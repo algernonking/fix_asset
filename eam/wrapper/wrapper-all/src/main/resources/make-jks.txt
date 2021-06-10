@@ -1,0 +1,2 @@
+执行命令
+keytool -genkey -alias foxnic-web -keypass foxnic-web -keyalg RSA -storetype PKCS12 -keysize 2048 -validity 3650 -keystore c:/tmp/foxnic-web.jks -storepass fox-123456-nic -dname "CN=(LeeFJ), OU=(org.leefj), O=(org.leefj), L=(nb), ST=(zj), C=(cn)"

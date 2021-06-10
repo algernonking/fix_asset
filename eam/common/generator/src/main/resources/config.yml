@@ -1,0 +1,54 @@
+
+settings:
+  enableMicroService: true 
+  enableSwagger: true
+  #是否前后端分离
+  isFrontendDepart: true
+
+
+#源代码相关的部分
+source: 
+  #DAO常量名
+  daoNameConst: org.github.foxnic.web.framework.dao.DBConfigs.PRIMARY_DAO
+  #系统常量包名
+  domainConstantsPackage: com.dt.eam.constants
+
+#使用不同的机器码对应到作者
+authors:
+  #指定机器码与对应的作者，机器码在代码生成时控制台输出，或main函数调用 Machine.getIdentity()
+  C99A60CEE2D4D881: 李方捷 , leefangjie@qq.com
+  D11C00DED5F5C932: 金杰 , maillank@qq.com
+
+
+compoments: 
+  domain: /common/domain
+  proxy: /common/proxy
+  
+
+
+#应用清单
+applications: 
+  #EAM
+  service-eam:  
+    nacosGroup: service
+    nacosDataId: service-eam.yml
+    serviceProjectPath:  /service/service-eam
+    packageName: com.dt.eam.eam
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: EAM
+    viewProjectPath: /view/view-eam
+    viewPrefixPath: public/business/eam
+    wrapperProjectPath:  /wrapper/wrapper-all
+  #HRM
+  service-hrm:  
+    nacosGroup: service
+    nacosDataId: service-hrm.yml
+    serviceProjectPath:  /service/service-hrm
+    packageName: com.dt.eam.hrm
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: HRM
+    viewProjectPath: /view/view-hrm
+    viewPrefixPath: public/business/hrm
+    wrapperProjectPath:  /wrapper/wrapper-all
+ 
+    

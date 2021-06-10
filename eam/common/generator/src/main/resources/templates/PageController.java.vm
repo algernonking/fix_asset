@@ -1,0 +1,31 @@
+package #(package);
+#(imports)
+
+#(classJavaDoc)
+
+@Controller("#(beanName)")
+@RequestMapping(#(simpleName).prefix)
+public class #(simpleName) {
+	
+	public static final String prefix="#(uriPrefix)";
+
+	#if(!isFrontendDepart)
+	@Autowired
+	private #(serviceSimpleName) #(serviceVarName);
+	#end
+	/**
+	 * #(topic) 功能主页面
+	 */
+	@RequestMapping("/#(listPageName).html")
+	public String list(Model model) {
+		return prefix+"/#(listPageName)";
+	}
+
+	/**
+	 * #(topic) 表单页面
+	 */
+	@RequestMapping("/#(formPageName).html")
+	public String form(Model model#(pkParamList)) {
+		return prefix+"/#(formPageName)";
+	}
+}

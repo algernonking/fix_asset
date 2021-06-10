@@ -1,0 +1,42 @@
+spring:
+  servlet: 
+    multipart: 
+      max-file-size: 100MB
+      max-request-size: 100MB
+  datasource:
+    druid:
+      primary:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://39.105.191.22:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true
+        username: root
+        password: root_pwd
+        min-idle: 1
+        initial-size: 2
+        max-active: 64
+        max-wait: 60000
+        printSQL: true
+
+
+logging:
+  config: classpath:logback-config.xml  
+
+snowflake: 
+  datacenterId: 1  
+  workerId: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  
+
+knife4j: 
+  enable: true
+  title: ${spring.application.name}
+  description: ${spring.application.description}
+  version: 1.0        
+
+upload: 
+  windows: c:/upload
+  mac: /Users/LeeFJ/git/tailoring/uploads
+  linux: /tailoring/uploads         

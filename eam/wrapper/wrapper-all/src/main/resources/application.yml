@@ -1,0 +1,92 @@
+server:
+  session: 
+    timeout: 1200s
+  servlet:
+    session:
+      # 会话超时时间，如 30s , 20m 等
+      timeout: 1200s 
+  port: 8089
+ 
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: service-all
+    description: Foxnic Web Service All
+  servlet: 
+    multipart: 
+      max-file-size: 100MB
+      max-request-size: 100MB
+  datasource:
+    druid:
+      primary:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://39.105.191.22:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        username: root
+        password: root_pwd
+        #url: jdbc:mysql://47.92.240.43:3306/foxnic-web?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        #username: tailoring
+        #password: Tailoring@2021111
+        min-idle: 1
+        initial-size: 2
+        max-active: 64
+        max-wait: 60000
+        printSQL: true
+  thymeleaf:
+    prefix: classpath:/public/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5
+    cache: false
+  session:
+    store-type: redis # 使用 redis 存储session
+  redis:
+      port: 6379
+      host: 127.0.0.1
+
+
+
+security:
+  # 模式：session / jwt
+  mode: both 
+  # 配置无需鉴权可以访问的地址
+  ignored-urls: /assets/** , /pages/** , /favicon.ico , /module/** ,  /**/*.css , /**/*.js , /error
+  # mode=session 时配置的登录页面
+  login-page: /login.html
+  jwt:
+    key-location: foxnic-web.jks
+    key-alias: foxnic-web
+    key-pass: fox-123456-nic
+    # 缓存类型  local/remote/both
+    cache-type: local
+    iss: felord.cn
+    sub: all
+    access-expire-seconds: 1800
+    refresh-expire-seconds: 2000
+
+
+logging:
+  config: classpath:logback-config.xml  
+
+snowflake: 
+  datacenterId: 1  
+  workerId: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  
+
+knife4j: 
+  enable: true
+  title: ${spring.application.name}
+  description: ${spring.application.description}
+  version: 1.0        
+
+upload: 
+  windows: c:/upload
+  mac: /Users/LeeFJ/git/tailoring/uploads
+  linux: /tailoring/uploads         

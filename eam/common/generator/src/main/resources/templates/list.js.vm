@@ -1,0 +1,276 @@
+#(authorAndTime)
+
+
+function ListPage() {
+        
+	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
+	#if(isTree)
+	// 树形结构记录当前上级节点ID
+	var #(parentIdVar) = #(rootId);
+	var navStack=[[0,fox.translate("根节点")]];
+	#end
+	//模块基础路径
+	const moduleURL="#(moduleURL)";
+	
+	/**
+      * 入口函数，初始化
+      */
+	this.init=function(layui) {
+     	
+     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
+		
+     	//渲染表格
+     	renderTable();
+		#if(isTree)
+		//初始化层级导航
+		refreshNav();
+		#end 
+		//绑定搜索框事件
+		bindSearchEvent();
+		//绑定按钮事件
+		bindButtonEvent();
+		//绑定行操作按钮事件
+    	bindRowOperationEvent();
+     }
+     
+     
+     /**
+      * 渲染表格
+      */
+     function renderTable() {
+     
+		fox.renderTable({
+			elem: '#data-table',
+            url: moduleURL +'/query-paged-list',
+            #if(isTree) 
+            //树形结构需要传递相关参数
+            where: { #(parentIdVar) : #(parentIdVar) } ,
+            #end
+			cols: [[
+			 	{ type:'checkbox' },
+                { type: 'numbers' },
+                #for(f : fields)
+                { field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)')#(f.templet) } ,
+                #end
+                { fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 175 }
+            ]]
+        });
+        #if(hasLogicField)
+        //绑定 Switch 切换事件
+        #for(f : fields)
+        #if(f.isLogicField)
+        fox.bindSwitchEvent("cell-tpl-#(f.varName)",moduleURL +'/update',function(r){});
+        #end
+        #end
+        #end
+        
+     };
+     
+	/**
+      * 刷新表格数据
+      */
+	function refreshTableData() {
+		var field = $('#search-field').val();
+		var value = $('#search-input').val();
+		var ps={searchField: field, searchValue: value};
+		#if(isTree) 
+		// 树形结构锁定上级ID
+		ps.#(parentIdVar)=#(parentIdVar);
+		#end
+		table.reload('data-table', { where : ps });
+	}
+    
+    #if(isTree) 
+	//导航刷新函数
+	function refreshNav() {
+		$("#tree-nav").empty();
+		for (var i=0;i<navStack.length;i++) {
+			var last=i==navStack.length-1;
+			$("#tree-nav").append("<a href='javascript:' class='nav-node' index='"+i+"'>"+navStack[i][1]+"</a>")
+			if(!last) {
+				$("#tree-nav").append('<span lay-separator="">/</span>');
+			}
+		}
+		//点击事件
+		$(".nav-node").click(function(it){
+			it=$(this);
+			//倒换
+			var z=it.attr('index');
+			var tmp=[];
+			for (var i=0;i<=z;i++) {
+				//debugger;
+				tmp.push(navStack[i]);
+			}
+			navStack=tmp;
+			#(parentIdVar)=navStack[navStack.length-1][0];
+			resetSearchFields();
+			//
+			refreshTableData();
+			refreshNav();
+		});
+	};
+	#end 
+	
+	/**
+	  * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
+	  */
+	function getCheckedList(field) {
+		var checkStatus = table.checkStatus('data-table');
+		var data = checkStatus.data;
+		if(!field) return data;
+		for(var i=0;i<data.length;i++) data[i]=data[i][field];
+		return data;
+	}
+	
+	/**
+	 * 重置搜索框
+	 */
+	function resetSearchFields() {
+		$('#search-field').val("");
+		$('#search-input').val("");
+		layui.form.render();
+	}
+	
+	/**
+	 * 绑定搜索框事件
+	 */
+	function bindSearchEvent() {
+		//回车键查询
+        $("#search-input").keydown(function(event) {
+			if(event.keyCode !=13) return;
+		  	refreshTableData();
+        });
+
+        // 搜索按钮点击事件
+        $('#search-button').click(function () {
+           refreshTableData();
+        });
+	}
+	
+	/**
+	 * 绑定按钮事件
+	  */
+	function bindButtonEvent() {
+	
+		//添加按钮点击事件
+        $('#add-button').click(function () {
+        	//设置新增是初始化数据
+        	var data={};
+        	#if(isTree) 
+        	data.#(parentIdVar)=#(parentIdVar);
+        	#end
+            showEditForm(data);
+        });
+		
+		#if(isSimplePK)
+        //批量删除按钮点击事件
+        $('#delete-button').click(function () {
+          
+			var ids=getCheckedList("#(idPropertyName)");
+            if(ids.length==0) {
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('#(topic)')+"!");
+            	return;
+            }
+            //调用批量删除接口
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
+				layer.close(i);
+				layer.load(2);
+                admin.req(moduleURL+"/batch-delete", JSON.stringify({ #(idsPropertyName): JSON.stringify(ids) }), function (data) {
+                    layer.closeAll('loading');
+                    if (data.success) {
+                        layer.msg(data.message, {icon: 1, time: 500});
+                        refreshTableData();
+                    } else {
+                        layer.msg(data.message, {icon: 2, time: 500});
+                    }
+                });
+			});
+        });
+        #end
+	}
+     
+    /**
+     * 绑定行操作按钮事件
+     */
+    function bindRowOperationEvent() {
+		// 工具条点击事件
+		table.on('tool(data-table)', function (obj) {
+			var data = obj.data;
+			var layEvent = obj.event;
+	
+			if (layEvent === 'edit') { // 修改
+				layer.load(2);
+				admin.req(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
+					layer.closeAll('loading');
+					if(data.success) {
+						 showEditForm(data.data);
+					} else {
+						 layer.msg(data.message, {icon: 1, time: 500});
+					}
+				});
+				
+			} else if (layEvent === 'del') { // 删除
+			
+				layer.confirm(fox.translate('确定删除此')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
+					layer.close(i);
+					layer.load(2);
+					admin.req(moduleURL+"/delete", { #(paramJson) }, function (data) {
+						layer.closeAll('loading');
+						if (data.success) {
+							layer.msg(data.message, {icon: 1, time: 500});
+							refreshTableData();
+						} else {
+							layer.msg(data.message, {icon: 2, time: 500});
+						}
+					});
+				});
+				
+			}  #if(isTree)else if (layEvent === 'drill') {
+			
+				#(parentIdVar) = data.#(idPropertyName);
+				navStack.push([data.id,data.label]);
+				resetSearchFields();
+				refreshTableData();
+				refreshNav();
+				
+			} #end
+		});
+ 
+    };
+    
+    /**
+     * 打开编辑窗口
+     */
+	function showEditForm(data) {
+		var queryString="";
+		if(data) queryString="?" + #(paramQueryString);
+		admin.putTempData('#(formDataKey)', data);
+		var area=admin.getTempData('#(formAreaKey)');
+		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+		var top= ($(window).height()-height)/2;
+		var title = (data && data.#(idPropertyName)) ? (fox.translate('修改')+fox.translate('#(topic)')) : (fox.translate('添加')+fox.translate('#(topic)'));
+		admin.popupCenter({
+			title: title,
+			resize:true,
+			offset:[top,null],
+			area:["500px",height+"px"],
+			type: 2,
+			content: '#(formURI)' + queryString,
+			finish: function () {
+				refreshTableData();
+			}
+		});
+	};
+
+};
+
+
+layui.config({
+	dir: layuiPath,
+	base: '/module/'
+}).extend({
+	xmSelect: 'xm-select/xm-select'
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect'],function() {
+	(new ListPage()).init(layui);
+});

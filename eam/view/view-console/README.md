@@ -1,0 +1,1 @@
+改项目用于覆盖Foxnic-Web提供的控制台前端部分，把 Foxnic-Web 的 view-console 项目文件拷贝当前项目下一致的路径即可。

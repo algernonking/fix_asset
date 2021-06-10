@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 日志存放路径 -->
+	<property name="log.path" value="/tmp/ops/logs" />
+	<!-- 日志输出格式 -->
+	<property name="log.pattern"
+		value="%d{HH:mm:ss.SSS} [%thread] - [%X{tid}] - %-5level %logger{20} - [%method,%line] - %msg%n" />
+
+	<!-- 控制台输出 -->
+	<appender name="console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${log.pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 系统日志输出 -->
+	<appender name="file_info"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/ops-info.log</file>
+		<!-- 循环政策：基于时间创建日志文件 -->
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名格式 -->
+			<fileNamePattern>${log.path}/ops-info.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- 日志最大的历史 60天 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${log.pattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>INFO</level>
+			<!-- 匹配时的操作：接收（记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝（不记录） -->
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="file_error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/ops-error.log</file>
+		<!-- 循环政策：基于时间创建日志文件 -->
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名格式 -->
+			<fileNamePattern>${log.path}/ops-error.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- 日志最大的历史 60天 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${log.pattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>ERROR</level>
+			<!-- 匹配时的操作：接收（记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝（不记录） -->
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+
+	<appender name="file_debug"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/ops-debug.log</file>
+		<!-- 循环政策：基于时间创建日志文件 -->
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- 日志文件名格式 -->
+			<fileNamePattern>${log.path}/ops-debug.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<!-- 日志最大的历史 60天 -->
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${log.pattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<!-- 过滤的级别 -->
+			<level>DEBUG</level>
+			<!-- 匹配时的操作：接收（记录） -->
+			<onMatch>ACCEPT</onMatch>
+			<!-- 不匹配时的操作：拒绝（不记录） -->
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+ 
+ 	<!--  
+	<appender name="gelf" class="de.siegmar.logbackgelf.GelfUdpAppender">
+        <graylogHost>10.88.20.239</graylogHost>
+        <graylogPort>12208</graylogPort>
+		<maxChunkSize>508</maxChunkSize>
+		<useCompression>true</useCompression>
+		<encoder class="de.siegmar.logbackgelf.GelfEncoder">
+			<originHost>localhost</originHost>
+			<includeRawMessage>false</includeRawMessage>
+			<includeMarker>true</includeMarker>
+			<includeMdcData>true</includeMdcData>
+			<includeCallerData>false</includeCallerData>
+			<includeRootCauseData>false</includeRootCauseData>
+			<includeLevelName>false</includeLevelName>
+			<shortPatternLayout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%m%nopex</pattern>
+			</shortPatternLayout>
+			<fullPatternLayout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%m%n</pattern>
+			</fullPatternLayout>
+			<numbersAsString>false</numbersAsString>
+			<staticField>app_name:${app_name}</staticField>
+			<staticField>app_env:${app_env}</staticField>
+			<staticField>app_node:${app_node}</staticField>
+			<staticField>os_arch:${os.arch}</staticField>
+			<staticField>os_name:${os.name}</staticField>
+			<staticField>os_version:${os.version}</staticField>
+			<staticField>tid:%X{tid}</staticField>
+			<staticField>remote_ip:%X{remote_ip}</staticField>
+			<staticField>request_url:%X{request_url}</staticField>
+			<staticField>job_name:%X{job_name}</staticField>
+			<staticField>job_method:%X{job_method}</staticField>
+		</encoder>
+	</appender>
+	-->
+	
+ 
+	<!-- 系统模块日志级别控制 -->
+	<logger name="com.chinayie.platform" level="info" />
+	<!-- Spring日志级别控制 -->
+	<logger name="org.springframework" level="warn" />
+ 
+	<root level="info">
+		<appender-ref ref="console" />
+		<!--  
+		<appender-ref ref="gelf" />
+		-->
+	</root>
+
+	<!--系统操作日志 -->
+
+	<root level="info">
+		<appender-ref ref="file_info" />
+		<appender-ref ref="file_error" />
+		<!--  
+		<appender-ref ref="gelf" />
+		-->
+	</root>
+	
+	<!-- 
+	<root level="debug">
+		 <appender-ref ref="console" />
+	</root>
+	 -->
+ 
+</configuration> 

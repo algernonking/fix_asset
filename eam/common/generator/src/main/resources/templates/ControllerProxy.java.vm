@@ -1,0 +1,149 @@
+package #(package);
+
+import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.springboot.mvc.Result;
+
+import org.github.foxnic.web.proxy.FeignConfiguration;
+
+#if(isEnableMicroService)import org.springframework.cloud.openfeign.FeignClient;#end
+
+#(imports)
+
+#(classJavaDoc)
+
+#if(isEnableMicroService)@FeignClient(value = #(msNameConst), contextId = #(simpleName).API_CONTEXT_PATH , configuration = FeignConfiguration.class)#end
+public interface #(simpleName) {
+	
+	/**
+	 * 基础路径 , #(apiBasicPath)
+	*/
+	public static final String API_BASIC_PATH = "#(apiBasicPath)";
+	
+	/**
+	 * API 上下文路径 , #(apiContextPath)
+	*/
+	public static final String API_CONTEXT_PATH = "#(apiContextPath)";
+	
+	/**
+	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
+	*/
+	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
+	
+	/**
+	 * 添加#(topic)
+	 */
+	public static final String INSERT = API_PREFIX + "insert";
+	
+	/**
+	 * 删除#(topic)
+	 */
+	public static final String DELETE = API_PREFIX + "delete";
+	
+	
+	/**
+	 * 批量删除#(topic)
+	 */
+	public static final String BATCH_DELETE = API_PREFIX + "batch-delete";
+	
+	
+	/**
+	 * 更新#(topic)
+	 */
+	public static final String UPDATE = API_PREFIX + "update";
+	
+	
+	/**
+	 * 保存#(topic)
+	 */
+	public static final String SAVE = API_PREFIX + "save";
+	
+	/**
+	 * 获取#(topic)
+	 */
+	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
+	
+	/**
+	 * 查询#(topic)
+	 */
+	public static final String QUERY_LIST = API_PREFIX + "query-list";
+	
+	/**
+	 * 分页查询#(topic)
+	 */
+	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
+	
+	/**
+	 * 导出#(topic)数据(Excel)
+	 */
+	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
+	
+	/**
+	 * 导入#(topic)数据(Excel)
+	 */
+	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+	
+	/**
+	 * 添加#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).INSERT)
+	Result<#(poSimpleName)> insert(#(voSimpleName) #(voVar));
+	
+	/**
+	 * 删除#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).DELETE)
+	Result<#(poSimpleName)> deleteById(#(controllerMethodParameterDeclare4DeleteById));
+	
+	
+	/**
+	 * 批量删除#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).BATCH_DELETE)
+	Result<#(poSimpleName)> deleteByIds(List<#(pkType)> id);
+	
+	/**
+	 * 更新#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).UPDATE)
+	Result<#(poSimpleName)> update(#(voSimpleName) #(voVar));
+	
+	/**
+	 * 更新#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).SAVE)
+	Result<#(poSimpleName)> save(#(voSimpleName) #(voVar));
+	
+	/**
+	 * 获取#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).GET_BY_ID)
+	Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById));
+	
+	/**
+	 * 查询#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).QUERY_LIST)
+	Result<List<#(poSimpleName)>> queryList(#(voSimpleName) sample);
+	
+	/**
+	 * 分页查询#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).QUERY_PAGED_LIST)
+	Result<PagedList<#(poSimpleName)>> queryPagedList(#(voSimpleName) sample);
+	
+	
+	/**
+	 * 控制器类名
+	 * */
+	public static final String CONTROLLER_CLASS_NAME="#(controllerClassName)";
+
+	/**
+	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用
+	 * */
+	public static #(simpleName) api() {
+		return APIProxy.get(#(simpleName).class,CONTROLLER_CLASS_NAME);
+	}
+
+}
