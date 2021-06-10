@@ -30,9 +30,4 @@ target
 
 *.iml
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> branch 'master' of https://gitee.com/lank/eam.git
+.idea

@@ -14,6 +14,7 @@ import com.dt.eam.misc.EamMeta;
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {
+
 	public static void main(String[] args) {
 		BootApplication.run(WrapperAllApp.class, args);
 	}

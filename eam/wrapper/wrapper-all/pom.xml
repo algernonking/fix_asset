@@ -23,7 +23,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<platform.version>0.0.2.RELEASE</platform.version>
-		<foxnic-web.version>0.0.2.RELEASE</foxnic-web.version>
+		<foxnic-web.version>0.0.3.RELEASE</foxnic-web.version>
 	</properties>
 	<dependencies>
 	
