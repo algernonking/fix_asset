@@ -82,7 +82,7 @@ function FormPage() {
 	    	
 	    	var api=moduleURL+"/"+(data.field.#(idPropertyName)?"update":"insert");
 	        layer.load(2);
-	        admin.req(api, JSON.stringify(data.field), function (data) {
+	        admin.request(api, data.field, function (data) {
 	            layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
