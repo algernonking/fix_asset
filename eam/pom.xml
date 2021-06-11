@@ -13,7 +13,7 @@
 	<artifactId>parent</artifactId>
 	<version>0.0.2.RELEASE</version>
 	<packaging>pom</packaging>
-	<name>eam-parent</name>
+	<name>parent</name>
 	<description>eam-parent</description>
 
 	<properties>
@@ -28,6 +28,22 @@
 		<foxnic.version>1.2.1.RELEASE</foxnic.version>
 		<foxnic-web.version>0.0.3.RELEASE</foxnic-web.version>
 	</properties>
+
+	<modules>
+		<!-- 通用模块 -->
+		<module>./common/domain</module>
+		<module>./common/proxy</module>
+		<!-- 接口服务 -->
+		<module>./service/service-eam</module>
+		<module>./service/service-hrm</module>
+		<!-- 界面视图 -->
+		<module>./view/view-console</module>
+		<module>./view/view-hrm</module>
+		<module>./view/view-eam</module>
+		<!-- 聚合 -->
+		<module>./wrapper/wrapper-all</module>
+	</modules>
+
 	<dependencies>
 
 		<dependency>

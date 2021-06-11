@@ -10,8 +10,8 @@
         <!-- lookup parent from repository --> 
     </parent>  
     <artifactId>proxy</artifactId>  
-    <name>web-proxy</name>  
-    <description>proxy</description>  
+    <name>proxy-eam</name>
+    <description>proxy</description>
     <packaging>jar</packaging>  
     <dependencies> 
         <dependency> 

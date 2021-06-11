@@ -10,7 +10,7 @@
         <!-- lookup parent from repository --> 
     </parent>  
     <artifactId>generator</artifactId>  
-    <name>code-generator</name>  
+    <name>generator</name>
     <description>Code Generator</description>  
     <dependencies> 
         <dependency> 
