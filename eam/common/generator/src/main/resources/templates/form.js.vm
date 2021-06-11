@@ -36,7 +36,7 @@ function FormPage() {
       * 渲染表单组件
       */
 	function renderFormFields() {
-		form.render('radio');
+		form.render();
 	    //渲染图片字段
 	    #for(f : fields)
 	    #if(f.isImageField) 
@@ -51,6 +51,7 @@ function FormPage() {
 	function fillFormData() {
 		var formData = admin.getTempData('#(formDataKey)');
 		if (formData) {
+			$('#data-form')[0].reset();
 			form.val('data-form', formData);
 	     	//设置并显示图片
 	     	#for(f : fields)
