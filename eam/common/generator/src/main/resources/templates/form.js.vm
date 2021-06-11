@@ -50,7 +50,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('#(formDataKey)');
-		$('#data-form').attr('method', 'POST');
 		if (formData) {
 			form.val('data-form', formData);
 	     	//设置并显示图片
