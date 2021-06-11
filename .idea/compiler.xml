@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="view-eam" />
+        <module name="service-eam" />
+        <module name="view-hrm" />
+        <module name="view-console" />
+        <module name="wrapper-all" />
+        <module name="proxy" />
+        <module name="service-hrm" />
+        <module name="domain" />
+        <module name="generator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="domain" target="1.8" />
+      <module name="generator" target="1.8" />
+      <module name="parent" target="1.8" />
+      <module name="proxy" target="1.8" />
+      <module name="service-eam" target="1.8" />
+      <module name="service-hrm" target="1.8" />
+      <module name="view-console" target="1.8" />
+      <module name="view-eam" target="1.8" />
+      <module name="view-hrm" target="1.8" />
+      <module name="wrapper-all" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="domain" options="-parameters" />
+      <module name="generator" options="-parameters" />
+      <module name="proxy" options="-parameters" />
+      <module name="service-eam" options="-parameters" />
+      <module name="service-hrm" options="-parameters" />
+      <module name="view-console" options="-parameters" />
+      <module name="view-eam" options="-parameters" />
+      <module name="view-hrm" options="-parameters" />
+      <module name="wrapper-all" options="-parameters" />
+    </option>
+  </component>
+</project>
