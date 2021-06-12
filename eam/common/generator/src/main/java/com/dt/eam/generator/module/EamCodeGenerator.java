@@ -20,6 +20,8 @@ public class EamCodeGenerator  {
 		EamCodeGenerator g=new EamCodeGenerator();
 		g.generateEamBrandConfig();
  		g.generateEamGoodsConfig();
+ 		g.generateEamMaintainerConfig();
+ 		g.generateEamManufacturerConfig();
 	}
 	
 	private EamConfigs configs;
@@ -91,6 +93,31 @@ public class EamCodeGenerator  {
 
 	private void generateEamGoodsConfig() throws Exception {
 		ModuleContext cfg2=createModuleConfig(EAMTables.EAM_GOODS.$TABLE, 2);
+		//文件生成覆盖模式
+		cfg2.overrides()
+				.setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+				.setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
+				.setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
+				.setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
+				.setListPage(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
+		//生成代码
+		cfg2.buildAll();
+	}
+	private void generateEamMaintainerConfig() throws Exception {
+		ModuleContext cfg2=createModuleConfig(EAMTables.EAM_MAINTAINER.$TABLE, 3);
+		//文件生成覆盖模式
+		cfg2.overrides()
+				.setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+				.setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
+				.setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
+				.setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
+				.setListPage(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
+		//生成代码
+		cfg2.buildAll();
+	}
+
+	private void generateEamManufacturerConfig() throws Exception {
+		ModuleContext cfg2=createModuleConfig(EAMTables.EAM_MANUFACTURER.$TABLE, 4);
 		//文件生成覆盖模式
 		cfg2.overrides()
 				.setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
