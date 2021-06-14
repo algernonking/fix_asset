@@ -19,14 +19,16 @@
         <junit.jupiter.version>5.7.0</junit.jupiter.version>  
         <junit.vintage.version>5.7.0</junit.vintage.version>  
         <junit.platform.version>1.7.0</junit.platform.version>  
-        <foxnic.version>1.2.0.RELEASE</foxnic.version>  
-        <platform.version>0.0.2.RELEASE</platform.version> 
+        <foxnic.version>1.2.1.RELEASE</foxnic.version>
+        <platform.version>0.0.2.RELEASE</platform.version>
+        <foxnic.version>1.2.1.RELEASE</foxnic.version>
+        <foxnic-web.version>0.0.4.RELEASE</foxnic-web.version>
     </properties>  
     <dependencies> 
         <dependency> 
             <groupId>com.github.foxnic.web</groupId>  
             <artifactId>domain</artifactId>  
-            <version>${platform.version}</version>  
+            <version>${foxnic-web.version}</version>
             <exclusions> 
                 <exclusion> 
                     <groupId>com.github.xiaoymin</groupId>  
@@ -37,7 +39,7 @@
         <dependency> 
             <groupId>com.github.foxnic.web</groupId>  
             <artifactId>proxy</artifactId>  
-            <version>${platform.version}</version> 
+            <version>${foxnic-web.version}</version>
         </dependency>  
         <dependency> 
             <groupId>org.springframework.boot</groupId>  

@@ -26,7 +26,7 @@
 		<knife4j.version>3.0.2</knife4j.version>
 		<platform.version>0.0.2.RELEASE</platform.version>
 		<foxnic.version>1.2.1.RELEASE</foxnic.version>
-		<foxnic-web.version>0.0.3.RELEASE</foxnic-web.version>
+		<foxnic-web.version>0.0.4.RELEASE</foxnic-web.version>
 	</properties>
 
 	<modules>
@@ -78,6 +78,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
