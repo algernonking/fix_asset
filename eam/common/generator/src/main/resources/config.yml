@@ -2,8 +2,6 @@
 settings:
   enableMicroService: true 
   enableSwagger: true
-  #是否前后端分离
-  isFrontendDepart: true
 
 
 #源代码相关的部分

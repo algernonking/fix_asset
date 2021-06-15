@@ -200,8 +200,10 @@ function ListPage() {
 			var layEvent = obj.event;
 	
 			if (layEvent === 'edit') { // 修改
-				layer.load(2);
+				//延迟显示加载动画，避免界面闪动
+				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
+					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
 						 showEditForm(data.data);
