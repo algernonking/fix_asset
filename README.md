@@ -36,5 +36,10 @@
 
  :point_right: **注意：代码生成的逻辑，需要按照上面提到的类中给出的示例按需调整。** 
 
+
+#### 相关文档
+
+[Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages)
+
  
  
