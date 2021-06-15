@@ -39,7 +39,7 @@
 
 #### 相关文档
 
-[Foxnc-Web 文档 ](http://https://gitee.com/LeeFJ/foxnic-web/wikis/pages)
+[Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages)
 
  
  
