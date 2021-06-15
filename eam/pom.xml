@@ -26,12 +26,15 @@
 		<knife4j.version>3.0.2</knife4j.version>
 		<platform.version>0.0.2.RELEASE</platform.version>
 		<foxnic.version>1.2.1.RELEASE</foxnic.version>
-		<foxnic-web.version>0.0.4.RELEASE</foxnic-web.version>
+		<foxnic-web.version>0.0.5.RELEASE</foxnic-web.version>
 	</properties>
+
+
 
 	<modules>
 		<!-- 通用模块 -->
 		<module>./common/domain</module>
+		<module>./common/framework</module>
 		<module>./common/proxy</module>
 		<!-- 接口服务 -->
 		<module>./service/service-eam</module>
@@ -45,25 +48,12 @@
 	</modules>
 
 	<dependencies>
-
 		<dependency>
-			<groupId>com.github.foxnic</groupId>
-			<artifactId>foxnic-sql</artifactId>
-			<version>${foxnic.version}</version>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.github.foxnic</groupId>
-			<artifactId>foxnic-dao</artifactId>
-			<version>${foxnic.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.foxnic</groupId>
-			<artifactId>foxnic-springboot</artifactId>
-			<version>${foxnic.version}</version>
-		</dependency>
-	
 	</dependencies>
+
 	<build>
 		<defaultGoal>compile</defaultGoal>
 		<resources>

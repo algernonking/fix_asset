@@ -19,23 +19,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>  
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding> 
     </properties>  
-    <dependencies> 
-        <dependency> 
-            <groupId>com.github.foxnic.web</groupId>  
-            <artifactId>framework-boot</artifactId>  
-            <version>${foxnic-web.version}</version> 
+    <dependencies>
+        <dependency>
+            <groupId>com.dt.eam</groupId>
+            <artifactId>framework</artifactId>
+            <version>${platform.version}</version>
         </dependency>
-        <dependency> 
-            <groupId>com.github.foxnic.web</groupId>  
-            <artifactId>domain</artifactId>  
-            <version>${foxnic-web.version}</version> 
-        </dependency>  
-        <dependency> 
-            <groupId>com.github.foxnic.web</groupId>  
-            <artifactId>proxy</artifactId>  
-            <version>${foxnic-web.version}</version> 
-        </dependency>  
-        
+
 		<dependency> 
             <groupId>com.dt.eam</groupId>  
             <artifactId>domain</artifactId>  
@@ -46,22 +36,6 @@
             <artifactId>proxy</artifactId>  
             <version>${platform.version}</version> 
         </dependency>  
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->  
-        <dependency> 
-            <groupId>org.apache.poi</groupId>  
-            <artifactId>poi</artifactId>  
-            <version>3.17</version> 
-        </dependency>  
-        <dependency> 
-            <groupId>org.apache.poi</groupId>  
-            <artifactId>poi-ooxml</artifactId>  
-            <version>3.17</version> 
-        </dependency>  
-        <!-- https://mvnrepository.com/artifact/org.apache.xmlbeans/xmlbeans -->  
-        <dependency> 
-            <groupId>org.apache.xmlbeans</groupId>  
-            <artifactId>xmlbeans</artifactId>  
-            <version>2.6.0</version> 
-        </dependency> 
+
     </dependencies> 
 </project>

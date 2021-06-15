@@ -5,7 +5,7 @@ import com.dt.eam.relation.modules.SystemRelationManager;
 import com.github.foxnic.commons.concurrent.task.SimpleTaskManager;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.dao.relation.RelationManager;
-import com.github.foxnic.springboot.spring.SpringUtil;
+
 
 public class FoxnicWebRelationManager extends RelationManager {
 
@@ -19,15 +19,15 @@ public class FoxnicWebRelationManager extends RelationManager {
 	}
 
 	private void startMonitor() {
-		if(SpringUtil.isReady()) {
-			SimpleTaskManager tm=new SimpleTaskManager();
-			tm.doIntervalTask(new Runnable() {
-				@Override
-				public void run() {
-					doReConfigAndValidate();
-				}
-			}, 3000);
-		}
+//		if(SpringUtil.isReady()) {
+//			SimpleTaskManager tm=new SimpleTaskManager();
+//			tm.doIntervalTask(new Runnable() {
+//				@Override
+//				public void run() {
+//					doReConfigAndValidate();
+//				}
+//			}, 3000);
+//		}
 	}
 
 	

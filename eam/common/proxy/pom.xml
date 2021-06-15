@@ -14,10 +14,10 @@
     <description>proxy</description>
     <packaging>jar</packaging>  
     <dependencies> 
-        <dependency> 
-            <groupId>com.github.foxnic.web</groupId>  
-            <artifactId>framework-boot</artifactId>  
-            <version>${foxnic-web.version}</version> 
+        <dependency>
+            <groupId>com.github.foxnic</groupId>
+            <artifactId>foxnic-sql</artifactId>
+            <version>${foxnic.version}</version>
         </dependency>
         <dependency> 
             <groupId>com.github.foxnic.web</groupId>  

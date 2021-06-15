@@ -13,7 +13,12 @@
     <name>domain-eam</name>
     <description>domain-eam</description>
     <packaging>jar</packaging>  
-    <dependencies> 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.foxnic</groupId>
+            <artifactId>foxnic-sql</artifactId>
+            <version>${foxnic.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.github.xiaoymin</groupId>  
             <artifactId>knife4j-micro-spring-boot-starter</artifactId>  

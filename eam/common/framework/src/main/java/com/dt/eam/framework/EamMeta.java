@@ -1,4 +1,4 @@
-package com.dt.eam.misc;
+package com.dt.eam.framework;
 
 public class EamMeta {
 
