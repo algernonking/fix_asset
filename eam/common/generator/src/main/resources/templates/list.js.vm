@@ -60,7 +60,7 @@ function ListPage() {
         //绑定 Switch 切换事件
         #for(f : fields)
         #if(f.isLogicField)
-        fox.bindSwitchEvent("cell-tpl-#(f.varName)",moduleURL +'/update',function(r){});
+        fox.bindSwitchEvent("cell-tpl-#(f.varName)",moduleURL +'/update','#(idPropertyName)','#(f.varName)',function(r){});
         #end
         #end
         #end
@@ -176,7 +176,7 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.req(moduleURL+"/batch-delete", JSON.stringify({ #(idsPropertyName): JSON.stringify(ids) }), function (data) {
+                admin.request(moduleURL+"/batch-delete", JSON.stringify({ #(idsPropertyName): JSON.stringify(ids) }), function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});
@@ -201,7 +201,7 @@ function ListPage() {
 	
 			if (layEvent === 'edit') { // 修改
 				layer.load(2);
-				admin.req(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
+				admin.request(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
 					layer.closeAll('loading');
 					if(data.success) {
 						 showEditForm(data.data);
@@ -215,7 +215,7 @@ function ListPage() {
 				layer.confirm(fox.translate('确定删除此')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
-					admin.req(moduleURL+"/delete", { #(paramJson) }, function (data) {
+					admin.request(moduleURL+"/delete", { #(paramJson) }, function (data) {
 						layer.closeAll('loading');
 						if (data.success) {
 							layer.msg(data.message, {icon: 1, time: 500});

@@ -63,7 +63,7 @@
 #for(f:fields)
 #if(f.isLogicField)
 <script type="text/html" id="cell-tpl-#(f.varName)">
-    <input type="checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(pkVarName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}}/>
+    <input type="checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(idPropertyName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}}/>
 </script>
 #end
 #end
