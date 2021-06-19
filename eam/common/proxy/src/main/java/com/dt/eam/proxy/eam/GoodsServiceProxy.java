@@ -1,10 +1,7 @@
 package com.dt.eam.proxy.eam;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
+import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,15 +9,17 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import com.dt.eam.domain.eam.Goods;
 import com.dt.eam.domain.eam.GoodsVO;
-import com.github.foxnic.springboot.api.proxy.APIProxy;
+import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
 import com.dt.eam.proxy.EAMServiceNames;
 
 /**
  * <p>
  * 资产物品表  控制器服务代理
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 11:21:24
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:16:33
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = GoodsServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -88,6 +87,11 @@ public interface GoodsServiceProxy {
 	 * 导出资产物品数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
+
+	/**
+	 * 下载资产物品导入模版(Excel)
+	 */
+	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
 	 * 导入资产物品数据(Excel)

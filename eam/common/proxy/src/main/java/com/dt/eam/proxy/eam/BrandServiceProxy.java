@@ -1,10 +1,7 @@
 package com.dt.eam.proxy.eam;
 
-import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
+import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
 
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,7 +9,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 import com.dt.eam.domain.eam.Brand;
 import com.dt.eam.domain.eam.BrandVO;
-import com.github.foxnic.springboot.api.proxy.APIProxy;
+import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
 import com.dt.eam.proxy.EAMServiceNames;
 
 /**
@@ -20,7 +19,7 @@ import com.dt.eam.proxy.EAMServiceNames;
  * 品牌表  控制器服务代理
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:30:18
+ * @since 2021-06-19 20:16:31
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -88,6 +87,11 @@ public interface BrandServiceProxy {
 	 * 导出品牌数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
+
+	/**
+	 * 下载品牌导入模版(Excel)
+	 */
+	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
 	 * 导入品牌数据(Excel)
