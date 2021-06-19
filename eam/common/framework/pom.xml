@@ -39,11 +39,6 @@
 
         <dependency>
             <groupId>com.github.foxnic.web</groupId>
-            <artifactId>framework-boot</artifactId>
-            <version>${foxnic-web.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.foxnic.web</groupId>
             <artifactId>domain</artifactId>
             <version>${foxnic-web.version}</version>
         </dependency>

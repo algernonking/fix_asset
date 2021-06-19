@@ -1,11 +1,13 @@
 package #(package);
-#(imports)
 
+import org.github.foxnic.web.framework.view.controller.ViewController;
+#(imports)
+import javax.servlet.http.HttpServletRequest;
 #(classJavaDoc)
 
 @Controller("#(beanName)")
 @RequestMapping(#(simpleName).prefix)
-public class #(simpleName) {
+public class #(simpleName) extends ViewController {
 	
 	public static final String prefix="#(uriPrefix)";
 
@@ -28,7 +30,7 @@ public class #(simpleName) {
 	 * #(topic) 功能主页面
 	 */
 	@RequestMapping("/#(listPageName).html")
-	public String list(Model model) {
+	public String list(Model model,HttpServletRequest request) {
 		return prefix+"/#(listPageName)";
 	}
 
@@ -36,7 +38,7 @@ public class #(simpleName) {
 	 * #(topic) 表单页面
 	 */
 	@RequestMapping("/#(formPageName).html")
-	public String form(Model model#(pkParamList)) {
+	public String form(Model model,HttpServletRequest request#(pkParamList)) {
 		return prefix+"/#(formPageName)";
 	}
 }

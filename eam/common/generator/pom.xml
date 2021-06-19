@@ -44,21 +44,35 @@
             <groupId>com.dt.eam</groupId>  
             <artifactId>proxy</artifactId>
             <version>${platform.version}</version> 
-        </dependency> 
-        
-<!--        <dependency> -->
-<!--            <groupId>com.dt.eam</groupId>  -->
-<!--            <artifactId>domain</artifactId>  -->
-<!--            <version>${platform.version}</version> -->
-<!--        </dependency> -->
-        
-		<dependency> 
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.dt.eam</groupId>
+            <artifactId>service-eam</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dt.eam</groupId>
+            <artifactId>service-hrm</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.dt.eam</groupId>
+            <artifactId>view-console</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.dt.eam</groupId>  
             <artifactId>view-hrm</artifactId>
             <version>${platform.version}</version> 
         </dependency> 
         
-		<dependency> 
+		<dependency>
             <groupId>com.dt.eam</groupId>  
             <artifactId>view-eam</artifactId>
             <version>${platform.version}</version> 

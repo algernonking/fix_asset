@@ -46,9 +46,10 @@
     		<artifactId>service-hrm</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
- 
+
+
 		<dependency>
-			<groupId>com.dt.eam</groupId>  
+			<groupId>com.dt.eam</groupId>
     		<artifactId>view-console</artifactId>
     		<version>${platform.version}</version>
 		</dependency>

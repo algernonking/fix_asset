@@ -6,9 +6,9 @@ import java.util.Date;
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
- * @sign 821CBF48748D68DCC06BABE44F4EB10F
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:07:36
+ * @sign 56CBB19D0BFBF6F16F4453F0ECEA49B2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -22,7 +22,12 @@ public class ManufacturerMeta {
 	/**
 	 * 名称
 	*/
-	public static final String NAME="name";
+	public static final String MANUFACTURER_NAME="manufacturerName";
+	
+	/**
+	 * 备注
+	*/
+	public static final String MANUFACTURER_NOTES="manufacturerNotes";
 	
 	/**
 	 * 创建人ID
@@ -67,7 +72,7 @@ public class ManufacturerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , MANUFACTURER_NAME , MANUFACTURER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -90,12 +95,23 @@ public class ManufacturerMeta {
 		
 		/**
 		 * 设置 名称
-		 * @param name 名称
+		 * @param manufacturerName 名称
 		 * @return 当前对象
 		*/
-		public Manufacturer setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
+		public Manufacturer setManufacturerName(String manufacturerName) {
+			super.change(MANUFACTURER_NAME,super.getManufacturerName(),manufacturerName);
+			super.setManufacturerName(manufacturerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 备注
+		 * @param manufacturerNotes 备注
+		 * @return 当前对象
+		*/
+		public Manufacturer setManufacturerNotes(String manufacturerNotes) {
+			super.change(MANUFACTURER_NOTES,super.getManufacturerNotes(),manufacturerNotes);
+			super.setManufacturerNotes(manufacturerNotes);
 			return this;
 		}
 		

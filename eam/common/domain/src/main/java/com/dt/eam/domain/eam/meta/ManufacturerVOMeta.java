@@ -6,9 +6,9 @@ import java.util.List;
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
- * @sign C00D422315A9189DF8BBD2BBEB328755
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:07:36
+ * @sign F4D0EB7639A25DDE9E033ADF1DEE83AE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -35,6 +35,16 @@ public class ManufacturerVOMeta extends ManufacturerMeta {
 	public static final String SEARCH_VALUE="searchValue";
 	
 	/**
+	 * 排序字段
+	*/
+	public static final String SORT_FIELD="sortField";
+	
+	/**
+	 * 排序方式
+	*/
+	public static final String SORT_TYPE="sortType";
+	
+	/**
 	 * 主键清单 , 用于接收批量主键参数
 	*/
 	public static final String IDS="ids";
@@ -42,7 +52,7 @@ public class ManufacturerVOMeta extends ManufacturerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , SEARCH_VALUE , IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , SEARCH_VALUE , SORT_FIELD , SORT_TYPE , IDS };
 	
 	/**
 	 * 代理类
@@ -93,6 +103,28 @@ public class ManufacturerVOMeta extends ManufacturerMeta {
 		public ManufacturerVO setSearchValue(String searchValue) {
 			super.change(SEARCH_VALUE,super.getSearchValue(),searchValue);
 			super.setSearchValue(searchValue);
+			return this;
+		}
+		
+		/**
+		 * 设置 排序字段
+		 * @param sortField 排序字段
+		 * @return 当前对象
+		*/
+		public ManufacturerVO setSortField(String sortField) {
+			super.change(SORT_FIELD,super.getSortField(),sortField);
+			super.setSortField(sortField);
+			return this;
+		}
+		
+		/**
+		 * 设置 排序方式
+		 * @param sortType 排序方式
+		 * @return 当前对象
+		*/
+		public ManufacturerVO setSortType(String sortType) {
+			super.change(SORT_TYPE,super.getSortType(),sortType);
+			super.setSortType(sortType);
 			return this;
 		}
 		

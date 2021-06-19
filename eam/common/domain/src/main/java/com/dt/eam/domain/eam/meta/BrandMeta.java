@@ -7,8 +7,8 @@ import java.util.Date;
 
 /**
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:26:19
- * @sign 821CBF48748D68DCC06BABE44F4EB10F
+ * @since 2021-06-19 20:07:34
+ * @sign 1949416485663676EFD181478BECAAA6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -22,7 +22,7 @@ public class BrandMeta {
 	/**
 	 * 名称
 	*/
-	public static final String NAME="name";
+	public static final String BRAND_NAME="brandName";
 	
 	/**
 	 * 创建人ID
@@ -67,7 +67,7 @@ public class BrandMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , BRAND_NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -90,12 +90,12 @@ public class BrandMeta {
 		
 		/**
 		 * 设置 名称
-		 * @param name 名称
+		 * @param brandName 名称
 		 * @return 当前对象
 		*/
-		public Brand setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
+		public Brand setBrandName(String brandName) {
+			super.change(BRAND_NAME,super.getBrandName(),brandName);
+			super.setBrandName(brandName);
 			return this;
 		}
 		

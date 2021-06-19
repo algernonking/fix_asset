@@ -1,29 +1,47 @@
 package com.dt.eam.eam.page;
 
+import org.github.foxnic.web.framework.view.controller.ViewController;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-
+import com.dt.eam.proxy.eam.ManufacturerServiceProxy;
+import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
  * 生产厂商 模版页面控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:12:54
 */
 
 @Controller("EamManufacturerPageController")
 @RequestMapping(ManufacturerPageController.prefix)
-public class ManufacturerPageController {
+public class ManufacturerPageController extends ViewController {
 	
 	public static final String prefix="business/eam/manufacturer";
 
+	private ManufacturerServiceProxy proxy;
+	
+	/**
+	 * 获得代理对象<br> 
+	 * 1、单体应用时，在应用内部调用；<br> 
+	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
+	 * 3、微服务时，通过feign调用; <br> 
+	 * */
+	public ManufacturerServiceProxy proxy() {
+		if(proxy==null) {
+			proxy=ManufacturerServiceProxy.api();
+		}
+		return proxy;
+	}
+	
 	/**
 	 * 生产厂商 功能主页面
 	 */
 	@RequestMapping("/manufacturer_list.html")
-	public String list(Model model) {
+	public String list(Model model,HttpServletRequest request) {
 		return prefix+"/manufacturer_list";
 	}
 
@@ -31,7 +49,7 @@ public class ManufacturerPageController {
 	 * 生产厂商 表单页面
 	 */
 	@RequestMapping("/manufacturer_form.html")
-	public String form(Model model , String id) {
+	public String form(Model model,HttpServletRequest request , String id) {
 		return prefix+"/manufacturer_form";
 	}
 }

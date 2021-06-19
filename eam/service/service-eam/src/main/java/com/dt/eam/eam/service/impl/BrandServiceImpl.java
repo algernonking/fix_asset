@@ -1,26 +1,28 @@
 package com.dt.eam.eam.service.impl;
 
-import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.springboot.api.error.ErrorDesc;
-import com.github.foxnic.springboot.mvc.Result;
-import com.github.foxnic.sql.expr.ConditionExpr;
-import com.github.foxnic.sql.meta.DBField;
-
 
 import com.dt.eam.domain.eam.Brand;
 import com.dt.eam.domain.eam.BrandVO;
+import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.spec.DAO;
+import java.lang.reflect.Field;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.sql.expr.ConditionExpr;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.dao.excel.ExcelStructure;
+import java.io.InputStream;
+import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.data.SaveMode;
 import com.dt.eam.eam.service.IBrandService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -30,7 +32,7 @@ import java.util.Date;
  * 品牌表 服务实现
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:26:19
+ * @since 2021-06-19 20:16:31
 */
 
 
@@ -55,7 +57,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 插入实体
-	 * @param role 实体数据
+	 * @param brand 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -65,7 +67,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param roleList 实体数据清单
+	 * @param brandList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -105,7 +107,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 更新实体
-	 * @param role 数据对象
+	 * @param brand 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -116,7 +118,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param roleList 数据对象列表
+	 * @param brandList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -195,14 +197,34 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param roleVO 数据对象
+	 * @param brand 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Brand> checkExists(Brand role) {
+	public Result<Brand> checkExists(Brand brand) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(role, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(brand, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
+	}
+
+	@Override
+	public ExcelWriter exportExcel(Brand sample) {
+		return super.exportExcel(sample);
+	}
+
+	@Override
+	public ExcelWriter exportExcelTemplate() {
+		return super.exportExcelTemplate();
+	}
+
+	@Override
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch) {
+		return super.importExcel(input,sheetIndex,batch);
+	}
+
+	@Override
+	public ExcelStructure buildExcelStructure(boolean isForExport) {
+		return super.buildExcelStructure(isForExport);
 	}
 
 }

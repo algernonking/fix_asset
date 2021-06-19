@@ -1,29 +1,23 @@
 package com.dt.eam.hrm.service.impl;
 
-import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.dt.eam.domain.hrm.Company;
+import com.dt.eam.hrm.service.ICompanyService;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.springboot.api.error.ErrorDesc;
-import com.github.foxnic.springboot.mvc.Result;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.meta.DBField;
-
-
-import com.dt.eam.domain.hrm.Company;
-import com.dt.eam.domain.hrm.CompanyVO;
-import com.dt.eam.hrm.service.ICompanyService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -55,7 +49,7 @@ public class CompanyServiceImpl extends SuperService<Company> implements ICompan
 	
 	/**
 	 * 插入实体
-	 * @param role 实体数据
+	 * @param company 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -65,7 +59,7 @@ public class CompanyServiceImpl extends SuperService<Company> implements ICompan
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param roleList 实体数据清单
+	 * @param companyList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -105,7 +99,7 @@ public class CompanyServiceImpl extends SuperService<Company> implements ICompan
 	
 	/**
 	 * 更新实体
-	 * @param role 数据对象
+	 * @param company 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -116,7 +110,7 @@ public class CompanyServiceImpl extends SuperService<Company> implements ICompan
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param roleList 数据对象列表
+	 * @param companyList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -195,7 +189,7 @@ public class CompanyServiceImpl extends SuperService<Company> implements ICompan
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param roleVO 数据对象
+	 * @param role 数据对象
 	 * @return 判断结果
 	 */
 	public Result<Company> checkExists(Company role) {

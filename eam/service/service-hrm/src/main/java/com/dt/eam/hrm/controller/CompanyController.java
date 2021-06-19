@@ -1,33 +1,27 @@
 package com.dt.eam.hrm.controller;
 
- 
-import java.util.List;
 
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
-import org.github.foxnic.web.framework.web.SuperController;
-
-
-import com.dt.eam.proxy.hrm.CompanyServiceProxy;
-import com.dt.eam.domain.hrm.meta.CompanyVOMeta;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dt.eam.domain.hrm.Company;
 import com.dt.eam.domain.hrm.CompanyVO;
-import io.swagger.annotations.Api;
-import com.github.xiaoymin.knife4j.annotations.ApiSort;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiImplicitParam;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.dt.eam.domain.hrm.meta.CompanyVOMeta;
 import com.dt.eam.hrm.service.ICompanyService;
-import com.github.foxnic.springboot.api.annotations.NotNull;
+import com.dt.eam.proxy.hrm.CompanyServiceProxy;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.api.validate.annotations.NotNull;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>

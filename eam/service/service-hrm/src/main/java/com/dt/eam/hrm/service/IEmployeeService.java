@@ -1,16 +1,15 @@
 package com.dt.eam.hrm.service;
-import java.util.List;
 
+import com.dt.eam.domain.hrm.Employee;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.github.foxnic.springboot.mvc.Result;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
 
-import com.dt.eam.domain.hrm.Employee;
-import com.dt.eam.domain.hrm.EmployeeVO;
+import java.util.List;
 
 /**
  * <p>
@@ -89,7 +88,7 @@ public interface IEmployeeService extends ISuperService<Employee> {
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param entity 实体数据
+	 * @param employee 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -107,7 +106,7 @@ public interface IEmployeeService extends ISuperService<Employee> {
 	 * 检查实体中的数据字段是否已经存在
 	 * @param employee  实体对象
 	 * @param field  字段清单，至少指定一个
-	 * @param 是否已经存在
+	 * @return  是否已经存在
 	 * */
 	boolean checkExists(Employee employee,DBField... field);
  

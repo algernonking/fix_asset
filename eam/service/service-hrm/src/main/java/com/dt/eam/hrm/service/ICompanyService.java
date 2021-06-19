@@ -1,16 +1,15 @@
 package com.dt.eam.hrm.service;
-import java.util.List;
 
+import com.dt.eam.domain.hrm.Company;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.github.foxnic.springboot.mvc.Result;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
 
-import com.dt.eam.domain.hrm.Company;
-import com.dt.eam.domain.hrm.CompanyVO;
+import java.util.List;
 
 /**
  * <p>
@@ -97,7 +96,7 @@ public interface ICompanyService extends ISuperService<Company> {
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param entity 实体数据
+	 * @param company 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -115,7 +114,7 @@ public interface ICompanyService extends ISuperService<Company> {
 	 * 检查实体中的数据字段是否已经存在
 	 * @param company  实体对象
 	 * @param field  字段清单，至少指定一个
-	 * @param 是否已经存在
+	 * @return  是否已经存在
 	 * */
 	boolean checkExists(Company company,DBField... field);
  
@@ -249,7 +248,7 @@ public interface ICompanyService extends ISuperService<Company> {
  
  	/**
 	 * 查询指定字段的数据清单
-	 * @param T 元素类型
+	 * @param <T> 元素类型
 	 * @param field 字段
 	 * @param type 元素类型
 	 * @param condition 条件表达式
@@ -259,7 +258,7 @@ public interface ICompanyService extends ISuperService<Company> {
  
 	/**
 	 * 查询指定字段的数据清单
-	 * @param T 元素类型
+	 * @param <T> 元素类型
 	 * @param field 字段
 	 * @param type 元素类型
 	 * @param condition 条件表达式

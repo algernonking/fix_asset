@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:30:18
+ * @since 2021-06-19 20:16:33
  */
 
 function FormPage() {
@@ -23,7 +23,7 @@ function FormPage() {
 		fillFormData();
 		
 		//绑定提交事件
-		bindSubmitEvent();
+		bindButtonEvent();
 		
 		//调整窗口的高度与位置
 		adjustPopup();
@@ -40,8 +40,8 @@ function FormPage() {
       * 渲染表单组件
       */
 	function renderFormFields() {
-		form.render('radio');
-	    //渲染图片字段
+		form.render();
+	   
 	}
 	
 	/**
@@ -49,18 +49,30 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-brand-form-data');
-		$('#data-form').attr('method', 'POST');
+		var fm=$('#data-form');
 		if (formData) {
+			fm[0].reset();
 			form.val('data-form', formData);
 	     	//设置并显示图片
-	     	$('#data-form').attr('method', 'POST');
+	     	fm.attr('method', 'POST');
+	     	renderFormFields();
 		}
+		
+		//渐显效果
+		fm.css("opacity","0.0");
+        fm.css("display","");
+        setTimeout(function (){
+            fm.animate({
+                opacity:'1.0'
+            },100);
+        },1);
+        
 	}
 	
 	/**
       * 保存数据，表单提交事件
       */
-    function bindSubmitEvent() {
+    function bindButtonEvent() {
     
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
@@ -68,9 +80,10 @@ function FormPage() {
 	    	//处理逻辑值
 	    	
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
-	        layer.load(2);
-	        admin.req(api, JSON.stringify(data.field), function (data) {
-	            layer.closeAll('loading');
+	        var task=setTimeout(function(){layer.load(2);},1000);
+	        admin.request(api, data.field, function (data) {
+	            clearTimeout(task);
+			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
 	                admin.finishPopupCenter();
@@ -81,6 +94,9 @@ function FormPage() {
 	        
 	        return false;
 	    });
+	    
+	    //关闭窗口
+	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
 

@@ -14,7 +14,7 @@ source:
 #使用不同的机器码对应到作者
 authors:
   #指定机器码与对应的作者，机器码在代码生成时控制台输出，或main函数调用 Machine.getIdentity()
-  C99A60CEE2D4D881: 李方捷 , leefangjie@qq.com
+  46B7C7194FD9C97C: 李方捷 , leefangjie@qq.com
   D8E2EF2E0509FCAD: 金杰 , maillank@qq.com
 
 

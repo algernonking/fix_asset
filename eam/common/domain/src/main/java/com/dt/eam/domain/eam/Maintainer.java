@@ -15,9 +15,9 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 /**
  * null
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
- * @sign 821CBF48748D68DCC06BABE44F4EB10F
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:07:36
+ * @sign 5A939CF775FB384B2DDC0401C3185FAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,7 +39,13 @@ public class Maintainer extends Entity {
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
+	private String maintainerName;
+	
+	/**
+	 * 备注：备注
+	*/
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
+	private String maintainerNotes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -119,23 +125,48 @@ public class Maintainer extends Entity {
 	 * 属性说明 : 名称
 	 * @return 名称
 	*/
-	public String getName() {
-		return name;
+	public String getMaintainerName() {
+		return maintainerName;
 	}
 	
 	/**
 	 * 设置 名称
-	 * @param name 名称
+	 * @param maintainerName 名称
 	 * @return 当前对象
 	*/
-	public Maintainer setName(String name) {
-		this.name=name;
+	public Maintainer setMaintainerName(String maintainerName) {
+		this.maintainerName=maintainerName;
 		return this;
 	}
 	
 	/**
 	 * 添加 名称
-	 * @param name 名称
+	 * @param maintainerName 名称
+	 * @return 当前对象
+	*/
+	
+	/**
+	 * 获得 备注<br>
+	 * 属性说明 : 备注
+	 * @return 备注
+	*/
+	public String getMaintainerNotes() {
+		return maintainerNotes;
+	}
+	
+	/**
+	 * 设置 备注
+	 * @param maintainerNotes 备注
+	 * @return 当前对象
+	*/
+	public Maintainer setMaintainerNotes(String maintainerNotes) {
+		this.maintainerNotes=maintainerNotes;
+		return this;
+	}
+	
+	/**
+	 * 添加 备注
+	 * @param maintainerNotes 备注
 	 * @return 当前对象
 	*/
 	

@@ -1,28 +1,22 @@
 package com.dt.eam.hrm.service.impl;
 
-import java.lang.reflect.Field;
-import java.util.Date;
-import java.util.List;
-
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.dt.eam.domain.hrm.Employee;
+import com.dt.eam.hrm.service.IEmployeeService;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.springboot.api.error.ErrorDesc;
-import com.github.foxnic.springboot.mvc.Result;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.meta.DBField;
-
-
-import com.dt.eam.domain.hrm.Employee;
-import com.dt.eam.domain.hrm.EmployeeVO;
-import com.dt.eam.hrm.service.IEmployeeService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * <p>
@@ -54,7 +48,7 @@ public class EmployeeServiceImpl extends SuperService<Employee> implements IEmpl
 	
 	/**
 	 * 插入实体
-	 * @param role 实体数据
+	 * @param employee 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -64,7 +58,7 @@ public class EmployeeServiceImpl extends SuperService<Employee> implements IEmpl
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param roleList 实体数据清单
+	 * @param employeeList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
@@ -178,7 +172,7 @@ public class EmployeeServiceImpl extends SuperService<Employee> implements IEmpl
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param roleVO 数据对象
+	 * @param role 数据对象
 	 * @return 判断结果
 	 */
 	public Result<Employee> checkExists(Employee role) {

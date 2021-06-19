@@ -3,16 +3,16 @@ package #(package);
  
 import java.util.List;
 
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.github.foxnic.web.framework.web.SuperController;
+import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
+import org.springframework.web.bind.annotation.RequestMapping;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 #(imports)
 
@@ -23,7 +23,7 @@ import org.github.foxnic.web.framework.web.SuperController;
 @ApiSort(#(apiSort))
 #end
 @RestController("#(beanName)")
-public class #(simpleName) {
+public class #(simpleName) extends SuperController {
 
 	@Autowired
 	private #(serviceSimpleName) #(serviceVarName);
@@ -38,13 +38,14 @@ public class #(simpleName) {
 	#end
 	#(validation4Insert)
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).INSERT)
+	@SentinelResource(value = #(agentSimpleName).INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).INSERT)
 	public Result<#(poSimpleName)> insert(#(voSimpleName) #(voVarName)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		boolean suc=#(serviceVarName).insert(#(voVarName));
 		result.success(suc);
+		if(!suc) result.message("数据插入失败");
 		return result;
 	}
 
@@ -58,13 +59,14 @@ public class #(simpleName) {
 	#end
 	#(validation4DeleteById)
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).DELETE)
+	@SentinelResource(value = #(agentSimpleName).DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).DELETE)
 	public Result<#(poSimpleName)> deleteById(#(controllerMethodParameterDeclare4DeleteById)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		boolean suc=#(serviceVarName).#(implMethod4DeleteById)(#(controllerMethodParameterPassIn4DeleteById));
 		result.success(suc);
+		if(!suc) result.message("数据删除失败");
 		return result;
 	}
 	
@@ -82,13 +84,14 @@ public class #(simpleName) {
 	@ApiOperationSupport(order=3) #end
 	@NotNull(name = #(voMetaSimpleName).#(idsPropertyConst))
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).BATCH_DELETE)
+	@SentinelResource(value = #(agentSimpleName).BATCH_DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).BATCH_DELETE)
 	public Result<#(poSimpleName)> deleteByIds(List<#(idsPropertyType)> #(idsPropertyName)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		boolean suc=#(serviceVarName).deleteByIdsLogical(#(idsPropertyName));
 		result.success(suc);
+		if(!suc) result.message("数据删除失败");
 		return result;
 	}
 	#end
@@ -102,13 +105,14 @@ public class #(simpleName) {
 	#end
 	#(validation4Update)
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).UPDATE)
+	@SentinelResource(value = #(agentSimpleName).UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).UPDATE)
 	public Result<#(poSimpleName)> update(#(voSimpleName) #(voVarName)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		boolean suc=#(serviceVarName).update(#(voVarName),SaveMode.NOT_NULL_FIELDS);
 		result.success(suc);
+		if(!suc) result.message("数据更新失败");
 		return result;
 	}
 	
@@ -122,13 +126,14 @@ public class #(simpleName) {
 	#end
 	#(validation4Save)
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).SAVE)
+	@SentinelResource(value = #(agentSimpleName).SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).SAVE)
 	public Result<#(poSimpleName)> save(#(voSimpleName) #(voVarName)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		boolean suc=#(serviceVarName).save(#(voVarName),SaveMode.NOT_NULL_FIELDS);
 		result.success(suc);
+		if(!suc) result.message("数据保存失败");
 		return result;
 	}
 
@@ -145,7 +150,7 @@ public class #(simpleName) {
 	#end
 	@NotNull(name = #(voMetaSimpleName).#(idPropertyConst))
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).GET_BY_ID)
+	@SentinelResource(value = #(agentSimpleName).GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).GET_BY_ID)
 	public Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById)) {
@@ -164,7 +169,7 @@ public class #(simpleName) {
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { #(voMetaSimpleName).PAGE_INDEX , #(voMetaSimpleName).PAGE_SIZE } )
 	#end
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).QUERY_LIST)
+	@SentinelResource(value = #(agentSimpleName).QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).QUERY_LIST)
 	public Result<List<#(poSimpleName)>> queryList(#(voSimpleName) sample) {
@@ -183,7 +188,7 @@ public class #(simpleName) {
 	@ApiOperationSupport(order=8)
 	#end
 	#if(isEnableMicroService)
-	@SentinelResource(value = #(agentSimpleName).QUERY_PAGED_LIST)
+	@SentinelResource(value = #(agentSimpleName).QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).QUERY_PAGED_LIST)
 	public Result<PagedList<#(poSimpleName)>> queryPagedList(#(voSimpleName) sample) {
@@ -192,6 +197,60 @@ public class #(simpleName) {
 		result.success(true).data(list);
 		return result;
 	}
+
+
+
+	/**
+	 * 导出 Excel
+	 * */
+	@SentinelResource(value = #(agentSimpleName).EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL)
+	public void exportExcel(#(voSimpleName)  sample,HttpServletResponse response) throws Exception {
+			//生成 Excel 数据
+			ExcelWriter ew=#(serviceVarName).exportExcel(sample);
+			//下载
+			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	}
+
+
+	/**
+	 * 导出 Excel 模板
+	 * */
+	@SentinelResource(value = #(agentSimpleName).EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL_TEMPLATE)
+	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+			//生成 Excel 模版
+			ExcelWriter ew=#(serviceVarName).exportExcelTemplate();
+			//下载
+			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		}
+
+
+
+
+	@SentinelResource(value = #(agentSimpleName).IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(#(agentSimpleName).IMPORT_EXCEL)
+	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+
+			//获得上传的文件
+			Map<String, MultipartFile> map = request.getFileMap();
+			InputStream input=null;
+			for (MultipartFile mf : map.values()) {
+				input=StreamUtil.bytes2input(mf.getBytes());
+				break;
+			}
+
+			if(input==null) {
+				return ErrorDesc.failure().message("缺少上传的文件");
+			}
+
+			List<ValidateResult> errors=#(serviceVarName).importExcel(input,0,true);
+			if(errors==null || errors.isEmpty()) {
+				return ErrorDesc.success();
+			} else {
+				return ErrorDesc.failure().message("导入失败").data(errors);
+			}
+		}
 
 
 }

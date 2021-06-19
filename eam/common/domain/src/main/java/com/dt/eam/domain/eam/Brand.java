@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:26:19
- * @sign 821CBF48748D68DCC06BABE44F4EB10F
+ * @since 2021-06-19 20:07:34
+ * @sign 1949416485663676EFD181478BECAAA6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,7 +39,7 @@ public class Brand extends Entity {
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
+	private String brandName;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -119,23 +119,23 @@ public class Brand extends Entity {
 	 * 属性说明 : 名称
 	 * @return 名称
 	*/
-	public String getName() {
-		return name;
+	public String getBrandName() {
+		return brandName;
 	}
 	
 	/**
 	 * 设置 名称
-	 * @param name 名称
+	 * @param brandName 名称
 	 * @return 当前对象
 	*/
-	public Brand setName(String name) {
-		this.name=name;
+	public Brand setBrandName(String brandName) {
+		this.brandName=brandName;
 		return this;
 	}
 	
 	/**
 	 * 添加 名称
-	 * @param name 名称
+	 * @param brandName 名称
 	 * @return 当前对象
 	*/
 	

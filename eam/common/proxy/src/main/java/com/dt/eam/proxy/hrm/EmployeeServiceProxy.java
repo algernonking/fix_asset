@@ -1,19 +1,16 @@
 package com.dt.eam.proxy.hrm;
 
-import java.util.List;
-import org.springframework.web.bind.annotation.RequestMapping;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
-import org.github.foxnic.web.proxy.FeignConfiguration;
-
-import org.springframework.cloud.openfeign.FeignClient;
-
-
 import com.dt.eam.domain.hrm.Employee;
 import com.dt.eam.domain.hrm.EmployeeVO;
-import com.github.foxnic.springboot.api.proxy.APIProxy;
 import com.dt.eam.proxy.EAMServiceNames;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.github.foxnic.web.proxy.api.APIProxy;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * <p>

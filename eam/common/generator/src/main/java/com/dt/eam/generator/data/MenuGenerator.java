@@ -1,23 +1,6 @@
 package com.dt.eam.generator.data;
 
-import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import com.dt.eam.constants.db.EAMTables;
-import com.dt.eam.eam.page.GoodsPageController;
-import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_MENU;
-import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_ROLE_MENU;
-import org.github.foxnic.web.constants.enums.MenuType;
-import org.github.foxnic.web.domain.oauth.Menu;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.dt.eam.constants.db.EAMTables.EAM_BRAND;
-import com.dt.eam.constants.db.EAMTables.EAM_GOODS;
-import com.dt.eam.eam.page.BrandPageController;
 import com.dt.eam.generator.config.EamConfigs;
-import com.dt.eam.proxy.eam.BrandServiceProxy;
-import com.dt.eam.proxy.eam.GoodsServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -26,6 +9,15 @@ import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.meta.DBTableMeta;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.meta.DBTable;
+import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_MENU;
+import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_ROLE_MENU;
+import org.github.foxnic.web.constants.enums.MenuType;
+import org.github.foxnic.web.domain.oauth.Menu;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
  
 
@@ -40,9 +32,9 @@ public class MenuGenerator {
 //		generator.generate(HRM_COMPANY.$TABLE,CompanyServiceProxy.class,CompanyPageController.class,"hrm");
 //		generator.generate(HRM_EMPLOYEE.$TABLE,EmployeeServiceProxy.class,EmployeePageController.class,"hrm");
 		
-		generator.generate(EAM_BRAND.$TABLE,BrandServiceProxy.class,BrandPageController.class,"eam");
+//		generator.generate(EAM_BRAND.$TABLE,BrandServiceProxy.class,BrandPageController.class,"eam");
 
-		generator.generate(EAM_GOODS.$TABLE,GoodsServiceProxy.class, GoodsPageController.class,"eam");
+//		generator.generate(EAM_GOODS.$TABLE,GoodsServiceProxy.class, GoodsPageController.class,"eam");
 		
 //		generator.generate(SYS_LANG.$TABLE,LangServiceProxy.class,LangPageController.class,"system");
 		
@@ -50,7 +42,7 @@ public class MenuGenerator {
 		
 //		generator.generate(SYS_MENU.$TABLE,MenuServiceProxy.class,MenuPageController.class,"oauth");
 		
-//		generator.removeByBatchId("454331740924674048");
+		generator.removeByBatchId("455378941025189888");
 		
 	}
 	

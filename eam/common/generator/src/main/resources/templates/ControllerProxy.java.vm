@@ -1,10 +1,7 @@
 package #(package);
 
-import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.springboot.mvc.Result;
-
+import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
 
 #if(isEnableMicroService)import org.springframework.cloud.openfeign.FeignClient;#end
@@ -78,6 +75,11 @@ public interface #(simpleName) {
 	 * 导出#(topic)数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
+
+	/**
+	 * 下载#(topic)导入模版(Excel)
+	 */
+	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
 	 * 导入#(topic)数据(Excel)

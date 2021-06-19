@@ -1,23 +1,33 @@
 package com.dt.eam.eam.service;
-import java.util.List;
 
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.github.foxnic.springboot.mvc.Result;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.excel.ValidateResult;
+
+import com.github.foxnic.springboot.web.DownloadUtil;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ExcelStructure;
+
 
 import com.dt.eam.domain.eam.Maintainer;
 import com.dt.eam.domain.eam.MaintainerVO;
+import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import java.io.InputStream;
 
 /**
  * <p>
  * 维保厂商 服务接口
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-19 20:12:53
 */
 
 public interface IMaintainerService extends ISuperService<Maintainer> {
@@ -97,7 +107,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param entity 实体数据
+	 * @param maintainer 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
@@ -115,7 +125,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * 检查实体中的数据字段是否已经存在
 	 * @param maintainer  实体对象
 	 * @param field  字段清单，至少指定一个
-	 * @param 是否已经存在
+	 * @return 是否已经存在
 	 * */
 	boolean checkExists(Maintainer maintainer,DBField... field);
  
@@ -249,7 +259,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
  
  	/**
 	 * 查询指定字段的数据清单
-	 * @param T 元素类型
+	 * @param <T> 元素类型
 	 * @param field 字段
 	 * @param type 元素类型
 	 * @param condition 条件表达式
@@ -259,7 +269,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
  
 	/**
 	 * 查询指定字段的数据清单
-	 * @param T 元素类型
+	 * @param <T> 元素类型
 	 * @param field 字段
 	 * @param type 元素类型
 	 * @param condition 条件表达式
@@ -267,5 +277,28 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 列数据
 	 * */
 	<T> List<T> queryValues(DBField field, Class<T> type, String condition,Object... ps);
+
+	/**
+	 * 导出 Excel
+	 * */
+	ExcelWriter exportExcel(Maintainer sample);
+
+	/**
+	 * 导出用于数据导入的 Excel 模版
+	 * */
+	ExcelWriter  exportExcelTemplate();
+
+	/**
+	 * 构建 Excel 结构
+	 * @param  isForExport 是否用于数据导出
+	 * @return   ExcelStructure
+	 * */
+	ExcelStructure buildExcelStructure(boolean isForExport);
+
+	/**
+	 * 导入 Excel 数据
+	 * @return  错误信息，成功时返回 null
+	 * */
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
  
 }

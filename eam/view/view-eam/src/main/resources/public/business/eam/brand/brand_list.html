@@ -2,7 +2,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-10 14:30:18
+ * @since 2021-06-19 20:16:31
  */
  -->
  <!DOCTYPE html>
@@ -15,7 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
     <link rel="stylesheet" href="/assets/css/admin.css"/>
-    <link rel="stylesheet" href="/module/formSelects/formSelects-v4.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
 </head>
 
 <body>
@@ -28,7 +29,7 @@
             <select id="search-field">
                 <option value="" th:text="${lang.translate('-请选择-')}">-请选择-</option>
                 <option value="id" th:text="${lang.translate('主键')}">主键</option>
-                <option value="name" th:text="${lang.translate('名称')}">名称</option>
+                <option value="brandName" th:text="${lang.translate('名称')}">名称</option>
             </select>&emsp;
             <input id="search-input" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入关键字')}"/>&emsp;
             <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
@@ -50,6 +51,11 @@
 <script type="text/html" id="tableOperationTemplate">
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
     <a class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+</script>
+
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG= [[${layuiTableWidthConfig}]];
 </script>
 
 <script src="/business/eam/brand/brand_list.js"></script>

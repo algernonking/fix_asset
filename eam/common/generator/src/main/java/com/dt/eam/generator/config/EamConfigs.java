@@ -1,11 +1,5 @@
 package com.dt.eam.generator.config;
 
-import java.io.File;
-
-import org.github.foxnic.web.framework.dao.DBTreatyConfig;
-import org.github.foxnic.web.framework.nacos.NacosConfig;
-import org.github.foxnic.web.relation.FoxnicWebRelationManager;
-
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.foxnic.commons.cache.Variable;
 import com.github.foxnic.commons.io.FileUtil;
@@ -16,6 +10,11 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
 import com.github.foxnic.generator.config.GlobalSettings;
 import com.github.foxnic.sql.treaty.DBTreaty;
+import org.github.foxnic.web.framework.dao.DBTreatyConfig;
+import org.github.foxnic.web.framework.nacos.NacosConfig;
+import org.github.foxnic.web.relation.FoxnicWebRelationManager;
+
+import java.io.File;
 
 public class EamConfigs {
 	
@@ -133,7 +132,6 @@ public class EamConfigs {
 		this.settings.setAuthor(author);
 		this.settings.setEnableSwagger(projectConfigs.isEnableSwagger());
 		this.settings.setEnableMicroService(projectConfigs.isEnableMicroService());
-		this.settings.setFrontendDepart(projectConfigs.isFrontendDepart());
 	}
 
 	
