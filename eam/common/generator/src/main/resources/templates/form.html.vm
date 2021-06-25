@@ -23,17 +23,16 @@
     #end
     #for(f : fields)
     #if(f.isImageField)
-    
+
     <div class="layui-form-item">
-    	<label class="layui-form-label" ></label>
-	    <div class="layui-upload layui-input-block">
-		  <button type="button" class="layui-btn" id="#(f.varName)-button" th:text="${lang.translate('选择图片')}">选择图片</button>
-		  <div class="layui-upload-list">
-		    <img class="layui-upload-img" onclick="window.previewImage(this)" id="#(f.varName)-image" style="width:92px;height:92px" src="/assets/images/no-image-92@2x.png">
-		    <p id="#(f.varName)-text"></p>
-		  </div>
-		</div>
-	</div>
+        <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
+        <div class="layui-upload layui-input-block">
+            <input id="#(f.varName)"  name="#(f.varName)" ay-filter="#(f.varName)" style="display: none">
+            <button type="button" class="layui-btn" id="portraitId-button" th:text="${lang.translate('选择图片')}">选择图片</button>
+            <div class="layui-upload-list" id="portraitId-file-list"></div>
+        </div>
+    </div>
+
 	
 	#else if(f.isLogicField)
 	
@@ -49,30 +48,53 @@
     <div class="layui-form-item">
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
-        	#if(f.radioField.dict!=null)
-            <input type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${enum.toArray('org.github.foxnic.web.constants.enums.MenuType')}" th:value="${e.code}" th:title="${e.text}">
+        	#if(f.radioField.dictCode!=null)
+            <input type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${dict.toArray('#(f.radioField.dictCode)')}" th:value="${e.code}" th:title="${e.text}">
             #end
             #if(f.radioField.enumTypeName!=null)
             <input type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${enum.toArray('#(f.radioField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}">
             #end
         </div>
     </div>
+
+    #else if(f.isCheckField)
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
+            <div class="layui-input-block">
+                #if(f.checkField.dictCode!=null)
+                    <input type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${dict.toArray('#(f.checkField.dictCode)')}" th:value="${e.code}" th:title="${e.text}">
+                #end
+                #if(f.checkField.enumTypeName!=null)
+                    <input type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${enum.toArray('#(f.checkField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}">
+                #end
+            </div>
+        </div>
     
     #else if(f.isMulitiLine)
     
         <div class="layui-form-item">
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
-            <textarea lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" class="layui-textarea" #(f.layVerifyHtml) #(f.maxLenHtml) #(f.requiredHtml)></textarea>
+            <textarea lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" class="layui-textarea" ></textarea>
         </div>
     </div>
-    
+
+    #else if(f.isSelectField)
+
+        <div class="layui-form-item">
+            <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
+            <div class="layui-input-block">
+                <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end"></div>
+            </div>
+        </div>
+
     #else 
     
     <div class="layui-form-item">
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
-            <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" type="text" class="layui-input" #(f.layVerifyHtml) #(f.maxLenHtml) #(f.requiredHtml) />
+            <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />
         </div>
     </div>
     

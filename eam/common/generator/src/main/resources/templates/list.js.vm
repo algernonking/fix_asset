@@ -43,15 +43,25 @@ function ListPage() {
 		fox.renderTable({
 			elem: '#data-table',
             url: moduleURL +'/query-paged-list',
+		 	height: 'full-78',
+		 	limit: 50,
             #if(isTree) 
             //树形结构需要传递相关参数
             where: { #(parentIdVar) : #(parentIdVar) } ,
             #end
 			cols: [[
+				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
-                {  fixed: 'left',type: 'numbers' },
                 #for(f : fields)
-                { field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)')#(f.templet) } ,
+		 		#if(f.isDateField)
+				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
+				#elseif(f.isImageField)
+				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return '<img style="height: 100%;"  onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
+				#elseif(f.isLogicField)
+				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: '#cell-tpl-#(f.varName)'} ,
+				#else
+                { field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)')} ,
+				#end
                 #end
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
@@ -266,13 +276,13 @@ function ListPage() {
 		admin.putTempData('#(formDataKey)', data);
 		var area=admin.getTempData('#(formAreaKey)');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
-		var top= ($(window).height()-height)/2;
+		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.#(idPropertyName)) ? (fox.translate('修改')+fox.translate('#(topic)')) : (fox.translate('添加')+fox.translate('#(topic)'));
 		admin.popupCenter({
 			title: title,
-			resize:true,
-			offset:[top,null],
-			area:["500px",height+"px"],
+			resize: true,
+			offset: [top,null],
+			area: ["500px",height+"px"],
 			type: 2,
 			content: '#(formURI)' + queryString,
 			finish: function () {

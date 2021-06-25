@@ -86,7 +86,11 @@ knife4j:
   description: ${spring.application.description}
   version: 1.0        
 
-upload: 
-  windows: c:/upload
-  mac: /Users/LeeFJ/git/tailoring/uploads
-  linux: /tailoring/uploads         
+storage:
+  mode: disk
+  disk:
+    location:
+      #在不同的环境下选择不同的路径
+      windows: c:/uploads
+      mac: /Users/LeeFJ/git/tailoring/uploads
+      linux: /tailoring/uploads
