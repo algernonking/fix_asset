@@ -46,7 +46,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌表 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:16:31
+ * @since 2021-07-19 15:07:57
 */
 
 @Api(tags = "品牌")
@@ -70,11 +70,8 @@ public class BrandController extends SuperController {
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.INSERT)
-	public Result<Brand> insert(BrandVO brandVO) {
-		Result<Brand> result=new Result<>();
-		boolean suc=brandService.insert(brandVO);
-		result.success(suc);
-		if(!suc) result.message("数据插入失败");
+	public Result insert(BrandVO brandVO) {
+		Result result=brandService.insert(brandVO);
 		return result;
 	}
 
@@ -90,11 +87,8 @@ public class BrandController extends SuperController {
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.DELETE)
-	public Result<Brand> deleteById(String id) {
-		Result<Brand> result=new Result<>();
-		boolean suc=brandService.deleteByIdLogical(id);
-		result.success(suc);
-		if(!suc) result.message("数据删除失败");
+	public Result deleteById(String id) {
+		Result result=brandService.deleteByIdLogical(id);
 		return result;
 	}
 	
@@ -109,13 +103,10 @@ public class BrandController extends SuperController {
 	})
 	@ApiOperationSupport(order=3) 
 	@NotNull(name = BrandVOMeta.IDS)
-	@SentinelResource(value = BrandServiceProxy.BATCH_DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-	@PostMapping(BrandServiceProxy.BATCH_DELETE)
-	public Result<Brand> deleteByIds(List<String> ids) {
-		Result<Brand> result=new Result<>();
-		boolean suc=brandService.deleteByIdsLogical(ids);
-		result.success(suc);
-		if(!suc) result.message("数据删除失败");
+	@SentinelResource(value = BrandServiceProxy.DELETE_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(BrandServiceProxy.DELETE_BY_IDS)
+	public Result deleteByIds(List<String> ids) {
+		Result result=brandService.deleteByIdsLogical(ids);
 		return result;
 	}
 	
@@ -131,11 +122,8 @@ public class BrandController extends SuperController {
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.UPDATE)
-	public Result<Brand> update(BrandVO brandVO) {
-		Result<Brand> result=new Result<>();
-		boolean suc=brandService.update(brandVO,SaveMode.NOT_NULL_FIELDS);
-		result.success(suc);
-		if(!suc) result.message("数据更新失败");
+	public Result update(BrandVO brandVO) {
+		Result result=brandService.update(brandVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
 	
@@ -152,11 +140,8 @@ public class BrandController extends SuperController {
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.SAVE)
-	public Result<Brand> save(BrandVO brandVO) {
-		Result<Brand> result=new Result<>();
-		boolean suc=brandService.save(brandVO,SaveMode.NOT_NULL_FIELDS);
-		result.success(suc);
-		if(!suc) result.message("数据保存失败");
+	public Result save(BrandVO brandVO) {
+		Result result=brandService.save(brandVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
 
@@ -176,6 +161,26 @@ public class BrandController extends SuperController {
 		Result<Brand> result=new Result<>();
 		Brand role=brandService.getById(id);
 		result.success(true).data(role);
+		return result;
+	}
+
+
+	/**
+	 * 批量删除品牌 <br>
+	 * 联合主键时，请自行调整实现
+	*/
+		@ApiOperation(value = "批量删除品牌")
+		@ApiImplicitParams({
+				@ApiImplicitParam(name = BrandVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+		})
+		@ApiOperationSupport(order=3) 
+		@NotNull(name = BrandVOMeta.IDS)
+		@SentinelResource(value = BrandServiceProxy.GET_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(BrandServiceProxy.GET_BY_IDS)
+	public Result<List<Brand>> getByIds(List<String> ids) {
+		Result<List<Brand>> result=new Result<>();
+		List<Brand> list=brandService.getByIds(ids);
+		result.success(true).data(list);
 		return result;
 	}
 
