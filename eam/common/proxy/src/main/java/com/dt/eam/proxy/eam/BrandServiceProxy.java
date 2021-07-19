@@ -19,7 +19,7 @@ import com.dt.eam.proxy.EAMServiceNames;
  * 品牌表  控制器服务代理
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:16:31
+ * @since 2021-07-19 15:07:57
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -49,13 +49,12 @@ public interface BrandServiceProxy {
 	 * 删除品牌
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
-	
-	
+
 	/**
 	 * 批量删除品牌
 	 */
-	public static final String BATCH_DELETE = API_PREFIX + "batch-delete";
-	
+	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
+	;
 	
 	/**
 	 * 更新品牌
@@ -69,10 +68,16 @@ public interface BrandServiceProxy {
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取品牌
+	 * 获取单个品牌
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
-	
+
+	/**
+	 * 获取多个品牌
+	 */
+	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
+	;
+
 	/**
 	 * 查询品牌
 	 */
@@ -102,39 +107,43 @@ public interface BrandServiceProxy {
 	 * 添加品牌
 	*/
 	@RequestMapping(BrandServiceProxy.INSERT)
-	Result<Brand> insert(BrandVO brandVO);
+	Result insert(BrandVO brandVO);
 	
 	/**
 	 * 删除品牌
 	*/
 	@RequestMapping(BrandServiceProxy.DELETE)
-	Result<Brand> deleteById(String id);
-	
-	
+	Result deleteById(String id);
+
 	/**
 	 * 批量删除品牌
 	*/
-	@RequestMapping(BrandServiceProxy.BATCH_DELETE)
-	Result<Brand> deleteByIds(List<String> id);
-	
+	@RequestMapping(BrandServiceProxy.DELETE_BY_IDS)
+	Result deleteByIds(List<String> ids);
+
 	/**
 	 * 更新品牌
 	*/
 	@RequestMapping(BrandServiceProxy.UPDATE)
-	Result<Brand> update(BrandVO brandVO);
+	Result update(BrandVO brandVO);
 	
 	/**
 	 * 更新品牌
 	*/
 	@RequestMapping(BrandServiceProxy.SAVE)
-	Result<Brand> save(BrandVO brandVO);
+	Result save(BrandVO brandVO);
 	
 	/**
 	 * 获取品牌
 	*/
 	@RequestMapping(BrandServiceProxy.GET_BY_ID)
 	Result<Brand> getById(String id);
-	
+
+	/**
+	 * 批量删除品牌
+	*/
+	@RequestMapping(BrandServiceProxy.GET_BY_IDS)
+	Result<List<Brand>> getByIds(List<String> ids);
 	/**
 	 * 查询品牌
 	*/

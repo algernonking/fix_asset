@@ -20,19 +20,38 @@
 <div class="layui-card">
  
     <div class="layui-card-body">
-        <div class="layui-form toolbar">
-            <span th:text="${lang.translate('搜索')}">搜索</span>：
-            <select id="search-field">
-                <option value="" th:text="${lang.translate('-请选择-')}">-请选择-</option>
-                #for(f : searchFields)
-                <option value="#(f.varName)" th:text="${lang.translate('#(f.label)')}">#(f.label)</option>
+        <div class="layui-form toolbar search-bar">
+
+            #for(f : searchFields)
+            #if(!f.isHideInSearch)
+            <div class="search-unit">
+                <span th:text="${lang.translate('#(f.label)')}" class="search-label">#(f.label)</span><span class="search-colon">:</span>
+                #if(f.isLogicField)
+                <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:100px"></div>
+                #else if(f.isRadioField)
+
+                #if(f.radioField.dictCode!=null)
+                <div id="#(f.varName)" th:data="${dict.toArray('#(f.radioField.dictCode)')}" style="width:140px"></div>
                 #end
-            </select>&emsp;
-            <input id="search-input" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入关键字')}"/>&emsp;
+                #if(f.radioField.enumTypeName!=null)
+                <div id="#(f.varName)" th:data="${enum.toArray('#(f.radioField.enumTypeName)')}" style="width:140px"></div>
+                #end
+
+                #else if(f.isDateField)
+                 <input type="text" id="#(f.varName)-begin" style="width: 90px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                 <span class="search-dash">-</span>
+                 <input type="text" id="#(f.varName)-end"  style="width: 90px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                #else
+                <input id="#(f.varName)" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入#(f.label)')}"/>
+                #end
+            </div>
+            #end
+            #end
+
             <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
-            <button id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+            <button th:if="${perm.checkAuth('#(authPrefix):create')}" id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
             #if(isSimplePK)
-            <button id="delete-button" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+            <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
             #end
             #if(isTree)
             <span id="tree-nav" class="layui-breadcrumb" style="padding-left:16px"></span>
@@ -54,8 +73,8 @@
 	#if(isTree) 
 	<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" th:text="${lang.translate('下级')}">下级</a>
 	#end
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
-    <a class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <a th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 
 #if(hasLogicField)
@@ -70,7 +89,18 @@
 #end
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG= [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    #for(f:fields)
+    #if(f.isRadioField)
+    #if(f.radioField.dictCode!=null)
+    var RADIO_#(f.varName.toUpperCase())_DATA = [[${dict.toArray('#(f.radioField.dictCode)')}]];
+    #end
+    #if(f.radioField.enumTypeName!=null)
+    var RADIO_#(f.varName.toUpperCase())_DATA = [[${enum.toArray('#(f.radioField.enumTypeName)')}]];
+    #end
+    #else if(f.isSelectField)
+    #end
+    #end
 </script>
 
 <script src="#(jsURI)"></script>

@@ -94,3 +94,7 @@ storage:
       windows: c:/uploads
       mac: /Users/LeeFJ/git/tailoring/uploads
       linux: /tailoring/uploads
+
+develop:
+  language: confuse
+  start-relation-monitor: true

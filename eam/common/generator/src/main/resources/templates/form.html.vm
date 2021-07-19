@@ -15,28 +15,28 @@
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body style="overflow-y: hidden">
 
 <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
     #for(f : hiddenFields)
     <input name="#(f.varName)" id="#(f.varName)"  type="hidden"/>
     #end
     #for(f : fields)
-    #if(f.isImageField)
+    #if(f.isUploadField)
 
-    <div class="layui-form-item">
+    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-upload layui-input-block">
-            <input id="#(f.varName)"  name="#(f.varName)" ay-filter="#(f.varName)" style="display: none">
-            <button type="button" class="layui-btn" id="portraitId-button" th:text="${lang.translate('选择图片')}">选择图片</button>
-            <div class="layui-upload-list" id="portraitId-file-list"></div>
+            <input id="#(f.varName)"  name="#(f.varName)" lay-filter="#(f.varName)" style="display: none">
+            <button type="button" class="layui-btn" id="#(f.varName)-button" th:text="${lang.translate('#(f.uploadField.buttonLabel)')}">#(f.uploadField.buttonLabel)</button>
+            <div class="layui-upload-list" id="#(f.varName)-file-list"></div>
         </div>
     </div>
 
 	
 	#else if(f.isLogicField)
 	
-    <div class="layui-form-item">
+    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
             <input type="checkbox" checked="" id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)" value="#(f.logicField.valueOn)">
@@ -45,7 +45,7 @@
     
 	#else if(f.isRadioField)
 	
-    <div class="layui-form-item">
+    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
         	#if(f.radioField.dictCode!=null)
@@ -59,7 +59,7 @@
 
     #else if(f.isCheckField)
 
-        <div class="layui-form-item">
+        <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
             <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
             <div class="layui-input-block">
                 #if(f.checkField.dictCode!=null)
@@ -73,7 +73,7 @@
     
     #else if(f.isMulitiLine)
     
-        <div class="layui-form-item">
+        <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
             <textarea lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" class="layui-textarea" ></textarea>
@@ -82,7 +82,7 @@
 
     #else if(f.isSelectField)
 
-        <div class="layui-form-item">
+        <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
             <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
             <div class="layui-input-block">
                 <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end"></div>
@@ -91,7 +91,7 @@
 
     #else 
     
-    <div class="layui-form-item">
+    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
         <label class="layui-form-label" th:text="${lang.translate('#(f.label)')}">#(f.label)</label>
         <div class="layui-input-block">
             <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.label)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />
@@ -104,7 +104,7 @@
 
     <div class="layui-form-item model-form-footer">
         <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
-        <button class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+        <button th:if="${perm.checkAnyAuth('#(authPrefix):create','#(authPrefix):update','#(authPrefix):save')}" class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
     </div>
 </form>
 

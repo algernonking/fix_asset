@@ -17,7 +17,7 @@ function ListPage() {
       */
 	this.init=function(layui) {
      	
-     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
+     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 		
      	//渲染表格
@@ -25,7 +25,9 @@ function ListPage() {
 		#if(isTree)
 		//初始化层级导航
 		refreshNav();
-		#end 
+		#end
+		//初始化搜索输入框组件
+		initSearchFields();
 		//绑定搜索框事件
 		bindSearchEvent();
 		//绑定按钮事件
@@ -54,13 +56,20 @@ function ListPage() {
 			 	{  fixed: 'left',type:'checkbox' },
                 #for(f : fields)
 		 		#if(f.isDateField)
-				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
-				#elseif(f.isImageField)
-				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return '<img style="height: 100%;"  onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
+				#elseif(f.isUploadField && f.uploadField.isImageOnly && f.uploadField.count==1)
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
+				#elseif(f.isRadioField)
+				#if(f.radioField.dictCode!=null)
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet:function (d){ return fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+				#end
+				#if(f.radioField.enumTypeName!=null)
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet:function (d){ return fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+				#end
 				#elseif(f.isLogicField)
-				{ field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)'), templet: '#cell-tpl-#(f.varName)'} ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: '#cell-tpl-#(f.varName)'} ,
 				#else
-                { field: '#(f.varName)', sort: true, title: fox.translate('#(f.label)')} ,
+                { field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)')} ,
 				#end
                 #end
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -97,9 +106,21 @@ function ListPage() {
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType) {
-		var field = $('#search-field').val();
-		var value = $('#search-input').val();
-		var ps={searchField: field, searchValue: value,sortField:sortField,sortType:sortType};
+		var value = {};
+		#for(f : searchFields)
+		#if(!f.isHideInSearch)
+		#if(f.isLogicField)
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value") };
+		#else if(f.isRadioField)
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value") };
+		#else if(f.isDateField)
+		value.#(f.varName)={ begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
+		#else
+		value.#(f.varName)={ value: $("##(f.varName)").val() };
+		#end
+		#end
+		#end
+		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		#if(isTree) 
 		// 树形结构锁定上级ID
 		ps.#(parentIdVar)=#(parentIdVar);
@@ -157,13 +178,65 @@ function ListPage() {
 		$('#search-input').val("");
 		layui.form.render();
 	}
+
+	function initSearchFields() {
+	#for(f : searchFields)
+	#if(!f.isHideInSearch)
+		#if(f.isLogicField)
+		//渲染 #(f.varName) 搜索框
+		fox.renderSelectBox({
+			el: "#(f.varName)",
+			size: "small",
+			radio: true
+		});
+		#else if(f.isRadioField)
+		//渲染 #(f.varName) 搜索框
+		fox.renderSelectBox({
+			el: "#(f.varName)",
+			size: "small",
+			radio: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			#if(f.radioField.dictCode!=null)
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+			#end
+			#if(f.radioField.enumTypeName!=null)
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+			#end
+		});
+		#else if(f.isDateField)
+			laydate.render({
+				elem: '##(f.varName)-begin'
+			});
+			laydate.render({
+				elem: '##(f.varName)-end'
+			});
+		#end
+	#end
+	#end
+	}
 	
 	/**
 	 * 绑定搜索框事件
 	 */
 	function bindSearchEvent() {
 		//回车键查询
-        $("#search-input").keydown(function(event) {
+        $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
 		  	refreshTableData();
         });
@@ -202,13 +275,13 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.request(moduleURL+"/batch-delete", { #(idsPropertyName): ids }, function (data) {
+                admin.request(moduleURL+"/delete-by-id", { #(idsPropertyName): ids }, function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 500});
+                        layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
 			});
@@ -234,7 +307,7 @@ function ListPage() {
 					if(data.success) {
 						 showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 500});
+						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 				
@@ -249,7 +322,7 @@ function ListPage() {
 							layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 500});
+							layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
@@ -299,6 +372,6 @@ layui.config({
 	base: '/module/'
 }).extend({
 	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect'],function() {
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
 	(new ListPage()).init(layui);
 });

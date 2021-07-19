@@ -33,7 +33,7 @@ public class FoxnicWebRelationManager extends RelationManager {
 	
 	protected void doReConfigAndValidate() {
 		FoxnicWebRelationManager.this.reconfig(); 
-		FoxnicWebRelationManager.this.validate();
+//		FoxnicWebRelationManager.this.validate();
 //		Logger.info("FoxnicWebRelationManager Reconfig");
 	}
 

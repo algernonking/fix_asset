@@ -23,6 +23,9 @@ import com.github.foxnic.dao.excel.ExcelStructure;
 import java.io.InputStream;
 import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.meta.DBColumnMeta;
+import com.github.foxnic.sql.expr.Select;
+import java.util.ArrayList;
 import com.dt.eam.eam.service.IBrandService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -32,7 +35,7 @@ import java.util.Date;
  * 品牌表 服务实现
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:16:31
+ * @since 2021-07-19 15:07:57
 */
 
 
@@ -61,7 +64,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public boolean insert(Brand brand) {
+	public Result insert(Brand brand) {
 		return super.insert(brand);
 	}
 	
@@ -71,7 +74,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public boolean insertList(List<Brand> brandList) {
+	public Result insertList(List<Brand> brandList) {
 		return super.insertList(brandList);
 	}
 	
@@ -82,11 +85,19 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
-	public boolean deleteByIdPhysical(String id) {
+	public Result deleteByIdPhysical(String id) {
 		Brand brand = new Brand();
-		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
+		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		brand.setId(id);
-		return dao.deleteEntity(brand);
+		try {
+			boolean suc = dao.deleteEntity(brand);
+			return suc?ErrorDesc.success():ErrorDesc.failure();
+		}
+		catch(Exception e) {
+			Result r= ErrorDesc.failure();
+			r.extra().setException(e);
+			return r;
+		}
 	}
 	
 	/**
@@ -95,14 +106,22 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
-	public boolean deleteByIdLogical(String id) {
+	public Result deleteByIdLogical(String id) {
 		Brand brand = new Brand();
-		if(id==null) throw new IllegalArgumentException("id 不允许为 null 。");
+		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		brand.setId(id);
 		brand.setDeleted(dao.getDBTreaty().getTrueValue());
 		brand.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
 		brand.setDeleteTime(new Date());
-		return dao.updateEntity(brand,SaveMode.NOT_NULL_FIELDS);
+		try {
+			boolean suc = dao.updateEntity(brand,SaveMode.NOT_NULL_FIELDS);
+			return suc?ErrorDesc.success():ErrorDesc.failure();
+		}
+		catch(Exception e) {
+			Result r= ErrorDesc.failure();
+			r.extra().setException(e);
+			return r;
+		}
 	}
 	
 	/**
@@ -112,7 +131,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public boolean update(Brand brand , SaveMode mode) {
+	public Result update(Brand brand , SaveMode mode) {
 		return super.update(brand , mode);
 	}
 	
@@ -123,7 +142,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public boolean updateList(List<Brand> brandList , SaveMode mode) {
+	public Result updateList(List<Brand> brandList , SaveMode mode) {
 		return super.updateList(brandList , mode);
 	}
 	
@@ -154,7 +173,14 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
- 
+
+	@Override
+	public List<Brand> getByIds(List<String> ids) {
+		return new ArrayList<>(getByIdsMap(ids).values());
+	}
+
+
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * 

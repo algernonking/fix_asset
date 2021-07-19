@@ -2,7 +2,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:16:33
+ * @since 2021-07-19 15:07:58
  */
  -->
  <!DOCTYPE html>
@@ -19,15 +19,15 @@
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body style="overflow-y: hidden">
 
 <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
     <input name="id" id="id"  type="hidden"/>
     
-    <div class="layui-form-item">
+    <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('名称')}">名称</label>
         <div class="layui-input-block">
-            <input lay-filter="brandName" id="brandName" name="brandName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    />
+            <input lay-filter="brandName" id="brandName" name="brandName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
         </div>
     </div>
     
@@ -35,7 +35,7 @@
 
     <div class="layui-form-item model-form-footer">
         <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
-        <button class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+        <button th:if="${perm.checkAnyAuth('eam_brand:create','eam_brand:update','eam_brand:save')}" class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
     </div>
 </form>
 

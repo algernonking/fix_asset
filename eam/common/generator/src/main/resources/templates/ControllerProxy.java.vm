@@ -37,13 +37,13 @@ public interface #(simpleName) {
 	 * 删除#(topic)
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
-	
-	
+
+	#if(isSimplePk)
 	/**
 	 * 批量删除#(topic)
 	 */
-	public static final String BATCH_DELETE = API_PREFIX + "batch-delete";
-	
+	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
+	#end;
 	
 	/**
 	 * 更新#(topic)
@@ -57,10 +57,17 @@ public interface #(simpleName) {
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取#(topic)
+	 * 获取单个#(topic)
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
-	
+
+	#if(isSimplePk)
+	/**
+	 * 获取多个#(topic)
+	 */
+	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
+	#end;
+
 	/**
 	 * 查询#(topic)
 	 */
@@ -90,39 +97,47 @@ public interface #(simpleName) {
 	 * 添加#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).INSERT)
-	Result<#(poSimpleName)> insert(#(voSimpleName) #(voVar));
+	Result insert(#(voSimpleName) #(voVar));
 	
 	/**
 	 * 删除#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).DELETE)
-	Result<#(poSimpleName)> deleteById(#(controllerMethodParameterDeclare4DeleteById));
-	
-	
+	Result deleteById(#(controllerMethodParameterDeclare4DeleteById));
+
+	#if(isSimplePk)
 	/**
 	 * 批量删除#(topic)
 	*/
-	@RequestMapping(#(agentSimpleName).BATCH_DELETE)
-	Result<#(poSimpleName)> deleteByIds(List<#(pkType)> id);
-	
+	@RequestMapping(#(agentSimpleName).DELETE_BY_IDS)
+	Result deleteByIds(List<#(pkType)> #(idPropertyName)s);
+	#end
+
 	/**
 	 * 更新#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).UPDATE)
-	Result<#(poSimpleName)> update(#(voSimpleName) #(voVar));
+	Result update(#(voSimpleName) #(voVar));
 	
 	/**
 	 * 更新#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).SAVE)
-	Result<#(poSimpleName)> save(#(voSimpleName) #(voVar));
+	Result save(#(voSimpleName) #(voVar));
 	
 	/**
 	 * 获取#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).GET_BY_ID)
 	Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById));
-	
+
+	#if(isSimplePk)
+	/**
+	 * 批量删除#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).GET_BY_IDS)
+	Result<List<#(poSimpleName)>> getByIds(List<#(pkType)> #(idPropertyName)s);
+	#end
 	/**
 	 * 查询#(topic)
 	*/

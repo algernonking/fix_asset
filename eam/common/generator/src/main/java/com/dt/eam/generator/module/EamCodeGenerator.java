@@ -19,9 +19,9 @@ public class EamCodeGenerator  {
 	public static void main(String[] args) throws Exception {
 		EamCodeGenerator g=new EamCodeGenerator();
 		g.generateEamBrandConfig();
- 		g.generateEamGoodsConfig();
- 		g.generateEamMaintainerConfig();
- 		g.generateEamManufacturerConfig();
+// 		g.generateEamGoodsConfig();
+// 		g.generateEamMaintainerConfig();
+// 		g.generateEamManufacturerConfig();
 	}
 	
 	private EamConfigs configs;

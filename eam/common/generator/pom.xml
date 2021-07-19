@@ -27,7 +27,7 @@
             <groupId>com.github.foxnic.web</groupId>  
             <artifactId>proxy</artifactId>  
             <version>${foxnic-web.version}</version> 
-        </dependency>  
+        </dependency>
         <dependency> 
             <groupId>com.github.foxnic</groupId>  
             <artifactId>foxnic-generator</artifactId>  

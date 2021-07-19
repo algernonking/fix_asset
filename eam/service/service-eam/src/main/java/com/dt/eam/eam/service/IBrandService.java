@@ -1,33 +1,27 @@
 package com.dt.eam.eam.service;
 
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.ISuperService;
+
 import com.github.foxnic.sql.expr.ConditionExpr;
-import com.github.foxnic.sql.expr.OrderBy;
-import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.excel.ValidateResult;
-
-import com.github.foxnic.springboot.web.DownloadUtil;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ExcelStructure;
-
-
+import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.eam.domain.eam.Brand;
 import com.dt.eam.domain.eam.BrandVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import java.io.InputStream;
+import com.github.foxnic.sql.expr.OrderBy;
+import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ExcelStructure;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
  * 品牌表 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:16:31
+ * @since 2021-07-19 15:07:57
 */
 
 public interface IBrandService extends ISuperService<Brand> {
@@ -37,14 +31,14 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param brand 实体数据
 	 * @return 插入是否成功
 	 * */
-	boolean insert(Brand brand);
+	Result insert(Brand brand);
  
 	/**
 	 * 批量插入实体，事务内
 	 * @param brandList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	boolean insertList(List<Brand> brandList);
+	Result insertList(List<Brand> brandList);
 	
 	
 		
@@ -54,7 +48,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
-	boolean deleteByIdPhysical(String id);
+	Result deleteByIdPhysical(String id);
 	
 	/**
 	 * 按主键删除 品牌
@@ -62,22 +56,21 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
-	boolean deleteByIdLogical(String id);
-	
+	Result deleteByIdLogical(String id);
 	
 	/**
 	 * 批量物理删除，仅支持单字段主键表
 	 * @param ids 主键清单
 	 * @return 是否删除成功
 	 * */
-	<T> boolean deleteByIdsPhysical(List<T> ids);
+	<T> Result deleteByIdsPhysical(List<T> ids);
 	
 	/**
 	 * 批量逻辑删除，仅支持单字段主键表
 	 * @param ids 主键清单
 	 * @return 是否删除成功
 	 * */
-	<T> boolean deleteByIdsLogical(List<T> ids);
+	<T> Result deleteByIdsLogical(List<T> ids);
 	
 		
 	/**
@@ -94,7 +87,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	boolean update(Brand brand , SaveMode mode);
+	Result update(Brand brand , SaveMode mode);
 	
 	
 	/**
@@ -103,7 +96,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	boolean updateList(List<Brand> brandList, SaveMode mode);
+	Result updateList(List<Brand> brandList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
@@ -111,7 +104,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	boolean save(Brand brand , SaveMode mode);
+	Result save(Brand brand , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
@@ -119,7 +112,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	boolean saveList(List<Brand> brandList , SaveMode mode);
+	Result saveList(List<Brand> brandList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
@@ -137,7 +130,14 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @return Brand 数据对象
 	 */
 	Brand getById(String id);
-	
+		
+	/**
+	 * 检查实体中的数据字段是否已经存在
+	 * @param ids  主键清单
+	 * @return 实体集
+	 * */
+	List<Brand> getByIds(List<String> ids);
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *
