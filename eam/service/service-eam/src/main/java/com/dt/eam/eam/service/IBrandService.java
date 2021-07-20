@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 品牌表 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-19 15:07:57
+ * @since 2021-07-20 14:08:09
 */
 
 public interface IBrandService extends ISuperService<Brand> {

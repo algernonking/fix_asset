@@ -47,6 +47,11 @@
     		<version>${platform.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.dt.eam</groupId>
+			<artifactId>service-datacenter</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.dt.eam</groupId>
@@ -65,12 +70,20 @@
     		<artifactId>view-hrm</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.dt.eam</groupId>
+			<artifactId>view-datacenter</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>view-console</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

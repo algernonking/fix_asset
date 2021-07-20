@@ -9,9 +9,9 @@
         <relativePath/>  
         <!-- lookup parent from repository --> 
     </parent>  
-    <artifactId>service-hrm</artifactId>  
-    <name>service-hrm</name>  
-    <description>Service HRM</description>  
+    <artifactId>service-datacenter</artifactId>
+    <name>service-datacenter</name>
+    <description>Service Data Center</description>
     <properties> 
         <skipTests>true</skipTests>  
         <java.version>1.8</java.version>  

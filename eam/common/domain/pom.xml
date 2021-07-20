@@ -20,6 +20,11 @@
             <version>${foxnic.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.github.foxnic.web</groupId>
+            <artifactId>domain</artifactId>
+            <version>${foxnic-web.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.github.xiaoymin</groupId>  
             <artifactId>knife4j-micro-spring-boot-starter</artifactId>  
             <version>${knife4j.version}</version> 

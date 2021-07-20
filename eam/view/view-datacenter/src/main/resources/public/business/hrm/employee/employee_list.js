@@ -1,7 +1,7 @@
 /**
- * 品牌 列表页 JS 脚本
+ * 员工 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-20 14:08:11
+ * @since 2021-06-10 14:31:12
  */
 
 
@@ -9,20 +9,18 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-brand";
+	const moduleURL="/service-hrm/hrm-employee";
 	
 	/**
       * 入口函数，初始化
       */
 	this.init=function(layui) {
      	
-     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
+     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 		
      	//渲染表格
      	renderTable();
-		//初始化搜索输入框组件
-		initSearchFields();
 		//绑定搜索框事件
 		bindSearchEvent();
 		//绑定按钮事件
@@ -35,49 +33,31 @@ function ListPage() {
      /**
       * 渲染表格
       */
-    function renderTable() {
+     function renderTable() {
      
 		fox.renderTable({
 			elem: '#data-table',
             url: moduleURL +'/query-paged-list',
-		 	height: 'full-78',
-		 	limit: 50,
 			cols: [[
-				{  fixed: 'left',type: 'numbers' },
-			 	{  fixed: 'left',type:'checkbox' },
-                { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
-                { field: 'brandName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
-				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
-                { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+			 	{ type:'checkbox' },
+                { type: 'numbers' },
+                { field: 'id', sort: true, title: fox.translate('ID') } ,
+                { field: 'name', sort: true, title: fox.translate('姓名') } ,
+                { field: 'companyId', sort: true, title: fox.translate('公司ID') } ,
+                { field: 'createTime', sort: true, title: fox.translate('创建时间') , templet: function (d) { return util.toDateString(d.createTime); } } ,
+                { fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 175 }
             ]]
-	 		,footer : {
-				exportExcel : true,
-				importExcel : {
-					params : {} ,
-				 	callback : function(r) {
-						if(r.success) {
-							layer.msg(fox.translate('数据导入成功')+"!");
-						} else {
-							layer.msg(fox.translate('数据导入失败')+"!");
-						}
-					}
-			 	}
-		 	}
         });
-        //绑定排序事件
-        table.on('sort(data-table)', function(obj){
-		  refreshTableData(obj.field,obj.type);
-        });
-    };
+        
+     };
      
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
-		var value = {};
-		value.id={ value: $("#id").val() };
-		value.brandName={ value: $("#brandName").val() };
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
+	function refreshTableData() {
+		var field = $('#search-field').val();
+		var value = $('#search-input').val();
+		var ps={searchField: field, searchValue: value};
 		table.reload('data-table', { where : ps });
 	}
     
@@ -101,16 +81,13 @@ function ListPage() {
 		$('#search-input').val("");
 		layui.form.render();
 	}
-
-	function initSearchFields() {
-	}
 	
 	/**
 	 * 绑定搜索框事件
 	 */
 	function bindSearchEvent() {
 		//回车键查询
-        $(".search-input").keydown(function(event) {
+        $("#search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
 		  	refreshTableData();
         });
@@ -138,20 +115,20 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('品牌')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('员工')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('品牌')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('员工')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.request(moduleURL+"/delete-by-id", { ids: ids }, function (data) {
+                admin.req(moduleURL+"/batch-delete", JSON.stringify({ ids: JSON.stringify(ids) }), function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 1500});
+                        layer.msg(data.message, {icon: 2, time: 500});
                     }
                 });
 			});
@@ -168,30 +145,28 @@ function ListPage() {
 			var layEvent = obj.event;
 	
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
+				layer.load(2);
+				admin.req(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					layer.closeAll('loading');
 					if(data.success) {
 						 showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 layer.msg(data.message, {icon: 1, time: 500});
 					}
 				});
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('品牌')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('员工')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
-					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
+					admin.req(moduleURL+"/delete", { id : data.id }, function (data) {
 						layer.closeAll('loading');
 						if (data.success) {
 							layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 1500});
+							layer.msg(data.message, {icon: 2, time: 500});
 						}
 					});
 				});
@@ -206,19 +181,19 @@ function ListPage() {
      */
 	function showEditForm(data) {
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-brand-form-data', data);
-		var area=admin.getTempData('eam-brand-form-area');
+		if(data) queryString="?" + 'id=' + data.id;
+		admin.putTempData('hrm-employee-form-data', data);
+		var area=admin.getTempData('hrm-employee-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
-		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('品牌')) : (fox.translate('添加')+fox.translate('品牌'));
+		var top= ($(window).height()-height)/2;
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('员工')) : (fox.translate('添加')+fox.translate('员工'));
 		admin.popupCenter({
 			title: title,
-			resize: true,
-			offset: [top,null],
-			area: ["500px",height+"px"],
+			resize:true,
+			offset:[top,null],
+			area:["500px",height+"px"],
 			type: 2,
-			content: '/business/eam/brand/brand_form.html' + queryString,
+			content: '/business/hrm/employee/employee_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
@@ -233,6 +208,6 @@ layui.config({
 	base: '/module/'
 }).extend({
 	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect'],function() {
 	(new ListPage()).init(layui);
 });

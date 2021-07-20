@@ -1,24 +1,25 @@
 package com.dt.eam.relation;
 
-import com.dt.eam.relation.modules.OAuthRelationManager;
-import com.dt.eam.relation.modules.SystemRelationManager;
-import com.github.foxnic.commons.concurrent.task.SimpleTaskManager;
-import com.github.foxnic.commons.log.Logger;
+import com.dt.eam.relation.modules.HRMRelationManager;
 import com.github.foxnic.dao.relation.RelationManager;
+import org.github.foxnic.web.relation.modules.OAuthRelationManager;
+import org.github.foxnic.web.relation.modules.SystemRelationManager;
 
 
-public class FoxnicWebRelationManager extends RelationManager {
+public class EAMRelationManager extends RelationManager {
 
-	public FoxnicWebRelationManager() {
+	public EAMRelationManager() {
 		super(
 				new OAuthRelationManager(),
-				new SystemRelationManager()
+				new SystemRelationManager(),
+				//
+				new HRMRelationManager()
 		);
 		//启动动态刷入
 		startMonitor();
 	}
 
-	private void startMonitor() {
+	public void startMonitor() {
 //		if(SpringUtil.isReady()) {
 //			SimpleTaskManager tm=new SimpleTaskManager();
 //			tm.doIntervalTask(new Runnable() {
@@ -32,7 +33,7 @@ public class FoxnicWebRelationManager extends RelationManager {
 
 	
 	protected void doReConfigAndValidate() {
-		FoxnicWebRelationManager.this.reconfig(); 
+		EAMRelationManager.this.reconfig();
 //		FoxnicWebRelationManager.this.validate();
 //		Logger.info("FoxnicWebRelationManager Reconfig");
 	}

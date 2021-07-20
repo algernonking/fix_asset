@@ -35,7 +35,23 @@
             <groupId>com.dt.eam</groupId>  
             <artifactId>proxy</artifactId>  
             <version>${platform.version}</version> 
-        </dependency>  
-
-    </dependencies> 
+        </dependency>
+    </dependencies>
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.tql</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

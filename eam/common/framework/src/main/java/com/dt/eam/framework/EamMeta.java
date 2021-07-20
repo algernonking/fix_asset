@@ -30,6 +30,12 @@ public class EamMeta {
 	 * 认证服务
 	 * */
 	public static final String SERVICE_HRM_PACKAGE=BASE_PACKAGE+".hrm";
+
+
+	/**
+	 * 认证服务
+	 * */
+	public static final String FRAMEWORK_PACKAGE=BASE_PACKAGE+".framework";
  
 	
 	 

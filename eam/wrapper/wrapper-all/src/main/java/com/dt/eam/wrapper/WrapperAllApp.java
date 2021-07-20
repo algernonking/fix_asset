@@ -8,9 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.dt.eam.framework.EamMeta;
 
-@ComponentScan(basePackages = { 
+@ComponentScan(basePackages = {
 		FoxnicWebMeta.SERVICE_STORAGE_PACKAGE , FoxnicWebMeta.SERVICE_SYSTEM_PACKAGE , FoxnicWebMeta.SERVICE_OAUTH_PACKAGE,
-		EamMeta.SERVICE_EAM_PACKAGE,EamMeta.SERVICE_HRM_PACKAGE
+		EamMeta.FRAMEWORK_PACKAGE, EamMeta.SERVICE_EAM_PACKAGE, EamMeta.SERVICE_HRM_PACKAGE
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {
