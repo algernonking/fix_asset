@@ -2,6 +2,7 @@ package com.dt.eam.generator.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.dt.eam.framework.datasource.DAOConfig;
+import com.dt.eam.relation.EAMRelationManager;
 import com.github.foxnic.commons.cache.Variable;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.network.Machine;
@@ -12,7 +13,6 @@ import com.github.foxnic.dao.spec.DAOBuilder;
 import com.github.foxnic.generator.config.GlobalSettings;
 import com.github.foxnic.sql.treaty.DBTreaty;
 import org.github.foxnic.web.framework.nacos.NacosConfig;
-import org.github.foxnic.web.relation.FoxnicWebRelationManager;
 
 import java.io.File;
 
@@ -165,7 +165,7 @@ public class EamConfigs {
 		// 设置数据库规约
 		DBTreaty dbTreaty = (new DAOConfig()).getDBTreaty();
 		dao.setDBTreaty(dbTreaty);
-		dao.setRelationManager(new FoxnicWebRelationManager());
+		dao.setRelationManager(new EAMRelationManager());
 		
  
 	}
