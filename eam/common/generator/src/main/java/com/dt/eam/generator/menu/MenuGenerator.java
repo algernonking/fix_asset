@@ -1,9 +1,9 @@
 package com.dt.eam.generator.menu;
 
-import com.dt.eam.constants.db.EAMTables.EAM_BRAND;
-import com.dt.eam.eam.page.BrandPageController;
+import com.dt.eam.constants.db.EAMTables.DC_INFO;
+import com.dt.eam.datacenter.page.InfoPageController;
 import com.dt.eam.generator.config.EamConfigs;
-import com.dt.eam.proxy.eam.BrandServiceProxy;
+import com.dt.eam.proxy.datacenter.InfoServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -37,13 +37,27 @@ public class MenuGenerator {
 	 * 超级管理员角色ID
 	 * */
 	public static final String SUPER_ADMIN_ROLE_ID="110352963290923110";
-	
+
+	/**
+	 * 数据中心菜单ID，配置后，从数据库取得
+	 * */
+	public static final String DATACENTER_MENU_ID="470155869825269760";
+
+	/**
+	 * 数据中心菜单ID，配置后，从数据库取得
+	 * */
+	public static final String EAM_MENU_ID="eam";
+
+
 	public static void main(String[] args) {
 
 		MenuGenerator mg=null;
 
-		mg=new MenuGenerator(EAM_BRAND.$TABLE, BrandServiceProxy.class, BrandPageController.class);
-		mg.generate("eam");
+//		mg=new MenuGenerator(EAM_BRAND.$TABLE, BrandServiceProxy.class, BrandPageController.class);
+//		mg.generate(EAM_MENU_ID);
+
+		mg=new MenuGenerator(DC_INFO.$TABLE, InfoServiceProxy.class, InfoPageController.class);
+		mg.generate(DATACENTER_MENU_ID);
 
 
 	}

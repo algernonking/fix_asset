@@ -39,10 +39,12 @@
 		<!-- 接口服务 -->
 		<module>./service/service-eam</module>
 		<module>./service/service-hrm</module>
+		<module>./service/service-datacenter</module>
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
 		<module>./view/view-hrm</module>
 		<module>./view/view-eam</module>
+		<module>./view/view-datacenter</module>
 		<!-- 聚合 -->
 		<module>./wrapper/wrapper-all</module>
 	</modules>

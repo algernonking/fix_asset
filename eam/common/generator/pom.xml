@@ -55,6 +55,12 @@
 
         <dependency>
             <groupId>com.dt.eam</groupId>
+            <artifactId>service-datacenter</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dt.eam</groupId>
             <artifactId>service-hrm</artifactId>
             <version>${platform.version}</version>
         </dependency>
@@ -76,7 +82,13 @@
             <groupId>com.dt.eam</groupId>  
             <artifactId>view-eam</artifactId>
             <version>${platform.version}</version> 
-        </dependency> 
-        
+        </dependency>
+
+        <dependency>
+            <groupId>com.dt.eam</groupId>
+            <artifactId>view-datacenter</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
     </dependencies> 
 </project>

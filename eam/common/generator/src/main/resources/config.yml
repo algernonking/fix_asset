@@ -27,7 +27,7 @@ compoments:
 #应用清单
 applications: 
   #EAM
-  service-eam:  
+  service-eam:
     nacosGroup: service
     nacosDataId: service-eam.yml
     serviceProjectPath:  /service/service-eam
@@ -38,7 +38,7 @@ applications:
     viewPrefixPath: public/business/eam
     wrapperProjectPath:  /wrapper/wrapper-all
   #HRM
-  service-hrm:  
+  service-hrm:
     nacosGroup: service
     nacosDataId: service-hrm.yml
     serviceProjectPath:  /service/service-hrm
@@ -48,5 +48,16 @@ applications:
     viewProjectPath: /view/view-hrm
     viewPrefixPath: public/business/hrm
     wrapperProjectPath:  /wrapper/wrapper-all
+
+  service-datacenter:
+    nacosGroup: service
+    nacosDataId: service-datacenter.yml
+    serviceProjectPath: /service/service-datacenter
+    packageName: com.dt.eam.datacenter
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: DATACENTER
+    viewProjectPath: /view/view-datacenter
+    viewPrefixPath: public/business/datacenter
+    wrapperProjectPath: /wrapper/wrapper-all
  
     

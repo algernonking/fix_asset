@@ -7,6 +7,11 @@ public class EamMeta {
 	 * 基础包
 	 * */
 	public static final String BASE_PACKAGE="com.dt.eam";
+
+	/**
+	 * 基础框架
+	 * */
+	public static final String FRAMEWORK_PACKAGE=BASE_PACKAGE+".framework";
  
 	/**
 	 * Feign代理包
@@ -21,21 +26,23 @@ public class EamMeta {
 	
 	
 	/**
-	 * 系统服务
+	 * 资产服务
 	 * */
 	public static final String SERVICE_EAM_PACKAGE=BASE_PACKAGE+".eam";
 	
 	
 	/**
-	 * 认证服务
+	 * 人事服务
 	 * */
 	public static final String SERVICE_HRM_PACKAGE=BASE_PACKAGE+".hrm";
 
-
 	/**
-	 * 认证服务
+	 * 数据中心服务
 	 * */
-	public static final String FRAMEWORK_PACKAGE=BASE_PACKAGE+".framework";
+	public static final String DATACENTER_PACKAGE=BASE_PACKAGE+".datacenter";
+
+
+
  
 	
 	 

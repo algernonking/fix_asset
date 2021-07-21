@@ -10,7 +10,7 @@ import com.dt.eam.framework.EamMeta;
 
 @ComponentScan(basePackages = {
 		FoxnicWebMeta.SERVICE_STORAGE_PACKAGE , FoxnicWebMeta.SERVICE_SYSTEM_PACKAGE , FoxnicWebMeta.SERVICE_OAUTH_PACKAGE,
-		EamMeta.FRAMEWORK_PACKAGE, EamMeta.SERVICE_EAM_PACKAGE, EamMeta.SERVICE_HRM_PACKAGE
+		EamMeta.FRAMEWORK_PACKAGE, EamMeta.SERVICE_EAM_PACKAGE, EamMeta.SERVICE_HRM_PACKAGE, EamMeta.DATACENTER_PACKAGE
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {
