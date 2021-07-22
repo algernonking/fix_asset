@@ -80,7 +80,7 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
 #if(isSimplePK)
 	@Override
 	public List<#(poSimpleName)> getByIds(List<#(idPropertyType)> #(idPropertyName)s) {
-		return new ArrayList<>(getByIdsMap(ids).values());
+		return new ArrayList<>(getByIdsMap(#(idPropertyName)s).values());
 	}
 #end
 
