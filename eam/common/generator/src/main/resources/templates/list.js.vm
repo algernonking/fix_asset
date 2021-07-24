@@ -75,8 +75,8 @@ function ListPage() {
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
 	 		,footer : {
-				exportExcel : true,
-				importExcel : {
+				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
 					params : {} ,
 				 	callback : function(r) {
 						if(r.success) {
@@ -85,7 +85,7 @@ function ListPage() {
 							layer.msg(fox.translate('数据导入失败')+"!");
 						}
 					}
-			 	}
+			 	}:false
 		 	}
         });
         #if(hasLogicField)

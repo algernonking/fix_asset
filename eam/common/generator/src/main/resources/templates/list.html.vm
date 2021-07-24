@@ -101,6 +101,7 @@
     #else if(f.isSelectField)
     #end
     #end
+    var AUTH_PREFIX="#(authPrefix)";
 </script>
 
 <script src="#(jsURI)"></script>
