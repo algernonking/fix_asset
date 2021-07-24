@@ -1,36 +1,41 @@
 package com.dt.eam.eam.service.impl;
 
 
-import com.dt.eam.domain.eam.Brand;
-import com.dt.eam.eam.service.IBrandService;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.sql.expr.ConditionExpr;
-import com.github.foxnic.sql.meta.DBField;
-import org.github.foxnic.web.framework.dao.DBConfigs;
+import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
+
+import com.dt.eam.domain.eam.Brand;
+import com.dt.eam.domain.eam.BrandVO;
 import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.spec.DAO;
+import java.lang.reflect.Field;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.sql.expr.ConditionExpr;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.dao.excel.ExcelStructure;
+import java.io.InputStream;
+import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.meta.DBColumnMeta;
+import com.github.foxnic.sql.expr.Select;
+import java.util.ArrayList;
+import com.dt.eam.eam.service.IBrandService;
+import org.github.foxnic.web.framework.dao.DBConfigs;
+import java.util.Date;
 
 /**
  * <p>
  * 品牌表 服务实现
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-20 14:08:09
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-24 11:03:28
 */
 
 

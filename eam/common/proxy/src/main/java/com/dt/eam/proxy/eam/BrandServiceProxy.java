@@ -18,8 +18,8 @@ import com.dt.eam.proxy.EAMServiceNames;
  * <p>
  * 品牌表  控制器服务代理
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-20 14:08:09
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-24 11:03:28
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

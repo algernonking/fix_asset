@@ -7,8 +7,8 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-21 08:55:46
- * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-24 10:17:06
+ * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -81,8 +81,9 @@ public class EAMTables {
 		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
 		
 		/**
+		 * 版本
 		*/
-		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public DC_INFO() {
 			this.init($NAME,"数据中心" , ID , DC_NAME , DC_POSITION , DC_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);

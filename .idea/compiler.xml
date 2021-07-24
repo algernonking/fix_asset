@@ -9,9 +9,10 @@
         <module name="view-eam" />
         <module name="service-eam" />
         <module name="view-hrm" />
-        <module name="view-console" />
         <module name="wrapper-all" />
+        <module name="view-console" />
         <module name="proxy" />
+        <module name="framework" />
         <module name="service-hrm" />
         <module name="domain" />
         <module name="generator" />
@@ -19,6 +20,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="domain" target="1.8" />
+      <module name="framework" target="1.8" />
       <module name="generator" target="1.8" />
       <module name="parent" target="1.8" />
       <module name="proxy" target="1.8" />
@@ -33,11 +35,14 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="domain" options="-parameters" />
+      <module name="framework" options="-parameters" />
       <module name="generator" options="-parameters" />
       <module name="proxy" options="-parameters" />
+      <module name="service-datacenter" options="-parameters" />
       <module name="service-eam" options="-parameters" />
       <module name="service-hrm" options="-parameters" />
       <module name="view-console" options="-parameters" />
+      <module name="view-datacenter" options="-parameters" />
       <module name="view-eam" options="-parameters" />
       <module name="view-hrm" options="-parameters" />
       <module name="wrapper-all" options="-parameters" />

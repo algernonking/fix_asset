@@ -12,7 +12,7 @@ import com.github.foxnic.sql.meta.DBTable;
  
 
 /**
- * 为以usr_开头的表生成代码
+ * 为以eam_开头的表生成代码
  */
 public class EamCodeGenerator  {
  
