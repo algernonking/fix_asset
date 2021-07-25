@@ -1,17 +1,27 @@
 package com.dt.eam.generator.module.eam;
 
+import com.dt.eam.constants.db.EAMTables;
+import com.dt.eam.eam.page.MaintainerPageController;
 import com.dt.eam.generator.config.EamConfigs;
+import com.dt.eam.generator.menu.MenuGenerator;
 import com.dt.eam.proxy.EAMServiceNames;
+import com.dt.eam.proxy.eam.MaintainerServiceProxy;
 import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
 
+    public String appId="service-eam";
+
+    public String EAM_MENU_ID="eam";
     public String appConfigPrefix= "service-eam";
 
     public String tablePrefix="eam_";
 
     public EamConfigs configs;
+
+
+    public DBTable Table;
 
     public BaseCodeGenerator() {
         configs=new EamConfigs(appConfigPrefix);
@@ -50,4 +60,11 @@ public class BaseCodeGenerator {
         return createModuleConfig(table, tablePrefix, apiSort);
     }
 
+    public void generatorMenu (Class proxyType, Class pageType,String batchId){
+        MenuGenerator mg=new MenuGenerator(appId,MenuGenerator.SUPER_ADMIN_ROLE_ID,Table, proxyType, pageType);
+        if(batchId!=null&&batchId.length()>3){
+            mg.removeByBatchId(batchId);
+        }
+        mg.generate(EAM_MENU_ID);
+    }
 }
