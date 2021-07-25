@@ -20,8 +20,8 @@ import com.github.foxnic.dao.data.SaveMode;
  * <p>
  * 风险等级表 服务接口
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-25 13:26:58
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-25 13:47:11
 */
 
 public interface ISafetylevelService extends ISuperService<Safetylevel> {
