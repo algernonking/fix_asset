@@ -329,7 +329,7 @@ public class MenuGenerator {
 
 	private void grant() {
 
-		RcdSet menus=dao.query("select id from "+ FoxnicWeb.SYS_MENU.$NAME+" where batch_id=?",batchId);
+		RcdSet menus=dao.query("select id from "+ FoxnicWeb.SYS_MENU.$NAME+" where batch_id=? and authority not like '%:export' and authority not like '%:import'",batchId);
 		for (Rcd r : menus) {
 			dao.insert(FoxnicWeb.SYS_ROLE_MENU.$NAME)
 			.set(FoxnicWeb.SYS_ROLE_MENU.ID, IDGenerator.getSnowflakeId())
