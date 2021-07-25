@@ -28,6 +28,9 @@ public class EamMaintainer extends BaseCodeGenerator {
         //生成代码
         //g.generateEamBrandConfig();
         //生成菜单
-        g.generatorMenu(MaintainerServiceProxy.class,MaintainerPageController.class,null);
+        g.EAM_MENU_ID="471620638545543168";
+        String b="471622325670772736";
+        g.generatorMenu(MaintainerServiceProxy.class,MaintainerPageController.class,b);
     }
+
 }

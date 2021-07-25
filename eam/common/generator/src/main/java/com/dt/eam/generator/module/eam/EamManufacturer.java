@@ -2,10 +2,11 @@ package com.dt.eam.generator.module.eam;
 
 import com.dt.eam.constants.db.EAMTables;
 import com.dt.eam.eam.page.MaintainerPageController;
+import com.dt.eam.eam.page.ManufacturerPageController;
 import com.dt.eam.proxy.eam.MaintainerServiceProxy;
+import com.dt.eam.proxy.eam.ManufacturerServiceProxy;
 import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.generator.config.WriteMode;
-import com.github.foxnic.sql.meta.DBTable;
 
 public class EamManufacturer extends BaseCodeGenerator{
 
@@ -26,8 +27,9 @@ public class EamManufacturer extends BaseCodeGenerator{
         EamManufacturer g=new EamManufacturer();
         g.Table=EAMTables.EAM_MANUFACTURER.$TABLE;
         //生成代码
-        g.generateEamBrandConfig();
+       // g.generateEamBrandConfig();
+        g.EAM_MENU_ID="471620638545543168";
         //生成菜单
-        g.generatorMenu(MaintainerServiceProxy.class, MaintainerPageController.class,null);
+        g.generatorMenu(ManufacturerServiceProxy.class, ManufacturerPageController.class,null);
     }
 }

@@ -1,6 +1,10 @@
 package com.dt.eam.generator.module.eam;
 
 import com.dt.eam.constants.db.EAMTables;
+import com.dt.eam.eam.page.BrandPageController;
+import com.dt.eam.eam.page.MaintainerPageController;
+import com.dt.eam.proxy.eam.BrandServiceProxy;
+import com.dt.eam.proxy.eam.MaintainerServiceProxy;
 import com.github.foxnic.generator.config.ModuleContext;
 
 import com.github.foxnic.generator.config.WriteMode;
@@ -23,4 +27,14 @@ public class Brand extends BaseCodeGenerator {
         //生成代码
         cfg.buildAll();
     }
+    public static void main(String[] args) throws Exception {
+        Brand g=new Brand();
+        g.Table=EAMTables.EAM_BRAND.$TABLE;
+        //生成代码
+        // g.generateEamBrandConfig();
+        g.EAM_MENU_ID="471620638545543168";
+        //生成菜单
+        g.generatorMenu(BrandServiceProxy.class, BrandPageController.class,"471593149744021504");
+    }
+
 }
