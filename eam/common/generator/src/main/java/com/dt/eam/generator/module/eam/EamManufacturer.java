@@ -27,9 +27,9 @@ public class EamManufacturer extends BaseCodeGenerator{
         EamManufacturer g=new EamManufacturer();
         g.Table=EAMTables.EAM_MANUFACTURER.$TABLE;
         //生成代码
-       // g.generateEamBrandConfig();
+        g.generateConfig();
         g.EAM_MENU_ID="471620638545543168";
         //生成菜单
-        g.generatorMenu(ManufacturerServiceProxy.class, ManufacturerPageController.class,null);
+      //  g.generatorMenu(ManufacturerServiceProxy.class, ManufacturerPageController.class,null);
     }
 }

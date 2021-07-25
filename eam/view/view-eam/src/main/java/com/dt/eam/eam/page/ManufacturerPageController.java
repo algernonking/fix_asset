@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
  * <p>
  * 生产厂商 模版页面控制器
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:12:54
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-25 12:37:09
 */
 
 @Controller("EamManufacturerPageController")

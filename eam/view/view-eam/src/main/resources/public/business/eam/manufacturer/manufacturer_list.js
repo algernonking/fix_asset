@@ -1,7 +1,7 @@
 /**
  * 生产厂商 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
+ * @since 2021-07-25 12:37:10
  */
 
 
@@ -16,11 +16,13 @@ function ListPage() {
       */
 	this.init=function(layui) {
      	
-     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
+     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 		
      	//渲染表格
      	renderTable();
+		//初始化搜索输入框组件
+		initSearchFields();
 		//绑定搜索框事件
 		bindSearchEvent();
 		//绑定按钮事件
@@ -33,30 +35,53 @@ function ListPage() {
      /**
       * 渲染表格
       */
-     function renderTable() {
+    function renderTable() {
      
 		fox.renderTable({
 			elem: '#data-table',
             url: moduleURL +'/query-paged-list',
+		 	height: 'full-78',
+		 	limit: 50,
 			cols: [[
-			 	{ type:'checkbox' },
-                { type: 'numbers' },
-                { field: 'id', sort: true, title: fox.translate('主键') } ,
-                { field: 'name', sort: true, title: fox.translate('名称') } ,
-                { field: 'createTime', sort: true, title: fox.translate('创建时间') , templet: function (d) { return util.toDateString(d.createTime); } } ,
-                { fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 175 }
+				{  fixed: 'left',type: 'numbers' },
+			 	{  fixed: 'left',type:'checkbox' },
+                { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
+                { field: 'manufacturerName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
+                { field: 'location', align:"left", hide:false, sort: true, title: fox.translate('所在地')} ,
+                { field: 'manufacturerNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
+				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
+                { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
+	 		,footer : {
+				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
+					params : {} ,
+				 	callback : function(r) {
+						if(r.success) {
+							layer.msg(fox.translate('数据导入成功')+"!");
+						} else {
+							layer.msg(fox.translate('数据导入失败')+"!");
+						}
+					}
+			 	}:false
+		 	}
         });
-        
-     };
+        //绑定排序事件
+        table.on('sort(data-table)', function(obj){
+		  refreshTableData(obj.field,obj.type);
+        });
+    };
      
 	/**
       * 刷新表格数据
       */
-	function refreshTableData() {
-		var field = $('#search-field').val();
-		var value = $('#search-input').val();
-		var ps={searchField: field, searchValue: value};
+	function refreshTableData(sortField,sortType) {
+		var value = {};
+		value.id={ value: $("#id").val() };
+		value.manufacturerName={ value: $("#manufacturerName").val() };
+		value.location={ value: $("#location").val() };
+		value.manufacturerNotes={ value: $("#manufacturerNotes").val() };
+		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
     
@@ -80,13 +105,16 @@ function ListPage() {
 		$('#search-input').val("");
 		layui.form.render();
 	}
+
+	function initSearchFields() {
+	}
 	
 	/**
 	 * 绑定搜索框事件
 	 */
 	function bindSearchEvent() {
 		//回车键查询
-        $("#search-input").keydown(function(event) {
+        $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
 		  	refreshTableData();
         });
@@ -121,13 +149,13 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('生产厂商')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.req(moduleURL+"/batch-delete", JSON.stringify({ ids: JSON.stringify(ids) }), function (data) {
+                admin.request(moduleURL+"/delete-by-id", { ids: ids }, function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 500});
+                        layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
 			});
@@ -144,13 +172,15 @@ function ListPage() {
 			var layEvent = obj.event;
 	
 			if (layEvent === 'edit') { // 修改
-				layer.load(2);
-				admin.req(moduleURL+"/get-by-id", { id : data.id }, function (data) {
+				//延迟显示加载动画，避免界面闪动
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
+					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
 						 showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 500});
+						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 				
@@ -159,13 +189,13 @@ function ListPage() {
 				layer.confirm(fox.translate('确定删除此')+fox.translate('生产厂商')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
-					admin.req(moduleURL+"/delete", { id : data.id }, function (data) {
+					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
 						layer.closeAll('loading');
 						if (data.success) {
 							layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 500});
+							layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
@@ -180,17 +210,17 @@ function ListPage() {
      */
 	function showEditForm(data) {
 		var queryString="";
-		if(data) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('eam-manufacturer-form-data', data);
 		var area=admin.getTempData('eam-manufacturer-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
-		var top= ($(window).height()-height)/2;
+		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('生产厂商')) : (fox.translate('添加')+fox.translate('生产厂商'));
 		admin.popupCenter({
 			title: title,
-			resize:true,
-			offset:[top,null],
-			area:["500px",height+"px"],
+			resize: true,
+			offset: [top,null],
+			area: ["500px",height+"px"],
 			type: 2,
 			content: '/business/eam/manufacturer/manufacturer_form.html' + queryString,
 			finish: function () {
@@ -207,6 +237,6 @@ layui.config({
 	base: '/module/'
 }).extend({
 	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect'],function() {
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
 	(new ListPage()).init(layui);
 });
