@@ -1,30 +1,35 @@
 package com.dt.eam.generator.module.eam;
 
-import com.dt.eam.constants.db.EAMTables;
-import com.dt.eam.eam.page.MaintainerPageController;
 import com.dt.eam.generator.config.EamConfigs;
 import com.dt.eam.generator.menu.MenuGenerator;
 import com.dt.eam.proxy.EAMServiceNames;
-import com.dt.eam.proxy.eam.MaintainerServiceProxy;
 import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
 
-    public String appId="service-eam";
+    public static final String BASIC_DATA_MENU_ID="471620638545543168";
 
-    public String EAM_MENU_ID="eam";
-    public String appConfigPrefix= "service-eam";
+    //
+    private String appId="service-eam";
 
-    public String tablePrefix="eam_";
+    private String appConfigPrefix= "service-eam";
 
-    public EamConfigs configs;
+    private String tablePrefix="eam_";
 
+    private EamConfigs configs;
 
-    public DBTable Table;
+    private DBTable table;
 
-    public BaseCodeGenerator() {
+    private String parentMenuId;
+
+    protected ModuleContext cfg;
+
+    public BaseCodeGenerator(DBTable table,String parentMenuId) {
+        this.table=table;
+        this.parentMenuId=parentMenuId;
         configs=new EamConfigs(appConfigPrefix);
+        cfg=createModuleConfig();
     }
 
     public ModuleContext createModuleConfig(DBTable table, String tablePrefix, int apiSort) {
@@ -56,15 +61,21 @@ public class BaseCodeGenerator {
         return mdu;
     }
 
-    public ModuleContext createModuleConfig(DBTable table,int apiSort) {
-        return createModuleConfig(table, tablePrefix, apiSort);
+    public ModuleContext createModuleConfig(int apiSort) {
+        return createModuleConfig(this.table, tablePrefix, apiSort);
     }
 
-    public void generatorMenu (Class proxyType, Class pageType,String batchId){
-        MenuGenerator mg=new MenuGenerator(appId,MenuGenerator.SUPER_ADMIN_ROLE_ID,Table, proxyType, pageType);
-        if(batchId!=null&&batchId.length()>3){
-            mg.removeByBatchId(batchId);
-        }
-        mg.generate(EAM_MENU_ID);
+    public ModuleContext createModuleConfig() {
+        return createModuleConfig(this.table, tablePrefix, 1);
+    }
+
+    public void removeByBatchId(String batchId) {
+        MenuGenerator mg=new MenuGenerator(appId,MenuGenerator.SUPER_ADMIN_ROLE_ID,table, null, null);
+        mg.removeByBatchId(batchId);
+    }
+
+    public void generateMenu(Class proxyType, Class pageType){
+        MenuGenerator mg=new MenuGenerator(appId,MenuGenerator.SUPER_ADMIN_ROLE_ID,table, proxyType, pageType);
+        mg.generate(parentMenuId);
     }
 }

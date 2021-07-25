@@ -18,8 +18,8 @@ import com.dt.eam.proxy.EAMServiceNames;
  * <p>
  * 风险等级表  控制器服务代理
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-25 12:22:39
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-25 13:26:58
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = SafetylevelServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

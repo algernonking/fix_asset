@@ -1,21 +1,16 @@
 package com.dt.eam.generator.module.eam;
 
 import com.dt.eam.constants.db.EAMTables;
-import com.dt.eam.eam.page.BrandPageController;
-import com.dt.eam.eam.page.MaintainerPageController;
-import com.dt.eam.proxy.eam.BrandServiceProxy;
-import com.dt.eam.proxy.eam.MaintainerServiceProxy;
-import com.github.foxnic.generator.config.ModuleContext;
-
 import com.github.foxnic.generator.config.WriteMode;
 
 public class Brand extends BaseCodeGenerator {
 
 
-    public void generateConfig() throws Exception {
+    public Brand() {
+        super(EAMTables.EAM_BRAND.$TABLE,BASIC_DATA_MENU_ID);
+    }
 
-        //创建模块配置
-        ModuleContext cfg=createModuleConfig(EAMTables.EAM_BRAND.$TABLE, 1);
+    public void generateCode() throws Exception {
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -27,14 +22,16 @@ public class Brand extends BaseCodeGenerator {
         //生成代码
         cfg.buildAll();
     }
+
     public static void main(String[] args) throws Exception {
         Brand g=new Brand();
-        g.Table=EAMTables.EAM_BRAND.$TABLE;
         //生成代码
-        // g.generateEamBrandConfig();
-        g.EAM_MENU_ID="471620638545543168";
+        g.generateCode();
+
+        //移除之前生成的菜单，视情况执行
+        //g.removeByBatchId("471622036347682816");
         //生成菜单
-        g.generatorMenu(BrandServiceProxy.class, BrandPageController.class,"471593149744021504");
+//        g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
     }
 
 }

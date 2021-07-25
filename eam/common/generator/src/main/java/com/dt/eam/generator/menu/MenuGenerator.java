@@ -1,11 +1,8 @@
 package com.dt.eam.generator.menu;
 
 import com.dt.eam.constants.db.EAMTables;
-import com.dt.eam.constants.db.EAMTables.DC_INFO;
-import com.dt.eam.datacenter.page.InfoPageController;
 import com.dt.eam.eam.page.BrandPageController;
 import com.dt.eam.generator.config.EamConfigs;
-import com.dt.eam.proxy.datacenter.InfoServiceProxy;
 import com.dt.eam.proxy.eam.BrandServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
@@ -116,7 +113,17 @@ public class MenuGenerator {
 			return;
 		}
 
+
+
 		dao.execute("delete from "+ FoxnicWeb.SYS_RESOURZE.$NAME +" where deleted=1");
+
+		Rcd m=dao.queryRecord("select batch_id from sys_menu where parent_id=? and label=?",parentId,getTopMenuLabel());
+
+		if(m!=null) {
+			batchId=m.getString("batch_id");
+			System.err.println("菜单生成失败，同一父节点下已经存在同名菜单"+(batchId==null?"":(" , 已存在菜单的 batchId 为 "+batchId)));
+			return;
+		}
 
 		try {
 			dao.beginTransaction();
@@ -211,7 +218,7 @@ public class MenuGenerator {
 				topMenu.setType(MenuType.page.name());
 				topMenu.setSort(0);
 				topMenu.setUrl("#!"+table.name().toLowerCase()+"_list");
-				topMenu.setLabel(getTopic()+"管理");
+				topMenu.setLabel(getTopMenuLabel());
 				topMenu.setHidden(0);
 				topMenu.setAuthority(authorityPrefix+"mngr");
 				topMenu.setPathResourceId(resourze.getId());
@@ -223,6 +230,9 @@ public class MenuGenerator {
 
 	}
 
+	private String getTopMenuLabel() {
+		return getTopic()+"管理";
+	}
 
 
 	/**

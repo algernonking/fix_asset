@@ -15,6 +15,7 @@ source:
 authors:
   #指定机器码与对应的作者，机器码在代码生成时控制台输出，或main函数调用 Machine.getIdentity()
   B15BDA59450483F9: 李方捷 , leefangjie@qq.com
+  B1894FFE47E36B09: 李方捷 , leefangjie@qq.com
   D7B67D75818C671B: 金杰 , maillank@qq.com
 
 

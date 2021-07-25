@@ -1,19 +1,19 @@
 /**
  * 生产厂商 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-06-12 14:21:18
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-25 13:25:47
  */
 
 function FormPage() {
 
-	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
+	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-manufacturer";
 	
 	/**
       * 入口函数，初始化
       */
 	this.init=function(layui) { 	
-     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
+     	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 		
 		//渲染表单组件
@@ -23,17 +23,20 @@ function FormPage() {
 		fillFormData();
 		
 		//绑定提交事件
-		bindSubmitEvent();
-		
+		bindButtonEvent();
+
 		//调整窗口的高度与位置
 		adjustPopup();
-		
 	}
 	
 	function adjustPopup() {
-		var height=document.body.clientHeight+58;
-		admin.changePopupArea(null,height);
-		admin.putTempData('eam-manufacturer-form-area', {height:height});
+		setTimeout(function () {
+			var body=$("body");
+			var bodyHeight=body.height();
+			var area=admin.changePopupArea(null,bodyHeight);
+			admin.putTempData('eam-manufacturer-form-area', area);
+			window.adjustPopup=adjustPopup;
+		},50);
 	}
 	
 	/**
@@ -41,7 +44,7 @@ function FormPage() {
       */
 	function renderFormFields() {
 		form.render();
-	    //渲染图片字段
+	   
 	}
 	
 	/**
@@ -49,38 +52,62 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-manufacturer-form-data');
-		if (formData) {
-			$('#data-form')[0].reset();
-			form.val('data-form', formData);
-	     	//设置并显示图片
-	     	$('#data-form').attr('method', 'POST');
+		//如果是新建
+		if(!formData.id) {
+			adjustPopup();
 		}
+		var fm=$('#data-form');
+		if (formData) {
+			fm[0].reset();
+			form.val('data-form', formData);
+
+
+
+	     	fm.attr('method', 'POST');
+	     	renderFormFields();
+		}
+		
+		//渐显效果
+		fm.css("opacity","0.0");
+        fm.css("display","");
+        setTimeout(function (){
+            fm.animate({
+                opacity:'1.0'
+            },100);
+        },1);
+        
 	}
 	
 	/**
       * 保存数据，表单提交事件
       */
-    function bindSubmitEvent() {
+    function bindButtonEvent() {
     
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 	    	
-	    	//处理逻辑值
-	    	
+
+
+
+
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
-	        layer.load(2);
+	        var task=setTimeout(function(){layer.load(2);},1000);
 	        admin.request(api, data.field, function (data) {
-	            layer.closeAll('loading');
+	            clearTimeout(task);
+			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
 	                admin.finishPopupCenter();
 	            } else {
-	                layer.msg(data.message, {icon: 2, time: 500});
+	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
 	        
 	        return false;
 	    });
+	    
+	    //关闭窗口
+	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
 
@@ -90,7 +117,8 @@ layui.config({
 	dir: layuiPath,
 	base: '/module/'
 }).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect'],function() {
+	xmSelect: 'xm-select/xm-select',
+	foxnicUpload: 'upload/foxnic-upload'
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload'],function() {
 	(new FormPage()).init(layui);
 });

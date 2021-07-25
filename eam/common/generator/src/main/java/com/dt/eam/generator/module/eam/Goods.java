@@ -1,15 +1,15 @@
 package com.dt.eam.generator.module.eam;
 
 import com.dt.eam.constants.db.EAMTables;
-import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class Goods extends BaseCodeGenerator {
+
+    public Goods() {
+        super(EAMTables.EAM_GOODS.$TABLE,BASIC_DATA_MENU_ID);
+    }
+
     public void generateConfig() throws Exception {
-
-        //创建模块配置
-        ModuleContext cfg=createModuleConfig(EAMTables.EAM_GOODS.$TABLE, 1);
-
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

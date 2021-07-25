@@ -19,7 +19,7 @@ import com.dt.eam.proxy.EAMServiceNames;
  * 生产厂商  控制器服务代理
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:12:54
+ * @since 2021-07-25 13:25:46
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = ManufacturerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -49,13 +49,12 @@ public interface ManufacturerServiceProxy {
 	 * 删除生产厂商
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
-	
-	
+
 	/**
 	 * 批量删除生产厂商
 	 */
-	public static final String BATCH_DELETE = API_PREFIX + "batch-delete";
-	
+	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
+	;
 	
 	/**
 	 * 更新生产厂商
@@ -69,10 +68,16 @@ public interface ManufacturerServiceProxy {
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取生产厂商
+	 * 获取单个生产厂商
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
-	
+
+	/**
+	 * 获取多个生产厂商
+	 */
+	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
+	;
+
 	/**
 	 * 查询生产厂商
 	 */
@@ -102,39 +107,43 @@ public interface ManufacturerServiceProxy {
 	 * 添加生产厂商
 	*/
 	@RequestMapping(ManufacturerServiceProxy.INSERT)
-	Result<Manufacturer> insert(ManufacturerVO manufacturerVO);
+	Result insert(ManufacturerVO manufacturerVO);
 	
 	/**
 	 * 删除生产厂商
 	*/
 	@RequestMapping(ManufacturerServiceProxy.DELETE)
-	Result<Manufacturer> deleteById(String id);
-	
-	
+	Result deleteById(String id);
+
 	/**
 	 * 批量删除生产厂商
 	*/
-	@RequestMapping(ManufacturerServiceProxy.BATCH_DELETE)
-	Result<Manufacturer> deleteByIds(List<String> id);
-	
+	@RequestMapping(ManufacturerServiceProxy.DELETE_BY_IDS)
+	Result deleteByIds(List<String> ids);
+
 	/**
 	 * 更新生产厂商
 	*/
 	@RequestMapping(ManufacturerServiceProxy.UPDATE)
-	Result<Manufacturer> update(ManufacturerVO manufacturerVO);
+	Result update(ManufacturerVO manufacturerVO);
 	
 	/**
 	 * 更新生产厂商
 	*/
 	@RequestMapping(ManufacturerServiceProxy.SAVE)
-	Result<Manufacturer> save(ManufacturerVO manufacturerVO);
+	Result save(ManufacturerVO manufacturerVO);
 	
 	/**
 	 * 获取生产厂商
 	*/
 	@RequestMapping(ManufacturerServiceProxy.GET_BY_ID)
 	Result<Manufacturer> getById(String id);
-	
+
+	/**
+	 * 批量删除生产厂商
+	*/
+	@RequestMapping(ManufacturerServiceProxy.GET_BY_IDS)
+	Result<List<Manufacturer>> getByIds(List<String> ids);
 	/**
 	 * 查询生产厂商
 	*/

@@ -45,8 +45,8 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * <p>
  * 维保厂商 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-25 08:25:56
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-25 13:25:37
 */
 
 @Api(tags = "维保厂商")
@@ -63,7 +63,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "添加维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -82,7 +82,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "删除维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MaintainerVOMeta.ID)
@@ -116,7 +116,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "更新维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -135,7 +135,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "保存维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -193,7 +193,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "查询维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -213,7 +213,7 @@ public class MaintainerController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询维保厂商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-24 11:03:29
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-25 13:24:13
  */
 
 
@@ -51,8 +51,8 @@ function ListPage() {
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
 	 		,footer : {
-				exportExcel : true,
-				importExcel : {
+				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
 					params : {} ,
 				 	callback : function(r) {
 						if(r.success) {
@@ -61,7 +61,7 @@ function ListPage() {
 							layer.msg(fox.translate('数据导入失败')+"!");
 						}
 					}
-			 	}
+			 	}:false
 		 	}
         });
         //绑定排序事件

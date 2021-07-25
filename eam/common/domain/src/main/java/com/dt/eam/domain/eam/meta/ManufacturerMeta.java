@@ -7,8 +7,8 @@ import java.util.Date;
 
 /**
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-19 20:07:36
- * @sign 56CBB19D0BFBF6F16F4453F0ECEA49B2
+ * @since 2021-07-25 13:25:46
+ * @sign 5E0067CB73A2FAD378EA6F251B3BD5B7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -23,6 +23,11 @@ public class ManufacturerMeta {
 	 * 名称
 	*/
 	public static final String MANUFACTURER_NAME="manufacturerName";
+	
+	/**
+	 * 所在地
+	*/
+	public static final String LOCATION="location";
 	
 	/**
 	 * 备注
@@ -72,7 +77,7 @@ public class ManufacturerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , MANUFACTURER_NAME , MANUFACTURER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , MANUFACTURER_NAME , LOCATION , MANUFACTURER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -101,6 +106,17 @@ public class ManufacturerMeta {
 		public Manufacturer setManufacturerName(String manufacturerName) {
 			super.change(MANUFACTURER_NAME,super.getManufacturerName(),manufacturerName);
 			super.setManufacturerName(manufacturerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 所在地
+		 * @param location 所在地
+		 * @return 当前对象
+		*/
+		public Manufacturer setLocation(String location) {
+			super.change(LOCATION,super.getLocation(),location);
+			super.setLocation(location);
 			return this;
 		}
 		
