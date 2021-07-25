@@ -10,7 +10,7 @@ import com.github.foxnic.sql.meta.DBTable;
 
 public class EamMaintainer extends BaseCodeGenerator {
 
-    public void generateEamBrandConfig() throws Exception {
+    public void generateConfig() throws Exception {
         //创建模块配置
         ModuleContext cfg=createModuleConfig(Table, 1);
         //文件生成覆盖模式

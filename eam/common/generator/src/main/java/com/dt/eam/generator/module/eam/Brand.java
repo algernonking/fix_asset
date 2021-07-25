@@ -12,7 +12,7 @@ import com.github.foxnic.generator.config.WriteMode;
 public class Brand extends BaseCodeGenerator {
 
 
-    public void generateEamBrandConfig() throws Exception {
+    public void generateConfig() throws Exception {
 
         //创建模块配置
         ModuleContext cfg=createModuleConfig(EAMTables.EAM_BRAND.$TABLE, 1);

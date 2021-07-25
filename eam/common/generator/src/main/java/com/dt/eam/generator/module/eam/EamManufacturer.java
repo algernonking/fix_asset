@@ -10,7 +10,7 @@ import com.github.foxnic.generator.config.WriteMode;
 
 public class EamManufacturer extends BaseCodeGenerator{
 
-    public void generateEamBrandConfig() throws Exception {
+    public void generateConfig() throws Exception {
         //创建模块配置
         ModuleContext cfg=createModuleConfig(Table, 1);
         //文件生成覆盖模式

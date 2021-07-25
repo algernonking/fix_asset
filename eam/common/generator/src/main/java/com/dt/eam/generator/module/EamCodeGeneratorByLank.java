@@ -7,9 +7,7 @@ public class EamCodeGeneratorByLank {
 
     public static void main(String[] args) throws Exception {
 
-        //生成品牌代码
-        Brand brand=new Brand();
-        brand.generateEamBrandConfig();
+
 
         //生成物件代码
        // Goods goods=new Goods();
