@@ -46,7 +46,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 维保厂商 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-25 13:25:37
+ * @since 2021-07-26 09:35:01
 */
 
 @Api(tags = "维保厂商")
@@ -64,7 +64,7 @@ public class MaintainerController extends SuperController {
 	@ApiOperation(value = "添加维保厂商")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
-		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -117,7 +117,7 @@ public class MaintainerController extends SuperController {
 	@ApiOperation(value = "更新维保厂商")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
-		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } ) 
@@ -136,7 +136,7 @@ public class MaintainerController extends SuperController {
 	@ApiOperation(value = "保存维保厂商")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
-		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
@@ -194,7 +194,7 @@ public class MaintainerController extends SuperController {
 	@ApiOperation(value = "查询维保厂商")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
-		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE } )
@@ -214,7 +214,7 @@ public class MaintainerController extends SuperController {
 	@ApiOperation(value = "分页查询维保厂商")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471599404445335552"),
-		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

@@ -46,7 +46,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌表 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-25 13:24:12
+ * @since 2021-07-26 09:33:30
 */
 
 @Api(tags = "品牌")

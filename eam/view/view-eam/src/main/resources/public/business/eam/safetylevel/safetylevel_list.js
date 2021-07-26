@@ -1,7 +1,7 @@
 /**
  * 风险等级 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-25 13:47:12
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-26 09:35:36
  */
 
 
@@ -147,7 +147,7 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('风险等级')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.request(moduleURL+"/delete-by-id", { ids: ids }, function (data) {
+                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});

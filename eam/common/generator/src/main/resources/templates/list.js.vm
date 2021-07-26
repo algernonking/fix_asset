@@ -275,7 +275,7 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.request(moduleURL+"/delete-by-id", { #(idsPropertyName): ids }, function (data) {
+                admin.request(moduleURL+"/delete-by-ids", { #(idsPropertyName): ids }, function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});

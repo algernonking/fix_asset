@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-25 13:24:13
+ * @since 2021-07-26 09:33:32
  */
 
 
@@ -145,7 +145,7 @@ function ListPage() {
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('品牌')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
-                admin.request(moduleURL+"/delete-by-id", { ids: ids }, function (data) {
+                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     layer.closeAll('loading');
                     if (data.success) {
                         layer.msg(data.message, {icon: 1, time: 500});

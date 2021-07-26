@@ -19,7 +19,7 @@ import com.dt.eam.proxy.EAMServiceNames;
  * 维保厂商  控制器服务代理
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-25 13:25:37
+ * @since 2021-07-26 09:35:01
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = MaintainerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

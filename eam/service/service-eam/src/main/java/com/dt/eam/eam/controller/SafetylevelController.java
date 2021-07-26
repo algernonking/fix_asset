@@ -45,8 +45,8 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * <p>
  * 风险等级表 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-25 13:47:11
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-26 09:35:35
 */
 
 @Api(tags = "风险等级")
@@ -64,8 +64,8 @@ public class SafetylevelController extends SuperController {
 	@ApiOperation(value = "添加风险等级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = SafetylevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471669964785319936"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = SafetylevelVOMeta.ID)
@@ -117,8 +117,8 @@ public class SafetylevelController extends SuperController {
 	@ApiOperation(value = "更新风险等级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = SafetylevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471669964785319936"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { SafetylevelVOMeta.PAGE_INDEX , SafetylevelVOMeta.PAGE_SIZE , SafetylevelVOMeta.SEARCH_FIELD , SafetylevelVOMeta.SEARCH_VALUE , SafetylevelVOMeta.SORT_FIELD , SafetylevelVOMeta.SORT_TYPE , SafetylevelVOMeta.IDS } ) 
 	@NotNull(name = SafetylevelVOMeta.ID)
@@ -136,8 +136,8 @@ public class SafetylevelController extends SuperController {
 	@ApiOperation(value = "保存风险等级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = SafetylevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471669964785319936"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { SafetylevelVOMeta.PAGE_INDEX , SafetylevelVOMeta.PAGE_SIZE , SafetylevelVOMeta.SEARCH_FIELD , SafetylevelVOMeta.SEARCH_VALUE , SafetylevelVOMeta.SORT_FIELD , SafetylevelVOMeta.SORT_TYPE , SafetylevelVOMeta.IDS } )
 	@NotNull(name = SafetylevelVOMeta.ID)
@@ -194,8 +194,8 @@ public class SafetylevelController extends SuperController {
 	@ApiOperation(value = "查询风险等级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = SafetylevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471669964785319936"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { SafetylevelVOMeta.PAGE_INDEX , SafetylevelVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = SafetylevelServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -214,8 +214,8 @@ public class SafetylevelController extends SuperController {
 	@ApiOperation(value = "分页查询风险等级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = SafetylevelVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471669964785319936"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
+		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = SafetylevelServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
