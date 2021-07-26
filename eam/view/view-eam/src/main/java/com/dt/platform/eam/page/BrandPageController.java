@@ -4,6 +4,7 @@ import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.BrandServiceProxy;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 品牌表 模版页面控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 09:33:30
+ * @since 2021-07-26 16:13:48
 */
 
 @Controller("EamBrandPageController")

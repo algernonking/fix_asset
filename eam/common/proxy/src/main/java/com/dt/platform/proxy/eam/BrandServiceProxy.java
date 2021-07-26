@@ -1,23 +1,25 @@
 package com.dt.platform.proxy.eam;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.github.foxnic.web.proxy.api.APIProxy;
+import org.github.foxnic.web.proxy.FeignConfiguration;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+
 import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.BrandVO;
-import com.dt.platform.proxy.EAMServiceNames;
+import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
-import org.github.foxnic.web.proxy.FeignConfiguration;
-import org.github.foxnic.web.proxy.api.APIProxy;
-import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import com.dt.platform.proxy.EAMServiceNames;
 
 /**
  * <p>
  * 品牌表  控制器服务代理
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 09:33:30
+ * @since 2021-07-26 16:13:48
 */
 
 @FeignClient(value = EAMServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

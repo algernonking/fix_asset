@@ -4,7 +4,7 @@ package com.dt.platform.eam.service;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Brand;
-
+import com.dt.platform.domain.eam.BrandVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 品牌表 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 09:33:30
+ * @since 2021-07-26 16:13:48
 */
 
 public interface IBrandService extends ISuperService<Brand> {
