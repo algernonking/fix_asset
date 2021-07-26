@@ -144,7 +144,7 @@ public interface EmployeeServiceProxy {
 	/**
 	 * 控制器类名
 	 * */
-	public static final String CONTROLLER_CLASS_NAME="com.dt.eam.hrm.controller.EmployeeController";
+	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.hrm.controller.EmployeeController";
 
 	/**
 	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用

@@ -1,18 +1,16 @@
 package com.dt.platform.proxy.datacenter;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.github.foxnic.web.proxy.api.APIProxy;
-import org.github.foxnic.web.proxy.FeignConfiguration;
-
-import org.springframework.cloud.openfeign.FeignClient;
-
-
 import com.dt.platform.domain.datacenter.DcInfo;
 import com.dt.platform.domain.datacenter.DcInfoVO;
-import java.util.List;
+import com.dt.platform.proxy.EAMServiceNames;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
-import com.dt.platform.proxy.EAMServiceNames;
+import org.github.foxnic.web.proxy.FeignConfiguration;
+import org.github.foxnic.web.proxy.api.APIProxy;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * <p>
@@ -160,7 +158,7 @@ public interface DcInfoServiceProxy {
 	/**
 	 * 控制器类名
 	 * */
-	public static final String CONTROLLER_CLASS_NAME="com.dt.eam.datacenter.controller.DcInfoController";
+	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.datacenter.controller.DcInfoController";
 
 	/**
 	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用

@@ -6,7 +6,7 @@ public class PlatformMeta {
 	/**
 	 * 基础包
 	 * */
-	public static final String BASE_PACKAGE="com.dt.eam";
+	public static final String BASE_PACKAGE="com.dt.platform";
 
 	/**
 	 * 基础框架
