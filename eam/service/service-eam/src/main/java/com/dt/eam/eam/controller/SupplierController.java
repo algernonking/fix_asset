@@ -46,7 +46,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-26 09:35:10
+ * @since 2021-07-26 09:53:37
 */
 
 @Api(tags = "供应商")
@@ -63,9 +63,9 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "添加供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "abcd"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "abcde"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = SupplierVOMeta.ID)
@@ -82,7 +82,7 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "删除供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = SupplierVOMeta.ID)
@@ -116,9 +116,9 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "更新供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "abcd"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "abcde"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { SupplierVOMeta.PAGE_INDEX , SupplierVOMeta.PAGE_SIZE , SupplierVOMeta.SEARCH_FIELD , SupplierVOMeta.SEARCH_VALUE , SupplierVOMeta.SORT_FIELD , SupplierVOMeta.SORT_TYPE , SupplierVOMeta.IDS } ) 
 	@NotNull(name = SupplierVOMeta.ID)
@@ -135,9 +135,9 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "保存供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "abcd"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "abcde"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { SupplierVOMeta.PAGE_INDEX , SupplierVOMeta.PAGE_SIZE , SupplierVOMeta.SEARCH_FIELD , SupplierVOMeta.SEARCH_VALUE , SupplierVOMeta.SORT_FIELD , SupplierVOMeta.SORT_TYPE , SupplierVOMeta.IDS } )
 	@NotNull(name = SupplierVOMeta.ID)
@@ -193,9 +193,9 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "查询供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "abcd"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "abcde"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { SupplierVOMeta.PAGE_INDEX , SupplierVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = SupplierServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -213,9 +213,9 @@ public class SupplierController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询供应商")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = SupplierVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471976330536157184"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "abcd"),
+		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "abcde"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = SupplierServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
