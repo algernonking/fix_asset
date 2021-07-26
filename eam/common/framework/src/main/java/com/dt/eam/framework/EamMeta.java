@@ -41,6 +41,11 @@ public class EamMeta {
 	 * */
 	public static final String DATACENTER_PACKAGE=BASE_PACKAGE+".datacenter";
 
+	/**
+	 * 运维服务
+	 * */
+	public static final String OPS_PACKAGE=BASE_PACKAGE+".ops";
+
 
 
  

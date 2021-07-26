@@ -55,6 +55,12 @@
 
 		<dependency>
 			<groupId>com.dt.eam</groupId>
+			<artifactId>service-ops</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dt.eam</groupId>
     		<artifactId>view-console</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
@@ -74,6 +80,12 @@
 		<dependency>
 			<groupId>com.dt.eam</groupId>
 			<artifactId>view-datacenter</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dt.eam</groupId>
+			<artifactId>view-ops</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 		

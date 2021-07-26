@@ -1,0 +1,257 @@
+<!-- 
+/**
+ * 主机 列表页 JS 脚本
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-26 13:40:06
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('主机')}">主机</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+</head>
+
+<body style="overflow-y: hidden">
+
+<form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
+    <input name="id" id="id"  type="hidden"/>
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('主机类型')}">主机类型</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostType" id="hostType" name="hostType" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主机类型') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('名称')}">名称</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostName" id="hostName" name="hostName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('IP')}">IP</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('CPU')}">CPU</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostConfCpu" id="hostConfCpu" name="hostConfCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('CPU') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('memory')}">memory</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostConfMemory" id="hostConfMemory" name="hostConfMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('memory') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('虚拟IP')}">虚拟IP</label>
+        <div class="layui-input-block">
+            <input lay-filter="vip" id="vip" name="vip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟IP') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('运行环境:prod')}">运行环境:prod</label>
+        <div class="layui-input-block">
+            <input lay-filter="environment" id="environment" name="environment" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运行环境:prod') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('online')}">online</label>
+        <div class="layui-input-block">
+            <input lay-filter="status" id="status" name="status" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('online') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('监控状态:valid')}">监控状态:valid</label>
+        <div class="layui-input-block">
+            <input lay-filter="monitorStatus" id="monitorStatus" name="monitorStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('监控状态:valid') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('上线时间')}">上线时间</label>
+        <div class="layui-input-block">
+            <input lay-filter="onlineTime" id="onlineTime" name="onlineTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上线时间') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('下线时间')}">下线时间</label>
+        <div class="layui-input-block">
+            <input lay-filter="offlineTime" id="offlineTime" name="offlineTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('操作系统')}">操作系统</label>
+        <div class="layui-input-block">
+            <input lay-filter="os" id="os" name="os" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('操作系统') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('数据库')}">数据库</label>
+        <div class="layui-input-block">
+            <input lay-filter="db" id="db" name="db" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('中间件')}">中间件</label>
+        <div class="layui-input-block">
+            <input lay-filter="middleware" id="middleware" name="middleware" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('中间件') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标签')}">标签</label>
+        <div class="layui-input-block">
+            <input lay-filter="labels" id="labels" name="labels" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('是否归档')}">是否归档</label>
+        <div class="layui-input-block">
+            <input lay-filter="arch" id="arch" name="arch" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否归档') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('系统管理员')}">系统管理员</label>
+        <div class="layui-input-block">
+            <input lay-filter="userOsAdmin" id="userOsAdmin" name="userOsAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('系统管理员') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('数据库管理员')}">数据库管理员</label>
+        <div class="layui-input-block">
+            <input lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('数据库使用用户')}">数据库使用用户</label>
+        <div class="layui-input-block">
+            <input lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('应用使用用户')}">应用使用用户</label>
+        <div class="layui-input-block">
+            <input lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('运维操作用户')}">运维操作用户</label>
+        <div class="layui-input-block">
+            <input lay-filter="userOpsOper" id="userOpsOper" name="userOpsOper" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运维操作用户') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('其他用户')}">其他用户</label>
+        <div class="layui-input-block">
+            <input lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('改密策略')}">改密策略</label>
+        <div class="layui-input-block">
+            <input lay-filter="passwordStrategy" id="passwordStrategy" name="passwordStrategy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('改密策略') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('备注')}">备注</label>
+        <div class="layui-input-block">
+            <input lay-filter="hostNotes" id="hostNotes" name="hostNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+
+    <div class="layui-form-item model-form-footer">
+        <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
+        <button th:if="${perm.checkAnyAuth('ops_host:create','ops_host:update','ops_host:save')}" class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    </div>
+</form>
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+
+<script src="/business/ops/host/host_form.js"></script>
+
+</body>
+</html>
