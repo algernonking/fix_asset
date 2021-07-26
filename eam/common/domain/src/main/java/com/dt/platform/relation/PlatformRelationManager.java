@@ -7,9 +7,9 @@ import org.github.foxnic.web.relation.modules.OAuthRelationManager;
 import org.github.foxnic.web.relation.modules.SystemRelationManager;
 
 
-public class EAMRelationManager extends RelationManager {
+public class PlatformRelationManager extends RelationManager {
 
-	public EAMRelationManager() {
+	public PlatformRelationManager() {
 		super(
 				new OAuthRelationManager(),
 				new SystemRelationManager(),
@@ -36,7 +36,7 @@ public class EAMRelationManager extends RelationManager {
 
 	
 	protected void doReConfigAndValidate() {
-		EAMRelationManager.this.reconfig();
+		PlatformRelationManager.this.reconfig();
 //		FoxnicWebRelationManager.this.validate();
 //		Logger.info("FoxnicWebRelationManager Reconfig");
 	}

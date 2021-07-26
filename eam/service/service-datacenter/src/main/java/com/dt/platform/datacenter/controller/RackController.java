@@ -1,7 +1,6 @@
 package com.dt.platform.datacenter.controller;
 
  
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
@@ -32,6 +32,8 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import com.dt.platform.domain.datacenter.DcInfo;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -46,8 +48,8 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * <p>
  * 数据中心 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-26 17:20:21
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-26 18:16:43
 */
 
 @Api(tags = "数据中心")
@@ -125,7 +127,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass= BigDecimal.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
