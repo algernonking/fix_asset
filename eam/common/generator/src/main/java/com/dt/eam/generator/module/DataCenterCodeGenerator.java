@@ -22,7 +22,7 @@ public class DataCenterCodeGenerator extends EamCodeGenerator {
 	}
  
 	public ModuleContext createModuleConfig(DBTable table,int apiSort) {
-		return createModuleConfig(table, "dc_", apiSort);
+		return createModuleConfig(table, "", apiSort);
 	}
 	
 	

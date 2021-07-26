@@ -7,8 +7,8 @@ import org.github.foxnic.web.proxy.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 
 
-import com.dt.eam.domain.datacenter.Info;
-import com.dt.eam.domain.datacenter.InfoVO;
+import com.dt.eam.domain.datacenter.DcInfo;
+import com.dt.eam.domain.datacenter.DcInfoVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,12 +18,12 @@ import com.dt.eam.proxy.EAMServiceNames;
  * <p>
  * 数据中心  控制器服务代理
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-21 09:05:52
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-26 15:14:29
 */
 
-@FeignClient(value = EAMServiceNames.DATACENTER, contextId = InfoServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
-public interface InfoServiceProxy {
+@FeignClient(value = EAMServiceNames.DATACENTER, contextId = DcInfoServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
+public interface DcInfoServiceProxy {
 	
 	/**
 	 * 基础路径 , service-datacenter
@@ -106,67 +106,67 @@ public interface InfoServiceProxy {
 	/**
 	 * 添加数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.INSERT)
-	Result insert(InfoVO infoVO);
+	@RequestMapping(DcInfoServiceProxy.INSERT)
+	Result insert(DcInfoVO dcInfoVO);
 	
 	/**
 	 * 删除数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.DELETE)
+	@RequestMapping(DcInfoServiceProxy.DELETE)
 	Result deleteById(String id);
 
 	/**
 	 * 批量删除数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.DELETE_BY_IDS)
+	@RequestMapping(DcInfoServiceProxy.DELETE_BY_IDS)
 	Result deleteByIds(List<String> ids);
 
 	/**
 	 * 更新数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.UPDATE)
-	Result update(InfoVO infoVO);
+	@RequestMapping(DcInfoServiceProxy.UPDATE)
+	Result update(DcInfoVO dcInfoVO);
 	
 	/**
 	 * 更新数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.SAVE)
-	Result save(InfoVO infoVO);
+	@RequestMapping(DcInfoServiceProxy.SAVE)
+	Result save(DcInfoVO dcInfoVO);
 	
 	/**
 	 * 获取数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.GET_BY_ID)
-	Result<Info> getById(String id);
+	@RequestMapping(DcInfoServiceProxy.GET_BY_ID)
+	Result<DcInfo> getById(String id);
 
 	/**
 	 * 批量删除数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.GET_BY_IDS)
-	Result<List<Info>> getByIds(List<String> ids);
+	@RequestMapping(DcInfoServiceProxy.GET_BY_IDS)
+	Result<List<DcInfo>> getByIds(List<String> ids);
 	/**
 	 * 查询数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.QUERY_LIST)
-	Result<List<Info>> queryList(InfoVO sample);
+	@RequestMapping(DcInfoServiceProxy.QUERY_LIST)
+	Result<List<DcInfo>> queryList(DcInfoVO sample);
 	
 	/**
 	 * 分页查询数据中心
 	*/
-	@RequestMapping(InfoServiceProxy.QUERY_PAGED_LIST)
-	Result<PagedList<Info>> queryPagedList(InfoVO sample);
+	@RequestMapping(DcInfoServiceProxy.QUERY_PAGED_LIST)
+	Result<PagedList<DcInfo>> queryPagedList(DcInfoVO sample);
 	
 	
 	/**
 	 * 控制器类名
 	 * */
-	public static final String CONTROLLER_CLASS_NAME="com.dt.eam.datacenter.controller.InfoController";
+	public static final String CONTROLLER_CLASS_NAME="com.dt.eam.datacenter.controller.DcInfoController";
 
 	/**
 	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用
 	 * */
-	public static InfoServiceProxy api() {
-		return APIProxy.get(InfoServiceProxy.class,CONTROLLER_CLASS_NAME);
+	public static DcInfoServiceProxy api() {
+		return APIProxy.get(DcInfoServiceProxy.class,CONTROLLER_CLASS_NAME);
 	}
 
 }

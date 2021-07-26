@@ -10,10 +10,12 @@
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" filepath="$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" filepath="$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" filepath="$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eam/service/service-ops/service-ops.iml" filepath="$PROJECT_DIR$/eam/service/service-ops/service-ops.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-console/view-console.iml" filepath="$PROJECT_DIR$/eam/view/view-console/view-console.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-datacenter/view-datacenter.iml" filepath="$PROJECT_DIR$/eam/view/view-datacenter/view-datacenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-eam/view-eam.iml" filepath="$PROJECT_DIR$/eam/view/view-eam/view-eam.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-hrm/view-hrm.iml" filepath="$PROJECT_DIR$/eam/view/view-hrm/view-hrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eam/view/view-ops/view-ops.iml" filepath="$PROJECT_DIR$/eam/view/view-ops/view-ops.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/wrapper/wrapper.iml" filepath="$PROJECT_DIR$/eam/wrapper/wrapper.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/wrapper/wrapper-all/wrapper-all.iml" filepath="$PROJECT_DIR$/eam/wrapper/wrapper-all/wrapper-all.iml" />
     </modules>

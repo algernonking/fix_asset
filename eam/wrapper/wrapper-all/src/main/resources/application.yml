@@ -96,5 +96,5 @@ storage:
       linux: /tailoring/uploads
 
 develop:
-  language: confuse
+  language: defaults
   start-relation-monitor: true
