@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.dt.eam</groupId>
+		<groupId>com.dt.platform</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.2.RELEASE</version>
 		<relativePath/>
@@ -35,56 +35,56 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>com.dt.eam</groupId>  
+			<groupId>com.dt.platform</groupId>  
     		<artifactId>service-eam</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
 		
 		
 		<dependency>
-			<groupId>com.dt.eam</groupId>  
+			<groupId>com.dt.platform</groupId>  
     		<artifactId>service-hrm</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.dt.eam</groupId>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>service-datacenter</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.dt.eam</groupId>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>service-ops</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.dt.eam</groupId>
+			<groupId>com.dt.platform</groupId>
     		<artifactId>view-console</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.dt.eam</groupId>  
+			<groupId>com.dt.platform</groupId>  
     		<artifactId>view-eam</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>com.dt.eam</groupId>  
+			<groupId>com.dt.platform</groupId>  
     		<artifactId>view-hrm</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.dt.eam</groupId>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>view-datacenter</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.dt.eam</groupId>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>view-ops</artifactId>
 			<version>${platform.version}</version>
 		</dependency>

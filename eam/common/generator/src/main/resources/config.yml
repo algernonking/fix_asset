@@ -9,7 +9,7 @@ source:
   #DAO常量名
   daoNameConst: org.github.foxnic.web.framework.dao.DBConfigs.PRIMARY_DAO
   #系统常量包名
-  domainConstantsPackage: com.dt.eam.constants
+  domainConstantsPackage: com.dt.platform.constants
 
 #使用不同的机器码对应到作者
 authors:
@@ -32,7 +32,7 @@ applications:
     nacosGroup: service
     nacosDataId: service-eam.yml
     serviceProjectPath:  /service/service-eam
-    packageName: com.dt.eam.eam
+    packageName: com.dt.platform.eam
     primaryDatasourceConfigKey: spring.datasource.druid.primary
     microServiceNameConst: EAM
     viewProjectPath: /view/view-eam
@@ -43,7 +43,7 @@ applications:
     nacosGroup: service
     nacosDataId: service-hrm.yml
     serviceProjectPath:  /service/service-hrm
-    packageName: com.dt.eam.hrm
+    packageName: com.dt.platform.hrm
     primaryDatasourceConfigKey: spring.datasource.druid.primary
     microServiceNameConst: HRM
     viewProjectPath: /view/view-hrm
@@ -54,7 +54,7 @@ applications:
     nacosGroup: service
     nacosDataId: service-datacenter.yml
     serviceProjectPath: /service/service-datacenter
-    packageName: com.dt.eam.datacenter
+    packageName: com.dt.platform.datacenter
     primaryDatasourceConfigKey: spring.datasource.druid.primary
     microServiceNameConst: DATACENTER
     viewProjectPath: /view/view-datacenter
@@ -65,7 +65,7 @@ applications:
     nacosGroup: service
     nacosDataId: service-ops.yml
     serviceProjectPath: /service/service-ops
-    packageName: com.dt.eam.ops
+    packageName: com.dt.platform.ops
     primaryDatasourceConfigKey: spring.datasource.druid.primary
     microServiceNameConst: OPS
     viewProjectPath: /view/view-ops
