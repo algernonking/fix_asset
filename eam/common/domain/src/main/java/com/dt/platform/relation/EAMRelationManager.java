@@ -1,5 +1,6 @@
 package com.dt.platform.relation;
 
+import com.dt.platform.relation.modules.DCRelationManager;
 import com.dt.platform.relation.modules.HRMRelationManager;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.relation.modules.OAuthRelationManager;
@@ -13,7 +14,9 @@ public class EAMRelationManager extends RelationManager {
 				new OAuthRelationManager(),
 				new SystemRelationManager(),
 				//
-				new HRMRelationManager()
+				new HRMRelationManager(),
+				new DCRelationManager(),
+				new SystemRelationManager()
 		);
 		//启动动态刷入
 		startMonitor();
