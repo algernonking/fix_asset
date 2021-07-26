@@ -239,7 +239,14 @@ public class MenuGenerator {
 	 * 从页面控制器提取页面资源
 	 * */
 	private void createPageResources() throws Exception {
-		String prefix=(String)pageType.getDeclaredField("prefix").get(null);
+		Field field=null;
+		try {
+			field=pageType.getDeclaredField("prefix");
+		} catch (Exception e) {
+			System.err.println(pageType.getName() +" 可能不是一个页面控制器");
+			e.printStackTrace();
+		}
+		String prefix=(String)field.get(null);
 		prefix=StringUtil.removeFirst(prefix, "/");
 
 		File file=(new MavenProject(pageType)).getSourceFile(pageType);
