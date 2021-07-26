@@ -29,7 +29,7 @@ public class Brand extends BaseCodeGenerator {
         g.generateCode();
 
         //移除之前生成的菜单，视情况执行
-        //g.removeByBatchId("471622036347682816");
+//        g.removeByBatchId("471622036347682816");
         //生成菜单
 //        g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
     }
