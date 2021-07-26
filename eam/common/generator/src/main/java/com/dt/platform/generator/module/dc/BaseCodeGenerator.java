@@ -17,6 +17,14 @@ public class BaseCodeGenerator {
 
     private String appConfigPrefix= "service-datacenter";
 
+    public String getTablePrefix() {
+        return tablePrefix;
+    }
+
+    public void setTablePrefix(String tablePrefix) {
+        this.tablePrefix = tablePrefix;
+    }
+
     private String tablePrefix="dc_";
 
     private EamConfigs configs;

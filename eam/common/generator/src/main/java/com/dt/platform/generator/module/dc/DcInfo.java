@@ -32,7 +32,8 @@ public class DcInfo extends BaseCodeGenerator {
         //g.generateCode();
 
         //移除之前生成的菜单，视情况执行
-        //g.removeByBatchId("471622036347682816");
+        System.out.println("############"+g.getTablePrefix());
+        //g.removeByBatchId("470160949404237824");
         //生成菜单
         g.generateMenu(DcInfoServiceProxy.class, DcInfoController.class);
     }
