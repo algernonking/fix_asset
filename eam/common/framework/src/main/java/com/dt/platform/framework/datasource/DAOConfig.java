@@ -1,6 +1,6 @@
 package com.dt.platform.framework.datasource;
 
-import com.dt.platform.relation.EAMRelationManager;
+import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
@@ -39,7 +39,7 @@ public class DAOConfig {
 			dao.setPrintSQL(printSQL);
 			dao.setPrintSQLSimple(printSQL);
 			dao.setDBTreaty(dbTreaty);
-			EAMRelationManager relationManager=new EAMRelationManager();
+			PlatformRelationManager relationManager=new PlatformRelationManager();
 			if(startRelationMonitor) {
 				relationManager.startMonitor();
 			}

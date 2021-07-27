@@ -2,7 +2,7 @@ package com.dt.platform.generator.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.dt.platform.framework.datasource.DAOConfig;
-import com.dt.platform.relation.EAMRelationManager;
+import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.cache.Variable;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.network.Machine;
@@ -165,7 +165,7 @@ public class EamConfigs {
 		// 设置数据库规约
 		DBTreaty dbTreaty = (new DAOConfig()).getDBTreaty();
 		dao.setDBTreaty(dbTreaty);
-		dao.setRelationManager(new EAMRelationManager());
+		dao.setRelationManager(new PlatformRelationManager());
 		
  
 	}
