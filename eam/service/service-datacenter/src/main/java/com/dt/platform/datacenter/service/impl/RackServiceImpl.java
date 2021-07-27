@@ -32,10 +32,10 @@ import java.util.Date;
 
 /**
  * <p>
- * 数据中心 服务实现
+ * 机柜管理 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-26 17:20:21
+ * @since 2021-07-27 09:19:32
 */
 
 
@@ -80,7 +80,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	
 	/**
-	 * 按主键删除 数据中心
+	 * 按主键删除 机柜管理
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -101,7 +101,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	}
 	
 	/**
-	 * 按主键删除 数据中心
+	 * 按主键删除 机柜管理
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -148,7 +148,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	
 	/**
-	 * 按主键更新字段 数据中心
+	 * 按主键更新字段 机柜管理
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -162,7 +162,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	
 	/**
-	 * 按主键获取 数据中心
+	 * 按主键获取 机柜管理
 	 *
 	 * @param id 主键
 	 * @return Rack 数据对象

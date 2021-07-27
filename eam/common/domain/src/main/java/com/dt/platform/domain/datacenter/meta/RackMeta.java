@@ -3,13 +3,14 @@ package com.dt.platform.domain.datacenter.meta;
 import com.dt.platform.domain.datacenter.Rack;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.datacenter.DcInfo;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-26 17:20:21
- * @sign D44B43E2514082D821DD26DC6C59988D
+ * @since 2021-07-27 08:54:40
+ * @sign 760427217E66C0777DC9974CF7517CCD
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -91,9 +92,14 @@ public class RackMeta {
 	public static final String VERSION="version";
 	
 	/**
+	 * 数据中心 , 数据中心名称
+	*/
+	public static final String DC_NAME="dcName";
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , DC_NAME };
 	
 	/**
 	 * 代理类
@@ -265,6 +271,17 @@ public class RackMeta {
 		public Rack setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 数据中心
+		 * @param dcName 数据中心
+		 * @return 当前对象
+		*/
+		public Rack setDcName(DcInfo dcName) {
+			super.change(DC_NAME,super.getDcName(),dcName);
+			super.setDcName(dcName);
 			return this;
 		}
 	}

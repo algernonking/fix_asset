@@ -1,7 +1,7 @@
 /**
- * 数据中心 列表页 JS 脚本
+ * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-26 17:20:22
+ * @since 2021-07-27 09:19:34
  */
 
 
@@ -83,7 +83,6 @@ function ListPage() {
 		value.dcId={ value: $("#dcId").val() };
 		value.rackCode={ value: $("#rackCode").val() };
 		value.rackName={ value: $("#rackName").val() };
-		value.rackCaptical={ value: $("#rackCaptical").val() };
 		value.rackLabels={ value: $("#rackLabels").val() };
 		value.rackNotes={ value: $("#rackNotes").val() };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
@@ -147,11 +146,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('数据中心')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('机柜管理')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('数据中心')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -191,7 +190,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('数据中心')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -220,7 +219,7 @@ function ListPage() {
 		var area=admin.getTempData('dc-rack-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('数据中心')) : (fox.translate('添加')+fox.translate('数据中心'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('机柜管理')) : (fox.translate('添加')+fox.translate('机柜管理'));
 		admin.popupCenter({
 			title: title,
 			resize: true,

@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.dc;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.datacenter.controller.DcInfoController;
+import com.dt.platform.datacenter.page.DcInfoPageController;
 import com.dt.platform.proxy.datacenter.DcInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -29,13 +30,13 @@ public class DcInfo extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         DcInfo g=new DcInfo();
         //生成代码
-        //g.generateCode();
+       // g.generateCode();
 
         //移除之前生成的菜单，视情况执行
         System.out.println("############"+g.getTablePrefix());
-        //g.removeByBatchId("470160949404237824");
+        //g.removeByBatchId("472099190273474560");
         //生成菜单
-        g.generateMenu(DcInfoServiceProxy.class, DcInfoController.class);
+        g.generateMenu(DcInfoServiceProxy.class, DcInfoPageController.class);
     }
 
 }
