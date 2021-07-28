@@ -25,7 +25,7 @@
             #for(f : searchFields)
             #if(!f.isHideInSearch)
             <div class="search-unit">
-                <span th:text="${lang.translate('#(f.label)')}" class="search-label">#(f.label)</span><span class="search-colon">:</span>
+                <span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label">#(f.labelInSearch)</span><span class="search-colon">:</span>
                 #if(f.isLogicField)
                 <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:100px"></div>
                 #else if(f.isRadioField)
@@ -42,7 +42,7 @@
                  <span class="search-dash">-</span>
                  <input type="text" id="#(f.varName)-end"  style="width: 90px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                 #else
-                <input id="#(f.varName)" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入#(f.label)')}"/>
+                <input id="#(f.varName)" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入#(f.labelInSearch)')}"/>
                 #end
             </div>
             #end

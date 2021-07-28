@@ -99,7 +99,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}
@@ -113,8 +113,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					//请自行调整此处字段的对应关系
-					opts.push({name:data[i].name,value:data[i].id});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}
@@ -125,7 +124,7 @@ function FormPage() {
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}
@@ -153,7 +152,7 @@ function FormPage() {
 
 	     	#for(f : fields)
 		    #if(f.isUploadField)
-			//设置  #(f.label)  显示附件
+			//设置  #(f.labelInForm)  显示附件
 		    if($("##(f.varName)").val()) {
 				foxup.fill("#(f.varName)",$("##(f.varName)").val());
 		    }
@@ -162,7 +161,7 @@ function FormPage() {
 
 			#for(f : fields)
 			#if(f.isSelectField)
-			//设置 #(f.label) 下拉框选中值
+			//设置 #(f.labelInForm) 下拉框选中值
 			var #(f.varName)Select=xmSelect.get("##(f.varName)",true);
 			var #(f.varName)Opionts=[];
 			if (formData.#(f.selectField.fillBy))	{
@@ -202,7 +201,7 @@ function FormPage() {
 
 	    	#for(f : fields)
 		    #if(f.isLogicField)
-			//处理 #(f.label) 默认值
+			//处理 #(f.labelInForm) 默认值
 		    if(!data.field.#(f.varName)) data.field.#(f.varName)=0;
 		    #end
 		    #end
@@ -210,7 +209,7 @@ function FormPage() {
 
 			#for(f : fields)
 			#if(f.isSelectField)
-			//获取 #(f.label) 下拉框的值
+			//获取 #(f.labelInForm) 下拉框的值
 			data.field["#(f.varName)"]=xmSelect.get("##(f.varName)",true).getValue("value");
 			#if(!f.selectField.muliti)
 			if(data.field["#(f.varName)"] && data.field["#(f.varName)"].length>0) {

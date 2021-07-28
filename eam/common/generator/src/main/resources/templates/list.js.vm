@@ -56,20 +56,20 @@ function ListPage() {
 			 	{  fixed: 'left',type:'checkbox' },
                 #for(f : fields)
 		 		#if(f.isDateField)
-				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
 				#elseif(f.isUploadField && f.uploadField.isImageOnly && f.uploadField.count==1)
-				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
 				#elseif(f.isRadioField)
 				#if(f.radioField.dictCode!=null)
-				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet:function (d){ return fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
 				#end
 				#if(f.radioField.enumTypeName!=null)
-				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet:function (d){ return fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
 				#end
 				#elseif(f.isLogicField)
-				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)'), templet: '#cell-tpl-#(f.varName)'} ,
+				{ field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: '#cell-tpl-#(f.varName)'} ,
 				#else
-                { field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.label)')} ,
+                { field: '#(f.varName)', align:"#(f.align)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)')} ,
 				#end
                 #end
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
