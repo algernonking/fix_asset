@@ -1,8 +1,6 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.eam.page.SupplierPageController;
-import com.dt.platform.proxy.eam.SupplierServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class EamSupplier extends BaseCodeGenerator{
@@ -29,7 +27,7 @@ public class EamSupplier extends BaseCodeGenerator{
 
         //生成菜单
         g.removeByBatchId("");
-        g.generateMenu(SupplierServiceProxy.class, SupplierPageController.class);
+       // g.generateMenu(SupplierServiceProxy.class, SupplierPageController.class);
     }
 
 

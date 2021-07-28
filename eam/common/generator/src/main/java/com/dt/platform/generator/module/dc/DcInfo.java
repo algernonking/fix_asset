@@ -2,9 +2,9 @@ package com.dt.platform.generator.module.dc;
 
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.datacenter.controller.DcInfoController;
-import com.dt.platform.datacenter.page.DcInfoPageController;
-import com.dt.platform.proxy.datacenter.DcInfoServiceProxy;
+//import com.dt.platform.datacenter.controller.DcInfoController;
+//import com.dt.platform.datacenter.page.DcInfoPageController;
+//import com.dt.platform.proxy.datacenter.DcInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class DcInfo extends BaseCodeGenerator {
@@ -36,7 +36,7 @@ public class DcInfo extends BaseCodeGenerator {
         System.out.println("############"+g.getTablePrefix());
         //g.removeByBatchId("472099190273474560");
         //生成菜单
-        g.generateMenu(DcInfoServiceProxy.class, DcInfoPageController.class);
+       // g.generateMenu(DcInfoServiceProxy.class, DcInfoPageController.class);
     }
 
 }

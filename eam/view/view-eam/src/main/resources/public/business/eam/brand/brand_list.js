@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 16:13:50
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-28 14:33:53
  */
 
 
@@ -45,7 +45,7 @@ function ListPage() {
 			cols: [[
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
-                { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
+                { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
                 { field: 'brandName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -75,7 +75,6 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.id={ value: $("#id").val() };
 		value.brandName={ value: $("#brandName").val() };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });

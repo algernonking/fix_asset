@@ -1,9 +1,9 @@
 package com.dt.platform.generator.menu;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.eam.page.BrandPageController;
+//import com.dt.platform.eam.page.BrandPageController;
 import com.dt.platform.generator.config.EamConfigs;
-import com.dt.platform.proxy.eam.BrandServiceProxy;
+//import com.dt.platform.proxy.eam.BrandServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -53,9 +53,9 @@ public class MenuGenerator {
 
 		MenuGenerator mg=null;
 
-		mg=new MenuGenerator(EAMTables.EAM_BRAND.$TABLE, BrandServiceProxy.class, BrandPageController.class);
-		mg.removeByBatchId("469531569673994240");
-		mg.generate(EAM_MENU_ID);
+//		mg=new MenuGenerator(EAMTables.EAM_BRAND.$TABLE, BrandServiceProxy.class, BrandPageController.class);
+//		mg.removeByBatchId("469531569673994240");
+//		mg.generate(EAM_MENU_ID);
 
 //		mg=new MenuGenerator(DC_INFO.$TABLE, InfoServiceProxy.class, InfoPageController.class);
 //		mg.generate(DATACENTER_MENU_ID);

@@ -1,9 +1,6 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.generator.module.eam.Brand;
-import com.dt.platform.ops.page.ServicetypePageController;
-import com.dt.platform.proxy.ops.ServicetypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class ServiceType extends BaseCodeGenerator{
@@ -34,6 +31,6 @@ public class ServiceType extends BaseCodeGenerator{
         //移除之前生成的菜单，视情况执行
 //        g.removeByBatchId("471622036347682816");
         //生成菜单
-        g.generateMenu(ServicetypeServiceProxy.class, ServicetypePageController.class);
+       // g.generateMenu(ServicetypeServiceProxy.class, ServicetypePageController.class);
     }
 }

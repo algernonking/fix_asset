@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.eam.BrandServiceProxy;
@@ -45,8 +46,8 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * <p>
  * 品牌表 接口控制器
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 16:13:48
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-28 14:33:52
 */
 
 @Api(tags = "品牌")
@@ -118,7 +119,7 @@ public class BrandController extends SuperController {
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
 		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } ) 
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.UPDATE)
@@ -136,7 +137,7 @@ public class BrandController extends SuperController {
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
 		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.SAVE)

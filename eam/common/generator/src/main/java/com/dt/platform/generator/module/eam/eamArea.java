@@ -1,8 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.eam.page.AreaPageController;
-import com.dt.platform.proxy.eam.AreaServiceProxy;
+
 import com.github.foxnic.generator.config.WriteMode;
 
 public class eamArea  extends BaseCodeGenerator{
@@ -29,6 +28,6 @@ public class eamArea  extends BaseCodeGenerator{
 
         //生成菜单
         //  g.removeByBatchId("");
-        g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+      //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
     }
 }

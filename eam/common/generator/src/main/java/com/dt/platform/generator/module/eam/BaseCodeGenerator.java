@@ -4,6 +4,7 @@ import com.dt.platform.generator.config.EamConfigs;
 import com.dt.platform.generator.menu.MenuGenerator;
 import com.dt.platform.proxy.EAMServiceNames;
 import com.github.foxnic.generator.config.ModuleContext;
+import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {

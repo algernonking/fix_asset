@@ -1,8 +1,8 @@
 <!-- 
 /**
  * 品牌 列表页 JS 脚本
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-26 16:13:48
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-28 14:33:52
  */
  -->
  <!DOCTYPE html>
@@ -26,10 +26,6 @@
     <div class="layui-card-body">
         <div class="layui-form toolbar search-bar">
 
-            <div class="search-unit">
-                <span th:text="${lang.translate('主键')}" class="search-label">主键</span><span class="search-colon">:</span>
-                <input id="id" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入主键')}"/>
-            </div>
             <div class="search-unit">
                 <span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span>
                 <input id="brandName" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入名称')}"/>
