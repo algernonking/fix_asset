@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜管理 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-27 09:19:32
+ * @since 2021-07-27 09:41:51
 */
 
 @Api(tags = "机柜管理")

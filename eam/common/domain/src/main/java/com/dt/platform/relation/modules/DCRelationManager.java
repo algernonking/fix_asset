@@ -3,6 +3,7 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.datacenter.DcInfo;
 import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.RackVO;
 import com.github.foxnic.dao.relation.RelationManager;
 
 public class DCRelationManager  extends RelationManager {

@@ -1,7 +1,7 @@
 /**
- * 机柜管理 列表页 JS 脚本
+ * 服务种类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-27 09:41:52
+ * @since 2021-07-27 15:03:57
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-datacenter/dc-rack";
+	const moduleURL="/service-ops/ops-servicetype";
 	
 	/**
       * 入口函数，初始化
@@ -46,12 +46,8 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
-                { field: 'dcId', align:"left", hide:false, sort: true, title: fox.translate('数据中心')} ,
-                { field: 'rackCode', align:"left", hide:false, sort: true, title: fox.translate('编码')} ,
-                { field: 'rackName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
-                { field: 'rackCaptical', align:"right", hide:false, sort: true, title: fox.translate('容量')} ,
-                { field: 'rackLabels', align:"left", hide:false, sort: true, title: fox.translate('标签')} ,
-                { field: 'rackNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
+                { field: 'code', align:"left", hide:false, sort: true, title: fox.translate('编码')} ,
+                { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
@@ -80,11 +76,9 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.dcId={ value: $("#dcId").val() };
-		value.rackCode={ value: $("#rackCode").val() };
-		value.rackName={ value: $("#rackName").val() };
-		value.rackLabels={ value: $("#rackLabels").val() };
-		value.rackNotes={ value: $("#rackNotes").val() };
+		value.id={ value: $("#id").val() };
+		value.code={ value: $("#code").val() };
+		value.name={ value: $("#name").val() };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -146,11 +140,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('机柜管理')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('服务种类')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('服务种类')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -190,7 +184,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('服务种类')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -215,18 +209,18 @@ function ListPage() {
 	function showEditForm(data) {
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('dc-rack-form-data', data);
-		var area=admin.getTempData('dc-rack-form-area');
+		admin.putTempData('ops-servicetype-form-data', data);
+		var area=admin.getTempData('ops-servicetype-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('机柜管理')) : (fox.translate('添加')+fox.translate('机柜管理'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('服务种类')) : (fox.translate('添加')+fox.translate('服务种类'));
 		admin.popupCenter({
 			title: title,
 			resize: true,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
-			content: '/business/datacenter/rack/rack_form.html' + queryString,
+			content: '/business/ops/servicetype/servicetype_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}

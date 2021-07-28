@@ -1,10 +1,10 @@
-package com.dt.platform.datacenter.service;
+package com.dt.platform.ops.service;
 
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
+import com.dt.platform.domain.ops.Servicetype;
+import com.dt.platform.domain.ops.ServicetypeVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,32 +18,32 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 机柜管理 服务接口
+ * 服务种类 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-27 09:41:50
+ * @since 2021-07-27 15:03:54
 */
 
-public interface IRackService extends ISuperService<Rack> {
+public interface IServicetypeService extends ISuperService<Servicetype> {
 	
 	/**
 	 * 插入实体
-	 * @param rack 实体数据
+	 * @param servicetype 实体数据
 	 * @return 插入是否成功
 	 * */
-	Result insert(Rack rack);
+	Result insert(Servicetype servicetype);
  
 	/**
 	 * 批量插入实体，事务内
-	 * @param rackList 实体数据清单
+	 * @param servicetypeList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	Result insertList(List<Rack> rackList);
+	Result insertList(List<Servicetype> servicetypeList);
 	
 	
 		
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 服务种类
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IRackService extends ISuperService<Rack> {
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 服务种类
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IRackService extends ISuperService<Rack> {
 	
 		
 	/**
-	 * 按主键更新字段 机柜管理
+	 * 按主键更新字段 服务种类
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -83,68 +83,68 @@ public interface IRackService extends ISuperService<Rack> {
 	
 	/**
 	 * 更新实体
-	 * @param rack 数据对象
+	 * @param servicetype 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result update(Rack rack , SaveMode mode);
+	Result update(Servicetype servicetype , SaveMode mode);
 	
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param rackList 数据对象列表
+	 * @param servicetypeList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result updateList(List<Rack> rackList, SaveMode mode);
+	Result updateList(List<Servicetype> servicetypeList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param rack 实体数据
+	 * @param servicetype 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result save(Rack rack , SaveMode mode);
+	Result save(Servicetype servicetype , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
-	 * @param rackList 实体数据清单
+	 * @param servicetypeList 实体数据清单
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result saveList(List<Rack> rackList , SaveMode mode);
+	Result saveList(List<Servicetype> servicetypeList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
-	 * @param rack  实体对象
+	 * @param servicetype  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
 	 * */
-	boolean checkExists(Rack rack,DBField... field);
+	boolean checkExists(Servicetype servicetype,DBField... field);
  
 		
 	/**
-	 * 按主键获取 机柜管理
+	 * 按主键获取 服务种类
 	 *
 	 * @param id 主键
-	 * @return Rack 数据对象
+	 * @return Servicetype 数据对象
 	 */
-	Rack getById(String id);
+	Servicetype getById(String id);
 		
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<Rack> getByIds(List<String> ids);
+	List<Servicetype> getByIds(List<String> ids);
 
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param rack 数据对象
+	 * @param servicetype 数据对象
 	 * @return 判断结果
 	 */
-	Result<Rack> checkExists(Rack rack);
+	Result<Servicetype> checkExists(Servicetype servicetype);
  
 	/**
 	 * 根据实体数构建默认的条件表达式
@@ -152,14 +152,14 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param stringFuzzy 字符串是否使用模糊匹配
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Rack sample,boolean stringFuzzy);
+	ConditionExpr buildQueryCondition(Servicetype sample,boolean stringFuzzy);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Rack sample);
+	ConditionExpr buildQueryCondition(Servicetype sample);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
@@ -167,7 +167,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Rack sample,String tableAliase);
+	ConditionExpr buildQueryCondition(Servicetype sample,String tableAliase);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式
@@ -176,14 +176,14 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param tableAliase 数据表别名
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Rack sample,boolean stringFuzzy,String tableAliase);
+	ConditionExpr buildQueryCondition(Servicetype sample,boolean stringFuzzy,String tableAliase);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	List<Rack> queryList(Rack sample);
+	List<Servicetype> queryList(Servicetype sample);
  
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -192,7 +192,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Rack> queryList(Rack sample,ConditionExpr condition,OrderBy orderBy);
+	List<Servicetype> queryList(Servicetype sample,ConditionExpr condition,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -200,7 +200,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Rack> queryList(Rack sample,OrderBy orderBy);
+	List<Servicetype> queryList(Servicetype sample,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -208,14 +208,14 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	List<Rack> queryList(Rack sample,ConditionExpr condition);
+	List<Servicetype> queryList(Servicetype sample,ConditionExpr condition);
 	
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	Rack queryEntity(Rack sample);
+	Servicetype queryEntity(Servicetype sample);
 	
 	/**
 	 * 分页查询实体集
@@ -224,7 +224,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<Rack> queryPagedList(Rack sample,int pageSize,int pageIndex);
+	PagedList<Servicetype> queryPagedList(Servicetype sample,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -235,7 +235,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Rack> queryPagedList(Rack sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Servicetype> queryPagedList(Servicetype sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -245,7 +245,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	PagedList<Rack> queryPagedList(Rack sample,ConditionExpr condition,int pageSize,int pageIndex);
+	PagedList<Servicetype> queryPagedList(Servicetype sample,ConditionExpr condition,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -255,7 +255,7 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Rack> queryPagedList(Rack sample,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Servicetype> queryPagedList(Servicetype sample,OrderBy orderBy,int pageSize,int pageIndex);
  
  	/**
 	 * 查询指定字段的数据清单
@@ -281,7 +281,7 @@ public interface IRackService extends ISuperService<Rack> {
 	/**
 	 * 导出 Excel
 	 * */
-	ExcelWriter exportExcel(Rack sample);
+	ExcelWriter exportExcel(Servicetype sample);
 
 	/**
 	 * 导出用于数据导入的 Excel 模版

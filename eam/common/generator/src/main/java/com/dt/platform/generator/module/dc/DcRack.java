@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.dc;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.datacenter.controller.DcInfoController;
 import com.dt.platform.datacenter.page.RackPageController;
+import com.dt.platform.domain.datacenter.meta.DcInfoMeta;
 import com.dt.platform.domain.datacenter.meta.DcInfoVOMeta;
 import com.dt.platform.proxy.datacenter.DcInfoServiceProxy;
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
@@ -17,10 +18,14 @@ public class DcRack extends BaseCodeGenerator {
 
         //cfg.getVoClassFile().addSimpleProperty(String.class,"dcName","数据中心","");
         cfg.field(EAMTables.DC_RACK.ID).hideInForm().hideInSearch();
+
+
+
         cfg.field(EAMTables.DC_RACK.DC_ID).selectField().
-                queryApi(DcInfoServiceProxy.QUERY_PAGED_LIST)
-                .muliti(false).paging(false).
+                queryApi(DcInfoServiceProxy.QUERY_LIST)
+                .muliti(false).
                 fillBy(DcInfoVOMeta.ID);
+
         cfg.field(EAMTables.DC_RACK.RACK_CAPTICAL).hideInSearch();
         //文件生成覆盖模式
         cfg.overrides()
