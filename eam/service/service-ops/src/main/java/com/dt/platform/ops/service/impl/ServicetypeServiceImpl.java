@@ -1,4 +1,4 @@
-package com.dt.platform.datacenter.service.impl;
+package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
+import com.dt.platform.domain.ops.Servicetype;
+import com.dt.platform.domain.ops.ServicetypeVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.datacenter.service.IRackService;
+import com.dt.platform.ops.service.IServicetypeService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 机柜管理 服务实现
+ * 服务种类 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-27 09:41:51
+ * @since 2021-07-27 15:03:54
 */
 
 
-@Service("DcRackService")
-public class RackServiceImpl extends SuperService<Rack> implements IRackService {
+@Service("OpsServicetypeService")
+public class ServicetypeServiceImpl extends SuperService<Servicetype> implements IServicetypeService {
 	
 	/**
 	 * 注入DAO对象
@@ -60,37 +60,37 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	/**
 	 * 插入实体
-	 * @param rack 实体数据
+	 * @param servicetype 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Rack rack) {
-		return super.insert(rack);
+	public Result insert(Servicetype servicetype) {
+		return super.insert(servicetype);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param rackList 实体数据清单
+	 * @param servicetypeList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Rack> rackList) {
-		return super.insertList(rackList);
+	public Result insertList(List<Servicetype> servicetypeList) {
+		return super.insertList(servicetypeList);
 	}
 	
 	
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 服务种类
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Rack rack = new Rack();
+		Servicetype servicetype = new Servicetype();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		rack.setId(id);
+		servicetype.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(rack);
+			boolean suc = dao.deleteEntity(servicetype);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -101,20 +101,20 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	}
 	
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 服务种类
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Rack rack = new Rack();
+		Servicetype servicetype = new Servicetype();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		rack.setId(id);
-		rack.setDeleted(dao.getDBTreaty().getTrueValue());
-		rack.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		rack.setDeleteTime(new Date());
+		servicetype.setId(id);
+		servicetype.setDeleted(dao.getDBTreaty().getTrueValue());
+		servicetype.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		servicetype.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(rack,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(servicetype,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -126,29 +126,29 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	/**
 	 * 更新实体
-	 * @param rack 数据对象
+	 * @param servicetype 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Rack rack , SaveMode mode) {
-		return super.update(rack , mode);
+	public Result update(Servicetype servicetype , SaveMode mode) {
+		return super.update(servicetype , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param rackList 数据对象列表
+	 * @param servicetypeList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Rack> rackList , SaveMode mode) {
-		return super.updateList(rackList , mode);
+	public Result updateList(List<Servicetype> servicetypeList , SaveMode mode) {
+		return super.updateList(servicetypeList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 机柜管理
+	 * 按主键更新字段 服务种类
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -162,20 +162,20 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	
 	
 	/**
-	 * 按主键获取 机柜管理
+	 * 按主键获取 服务种类
 	 *
 	 * @param id 主键
-	 * @return Rack 数据对象
+	 * @return Servicetype 数据对象
 	 */
-	public Rack getById(String id) {
-		Rack sample = new Rack();
+	public Servicetype getById(String id) {
+		Servicetype sample = new Servicetype();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Rack> getByIds(List<String> ids) {
+	public List<Servicetype> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -188,7 +188,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Rack> queryList(Rack sample) {
+	public List<Servicetype> queryList(Servicetype sample) {
 		return super.queryList(sample);
 	}
 	
@@ -202,7 +202,7 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Rack> queryPagedList(Rack sample, int pageSize, int pageIndex) {
+	public PagedList<Servicetype> queryPagedList(Servicetype sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -216,25 +216,25 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Rack> queryPagedList(Rack sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<Servicetype> queryPagedList(Servicetype sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param rack 数据对象
+	 * @param servicetype 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Rack> checkExists(Rack rack) {
+	public Result<Servicetype> checkExists(Servicetype servicetype) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(rack, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(servicetype, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Rack sample) {
+	public ExcelWriter exportExcel(Servicetype sample) {
 		return super.exportExcel(sample);
 	}
 

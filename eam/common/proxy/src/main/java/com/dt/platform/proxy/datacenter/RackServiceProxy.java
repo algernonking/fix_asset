@@ -19,7 +19,7 @@ import com.dt.platform.proxy.EAMServiceNames;
  * 机柜管理  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-27 09:19:32
+ * @since 2021-07-27 09:41:51
 */
 
 @FeignClient(value = EAMServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

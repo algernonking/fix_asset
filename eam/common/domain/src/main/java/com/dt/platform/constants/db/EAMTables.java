@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-24 10:17:06
+ * @since 2021-07-27 15:03:01
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -92,7 +92,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 数据中心
+	 * 机柜管理
 	*/
 	public static class DC_RACK extends DBTable {
 		
@@ -176,7 +176,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public DC_RACK() {
-			this.init($NAME,"数据中心" , ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"机柜管理" , ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final DC_RACK $TABLE=new DC_RACK();
 	}
@@ -1428,7 +1428,6 @@ public class EAMTables {
 		public EAM_MANUFACTURER() {
 			this.init($NAME,"生产厂商" , ID , MANUFACTURER_NAME , LOCATION , MANUFACTURER_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-
 		public static final EAM_MANUFACTURER $TABLE=new EAM_MANUFACTURER();
 	}
 	
@@ -1900,7 +1899,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 资产仓库表
+	 * 仓库
 	*/
 	public static class EAM_WAREHOUSE extends DBTable {
 		
@@ -1964,7 +1963,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_WAREHOUSE() {
-			this.init($NAME,"资产仓库表" , ID , WAREHOUSE_NAME , WAREHOUSE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"仓库" , ID , WAREHOUSE_NAME , WAREHOUSE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_WAREHOUSE $TABLE=new EAM_WAREHOUSE();
 	}
@@ -2633,7 +2632,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 服务
+	 * 服务类型
 	*/
 	public static class OPS_SERVICE extends DBTable {
 		
@@ -2656,11 +2655,6 @@ public class EAMTables {
 		 * 名称
 		*/
 		public static final DBField SERVICE_NAME = new DBField(DBDataType.STRING , "service_name","serviceName","名称","名称",false,false,true);
-		
-		/**
-		 * 服务类型明细
-		*/
-		public static final DBField SERVICE_DETAIL_ID = new DBField(DBDataType.STRING , "service_detail_id","serviceDetailId","服务类型明细","服务类型明细",false,false,true);
 		
 		/**
 		 * 备注
@@ -2707,7 +2701,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_SERVICE() {
-			this.init($NAME,"服务" , ID , SERVICE_TYPE , SERVICE_NAME , SERVICE_DETAIL_ID , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"服务类型" , ID , SERVICE_TYPE , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_SERVICE $TABLE=new OPS_SERVICE();
 	}
@@ -2728,6 +2722,11 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 服务ID
+		*/
+		public static final DBField SERVICE_ID = new DBField(DBDataType.STRING , "service_id","serviceId","服务ID","服务ID",false,false,true);
+		
+		/**
 		 * 名称
 		*/
 		public static final DBField SERVICE_DETAIL_NAME = new DBField(DBDataType.STRING , "service_detail_name","serviceDetailName","名称","名称",false,false,true);
@@ -2735,7 +2734,7 @@ public class EAMTables {
 		/**
 		 * 排序
 		*/
-		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","排序","排序",false,false,false);
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","排序","排序",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -2777,8 +2776,78 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_SERVICE_DETAIL() {
-			this.init($NAME,"服务类型明细" , ID , SERVICE_DETAIL_NAME , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"服务类型明细" , ID , SERVICE_ID , SERVICE_DETAIL_NAME , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_SERVICE_DETAIL $TABLE=new OPS_SERVICE_DETAIL();
+	}
+	
+	/**
+	 * 服务种类
+	*/
+	public static class OPS_SERVICETYPE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_servicetype";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,true);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public OPS_SERVICETYPE() {
+			this.init($NAME,"服务种类" , ID , CODE , NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_SERVICETYPE $TABLE=new OPS_SERVICETYPE();
 	}
 }
