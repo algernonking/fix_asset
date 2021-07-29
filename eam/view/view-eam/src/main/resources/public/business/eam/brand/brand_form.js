@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-28 14:33:54
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-28 17:28:29
  */
 
 function FormPage() {

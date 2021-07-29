@@ -4,7 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.db.EAMTables.EAM_BRAND;
 import com.dt.platform.generator.config.EamConfigs;
 import com.dt.platform.generator.config.EamConfigs.ProjectConfigs;
-import com.dt.platform.proxy.EAMServiceNames;
+import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.generator.config.WriteMode;
 import com.github.foxnic.sql.meta.DBTable;
@@ -61,7 +61,7 @@ public class EamCodeGenerator  {
 		//设置DAO名称常量
 		mdu.setDAONameConsts(procfg.getDAONameConst());
 		//设置微服务命名常量
-		mdu.setMicroServiceNameConst(EAMServiceNames.class.getName()+"."+procfg.getAppMicroServiceNameConst());
+		mdu.setMicroServiceNameConst(ServiceNames.class.getName()+"."+procfg.getAppMicroServiceNameConst());
  
 		return mdu;
  

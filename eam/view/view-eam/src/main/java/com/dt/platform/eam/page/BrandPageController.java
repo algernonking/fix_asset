@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
  * <p>
  * 品牌表 模版页面控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-28 14:33:52
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-28 17:28:27
 */
 
 @Controller("EamBrandPageController")

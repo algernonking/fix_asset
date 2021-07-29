@@ -1,6 +1,6 @@
 package com.dt.platform.proxy;
 
-public class EAMServiceNames {
+public class ServiceNames {
 	
 	/**
 	 * 资产相关的服务 <br>

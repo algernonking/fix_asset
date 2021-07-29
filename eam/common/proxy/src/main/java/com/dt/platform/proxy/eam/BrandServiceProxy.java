@@ -12,17 +12,17 @@ import com.dt.platform.domain.eam.BrandVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
-import com.dt.platform.proxy.EAMServiceNames;
+import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
  * 品牌表  控制器服务代理
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-28 14:33:52
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-28 17:28:27
 */
 
-@FeignClient(value = EAMServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
+@FeignClient(value = ServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface BrandServiceProxy {
 	
 	/**
