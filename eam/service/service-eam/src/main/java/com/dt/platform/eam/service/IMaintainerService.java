@@ -3,8 +3,8 @@ package com.dt.platform.eam.service;
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.Brand;
-import com.dt.platform.domain.eam.BrandVO;
+import com.dt.platform.domain.eam.Maintainer;
+import com.dt.platform.domain.eam.MaintainerVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,32 +18,32 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 品牌表 服务接口
+ * 维保厂商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:34:43
+ * @since 2021-07-29 15:44:39
 */
 
-public interface IBrandService extends ISuperService<Brand> {
+public interface IMaintainerService extends ISuperService<Maintainer> {
 	
 	/**
 	 * 插入实体
-	 * @param brand 实体数据
+	 * @param maintainer 实体数据
 	 * @return 插入是否成功
 	 * */
-	Result insert(Brand brand);
+	Result insert(Maintainer maintainer);
  
 	/**
 	 * 批量插入实体，事务内
-	 * @param brandList 实体数据清单
+	 * @param maintainerList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	Result insertList(List<Brand> brandList);
+	Result insertList(List<Maintainer> maintainerList);
 	
 	
 		
 	/**
-	 * 按主键删除 品牌
+	 * 按主键删除 维保厂商
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 品牌
+	 * 按主键删除 维保厂商
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	
 		
 	/**
-	 * 按主键更新字段 品牌
+	 * 按主键更新字段 维保厂商
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -83,75 +83,75 @@ public interface IBrandService extends ISuperService<Brand> {
 	
 	/**
 	 * 更新实体
-	 * @param brand 数据对象
+	 * @param maintainer 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result update(Brand brand , SaveMode mode);
+	Result update(Maintainer maintainer , SaveMode mode);
 	
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param brandList 数据对象列表
+	 * @param maintainerList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result updateList(List<Brand> brandList, SaveMode mode);
+	Result updateList(List<Maintainer> maintainerList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param brand 实体数据
+	 * @param maintainer 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result save(Brand brand , SaveMode mode);
+	Result save(Maintainer maintainer , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
-	 * @param brandList 实体数据清单
+	 * @param maintainerList 实体数据清单
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result saveList(List<Brand> brandList , SaveMode mode);
+	Result saveList(List<Maintainer> maintainerList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
-	 * @param brand  实体对象
+	 * @param maintainer  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
 	 * */
-	boolean checkExists(Brand brand,DBField... field);
+	boolean checkExists(Maintainer maintainer,DBField... field);
  
 		
 	/**
-	 * 按主键获取 品牌
+	 * 按主键获取 维保厂商
 	 *
 	 * @param id 主键
-	 * @return Brand 数据对象
+	 * @return Maintainer 数据对象
 	 */
-	Brand getById(String id);
+	Maintainer getById(String id);
 		
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<Brand> getByIds(List<String> ids);
+	List<Maintainer> getByIds(List<String> ids);
 
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param brand 数据对象
+	 * @param maintainer 数据对象
 	 * @return 判断结果
 	 */
-	Result<Brand> checkExists(Brand brand);
+	Result<Maintainer> checkExists(Maintainer maintainer);
 
 	/**
 	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Brand sample);
+	ConditionExpr buildQueryCondition(Maintainer sample);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
@@ -159,14 +159,14 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Brand sample,String tableAliase);
+	ConditionExpr buildQueryCondition(Maintainer sample,String tableAliase);
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	List<Brand> queryList(Brand sample);
+	List<Maintainer> queryList(Maintainer sample);
  
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -175,7 +175,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Brand> queryList(Brand sample,ConditionExpr condition,OrderBy orderBy);
+	List<Maintainer> queryList(Maintainer sample,ConditionExpr condition,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -183,7 +183,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Brand> queryList(Brand sample,OrderBy orderBy);
+	List<Maintainer> queryList(Maintainer sample,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -191,14 +191,14 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	List<Brand> queryList(Brand sample,ConditionExpr condition);
+	List<Maintainer> queryList(Maintainer sample,ConditionExpr condition);
 	
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	Brand queryEntity(Brand sample);
+	Maintainer queryEntity(Maintainer sample);
 	
 	/**
 	 * 分页查询实体集
@@ -207,7 +207,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<Brand> queryPagedList(Brand sample,int pageSize,int pageIndex);
+	PagedList<Maintainer> queryPagedList(Maintainer sample,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -218,7 +218,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Brand> queryPagedList(Brand sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Maintainer> queryPagedList(Maintainer sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -228,7 +228,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	PagedList<Brand> queryPagedList(Brand sample,ConditionExpr condition,int pageSize,int pageIndex);
+	PagedList<Maintainer> queryPagedList(Maintainer sample,ConditionExpr condition,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -238,7 +238,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Brand> queryPagedList(Brand sample,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Maintainer> queryPagedList(Maintainer sample,OrderBy orderBy,int pageSize,int pageIndex);
  
  	/**
 	 * 查询指定字段的数据清单
@@ -264,7 +264,7 @@ public interface IBrandService extends ISuperService<Brand> {
 	/**
 	 * 导出 Excel
 	 * */
-	ExcelWriter exportExcel(Brand sample);
+	ExcelWriter exportExcel(Maintainer sample);
 
 	/**
 	 * 导出用于数据导入的 Excel 模版

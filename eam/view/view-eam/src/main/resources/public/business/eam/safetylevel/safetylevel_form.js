@@ -1,13 +1,13 @@
 /**
- * 品牌 列表页 JS 脚本
+ * 风险等级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:34:45
+ * @since 2021-07-29 15:47:45
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-brand";
+	const moduleURL="/service-eam/eam-safetylevel";
 	
 	/**
       * 入口函数，初始化
@@ -34,7 +34,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var area=admin.changePopupArea(null,bodyHeight);
-			admin.putTempData('eam-brand-form-area', area);
+			admin.putTempData('eam-safetylevel-form-area', area);
 			window.adjustPopup=adjustPopup;
 		},50);
 	}
@@ -51,7 +51,7 @@ function FormPage() {
       * 填充表单数据
       */
 	function fillFormData() {
-		var formData = admin.getTempData('eam-brand-form-data');
+		var formData = admin.getTempData('eam-safetylevel-form-data');
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();

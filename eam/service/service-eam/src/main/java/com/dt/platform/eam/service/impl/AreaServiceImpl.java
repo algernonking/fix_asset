@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.Brand;
-import com.dt.platform.domain.eam.BrandVO;
+import com.dt.platform.domain.eam.Area;
+import com.dt.platform.domain.eam.AreaVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IBrandService;
+import com.dt.platform.eam.service.IAreaService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 品牌表 服务实现
+ * 资产存放区域 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:34:43
+ * @since 2021-07-29 15:43:38
 */
 
 
-@Service("EamBrandService")
-public class BrandServiceImpl extends SuperService<Brand> implements IBrandService {
+@Service("EamAreaService")
+public class AreaServiceImpl extends SuperService<Area> implements IAreaService {
 	
 	/**
 	 * 注入DAO对象
@@ -60,37 +60,37 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 插入实体
-	 * @param brand 实体数据
+	 * @param area 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Brand brand) {
-		return super.insert(brand);
+	public Result insert(Area area) {
+		return super.insert(area);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param brandList 实体数据清单
+	 * @param areaList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Brand> brandList) {
-		return super.insertList(brandList);
+	public Result insertList(List<Area> areaList) {
+		return super.insertList(areaList);
 	}
 	
 	
 	/**
-	 * 按主键删除 品牌
+	 * 按主键删除 资产存放区域
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Brand brand = new Brand();
+		Area area = new Area();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		brand.setId(id);
+		area.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(brand);
+			boolean suc = dao.deleteEntity(area);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -101,20 +101,20 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	}
 	
 	/**
-	 * 按主键删除 品牌
+	 * 按主键删除 资产存放区域
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Brand brand = new Brand();
+		Area area = new Area();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		brand.setId(id);
-		brand.setDeleted(dao.getDBTreaty().getTrueValue());
-		brand.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		brand.setDeleteTime(new Date());
+		area.setId(id);
+		area.setDeleted(dao.getDBTreaty().getTrueValue());
+		area.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		area.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(brand,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(area,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -126,29 +126,29 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	/**
 	 * 更新实体
-	 * @param brand 数据对象
+	 * @param area 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Brand brand , SaveMode mode) {
-		return super.update(brand , mode);
+	public Result update(Area area , SaveMode mode) {
+		return super.update(area , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param brandList 数据对象列表
+	 * @param areaList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Brand> brandList , SaveMode mode) {
-		return super.updateList(brandList , mode);
+	public Result updateList(List<Area> areaList , SaveMode mode) {
+		return super.updateList(areaList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 品牌
+	 * 按主键更新字段 资产存放区域
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -162,20 +162,20 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	
 	
 	/**
-	 * 按主键获取 品牌
+	 * 按主键获取 资产存放区域
 	 *
 	 * @param id 主键
-	 * @return Brand 数据对象
+	 * @return Area 数据对象
 	 */
-	public Brand getById(String id) {
-		Brand sample = new Brand();
+	public Area getById(String id) {
+		Area sample = new Area();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Brand> getByIds(List<String> ids) {
+	public List<Area> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -188,7 +188,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Brand> queryList(Brand sample) {
+	public List<Area> queryList(Area sample) {
 		return super.queryList(sample);
 	}
 	
@@ -202,7 +202,7 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Brand> queryPagedList(Brand sample, int pageSize, int pageIndex) {
+	public PagedList<Area> queryPagedList(Area sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -216,25 +216,25 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Brand> queryPagedList(Brand sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<Area> queryPagedList(Area sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param brand 数据对象
+	 * @param area 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Brand> checkExists(Brand brand) {
+	public Result<Area> checkExists(Area area) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(brand, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(area, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Brand sample) {
+	public ExcelWriter exportExcel(Area sample) {
 		return super.exportExcel(sample);
 	}
 

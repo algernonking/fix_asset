@@ -10,6 +10,13 @@ public class EamSafetylevel  extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
+
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.ID)
+                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().fuzzySearch();
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口

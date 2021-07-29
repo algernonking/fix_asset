@@ -11,6 +11,11 @@ public class EamManufacturer extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.ID)
+                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NOTES).search().fuzzySearch();
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

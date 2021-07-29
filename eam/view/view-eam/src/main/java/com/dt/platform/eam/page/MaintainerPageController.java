@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.BrandServiceProxy;
+import com.dt.platform.proxy.eam.MaintainerServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 品牌表 模版页面控制器
+ * 维保厂商 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:34:43
+ * @since 2021-07-29 15:44:39
 */
 
-@Controller("EamBrandPageController")
-@RequestMapping(BrandPageController.prefix)
-public class BrandPageController extends ViewController {
+@Controller("EamMaintainerPageController")
+@RequestMapping(MaintainerPageController.prefix)
+public class MaintainerPageController extends ViewController {
 	
-	public static final String prefix="business/eam/brand";
+	public static final String prefix="business/eam/maintainer";
 
-	private BrandServiceProxy proxy;
+	private MaintainerServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class BrandPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public BrandServiceProxy proxy() {
+	public MaintainerServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=BrandServiceProxy.api();
+			proxy=MaintainerServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 品牌 功能主页面
+	 * 维保厂商 功能主页面
 	 */
-	@RequestMapping("/brand_list.html")
+	@RequestMapping("/maintainer_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/brand_list";
+		return prefix+"/maintainer_list";
 	}
 
 	/**
-	 * 品牌 表单页面
+	 * 维保厂商 表单页面
 	 */
-	@RequestMapping("/brand_form.html")
+	@RequestMapping("/maintainer_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/brand_form";
+		return prefix+"/maintainer_form";
 	}
 }

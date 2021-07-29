@@ -12,8 +12,11 @@ public class Brand extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-        cfg.field(EAMTables.EAM_BRAND.ID)
+
+        cfg.view().field(EAMTables.EAM_BRAND.ID)
                 .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

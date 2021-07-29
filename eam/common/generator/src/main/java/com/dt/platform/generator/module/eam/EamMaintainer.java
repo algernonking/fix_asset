@@ -10,6 +10,12 @@ public class EamMaintainer extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
+
+        cfg.view().field(EAMTables.EAM_MAINTAINER.ID)
+                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).search().fuzzySearch();
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

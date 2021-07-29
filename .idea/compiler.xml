@@ -12,13 +12,13 @@
         <module name="service-hrm" />
         <module name="wrapper-all" />
         <module name="service-eam" />
-        <module name="view-eam" />
+        <module name="view-datacenter" />
         <module name="service-datacenter" />
         <module name="proxy" />
         <module name="framework" />
         <module name="domain" />
         <module name="generator" />
-        <module name="view-datacenter" />
+        <module name="view-eam" />
         <module name="service-ops" />
       </profile>
     </annotationProcessing>
