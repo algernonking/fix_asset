@@ -15,8 +15,8 @@ public class PlatformRelationManager extends RelationManager {
 				new SystemRelationManager(),
 				//
 				new HRMRelationManager(),
-				new DCRelationManager(),
-				new SystemRelationManager()
+				new DCRelationManager()
+
 		);
 		//启动动态刷入
 		startMonitor();

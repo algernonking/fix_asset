@@ -1,9 +1,6 @@
 package com.dt.platform.generator.menu;
 
-import com.dt.platform.constants.db.EAMTables;
-//import com.dt.platform.eam.page.BrandPageController;
 import com.dt.platform.generator.config.EamConfigs;
-//import com.dt.platform.proxy.eam.BrandServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -29,6 +26,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+//import com.dt.platform.eam.page.BrandPageController;
+//import com.dt.platform.proxy.eam.BrandServiceProxy;
 
 
 public class MenuGenerator {
@@ -373,6 +373,10 @@ public class MenuGenerator {
 	}
 
 	public void removeByBatchId(String batchId)  {
+
+		if(StringUtil.isBlank(batchId)) {
+			throw new RuntimeException("未指定 batchId");
+		}
 
 		try {
 			this.dao.beginTransaction();
