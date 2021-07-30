@@ -1,6 +1,9 @@
 package com.dt.platform.relation.modules;
 
 
+import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.meta.DcInfoMeta;
+import com.dt.platform.domain.datacenter.meta.RackMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 
 public class DCRelationManager  extends RelationManager {
@@ -19,8 +22,8 @@ public class DCRelationManager  extends RelationManager {
 
     }
     private void setupDcRack() {
-//        this.property(Rack.class, "dcName", DcInfo.class, "数据中心", "数据中心名称").single().
-//				using(EAMTables.DC_RACK.DC_ID).join(EAMTables.DC_INFO.ID);
+      //  this.property(RackMeta.DC_ID).using(DcInfoMeta.ID)
+
 
     }
 

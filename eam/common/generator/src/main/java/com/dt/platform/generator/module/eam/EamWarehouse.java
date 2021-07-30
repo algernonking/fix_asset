@@ -31,7 +31,7 @@ public class EamWarehouse  extends BaseCodeGenerator{
     public static void main(String[] args) throws Exception {
         EamWarehouse g=new EamWarehouse();
         //生成代码
-      //  g.generateCode();
+        g.generateCode();
 
 
         //生成菜单

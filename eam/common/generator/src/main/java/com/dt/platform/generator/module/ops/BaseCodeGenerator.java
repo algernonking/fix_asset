@@ -7,7 +7,7 @@ import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
-  //  public static final String BASIC_DATA_MENU_ID="472025257461415936";
+    public static final String BASIC_DATA_MENU_ID="472036614189613057";
     public static final String BASIC_SETTING_MENU_ID="472357984110903296";
 
     //

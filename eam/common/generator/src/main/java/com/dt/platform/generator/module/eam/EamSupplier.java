@@ -28,11 +28,11 @@ public class EamSupplier extends BaseCodeGenerator{
     public static void main(String[] args) throws Exception {
         EamSupplier g=new EamSupplier();
         //生成代码
-        //g.generateCode();
+        g.generateCode();
 
 
         //生成菜单
-        g.removeByBatchId("");
+        //g.removeByBatchId("");
        // g.generateMenu(SupplierServiceProxy.class, SupplierPageController.class);
     }
 

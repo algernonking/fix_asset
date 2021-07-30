@@ -14,8 +14,14 @@ public class DcInfo extends BaseCodeGenerator {
         super(EAMTables.DC_INFO.$TABLE,BASIC_DATA_MENU_ID,"");
     }
 
+
     public void generateCode() throws Exception {
 
+        cfg.view().field(EAMTables.DC_INFO.ID)
+                .basic().hidden(true);
+        cfg.view().field(EAMTables.DC_INFO.DC_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.DC_INFO.DC_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.DC_INFO.DC_POSITION).search().fuzzySearch();
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -30,7 +36,7 @@ public class DcInfo extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         DcInfo g=new DcInfo();
         //生成代码
-       // g.generateCode();
+        g.generateCode();
 
         //移除之前生成的菜单，视情况执行
         System.out.println("############"+g.getTablePrefix());

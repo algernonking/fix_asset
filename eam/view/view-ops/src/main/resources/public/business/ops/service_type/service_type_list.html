@@ -1,0 +1,68 @@
+<!-- 
+/**
+ * 服务种类 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-30 13:54:10
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('服务种类')}">服务种类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+</head>
+
+<body style="overflow-y: hidden">
+
+<div class="layui-card">
+ 
+    <div class="layui-card-body">
+        <div class="layui-form toolbar search-bar">
+
+            <div class="search-unit">
+                <span th:text="${lang.translate('编码')}" class="search-label">编码</span><span class="search-colon">:</span>
+                <input id="code" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入编码')}"/>
+            </div>
+            <div class="search-unit">
+                <span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span>
+                <input id="name" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入名称')}"/>
+            </div>
+
+            <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
+            <button th:if="${perm.checkAuth('ops_service_type:create')}" id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+            <button th:if="${perm.checkAuth('ops_service_type:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+            
+        </div>
+
+        <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+    </div>
+</div>
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+
+<!-- 表格操作列 -->
+<script type="text/html" id="tableOperationTemplate">
+    <a th:if="${perm.checkAuth('ops_service_type:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <a th:if="${perm.checkAuth('ops_service_type:delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+</script>
+
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var AUTH_PREFIX="ops_service_type";
+</script>
+
+<script src="/business/ops/service_type/service_type_list.js"></script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-27 15:03:01
+ * @since 2021-07-30 14:55:52
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2217,14 +2217,19 @@ public class EAMTables {
 		public static final DBField HOST_IP = new DBField(DBDataType.STRING , "host_ip","hostIp","IP","IP",false,false,false);
 		
 		/**
+		 * VIP
+		*/
+		public static final DBField HOST_VIP = new DBField(DBDataType.STRING , "host_vip","hostVip","VIP","VIP",false,false,false);
+		
+		/**
 		 * CPU
 		*/
-		public static final DBField HOST_CONF_CPU = new DBField(DBDataType.STRING , "host_conf_cpu","hostConfCpu","CPU","CPU",false,false,true);
+		public static final DBField HOST_CPU = new DBField(DBDataType.DECIMAL , "host_cpu","hostCpu","CPU","CPU",false,false,true);
 		
 		/**
 		 * memory
 		*/
-		public static final DBField HOST_CONF_MEMORY = new DBField(DBDataType.STRING , "host_conf_memory","hostConfMemory","memory","memory",false,false,true);
+		public static final DBField HOST_MEMORY = new DBField(DBDataType.DECIMAL , "host_memory","hostMemory","memory","memory",false,false,true);
 		
 		/**
 		 * 虚拟IP
@@ -2361,7 +2366,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_HOST() {
-			this.init($NAME,"主机表" , ID , HOST_TYPE , HOST_NAME , HOST_IP , HOST_CONF_CPU , HOST_CONF_MEMORY , VIP , ENVIRONMENT , STATUS , MONITOR_STATUS , ONLINE_TIME , OFFLINE_TIME , OS , DB , MIDDLEWARE , LABELS , ARCH , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"主机表" , ID , HOST_TYPE , HOST_NAME , HOST_IP , HOST_VIP , HOST_CPU , HOST_MEMORY , VIP , ENVIRONMENT , STATUS , MONITOR_STATUS , ONLINE_TIME , OFFLINE_TIME , OS , DB , MIDDLEWARE , LABELS , ARCH , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_HOST $TABLE=new OPS_HOST();
 	}
@@ -2784,12 +2789,12 @@ public class EAMTables {
 	/**
 	 * 服务种类
 	*/
-	public static class OPS_SERVICETYPE extends DBTable {
+	public static class OPS_SERVICE_TYPE extends DBTable {
 		
 		/**
 		 * 表名
 		*/
-		public static final String $NAME = "ops_servicetype";
+		public static final String $NAME = "ops_service_type";
 		
 		/**
 		 * 主键
@@ -2845,9 +2850,9 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
-		public OPS_SERVICETYPE() {
+		public OPS_SERVICE_TYPE() {
 			this.init($NAME,"服务种类" , ID , CODE , NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-		public static final OPS_SERVICETYPE $TABLE=new OPS_SERVICETYPE();
+		public static final OPS_SERVICE_TYPE $TABLE=new OPS_SERVICE_TYPE();
 	}
 }
