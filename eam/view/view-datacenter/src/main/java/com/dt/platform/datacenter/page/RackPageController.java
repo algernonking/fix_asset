@@ -1,19 +1,18 @@
 package com.dt.platform.datacenter.page;
 
-import org.github.foxnic.web.framework.view.controller.ViewController;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import com.dt.platform.proxy.datacenter.RackServiceProxy;
+import org.github.foxnic.web.framework.view.controller.ViewController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
  * 机柜管理 模版页面控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:21
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:16
 */
 
 @Controller("DcRackPageController")

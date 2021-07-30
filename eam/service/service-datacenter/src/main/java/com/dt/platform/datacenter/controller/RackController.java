@@ -1,55 +1,49 @@
 package com.dt.platform.datacenter.controller;
 
  
-import java.util.List;
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.github.foxnic.web.framework.web.SuperController;
-import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
-import org.springframework.web.bind.annotation.RequestMapping;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-
-
-import com.dt.platform.proxy.datacenter.RackServiceProxy;
-import com.dt.platform.domain.datacenter.meta.RackVOMeta;
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.springboot.web.DownloadUtil;
-import com.github.foxnic.dao.data.PagedList;
-import java.util.Date;
-import java.sql.Timestamp;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.commons.io.StreamUtil;
-import java.util.Map;
-import com.github.foxnic.dao.excel.ValidateResult;
-import java.io.InputStream;
-import com.dt.platform.domain.datacenter.meta.RackMeta;
-import java.math.BigDecimal;
-import io.swagger.annotations.Api;
-import com.github.xiaoymin.knife4j.annotations.ApiSort;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiImplicitParam;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.dt.platform.datacenter.service.IRackService;
+import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.RackVO;
+import com.dt.platform.domain.datacenter.meta.RackMeta;
+import com.dt.platform.domain.datacenter.meta.RackVOMeta;
+import com.dt.platform.proxy.datacenter.RackServiceProxy;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.api.validate.annotations.NotNull;
+import com.github.foxnic.commons.io.StreamUtil;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.springboot.web.DownloadUtil;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
+import org.github.foxnic.web.framework.web.SuperController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
  * 机柜管理 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:21
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:14
 */
 
 @Api(tags = "机柜管理")
@@ -177,8 +171,10 @@ public class RackController extends SuperController {
 	@PostMapping(RackServiceProxy.GET_BY_ID)
 	public Result<Rack> getById(String id) {
 		Result<Rack> result=new Result<>();
-		Rack role=rackService.getById(id);
-		result.success(true).data(role);
+		Rack rack=rackService.getById(id);
+		// 关联出 数据中心 数据
+		rackService.join(rack,RackMeta.INFO);
+		result.success(true).data(rack);
 		return result;
 	}
 
@@ -246,6 +242,8 @@ public class RackController extends SuperController {
 	public Result<PagedList<Rack>> queryPagedList(RackVO sample) {
 		Result<PagedList<Rack>> result=new Result<>();
 		PagedList<Rack> list=rackService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 数据中心 数据
+		rackService.join(list,RackMeta.INFO);
 		result.success(true).data(list);
 		return result;
 	}
