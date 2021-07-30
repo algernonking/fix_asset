@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:22
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:16
  */
 
 
@@ -46,7 +46,7 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
-                { field: 'dcId', align:"left", hide:false, sort: true, title: fox.translate('数据中心')} ,
+				{ field: 'dcId', align:"left", hide:false, sort: true, title: fox.translate('数据中心'), templet: function (d) { return fox.joinLabel(d.info,"dcName");}} ,
                 { field: 'rackCode', align:"left", hide:false, sort: true, title: fox.translate('编码')} ,
                 { field: 'rackName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
                 { field: 'rackCaptical', align:"right", hide:false, sort: true, title: fox.translate('容量')} ,
@@ -81,7 +81,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.id={ value: $("#id").val() };
-		value.dcId={ value: $("#dcId").val() };
+		value.dcId={ value: xmSelect.get("#dcId",true).getValue("value") };
 		value.rackCode={ value: $("#rackCode").val() };
 		value.rackName={ value: $("#rackName").val() };
 		value.rackCaptical={ value: $("#rackCaptical").val() };
@@ -113,6 +113,24 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
+		//渲染 dcId 下拉字段
+		fox.renderSelectBox({
+			el: "dcId",
+			radio: true,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].dcName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**

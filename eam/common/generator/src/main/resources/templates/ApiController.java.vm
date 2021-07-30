@@ -143,8 +143,17 @@ public class #(simpleName) extends SuperController {
 	@PostMapping(#(agentSimpleName).GET_BY_ID)
 	public Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById)) {
 		Result<#(poSimpleName)> result=new Result<>();
-		#(poSimpleName) role=#(serviceVarName).getById(#(controllerMethodParameterPassIn4GetById));
-		result.success(true).data(role);
+		#(poSimpleName) #(poVarName)=#(serviceVarName).getById(#(controllerMethodParameterPassIn4GetById));
+		#for(f : fields)
+		#if(f.isSelectField)
+		#if(f.selectField.enumTypeName!=null)
+		#else
+		// 关联出 #(f.labelInList) 数据
+		#(serviceVarName).join(#(poVarName),#(poMetaClassName).#(f.selectField.fillByConstName));
+		#end
+		#end
+		#end
+		result.success(true).data(#(poVarName));
 		return result;
 	}
 
@@ -207,6 +216,15 @@ public class #(simpleName) extends SuperController {
 	public Result<PagedList<#(poSimpleName)>> queryPagedList(#(voSimpleName) sample) {
 		Result<PagedList<#(poSimpleName)>> result=new Result<>();
 		PagedList<#(poSimpleName)> list=#(serviceVarName).queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		#for(f : fields)
+		#if(f.isSelectField)
+		#if(f.selectField.enumTypeName!=null)
+		#else
+		// 关联出 #(f.labelInList) 数据
+		#(serviceVarName).join(list,#(poMetaClassName).#(f.selectField.fillByConstName));
+		#end
+		#end
+		#end
 		result.success(true).data(list);
 		return result;
 	}

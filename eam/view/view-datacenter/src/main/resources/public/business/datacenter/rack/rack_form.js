@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:23
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:17
  */
 
 function FormPage() {
@@ -45,6 +45,23 @@ function FormPage() {
 	function renderFormFields() {
 		form.render();
 	   
+		//渲染 dcId 下拉字段
+		fox.renderSelectBox({
+			el: "dcId",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].dcName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -62,6 +79,13 @@ function FormPage() {
 			form.val('data-form', formData);
 
 
+			//设置 数据中心 下拉框选中值
+			var dcIdSelect=xmSelect.get("#dcId",true);
+			var dcIdOpionts=[];
+			if (formData.info)	{
+				dcIdOpionts=dcIdSelect.options.transform([formData.info]);
+			}
+			dcIdSelect.setValue(dcIdOpionts);
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
@@ -89,6 +113,11 @@ function FormPage() {
 
 
 
+			//获取 数据中心 下拉框的值
+			data.field["dcId"]=xmSelect.get("#dcId",true).getValue("value");
+			if(data.field["dcId"] && data.field["dcId"].length>0) {
+				data.field["dcId"]=data.field["dcId"][0];
+			}
 
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);

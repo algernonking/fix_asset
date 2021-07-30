@@ -16,9 +16,9 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 /**
  * null
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:21
- * @sign D44B43E2514082D821DD26DC6C59988D
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:14
+ * @sign 6C3BC4EEE8C71A9988B8A91A00991166
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -119,6 +119,12 @@ public class Rack extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 机柜所属数据中心
+	*/
+	@ApiModelProperty(required = false,value="机柜所属数据中心" , notes = "")
+	private DcInfo info;
 	
 	/**
 	 * 获得 主键<br>
@@ -402,6 +408,24 @@ public class Rack extends Entity {
 	*/
 	public Rack setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜所属数据中心<br>
+	 * @return 机柜所属数据中心
+	*/
+	public DcInfo getInfo() {
+		return info;
+	}
+	
+	/**
+	 * 设置 机柜所属数据中心
+	 * @param info 机柜所属数据中心
+	 * @return 当前对象
+	*/
+	public Rack setInfo(DcInfo info) {
+		this.info=info;
 		return this;
 	}
 

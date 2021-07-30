@@ -28,15 +28,17 @@
                 <span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label">#(f.labelInSearch)</span><span class="search-colon">:</span>
                 #if(f.isLogicField)
                 <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:100px"></div>
+                #else if(f.isSelectField)
+                <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end" style="width:140px"></div>
                 #else if(f.isRadioField)
 
                 #if(f.radioField.dictCode!=null)
                 <div id="#(f.varName)" th:data="${dict.toArray('#(f.radioField.dictCode)')}" style="width:140px"></div>
                 #end
+
                 #if(f.radioField.enumTypeName!=null)
                 <div id="#(f.varName)" th:data="${enum.toArray('#(f.radioField.enumTypeName)')}" style="width:140px"></div>
                 #end
-
                 #else if(f.isDateField)
                  <input type="text" id="#(f.varName)-begin" style="width: 90px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                  <span class="search-dash">-</span>

@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.datacenter.Rack;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.datacenter.DcInfo;
 
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 14:59:21
- * @sign D44B43E2514082D821DD26DC6C59988D
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-07-30 15:46:14
+ * @sign 6C3BC4EEE8C71A9988B8A91A00991166
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -167,9 +168,19 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 机柜所属数据中心
+	*/
+	public static final String INFO="info";
+	
+	/**
+	 * 机柜所属数据中心
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.DcInfo> INFO_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,INFO, com.dt.platform.domain.datacenter.DcInfo.class, "机柜所属数据中心", "", com.dt.platform.domain.datacenter.DcInfo.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INFO };
 	
 	/**
 	 * 代理类
@@ -341,6 +352,17 @@ public class RackMeta {
 		public Rack setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜所属数据中心
+		 * @param info 机柜所属数据中心
+		 * @return 当前对象
+		*/
+		public Rack setInfo(DcInfo info) {
+			super.change(INFO,super.getInfo(),info);
+			super.setInfo(info);
 			return this;
 		}
 	}
