@@ -3,7 +3,7 @@ package com.dt.platform.generator.data;
 import java.io.File;
 import java.util.HashSet;
 
-import com.dt.platform.generator.config.EamConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.project.maven.MavenProject;
 import com.github.foxnic.dao.spec.DAO;
@@ -31,11 +31,11 @@ public class DataGenerator  {
 		//
 	}
 	
-	private EamConfigs configs;
+	private PlatformConfigs configs;
 	private DAO dao;
 	
 	public DataGenerator() {
-		this.configs=new EamConfigs("service-system");
+		this.configs=new PlatformConfigs("service-system");
 		this.dao=this.configs.getDAO();
 	}
 

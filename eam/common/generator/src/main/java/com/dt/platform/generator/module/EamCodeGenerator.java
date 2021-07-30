@@ -2,8 +2,8 @@ package com.dt.platform.generator.module;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.db.EAMTables.EAM_BRAND;
-import com.dt.platform.generator.config.EamConfigs;
-import com.dt.platform.generator.config.EamConfigs.ProjectConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
+import com.dt.platform.generator.config.PlatformConfigs.ProjectConfigs;
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.generator.config.WriteMode;
@@ -24,7 +24,7 @@ public class EamCodeGenerator  {
 // 		g.generateEamManufacturerConfig();
 	}
 	
-	private EamConfigs configs;
+	private PlatformConfigs configs;
 	
  
 	public EamCodeGenerator() {
@@ -32,7 +32,7 @@ public class EamCodeGenerator  {
 	}
 	
 	public EamCodeGenerator(String appConfigPrefix) {
-		configs=new EamConfigs(appConfigPrefix);
+		configs=new PlatformConfigs(appConfigPrefix);
 	}
 	
 	

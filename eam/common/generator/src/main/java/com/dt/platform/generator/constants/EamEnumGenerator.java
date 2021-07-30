@@ -6,7 +6,7 @@ import java.util.Map;
 import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT;
 import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT_ITEM;
 
-import com.dt.platform.generator.config.EamConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
 import com.github.foxnic.commons.code.JavaClassFile;
 import com.github.foxnic.commons.lang.DateUtil;
 import com.github.foxnic.commons.project.maven.MavenProject;
@@ -31,11 +31,11 @@ public class EamEnumGenerator  {
 		g.buildEnums();
 	}
 	
-	private EamConfigs configs;
+	private PlatformConfigs configs;
 	private DAO dao;
 	
 	public EamEnumGenerator() {
-		this.configs=new EamConfigs("service-eam");
+		this.configs=new PlatformConfigs("service-eam");
 		this.dao=this.configs.getDAO();
 	}
 

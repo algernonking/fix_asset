@@ -1,6 +1,6 @@
 package com.dt.platform.generator.constants;
 
-import com.dt.platform.generator.config.EamConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.generator.builder.constants.DBMetaClassFile;
 
@@ -16,11 +16,11 @@ public class EamDbMetaGenerator  {
 		g.buildDBMeta();
 	}
 	
-	private EamConfigs configs;
+	private PlatformConfigs configs;
 	private DAO dao;
 	
 	public EamDbMetaGenerator() {
-		this.configs=new EamConfigs("service-eam");
+		this.configs=new PlatformConfigs("service-eam");
 		this.dao=this.configs.getDAO();
 	}
 

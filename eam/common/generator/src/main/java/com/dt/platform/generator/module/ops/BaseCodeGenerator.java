@@ -1,6 +1,6 @@
 package com.dt.platform.generator.module.ops;
 
-import com.dt.platform.generator.config.EamConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
 import com.dt.platform.generator.menu.MenuGenerator;
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.generator.config.ModuleContext;
@@ -25,7 +25,7 @@ public class BaseCodeGenerator {
 
     private String tablePrefix="ops_";
 
-    private EamConfigs configs;
+    private PlatformConfigs configs;
 
     private DBTable table;
 
@@ -37,7 +37,7 @@ public class BaseCodeGenerator {
 
         this.table=table;
         this.parentMenuId=parentMenuId;
-        configs=new EamConfigs(appConfigPrefix);
+        configs=new PlatformConfigs(appConfigPrefix);
         cfg=createModuleConfig();
     }
     public BaseCodeGenerator(DBTable table, String parentMenuId,String tabPrefix) {
@@ -46,14 +46,14 @@ public class BaseCodeGenerator {
         }
         this.table=table;
         this.parentMenuId=parentMenuId;
-        configs=new EamConfigs(appConfigPrefix);
+        configs=new PlatformConfigs(appConfigPrefix);
         cfg=createModuleConfig();
     }
 
     public ModuleContext createModuleConfig(DBTable table, String tablePrefix, int apiSort) {
 
         //项目配置
-        EamConfigs.ProjectConfigs procfg=this.configs.getProjectConfigs();
+        PlatformConfigs.ProjectConfigs procfg=this.configs.getProjectConfigs();
 
         ModuleContext mdu=new ModuleContext(this.configs.getSettings(),table,tablePrefix,procfg.getAppPackageName());
         //设置页面的代码文件路径

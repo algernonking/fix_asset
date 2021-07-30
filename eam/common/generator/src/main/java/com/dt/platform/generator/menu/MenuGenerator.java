@@ -1,6 +1,6 @@
 package com.dt.platform.generator.menu;
 
-import com.dt.platform.generator.config.EamConfigs;
+import com.dt.platform.generator.config.PlatformConfigs;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -63,7 +63,7 @@ public class MenuGenerator {
 
 
 
-	private EamConfigs configs;
+	private PlatformConfigs configs;
 	private DAO dao;
 	private DBTable table;
 	private Class proxyType;
@@ -81,7 +81,7 @@ public class MenuGenerator {
 	}
 	
 	public MenuGenerator(String appId, String roleId, DBTable table, Class proxyType, Class pageType) {
-		this.configs=new EamConfigs(appId);
+		this.configs=new PlatformConfigs(appId);
 		this.dao=this.configs.getDAO();
 		this.table=table;
 		this.proxyType =proxyType;

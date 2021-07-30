@@ -16,7 +16,7 @@ import org.github.foxnic.web.framework.nacos.NacosConfig;
 
 import java.io.File;
 
-public class EamConfigs {
+public class PlatformConfigs {
 	
 	private String appConfigPrefix;
 	private ProjectConfigs projectConfigs;
@@ -63,13 +63,13 @@ public class EamConfigs {
 //	public FoxnicWebConfigs(String serviceProjectFolderName,String datasourceConfigKey,String nacosGroup,String nacosDataId) {
 //		
 	
-	public EamConfigs(String appId) {
+	public PlatformConfigs(String appId) {
 		
 		System.out.println("machine Id : "+Machine.getIdentity());
 		
 		initGlobalSettings();
 		//
-		generatorProject=new MavenProject(EamConfigs.class);
+		generatorProject=new MavenProject(PlatformConfigs.class);
 		
 		
 		File configFile=FileUtil.resolveByPath(this.generatorProject.getMainResourceDir(), "config.yml");
@@ -132,6 +132,8 @@ public class EamConfigs {
 		this.settings.setAuthor(author);
 		this.settings.setEnableSwagger(projectConfigs.isEnableSwagger());
 		this.settings.setEnableMicroService(projectConfigs.isEnableMicroService());
+		//强制实体重建
+		this.settings.setRebuildEntity(true);
 	}
 
 	
