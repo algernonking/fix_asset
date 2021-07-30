@@ -1,13 +1,14 @@
 package com.dt.platform.generator.module.dc;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.datacenter.DcInfo;
-import com.dt.platform.domain.datacenter.RackArea;
-import com.dt.platform.domain.datacenter.meta.DcInfoMeta;
-import com.dt.platform.domain.datacenter.meta.RackAreaMeta;
+
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
+import com.dt.platform.domain.datacenter.meta.AreaMeta;
+import com.dt.platform.domain.datacenter.meta.LayerMeta;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
-import com.dt.platform.proxy.datacenter.DcInfoServiceProxy;
-import com.dt.platform.proxy.datacenter.RackAreaServiceProxy;
+import com.dt.platform.proxy.datacenter.AreaServiceProxy;
+import com.dt.platform.proxy.datacenter.LayerServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 
@@ -26,34 +27,34 @@ import com.github.foxnic.generator.config.WriteMode;
 
 public class DcRackGtr extends BaseCodeGenerator {
     public DcRackGtr() {
-        super(EAMTables.DC_RACK.$TABLE,BASIC_RACK_MENU_ID);
+        super(EAMTables.DC_RACK.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-        //第一步：配置好后，生成代码
-        cfg.getPoClassFile().addSimpleProperty(DcInfo.class,"info","机柜所属数据中心","");
-        cfg.getPoClassFile().addSimpleProperty(RackArea.class,"rackArea","机柜所属区域","");
-//
-//
-//
+//        //第一步：配置好后，生成代码
+        cfg.getPoClassFile().addSimpleProperty(Area.class,"area","区域","");
+        cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","");
+
         cfg.view().field(EAMTables.DC_RACK.ID).basic().hidden(true);
         cfg.view().field(EAMTables.DC_RACK.ID).search().hidden();
         cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).search().hidden();
-
-
-        cfg.view().field(EAMTables.DC_RACK.DC_ID)
-                .basic().label("数据中心")
-                .form().validate().required()
-                .form().select().queryApi(DcInfoServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
-                .valueField(DcInfoMeta.ID).textField(DcInfoMeta.DC_NAME).fillBy(RackMeta.INFO).muliti(false);
-
-
+        cfg.view().field(EAMTables.DC_RACK.RACK_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.DC_RACK.RACK_LABELS).search().fuzzySearch();
+//
         cfg.view().field(EAMTables.DC_RACK.AREA_ID)
-                .basic().label("所属区域")
+                .basic().label("区域")
                 .form().validate().required()
-                .form().select().queryApi(RackAreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
-                .valueField(RackAreaMeta.ID).textField(RackAreaMeta.NAME).fillBy(RackMeta.RACK_AREA).muliti(false);
+                .form().select().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillBy(RackMeta.AREA).muliti(false);
+
+        cfg.view().field(EAMTables.DC_RACK.LAYER_ID)
+                .basic().label("层级")
+                .form().validate().required()
+                .form().select().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(RackMeta.LAYER).muliti(false);
+
 
         //文件生成覆盖模式
         cfg.overrides()

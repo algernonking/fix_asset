@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:51
+ * @since 2021-07-30 22:37:18
  */
 
 
@@ -46,8 +46,8 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-				{ field: 'dcId', align:"left", hide:false, sort: true, title: fox.translate('数据中心'), templet: function (d) { return fox.joinLabel(d.info,"dcName");}} ,
-				{ field: 'areaId', align:"left", hide:false, sort: true, title: fox.translate('所属区域'), templet: function (d) { return fox.joinLabel(d.rackArea,"name");}} ,
+				{ field: 'areaId', align:"left", hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"name");}} ,
+				{ field: 'layerId', align:"left", hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return fox.joinLabel(d.layer,"name");}} ,
                 { field: 'rackCode', align:"left", hide:false, sort: true, title: fox.translate('编码')} ,
                 { field: 'rackName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
                 { field: 'rackCaptical', align:"right", hide:false, sort: true, title: fox.translate('容量')} ,
@@ -81,12 +81,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.dcId={ value: xmSelect.get("#dcId",true).getValue("value") };
 		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value") };
-		value.rackCode={ value: $("#rackCode").val() };
+		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value") };
+		value.rackCode={ value: $("#rackCode").val() ,fuzzy: true };
 		value.rackName={ value: $("#rackName").val() };
-		value.rackLabels={ value: $("#rackLabels").val() };
-		value.rackNotes={ value: $("#rackNotes").val() };
+		value.rackLabels={ value: $("#rackLabels").val() ,fuzzy: true };
+		value.rackNotes={ value: $("#rackNotes").val() ,fuzzy: true };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -113,9 +113,9 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
-		//渲染 dcId 下拉字段
+		//渲染 areaId 下拉字段
 		fox.renderSelectBox({
-			el: "dcId",
+			el: "areaId",
 			radio: true,
 			size: "small",
 			filterable: false,
@@ -126,14 +126,14 @@ function ListPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].dcName,value:data[i].id});
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}
 		});
-		//渲染 areaId 下拉字段
+		//渲染 layerId 下拉字段
 		fox.renderSelectBox({
-			el: "areaId",
+			el: "layerId",
 			radio: true,
 			size: "small",
 			filterable: false,

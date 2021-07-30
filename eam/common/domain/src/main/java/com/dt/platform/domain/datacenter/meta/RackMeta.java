@@ -4,15 +4,15 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.datacenter.Rack;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.dt.platform.domain.datacenter.DcInfo;
-import com.dt.platform.domain.datacenter.RackArea;
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:47
- * @sign 0190C32989C14F624CB2F18E3DD3565B
+ * @since 2021-07-30 22:37:14
+ * @sign 5CB5A32802E4AE817FA2D58DB9975B95
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -29,24 +29,24 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 数据中心
-	*/
-	public static final String DC_ID="dcId";
-	
-	/**
-	 * 数据中心
-	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> DC_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DC_ID, java.lang.String.class, "数据中心", "数据中心", java.lang.String.class, null);
-	
-	/**
-	 * 机柜区域
+	 * 区域
 	*/
 	public static final String AREA_ID="areaId";
 	
 	/**
-	 * 机柜区域
+	 * 区域
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "机柜区域", "机柜区域", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
+	
+	/**
+	 * 层级
+	*/
+	public static final String LAYER_ID="layerId";
+	
+	/**
+	 * 层级
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> LAYER_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
 	
 	/**
 	 * 编码
@@ -179,29 +179,29 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 机柜所属数据中心
+	 * 区域
 	*/
-	public static final String INFO="info";
+	public static final String AREA="area";
 	
 	/**
-	 * 机柜所属数据中心
+	 * 区域
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.DcInfo> INFO_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,INFO, com.dt.platform.domain.datacenter.DcInfo.class, "机柜所属数据中心", "", com.dt.platform.domain.datacenter.DcInfo.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Area> AREA_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "", com.dt.platform.domain.datacenter.Area.class, null);
 	
 	/**
-	 * 机柜所属区域
+	 * 层级
 	*/
-	public static final String RACK_AREA="rackArea";
+	public static final String LAYER="layer";
 	
 	/**
-	 * 机柜所属区域
+	 * 层级
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.RackArea> RACK_AREA_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_AREA, com.dt.platform.domain.datacenter.RackArea.class, "机柜所属区域", "", com.dt.platform.domain.datacenter.RackArea.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Layer> LAYER_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER, com.dt.platform.domain.datacenter.Layer.class, "层级", "", com.dt.platform.domain.datacenter.Layer.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , DC_ID , AREA_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INFO , RACK_AREA };
+	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER };
 	
 	/**
 	 * 代理类
@@ -223,24 +223,24 @@ public class RackMeta {
 		}
 		
 		/**
-		 * 设置 数据中心
-		 * @param dcId 数据中心
-		 * @return 当前对象
-		*/
-		public Rack setDcId(String dcId) {
-			super.change(DC_ID,super.getDcId(),dcId);
-			super.setDcId(dcId);
-			return this;
-		}
-		
-		/**
-		 * 设置 机柜区域
-		 * @param areaId 机柜区域
+		 * 设置 区域
+		 * @param areaId 区域
 		 * @return 当前对象
 		*/
 		public Rack setAreaId(String areaId) {
 			super.change(AREA_ID,super.getAreaId(),areaId);
 			super.setAreaId(areaId);
+			return this;
+		}
+		
+		/**
+		 * 设置 层级
+		 * @param layerId 层级
+		 * @return 当前对象
+		*/
+		public Rack setLayerId(String layerId) {
+			super.change(LAYER_ID,super.getLayerId(),layerId);
+			super.setLayerId(layerId);
 			return this;
 		}
 		
@@ -388,24 +388,24 @@ public class RackMeta {
 		}
 		
 		/**
-		 * 设置 机柜所属数据中心
-		 * @param info 机柜所属数据中心
+		 * 设置 区域
+		 * @param area 区域
 		 * @return 当前对象
 		*/
-		public Rack setInfo(DcInfo info) {
-			super.change(INFO,super.getInfo(),info);
-			super.setInfo(info);
+		public Rack setArea(Area area) {
+			super.change(AREA,super.getArea(),area);
+			super.setArea(area);
 			return this;
 		}
 		
 		/**
-		 * 设置 机柜所属区域
-		 * @param rackArea 机柜所属区域
+		 * 设置 层级
+		 * @param layer 层级
 		 * @return 当前对象
 		*/
-		public Rack setRackArea(RackArea rackArea) {
-			super.change(RACK_AREA,super.getRackArea(),rackArea);
-			super.setRackArea(rackArea);
+		public Rack setLayer(Layer layer) {
+			super.change(LAYER,super.getLayer(),layer);
+			super.setLayer(layer);
 			return this;
 		}
 	}

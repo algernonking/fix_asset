@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:47
- * @sign 0190C32989C14F624CB2F18E3DD3565B
+ * @since 2021-07-30 22:37:14
+ * @sign 5CB5A32802E4AE817FA2D58DB9975B95
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,16 +37,16 @@ public class Rack extends Entity {
 	private String id;
 	
 	/**
-	 * 数据中心：数据中心
+	 * 区域：区域
 	*/
-	@ApiModelProperty(required = false,value="数据中心" , notes = "数据中心")
-	private String dcId;
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String areaId;
 	
 	/**
-	 * 机柜区域：机柜区域
+	 * 层级：层级
 	*/
-	@ApiModelProperty(required = false,value="机柜区域" , notes = "机柜区域")
-	private String areaId;
+	@ApiModelProperty(required = false,value="层级" , notes = "层级")
+	private String layerId;
 	
 	/**
 	 * 编码：编码
@@ -127,16 +127,16 @@ public class Rack extends Entity {
 	private Integer version;
 	
 	/**
-	 * 机柜所属数据中心
+	 * 区域
 	*/
-	@ApiModelProperty(required = false,value="机柜所属数据中心" , notes = "")
-	private DcInfo info;
+	@ApiModelProperty(required = false,value="区域" , notes = "")
+	private Area area;
 	
 	/**
-	 * 机柜所属区域
+	 * 层级
 	*/
-	@ApiModelProperty(required = false,value="机柜所属区域" , notes = "")
-	private RackArea rackArea;
+	@ApiModelProperty(required = false,value="层级" , notes = "")
+	private Layer layer;
 	
 	/**
 	 * 获得 主键<br>
@@ -158,40 +158,40 @@ public class Rack extends Entity {
 	}
 	
 	/**
-	 * 获得 数据中心<br>
-	 * 数据中心
-	 * @return 数据中心
-	*/
-	public String getDcId() {
-		return dcId;
-	}
-	
-	/**
-	 * 设置 数据中心
-	 * @param dcId 数据中心
-	 * @return 当前对象
-	*/
-	public Rack setDcId(String dcId) {
-		this.dcId=dcId;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜区域<br>
-	 * 机柜区域
-	 * @return 机柜区域
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
 	*/
 	public String getAreaId() {
 		return areaId;
 	}
 	
 	/**
-	 * 设置 机柜区域
-	 * @param areaId 机柜区域
+	 * 设置 区域
+	 * @param areaId 区域
 	 * @return 当前对象
 	*/
 	public Rack setAreaId(String areaId) {
 		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 层级<br>
+	 * 层级
+	 * @return 层级
+	*/
+	public String getLayerId() {
+		return layerId;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layerId 层级
+	 * @return 当前对象
+	*/
+	public Rack setLayerId(String layerId) {
+		this.layerId=layerId;
 		return this;
 	}
 	
@@ -443,38 +443,38 @@ public class Rack extends Entity {
 	}
 	
 	/**
-	 * 获得 机柜所属数据中心<br>
-	 * @return 机柜所属数据中心
+	 * 获得 区域<br>
+	 * @return 区域
 	*/
-	public DcInfo getInfo() {
-		return info;
+	public Area getArea() {
+		return area;
 	}
 	
 	/**
-	 * 设置 机柜所属数据中心
-	 * @param info 机柜所属数据中心
+	 * 设置 区域
+	 * @param area 区域
 	 * @return 当前对象
 	*/
-	public Rack setInfo(DcInfo info) {
-		this.info=info;
+	public Rack setArea(Area area) {
+		this.area=area;
 		return this;
 	}
 	
 	/**
-	 * 获得 机柜所属区域<br>
-	 * @return 机柜所属区域
+	 * 获得 层级<br>
+	 * @return 层级
 	*/
-	public RackArea getRackArea() {
-		return rackArea;
+	public Layer getLayer() {
+		return layer;
 	}
 	
 	/**
-	 * 设置 机柜所属区域
-	 * @param rackArea 机柜所属区域
+	 * 设置 层级
+	 * @param layer 层级
 	 * @return 当前对象
 	*/
-	public Rack setRackArea(RackArea rackArea) {
-		this.rackArea=rackArea;
+	public Rack setLayer(Layer layer) {
+		this.layer=layer;
 		return this;
 	}
 

@@ -34,8 +34,8 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
 import java.math.BigDecimal;
-import com.dt.platform.domain.datacenter.DcInfo;
-import com.dt.platform.domain.datacenter.RackArea;
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜管理 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:48
+ * @since 2021-07-30 22:37:15
 */
 
 @Api(tags = "机柜管理")
@@ -68,14 +68,14 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "添加机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
-		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
+		@ApiImplicitParam(name = RackVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = RackVOMeta.ID)
@@ -92,7 +92,7 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "删除机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064")
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = RackVOMeta.ID)
@@ -126,14 +126,14 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "更新机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
-		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
+		@ApiImplicitParam(name = RackVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { RackVOMeta.PAGE_INDEX , RackVOMeta.PAGE_SIZE , RackVOMeta.SEARCH_FIELD , RackVOMeta.FUZZY_FIELD , RackVOMeta.SEARCH_VALUE , RackVOMeta.SORT_FIELD , RackVOMeta.SORT_TYPE , RackVOMeta.IDS } ) 
 	@NotNull(name = RackVOMeta.ID)
@@ -150,14 +150,14 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "保存机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
-		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
+		@ApiImplicitParam(name = RackVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { RackVOMeta.PAGE_INDEX , RackVOMeta.PAGE_SIZE , RackVOMeta.SEARCH_FIELD , RackVOMeta.FUZZY_FIELD , RackVOMeta.SEARCH_VALUE , RackVOMeta.SORT_FIELD , RackVOMeta.SORT_TYPE , RackVOMeta.IDS } )
 	@NotNull(name = RackVOMeta.ID)
@@ -183,10 +183,10 @@ public class RackController extends SuperController {
 	public Result<Rack> getById(String id) {
 		Result<Rack> result=new Result<>();
 		Rack rack=rackService.getById(id);
-		// 关联出 数据中心 数据
-		rackService.join(rack,RackMeta.INFO);
-		// 关联出 所属区域 数据
-		rackService.join(rack,RackMeta.RACK_AREA);
+		// 关联出 区域 数据
+		rackService.join(rack,RackMeta.AREA);
+		// 关联出 层级 数据
+		rackService.join(rack,RackMeta.LAYER);
 		result.success(true).data(rack);
 		return result;
 	}
@@ -217,14 +217,14 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "查询机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
-		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
+		@ApiImplicitParam(name = RackVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { RackVOMeta.PAGE_INDEX , RackVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = RackServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -242,14 +242,14 @@ public class RackController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询机柜管理")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
-		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
+		@ApiImplicitParam(name = RackVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = RackServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -257,10 +257,10 @@ public class RackController extends SuperController {
 	public Result<PagedList<Rack>> queryPagedList(RackVO sample) {
 		Result<PagedList<Rack>> result=new Result<>();
 		PagedList<Rack> list=rackService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 数据中心 数据
-		rackService.join(list,RackMeta.INFO);
-		// 关联出 所属区域 数据
-		rackService.join(list,RackMeta.RACK_AREA);
+		// 关联出 区域 数据
+		rackService.join(list,RackMeta.AREA);
+		// 关联出 层级 数据
+		rackService.join(list,RackMeta.LAYER);
 		result.success(true).data(list);
 		return result;
 	}

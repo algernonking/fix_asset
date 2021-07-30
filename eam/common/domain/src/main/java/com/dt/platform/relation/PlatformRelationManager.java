@@ -2,6 +2,7 @@ package com.dt.platform.relation;
 
 import com.dt.platform.relation.modules.DCRelationManager;
 import com.dt.platform.relation.modules.HRMRelationManager;
+import com.dt.platform.relation.modules.OPSRelationManager;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.relation.modules.OAuthRelationManager;
 import org.github.foxnic.web.relation.modules.SystemRelationManager;
@@ -15,6 +16,7 @@ public class PlatformRelationManager extends RelationManager {
 				new SystemRelationManager(),
 				//
 				new HRMRelationManager(),
+				new OPSRelationManager(),
 				new DCRelationManager()
 
 		);

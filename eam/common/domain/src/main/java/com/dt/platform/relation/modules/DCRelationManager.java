@@ -2,6 +2,7 @@ package com.dt.platform.relation.modules;
 
 
 import com.dt.platform.constants.db.EAMTables;
+
 import com.dt.platform.domain.datacenter.meta.RackMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 
@@ -21,14 +22,14 @@ public class DCRelationManager  extends RelationManager {
 
     }
     private void setupDcRack() {
-//
-        // 配置关联关系
-        this.property(RackMeta.INFO_PROP)
-                .using(EAMTables.DC_RACK.DC_ID).join(EAMTables.DC_INFO.ID);
 
         // 配置关联关系
-        this.property(RackMeta.RACK_AREA_PROP)
-                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_RACK_AREA.ID);
+        this.property(RackMeta.AREA_PROP)
+                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_AREA.ID);
+
+        // 配置关联关系
+        this.property(RackMeta.LAYER_PROP)
+                .using(EAMTables.DC_RACK.LAYER_ID).join(EAMTables.DC_LAYER.ID);
 //
 
     }

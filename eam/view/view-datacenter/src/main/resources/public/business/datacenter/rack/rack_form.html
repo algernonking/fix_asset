@@ -2,7 +2,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:51
+ * @since 2021-07-30 22:37:19
  */
  -->
  <!DOCTYPE html>
@@ -25,18 +25,18 @@
     <input name="id" id="id"  type="hidden"/>
 
         <div class="layui-form-item" >
-            <label class="layui-form-label" th:text="${lang.translate('数据中心')}">数据中心</label>
+            <label class="layui-form-label" th:text="${lang.translate('区域')}">区域</label>
             <div class="layui-input-block">
-                <div id="dcId" th:data="${'/service-datacenter/dc-info/query-list'}"></div>
+                <div id="areaId" th:data="${'/service-datacenter/dc-area/query-list'}"></div>
             </div>
         </div>
 
 	
 
         <div class="layui-form-item" >
-            <label class="layui-form-label" th:text="${lang.translate('所属区域')}">所属区域</label>
+            <label class="layui-form-label" th:text="${lang.translate('层级')}">层级</label>
             <div class="layui-input-block">
-                <div id="areaId" th:data="${'/service-datacenter/dc-rack-area/query-list'}"></div>
+                <div id="layerId" th:data="${'/service-datacenter/dc-layer/query-list'}"></div>
             </div>
         </div>
 

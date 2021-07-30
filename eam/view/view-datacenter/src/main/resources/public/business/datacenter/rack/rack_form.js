@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:51
+ * @since 2021-07-30 22:37:19
  */
 
 function FormPage() {
@@ -45,9 +45,9 @@ function FormPage() {
 	function renderFormFields() {
 		form.render();
 	   
-		//渲染 dcId 下拉字段
+		//渲染 areaId 下拉字段
 		fox.renderSelectBox({
-			el: "dcId",
+			el: "areaId",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -57,14 +57,14 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].dcName,value:data[i].id});
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}
 		});
-		//渲染 areaId 下拉字段
+		//渲染 layerId 下拉字段
 		fox.renderSelectBox({
-			el: "areaId",
+			el: "layerId",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -96,20 +96,20 @@ function FormPage() {
 			form.val('data-form', formData);
 
 
-			//设置 数据中心 下拉框选中值
-			var dcIdSelect=xmSelect.get("#dcId",true);
-			var dcIdOpionts=[];
-			if (formData.info)	{
-				dcIdOpionts=dcIdSelect.options.transform([formData.info]);
-			}
-			dcIdSelect.setValue(dcIdOpionts);
-			//设置 所属区域 下拉框选中值
+			//设置 区域 下拉框选中值
 			var areaIdSelect=xmSelect.get("#areaId",true);
 			var areaIdOpionts=[];
-			if (formData.rackArea)	{
-				areaIdOpionts=areaIdSelect.options.transform([formData.rackArea]);
+			if (formData.area)	{
+				areaIdOpionts=areaIdSelect.options.transform([formData.area]);
 			}
 			areaIdSelect.setValue(areaIdOpionts);
+			//设置 层级 下拉框选中值
+			var layerIdSelect=xmSelect.get("#layerId",true);
+			var layerIdOpionts=[];
+			if (formData.layer)	{
+				layerIdOpionts=layerIdSelect.options.transform([formData.layer]);
+			}
+			layerIdSelect.setValue(layerIdOpionts);
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
@@ -137,15 +137,15 @@ function FormPage() {
 
 
 
-			//获取 数据中心 下拉框的值
-			data.field["dcId"]=xmSelect.get("#dcId",true).getValue("value");
-			if(data.field["dcId"] && data.field["dcId"].length>0) {
-				data.field["dcId"]=data.field["dcId"][0];
-			}
-			//获取 所属区域 下拉框的值
+			//获取 区域 下拉框的值
 			data.field["areaId"]=xmSelect.get("#areaId",true).getValue("value");
 			if(data.field["areaId"] && data.field["areaId"].length>0) {
 				data.field["areaId"]=data.field["areaId"][0];
+			}
+			//获取 层级 下拉框的值
+			data.field["layerId"]=xmSelect.get("#layerId",true).getValue("value");
+			if(data.field["layerId"] && data.field["layerId"].length>0) {
+				data.field["layerId"]=data.field["layerId"][0];
 			}
 
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");

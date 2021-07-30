@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-30 16:32:43
+ * @since 2021-07-30 22:57:00
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -16,14 +16,14 @@ import com.github.foxnic.sql.meta.DBDataType;
 public class EAMTables {
 	
 	/**
-	 * 数据中心
+	 * 区域
 	*/
-	public static class DC_INFO extends DBTable {
+	public static class DC_AREA extends DBTable {
 		
 		/**
 		 * 表名
 		*/
-		public static final String $NAME = "dc_info";
+		public static final String $NAME = "dc_area";
 		
 		/**
 		 * 主键
@@ -31,19 +31,24 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 类型
+		*/
+		public static final DBField TYPE_ID = new DBField(DBDataType.STRING , "type_id","typeId","类型","类型",false,false,false);
+		
+		/**
 		 * 名称
 		*/
-		public static final DBField DC_NAME = new DBField(DBDataType.STRING , "dc_name","dcName","名称","名称",false,false,true);
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
 		
 		/**
 		 * 位置
 		*/
-		public static final DBField DC_POSITION = new DBField(DBDataType.STRING , "dc_position","dcPosition","位置","位置",false,false,true);
+		public static final DBField POSITION = new DBField(DBDataType.STRING , "position","position","位置","位置",false,false,true);
 		
 		/**
 		 * 备注
 		*/
-		public static final DBField DC_NOTES = new DBField(DBDataType.STRING , "dc_notes","dcNotes","备注","备注",false,false,true);
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -85,10 +90,81 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
-		public DC_INFO() {
-			this.init($NAME,"数据中心" , ID , DC_NAME , DC_POSITION , DC_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		public DC_AREA() {
+			this.init($NAME,"区域" , ID , TYPE_ID , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-		public static final DC_INFO $TABLE=new DC_INFO();
+		public static final DC_AREA $TABLE=new DC_AREA();
+	}
+	
+	/**
+	 * 层级
+	*/
+	public static class DC_LAYER extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "dc_layer";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public DC_LAYER() {
+			this.init($NAME,"层级" , ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final DC_LAYER $TABLE=new DC_LAYER();
 	}
 	
 	/**
@@ -107,14 +183,14 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 数据中心
+		 * 区域
 		*/
-		public static final DBField DC_ID = new DBField(DBDataType.STRING , "dc_id","dcId","数据中心","数据中心",false,false,true);
+		public static final DBField AREA_ID = new DBField(DBDataType.STRING , "area_id","areaId","区域","区域",false,false,true);
 		
 		/**
-		 * 机柜区域
+		 * 层级
 		*/
-		public static final DBField AREA_ID = new DBField(DBDataType.STRING , "area_id","areaId","机柜区域","机柜区域",false,false,true);
+		public static final DBField LAYER_ID = new DBField(DBDataType.STRING , "layer_id","layerId","层级","层级",false,false,true);
 		
 		/**
 		 * 编码
@@ -181,85 +257,9 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public DC_RACK() {
-			this.init($NAME,"机柜管理" , ID , DC_ID , AREA_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"机柜管理" , ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final DC_RACK $TABLE=new DC_RACK();
-	}
-	
-	/**
-	 * 机柜区域
-	*/
-	public static class DC_RACK_AREA extends DBTable {
-		
-		/**
-		 * 表名
-		*/
-		public static final String $NAME = "dc_rack_area";
-		
-		/**
-		 * 主键
-		*/
-		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
-		
-		/**
-		 * 名称
-		*/
-		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
-		
-		/**
-		 * 区域
-		*/
-		public static final DBField POSITION = new DBField(DBDataType.STRING , "position","position","区域","区域",false,false,true);
-		
-		/**
-		 * 备注
-		*/
-		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
-		
-		/**
-		 * 创建人ID
-		*/
-		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
-		
-		/**
-		 * 创建时间
-		*/
-		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
-		
-		/**
-		 * 修改人ID
-		*/
-		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
-		
-		/**
-		 * 修改时间
-		*/
-		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
-		
-		/**
-		 * 是否已删除
-		*/
-		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
-		
-		/**
-		 * 删除人ID
-		*/
-		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
-		
-		/**
-		 * 删除时间
-		*/
-		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
-		
-		/**
-		 * 版本
-		*/
-		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
-		
-		public DC_RACK_AREA() {
-			this.init($NAME,"机柜区域" , ID , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
-		}
-		public static final DC_RACK_AREA $TABLE=new DC_RACK_AREA();
 	}
 	
 	/**
@@ -2735,7 +2735,7 @@ public class EAMTables {
 		/**
 		 * 服务类型,DB,OS,MIDDLEWARE,OTHER
 		*/
-		public static final DBField SERVICE_TYPE = new DBField(DBDataType.STRING , "service_type","serviceType","服务类型","DB,OS,MIDDLEWARE,OTHER",false,false,true);
+		public static final DBField TYPE_ID = new DBField(DBDataType.STRING , "type_id","typeId","服务类型","DB,OS,MIDDLEWARE,OTHER",false,false,true);
 		
 		/**
 		 * 名称
@@ -2787,13 +2787,13 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_SERVICE() {
-			this.init($NAME,"服务类型" , ID , SERVICE_TYPE , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"服务类型" , ID , TYPE_ID , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_SERVICE $TABLE=new OPS_SERVICE();
 	}
 	
 	/**
-	 * 服务类型明细
+	 * 服务明细
 	*/
 	public static class OPS_SERVICE_DETAIL extends DBTable {
 		
@@ -2815,7 +2815,17 @@ public class EAMTables {
 		/**
 		 * 名称
 		*/
-		public static final DBField SERVICE_DETAIL_NAME = new DBField(DBDataType.STRING , "service_detail_name","serviceDetailName","名称","名称",false,false,true);
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 补丁
+		*/
+		public static final DBField PATCH = new DBField(DBDataType.STRING , "patch","patch","补丁","补丁",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
 		
 		/**
 		 * 排序
@@ -2862,7 +2872,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_SERVICE_DETAIL() {
-			this.init($NAME,"服务类型明细" , ID , SERVICE_ID , SERVICE_DETAIL_NAME , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"服务明细" , ID , SERVICE_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_SERVICE_DETAIL $TABLE=new OPS_SERVICE_DETAIL();
 	}
