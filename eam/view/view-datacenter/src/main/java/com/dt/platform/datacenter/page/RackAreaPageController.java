@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.datacenter.RackServiceProxy;
+import com.dt.platform.proxy.datacenter.RackAreaServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 机柜管理 模版页面控制器
+ * 机柜区域 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:51
+ * @since 2021-07-30 16:39:11
 */
 
-@Controller("DcRackPageController")
-@RequestMapping(RackPageController.prefix)
-public class RackPageController extends ViewController {
+@Controller("DcRackAreaPageController")
+@RequestMapping(RackAreaPageController.prefix)
+public class RackAreaPageController extends ViewController {
 	
-	public static final String prefix="business/datacenter/rack";
+	public static final String prefix="business/datacenter/rack_area";
 
-	private RackServiceProxy proxy;
+	private RackAreaServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class RackPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public RackServiceProxy proxy() {
+	public RackAreaServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=RackServiceProxy.api();
+			proxy=RackAreaServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 机柜管理 功能主页面
+	 * 机柜区域 功能主页面
 	 */
-	@RequestMapping("/rack_list.html")
+	@RequestMapping("/rack_area_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/rack_list";
+		return prefix+"/rack_area_list";
 	}
 
 	/**
-	 * 机柜管理 表单页面
+	 * 机柜区域 表单页面
 	 */
-	@RequestMapping("/rack_form.html")
+	@RequestMapping("/rack_area_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/rack_form";
+		return prefix+"/rack_area_form";
 	}
 }

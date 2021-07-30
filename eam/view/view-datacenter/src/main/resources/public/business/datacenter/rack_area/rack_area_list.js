@@ -1,7 +1,7 @@
 /**
- * 机柜管理 列表页 JS 脚本
+ * 机柜区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:51
+ * @since 2021-07-30 16:39:11
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-datacenter/dc-rack";
+	const moduleURL="/service-datacenter/dc-rack-area";
 	
 	/**
       * 入口函数，初始化
@@ -46,13 +46,9 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-				{ field: 'dcId', align:"left", hide:false, sort: true, title: fox.translate('数据中心'), templet: function (d) { return fox.joinLabel(d.info,"dcName");}} ,
-				{ field: 'areaId', align:"left", hide:false, sort: true, title: fox.translate('所属区域'), templet: function (d) { return fox.joinLabel(d.rackArea,"name");}} ,
-                { field: 'rackCode', align:"left", hide:false, sort: true, title: fox.translate('编码')} ,
-                { field: 'rackName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
-                { field: 'rackCaptical', align:"right", hide:false, sort: true, title: fox.translate('容量')} ,
-                { field: 'rackLabels', align:"left", hide:false, sort: true, title: fox.translate('标签')} ,
-                { field: 'rackNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
+                { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
+                { field: 'position', align:"left", hide:false, sort: true, title: fox.translate('区域')} ,
+                { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
@@ -81,12 +77,9 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.dcId={ value: xmSelect.get("#dcId",true).getValue("value") };
-		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value") };
-		value.rackCode={ value: $("#rackCode").val() };
-		value.rackName={ value: $("#rackName").val() };
-		value.rackLabels={ value: $("#rackLabels").val() };
-		value.rackNotes={ value: $("#rackNotes").val() };
+		value.name={ value: $("#name").val() };
+		value.position={ value: $("#position").val() };
+		value.notes={ value: $("#notes").val() };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -113,42 +106,6 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
-		//渲染 dcId 下拉字段
-		fox.renderSelectBox({
-			el: "dcId",
-			radio: true,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].dcName,value:data[i].id});
-				}
-				return opts;
-			}
-		});
-		//渲染 areaId 下拉字段
-		fox.renderSelectBox({
-			el: "areaId",
-			radio: true,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
 	}
 	
 	/**
@@ -184,11 +141,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('机柜管理')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('机柜区域')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('机柜区域')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -228,7 +185,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('机柜管理')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('机柜区域')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -253,18 +210,18 @@ function ListPage() {
 	function showEditForm(data) {
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('dc-rack-form-data', data);
-		var area=admin.getTempData('dc-rack-form-area');
+		admin.putTempData('dc-rack-area-form-data', data);
+		var area=admin.getTempData('dc-rack-area-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('机柜管理')) : (fox.translate('添加')+fox.translate('机柜管理'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('机柜区域')) : (fox.translate('添加')+fox.translate('机柜区域'));
 		admin.popupCenter({
 			title: title,
 			resize: true,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
-			content: '/business/datacenter/rack/rack_form.html' + queryString,
+			content: '/business/datacenter/rack_area/rack_area_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}

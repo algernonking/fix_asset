@@ -7,8 +7,8 @@ import org.github.foxnic.web.proxy.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 
 
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
+import com.dt.platform.domain.datacenter.RackArea;
+import com.dt.platform.domain.datacenter.RackAreaVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -16,14 +16,14 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 机柜管理  控制器服务代理
+ * 机柜区域  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:47
+ * @since 2021-07-30 16:39:10
 */
 
-@FeignClient(value = ServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
-public interface RackServiceProxy {
+@FeignClient(value = ServiceNames.DATACENTER, contextId = RackAreaServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
+public interface RackAreaServiceProxy {
 	
 	/**
 	 * 基础路径 , service-datacenter
@@ -31,9 +31,9 @@ public interface RackServiceProxy {
 	public static final String API_BASIC_PATH = "service-datacenter";
 	
 	/**
-	 * API 上下文路径 , dc-rack
+	 * API 上下文路径 , dc-rack-area
 	*/
-	public static final String API_CONTEXT_PATH = "dc-rack";
+	public static final String API_CONTEXT_PATH = "dc-rack-area";
 	
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
@@ -41,132 +41,132 @@ public interface RackServiceProxy {
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 	
 	/**
-	 * 添加机柜管理
+	 * 添加机柜区域
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
 	
 	/**
-	 * 删除机柜管理
+	 * 删除机柜区域
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜区域
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
 	;
 	
 	/**
-	 * 更新机柜管理
+	 * 更新机柜区域
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
 	
 	
 	/**
-	 * 保存机柜管理
+	 * 保存机柜区域
 	 */
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取单个机柜管理
+	 * 获取单个机柜区域
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
 
 	/**
-	 * 获取多个机柜管理
+	 * 获取多个机柜区域
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
 	;
 
 	/**
-	 * 查询机柜管理
+	 * 查询机柜区域
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
 	
 	/**
-	 * 分页查询机柜管理
+	 * 分页查询机柜区域
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
 	
 	/**
-	 * 导出机柜管理数据(Excel)
+	 * 导出机柜区域数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
 
 	/**
-	 * 下载机柜管理导入模版(Excel)
+	 * 下载机柜区域导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
-	 * 导入机柜管理数据(Excel)
+	 * 导入机柜区域数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 	
 	/**
-	 * 添加机柜管理
+	 * 添加机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.INSERT)
-	Result insert(RackVO rackVO);
+	@RequestMapping(RackAreaServiceProxy.INSERT)
+	Result insert(RackAreaVO rackAreaVO);
 	
 	/**
-	 * 删除机柜管理
+	 * 删除机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.DELETE)
+	@RequestMapping(RackAreaServiceProxy.DELETE)
 	Result deleteById(String id);
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.DELETE_BY_IDS)
+	@RequestMapping(RackAreaServiceProxy.DELETE_BY_IDS)
 	Result deleteByIds(List<String> ids);
 
 	/**
-	 * 更新机柜管理
+	 * 更新机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.UPDATE)
-	Result update(RackVO rackVO);
+	@RequestMapping(RackAreaServiceProxy.UPDATE)
+	Result update(RackAreaVO rackAreaVO);
 	
 	/**
-	 * 更新机柜管理
+	 * 更新机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.SAVE)
-	Result save(RackVO rackVO);
+	@RequestMapping(RackAreaServiceProxy.SAVE)
+	Result save(RackAreaVO rackAreaVO);
 	
 	/**
-	 * 获取机柜管理
+	 * 获取机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.GET_BY_ID)
-	Result<Rack> getById(String id);
+	@RequestMapping(RackAreaServiceProxy.GET_BY_ID)
+	Result<RackArea> getById(String id);
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.GET_BY_IDS)
-	Result<List<Rack>> getByIds(List<String> ids);
+	@RequestMapping(RackAreaServiceProxy.GET_BY_IDS)
+	Result<List<RackArea>> getByIds(List<String> ids);
 	/**
-	 * 查询机柜管理
+	 * 查询机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.QUERY_LIST)
-	Result<List<Rack>> queryList(RackVO sample);
+	@RequestMapping(RackAreaServiceProxy.QUERY_LIST)
+	Result<List<RackArea>> queryList(RackAreaVO sample);
 	
 	/**
-	 * 分页查询机柜管理
+	 * 分页查询机柜区域
 	*/
-	@RequestMapping(RackServiceProxy.QUERY_PAGED_LIST)
-	Result<PagedList<Rack>> queryPagedList(RackVO sample);
+	@RequestMapping(RackAreaServiceProxy.QUERY_PAGED_LIST)
+	Result<PagedList<RackArea>> queryPagedList(RackAreaVO sample);
 	
 	
 	/**
 	 * 控制器类名
 	 * */
-	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.datacenter.controller.RackController";
+	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.datacenter.controller.RackAreaController";
 
 	/**
 	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用
 	 * */
-	public static RackServiceProxy api() {
-		return APIProxy.get(RackServiceProxy.class,CONTROLLER_CLASS_NAME);
+	public static RackAreaServiceProxy api() {
+		return APIProxy.get(RackAreaServiceProxy.class,CONTROLLER_CLASS_NAME);
 	}
 
 }

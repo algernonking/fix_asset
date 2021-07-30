@@ -3,10 +3,9 @@ package com.dt.platform.domain.datacenter;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.DC_RACK;
+import com.dt.platform.constants.db.EAMTables.DC_RACK_AREA;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -17,17 +16,17 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:47
- * @sign 0190C32989C14F624CB2F18E3DD3565B
+ * @since 2021-07-30 16:39:09
+ * @sign EE2EAC08CA3A5D028BBD2F32CD444686
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "dc_rack")
-public class Rack extends Entity {
+@Table(name = "dc_rack_area")
+public class RackArea extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =DC_RACK.$TABLE;
+	public static final DBTable TABLE =DC_RACK_AREA.$TABLE;
 	
 	/**
 	 * 主键：主键
@@ -37,46 +36,22 @@ public class Rack extends Entity {
 	private String id;
 	
 	/**
-	 * 数据中心：数据中心
-	*/
-	@ApiModelProperty(required = false,value="数据中心" , notes = "数据中心")
-	private String dcId;
-	
-	/**
-	 * 机柜区域：机柜区域
-	*/
-	@ApiModelProperty(required = false,value="机柜区域" , notes = "机柜区域")
-	private String areaId;
-	
-	/**
-	 * 编码：编码
-	*/
-	@ApiModelProperty(required = false,value="编码" , notes = "编码")
-	private String rackCode;
-	
-	/**
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String rackName;
+	private String name;
 	
 	/**
-	 * 容量：容量
+	 * 区域：区域
 	*/
-	@ApiModelProperty(required = false,value="容量" , notes = "容量")
-	private BigDecimal rackCaptical;
-	
-	/**
-	 * 标签：标签
-	*/
-	@ApiModelProperty(required = false,value="标签" , notes = "标签")
-	private String rackLabels;
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String position;
 	
 	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String rackNotes;
+	private String notes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -121,22 +96,10 @@ public class Rack extends Entity {
 	private Date deleteTime;
 	
 	/**
-	 * version：version
+	 * 版本：版本
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="版本" , notes = "版本")
 	private Integer version;
-	
-	/**
-	 * 机柜所属数据中心
-	*/
-	@ApiModelProperty(required = false,value="机柜所属数据中心" , notes = "")
-	private DcInfo info;
-	
-	/**
-	 * 机柜所属区域
-	*/
-	@ApiModelProperty(required = false,value="机柜所属区域" , notes = "")
-	private RackArea rackArea;
 	
 	/**
 	 * 获得 主键<br>
@@ -152,65 +115,8 @@ public class Rack extends Entity {
 	 * @param id 主键
 	 * @return 当前对象
 	*/
-	public Rack setId(String id) {
+	public RackArea setId(String id) {
 		this.id=id;
-		return this;
-	}
-	
-	/**
-	 * 获得 数据中心<br>
-	 * 数据中心
-	 * @return 数据中心
-	*/
-	public String getDcId() {
-		return dcId;
-	}
-	
-	/**
-	 * 设置 数据中心
-	 * @param dcId 数据中心
-	 * @return 当前对象
-	*/
-	public Rack setDcId(String dcId) {
-		this.dcId=dcId;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜区域<br>
-	 * 机柜区域
-	 * @return 机柜区域
-	*/
-	public String getAreaId() {
-		return areaId;
-	}
-	
-	/**
-	 * 设置 机柜区域
-	 * @param areaId 机柜区域
-	 * @return 当前对象
-	*/
-	public Rack setAreaId(String areaId) {
-		this.areaId=areaId;
-		return this;
-	}
-	
-	/**
-	 * 获得 编码<br>
-	 * 编码
-	 * @return 编码
-	*/
-	public String getRackCode() {
-		return rackCode;
-	}
-	
-	/**
-	 * 设置 编码
-	 * @param rackCode 编码
-	 * @return 当前对象
-	*/
-	public Rack setRackCode(String rackCode) {
-		this.rackCode=rackCode;
 		return this;
 	}
 	
@@ -219,55 +125,36 @@ public class Rack extends Entity {
 	 * 名称
 	 * @return 名称
 	*/
-	public String getRackName() {
-		return rackName;
+	public String getName() {
+		return name;
 	}
 	
 	/**
 	 * 设置 名称
-	 * @param rackName 名称
+	 * @param name 名称
 	 * @return 当前对象
 	*/
-	public Rack setRackName(String rackName) {
-		this.rackName=rackName;
+	public RackArea setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 容量<br>
-	 * 容量
-	 * @return 容量
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
 	*/
-	public BigDecimal getRackCaptical() {
-		return rackCaptical;
+	public String getPosition() {
+		return position;
 	}
 	
 	/**
-	 * 设置 容量
-	 * @param rackCaptical 容量
+	 * 设置 区域
+	 * @param position 区域
 	 * @return 当前对象
 	*/
-	public Rack setRackCaptical(BigDecimal rackCaptical) {
-		this.rackCaptical=rackCaptical;
-		return this;
-	}
-	
-	/**
-	 * 获得 标签<br>
-	 * 标签
-	 * @return 标签
-	*/
-	public String getRackLabels() {
-		return rackLabels;
-	}
-	
-	/**
-	 * 设置 标签
-	 * @param rackLabels 标签
-	 * @return 当前对象
-	*/
-	public Rack setRackLabels(String rackLabels) {
-		this.rackLabels=rackLabels;
+	public RackArea setPosition(String position) {
+		this.position=position;
 		return this;
 	}
 	
@@ -276,17 +163,17 @@ public class Rack extends Entity {
 	 * 备注
 	 * @return 备注
 	*/
-	public String getRackNotes() {
-		return rackNotes;
+	public String getNotes() {
+		return notes;
 	}
 	
 	/**
 	 * 设置 备注
-	 * @param rackNotes 备注
+	 * @param notes 备注
 	 * @return 当前对象
 	*/
-	public Rack setRackNotes(String rackNotes) {
-		this.rackNotes=rackNotes;
+	public RackArea setNotes(String notes) {
+		this.notes=notes;
 		return this;
 	}
 	
@@ -304,7 +191,7 @@ public class Rack extends Entity {
 	 * @param createBy 创建人ID
 	 * @return 当前对象
 	*/
-	public Rack setCreateBy(String createBy) {
+	public RackArea setCreateBy(String createBy) {
 		this.createBy=createBy;
 		return this;
 	}
@@ -323,7 +210,7 @@ public class Rack extends Entity {
 	 * @param createTime 创建时间
 	 * @return 当前对象
 	*/
-	public Rack setCreateTime(Date createTime) {
+	public RackArea setCreateTime(Date createTime) {
 		this.createTime=createTime;
 		return this;
 	}
@@ -342,7 +229,7 @@ public class Rack extends Entity {
 	 * @param updateBy 修改人ID
 	 * @return 当前对象
 	*/
-	public Rack setUpdateBy(String updateBy) {
+	public RackArea setUpdateBy(String updateBy) {
 		this.updateBy=updateBy;
 		return this;
 	}
@@ -361,7 +248,7 @@ public class Rack extends Entity {
 	 * @param updateTime 修改时间
 	 * @return 当前对象
 	*/
-	public Rack setUpdateTime(Date updateTime) {
+	public RackArea setUpdateTime(Date updateTime) {
 		this.updateTime=updateTime;
 		return this;
 	}
@@ -380,7 +267,7 @@ public class Rack extends Entity {
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
-	public Rack setDeleted(Integer deleted) {
+	public RackArea setDeleted(Integer deleted) {
 		this.deleted=deleted;
 		return this;
 	}
@@ -399,7 +286,7 @@ public class Rack extends Entity {
 	 * @param deleteBy 删除人ID
 	 * @return 当前对象
 	*/
-	public Rack setDeleteBy(String deleteBy) {
+	public RackArea setDeleteBy(String deleteBy) {
 		this.deleteBy=deleteBy;
 		return this;
 	}
@@ -418,70 +305,34 @@ public class Rack extends Entity {
 	 * @param deleteTime 删除时间
 	 * @return 当前对象
 	*/
-	public Rack setDeleteTime(Date deleteTime) {
+	public RackArea setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
 		return this;
 	}
 	
 	/**
-	 * 获得 version<br>
-	 * version
-	 * @return version
+	 * 获得 版本<br>
+	 * 版本
+	 * @return 版本
 	*/
 	public Integer getVersion() {
 		return version;
 	}
 	
 	/**
-	 * 设置 version
-	 * @param version version
+	 * 设置 版本
+	 * @param version 版本
 	 * @return 当前对象
 	*/
-	public Rack setVersion(Integer version) {
+	public RackArea setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜所属数据中心<br>
-	 * @return 机柜所属数据中心
-	*/
-	public DcInfo getInfo() {
-		return info;
-	}
-	
-	/**
-	 * 设置 机柜所属数据中心
-	 * @param info 机柜所属数据中心
-	 * @return 当前对象
-	*/
-	public Rack setInfo(DcInfo info) {
-		this.info=info;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜所属区域<br>
-	 * @return 机柜所属区域
-	*/
-	public RackArea getRackArea() {
-		return rackArea;
-	}
-	
-	/**
-	 * 设置 机柜所属区域
-	 * @param rackArea 机柜所属区域
-	 * @return 当前对象
-	*/
-	public Rack setRackArea(RackArea rackArea) {
-		this.rackArea=rackArea;
 		return this;
 	}
 
 	/**
 	 * 将自己转换成指定类型的PO
 	 * @param poType  PO类型
-	 * @return Rack , 转换好的 Rack 对象
+	 * @return RackArea , 转换好的 RackArea 对象
 	*/
 	@Transient
 	public <T extends Entity> T toPO(Class<T> poType) {
@@ -491,7 +342,7 @@ public class Rack extends Entity {
 	/**
 	 * 将自己转换成任意指定类型
 	 * @param pojoType  Pojo类型
-	 * @return Rack , 转换好的 PoJo 对象
+	 * @return RackArea , 转换好的 PoJo 对象
 	*/
 	@Transient
 	public <T> T toPojo(Class<T> pojoType) {
@@ -508,35 +359,35 @@ public class Rack extends Entity {
 	}
 
 	/**
-	 * 将 Map 转换成 Rack
-	 * @param rackMap 包含实体信息的 Map 对象
-	 * @return Rack , 转换好的的 Rack 对象
+	 * 将 Map 转换成 RackArea
+	 * @param rackAreaMap 包含实体信息的 Map 对象
+	 * @return RackArea , 转换好的的 RackArea 对象
 	*/
 	@Transient
-	public static Rack createFrom(Map<String,Object> rackMap) {
-		if(rackMap==null) return null;
-		Rack po = EntityContext.create(Rack.class, rackMap);
+	public static RackArea createFrom(Map<String,Object> rackAreaMap) {
+		if(rackAreaMap==null) return null;
+		RackArea po = EntityContext.create(RackArea.class, rackAreaMap);
 		return po;
 	}
 
 	/**
-	 * 将 Pojo 转换成 Rack
+	 * 将 Pojo 转换成 RackArea
 	 * @param pojo 包含实体信息的 Pojo 对象
-	 * @return Rack , 转换好的的 Rack 对象
+	 * @return RackArea , 转换好的的 RackArea 对象
 	*/
 	@Transient
-	public static Rack createFrom(Object pojo) {
+	public static RackArea createFrom(Object pojo) {
 		if(pojo==null) return null;
-		Rack po = EntityContext.create(Rack.class,pojo);
+		RackArea po = EntityContext.create(RackArea.class,pojo);
 		return po;
 	}
 
 	/**
-	 * 创建一个 Rack，等同于 new
-	 * @return Rack 对象
+	 * 创建一个 RackArea，等同于 new
+	 * @return RackArea 对象
 	*/
 	@Transient
-	public static Rack create() {
-		return EntityContext.create(Rack.class);
+	public static RackArea create() {
+		return EntityContext.create(RackArea.class);
 	}
 }

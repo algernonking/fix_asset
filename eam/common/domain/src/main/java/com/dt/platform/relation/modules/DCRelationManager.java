@@ -21,11 +21,15 @@ public class DCRelationManager  extends RelationManager {
 
     }
     private void setupDcRack() {
-
+//
         // 配置关联关系
         this.property(RackMeta.INFO_PROP)
                 .using(EAMTables.DC_RACK.DC_ID).join(EAMTables.DC_INFO.ID);
 
+        // 配置关联关系
+        this.property(RackMeta.RACK_AREA_PROP)
+                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_RACK_AREA.ID);
+//
 
     }
 

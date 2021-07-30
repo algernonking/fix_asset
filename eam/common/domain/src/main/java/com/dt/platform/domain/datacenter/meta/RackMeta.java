@@ -5,13 +5,14 @@ import com.dt.platform.domain.datacenter.Rack;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.datacenter.DcInfo;
+import com.dt.platform.domain.datacenter.RackArea;
 
 
 
 /**
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-30 15:46:14
- * @sign 6C3BC4EEE8C71A9988B8A91A00991166
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-30 16:52:47
+ * @sign 0190C32989C14F624CB2F18E3DD3565B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,6 +37,16 @@ public class RackMeta {
 	 * 数据中心
 	*/
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> DC_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DC_ID, java.lang.String.class, "数据中心", "数据中心", java.lang.String.class, null);
+	
+	/**
+	 * 机柜区域
+	*/
+	public static final String AREA_ID="areaId";
+	
+	/**
+	 * 机柜区域
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "机柜区域", "机柜区域", java.lang.String.class, null);
 	
 	/**
 	 * 编码
@@ -178,9 +189,19 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.DcInfo> INFO_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,INFO, com.dt.platform.domain.datacenter.DcInfo.class, "机柜所属数据中心", "", com.dt.platform.domain.datacenter.DcInfo.class, null);
 	
 	/**
+	 * 机柜所属区域
+	*/
+	public static final String RACK_AREA="rackArea";
+	
+	/**
+	 * 机柜所属区域
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.RackArea> RACK_AREA_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_AREA, com.dt.platform.domain.datacenter.RackArea.class, "机柜所属区域", "", com.dt.platform.domain.datacenter.RackArea.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , DC_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INFO };
+	public static final String[] $PROPS={ ID , DC_ID , AREA_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INFO , RACK_AREA };
 	
 	/**
 	 * 代理类
@@ -209,6 +230,17 @@ public class RackMeta {
 		public Rack setDcId(String dcId) {
 			super.change(DC_ID,super.getDcId(),dcId);
 			super.setDcId(dcId);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜区域
+		 * @param areaId 机柜区域
+		 * @return 当前对象
+		*/
+		public Rack setAreaId(String areaId) {
+			super.change(AREA_ID,super.getAreaId(),areaId);
+			super.setAreaId(areaId);
 			return this;
 		}
 		
@@ -363,6 +395,17 @@ public class RackMeta {
 		public Rack setInfo(DcInfo info) {
 			super.change(INFO,super.getInfo(),info);
 			super.setInfo(info);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜所属区域
+		 * @param rackArea 机柜所属区域
+		 * @return 当前对象
+		*/
+		public Rack setRackArea(RackArea rackArea) {
+			super.change(RACK_AREA,super.getRackArea(),rackArea);
+			super.setRackArea(rackArea);
 			return this;
 		}
 	}

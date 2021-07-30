@@ -9,7 +9,7 @@ import com.github.foxnic.sql.meta.DBTable;
 public class BaseCodeGenerator {
 
     public static final String BASIC_DATA_MENU_ID="472025257461415936";
-    public static final String BASIC_RACK_MENU_ID="472036232839299072";
+    public static final String BASIC_RACK_MENU_ID="473228449763295232";
 
 
     //

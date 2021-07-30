@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 16:52:47
- * @sign CEA863B3EE33EDEBDA965F273218C377
+ * @since 2021-07-30 16:39:10
+ * @sign CB7A9E42ECF91969435C012816A8D135
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class RackVO extends Rack {
+public class RackAreaVO extends RackArea {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class RackVO extends Rack {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public RackVO setPageIndex(Integer pageIndex) {
+	public RackAreaVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class RackVO extends Rack {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public RackVO setPageSize(Integer pageSize) {
+	public RackAreaVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class RackVO extends Rack {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public RackVO setSearchField(String searchField) {
+	public RackAreaVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class RackVO extends Rack {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public RackVO setFuzzyField(String fuzzyField) {
+	public RackAreaVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class RackVO extends Rack {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public RackVO setSearchValue(String searchValue) {
+	public RackAreaVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class RackVO extends Rack {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public RackVO setSortField(String sortField) {
+	public RackAreaVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class RackVO extends Rack {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public RackVO setSortType(String sortType) {
+	public RackAreaVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class RackVO extends Rack {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public RackVO setIds(List<String> ids) {
+	public RackAreaVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class RackVO extends Rack {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public RackVO addId(String id) {
+	public RackAreaVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

@@ -1,49 +1,57 @@
 package com.dt.platform.datacenter.controller;
 
  
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.dt.platform.datacenter.service.IRackService;
-import com.dt.platform.domain.datacenter.Rack;
-import com.dt.platform.domain.datacenter.RackVO;
-import com.dt.platform.domain.datacenter.meta.RackMeta;
-import com.dt.platform.domain.datacenter.meta.RackVOMeta;
-import com.dt.platform.proxy.datacenter.RackServiceProxy;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.api.validate.annotations.NotNull;
-import com.github.foxnic.commons.io.StreamUtil;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.springboot.web.DownloadUtil;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.github.xiaoymin.knife4j.annotations.ApiSort;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
-import org.github.foxnic.web.framework.web.SuperController;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import org.github.foxnic.web.framework.web.SuperController;
+import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.util.List;
+
+import com.dt.platform.proxy.datacenter.RackServiceProxy;
+import com.dt.platform.domain.datacenter.meta.RackVOMeta;
+import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.RackVO;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.springboot.web.DownloadUtil;
+import com.github.foxnic.dao.data.PagedList;
+import java.util.Date;
+import java.sql.Timestamp;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
+import com.github.foxnic.dao.excel.ValidateResult;
+import java.io.InputStream;
+import com.dt.platform.domain.datacenter.meta.RackMeta;
+import java.math.BigDecimal;
+import com.dt.platform.domain.datacenter.DcInfo;
+import com.dt.platform.domain.datacenter.RackArea;
+import io.swagger.annotations.Api;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiImplicitParam;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.dt.platform.datacenter.service.IRackService;
+import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
  * 机柜管理 接口控制器
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-07-30 15:46:14
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-07-30 16:52:48
 */
 
 @Api(tags = "机柜管理")
@@ -62,6 +70,7 @@ public class RackController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
@@ -119,6 +128,7 @@ public class RackController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
@@ -142,6 +152,7 @@ public class RackController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
@@ -174,6 +185,8 @@ public class RackController extends SuperController {
 		Rack rack=rackService.getById(id);
 		// 关联出 数据中心 数据
 		rackService.join(rack,RackMeta.INFO);
+		// 关联出 所属区域 数据
+		rackService.join(rack,RackMeta.RACK_AREA);
 		result.success(true).data(rack);
 		return result;
 	}
@@ -206,6 +219,7 @@ public class RackController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
@@ -230,6 +244,7 @@ public class RackController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "472326614038872064"),
 		@ApiImplicitParam(name = RackVOMeta.DC_ID , value = "数据中心" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "机柜区域" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "12.00"),
@@ -244,6 +259,8 @@ public class RackController extends SuperController {
 		PagedList<Rack> list=rackService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 数据中心 数据
 		rackService.join(list,RackMeta.INFO);
+		// 关联出 所属区域 数据
+		rackService.join(list,RackMeta.RACK_AREA);
 		result.success(true).data(list);
 		return result;
 	}
