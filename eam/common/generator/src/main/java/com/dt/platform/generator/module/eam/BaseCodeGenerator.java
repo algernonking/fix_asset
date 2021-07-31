@@ -9,6 +9,7 @@ import com.github.foxnic.sql.meta.DBTable;
 public class BaseCodeGenerator {
 
     public static final String BASIC_DATA_MENU_ID="471620638545543168";
+    public static final String BASIC_SETTING_MENU_ID="471986431431016449";
 
     //
     private String appId="service-eam";

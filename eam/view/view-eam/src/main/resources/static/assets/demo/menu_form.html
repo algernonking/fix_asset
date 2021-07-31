@@ -1,0 +1,135 @@
+<!-- 
+/**
+ * 菜单 列表页 JS 脚本
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-06-08 10:22:55
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('菜单')}">菜单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<form id="data-form" lay-filter="data-form" class="layui-form model-form">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('编号')}">编号</label>
+        <div class="layui-input-block">
+            <input id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编号') }" type="text" class="layui-input"  readonly  />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('名称')}">名称</label>
+        <div class="layui-input-block">
+            <input id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('菜单类型')}">类型</label>
+        <div class="layui-input-block">
+	      <input type="radio" name="type" th:each="e,stat:${enum.toArray('org.github.foxnic.web.constants.enums.MenuType')}" th:value="${e.code}" th:title="${e.text}">
+        </div>
+    </div>
+    
+    <div class="layui-form-item" style="display:none">
+        <label class="layui-form-label" th:text="${lang.translate('批次号')}">批次号</label>
+        <div class="layui-input-block">
+            <input id="batchId" name="batchId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('批次号') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('权限')}">权限</label>
+        <div class="layui-input-block">
+            <input id="authority" name="authority" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('权限') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+ 
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('是否隐藏')}">隐藏</label>
+        <div class="layui-input-block">
+            <input type="checkbox" id="hidden" name="hidden" lay-filter="hidden" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否隐藏') }" lay-skin="switch" lay-text="显示&nbsp;|隐藏&nbsp;&nbsp;" />
+        </div>
+    </div>
+ 
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('样式')}">样式</label>
+        <div class="layui-input-inline" style="width: 200px;display: none;">
+            <input id="css" name="css" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('样式') }" type="text" class="layui-input"    />
+        </div>
+        <div class="layui-input-inline" style="width: 100px;">
+            <button id="icon-button" type="button" class="layui-btn"><i class="fa fa-briefcase" id="icon-button-el"></i>&nbsp;&nbsp;<span th:placeholder="${ lang.translate('请选择图标') }">请选择图标</span></button>
+        </div>
+
+    </div>
+
+    <!--
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('资源路径')}">资源路径</label>
+        <div class="layui-input-block">
+            <input id="path" name="path" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资源路径') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+    -->
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('页面路径')}">页面路径</label>
+        <div class="layui-input-block">
+            <div id="pathResourceId" th:data="${'/service-oauth/sys-resourze/query-paged-list'}"></div>
+        </div>
+    </div>
+ 
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('路由地址')}">路由地址</label>
+        <div class="layui-input-block">
+            <input id="url" name="url" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('路由地址') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" th:text="${lang.translate('资源清单')}">资源清单</label>
+        <div class="layui-input-block">
+            <div id="resourceIds" th:data="${'/service-oauth/sys-resourze/query-paged-list'}"></div>
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" style="display:none">
+        <label class="layui-form-label" th:text="${lang.translate('上级ID')}">上级ID</label>
+        <div class="layui-input-block">
+            <input id="parentId" name="parentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上级ID') }" type="text" class="layui-input"    />
+        </div>
+    </div>
+ 
+    <div class="layui-form-item model-form-footer">
+        <button class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    </div>
+</form>
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+
+<script src="/business/oauth/menu/menu_form.js"></script>
+
+</body>
+</html>

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-30 22:57:00
+ * @since 2021-07-31 12:15:03
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1146,7 +1146,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 资产分类表
+	 * 资产分类
 	*/
 	public static class EAM_CATEGORY extends DBTable {
 		
@@ -1171,9 +1171,9 @@ public class EAMTables {
 		public static final DBField CATEGORY_NAME = new DBField(DBDataType.STRING , "category_name","categoryName","名称","名称",false,false,true);
 		
 		/**
-		 * 路径名称
+		 * 全称
 		*/
-		public static final DBField CATEGORY_FULLNAME = new DBField(DBDataType.STRING , "category_fullname","categoryFullname","路径名称","路径名称",false,false,true);
+		public static final DBField CATEGORY_FULLNAME = new DBField(DBDataType.STRING , "category_fullname","categoryFullname","全称","全称",false,false,true);
 		
 		/**
 		 * 编码
@@ -1183,12 +1183,21 @@ public class EAMTables {
 		/**
 		 * 父节点
 		*/
-		public static final DBField PID = new DBField(DBDataType.STRING , "pid","pid","父节点","父节点",false,false,false);
+		public static final DBField PARENT_ID = new DBField(DBDataType.STRING , "parent_id","parentId","父节点","父节点",false,false,false);
+		
+		/**
+		*/
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","sort","sort",false,false,true);
 		
 		/**
 		 * 节点路径
 		*/
-		public static final DBField ROUTE = new DBField(DBDataType.STRING , "route","route","节点路径","节点路径",false,false,false);
+		public static final DBField HIERARCHY = new DBField(DBDataType.STRING , "hierarchy","hierarchy","节点路径","节点路径",false,false,false);
+		
+		/**
+		 * 节点路径名称
+		*/
+		public static final DBField HIERARCHY_NAME = new DBField(DBDataType.STRING , "hierarchy_name","hierarchyName","节点路径名称","节点路径名称",false,false,false);
 		
 		/**
 		 * 备注
@@ -1235,7 +1244,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_CATEGORY() {
-			this.init($NAME,"资产分类表" , ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PID , ROUTE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产分类" , ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_CATEGORY $TABLE=new EAM_CATEGORY();
 	}
