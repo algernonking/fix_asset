@@ -1,25 +1,23 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamSafetylevel  extends BaseCodeGenerator{
-
-    public EamSafetylevel() {
-        super(EAMTables.EAM_SAFETYLEVEL.$TABLE,BASIC_DATA_MENU_ID);
+public class eamAreaGtr extends BaseCodeGenerator{
+    public eamAreaGtr() {
+        super(EAMTables.EAM_AREA.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.ID)
+        cfg.view().field(EAMTables.EAM_AREA.ID)
                 .basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().fuzzySearch();
-
-
+        cfg.view().field(EAMTables.EAM_AREA.AREA_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_AREA.AREA_NOTES).search().fuzzySearch();
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
@@ -28,10 +26,13 @@ public class EamSafetylevel  extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        EamSafetylevel g=new EamSafetylevel();
+        eamAreaGtr g=new eamAreaGtr();
         //生成代码
-        g.generateCode();
+         g.generateCode();
+
+
         //生成菜单
-//        g.generateMenu(SafetylevelServiceProxy.class, SafetylevelPageController.class);
+        //  g.removeByBatchId("");
+      //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
     }
 }

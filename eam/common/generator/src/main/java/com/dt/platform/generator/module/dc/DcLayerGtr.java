@@ -38,11 +38,11 @@ public class DcLayerGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         DcLayerGtr g=new DcLayerGtr();
         //生成代码
-       // g.generateCode();
+        g.generateCode();
 
         //移除之前生成的菜单，视情况执行
        // System.out.println("############"+g.getTablePrefix());
         //g.removeByBatchId("470160949404237824");
-        g.generateMenu(LayerServiceProxy.class, LayerPageController.class);
+       // g.generateMenu(LayerServiceProxy.class, LayerPageController.class);
     }
 }

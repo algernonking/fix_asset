@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-07-31 12:15:03
+ * @since 2021-08-01 20:08:15
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -348,6 +348,21 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 单据编号
+		*/
+		public static final DBField BUSI_CODE = new DBField(DBDataType.STRING , "busi_code","busiCode","单据编号","单据编号",false,false,true);
+		
+		/**
+		 * 资产状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","资产状态","资产状态",false,false,true);
+		
+		/**
+		 * 资产编号
+		*/
+		public static final DBField ASSET_CODE = new DBField(DBDataType.STRING , "asset_code","assetCode","资产编号","资产编号",false,false,true);
+		
+		/**
 		 * 分类ID
 		*/
 		public static final DBField CATEGORY_ID = new DBField(DBDataType.STRING , "category_id","categoryId","分类ID","分类ID",false,false,true);
@@ -393,16 +408,6 @@ public class EAMTables {
 		public static final DBField UNIT_PRICE = new DBField(DBDataType.DECIMAL , "unit_price","unitPrice","标准型号","单价",false,false,true);
 		
 		/**
-		 * 单据号
-		*/
-		public static final DBField BUIS_CODE = new DBField(DBDataType.STRING , "buis_code","buisCode","单据号","单据号",false,false,true);
-		
-		/**
-		 * 资产状态
-		*/
-		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","资产状态","资产状态",false,false,true);
-		
-		/**
 		 * 资产RFID
 		*/
 		public static final DBField RFID = new DBField(DBDataType.STRING , "rfid","rfid","资产RFID","资产RFID",false,false,true);
@@ -416,11 +421,6 @@ public class EAMTables {
 		 * 批次号,如果来自库存,建议填写库存单据
 		*/
 		public static final DBField BATCH_NUMBER = new DBField(DBDataType.STRING , "batch_number","batchNumber","批次号","如果来自库存,建议填写库存单据",false,false,true);
-		
-		/**
-		 * 资产编号
-		*/
-		public static final DBField ASSET_CODE = new DBField(DBDataType.STRING , "asset_code","assetCode","资产编号","资产编号",false,false,true);
 		
 		/**
 		 * 资产序列号
@@ -446,11 +446,6 @@ public class EAMTables {
 		 * 存放地点
 		*/
 		public static final DBField PLACE_DETAIL = new DBField(DBDataType.STRING , "place_detail","placeDetail","存放地点","存放地点",false,false,true);
-		
-		/**
-		 * 预留，使用组织ID
-		*/
-		public static final DBField USERORG_ID = new DBField(DBDataType.STRING , "userorg_id","userorgId","预留","使用组织ID",false,false,true);
 		
 		/**
 		 * 使用人员
@@ -517,7 +512,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET() {
-			this.init($NAME,"资产表" , ID , CATEGORY_ID , GOODS_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , UNIT_PRICE , BUIS_CODE , STATUS , RFID , ASSET_NUMBER , BATCH_NUMBER , ASSET_CODE , SN , SOURCE_ID , SOURCE_DETAIL , AREA_ID , PLACE_DETAIL , USERORG_ID , USER_ID , PRODUCTION_DATE , STORAGE_TIME , DISPLAY , ASSETS_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产表" , ID , BUSI_CODE , STATUS , ASSET_CODE , CATEGORY_ID , GOODS_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , UNIT_PRICE , RFID , ASSET_NUMBER , BATCH_NUMBER , SN , SOURCE_ID , SOURCE_DETAIL , AREA_ID , PLACE_DETAIL , USER_ID , PRODUCTION_DATE , STORAGE_TIME , DISPLAY , ASSETS_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET $TABLE=new EAM_ASSET();
 	}
@@ -1183,26 +1178,137 @@ public class EAMTables {
 		/**
 		 * 父节点
 		*/
-		public static final DBField PARENT_ID = new DBField(DBDataType.STRING , "parent_id","parentId","父节点","父节点",false,false,false);
+		public static final DBField PARENT_ID = new DBField(DBDataType.STRING , "parent_id","parentId","父节点","父节点",false,false,true);
 		
 		/**
+		 * 排序
 		*/
-		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","sort","sort",false,false,true);
+		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","排序","排序",false,false,true);
 		
 		/**
 		 * 节点路径
 		*/
-		public static final DBField HIERARCHY = new DBField(DBDataType.STRING , "hierarchy","hierarchy","节点路径","节点路径",false,false,false);
+		public static final DBField HIERARCHY = new DBField(DBDataType.STRING , "hierarchy","hierarchy","节点路径","节点路径",false,false,true);
 		
 		/**
 		 * 节点路径名称
 		*/
-		public static final DBField HIERARCHY_NAME = new DBField(DBDataType.STRING , "hierarchy_name","hierarchyName","节点路径名称","节点路径名称",false,false,false);
+		public static final DBField HIERARCHY_NAME = new DBField(DBDataType.STRING , "hierarchy_name","hierarchyName","节点路径名称","节点路径名称",false,false,true);
 		
 		/**
 		 * 备注
 		*/
-		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,false);
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
+		
+		public EAM_CATEGORY() {
+			this.init($NAME,"资产分类" , ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_CATEGORY $TABLE=new EAM_CATEGORY();
+	}
+	
+	/**
+	 * 物品档案
+	*/
+	public static class EAM_GOODS extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_goods";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 状态-used|unsed
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","used|unsed",false,false,true);
+		
+		/**
+		 * 分类ID
+		*/
+		public static final DBField CATEGORY_ID = new DBField(DBDataType.STRING , "category_id","categoryId","分类ID","分类ID",false,false,true);
+		
+		/**
+		 * 标准型号物品名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","标准型号物品名称","标准型号物品名称",false,false,true);
+		
+		/**
+		 * 标准型号厂商
+		*/
+		public static final DBField MANUFACTURER_ID = new DBField(DBDataType.STRING , "manufacturer_id","manufacturerId","标准型号厂商","标准型号厂商",false,false,true);
+		
+		/**
+		 * 标准型号品牌
+		*/
+		public static final DBField BRAND_ID = new DBField(DBDataType.STRING , "brand_id","brandId","标准型号品牌","标准型号品牌",false,false,true);
+		
+		/**
+		 * 标准型号规格型号
+		*/
+		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","标准型号规格型号","标准型号规格型号",false,false,true);
+		
+		/**
+		 * 标准型号物品图片
+		*/
+		public static final DBField PICTURE_ID = new DBField(DBDataType.STRING , "picture_id","pictureId","标准型号物品图片","标准型号物品图片",false,false,true);
+		
+		/**
+		 * 标准型号计量单位
+		*/
+		public static final DBField UNIT = new DBField(DBDataType.STRING , "unit","unit","标准型号计量单位","标准型号计量单位",false,false,true);
+		
+		/**
+		 * 标准参考单价
+		*/
+		public static final DBField REFERENCE_PRICE = new DBField(DBDataType.DECIMAL , "reference_price","referencePrice","标准参考单价","标准参考单价",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -1243,21 +1349,21 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
-		public EAM_CATEGORY() {
-			this.init($NAME,"资产分类" , ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		public EAM_GOODS() {
+			this.init($NAME,"物品档案" , ID , STATUS , CATEGORY_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , REFERENCE_PRICE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-		public static final EAM_CATEGORY $TABLE=new EAM_CATEGORY();
+		public static final EAM_GOODS $TABLE=new EAM_GOODS();
 	}
 	
 	/**
-	 * 资产物品表
+	 * 物品库存
 	*/
-	public static class EAM_GOODS extends DBTable {
+	public static class EAM_GOODS_STOCK extends DBTable {
 		
 		/**
 		 * 表名
 		*/
-		public static final String $NAME = "eam_goods";
+		public static final String $NAME = "eam_goods_stock";
 		
 		/**
 		 * 主键
@@ -1265,44 +1371,9 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 状态，valid有效，invalid无效
+		 * 物品档案
 		*/
-		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","valid有效，invalid无效",false,false,true);
-		
-		/**
-		 * 分类ID
-		*/
-		public static final DBField CATEGORY_ID = new DBField(DBDataType.STRING , "category_id","categoryId","分类ID","分类ID",false,false,true);
-		
-		/**
-		 * 标准型号，资产名称
-		*/
-		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","标准型号","资产名称",false,false,true);
-		
-		/**
-		 * 标准型号，厂商
-		*/
-		public static final DBField MANUFACTURER_ID = new DBField(DBDataType.STRING , "manufacturer_id","manufacturerId","标准型号","厂商",false,false,true);
-		
-		/**
-		 * 标准型号，品牌
-		*/
-		public static final DBField BRAND_ID = new DBField(DBDataType.STRING , "brand_id","brandId","标准型号","品牌",false,false,true);
-		
-		/**
-		 * 标准型号，规格型号
-		*/
-		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","标准型号","规格型号",false,false,true);
-		
-		/**
-		 * 标准型号，物品图片
-		*/
-		public static final DBField PICTURE_ID = new DBField(DBDataType.STRING , "picture_id","pictureId","标准型号","物品图片",false,false,true);
-		
-		/**
-		 * 标准型号，,计量单位
-		*/
-		public static final DBField UNIT = new DBField(DBDataType.STRING , "unit","unit","标准型号",",计量单位",false,false,true);
+		public static final DBField GOOD_ID = new DBField(DBDataType.STRING , "good_id","goodId","物品档案","物品档案",false,false,true);
 		
 		/**
 		 * 标准型号，单价
@@ -1368,10 +1439,10 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
-		public EAM_GOODS() {
-			this.init($NAME,"资产物品表" , ID , STATUS , CATEGORY_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , UNIT_PRICE , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		public EAM_GOODS_STOCK() {
+			this.init($NAME,"物品库存" , ID , GOOD_ID , UNIT_PRICE , STOCK_MIN , STOCK_MAX , STOCK_SECURITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-		public static final EAM_GOODS $TABLE=new EAM_GOODS();
+		public static final EAM_GOODS_STOCK $TABLE=new EAM_GOODS_STOCK();
 	}
 	
 	/**

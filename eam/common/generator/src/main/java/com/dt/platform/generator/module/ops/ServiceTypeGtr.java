@@ -35,7 +35,7 @@ public class ServiceTypeGtr extends BaseCodeGenerator{
       //  g.generateCode();
 
         //移除之前生成的菜单，视情况执行
-       g.removeByBatchId("473490445867941888");
+        g.removeByBatchId("473490445867941888");
         g.removeByBatchId("472419134236262400");
         //生成菜单
         g.generateMenu(ServiceTypeServiceProxy.class, ServiceTypePageController.class);

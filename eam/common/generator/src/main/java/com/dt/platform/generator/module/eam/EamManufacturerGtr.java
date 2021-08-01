@@ -3,17 +3,18 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamSupplier extends BaseCodeGenerator{
-    public EamSupplier() {
-        super(EAMTables.EAM_SUPPLIER.$TABLE,BASIC_DATA_MENU_ID);
+public class EamManufacturerGtr extends BaseCodeGenerator{
+
+    public EamManufacturerGtr() {
+        super(EAMTables.EAM_MANUFACTURER.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_SUPPLIER.ID)
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.ID)
                 .basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NOTES).search().fuzzySearch();
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -26,15 +27,11 @@ public class EamSupplier extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        EamSupplier g=new EamSupplier();
-        //生成代码
+        EamManufacturerGtr g=new EamManufacturerGtr();
+
         g.generateCode();
 
-
         //生成菜单
-        //g.removeByBatchId("");
-       // g.generateMenu(SupplierServiceProxy.class, SupplierPageController.class);
+//        g.generateMenu(ManufacturerServiceProxy.class, ManufacturerPageController.class);
     }
-
-
 }

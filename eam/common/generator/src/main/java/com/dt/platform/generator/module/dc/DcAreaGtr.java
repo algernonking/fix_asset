@@ -38,12 +38,12 @@ public class DcAreaGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         DcAreaGtr g=new DcAreaGtr();
         //生成代码
-       // g.generateCode();
+        g.generateCode();
 
         //移除之前生成的菜单，视情况执行
        // System.out.println("############"+g.getTablePrefix());
         //g.removeByBatchId("470160949404237824");
         //生成菜单
-       g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+      // g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
     }
 }

@@ -3,8 +3,8 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamWarehouse  extends BaseCodeGenerator{
-    public EamWarehouse() {
+public class EamWarehouseGtr extends BaseCodeGenerator{
+    public EamWarehouseGtr() {
         super(EAMTables.EAM_WAREHOUSE.$TABLE,BASIC_DATA_MENU_ID);
     }
 
@@ -29,7 +29,7 @@ public class EamWarehouse  extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        EamWarehouse g=new EamWarehouse();
+        EamWarehouseGtr g=new EamWarehouseGtr();
         //生成代码
         g.generateCode();
 
