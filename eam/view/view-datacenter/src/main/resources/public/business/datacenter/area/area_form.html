@@ -2,7 +2,7 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:48:26
+ * @since 2021-08-01 21:54:40
  */
  -->
  <!DOCTYPE html>
@@ -23,14 +23,14 @@
 
 <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
     <input name="id" id="id"  type="hidden"/>
-    
+	
     <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('类型')}">类型</label>
         <div class="layui-input-block">
-            <input lay-filter="typeId" id="typeId" name="typeId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('类型') }" type="text" class="layui-input"   />
+            <input type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.datacenter.AreaTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
         </div>
     </div>
-    
+
 	
     
     <div class="layui-form-item" >

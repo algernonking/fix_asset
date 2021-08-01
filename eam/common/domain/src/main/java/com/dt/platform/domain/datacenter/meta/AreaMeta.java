@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:48:23
- * @sign 8356759611C78BAD790A268F0125D1BC
+ * @since 2021-08-01 21:54:36
+ * @sign 2B963E391B74E2EC634140ABE40E210A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -28,12 +28,12 @@ public class AreaMeta {
 	/**
 	 * 类型
 	*/
-	public static final String TYPE_ID="typeId";
+	public static final String TYPE="type";
 	
 	/**
 	 * 类型
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Area,java.lang.String> TYPE_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Area.class ,TYPE_ID, java.lang.String.class, "类型", "类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Area,java.lang.String> TYPE_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Area.class ,TYPE, java.lang.String.class, "类型", "类型", java.lang.String.class, null);
 	
 	/**
 	 * 名称
@@ -148,7 +148,7 @@ public class AreaMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE_ID , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , TYPE , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -171,12 +171,12 @@ public class AreaMeta {
 		
 		/**
 		 * 设置 类型
-		 * @param typeId 类型
+		 * @param type 类型
 		 * @return 当前对象
 		*/
-		public Area setTypeId(String typeId) {
-			super.change(TYPE_ID,super.getTypeId(),typeId);
-			super.setTypeId(typeId);
+		public Area setType(String type) {
+			super.change(TYPE,super.getType(),type);
+			super.setType(type);
 			return this;
 		}
 		

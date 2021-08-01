@@ -2,7 +2,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 20:08:51
+ * @since 2021-08-01 20:52:08
  */
  -->
  <!DOCTYPE html>
@@ -50,6 +50,15 @@
     </div>
     
 	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('规格型号')}">规格型号</label>
+        <div class="layui-input-block">
+            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('规格型号') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
 
         <div class="layui-form-item" >
             <label class="layui-form-label" th:text="${lang.translate('生产厂商')}">生产厂商</label>
@@ -70,24 +79,6 @@
 	
     
     <div class="layui-form-item" >
-        <label class="layui-form-label" th:text="${lang.translate('规格')}">规格</label>
-        <div class="layui-input-block">
-            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('规格') }" type="text" class="layui-input"   />
-        </div>
-    </div>
-    
-	
-    
-    <div class="layui-form-item" >
-        <label class="layui-form-label" th:text="${lang.translate('标准型号物品图片')}">标准型号物品图片</label>
-        <div class="layui-input-block">
-            <input lay-filter="pictureId" id="pictureId" name="pictureId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号物品图片') }" type="text" class="layui-input"   />
-        </div>
-    </div>
-    
-	
-    
-    <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('计量单位')}">计量单位</label>
         <div class="layui-input-block">
             <input lay-filter="unit" id="unit" name="unit" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('计量单位') }" type="text" class="layui-input"   />
@@ -100,6 +91,15 @@
         <label class="layui-form-label" th:text="${lang.translate('参考价')}">参考价</label>
         <div class="layui-input-block">
             <input lay-filter="referencePrice" id="referencePrice" name="referencePrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('参考价') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('图片')}">图片</label>
+        <div class="layui-input-block">
+            <input lay-filter="pictureId" id="pictureId" name="pictureId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('图片') }" type="text" class="layui-input"   />
         </div>
     </div>
     

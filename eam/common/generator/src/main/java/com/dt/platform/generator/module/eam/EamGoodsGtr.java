@@ -1,7 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.eam.GoodsStauts;
+import com.dt.platform.constants.enums.eam.GoodsStautsEnum;
 import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -32,18 +32,19 @@ public class EamGoodsGtr extends BaseCodeGenerator {
 
 
 
+
         cfg.view().field(EAMTables.EAM_GOODS.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_GOODS.NAME).basic().label("物品名称").search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_GOODS.MODEL).basic().label("规格").search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_GOODS.MODEL).basic().label("规格型号").search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_GOODS.REFERENCE_PRICE).basic().label("参考价").search().hidden();
         cfg.view().field(EAMTables.EAM_GOODS.UNIT).basic().label("计量单位").search().hidden();
         cfg.view().field(EAMTables.EAM_GOODS.NOTES).basic().label("备注").search().fuzzySearch();
 
 
-
+        cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID).basic().label("图片").search().hidden();
         cfg.view().field(EAMTables.EAM_GOODS.STATUS).basic().label("状态")
-                .form().validate().required().form().radio().enumType(GoodsStauts.class);
+                .form().validate().required().form().radio().enumType(GoodsStautsEnum.class);
 
         cfg.view().field(EAMTables.EAM_GOODS.CATEGORY_ID)
                 .basic().label("资产分类").search().hidden()

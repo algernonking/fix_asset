@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 20:08:48
- * @sign 1F9C96C24B1E8F984650ACAE77C932C4
+ * @since 2021-08-01 20:52:05
+ * @sign 8C92599713D301CB1BB891E008819137
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -55,6 +55,12 @@ public class Goods extends Entity {
 	private String name;
 	
 	/**
+	 * 标准型号规格型号：标准型号规格型号
+	*/
+	@ApiModelProperty(required = false,value="标准型号规格型号" , notes = "标准型号规格型号")
+	private String model;
+	
+	/**
 	 * 标准型号厂商：标准型号厂商
 	*/
 	@ApiModelProperty(required = false,value="标准型号厂商" , notes = "标准型号厂商")
@@ -67,18 +73,6 @@ public class Goods extends Entity {
 	private String brandId;
 	
 	/**
-	 * 标准型号规格型号：标准型号规格型号
-	*/
-	@ApiModelProperty(required = false,value="标准型号规格型号" , notes = "标准型号规格型号")
-	private String model;
-	
-	/**
-	 * 标准型号物品图片：标准型号物品图片
-	*/
-	@ApiModelProperty(required = false,value="标准型号物品图片" , notes = "标准型号物品图片")
-	private String pictureId;
-	
-	/**
 	 * 标准型号计量单位：标准型号计量单位
 	*/
 	@ApiModelProperty(required = false,value="标准型号计量单位" , notes = "标准型号计量单位")
@@ -89,6 +83,12 @@ public class Goods extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="标准参考单价" , notes = "标准参考单价")
 	private BigDecimal referencePrice;
+	
+	/**
+	 * 标准型号物品图片：标准型号物品图片
+	*/
+	@ApiModelProperty(required = false,value="标准型号物品图片" , notes = "标准型号物品图片")
+	private String pictureId;
 	
 	/**
 	 * 备注：备注
@@ -239,6 +239,25 @@ public class Goods extends Entity {
 	}
 	
 	/**
+	 * 获得 标准型号规格型号<br>
+	 * 标准型号规格型号
+	 * @return 标准型号规格型号
+	*/
+	public String getModel() {
+		return model;
+	}
+	
+	/**
+	 * 设置 标准型号规格型号
+	 * @param model 标准型号规格型号
+	 * @return 当前对象
+	*/
+	public Goods setModel(String model) {
+		this.model=model;
+		return this;
+	}
+	
+	/**
 	 * 获得 标准型号厂商<br>
 	 * 标准型号厂商
 	 * @return 标准型号厂商
@@ -277,44 +296,6 @@ public class Goods extends Entity {
 	}
 	
 	/**
-	 * 获得 标准型号规格型号<br>
-	 * 标准型号规格型号
-	 * @return 标准型号规格型号
-	*/
-	public String getModel() {
-		return model;
-	}
-	
-	/**
-	 * 设置 标准型号规格型号
-	 * @param model 标准型号规格型号
-	 * @return 当前对象
-	*/
-	public Goods setModel(String model) {
-		this.model=model;
-		return this;
-	}
-	
-	/**
-	 * 获得 标准型号物品图片<br>
-	 * 标准型号物品图片
-	 * @return 标准型号物品图片
-	*/
-	public String getPictureId() {
-		return pictureId;
-	}
-	
-	/**
-	 * 设置 标准型号物品图片
-	 * @param pictureId 标准型号物品图片
-	 * @return 当前对象
-	*/
-	public Goods setPictureId(String pictureId) {
-		this.pictureId=pictureId;
-		return this;
-	}
-	
-	/**
 	 * 获得 标准型号计量单位<br>
 	 * 标准型号计量单位
 	 * @return 标准型号计量单位
@@ -349,6 +330,25 @@ public class Goods extends Entity {
 	*/
 	public Goods setReferencePrice(BigDecimal referencePrice) {
 		this.referencePrice=referencePrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 标准型号物品图片<br>
+	 * 标准型号物品图片
+	 * @return 标准型号物品图片
+	*/
+	public String getPictureId() {
+		return pictureId;
+	}
+	
+	/**
+	 * 设置 标准型号物品图片
+	 * @param pictureId 标准型号物品图片
+	 * @return 当前对象
+	*/
+	public Goods setPictureId(String pictureId) {
+		this.pictureId=pictureId;
 		return this;
 	}
 	

@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.dc;
 import com.dt.platform.constants.db.EAMTables;
 
 
+import com.dt.platform.constants.enums.datacenter.AreaTypeEnum;
 import com.dt.platform.datacenter.page.AreaPageController;
 import com.dt.platform.proxy.datacenter.AreaServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -24,6 +25,10 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
 
+        cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
+              .form().validate().required().form().radio().enumType(AreaTypeEnum.class);
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -42,8 +47,8 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
         //移除之前生成的菜单，视情况执行
        // System.out.println("############"+g.getTablePrefix());
-        //g.removeByBatchId("470160949404237824");
+        g.removeByBatchId("473608218912751616");
         //生成菜单
-      // g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+       g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
     }
 }

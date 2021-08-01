@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 20:08:51
+ * @since 2021-08-01 20:52:08
  */
 
 
@@ -49,12 +49,12 @@ function ListPage() {
 				{ field: 'status', align:"left", hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
 				{ field: 'categoryId', align:"left", hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return fox.joinLabel(d.category,"categoryName");}} ,
                 { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('物品名称')} ,
+                { field: 'model', align:"left", hide:false, sort: true, title: fox.translate('规格型号')} ,
 				{ field: 'manufacturerId', align:"left", hide:false, sort: true, title: fox.translate('生产厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}} ,
 				{ field: 'brandId', align:"left", hide:false, sort: true, title: fox.translate('品牌'), templet: function (d) { return fox.joinLabel(d.brand,"brandName");}} ,
-                { field: 'model', align:"left", hide:false, sort: true, title: fox.translate('规格')} ,
-                { field: 'pictureId', align:"left", hide:false, sort: true, title: fox.translate('标准型号物品图片')} ,
                 { field: 'unit', align:"left", hide:false, sort: true, title: fox.translate('计量单位')} ,
                 { field: 'referencePrice', align:"right", hide:false, sort: true, title: fox.translate('参考价')} ,
+                { field: 'pictureId', align:"left", hide:false, sort: true, title: fox.translate('图片')} ,
                 { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -87,7 +87,6 @@ function ListPage() {
 		value.status={ value: xmSelect.get("#status",true).getValue("value") };
 		value.name={ value: $("#name").val() ,fuzzy: true };
 		value.model={ value: $("#model").val() ,fuzzy: true };
-		value.pictureId={ value: $("#pictureId").val() };
 		value.notes={ value: $("#notes").val() ,fuzzy: true };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });

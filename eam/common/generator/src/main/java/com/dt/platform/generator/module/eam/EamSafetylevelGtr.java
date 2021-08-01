@@ -13,8 +13,8 @@ public class EamSafetylevelGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.ID)
                 .basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().hidden();
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().hidden();
 
 
         //文件生成覆盖模式

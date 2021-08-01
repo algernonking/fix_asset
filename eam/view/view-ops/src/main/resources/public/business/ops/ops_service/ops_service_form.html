@@ -2,7 +2,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:27
+ * @since 2021-08-01 21:59:46
  */
  -->
  <!DOCTYPE html>
@@ -23,13 +23,13 @@
 
 <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
     <input name="id" id="id"  type="hidden"/>
-
-        <div class="layui-form-item" >
-            <label class="layui-form-label" th:text="${lang.translate('服务类型')}">服务类型</label>
-            <div class="layui-input-block">
-                <div id="typeId" th:data="${'/service-ops/ops-service-type/query-list'}"></div>
-            </div>
+	
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('服务类型')}">服务类型</label>
+        <div class="layui-input-block">
+            <input type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
         </div>
+    </div>
 
 	
     

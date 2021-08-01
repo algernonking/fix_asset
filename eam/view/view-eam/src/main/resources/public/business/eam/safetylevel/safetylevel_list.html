@@ -2,7 +2,7 @@
 /**
  * 风险等级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:47:43
+ * @since 2021-08-01 21:15:35
  */
  -->
  <!DOCTYPE html>
@@ -26,14 +26,6 @@
     <div class="layui-card-body">
         <div class="layui-form toolbar search-bar">
 
-            <div class="search-unit">
-                <span th:text="${lang.translate('风险等级编码')}" class="search-label">风险等级编码</span><span class="search-colon">:</span>
-                <input id="safetyCode" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入风险等级编码')}"/>
-            </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('风险等级')}" class="search-label">风险等级</span><span class="search-colon">:</span>
-                <input id="safetyName" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入风险等级')}"/>
-            </div>
 
             <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
             <button th:if="${perm.checkAuth('eam_safetylevel:create')}" id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>

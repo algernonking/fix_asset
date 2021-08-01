@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-01 20:08:15
+ * @since 2021-08-01 21:35:41
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -33,7 +33,7 @@ public class EAMTables {
 		/**
 		 * 类型
 		*/
-		public static final DBField TYPE_ID = new DBField(DBDataType.STRING , "type_id","typeId","类型","类型",false,false,false);
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","类型","类型",false,false,false);
 		
 		/**
 		 * 名称
@@ -91,7 +91,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public DC_AREA() {
-			this.init($NAME,"区域" , ID , TYPE_ID , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"区域" , ID , TYPE , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final DC_AREA $TABLE=new DC_AREA();
 	}
@@ -1276,6 +1276,11 @@ public class EAMTables {
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","标准型号物品名称","标准型号物品名称",false,false,true);
 		
 		/**
+		 * 标准型号规格型号
+		*/
+		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","标准型号规格型号","标准型号规格型号",false,false,true);
+		
+		/**
 		 * 标准型号厂商
 		*/
 		public static final DBField MANUFACTURER_ID = new DBField(DBDataType.STRING , "manufacturer_id","manufacturerId","标准型号厂商","标准型号厂商",false,false,true);
@@ -1286,16 +1291,6 @@ public class EAMTables {
 		public static final DBField BRAND_ID = new DBField(DBDataType.STRING , "brand_id","brandId","标准型号品牌","标准型号品牌",false,false,true);
 		
 		/**
-		 * 标准型号规格型号
-		*/
-		public static final DBField MODEL = new DBField(DBDataType.STRING , "model","model","标准型号规格型号","标准型号规格型号",false,false,true);
-		
-		/**
-		 * 标准型号物品图片
-		*/
-		public static final DBField PICTURE_ID = new DBField(DBDataType.STRING , "picture_id","pictureId","标准型号物品图片","标准型号物品图片",false,false,true);
-		
-		/**
 		 * 标准型号计量单位
 		*/
 		public static final DBField UNIT = new DBField(DBDataType.STRING , "unit","unit","标准型号计量单位","标准型号计量单位",false,false,true);
@@ -1304,6 +1299,11 @@ public class EAMTables {
 		 * 标准参考单价
 		*/
 		public static final DBField REFERENCE_PRICE = new DBField(DBDataType.DECIMAL , "reference_price","referencePrice","标准参考单价","标准参考单价",false,false,true);
+		
+		/**
+		 * 标准型号物品图片
+		*/
+		public static final DBField PICTURE_ID = new DBField(DBDataType.STRING , "picture_id","pictureId","标准型号物品图片","标准型号物品图片",false,false,true);
 		
 		/**
 		 * 备注
@@ -1350,7 +1350,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_GOODS() {
-			this.init($NAME,"物品档案" , ID , STATUS , CATEGORY_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , REFERENCE_PRICE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"物品档案" , ID , STATUS , CATEGORY_ID , NAME , MODEL , MANUFACTURER_ID , BRAND_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_GOODS $TABLE=new EAM_GOODS();
 	}
@@ -2815,7 +2815,7 @@ public class EAMTables {
 		/**
 		 * 服务类型,DB,OS,MIDDLEWARE,OTHER
 		*/
-		public static final DBField TYPE_ID = new DBField(DBDataType.STRING , "type_id","typeId","服务类型","DB,OS,MIDDLEWARE,OTHER",false,false,true);
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","服务类型","DB,OS,MIDDLEWARE,OTHER",false,false,true);
 		
 		/**
 		 * 名称
@@ -2867,7 +2867,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public OPS_SERVICE() {
-			this.init($NAME,"服务类型" , ID , TYPE_ID , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"服务类型" , ID , TYPE , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_SERVICE $TABLE=new OPS_SERVICE();
 	}

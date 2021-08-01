@@ -1,7 +1,7 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:48:25
+ * @since 2021-08-01 21:54:39
  */
 
 
@@ -46,7 +46,7 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'typeId', align:"left", hide:false, sort: true, title: fox.translate('类型')} ,
+				{ field: 'type', align:"left", hide:false, sort: true, title: fox.translate('类型'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}} ,
                 { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
                 { field: 'position', align:"left", hide:false, sort: true, title: fox.translate('位置')} ,
                 { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
@@ -78,7 +78,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.typeId={ value: $("#typeId").val() };
+		value.type={ value: xmSelect.get("#type",true).getValue("value") };
 		value.name={ value: $("#name").val() ,fuzzy: true };
 		value.position={ value: $("#position").val() ,fuzzy: true };
 		value.notes={ value: $("#notes").val() ,fuzzy: true };
@@ -108,6 +108,22 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
+		//渲染 type 搜索框
+		fox.renderSelectBox({
+			el: "type",
+			size: "small",
+			radio: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**

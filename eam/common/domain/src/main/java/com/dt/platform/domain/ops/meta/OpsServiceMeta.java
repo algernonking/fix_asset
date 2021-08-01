@@ -3,14 +3,13 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.OpsService;
 import java.util.Date;
-import com.dt.platform.domain.ops.ServiceType;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:20
- * @sign 3A4F3947D6C0DC84C37A28ACFBA205D7
+ * @since 2021-08-01 21:59:42
+ * @sign C5CCA2FA8CB3419E1539F0273C657AB6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -29,12 +28,12 @@ public class OpsServiceMeta {
 	/**
 	 * 服务类型 , DB,OS,MIDDLEWARE,OTHER
 	*/
-	public static final String TYPE_ID="typeId";
+	public static final String TYPE="type";
 	
 	/**
 	 * 服务类型 , DB,OS,MIDDLEWARE,OTHER
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.OpsService,java.lang.String> TYPE_ID_PROP=new BeanProperty(com.dt.platform.domain.ops.OpsService.class ,TYPE_ID, java.lang.String.class, "服务类型", "DB,OS,MIDDLEWARE,OTHER", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.OpsService,java.lang.String> TYPE_PROP=new BeanProperty(com.dt.platform.domain.ops.OpsService.class ,TYPE, java.lang.String.class, "服务类型", "DB,OS,MIDDLEWARE,OTHER", java.lang.String.class, null);
 	
 	/**
 	 * 名称
@@ -137,19 +136,9 @@ public class OpsServiceMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.OpsService,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.ops.OpsService.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 类型
-	*/
-	public static final String SERVICE_TYPE="serviceType";
-	
-	/**
-	 * 类型
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.OpsService,com.dt.platform.domain.ops.ServiceType> SERVICE_TYPE_PROP=new BeanProperty(com.dt.platform.domain.ops.OpsService.class ,SERVICE_TYPE, com.dt.platform.domain.ops.ServiceType.class, "类型", "", com.dt.platform.domain.ops.ServiceType.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE_ID , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SERVICE_TYPE };
+	public static final String[] $PROPS={ ID , TYPE , SERVICE_NAME , SERVICE_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -172,12 +161,12 @@ public class OpsServiceMeta {
 		
 		/**
 		 * 设置 服务类型
-		 * @param typeId 服务类型
+		 * @param type 服务类型
 		 * @return 当前对象
 		*/
-		public OpsService setTypeId(String typeId) {
-			super.change(TYPE_ID,super.getTypeId(),typeId);
-			super.setTypeId(typeId);
+		public OpsService setType(String type) {
+			super.change(TYPE,super.getType(),type);
+			super.setType(type);
 			return this;
 		}
 		
@@ -288,17 +277,6 @@ public class OpsServiceMeta {
 		public OpsService setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
-			return this;
-		}
-		
-		/**
-		 * 设置 类型
-		 * @param serviceType 类型
-		 * @return 当前对象
-		*/
-		public OpsService setServiceType(ServiceType serviceType) {
-			super.change(SERVICE_TYPE,super.getServiceType(),serviceType);
-			super.setServiceType(serviceType);
 			return this;
 		}
 	}

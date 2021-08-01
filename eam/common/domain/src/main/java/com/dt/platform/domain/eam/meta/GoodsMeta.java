@@ -12,8 +12,8 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 20:08:48
- * @sign 1F9C96C24B1E8F984650ACAE77C932C4
+ * @since 2021-08-01 20:52:05
+ * @sign 8C92599713D301CB1BB891E008819137
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -60,6 +60,16 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,NAME, java.lang.String.class, "标准型号物品名称", "标准型号物品名称", java.lang.String.class, null);
 	
 	/**
+	 * 标准型号规格型号
+	*/
+	public static final String MODEL="model";
+	
+	/**
+	 * 标准型号规格型号
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MODEL_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MODEL, java.lang.String.class, "标准型号规格型号", "标准型号规格型号", java.lang.String.class, null);
+	
+	/**
 	 * 标准型号厂商
 	*/
 	public static final String MANUFACTURER_ID="manufacturerId";
@@ -80,26 +90,6 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> BRAND_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND_ID, java.lang.String.class, "标准型号品牌", "标准型号品牌", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号规格型号
-	*/
-	public static final String MODEL="model";
-	
-	/**
-	 * 标准型号规格型号
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MODEL_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MODEL, java.lang.String.class, "标准型号规格型号", "标准型号规格型号", java.lang.String.class, null);
-	
-	/**
-	 * 标准型号物品图片
-	*/
-	public static final String PICTURE_ID="pictureId";
-	
-	/**
-	 * 标准型号物品图片
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> PICTURE_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,PICTURE_ID, java.lang.String.class, "标准型号物品图片", "标准型号物品图片", java.lang.String.class, null);
-	
-	/**
 	 * 标准型号计量单位
 	*/
 	public static final String UNIT="unit";
@@ -118,6 +108,16 @@ public class GoodsMeta {
 	 * 标准参考单价
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.math.BigDecimal> REFERENCE_PRICE_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,REFERENCE_PRICE, java.math.BigDecimal.class, "标准参考单价", "标准参考单价", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 标准型号物品图片
+	*/
+	public static final String PICTURE_ID="pictureId";
+	
+	/**
+	 * 标准型号物品图片
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> PICTURE_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,PICTURE_ID, java.lang.String.class, "标准型号物品图片", "标准型号物品图片", java.lang.String.class, null);
 	
 	/**
 	 * 备注
@@ -242,7 +242,7 @@ public class GoodsMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , CATEGORY_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , REFERENCE_PRICE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , BRAND , MANUFACTURER };
+	public static final String[] $PROPS={ ID , STATUS , CATEGORY_ID , NAME , MODEL , MANUFACTURER_ID , BRAND_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , BRAND , MANUFACTURER };
 	
 	/**
 	 * 代理类
@@ -297,6 +297,17 @@ public class GoodsMeta {
 		}
 		
 		/**
+		 * 设置 标准型号规格型号
+		 * @param model 标准型号规格型号
+		 * @return 当前对象
+		*/
+		public Goods setModel(String model) {
+			super.change(MODEL,super.getModel(),model);
+			super.setModel(model);
+			return this;
+		}
+		
+		/**
 		 * 设置 标准型号厂商
 		 * @param manufacturerId 标准型号厂商
 		 * @return 当前对象
@@ -319,28 +330,6 @@ public class GoodsMeta {
 		}
 		
 		/**
-		 * 设置 标准型号规格型号
-		 * @param model 标准型号规格型号
-		 * @return 当前对象
-		*/
-		public Goods setModel(String model) {
-			super.change(MODEL,super.getModel(),model);
-			super.setModel(model);
-			return this;
-		}
-		
-		/**
-		 * 设置 标准型号物品图片
-		 * @param pictureId 标准型号物品图片
-		 * @return 当前对象
-		*/
-		public Goods setPictureId(String pictureId) {
-			super.change(PICTURE_ID,super.getPictureId(),pictureId);
-			super.setPictureId(pictureId);
-			return this;
-		}
-		
-		/**
 		 * 设置 标准型号计量单位
 		 * @param unit 标准型号计量单位
 		 * @return 当前对象
@@ -359,6 +348,17 @@ public class GoodsMeta {
 		public Goods setReferencePrice(BigDecimal referencePrice) {
 			super.change(REFERENCE_PRICE,super.getReferencePrice(),referencePrice);
 			super.setReferencePrice(referencePrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 标准型号物品图片
+		 * @param pictureId 标准型号物品图片
+		 * @return 当前对象
+		*/
+		public Goods setPictureId(String pictureId) {
+			super.change(PICTURE_ID,super.getPictureId(),pictureId);
+			super.setPictureId(pictureId);
 			return this;
 		}
 		

@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:28
+ * @since 2021-08-01 21:59:47
  */
 
 function FormPage() {
@@ -45,23 +45,6 @@ function FormPage() {
 	function renderFormFields() {
 		form.render();
 	   
-		//渲染 typeId 下拉字段
-		fox.renderSelectBox({
-			el: "typeId",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
 	}
 	
 	/**
@@ -79,13 +62,6 @@ function FormPage() {
 			form.val('data-form', formData);
 
 
-			//设置 服务类型 下拉框选中值
-			var typeIdSelect=xmSelect.get("#typeId",true);
-			var typeIdOpionts=[];
-			if (formData.serviceType)	{
-				typeIdOpionts=typeIdSelect.options.transform([formData.serviceType]);
-			}
-			typeIdSelect.setValue(typeIdOpionts);
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
@@ -113,11 +89,6 @@ function FormPage() {
 
 
 
-			//获取 服务类型 下拉框的值
-			data.field["typeId"]=xmSelect.get("#typeId",true).getValue("value");
-			if(data.field["typeId"] && data.field["typeId"].length>0) {
-				data.field["typeId"]=data.field["typeId"][0];
-			}
 
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);

@@ -32,6 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.SafetylevelMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 风险等级表 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:47:43
+ * @since 2021-08-01 21:15:32
 */
 
 @Api(tags = "风险等级")
@@ -163,8 +164,8 @@ public class SafetylevelController extends SuperController {
 	@PostMapping(SafetylevelServiceProxy.GET_BY_ID)
 	public Result<Safetylevel> getById(String id) {
 		Result<Safetylevel> result=new Result<>();
-		Safetylevel role=safetylevelService.getById(id);
-		result.success(true).data(role);
+		Safetylevel safetylevel=safetylevelService.getById(id);
+		result.success(true).data(safetylevel);
 		return result;
 	}
 

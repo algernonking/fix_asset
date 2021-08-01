@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:48:23
- * @sign 8356759611C78BAD790A268F0125D1BC
+ * @since 2021-08-01 21:54:36
+ * @sign 2B963E391B74E2EC634140ABE40E210A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,7 +39,7 @@ public class Area extends Entity {
 	 * 类型：类型
 	*/
 	@ApiModelProperty(required = true,value="类型" , notes = "类型")
-	private String typeId;
+	private String type;
 	
 	/**
 	 * 名称：名称
@@ -131,17 +131,17 @@ public class Area extends Entity {
 	 * 类型
 	 * @return 类型
 	*/
-	public String getTypeId() {
-		return typeId;
+	public String getType() {
+		return type;
 	}
 	
 	/**
 	 * 设置 类型
-	 * @param typeId 类型
+	 * @param type 类型
 	 * @return 当前对象
 	*/
-	public Area setTypeId(String typeId) {
-		this.typeId=typeId;
+	public Area setType(String type) {
+		this.type=type;
 		return this;
 	}
 	

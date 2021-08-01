@@ -11,26 +11,16 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 */
 
 
+public enum AssetTypeEnum implements CodeTextEnum {
 
-
-public enum GoodsStauts implements CodeTextEnum {
-	
-	/**
-	 * 有效
-	*/
-	GOODS_VALID("valid" , "有效"),
-	
-	/**
-	 * 无效
-	*/
-	GOODS_INVALID("invalid" , "无效"),
-	
-
+	ASSET_NORMAL("asset_normal" , "资产"),
+	ASSET_SOFTWARE("asset_software" , "软件资产"),
+	ASSET_CONSUMABLES("asset_consumables" , "耗材"),
+	ASSET_SPAREPARTS("asset_spareparts" , "备品备件"),
 	;
-	
 	private String code;
 	private String text;
-	private GoodsStauts(String code, String text)  {
+	private AssetTypeEnum(String code, String text)  {
 		this.code=code;
 		this.text=text;
 	}

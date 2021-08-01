@@ -2,7 +2,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:26
+ * @since 2021-08-01 21:59:45
  */
  -->
  <!DOCTYPE html>
@@ -28,7 +28,9 @@
 
             <div class="search-unit">
                 <span th:text="${lang.translate('服务类型')}" class="search-label">服务类型</span><span class="search-colon">:</span>
-                <div id="typeId" th:data="${'/service-ops/ops-service-type/query-list'}" style="width:140px"></div>
+
+
+                <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}" style="width:140px"></div>
             </div>
             <div class="search-unit">
                 <span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span>
@@ -63,6 +65,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}]];
     var AUTH_PREFIX="ops_service";
 </script>
 

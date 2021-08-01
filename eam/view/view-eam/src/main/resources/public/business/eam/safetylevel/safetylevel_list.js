@@ -1,7 +1,7 @@
 /**
  * 风险等级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:47:44
+ * @since 2021-08-01 21:15:35
  */
 
 
@@ -76,8 +76,6 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.safetyCode={ value: $("#safetyCode").val() ,fuzzy: true };
-		value.safetyName={ value: $("#safetyName").val() ,fuzzy: true };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}

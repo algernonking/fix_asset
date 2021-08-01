@@ -1,16 +1,11 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.datacenter.meta.AreaMeta;
-import com.dt.platform.domain.datacenter.meta.RackMeta;
-import com.dt.platform.domain.ops.ServiceType;
+import com.dt.platform.constants.enums.datacenter.AreaTypeEnum;
+import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
 
-import com.dt.platform.domain.ops.meta.OpsServiceMeta;
-import com.dt.platform.domain.ops.meta.ServiceTypeMeta;
 import com.dt.platform.ops.page.OpsServicePageController;
-import com.dt.platform.proxy.datacenter.AreaServiceProxy;
 import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
-import com.dt.platform.proxy.ops.ServiceTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsServiceGtr extends BaseCodeGenerator{
@@ -22,18 +17,29 @@ public class OpsServiceGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-        cfg.getPoClassFile().addSimpleProperty(ServiceType.class,"serviceType","类型","");
+//        cfg.getPoClassFile().addSimpleProperty(ServiceType.class,"serviceType","类型","");
 
         cfg.view().field(EAMTables.OPS_SERVICE.ID)
                 .basic().hidden(true);
+
+
+
+
         cfg.view().field(EAMTables.OPS_SERVICE.SERVICE_NAME).search().fuzzySearch();
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE.TYPE_ID)
-                .basic().label("服务类型")
-                .form().validate().required()
-                .form().select().queryApi(ServiceTypeServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
-                .valueField(ServiceTypeMeta.ID).textField(ServiceTypeMeta.NAME).fillBy(OpsServiceMeta.SERVICE_TYPE).muliti(false);
+
+        cfg.view().field(EAMTables.OPS_SERVICE.TYPE).basic().label("服务类型")
+                .form().validate().required().form().radio().enumType(ServiceTypeEnum.class);
+
+
+
+
+//        cfg.view().field(EAMTables.OPS_SERVICE.TYPE_ID)
+//                .basic().label("服务类型")
+//                .form().validate().required()
+//                .form().select().queryApi(ServiceTypeServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+//                .valueField(ServiceTypeMeta.ID).textField(ServiceTypeMeta.NAME).fillBy(OpsServiceMeta.SERVICE_TYPE).muliti(false);
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -49,9 +55,10 @@ public class OpsServiceGtr extends BaseCodeGenerator{
     public static void main(String[] args) throws Exception {
         OpsServiceGtr g=new OpsServiceGtr();
         //生成代码
+        g.generateCode();
 
         //移除之前生成的菜单，视情况执行
-
+        g.removeByBatchId("474331804975759360");
         g.generateMenu(OpsServiceServiceProxy.class, OpsServicePageController.class);
     }
 }

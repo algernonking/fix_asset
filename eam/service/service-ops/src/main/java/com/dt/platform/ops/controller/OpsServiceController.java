@@ -33,7 +33,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.OpsServiceMeta;
-import com.dt.platform.domain.ops.ServiceType;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:21
+ * @since 2021-08-01 21:59:43
 */
 
 @Api(tags = "服务类型")
@@ -67,7 +66,7 @@ public class OpsServiceController extends SuperController {
 	@ApiOperation(value = "添加服务类型")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE_ID , value = "服务类型" , required = false , dataTypeClass=String.class , example = "DB"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -121,7 +120,7 @@ public class OpsServiceController extends SuperController {
 	@ApiOperation(value = "更新服务类型")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE_ID , value = "服务类型" , required = false , dataTypeClass=String.class , example = "DB"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -141,7 +140,7 @@ public class OpsServiceController extends SuperController {
 	@ApiOperation(value = "保存服务类型")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE_ID , value = "服务类型" , required = false , dataTypeClass=String.class , example = "DB"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -169,8 +168,6 @@ public class OpsServiceController extends SuperController {
 	public Result<OpsService> getById(String id) {
 		Result<OpsService> result=new Result<>();
 		OpsService opsService=opsServiceService.getById(id);
-		// 关联出 服务类型 数据
-		opsServiceService.join(opsService,OpsServiceMeta.SERVICE_TYPE);
 		result.success(true).data(opsService);
 		return result;
 	}
@@ -202,7 +199,7 @@ public class OpsServiceController extends SuperController {
 	@ApiOperation(value = "查询服务类型")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE_ID , value = "服务类型" , required = false , dataTypeClass=String.class , example = "DB"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -223,7 +220,7 @@ public class OpsServiceController extends SuperController {
 	@ApiOperation(value = "分页查询服务类型")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE_ID , value = "服务类型" , required = false , dataTypeClass=String.class , example = "DB"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -233,8 +230,6 @@ public class OpsServiceController extends SuperController {
 	public Result<PagedList<OpsService>> queryPagedList(OpsServiceVO sample) {
 		Result<PagedList<OpsService>> result=new Result<>();
 		PagedList<OpsService> list=opsServiceService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 服务类型 数据
-		opsServiceService.join(list,OpsServiceMeta.SERVICE_TYPE);
 		result.success(true).data(list);
 		return result;
 	}

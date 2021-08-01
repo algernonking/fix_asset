@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:39:20
- * @sign 3A4F3947D6C0DC84C37A28ACFBA205D7
+ * @since 2021-08-01 21:59:42
+ * @sign C5CCA2FA8CB3419E1539F0273C657AB6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,7 +39,7 @@ public class OpsService extends Entity {
 	 * 服务类型：DB,OS,MIDDLEWARE,OTHER
 	*/
 	@ApiModelProperty(required = false,value="服务类型" , notes = "DB,OS,MIDDLEWARE,OTHER")
-	private String typeId;
+	private String type;
 	
 	/**
 	 * 名称：名称
@@ -102,12 +102,6 @@ public class OpsService extends Entity {
 	private Integer version;
 	
 	/**
-	 * 类型
-	*/
-	@ApiModelProperty(required = false,value="类型" , notes = "")
-	private ServiceType serviceType;
-	
-	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -131,17 +125,17 @@ public class OpsService extends Entity {
 	 * DB,OS,MIDDLEWARE,OTHER
 	 * @return 服务类型
 	*/
-	public String getTypeId() {
-		return typeId;
+	public String getType() {
+		return type;
 	}
 	
 	/**
 	 * 设置 服务类型
-	 * @param typeId 服务类型
+	 * @param type 服务类型
 	 * @return 当前对象
 	*/
-	public OpsService setTypeId(String typeId) {
-		this.typeId=typeId;
+	public OpsService setType(String type) {
+		this.type=type;
 		return this;
 	}
 	
@@ -332,24 +326,6 @@ public class OpsService extends Entity {
 	*/
 	public OpsService setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 类型<br>
-	 * @return 类型
-	*/
-	public ServiceType getServiceType() {
-		return serviceType;
-	}
-	
-	/**
-	 * 设置 类型
-	 * @param serviceType 类型
-	 * @return 当前对象
-	*/
-	public OpsService setServiceType(ServiceType serviceType) {
-		this.serviceType=serviceType;
 		return this;
 	}
 

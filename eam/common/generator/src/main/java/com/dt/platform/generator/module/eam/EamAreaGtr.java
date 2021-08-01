@@ -4,8 +4,8 @@ import com.dt.platform.constants.db.EAMTables;
 
 import com.github.foxnic.generator.config.WriteMode;
 
-public class eamAreaGtr extends BaseCodeGenerator{
-    public eamAreaGtr() {
+public class EamAreaGtr extends BaseCodeGenerator{
+    public EamAreaGtr() {
         super(EAMTables.EAM_AREA.$TABLE,BASIC_DATA_MENU_ID);
     }
 
@@ -15,6 +15,8 @@ public class eamAreaGtr extends BaseCodeGenerator{
                 .basic().hidden(true);
         cfg.view().field(EAMTables.EAM_AREA.AREA_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_AREA.AREA_NOTES).search().fuzzySearch();
+
+//
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -26,7 +28,7 @@ public class eamAreaGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        eamAreaGtr g=new eamAreaGtr();
+        EamAreaGtr g=new EamAreaGtr();
         //生成代码
          g.generateCode();
 

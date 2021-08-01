@@ -13,7 +13,7 @@ public class OPSRelationManager extends RelationManager {
     protected void config() {
         this.setupRelations();
         this.setupProperties();
-        this.setupOpsService();
+//        this.setupOpsService();
         this.setupOpsServiceDetail();
     }
 
@@ -24,10 +24,10 @@ public class OPSRelationManager extends RelationManager {
     private void setupRelations() {
 
     }
-    private void setupOpsService() {
-        this.property(OpsServiceMeta.SERVICE_TYPE_PROP)
-                .using(EAMTables.OPS_SERVICE.TYPE_ID).join(EAMTables.OPS_SERVICE_TYPE.ID);
-    }
+//    private void setupOpsService() {
+//        this.property(OpsServiceMeta.SERVICE_TYPE_PROP)
+//                .using(EAMTables.OPS_SERVICE.TYPE_ID).join(EAMTables.OPS_SERVICE_TYPE.ID);
+//    }
     private void setupOpsServiceDetail() {
         this.property(ServiceDetailMeta.OPS_SERVICE_PROP)
                 .using(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID).join(EAMTables.OPS_SERVICE.ID);

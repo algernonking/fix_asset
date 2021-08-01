@@ -2,7 +2,7 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:48:25
+ * @since 2021-08-01 21:54:39
  */
  -->
  <!DOCTYPE html>
@@ -28,7 +28,9 @@
 
             <div class="search-unit">
                 <span th:text="${lang.translate('类型')}" class="search-label">类型</span><span class="search-colon">:</span>
-                <input id="typeId" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入类型')}"/>
+
+
+                <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.datacenter.AreaTypeEnum')}" style="width:140px"></div>
             </div>
             <div class="search-unit">
                 <span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span>
@@ -67,6 +69,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.datacenter.AreaTypeEnum')}]];
     var AUTH_PREFIX="dc_area";
 </script>
 

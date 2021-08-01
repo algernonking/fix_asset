@@ -31,7 +31,8 @@ import java.util.Map;
 //import com.dt.platform.proxy.eam.BrandServiceProxy;
 
 
-public class MenuGenerator {
+public class
+MenuGenerator {
 
 	/**
 	 * 超级管理员角色ID
