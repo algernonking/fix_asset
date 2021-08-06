@@ -1,0 +1,267 @@
+<!-- 
+/**
+ * 资产 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-05 15:17:43
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('资产')}">资产</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.css"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+</head>
+
+<body style="overflow-y: hidden">
+
+<form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
+    <input name="id" id="id"  type="hidden"/>
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('单据编号')}">单据编号</label>
+        <div class="layui-input-block">
+            <input lay-filter="busiCode" id="busiCode" name="busiCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据编号') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('资产状态')}">资产状态</label>
+        <div class="layui-input-block">
+            <input lay-filter="status" id="status" name="status" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产状态') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('资产编号')}">资产编号</label>
+        <div class="layui-input-block">
+            <input lay-filter="assetCode" id="assetCode" name="assetCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产编号') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('分类ID')}">分类ID</label>
+        <div class="layui-input-block">
+            <input lay-filter="categoryId" id="categoryId" name="categoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('分类ID') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号ID')}">标准型号ID</label>
+        <div class="layui-input-block">
+            <input lay-filter="goodsId" id="goodsId" name="goodsId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号ID') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号资产名称')}">标准型号资产名称</label>
+        <div class="layui-input-block">
+            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号资产名称') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号厂商')}">标准型号厂商</label>
+        <div class="layui-input-block">
+            <input lay-filter="manufacturerId" id="manufacturerId" name="manufacturerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号厂商') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号品牌')}">标准型号品牌</label>
+        <div class="layui-input-block">
+            <input lay-filter="brandId" id="brandId" name="brandId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号品牌') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号规格型号')}">标准型号规格型号</label>
+        <div class="layui-input-block">
+            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号规格型号') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号物品图片')}">标准型号物品图片</label>
+        <div class="layui-input-block">
+            <input lay-filter="pictureId" id="pictureId" name="pictureId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号物品图片') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号计量单位')}">标准型号计量单位</label>
+        <div class="layui-input-block">
+            <input lay-filter="unit" id="unit" name="unit" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号计量单位') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('标准型号单价')}">标准型号单价</label>
+        <div class="layui-input-block">
+            <input lay-filter="unitPrice" id="unitPrice" name="unitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标准型号单价') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('资产RFID')}">资产RFID</label>
+        <div class="layui-input-block">
+            <input lay-filter="rfid" id="rfid" name="rfid" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产RFID') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('资产数量')}">资产数量</label>
+        <div class="layui-input-block">
+            <input lay-filter="assetNumber" id="assetNumber" name="assetNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产数量') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('批次号如果来自库存建议填写库存单据')}">批次号如果来自库存建议填写库存单据</label>
+        <div class="layui-input-block">
+            <input lay-filter="batchNumber" id="batchNumber" name="batchNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('批次号如果来自库存建议填写库存单据') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('资产序列号')}">资产序列号</label>
+        <div class="layui-input-block">
+            <input lay-filter="sn" id="sn" name="sn" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产序列号') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('来源')}">来源</label>
+        <div class="layui-input-block">
+            <input lay-filter="sourceId" id="sourceId" name="sourceId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('来源') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('来源详情')}">来源详情</label>
+        <div class="layui-input-block">
+            <input lay-filter="sourceDetail" id="sourceDetail" name="sourceDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('来源详情') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('存放区域')}">存放区域</label>
+        <div class="layui-input-block">
+            <input lay-filter="areaId" id="areaId" name="areaId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('存放区域') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('存放地点')}">存放地点</label>
+        <div class="layui-input-block">
+            <input lay-filter="placeDetail" id="placeDetail" name="placeDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('存放地点') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('使用人员')}">使用人员</label>
+        <div class="layui-input-block">
+            <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('生产日期')}">生产日期</label>
+        <div class="layui-input-block">
+            <input lay-filter="productionDate" id="productionDate" name="productionDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('生产日期') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('入库时间')}">入库时间</label>
+        <div class="layui-input-block">
+            <input lay-filter="storageTime" id="storageTime" name="storageTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('入库时间') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('是否显示(显示:1')}">是否显示(显示:1</label>
+        <div class="layui-input-block">
+            <input lay-filter="display" id="display" name="display" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否显示(显示:1') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+    
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('备注')}">备注</label>
+        <div class="layui-input-block">
+            <input lay-filter="assetsNotes" id="assetsNotes" name="assetsNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+    
+	
+
+
+    <div class="layui-form-item model-form-footer">
+        <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
+        <button th:if="${perm.checkAnyAuth('eam_asset:create','eam_asset:update','eam_asset:save')}" class="layui-btn"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    </div>
+</form>
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+
+<script src="/business/eam/asset/asset_form.js"></script>
+
+</body>
+</html>

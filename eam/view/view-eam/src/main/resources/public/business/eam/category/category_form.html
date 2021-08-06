@@ -23,7 +23,22 @@
 
 <form id="data-form" lay-filter="data-form" class="layui-form model-form"  >
 
-    <input name="id" id="id"  type="hidden"/>
+
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('主键')}">主键</label>
+        <div class="layui-input-block">
+            <input readonly="readonly" lay-filter="id" id="id" name="id" th:placeholder="${  lang.translate('系统自动填充') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+
+
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('分类路径')}">分类路径</label>
+        <div class="layui-input-block">
+            <input readonly="readonly" lay-filter="hierarchyName" id="hierarchyName" name="hierarchyName" th:placeholder="${lang.translate('系统自动填充') }" type="text" class="layui-input"   />
+        </div>
+    </div>
+
 
     <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('编码')}">编码</label>
@@ -31,6 +46,7 @@
             <input lay-filter="categoryCode" id="categoryCode" name="categoryCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"   />
         </div>
     </div>
+
 
 
     <div class="layui-form-item" >

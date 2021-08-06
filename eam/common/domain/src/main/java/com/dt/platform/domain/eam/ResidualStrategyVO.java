@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-05 14:57:30
- * @sign 760048BF41C39DDB763F4F172ACC9205
+ * @since 2021-08-06 09:13:21
+ * @sign DBCD254C2B15B9530AFFA434AC834C82
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class GoodsVO extends Goods {
+public class ResidualStrategyVO extends ResidualStrategy {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class GoodsVO extends Goods {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public GoodsVO setPageIndex(Integer pageIndex) {
+	public ResidualStrategyVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class GoodsVO extends Goods {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public GoodsVO setPageSize(Integer pageSize) {
+	public ResidualStrategyVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class GoodsVO extends Goods {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public GoodsVO setSearchField(String searchField) {
+	public ResidualStrategyVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class GoodsVO extends Goods {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public GoodsVO setFuzzyField(String fuzzyField) {
+	public ResidualStrategyVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class GoodsVO extends Goods {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public GoodsVO setSearchValue(String searchValue) {
+	public ResidualStrategyVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class GoodsVO extends Goods {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public GoodsVO setSortField(String sortField) {
+	public ResidualStrategyVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class GoodsVO extends Goods {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public GoodsVO setSortType(String sortType) {
+	public ResidualStrategyVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class GoodsVO extends Goods {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public GoodsVO setIds(List<String> ids) {
+	public ResidualStrategyVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class GoodsVO extends Goods {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public GoodsVO addId(String id) {
+	public ResidualStrategyVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.GoodsServiceProxy;
+import com.dt.platform.proxy.eam.AssetServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 物品档案 模版页面控制器
+ * 资产表 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-05 14:57:32
+ * @since 2021-08-05 15:17:43
 */
 
-@Controller("EamGoodsPageController")
-@RequestMapping(GoodsPageController.prefix)
-public class GoodsPageController extends ViewController {
+@Controller("EamAssetPageController")
+@RequestMapping(AssetPageController.prefix)
+public class AssetPageController extends ViewController {
 	
-	public static final String prefix="business/eam/goods";
+	public static final String prefix="business/eam/asset";
 
-	private GoodsServiceProxy proxy;
+	private AssetServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class GoodsPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public GoodsServiceProxy proxy() {
+	public AssetServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=GoodsServiceProxy.api();
+			proxy=AssetServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 物品档案 功能主页面
+	 * 资产 功能主页面
 	 */
-	@RequestMapping("/goods_list.html")
+	@RequestMapping("/asset_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/goods_list";
+		return prefix+"/asset_list";
 	}
 
 	/**
-	 * 物品档案 表单页面
+	 * 资产 表单页面
 	 */
-	@RequestMapping("/goods_form.html")
+	@RequestMapping("/asset_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/goods_form";
+		return prefix+"/asset_form";
 	}
 }

@@ -2,18 +2,12 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.domain.eam.Goods;
-import com.github.foxnic.api.error.CommonError;
-import com.github.foxnic.dao.data.Rcd;
-import com.github.foxnic.dao.data.RcdSet;
-import com.github.foxnic.sql.expr.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.Category;
-import com.dt.platform.domain.eam.CategoryVO;
+import com.dt.platform.domain.eam.ResidualStrategy;
+import com.dt.platform.domain.eam.ResidualStrategyVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -32,27 +26,22 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.ICategoryService;
+import com.dt.platform.eam.service.IResidualStrategyService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 资产分类 服务实现
+ * 折旧策略 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-31 12:16:02
+ * @since 2021-08-06 09:13:21
 */
 
 
-@Service("EamCategoryService")
-public class CategoryServiceImpl extends SuperService<Category> implements ICategoryService {
-
-
-
-	@Autowired
-	private ICategoryService categoryService;
-
+@Service("EamResidualStrategyService")
+public class ResidualStrategyServiceImpl extends SuperService<ResidualStrategy> implements IResidualStrategyService {
+	
 	/**
 	 * 注入DAO对象
 	 * */
@@ -71,69 +60,37 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	
 	/**
 	 * 插入实体
-	 * @param category 实体数据
+	 * @param residualStrategy 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Category category) {
-		return super.insert(category);
+	public Result insert(ResidualStrategy residualStrategy) {
+		return super.insert(residualStrategy);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param categoryList 实体数据清单
+	 * @param residualStrategyList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Category> categoryList) {
-		return super.insertList(categoryList);
+	public Result insertList(List<ResidualStrategy> residualStrategyList) {
+		return super.insertList(residualStrategyList);
 	}
-
-
-
+	
+	
 	/**
-	 * 更新分类路径及名称
-	 * @param id 主键
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result updateHierarchy(String id) {
-		Rcd category_rs = dao.queryRecord("select id,category_name categoryName,hierarchy from eam_category where deleted='0' and id=?", id);
-		String hierarchy=category_rs.getString("hierarchy");
-		String split="/";
-		String afterHierarchyName="";
-		String[] ids = hierarchy.split(split);
-		for (int i = 0; i < ids.length;i++) {
-			afterHierarchyName = afterHierarchyName + split+ dao.queryRecord("select category_name categoryName from eam_category where deleted='0' and id=?", ids[i]).getString("categoryName");
-		}
-		afterHierarchyName = afterHierarchyName.replaceFirst(split, "");
-		Update ups = new Update("eam_category");
-		ups.set("hierarchy_name", afterHierarchyName);
-		ups.where().and("id=?", id);
-		dao.execute(ups);
-		RcdSet rds = dao.query("select id,category_name categoryName,hierarchy from eam_category where deleted='0' and parent_id=?", id);
-		for (int j = 0; j < rds.size(); j++) {
-			updateHierarchy(rds.getRcd(j).getString("id"));
-		}
-		Result r=new Result();
-		r.success(true);
-		r.message(CommonError.SUCCESS_TEXT);
-		return r;
-	}
-
-
-	/**
-	 * 按主键删除 资产分类
+	 * 按主键删除 折旧策略
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Category category = new Category();
+		ResidualStrategy residualStrategy = new ResidualStrategy();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		category.setId(id);
+		residualStrategy.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(category);
+			boolean suc = dao.deleteEntity(residualStrategy);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -144,20 +101,20 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	}
 	
 	/**
-	 * 按主键删除 资产分类
+	 * 按主键删除 折旧策略
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Category category = new Category();
+		ResidualStrategy residualStrategy = new ResidualStrategy();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		category.setId(id);
-		category.setDeleted(dao.getDBTreaty().getTrueValue());
-		category.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		category.setDeleteTime(new Date());
+		residualStrategy.setId(id);
+		residualStrategy.setDeleted(dao.getDBTreaty().getTrueValue());
+		residualStrategy.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		residualStrategy.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(category,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(residualStrategy,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -169,29 +126,29 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	
 	/**
 	 * 更新实体
-	 * @param category 数据对象
+	 * @param residualStrategy 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Category category , SaveMode mode) {
-		return super.update(category , mode);
+	public Result update(ResidualStrategy residualStrategy , SaveMode mode) {
+		return super.update(residualStrategy , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param categoryList 数据对象列表
+	 * @param residualStrategyList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Category> categoryList , SaveMode mode) {
-		return super.updateList(categoryList , mode);
+	public Result updateList(List<ResidualStrategy> residualStrategyList , SaveMode mode) {
+		return super.updateList(residualStrategyList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 资产分类
+	 * 按主键更新字段 折旧策略
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -205,20 +162,20 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	
 	
 	/**
-	 * 按主键获取 资产分类
+	 * 按主键获取 折旧策略
 	 *
 	 * @param id 主键
-	 * @return Category 数据对象
+	 * @return ResidualStrategy 数据对象
 	 */
-	public Category getById(String id) {
-		Category sample = new Category();
+	public ResidualStrategy getById(String id) {
+		ResidualStrategy sample = new ResidualStrategy();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Category> getByIds(List<String> ids) {
+	public List<ResidualStrategy> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -231,7 +188,7 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Category> queryList(Category sample) {
+	public List<ResidualStrategy> queryList(ResidualStrategy sample) {
 		return super.queryList(sample);
 	}
 	
@@ -245,7 +202,7 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Category> queryPagedList(Category sample, int pageSize, int pageIndex) {
+	public PagedList<ResidualStrategy> queryPagedList(ResidualStrategy sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -259,25 +216,25 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Category> queryPagedList(Category sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<ResidualStrategy> queryPagedList(ResidualStrategy sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param category 数据对象
+	 * @param residualStrategy 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Category> checkExists(Category category) {
+	public Result<ResidualStrategy> checkExists(ResidualStrategy residualStrategy) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(category, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(residualStrategy, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Category sample) {
+	public ExcelWriter exportExcel(ResidualStrategy sample) {
 		return super.exportExcel(sample);
 	}
 

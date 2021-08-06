@@ -1,32 +1,31 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.datacenter.AreaTypeEnum;
 import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-
 import com.dt.platform.ops.page.OpsServicePageController;
 import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class OpsServiceGtr extends BaseCodeGenerator{
+public class OpsHostServiceGtr extends BaseCodeGenerator{
 
 
-    public OpsServiceGtr() {
-        super(EAMTables.OPS_SERVICE.$TABLE,BASIC_DATA_MENU_ID,"");
+    public OpsHostServiceGtr() {
+        super(EAMTables.OPS_HOST.$TABLE,BASIC_DATA_MENU_ID,"");
     }
 
     public void generateCode() throws Exception {
 
 //        cfg.getPoClassFile().addSimpleProperty(ServiceType.class,"serviceType","类型","");
 
-        cfg.view().field(EAMTables.OPS_SERVICE.ID)
+        cfg.view().field(EAMTables.OPS_HOST.ID)
                 .basic().hidden(true);
 
 
 
 
-        cfg.view().field(EAMTables.OPS_SERVICE.SERVICE_NAME).search().fuzzySearch();
-
+        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_HOST.HOST_NOTES).search().fuzzySearch();
 
 
         cfg.view().field(EAMTables.OPS_SERVICE.TYPE).basic().label("服务类型")
@@ -53,7 +52,7 @@ public class OpsServiceGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        OpsServiceGtr g=new OpsServiceGtr();
+        OpsHostServiceGtr g=new OpsHostServiceGtr();
         //生成代码
         g.generateCode();
 

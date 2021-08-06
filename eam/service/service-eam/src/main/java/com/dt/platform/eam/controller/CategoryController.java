@@ -94,6 +94,19 @@ public class CategoryController extends SuperController {
 		}
 		Result result=categoryService.insert(categoryVO);
 		if(result.success()) {
+			Category currentCategory=new Category();
+			currentCategory.setId(categoryVO.getId());
+			if("0".equals(categoryVO.getParentId())){
+				currentCategory.setHierarchy(categoryVO.getId());
+				currentCategory.setHierarchyName(categoryVO.getCategoryName());
+			}else{
+				Category parentCategory=categoryService.getById(categoryVO.getParentId());
+				currentCategory.setHierarchy(parentCategory.getHierarchy()+"/"+categoryVO.getId());
+				currentCategory.setHierarchyName(parentCategory.getHierarchyName()+"/"+categoryVO.getCategoryName());
+			}
+			categoryService.update(currentCategory,SaveMode.NOT_NULL_FIELDS);
+			categoryVO.setHierarchy(currentCategory.getHierarchy());
+			categoryVO.setHierarchyName(currentCategory.getHierarchyName());
 			result.data(categoryVO);
 		}
 		return result;
@@ -163,7 +176,12 @@ public class CategoryController extends SuperController {
 	@SentinelResource(value = CategoryServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CategoryServiceProxy.UPDATE)
 	public Result update(CategoryVO categoryVO) {
+
 		Result result=categoryService.update(categoryVO,SaveMode.NOT_NULL_FIELDS);
+		if(result.isSuccess()){
+			//更新分类名称
+			return categoryService.updateHierarchy(categoryVO.getId());
+		}
 		return result;
 	}
 	

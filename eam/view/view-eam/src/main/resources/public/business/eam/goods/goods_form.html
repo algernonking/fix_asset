@@ -2,7 +2,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 20:52:08
+ * @since 2021-08-05 14:57:34
  */
  -->
  <!DOCTYPE html>
@@ -27,7 +27,7 @@
     <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('状态')}">状态</label>
         <div class="layui-input-block">
-            <input type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.GoodsStauts')}" th:value="${e.code}" th:title="${e.text}">
+            <input type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.GoodsStautsEnum')}" th:value="${e.code}" th:title="${e.text}">
         </div>
     </div>
 

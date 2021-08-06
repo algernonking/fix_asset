@@ -25,7 +25,14 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface ICategoryService extends ISuperService<Category> {
-	
+
+	/**
+	 * 更新分类路径及名称
+	 * @param id 主键
+	 * @return 插入是否成功
+	 * */
+	Result updateHierarchy(String id);
+
 	/**
 	 * 插入实体
 	 * @param category 实体数据

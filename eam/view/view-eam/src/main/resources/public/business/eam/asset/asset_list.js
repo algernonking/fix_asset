@@ -1,7 +1,7 @@
 /**
- * 物品档案 列表页 JS 脚本
+ * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-05 14:57:33
+ * @since 2021-08-05 15:17:43
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-goods";
+	const moduleURL="/service-eam/eam-asset";
 	
 	/**
       * 入口函数，初始化
@@ -45,17 +45,32 @@ function ListPage() {
 			cols: [[
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
-                { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-				{ field: 'status', align:"left", hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
-				{ field: 'categoryId', align:"left", hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}} ,
-                { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('物品名称')} ,
-                { field: 'model', align:"left", hide:false, sort: true, title: fox.translate('规格型号')} ,
-				{ field: 'manufacturerId', align:"left", hide:false, sort: true, title: fox.translate('生产厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}} ,
-				{ field: 'brandId', align:"left", hide:false, sort: true, title: fox.translate('品牌'), templet: function (d) { return fox.joinLabel(d.brand,"brandName");}} ,
-                { field: 'unit', align:"left", hide:false, sort: true, title: fox.translate('计量单位')} ,
-                { field: 'referencePrice', align:"right", hide:false, sort: true, title: fox.translate('参考价')} ,
-                { field: 'pictureId', align:"left", hide:false, sort: true, title: fox.translate('图片')} ,
-                { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
+                { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
+                { field: 'busiCode', align:"left", hide:false, sort: true, title: fox.translate('单据编号')} ,
+                { field: 'status', align:"left", hide:false, sort: true, title: fox.translate('资产状态')} ,
+                { field: 'assetCode', align:"left", hide:false, sort: true, title: fox.translate('资产编号')} ,
+                { field: 'categoryId', align:"left", hide:false, sort: true, title: fox.translate('分类ID')} ,
+                { field: 'goodsId', align:"left", hide:false, sort: true, title: fox.translate('标准型号ID')} ,
+                { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('标准型号资产名称')} ,
+                { field: 'manufacturerId', align:"left", hide:false, sort: true, title: fox.translate('标准型号厂商')} ,
+                { field: 'brandId', align:"left", hide:false, sort: true, title: fox.translate('标准型号品牌')} ,
+                { field: 'model', align:"left", hide:false, sort: true, title: fox.translate('标准型号规格型号')} ,
+                { field: 'pictureId', align:"left", hide:false, sort: true, title: fox.translate('标准型号物品图片')} ,
+                { field: 'unit', align:"left", hide:false, sort: true, title: fox.translate('标准型号计量单位')} ,
+                { field: 'unitPrice', align:"right", hide:false, sort: true, title: fox.translate('标准型号单价')} ,
+                { field: 'rfid', align:"left", hide:false, sort: true, title: fox.translate('资产RFID')} ,
+                { field: 'assetNumber', align:"right", hide:false, sort: true, title: fox.translate('资产数量')} ,
+                { field: 'batchNumber', align:"left", hide:false, sort: true, title: fox.translate('批次号如果来自库存建议填写库存单据')} ,
+                { field: 'sn', align:"left", hide:false, sort: true, title: fox.translate('资产序列号')} ,
+                { field: 'sourceId', align:"left", hide:false, sort: true, title: fox.translate('来源')} ,
+                { field: 'sourceDetail', align:"left", hide:false, sort: true, title: fox.translate('来源详情')} ,
+                { field: 'areaId', align:"left", hide:false, sort: true, title: fox.translate('存放区域')} ,
+                { field: 'placeDetail', align:"left", hide:false, sort: true, title: fox.translate('存放地点')} ,
+                { field: 'userId', align:"left", hide:false, sort: true, title: fox.translate('使用人员')} ,
+				{ field: 'productionDate', align:"right", hide:false, sort: true, title: fox.translate('生产日期'), templet: function (d) { return fox.dateFormat(d.productionDate); }} ,
+				{ field: 'storageTime', align:"right", hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }} ,
+                { field: 'display', align:"left", hide:false, sort: true, title: fox.translate('是否显示(显示:1')} ,
+                { field: 'assetsNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
             ]]
@@ -84,10 +99,32 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.status={ value: xmSelect.get("#status",true).getValue("value") };
-		value.name={ value: $("#name").val() ,fuzzy: true };
-		value.model={ value: $("#model").val() ,fuzzy: true };
-		value.notes={ value: $("#notes").val() ,fuzzy: true };
+		value.id={ value: $("#id").val() };
+		value.busiCode={ value: $("#busiCode").val() };
+		value.status={ value: $("#status").val() };
+		value.assetCode={ value: $("#assetCode").val() };
+		value.categoryId={ value: $("#categoryId").val() };
+		value.goodsId={ value: $("#goodsId").val() };
+		value.name={ value: $("#name").val() };
+		value.manufacturerId={ value: $("#manufacturerId").val() };
+		value.brandId={ value: $("#brandId").val() };
+		value.model={ value: $("#model").val() };
+		value.pictureId={ value: $("#pictureId").val() };
+		value.unit={ value: $("#unit").val() };
+		value.unitPrice={ value: $("#unitPrice").val() };
+		value.rfid={ value: $("#rfid").val() };
+		value.assetNumber={ value: $("#assetNumber").val() };
+		value.batchNumber={ value: $("#batchNumber").val() };
+		value.sn={ value: $("#sn").val() };
+		value.sourceId={ value: $("#sourceId").val() };
+		value.sourceDetail={ value: $("#sourceDetail").val() };
+		value.areaId={ value: $("#areaId").val() };
+		value.placeDetail={ value: $("#placeDetail").val() };
+		value.userId={ value: $("#userId").val() };
+		value.productionDate={ begin: $("#productionDate-begin").val(), end: $("#productionDate-end").val() };
+		value.storageTime={ begin: $("#storageTime-begin").val(), end: $("#storageTime-end").val() };
+		value.display={ value: $("#display").val() };
+		value.assetsNotes={ value: $("#assetsNotes").val() };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -114,22 +151,18 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
-		//渲染 status 搜索框
-		fox.renderSelectBox({
-			el: "status",
-			size: "small",
-			radio: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
+			laydate.render({
+				elem: '#productionDate-begin'
+			});
+			laydate.render({
+				elem: '#productionDate-end'
+			});
+			laydate.render({
+				elem: '#storageTime-begin'
+			});
+			laydate.render({
+				elem: '#storageTime-end'
+			});
 	}
 	
 	/**
@@ -165,11 +198,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('物品档案')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('物品档案')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -209,7 +242,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('物品档案')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('资产')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -234,18 +267,18 @@ function ListPage() {
 	function showEditForm(data) {
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-goods-form-data', data);
-		var area=admin.getTempData('eam-goods-form-area');
+		admin.putTempData('eam-asset-form-data', data);
+		var area=admin.getTempData('eam-asset-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('物品档案')) : (fox.translate('添加')+fox.translate('物品档案'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产')) : (fox.translate('添加')+fox.translate('资产'));
 		admin.popupCenter({
 			title: title,
 			resize: true,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
-			content: '/business/eam/goods/goods_form.html' + queryString,
+			content: '/business/eam/asset/asset_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
