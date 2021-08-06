@@ -31,10 +31,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
 
 
-
-
         cfg.view().field(EAMTables.EAM_GOODS.ID).basic().hidden(true);
-
         cfg.view().field(EAMTables.EAM_GOODS.NAME).basic().label("物品名称").search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_GOODS.MODEL).basic().label("规格型号").search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_GOODS.REFERENCE_PRICE).basic().label("参考价").search().hidden();
