@@ -1,9 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+
 import com.dt.platform.constants.enums.eam.CommonStatusEnum;
-import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-import com.dt.platform.domain.eam.ResidualStrategy;
 import com.dt.platform.eam.page.ResidualStrategyPageController;
 import com.dt.platform.proxy.eam.ResidualStrategyServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
