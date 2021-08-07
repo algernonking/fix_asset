@@ -1,9 +1,9 @@
-package com.dt.platform.domain.eam;
+package com.dt.platform.domain.common;
 
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_CODE_ATTR;
+import com.dt.platform.constants.db.EAMTables.SYS_CODE_ATTR;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -16,17 +16,17 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:48
  * @sign 7240478BBCF43E6ABECF8B1F1634FC55
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "eam_code_attr")
+@Table(name = "sys_code_attr")
 public class CodeAttr extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_CODE_ATTR.$TABLE;
+	public static final DBTable TABLE =SYS_CODE_ATTR.$TABLE;
 	
 	/**
 	 * 主键：主键

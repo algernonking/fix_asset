@@ -1,10 +1,10 @@
-package com.dt.platform.eam.service;
+package com.dt.platform.common.service;
 
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.domain.common.CodeAttr;
+import com.dt.platform.domain.common.CodeAttrVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 编码分配属性 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:49
 */
 
 public interface ICodeAttrService extends ISuperService<CodeAttr> {

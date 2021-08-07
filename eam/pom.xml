@@ -40,12 +40,14 @@
 		<module>./service/service-hrm</module>
 		<module>./service/service-datacenter</module>
 		<module>./service/service-ops</module>
+		<module>./service/service-common</module>
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
 		<module>./view/view-hrm</module>
 		<module>./view/view-eam</module>
 		<module>./view/view-datacenter</module>
 		<module>./view/view-ops</module>
+		<module>./view/view-common</module>
 		<!-- 聚合 -->
 		<module>./wrapper/wrapper-all</module>
 	</modules>

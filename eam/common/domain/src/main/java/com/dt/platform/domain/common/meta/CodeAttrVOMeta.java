@@ -1,14 +1,14 @@
-package com.dt.platform.domain.eam.meta;
+package com.dt.platform.domain.common.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.domain.common.CodeAttrVO;
 import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:48
  * @sign BB700C461C082B664E4C8990233249DB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -23,7 +23,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 页码
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.Integer> PAGE_INDEX_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,PAGE_INDEX, java.lang.Integer.class, "页码", "", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.Integer> PAGE_INDEX_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,PAGE_INDEX, java.lang.Integer.class, "页码", "", java.lang.Integer.class, null);
 	
 	/**
 	 * 分页大小
@@ -33,7 +33,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 分页大小
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.Integer> PAGE_SIZE_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,PAGE_SIZE, java.lang.Integer.class, "分页大小", "", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.Integer> PAGE_SIZE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,PAGE_SIZE, java.lang.Integer.class, "分页大小", "", java.lang.Integer.class, null);
 	
 	/**
 	 * 搜索字段
@@ -43,7 +43,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 搜索字段
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> SEARCH_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,SEARCH_FIELD, java.lang.String.class, "搜索字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> SEARCH_FIELD_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,SEARCH_FIELD, java.lang.String.class, "搜索字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 模糊搜索字段
@@ -53,7 +53,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 模糊搜索字段
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> FUZZY_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,FUZZY_FIELD, java.lang.String.class, "模糊搜索字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> FUZZY_FIELD_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,FUZZY_FIELD, java.lang.String.class, "模糊搜索字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 搜索的值
@@ -63,7 +63,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 搜索的值
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> SEARCH_VALUE_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> SEARCH_VALUE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
 	
 	/**
 	 * 排序字段
@@ -73,7 +73,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 排序字段
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> SORT_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,SORT_FIELD, java.lang.String.class, "排序字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> SORT_FIELD_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,SORT_FIELD, java.lang.String.class, "排序字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 排序方式
@@ -83,7 +83,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 排序方式
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> SORT_TYPE_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> SORT_TYPE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
 	
 	/**
 	 * 主键清单 , 用于接收批量主键参数
@@ -93,7 +93,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 主键清单 , 用于接收批量主键参数
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.CodeAttrVO,java.lang.String> IDS_PROP=new BeanProperty(com.dt.platform.domain.eam.CodeAttrVO.class ,IDS, java.util.List.class, "主键清单", "用于接收批量主键参数", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttrVO,java.lang.String> IDS_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttrVO.class ,IDS, java.util.List.class, "主键清单", "用于接收批量主键参数", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -103,7 +103,7 @@ public class CodeAttrVOMeta extends CodeAttrMeta {
 	/**
 	 * 代理类
 	*/
-	public static class $$proxy$$ extends com.dt.platform.domain.eam.CodeAttrVO {
+	public static class $$proxy$$ extends com.dt.platform.domain.common.CodeAttrVO {
 
 		private static final long serialVersionUID = 1L;
 

@@ -2,7 +2,7 @@
 /**
  * 编码分配属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 09:36:55
+ * @since 2021-08-07 21:18:50
  */
  -->
  <!DOCTYPE html>
@@ -25,9 +25,9 @@
     <input name="id" id="id"  type="hidden"/>
     
     <div class="layui-form-item" >
-        <label class="layui-form-label" th:text="${lang.translate('编号')}">编号</label>
+        <label class="layui-form-label" th:text="${lang.translate('占位符')}">占位符</label>
         <div class="layui-input-block">
-            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编号') }" type="text" class="layui-input"   />
+            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('占位符') }" type="text" class="layui-input"   />
         </div>
     </div>
     
@@ -45,7 +45,7 @@
     <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('属性分类')}">属性分类</label>
         <div class="layui-input-block">
-            <input type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.CodeAttrTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
+            <input type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.CodeAttrTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
         </div>
     </div>
 

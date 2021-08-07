@@ -2,7 +2,7 @@
 /**
  * 编码分配属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 09:36:54
+ * @since 2021-08-07 21:18:50
  */
  -->
  <!DOCTYPE html>
@@ -27,8 +27,8 @@
         <div class="layui-form toolbar search-bar">
 
             <div class="search-unit">
-                <span th:text="${lang.translate('编号')}" class="search-label">编号</span><span class="search-colon">:</span>
-                <input id="code" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入编号')}"/>
+                <span th:text="${lang.translate('占位符')}" class="search-label">占位符</span><span class="search-colon">:</span>
+                <input id="code" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入占位符')}"/>
             </div>
             <div class="search-unit">
                 <span th:text="${lang.translate('编码名称')}" class="search-label">编码名称</span><span class="search-colon">:</span>
@@ -38,7 +38,7 @@
                 <span th:text="${lang.translate('属性分类')}" class="search-label">属性分类</span><span class="search-colon">:</span>
 
 
-                <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.CodeAttrTypeEnum')}" style="width:140px"></div>
+                <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeAttrTypeEnum')}" style="width:140px"></div>
             </div>
             <div class="search-unit">
                 <span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span>
@@ -69,7 +69,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.CodeAttrTypeEnum')}]];
+    var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeAttrTypeEnum')}]];
     var AUTH_PREFIX="eam_code_attr";
 </script>
 

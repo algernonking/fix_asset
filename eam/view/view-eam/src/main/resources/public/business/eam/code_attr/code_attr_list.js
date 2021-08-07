@@ -1,7 +1,7 @@
 /**
  * 编码分配属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 09:36:55
+ * @since 2021-08-07 21:18:50
  */
 
 
@@ -46,7 +46,7 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'code', align:"left", hide:false, sort: true, title: fox.translate('编号')} ,
+                { field: 'code', align:"left", hide:false, sort: true, title: fox.translate('占位符')} ,
                 { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('编码名称')} ,
 				{ field: 'type', align:"left", hide:false, sort: true, title: fox.translate('属性分类'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}} ,
                 { field: 'sort', align:"right", hide:false, sort: true, title: fox.translate('排序')} ,

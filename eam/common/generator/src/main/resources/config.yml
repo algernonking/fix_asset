@@ -71,5 +71,16 @@ applications:
     viewProjectPath: /view/view-ops
     viewPrefixPath: public/business/ops
     wrapperProjectPath: /wrapper/wrapper-all
+  #功能模块
+  service-common:
+    nacosGroup: service
+    nacosDataId: service-common.yml
+    serviceProjectPath: /service/service-common
+    packageName: com.dt.platform.common
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: COMMON
+    viewProjectPath: /view/view-common
+    viewPrefixPath: public/business/common
+    wrapperProjectPath: /wrapper/wrapper-all
  
     

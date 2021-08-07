@@ -1,4 +1,4 @@
-package com.dt.platform.eam.service.impl;
+package com.dt.platform.common.service.impl;
 
 
 import javax.annotation.Resource;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.domain.common.CodeAttr;
+import com.dt.platform.domain.common.CodeAttrVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,7 +26,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.ICodeAttrService;
+import com.dt.platform.common.service.ICodeAttrService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
@@ -35,11 +35,11 @@ import java.util.Date;
  * 编码分配属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:49
 */
 
 
-@Service("EamCodeAttrService")
+@Service("SysCodeAttrService")
 public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICodeAttrService {
 	
 	/**

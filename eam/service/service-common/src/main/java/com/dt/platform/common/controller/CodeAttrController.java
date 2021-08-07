@@ -1,4 +1,4 @@
-package com.dt.platform.eam.controller;
+package com.dt.platform.common.controller;
 
  
 import java.util.List;
@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
-import com.dt.platform.proxy.eam.CodeAttrServiceProxy;
-import com.dt.platform.domain.eam.meta.CodeAttrVOMeta;
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.proxy.common.CodeAttrServiceProxy;
+import com.dt.platform.domain.common.meta.CodeAttrVOMeta;
+import com.dt.platform.domain.common.CodeAttr;
+import com.dt.platform.domain.common.CodeAttrVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -32,7 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
-import com.dt.platform.domain.eam.meta.CodeAttrMeta;
+import com.dt.platform.domain.common.meta.CodeAttrMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +40,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiImplicitParam;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.dt.platform.eam.service.ICodeAttrService;
+import com.dt.platform.common.service.ICodeAttrService;
 import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
@@ -48,12 +48,12 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:49
 */
 
 @Api(tags = "编码分配属性")
 @ApiSort(0)
-@RestController("EamCodeAttrController")
+@RestController("SysCodeAttrController")
 public class CodeAttrController extends SuperController {
 
 	@Autowired

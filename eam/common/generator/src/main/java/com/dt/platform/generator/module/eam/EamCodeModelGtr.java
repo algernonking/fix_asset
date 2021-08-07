@@ -2,19 +2,11 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
-
-import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.meta.CategoryMeta;
-import com.dt.platform.domain.eam.meta.GoodsMeta;
-import com.dt.platform.eam.page.CodeAttrPageController;
-import com.dt.platform.proxy.eam.CategoryServiceProxy;
-import com.dt.platform.proxy.eam.CodeAttrServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamCodeAttrGtr extends BaseCodeGenerator {
+public class EamCodeModelGtr extends BaseCodeGenerator {
 
-    public EamCodeAttrGtr() {
+    public EamCodeModelGtr() {
         super(EAMTables.EAM_CODE_ATTR.$TABLE,BASIC_SETTING_MENU_ID);
     }
 
@@ -40,7 +32,7 @@ public class EamCodeAttrGtr extends BaseCodeGenerator {
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {
-        EamCodeAttrGtr g=new EamCodeAttrGtr();
+        EamCodeModelGtr g=new EamCodeModelGtr();
 
         //生成代码
         g.generateCode();

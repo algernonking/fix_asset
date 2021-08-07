@@ -1,4 +1,4 @@
-package com.dt.platform.proxy.eam;
+package com.dt.platform.proxy.common;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
@@ -7,8 +7,8 @@ import org.github.foxnic.web.proxy.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 
 
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.domain.common.CodeAttr;
+import com.dt.platform.domain.common.CodeAttrVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -19,21 +19,21 @@ import com.dt.platform.proxy.ServiceNames;
  * 编码分配属性  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-07 22:35:49
 */
 
-@FeignClient(value = ServiceNames.EAM, contextId = CodeAttrServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
+@FeignClient(value = ServiceNames.COMMON, contextId = CodeAttrServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface CodeAttrServiceProxy {
 	
 	/**
-	 * 基础路径 , service-eam
+	 * 基础路径 , service-common
 	*/
-	public static final String API_BASIC_PATH = "service-eam";
+	public static final String API_BASIC_PATH = "service-common";
 	
 	/**
-	 * API 上下文路径 , eam-code-attr
+	 * API 上下文路径 , sys-code-attr
 	*/
-	public static final String API_CONTEXT_PATH = "eam-code-attr";
+	public static final String API_CONTEXT_PATH = "sys-code-attr";
 	
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
@@ -160,7 +160,7 @@ public interface CodeAttrServiceProxy {
 	/**
 	 * 控制器类名
 	 * */
-	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.eam.controller.CodeAttrController";
+	public static final String CONTROLLER_CLASS_NAME="com.dt.platform.common.controller.CodeAttrController";
 
 	/**
 	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用
