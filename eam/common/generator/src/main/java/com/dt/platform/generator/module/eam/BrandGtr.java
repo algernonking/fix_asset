@@ -13,8 +13,7 @@ public class BrandGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
 
-        cfg.view().field(EAMTables.EAM_BRAND.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_BRAND.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 
         //文件生成覆盖模式

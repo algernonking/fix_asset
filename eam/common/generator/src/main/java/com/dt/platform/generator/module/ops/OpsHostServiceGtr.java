@@ -17,8 +17,7 @@ public class OpsHostServiceGtr extends BaseCodeGenerator{
 
 //        cfg.getPoClassFile().addSimpleProperty(ServiceType.class,"serviceType","类型","");
 
-        cfg.view().field(EAMTables.OPS_HOST.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
 
 
 

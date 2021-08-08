@@ -10,10 +10,10 @@ import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 服务类型 模版页面控制器
+ * 服务 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 21:59:45
+ * @since 2021-08-08 17:10:07
 */
 
 @Controller("OpsServicePageController")
@@ -38,7 +38,7 @@ public class OpsServicePageController extends ViewController {
 	}
 	
 	/**
-	 * 服务类型 功能主页面
+	 * 服务 功能主页面
 	 */
 	@RequestMapping("/ops_service_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class OpsServicePageController extends ViewController {
 	}
 
 	/**
-	 * 服务类型 表单页面
+	 * 服务 表单页面
 	 */
 	@RequestMapping("/ops_service_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

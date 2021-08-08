@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 层级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 21:52:04
+ * @since 2021-08-08 17:09:48
 */
 
 @Api(tags = "层级")
@@ -65,8 +65,8 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "添加层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -84,7 +84,7 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "删除层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = LayerVOMeta.ID)
@@ -118,8 +118,8 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "更新层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } ) 
@@ -137,8 +137,8 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "保存层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
@@ -195,8 +195,8 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "查询层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE } )
@@ -215,8 +215,8 @@ public class LayerController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询层级")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = LayerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473609699250405376"),
+		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

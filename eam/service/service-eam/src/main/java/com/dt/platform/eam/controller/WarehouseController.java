@@ -32,6 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.WarehouseMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 仓库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 21:10:37
+ * @since 2021-08-08 17:10:02
 */
 
 @Api(tags = "仓库")
@@ -166,8 +167,8 @@ public class WarehouseController extends SuperController {
 	@PostMapping(WarehouseServiceProxy.GET_BY_ID)
 	public Result<Warehouse> getById(String id) {
 		Result<Warehouse> result=new Result<>();
-		Warehouse role=warehouseService.getById(id);
-		result.success(true).data(role);
+		Warehouse warehouse=warehouseService.getById(id);
+		result.success(true).data(warehouse);
 		return result;
 	}
 

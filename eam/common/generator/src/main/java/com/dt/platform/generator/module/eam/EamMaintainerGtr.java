@@ -11,8 +11,7 @@ public class EamMaintainerGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_MAINTAINER.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_MAINTAINER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).search().fuzzySearch();
 

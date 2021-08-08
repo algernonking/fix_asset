@@ -11,8 +11,7 @@ public class EamAreaGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_AREA.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_AREA.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_AREA.AREA_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_AREA.AREA_NOTES).search().fuzzySearch();
 

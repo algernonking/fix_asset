@@ -45,13 +45,13 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 服务类型 接口控制器
+ * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 21:59:43
+ * @since 2021-08-08 17:10:07
 */
 
-@Api(tags = "服务类型")
+@Api(tags = "服务")
 @ApiSort(0)
 @RestController("OpsServiceController")
 public class OpsServiceController extends SuperController {
@@ -61,12 +61,12 @@ public class OpsServiceController extends SuperController {
 
 	
 	/**
-	 * 添加服务类型
+	 * 添加服务
 	*/
-	@ApiOperation(value = "添加服务类型")
+	@ApiOperation(value = "添加服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -81,11 +81,11 @@ public class OpsServiceController extends SuperController {
 
 	
 	/**
-	 * 删除服务类型
+	 * 删除服务
 	*/
-	@ApiOperation(value = "删除服务类型")
+	@ApiOperation(value = "删除服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = OpsServiceVOMeta.ID)
@@ -98,10 +98,10 @@ public class OpsServiceController extends SuperController {
 	
 	
 	/**
-	 * 批量删除服务类型 <br>
+	 * 批量删除服务 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-	@ApiOperation(value = "批量删除服务类型")
+	@ApiOperation(value = "批量删除服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 	})
@@ -115,12 +115,12 @@ public class OpsServiceController extends SuperController {
 	}
 	
 	/**
-	 * 更新服务类型
+	 * 更新服务
 	*/
-	@ApiOperation(value = "更新服务类型")
+	@ApiOperation(value = "更新服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -135,12 +135,12 @@ public class OpsServiceController extends SuperController {
 	
 	
 	/**
-	 * 保存服务类型
+	 * 保存服务
 	*/
-	@ApiOperation(value = "保存服务类型")
+	@ApiOperation(value = "保存服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -155,9 +155,9 @@ public class OpsServiceController extends SuperController {
 
 	
 	/**
-	 * 获取服务类型
+	 * 获取服务
 	*/
-	@ApiOperation(value = "获取服务类型")
+	@ApiOperation(value = "获取服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})
@@ -174,10 +174,10 @@ public class OpsServiceController extends SuperController {
 
 
 	/**
-	 * 批量删除服务类型 <br>
+	 * 批量删除服务 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除服务类型")
+		@ApiOperation(value = "批量删除服务")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = OpsServiceVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
@@ -194,12 +194,12 @@ public class OpsServiceController extends SuperController {
 
 	
 	/**
-	 * 查询服务类型
+	 * 查询服务
 	*/
-	@ApiOperation(value = "查询服务类型")
+	@ApiOperation(value = "查询服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -215,12 +215,12 @@ public class OpsServiceController extends SuperController {
 
 	
 	/**
-	 * 分页查询服务类型
+	 * 分页查询服务
 	*/
-	@ApiOperation(value = "分页查询服务类型")
+	@ApiOperation(value = "分页查询服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = OpsServiceVOMeta.TYPE , value = "服务类型" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = OpsServiceVOMeta.SERVICE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

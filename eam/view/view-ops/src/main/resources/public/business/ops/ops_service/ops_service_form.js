@@ -1,7 +1,7 @@
 /**
- * 服务类型 列表页 JS 脚本
+ * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 21:59:47
+ * @since 2021-08-08 17:10:07
  */
 
 function FormPage() {

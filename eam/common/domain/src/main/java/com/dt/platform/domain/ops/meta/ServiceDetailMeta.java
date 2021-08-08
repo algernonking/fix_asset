@@ -9,7 +9,7 @@ import com.dt.platform.domain.ops.OpsService;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 23:09:11
+ * @since 2021-08-08 17:10:08
  * @sign 8219A67F312D795D261708B5B7264138
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

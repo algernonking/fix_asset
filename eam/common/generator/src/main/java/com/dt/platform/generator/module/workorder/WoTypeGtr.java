@@ -8,10 +8,10 @@ import com.dt.platform.generator.module.ops.BaseCodeGenerator;
 import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class woTypeGtr extends BaseCodeGenerator{
+public class WoTypeGtr extends BaseCodeGenerator{
 
 
-    public woTypeGtr() {
+    public WoTypeGtr() {
         super(EAMTables.OPS_SERVICE_DETAIL.$TABLE,BASIC_DATA_MENU_ID);
     }
 
@@ -19,8 +19,7 @@ public class woTypeGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(OpsService.class,"opsService","服务","");
 //
-        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden();
 
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.PATCH).search().fuzzySearch();
@@ -46,7 +45,7 @@ public class woTypeGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        woTypeGtr g=new woTypeGtr();
+        WoTypeGtr g=new WoTypeGtr();
         //生成代码
         g.generateCode();
         //移除之前生成的菜单，视情况执行

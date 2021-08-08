@@ -11,8 +11,7 @@ public class EamSafetylevelGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().hidden();
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().hidden();
 

@@ -2,7 +2,7 @@
 /**
  * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 11:02:25
+ * @since 2021-08-08 17:09:42
  */
  -->
  <!DOCTYPE html>
@@ -24,7 +24,7 @@
 <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
     <input name="id" id="id"  type="hidden"/>
     
-    <div class="layui-form-item" style="display: none")>
+    <div class="layui-form-item" >
         <label class="layui-form-label" th:text="${lang.translate('占位符')}">占位符</label>
         <div class="layui-input-block">
             <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('占位符') }" type="text" class="layui-input"   />
@@ -43,7 +43,7 @@
 	
 	
     <div class="layui-form-item" >
-        <label class="layui-form-label" th:text="${lang.translate('属性分类')}">属性分类</label>
+        <label class="layui-form-label" th:text="${lang.translate('属性类型')}">属性类型</label>
         <div class="layui-input-block">
             <input type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.CodeAttrTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
         </div>

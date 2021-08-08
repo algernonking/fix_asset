@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 折旧策略  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-06 09:13:21
+ * @since 2021-08-08 17:09:59
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = ResidualStrategyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

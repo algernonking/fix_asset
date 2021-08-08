@@ -32,6 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.AreaMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产存放区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:43:38
+ * @since 2021-08-08 17:09:53
 */
 
 @Api(tags = "资产存放区域")
@@ -163,8 +164,8 @@ public class AreaController extends SuperController {
 	@PostMapping(AreaServiceProxy.GET_BY_ID)
 	public Result<Area> getById(String id) {
 		Result<Area> result=new Result<>();
-		Area role=areaService.getById(id);
-		result.success(true).data(role);
+		Area area=areaService.getById(id);
+		result.success(true).data(area);
 		return result;
 	}
 

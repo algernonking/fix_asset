@@ -1,7 +1,7 @@
 /**
  * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 11:02:24
+ * @since 2021-08-08 17:09:42
  */
 
 
@@ -46,9 +46,9 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'code', align:"left", hide:true, sort: true, title: fox.translate('占位符')} ,
+                { field: 'code', align:"left", hide:false, sort: true, title: fox.translate('占位符')} ,
                 { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('编码名称')} ,
-				{ field: 'type', align:"left", hide:false, sort: true, title: fox.translate('属性分类'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}} ,
+				{ field: 'type', align:"left", hide:false, sort: true, title: fox.translate('属性类型'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}} ,
                 { field: 'sort', align:"right", hide:true, sort: true, title: fox.translate('排序')} ,
                 { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,

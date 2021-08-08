@@ -12,8 +12,7 @@ public class EamWarehouseGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
 
-        cfg.view().field(EAMTables.EAM_WAREHOUSE.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_WAREHOUSE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_WAREHOUSE.WAREHOUSE_NOTES).search().fuzzySearch();
 

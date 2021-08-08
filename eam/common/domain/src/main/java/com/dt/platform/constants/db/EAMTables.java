@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-08 10:49:49
+ * @since 2021-08-08 17:09:10
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -3727,8 +3727,13 @@ public class EAMTables {
 		*/
 		public static final DBField ROLE_ID = new DBField(DBDataType.STRING , "role_id","roleId","角色ID","角色ID",false,false,true);
 		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
 		public SYS_CODE_EXAMPLE_ROLE() {
-			this.init($NAME,"" , ID , EXAMPLE_ID , ROLE_ID);
+			this.init($NAME,"" , ID , EXAMPLE_ID , ROLE_ID , VERSION);
 		}
 		public static final SYS_CODE_EXAMPLE_ROLE $TABLE=new SYS_CODE_EXAMPLE_ROLE();
 	}

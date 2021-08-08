@@ -32,6 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.SupplierMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 21:10:13
+ * @since 2021-08-08 17:10:01
 */
 
 @Api(tags = "供应商")
@@ -163,8 +164,8 @@ public class SupplierController extends SuperController {
 	@PostMapping(SupplierServiceProxy.GET_BY_ID)
 	public Result<Supplier> getById(String id) {
 		Result<Supplier> result=new Result<>();
-		Supplier role=supplierService.getById(id);
-		result.success(true).data(role);
+		Supplier supplier=supplierService.getById(id);
+		result.success(true).data(supplier);
 		return result;
 	}
 

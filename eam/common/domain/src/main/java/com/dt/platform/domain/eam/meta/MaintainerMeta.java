@@ -1,5 +1,6 @@
 package com.dt.platform.domain.eam.meta;
 
+import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Maintainer;
 import java.util.Date;
 
@@ -7,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:44:39
+ * @since 2021-08-08 17:09:56
  * @sign 5A939CF775FB384B2DDC0401C3185FAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -20,9 +21,19 @@ public class MaintainerMeta {
 	public static final String ID="id";
 	
 	/**
+	 * 主键
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
 	 * 名称
 	*/
 	public static final String MAINTAINER_NAME="maintainerName";
+	
+	/**
+	 * 名称
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> MAINTAINER_NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,MAINTAINER_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
 	 * 备注
@@ -30,9 +41,19 @@ public class MaintainerMeta {
 	public static final String MAINTAINER_NOTES="maintainerNotes";
 	
 	/**
+	 * 备注
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> MAINTAINER_NOTES_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,MAINTAINER_NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	
+	/**
 	 * 创建人ID
 	*/
 	public static final String CREATE_BY="createBy";
+	
+	/**
+	 * 创建人ID
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
 	 * 创建时间
@@ -40,9 +61,19 @@ public class MaintainerMeta {
 	public static final String CREATE_TIME="createTime";
 	
 	/**
+	 * 创建时间
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	
+	/**
 	 * 修改人ID
 	*/
 	public static final String UPDATE_BY="updateBy";
+	
+	/**
+	 * 修改人ID
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
 	 * 修改时间
@@ -50,9 +81,19 @@ public class MaintainerMeta {
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
+	 * 修改时间
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	
+	/**
 	 * 是否已删除
 	*/
 	public static final String DELETED="deleted";
+	
+	/**
+	 * 是否已删除
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
 	 * 删除人ID
@@ -60,14 +101,29 @@ public class MaintainerMeta {
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
+	 * 删除人ID
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	
+	/**
 	 * 删除时间
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
+	 * 删除时间
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	
+	/**
 	 * 数据版本号
 	*/
 	public static final String VERSION="version";
+	
+	/**
+	 * 数据版本号
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Maintainer,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.eam.Maintainer.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
 	
 	/**
 	 * 全部属性清单

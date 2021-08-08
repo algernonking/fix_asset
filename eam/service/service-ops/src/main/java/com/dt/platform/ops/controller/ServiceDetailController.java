@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 23:09:12
+ * @since 2021-08-08 17:10:08
 */
 
 @Api(tags = "服务明细")
@@ -67,9 +67,9 @@ public class ServiceDetailController extends SuperController {
 	@ApiOperation(value = "添加服务明细")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceDetailVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "11.2.0.4"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -123,9 +123,9 @@ public class ServiceDetailController extends SuperController {
 	@ApiOperation(value = "更新服务明细")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceDetailVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "11.2.0.4"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -145,9 +145,9 @@ public class ServiceDetailController extends SuperController {
 	@ApiOperation(value = "保存服务明细")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceDetailVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "11.2.0.4"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -208,9 +208,9 @@ public class ServiceDetailController extends SuperController {
 	@ApiOperation(value = "查询服务明细")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceDetailVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "11.2.0.4"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -231,9 +231,9 @@ public class ServiceDetailController extends SuperController {
 	@ApiOperation(value = "分页查询服务明细")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceDetailVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.SERVICE_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "11.2.0.4"),
-		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ServiceDetailVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceDetailVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})

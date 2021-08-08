@@ -16,10 +16,10 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 服务类型  控制器服务代理
+ * 服务  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-01 21:59:43
+ * @since 2021-08-08 17:10:07
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = OpsServiceServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -41,117 +41,117 @@ public interface OpsServiceServiceProxy {
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 	
 	/**
-	 * 添加服务类型
+	 * 添加服务
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
 	
 	/**
-	 * 删除服务类型
+	 * 删除服务
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
 
 	/**
-	 * 批量删除服务类型
+	 * 批量删除服务
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
 	;
 	
 	/**
-	 * 更新服务类型
+	 * 更新服务
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
 	
 	
 	/**
-	 * 保存服务类型
+	 * 保存服务
 	 */
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取单个服务类型
+	 * 获取单个服务
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
 
 	/**
-	 * 获取多个服务类型
+	 * 获取多个服务
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
 	;
 
 	/**
-	 * 查询服务类型
+	 * 查询服务
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
 	
 	/**
-	 * 分页查询服务类型
+	 * 分页查询服务
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
 	
 	/**
-	 * 导出服务类型数据(Excel)
+	 * 导出服务数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
 
 	/**
-	 * 下载服务类型导入模版(Excel)
+	 * 下载服务导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
-	 * 导入服务类型数据(Excel)
+	 * 导入服务数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 	
 	/**
-	 * 添加服务类型
+	 * 添加服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.INSERT)
 	Result insert(OpsServiceVO opsServiceVO);
 	
 	/**
-	 * 删除服务类型
+	 * 删除服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.DELETE)
 	Result deleteById(String id);
 
 	/**
-	 * 批量删除服务类型
+	 * 批量删除服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.DELETE_BY_IDS)
 	Result deleteByIds(List<String> ids);
 
 	/**
-	 * 更新服务类型
+	 * 更新服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.UPDATE)
 	Result update(OpsServiceVO opsServiceVO);
 	
 	/**
-	 * 更新服务类型
+	 * 更新服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.SAVE)
 	Result save(OpsServiceVO opsServiceVO);
 	
 	/**
-	 * 获取服务类型
+	 * 获取服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.GET_BY_ID)
 	Result<OpsService> getById(String id);
 
 	/**
-	 * 批量删除服务类型
+	 * 批量删除服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.GET_BY_IDS)
 	Result<List<OpsService>> getByIds(List<String> ids);
 	/**
-	 * 查询服务类型
+	 * 查询服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.QUERY_LIST)
 	Result<List<OpsService>> queryList(OpsServiceVO sample);
 	
 	/**
-	 * 分页查询服务类型
+	 * 分页查询服务
 	*/
 	@RequestMapping(OpsServiceServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<OpsService>> queryPagedList(OpsServiceVO sample);

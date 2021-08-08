@@ -32,6 +32,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.BrandMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -47,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌表 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:34:43
+ * @since 2021-08-08 17:09:51
 */
 
 @Api(tags = "品牌")
@@ -160,8 +161,8 @@ public class BrandController extends SuperController {
 	@PostMapping(BrandServiceProxy.GET_BY_ID)
 	public Result<Brand> getById(String id) {
 		Result<Brand> result=new Result<>();
-		Brand role=brandService.getById(id);
-		result.success(true).data(role);
+		Brand brand=brandService.getById(id);
+		result.success(true).data(brand);
 		return result;
 	}
 

@@ -1,5 +1,6 @@
 package com.dt.platform.domain.eam.meta;
 
+import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AreaVO;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-29 15:43:38
+ * @since 2021-08-08 17:09:53
  * @sign FC79045C9B18077C2742CEA55603602C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -20,9 +21,19 @@ public class AreaVOMeta extends AreaMeta {
 	public static final String PAGE_INDEX="pageIndex";
 	
 	/**
+	 * 页码
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.Integer> PAGE_INDEX_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,PAGE_INDEX, java.lang.Integer.class, "页码", "", java.lang.Integer.class, null);
+	
+	/**
 	 * 分页大小
 	*/
 	public static final String PAGE_SIZE="pageSize";
+	
+	/**
+	 * 分页大小
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.Integer> PAGE_SIZE_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,PAGE_SIZE, java.lang.Integer.class, "分页大小", "", java.lang.Integer.class, null);
 	
 	/**
 	 * 搜索字段
@@ -30,9 +41,19 @@ public class AreaVOMeta extends AreaMeta {
 	public static final String SEARCH_FIELD="searchField";
 	
 	/**
+	 * 搜索字段
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> SEARCH_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,SEARCH_FIELD, java.lang.String.class, "搜索字段", "", java.lang.String.class, null);
+	
+	/**
 	 * 模糊搜索字段
 	*/
 	public static final String FUZZY_FIELD="fuzzyField";
+	
+	/**
+	 * 模糊搜索字段
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> FUZZY_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,FUZZY_FIELD, java.lang.String.class, "模糊搜索字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 搜索的值
@@ -40,9 +61,19 @@ public class AreaVOMeta extends AreaMeta {
 	public static final String SEARCH_VALUE="searchValue";
 	
 	/**
+	 * 搜索的值
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> SEARCH_VALUE_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
+	
+	/**
 	 * 排序字段
 	*/
 	public static final String SORT_FIELD="sortField";
+	
+	/**
+	 * 排序字段
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> SORT_FIELD_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,SORT_FIELD, java.lang.String.class, "排序字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 排序方式
@@ -50,9 +81,19 @@ public class AreaVOMeta extends AreaMeta {
 	public static final String SORT_TYPE="sortType";
 	
 	/**
+	 * 排序方式
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> SORT_TYPE_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
+	
+	/**
 	 * 主键清单 , 用于接收批量主键参数
 	*/
 	public static final String IDS="ids";
+	
+	/**
+	 * 主键清单 , 用于接收批量主键参数
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AreaVO,java.lang.String> IDS_PROP=new BeanProperty(com.dt.platform.domain.eam.AreaVO.class ,IDS, java.util.List.class, "主键清单", "用于接收批量主键参数", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
