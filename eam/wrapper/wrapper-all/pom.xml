@@ -55,6 +55,13 @@
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
+			<artifactId>service-common</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>service-ops</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
@@ -86,6 +93,13 @@
 		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>view-ops</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>view-common</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 		

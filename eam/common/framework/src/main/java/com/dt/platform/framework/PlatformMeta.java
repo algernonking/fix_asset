@@ -46,6 +46,11 @@ public class PlatformMeta {
 	 * */
 	public static final String OPS_PACKAGE=BASE_PACKAGE+".ops";
 
+	/**
+	 * 常用服务
+	 * */
+	public static final String COMMON_PACKAGE=BASE_PACKAGE+".common";
+
 
 
  

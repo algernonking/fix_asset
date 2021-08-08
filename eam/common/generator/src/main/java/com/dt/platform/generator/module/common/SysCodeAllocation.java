@@ -1,27 +1,25 @@
 package com.dt.platform.generator.module.common;
+
+import com.dt.platform.common.page.CodeAllocationPageController;
 import com.dt.platform.common.page.CodeAttrPageController;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
-
+import com.dt.platform.domain.common.CodeAllocation;
+import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeAttrServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class SysCodeAttrGtr extends BaseCodeGenerator {
+public class SysCodeAllocation extends BaseCodeGenerator {
 
-    public SysCodeAttrGtr() {
-        super(EAMTables.SYS_CODE_ATTR.$TABLE,BASIC_CODE_MENU_ID);
+    public SysCodeAllocation() {
+        super(EAMTables.SYS_CODE_ALLOCATION.$TABLE,BASIC_CODE_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.ID)
-                .basic().hidden(true);
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).search().hidden();
-
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性分类")
-                .form().validate().required().form().radio().enumType(CodeAttrTypeEnum.class);
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).search().fuzzySearch();
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.NOTES).search().fuzzySearch();
 
 
         //文件生成覆盖模式
@@ -34,12 +32,12 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {
-        SysCodeAttrGtr g=new SysCodeAttrGtr();
+        SysCodeAllocation g=new SysCodeAllocation();
 
         //生成代码
-       // g.generateCode();
+        //g.generateCode();
         //生成菜单
-        g.generateMenu(CodeAttrServiceProxy.class, CodeAttrPageController.class);
+        g.generateMenu(CodeAllocationServiceProxy.class, CodeAllocationPageController.class);
     }
 
 }
