@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 09:44:14
- * @sign DD08644E349D66CD545C25DBA1E505E8
+ * @since 2021-08-08 11:05:13
+ * @sign C27B873187A93686C54C74683BCD4340
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,10 +48,10 @@ public class CodeRule extends Entity {
 	private String rule;
 	
 	/**
-	 * 所属模块：所属模块
+	 * 业务模块：业务模块
 	*/
-	@ApiModelProperty(required = false,value="所属模块" , notes = "所属模块")
-	private String model;
+	@ApiModelProperty(required = false,value="业务模块" , notes = "业务模块")
+	private String module;
 	
 	/**
 	 * 备注：备注
@@ -165,21 +165,21 @@ public class CodeRule extends Entity {
 	}
 	
 	/**
-	 * 获得 所属模块<br>
-	 * 所属模块
-	 * @return 所属模块
+	 * 获得 业务模块<br>
+	 * 业务模块
+	 * @return 业务模块
 	*/
-	public String getModel() {
-		return model;
+	public String getModule() {
+		return module;
 	}
 	
 	/**
-	 * 设置 所属模块
-	 * @param model 所属模块
+	 * 设置 业务模块
+	 * @param module 业务模块
 	 * @return 当前对象
 	*/
-	public CodeRule setModel(String model) {
-		this.model=model;
+	public CodeRule setModule(String module) {
+		this.module=module;
 		return this;
 	}
 	

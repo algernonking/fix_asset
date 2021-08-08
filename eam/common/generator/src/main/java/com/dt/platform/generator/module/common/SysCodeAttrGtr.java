@@ -14,13 +14,14 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.ID)
-                .basic().hidden(true);
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.CODE).search().hidden();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).search().hidden();
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).form().list().hidden();
 
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性分类")
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性类型")
                 .form().validate().required().form().radio().enumType(CodeAttrTypeEnum.class);
 
 
@@ -37,9 +38,9 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
         SysCodeAttrGtr g=new SysCodeAttrGtr();
 
         //生成代码
-       // g.generateCode();
+        g.generateCode();
         //生成菜单
-        g.generateMenu(CodeAttrServiceProxy.class, CodeAttrPageController.class);
+       // g.generateMenu(CodeAttrServiceProxy.class, CodeAttrPageController.class);
     }
 
 }

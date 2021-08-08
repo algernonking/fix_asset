@@ -32,18 +32,16 @@ import java.util.Date;
 
 /**
  * <p>
- * 编码分配属性 服务实现
+ * 编码属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 22:35:49
+ * @since 2021-08-08 11:02:22
 */
 
 
 @Service("SysCodeAttrService")
 public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICodeAttrService {
-
-
-
+	
 	/**
 	 * 注入DAO对象
 	 * */
@@ -82,7 +80,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 编码属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -103,7 +101,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	}
 	
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 编码属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -150,7 +148,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	
 	/**
-	 * 按主键更新字段 编码分配属性
+	 * 按主键更新字段 编码属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -164,7 +162,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	
 	/**
-	 * 按主键获取 编码分配属性
+	 * 按主键获取 编码属性
 	 *
 	 * @param id 主键
 	 * @return CodeAttr 数据对象

@@ -2,7 +2,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 09:44:18
+ * @since 2021-08-08 11:05:16
  */
  -->
  <!DOCTYPE html>
@@ -41,14 +41,14 @@
     </div>
     
 	
-    
-    <div class="layui-form-item" >
-        <label class="layui-form-label" th:text="${lang.translate('所属模块')}">所属模块</label>
-        <div class="layui-input-block">
-            <input lay-filter="model" id="model" name="model" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属模块') }" type="text" class="layui-input"   />
+
+        <div class="layui-form-item" >
+            <label class="layui-form-label" th:text="${lang.translate('业务模块')}">业务模块</label>
+            <div class="layui-input-block">
+                <div id="module" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}"></div>
+            </div>
         </div>
-    </div>
-    
+
 	
     
     <div class="layui-form-item" >

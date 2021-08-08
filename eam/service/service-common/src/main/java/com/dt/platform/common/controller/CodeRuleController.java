@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码规则 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 09:44:14
+ * @since 2021-08-08 11:05:13
 */
 
 @Api(tags = "编码规则")
@@ -68,7 +68,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODEL , value = "所属模块" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -123,7 +123,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODEL , value = "所属模块" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } ) 
@@ -144,7 +144,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODEL , value = "所属模块" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } )
@@ -204,7 +204,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODEL , value = "所属模块" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE } )
@@ -226,7 +226,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODEL , value = "所属模块" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

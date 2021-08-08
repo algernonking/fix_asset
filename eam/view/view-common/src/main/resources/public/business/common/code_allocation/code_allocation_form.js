@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 08:48:18
+ * @since 2021-08-08 12:19:34
  */
 
 function FormPage() {
@@ -45,6 +45,39 @@ function FormPage() {
 	function renderFormFields() {
 		form.render();
 	   
+		//渲染 module 下拉字段
+		fox.renderSelectBox({
+			el: "module",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].undefiled,value:data[i].undefiled});
+				}
+				return opts;
+			}
+		});
+		//渲染 ruleId 下拉字段
+		fox.renderSelectBox({
+			el: "ruleId",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -62,6 +95,20 @@ function FormPage() {
 			form.val('data-form', formData);
 
 
+			//设置 业务模块 下拉框选中值
+			var moduleSelect=xmSelect.get("#module",true);
+			var moduleOpionts=[];
+			if (formData.undefined)	{
+				moduleOpionts=moduleSelect.options.transform([formData.undefined]);
+			}
+			moduleSelect.setValue(moduleOpionts);
+			//设置 编码规则 下拉框选中值
+			var ruleIdSelect=xmSelect.get("#ruleId",true);
+			var ruleIdOpionts=[];
+			if (formData.rule)	{
+				ruleIdOpionts=ruleIdSelect.options.transform([formData.rule]);
+			}
+			ruleIdSelect.setValue(ruleIdOpionts);
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
@@ -89,6 +136,16 @@ function FormPage() {
 
 
 
+			//获取 业务模块 下拉框的值
+			data.field["module"]=xmSelect.get("#module",true).getValue("value");
+			if(data.field["module"] && data.field["module"].length>0) {
+				data.field["module"]=data.field["module"][0];
+			}
+			//获取 编码规则 下拉框的值
+			data.field["ruleId"]=xmSelect.get("#ruleId",true).getValue("value");
+			if(data.field["ruleId"] && data.field["ruleId"].length>0) {
+				data.field["ruleId"]=data.field["ruleId"][0];
+			}
 
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);

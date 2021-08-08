@@ -15,12 +15,12 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum CodeAttrTypeEnum implements CodeTextEnum {
 
-	TIME("time" , "时间类型"),
-	ORG("org" , "组织架构"),
 	STRING_FIX("string_fix" , "固定字符串"),
 	STRING_RAND("string_rand" , "随机字符串"),
-	NUMBER_SEQ("number_seq" , "顺序数字类型"),
-	NUMBER_RAND("number_rand" , "随机数字类型"),
+	NUMBER_SEQ("number_seq" , "顺序数字"),
+	NUMBER_RAND("number_rand" , "随机数字"),
+	TIME("time" , "时间"),
+	ORG("org" , "组织架构"),
 	;
 
 	private String code;

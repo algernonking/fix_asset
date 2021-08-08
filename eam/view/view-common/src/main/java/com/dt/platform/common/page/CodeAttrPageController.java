@@ -10,10 +10,10 @@ import com.dt.platform.proxy.common.CodeAttrServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 编码分配属性 模版页面控制器
+ * 编码属性 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 22:35:50
+ * @since 2021-08-08 11:02:24
 */
 
 @Controller("SysCodeAttrPageController")
@@ -38,7 +38,7 @@ public class CodeAttrPageController extends ViewController {
 	}
 	
 	/**
-	 * 编码分配属性 功能主页面
+	 * 编码属性 功能主页面
 	 */
 	@RequestMapping("/code_attr_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class CodeAttrPageController extends ViewController {
 	}
 
 	/**
-	 * 编码分配属性 表单页面
+	 * 编码属性 表单页面
 	 */
 	@RequestMapping("/code_attr_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

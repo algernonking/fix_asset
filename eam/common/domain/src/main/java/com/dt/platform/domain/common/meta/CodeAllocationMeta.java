@@ -3,13 +3,14 @@ package com.dt.platform.domain.common.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.common.CodeAllocation;
 import java.util.Date;
+import com.dt.platform.domain.common.CodeRule;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 08:48:14
- * @sign A1FD6E60FACDBF4986CBAE936F9C125F
+ * @since 2021-08-08 12:19:30
+ * @sign F66804B3CE0B84513359F0609CB7A07C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,24 +27,24 @@ public class CodeAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 所属模块
+	 * 业务模块
 	*/
 	public static final String MODULE="module";
 	
 	/**
-	 * 所属模块
+	 * 业务模块
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> MODULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,MODULE, java.lang.String.class, "所属模块", "所属模块", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> MODULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,MODULE, java.lang.String.class, "业务模块", "业务模块", java.lang.String.class, null);
 	
 	/**
-	 * 所属模块
+	 * 规则ID
 	*/
 	public static final String RULE_ID="ruleId";
 	
 	/**
-	 * 所属模块
+	 * 规则ID
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> RULE_ID_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,RULE_ID, java.lang.String.class, "所属模块", "所属模块", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> RULE_ID_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,RULE_ID, java.lang.String.class, "规则ID", "规则ID", java.lang.String.class, null);
 	
 	/**
 	 * 备注
@@ -136,9 +137,19 @@ public class CodeAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 编码规则
+	*/
+	public static final String R_ULE="RULE";
+	
+	/**
+	 * 编码规则
+	*/
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,com.dt.platform.domain.common.CodeRule> R_ULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,R_ULE, com.dt.platform.domain.common.CodeRule.class, "编码规则", "编码规则", com.dt.platform.domain.common.CodeRule.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , MODULE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , MODULE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , R_ULE };
 	
 	/**
 	 * 代理类
@@ -160,8 +171,8 @@ public class CodeAllocationMeta {
 		}
 		
 		/**
-		 * 设置 所属模块
-		 * @param module 所属模块
+		 * 设置 业务模块
+		 * @param module 业务模块
 		 * @return 当前对象
 		*/
 		public CodeAllocation setModule(String module) {
@@ -171,8 +182,8 @@ public class CodeAllocationMeta {
 		}
 		
 		/**
-		 * 设置 所属模块
-		 * @param ruleId 所属模块
+		 * 设置 规则ID
+		 * @param ruleId 规则ID
 		 * @return 当前对象
 		*/
 		public CodeAllocation setRuleId(String ruleId) {
@@ -277,6 +288,17 @@ public class CodeAllocationMeta {
 		public CodeAllocation setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码规则
+		 * @param RULE 编码规则
+		 * @return 当前对象
+		*/
+		public CodeAllocation setRULE(CodeRule RULE) {
+			super.change(R_ULE,super.getRULE(),RULE);
+			super.setRULE(RULE);
 			return this;
 		}
 	}

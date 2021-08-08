@@ -1,7 +1,7 @@
 /**
- * 编码分配属性 列表页 JS 脚本
+ * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 22:35:51
+ * @since 2021-08-08 11:02:24
  */
 
 
@@ -46,10 +46,10 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'code', align:"left", hide:false, sort: true, title: fox.translate('占位符')} ,
+                { field: 'code', align:"left", hide:true, sort: true, title: fox.translate('占位符')} ,
                 { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('编码名称')} ,
 				{ field: 'type', align:"left", hide:false, sort: true, title: fox.translate('属性分类'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}} ,
-                { field: 'sort', align:"right", hide:false, sort: true, title: fox.translate('排序')} ,
+                { field: 'sort', align:"right", hide:true, sort: true, title: fox.translate('排序')} ,
                 { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -79,7 +79,6 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.code={ value: $("#code").val() };
 		value.name={ value: $("#name").val() ,fuzzy: true };
 		value.type={ value: xmSelect.get("#type",true).getValue("value") };
 		value.notes={ value: $("#notes").val() ,fuzzy: true };
@@ -160,11 +159,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('编码分配属性')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('编码属性')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('编码分配属性')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('编码属性')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -204,7 +203,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('编码分配属性')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('编码属性')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -233,7 +232,7 @@ function ListPage() {
 		var area=admin.getTempData('sys-code-attr-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('编码分配属性')) : (fox.translate('添加')+fox.translate('编码分配属性'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('编码属性')) : (fox.translate('添加')+fox.translate('编码属性'));
 		admin.popupCenter({
 			title: title,
 			resize: true,

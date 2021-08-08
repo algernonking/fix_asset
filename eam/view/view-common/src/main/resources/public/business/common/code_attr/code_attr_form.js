@@ -1,7 +1,7 @@
 /**
- * 编码分配属性 列表页 JS 脚本
+ * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 22:35:52
+ * @since 2021-08-08 11:02:25
  */
 
 function FormPage() {

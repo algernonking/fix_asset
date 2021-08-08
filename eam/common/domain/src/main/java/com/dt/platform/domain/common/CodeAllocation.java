@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 08:48:14
- * @sign A1FD6E60FACDBF4986CBAE936F9C125F
+ * @since 2021-08-08 12:19:30
+ * @sign F66804B3CE0B84513359F0609CB7A07C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,15 +36,15 @@ public class CodeAllocation extends Entity {
 	private String id;
 	
 	/**
-	 * 所属模块：所属模块
+	 * 业务模块：业务模块
 	*/
-	@ApiModelProperty(required = false,value="所属模块" , notes = "所属模块")
+	@ApiModelProperty(required = false,value="业务模块" , notes = "业务模块")
 	private String module;
 	
 	/**
-	 * 所属模块：所属模块
+	 * 规则ID：规则ID
 	*/
-	@ApiModelProperty(required = false,value="所属模块" , notes = "所属模块")
+	@ApiModelProperty(required = false,value="规则ID" , notes = "规则ID")
 	private String ruleId;
 	
 	/**
@@ -102,6 +102,12 @@ public class CodeAllocation extends Entity {
 	private Integer version;
 	
 	/**
+	 * 编码规则：编码规则
+	*/
+	@ApiModelProperty(required = false,value="编码规则" , notes = "编码规则")
+	private CodeRule RULE;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -121,17 +127,17 @@ public class CodeAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 所属模块<br>
-	 * 所属模块
-	 * @return 所属模块
+	 * 获得 业务模块<br>
+	 * 业务模块
+	 * @return 业务模块
 	*/
 	public String getModule() {
 		return module;
 	}
 	
 	/**
-	 * 设置 所属模块
-	 * @param module 所属模块
+	 * 设置 业务模块
+	 * @param module 业务模块
 	 * @return 当前对象
 	*/
 	public CodeAllocation setModule(String module) {
@@ -140,17 +146,17 @@ public class CodeAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 所属模块<br>
-	 * 所属模块
-	 * @return 所属模块
+	 * 获得 规则ID<br>
+	 * 规则ID
+	 * @return 规则ID
 	*/
 	public String getRuleId() {
 		return ruleId;
 	}
 	
 	/**
-	 * 设置 所属模块
-	 * @param ruleId 所属模块
+	 * 设置 规则ID
+	 * @param ruleId 规则ID
 	 * @return 当前对象
 	*/
 	public CodeAllocation setRuleId(String ruleId) {
@@ -326,6 +332,25 @@ public class CodeAllocation extends Entity {
 	*/
 	public CodeAllocation setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码规则<br>
+	 * 编码规则
+	 * @return 编码规则
+	*/
+	public CodeRule getRULE() {
+		return RULE;
+	}
+	
+	/**
+	 * 设置 编码规则
+	 * @param RULE 编码规则
+	 * @return 当前对象
+	*/
+	public CodeAllocation setRULE(CodeRule RULE) {
+		this.RULE=RULE;
 		return this;
 	}
 

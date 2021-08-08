@@ -12,11 +12,11 @@ public class PlatformRelationManager extends RelationManager {
 		super(
 				new OAuthRelationManager(),
 				new SystemRelationManager(),
-				//
 				new HRMRelationManager(),
 				new KNRelationManager(),
 				new EAMRelationManager(),
 				new OPSRelationManager(),
+				new CommonRelationManager(),
 				new DCRelationManager()
 
 		);

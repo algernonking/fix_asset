@@ -2,7 +2,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 09:44:17
+ * @since 2021-08-08 11:05:15
  */
  -->
  <!DOCTYPE html>
@@ -29,18 +29,6 @@
             <div class="search-unit">
                 <span th:text="${lang.translate('编码名称')}" class="search-label">编码名称</span><span class="search-colon">:</span>
                 <input id="name" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入编码名称')}"/>
-            </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('编码规则')}" class="search-label">编码规则</span><span class="search-colon">:</span>
-                <input id="rule" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入编码规则')}"/>
-            </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('所属模块')}" class="search-label">所属模块</span><span class="search-colon">:</span>
-                <input id="model" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入所属模块')}"/>
-            </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span>
-                <input id="notes" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入备注')}"/>
             </div>
 
             <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>

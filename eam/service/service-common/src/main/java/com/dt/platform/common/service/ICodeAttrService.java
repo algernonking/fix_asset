@@ -18,10 +18,10 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 编码分配属性 服务接口
+ * 编码属性 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 22:35:49
+ * @since 2021-08-08 11:02:22
 */
 
 public interface ICodeAttrService extends ISuperService<CodeAttr> {
@@ -43,7 +43,7 @@ public interface ICodeAttrService extends ISuperService<CodeAttr> {
 	
 		
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 编码属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface ICodeAttrService extends ISuperService<CodeAttr> {
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 编码属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface ICodeAttrService extends ISuperService<CodeAttr> {
 	
 		
 	/**
-	 * 按主键更新字段 编码分配属性
+	 * 按主键更新字段 编码属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +124,7 @@ public interface ICodeAttrService extends ISuperService<CodeAttr> {
  
 		
 	/**
-	 * 按主键获取 编码分配属性
+	 * 按主键获取 编码属性
 	 *
 	 * @param id 主键
 	 * @return CodeAttr 数据对象

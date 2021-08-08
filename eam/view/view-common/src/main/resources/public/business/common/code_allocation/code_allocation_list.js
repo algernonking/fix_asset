@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 08:48:17
+ * @since 2021-08-08 12:19:33
  */
 
 
@@ -46,8 +46,8 @@ function ListPage() {
 				{  fixed: 'left',type: 'numbers' },
 			 	{  fixed: 'left',type:'checkbox' },
                 { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'module', align:"left", hide:false, sort: true, title: fox.translate('所属模块')} ,
-                { field: 'ruleId', align:"left", hide:false, sort: true, title: fox.translate('所属模块')} ,
+				{ field: 'module', align:"left", hide:false, sort: true, title: fox.translate('业务模块')} ,
+				{ field: 'ruleId', align:"left", hide:false, sort: true, title: fox.translate('编码规则'), templet: function (d) { return fox.joinLabel(d.rule,"name");}} ,
                 { field: 'notes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
 				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
                 { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -77,8 +77,6 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.module={ value: $("#module").val() ,fuzzy: true };
-		value.ruleId={ value: $("#ruleId").val() };
 		value.notes={ value: $("#notes").val() ,fuzzy: true };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });

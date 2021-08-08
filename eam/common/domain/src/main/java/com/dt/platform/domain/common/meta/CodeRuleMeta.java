@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 09:44:14
- * @sign DD08644E349D66CD545C25DBA1E505E8
+ * @since 2021-08-08 11:05:13
+ * @sign C27B873187A93686C54C74683BCD4340
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,14 +46,14 @@ public class CodeRuleMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> RULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,RULE, java.lang.String.class, "编码规则", "编码规则", java.lang.String.class, null);
 	
 	/**
-	 * 所属模块
+	 * 业务模块
 	*/
-	public static final String MODEL="model";
+	public static final String MODULE="module";
 	
 	/**
-	 * 所属模块
+	 * 业务模块
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> MODEL_PROP=new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,MODEL, java.lang.String.class, "所属模块", "所属模块", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> MODULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,MODULE, java.lang.String.class, "业务模块", "业务模块", java.lang.String.class, null);
 	
 	/**
 	 * 备注
@@ -148,7 +148,7 @@ public class CodeRuleMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , RULE , MODEL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , RULE , MODULE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -192,13 +192,13 @@ public class CodeRuleMeta {
 		}
 		
 		/**
-		 * 设置 所属模块
-		 * @param model 所属模块
+		 * 设置 业务模块
+		 * @param module 业务模块
 		 * @return 当前对象
 		*/
-		public CodeRule setModel(String model) {
-			super.change(MODEL,super.getModel(),model);
-			super.setModel(model);
+		public CodeRule setModule(String module) {
+			super.change(MODULE,super.getModule(),module);
+			super.setModule(module);
 			return this;
 		}
 		
