@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:37
- * @sign F66804B3CE0B84513359F0609CB7A07C
+ * @since 2021-08-08 17:30:55
+ * @sign BA335B07CD3BCA1E6B3B84CE15C64D6D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -105,7 +105,7 @@ public class CodeAllocation extends Entity {
 	 * 编码规则：编码规则
 	*/
 	@ApiModelProperty(required = false,value="编码规则" , notes = "编码规则")
-	private CodeRule RULE;
+	private CodeRule rule;
 	
 	/**
 	 * 获得 主键<br>
@@ -340,17 +340,17 @@ public class CodeAllocation extends Entity {
 	 * 编码规则
 	 * @return 编码规则
 	*/
-	public CodeRule getRULE() {
-		return RULE;
+	public CodeRule getRule() {
+		return rule;
 	}
 	
 	/**
 	 * 设置 编码规则
-	 * @param RULE 编码规则
+	 * @param rule 编码规则
 	 * @return 当前对象
 	*/
-	public CodeAllocation setRULE(CodeRule RULE) {
-		this.RULE=RULE;
+	public CodeAllocation setRule(CodeRule rule) {
+		this.rule=rule;
 		return this;
 	}
 

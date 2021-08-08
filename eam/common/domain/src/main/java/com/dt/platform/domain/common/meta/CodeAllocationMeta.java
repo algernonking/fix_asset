@@ -9,8 +9,8 @@ import com.dt.platform.domain.common.CodeRule;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:37
- * @sign F66804B3CE0B84513359F0609CB7A07C
+ * @since 2021-08-08 17:30:55
+ * @sign BA335B07CD3BCA1E6B3B84CE15C64D6D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -139,17 +139,17 @@ public class CodeAllocationMeta {
 	/**
 	 * 编码规则
 	*/
-	public static final String R_ULE="RULE";
+	public static final String RULE="rule";
 	
 	/**
 	 * 编码规则
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,com.dt.platform.domain.common.CodeRule> R_ULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,R_ULE, com.dt.platform.domain.common.CodeRule.class, "编码规则", "编码规则", com.dt.platform.domain.common.CodeRule.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,com.dt.platform.domain.common.CodeRule> RULE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,RULE, com.dt.platform.domain.common.CodeRule.class, "编码规则", "编码规则", com.dt.platform.domain.common.CodeRule.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , MODULE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , R_ULE };
+	public static final String[] $PROPS={ ID , MODULE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , RULE };
 	
 	/**
 	 * 代理类
@@ -293,12 +293,12 @@ public class CodeAllocationMeta {
 		
 		/**
 		 * 设置 编码规则
-		 * @param RULE 编码规则
+		 * @param rule 编码规则
 		 * @return 当前对象
 		*/
-		public CodeAllocation setRULE(CodeRule RULE) {
-			super.change(R_ULE,super.getRULE(),RULE);
-			super.setRULE(RULE);
+		public CodeAllocation setRule(CodeRule rule) {
+			super.change(RULE,super.getRule(),rule);
+			super.setRule(rule);
 			return this;
 		}
 	}
