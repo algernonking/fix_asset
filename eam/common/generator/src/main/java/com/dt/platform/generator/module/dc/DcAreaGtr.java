@@ -26,7 +26,7 @@ public class DcAreaGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
 
         cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
-              .form().validate().required().form().radio().enumType(AreaTypeEnum.class);
+              .form().validate().required().form().radioBox().enumType(AreaTypeEnum.class);
 
 
         //文件生成覆盖模式

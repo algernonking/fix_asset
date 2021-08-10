@@ -20,7 +20,7 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.STATUS).basic().label("状态")
-                .form().validate().required().form().radio().enumType(CommonStatusEnum.class);
+                .form().validate().required().form().radioBox().enumType(CommonStatusEnum.class);
 
 
         //文件生成覆盖模式

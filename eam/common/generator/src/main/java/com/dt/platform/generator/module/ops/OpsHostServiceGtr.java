@@ -2,8 +2,6 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-import com.dt.platform.ops.page.OpsServicePageController;
-import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostServiceGtr extends BaseCodeGenerator{
@@ -28,7 +26,7 @@ public class OpsHostServiceGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_SERVICE.TYPE).basic().label("服务类型")
-                .form().validate().required().form().radio().enumType(ServiceTypeEnum.class);
+                .form().validate().required().form().radioBox().enumType(ServiceTypeEnum.class);
 
 
 

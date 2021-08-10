@@ -30,7 +30,7 @@ public class WoTypeGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID)
                 .basic().label("服务")
                 .form().validate().required()
-                .form().select().queryApi(OpsServiceServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(OpsServiceServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(OpsServiceMeta.ID).textField(OpsServiceMeta.SERVICE_NAME).fillBy(ServiceDetailMeta.OPS_SERVICE).muliti(false);
 
         //文件生成覆盖模式

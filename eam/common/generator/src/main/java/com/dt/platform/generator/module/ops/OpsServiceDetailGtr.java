@@ -2,15 +2,9 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.ops.OpsService;
-import com.dt.platform.domain.ops.ServiceType;
 import com.dt.platform.domain.ops.meta.OpsServiceMeta;
 import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
-import com.dt.platform.domain.ops.meta.ServiceTypeMeta;
-import com.dt.platform.ops.page.OpsServicePageController;
-import com.dt.platform.ops.page.ServiceDetailPageController;
 import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
-import com.dt.platform.proxy.ops.ServiceDetailServiceProxy;
-import com.dt.platform.proxy.ops.ServiceTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsServiceDetailGtr extends BaseCodeGenerator{
@@ -35,7 +29,7 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID)
                 .basic().label("服务")
                 .form().validate().required()
-                .form().select().queryApi(OpsServiceServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(OpsServiceServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(OpsServiceMeta.ID).textField(OpsServiceMeta.SERVICE_NAME).fillBy(ServiceDetailMeta.OPS_SERVICE).muliti(false);
 
         //文件生成覆盖模式

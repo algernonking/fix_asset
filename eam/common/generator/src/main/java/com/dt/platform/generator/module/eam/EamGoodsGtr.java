@@ -41,25 +41,25 @@ public class EamGoodsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID).basic().label("图片").search().hidden();
         cfg.view().field(EAMTables.EAM_GOODS.STATUS).basic().label("状态")
-                .form().validate().required().form().radio().enumType(GoodsStautsEnum.class);
+                .form().validate().required().form().radioBox().enumType(GoodsStautsEnum.class);
 
         cfg.view().field(EAMTables.EAM_GOODS.CATEGORY_ID)
                 .basic().label("资产分类").search().hidden()
                 .form().validate().required()
-                .form().select().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
+                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(GoodsMeta.CATEGORY).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
                 .basic().label("品牌").search().hidden()
                 .form().validate().required()
-                .form().select().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillBy(GoodsMeta.BRAND).muliti(false);
 
         cfg.view().field(EAMTables.EAM_GOODS.MANUFACTURER_ID)
                 .basic().label("生产厂商").search().hidden()
                 .form().validate().required()
-                .form().select().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(GoodsMeta.MANUFACTURER).muliti(false);
 
         //文件生成覆盖模式

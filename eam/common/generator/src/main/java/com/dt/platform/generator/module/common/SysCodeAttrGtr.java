@@ -1,9 +1,6 @@
 package com.dt.platform.generator.module.common;
-import com.dt.platform.common.page.CodeAttrPageController;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
-
-import com.dt.platform.proxy.common.CodeAttrServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class SysCodeAttrGtr extends BaseCodeGenerator {
@@ -22,7 +19,7 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).form().list().hidden();
 
         cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性类型")
-                .form().validate().required().form().radio().enumType(CodeAttrTypeEnum.class);
+                .form().validate().required().form().radioBox().enumType(CodeAttrTypeEnum.class);
 
 
         //文件生成覆盖模式

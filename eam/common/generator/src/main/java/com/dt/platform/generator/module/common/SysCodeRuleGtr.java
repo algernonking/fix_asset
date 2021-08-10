@@ -2,10 +2,6 @@ package com.dt.platform.generator.module.common;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-import com.dt.platform.domain.eam.meta.CategoryMeta;
-import com.dt.platform.domain.eam.meta.GoodsMeta;
-import com.dt.platform.proxy.eam.CategoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class SysCodeRuleGtr extends BaseCodeGenerator {
@@ -24,8 +20,8 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).basic().label("业务模块")
-                .form().validate().required().form().select()
-                .enumType(CodeModuleEnum.class).form().select().paging(false).muliti(false);
+                .form().validate().required().form().selectBox()
+                .enumType(CodeModuleEnum.class).form().selectBox().paging(false).muliti(false);
 
 
         //文件生成覆盖模式

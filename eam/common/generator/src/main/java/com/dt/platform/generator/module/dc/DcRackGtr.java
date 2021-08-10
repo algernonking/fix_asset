@@ -46,13 +46,13 @@ public class DcRackGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_RACK.AREA_ID)
                 .basic().label("区域")
                 .form().validate().required()
-                .form().select().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillBy(RackMeta.AREA).muliti(false);
 
         cfg.view().field(EAMTables.DC_RACK.LAYER_ID)
                 .basic().label("层级")
                 .form().validate().required()
-                .form().select().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(RackMeta.LAYER).muliti(false);
 
 

@@ -33,14 +33,14 @@ public class SysCodeAllocation extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
                 .basic().label("编码规则").search().hidden()
                 .form().validate().required()
-                .form().select().queryApi(CodeRuleServiceProxy.QUERY_PAGED_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_PAGED_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
 
 
 
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).basic().label("业务模块")
-                .form().validate().required().form().select().paging(false).muliti(false).filter(false).toolbar(false)
+                .form().validate().required().form().selectBox().paging(false).muliti(false).filter(false).toolbar(false)
                 .enumType(CodeModuleEnum.class);
 
 
