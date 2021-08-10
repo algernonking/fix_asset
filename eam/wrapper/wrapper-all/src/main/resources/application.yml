@@ -98,3 +98,7 @@ storage:
 develop:
   language: defaults
   start-relation-monitor: true
+  deploy:
+    enable: true
+    # 可以使用以当前项目为基础的相对路径，指定静态资源自动部署的项目目录
+    projects: ../view/view-common, ../view/view-console, ../view/view-datacenter, ../view/view-eam, ../view/view-hrm, ../view/view-ops
