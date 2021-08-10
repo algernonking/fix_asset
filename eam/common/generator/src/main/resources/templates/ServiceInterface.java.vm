@@ -238,5 +238,14 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
+	#if(relationMasterIdField!=null)
+	/**
+	 * 保存关系
+	 * @param #(relationMasterVar) #(relationMasterVarDoc)
+	 * @param #(relationSlaveVar) #(relationSlaveVarDoc)
+	 */
+	void saveRelation(#(relationMasterVarType) #(relationMasterVar),List<#(relationSlaveVarType)> #(relationSlaveVar));
+	#end
  
 }

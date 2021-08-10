@@ -41,72 +41,118 @@ function ListPage() {
       * 渲染表格
       */
     function renderTable() {
-     
-		fox.renderTable({
-			elem: '#data-table',
-            url: moduleURL +'/query-paged-list',
-		 	height: 'full-78',
-		 	limit: 50,
-            #if(isTree) 
-            //树形结构需要传递相关参数
-            where: { #(parentIdVar) : #(parentIdVar) } ,
-            #end
-			cols: [[
-				{  fixed: 'left',type: 'numbers' },
-			 	{  fixed: 'left',type:'checkbox' },
-                #for(f : fields)
-		 		#if(f.isDateField)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
-				#elseif(f.isUploadField && f.uploadField.isImageOnly && f.uploadField.count==1)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
-				#elseif(f.isRadioField)
-				#if(f.radioField.dictCode!=null)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+		$(window).resize(function() {
+			adjustSearchElement();
+		});
+		adjustSearchElement();
+		//
+		function renderTableInternal() {
+			var h=$(".search-bar").height();
+			fox.renderTable({
+				elem: '#data-table',
+				toolbar: '#toolbarTemplate',
+				defaultToolbar: ['filter', 'print'],
+				url: moduleURL +'/query-paged-list',
+				height: 'full-'+(h+28),
+				limit: 50,
+				#if(isTree)
+				//树形结构需要传递相关参数
+				where: { #(parentIdVar) : #(parentIdVar) } ,
 				#end
-				#if(f.radioField.enumTypeName!=null)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
-				#end
-				#elseif(f.isLogicField)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: '#cell-tpl-#(f.varName)'} ,
-				#elseif(f.isSelectField)
-				#if(f.selectField.enumTypeName!=null)
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)')} ,
-				#else
-				{ field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.joinLabel(d.#(f.selectField.fillBy),"#(f.selectField.textField)");}} ,
-				#end
-				#else
-                { field: '#(f.varName)', align:"#(f.alignInList)", hide:#(f.isHideInList), sort: true, title: fox.translate('#(f.labelInList)')} ,
-				#end
-                #end
-                { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
-            ]]
-	 		,footer : {
-				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
-				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
-					params : {} ,
-				 	callback : function(r) {
-						if(r.success) {
-							layer.msg(fox.translate('数据导入成功')+"!");
-						} else {
-							layer.msg(fox.translate('数据导入失败')+"!");
+				cols: [[
+					{ fixed: 'left',type: 'numbers' },
+					{ fixed: 'left',type:'checkbox' },
+					#for(f : fields)
+					#if(f.typeName.equals("date_input"))
+					{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.dateFormat(d.#(f.varName)); }} ,
+					#elseif(f.typeName.equals("upload") && f.uploadField.isImageOnly && f.uploadField.count==1)
+					{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } } ,
+					#elseif(f.typeName.equals("radio_box"))
+					#if(f.radioField.dictCode!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#if(f.radioField.enumTypeName!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#elseif(f.typeName.equals("check_box"))
+					#if(f.checkField.dictCode!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getDictText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#if(f.checkField.enumTypeName!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getEnumText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#elseif(f.typeName.equals("logic_switch"))
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: '#cell-tpl-#(f.varName)'} ,
+					#elseif(f.typeName.equals("select_box"))
+					#if(f.selectField.enumTypeName!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getEnumText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#if(f.selectField.dictCode!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return fox.getDictText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName));}} ,
+					#end
+					#if(f.selectField.queryApi!=null)
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.joinLabel(#if(f.selectField.fillBy!=null)d.#(f.selectField.fillBy)#else null #end,"#(f.selectField.textField)");}} ,
+					#end
+					#else
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)')} ,
+					#end
+					#end
+					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
+					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+				]],
+				footer : {
+					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
+						params : {} ,
+						callback : function(r) {
+							if(r.success) {
+								layer.msg(fox.translate('数据导入成功')+"!");
+							} else {
+								layer.msg(fox.translate('数据导入失败')+"!");
+							}
 						}
-					}
-			 	}:false
-		 	}
-        });
-        #if(hasLogicField)
-        //绑定 Switch 切换事件
-        #for(f : fields)
-        #if(f.isLogicField)
-        fox.bindSwitchEvent("cell-tpl-#(f.varName)",moduleURL +'/update','#(idPropertyName)','#(f.varName)',function(r){});
-        #end
-        #end
-        #end
-        //绑定排序事件
-        table.on('sort(data-table)', function(obj){
-		  refreshTableData(obj.field,obj.type);
-        });
+					}:false
+				}
+			});
+			#if(hasLogicField)
+			//绑定 Switch 切换事件
+			#for(f : fields)
+			#if(f.typeName.equals("logic_switch"))
+			fox.bindSwitchEvent("cell-tpl-#(f.varName)",moduleURL +'/update','#(idPropertyName)','#(f.varName)',function(r){});
+			#end
+			#end
+			#end
+			//绑定排序事件
+			table.on('sort(data-table)', function(obj){
+			  refreshTableData(obj.field,obj.type);
+			});
+		}
+		setTimeout(renderTableInternal,1);
     };
+
+	/**
+	 * 调整搜索相关的尺寸
+	 * */
+	function adjustSearchElement() {
+		var divs=$(".search-label-div");
+		var maxWidth=0;
+		for (var i = 0; i < divs.length; i++) {
+			var div=$(divs[i]);
+			var w=div.width();
+			if(maxWidth<w) maxWidth=w;
+		}
+		divs.width(maxWidth);
+		var h=$(".search-bar").height();
+		$(".search-buttons").css("margin-top",(h-$(".search-buttons").height()-8)+"px");
+		var ks=$(window).width()-$(".search-buttons").width()-16;
+		$(".search-buttons").css("left",ks+"px");
+		$(".search-input-rows").animate({opacity:'1.0'},0.25);
+		$(".search-buttons").animate({opacity:'1.0'},0.25);
+		//渲染后的补充执行
+		setTimeout(function (){
+			adjustSearchElement();
+		},16);
+	}
      
 	/**
       * 刷新表格数据
@@ -115,16 +161,36 @@ function ListPage() {
 		var value = {};
 		#for(f : searchFields)
 		#if(!f.isHideInSearch)
-		#if(f.isLogicField)
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value") };
-		#else if(f.isRadioField)
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value") };
-		#else if(f.isSelectField)
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value") };
-		#else if(f.isDateField)
+		#if(f.typeName.equals("logic_switch"))
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")};
+		#else if(f.typeName.equals("radio_box"))
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")};
+		#else if(f.typeName.equals("select_box"))
+		#if(f.selectField.queryApi!=null)
+		#if(f.search.fuzzySearch)
+		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.textField)" };
+		#else
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"(f.selectField.valueField)" };
+		#end
+		#else
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end};
+		#end
+		#else if(f.typeName.equals("check_box"))
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end};
+		#else if(f.typeName.equals("date_input"))
+		#if(f.search.searchInRange)
 		value.#(f.varName)={ begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
 		#else
-		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true#end  };
+		value.#(f.varName)={ value: $("##(f.varName)").val()};
+		#end
+		#else if(f.typeName.equals("number_input"))
+		#if(f.search.searchInRange)
+		value.#(f.varName)={ begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
+		#else
+		value.#(f.varName)={ value: $("##(f.varName)").val()};
+		#end
+		#else
+		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end};
 		#end
 		#end
 		#end
@@ -188,22 +254,25 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
+
+		fox.switchSearchRow();
+
 	#for(f : searchFields)
 	#if(!f.isHideInSearch)
-		#if(f.isLogicField)
+		#if(f.typeName.equals("logic_switch"))
 		//渲染 #(f.varName) 搜索框
 		fox.renderSelectBox({
 			el: "#(f.varName)",
 			size: "small",
-			radio: true
+			radio: false
 		});
-		#else if(f.isRadioField)
+		#else if(f.typeName.equals("radio_box"))
 		//渲染 #(f.varName) 搜索框
 		fox.renderSelectBox({
 			el: "#(f.varName)",
 			size: "small",
 			radio: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			#if(f.radioField.dictCode!=null)
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -227,23 +296,62 @@ function ListPage() {
 			}
 			#end
 		});
-		#else if(f.isDateField)
-			laydate.render({
-				elem: '##(f.varName)-begin'
-			});
-			laydate.render({
-				elem: '##(f.varName)-end'
-			});
-		#else if(f.isSelectField)
+		#else if(f.typeName.equals("check_box"))
+		//渲染 #(f.varName) 搜索框
+		fox.renderSelectBox({
+			el: "#(f.varName)",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			#if(f.checkField.dictCode!=null)
+				transform: function(data) {
+					//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+					var opts=[];
+					for (var i = 0; i < data.length; i++) {
+						if(!data[i]) continue;
+						opts.push({name:data[i].text,value:data[i].code});
+					}
+					return opts;
+				}
+			#end
+			#if(f.checkField.enumTypeName!=null)
+				transform:function(data) {
+					//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+					var opts=[];
+					if(!data) return opts;
+					for (var i = 0; i < data.length; i++) {
+						opts.push({name:data[i].text,value:data[i].code});
+					}
+					return opts;
+				}
+			#end
+		});
+		#else if(f.typeName.equals("date_input"))
+		#if(f.search.searchInRange)
+		laydate.render({
+			elem: '##(f.varName)-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '##(f.varName)-end',
+			trigger:"click"
+		});
+		#else
+		laydate.render({
+			elem: '##(f.varName)',
+			trigger:"click"
+		});
+		#end
+		#else if(f.typeName.equals("select_box"))
 		//渲染 #(f.varName) 下拉字段
 		fox.renderSelectBox({
 			el: "#(f.varName)",
-			radio: #(!f.selectField.muliti),
+			radio: false,
 			size: "small",
 			filterable: #(f.selectField.filter),
 			#if(f.selectField.paging)
-				paging: true,
-				pageRemote: true,
+			paging: true,
+			pageRemote: true,
 			#end
 			#if(f.selectField.toolbar)
 			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
@@ -262,7 +370,7 @@ function ListPage() {
 			#end
 			#if(f.selectField.queryApi!=null)
 			#if(f.selectField.filter)
-			searchField: "#(f.selectField.textField))", //请自行调整用于搜索的字段名称
+			searchField: "#(f.selectField.textField)", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			#end
 			transform: function(data) {
@@ -291,6 +399,7 @@ function ListPage() {
 	#end
 	#end
 	#end
+		fox.renderSearchInputs();
 	}
 	
 	/**
@@ -307,26 +416,59 @@ function ListPage() {
         $('#search-button').click(function () {
            refreshTableData();
         });
+
+		// 搜索按钮点击事件
+		$('#search-button-advance').click(function () {
+			fox.switchSearchRow(function (ex){
+				if(ex=="1") {
+					$('#search-button-advance span').text("关闭");
+				} else {
+					$('#search-button-advance span').text("更多");
+				}
+			});
+		});
 	}
 	
 	/**
 	 * 绑定按钮事件
 	  */
 	function bindButtonEvent() {
-	
+
+		//头工具栏事件
+		table.on('toolbar(data-table)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event){
+				case 'create':
+					openCreateFrom();
+					break;
+				#if(isSimplePK)
+				case 'batch-del':
+					batchDelete();
+					break;
+				#end
+				case 'other':
+					break;
+					//自定义头工具栏右侧图标 - 提示
+				case 'LAYTABLE_TIPS':
+					layer.alert('这是工具栏右侧自定义的一个图标按钮');
+					break;
+			};
+		});
+
+
 		//添加按钮点击事件
-        $('#add-button').click(function () {
+        function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
         	#if(isTree) 
         	data.#(parentIdVar)=#(parentIdVar);
         	#end
             showEditForm(data);
-        });
+        };
 		
 		#if(isSimplePK)
         //批量删除按钮点击事件
-        $('#delete-button').click(function () {
+        function batchDelete() {
           
 			var ids=getCheckedList("#(idPropertyName)");
             if(ids.length==0) {
@@ -347,7 +489,7 @@ function ListPage() {
                     }
                 });
 			});
-        });
+        }
         #end
 	}
      
@@ -417,7 +559,7 @@ function ListPage() {
 			title: title,
 			resize: true,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["#(formWindow.width)px",height+"px"],
 			type: 2,
 			content: '#(formURI)' + queryString,
 			finish: function () {

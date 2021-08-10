@@ -9,10 +9,11 @@
     <meta charset="utf-8"/>
     <title th:text="${lang.translate('#(topic)')}">#(topic)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/assets/css/admin.css"/>
-    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
 </head>
 
 <body style="overflow-y: hidden">
@@ -20,55 +21,106 @@
 <div class="layui-card">
  
     <div class="layui-card-body">
-        <div class="layui-form toolbar search-bar">
 
-            #for(f : searchFields)
-            #if(!f.isHideInSearch)
-            <div class="search-unit">
-                <span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label">#(f.labelInSearch)</span><span class="search-colon">:</span>
-                #if(f.isLogicField)
-                <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:100px"></div>
-                #else if(f.isSelectField)
-                <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end" style="width:140px"></div>
-                #else if(f.isRadioField)
+        <div class="search-bar">
 
-                #if(f.radioField.dictCode!=null)
-                <div id="#(f.varName)" th:data="${dict.toArray('#(f.radioField.dictCode)')}" style="width:140px"></div>
-                #end
+            <div class="search-input-rows" style="opacity: 0">
+                #for(searchFields : searchRows)
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    #for(f : searchFields)
+                    <!-- #(f.labelInSearch) , #(f.varName) ,typeName=#(f.typeName), isHideInSearch=#(f.isHideInSearch) -->
+                    #if(!f.isHideInSearch)
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label">#(f.labelInSearch)</span><span class="search-colon">:</span></div>
+                        #if(f.typeName.equals("logic_switch"))
+                        <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:#(f.search.inputWidth)px"></div>
+                        #else if(f.typeName.equals("select_box"))
+                        #if(f.selectField.queryApi!=null && f.search.fuzzySearch)
+                         <input id="#(f.varName)" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" />
+                        #else
+                        <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end" style="width:#(f.search.inputWidth)px"></div>
+                        #end
+                        #else if(f.typeName.equals("radio_box"))
 
-                #if(f.radioField.enumTypeName!=null)
-                <div id="#(f.varName)" th:data="${enum.toArray('#(f.radioField.enumTypeName)')}" style="width:140px"></div>
-                #end
-                #else if(f.isDateField)
-                 <input type="text" id="#(f.varName)-begin" style="width: 90px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
-                 <span class="search-dash">-</span>
-                 <input type="text" id="#(f.varName)-end"  style="width: 90px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                #else
-                <input id="#(f.varName)" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入#(f.labelInSearch)')}"/>
+                        #if(f.radioField.dictCode!=null)
+                        <div id="#(f.varName)" th:data="${dict.toArray('#(f.radioField.dictCode)')}" style="width:#(f.search.inputWidth)px"></div>
+                        #end
+
+                        #if(f.radioField.enumTypeName!=null)
+                        <div id="#(f.varName)" th:data="${enum.toArray('#(f.radioField.enumTypeName)')}" style="width:#(f.search.inputWidth)px"></div>
+                        #end
+
+                        #else if(f.typeName.equals("check_box"))
+
+                            #if(f.checkField.dictCode!=null)
+                                <div id="#(f.varName)" th:data="${dict.toArray('#(f.checkField.dictCode)')}" style="width:#(f.search.inputWidth)px"></div>
+                            #end
+
+                            #if(f.checkField.enumTypeName!=null)
+                                <div id="#(f.varName)" th:data="${enum.toArray('#(f.checkField.enumTypeName)')}" style="width:#(f.search.inputWidth)px"></div>
+                            #end
+
+                        #else if(f.typeName.equals("date_input"))
+                            #if(f.search.searchInRange)
+                            <input type="text" id="#(f.varName)-begin" style="width: #(f.search.inputWidth)px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="#(f.varName)-end"  style="width: #(f.search.inputWidth)px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            #else
+                            <input type="text" id="#(f.varName)"  style="width: #(f.search.inputWidth)px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            #end
+                        #else if(f.typeName.equals("number_input"))
+                            #if(f.search.searchInRange)
+                            <input id="#(f.varName)-begin" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" autocomplete="off" input-type="number_input"  integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)" min-value="#(f.numberInput.minValue)" max-value="#(f.numberInput.maxValue)" scale="#(f.numberInput.scale)"/>
+                            <span class="search-dash">-</span>
+                            <input id="#(f.varName)-end" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" autocomplete="off" input-type="number_input"  integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)" min-value="#(f.numberInput.minValue)" max-value="#(f.numberInput.maxValue)" scale="#(f.numberInput.scale)"/>
+                            #else
+                            <input id="#(f.varName)" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" autocomplete="off" input-type="number_input" integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)" min-value="#(f.numberInput.minValue)" max-value="#(f.numberInput.maxValue)" scale="#(f.numberInput.scale)"/>
+                            #end
+                        #else
+                        <input id="#(f.varName)" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" />
+                        #end
+                    </div>
+                    #end
+                    #end
+
+                    #if(isTree)
+                    <span id="tree-nav" class="layui-breadcrumb" style="padding-left:16px"></span>
+                    #end
+
+                </div>
                 #end
             </div>
-            #end
-            #end
 
-            <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
-            <button th:if="${perm.checkAuth('#(authPrefix):create')}" id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
-            #if(isSimplePK)
-            <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-            #end
-            #if(isTree)
-            <span id="tree-nav" class="layui-breadcrumb" style="padding-left:16px"></span>
-			#end
-            
+
+            <!-- 按钮区域 -->
+            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+                <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
+            </div>
         </div>
 
-        <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        <div style="margin-top: 40px">
+            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        </div>
+
     </div>
 </div>
 
-<script type="text/javascript" src="/module/global.js"></script>
-<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
-<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+
+<!-- 表格工具栏 -->
+<script type="text/html" id="toolbarTemplate">
+    <div class="layui-btn-container">
+        <button th:if="${perm.checkAuth('#(authPrefix):create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+        #if(isSimplePK)
+            <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        #end
+    </div>
+</script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
@@ -82,7 +134,7 @@
 #if(hasLogicField)
 <!-- 表格状态列 -->
 #for(f:fields)
-#if(f.isLogicField)
+#if(f.typeName.equals("logic_switch"))
 <script type="text/html" id="cell-tpl-#(f.varName)">
     <input type="checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(idPropertyName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}}/>
 </script>
@@ -93,20 +145,33 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     #for(f:fields)
-    #if(f.isRadioField)
+    #if(f.typeName.equals("radio_box"))
     #if(f.radioField.dictCode!=null)
     var RADIO_#(f.varName.toUpperCase())_DATA = [[${dict.toArray('#(f.radioField.dictCode)')}]];
     #end
     #if(f.radioField.enumTypeName!=null)
     var RADIO_#(f.varName.toUpperCase())_DATA = [[${enum.toArray('#(f.radioField.enumTypeName)')}]];
     #end
-    #else if(f.isSelectField)
+    #else if(f.typeName.equals("check_box"))
+    #if(f.checkField.dictCode!=null)
+    var CHECK_#(f.varName.toUpperCase())_DATA = [[${dict.toArray('#(f.checkField.dictCode)')}]];
+    #end
+    #if(f.checkField.enumTypeName!=null)
+    var CHECK_#(f.varName.toUpperCase())_DATA = [[${enum.toArray('#(f.checkField.enumTypeName)')}]];
+    #end
+    #else if(f.typeName.equals("select_box"))
+    #if(f.selectField.dictCode!=null)
+    var SELECT_#(f.varName.toUpperCase())_DATA = [[${dict.toArray('#(f.selectField.dictCode)')}]];
+    #end
+    #if(f.selectField.enumTypeName!=null)
+    var SELECT_#(f.varName.toUpperCase())_DATA = [[${enum.toArray('#(f.selectField.enumTypeName)')}]];
+    #end
     #end
     #end
     var AUTH_PREFIX="#(authPrefix)";
 </script>
 
-<script src="#(jsURI)"></script>
+<script th:src="'#(jsURI)?'+${cacheKey}"></script>
 
 </body>
 </html>
