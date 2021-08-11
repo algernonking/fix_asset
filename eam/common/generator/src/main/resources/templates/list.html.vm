@@ -96,11 +96,13 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                #if(searchRows.size()>1)
                 <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
+                #end
             </div>
         </div>
 
-        <div style="margin-top: 40px">
+        <div style="margin-top: 44px">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

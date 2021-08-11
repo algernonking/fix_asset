@@ -42,9 +42,9 @@ function ListPage() {
       */
     function renderTable() {
 		$(window).resize(function() {
-			adjustSearchElement();
+			fox.adjustSearchElement();
 		});
-		adjustSearchElement();
+		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
 			var h=$(".search-bar").height();
@@ -131,30 +131,6 @@ function ListPage() {
     };
 
 	/**
-	 * 调整搜索相关的尺寸
-	 * */
-	function adjustSearchElement() {
-		var divs=$(".search-label-div");
-		var maxWidth=0;
-		for (var i = 0; i < divs.length; i++) {
-			var div=$(divs[i]);
-			var w=div.width();
-			if(maxWidth<w) maxWidth=w;
-		}
-		divs.width(maxWidth);
-		var h=$(".search-bar").height();
-		$(".search-buttons").css("margin-top",(h-$(".search-buttons").height()-8)+"px");
-		var ks=$(window).width()-$(".search-buttons").width()-16;
-		$(".search-buttons").css("left",ks+"px");
-		$(".search-input-rows").animate({opacity:'1.0'},0.25);
-		$(".search-buttons").animate({opacity:'1.0'},0.25);
-		//渲染后的补充执行
-		setTimeout(function (){
-			adjustSearchElement();
-		},16);
-	}
-     
-	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType) {
@@ -170,7 +146,7 @@ function ListPage() {
 		#if(f.search.fuzzySearch)
 		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.textField)" };
 		#else
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"(f.selectField.valueField)" };
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.valueField)" };
 		#end
 		#else
 		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end};
