@@ -19,7 +19,7 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(OpsService.class,"opsService","服务","");
 //
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden();
+        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden(true);
 
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.PATCH).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.NAME).search().fuzzySearch();

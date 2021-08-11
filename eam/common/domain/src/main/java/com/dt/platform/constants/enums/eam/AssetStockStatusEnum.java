@@ -11,17 +11,14 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 */
 
 
+public enum AssetStockStatusEnum implements CodeTextEnum {
 
-
-public enum GoodsStautsEnum implements CodeTextEnum {
-
-	GOODS_VALID("valid" , "有效"),
-	GOODS_INVALID("invalid" , "无效")
+	IDLE("idle" , "闲置"),
+	SCRAP("scrap" , "报废")
 	;
-	
 	private String code;
 	private String text;
-	private GoodsStautsEnum(String code, String text)  {
+	private AssetStockStatusEnum(String code, String text)  {
 		this.code=code;
 		this.text=text;
 	}

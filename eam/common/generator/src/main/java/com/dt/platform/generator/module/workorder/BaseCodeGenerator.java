@@ -7,9 +7,10 @@ import com.github.foxnic.generator.config.ModuleContext;
 import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
-    public static final String BASIC_DATA_MENU_ID="472036614189613057";
-    public static final String BASIC_SETTING_MENU_ID="472357984110903296";
 
+    public static final String BASIC_SETTING_MENU_ID="472818971712684033";
+
+    public static final String SERVICE_STAGE="472358699843715073";
     //
     private String appId="service-ops";
 
@@ -23,7 +24,7 @@ public class BaseCodeGenerator {
         this.tablePrefix = tablePrefix;
     }
 
-    private String tablePrefix="ops_";
+    private String tablePrefix="workorder_";
 
     private PlatformConfigs configs;
 
