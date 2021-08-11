@@ -14,6 +14,7 @@ public class CodeBuildRepeat {
                 "EamManufacturerGtr",
                 "EamResidualStrategyGtr",
                 "EamSupplierGtr",
+                "EamSafetylevelGtr",
                 "EamWarehouseGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){

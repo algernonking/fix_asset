@@ -38,8 +38,11 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS.UNIT).basic().label("计量单位").search().hidden();
         cfg.view().field(EAMTables.EAM_GOODS.NOTES).basic().label("备注").search().fuzzySearch();
 
+        cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID)
+                .search().hidden()
+                .form().label("图片").upload().acceptSingleImage().displayFileName(false);
 
-        cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID).basic().label("图片").search().hidden();
+
         cfg.view().field(EAMTables.EAM_GOODS.STATUS).basic().label("状态")
                 .form().validate().required().form().radioBox().enumType(GoodsStautsEnum.class);
 

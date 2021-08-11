@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 供应商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:10:01
+ * @since 2021-08-11 14:38:57
 */
 
 public interface ISupplierService extends ISuperService<Supplier> {
@@ -283,5 +283,6 @@ public interface ISupplierService extends ISuperService<Supplier> {
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
  
 }

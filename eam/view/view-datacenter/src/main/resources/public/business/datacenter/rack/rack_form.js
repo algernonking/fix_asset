@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:50
+ * @since 2021-08-11 15:12:30
  */
 
 function FormPage() {
@@ -14,7 +14,7 @@ function FormPage() {
       */
 	this.init=function(layui) { 	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
+		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 		
 		//渲染表单组件
 		renderFormFields();
@@ -28,22 +28,39 @@ function FormPage() {
 		//调整窗口的高度与位置
 		adjustPopup();
 	}
-	
+
+	/**
+	 * 自动调节窗口高度
+	 * */
+	var adjustPopupTask=-1;
 	function adjustPopup() {
-		setTimeout(function () {
+		clearTimeout(adjustPopupTask);
+		var scroll=$(".form-container").attr("scroll");
+		if(scroll=='yes') return;
+		adjustPopupTask=setTimeout(function () {
 			var body=$("body");
 			var bodyHeight=body.height();
-			var area=admin.changePopupArea(null,bodyHeight);
+			var footerHeight=$(".model-form-footer").height();
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			admin.putTempData('dc-rack-form-area', area);
 			window.adjustPopup=adjustPopup;
-		},50);
+			if(area.tooHeigh) {
+				var windowHeight=area.iframeHeight;
+				var finalHeight=windowHeight-footerHeight-16;
+				//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+				$(".form-container").css("display","");
+				$(".form-container").css("overflow-y","scroll");
+				$(".form-container").css("height",finalHeight+"px");
+				$(".form-container").attr("scroll","yes");
+			}
+		},250);
 	}
 	
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
-		form.render();
+		fox.renderFormInputs(form);
 	   
 		//渲染 areaId 下拉字段
 		fox.renderSelectBox({
@@ -96,20 +113,16 @@ function FormPage() {
 			form.val('data-form', formData);
 
 
-			//设置 区域 下拉框选中值
-			var areaIdSelect=xmSelect.get("#areaId",true);
-			var areaIdOpionts=[];
-			if (formData.area)	{
-				areaIdOpionts=areaIdSelect.options.transform([formData.area]);
-			}
-			areaIdSelect.setValue(areaIdOpionts);
-			//设置 层级 下拉框选中值
-			var layerIdSelect=xmSelect.get("#layerId",true);
-			var layerIdOpionts=[];
-			if (formData.layer)	{
-				layerIdOpionts=layerIdSelect.options.transform([formData.layer]);
-			}
-			layerIdSelect.setValue(layerIdOpionts);
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
@@ -133,7 +146,11 @@ function FormPage() {
     
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
-	    	
+			data.field = form.val("data-form");
+
+
+
+
 
 
 
@@ -147,6 +164,9 @@ function FormPage() {
 			if(data.field["layerId"] && data.field["layerId"].length>0) {
 				data.field["layerId"]=data.field["layerId"][0];
 			}
+
+			//校验表单
+			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
 
 	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);
@@ -177,6 +197,6 @@ layui.config({
 }).extend({
 	xmSelect: 'xm-select/xm-select',
 	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload'],function() {
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
 	(new FormPage()).init(layui);
 });

@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:42
+ * @since 2021-08-11 14:38:39
  * @sign 7240478BBCF43E6ABECF8B1F1634FC55
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -16,144 +16,144 @@ import java.util.Date;
 public class CodeAttrMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 占位符
+	 * 占位符 , 类型: java.lang.String
 	*/
 	public static final String CODE="code";
 	
 	/**
-	 * 占位符
+	 * 占位符 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CODE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CODE, java.lang.String.class, "占位符", "占位符", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CODE, java.lang.String.class, "占位符", "占位符", java.lang.String.class, null);
 	
 	/**
-	 * 编码名称
+	 * 编码名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
 	
 	/**
-	 * 编码名称
+	 * 编码名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> NAME_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,NAME, java.lang.String.class, "编码名称", "编码名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,NAME, java.lang.String.class, "编码名称", "编码名称", java.lang.String.class, null);
 	
 	/**
-	 * 编码类型
+	 * 编码类型 , 类型: java.lang.String
 	*/
 	public static final String TYPE="type";
 	
 	/**
-	 * 编码类型
+	 * 编码类型 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> TYPE_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,TYPE, java.lang.String.class, "编码类型", "编码类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,TYPE, java.lang.String.class, "编码类型", "编码类型", java.lang.String.class, null);
 	
 	/**
-	 * 排序
+	 * 排序 , 类型: java.lang.Integer
 	*/
 	public static final String SORT="sort";
 	
 	/**
-	 * 排序
+	 * 排序 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> SORT_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> SORT_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> NOTES_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
 	 * 全部属性清单

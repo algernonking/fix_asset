@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 编码属性 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:42
+ * @since 2021-08-11 14:38:39
 */
 
 public interface ICodeAttrService extends ISuperService<CodeAttr> {
@@ -283,5 +283,6 @@ public interface ICodeAttrService extends ISuperService<CodeAttr> {
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
  
 }

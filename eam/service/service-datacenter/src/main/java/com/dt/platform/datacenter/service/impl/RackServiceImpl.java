@@ -35,7 +35,7 @@ import java.util.Date;
  * 机柜管理 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:50
+ * @since 2021-08-11 15:12:19
 */
 
 
@@ -252,5 +252,6 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

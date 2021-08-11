@@ -35,7 +35,7 @@ import java.util.Date;
  * 编码规则 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:45
+ * @since 2021-08-11 14:38:42
 */
 
 
@@ -252,5 +252,6 @@ public class CodeRuleServiceImpl extends SuperService<CodeRule> implements ICode
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

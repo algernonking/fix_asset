@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产存放区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:53
+ * @since 2021-08-11 14:38:49
 */
 
 @Api(tags = "资产存放区域")

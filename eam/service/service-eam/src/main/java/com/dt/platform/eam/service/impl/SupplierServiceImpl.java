@@ -35,7 +35,7 @@ import java.util.Date;
  * 供应商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:10:01
+ * @since 2021-08-11 14:38:57
 */
 
 
@@ -252,5 +252,6 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

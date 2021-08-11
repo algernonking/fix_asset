@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:51
+ * @since 2021-08-11 14:38:48
  * @sign 1949416485663676EFD181478BECAAA6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -16,104 +16,104 @@ import java.util.Date;
 public class BrandMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String BRAND_NAME="brandName";
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> BRAND_NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,BRAND_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> BRAND_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,BRAND_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * 数据版本号
+	 * 数据版本号 , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * 数据版本号
+	 * 数据版本号 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.eam.Brand.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Brand,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Brand.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
 	
 	/**
 	 * 全部属性清单

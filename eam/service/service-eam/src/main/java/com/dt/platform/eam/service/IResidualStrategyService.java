@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 折旧策略 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:59
+ * @since 2021-08-11 15:52:50
 */
 
 public interface IResidualStrategyService extends ISuperService<ResidualStrategy> {
@@ -283,5 +283,6 @@ public interface IResidualStrategyService extends ISuperService<ResidualStrategy
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
  
 }

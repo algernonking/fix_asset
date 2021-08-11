@@ -35,7 +35,7 @@ import java.util.Date;
  * 编码分配 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:30:55
+ * @since 2021-08-11 17:50:07
 */
 
 
@@ -252,5 +252,6 @@ public class CodeAllocationServiceImpl extends SuperService<CodeAllocation> impl
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

@@ -18,6 +18,11 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.VALUE).basic().search().hidden(true);
+        cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.STATUS).basic().search().hidden(true);
+        cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.DEPRECIATION_RATE).basic().search().hidden(true);
+        cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.RESIDUALVALUE_RATE).basic().search().hidden(true);
+
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.STATUS).basic().label("状态")
                 .form().validate().required().form().radioBox().enumType(CommonStatusEnum.class);
@@ -40,10 +45,10 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         EamResidualStrategyGtr g=new EamResidualStrategyGtr();
         //生成代码
-       // g.generateCode();
+        g.generateCode();
         //生成菜单
         //g.removeByBatchId("");
-        g.generateMenu(ResidualStrategyServiceProxy.class, ResidualStrategyPageController.class);
+       // g.generateMenu(ResidualStrategyServiceProxy.class, ResidualStrategyPageController.class);
     }
 
 

@@ -71,6 +71,12 @@
             <version>${platform.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.dt.platform</groupId>
+            <artifactId>service-common</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.dt.platform</groupId>

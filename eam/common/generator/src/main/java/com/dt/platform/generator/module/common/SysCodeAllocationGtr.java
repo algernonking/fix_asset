@@ -9,9 +9,9 @@ import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.proxy.common.CodeRuleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class SysCodeAllocation extends BaseCodeGenerator {
+public class SysCodeAllocationGtr extends BaseCodeGenerator {
 
-    public SysCodeAllocation() {
+    public SysCodeAllocationGtr() {
         super(EAMTables.SYS_CODE_ALLOCATION.$TABLE,BASIC_CODE_MENU_ID);
     }
 
@@ -30,18 +30,19 @@ public class SysCodeAllocation extends BaseCodeGenerator {
 
 
 
-        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
-                .basic().label("编码规则").search().hidden()
-                .form().validate().required()
-                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_PAGED_LIST).paging(false).filter(false).toolbar(false)
-                .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
-
-
-
-
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).basic().label("业务模块")
                 .form().validate().required().form().selectBox().paging(false).muliti(false).filter(false).toolbar(false)
                 .enumType(CodeModuleEnum.class);
+
+
+
+
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
+                .basic().label("编码规则").search().hidden()
+                .form().validate().required()
+                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
+
 
 
 
@@ -56,7 +57,7 @@ public class SysCodeAllocation extends BaseCodeGenerator {
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {
-        SysCodeAllocation g=new SysCodeAllocation();
+        SysCodeAllocationGtr g=new SysCodeAllocationGtr();
 
         //生成代码
         g.generateCode();

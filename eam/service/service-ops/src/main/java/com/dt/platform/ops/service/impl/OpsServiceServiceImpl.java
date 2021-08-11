@@ -35,7 +35,7 @@ import java.util.Date;
  * 服务 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:10:07
+ * @since 2021-08-11 14:39:03
 */
 
 
@@ -252,5 +252,6 @@ public class OpsServiceServiceImpl extends SuperService<OpsService> implements I
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

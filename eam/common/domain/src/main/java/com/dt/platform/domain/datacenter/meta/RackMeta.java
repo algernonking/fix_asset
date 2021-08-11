@@ -11,7 +11,7 @@ import com.dt.platform.domain.datacenter.Layer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:50
+ * @since 2021-08-11 15:12:18
  * @sign 5CB5A32802E4AE817FA2D58DB9975B95
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -19,184 +19,184 @@ import com.dt.platform.domain.datacenter.Layer;
 public class RackMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 区域
+	 * 区域 , 类型: java.lang.String
 	*/
 	public static final String AREA_ID="areaId";
 	
 	/**
-	 * 区域
+	 * 区域 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
 	
 	/**
-	 * 层级
+	 * 层级 , 类型: java.lang.String
 	*/
 	public static final String LAYER_ID="layerId";
 	
 	/**
-	 * 层级
+	 * 层级 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> LAYER_ID_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> LAYER_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
 	
 	/**
-	 * 编码
+	 * 编码 , 类型: java.lang.String
 	*/
 	public static final String RACK_CODE="rackCode";
 	
 	/**
-	 * 编码
+	 * 编码 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_CODE_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_CODE_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String RACK_NAME="rackName";
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_NAME_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_NAME_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * 容量
+	 * 容量 , 类型: java.math.BigDecimal
 	*/
 	public static final String RACK_CAPTICAL="rackCaptical";
 	
 	/**
-	 * 容量
+	 * 容量 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.math.BigDecimal> RACK_CAPTICAL_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_CAPTICAL, java.math.BigDecimal.class, "容量", "容量", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.math.BigDecimal> RACK_CAPTICAL_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_CAPTICAL, java.math.BigDecimal.class, "容量", "容量", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 标签
+	 * 标签 , 类型: java.lang.String
 	*/
 	public static final String RACK_LABELS="rackLabels";
 	
 	/**
-	 * 标签
+	 * 标签 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_LABELS_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_LABELS, java.lang.String.class, "标签", "标签", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_LABELS_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_LABELS, java.lang.String.class, "标签", "标签", java.lang.String.class, null);
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String RACK_NOTES="rackNotes";
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_NOTES_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> RACK_NOTES_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 区域
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
 	*/
 	public static final String AREA="area";
 	
 	/**
-	 * 区域
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Area> AREA_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "", com.dt.platform.domain.datacenter.Area.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Area> AREA_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "", com.dt.platform.domain.datacenter.Area.class, null);
 	
 	/**
-	 * 层级
+	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
 	*/
 	public static final String LAYER="layer";
 	
 	/**
-	 * 层级
+	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Layer> LAYER_PROP=new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER, com.dt.platform.domain.datacenter.Layer.class, "层级", "", com.dt.platform.domain.datacenter.Layer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Layer> LAYER_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER, com.dt.platform.domain.datacenter.Layer.class, "层级", "", com.dt.platform.domain.datacenter.Layer.class, null);
 	
 	/**
 	 * 全部属性清单

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 区域 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:46
+ * @since 2021-08-11 14:38:43
 */
 
 public interface IAreaService extends ISuperService<Area> {
@@ -283,5 +283,6 @@ public interface IAreaService extends ISuperService<Area> {
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
  
 }

@@ -35,7 +35,7 @@ import java.util.Date;
  * 物品档案 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:55
+ * @since 2021-08-11 15:39:32
 */
 
 
@@ -252,5 +252,6 @@ public class GoodsServiceImpl extends SuperService<Goods> implements IGoodsServi
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

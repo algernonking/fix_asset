@@ -35,7 +35,7 @@ import java.util.Date;
  * 生产厂商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:58
+ * @since 2021-08-11 14:38:54
 */
 
 
@@ -252,5 +252,6 @@ public class ManufacturerServiceImpl extends SuperService<Manufacturer> implemen
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

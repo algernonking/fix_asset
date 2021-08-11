@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 机柜管理 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:50
+ * @since 2021-08-11 15:12:19
 */
 
 public interface IRackService extends ISuperService<Rack> {
@@ -283,5 +283,6 @@ public interface IRackService extends ISuperService<Rack> {
 	 * @return  错误信息，成功时返回 null
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+
  
 }

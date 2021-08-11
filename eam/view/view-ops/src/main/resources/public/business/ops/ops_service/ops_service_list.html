@@ -2,7 +2,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:10:07
+ * @since 2021-08-11 14:39:03
  */
  -->
  <!DOCTYPE html>
@@ -13,10 +13,11 @@
     <meta charset="utf-8"/>
     <title th:text="${lang.translate('服务')}">服务</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css"/>
-    <link rel="stylesheet" href="/assets/css/admin.css"/>
-    <link rel="stylesheet" href="/assets/css/foxnic-web.css">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
 </head>
 
 <body style="overflow-y: hidden">
@@ -24,37 +25,61 @@
 <div class="layui-card">
  
     <div class="layui-card-body">
-        <div class="layui-form toolbar search-bar">
 
-            <div class="search-unit">
-                <span th:text="${lang.translate('服务类型')}" class="search-label">服务类型</span><span class="search-colon">:</span>
+        <div class="search-bar">
+
+            <div class="search-input-rows" style="opacity: 0">
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 服务类型 , type ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('服务类型')}" class="search-label">服务类型</span><span class="search-colon">:</span></div>
 
 
-                <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}" style="width:140px"></div>
+                        <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}" style="width:140px"></div>
+
+                    </div>
+                    <!-- 名称 , serviceName ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="serviceName" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 备注 , serviceNotes ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="serviceNotes" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+
+
+                </div>
             </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span>
-                <input id="serviceName" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入名称')}"/>
-            </div>
-            <div class="search-unit">
-                <span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span>
-                <input id="serviceNotes" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入备注')}"/>
-            </div>
 
-            <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i><span th:text="${lang.translate('搜索')}">搜索</span></button>
-            <button th:if="${perm.checkAuth('ops_service:create')}" id="add-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
-            <button th:if="${perm.checkAuth('ops_service:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-            
+
+            <!-- 按钮区域 -->
+            <div class="layui-form toolbar search-buttons" style="opacity: 0">
+                <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+            </div>
         </div>
 
-        <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        <div style="margin-top: 44px">
+            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        </div>
+
     </div>
 </div>
 
-<script type="text/javascript" src="/module/global.js"></script>
-<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
-<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+
+<!-- 表格工具栏 -->
+<script type="text/html" id="toolbarTemplate">
+    <div class="layui-btn-container">
+        <button th:if="${perm.checkAuth('ops_service:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+            <button th:if="${perm.checkAuth('ops_service:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+    </div>
+</script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
@@ -69,7 +94,7 @@
     var AUTH_PREFIX="ops_service";
 </script>
 
-<script src="/business/ops/ops_service/ops_service_list.js"></script>
+<script th:src="'/business/ops/ops_service/ops_service_list.js?'+${cacheKey}"></script>
 
 </body>
 </html>

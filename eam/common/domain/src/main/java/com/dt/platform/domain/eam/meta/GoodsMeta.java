@@ -12,7 +12,7 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:55
+ * @since 2021-08-11 15:39:32
  * @sign 8C92599713D301CB1BB891E008819137
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -20,224 +20,224 @@ import com.dt.platform.domain.eam.Manufacturer;
 public class GoodsMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , used|unsed
+	 * 状态 , used|unsed , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 状态 , used|unsed
+	 * 状态 , used|unsed , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态", "used|unsed", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态", "used|unsed", java.lang.String.class, null);
 	
 	/**
-	 * 分类ID
+	 * 分类ID , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_ID="categoryId";
 	
 	/**
-	 * 分类ID
+	 * 分类ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CATEGORY_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY_ID, java.lang.String.class, "分类ID", "分类ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY_ID, java.lang.String.class, "分类ID", "分类ID", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号物品名称
+	 * 标准型号物品名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
 	
 	/**
-	 * 标准型号物品名称
+	 * 标准型号物品名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,NAME, java.lang.String.class, "标准型号物品名称", "标准型号物品名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,NAME, java.lang.String.class, "标准型号物品名称", "标准型号物品名称", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号规格型号
+	 * 标准型号规格型号 , 类型: java.lang.String
 	*/
 	public static final String MODEL="model";
 	
 	/**
-	 * 标准型号规格型号
+	 * 标准型号规格型号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MODEL_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MODEL, java.lang.String.class, "标准型号规格型号", "标准型号规格型号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MODEL_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MODEL, java.lang.String.class, "标准型号规格型号", "标准型号规格型号", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号厂商
+	 * 标准型号厂商 , 类型: java.lang.String
 	*/
 	public static final String MANUFACTURER_ID="manufacturerId";
 	
 	/**
-	 * 标准型号厂商
+	 * 标准型号厂商 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MANUFACTURER_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MANUFACTURER_ID, java.lang.String.class, "标准型号厂商", "标准型号厂商", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MANUFACTURER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MANUFACTURER_ID, java.lang.String.class, "标准型号厂商", "标准型号厂商", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号品牌
+	 * 标准型号品牌 , 类型: java.lang.String
 	*/
 	public static final String BRAND_ID="brandId";
 	
 	/**
-	 * 标准型号品牌
+	 * 标准型号品牌 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> BRAND_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND_ID, java.lang.String.class, "标准型号品牌", "标准型号品牌", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> BRAND_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND_ID, java.lang.String.class, "标准型号品牌", "标准型号品牌", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号计量单位
+	 * 标准型号计量单位 , 类型: java.lang.String
 	*/
 	public static final String UNIT="unit";
 	
 	/**
-	 * 标准型号计量单位
+	 * 标准型号计量单位 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> UNIT_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UNIT, java.lang.String.class, "标准型号计量单位", "标准型号计量单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> UNIT_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UNIT, java.lang.String.class, "标准型号计量单位", "标准型号计量单位", java.lang.String.class, null);
 	
 	/**
-	 * 标准参考单价
+	 * 标准参考单价 , 类型: java.math.BigDecimal
 	*/
 	public static final String REFERENCE_PRICE="referencePrice";
 	
 	/**
-	 * 标准参考单价
+	 * 标准参考单价 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.math.BigDecimal> REFERENCE_PRICE_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,REFERENCE_PRICE, java.math.BigDecimal.class, "标准参考单价", "标准参考单价", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.math.BigDecimal> REFERENCE_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,REFERENCE_PRICE, java.math.BigDecimal.class, "标准参考单价", "标准参考单价", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 标准型号物品图片
+	 * 标准型号物品图片 , 类型: java.lang.String
 	*/
 	public static final String PICTURE_ID="pictureId";
 	
 	/**
-	 * 标准型号物品图片
+	 * 标准型号物品图片 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> PICTURE_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,PICTURE_ID, java.lang.String.class, "标准型号物品图片", "标准型号物品图片", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> PICTURE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,PICTURE_ID, java.lang.String.class, "标准型号物品图片", "标准型号物品图片", java.lang.String.class, null);
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> NOTES_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 资产分类
+	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
 	*/
 	public static final String CATEGORY="category";
 	
 	/**
-	 * 资产分类
+	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Category> CATEGORY_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY, com.dt.platform.domain.eam.Category.class, "资产分类", "资产分类", com.dt.platform.domain.eam.Category.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY, com.dt.platform.domain.eam.Category.class, "资产分类", "资产分类", com.dt.platform.domain.eam.Category.class, null);
 	
 	/**
-	 * 品牌
+	 * 品牌 , 类型: com.dt.platform.domain.eam.Brand
 	*/
 	public static final String BRAND="brand";
 	
 	/**
-	 * 品牌
+	 * 品牌 , 类型: com.dt.platform.domain.eam.Brand
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Brand> BRAND_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND, com.dt.platform.domain.eam.Brand.class, "品牌", "品牌", com.dt.platform.domain.eam.Brand.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Brand> BRAND_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND, com.dt.platform.domain.eam.Brand.class, "品牌", "品牌", com.dt.platform.domain.eam.Brand.class, null);
 	
 	/**
-	 * 生产厂商
+	 * 生产厂商 , 类型: com.dt.platform.domain.eam.Manufacturer
 	*/
 	public static final String MANUFACTURER="manufacturer";
 	
 	/**
-	 * 生产厂商
+	 * 生产厂商 , 类型: com.dt.platform.domain.eam.Manufacturer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Manufacturer> MANUFACTURER_PROP=new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MANUFACTURER, com.dt.platform.domain.eam.Manufacturer.class, "生产厂商", "生产厂商", com.dt.platform.domain.eam.Manufacturer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Manufacturer> MANUFACTURER_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MANUFACTURER, com.dt.platform.domain.eam.Manufacturer.class, "生产厂商", "生产厂商", com.dt.platform.domain.eam.Manufacturer.class, null);
 	
 	/**
 	 * 全部属性清单

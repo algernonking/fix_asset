@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产存放区域 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:09:53
+ * @since 2021-08-11 14:38:49
 */
 
 
@@ -252,5 +252,6 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

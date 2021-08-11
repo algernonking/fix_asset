@@ -9,7 +9,7 @@ import com.dt.platform.domain.ops.OpsService;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-08 17:10:08
+ * @since 2021-08-11 14:39:04
  * @sign 8219A67F312D795D261708B5B7264138
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -17,154 +17,154 @@ import com.dt.platform.domain.ops.OpsService;
 public class ServiceDetailMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 服务ID
+	 * 服务ID , 类型: java.lang.String
 	*/
 	public static final String SERVICE_ID="serviceId";
 	
 	/**
-	 * 服务ID
+	 * 服务ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> SERVICE_ID_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,SERVICE_ID, java.lang.String.class, "服务ID", "服务ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> SERVICE_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,SERVICE_ID, java.lang.String.class, "服务ID", "服务ID", java.lang.String.class, null);
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> NAME_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * 补丁
+	 * 补丁 , 类型: java.lang.String
 	*/
 	public static final String PATCH="patch";
 	
 	/**
-	 * 补丁
+	 * 补丁 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> PATCH_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,PATCH, java.lang.String.class, "补丁", "补丁", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> PATCH_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,PATCH, java.lang.String.class, "补丁", "补丁", java.lang.String.class, null);
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> NOTES_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 排序
+	 * 排序 , 类型: java.lang.Integer
 	*/
 	public static final String SORT="sort";
 	
 	/**
-	 * 排序
+	 * 排序 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> SORT_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> SORT_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 服务
+	 * 服务 , 类型: com.dt.platform.domain.ops.OpsService
 	*/
 	public static final String OPS_SERVICE="opsService";
 	
 	/**
-	 * 服务
+	 * 服务 , 类型: com.dt.platform.domain.ops.OpsService
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,com.dt.platform.domain.ops.OpsService> OPS_SERVICE_PROP=new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,OPS_SERVICE, com.dt.platform.domain.ops.OpsService.class, "服务", "", com.dt.platform.domain.ops.OpsService.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,com.dt.platform.domain.ops.OpsService> OPS_SERVICE_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,OPS_SERVICE, com.dt.platform.domain.ops.OpsService.class, "服务", "", com.dt.platform.domain.ops.OpsService.class, null);
 	
 	/**
 	 * 全部属性清单
