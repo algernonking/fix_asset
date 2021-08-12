@@ -2,8 +2,6 @@ package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.domain.ops.meta.HostDbMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +34,8 @@ import java.util.Date;
  * <p>
  * 主机 服务实现
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 16:38:03
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 19:26:38
 */
 
 
@@ -49,16 +47,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-
-	@Autowired
-	HostDbServiceImpl hostDbService;
-
-	@Autowired
-	HostMidServiceImpl hostMidService;
-
-	@Autowired
-	HostOsServiceImpl hostOsService;
-
+	
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -68,7 +57,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-
+	
 	/**
 	 * 插入实体
 	 * @param host 实体数据
@@ -76,9 +65,6 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	@Override
 	public Result insert(Host host) {
-		hostDbService.saveRelation(host.getId(),host.getHostDbIds());
-		hostOsService.saveRelation(host.getId(),host.getHostOsIds());
-		hostMidService.saveRelation(host.getId(),host.getHostMiddlewareIds());
 		return super.insert(host);
 	}
 	
@@ -146,9 +132,6 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	@Override
 	public Result update(Host host , SaveMode mode) {
-		hostDbService.saveRelation(host.getId(),host.getHostDbIds());
-		hostOsService.saveRelation(host.getId(),host.getHostOsIds());
-		hostMidService.saveRelation(host.getId(),host.getHostMiddlewareIds());
 		return super.update(host , mode);
 	}
 	

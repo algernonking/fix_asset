@@ -1,8 +1,8 @@
 <!-- 
 /**
  * 主机 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 16:38:05
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 19:26:40
  */
  -->
  <!DOCTYPE html>
@@ -29,7 +29,7 @@
 
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>基本信息</legend>
         </fieldset>
 
@@ -139,7 +139,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>操作系统</legend>
         </fieldset>
 
@@ -204,14 +204,14 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>系统、数据库和中间件</legend>
         </fieldset>
 
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
                     <div class="layui-form-item" >
@@ -231,7 +231,12 @@
                     </div>
 
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('中间件')}">中间件</div></div>
                         <div class="layui-input-block ">
@@ -246,7 +251,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>用户情况</legend>
         </fieldset>
 
@@ -311,7 +316,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>其他情况</legend>
         </fieldset>
 

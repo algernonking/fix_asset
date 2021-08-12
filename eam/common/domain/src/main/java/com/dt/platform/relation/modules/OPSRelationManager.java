@@ -33,7 +33,11 @@ public class OPSRelationManager extends RelationManager {
 
         //数据库类别
         this.property(HostMeta.HOST_DB_LIST_PROP)
-                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID);
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID)
+                .using(EAMTables.OPS_HOST_DB.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID)
+        .after((host,dbs)->{
+            return dbs;
+        });
 
         //中间件列表
         this.property(HostMeta.HOST_MIDDLEWARE_LIST_PROP)

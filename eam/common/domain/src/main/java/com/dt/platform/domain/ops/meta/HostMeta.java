@@ -5,7 +5,7 @@ import com.dt.platform.domain.ops.Host;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.ops.HostPosition;
-import com.dt.platform.domain.ops.HostDb;
+import com.dt.platform.domain.ops.ServiceDetail;
 import java.util.List;
 import com.dt.platform.domain.ops.HostMid;
 import com.dt.platform.domain.ops.HostOs;
@@ -13,9 +13,9 @@ import com.dt.platform.domain.ops.HostOs;
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 16:38:02
- * @sign 707D6C5D74B04A098362219B05B90591
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 19:26:38
+ * @sign A6B4F8C66C2F15D06B13BE25524456C4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -362,14 +362,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostPosition> POSITION_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,POSITION, com.dt.platform.domain.ops.HostPosition.class, "所在位置", "所在位置", com.dt.platform.domain.ops.HostPosition.class, null);
 	
 	/**
-	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
 	public static final String HOST_DB_LIST="hostDbList";
 	
 	/**
-	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostDb> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.HostDb.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.ServiceDetail.class, null);
 	
 	/**
 	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
@@ -813,7 +813,7 @@ public class HostMeta {
 		 * @param hostDbList 数据库
 		 * @return 当前对象
 		*/
-		public Host setHostDbList(List<HostDb> hostDbList) {
+		public Host setHostDbList(List<ServiceDetail> hostDbList) {
 			super.change(HOST_DB_LIST,super.getHostDbList(),hostDbList);
 			super.setHostDbList(hostDbList);
 			return this;

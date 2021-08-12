@@ -22,7 +22,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
 
 
-        cfg.getPoClassFile().addListProperty(HostDb.class,"hostDbList","数据库","数据库");
+        cfg.getPoClassFile().addListProperty(ServiceDetail.class,"hostDbList","数据库","数据库");
         cfg.getPoClassFile().addListProperty(String.class,"hostDbIds","数据库列表","数据库");
 
         cfg.getPoClassFile().addListProperty(HostMid.class,"hostMiddlewareList","中间件","中间件");
