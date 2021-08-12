@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:21
- * @sign 6F009ED41DD306C4417CB1660B6727E8
+ * @since 2021-08-12 13:26:09
+ * @sign 707D6C5D74B04A098362219B05B90591
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -240,37 +240,37 @@ public class Host extends Entity {
 	 * 数据库：数据库
 	*/
 	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
-	private List<HostDb> host_db_list;
+	private List<HostDb> hostDbList;
 	
 	/**
 	 * 数据库列表：数据库
 	*/
 	@ApiModelProperty(required = false,value="数据库列表" , notes = "数据库")
-	private List<String> host_db_ids;
+	private List<String> hostDbIds;
 	
 	/**
 	 * 中间件：中间件
 	*/
 	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
-	private List<HostMid> host_middleware_list;
+	private List<HostMid> hostMiddlewareList;
 	
 	/**
 	 * 中间件列表：中间件
 	*/
 	@ApiModelProperty(required = false,value="中间件列表" , notes = "中间件")
-	private List<String> host_middleware_ids;
+	private List<String> hostMiddlewareIds;
 	
 	/**
 	 * 操作系统：操作系统
 	*/
 	@ApiModelProperty(required = false,value="操作系统" , notes = "操作系统")
-	private List<HostOs> host_os_list;
+	private List<HostOs> hostOsList;
 	
 	/**
 	 * 操作系统列表：操作系统
 	*/
 	@ApiModelProperty(required = false,value="操作系统列表" , notes = "操作系统")
-	private List<String> host_os_ids;
+	private List<String> hostOsIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -924,27 +924,27 @@ public class Host extends Entity {
 	 * @return 数据库
 	*/
 	public List<HostDb> getHostDbList() {
-		return host_db_list;
+		return hostDbList;
 	}
 	
 	/**
 	 * 设置 数据库
-	 * @param host_db_list 数据库
+	 * @param hostDbList 数据库
 	 * @return 当前对象
 	*/
-	public Host setHostDbList(List<HostDb> host_db_list) {
-		this.host_db_list=host_db_list;
+	public Host setHostDbList(List<HostDb> hostDbList) {
+		this.hostDbList=hostDbList;
 		return this;
 	}
 	
 	/**
 	 * 添加 数据库
-	 * @param entity 数据库
+	 * @param hostDb 数据库
 	 * @return 当前对象
 	*/
-	public Host addHostDb(HostDb entity) {
-		if(this.host_db_list==null) host_db_list=new ArrayList<>();
-		this.host_db_list.add(entity);
+	public Host addHostDb(HostDb hostDb) {
+		if(this.hostDbList==null) hostDbList=new ArrayList<>();
+		this.hostDbList.add(hostDb);
 		return this;
 	}
 	
@@ -954,27 +954,27 @@ public class Host extends Entity {
 	 * @return 数据库列表
 	*/
 	public List<String> getHostDbIds() {
-		return host_db_ids;
+		return hostDbIds;
 	}
 	
 	/**
 	 * 设置 数据库列表
-	 * @param host_db_ids 数据库列表
+	 * @param hostDbIds 数据库列表
 	 * @return 当前对象
 	*/
-	public Host setHostDbIds(List<String> host_db_ids) {
-		this.host_db_ids=host_db_ids;
+	public Host setHostDbIds(List<String> hostDbIds) {
+		this.hostDbIds=hostDbIds;
 		return this;
 	}
 	
 	/**
 	 * 添加 数据库列表
-	 * @param host_db_id 数据库列表
+	 * @param hostDbId 数据库列表
 	 * @return 当前对象
 	*/
-	public Host addHostDbId(String host_db_id) {
-		if(this.host_db_ids==null) host_db_ids=new ArrayList<>();
-		this.host_db_ids.add(host_db_id);
+	public Host addHostDbId(String hostDbId) {
+		if(this.hostDbIds==null) hostDbIds=new ArrayList<>();
+		this.hostDbIds.add(hostDbId);
 		return this;
 	}
 	
@@ -984,27 +984,27 @@ public class Host extends Entity {
 	 * @return 中间件
 	*/
 	public List<HostMid> getHostMiddlewareList() {
-		return host_middleware_list;
+		return hostMiddlewareList;
 	}
 	
 	/**
 	 * 设置 中间件
-	 * @param host_middleware_list 中间件
+	 * @param hostMiddlewareList 中间件
 	 * @return 当前对象
 	*/
-	public Host setHostMiddlewareList(List<HostMid> host_middleware_list) {
-		this.host_middleware_list=host_middleware_list;
+	public Host setHostMiddlewareList(List<HostMid> hostMiddlewareList) {
+		this.hostMiddlewareList=hostMiddlewareList;
 		return this;
 	}
 	
 	/**
 	 * 添加 中间件
-	 * @param entity 中间件
+	 * @param hostMiddleware 中间件
 	 * @return 当前对象
 	*/
-	public Host addHostMiddleware(HostMid entity) {
-		if(this.host_middleware_list==null) host_middleware_list=new ArrayList<>();
-		this.host_middleware_list.add(entity);
+	public Host addHostMiddleware(HostMid hostMiddleware) {
+		if(this.hostMiddlewareList==null) hostMiddlewareList=new ArrayList<>();
+		this.hostMiddlewareList.add(hostMiddleware);
 		return this;
 	}
 	
@@ -1014,27 +1014,27 @@ public class Host extends Entity {
 	 * @return 中间件列表
 	*/
 	public List<String> getHostMiddlewareIds() {
-		return host_middleware_ids;
+		return hostMiddlewareIds;
 	}
 	
 	/**
 	 * 设置 中间件列表
-	 * @param host_middleware_ids 中间件列表
+	 * @param hostMiddlewareIds 中间件列表
 	 * @return 当前对象
 	*/
-	public Host setHostMiddlewareIds(List<String> host_middleware_ids) {
-		this.host_middleware_ids=host_middleware_ids;
+	public Host setHostMiddlewareIds(List<String> hostMiddlewareIds) {
+		this.hostMiddlewareIds=hostMiddlewareIds;
 		return this;
 	}
 	
 	/**
 	 * 添加 中间件列表
-	 * @param host_middleware_id 中间件列表
+	 * @param hostMiddlewareId 中间件列表
 	 * @return 当前对象
 	*/
-	public Host addHostMiddlewareId(String host_middleware_id) {
-		if(this.host_middleware_ids==null) host_middleware_ids=new ArrayList<>();
-		this.host_middleware_ids.add(host_middleware_id);
+	public Host addHostMiddlewareId(String hostMiddlewareId) {
+		if(this.hostMiddlewareIds==null) hostMiddlewareIds=new ArrayList<>();
+		this.hostMiddlewareIds.add(hostMiddlewareId);
 		return this;
 	}
 	
@@ -1044,27 +1044,27 @@ public class Host extends Entity {
 	 * @return 操作系统
 	*/
 	public List<HostOs> getHostOsList() {
-		return host_os_list;
+		return hostOsList;
 	}
 	
 	/**
 	 * 设置 操作系统
-	 * @param host_os_list 操作系统
+	 * @param hostOsList 操作系统
 	 * @return 当前对象
 	*/
-	public Host setHostOsList(List<HostOs> host_os_list) {
-		this.host_os_list=host_os_list;
+	public Host setHostOsList(List<HostOs> hostOsList) {
+		this.hostOsList=hostOsList;
 		return this;
 	}
 	
 	/**
 	 * 添加 操作系统
-	 * @param entity 操作系统
+	 * @param hostOs 操作系统
 	 * @return 当前对象
 	*/
-	public Host addHostOs(HostOs entity) {
-		if(this.host_os_list==null) host_os_list=new ArrayList<>();
-		this.host_os_list.add(entity);
+	public Host addHostOs(HostOs hostOs) {
+		if(this.hostOsList==null) hostOsList=new ArrayList<>();
+		this.hostOsList.add(hostOs);
 		return this;
 	}
 	
@@ -1074,27 +1074,27 @@ public class Host extends Entity {
 	 * @return 操作系统列表
 	*/
 	public List<String> getHostOsIds() {
-		return host_os_ids;
+		return hostOsIds;
 	}
 	
 	/**
 	 * 设置 操作系统列表
-	 * @param host_os_ids 操作系统列表
+	 * @param hostOsIds 操作系统列表
 	 * @return 当前对象
 	*/
-	public Host setHostOsIds(List<String> host_os_ids) {
-		this.host_os_ids=host_os_ids;
+	public Host setHostOsIds(List<String> hostOsIds) {
+		this.hostOsIds=hostOsIds;
 		return this;
 	}
 	
 	/**
 	 * 添加 操作系统列表
-	 * @param host_os_id 操作系统列表
+	 * @param hostOsId 操作系统列表
 	 * @return 当前对象
 	*/
-	public Host addHostOsId(String host_os_id) {
-		if(this.host_os_ids==null) host_os_ids=new ArrayList<>();
-		this.host_os_ids.add(host_os_id);
+	public Host addHostOsId(String hostOsId) {
+		if(this.hostOsIds==null) hostOsIds=new ArrayList<>();
+		this.hostOsIds.add(hostOsId);
 		return this;
 	}
 

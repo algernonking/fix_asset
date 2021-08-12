@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:27
+ * @since 2021-08-12 13:26:27
  */
 
 function FormPage() {
@@ -110,6 +110,14 @@ function FormPage() {
 				return opts;
 			}
 		});
+		laydate.render({
+			elem: '#offlineTime',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#onlineTime',
+			trigger:"click"
+		});
 		//渲染 hostDbIds 下拉字段
 		fox.renderSelectBox({
 			el: "hostDbIds",
@@ -170,7 +178,7 @@ function FormPage() {
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
-			radio: false,
+			radio: true,
 			filterable: true,
 			//转换数据
 			searchField: "name", //请自行调整用于搜索的字段名称
@@ -213,11 +221,11 @@ function FormPage() {
 			//设置  改密策略 设置下拉框勾选
 			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
 			//设置  数据库 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#hostDbIds",formData.host_db_list);
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
 			//设置  中间件 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.host_middleware_list);
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
 			//设置  操作系统 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#hostOsIds",formData.host_os_list);
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
 			//设置  所在位置 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
@@ -277,6 +285,9 @@ function FormPage() {
 			data.field["hostOsIds"]=xmSelect.get("#hostOsIds",true).getValue("value");
 			//获取 所在位置 下拉框的值
 			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
+			if(data.field["positionId"] && data.field["positionId"].length>0) {
+				data.field["positionId"]=data.field["positionId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

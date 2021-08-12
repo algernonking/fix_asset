@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.ops.Host;
-import com.dt.platform.domain.ops.HostVO;
+import com.dt.platform.domain.ops.OpsService;
+import com.dt.platform.domain.ops.OpsServiceVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.ops.service.IHostService;
+import com.dt.platform.ops.service.IOpsServiceService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 主机 服务实现
+ * 服务 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:26:11
+ * @since 2021-08-12 13:24:46
 */
 
 
-@Service("OpsHostService")
-public class HostServiceImpl extends SuperService<Host> implements IHostService {
+@Service("OpsServiceService")
+public class OpsServiceServiceImpl extends SuperService<OpsService> implements IOpsServiceService {
 	
 	/**
 	 * 注入DAO对象
@@ -60,37 +60,37 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	
 	/**
 	 * 插入实体
-	 * @param host 实体数据
+	 * @param opsService 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Host host) {
-		return super.insert(host);
+	public Result insert(OpsService opsService) {
+		return super.insert(opsService);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param hostList 实体数据清单
+	 * @param opsServiceList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Host> hostList) {
-		return super.insertList(hostList);
+	public Result insertList(List<OpsService> opsServiceList) {
+		return super.insertList(opsServiceList);
 	}
 	
 	
 	/**
-	 * 按主键删除 主机
+	 * 按主键删除 服务
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Host host = new Host();
+		OpsService opsService = new OpsService();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		host.setId(id);
+		opsService.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(host);
+			boolean suc = dao.deleteEntity(opsService);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -101,20 +101,20 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	}
 	
 	/**
-	 * 按主键删除 主机
+	 * 按主键删除 服务
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Host host = new Host();
+		OpsService opsService = new OpsService();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		host.setId(id);
-		host.setDeleted(dao.getDBTreaty().getTrueValue());
-		host.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		host.setDeleteTime(new Date());
+		opsService.setId(id);
+		opsService.setDeleted(dao.getDBTreaty().getTrueValue());
+		opsService.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		opsService.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(host,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(opsService,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -126,29 +126,29 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	
 	/**
 	 * 更新实体
-	 * @param host 数据对象
+	 * @param opsService 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Host host , SaveMode mode) {
-		return super.update(host , mode);
+	public Result update(OpsService opsService , SaveMode mode) {
+		return super.update(opsService , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param hostList 数据对象列表
+	 * @param opsServiceList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Host> hostList , SaveMode mode) {
-		return super.updateList(hostList , mode);
+	public Result updateList(List<OpsService> opsServiceList , SaveMode mode) {
+		return super.updateList(opsServiceList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 主机
+	 * 按主键更新字段 服务
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -162,20 +162,20 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	
 	
 	/**
-	 * 按主键获取 主机
+	 * 按主键获取 服务
 	 *
 	 * @param id 主键
-	 * @return Host 数据对象
+	 * @return OpsService 数据对象
 	 */
-	public Host getById(String id) {
-		Host sample = new Host();
+	public OpsService getById(String id) {
+		OpsService sample = new OpsService();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Host> getByIds(List<String> ids) {
+	public List<OpsService> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -188,7 +188,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Host> queryList(Host sample) {
+	public List<OpsService> queryList(OpsService sample) {
 		return super.queryList(sample);
 	}
 	
@@ -202,7 +202,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Host> queryPagedList(Host sample, int pageSize, int pageIndex) {
+	public PagedList<OpsService> queryPagedList(OpsService sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -216,25 +216,25 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Host> queryPagedList(Host sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<OpsService> queryPagedList(OpsService sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param host 数据对象
+	 * @param opsService 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Host> checkExists(Host host) {
+	public Result<OpsService> checkExists(OpsService opsService) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(host, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(opsService, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Host sample) {
+	public ExcelWriter exportExcel(OpsService sample) {
 		return super.exportExcel(sample);
 	}
 

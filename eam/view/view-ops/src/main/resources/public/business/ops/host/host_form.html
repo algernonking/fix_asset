@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:26
+ * @since 2021-08-12 13:26:26
  */
  -->
  <!DOCTYPE html>
@@ -75,12 +75,12 @@
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所在环境')}">所在环境</div></div>
+                        <div class="layui-input-block ">
+                            <div id="environment" th:data="${dict.toArray('ops_env')}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -89,21 +89,21 @@
             <div class="layui-col-xs6 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="offlineTime" id="offlineTime" name="offlineTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="offlineTime" id="offlineTime" name="offlineTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
                     </div>
-                </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('上线时间')}">上线时间</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="onlineTime" id="onlineTime" name="onlineTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上线时间') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('上线时间')}">上线时间</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="onlineTime" id="onlineTime" name="onlineTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上线时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
                     </div>
-                </div>
 
 
                 
@@ -111,6 +111,15 @@
                     <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="labels" id="labels" name="labels" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -137,27 +146,9 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('IP')}">IP</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('服务IP')}">服务IP</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('服务IP') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('CPU')}">CPU</div></div>
                     <div class="layui-input-block ">
@@ -186,12 +177,35 @@
 
                 <!--结束：栏次内字段循环-->
             </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('IP')}">IP</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('服务IP')}">服务IP</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('服务IP') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
             <!--结束：栏次输入框循环-->
         </div>
          <!--开始：group 循环-->
 
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
-            <legend>数据库中间件</legend>
+            <legend>系统、数据库、中间件</legend>
         </fieldset>
 
         <div class="layui-row form-row">
@@ -239,31 +253,13 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('应用使用用户')}">应用使用用户</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('数据库管理员')}">数据库管理员</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('数据库使用用户')}">数据库使用用户</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -282,6 +278,29 @@
                     <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('数据库管理员')}">数据库管理员</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('数据库使用用户')}">数据库使用用户</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -349,7 +368,7 @@
     var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_env')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
     var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
-    var VALIDATE_CONFIG={"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"monitorStatus":{"labelInForm":"监控状态","inputType":"radio_box","required":true},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
+    var VALIDATE_CONFIG={"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"monitorStatus":{"labelInForm":"监控状态","inputType":"radio_box","required":true},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_host";
 </script>
 

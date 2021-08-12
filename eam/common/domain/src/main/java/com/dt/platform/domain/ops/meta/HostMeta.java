@@ -14,8 +14,8 @@ import com.dt.platform.domain.ops.HostOs;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:21
- * @sign 6F009ED41DD306C4417CB1660B6727E8
+ * @since 2021-08-12 13:26:10
+ * @sign 707D6C5D74B04A098362219B05B90591
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -364,7 +364,7 @@ public class HostMeta {
 	/**
 	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
 	*/
-	public static final String HOST_DB_LIST="host_db_list";
+	public static final String HOST_DB_LIST="hostDbList";
 	
 	/**
 	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
@@ -374,7 +374,7 @@ public class HostMeta {
 	/**
 	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOST_DB_IDS="host_db_ids";
+	public static final String HOST_DB_IDS="hostDbIds";
 	
 	/**
 	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
@@ -384,7 +384,7 @@ public class HostMeta {
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
 	*/
-	public static final String HOST_MIDDLEWARE_LIST="host_middleware_list";
+	public static final String HOST_MIDDLEWARE_LIST="hostMiddlewareList";
 	
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
@@ -394,7 +394,7 @@ public class HostMeta {
 	/**
 	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOST_MIDDLEWARE_IDS="host_middleware_ids";
+	public static final String HOST_MIDDLEWARE_IDS="hostMiddlewareIds";
 	
 	/**
 	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
@@ -404,7 +404,7 @@ public class HostMeta {
 	/**
 	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
 	*/
-	public static final String HOST_OS_LIST="host_os_list";
+	public static final String HOST_OS_LIST="hostOsList";
 	
 	/**
 	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
@@ -414,7 +414,7 @@ public class HostMeta {
 	/**
 	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOST_OS_IDS="host_os_ids";
+	public static final String HOST_OS_IDS="hostOsIds";
 	
 	/**
 	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
@@ -810,67 +810,67 @@ public class HostMeta {
 		
 		/**
 		 * 设置 数据库
-		 * @param host_db_list 数据库
+		 * @param hostDbList 数据库
 		 * @return 当前对象
 		*/
-		public Host setHostDbList(List<HostDb> host_db_list) {
-			super.change(HOST_DB_LIST,super.getHostDbList(),host_db_list);
-			super.setHostDbList(host_db_list);
+		public Host setHostDbList(List<HostDb> hostDbList) {
+			super.change(HOST_DB_LIST,super.getHostDbList(),hostDbList);
+			super.setHostDbList(hostDbList);
 			return this;
 		}
 		
 		/**
 		 * 设置 数据库列表
-		 * @param host_db_ids 数据库列表
+		 * @param hostDbIds 数据库列表
 		 * @return 当前对象
 		*/
-		public Host setHostDbIds(List<String> host_db_ids) {
-			super.change(HOST_DB_IDS,super.getHostDbIds(),host_db_ids);
-			super.setHostDbIds(host_db_ids);
+		public Host setHostDbIds(List<String> hostDbIds) {
+			super.change(HOST_DB_IDS,super.getHostDbIds(),hostDbIds);
+			super.setHostDbIds(hostDbIds);
 			return this;
 		}
 		
 		/**
 		 * 设置 中间件
-		 * @param host_middleware_list 中间件
+		 * @param hostMiddlewareList 中间件
 		 * @return 当前对象
 		*/
-		public Host setHostMiddlewareList(List<HostMid> host_middleware_list) {
-			super.change(HOST_MIDDLEWARE_LIST,super.getHostMiddlewareList(),host_middleware_list);
-			super.setHostMiddlewareList(host_middleware_list);
+		public Host setHostMiddlewareList(List<HostMid> hostMiddlewareList) {
+			super.change(HOST_MIDDLEWARE_LIST,super.getHostMiddlewareList(),hostMiddlewareList);
+			super.setHostMiddlewareList(hostMiddlewareList);
 			return this;
 		}
 		
 		/**
 		 * 设置 中间件列表
-		 * @param host_middleware_ids 中间件列表
+		 * @param hostMiddlewareIds 中间件列表
 		 * @return 当前对象
 		*/
-		public Host setHostMiddlewareIds(List<String> host_middleware_ids) {
-			super.change(HOST_MIDDLEWARE_IDS,super.getHostMiddlewareIds(),host_middleware_ids);
-			super.setHostMiddlewareIds(host_middleware_ids);
+		public Host setHostMiddlewareIds(List<String> hostMiddlewareIds) {
+			super.change(HOST_MIDDLEWARE_IDS,super.getHostMiddlewareIds(),hostMiddlewareIds);
+			super.setHostMiddlewareIds(hostMiddlewareIds);
 			return this;
 		}
 		
 		/**
 		 * 设置 操作系统
-		 * @param host_os_list 操作系统
+		 * @param hostOsList 操作系统
 		 * @return 当前对象
 		*/
-		public Host setHostOsList(List<HostOs> host_os_list) {
-			super.change(HOST_OS_LIST,super.getHostOsList(),host_os_list);
-			super.setHostOsList(host_os_list);
+		public Host setHostOsList(List<HostOs> hostOsList) {
+			super.change(HOST_OS_LIST,super.getHostOsList(),hostOsList);
+			super.setHostOsList(hostOsList);
 			return this;
 		}
 		
 		/**
 		 * 设置 操作系统列表
-		 * @param host_os_ids 操作系统列表
+		 * @param hostOsIds 操作系统列表
 		 * @return 当前对象
 		*/
-		public Host setHostOsIds(List<String> host_os_ids) {
-			super.change(HOST_OS_IDS,super.getHostOsIds(),host_os_ids);
-			super.setHostOsIds(host_os_ids);
+		public Host setHostOsIds(List<String> hostOsIds) {
+			super.change(HOST_OS_IDS,super.getHostOsIds(),hostOsIds);
+			super.setHostOsIds(hostOsIds);
 			return this;
 		}
 	}

@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:39:03
+ * @since 2021-08-12 13:24:54
  */
 
 function FormPage() {
@@ -127,7 +127,8 @@ function FormPage() {
 			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
-	                admin.finishPopupCenter();
+					var index=admin.getTempData('ops-service-form-data-popup-index');
+	                admin.finishPopupCenter(index);
 	            } else {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }

@@ -22,15 +22,15 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
 
 
-        cfg.getPoClassFile().addListProperty(HostDb.class,"host_db_list","数据库","数据库");
-        cfg.getPoClassFile().addListProperty(String.class,"host_db_ids","数据库列表","数据库");
+        cfg.getPoClassFile().addListProperty(HostDb.class,"hostDbList","数据库","数据库");
+        cfg.getPoClassFile().addListProperty(String.class,"hostDbIds","数据库列表","数据库");
 
-        cfg.getPoClassFile().addListProperty(HostMid.class,"host_middleware_list","中间件","中间件");
-        cfg.getPoClassFile().addListProperty(String.class,"host_middleware_ids","中间件列表","中间件");
+        cfg.getPoClassFile().addListProperty(HostMid.class,"hostMiddlewareList","中间件","中间件");
+        cfg.getPoClassFile().addListProperty(String.class,"hostMiddlewareIds","中间件列表","中间件");
 
 
-        cfg.getPoClassFile().addListProperty(HostOs.class,"host_os_list","操作系统","操作系统");
-        cfg.getPoClassFile().addListProperty(String.class,"host_os_ids","操作系统列表","操作系统");
+        cfg.getPoClassFile().addListProperty(HostOs.class,"hostOsList","操作系统","操作系统");
+        cfg.getPoClassFile().addListProperty(String.class,"hostOsIds","操作系统列表","操作系统");
 
         cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.ARCH).basic().hidden(true);
@@ -57,8 +57,13 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
 
 
+        cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME)
+                .form().dateInput()
+                .search().range();
 
-
+        cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME)
+                .form().dateInput()
+                .search().range();
 
         cfg.view().field(HostMeta.HOST_DB_IDS)
                 .basic().label("数据库")
@@ -96,9 +101,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(HostPositionServiceProxy.QUERY_LIST)
                 .valueField(HostPositionMeta.ID).textField(ServiceDetailMeta.NAME)
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.POSITION).muliti(true);
+                .fillBy(HostMeta.POSITION).muliti(false);
 
 
+        //
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
                 .form().selectBox().dict(DictEnum.OPS_HOST_TYPE);
@@ -138,25 +144,29 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.HOST_NAME,
                         EAMTables.OPS_HOST.POSITION_ID,
                         EAMTables.OPS_HOST.STATUS,
-                        EAMTables.OPS_HOST.DIRECTOR_USERNAME,
+                        EAMTables.OPS_HOST.ENVIRONMENT,
+
                 }, new Object[] {
                         EAMTables.OPS_HOST.OFFLINE_TIME,
                         EAMTables.OPS_HOST.ONLINE_TIME,
                         EAMTables.OPS_HOST.LABELS,
+                        EAMTables.OPS_HOST.DIRECTOR_USERNAME,
                         EAMTables.OPS_HOST.HOST_NOTES
                 }
         );
         cfg.view().form().addGroup("操作系统",
                 new Object[] {
-                        EAMTables.OPS_HOST.HOST_IP,
-                        EAMTables.OPS_HOST.HOST_VIP,
                         EAMTables.OPS_HOST.HOST_CPU,
                         EAMTables.OPS_HOST.HOST_MEMORY,
                         EAMTables.OPS_HOST.HOST_CONF
+        },
+                new Object[] {
+                        EAMTables.OPS_HOST.HOST_IP,
+                        EAMTables.OPS_HOST.HOST_VIP
 
-        }
+                }
         );
-        cfg.view().form().addGroup("数据库中间件",
+        cfg.view().form().addGroup("系统、数据库、中间件",
                 new Object[]{
                         HostMeta.HOST_OS_IDS, HostMeta.HOST_DB_IDS, HostMeta.HOST_MIDDLEWARE_IDS
                 }
@@ -164,17 +174,19 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup("用户情况",
                 new Object[] {
                         EAMTables.OPS_HOST.USER_APP_USED,
-                        EAMTables.OPS_HOST.USER_DB_ADMIN,
-                        EAMTables.OPS_HOST.USER_DB_USED,
                         EAMTables.OPS_HOST.USER_OPS_OPER,
                         EAMTables.OPS_HOST.USER_OTHER
-            }
+            },
+                new Object[] {
+                        EAMTables.OPS_HOST.USER_DB_ADMIN,
+                        EAMTables.OPS_HOST.USER_DB_USED,
+
+                }
         );
 
         cfg.view().form().addGroup("其他情况",
                 new Object[] {
-                        EAMTables.OPS_HOST.MONITOR_STATUS,
-                        EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID
+                        EAMTables.OPS_HOST.MONITOR_STATUS,  EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID
                 }
         );
 

@@ -31,17 +31,19 @@ public class OPSRelationManager extends RelationManager {
 
     private void setupOpsHost() {
 
+        //数据库类别
         this.property(HostMeta.HOST_DB_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID);
 
-
+        //中间件列表
         this.property(HostMeta.HOST_MIDDLEWARE_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_MID.HOST_ID);
 
-
+        //系统列表
         this.property(HostMeta.HOST_OS_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_OS.HOST_ID);
 
+        //所在位置
         this.property(HostMeta.POSITION_PROP)
                 .using(EAMTables.OPS_HOST.POSITION_ID).join(EAMTables.OPS_HOST_POSITION.ID);
 

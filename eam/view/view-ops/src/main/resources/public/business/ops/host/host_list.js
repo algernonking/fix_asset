@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:26
+ * @since 2021-08-12 13:26:25
  */
 
 
@@ -73,15 +73,15 @@ function ListPage() {
 					{ field: 'userOpsOper', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运维操作用户')} ,
 					{ field: 'userOther', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他用户')} ,
 					{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}} ,
-					{ field: 'offlineTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('下线时间')} ,
-					{ field: 'onlineTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('上线时间')} ,
+					{ field: 'offlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }} ,
+					{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineTime); }} ,
 					{ field: 'arch', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否归档1归档0不归档')} ,
 					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签')} ,
 					{ field: 'hostNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
 					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
-					{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.host_db_list,"name");}} ,
-					{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.host_middleware_list,"name");}} ,
-					{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.host_os_list,"name");}} ,
+					{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.hostDbList,"name");}} ,
+					{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.hostMiddlewareList,"name");}} ,
+					{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.hostOsList,"name");}} ,
 					{ field: 'positionId', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
 					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -119,9 +119,9 @@ function ListPage() {
 		value.positionId={ value: $("#positionId").val()};
 		value.labels={ value: $("#labels").val()};
 		value.hostNotes={ value: $("#hostNotes").val()};
-		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"host_db_list",field:"id" };
-		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"host_middleware_list",field:"id" };
-		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"host_os_list",field:"id" };
+		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id" };
+		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"hostMiddlewareList",field:"id" };
+		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"hostOsList",field:"id" };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
