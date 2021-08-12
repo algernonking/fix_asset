@@ -18,8 +18,8 @@ import com.dt.platform.proxy.ServiceNames;
  * <p>
  * 主机位置  控制器服务代理
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 08:28:22
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 08:49:53
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = HostPositionServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

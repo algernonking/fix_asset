@@ -47,8 +47,8 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * <p>
  * 主机位置 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 08:28:22
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 08:49:54
 */
 
 @Api(tags = "主机位置")

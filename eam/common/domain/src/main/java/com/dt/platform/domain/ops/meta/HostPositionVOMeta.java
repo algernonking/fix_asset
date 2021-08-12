@@ -7,8 +7,8 @@ import java.util.List;
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 08:28:22
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 08:49:53
  * @sign F408CF0EA8F31C40C693F3C9FBA4CE46
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
