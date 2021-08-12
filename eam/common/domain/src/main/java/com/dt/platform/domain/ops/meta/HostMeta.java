@@ -13,7 +13,7 @@ import com.dt.platform.domain.ops.HostMid;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:03:02
+ * @since 2021-08-12 10:13:04
  * @sign 5035C7808311B9238B281C1BF9B6AC89
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
