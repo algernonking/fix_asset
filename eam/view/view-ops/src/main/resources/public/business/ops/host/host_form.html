@@ -1,8 +1,8 @@
 <!-- 
 /**
  * 主机 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:26:26
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 14:29:47
  */
  -->
  <!DOCTYPE html>
@@ -29,7 +29,7 @@
 
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>基本信息</legend>
         </fieldset>
 
@@ -57,12 +57,12 @@
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('位置')}">位置</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="positionId" id="positionId" name="positionId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('位置') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所在位置')}">所在位置</div></div>
+                        <div class="layui-input-block ">
+                            <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 
@@ -139,7 +139,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>操作系统</legend>
         </fieldset>
 
@@ -204,7 +204,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>系统、数据库、中间件</legend>
         </fieldset>
 
@@ -246,7 +246,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>用户情况</legend>
         </fieldset>
 
@@ -311,7 +311,7 @@
         </div>
          <!--开始：group 循环-->
 
-        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>其他情况</legend>
         </fieldset>
 

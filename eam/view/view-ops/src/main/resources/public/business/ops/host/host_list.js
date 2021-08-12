@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:26:25
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-08-12 14:29:46
  */
 
 
@@ -60,7 +60,7 @@ function ListPage() {
 					{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP')} ,
 					{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务IP')} ,
 					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}} ,
-					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置')} ,
+					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
 					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
 					{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人')} ,
 					{ field: 'hostMemory', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('内存')} ,
@@ -82,7 +82,6 @@ function ListPage() {
 					{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.hostDbList,"name");}} ,
 					{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.hostMiddlewareList,"name");}} ,
 					{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.hostOsList,"name");}} ,
-					{ field: 'positionId', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
 					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -116,7 +115,7 @@ function ListPage() {
 		value.hostName={ value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostIp={ value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostVip={ value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.positionId={ value: $("#positionId").val()};
+		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id" };
 		value.labels={ value: $("#labels").val()};
 		value.hostNotes={ value: $("#hostNotes").val()};
 		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id" };
@@ -151,6 +150,26 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: false,
+			size: "small",
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		//渲染 hostDbIds 下拉字段
 		fox.renderSelectBox({
 			el: "hostDbIds",
