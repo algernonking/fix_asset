@@ -17,6 +17,7 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         cfg.getPoClassFile().addSimpleProperty(OpsService.class,"opsService","服务","");
+    //    cfg.getPoClassFile().addProperty(OpsServiceMeta.SERVICE_NAME_PROP);
 //
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden(true);

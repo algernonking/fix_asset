@@ -10,7 +10,10 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.ops";
         String[] clasnamearr={
-                "OpsHostServiceGtr",
+                "OpsHostDbGtr",
+                "OpsHostMidGtr",
+                "OpsHostGtr",
+                "OpsHostPositionGtr",
                 "OpsServiceDetailGtr",
                 "OpsServiceGtr"
         };

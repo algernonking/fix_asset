@@ -1,21 +1,31 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
-import com.dt.platform.constants.enums.ops.ServiceTypeEnum;
-import com.dt.platform.ops.page.HostPageController;
-import com.dt.platform.proxy.ops.HostServiceProxy;
+import com.dt.platform.domain.eam.Brand;
+import com.dt.platform.domain.eam.Category;
+import com.dt.platform.domain.eam.Manufacturer;
+import com.dt.platform.domain.ops.HostDb;
+import com.dt.platform.domain.ops.HostMid;
+import com.dt.platform.domain.ops.HostPosition;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class OpsHostServiceGtr extends BaseCodeGenerator{
+public class OpsHostGtr extends BaseCodeGenerator{
 
 
-    public OpsHostServiceGtr() {
+    public OpsHostGtr() {
         super(EAMTables.OPS_HOST.$TABLE,BASIC_HOSTMGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
+
+        cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
+
+        cfg.getPoClassFile().addListProperty(HostDb.class,"hostdb","数据库","数据库");
+
+        cfg.getPoClassFile().addListProperty(HostMid.class,"hostmid","中间件","中间件");
 
 
 
@@ -41,7 +51,21 @@ public class OpsHostServiceGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
 
 
-        //
+
+
+        cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
+                .form().validate().required()
+                .form().selectBox().dict(DictEnum.OPS_HOST_TYPE);
+
+
+        cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)
+                .form().selectBox().dict(DictEnum.OPS_HOST_PASSWORD_STRATEGY);
+
+
+        cfg.view().field(EAMTables.OPS_HOST.ENVIRONMENT)
+                .form().selectBox().dict(DictEnum.OPS_ENV);
+
+
         cfg.view().field(EAMTables.OPS_HOST.STATUS)
                 .form().validate().required()
                 .form().radioBox().enumType(HostStatusEnum.class);
@@ -76,7 +100,7 @@ public class OpsHostServiceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.HOST_VIP
         }
         );
-        cfg.view().form().addGroup("应用数据库中间件",
+        cfg.view().form().addGroup("数据库中间件",
                 new Object[] {
                         EAMTables.OPS_HOST.DB
                 },
@@ -115,7 +139,7 @@ public class OpsHostServiceGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        OpsHostServiceGtr g=new OpsHostServiceGtr();
+        OpsHostGtr g=new OpsHostGtr();
         //生成代码
          g.generateCode();
 
