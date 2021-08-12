@@ -34,6 +34,9 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.ops.HostPosition;
+import com.dt.platform.domain.ops.HostDb;
+import com.dt.platform.domain.ops.HostMid;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:29
+ * @since 2021-08-12 10:03:02
 */
 
 @Api(tags = "主机")
@@ -70,7 +73,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
@@ -97,6 +100,7 @@ public class HostController extends SuperController {
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = HostVOMeta.ID)
+	@NotNull(name = HostVOMeta.HOST_IP)
 	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.INSERT)
@@ -149,7 +153,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
@@ -176,6 +180,7 @@ public class HostController extends SuperController {
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { HostVOMeta.PAGE_INDEX , HostVOMeta.PAGE_SIZE , HostVOMeta.SEARCH_FIELD , HostVOMeta.FUZZY_FIELD , HostVOMeta.SEARCH_VALUE , HostVOMeta.SORT_FIELD , HostVOMeta.SORT_TYPE , HostVOMeta.IDS } ) 
 	@NotNull(name = HostVOMeta.ID)
+	@NotNull(name = HostVOMeta.HOST_IP)
 	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.UPDATE)
@@ -194,7 +199,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
@@ -221,6 +226,7 @@ public class HostController extends SuperController {
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostVOMeta.PAGE_INDEX , HostVOMeta.PAGE_SIZE , HostVOMeta.SEARCH_FIELD , HostVOMeta.FUZZY_FIELD , HostVOMeta.SEARCH_VALUE , HostVOMeta.SORT_FIELD , HostVOMeta.SORT_TYPE , HostVOMeta.IDS } )
 	@NotNull(name = HostVOMeta.ID)
+	@NotNull(name = HostVOMeta.HOST_IP)
 	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.SAVE)
@@ -278,7 +284,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
@@ -323,7 +329,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),

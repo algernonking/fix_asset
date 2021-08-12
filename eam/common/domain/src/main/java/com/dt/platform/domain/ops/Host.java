@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:28
- * @sign EEE6FE59BCE7018CDD37729F9453AEAB
+ * @since 2021-08-12 10:03:02
+ * @sign 5035C7808311B9238B281C1BF9B6AC89
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,7 +59,7 @@ public class Host extends Entity {
 	/**
 	 * IP：IP
 	*/
-	@ApiModelProperty(required = false,value="IP" , notes = "IP")
+	@ApiModelProperty(required = true,value="IP" , notes = "IP")
 	private String hostIp;
 	
 	/**
@@ -245,6 +247,36 @@ public class Host extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 所在位置：所在位置
+	*/
+	@ApiModelProperty(required = false,value="所在位置" , notes = "所在位置")
+	private HostPosition position;
+	
+	/**
+	 * 数据库：数据库
+	*/
+	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
+	private List<HostDb> hostdb;
+	
+	/**
+	 * dbids列表
+	*/
+	@ApiModelProperty(required = false,value="dbids列表" , notes = "")
+	private List<String> hostdbids;
+	
+	/**
+	 * 中间件：中间件
+	*/
+	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
+	private List<HostMid> hostmid;
+	
+	/**
+	 * hostmidids列表：中间件
+	*/
+	@ApiModelProperty(required = false,value="hostmidids列表" , notes = "中间件")
+	private List<String> hostmidids;
 	
 	/**
 	 * 获得 主键<br>
@@ -927,6 +959,144 @@ public class Host extends Entity {
 	*/
 	public Host setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 所在位置<br>
+	 * 所在位置
+	 * @return 所在位置
+	*/
+	public HostPosition getPosition() {
+		return position;
+	}
+	
+	/**
+	 * 设置 所在位置
+	 * @param position 所在位置
+	 * @return 当前对象
+	*/
+	public Host setPosition(HostPosition position) {
+		this.position=position;
+		return this;
+	}
+	
+	/**
+	 * 获得 数据库<br>
+	 * 数据库
+	 * @return 数据库
+	*/
+	public List<HostDb> getHostdb() {
+		return hostdb;
+	}
+	
+	/**
+	 * 设置 数据库
+	 * @param hostdb 数据库
+	 * @return 当前对象
+	*/
+	public Host setHostdb(List<HostDb> hostdb) {
+		this.hostdb=hostdb;
+		return this;
+	}
+	
+	/**
+	 * 添加 数据库
+	 * @param entity 数据库
+	 * @return 当前对象
+	*/
+	public Host addHostdb(HostDb entity) {
+		if(this.hostdb==null) hostdb=new ArrayList<>();
+		this.hostdb.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 dbids列表<br>
+	 * @return dbids列表
+	*/
+	public List<String> getHostdbids() {
+		return hostdbids;
+	}
+	
+	/**
+	 * 设置 dbids列表
+	 * @param hostdbids dbids列表
+	 * @return 当前对象
+	*/
+	public Host setHostdbids(List<String> hostdbids) {
+		this.hostdbids=hostdbids;
+		return this;
+	}
+	
+	/**
+	 * 添加 dbids列表
+	 * @param hostdbid dbids列表
+	 * @return 当前对象
+	*/
+	public Host addHostdbid(String hostdbid) {
+		if(this.hostdbids==null) hostdbids=new ArrayList<>();
+		this.hostdbids.add(hostdbid);
+		return this;
+	}
+	
+	/**
+	 * 获得 中间件<br>
+	 * 中间件
+	 * @return 中间件
+	*/
+	public List<HostMid> getHostmid() {
+		return hostmid;
+	}
+	
+	/**
+	 * 设置 中间件
+	 * @param hostmid 中间件
+	 * @return 当前对象
+	*/
+	public Host setHostmid(List<HostMid> hostmid) {
+		this.hostmid=hostmid;
+		return this;
+	}
+	
+	/**
+	 * 添加 中间件
+	 * @param entity 中间件
+	 * @return 当前对象
+	*/
+	public Host addHostmid(HostMid entity) {
+		if(this.hostmid==null) hostmid=new ArrayList<>();
+		this.hostmid.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 hostmidids列表<br>
+	 * 中间件
+	 * @return hostmidids列表
+	*/
+	public List<String> getHostmidids() {
+		return hostmidids;
+	}
+	
+	/**
+	 * 设置 hostmidids列表
+	 * @param hostmidids hostmidids列表
+	 * @return 当前对象
+	*/
+	public Host setHostmidids(List<String> hostmidids) {
+		this.hostmidids=hostmidids;
+		return this;
+	}
+	
+	/**
+	 * 添加 hostmidids列表
+	 * @param hostmidid hostmidids列表
+	 * @return 当前对象
+	*/
+	public Host addHostmidid(String hostmidid) {
+		if(this.hostmidids==null) hostmidids=new ArrayList<>();
+		this.hostmidids.add(hostmidid);
 		return this;
 	}
 

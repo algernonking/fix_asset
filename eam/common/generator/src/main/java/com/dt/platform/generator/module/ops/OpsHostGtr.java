@@ -4,12 +4,12 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
-import com.dt.platform.domain.eam.Brand;
-import com.dt.platform.domain.eam.Category;
-import com.dt.platform.domain.eam.Manufacturer;
 import com.dt.platform.domain.ops.HostDb;
 import com.dt.platform.domain.ops.HostMid;
 import com.dt.platform.domain.ops.HostPosition;
+import com.dt.platform.domain.ops.meta.HostDbMeta;
+import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
+import com.dt.platform.proxy.ops.HostDbServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostGtr extends BaseCodeGenerator{
@@ -24,9 +24,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
 
         cfg.getPoClassFile().addListProperty(HostDb.class,"hostdb","数据库","数据库");
+        cfg.getPoClassFile().addListProperty(String.class,"hostdbids","dbids列表","");
 
         cfg.getPoClassFile().addListProperty(HostMid.class,"hostmid","中间件","中间件");
-
+        cfg.getPoClassFile().addListProperty(String.class,"hostmidids","hostmidids列表","中间件");
 
 
         cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
@@ -50,8 +51,17 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
 
+//
 
-
+//        cfg.view().field(OpsHostMeta.)
+//                .basic().label("数据库")
+//                .search().inputWidth(140)
+//                .list().sort(false)
+//                .form().selectBox().queryApi(HostDbServiceProxy.QUERY_LIST)
+//                .valueField(ServiceDetailMeta.ID).textField(ServiceDetailMeta.NAME)
+//                .toolbar(false).paging(false)
+//                .fillBy(HostDbMeta.SERVICE_DETAIL_ID).muliti(true);
+        ;
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()

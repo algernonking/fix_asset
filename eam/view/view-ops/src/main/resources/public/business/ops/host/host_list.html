@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:30
+ * @since 2021-08-12 10:03:07
  */
  -->
  <!DOCTYPE html>
@@ -31,10 +31,10 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主机类型 , hostType ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 主机类型 , hostType ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('主机类型')}" class="search-label">主机类型</span><span class="search-colon">:</span></div>
-                        <input id="hostType" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div id="hostType" th:data="${dict.toArray('ops_host_type')}" style="width:140px"></div>
                     </div>
                     <!-- 主机状态online , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -59,10 +59,10 @@
                         <div class="search-label-div"><span th:text="${lang.translate('VIP')}" class="search-label">VIP</span><span class="search-colon">:</span></div>
                         <input id="hostVip" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 运行环境prod , environment ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 运行环境prod , environment ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('运行环境prod')}" class="search-label">运行环境prod</span><span class="search-colon">:</span></div>
-                        <input id="environment" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div id="environment" th:data="${dict.toArray('ops_env')}" style="width:140px"></div>
                     </div>
                     <!-- 位置 , positionId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -102,10 +102,10 @@
                         <div class="search-label-div"><span th:text="${lang.translate('系统管理员')}" class="search-label">系统管理员</span><span class="search-colon">:</span></div>
                         <input id="userOsAdmin" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 改密策略 , passwordStrategyId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 改密策略 , passwordStrategyId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('改密策略')}" class="search-label">改密策略</span><span class="search-colon">:</span></div>
-                        <input id="passwordStrategyId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div id="passwordStrategyId" th:data="${dict.toArray('ops_host_password_strategy')}" style="width:140px"></div>
                     </div>
                     <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -158,8 +158,11 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_HOSTTYPE_DATA = [[${dict.toArray('ops_host_type')}]];
     var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}]];
+    var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_env')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
+    var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
     var AUTH_PREFIX="ops_host";
 </script>
 

@@ -4,6 +4,7 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 
 
+import com.dt.platform.domain.ops.OpsHost;
 import com.dt.platform.domain.ops.meta.OpsServiceMeta;
 import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
 import com.github.foxnic.dao.relation.RelationManager;
@@ -33,5 +34,13 @@ public class OPSRelationManager extends RelationManager {
                 .using(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID).join(EAMTables.OPS_SERVICE.ID);
 
     }
+
+    private void setupOpsHost() {
+//        this.property(OpsHostMeta)
+//                .using(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID).join(EAMTables.OPS_SERVICE.ID);
+
+    }
+
+
 
 }

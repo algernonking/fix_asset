@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:31
+ * @since 2021-08-12 10:03:11
  */
  -->
  <!DOCTYPE html>
@@ -39,12 +39,12 @@
             <div class="layui-col-xs6 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('主机类型')}">主机类型</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="hostType" id="hostType" name="hostType" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主机类型') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('主机类型')}">主机类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="hostType" th:data="${dict.toArray('ops_host_type')}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 
@@ -191,7 +191,7 @@
          <!--开始：group 循环-->
 
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 8px;">
-            <legend>应用数据库中间件</legend>
+            <legend>数据库中间件</legend>
         </fieldset>
 
         <div class="layui-row form-row">
@@ -307,12 +307,12 @@
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('改密策略')}">改密策略</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="passwordStrategyId" id="passwordStrategyId" name="passwordStrategyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('改密策略') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('改密策略')}">改密策略</div></div>
+                        <div class="layui-input-block ">
+                            <div id="passwordStrategyId" th:data="${dict.toArray('ops_host_password_strategy')}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -340,9 +340,12 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_HOSTTYPE_DATA = [[${dict.toArray('ops_host_type')}]];
     var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}]];
+    var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_env')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
-    var VALIDATE_CONFIG={"monitorStatus":{"labelInForm":"监控状态:valid","inputType":"radio_box","required":true},"status":{"labelInForm":"主机状态online","inputType":"radio_box","required":true}};
+    var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
+    var VALIDATE_CONFIG={"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"monitorStatus":{"labelInForm":"监控状态:valid","inputType":"radio_box","required":true},"status":{"labelInForm":"主机状态online","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_host";
 </script>
 

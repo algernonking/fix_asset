@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:32
+ * @since 2021-08-12 10:03:12
  */
 
 function FormPage() {
@@ -62,6 +62,54 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		//渲染 hostType 下拉字段
+		fox.renderSelectBox({
+			el: "hostType",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 environment 下拉字段
+		fox.renderSelectBox({
+			el: "environment",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 passwordStrategyId 下拉字段
+		fox.renderSelectBox({
+			el: "passwordStrategyId",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -82,6 +130,12 @@ function FormPage() {
 
 
 
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  运行环境prod 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
 
 
 
@@ -116,6 +170,21 @@ function FormPage() {
 
 
 
+			//获取 主机类型 下拉框的值
+			data.field["hostType"]=xmSelect.get("#hostType",true).getValue("value");
+			if(data.field["hostType"] && data.field["hostType"].length>0) {
+				data.field["hostType"]=data.field["hostType"][0];
+			}
+			//获取 运行环境prod 下拉框的值
+			data.field["environment"]=xmSelect.get("#environment",true).getValue("value");
+			if(data.field["environment"] && data.field["environment"].length>0) {
+				data.field["environment"]=data.field["environment"][0];
+			}
+			//获取 改密策略 下拉框的值
+			data.field["passwordStrategyId"]=xmSelect.get("#passwordStrategyId",true).getValue("value");
+			if(data.field["passwordStrategyId"] && data.field["passwordStrategyId"].length>0) {
+				data.field["passwordStrategyId"]=data.field["passwordStrategyId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

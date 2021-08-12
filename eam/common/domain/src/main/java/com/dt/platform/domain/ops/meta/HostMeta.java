@@ -4,13 +4,17 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.Host;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.ops.HostPosition;
+import com.dt.platform.domain.ops.HostDb;
+import java.util.List;
+import com.dt.platform.domain.ops.HostMid;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 22:25:29
- * @sign EEE6FE59BCE7018CDD37729F9453AEAB
+ * @since 2021-08-12 10:03:02
+ * @sign 5035C7808311B9238B281C1BF9B6AC89
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -377,9 +381,59 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 所在位置 , 类型: com.dt.platform.domain.ops.HostPosition
+	*/
+	public static final String POSITION="position";
+	
+	/**
+	 * 所在位置 , 类型: com.dt.platform.domain.ops.HostPosition
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostPosition> POSITION_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,POSITION, com.dt.platform.domain.ops.HostPosition.class, "所在位置", "所在位置", com.dt.platform.domain.ops.HostPosition.class, null);
+	
+	/**
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
+	*/
+	public static final String HOSTDB="hostdb";
+	
+	/**
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostDb> HOSTDB_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTDB, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.HostDb.class, null);
+	
+	/**
+	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String HOSTDBIDS="hostdbids";
+	
+	/**
+	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOSTDBIDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTDBIDS, java.util.List.class, "dbids列表", "", java.lang.String.class, null);
+	
+	/**
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
+	*/
+	public static final String HOSTMID="hostmid";
+	
+	/**
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOSTMID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTMID, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
+	
+	/**
+	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String HOSTMIDIDS="hostmidids";
+	
+	/**
+	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOSTMIDIDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTMIDIDS, java.util.List.class, "hostmidids列表", "中间件", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_ID , OS , DB , MIDDLEWARE , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_ID , OS , DB , MIDDLEWARE , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOSTDB , HOSTDBIDS , HOSTMID , HOSTMIDIDS };
 	
 	/**
 	 * 代理类
@@ -782,6 +836,61 @@ public class HostMeta {
 		public Host setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 所在位置
+		 * @param position 所在位置
+		 * @return 当前对象
+		*/
+		public Host setPosition(HostPosition position) {
+			super.change(POSITION,super.getPosition(),position);
+			super.setPosition(position);
+			return this;
+		}
+		
+		/**
+		 * 设置 数据库
+		 * @param hostdb 数据库
+		 * @return 当前对象
+		*/
+		public Host setHostdb(List<HostDb> hostdb) {
+			super.change(HOSTDB,super.getHostdb(),hostdb);
+			super.setHostdb(hostdb);
+			return this;
+		}
+		
+		/**
+		 * 设置 dbids列表
+		 * @param hostdbids dbids列表
+		 * @return 当前对象
+		*/
+		public Host setHostdbids(List<String> hostdbids) {
+			super.change(HOSTDBIDS,super.getHostdbids(),hostdbids);
+			super.setHostdbids(hostdbids);
+			return this;
+		}
+		
+		/**
+		 * 设置 中间件
+		 * @param hostmid 中间件
+		 * @return 当前对象
+		*/
+		public Host setHostmid(List<HostMid> hostmid) {
+			super.change(HOSTMID,super.getHostmid(),hostmid);
+			super.setHostmid(hostmid);
+			return this;
+		}
+		
+		/**
+		 * 设置 hostmidids列表
+		 * @param hostmidids hostmidids列表
+		 * @return 当前对象
+		*/
+		public Host setHostmidids(List<String> hostmidids) {
+			super.change(HOSTMIDIDS,super.getHostmidids(),hostmidids);
+			super.setHostmidids(hostmidids);
 			return this;
 		}
 	}
