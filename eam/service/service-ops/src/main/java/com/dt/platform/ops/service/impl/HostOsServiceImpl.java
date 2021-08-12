@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.ops.service.IHostOsService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import com.dt.platform.constants.db.EAMTables.*;
 
 /**
  * <p>
  * 操作系统 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:17:54
+ * @since 2021-08-12 17:13:27
 */
 
 
@@ -253,5 +254,13 @@ public class HostOsServiceImpl extends SuperService<HostOs> implements IHostOsSe
 		return super.buildExcelStructure(isForExport);
 	}
 
+	/**
+     * 保存关系
+     * @param hostId 主机
+     * @param serviceDetailIds 服务内容清单
+     */
+	public void saveRelation(String hostId,List<String> serviceDetailIds) {
+		super.saveRelation(OPS_HOST_OS.HOST_ID,hostId, OPS_HOST_OS.SERVICE_DETAIL_ID,serviceDetailIds,true);
+	}
 
 }

@@ -55,8 +55,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME)
-                .form().dateInput()
-                .search().range();
+                .form().dateInput().search().range();
 
         cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME)
                 .form().dateInput()
@@ -163,9 +162,12 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
                 }
         );
-        cfg.view().form().addGroup("系统、数据库、中间件",
+        cfg.view().form().addGroup("系统、数据库和中间件",
                 new Object[]{
-                        HostMeta.HOST_OS_IDS, HostMeta.HOST_DB_IDS, HostMeta.HOST_MIDDLEWARE_IDS
+                        HostMeta.HOST_OS_IDS, HostMeta.HOST_DB_IDS
+                },
+                new Object[]{
+                        HostMeta.HOST_MIDDLEWARE_IDS
                 }
         );
         cfg.view().form().addGroup("用户情况",
@@ -187,6 +189,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 }
         );
 
+        //指定该表为关系表
 
         //文件生成覆盖模式
         cfg.overrides()

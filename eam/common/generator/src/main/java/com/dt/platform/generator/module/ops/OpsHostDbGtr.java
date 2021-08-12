@@ -12,6 +12,9 @@ public class OpsHostDbGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
+        //指定该表为关系表
+        cfg.setRelationField(EAMTables.OPS_HOST_DB.HOST_ID, EAMTables.OPS_HOST_DB.SERVICE_DETAIL_ID,true);
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -20,6 +23,7 @@ public class OpsHostDbGtr extends BaseCodeGenerator{
                 .setFormPage(WriteMode.IGNORE) //表单HTML页
                 .setListPage(WriteMode.IGNORE); //列表HTML页
         //生成代码
+
         cfg.buildAll();
     }
 

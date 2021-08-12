@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:26:22
+ * @since 2021-08-12 16:38:04
  */
  -->
  <!DOCTYPE html>
@@ -61,10 +61,10 @@
                         <div class="search-label-div"><span th:text="${lang.translate('服务IP')}" class="search-label">服务IP</span><span class="search-colon">:</span></div>
                         <input id="hostVip" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 位置 , positionId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('位置')}" class="search-label">位置</span><span class="search-colon">:</span></div>
-                        <input id="positionId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('所在位置')}" class="search-label">所在位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:140px"></div>
                     </div>
 
 
