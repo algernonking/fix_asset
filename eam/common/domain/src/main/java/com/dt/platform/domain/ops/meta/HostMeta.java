@@ -13,8 +13,8 @@ import com.dt.platform.domain.ops.HostMid;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:13:04
- * @sign 5035C7808311B9238B281C1BF9B6AC89
+ * @since 2021-08-12 10:38:17
+ * @sign 48CEFD663686F6FEDCAC83D954613773
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -393,47 +393,47 @@ public class HostMeta {
 	/**
 	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
 	*/
-	public static final String HOSTDB="hostdb";
+	public static final String HOST_DB_LIST="host_db_list";
 	
 	/**
 	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostDb
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostDb> HOSTDB_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTDB, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.HostDb.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostDb> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.HostDb.class, null);
 	
 	/**
 	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOSTDBIDS="hostdbids";
+	public static final String HOST_DB_IDS="host_db_ids";
 	
 	/**
 	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOSTDBIDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTDBIDS, java.util.List.class, "dbids列表", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_DB_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_IDS, java.util.List.class, "dbids列表", "", java.lang.String.class, null);
 	
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
 	*/
-	public static final String HOSTMID="hostmid";
+	public static final String HOST_MID_LIST="host_mid_list";
 	
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOSTMID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTMID, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOST_MID_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MID_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
 	
 	/**
 	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOSTMIDIDS="hostmidids";
+	public static final String HOST_MID_IDS="host_mid_ids";
 	
 	/**
 	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOSTMIDIDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOSTMIDIDS, java.util.List.class, "hostmidids列表", "中间件", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_MID_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MID_IDS, java.util.List.class, "hostmidids列表", "中间件", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_ID , OS , DB , MIDDLEWARE , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOSTDB , HOSTDBIDS , HOSTMID , HOSTMIDIDS };
+	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_ID , OS , DB , MIDDLEWARE , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MID_LIST , HOST_MID_IDS };
 	
 	/**
 	 * 代理类
@@ -852,45 +852,45 @@ public class HostMeta {
 		
 		/**
 		 * 设置 数据库
-		 * @param hostdb 数据库
+		 * @param host_db_list 数据库
 		 * @return 当前对象
 		*/
-		public Host setHostdb(List<HostDb> hostdb) {
-			super.change(HOSTDB,super.getHostdb(),hostdb);
-			super.setHostdb(hostdb);
+		public Host setHostDbList(List<HostDb> host_db_list) {
+			super.change(HOST_DB_LIST,super.getHostDbList(),host_db_list);
+			super.setHostDbList(host_db_list);
 			return this;
 		}
 		
 		/**
 		 * 设置 dbids列表
-		 * @param hostdbids dbids列表
+		 * @param host_db_ids dbids列表
 		 * @return 当前对象
 		*/
-		public Host setHostdbids(List<String> hostdbids) {
-			super.change(HOSTDBIDS,super.getHostdbids(),hostdbids);
-			super.setHostdbids(hostdbids);
+		public Host setHostDbIds(List<String> host_db_ids) {
+			super.change(HOST_DB_IDS,super.getHostDbIds(),host_db_ids);
+			super.setHostDbIds(host_db_ids);
 			return this;
 		}
 		
 		/**
 		 * 设置 中间件
-		 * @param hostmid 中间件
+		 * @param host_mid_list 中间件
 		 * @return 当前对象
 		*/
-		public Host setHostmid(List<HostMid> hostmid) {
-			super.change(HOSTMID,super.getHostmid(),hostmid);
-			super.setHostmid(hostmid);
+		public Host setHostMidList(List<HostMid> host_mid_list) {
+			super.change(HOST_MID_LIST,super.getHostMidList(),host_mid_list);
+			super.setHostMidList(host_mid_list);
 			return this;
 		}
 		
 		/**
 		 * 设置 hostmidids列表
-		 * @param hostmidids hostmidids列表
+		 * @param host_mid_ids hostmidids列表
 		 * @return 当前对象
 		*/
-		public Host setHostmidids(List<String> hostmidids) {
-			super.change(HOSTMIDIDS,super.getHostmidids(),hostmidids);
-			super.setHostmidids(hostmidids);
+		public Host setHostMidIds(List<String> host_mid_ids) {
+			super.change(HOST_MID_IDS,super.getHostMidIds(),host_mid_ids);
+			super.setHostMidIds(host_mid_ids);
 			return this;
 		}
 	}

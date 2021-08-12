@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:13:04
- * @sign 5035C7808311B9238B281C1BF9B6AC89
+ * @since 2021-08-12 10:38:17
+ * @sign 48CEFD663686F6FEDCAC83D954613773
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -258,25 +258,25 @@ public class Host extends Entity {
 	 * 数据库：数据库
 	*/
 	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
-	private List<HostDb> hostdb;
+	private List<HostDb> host_db_list;
 	
 	/**
 	 * dbids列表
 	*/
 	@ApiModelProperty(required = false,value="dbids列表" , notes = "")
-	private List<String> hostdbids;
+	private List<String> host_db_ids;
 	
 	/**
 	 * 中间件：中间件
 	*/
 	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
-	private List<HostMid> hostmid;
+	private List<HostMid> host_mid_list;
 	
 	/**
 	 * hostmidids列表：中间件
 	*/
 	@ApiModelProperty(required = false,value="hostmidids列表" , notes = "中间件")
-	private List<String> hostmidids;
+	private List<String> host_mid_ids;
 	
 	/**
 	 * 获得 主键<br>
@@ -986,17 +986,17 @@ public class Host extends Entity {
 	 * 数据库
 	 * @return 数据库
 	*/
-	public List<HostDb> getHostdb() {
-		return hostdb;
+	public List<HostDb> getHostDbList() {
+		return host_db_list;
 	}
 	
 	/**
 	 * 设置 数据库
-	 * @param hostdb 数据库
+	 * @param host_db_list 数据库
 	 * @return 当前对象
 	*/
-	public Host setHostdb(List<HostDb> hostdb) {
-		this.hostdb=hostdb;
+	public Host setHostDbList(List<HostDb> host_db_list) {
+		this.host_db_list=host_db_list;
 		return this;
 	}
 	
@@ -1005,9 +1005,9 @@ public class Host extends Entity {
 	 * @param entity 数据库
 	 * @return 当前对象
 	*/
-	public Host addHostdb(HostDb entity) {
-		if(this.hostdb==null) hostdb=new ArrayList<>();
-		this.hostdb.add(entity);
+	public Host addHostDb(HostDb entity) {
+		if(this.host_db_list==null) host_db_list=new ArrayList<>();
+		this.host_db_list.add(entity);
 		return this;
 	}
 	
@@ -1015,28 +1015,28 @@ public class Host extends Entity {
 	 * 获得 dbids列表<br>
 	 * @return dbids列表
 	*/
-	public List<String> getHostdbids() {
-		return hostdbids;
+	public List<String> getHostDbIds() {
+		return host_db_ids;
 	}
 	
 	/**
 	 * 设置 dbids列表
-	 * @param hostdbids dbids列表
+	 * @param host_db_ids dbids列表
 	 * @return 当前对象
 	*/
-	public Host setHostdbids(List<String> hostdbids) {
-		this.hostdbids=hostdbids;
+	public Host setHostDbIds(List<String> host_db_ids) {
+		this.host_db_ids=host_db_ids;
 		return this;
 	}
 	
 	/**
 	 * 添加 dbids列表
-	 * @param hostdbid dbids列表
+	 * @param host_db_id dbids列表
 	 * @return 当前对象
 	*/
-	public Host addHostdbid(String hostdbid) {
-		if(this.hostdbids==null) hostdbids=new ArrayList<>();
-		this.hostdbids.add(hostdbid);
+	public Host addHostDbId(String host_db_id) {
+		if(this.host_db_ids==null) host_db_ids=new ArrayList<>();
+		this.host_db_ids.add(host_db_id);
 		return this;
 	}
 	
@@ -1045,17 +1045,17 @@ public class Host extends Entity {
 	 * 中间件
 	 * @return 中间件
 	*/
-	public List<HostMid> getHostmid() {
-		return hostmid;
+	public List<HostMid> getHostMidList() {
+		return host_mid_list;
 	}
 	
 	/**
 	 * 设置 中间件
-	 * @param hostmid 中间件
+	 * @param host_mid_list 中间件
 	 * @return 当前对象
 	*/
-	public Host setHostmid(List<HostMid> hostmid) {
-		this.hostmid=hostmid;
+	public Host setHostMidList(List<HostMid> host_mid_list) {
+		this.host_mid_list=host_mid_list;
 		return this;
 	}
 	
@@ -1064,9 +1064,9 @@ public class Host extends Entity {
 	 * @param entity 中间件
 	 * @return 当前对象
 	*/
-	public Host addHostmid(HostMid entity) {
-		if(this.hostmid==null) hostmid=new ArrayList<>();
-		this.hostmid.add(entity);
+	public Host addHostMid(HostMid entity) {
+		if(this.host_mid_list==null) host_mid_list=new ArrayList<>();
+		this.host_mid_list.add(entity);
 		return this;
 	}
 	
@@ -1075,28 +1075,28 @@ public class Host extends Entity {
 	 * 中间件
 	 * @return hostmidids列表
 	*/
-	public List<String> getHostmidids() {
-		return hostmidids;
+	public List<String> getHostMidIds() {
+		return host_mid_ids;
 	}
 	
 	/**
 	 * 设置 hostmidids列表
-	 * @param hostmidids hostmidids列表
+	 * @param host_mid_ids hostmidids列表
 	 * @return 当前对象
 	*/
-	public Host setHostmidids(List<String> hostmidids) {
-		this.hostmidids=hostmidids;
+	public Host setHostMidIds(List<String> host_mid_ids) {
+		this.host_mid_ids=host_mid_ids;
 		return this;
 	}
 	
 	/**
 	 * 添加 hostmidids列表
-	 * @param hostmidid hostmidids列表
+	 * @param host_mid_id hostmidids列表
 	 * @return 当前对象
 	*/
-	public Host addHostmidid(String hostmidid) {
-		if(this.hostmidids==null) hostmidids=new ArrayList<>();
-		this.hostmidids.add(hostmidid);
+	public Host addHostMidId(String host_mid_id) {
+		if(this.host_mid_ids==null) host_mid_ids=new ArrayList<>();
+		this.host_mid_ids.add(host_mid_id);
 		return this;
 	}
 

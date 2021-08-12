@@ -7,9 +7,14 @@ import com.dt.platform.constants.enums.ops.HostStatusEnum;
 import com.dt.platform.domain.ops.HostDb;
 import com.dt.platform.domain.ops.HostMid;
 import com.dt.platform.domain.ops.HostPosition;
+import com.dt.platform.domain.ops.ServiceDetail;
 import com.dt.platform.domain.ops.meta.HostDbMeta;
+import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.domain.ops.meta.OpsServiceMeta;
 import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
 import com.dt.platform.proxy.ops.HostDbServiceProxy;
+import com.dt.platform.proxy.ops.OpsServiceServiceProxy;
+import com.dt.platform.proxy.ops.ServiceDetailServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostGtr extends BaseCodeGenerator{
@@ -23,11 +28,11 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
 
-        cfg.getPoClassFile().addListProperty(HostDb.class,"hostdb","数据库","数据库");
-        cfg.getPoClassFile().addListProperty(String.class,"hostdbids","dbids列表","");
+        cfg.getPoClassFile().addListProperty(HostDb.class,"host_db_list","数据库","数据库");
+        cfg.getPoClassFile().addListProperty(String.class,"host_db_ids","dbids列表","");
 
-        cfg.getPoClassFile().addListProperty(HostMid.class,"hostmid","中间件","中间件");
-        cfg.getPoClassFile().addListProperty(String.class,"hostmidids","hostmidids列表","中间件");
+        cfg.getPoClassFile().addListProperty(HostMid.class,"host_mid_list","中间件","中间件");
+        cfg.getPoClassFile().addListProperty(String.class,"host_mid_ids","hostmidids列表","中间件");
 
 
         cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
@@ -51,17 +56,17 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
 
-//
 
-//        cfg.view().field(OpsHostMeta.)
-//                .basic().label("数据库")
-//                .search().inputWidth(140)
-//                .list().sort(false)
-//                .form().selectBox().queryApi(HostDbServiceProxy.QUERY_LIST)
-//                .valueField(ServiceDetailMeta.ID).textField(ServiceDetailMeta.NAME)
-//                .toolbar(false).paging(false)
-//                .fillBy(HostDbMeta.SERVICE_DETAIL_ID).muliti(true);
-        ;
+
+        cfg.view().field(HostMeta.HOST_DB_IDS)
+                .basic().label("数据库")
+                .search().inputWidth(140)
+                .list().sort(false)
+                .form().selectBox().queryApi(ServiceDetailServiceProxy.QUERY_LIST)
+                .valueField(ServiceDetailMeta.ID).textField(ServiceDetailMeta.NAME)
+                .toolbar(false).paging(false)
+                .fillBy(HostMeta.HOST_DB_LIST).muliti(true);
+
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()

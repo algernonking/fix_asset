@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 21:44:09
+ * @since 2021-08-12 10:19:06
  */
 
 
@@ -54,14 +54,14 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' },
 					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键')} ,
-					{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型')} ,
-					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态online')} ,
+					{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}} ,
+					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态online'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
 					{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称')} ,
 					{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP')} ,
 					{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('VIP')} ,
-					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运行环境prod')} ,
+					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运行环境prod'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}} ,
 					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置')} ,
-					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态:valid')} ,
+					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态:valid'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
 					{ field: 'directorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人')} ,
 					{ field: 'os', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作系统')} ,
 					{ field: 'db', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库')} ,
@@ -75,7 +75,7 @@ function ListPage() {
 					{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户')} ,
 					{ field: 'userOpsOper', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运维操作用户')} ,
 					{ field: 'userOther', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他用户')} ,
-					{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('改密策略')} ,
+					{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}} ,
 					{ field: 'offlineTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('下线时间')} ,
 					{ field: 'onlineTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('上线时间')} ,
 					{ field: 'arch', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否归档1归档0不归档')} ,
@@ -83,7 +83,7 @@ function ListPage() {
 					{ field: 'hostNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
 					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width:  }
+					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -112,20 +112,20 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.hostType={ value: $("#hostType").val()};
-		value.status={ value: $("#status").val()};
+		value.hostType={ value: xmSelect.get("#hostType",true).getValue("value")};
+		value.status={ value: xmSelect.get("#status",true).getValue("value")};
 		value.hostName={ value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostIp={ value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostVip={ value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.environment={ value: $("#environment").val()};
+		value.environment={ value: xmSelect.get("#environment",true).getValue("value")};
 		value.positionId={ value: $("#positionId").val()};
-		value.monitorStatus={ value: $("#monitorStatus").val()};
+		value.monitorStatus={ value: xmSelect.get("#monitorStatus",true).getValue("value")};
 		value.os={ value: $("#os").val()};
 		value.db={ value: $("#db").val()};
 		value.middleware={ value: $("#middleware").val()};
 		value.hostConf={ value: $("#hostConf").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.userOsAdmin={ value: $("#userOsAdmin").val()};
-		value.passwordStrategyId={ value: $("#passwordStrategyId").val()};
+		value.passwordStrategyId={ value: xmSelect.get("#passwordStrategyId",true).getValue("value")};
 		value.labels={ value: $("#labels").val()};
 		value.hostNotes={ value: $("#hostNotes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
@@ -157,6 +157,89 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 hostType 下拉字段
+		fox.renderSelectBox({
+			el: "hostType",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 搜索框
+		fox.renderSelectBox({
+			el: "status",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 environment 下拉字段
+		fox.renderSelectBox({
+			el: "environment",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 monitorStatus 搜索框
+		fox.renderSelectBox({
+			el: "monitorStatus",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 passwordStrategyId 下拉字段
+		fox.renderSelectBox({
+			el: "passwordStrategyId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -298,17 +381,18 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('主机')) : (fox.translate('添加')+fox.translate('主机'));
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/ops/ops_host/ops_host_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('ops-host-form-data-popup-index', index);
 	};
 
 };
