@@ -41,15 +41,12 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.USER_APP_USED).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.USER_DB_ADMIN).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.USER_DB_USED).search().hidden(true);
-
         cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).search().hidden(true);
-
         cfg.view().field(EAMTables.OPS_HOST.USER_OPS_OPER).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).search().hidden(true);
 
         cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME).search().hidden(true);
-
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
@@ -189,7 +186,6 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.MONITOR_STATUS,  EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID
                 }
         );
-
 
 
         //文件生成覆盖模式

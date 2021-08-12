@@ -17,14 +17,16 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         cfg.getPoClassFile().addSimpleProperty(OpsService.class,"opsService","服务","");
+        cfg.getPoClassFile().addSimpleProperty(String.class,"serviceName","服务名称","服务名称");
+
     //    cfg.getPoClassFile().addProperty(OpsServiceMeta.SERVICE_NAME_PROP);
 //
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden(true);
-
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.PATCH).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.NOTES).search().fuzzySearch();
+
 
 
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID)

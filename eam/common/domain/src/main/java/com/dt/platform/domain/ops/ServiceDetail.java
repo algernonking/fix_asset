@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:39:04
- * @sign 8219A67F312D795D261708B5B7264138
+ * @since 2021-08-12 13:42:57
+ * @sign C9DFEEA7165AA5AC1A8F27392CBFDD93
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -118,6 +118,12 @@ public class ServiceDetail extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="服务" , notes = "")
 	private OpsService opsService;
+	
+	/**
+	 * 服务名称：服务名称
+	*/
+	@ApiModelProperty(required = false,value="服务名称" , notes = "服务名称")
+	private String serviceName;
 	
 	/**
 	 * 获得 主键<br>
@@ -400,6 +406,25 @@ public class ServiceDetail extends Entity {
 	*/
 	public ServiceDetail setOpsService(OpsService opsService) {
 		this.opsService=opsService;
+		return this;
+	}
+	
+	/**
+	 * 获得 服务名称<br>
+	 * 服务名称
+	 * @return 服务名称
+	*/
+	public String getServiceName() {
+		return serviceName;
+	}
+	
+	/**
+	 * 设置 服务名称
+	 * @param serviceName 服务名称
+	 * @return 当前对象
+	*/
+	public ServiceDetail setServiceName(String serviceName) {
+		this.serviceName=serviceName;
 		return this;
 	}
 

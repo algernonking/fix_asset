@@ -1,7 +1,7 @@
 /**
  * 服务明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:39:04
+ * @since 2021-08-12 13:43:01
  */
 
 
@@ -282,9 +282,9 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('服务明细')) : (fox.translate('添加')+fox.translate('服务明细'));
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
@@ -293,6 +293,7 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('ops-service-detail-form-data-popup-index', index);
 	};
 
 };

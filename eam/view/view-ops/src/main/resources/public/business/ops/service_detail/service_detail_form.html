@@ -2,7 +2,7 @@
 /**
  * 服务明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:39:04
+ * @since 2021-08-12 13:43:02
  */
  -->
  <!DOCTYPE html>
@@ -37,8 +37,8 @@
 
 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('主键')}">主键</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -46,8 +46,8 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label"><div th:text="${lang.translate('服务')}">服务</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('服务')}">服务</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
                             <div id="serviceId" th:data="${'/service-ops/ops-service/query-list'}"></div>
                         </div>
                     </div>
@@ -55,8 +55,8 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label"><div th:text="${lang.translate('名称')}">名称</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -64,8 +64,8 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label"><div th:text="${lang.translate('补丁')}">补丁</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('补丁')}">补丁</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="patch" id="patch" name="patch" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('补丁') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -73,8 +73,8 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label"><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -82,8 +82,8 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label"><div th:text="${lang.translate('排序')}">排序</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('排序')}">排序</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="sort" id="sort" name="sort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('排序') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -91,8 +91,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('创建人ID')}">创建人ID</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('创建人ID')}">创建人ID</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="createBy" id="createBy" name="createBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('创建人ID') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -100,8 +100,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('创建时间')}">创建时间</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('创建时间')}">创建时间</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="createTime" id="createTime" name="createTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('创建时间') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -109,8 +109,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('修改人ID')}">修改人ID</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('修改人ID')}">修改人ID</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="updateBy" id="updateBy" name="updateBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('修改人ID') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -118,8 +118,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('修改时间')}">修改时间</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('修改时间')}">修改时间</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="updateTime" id="updateTime" name="updateTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('修改时间') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -127,8 +127,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('是否已删除')}">是否已删除</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('是否已删除')}">是否已删除</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="deleted" id="deleted" name="deleted" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否已删除') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -136,8 +136,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('删除人ID')}">删除人ID</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('删除人ID')}">删除人ID</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="deleteBy" id="deleteBy" name="deleteBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('删除人ID') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -145,8 +145,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('删除时间')}">删除时间</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('删除时间')}">删除时间</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="deleteTime" id="deleteTime" name="deleteTime" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('删除时间') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -154,8 +154,8 @@
 
                 
                 <div class="layui-form-item" style="display: none")>
-                    <div class="layui-form-label"><div th:text="${lang.translate('version')}">version</div></div>
-                    <div class="layui-input-block">
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('version')}">version</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="version" id="version" name="version" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('version') }" type="text" class="layui-input"   />
                     </div>
                 </div>
