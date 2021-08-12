@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.ops.HostServiceProxy;
+import com.dt.platform.proxy.ops.HostOsServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 主机 模版页面控制器
+ * 操作系统 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:25
+ * @since 2021-08-12 12:17:56
 */
 
-@Controller("OpsHostPageController")
-@RequestMapping(HostPageController.prefix)
-public class HostPageController extends ViewController {
+@Controller("OpsHostOsPageController")
+@RequestMapping(HostOsPageController.prefix)
+public class HostOsPageController extends ViewController {
 	
-	public static final String prefix="business/ops/host";
+	public static final String prefix="business/ops/host_os";
 
-	private HostServiceProxy proxy;
+	private HostOsServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class HostPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public HostServiceProxy proxy() {
+	public HostOsServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=HostServiceProxy.api();
+			proxy=HostOsServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 主机 功能主页面
+	 * 操作系统 功能主页面
 	 */
-	@RequestMapping("/host_list.html")
+	@RequestMapping("/host_os_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/host_list";
+		return prefix+"/host_os_list";
 	}
 
 	/**
-	 * 主机 表单页面
+	 * 操作系统 表单页面
 	 */
-	@RequestMapping("/host_form.html")
+	@RequestMapping("/host_os_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/host_form";
+		return prefix+"/host_os_form";
 	}
 }

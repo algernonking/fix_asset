@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:38:21
+ * @since 2021-08-12 12:49:27
  */
 
 function FormPage() {
@@ -110,6 +110,82 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 hostDbIds 下拉字段
+		fox.renderSelectBox({
+			el: "hostDbIds",
+			radio: false,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 hostMiddlewareIds 下拉字段
+		fox.renderSelectBox({
+			el: "hostMiddlewareIds",
+			radio: false,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 hostOsIds 下拉字段
+		fox.renderSelectBox({
+			el: "hostOsIds",
+			radio: false,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: false,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -132,10 +208,18 @@ function FormPage() {
 
 			//设置  主机类型 设置下拉框勾选
 			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
-			//设置  运行环境prod 设置下拉框勾选
+			//设置  所在环境 设置下拉框勾选
 			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
 			//设置  改密策略 设置下拉框勾选
 			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.host_db_list);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.host_middleware_list);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.host_os_list);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
 
 
@@ -175,7 +259,7 @@ function FormPage() {
 			if(data.field["hostType"] && data.field["hostType"].length>0) {
 				data.field["hostType"]=data.field["hostType"][0];
 			}
-			//获取 运行环境prod 下拉框的值
+			//获取 所在环境 下拉框的值
 			data.field["environment"]=xmSelect.get("#environment",true).getValue("value");
 			if(data.field["environment"] && data.field["environment"].length>0) {
 				data.field["environment"]=data.field["environment"][0];
@@ -185,6 +269,14 @@ function FormPage() {
 			if(data.field["passwordStrategyId"] && data.field["passwordStrategyId"].length>0) {
 				data.field["passwordStrategyId"]=data.field["passwordStrategyId"][0];
 			}
+			//获取 数据库 下拉框的值
+			data.field["hostDbIds"]=xmSelect.get("#hostDbIds",true).getValue("value");
+			//获取 中间件 下拉框的值
+			data.field["hostMiddlewareIds"]=xmSelect.get("#hostMiddlewareIds",true).getValue("value");
+			//获取 操作系统 下拉框的值
+			data.field["hostOsIds"]=xmSelect.get("#hostOsIds",true).getValue("value");
+			//获取 所在位置 下拉框的值
+			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

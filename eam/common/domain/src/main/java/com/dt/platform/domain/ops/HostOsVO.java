@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 12:49:21
- * @sign 4729339142B0B5AFF5E5322F80CAAD2A
+ * @since 2021-08-12 12:17:53
+ * @sign C63AAD1F835E30F809773312E2E3F80A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class HostVO extends Host {
+public class HostOsVO extends HostOs {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class HostVO extends Host {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public HostVO setPageIndex(Integer pageIndex) {
+	public HostOsVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class HostVO extends Host {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public HostVO setPageSize(Integer pageSize) {
+	public HostOsVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class HostVO extends Host {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public HostVO setSearchField(String searchField) {
+	public HostOsVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class HostVO extends Host {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public HostVO setFuzzyField(String fuzzyField) {
+	public HostOsVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class HostVO extends Host {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public HostVO setSearchValue(String searchValue) {
+	public HostOsVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class HostVO extends Host {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public HostVO setSortField(String sortField) {
+	public HostOsVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class HostVO extends Host {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public HostVO setSortType(String sortType) {
+	public HostOsVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class HostVO extends Host {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public HostVO setIds(List<String> ids) {
+	public HostOsVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class HostVO extends Host {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public HostVO addId(String id) {
+	public HostOsVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

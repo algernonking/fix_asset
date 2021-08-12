@@ -11,8 +11,8 @@ public class OPSRelationManager extends RelationManager {
     protected void config() {
         this.setupRelations();
         this.setupProperties();
-//        this.setupOpsService();
         this.setupOpsServiceDetail();
+        this.setupOpsHost();
     }
 
     public void setupProperties() {
@@ -33,6 +33,17 @@ public class OPSRelationManager extends RelationManager {
 
         this.property(HostMeta.HOST_DB_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID);
+
+
+        this.property(HostMeta.HOST_MIDDLEWARE_LIST_PROP)
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_MID.HOST_ID);
+
+
+        this.property(HostMeta.HOST_OS_LIST_PROP)
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_OS.HOST_ID);
+
+        this.property(HostMeta.POSITION_PROP)
+                .using(EAMTables.OPS_HOST.POSITION_ID).join(EAMTables.OPS_HOST_POSITION.ID);
 
     }
 

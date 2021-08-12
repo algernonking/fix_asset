@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:38:19
+ * @since 2021-08-12 12:49:26
  */
 
 
@@ -55,17 +55,14 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' },
 					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键')} ,
 					{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}} ,
-					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态online'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
+					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
 					{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称')} ,
 					{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP')} ,
-					{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('VIP')} ,
-					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运行环境prod'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}} ,
+					{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务IP')} ,
+					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}} ,
 					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置')} ,
-					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态:valid'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
-					{ field: 'directorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人')} ,
-					{ field: 'os', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作系统')} ,
-					{ field: 'db', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库')} ,
-					{ field: 'middleware', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('中间件')} ,
+					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
+					{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人')} ,
 					{ field: 'hostMemory', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('内存')} ,
 					{ field: 'hostCpu', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('CPU')} ,
 					{ field: 'hostConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他配置')} ,
@@ -82,6 +79,10 @@ function ListPage() {
 					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签')} ,
 					{ field: 'hostNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
 					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
+					{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.host_db_list,"name");}} ,
+					{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.host_middleware_list,"name");}} ,
+					{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.host_os_list,"name");}} ,
+					{ field: 'positionId', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
 					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -112,22 +113,15 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.hostType={ value: xmSelect.get("#hostType",true).getValue("value")};
-		value.status={ value: xmSelect.get("#status",true).getValue("value")};
 		value.hostName={ value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostIp={ value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.hostVip={ value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.environment={ value: xmSelect.get("#environment",true).getValue("value")};
 		value.positionId={ value: $("#positionId").val()};
-		value.monitorStatus={ value: xmSelect.get("#monitorStatus",true).getValue("value")};
-		value.os={ value: $("#os").val()};
-		value.db={ value: $("#db").val()};
-		value.middleware={ value: $("#middleware").val()};
-		value.hostConf={ value: $("#hostConf").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.userOsAdmin={ value: $("#userOsAdmin").val()};
-		value.passwordStrategyId={ value: xmSelect.get("#passwordStrategyId",true).getValue("value")};
 		value.labels={ value: $("#labels").val()};
 		value.hostNotes={ value: $("#hostNotes").val()};
+		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"host_db_list",field:"id" };
+		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"host_middleware_list",field:"id" };
+		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"host_os_list",field:"id" };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -157,85 +151,62 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
-		//渲染 hostType 下拉字段
+		//渲染 hostDbIds 下拉字段
 		fox.renderSelectBox({
-			el: "hostType",
+			el: "hostDbIds",
 			radio: false,
 			size: "small",
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 status 搜索框
-		fox.renderSelectBox({
-			el: "status",
-			size: "small",
-			radio: false,
-			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
-			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 environment 下拉字段
-		fox.renderSelectBox({
-			el: "environment",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}
 		});
-		//渲染 monitorStatus 搜索框
+		//渲染 hostMiddlewareIds 下拉字段
 		fox.renderSelectBox({
-			el: "monitorStatus",
-			size: "small",
+			el: "hostMiddlewareIds",
 			radio: false,
-			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
-			transform:function(data) {
+			size: "small",
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}
 		});
-		//渲染 passwordStrategyId 下拉字段
+		//渲染 hostOsIds 下拉字段
 		fox.renderSelectBox({
-			el: "passwordStrategyId",
+			el: "hostOsIds",
 			radio: false,
 			size: "small",
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}

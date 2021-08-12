@@ -8,13 +8,14 @@ import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.HostDb;
 import java.util.List;
 import com.dt.platform.domain.ops.HostMid;
+import com.dt.platform.domain.ops.HostOs;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:38:17
- * @sign 48CEFD663686F6FEDCAC83D954613773
+ * @since 2021-08-12 12:49:21
+ * @sign 6F009ED41DD306C4417CB1660B6727E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -113,42 +114,12 @@ public class HostMeta {
 	/**
 	 * 负责人 , 类型: java.lang.String
 	*/
-	public static final String DIRECTOR_ID="directorId";
+	public static final String DIRECTOR_USERNAME="directorUsername";
 	
 	/**
 	 * 负责人 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> DIRECTOR_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,DIRECTOR_ID, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
-	
-	/**
-	 * 操作系统 , 类型: java.lang.String
-	*/
-	public static final String OS="os";
-	
-	/**
-	 * 操作系统 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> OS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,OS, java.lang.String.class, "操作系统", "操作系统", java.lang.String.class, null);
-	
-	/**
-	 * 数据库 , 类型: java.lang.String
-	*/
-	public static final String DB="db";
-	
-	/**
-	 * 数据库 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> DB_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,DB, java.lang.String.class, "数据库", "数据库", java.lang.String.class, null);
-	
-	/**
-	 * 中间件 , 类型: java.lang.String
-	*/
-	public static final String MIDDLEWARE="middleware";
-	
-	/**
-	 * 中间件 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> MIDDLEWARE_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,MIDDLEWARE, java.lang.String.class, "中间件", "中间件", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> DIRECTOR_USERNAME_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,DIRECTOR_USERNAME, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
 	
 	/**
 	 * 内存 , 类型: java.math.BigDecimal
@@ -401,39 +372,59 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostDb> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.HostDb.class, null);
 	
 	/**
-	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
+	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
 	*/
 	public static final String HOST_DB_IDS="host_db_ids";
 	
 	/**
-	 * dbids列表 , 集合类型: LIST , 类型: java.lang.String
+	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_DB_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_IDS, java.util.List.class, "dbids列表", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_DB_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_IDS, java.util.List.class, "数据库列表", "数据库", java.lang.String.class, null);
 	
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
 	*/
-	public static final String HOST_MID_LIST="host_mid_list";
+	public static final String HOST_MIDDLEWARE_LIST="host_middleware_list";
 	
 	/**
 	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOST_MID_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MID_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOST_MIDDLEWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
 	
 	/**
-	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
+	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final String HOST_MID_IDS="host_mid_ids";
+	public static final String HOST_MIDDLEWARE_IDS="host_middleware_ids";
 	
 	/**
-	 * hostmidids列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
+	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_MID_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MID_IDS, java.util.List.class, "hostmidids列表", "中间件", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_MIDDLEWARE_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_IDS, java.util.List.class, "中间件列表", "中间件", java.lang.String.class, null);
+	
+	/**
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
+	*/
+	public static final String HOST_OS_LIST="host_os_list";
+	
+	/**
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostOs> HOST_OS_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_LIST, java.util.List.class, "操作系统", "操作系统", com.dt.platform.domain.ops.HostOs.class, null);
+	
+	/**
+	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String HOST_OS_IDS="host_os_ids";
+	
+	/**
+	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_OS_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_IDS, java.util.List.class, "操作系统列表", "操作系统", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_ID , OS , DB , MIDDLEWARE , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MID_LIST , HOST_MID_IDS };
+	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_USERNAME , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MIDDLEWARE_LIST , HOST_MIDDLEWARE_IDS , HOST_OS_LIST , HOST_OS_IDS };
 	
 	/**
 	 * 代理类
@@ -544,45 +535,12 @@ public class HostMeta {
 		
 		/**
 		 * 设置 负责人
-		 * @param directorId 负责人
+		 * @param directorUsername 负责人
 		 * @return 当前对象
 		*/
-		public Host setDirectorId(String directorId) {
-			super.change(DIRECTOR_ID,super.getDirectorId(),directorId);
-			super.setDirectorId(directorId);
-			return this;
-		}
-		
-		/**
-		 * 设置 操作系统
-		 * @param os 操作系统
-		 * @return 当前对象
-		*/
-		public Host setOs(String os) {
-			super.change(OS,super.getOs(),os);
-			super.setOs(os);
-			return this;
-		}
-		
-		/**
-		 * 设置 数据库
-		 * @param db 数据库
-		 * @return 当前对象
-		*/
-		public Host setDb(String db) {
-			super.change(DB,super.getDb(),db);
-			super.setDb(db);
-			return this;
-		}
-		
-		/**
-		 * 设置 中间件
-		 * @param middleware 中间件
-		 * @return 当前对象
-		*/
-		public Host setMiddleware(String middleware) {
-			super.change(MIDDLEWARE,super.getMiddleware(),middleware);
-			super.setMiddleware(middleware);
+		public Host setDirectorUsername(String directorUsername) {
+			super.change(DIRECTOR_USERNAME,super.getDirectorUsername(),directorUsername);
+			super.setDirectorUsername(directorUsername);
 			return this;
 		}
 		
@@ -862,8 +820,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 dbids列表
-		 * @param host_db_ids dbids列表
+		 * 设置 数据库列表
+		 * @param host_db_ids 数据库列表
 		 * @return 当前对象
 		*/
 		public Host setHostDbIds(List<String> host_db_ids) {
@@ -874,23 +832,45 @@ public class HostMeta {
 		
 		/**
 		 * 设置 中间件
-		 * @param host_mid_list 中间件
+		 * @param host_middleware_list 中间件
 		 * @return 当前对象
 		*/
-		public Host setHostMidList(List<HostMid> host_mid_list) {
-			super.change(HOST_MID_LIST,super.getHostMidList(),host_mid_list);
-			super.setHostMidList(host_mid_list);
+		public Host setHostMiddlewareList(List<HostMid> host_middleware_list) {
+			super.change(HOST_MIDDLEWARE_LIST,super.getHostMiddlewareList(),host_middleware_list);
+			super.setHostMiddlewareList(host_middleware_list);
 			return this;
 		}
 		
 		/**
-		 * 设置 hostmidids列表
-		 * @param host_mid_ids hostmidids列表
+		 * 设置 中间件列表
+		 * @param host_middleware_ids 中间件列表
 		 * @return 当前对象
 		*/
-		public Host setHostMidIds(List<String> host_mid_ids) {
-			super.change(HOST_MID_IDS,super.getHostMidIds(),host_mid_ids);
-			super.setHostMidIds(host_mid_ids);
+		public Host setHostMiddlewareIds(List<String> host_middleware_ids) {
+			super.change(HOST_MIDDLEWARE_IDS,super.getHostMiddlewareIds(),host_middleware_ids);
+			super.setHostMiddlewareIds(host_middleware_ids);
+			return this;
+		}
+		
+		/**
+		 * 设置 操作系统
+		 * @param host_os_list 操作系统
+		 * @return 当前对象
+		*/
+		public Host setHostOsList(List<HostOs> host_os_list) {
+			super.change(HOST_OS_LIST,super.getHostOsList(),host_os_list);
+			super.setHostOsList(host_os_list);
+			return this;
+		}
+		
+		/**
+		 * 设置 操作系统列表
+		 * @param host_os_ids 操作系统列表
+		 * @return 当前对象
+		*/
+		public Host setHostOsIds(List<String> host_os_ids) {
+			super.change(HOST_OS_IDS,super.getHostOsIds(),host_os_ids);
+			super.setHostOsIds(host_os_ids);
 			return this;
 		}
 	}

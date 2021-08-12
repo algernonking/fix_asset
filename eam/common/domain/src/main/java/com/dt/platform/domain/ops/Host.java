@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:38:17
- * @sign 48CEFD663686F6FEDCAC83D954613773
+ * @since 2021-08-12 12:49:21
+ * @sign 6F009ED41DD306C4417CB1660B6727E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -90,25 +90,7 @@ public class Host extends Entity {
 	 * 负责人：负责人
 	*/
 	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
-	private String directorId;
-	
-	/**
-	 * 操作系统：操作系统
-	*/
-	@ApiModelProperty(required = false,value="操作系统" , notes = "操作系统")
-	private String os;
-	
-	/**
-	 * 数据库：数据库
-	*/
-	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
-	private String db;
-	
-	/**
-	 * 中间件：中间件
-	*/
-	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
-	private String middleware;
+	private String directorUsername;
 	
 	/**
 	 * 内存：内存
@@ -261,22 +243,34 @@ public class Host extends Entity {
 	private List<HostDb> host_db_list;
 	
 	/**
-	 * dbids列表
+	 * 数据库列表：数据库
 	*/
-	@ApiModelProperty(required = false,value="dbids列表" , notes = "")
+	@ApiModelProperty(required = false,value="数据库列表" , notes = "数据库")
 	private List<String> host_db_ids;
 	
 	/**
 	 * 中间件：中间件
 	*/
 	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
-	private List<HostMid> host_mid_list;
+	private List<HostMid> host_middleware_list;
 	
 	/**
-	 * hostmidids列表：中间件
+	 * 中间件列表：中间件
 	*/
-	@ApiModelProperty(required = false,value="hostmidids列表" , notes = "中间件")
-	private List<String> host_mid_ids;
+	@ApiModelProperty(required = false,value="中间件列表" , notes = "中间件")
+	private List<String> host_middleware_ids;
+	
+	/**
+	 * 操作系统：操作系统
+	*/
+	@ApiModelProperty(required = false,value="操作系统" , notes = "操作系统")
+	private List<HostOs> host_os_list;
+	
+	/**
+	 * 操作系统列表：操作系统
+	*/
+	@ApiModelProperty(required = false,value="操作系统列表" , notes = "操作系统")
+	private List<String> host_os_ids;
 	
 	/**
 	 * 获得 主键<br>
@@ -454,74 +448,17 @@ public class Host extends Entity {
 	 * 负责人
 	 * @return 负责人
 	*/
-	public String getDirectorId() {
-		return directorId;
+	public String getDirectorUsername() {
+		return directorUsername;
 	}
 	
 	/**
 	 * 设置 负责人
-	 * @param directorId 负责人
+	 * @param directorUsername 负责人
 	 * @return 当前对象
 	*/
-	public Host setDirectorId(String directorId) {
-		this.directorId=directorId;
-		return this;
-	}
-	
-	/**
-	 * 获得 操作系统<br>
-	 * 操作系统
-	 * @return 操作系统
-	*/
-	public String getOs() {
-		return os;
-	}
-	
-	/**
-	 * 设置 操作系统
-	 * @param os 操作系统
-	 * @return 当前对象
-	*/
-	public Host setOs(String os) {
-		this.os=os;
-		return this;
-	}
-	
-	/**
-	 * 获得 数据库<br>
-	 * 数据库
-	 * @return 数据库
-	*/
-	public String getDb() {
-		return db;
-	}
-	
-	/**
-	 * 设置 数据库
-	 * @param db 数据库
-	 * @return 当前对象
-	*/
-	public Host setDb(String db) {
-		this.db=db;
-		return this;
-	}
-	
-	/**
-	 * 获得 中间件<br>
-	 * 中间件
-	 * @return 中间件
-	*/
-	public String getMiddleware() {
-		return middleware;
-	}
-	
-	/**
-	 * 设置 中间件
-	 * @param middleware 中间件
-	 * @return 当前对象
-	*/
-	public Host setMiddleware(String middleware) {
-		this.middleware=middleware;
+	public Host setDirectorUsername(String directorUsername) {
+		this.directorUsername=directorUsername;
 		return this;
 	}
 	
@@ -1012,16 +949,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 dbids列表<br>
-	 * @return dbids列表
+	 * 获得 数据库列表<br>
+	 * 数据库
+	 * @return 数据库列表
 	*/
 	public List<String> getHostDbIds() {
 		return host_db_ids;
 	}
 	
 	/**
-	 * 设置 dbids列表
-	 * @param host_db_ids dbids列表
+	 * 设置 数据库列表
+	 * @param host_db_ids 数据库列表
 	 * @return 当前对象
 	*/
 	public Host setHostDbIds(List<String> host_db_ids) {
@@ -1030,8 +968,8 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 添加 dbids列表
-	 * @param host_db_id dbids列表
+	 * 添加 数据库列表
+	 * @param host_db_id 数据库列表
 	 * @return 当前对象
 	*/
 	public Host addHostDbId(String host_db_id) {
@@ -1045,17 +983,17 @@ public class Host extends Entity {
 	 * 中间件
 	 * @return 中间件
 	*/
-	public List<HostMid> getHostMidList() {
-		return host_mid_list;
+	public List<HostMid> getHostMiddlewareList() {
+		return host_middleware_list;
 	}
 	
 	/**
 	 * 设置 中间件
-	 * @param host_mid_list 中间件
+	 * @param host_middleware_list 中间件
 	 * @return 当前对象
 	*/
-	public Host setHostMidList(List<HostMid> host_mid_list) {
-		this.host_mid_list=host_mid_list;
+	public Host setHostMiddlewareList(List<HostMid> host_middleware_list) {
+		this.host_middleware_list=host_middleware_list;
 		return this;
 	}
 	
@@ -1064,39 +1002,99 @@ public class Host extends Entity {
 	 * @param entity 中间件
 	 * @return 当前对象
 	*/
-	public Host addHostMid(HostMid entity) {
-		if(this.host_mid_list==null) host_mid_list=new ArrayList<>();
-		this.host_mid_list.add(entity);
+	public Host addHostMiddleware(HostMid entity) {
+		if(this.host_middleware_list==null) host_middleware_list=new ArrayList<>();
+		this.host_middleware_list.add(entity);
 		return this;
 	}
 	
 	/**
-	 * 获得 hostmidids列表<br>
+	 * 获得 中间件列表<br>
 	 * 中间件
-	 * @return hostmidids列表
+	 * @return 中间件列表
 	*/
-	public List<String> getHostMidIds() {
-		return host_mid_ids;
+	public List<String> getHostMiddlewareIds() {
+		return host_middleware_ids;
 	}
 	
 	/**
-	 * 设置 hostmidids列表
-	 * @param host_mid_ids hostmidids列表
+	 * 设置 中间件列表
+	 * @param host_middleware_ids 中间件列表
 	 * @return 当前对象
 	*/
-	public Host setHostMidIds(List<String> host_mid_ids) {
-		this.host_mid_ids=host_mid_ids;
+	public Host setHostMiddlewareIds(List<String> host_middleware_ids) {
+		this.host_middleware_ids=host_middleware_ids;
 		return this;
 	}
 	
 	/**
-	 * 添加 hostmidids列表
-	 * @param host_mid_id hostmidids列表
+	 * 添加 中间件列表
+	 * @param host_middleware_id 中间件列表
 	 * @return 当前对象
 	*/
-	public Host addHostMidId(String host_mid_id) {
-		if(this.host_mid_ids==null) host_mid_ids=new ArrayList<>();
-		this.host_mid_ids.add(host_mid_id);
+	public Host addHostMiddlewareId(String host_middleware_id) {
+		if(this.host_middleware_ids==null) host_middleware_ids=new ArrayList<>();
+		this.host_middleware_ids.add(host_middleware_id);
+		return this;
+	}
+	
+	/**
+	 * 获得 操作系统<br>
+	 * 操作系统
+	 * @return 操作系统
+	*/
+	public List<HostOs> getHostOsList() {
+		return host_os_list;
+	}
+	
+	/**
+	 * 设置 操作系统
+	 * @param host_os_list 操作系统
+	 * @return 当前对象
+	*/
+	public Host setHostOsList(List<HostOs> host_os_list) {
+		this.host_os_list=host_os_list;
+		return this;
+	}
+	
+	/**
+	 * 添加 操作系统
+	 * @param entity 操作系统
+	 * @return 当前对象
+	*/
+	public Host addHostOs(HostOs entity) {
+		if(this.host_os_list==null) host_os_list=new ArrayList<>();
+		this.host_os_list.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 操作系统列表<br>
+	 * 操作系统
+	 * @return 操作系统列表
+	*/
+	public List<String> getHostOsIds() {
+		return host_os_ids;
+	}
+	
+	/**
+	 * 设置 操作系统列表
+	 * @param host_os_ids 操作系统列表
+	 * @return 当前对象
+	*/
+	public Host setHostOsIds(List<String> host_os_ids) {
+		this.host_os_ids=host_os_ids;
+		return this;
+	}
+	
+	/**
+	 * 添加 操作系统列表
+	 * @param host_os_id 操作系统列表
+	 * @return 当前对象
+	*/
+	public Host addHostOsId(String host_os_id) {
+		if(this.host_os_ids==null) host_os_ids=new ArrayList<>();
+		this.host_os_ids.add(host_os_id);
 		return this;
 	}
 

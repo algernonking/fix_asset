@@ -37,6 +37,7 @@ import java.math.BigDecimal;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.HostDb;
 import com.dt.platform.domain.ops.HostMid;
+import com.dt.platform.domain.ops.HostOs;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 10:38:17
+ * @since 2021-08-12 12:49:21
 */
 
 @Api(tags = "主机")
@@ -78,10 +79,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.OS , value = "操作系统" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DB , value = "数据库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.MIDDLEWARE , value = "中间件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CONF , value = "其他配置" , required = false , dataTypeClass=String.class),
@@ -158,10 +156,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.OS , value = "操作系统" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DB , value = "数据库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.MIDDLEWARE , value = "中间件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CONF , value = "其他配置" , required = false , dataTypeClass=String.class),
@@ -204,10 +199,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.OS , value = "操作系统" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DB , value = "数据库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.MIDDLEWARE , value = "中间件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CONF , value = "其他配置" , required = false , dataTypeClass=String.class),
@@ -250,6 +242,14 @@ public class HostController extends SuperController {
 	public Result<Host> getById(String id) {
 		Result<Host> result=new Result<>();
 		Host host=hostService.getById(id);
+		// 关联出 数据库 数据
+		hostService.join(host,HostMeta.HOST_DB_LIST);
+		// 关联出 中间件 数据
+		hostService.join(host,HostMeta.HOST_MIDDLEWARE_LIST);
+		// 关联出 操作系统 数据
+		hostService.join(host,HostMeta.HOST_OS_LIST);
+		// 关联出 所在位置 数据
+		hostService.join(host,HostMeta.POSITION);
 		result.success(true).data(host);
 		return result;
 	}
@@ -289,10 +289,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.OS , value = "操作系统" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DB , value = "数据库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.MIDDLEWARE , value = "中间件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CONF , value = "其他配置" , required = false , dataTypeClass=String.class),
@@ -334,10 +331,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.OS , value = "操作系统" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.DB , value = "数据库" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostVOMeta.MIDDLEWARE , value = "中间件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CONF , value = "其他配置" , required = false , dataTypeClass=String.class),
@@ -360,6 +354,14 @@ public class HostController extends SuperController {
 	public Result<PagedList<Host>> queryPagedList(HostVO sample) {
 		Result<PagedList<Host>> result=new Result<>();
 		PagedList<Host> list=hostService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 数据库 数据
+		hostService.join(list,HostMeta.HOST_DB_LIST);
+		// 关联出 中间件 数据
+		hostService.join(list,HostMeta.HOST_MIDDLEWARE_LIST);
+		// 关联出 操作系统 数据
+		hostService.join(list,HostMeta.HOST_OS_LIST);
+		// 关联出 所在位置 数据
+		hostService.join(list,HostMeta.POSITION);
 		result.success(true).data(list);
 		return result;
 	}
