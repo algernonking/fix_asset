@@ -41,11 +41,13 @@ public class OPSRelationManager extends RelationManager {
 
         //中间件列表
         this.property(HostMeta.HOST_MIDDLEWARE_LIST_PROP)
-                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_MID.HOST_ID);
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_MID.HOST_ID)
+                .using(EAMTables.OPS_HOST_MID.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID);
 
         //系统列表
         this.property(HostMeta.HOST_OS_LIST_PROP)
-                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_OS.HOST_ID);
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_OS.HOST_ID)
+                .using(EAMTables.OPS_HOST_OS.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID);
 
         //所在位置
         this.property(HostMeta.POSITION_PROP)

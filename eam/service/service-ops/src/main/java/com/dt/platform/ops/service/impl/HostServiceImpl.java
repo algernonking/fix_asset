@@ -34,14 +34,23 @@ import java.util.Date;
  * <p>
  * 主机 服务实现
  * </p>
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-08-12 19:26:38
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-13 08:24:18
 */
 
 
 @Service("OpsHostService")
 public class HostServiceImpl extends SuperService<Host> implements IHostService {
-	
+
+	@Autowired
+	HostDbServiceImpl hostDbService;
+
+	@Autowired
+	HostMidServiceImpl hostMidService;
+
+	@Autowired
+	HostOsServiceImpl hostOsService;
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -65,6 +74,9 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	@Override
 	public Result insert(Host host) {
+		hostDbService.saveRelation(host.getId(),host.getHostDbIds());
+		hostMidService.saveRelation(host.getId(),host.getHostMiddlewareIds());
+		hostOsService.saveRelation(host.getId(),host.getHostOsIds());
 		return super.insert(host);
 	}
 	
@@ -132,6 +144,9 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	@Override
 	public Result update(Host host , SaveMode mode) {
+		hostDbService.saveRelation(host.getId(),host.getHostDbIds());
+		hostMidService.saveRelation(host.getId(),host.getHostMiddlewareIds());
+		hostOsService.saveRelation(host.getId(),host.getHostOsIds());
 		return super.update(host , mode);
 	}
 	

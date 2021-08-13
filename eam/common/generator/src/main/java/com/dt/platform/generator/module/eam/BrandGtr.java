@@ -17,7 +17,7 @@ public class BrandGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_BRAND.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 
-        cfg.view().list().columnLayout(
+        cfg.view().table().columnLayout(
                 //常规列
                 EAMTables.EAM_BRAND.BRAND_NAME,
                 EAMTables.EAM_BRAND.CREATE_TIME

@@ -1,7 +1,7 @@
 /**
  * 服务明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:43:01
+ * @since 2021-08-13 10:07:09
  */
 
 
@@ -60,6 +60,7 @@ function ListPage() {
 					{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
 					{ field: 'sort', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('排序')} ,
 					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
+					{ field: 'resServicename', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('类型名称')} ,
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
 					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -94,6 +95,7 @@ function ListPage() {
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.patch={ value: $("#patch").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.resServicename={ value: $("#resServicename").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}

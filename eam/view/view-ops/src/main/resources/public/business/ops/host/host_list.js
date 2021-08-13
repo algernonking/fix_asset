@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-08-12 19:26:40
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-13 08:24:21
  */
 
 
@@ -63,17 +63,17 @@ function ListPage() {
 					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
 					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
 					{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人')} ,
-					{ field: 'hostMemory', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('内存')} ,
-					{ field: 'hostCpu', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('CPU')} ,
+					{ field: 'hostMemory', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('内存')} ,
+					{ field: 'hostCpu', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('CPU')} ,
 					{ field: 'hostConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他配置')} ,
-					{ field: 'userOsAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统管理员')} ,
+					{ field: 'userOsAdmin', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('系统管理员')} ,
 					{ field: 'userDbAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库管理员')} ,
 					{ field: 'userDbUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库使用用户')} ,
 					{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户')} ,
-					{ field: 'userOpsOper', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运维操作用户')} ,
-					{ field: 'userOther', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他用户')} ,
+					{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户')} ,
+					{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户')} ,
 					{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}} ,
-					{ field: 'offlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }} ,
+					{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }} ,
 					{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineTime); }} ,
 					{ field: 'arch', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否归档1归档0不归档')} ,
 					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签')} ,

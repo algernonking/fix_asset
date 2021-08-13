@@ -1,0 +1,12 @@
+@Autowired
+HostDbServiceImpl hostDbService;
+
+@Autowired
+HostMidServiceImpl hostMidService;
+
+@Autowired
+HostOsServiceImpl hostOsService;
+
+hostDbService.saveRelation(host.getId(),host.getHostDbIds());
+hostMidService.saveRelation(host.getId(),host.getHostMiddlewareIds());
+hostOsService.saveRelation(host.getId(),host.getHostOsIds());

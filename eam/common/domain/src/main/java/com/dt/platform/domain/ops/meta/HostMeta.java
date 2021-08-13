@@ -7,15 +7,13 @@ import java.util.Date;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.ServiceDetail;
 import java.util.List;
-import com.dt.platform.domain.ops.HostMid;
-import com.dt.platform.domain.ops.HostOs;
 
 
 
 /**
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-08-12 19:26:38
- * @sign A6B4F8C66C2F15D06B13BE25524456C4
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-13 08:24:18
+ * @sign B6E9A6A60539D136DED629BE84E22121
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -382,14 +380,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_DB_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_IDS, java.util.List.class, "数据库列表", "数据库", java.lang.String.class, null);
 	
 	/**
-	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
 	public static final String HOST_MIDDLEWARE_LIST="hostMiddlewareList";
 	
 	/**
-	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostMid
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostMid> HOST_MIDDLEWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.HostMid.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_MIDDLEWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.ServiceDetail.class, null);
 	
 	/**
 	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
@@ -402,14 +400,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_MIDDLEWARE_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_IDS, java.util.List.class, "中间件列表", "中间件", java.lang.String.class, null);
 	
 	/**
-	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
 	public static final String HOST_OS_LIST="hostOsList";
 	
 	/**
-	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.HostOs
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostOs> HOST_OS_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_LIST, java.util.List.class, "操作系统", "操作系统", com.dt.platform.domain.ops.HostOs.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_OS_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_LIST, java.util.List.class, "操作系统", "操作系统", com.dt.platform.domain.ops.ServiceDetail.class, null);
 	
 	/**
 	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
@@ -835,7 +833,7 @@ public class HostMeta {
 		 * @param hostMiddlewareList 中间件
 		 * @return 当前对象
 		*/
-		public Host setHostMiddlewareList(List<HostMid> hostMiddlewareList) {
+		public Host setHostMiddlewareList(List<ServiceDetail> hostMiddlewareList) {
 			super.change(HOST_MIDDLEWARE_LIST,super.getHostMiddlewareList(),hostMiddlewareList);
 			super.setHostMiddlewareList(hostMiddlewareList);
 			return this;
@@ -857,7 +855,7 @@ public class HostMeta {
 		 * @param hostOsList 操作系统
 		 * @return 当前对象
 		*/
-		public Host setHostOsList(List<HostOs> hostOsList) {
+		public Host setHostOsList(List<ServiceDetail> hostOsList) {
 			super.change(HOST_OS_LIST,super.getHostOsList(),hostOsList);
 			super.setHostOsList(hostOsList);
 			return this;

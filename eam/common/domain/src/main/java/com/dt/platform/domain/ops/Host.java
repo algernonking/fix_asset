@@ -18,9 +18,9 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 /**
  * null
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-08-12 19:26:38
- * @sign A6B4F8C66C2F15D06B13BE25524456C4
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-13 08:24:18
+ * @sign B6E9A6A60539D136DED629BE84E22121
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -252,7 +252,7 @@ public class Host extends Entity {
 	 * 中间件：中间件
 	*/
 	@ApiModelProperty(required = false,value="中间件" , notes = "中间件")
-	private List<HostMid> hostMiddlewareList;
+	private List<ServiceDetail> hostMiddlewareList;
 	
 	/**
 	 * 中间件列表：中间件
@@ -264,7 +264,7 @@ public class Host extends Entity {
 	 * 操作系统：操作系统
 	*/
 	@ApiModelProperty(required = false,value="操作系统" , notes = "操作系统")
-	private List<HostOs> hostOsList;
+	private List<ServiceDetail> hostOsList;
 	
 	/**
 	 * 操作系统列表：操作系统
@@ -983,7 +983,7 @@ public class Host extends Entity {
 	 * 中间件
 	 * @return 中间件
 	*/
-	public List<HostMid> getHostMiddlewareList() {
+	public List<ServiceDetail> getHostMiddlewareList() {
 		return hostMiddlewareList;
 	}
 	
@@ -992,7 +992,7 @@ public class Host extends Entity {
 	 * @param hostMiddlewareList 中间件
 	 * @return 当前对象
 	*/
-	public Host setHostMiddlewareList(List<HostMid> hostMiddlewareList) {
+	public Host setHostMiddlewareList(List<ServiceDetail> hostMiddlewareList) {
 		this.hostMiddlewareList=hostMiddlewareList;
 		return this;
 	}
@@ -1002,7 +1002,7 @@ public class Host extends Entity {
 	 * @param hostMiddleware 中间件
 	 * @return 当前对象
 	*/
-	public Host addHostMiddleware(HostMid hostMiddleware) {
+	public Host addHostMiddleware(ServiceDetail hostMiddleware) {
 		if(this.hostMiddlewareList==null) hostMiddlewareList=new ArrayList<>();
 		this.hostMiddlewareList.add(hostMiddleware);
 		return this;
@@ -1043,7 +1043,7 @@ public class Host extends Entity {
 	 * 操作系统
 	 * @return 操作系统
 	*/
-	public List<HostOs> getHostOsList() {
+	public List<ServiceDetail> getHostOsList() {
 		return hostOsList;
 	}
 	
@@ -1052,7 +1052,7 @@ public class Host extends Entity {
 	 * @param hostOsList 操作系统
 	 * @return 当前对象
 	*/
-	public Host setHostOsList(List<HostOs> hostOsList) {
+	public Host setHostOsList(List<ServiceDetail> hostOsList) {
 		this.hostOsList=hostOsList;
 		return this;
 	}
@@ -1062,7 +1062,7 @@ public class Host extends Entity {
 	 * @param hostOs 操作系统
 	 * @return 当前对象
 	*/
-	public Host addHostOs(HostOs hostOs) {
+	public Host addHostOs(ServiceDetail hostOs) {
 		if(this.hostOsList==null) hostOsList=new ArrayList<>();
 		this.hostOsList.add(hostOs);
 		return this;
