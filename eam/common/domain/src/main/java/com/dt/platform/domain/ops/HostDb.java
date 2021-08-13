@@ -1,24 +1,23 @@
 package com.dt.platform.domain.ops;
 
-import com.dt.platform.constants.db.EAMTables.OPS_HOST_DB;
 import com.github.foxnic.dao.entity.Entity;
-import com.github.foxnic.dao.entity.EntityContext;
-import com.github.foxnic.sql.meta.DBTable;
-import io.swagger.annotations.ApiModelProperty;
-
-import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import com.github.foxnic.sql.meta.DBTable;
+import com.dt.platform.constants.db.EAMTables.OPS_HOST_DB;
+import javax.persistence.Id;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import javax.persistence.Transient;
 import java.util.Map;
+import com.github.foxnic.dao.entity.EntityContext;
 
 
 
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 17:11:11
- * @sign 4407C412592DD98ED9CFC2D197E33B7E11
+ * @since 2021-08-13 21:59:22
+ * @sign 4407C412592DD98ED9CFC2D197E33B7E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

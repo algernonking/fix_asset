@@ -36,7 +36,7 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 中间件 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 17:11:53
+ * @since 2021-08-13 21:59:24
 */
 
 
@@ -53,6 +53,8 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {

@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.ServiceDetail;
 import io.swagger.annotations.Api;
@@ -51,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 08:24:18
+ * @since 2021-08-13 22:20:28
 */
 
 @Api(tags = "主机")
@@ -69,6 +70,7 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "添加主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
@@ -146,6 +148,7 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "更新主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
@@ -189,6 +192,7 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "保存主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
@@ -240,6 +244,8 @@ public class HostController extends SuperController {
 	public Result<Host> getById(String id) {
 		Result<Host> result=new Result<>();
 		Host host=hostService.getById(id);
+		// 关联出 信息系统 数据
+		hostService.join(host,HostMeta.INFO_SYSTEM);
 		// 关联出 所在位置 数据
 		hostService.join(host,HostMeta.POSITION);
 		// 关联出 数据库 数据
@@ -279,6 +285,7 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "查询主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
@@ -321,6 +328,7 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "分页查询主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
@@ -352,6 +360,8 @@ public class HostController extends SuperController {
 	public Result<PagedList<Host>> queryPagedList(HostVO sample) {
 		Result<PagedList<Host>> result=new Result<>();
 		PagedList<Host> list=hostService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 信息系统 数据
+		hostService.join(list,HostMeta.INFO_SYSTEM);
 		// 关联出 所在位置 数据
 		hostService.join(list,HostMeta.POSITION);
 		// 关联出 数据库 数据

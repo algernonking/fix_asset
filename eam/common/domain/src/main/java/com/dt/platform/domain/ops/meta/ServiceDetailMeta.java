@@ -9,8 +9,8 @@ import com.dt.platform.domain.ops.OpsService;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 10:35:55
- * @sign C9DFEEA7165AA5AC1A8F27392CBFDD93
+ * @since 2021-08-13 21:59:31
+ * @sign 8219A67F312D795D261708B5B7264138
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -167,19 +167,9 @@ public class ServiceDetailMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,com.dt.platform.domain.ops.OpsService> OPS_SERVICE_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,OPS_SERVICE, com.dt.platform.domain.ops.OpsService.class, "服务", "", com.dt.platform.domain.ops.OpsService.class, null);
 	
 	/**
-	 * 服务名称 , 类型: java.lang.String
-	*/
-	public static final String SERVICE_NAME="serviceName";
-	
-	/**
-	 * 服务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceDetail,java.lang.String> SERVICE_NAME_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceDetail.class ,SERVICE_NAME, java.lang.String.class, "服务名称", "服务名称", java.lang.String.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , SERVICE_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , OPS_SERVICE , SERVICE_NAME };
+	public static final String[] $PROPS={ ID , SERVICE_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , OPS_SERVICE };
 	
 	/**
 	 * 代理类
@@ -351,17 +341,6 @@ public class ServiceDetailMeta {
 		public ServiceDetail setOpsService(OpsService opsService) {
 			super.change(OPS_SERVICE,super.getOpsService(),opsService);
 			super.setOpsService(opsService);
-			return this;
-		}
-		
-		/**
-		 * 设置 服务名称
-		 * @param serviceName 服务名称
-		 * @return 当前对象
-		*/
-		public ServiceDetail setServiceName(String serviceName) {
-			super.change(SERVICE_NAME,super.getServiceName(),serviceName);
-			super.setServiceName(serviceName);
 			return this;
 		}
 	}

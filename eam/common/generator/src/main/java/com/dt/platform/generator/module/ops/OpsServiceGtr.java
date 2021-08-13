@@ -16,16 +16,13 @@ public class OpsServiceGtr extends BaseCodeGenerator{
 //        cfg.getPoClassFile().addSimpleProperty(ServiceType.class,"serviceType","类型","");
 
         cfg.view().field(EAMTables.OPS_SERVICE.ID).basic().hidden(true);
-
-
+        cfg.view().field(EAMTables.OPS_SERVICE.CREATE_TIME).list().hidden();
         cfg.view().field(EAMTables.OPS_SERVICE.SERVICE_NAME).search().fuzzySearch();
-
+        cfg.view().field(EAMTables.OPS_SERVICE.SERVICE_NOTES).search().fuzzySearch();
 
 
         cfg.view().field(EAMTables.OPS_SERVICE.TYPE).basic().label("服务类型")
                 .form().validate().required().form().radioBox().enumType(ServiceTypeEnum.class);
-
-
 
 
         //文件生成覆盖模式

@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:24:45
+ * @since 2021-08-13 21:59:33
  * @sign C5CCA2FA8CB3419E1539F0273C657AB6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

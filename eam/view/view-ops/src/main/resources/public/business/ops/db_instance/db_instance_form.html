@@ -1,0 +1,187 @@
+<!-- 
+/**
+ * 数据库实例 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-08-13 21:59:17
+ */
+ -->
+ <!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('数据库实例')}">数据库实例</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+</head>
+
+<body style="overflow-y: hidden">
+<div class="form-container">
+
+    <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
+        <input name="id" id="id"  type="hidden"/>
+
+
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('实例名称')}">实例名称</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('实例名称') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主机')}">主机</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="hostId" th:data="${'/service-ops/ops-host/query-paged-list'}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('数据库')}">数据库</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="databaseId" th:data="${'/service-ops/ops-service-detail/query-list'}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('日志模式')}">日志模式</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="logMethod" th:data="${dict.toArray('ops_db_log_method')}"></div>
+                        </div>
+                    </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('标签')}">标签</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="labels" id="labels" name="labels" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="backupStatus" th:data="${dict.toArray('ops_db_backup_status')}"></div>
+                        </div>
+                    </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份策略')}">备份策略</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="backupStrategy" id="backupStrategy" name="backupStrategy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份策略') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="backupType" th:data="${dict.toArray('ops_db_backup_type')}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份方式')}">备份方式</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="backupMethod" th:data="${dict.toArray('ops_db_backup_method')}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份时间')}">备份时间</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="backupTime" id="backupTime" name="backupTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('备份时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
+                    </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份大小')}">备份大小</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="backupSize" id="backupSize" name="backupSize" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份大小') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+        <!--结束：group循环-->
+
+        <div style="height: 8px"></div>
+
+
+    </form>
+
+</div>
+
+<div class="model-form-footer">
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
+    <button th:if="${perm.checkAnyAuth('ops_db_instance:create','ops_db_instance:update','ops_db_instance:save')}" class="layui-btn" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+</div>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_LOGMETHOD_DATA = [[${dict.toArray('ops_db_log_method')}]];
+    var SELECT_BACKUPTYPE_DATA = [[${dict.toArray('ops_db_backup_type')}]];
+    var SELECT_BACKUPSTATUS_DATA = [[${dict.toArray('ops_db_backup_status')}]];
+    var SELECT_BACKUPMETHOD_DATA = [[${dict.toArray('ops_db_backup_method')}]];
+    var VALIDATE_CONFIG={"backupTime":{"date":true,"labelInForm":"备份时间","inputType":"date_input"}};
+    var AUTH_PREFIX="ops_db_instance";
+</script>
+
+<script th:src="'/business/ops/db_instance/db_instance_form.js?'+${cacheKey}"></script>
+
+</body>
+</html>

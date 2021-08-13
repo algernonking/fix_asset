@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-08-13 13:34:41
+ * @since 2021-08-13 16:44:12
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -22,11 +22,6 @@ public enum DictEnum implements CodeTextEnum {
 	 * EAM_资产状态
 	*/
 	EAM_ASSET_STATUS("eam_asset_status" , "EAM_资产状态"),
-	
-	/**
-	 * 服务类型
-	*/
-	SERVICE("service" , "服务类型"),
 	
 	/**
 	 * 节点改密策略
@@ -52,6 +47,46 @@ public enum DictEnum implements CodeTextEnum {
 	 * 节点风险等级
 	*/
 	OPS_HOST_SAFETY("ops_host_safety" , "节点风险等级"),
+	
+	/**
+	 * 数据库日志模式
+	*/
+	OPS_DB_LOG_METHOD("ops_db_log_method" , "数据库日志模式"),
+	
+	/**
+	 * 数据库备份模式
+	*/
+	OPS_DB_BACKUP_METHOD("ops_db_backup_method" , "数据库备份模式"),
+	
+	/**
+	 * 数据库备份状态
+	*/
+	OPS_DB_BACKUP_STATUS("ops_db_backup_status" , "数据库备份状态"),
+	
+	/**
+	 * 数据库备份类型
+	*/
+	OPS_DB_BACKUP_TYPE("ops_db_backup_type" , "数据库备份类型"),
+	
+	/**
+	 * 信息系统运维模式
+	*/
+	OPS_SYSTEM_OPS_METHOD("ops_system_ops_method" , "信息系统运维模式"),
+	
+	/**
+	 * 信息系统开发模式
+	*/
+	OPS_SYSTEM_DEV_METHOD("ops_system_dev_method" , "信息系统开发模式"),
+	
+	/**
+	 * 信息系统状态
+	*/
+	OPS_SYSTEM_STATUS("ops_system_status" , "信息系统状态"),
+	
+	/**
+	 * 信息系统分级
+	*/
+	OPS_SYSTEM_GRADE("ops_system_grade" , "信息系统分级"),
 	
 	/**
 	 * EAM_资产来源

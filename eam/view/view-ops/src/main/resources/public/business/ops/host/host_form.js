@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 08:24:22
+ * @since 2021-08-13 22:20:33
  */
 
 function FormPage() {
@@ -62,6 +62,25 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		//渲染 systemId 下拉字段
+		fox.renderSelectBox({
+			el: "systemId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		//渲染 hostType 下拉字段
 		fox.renderSelectBox({
 			el: "hostType",
@@ -214,6 +233,8 @@ function FormPage() {
 
 
 
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
 			//设置  主机类型 设置下拉框勾选
 			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
 			//设置  所在环境 设置下拉框勾选
@@ -262,6 +283,11 @@ function FormPage() {
 
 
 
+			//获取 信息系统 下拉框的值
+			data.field["systemId"]=xmSelect.get("#systemId",true).getValue("value");
+			if(data.field["systemId"] && data.field["systemId"].length>0) {
+				data.field["systemId"]=data.field["systemId"][0];
+			}
 			//获取 主机类型 下拉框的值
 			data.field["hostType"]=xmSelect.get("#hostType",true).getValue("value");
 			if(data.field["hostType"] && data.field["hostType"].length>0) {

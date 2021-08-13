@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机位置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 09:11:19
+ * @since 2021-08-13 21:59:29
 */
 
 @Api(tags = "主机位置")
@@ -65,8 +65,8 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "添加主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640"),
+		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -84,7 +84,7 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "删除主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = HostPositionVOMeta.ID)
@@ -118,8 +118,8 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "更新主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640"),
+		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { HostPositionVOMeta.PAGE_INDEX , HostPositionVOMeta.PAGE_SIZE , HostPositionVOMeta.SEARCH_FIELD , HostPositionVOMeta.FUZZY_FIELD , HostPositionVOMeta.SEARCH_VALUE , HostPositionVOMeta.SORT_FIELD , HostPositionVOMeta.SORT_TYPE , HostPositionVOMeta.IDS } ) 
@@ -137,8 +137,8 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "保存主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640"),
+		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostPositionVOMeta.PAGE_INDEX , HostPositionVOMeta.PAGE_SIZE , HostPositionVOMeta.SEARCH_FIELD , HostPositionVOMeta.FUZZY_FIELD , HostPositionVOMeta.SEARCH_VALUE , HostPositionVOMeta.SORT_FIELD , HostPositionVOMeta.SORT_TYPE , HostPositionVOMeta.IDS } )
@@ -195,8 +195,8 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "查询主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640"),
+		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostPositionVOMeta.PAGE_INDEX , HostPositionVOMeta.PAGE_SIZE } )
@@ -215,8 +215,8 @@ public class HostPositionController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询主机位置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostPositionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478242968168304640"),
+		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

@@ -1,4 +1,4 @@
-package com.dt.platform.eam.page;
+package com.dt.platform.ops.page;
 
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.CodeAttrServiceProxy;
+import com.dt.platform.proxy.ops.DbInstanceServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 编码分配属性 模版页面控制器
+ * 数据库实例 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:50
+ * @since 2021-08-13 21:59:13
 */
 
-@Controller("EamCodeAttrPageController")
-@RequestMapping(CodeAttrPageController.prefix)
-public class CodeAttrPageController extends ViewController {
+@Controller("OpsDbInstancePageController")
+@RequestMapping(DbInstancePageController.prefix)
+public class DbInstancePageController extends ViewController {
 	
-	public static final String prefix="business/eam/code_attr";
+	public static final String prefix="business/ops/db_instance";
 
-	private CodeAttrServiceProxy proxy;
+	private DbInstanceServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class CodeAttrPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public CodeAttrServiceProxy proxy() {
+	public DbInstanceServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=CodeAttrServiceProxy.api();
+			proxy=DbInstanceServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 编码分配属性 功能主页面
+	 * 数据库实例 功能主页面
 	 */
-	@RequestMapping("/code_attr_list.html")
+	@RequestMapping("/db_instance_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/code_attr_list";
+		return prefix+"/db_instance_list";
 	}
 
 	/**
-	 * 编码分配属性 表单页面
+	 * 数据库实例 表单页面
 	 */
-	@RequestMapping("/code_attr_form.html")
+	@RequestMapping("/db_instance_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/code_attr_form";
+		return prefix+"/db_instance_form";
 	}
 }

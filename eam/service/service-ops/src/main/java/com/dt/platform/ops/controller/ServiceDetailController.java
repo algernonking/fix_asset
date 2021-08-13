@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 10:35:55
+ * @since 2021-08-13 21:59:31
 */
 
 @Api(tags = "服务明细")

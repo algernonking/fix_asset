@@ -1,4 +1,4 @@
-package com.dt.platform.domain.eam;
+package com.dt.platform.domain.ops;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
- * @sign BB700C461C082B664E4C8990233249DB
+ * @since 2021-08-13 22:29:19
+ * @sign E9E531B6E58A963986E194569324DB07
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class CodeAttrVO extends CodeAttr {
+public class InformationSystemVO extends InformationSystem {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setPageIndex(Integer pageIndex) {
+	public InformationSystemVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setPageSize(Integer pageSize) {
+	public InformationSystemVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setSearchField(String searchField) {
+	public InformationSystemVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setFuzzyField(String fuzzyField) {
+	public InformationSystemVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setSearchValue(String searchValue) {
+	public InformationSystemVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setSortField(String sortField) {
+	public InformationSystemVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setSortType(String sortType) {
+	public InformationSystemVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public CodeAttrVO setIds(List<String> ids) {
+	public InformationSystemVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class CodeAttrVO extends CodeAttr {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public CodeAttrVO addId(String id) {
+	public InformationSystemVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

@@ -1,4 +1,4 @@
-package com.dt.platform.eam.service.impl;
+package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.CodeAttr;
-import com.dt.platform.domain.eam.CodeAttrVO;
+import com.dt.platform.domain.ops.DbInstance;
+import com.dt.platform.domain.ops.DbInstanceVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.ICodeAttrService;
+import com.dt.platform.ops.service.IDbInstanceService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 编码分配属性 服务实现
+ * 数据库实例 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-07 21:18:48
+ * @since 2021-08-13 21:59:10
 */
 
 
-@Service("EamCodeAttrService")
-public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICodeAttrService {
+@Service("OpsDbInstanceService")
+public class DbInstanceServiceImpl extends SuperService<DbInstance> implements IDbInstanceService {
 	
 	/**
 	 * 注入DAO对象
@@ -52,6 +52,8 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -60,37 +62,37 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	/**
 	 * 插入实体
-	 * @param codeAttr 实体数据
+	 * @param dbInstance 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(CodeAttr codeAttr) {
-		return super.insert(codeAttr);
+	public Result insert(DbInstance dbInstance) {
+		return super.insert(dbInstance);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param codeAttrList 实体数据清单
+	 * @param dbInstanceList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<CodeAttr> codeAttrList) {
-		return super.insertList(codeAttrList);
+	public Result insertList(List<DbInstance> dbInstanceList) {
+		return super.insertList(dbInstanceList);
 	}
 	
 	
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 数据库实例
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		CodeAttr codeAttr = new CodeAttr();
+		DbInstance dbInstance = new DbInstance();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		codeAttr.setId(id);
+		dbInstance.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(codeAttr);
+			boolean suc = dao.deleteEntity(dbInstance);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -101,20 +103,20 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	}
 	
 	/**
-	 * 按主键删除 编码分配属性
+	 * 按主键删除 数据库实例
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		CodeAttr codeAttr = new CodeAttr();
+		DbInstance dbInstance = new DbInstance();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		codeAttr.setId(id);
-		codeAttr.setDeleted(dao.getDBTreaty().getTrueValue());
-		codeAttr.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		codeAttr.setDeleteTime(new Date());
+		dbInstance.setId(id);
+		dbInstance.setDeleted(dao.getDBTreaty().getTrueValue());
+		dbInstance.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		dbInstance.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(codeAttr,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(dbInstance,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -126,29 +128,29 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	/**
 	 * 更新实体
-	 * @param codeAttr 数据对象
+	 * @param dbInstance 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(CodeAttr codeAttr , SaveMode mode) {
-		return super.update(codeAttr , mode);
+	public Result update(DbInstance dbInstance , SaveMode mode) {
+		return super.update(dbInstance , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param codeAttrList 数据对象列表
+	 * @param dbInstanceList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<CodeAttr> codeAttrList , SaveMode mode) {
-		return super.updateList(codeAttrList , mode);
+	public Result updateList(List<DbInstance> dbInstanceList , SaveMode mode) {
+		return super.updateList(dbInstanceList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 编码分配属性
+	 * 按主键更新字段 数据库实例
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -162,20 +164,20 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	
 	
 	/**
-	 * 按主键获取 编码分配属性
+	 * 按主键获取 数据库实例
 	 *
 	 * @param id 主键
-	 * @return CodeAttr 数据对象
+	 * @return DbInstance 数据对象
 	 */
-	public CodeAttr getById(String id) {
-		CodeAttr sample = new CodeAttr();
+	public DbInstance getById(String id) {
+		DbInstance sample = new DbInstance();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<CodeAttr> getByIds(List<String> ids) {
+	public List<DbInstance> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -188,7 +190,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<CodeAttr> queryList(CodeAttr sample) {
+	public List<DbInstance> queryList(DbInstance sample) {
 		return super.queryList(sample);
 	}
 	
@@ -202,7 +204,7 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<CodeAttr> queryPagedList(CodeAttr sample, int pageSize, int pageIndex) {
+	public PagedList<DbInstance> queryPagedList(DbInstance sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -216,25 +218,25 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<CodeAttr> queryPagedList(CodeAttr sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<DbInstance> queryPagedList(DbInstance sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param codeAttr 数据对象
+	 * @param dbInstance 数据对象
 	 * @return 判断结果
 	 */
-	public Result<CodeAttr> checkExists(CodeAttr codeAttr) {
+	public Result<DbInstance> checkExists(DbInstance dbInstance) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(codeAttr, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(dbInstance, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(CodeAttr sample) {
+	public ExcelWriter exportExcel(DbInstance sample) {
 		return super.exportExcel(sample);
 	}
 
@@ -252,5 +254,6 @@ public class CodeAttrServiceImpl extends SuperService<CodeAttr> implements ICode
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
 
 }

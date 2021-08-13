@@ -4,6 +4,7 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.Host;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.ServiceDetail;
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 08:24:18
- * @sign B6E9A6A60539D136DED629BE84E22121
+ * @since 2021-08-13 22:20:28
+ * @sign 24201C1E354F5517B7C0189844EEA5B9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -28,6 +29,16 @@ public class HostMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
+	 * 信息系统 , 类型: java.lang.String
+	*/
+	public static final String SYSTEM_ID="systemId";
+	
+	/**
+	 * 信息系统 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> SYSTEM_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,SYSTEM_ID, java.lang.String.class, "信息系统", "信息系统", java.lang.String.class, null);
 	
 	/**
 	 * 主机类型 , 类型: java.lang.String
@@ -350,6 +361,16 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 信息系统 , 类型: com.dt.platform.domain.ops.InformationSystem
+	*/
+	public static final String INFO_SYSTEM="infoSystem";
+	
+	/**
+	 * 信息系统 , 类型: com.dt.platform.domain.ops.InformationSystem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.InformationSystem> INFO_SYSTEM_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,INFO_SYSTEM, com.dt.platform.domain.ops.InformationSystem.class, "信息系统", "信息系统", com.dt.platform.domain.ops.InformationSystem.class, null);
+	
+	/**
 	 * 所在位置 , 类型: com.dt.platform.domain.ops.HostPosition
 	*/
 	public static final String POSITION="position";
@@ -422,7 +443,7 @@ public class HostMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_USERNAME , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MIDDLEWARE_LIST , HOST_MIDDLEWARE_IDS , HOST_OS_LIST , HOST_OS_IDS };
+	public static final String[] $PROPS={ ID , SYSTEM_ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_USERNAME , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INFO_SYSTEM , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MIDDLEWARE_LIST , HOST_MIDDLEWARE_IDS , HOST_OS_LIST , HOST_OS_IDS };
 	
 	/**
 	 * 代理类
@@ -440,6 +461,17 @@ public class HostMeta {
 		public Host setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
+			return this;
+		}
+		
+		/**
+		 * 设置 信息系统
+		 * @param systemId 信息系统
+		 * @return 当前对象
+		*/
+		public Host setSystemId(String systemId) {
+			super.change(SYSTEM_ID,super.getSystemId(),systemId);
+			super.setSystemId(systemId);
 			return this;
 		}
 		
@@ -792,6 +824,17 @@ public class HostMeta {
 		public Host setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 信息系统
+		 * @param infoSystem 信息系统
+		 * @return 当前对象
+		*/
+		public Host setInfoSystem(InformationSystem infoSystem) {
+			super.change(INFO_SYSTEM,super.getInfoSystem(),infoSystem);
+			super.setInfoSystem(infoSystem);
 			return this;
 		}
 		

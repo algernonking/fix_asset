@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 数据库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 17:11:11
+ * @since 2021-08-13 21:59:22
 */
 
 @Api(tags = "数据库")
@@ -65,9 +65,9 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "添加数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968"),
+		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473626988658032641"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = HostDbVOMeta.ID)
@@ -84,7 +84,7 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "删除数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = HostDbVOMeta.ID)
@@ -118,9 +118,9 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "更新数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968"),
+		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473626988658032641"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { HostDbVOMeta.PAGE_INDEX , HostDbVOMeta.PAGE_SIZE , HostDbVOMeta.SEARCH_FIELD , HostDbVOMeta.FUZZY_FIELD , HostDbVOMeta.SEARCH_VALUE , HostDbVOMeta.SORT_FIELD , HostDbVOMeta.SORT_TYPE , HostDbVOMeta.IDS } ) 
 	@NotNull(name = HostDbVOMeta.ID)
@@ -137,9 +137,9 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "保存数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968"),
+		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473626988658032641"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostDbVOMeta.PAGE_INDEX , HostDbVOMeta.PAGE_SIZE , HostDbVOMeta.SEARCH_FIELD , HostDbVOMeta.FUZZY_FIELD , HostDbVOMeta.SEARCH_VALUE , HostDbVOMeta.SORT_FIELD , HostDbVOMeta.SORT_TYPE , HostDbVOMeta.IDS } )
 	@NotNull(name = HostDbVOMeta.ID)
@@ -195,9 +195,9 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "查询数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968"),
+		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473626988658032641"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostDbVOMeta.PAGE_INDEX , HostDbVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = HostDbServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -215,9 +215,9 @@ public class HostDbController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询数据库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostDbVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478319999837011968"),
+		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_DETAIL_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473626988658032641"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = HostDbServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

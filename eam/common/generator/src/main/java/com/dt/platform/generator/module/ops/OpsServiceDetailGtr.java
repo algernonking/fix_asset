@@ -18,23 +18,19 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(OpsService.class,"opsService","服务","");
 
-        cfg.getPoClassFile().addSimpleProperty(String.class,"serviceName","服务名称","服务名称");
 
-
-
-
-    //    cfg.getPoClassFile().addProperty(OpsServiceMeta.SERVICE_NAME_PROP);
-//
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).search().hidden(true);
+        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SORT).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.CREATE_TIME).list().hidden();
+
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.PATCH).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.NOTES).search().fuzzySearch();
-
-        String resourceNameField="res_"+OpsServiceMeta.SERVICE_NAME;
-        cfg.view().field(resourceNameField)
-                .basic().label("类型名称")
-                .table().fillBy(OpsServiceMeta.SERVICE_NAME);
+//
+//        String resourceNameField="res_"+OpsServiceMeta.SERVICE_NAME;
+//        cfg.view().field(resourceNameField)
+//                .basic().label("服务类型")
+//                .table().fillBy(ServiceDetailMeta.OPS_SERVICE,OpsServiceMeta.SERVICE_NAME);
 
 
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID)

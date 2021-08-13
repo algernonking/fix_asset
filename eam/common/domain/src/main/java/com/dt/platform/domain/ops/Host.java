@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 08:24:18
- * @sign B6E9A6A60539D136DED629BE84E22121
+ * @since 2021-08-13 22:20:28
+ * @sign 24201C1E354F5517B7C0189844EEA5B9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,6 +37,12 @@ public class Host extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 信息系统：信息系统
+	*/
+	@ApiModelProperty(required = false,value="信息系统" , notes = "信息系统")
+	private String systemId;
 	
 	/**
 	 * 主机类型：主机类型
@@ -231,6 +237,12 @@ public class Host extends Entity {
 	private Integer version;
 	
 	/**
+	 * 信息系统：信息系统
+	*/
+	@ApiModelProperty(required = false,value="信息系统" , notes = "信息系统")
+	private InformationSystem infoSystem;
+	
+	/**
 	 * 所在位置：所在位置
 	*/
 	@ApiModelProperty(required = false,value="所在位置" , notes = "所在位置")
@@ -288,6 +300,25 @@ public class Host extends Entity {
 	*/
 	public Host setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 信息系统<br>
+	 * 信息系统
+	 * @return 信息系统
+	*/
+	public String getSystemId() {
+		return systemId;
+	}
+	
+	/**
+	 * 设置 信息系统
+	 * @param systemId 信息系统
+	 * @return 当前对象
+	*/
+	public Host setSystemId(String systemId) {
+		this.systemId=systemId;
 		return this;
 	}
 	
@@ -896,6 +927,25 @@ public class Host extends Entity {
 	*/
 	public Host setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 信息系统<br>
+	 * 信息系统
+	 * @return 信息系统
+	*/
+	public InformationSystem getInfoSystem() {
+		return infoSystem;
+	}
+	
+	/**
+	 * 设置 信息系统
+	 * @param infoSystem 信息系统
+	 * @return 当前对象
+	*/
+	public Host setInfoSystem(InformationSystem infoSystem) {
+		this.infoSystem=infoSystem;
 		return this;
 	}
 	

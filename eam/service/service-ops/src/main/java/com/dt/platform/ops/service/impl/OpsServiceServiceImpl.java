@@ -35,7 +35,7 @@ import java.util.Date;
  * 服务 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 13:24:46
+ * @since 2021-08-13 21:59:33
 */
 
 
@@ -52,6 +52,8 @@ public class OpsServiceServiceImpl extends SuperService<OpsService> implements I
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {

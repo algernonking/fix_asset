@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 08:24:20
+ * @since 2021-08-13 22:20:30
  */
  -->
  <!DOCTYPE html>
@@ -64,7 +64,7 @@
                     <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('所在位置')}" class="search-label">所在位置</span><span class="search-colon">:</span></div>
-                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:140px"></div>
+                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:200px"></div>
                     </div>
 
 
@@ -74,17 +74,17 @@
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('操作系统')}" class="search-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:160px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('数据库')}" class="search-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:140px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('中间件')}" class="search-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:140px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
                     </div>
 
 
