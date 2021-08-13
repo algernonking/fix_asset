@@ -156,6 +156,7 @@ function FormPage() {
 		#else if(f.typeName.equals("date_input"))
 		laydate.render({
 			elem: '##(f.varName)',
+			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 	    #end
