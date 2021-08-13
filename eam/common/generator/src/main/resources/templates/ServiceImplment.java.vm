@@ -42,8 +42,20 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
 	 * @return 插入是否成功
 	 * */
 	@Override
+	#if(hasRealtionSave)
+	@Transactional
+	#end
 	public Result insert(#(poSimpleName) #(poVar)) {
-		return super.insert(#(poVar));
+		Result r=super.insert(#(poVar));
+		#if(hasRealtionSave)
+		//保存关系
+		if(r.success()) {
+		#for (rd : relationSaveDescs)
+			#(rd.injectDesc.varName).saveRelation(#(poVar).#(rd.idPropertyGetter)(), #(poVar).#(rd.slavePropertyGetter)());
+		#end
+		}
+		#end
+		return r;
 	}
 	
 	/**
@@ -65,8 +77,20 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
 	 * @return 保存是否成功
 	 * */
 	@Override
+	#if(hasRealtionSave)
+	@Transactional
+	#end
 	public Result update(#(poSimpleName) #(poVar) , SaveMode mode) {
-		return super.update(#(poVar) , mode);
+		Result r=super.update(#(poVar) , mode);
+		#if(hasRealtionSave)
+		//保存关系
+		if(r.success()) {
+		#for (rd : relationSaveDescs)
+			#(rd.injectDesc.varName).saveRelation(#(poVar).#(rd.idPropertyGetter)(), #(poVar).#(rd.slavePropertyGetter)());
+		#end
+		}
+		#end
+		return r;
 	}
 	
 	/**

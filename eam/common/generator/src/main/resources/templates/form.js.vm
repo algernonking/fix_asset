@@ -4,7 +4,9 @@ function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="#(moduleURL)";
-	
+
+	const disableCreateNew=#(disableCreateNew);
+	const disableModify=#(disableModify);
 	/**
       * 入口函数，初始化
       */
@@ -165,6 +167,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('#(formDataKey)');
+
 		#if(isSimplePK)
 		//如果是新建
 		if(!formData.#(idPropertyName)) {
@@ -226,6 +229,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	
