@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import com.dt.platform.constants.db.EAMTables.*;
 
 /**
  * <p>
  * 中间件 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-12 08:19:50
+ * @since 2021-08-12 17:11:53
 */
 
 public interface IHostMidService extends ISuperService<HostMid> {
@@ -284,5 +285,11 @@ public interface IHostMidService extends ISuperService<HostMid> {
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
 
+	/**
+	 * 保存关系
+	 * @param hostId 主机
+	 * @param serviceDetailIds 服务内容清单
+	 */
+	void saveRelation(String hostId,List<String> serviceDetailIds);
  
 }

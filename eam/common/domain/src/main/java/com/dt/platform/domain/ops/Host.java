@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-08-12 14:29:43
- * @sign 707D6C5D74B04A098362219B05B90591
+ * @since 2021-08-12 19:26:38
+ * @sign A6B4F8C66C2F15D06B13BE25524456C4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -240,7 +240,7 @@ public class Host extends Entity {
 	 * 数据库：数据库
 	*/
 	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
-	private List<HostDb> hostDbList;
+	private List<ServiceDetail> hostDbList;
 	
 	/**
 	 * 数据库列表：数据库
@@ -923,7 +923,7 @@ public class Host extends Entity {
 	 * 数据库
 	 * @return 数据库
 	*/
-	public List<HostDb> getHostDbList() {
+	public List<ServiceDetail> getHostDbList() {
 		return hostDbList;
 	}
 	
@@ -932,7 +932,7 @@ public class Host extends Entity {
 	 * @param hostDbList 数据库
 	 * @return 当前对象
 	*/
-	public Host setHostDbList(List<HostDb> hostDbList) {
+	public Host setHostDbList(List<ServiceDetail> hostDbList) {
 		this.hostDbList=hostDbList;
 		return this;
 	}
@@ -942,7 +942,7 @@ public class Host extends Entity {
 	 * @param hostDb 数据库
 	 * @return 当前对象
 	*/
-	public Host addHostDb(HostDb hostDb) {
+	public Host addHostDb(ServiceDetail hostDb) {
 		if(this.hostDbList==null) hostDbList=new ArrayList<>();
 		this.hostDbList.add(hostDb);
 		return this;
