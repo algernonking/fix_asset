@@ -6,7 +6,6 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_ASSET;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -17,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-05 15:17:41
- * @sign 8F2803FCFE3D79B0FA341A44DB9D25F9
+ * @since 2021-08-13 13:57:17
+ * @sign EFF88A68926C72E498C600846161D06D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -41,6 +40,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="单据编号" , notes = "单据编号")
 	private String busiCode;
+	
+	/**
+	 * 批次代码：批次代码
+	*/
+	@ApiModelProperty(required = true,value="批次代码" , notes = "批次代码")
+	private String batchCode;
 	
 	/**
 	 * 资产状态：资产状态
@@ -87,7 +92,7 @@ public class Asset extends Entity {
 	/**
 	 * 标准型号规格型号：标准型号规格型号
 	*/
-	@ApiModelProperty(required = false,value="标准型号规格型号" , notes = "标准型号规格型号")
+	@ApiModelProperty(required = true,value="标准型号规格型号" , notes = "标准型号规格型号")
 	private String model;
 	
 	/**
@@ -103,34 +108,22 @@ public class Asset extends Entity {
 	private String unit;
 	
 	/**
-	 * 标准型号单价：标准型号单价
-	*/
-	@ApiModelProperty(required = false,value="标准型号单价" , notes = "标准型号单价")
-	private BigDecimal unitPrice;
-	
-	/**
 	 * 资产RFID：资产RFID
 	*/
 	@ApiModelProperty(required = false,value="资产RFID" , notes = "资产RFID")
 	private String rfid;
 	
 	/**
-	 * 资产数量：资产数量
-	*/
-	@ApiModelProperty(required = false,value="资产数量" , notes = "资产数量")
-	private BigDecimal assetNumber;
-	
-	/**
-	 * 批次号如果来自库存建议填写库存单据：批次号如果来自库存建议填写库存单据
-	*/
-	@ApiModelProperty(required = false,value="批次号如果来自库存建议填写库存单据" , notes = "批次号如果来自库存建议填写库存单据")
-	private String batchNumber;
-	
-	/**
 	 * 资产序列号：资产序列号
 	*/
 	@ApiModelProperty(required = false,value="资产序列号" , notes = "资产序列号")
 	private String sn;
+	
+	/**
+	 * 资产数量：资产数量
+	*/
+	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
+	private Integer assetNumber;
 	
 	/**
 	 * 来源：来源
@@ -175,10 +168,22 @@ public class Asset extends Entity {
 	private Date storageTime;
 	
 	/**
-	 * 是否显示(显示:1：不显示:0,报废后不显示)
+	 * 是否显示：是否显示
 	*/
-	@ApiModelProperty(required = false,value="是否显示(显示:1" , notes = "不显示:0,报废后不显示)")
+	@ApiModelProperty(required = false,value="是否显示" , notes = "是否显示")
 	private String display;
+	
+	/**
+	 * 是否报废：是否报废
+	*/
+	@ApiModelProperty(required = true,value="是否报废" , notes = "是否报废")
+	private String scrap;
+	
+	/**
+	 * 插入方式：插入方式
+	*/
+	@ApiModelProperty(required = false,value="插入方式" , notes = "插入方式")
+	private String insertType;
 	
 	/**
 	 * 备注：备注
@@ -235,6 +240,66 @@ public class Asset extends Entity {
 	private Integer version;
 	
 	/**
+	 * 财务信息：财务信息
+	*/
+	@ApiModelProperty(required = false,value="财务信息" , notes = "财务信息")
+	private AssetExtFinancial assetFinancial;
+	
+	/**
+	 * 采购单价：采购单价
+	*/
+	@ApiModelProperty(required = false,value="采购单价" , notes = "采购单价")
+	private String purchaseUnitPrice;
+	
+	/**
+	 * 维保信息：维保信息
+	*/
+	@ApiModelProperty(required = false,value="维保信息" , notes = "维保信息")
+	private AssetExtMaintainer assetMaintainer;
+	
+	/**
+	 * 设备信息：设备信息
+	*/
+	@ApiModelProperty(required = false,value="设备信息" , notes = "设备信息")
+	private AssetExtEquipment assetEquipment;
+	
+	/**
+	 * 物品档案：物品档案
+	*/
+	@ApiModelProperty(required = false,value="物品档案" , notes = "物品档案")
+	private Goods goods;
+	
+	/**
+	 * 资产分类：资产分类
+	*/
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
+	private Category category;
+	
+	/**
+	 * 维保厂商：维保厂商
+	*/
+	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
+	private Maintainer maintainer;
+	
+	/**
+	 * 生产厂商：生产厂商
+	*/
+	@ApiModelProperty(required = false,value="生产厂商" , notes = "生产厂商")
+	private Manufacturer manufacturer;
+	
+	/**
+	 * 品牌：品牌
+	*/
+	@ApiModelProperty(required = false,value="品牌" , notes = "品牌")
+	private Brand brand;
+	
+	/**
+	 * 区域：区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private Area area;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -269,6 +334,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setBusiCode(String busiCode) {
 		this.busiCode=busiCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 批次代码<br>
+	 * 批次代码
+	 * @return 批次代码
+	*/
+	public String getBatchCode() {
+		return batchCode;
+	}
+	
+	/**
+	 * 设置 批次代码
+	 * @param batchCode 批次代码
+	 * @return 当前对象
+	*/
+	public Asset setBatchCode(String batchCode) {
+		this.batchCode=batchCode;
 		return this;
 	}
 	
@@ -463,25 +547,6 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 标准型号单价<br>
-	 * 标准型号单价
-	 * @return 标准型号单价
-	*/
-	public BigDecimal getUnitPrice() {
-		return unitPrice;
-	}
-	
-	/**
-	 * 设置 标准型号单价
-	 * @param unitPrice 标准型号单价
-	 * @return 当前对象
-	*/
-	public Asset setUnitPrice(BigDecimal unitPrice) {
-		this.unitPrice=unitPrice;
-		return this;
-	}
-	
-	/**
 	 * 获得 资产RFID<br>
 	 * 资产RFID
 	 * @return 资产RFID
@@ -501,44 +566,6 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 资产数量<br>
-	 * 资产数量
-	 * @return 资产数量
-	*/
-	public BigDecimal getAssetNumber() {
-		return assetNumber;
-	}
-	
-	/**
-	 * 设置 资产数量
-	 * @param assetNumber 资产数量
-	 * @return 当前对象
-	*/
-	public Asset setAssetNumber(BigDecimal assetNumber) {
-		this.assetNumber=assetNumber;
-		return this;
-	}
-	
-	/**
-	 * 获得 批次号如果来自库存建议填写库存单据<br>
-	 * 批次号如果来自库存建议填写库存单据
-	 * @return 批次号如果来自库存建议填写库存单据
-	*/
-	public String getBatchNumber() {
-		return batchNumber;
-	}
-	
-	/**
-	 * 设置 批次号如果来自库存建议填写库存单据
-	 * @param batchNumber 批次号如果来自库存建议填写库存单据
-	 * @return 当前对象
-	*/
-	public Asset setBatchNumber(String batchNumber) {
-		this.batchNumber=batchNumber;
-		return this;
-	}
-	
-	/**
 	 * 获得 资产序列号<br>
 	 * 资产序列号
 	 * @return 资产序列号
@@ -554,6 +581,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setSn(String sn) {
 		this.sn=sn;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产数量<br>
+	 * 资产数量
+	 * @return 资产数量
+	*/
+	public Integer getAssetNumber() {
+		return assetNumber;
+	}
+	
+	/**
+	 * 设置 资产数量
+	 * @param assetNumber 资产数量
+	 * @return 当前对象
+	*/
+	public Asset setAssetNumber(Integer assetNumber) {
+		this.assetNumber=assetNumber;
 		return this;
 	}
 	
@@ -691,21 +737,59 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 是否显示(显示:1<br>
-	 * 不显示:0,报废后不显示)
-	 * @return 是否显示(显示:1
+	 * 获得 是否显示<br>
+	 * 是否显示
+	 * @return 是否显示
 	*/
 	public String getDisplay() {
 		return display;
 	}
 	
 	/**
-	 * 设置 是否显示(显示:1
-	 * @param display 是否显示(显示:1
+	 * 设置 是否显示
+	 * @param display 是否显示
 	 * @return 当前对象
 	*/
 	public Asset setDisplay(String display) {
 		this.display=display;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否报废<br>
+	 * 是否报废
+	 * @return 是否报废
+	*/
+	public String getScrap() {
+		return scrap;
+	}
+	
+	/**
+	 * 设置 是否报废
+	 * @param scrap 是否报废
+	 * @return 当前对象
+	*/
+	public Asset setScrap(String scrap) {
+		this.scrap=scrap;
+		return this;
+	}
+	
+	/**
+	 * 获得 插入方式<br>
+	 * 插入方式
+	 * @return 插入方式
+	*/
+	public String getInsertType() {
+		return insertType;
+	}
+	
+	/**
+	 * 设置 插入方式
+	 * @param insertType 插入方式
+	 * @return 当前对象
+	*/
+	public Asset setInsertType(String insertType) {
+		this.insertType=insertType;
 		return this;
 	}
 	
@@ -877,6 +961,196 @@ public class Asset extends Entity {
 	*/
 	public Asset setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 财务信息<br>
+	 * 财务信息
+	 * @return 财务信息
+	*/
+	public AssetExtFinancial getAssetFinancial() {
+		return assetFinancial;
+	}
+	
+	/**
+	 * 设置 财务信息
+	 * @param assetFinancial 财务信息
+	 * @return 当前对象
+	*/
+	public Asset setAssetFinancial(AssetExtFinancial assetFinancial) {
+		this.assetFinancial=assetFinancial;
+		return this;
+	}
+	
+	/**
+	 * 获得 采购单价<br>
+	 * 采购单价
+	 * @return 采购单价
+	*/
+	public String getPurchaseUnitPrice() {
+		return purchaseUnitPrice;
+	}
+	
+	/**
+	 * 设置 采购单价
+	 * @param purchaseUnitPrice 采购单价
+	 * @return 当前对象
+	*/
+	public Asset setPurchaseUnitPrice(String purchaseUnitPrice) {
+		this.purchaseUnitPrice=purchaseUnitPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保信息<br>
+	 * 维保信息
+	 * @return 维保信息
+	*/
+	public AssetExtMaintainer getAssetMaintainer() {
+		return assetMaintainer;
+	}
+	
+	/**
+	 * 设置 维保信息
+	 * @param assetMaintainer 维保信息
+	 * @return 当前对象
+	*/
+	public Asset setAssetMaintainer(AssetExtMaintainer assetMaintainer) {
+		this.assetMaintainer=assetMaintainer;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备信息<br>
+	 * 设备信息
+	 * @return 设备信息
+	*/
+	public AssetExtEquipment getAssetEquipment() {
+		return assetEquipment;
+	}
+	
+	/**
+	 * 设置 设备信息
+	 * @param assetEquipment 设备信息
+	 * @return 当前对象
+	*/
+	public Asset setAssetEquipment(AssetExtEquipment assetEquipment) {
+		this.assetEquipment=assetEquipment;
+		return this;
+	}
+	
+	/**
+	 * 获得 物品档案<br>
+	 * 物品档案
+	 * @return 物品档案
+	*/
+	public Goods getGoods() {
+		return goods;
+	}
+	
+	/**
+	 * 设置 物品档案
+	 * @param goods 物品档案
+	 * @return 当前对象
+	*/
+	public Asset setGoods(Goods goods) {
+		this.goods=goods;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产分类<br>
+	 * 资产分类
+	 * @return 资产分类
+	*/
+	public Category getCategory() {
+		return category;
+	}
+	
+	/**
+	 * 设置 资产分类
+	 * @param category 资产分类
+	 * @return 当前对象
+	*/
+	public Asset setCategory(Category category) {
+		this.category=category;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保厂商<br>
+	 * 维保厂商
+	 * @return 维保厂商
+	*/
+	public Maintainer getMaintainer() {
+		return maintainer;
+	}
+	
+	/**
+	 * 设置 维保厂商
+	 * @param maintainer 维保厂商
+	 * @return 当前对象
+	*/
+	public Asset setMaintainer(Maintainer maintainer) {
+		this.maintainer=maintainer;
+		return this;
+	}
+	
+	/**
+	 * 获得 生产厂商<br>
+	 * 生产厂商
+	 * @return 生产厂商
+	*/
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+	
+	/**
+	 * 设置 生产厂商
+	 * @param manufacturer 生产厂商
+	 * @return 当前对象
+	*/
+	public Asset setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer=manufacturer;
+		return this;
+	}
+	
+	/**
+	 * 获得 品牌<br>
+	 * 品牌
+	 * @return 品牌
+	*/
+	public Brand getBrand() {
+		return brand;
+	}
+	
+	/**
+	 * 设置 品牌
+	 * @param brand 品牌
+	 * @return 当前对象
+	*/
+	public Asset setBrand(Brand brand) {
+		this.brand=brand;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public Area getArea() {
+		return area;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param area 区域
+	 * @return 当前对象
+	*/
+	public Asset setArea(Area area) {
+		this.area=area;
 		return this;
 	}
 

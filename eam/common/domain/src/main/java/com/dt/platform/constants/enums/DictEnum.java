@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-08-12 05:45:47
+ * @since 2021-08-13 13:34:41
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -17,6 +17,11 @@ public enum DictEnum implements CodeTextEnum {
 	 * EAM_资产安全等级
 	*/
 	EAM_SECURITY_LEVEL("eam_security_level" , "EAM_资产安全等级"),
+	
+	/**
+	 * EAM_资产状态
+	*/
+	EAM_ASSET_STATUS("eam_asset_status" , "EAM_资产状态"),
 	
 	/**
 	 * 服务类型

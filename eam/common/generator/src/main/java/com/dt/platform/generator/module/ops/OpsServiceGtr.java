@@ -28,12 +28,6 @@ public class OpsServiceGtr extends BaseCodeGenerator{
 
 
 
-//        cfg.view().field(EAMTables.OPS_SERVICE.TYPE_ID)
-//                .basic().label("服务类型")
-//                .form().validate().required()
-//                .form().select().queryApi(ServiceTypeServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
-//                .valueField(ServiceTypeMeta.ID).textField(ServiceTypeMeta.NAME).fillBy(OpsServiceMeta.SERVICE_TYPE).muliti(false);
-
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 13:57:17
- * @sign E309C0611BF9506BF72EC6BA217CDC56
+ * @since 2021-08-13 11:06:48
+ * @sign 4950C9769F16BA0580B2367FD3BEE8F0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class AssetVO extends Asset {
+public class AssetExtMaintainerVO extends AssetExtMaintainer {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class AssetVO extends Asset {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public AssetVO setPageIndex(Integer pageIndex) {
+	public AssetExtMaintainerVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class AssetVO extends Asset {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public AssetVO setPageSize(Integer pageSize) {
+	public AssetExtMaintainerVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class AssetVO extends Asset {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public AssetVO setSearchField(String searchField) {
+	public AssetExtMaintainerVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class AssetVO extends Asset {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public AssetVO setFuzzyField(String fuzzyField) {
+	public AssetExtMaintainerVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class AssetVO extends Asset {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public AssetVO setSearchValue(String searchValue) {
+	public AssetExtMaintainerVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class AssetVO extends Asset {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public AssetVO setSortField(String sortField) {
+	public AssetExtMaintainerVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class AssetVO extends Asset {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public AssetVO setSortType(String sortType) {
+	public AssetExtMaintainerVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class AssetVO extends Asset {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public AssetVO setIds(List<String> ids) {
+	public AssetExtMaintainerVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class AssetVO extends Asset {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public AssetVO addId(String id) {
+	public AssetExtMaintainerVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetVO;
+import com.dt.platform.domain.eam.AssetExtMaintainer;
+import com.dt.platform.domain.eam.AssetExtMaintainerVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetService;
+import com.dt.platform.eam.service.IAssetExtMaintainerService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 资产表 服务实现
+ * 资产维保属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 13:57:17
+ * @since 2021-08-13 11:06:48
 */
 
 
-@Service("EamAssetService")
-public class AssetServiceImpl extends SuperService<Asset> implements IAssetService {
+@Service("EamAssetExtMaintainerService")
+public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintainer> implements IAssetExtMaintainerService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,37 +62,37 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	
 	/**
 	 * 插入实体
-	 * @param asset 实体数据
+	 * @param assetExtMaintainer 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Asset asset) {
-		return super.insert(asset);
+	public Result insert(AssetExtMaintainer assetExtMaintainer) {
+		return super.insert(assetExtMaintainer);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetList 实体数据清单
+	 * @param assetExtMaintainerList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Asset> assetList) {
-		return super.insertList(assetList);
+	public Result insertList(List<AssetExtMaintainer> assetExtMaintainerList) {
+		return super.insertList(assetExtMaintainerList);
 	}
 	
 	
 	/**
-	 * 按主键删除 资产
+	 * 按主键删除 资产维保属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Asset asset = new Asset();
+		AssetExtMaintainer assetExtMaintainer = new AssetExtMaintainer();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		asset.setId(id);
+		assetExtMaintainer.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(asset);
+			boolean suc = dao.deleteEntity(assetExtMaintainer);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -103,20 +103,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 	
 	/**
-	 * 按主键删除 资产
+	 * 按主键删除 资产维保属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Asset asset = new Asset();
+		AssetExtMaintainer assetExtMaintainer = new AssetExtMaintainer();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		asset.setId(id);
-		asset.setDeleted(dao.getDBTreaty().getTrueValue());
-		asset.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		asset.setDeleteTime(new Date());
+		assetExtMaintainer.setId(id);
+		assetExtMaintainer.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetExtMaintainer.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetExtMaintainer.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(asset,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetExtMaintainer,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -128,29 +128,29 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	
 	/**
 	 * 更新实体
-	 * @param asset 数据对象
+	 * @param assetExtMaintainer 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Asset asset , SaveMode mode) {
-		return super.update(asset , mode);
+	public Result update(AssetExtMaintainer assetExtMaintainer , SaveMode mode) {
+		return super.update(assetExtMaintainer , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetList 数据对象列表
+	 * @param assetExtMaintainerList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Asset> assetList , SaveMode mode) {
-		return super.updateList(assetList , mode);
+	public Result updateList(List<AssetExtMaintainer> assetExtMaintainerList , SaveMode mode) {
+		return super.updateList(assetExtMaintainerList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 资产
+	 * 按主键更新字段 资产维保属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -164,20 +164,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	
 	
 	/**
-	 * 按主键获取 资产
+	 * 按主键获取 资产维保属性
 	 *
 	 * @param id 主键
-	 * @return Asset 数据对象
+	 * @return AssetExtMaintainer 数据对象
 	 */
-	public Asset getById(String id) {
-		Asset sample = new Asset();
+	public AssetExtMaintainer getById(String id) {
+		AssetExtMaintainer sample = new AssetExtMaintainer();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Asset> getByIds(List<String> ids) {
+	public List<AssetExtMaintainer> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -190,7 +190,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Asset> queryList(Asset sample) {
+	public List<AssetExtMaintainer> queryList(AssetExtMaintainer sample) {
 		return super.queryList(sample);
 	}
 	
@@ -204,7 +204,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Asset> queryPagedList(Asset sample, int pageSize, int pageIndex) {
+	public PagedList<AssetExtMaintainer> queryPagedList(AssetExtMaintainer sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -218,25 +218,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetExtMaintainer> queryPagedList(AssetExtMaintainer sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param asset 数据对象
+	 * @param assetExtMaintainer 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Asset> checkExists(Asset asset) {
+	public Result<AssetExtMaintainer> checkExists(AssetExtMaintainer assetExtMaintainer) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(asset, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetExtMaintainer, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Asset sample) {
+	public ExcelWriter exportExcel(AssetExtMaintainer sample) {
 		return super.exportExcel(sample);
 	}
 

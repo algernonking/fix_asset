@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-05 15:17:43
+ * @since 2021-08-13 13:57:21
  */
 
 
@@ -36,95 +36,94 @@ function ListPage() {
       * 渲染表格
       */
     function renderTable() {
-     
-		fox.renderTable({
-			elem: '#data-table',
-            url: moduleURL +'/query-paged-list',
-		 	height: 'full-78',
-		 	limit: 50,
-			cols: [[
-				{  fixed: 'left',type: 'numbers' },
-			 	{  fixed: 'left',type:'checkbox' },
-                { field: 'id', align:"left", hide:false, sort: true, title: fox.translate('主键')} ,
-                { field: 'busiCode', align:"left", hide:false, sort: true, title: fox.translate('单据编号')} ,
-                { field: 'status', align:"left", hide:false, sort: true, title: fox.translate('资产状态')} ,
-                { field: 'assetCode', align:"left", hide:false, sort: true, title: fox.translate('资产编号')} ,
-                { field: 'categoryId', align:"left", hide:false, sort: true, title: fox.translate('分类ID')} ,
-                { field: 'goodsId', align:"left", hide:false, sort: true, title: fox.translate('标准型号ID')} ,
-                { field: 'name', align:"left", hide:false, sort: true, title: fox.translate('标准型号资产名称')} ,
-                { field: 'manufacturerId', align:"left", hide:false, sort: true, title: fox.translate('标准型号厂商')} ,
-                { field: 'brandId', align:"left", hide:false, sort: true, title: fox.translate('标准型号品牌')} ,
-                { field: 'model', align:"left", hide:false, sort: true, title: fox.translate('标准型号规格型号')} ,
-                { field: 'pictureId', align:"left", hide:false, sort: true, title: fox.translate('标准型号物品图片')} ,
-                { field: 'unit', align:"left", hide:false, sort: true, title: fox.translate('标准型号计量单位')} ,
-                { field: 'unitPrice', align:"right", hide:false, sort: true, title: fox.translate('标准型号单价')} ,
-                { field: 'rfid', align:"left", hide:false, sort: true, title: fox.translate('资产RFID')} ,
-                { field: 'assetNumber', align:"right", hide:false, sort: true, title: fox.translate('资产数量')} ,
-                { field: 'batchNumber', align:"left", hide:false, sort: true, title: fox.translate('批次号如果来自库存建议填写库存单据')} ,
-                { field: 'sn', align:"left", hide:false, sort: true, title: fox.translate('资产序列号')} ,
-                { field: 'sourceId', align:"left", hide:false, sort: true, title: fox.translate('来源')} ,
-                { field: 'sourceDetail', align:"left", hide:false, sort: true, title: fox.translate('来源详情')} ,
-                { field: 'areaId', align:"left", hide:false, sort: true, title: fox.translate('存放区域')} ,
-                { field: 'placeDetail', align:"left", hide:false, sort: true, title: fox.translate('存放地点')} ,
-                { field: 'userId', align:"left", hide:false, sort: true, title: fox.translate('使用人员')} ,
-				{ field: 'productionDate', align:"right", hide:false, sort: true, title: fox.translate('生产日期'), templet: function (d) { return fox.dateFormat(d.productionDate); }} ,
-				{ field: 'storageTime', align:"right", hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }} ,
-                { field: 'display', align:"left", hide:false, sort: true, title: fox.translate('是否显示(显示:1')} ,
-                { field: 'assetsNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
-				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
-                { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
-            ]]
-	 		,footer : {
-				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
-				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
-					params : {} ,
-				 	callback : function(r) {
-						if(r.success) {
-							layer.msg(fox.translate('数据导入成功')+"!");
-						} else {
-							layer.msg(fox.translate('数据导入失败')+"!");
+		$(window).resize(function() {
+			fox.adjustSearchElement();
+		});
+		fox.adjustSearchElement();
+		//
+		function renderTableInternal() {
+			var h=$(".search-bar").height();
+			fox.renderTable({
+				elem: '#data-table',
+				toolbar: '#toolbarTemplate',
+				defaultToolbar: ['filter', 'print'],
+				url: moduleURL +'/query-paged-list',
+				height: 'full-'+(h+28),
+				limit: 50,
+				cols: [[
+					{ fixed: 'left',type: 'numbers' },
+					{ fixed: 'left',type:'checkbox' },
+					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') } ,
+					{ field: 'busiCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据编号') } ,
+					{ field: 'batchCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('批次代码') } ,
+					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}} ,
+					{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') } ,
+					{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}} ,
+					{ field: 'goodsId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物品档案'), templet: function (d) { return fox.joinLabel(d.goods,"name");}} ,
+					{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') } ,
+					{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}} ,
+					{ field: 'brandId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('品牌'), templet: function (d) { return fox.joinLabel(d.brand,"brandName");}} ,
+					{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号') } ,
+					{ field: 'pictureId', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('标准型号物品图片'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.pictureId+'" />'; } } ,
+					{ field: 'unit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单位') } ,
+					{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产RFID') } ,
+					{ field: 'sn', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列') } ,
+					{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') } ,
+					{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源'), templet:function (d){ return fox.getDictText(SELECT_SOURCEID_DATA,d.sourceId);}} ,
+					{ field: 'sourceDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源详情') } ,
+					{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"areaName");}} ,
+					{ field: 'placeDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放地点') } ,
+					{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') } ,
+					{ field: 'productionDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('生产日期') } ,
+					{ field: 'storageTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }} ,
+					{ field: 'display', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否显示') } ,
+					{ field: 'scrap', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否报废') } ,
+					{ field: 'insertType', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('插入方式') } ,
+					{ field: 'assetsNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') } ,
+					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间') } ,
+					{ field: 'purchaseUnitPrice', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') } ,
+					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
+					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+				]],
+				footer : {
+					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
+						params : {} ,
+						callback : function(r) {
+							if(r.success) {
+								layer.msg(fox.translate('数据导入成功')+"!");
+							} else {
+								layer.msg(fox.translate('数据导入失败')+"!");
+							}
 						}
-					}
-			 	}:false
-		 	}
-        });
-        //绑定排序事件
-        table.on('sort(data-table)', function(obj){
-		  refreshTableData(obj.field,obj.type);
-        });
+					}:false
+				}
+			});
+			//绑定排序事件
+			table.on('sort(data-table)', function(obj){
+			  refreshTableData(obj.field,obj.type);
+			});
+		}
+		setTimeout(renderTableInternal,1);
     };
-     
+
 	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.id={ value: $("#id").val() };
-		value.busiCode={ value: $("#busiCode").val() };
-		value.status={ value: $("#status").val() };
-		value.assetCode={ value: $("#assetCode").val() };
-		value.categoryId={ value: $("#categoryId").val() };
-		value.goodsId={ value: $("#goodsId").val() };
-		value.name={ value: $("#name").val() };
-		value.manufacturerId={ value: $("#manufacturerId").val() };
-		value.brandId={ value: $("#brandId").val() };
-		value.model={ value: $("#model").val() };
-		value.pictureId={ value: $("#pictureId").val() };
-		value.unit={ value: $("#unit").val() };
-		value.unitPrice={ value: $("#unitPrice").val() };
-		value.rfid={ value: $("#rfid").val() };
-		value.assetNumber={ value: $("#assetNumber").val() };
-		value.batchNumber={ value: $("#batchNumber").val() };
-		value.sn={ value: $("#sn").val() };
-		value.sourceId={ value: $("#sourceId").val() };
-		value.sourceDetail={ value: $("#sourceDetail").val() };
-		value.areaId={ value: $("#areaId").val() };
-		value.placeDetail={ value: $("#placeDetail").val() };
-		value.userId={ value: $("#userId").val() };
-		value.productionDate={ begin: $("#productionDate-begin").val(), end: $("#productionDate-end").val() };
-		value.storageTime={ begin: $("#storageTime-begin").val(), end: $("#storageTime-end").val() };
-		value.display={ value: $("#display").val() };
-		value.assetsNotes={ value: $("#assetsNotes").val() };
+		value.busiCode={ value: $("#busiCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.batchCode={ value: $("#batchCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.status={ value: xmSelect.get("#status",true).getValue("value")};
+		value.assetCode={ value: $("#assetCode").val()};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.sn={ value: $("#sn").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value")};
+		value.sourceDetail={ value: $("#sourceDetail").val()};
+		value.placeDetail={ value: $("#placeDetail").val()};
+		value.userId={ value: $("#userId").val()};
+		value.storageTime={ value: $("#storageTime").val()};
+		value.assetsNotes={ value: $("#assetsNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -151,18 +150,48 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
-			laydate.render({
-				elem: '#productionDate-begin'
-			});
-			laydate.render({
-				elem: '#productionDate-end'
-			});
-			laydate.render({
-				elem: '#storageTime-begin'
-			});
-			laydate.render({
-				elem: '#storageTime-end'
-			});
+
+		fox.switchSearchRow();
+
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 sourceId 下拉字段
+		fox.renderSelectBox({
+			el: "sourceId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#storageTime',
+			trigger:"click"
+		});
+		fox.renderSearchInputs();
 	}
 	
 	/**
@@ -179,22 +208,53 @@ function ListPage() {
         $('#search-button').click(function () {
            refreshTableData();
         });
+
+		// 搜索按钮点击事件
+		$('#search-button-advance').click(function () {
+			fox.switchSearchRow(function (ex){
+				if(ex=="1") {
+					$('#search-button-advance span').text("关闭");
+				} else {
+					$('#search-button-advance span').text("更多");
+				}
+			});
+		});
 	}
 	
 	/**
 	 * 绑定按钮事件
 	  */
 	function bindButtonEvent() {
-	
+
+		//头工具栏事件
+		table.on('toolbar(data-table)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event){
+				case 'create':
+					openCreateFrom();
+					break;
+				case 'batch-del':
+					batchDelete();
+					break;
+				case 'other':
+					break;
+					//自定义头工具栏右侧图标 - 提示
+				case 'LAYTABLE_TIPS':
+					layer.alert('这是工具栏右侧自定义的一个图标按钮');
+					break;
+			};
+		});
+
+
 		//添加按钮点击事件
-        $('#add-button').click(function () {
+        function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
             showEditForm(data);
-        });
+        };
 		
         //批量删除按钮点击事件
-        $('#delete-button').click(function () {
+        function batchDelete() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
@@ -215,7 +275,7 @@ function ListPage() {
                     }
                 });
 			});
-        });
+        }
 	}
      
     /**
@@ -272,17 +332,18 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产')) : (fox.translate('添加')+fox.translate('资产'));
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/eam/asset/asset_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('eam-asset-form-data-popup-index', index);
 	};
 
 };

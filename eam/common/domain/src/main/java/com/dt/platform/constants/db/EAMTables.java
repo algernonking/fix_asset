@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-13 11:03:31
+ * @since 2021-08-13 12:28:21
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -423,9 +423,9 @@ public class EAMTables {
 		public static final DBField BUSI_CODE = new DBField(DBDataType.STRING , "busi_code","busiCode","单据编号","单据编号",false,false,true);
 		
 		/**
-		 * 入库批次代码
+		 * 批次代码
 		*/
-		public static final DBField BATCH_CODE = new DBField(DBDataType.STRING , "batch_code","batchCode","入库批次代码","入库批次代码",false,false,false);
+		public static final DBField BATCH_CODE = new DBField(DBDataType.STRING , "batch_code","batchCode","批次代码","批次代码",false,false,false);
 		
 		/**
 		 * 资产状态
@@ -476,11 +476,6 @@ public class EAMTables {
 		 * 标准型号计量单位
 		*/
 		public static final DBField UNIT = new DBField(DBDataType.STRING , "unit","unit","标准型号计量单位","标准型号计量单位",false,false,true);
-		
-		/**
-		 * 标准型号单价
-		*/
-		public static final DBField UNIT_PRICE = new DBField(DBDataType.DECIMAL , "unit_price","unitPrice","标准型号单价","标准型号单价",false,false,true);
 		
 		/**
 		 * 资产RFID
@@ -592,7 +587,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET() {
-			this.init($NAME,"资产表" , ID , BUSI_CODE , BATCH_CODE , STATUS , ASSET_CODE , CATEGORY_ID , GOODS_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , UNIT_PRICE , RFID , SN , ASSET_NUMBER , SOURCE_ID , SOURCE_DETAIL , AREA_ID , PLACE_DETAIL , USER_ID , PRODUCTION_DATE , STORAGE_TIME , DISPLAY , SCRAP , INSERT_TYPE , ASSETS_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产表" , ID , BUSI_CODE , BATCH_CODE , STATUS , ASSET_CODE , CATEGORY_ID , GOODS_ID , NAME , MANUFACTURER_ID , BRAND_ID , MODEL , PICTURE_ID , UNIT , RFID , SN , ASSET_NUMBER , SOURCE_ID , SOURCE_DETAIL , AREA_ID , PLACE_DETAIL , USER_ID , PRODUCTION_DATE , STORAGE_TIME , DISPLAY , SCRAP , INSERT_TYPE , ASSETS_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET $TABLE=new EAM_ASSET();
 	}
@@ -630,7 +625,7 @@ public class EAMTables {
 		/**
 		 * 变更数量
 		*/
-		public static final DBField HANGE_COUNT = new DBField(DBDataType.DECIMAL , "hange_count","hangeCount","变更数量","变更数量",false,false,true);
+		public static final DBField CHANGE_COUNT = new DBField(DBDataType.DECIMAL , "change_count","changeCount","变更数量","变更数量",false,false,true);
 		
 		/**
 		 * 备注
@@ -678,7 +673,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
 		
 		public EAM_ASSET_CHANGE() {
-			this.init($NAME,"资产变更" , ID , NAME , CODE , TYPE , HANGE_COUNT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产变更" , ID , NAME , CODE , TYPE , CHANGE_COUNT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_CHANGE $TABLE=new EAM_ASSET_CHANGE();
 	}
@@ -935,9 +930,9 @@ public class EAMTables {
 		public static final DBField TAXAMOUNT_PRICE = new DBField(DBDataType.DECIMAL , "taxamount_price","taxamountPrice","含税金额","含税金额",false,false,false);
 		
 		/**
-		 * 资产原值
+		 * 资产原值(单价)
 		*/
-		public static final DBField ORIGINAL_PRICE = new DBField(DBDataType.DECIMAL , "original_price","originalPrice","资产原值","资产原值",false,false,false);
+		public static final DBField ORIGINAL_UNIT_PRICE = new DBField(DBDataType.DECIMAL , "original_unit_price","originalUnitPrice","资产原值(单价)","资产原值(单价)",false,false,false);
 		
 		/**
 		 * 累计折旧
@@ -1015,7 +1010,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
 		
 		public EAM_ASSET_EXT_FINANCIAL() {
-			this.init($NAME,"资产财务属性" , ID , ASSET_ID , TYPE_ID , ASSET_CODE , MANAGEORG_ID , SUPPLIER_ID , PURCHASE_DATE , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , FINANCIAL_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产财务属性" , ID , ASSET_ID , TYPE_ID , ASSET_CODE , MANAGEORG_ID , SUPPLIER_ID , PURCHASE_DATE , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , FINANCIAL_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_EXT_FINANCIAL $TABLE=new EAM_ASSET_EXT_FINANCIAL();
 	}
