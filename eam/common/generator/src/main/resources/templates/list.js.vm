@@ -94,7 +94,7 @@ function ListPage() {
 					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return fox.joinLabel(#if(f.selectField.fillBy!=null)d.#(f.selectField.fillBy)#else null #end,"#(f.selectField.textField)");}} ,
 					#end
 					#else
-					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)')} ,
+					{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null), templet: function (d) { return fox.getProperty(d,#(f.listFillByPropertyNames));}  #end} ,
 					#end
 					#end
 					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
