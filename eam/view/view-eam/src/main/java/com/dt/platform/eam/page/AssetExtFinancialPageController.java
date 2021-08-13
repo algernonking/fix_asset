@@ -1,4 +1,4 @@
-package com.dt.platform.ops.page;
+package com.dt.platform.eam.page;
 
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.ops.ServiceDetailServiceProxy;
+import com.dt.platform.proxy.eam.AssetExtFinancialServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 服务明细 模版页面控制器
+ * 资产财务属性 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 10:35:58
+ * @since 2021-08-13 11:06:09
 */
 
-@Controller("OpsServiceDetailPageController")
-@RequestMapping(ServiceDetailPageController.prefix)
-public class ServiceDetailPageController extends ViewController {
+@Controller("EamAssetExtFinancialPageController")
+@RequestMapping(AssetExtFinancialPageController.prefix)
+public class AssetExtFinancialPageController extends ViewController {
 	
-	public static final String prefix="business/ops/service_detail";
+	public static final String prefix="business/eam/asset_ext_financial";
 
-	private ServiceDetailServiceProxy proxy;
+	private AssetExtFinancialServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class ServiceDetailPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public ServiceDetailServiceProxy proxy() {
+	public AssetExtFinancialServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=ServiceDetailServiceProxy.api();
+			proxy=AssetExtFinancialServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 服务明细 功能主页面
+	 * 资产财务属性 功能主页面
 	 */
-	@RequestMapping("/service_detail_list.html")
+	@RequestMapping("/asset_ext_financial_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/service_detail_list";
+		return prefix+"/asset_ext_financial_list";
 	}
 
 	/**
-	 * 服务明细 表单页面
+	 * 资产财务属性 表单页面
 	 */
-	@RequestMapping("/service_detail_form.html")
+	@RequestMapping("/asset_ext_financial_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/service_detail_form";
+		return prefix+"/asset_ext_financial_form";
 	}
 }

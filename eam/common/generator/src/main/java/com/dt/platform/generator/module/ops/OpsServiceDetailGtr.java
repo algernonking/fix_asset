@@ -36,7 +36,6 @@ public class OpsServiceDetailGtr extends BaseCodeGenerator{
                 .basic().label("类型名称")
                 .table().fillBy(OpsServiceMeta.SERVICE_NAME);
 
-//        cfg.view().field("serviceName").basic().label("12").
 
         cfg.view().field(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID)
                 .basic().label("服务")

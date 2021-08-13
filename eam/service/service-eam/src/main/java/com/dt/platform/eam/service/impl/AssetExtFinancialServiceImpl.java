@@ -1,4 +1,4 @@
-package com.dt.platform.ops.service.impl;
+package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.ops.ServiceDetail;
-import com.dt.platform.domain.ops.ServiceDetailVO;
+import com.dt.platform.domain.eam.AssetExtFinancial;
+import com.dt.platform.domain.eam.AssetExtFinancialVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.ops.service.IServiceDetailService;
+import com.dt.platform.eam.service.IAssetExtFinancialService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 服务明细 服务实现
+ * 资产财务属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 10:35:55
+ * @since 2021-08-13 11:06:06
 */
 
 
-@Service("OpsServiceDetailService")
-public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implements IServiceDetailService {
+@Service("EamAssetExtFinancialService")
+public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial> implements IAssetExtFinancialService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,37 +62,37 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	
 	/**
 	 * 插入实体
-	 * @param serviceDetail 实体数据
+	 * @param assetExtFinancial 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(ServiceDetail serviceDetail) {
-		return super.insert(serviceDetail);
+	public Result insert(AssetExtFinancial assetExtFinancial) {
+		return super.insert(assetExtFinancial);
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param serviceDetailList 实体数据清单
+	 * @param assetExtFinancialList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<ServiceDetail> serviceDetailList) {
-		return super.insertList(serviceDetailList);
+	public Result insertList(List<AssetExtFinancial> assetExtFinancialList) {
+		return super.insertList(assetExtFinancialList);
 	}
 	
 	
 	/**
-	 * 按主键删除 服务明细
+	 * 按主键删除 资产财务属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		ServiceDetail serviceDetail = new ServiceDetail();
+		AssetExtFinancial assetExtFinancial = new AssetExtFinancial();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		serviceDetail.setId(id);
+		assetExtFinancial.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(serviceDetail);
+			boolean suc = dao.deleteEntity(assetExtFinancial);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -103,20 +103,20 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	}
 	
 	/**
-	 * 按主键删除 服务明细
+	 * 按主键删除 资产财务属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		ServiceDetail serviceDetail = new ServiceDetail();
+		AssetExtFinancial assetExtFinancial = new AssetExtFinancial();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		serviceDetail.setId(id);
-		serviceDetail.setDeleted(dao.getDBTreaty().getTrueValue());
-		serviceDetail.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		serviceDetail.setDeleteTime(new Date());
+		assetExtFinancial.setId(id);
+		assetExtFinancial.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetExtFinancial.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetExtFinancial.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(serviceDetail,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetExtFinancial,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -128,29 +128,29 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	
 	/**
 	 * 更新实体
-	 * @param serviceDetail 数据对象
+	 * @param assetExtFinancial 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(ServiceDetail serviceDetail , SaveMode mode) {
-		return super.update(serviceDetail , mode);
+	public Result update(AssetExtFinancial assetExtFinancial , SaveMode mode) {
+		return super.update(assetExtFinancial , mode);
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param serviceDetailList 数据对象列表
+	 * @param assetExtFinancialList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<ServiceDetail> serviceDetailList , SaveMode mode) {
-		return super.updateList(serviceDetailList , mode);
+	public Result updateList(List<AssetExtFinancial> assetExtFinancialList , SaveMode mode) {
+		return super.updateList(assetExtFinancialList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 服务明细
+	 * 按主键更新字段 资产财务属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -164,20 +164,20 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	
 	
 	/**
-	 * 按主键获取 服务明细
+	 * 按主键获取 资产财务属性
 	 *
 	 * @param id 主键
-	 * @return ServiceDetail 数据对象
+	 * @return AssetExtFinancial 数据对象
 	 */
-	public ServiceDetail getById(String id) {
-		ServiceDetail sample = new ServiceDetail();
+	public AssetExtFinancial getById(String id) {
+		AssetExtFinancial sample = new AssetExtFinancial();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<ServiceDetail> getByIds(List<String> ids) {
+	public List<AssetExtFinancial> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -190,7 +190,7 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<ServiceDetail> queryList(ServiceDetail sample) {
+	public List<AssetExtFinancial> queryList(AssetExtFinancial sample) {
 		return super.queryList(sample);
 	}
 	
@@ -204,7 +204,7 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<ServiceDetail> queryPagedList(ServiceDetail sample, int pageSize, int pageIndex) {
+	public PagedList<AssetExtFinancial> queryPagedList(AssetExtFinancial sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -218,25 +218,25 @@ public class ServiceDetailServiceImpl extends SuperService<ServiceDetail> implem
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<ServiceDetail> queryPagedList(ServiceDetail sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetExtFinancial> queryPagedList(AssetExtFinancial sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param serviceDetail 数据对象
+	 * @param assetExtFinancial 数据对象
 	 * @return 判断结果
 	 */
-	public Result<ServiceDetail> checkExists(ServiceDetail serviceDetail) {
+	public Result<AssetExtFinancial> checkExists(AssetExtFinancial assetExtFinancial) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(serviceDetail, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetExtFinancial, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(ServiceDetail sample) {
+	public ExcelWriter exportExcel(AssetExtFinancial sample) {
 		return super.exportExcel(sample);
 	}
 

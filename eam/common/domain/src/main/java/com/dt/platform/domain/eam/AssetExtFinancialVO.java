@@ -1,4 +1,4 @@
-package com.dt.platform.domain.ops;
+package com.dt.platform.domain.eam;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 10:35:55
- * @sign 092FA25DA72A87A02A95A07013E230AC
+ * @since 2021-08-13 11:06:05
+ * @sign F0486D94A1EEAA331EFF631E27D41E1D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class ServiceDetailVO extends ServiceDetail {
+public class AssetExtFinancialVO extends AssetExtFinancial {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setPageIndex(Integer pageIndex) {
+	public AssetExtFinancialVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setPageSize(Integer pageSize) {
+	public AssetExtFinancialVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setSearchField(String searchField) {
+	public AssetExtFinancialVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setFuzzyField(String fuzzyField) {
+	public AssetExtFinancialVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setSearchValue(String searchValue) {
+	public AssetExtFinancialVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setSortField(String sortField) {
+	public AssetExtFinancialVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setSortType(String sortType) {
+	public AssetExtFinancialVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO setIds(List<String> ids) {
+	public AssetExtFinancialVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class ServiceDetailVO extends ServiceDetail {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public ServiceDetailVO addId(String id) {
+	public AssetExtFinancialVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

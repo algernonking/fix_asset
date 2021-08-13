@@ -1,18 +1,9 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.eam.GoodsStautsEnum;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.BrandMeta;
-import com.dt.platform.domain.eam.meta.CategoryMeta;
-import com.dt.platform.domain.eam.meta.GoodsMeta;
-import com.dt.platform.domain.eam.meta.ManufacturerMeta;
-import com.dt.platform.eam.controller.AssetController;
 import com.dt.platform.eam.page.AssetPageController;
 import com.dt.platform.proxy.eam.AssetServiceProxy;
-import com.dt.platform.proxy.eam.BrandServiceProxy;
-import com.dt.platform.proxy.eam.CategoryServiceProxy;
-import com.dt.platform.proxy.eam.ManufacturerServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 
@@ -25,7 +16,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
 
-       cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
+        cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
 
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintainer","维保厂商","维保厂商");
 
