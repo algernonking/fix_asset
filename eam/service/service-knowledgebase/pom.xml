@@ -36,12 +36,6 @@
             <artifactId>proxy</artifactId>
             <version>${platform.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon</artifactId>
-            <version>2.3.0</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>

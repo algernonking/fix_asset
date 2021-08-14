@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.dt.platform</groupId>
@@ -17,7 +17,7 @@
 	<description>Wrapper-All</description>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>service-storage</artifactId>
@@ -33,18 +33,18 @@
 			<artifactId>service-oauth</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
-		
+
 		<dependency>
-			<groupId>com.dt.platform</groupId>  
-    		<artifactId>service-eam</artifactId>
-    		<version>${platform.version}</version>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-eam</artifactId>
+			<version>${platform.version}</version>
 		</dependency>
-		
-		
+
+
 		<dependency>
-			<groupId>com.dt.platform</groupId>  
-    		<artifactId>service-hrm</artifactId>
-    		<version>${platform.version}</version>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-hrm</artifactId>
+			<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
@@ -66,34 +66,26 @@
 			<version>${platform.version}</version>
 		</dependency>
 
+
+
+
+
 		<dependency>
 			<groupId>com.dt.platform</groupId>
-			<artifactId>service-knowledgebase</artifactId>
+			<artifactId>view-console</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>view-eam</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
-    		<artifactId>view-console</artifactId>
-    		<version>${platform.version}</version>
-		</dependency>
-
-
-
-
-		
-		<dependency>
-			<groupId>com.dt.platform</groupId>  
-    		<artifactId>view-eam</artifactId>
-    		<version>${platform.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.dt.platform</groupId>  
-    		<artifactId>view-hrm</artifactId>
-    		<version>${platform.version}</version>
+			<artifactId>view-hrm</artifactId>
+			<version>${platform.version}</version>
 		</dependency>
 
 		<dependency>
@@ -111,7 +103,14 @@
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
-			<artifactId>view-knowledgebase</artifactId>
+			<artifactId>view-common</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-knowledgebase</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 
@@ -119,10 +118,10 @@
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
-			<artifactId>view-common</artifactId>
+			<artifactId>view-knowledgebase</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>view-console</artifactId>

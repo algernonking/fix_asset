@@ -39,10 +39,10 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
     public static void main(String[] args) throws Exception {
         OpsServiceCategoryGtr g=new OpsServiceCategoryGtr();
         //生成代码
-        g.generateCode();
+       // g.generateCode();
 
         //移除之前生成的菜单，视情况执行
        // g.removeByBatchId("474335473372758016");
-        //g.generateMenu(ServiceCategoryServiceProxy.class, ServiceCategoryPageController.class);
+     //   g.generateMenu(ServiceCategoryServiceProxy.class, ServiceCategoryPageController.class);
     }
 }

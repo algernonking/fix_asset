@@ -60,6 +60,6 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-        //g.generateMenu(ServiceInfoServiceProxy.class, ServiceInfoPageController.class);
+        // g.generateMenu(ServiceInfoServiceProxy.class, ServiceInfoPageController.class);
     }
 }
