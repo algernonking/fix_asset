@@ -35,7 +35,7 @@ import java.util.Date;
  * 生产厂商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:54
+ * @since 2021-08-14 08:53:39
 */
 
 
@@ -52,6 +52,8 @@ public class ManufacturerServiceImpl extends SuperService<Manufacturer> implemen
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class ManufacturerServiceImpl extends SuperService<Manufacturer> implemen
 	 * */
 	@Override
 	public Result insert(Manufacturer manufacturer) {
-		return super.insert(manufacturer);
+		Result r=super.insert(manufacturer);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class ManufacturerServiceImpl extends SuperService<Manufacturer> implemen
 	 * */
 	@Override
 	public Result update(Manufacturer manufacturer , SaveMode mode) {
-		return super.update(manufacturer , mode);
+		Result r=super.update(manufacturer , mode);
+		return r;
 	}
 	
 	/**

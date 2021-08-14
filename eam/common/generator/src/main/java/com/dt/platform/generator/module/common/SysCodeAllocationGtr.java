@@ -24,7 +24,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID).search().hidden(true);
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).search().hidden();
-
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.CREATE_TIME).table().disable(true);
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID).search().hidden();
 

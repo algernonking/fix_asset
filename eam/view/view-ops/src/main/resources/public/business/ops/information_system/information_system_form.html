@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:29:23
+ * @since 2021-08-14 14:29:31
  */
  -->
  <!DOCTYPE html>
@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
 </head>
 
 <body style="overflow-y: hidden">
@@ -60,7 +62,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="status" th:data="${dict.toArray('ops_system_status')}"></div>
+                            <div id="status" input-type="select" th:data="${dict.toArray('ops_system_status')}"></div>
                         </div>
                     </div>
 
@@ -99,29 +101,29 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('信息分级')}">信息分级</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('系统分级')}">系统分级</div></div>
                         <div class="layui-input-block ">
-                            <div id="grade" th:data="${dict.toArray('ops_system_grade')}"></div>
+                            <div id="grade" input-type="select" th:data="${dict.toArray('ops_system_grade')}"></div>
                         </div>
                     </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('上线时间')}">上线时间</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="onlineDate" id="onlineDate" name="onlineDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上线时间') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('上线时间')}">上线时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="onlineDate" id="onlineDate" name="onlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上线时间') }" type="text" class="layui-input"   />
+                        </div>
                     </div>
-                </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="offlineDate" id="offlineDate" name="offlineDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="offlineDate" id="offlineDate" name="offlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
+                        </div>
                     </div>
-                </div>
 
 
                 
@@ -152,7 +154,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('运维模式')}">运维模式</div></div>
                         <div class="layui-input-block ">
-                            <div id="opsMethod" th:data="${dict.toArray('ops_system_ops_method')}"></div>
+                            <div id="opsMethod" input-type="select" th:data="${dict.toArray('ops_system_ops_method')}"></div>
                         </div>
                     </div>
 
@@ -161,18 +163,18 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('开发模式')}">开发模式</div></div>
                         <div class="layui-input-block ">
-                            <div id="devMethod" th:data="${dict.toArray('ops_system_dev_method')}"></div>
+                            <div id="devMethod" input-type="select" th:data="${dict.toArray('ops_system_dev_method')}"></div>
                         </div>
                     </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('演练时间')}">演练时间</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('演练时间') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('演练时间')}">演练时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('演练时间') }" type="text" class="layui-input"   />
+                        </div>
                     </div>
-                </div>
 
 
                 
@@ -275,7 +277,7 @@
 </div>
 
 <div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}">取消</button>
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
     <button th:if="${perm.checkAnyAuth('ops_information_system:create','ops_information_system:update','ops_information_system:save')}" class="layui-btn" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 

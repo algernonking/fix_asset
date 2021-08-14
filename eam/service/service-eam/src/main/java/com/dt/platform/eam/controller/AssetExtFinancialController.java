@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产财务属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:06:06
+ * @since 2021-08-14 08:53:27
 */
 
 @Api(tags = "资产财务属性")
@@ -75,7 +75,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE , value = "资产原值" , required = true , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
@@ -88,7 +88,7 @@ public class AssetExtFinancialController extends SuperController {
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
-	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE)
+	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION)
 	@NotNull(name = AssetExtFinancialVOMeta.RESIDUALS_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.NAV_PRICE)
@@ -148,7 +148,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE , value = "资产原值" , required = true , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
@@ -161,7 +161,7 @@ public class AssetExtFinancialController extends SuperController {
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
-	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE)
+	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION)
 	@NotNull(name = AssetExtFinancialVOMeta.RESIDUALS_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.NAV_PRICE)
@@ -187,7 +187,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE , value = "资产原值" , required = true , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
@@ -200,7 +200,7 @@ public class AssetExtFinancialController extends SuperController {
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
-	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE)
+	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION)
 	@NotNull(name = AssetExtFinancialVOMeta.RESIDUALS_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.NAV_PRICE)
@@ -265,7 +265,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE , value = "资产原值" , required = true , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
@@ -299,7 +299,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_PRICE , value = "资产原值" , required = true , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),

@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 信息系统 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:29:20
+ * @since 2021-08-14 14:29:26
 */
 
 @Api(tags = "信息系统")
@@ -65,13 +65,13 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "添加信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "协同办公系统"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class , example = "online"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
@@ -81,14 +81,14 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.OS_INFO , value = "操作系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DB_INFO , value = "数据库" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.APP_INFO , value = "应用" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RTO , value = "RTO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RPO , value = "RPO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.HARDWARE_INFO , value = "硬件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BACKUP_INFO , value = "备份信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.SAMEPLACE_BACUP_INFO , value = "本地备份" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DIFFPLACE_BACKUP_INFO , value = "异地备份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -107,7 +107,7 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "删除信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = InformationSystemVOMeta.ID)
@@ -141,13 +141,13 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "更新信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "协同办公系统"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class , example = "online"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
@@ -157,14 +157,14 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.OS_INFO , value = "操作系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DB_INFO , value = "数据库" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.APP_INFO , value = "应用" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RTO , value = "RTO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RPO , value = "RPO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.HARDWARE_INFO , value = "硬件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BACKUP_INFO , value = "备份信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.SAMEPLACE_BACUP_INFO , value = "本地备份" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DIFFPLACE_BACKUP_INFO , value = "异地备份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -183,13 +183,13 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "保存信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "协同办公系统"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class , example = "online"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
@@ -199,14 +199,14 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.OS_INFO , value = "操作系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DB_INFO , value = "数据库" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.APP_INFO , value = "应用" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RTO , value = "RTO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RPO , value = "RPO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.HARDWARE_INFO , value = "硬件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BACKUP_INFO , value = "备份信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.SAMEPLACE_BACUP_INFO , value = "本地备份" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DIFFPLACE_BACKUP_INFO , value = "异地备份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -264,13 +264,13 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "查询信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "协同办公系统"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class , example = "online"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
@@ -280,14 +280,14 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.OS_INFO , value = "操作系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DB_INFO , value = "数据库" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.APP_INFO , value = "应用" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RTO , value = "RTO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RPO , value = "RPO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.HARDWARE_INFO , value = "硬件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BACKUP_INFO , value = "备份信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.SAMEPLACE_BACUP_INFO , value = "本地备份" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DIFFPLACE_BACKUP_INFO , value = "异地备份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -307,13 +307,13 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478692829145600000"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "协同办公系统"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.STATUS , value = "当前状态" , required = false , dataTypeClass=String.class , example = "online"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.OPS_METHOD , value = "运维模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
@@ -323,14 +323,14 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.OS_INFO , value = "操作系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DB_INFO , value = "数据库" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.APP_INFO , value = "应用" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.GRADE , value = "等级" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RTO , value = "RTO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.RPO , value = "RPO" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.HARDWARE_INFO , value = "硬件信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BACKUP_INFO , value = "备份信息" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.SAMEPLACE_BACUP_INFO , value = "本地备份" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.DIFFPLACE_BACKUP_INFO , value = "异地备份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.ARCH_METHOD , value = "归档模式" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

@@ -35,7 +35,7 @@ import java.util.Date;
  * 主机位置 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:29
+ * @since 2021-08-14 14:29:46
 */
 
 
@@ -67,7 +67,8 @@ public class HostPositionServiceImpl extends SuperService<HostPosition> implemen
 	 * */
 	@Override
 	public Result insert(HostPosition hostPosition) {
-		return super.insert(hostPosition);
+		Result r=super.insert(hostPosition);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class HostPositionServiceImpl extends SuperService<HostPosition> implemen
 	 * */
 	@Override
 	public Result update(HostPosition hostPosition , SaveMode mode) {
-		return super.update(hostPosition , mode);
+		Result r=super.update(hostPosition , mode);
+		return r;
 	}
 	
 	/**

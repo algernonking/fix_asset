@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:30
+ * @since 2021-08-14 14:29:45
  */
  -->
  <!DOCTYPE html>
@@ -74,17 +74,17 @@
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('操作系统')}" class="search-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('数据库')}" class="search-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('中间件')}" class="search-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-detail/query-list'}" style="width:200px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
                     </div>
 
 
@@ -114,7 +114,7 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('ops_host:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('添加')}">添加</span></button>
+        <button th:if="${perm.checkAuth('ops_host:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
             <button th:if="${perm.checkAuth('ops_host:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>

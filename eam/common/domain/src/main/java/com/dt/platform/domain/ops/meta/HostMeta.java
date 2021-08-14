@@ -6,15 +6,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
-import com.dt.platform.domain.ops.ServiceDetail;
+import com.dt.platform.domain.ops.ServiceInfo;
 import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:28
- * @sign 24201C1E354F5517B7C0189844EEA5B9
+ * @since 2021-08-14 14:29:40
+ * @sign D96D1A32144838CB194AA7199CC64D58
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -381,14 +381,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.HostPosition> POSITION_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,POSITION, com.dt.platform.domain.ops.HostPosition.class, "所在位置", "所在位置", com.dt.platform.domain.ops.HostPosition.class, null);
 	
 	/**
-	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
 	public static final String HOST_DB_LIST="hostDbList";
 	
 	/**
-	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 数据库 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.ServiceDetail.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceInfo> HOST_DB_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_LIST, java.util.List.class, "数据库", "数据库", com.dt.platform.domain.ops.ServiceInfo.class, null);
 	
 	/**
 	 * 数据库列表 , 数据库 , 集合类型: LIST , 类型: java.lang.String
@@ -401,14 +401,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_DB_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_DB_IDS, java.util.List.class, "数据库列表", "数据库", java.lang.String.class, null);
 	
 	/**
-	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
 	public static final String HOST_MIDDLEWARE_LIST="hostMiddlewareList";
 	
 	/**
-	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 中间件 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_MIDDLEWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.ServiceDetail.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceInfo> HOST_MIDDLEWARE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_LIST, java.util.List.class, "中间件", "中间件", com.dt.platform.domain.ops.ServiceInfo.class, null);
 	
 	/**
 	 * 中间件列表 , 中间件 , 集合类型: LIST , 类型: java.lang.String
@@ -421,14 +421,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_MIDDLEWARE_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_MIDDLEWARE_IDS, java.util.List.class, "中间件列表", "中间件", java.lang.String.class, null);
 	
 	/**
-	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
 	public static final String HOST_OS_LIST="hostOsList";
 	
 	/**
-	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 操作系统 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceDetail> HOST_OS_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_LIST, java.util.List.class, "操作系统", "操作系统", com.dt.platform.domain.ops.ServiceDetail.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,com.dt.platform.domain.ops.ServiceInfo> HOST_OS_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_LIST, java.util.List.class, "操作系统", "操作系统", com.dt.platform.domain.ops.ServiceInfo.class, null);
 	
 	/**
 	 * 操作系统列表 , 操作系统 , 集合类型: LIST , 类型: java.lang.String
@@ -854,7 +854,7 @@ public class HostMeta {
 		 * @param hostDbList 数据库
 		 * @return 当前对象
 		*/
-		public Host setHostDbList(List<ServiceDetail> hostDbList) {
+		public Host setHostDbList(List<ServiceInfo> hostDbList) {
 			super.change(HOST_DB_LIST,super.getHostDbList(),hostDbList);
 			super.setHostDbList(hostDbList);
 			return this;
@@ -876,7 +876,7 @@ public class HostMeta {
 		 * @param hostMiddlewareList 中间件
 		 * @return 当前对象
 		*/
-		public Host setHostMiddlewareList(List<ServiceDetail> hostMiddlewareList) {
+		public Host setHostMiddlewareList(List<ServiceInfo> hostMiddlewareList) {
 			super.change(HOST_MIDDLEWARE_LIST,super.getHostMiddlewareList(),hostMiddlewareList);
 			super.setHostMiddlewareList(hostMiddlewareList);
 			return this;
@@ -898,7 +898,7 @@ public class HostMeta {
 		 * @param hostOsList 操作系统
 		 * @return 当前对象
 		*/
-		public Host setHostOsList(List<ServiceDetail> hostOsList) {
+		public Host setHostOsList(List<ServiceInfo> hostOsList) {
 			super.change(HOST_OS_LIST,super.getHostOsList(),hostOsList);
 			super.setHostOsList(hostOsList);
 			return this;

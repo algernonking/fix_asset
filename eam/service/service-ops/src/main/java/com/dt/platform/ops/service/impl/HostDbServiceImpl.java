@@ -36,7 +36,7 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 数据库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:22
+ * @since 2021-08-14 14:29:37
 */
 
 
@@ -68,7 +68,8 @@ public class HostDbServiceImpl extends SuperService<HostDb> implements IHostDbSe
 	 * */
 	@Override
 	public Result insert(HostDb hostDb) {
-		return super.insert(hostDb);
+		Result r=super.insert(hostDb);
+		return r;
 	}
 	
 	/**
@@ -135,7 +136,8 @@ public class HostDbServiceImpl extends SuperService<HostDb> implements IHostDbSe
 	 * */
 	@Override
 	public Result update(HostDb hostDb , SaveMode mode) {
-		return super.update(hostDb , mode);
+		Result r=super.update(hostDb , mode);
+		return r;
 	}
 	
 	/**
@@ -259,10 +261,10 @@ public class HostDbServiceImpl extends SuperService<HostDb> implements IHostDbSe
 	/**
      * 保存关系
      * @param hostId 主机
-     * @param serviceDetailIds 服务内容清单
+     * @param serviceInfoIds 服务内容清单
      */
-	public void saveRelation(String hostId,List<String> serviceDetailIds) {
-		super.saveRelation(OPS_HOST_DB.HOST_ID,hostId, OPS_HOST_DB.SERVICE_DETAIL_ID,serviceDetailIds,true);
+	public void saveRelation(String hostId,List<String> serviceInfoIds) {
+		super.saveRelation(OPS_HOST_DB.HOST_ID,hostId, OPS_HOST_DB.SERVICE_INFO_ID,serviceInfoIds,true);
 	}
 
 }

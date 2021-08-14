@@ -35,7 +35,7 @@ import java.util.Date;
  * 设备属性扩展 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:05:39
+ * @since 2021-08-14 08:53:25
 */
 
 
@@ -67,7 +67,8 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	 * */
 	@Override
 	public Result insert(AssetExtEquipment assetExtEquipment) {
-		return super.insert(assetExtEquipment);
+		Result r=super.insert(assetExtEquipment);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	 * */
 	@Override
 	public Result update(AssetExtEquipment assetExtEquipment , SaveMode mode) {
-		return super.update(assetExtEquipment , mode);
+		Result r=super.update(assetExtEquipment , mode);
+		return r;
 	}
 	
 	/**

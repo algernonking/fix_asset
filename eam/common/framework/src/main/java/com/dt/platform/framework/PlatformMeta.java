@@ -51,6 +51,13 @@ public class PlatformMeta {
 	 * */
 	public static final String COMMON_PACKAGE=BASE_PACKAGE+".common";
 
+	/**
+	 * 常用服务
+	 * */
+	public static final String KNOWLEDGEBASE_PACKAGE=BASE_PACKAGE+".knowledgebase";
+
+
+
 
 
  

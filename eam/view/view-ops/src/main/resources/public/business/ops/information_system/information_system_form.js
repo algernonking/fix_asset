@@ -1,14 +1,16 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:29:24
+ * @since 2021-08-14 14:29:32
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-ops/ops-information-system";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -110,6 +112,21 @@ function FormPage() {
 				return opts;
 			}
 		});
+		laydate.render({
+			elem: '#lastdrillDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#onlineDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#offlineDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 		//渲染 grade 下拉字段
 		fox.renderSelectBox({
 			el: "grade",
@@ -133,6 +150,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-information-system-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -152,7 +170,7 @@ function FormPage() {
 			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
 			//设置  开发模式 设置下拉框勾选
 			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  信息分级 设置下拉框勾选
+			//设置  系统分级 设置下拉框勾选
 			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
 
 
@@ -170,6 +188,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	
@@ -203,7 +229,7 @@ function FormPage() {
 			if(data.field["devMethod"] && data.field["devMethod"].length>0) {
 				data.field["devMethod"]=data.field["devMethod"][0];
 			}
-			//获取 信息分级 下拉框的值
+			//获取 系统分级 下拉框的值
 			data.field["grade"]=xmSelect.get("#grade",true).getValue("value");
 			if(data.field["grade"] && data.field["grade"].length>0) {
 				data.field["grade"]=data.field["grade"][0];

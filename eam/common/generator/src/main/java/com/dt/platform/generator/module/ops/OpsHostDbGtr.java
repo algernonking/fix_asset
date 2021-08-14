@@ -13,7 +13,7 @@ public class OpsHostDbGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         //指定该表为关系表
-        cfg.setRelationField(EAMTables.OPS_HOST_DB.HOST_ID, EAMTables.OPS_HOST_DB.SERVICE_DETAIL_ID,true);
+        cfg.setRelationField(EAMTables.OPS_HOST_DB.HOST_ID, EAMTables.OPS_HOST_DB.SERVICE_INFO_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()

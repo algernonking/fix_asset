@@ -35,7 +35,7 @@ import java.util.Date;
  * 编码规则 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:42
+ * @since 2021-08-14 08:53:17
 */
 
 
@@ -52,6 +52,8 @@ public class CodeRuleServiceImpl extends SuperService<CodeRule> implements ICode
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class CodeRuleServiceImpl extends SuperService<CodeRule> implements ICode
 	 * */
 	@Override
 	public Result insert(CodeRule codeRule) {
-		return super.insert(codeRule);
+		Result r=super.insert(codeRule);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class CodeRuleServiceImpl extends SuperService<CodeRule> implements ICode
 	 * */
 	@Override
 	public Result update(CodeRule codeRule , SaveMode mode) {
-		return super.update(codeRule , mode);
+		Result r=super.update(codeRule , mode);
+		return r;
 	}
 	
 	/**

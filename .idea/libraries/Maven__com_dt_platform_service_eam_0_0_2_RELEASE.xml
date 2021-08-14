@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Maven: com.dt.platform:service-eam:0.0.2.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/dt/platform/service-eam/0.0.2.RELEASE/service-eam-0.0.2.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/eam/service/service-eam/service-eam-0.0.2.RELEASE-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/dt/platform/service-eam/0.0.2.RELEASE/service-eam-0.0.2.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/eam/service/service-eam/service-eam-0.0.2.RELEASE-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/dt/platform/service-eam/0.0.2.RELEASE/service-eam-0.0.2.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

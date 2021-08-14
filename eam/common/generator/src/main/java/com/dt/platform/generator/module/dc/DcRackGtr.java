@@ -43,6 +43,10 @@ public class DcRackGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_RACK.RACK_LABELS).search().fuzzySearch();
 //
+
+         cfg.view().field(EAMTables.DC_RACK.CREATE_TIME).table().disable(true);
+
+
         cfg.view().field(EAMTables.DC_RACK.RACK_CODE).form().validate().required();
         cfg.view().field(EAMTables.DC_RACK.AREA_ID)
                 .basic().label("区域")

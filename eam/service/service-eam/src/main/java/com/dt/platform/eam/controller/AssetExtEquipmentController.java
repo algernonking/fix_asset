@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 设备属性扩展 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:05:39
+ * @since 2021-08-14 08:53:25
 */
 
 @Api(tags = "设备属性扩展")

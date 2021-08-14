@@ -7,9 +7,9 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.eam";
         String[] clasnamearr={
-                "EamAssetExtEquipment",
-                "EamAssetExtFinancial",
-                "EamAssetExtMaintainer",
+                "EamAssetExtEquipmentGtr",
+                "EamAssetExtFinancialGtr",
+                "EamAssetExtMaintainerGtr",
                 "BrandGtr",
                 "EamAreaGtr",
                 "EamGoodsGtr",
@@ -27,7 +27,7 @@ public class CodeBuildRepeat {
                 Method method=clazz.getMethod("generateCode");
                 method.invoke(clazz.newInstance());
             }catch(Exception e){
-                System.out.println("这个类真的不存在!");
+                System.err.println("这个类真的不存在!");
             }
             System.out.println("------------------------invoke finish------------------------");
         }

@@ -82,5 +82,16 @@ applications:
     viewProjectPath: /view/view-common
     viewPrefixPath: public/business/common
     wrapperProjectPath: /wrapper/wrapper-all
+  #知识库模块
+  service-knowledgebase:
+    nacosGroup: service
+    nacosDataId: service-knowledgebase.yml
+    serviceProjectPath: /service/service-knowledgebase
+    packageName: com.dt.platform.knowledgebase
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: KNOWLEDGEBASE
+    viewProjectPath: /view/view-knowledgebase
+    viewPrefixPath: public/business/knowledgebase
+    wrapperProjectPath: /wrapper/wrapper-all
  
     

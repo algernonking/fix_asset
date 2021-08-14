@@ -1,7 +1,7 @@
 /**
  * 机柜管理 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:12:28
+ * @since 2021-08-14 08:53:22
  */
 
 
@@ -52,18 +52,17 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键')} ,
-					{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"name");}} ,
-					{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return fox.joinLabel(d.layer,"name");}} ,
-					{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码')} ,
-					{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称')} ,
-					{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量')} ,
-					{ field: 'rackLabels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签')} ,
-					{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"name");}}
+					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return fox.joinLabel(d.layer,"name");}}
+					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') }
+					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量') }
+					,{ field: 'rackLabels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
+					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -304,9 +303,9 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('机柜管理')) : (fox.translate('添加')+fox.translate('机柜管理'));
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
@@ -315,6 +314,7 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('dc-rack-form-data-popup-index', index);
 	};
 
 };

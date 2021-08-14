@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:39:40
+ * @since 2021-08-14 08:53:34
  */
 
 
@@ -52,21 +52,21 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键')} ,
-					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
-					{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}} ,
-					{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物品名称')} ,
-					{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号')} ,
-					{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('生产厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}} ,
-					{ field: 'brandId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('品牌'), templet: function (d) { return fox.joinLabel(d.brand,"brandName");}} ,
-					{ field: 'unit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('计量单位')} ,
-					{ field: 'referencePrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('参考价')} ,
-					{ field: 'pictureId', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('标准型号物品图片'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.pictureId+'" />'; } } ,
-					{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注')} ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间')} ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}}
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物品名称') }
+					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号') }
+					,{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}}
+					,{ field: 'brandId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('品牌'), templet: function (d) { return fox.joinLabel(d.brand,"brandName");}}
+					,{ field: 'unit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('计量单位') }
+					,{ field: 'referencePrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('参考价') }
+					,{ field: 'pictureId', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('标准型号物品图片'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.pictureId+'" />'; } }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -285,17 +285,18 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('物品档案')) : (fox.translate('添加')+fox.translate('物品档案'));
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/eam/goods/goods_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('eam-goods-form-data-popup-index', index);
 	};
 
 };

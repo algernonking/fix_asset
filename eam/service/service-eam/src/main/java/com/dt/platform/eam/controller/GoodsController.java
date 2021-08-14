@@ -52,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 物品档案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:39:33
+ * @since 2021-08-14 08:53:34
 */
 
 @Api(tags = "物品档案")
@@ -193,9 +193,9 @@ public class GoodsController extends SuperController {
 	public Result<Goods> getById(String id) {
 		Result<Goods> result=new Result<>();
 		Goods goods=goodsService.getById(id);
-		// 关联出 资产分类 数据
+		// 关联出 分类 数据
 		goodsService.join(goods,GoodsMeta.CATEGORY);
-		// 关联出 生产厂商 数据
+		// 关联出 厂商 数据
 		goodsService.join(goods,GoodsMeta.MANUFACTURER);
 		// 关联出 品牌 数据
 		goodsService.join(goods,GoodsMeta.BRAND);
@@ -275,9 +275,9 @@ public class GoodsController extends SuperController {
 	public Result<PagedList<Goods>> queryPagedList(GoodsVO sample) {
 		Result<PagedList<Goods>> result=new Result<>();
 		PagedList<Goods> list=goodsService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 资产分类 数据
+		// 关联出 分类 数据
 		goodsService.join(list,GoodsMeta.CATEGORY);
-		// 关联出 生产厂商 数据
+		// 关联出 厂商 数据
 		goodsService.join(list,GoodsMeta.MANUFACTURER);
 		// 关联出 品牌 数据
 		goodsService.join(list,GoodsMeta.BRAND);

@@ -22,7 +22,7 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 数据库 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:22
+ * @since 2021-08-14 14:29:37
 */
 
 public interface IHostDbService extends ISuperService<HostDb> {
@@ -288,8 +288,8 @@ public interface IHostDbService extends ISuperService<HostDb> {
 	/**
 	 * 保存关系
 	 * @param hostId 主机
-	 * @param serviceDetailIds 服务内容清单
+	 * @param serviceInfoIds 服务内容清单
 	 */
-	void saveRelation(String hostId,List<String> serviceDetailIds);
+	void saveRelation(String hostId,List<String> serviceInfoIds);
  
 }

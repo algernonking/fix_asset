@@ -13,7 +13,7 @@ public class OpsHostOsGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
 
-        cfg.setRelationField(EAMTables.OPS_HOST_OS.HOST_ID, EAMTables.OPS_HOST_OS.SERVICE_DETAIL_ID,true);
+        cfg.setRelationField(EAMTables.OPS_HOST_OS.HOST_ID, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
 
 
         //文件生成覆盖模式

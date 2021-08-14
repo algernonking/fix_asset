@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.OPS_DB_INSTANCE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.math.BigDecimal;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:10
- * @sign C3D14D5A8B25381E0406CD422B62D917
+ * @since 2021-08-14 14:29:33
+ * @sign 52C1823AA35CA3E67CCEE12E395AEDC4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -99,7 +100,7 @@ public class DbInstance extends Entity {
 	 * 备份大小：备份大小
 	*/
 	@ApiModelProperty(required = false,value="备份大小" , notes = "备份大小")
-	private Date backupSize;
+	private BigDecimal backupSize;
 	
 	/**
 	 * 标签：标签
@@ -168,10 +169,10 @@ public class DbInstance extends Entity {
 	private Host host;
 	
 	/**
-	 * 所在位置：所在位置
+	 * 数据库：数据库
 	*/
-	@ApiModelProperty(required = false,value="所在位置" , notes = "所在位置")
-	private ServiceDetail database;
+	@ApiModelProperty(required = false,value="数据库" , notes = "数据库")
+	private ServiceInfo database;
 	
 	/**
 	 * 获得 主键<br>
@@ -387,7 +388,7 @@ public class DbInstance extends Entity {
 	 * 备份大小
 	 * @return 备份大小
 	*/
-	public Date getBackupSize() {
+	public BigDecimal getBackupSize() {
 		return backupSize;
 	}
 	
@@ -396,7 +397,7 @@ public class DbInstance extends Entity {
 	 * @param backupSize 备份大小
 	 * @return 当前对象
 	*/
-	public DbInstance setBackupSize(Date backupSize) {
+	public DbInstance setBackupSize(BigDecimal backupSize) {
 		this.backupSize=backupSize;
 		return this;
 	}
@@ -611,20 +612,20 @@ public class DbInstance extends Entity {
 	}
 	
 	/**
-	 * 获得 所在位置<br>
-	 * 所在位置
-	 * @return 所在位置
+	 * 获得 数据库<br>
+	 * 数据库
+	 * @return 数据库
 	*/
-	public ServiceDetail getDatabase() {
+	public ServiceInfo getDatabase() {
 		return database;
 	}
 	
 	/**
-	 * 设置 所在位置
-	 * @param database 所在位置
+	 * 设置 数据库
+	 * @param database 数据库
 	 * @return 当前对象
 	*/
-	public DbInstance setDatabase(ServiceDetail database) {
+	public DbInstance setDatabase(ServiceInfo database) {
 		this.database=database;
 		return this;
 	}

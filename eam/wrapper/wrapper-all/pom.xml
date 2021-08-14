@@ -68,9 +68,21 @@
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
+			<artifactId>service-knowledgebase</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
     		<artifactId>view-console</artifactId>
     		<version>${platform.version}</version>
 		</dependency>
+
+
+
+
 		
 		<dependency>
 			<groupId>com.dt.platform</groupId>  
@@ -95,6 +107,14 @@
 			<artifactId>view-ops</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>view-knowledgebase</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
 
 
 		<dependency>

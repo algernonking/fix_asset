@@ -16,7 +16,9 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).search().hidden();
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).form().table().hidden();
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).table().hidden();
+
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.CREATE_TIME).table().disable(true);
 
         cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性类型")
                 .form().validate().required().form().radioBox().enumType(CodeAttrTypeEnum.class);

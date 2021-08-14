@@ -35,7 +35,7 @@ import java.util.Date;
  * 维保厂商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:52
+ * @since 2021-08-14 08:53:36
 */
 
 
@@ -52,6 +52,8 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	 * */
 	@Override
 	public Result insert(Maintainer maintainer) {
-		return super.insert(maintainer);
+		Result r=super.insert(maintainer);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class MaintainerServiceImpl extends SuperService<Maintainer> implements I
 	 * */
 	@Override
 	public Result update(Maintainer maintainer , SaveMode mode) {
-		return super.update(maintainer , mode);
+		Result r=super.update(maintainer , mode);
+		return r;
 	}
 	
 	/**

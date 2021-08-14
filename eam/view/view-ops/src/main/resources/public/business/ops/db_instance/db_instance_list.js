@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:14
+ * @since 2021-08-14 14:29:33
  */
 
 
@@ -52,24 +52,22 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') } ,
-					{ field: 'hostId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机'), templet: function (d) { return fox.joinLabel(d.host,"hostName");}} ,
-					{ field: 'databaseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.database,"name");}} ,
-					{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('实例名称') } ,
-					{ field: 'logMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('日志模式'), templet:function (d){ return fox.getDictText(SELECT_LOGMETHOD_DATA,d.logMethod);}} ,
-					{ field: 'backupStrategy', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份策略') } ,
-					{ field: 'backupType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return fox.getDictText(SELECT_BACKUPTYPE_DATA,d.backupType);}} ,
-					{ field: 'backupDatakeep', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份保留时长') } ,
-					{ field: 'backupStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return fox.getDictText(SELECT_BACKUPSTATUS_DATA,d.backupStatus);}} ,
-					{ field: 'backupMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份方式'), templet:function (d){ return fox.getDictText(SELECT_BACKUPMETHOD_DATA,d.backupMethod);}} ,
-					{ field: 'backupTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上次备份'), templet: function (d) { return fox.dateFormat(d.backupTime); }} ,
-					{ field: 'backupSize', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('备份大小') } ,
-					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') } ,
-					{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') } ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间') } ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'hostId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机'), templet: function (d) { return fox.joinLabel(d.host,"hostName");}}
+					,{ field: 'databaseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.database,"name");}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('实例名称') }
+					,{ field: 'logMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('日志模式'), templet:function (d){ return fox.getDictText(SELECT_LOGMETHOD_DATA,d.logMethod);}}
+					,{ field: 'backupStrategy', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份策略') }
+					,{ field: 'backupType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return fox.getDictText(SELECT_BACKUPTYPE_DATA,d.backupType);}}
+					,{ field: 'backupDatakeep', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份保留时长') }
+					,{ field: 'backupStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return fox.getDictText(SELECT_BACKUPSTATUS_DATA,d.backupStatus);}}
+					,{ field: 'backupMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份方式'), templet:function (d){ return fox.getDictText(SELECT_BACKUPMETHOD_DATA,d.backupMethod);}}
+					,{ field: 'backupTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上次备份'), templet: function (d) { return fox.dateFormat(d.backupTime); }}
+					,{ field: 'backupSize', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('备份大小') }
+					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),

@@ -1,23 +1,22 @@
 package com.dt.platform.generator.module.workorder;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.ops.page.WorkorderTypePageController;
-import com.dt.platform.proxy.ops.WorkorderTypeServiceProxy;
+
 import com.github.foxnic.generator.config.WriteMode;
 
 public class WoTypeGtr extends BaseCodeGenerator{
 
 
     public WoTypeGtr() {
-        super(EAMTables.WORKORDER_TYPE.$TABLE,BASIC_SETTING_MENU_ID,"");
+        super(EAMTables.WORKORDER_CATEGORY.$TABLE,BASIC_SETTING_MENU_ID,"");
     }
 
     public void generateCode() throws Exception {
 
 
 //
-        cfg.view().field(EAMTables.WORKORDER_TYPE.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.WORKORDER_TYPE.SORT).search().hidden();
+        cfg.view().field(EAMTables.WORKORDER_CATEGORY.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.WORKORDER_CATEGORY.SORT).search().hidden();
 
 
 
@@ -39,6 +38,6 @@ public class WoTypeGtr extends BaseCodeGenerator{
         //g.generateCode();
         //移除之前生成的菜单，视情况执行
 
-        g.generateMenu(WorkorderTypeServiceProxy.class, WorkorderTypePageController.class);
+       // g.generateMenu(WorkorderTypeServiceProxy.class, WorkorderTypePageController.class);
     }
 }

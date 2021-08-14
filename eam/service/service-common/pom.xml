@@ -11,7 +11,7 @@
     </parent>  
     <artifactId>service-common</artifactId>
     <name>service-common</name>
-    <description>Service Data Center</description>
+    <description>Common Service</description>
     <properties> 
         <skipTests>true</skipTests>  
         <java.version>1.8</java.version>  

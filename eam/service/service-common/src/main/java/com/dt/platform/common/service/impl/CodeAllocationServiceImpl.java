@@ -35,7 +35,7 @@ import java.util.Date;
  * 编码分配 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 17:50:07
+ * @since 2021-08-14 08:53:08
 */
 
 
@@ -52,6 +52,8 @@ public class CodeAllocationServiceImpl extends SuperService<CodeAllocation> impl
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class CodeAllocationServiceImpl extends SuperService<CodeAllocation> impl
 	 * */
 	@Override
 	public Result insert(CodeAllocation codeAllocation) {
-		return super.insert(codeAllocation);
+		Result r=super.insert(codeAllocation);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class CodeAllocationServiceImpl extends SuperService<CodeAllocation> impl
 	 * */
 	@Override
 	public Result update(CodeAllocation codeAllocation , SaveMode mode) {
-		return super.update(codeAllocation , mode);
+		Result r=super.update(codeAllocation , mode);
+		return r;
 	}
 	
 	/**

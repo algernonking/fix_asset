@@ -1,7 +1,7 @@
 /**
  * 服务明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:31
+ * @since 2021-08-14 08:54:05
  */
 
 
@@ -52,16 +52,16 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') } ,
-					{ field: 'serviceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务'), templet: function (d) { return fox.joinLabel(d.opsService,"serviceName");}} ,
-					{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') } ,
-					{ field: 'patch', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('补丁') } ,
-					{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') } ,
-					{ field: 'sort', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('排序') } ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('创建时间') } ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'serviceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务'), templet: function (d) { return fox.joinLabel(d.opsService,"serviceName");}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'patch', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('补丁') }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'sort', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('排序') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),

@@ -17,8 +17,8 @@ public class CodeBuildRepeat {
                 "OpsHostMidGtr",
                 "OpsHostGtr",
                 "OpsHostPositionGtr",
-                "OpsServiceDetailGtr",
-                "OpsServiceGtr"
+                "OpsServiceInfoGtr",
+                "OpsServiceCategoryGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);
@@ -27,7 +27,7 @@ public class CodeBuildRepeat {
                 Method method=clazz.getMethod("generateCode");
                 method.invoke(clazz.newInstance());
             }catch(Exception e){
-                System.out.println("这个类真的不存在!");
+                System.err.println("这个类真的不存在!");
             }
             System.out.println("------------------------invoke finish------------------------");
         }

@@ -35,7 +35,7 @@ import java.util.Date;
  * 层级 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:45
+ * @since 2021-08-14 08:53:20
 */
 
 
@@ -52,6 +52,8 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 	 * */
 	@Override
 	public Result insert(Layer layer) {
-		return super.insert(layer);
+		Result r=super.insert(layer);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class LayerServiceImpl extends SuperService<Layer> implements ILayerServi
 	 * */
 	@Override
 	public Result update(Layer layer , SaveMode mode) {
-		return super.update(layer , mode);
+		Result r=super.update(layer , mode);
+		return r;
 	}
 	
 	/**

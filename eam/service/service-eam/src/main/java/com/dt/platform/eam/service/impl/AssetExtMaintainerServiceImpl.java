@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产维保属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:06:48
+ * @since 2021-08-14 08:53:29
 */
 
 
@@ -67,7 +67,8 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	 * */
 	@Override
 	public Result insert(AssetExtMaintainer assetExtMaintainer) {
-		return super.insert(assetExtMaintainer);
+		Result r=super.insert(assetExtMaintainer);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	 * */
 	@Override
 	public Result update(AssetExtMaintainer assetExtMaintainer , SaveMode mode) {
-		return super.update(assetExtMaintainer , mode);
+		Result r=super.update(assetExtMaintainer , mode);
+		return r;
 	}
 	
 	/**

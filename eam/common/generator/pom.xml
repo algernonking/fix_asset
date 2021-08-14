@@ -80,6 +80,14 @@
 
         <dependency>
             <groupId>com.dt.platform</groupId>
+            <artifactId>service-knowledgebase</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+
+
+        <dependency>
+            <groupId>com.dt.platform</groupId>
             <artifactId>view-console</artifactId>
             <version>${platform.version}</version>
         </dependency>
@@ -107,12 +115,20 @@
             <artifactId>view-ops</artifactId>
             <version>${platform.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.dt.platform</groupId>
             <artifactId>view-common</artifactId>
-            <version>0.0.2.RELEASE</version>
-            <scope>compile</scope>
+            <version>${platform.version}</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>com.dt.platform</groupId>
+            <artifactId>view-knowledgebase</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
 
     </dependencies> 
 </project>

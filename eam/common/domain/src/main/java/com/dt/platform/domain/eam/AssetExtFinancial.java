@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:06:05
- * @sign A755984F18E9B5A846FB8031E53AF7CA
+ * @since 2021-08-14 08:53:27
+ * @sign 804C387374F1AFD9F3B9844CD3D102C6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -85,10 +85,10 @@ public class AssetExtFinancial extends Entity {
 	private BigDecimal taxamountPrice;
 	
 	/**
-	 * 资产原值：资产原值
+	 * 资产原值(单价)：资产原值(单价)
 	*/
-	@ApiModelProperty(required = true,value="资产原值" , notes = "资产原值")
-	private BigDecimal originalPrice;
+	@ApiModelProperty(required = true,value="资产原值(单价)" , notes = "资产原值(单价)")
+	private BigDecimal originalUnitPrice;
 	
 	/**
 	 * 累计折旧：累计折旧
@@ -352,21 +352,21 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 资产原值<br>
-	 * 资产原值
-	 * @return 资产原值
+	 * 获得 资产原值(单价)<br>
+	 * 资产原值(单价)
+	 * @return 资产原值(单价)
 	*/
-	public BigDecimal getOriginalPrice() {
-		return originalPrice;
+	public BigDecimal getOriginalUnitPrice() {
+		return originalUnitPrice;
 	}
 	
 	/**
-	 * 设置 资产原值
-	 * @param originalPrice 资产原值
+	 * 设置 资产原值(单价)
+	 * @param originalUnitPrice 资产原值(单价)
 	 * @return 当前对象
 	*/
-	public AssetExtFinancial setOriginalPrice(BigDecimal originalPrice) {
-		this.originalPrice=originalPrice;
+	public AssetExtFinancial setOriginalUnitPrice(BigDecimal originalUnitPrice) {
+		this.originalUnitPrice=originalUnitPrice;
 		return this;
 	}
 	

@@ -19,6 +19,9 @@ public class DcAreaGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_AREA.ID).basic().hidden(true);
 
 
+        cfg.view().field(EAMTables.DC_AREA.CREATE_TIME).table().disable(true);
+
+
         cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();
 
         cfg.view().field(EAMTables.DC_AREA.POSITION).search().fuzzySearch();

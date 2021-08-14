@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产存放区域 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:49
+ * @since 2021-08-14 08:53:32
 */
 
 
@@ -52,6 +52,8 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	 * */
 	@Override
 	public Result insert(Area area) {
-		return super.insert(area);
+		Result r=super.insert(area);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	 * */
 	@Override
 	public Result update(Area area , SaveMode mode) {
-		return super.update(area , mode);
+		Result r=super.update(area , mode);
+		return r;
 	}
 	
 	/**

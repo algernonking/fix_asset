@@ -14,7 +14,7 @@ public class OpsHostMidGtr extends BaseCodeGenerator{
 
 
 
-        cfg.setRelationField(EAMTables.OPS_HOST_MID.HOST_ID, EAMTables.OPS_HOST_MID.SERVICE_DETAIL_ID,true);
+        cfg.setRelationField(EAMTables.OPS_HOST_MID.HOST_ID, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()

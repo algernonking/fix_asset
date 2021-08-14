@@ -26,6 +26,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.ops.service.IHostService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,7 +37,7 @@ import java.util.Date;
  * 主机 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:28
+ * @since 2021-08-14 14:29:40
 */
 
 
@@ -54,6 +56,15 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	public DAO dao() { return dao; }
 
 
+	@Autowired 
+	private HostMidServiceImpl hostMidServiceImpl;
+
+	@Autowired 
+	private HostOsServiceImpl hostOsServiceImpl;
+
+	@Autowired 
+	private HostDbServiceImpl hostDbServiceImpl;
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -66,8 +77,16 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(Host host) {
-		return super.insert(host);
+		Result r=super.insert(host);
+		//保存关系
+		if(r.success()) {
+			hostMidServiceImpl.saveRelation(host.getId(), host.getHostMiddlewareIds());
+			hostOsServiceImpl.saveRelation(host.getId(), host.getHostOsIds());
+			hostDbServiceImpl.saveRelation(host.getId(), host.getHostDbIds());
+		}
+		return r;
 	}
 	
 	/**
@@ -133,8 +152,16 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(Host host , SaveMode mode) {
-		return super.update(host , mode);
+		Result r=super.update(host , mode);
+		//保存关系
+		if(r.success()) {
+			hostMidServiceImpl.saveRelation(host.getId(), host.getHostMiddlewareIds());
+			hostOsServiceImpl.saveRelation(host.getId(), host.getHostOsIds());
+			hostDbServiceImpl.saveRelation(host.getId(), host.getHostDbIds());
+		}
+		return r;
 	}
 	
 	/**

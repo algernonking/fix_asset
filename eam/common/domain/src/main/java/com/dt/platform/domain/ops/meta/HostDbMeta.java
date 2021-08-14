@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:22
- * @sign 4407C412592DD98ED9CFC2D197E33B7E
+ * @since 2021-08-14 14:29:37
+ * @sign B373743EC06CEF8070570695FD88E4AB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,12 +38,12 @@ public class HostDbMeta {
 	/**
 	 * 服务内容 , 类型: java.lang.String
 	*/
-	public static final String SERVICE_DETAIL_ID="serviceDetailId";
+	public static final String SERVICE_INFO_ID="serviceInfoId";
 	
 	/**
 	 * 服务内容 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.HostDb,java.lang.String> SERVICE_DETAIL_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.HostDb.class ,SERVICE_DETAIL_ID, java.lang.String.class, "服务内容", "服务内容", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.HostDb,java.lang.String> SERVICE_INFO_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.HostDb.class ,SERVICE_INFO_ID, java.lang.String.class, "服务内容", "服务内容", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -128,7 +128,7 @@ public class HostDbMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_ID , SERVICE_DETAIL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , HOST_ID , SERVICE_INFO_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -162,12 +162,12 @@ public class HostDbMeta {
 		
 		/**
 		 * 设置 服务内容
-		 * @param serviceDetailId 服务内容
+		 * @param serviceInfoId 服务内容
 		 * @return 当前对象
 		*/
-		public HostDb setServiceDetailId(String serviceDetailId) {
-			super.change(SERVICE_DETAIL_ID,super.getServiceDetailId(),serviceDetailId);
-			super.setServiceDetailId(serviceDetailId);
+		public HostDb setServiceInfoId(String serviceInfoId) {
+			super.change(SERVICE_INFO_ID,super.getServiceInfoId(),serviceInfoId);
+			super.setServiceInfoId(serviceInfoId);
 			return this;
 		}
 		

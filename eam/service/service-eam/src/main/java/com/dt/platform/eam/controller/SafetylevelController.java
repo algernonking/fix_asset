@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 风险等级表 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 16:11:22
+ * @since 2021-08-14 08:53:44
 */
 
 @Api(tags = "风险等级")

@@ -1,14 +1,16 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:18
+ * @since 2021-08-14 14:29:34
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-ops/ops-db-instance";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -169,6 +171,7 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#backupTime',
+			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 	}
@@ -178,6 +181,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-db-instance-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -219,6 +223,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	

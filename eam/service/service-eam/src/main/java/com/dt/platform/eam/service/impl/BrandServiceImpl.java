@@ -35,7 +35,7 @@ import java.util.Date;
  * 品牌表 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:48
+ * @since 2021-08-14 08:53:30
 */
 
 
@@ -52,6 +52,8 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * */
 	@Override
 	public Result insert(Brand brand) {
-		return super.insert(brand);
+		Result r=super.insert(brand);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class BrandServiceImpl extends SuperService<Brand> implements IBrandServi
 	 * */
 	@Override
 	public Result update(Brand brand , SaveMode mode) {
-		return super.update(brand , mode);
+		Result r=super.update(brand , mode);
+		return r;
 	}
 	
 	/**

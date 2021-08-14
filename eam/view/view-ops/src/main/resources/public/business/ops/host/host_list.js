@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:32
+ * @since 2021-08-14 14:29:45
  */
 
 
@@ -52,39 +52,38 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') } ,
-					{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return fox.joinLabel(d.infoSystem,"name");}} ,
-					{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}} ,
-					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}} ,
-					{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') } ,
-					{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP') } ,
-					{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务IP') } ,
-					{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}} ,
-					{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}} ,
-					{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}} ,
-					{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') } ,
-					{ field: 'hostMemory', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('内存') } ,
-					{ field: 'hostCpu', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('CPU') } ,
-					{ field: 'hostConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他配置') } ,
-					{ field: 'userOsAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统管理员') } ,
-					{ field: 'userDbAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库管理员') } ,
-					{ field: 'userDbUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库使用用户') } ,
-					{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户') } ,
-					{ field: 'userOpsOper', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运维操作用户') } ,
-					{ field: 'userOther', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('其他用户') } ,
-					{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}} ,
-					{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }} ,
-					{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineTime); }} ,
-					{ field: 'arch', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否归档1归档0不归档') } ,
-					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') } ,
-					{ field: 'hostNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') } ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间') } ,
-					{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.hostDbList,"name");}} ,
-					{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.hostMiddlewareList,"name");}} ,
-					{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.hostOsList,"name");}} ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return fox.joinLabel(d.infoSystem,"name");}}
+					,{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}}
+					,{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP') }
+					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务IP') }
+					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}}
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
+					,{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}}
+					,{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') }
+					,{ field: 'hostMemory', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('内存') }
+					,{ field: 'hostCpu', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('CPU') }
+					,{ field: 'hostConf', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他配置') }
+					,{ field: 'userOsAdmin', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('系统管理员') }
+					,{ field: 'userDbAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库管理员') }
+					,{ field: 'userDbUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库使用用户') }
+					,{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户') }
+					,{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户') }
+					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') }
+					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}}
+					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }}
+					,{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineTime); }}
+					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') }
+					,{ field: 'hostNotes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.hostDbList,"name");}}
+					,{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.hostMiddlewareList,"name");}}
+					,{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.hostOsList,"name");}}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),

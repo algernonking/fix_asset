@@ -35,7 +35,7 @@ import java.util.Date;
  * 物品档案 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:39:32
+ * @since 2021-08-14 08:53:34
 */
 
 
@@ -52,6 +52,8 @@ public class GoodsServiceImpl extends SuperService<Goods> implements IGoodsServi
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class GoodsServiceImpl extends SuperService<Goods> implements IGoodsServi
 	 * */
 	@Override
 	public Result insert(Goods goods) {
-		return super.insert(goods);
+		Result r=super.insert(goods);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class GoodsServiceImpl extends SuperService<Goods> implements IGoodsServi
 	 * */
 	@Override
 	public Result update(Goods goods , SaveMode mode) {
-		return super.update(goods , mode);
+		Result r=super.update(goods , mode);
+		return r;
 	}
 	
 	/**

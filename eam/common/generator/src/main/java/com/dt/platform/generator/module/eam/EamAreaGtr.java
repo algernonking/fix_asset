@@ -15,6 +15,7 @@ public class EamAreaGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_AREA.AREA_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_AREA.AREA_NOTES).search().fuzzySearch();
 
+        cfg.view().field(EAMTables.EAM_AREA.CREATE_TIME).table().disable(true);
 //
         //文件生成覆盖模式
         cfg.overrides()

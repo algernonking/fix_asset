@@ -35,7 +35,7 @@ import java.util.Date;
  * 仓库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:58
+ * @since 2021-08-14 08:53:46
 */
 
 
@@ -52,6 +52,8 @@ public class WarehouseServiceImpl extends SuperService<Warehouse> implements IWa
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class WarehouseServiceImpl extends SuperService<Warehouse> implements IWa
 	 * */
 	@Override
 	public Result insert(Warehouse warehouse) {
-		return super.insert(warehouse);
+		Result r=super.insert(warehouse);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class WarehouseServiceImpl extends SuperService<Warehouse> implements IWa
 	 * */
 	@Override
 	public Result update(Warehouse warehouse , SaveMode mode) {
-		return super.update(warehouse , mode);
+		Result r=super.update(warehouse , mode);
+		return r;
 	}
 	
 	/**

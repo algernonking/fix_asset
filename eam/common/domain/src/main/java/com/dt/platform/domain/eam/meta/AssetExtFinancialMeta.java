@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:06:05
- * @sign A755984F18E9B5A846FB8031E53AF7CA
+ * @since 2021-08-14 08:53:27
+ * @sign 804C387374F1AFD9F3B9844CD3D102C6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -107,14 +107,14 @@ public class AssetExtFinancialMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> TAXAMOUNT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,TAXAMOUNT_PRICE, java.math.BigDecimal.class, "含税金额", "含税金额", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 资产原值 , 类型: java.math.BigDecimal
+	 * 资产原值(单价) , 类型: java.math.BigDecimal
 	*/
-	public static final String ORIGINAL_PRICE="originalPrice";
+	public static final String ORIGINAL_UNIT_PRICE="originalUnitPrice";
 	
 	/**
-	 * 资产原值 , 类型: java.math.BigDecimal
+	 * 资产原值(单价) , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> ORIGINAL_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ORIGINAL_PRICE, java.math.BigDecimal.class, "资产原值", "资产原值", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> ORIGINAL_UNIT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ORIGINAL_UNIT_PRICE, java.math.BigDecimal.class, "资产原值(单价)", "资产原值(单价)", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 累计折旧 , 类型: java.math.BigDecimal
@@ -269,7 +269,7 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , MANAGEORG_ID , SUPPLIER_ID , PURCHASE_DATE , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , FINANCIAL_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , MANAGEORG_ID , SUPPLIER_ID , PURCHASE_DATE , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , FINANCIAL_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -379,13 +379,13 @@ public class AssetExtFinancialMeta {
 		}
 		
 		/**
-		 * 设置 资产原值
-		 * @param originalPrice 资产原值
+		 * 设置 资产原值(单价)
+		 * @param originalUnitPrice 资产原值(单价)
 		 * @return 当前对象
 		*/
-		public AssetExtFinancial setOriginalPrice(BigDecimal originalPrice) {
-			super.change(ORIGINAL_PRICE,super.getOriginalPrice(),originalPrice);
-			super.setOriginalPrice(originalPrice);
+		public AssetExtFinancial setOriginalUnitPrice(BigDecimal originalUnitPrice) {
+			super.change(ORIGINAL_UNIT_PRICE,super.getOriginalUnitPrice(),originalUnitPrice);
+			super.setOriginalUnitPrice(originalUnitPrice);
 			return this;
 		}
 		

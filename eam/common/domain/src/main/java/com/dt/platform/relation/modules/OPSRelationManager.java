@@ -2,9 +2,11 @@ package com.dt.platform.relation.modules;
 
 
 import com.dt.platform.constants.db.EAMTables;
+
+
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.dt.platform.domain.ops.meta.HostMeta;
-import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
+import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 
 public class OPSRelationManager extends RelationManager {
@@ -28,8 +30,8 @@ public class OPSRelationManager extends RelationManager {
     private void setupOpsServiceDetail() {
 
         //关联服务类型
-        this.property(ServiceDetailMeta.OPS_SERVICE_PROP)
-                .using(EAMTables.OPS_SERVICE_DETAIL.SERVICE_ID).join(EAMTables.OPS_SERVICE.ID);
+        this.property(ServiceInfoMeta.SERVICE_CATEGORY_PROP)
+                .using(EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID).join(EAMTables.OPS_SERVICE_CATEGORY.ID);
 
     }
 
@@ -39,7 +41,7 @@ public class OPSRelationManager extends RelationManager {
                 .using(EAMTables.OPS_DB_INSTANCE.HOST_ID).join(EAMTables.OPS_HOST.ID);
 
         this.property(DbInstanceMeta.DATABASE_PROP)
-                .using(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID);
+                .using(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).join(EAMTables.OPS_SERVICE_INFO.ID);
 
     }
     private void setupOpsHost() {
@@ -47,7 +49,7 @@ public class OPSRelationManager extends RelationManager {
         //数据库类别
         this.property(HostMeta.HOST_DB_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID)
-                .using(EAMTables.OPS_HOST_DB.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID)
+                .using(EAMTables.OPS_HOST_DB.SERVICE_INFO_ID).join(EAMTables.OPS_SERVICE_INFO.ID)
         .after((host,dbs)->{
             return dbs;
         });
@@ -55,12 +57,14 @@ public class OPSRelationManager extends RelationManager {
         //中间件列表
         this.property(HostMeta.HOST_MIDDLEWARE_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_MID.HOST_ID)
-                .using(EAMTables.OPS_HOST_MID.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID);
+                .using(EAMTables.OPS_HOST_MID.SERVICE_INFO_ID).join(EAMTables.OPS_SERVICE_INFO.ID);
 
         //操作系统列表
         this.property(HostMeta.HOST_OS_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_OS.HOST_ID)
-                .using(EAMTables.OPS_HOST_OS.SERVICE_DETAIL_ID).join(EAMTables.OPS_SERVICE_DETAIL.ID);
+                .using(EAMTables.OPS_HOST_OS.SERVICE_INFO_ID).join(EAMTables.OPS_SERVICE_INFO.ID);
+
+
 
         //所在位置
         this.property(HostMeta.POSITION_PROP)

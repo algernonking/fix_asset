@@ -36,7 +36,7 @@ import com.dt.platform.domain.ops.meta.HostMeta;
 import java.math.BigDecimal;
 import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
-import com.dt.platform.domain.ops.ServiceDetail;
+import com.dt.platform.domain.ops.ServiceInfo;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:28
+ * @since 2021-08-14 14:29:45
 */
 
 @Api(tags = "主机")

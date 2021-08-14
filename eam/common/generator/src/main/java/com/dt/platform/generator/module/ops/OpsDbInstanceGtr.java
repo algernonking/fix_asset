@@ -2,17 +2,17 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
-import com.dt.platform.domain.ops.DbInstance;
+
 import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.HostPosition;
-import com.dt.platform.domain.ops.ServiceDetail;
+
+import com.dt.platform.domain.ops.ServiceInfo;
+
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.dt.platform.domain.ops.meta.HostMeta;
-import com.dt.platform.domain.ops.meta.ServiceDetailMeta;
-import com.dt.platform.ops.page.DbInstancePageController;
-import com.dt.platform.proxy.ops.DbInstanceServiceProxy;
+import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.proxy.ops.HostServiceProxy;
-import com.dt.platform.proxy.ops.ServiceDetailServiceProxy;
+import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsDbInstanceGtr extends BaseCodeGenerator{
@@ -26,10 +26,12 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
         cfg.getPoClassFile().addSimpleProperty(Host.class,"host","所在位置","所在位置");
-        cfg.getPoClassFile().addSimpleProperty(ServiceDetail.class,"database","所在位置","所在位置");
+        cfg.getPoClassFile().addSimpleProperty(ServiceInfo.class,"database","数据库","数据库");
 
 
-         cfg.view().field(EAMTables.OPS_DB_INSTANCE.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.ID).table().disable(true);
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.CREATE_TIME).table().disable(true);
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.LABELS).table().hidden(true);
 
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).search().fuzzySearch();
@@ -53,8 +55,8 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).basic().label("数据库")
-                .form().selectBox().queryApi(ServiceDetailServiceProxy.QUERY_LIST)
-                .valueField(ServiceDetailMeta.ID).textField(ServiceDetailMeta.NAME)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
+                .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false).muliti(false).fillBy(DbInstanceMeta.DATABASE);
 
 
@@ -76,6 +78,9 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                 .search();
 
 
+
+
+
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null ,
                 new Object[] {
@@ -94,6 +99,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
                 }
         );
+
 
         //文件生成覆盖模式
         cfg.overrides()

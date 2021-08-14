@@ -35,7 +35,7 @@ import java.util.Date;
  * 折旧策略 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:52:50
+ * @since 2021-08-14 08:53:41
 */
 
 
@@ -52,6 +52,8 @@ public class ResidualStrategyServiceImpl extends SuperService<ResidualStrategy> 
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class ResidualStrategyServiceImpl extends SuperService<ResidualStrategy> 
 	 * */
 	@Override
 	public Result insert(ResidualStrategy residualStrategy) {
-		return super.insert(residualStrategy);
+		Result r=super.insert(residualStrategy);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class ResidualStrategyServiceImpl extends SuperService<ResidualStrategy> 
 	 * */
 	@Override
 	public Result update(ResidualStrategy residualStrategy , SaveMode mode) {
-		return super.update(residualStrategy , mode);
+		Result r=super.update(residualStrategy , mode);
+		return r;
 	}
 	
 	/**

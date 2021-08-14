@@ -14,8 +14,25 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
 
-
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ARCH_METHOD).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DB_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OS_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.APP_INFO).table().hidden(true);
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).table().hidden(true);
+
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS).basic().label("状态")
                 .form().validate().required()

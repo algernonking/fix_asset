@@ -35,7 +35,7 @@ import java.util.Date;
  * 机柜管理 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:12:19
+ * @since 2021-08-14 08:53:22
 */
 
 
@@ -52,6 +52,8 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * */
 	@Override
 	public Result insert(Rack rack) {
-		return super.insert(rack);
+		Result r=super.insert(rack);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class RackServiceImpl extends SuperService<Rack> implements IRackService 
 	 * */
 	@Override
 	public Result update(Rack rack , SaveMode mode) {
-		return super.update(rack , mode);
+		Result r=super.update(rack , mode);
+		return r;
 	}
 	
 	/**

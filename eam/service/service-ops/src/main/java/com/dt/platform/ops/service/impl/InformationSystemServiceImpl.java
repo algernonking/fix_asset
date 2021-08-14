@@ -35,7 +35,7 @@ import java.util.Date;
  * 信息系统 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:29:19
+ * @since 2021-08-14 14:29:25
 */
 
 
@@ -67,7 +67,8 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 	 * */
 	@Override
 	public Result insert(InformationSystem informationSystem) {
-		return super.insert(informationSystem);
+		Result r=super.insert(informationSystem);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 	 * */
 	@Override
 	public Result update(InformationSystem informationSystem , SaveMode mode) {
-		return super.update(informationSystem , mode);
+		Result r=super.update(informationSystem , mode);
+		return r;
 	}
 	
 	/**

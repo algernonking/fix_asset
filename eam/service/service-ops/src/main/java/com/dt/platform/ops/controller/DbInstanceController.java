@@ -33,8 +33,9 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
+import java.math.BigDecimal;
 import com.dt.platform.domain.ops.Host;
-import com.dt.platform.domain.ops.ServiceDetail;
+import com.dt.platform.domain.ops.ServiceInfo;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 数据库实例 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:10
+ * @since 2021-08-14 14:29:33
 */
 
 @Api(tags = "数据库实例")
@@ -67,18 +68,18 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "添加数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.HOST_ID , value = "主机编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.DATABASE_ID , value = "数据库编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STRATEGY , value = "备份策略" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_DATAKEEP , value = "备份保留时长" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TIME , value = "上次备份" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -97,7 +98,7 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "删除数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464")
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = DbInstanceVOMeta.ID)
@@ -131,18 +132,18 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "更新数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.HOST_ID , value = "主机编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.DATABASE_ID , value = "数据库编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STRATEGY , value = "备份策略" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_DATAKEEP , value = "备份保留时长" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TIME , value = "上次备份" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -161,18 +162,18 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "保存数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.HOST_ID , value = "主机编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.DATABASE_ID , value = "数据库编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STRATEGY , value = "备份策略" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_DATAKEEP , value = "备份保留时长" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TIME , value = "上次备份" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -234,18 +235,18 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "查询数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.HOST_ID , value = "主机编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.DATABASE_ID , value = "数据库编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STRATEGY , value = "备份策略" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_DATAKEEP , value = "备份保留时长" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TIME , value = "上次备份" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -265,18 +266,18 @@ public class DbInstanceController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询数据库实例")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478623474294718464"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.HOST_ID , value = "主机编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.DATABASE_ID , value = "数据库编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.NAME , value = "实例名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.LOG_METHOD , value = "日志模式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STRATEGY , value = "备份策略" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TYPE , value = "备份类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_DATAKEEP , value = "备份保留时长" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_STATUS , value = "备份状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_TIME , value = "上次备份" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = DbInstanceVOMeta.BACKUP_SIZE , value = "备份大小" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

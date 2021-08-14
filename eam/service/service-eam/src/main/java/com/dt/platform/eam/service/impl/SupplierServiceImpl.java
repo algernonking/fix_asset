@@ -35,7 +35,7 @@ import java.util.Date;
  * 供应商 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:57
+ * @since 2021-08-14 08:53:43
 */
 
 
@@ -52,6 +52,8 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
+
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -65,7 +67,8 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	 * */
 	@Override
 	public Result insert(Supplier supplier) {
-		return super.insert(supplier);
+		Result r=super.insert(supplier);
+		return r;
 	}
 	
 	/**
@@ -132,7 +135,8 @@ public class SupplierServiceImpl extends SuperService<Supplier> implements ISupp
 	 * */
 	@Override
 	public Result update(Supplier supplier , SaveMode mode) {
-		return super.update(supplier , mode);
+		Result r=super.update(supplier , mode);
+		return r;
 	}
 	
 	/**

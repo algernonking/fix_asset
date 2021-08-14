@@ -3,15 +3,16 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.DbInstance;
 import java.util.Date;
+import java.math.BigDecimal;
 import com.dt.platform.domain.ops.Host;
-import com.dt.platform.domain.ops.ServiceDetail;
+import com.dt.platform.domain.ops.ServiceInfo;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:10
- * @sign C3D14D5A8B25381E0406CD422B62D917
+ * @since 2021-08-14 14:29:33
+ * @sign 52C1823AA35CA3E67CCEE12E395AEDC4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -128,14 +129,14 @@ public class DbInstanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,java.util.Date> BACKUP_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,BACKUP_TIME, java.util.Date.class, "上次备份", "上次备份", java.util.Date.class, null);
 	
 	/**
-	 * 备份大小 , 类型: java.util.Date
+	 * 备份大小 , 类型: java.math.BigDecimal
 	*/
 	public static final String BACKUP_SIZE="backupSize";
 	
 	/**
-	 * 备份大小 , 类型: java.util.Date
+	 * 备份大小 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,java.util.Date> BACKUP_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,BACKUP_SIZE, java.util.Date.class, "备份大小", "备份大小", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,java.math.BigDecimal> BACKUP_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,BACKUP_SIZE, java.math.BigDecimal.class, "备份大小", "备份大小", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 标签 , 类型: java.lang.String
@@ -248,14 +249,14 @@ public class DbInstanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,com.dt.platform.domain.ops.Host> HOST_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,HOST, com.dt.platform.domain.ops.Host.class, "所在位置", "所在位置", com.dt.platform.domain.ops.Host.class, null);
 	
 	/**
-	 * 所在位置 , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 数据库 , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
 	public static final String DATABASE="database";
 	
 	/**
-	 * 所在位置 , 类型: com.dt.platform.domain.ops.ServiceDetail
+	 * 数据库 , 类型: com.dt.platform.domain.ops.ServiceInfo
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,com.dt.platform.domain.ops.ServiceDetail> DATABASE_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,DATABASE, com.dt.platform.domain.ops.ServiceDetail.class, "所在位置", "所在位置", com.dt.platform.domain.ops.ServiceDetail.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,com.dt.platform.domain.ops.ServiceInfo> DATABASE_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,DATABASE, com.dt.platform.domain.ops.ServiceInfo.class, "数据库", "数据库", com.dt.platform.domain.ops.ServiceInfo.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -396,7 +397,7 @@ public class DbInstanceMeta {
 		 * @param backupSize 备份大小
 		 * @return 当前对象
 		*/
-		public DbInstance setBackupSize(Date backupSize) {
+		public DbInstance setBackupSize(BigDecimal backupSize) {
 			super.change(BACKUP_SIZE,super.getBackupSize(),backupSize);
 			super.setBackupSize(backupSize);
 			return this;
@@ -524,11 +525,11 @@ public class DbInstanceMeta {
 		}
 		
 		/**
-		 * 设置 所在位置
-		 * @param database 所在位置
+		 * 设置 数据库
+		 * @param database 数据库
 		 * @return 当前对象
 		*/
-		public DbInstance setDatabase(ServiceDetail database) {
+		public DbInstance setDatabase(ServiceInfo database) {
 			super.change(DATABASE,super.getDatabase(),database);
 			super.setDatabase(database);
 			return this;

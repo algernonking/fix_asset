@@ -17,7 +17,9 @@ import com.dt.platform.framework.PlatformMeta;
 		PlatformMeta.SERVICE_HRM_PACKAGE,
 		PlatformMeta.DATACENTER_PACKAGE,
 		PlatformMeta.OPS_PACKAGE,
-		PlatformMeta.COMMON_PACKAGE
+		PlatformMeta.COMMON_PACKAGE,
+		PlatformMeta.KNOWLEDGEBASE_PACKAGE
+
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {

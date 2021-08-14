@@ -1,7 +1,7 @@
 /**
- * 服务类型 列表页 JS 脚本
+ * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-30 22:28:02
+ * @since 2021-08-14 13:16:28
  */
 
 
@@ -36,50 +36,61 @@ function ListPage() {
       * 渲染表格
       */
     function renderTable() {
-     
-		fox.renderTable({
-			elem: '#data-table',
-            url: moduleURL +'/query-paged-list',
-		 	height: 'full-78',
-		 	limit: 50,
-			cols: [[
-				{  fixed: 'left',type: 'numbers' },
-			 	{  fixed: 'left',type:'checkbox' },
-                { field: 'id', align:"left", hide:true, sort: true, title: fox.translate('主键')} ,
-                { field: 'typeId', align:"left", hide:false, sort: true, title: fox.translate('服务类型')} ,
-                { field: 'serviceName', align:"left", hide:false, sort: true, title: fox.translate('名称')} ,
-                { field: 'serviceNotes', align:"left", hide:false, sort: true, title: fox.translate('备注')} ,
-				{ field: 'createTime', align:"right", hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }} ,
-                { field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
-            ]]
-	 		,footer : {
-				exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
-				importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
-					params : {} ,
-				 	callback : function(r) {
-						if(r.success) {
-							layer.msg(fox.translate('数据导入成功')+"!");
-						} else {
-							layer.msg(fox.translate('数据导入失败')+"!");
+		$(window).resize(function() {
+			fox.adjustSearchElement();
+		});
+		fox.adjustSearchElement();
+		//
+		function renderTableInternal() {
+			var h=$(".search-bar").height();
+			fox.renderTable({
+				elem: '#data-table',
+				toolbar: '#toolbarTemplate',
+				defaultToolbar: ['filter', 'print'],
+				url: moduleURL +'/query-paged-list',
+				height: 'full-'+(h+28),
+				limit: 50,
+				cols: [[
+					{ fixed: 'left',type: 'numbers' },
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务类型'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}}
+					,{ field: 'serviceName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'serviceNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+				]],
+				footer : {
+					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
+					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
+						params : {} ,
+						callback : function(r) {
+							if(r.success) {
+								layer.msg(fox.translate('数据导入成功')+"!");
+							} else {
+								layer.msg(fox.translate('数据导入失败')+"!");
+							}
 						}
-					}
-			 	}:false
-		 	}
-        });
-        //绑定排序事件
-        table.on('sort(data-table)', function(obj){
-		  refreshTableData(obj.field,obj.type);
-        });
+					}:false
+				}
+			});
+			//绑定排序事件
+			table.on('sort(data-table)', function(obj){
+			  refreshTableData(obj.field,obj.type);
+			});
+		}
+		setTimeout(renderTableInternal,1);
     };
-     
+
 	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.typeId={ value: $("#typeId").val() };
-		value.serviceName={ value: $("#serviceName").val() ,fuzzy: true };
-		value.serviceNotes={ value: $("#serviceNotes").val() };
+		value.type={ value: xmSelect.get("#type",true).getValue("value")};
+		value.serviceName={ value: $("#serviceName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.serviceNotes={ value: $("#serviceNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -106,6 +117,26 @@ function ListPage() {
 	}
 
 	function initSearchFields() {
+
+		fox.switchSearchRow();
+
+		//渲染 type 搜索框
+		fox.renderSelectBox({
+			el: "type",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		fox.renderSearchInputs();
 	}
 	
 	/**
@@ -122,30 +153,61 @@ function ListPage() {
         $('#search-button').click(function () {
            refreshTableData();
         });
+
+		// 搜索按钮点击事件
+		$('#search-button-advance').click(function () {
+			fox.switchSearchRow(function (ex){
+				if(ex=="1") {
+					$('#search-button-advance span').text("关闭");
+				} else {
+					$('#search-button-advance span').text("更多");
+				}
+			});
+		});
 	}
 	
 	/**
 	 * 绑定按钮事件
 	  */
 	function bindButtonEvent() {
-	
+
+		//头工具栏事件
+		table.on('toolbar(data-table)', function(obj){
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch(obj.event){
+				case 'create':
+					openCreateFrom();
+					break;
+				case 'batch-del':
+					batchDelete();
+					break;
+				case 'other':
+					break;
+					//自定义头工具栏右侧图标 - 提示
+				case 'LAYTABLE_TIPS':
+					layer.alert('这是工具栏右侧自定义的一个图标按钮');
+					break;
+			};
+		});
+
+
 		//添加按钮点击事件
-        $('#add-button').click(function () {
+        function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
             showEditForm(data);
-        });
+        };
 		
         //批量删除按钮点击事件
-        $('#delete-button').click(function () {
+        function batchDelete() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('服务类型')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('服务')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('服务类型')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('服务')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -158,7 +220,7 @@ function ListPage() {
                     }
                 });
 			});
-        });
+        }
 	}
      
     /**
@@ -185,7 +247,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('服务类型')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('服务')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -214,10 +276,10 @@ function ListPage() {
 		var area=admin.getTempData('ops-service-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('服务类型')) : (fox.translate('添加')+fox.translate('服务类型'));
-		admin.popupCenter({
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('服务')) : (fox.translate('添加')+fox.translate('服务'));
+		var index=admin.popupCenter({
 			title: title,
-			resize: true,
+			resize: false,
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
@@ -226,6 +288,7 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
+		admin.putTempData('ops-service-form-data-popup-index', index);
 	};
 
 };

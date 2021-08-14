@@ -1,14 +1,16 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 15:39:44
+ * @since 2021-08-14 08:53:34
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-goods";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -147,6 +149,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-goods-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -166,9 +169,9 @@ function FormPage() {
 
 
 
-			//设置  资产分类 设置下拉框勾选
+			//设置  分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.category);
-			//设置  生产厂商 设置下拉框勾选
+			//设置  厂商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#manufacturerId",formData.manufacturer);
 			//设置  品牌 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#brandId",formData.brand);
@@ -188,6 +191,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	
@@ -206,12 +217,12 @@ function FormPage() {
 
 
 
-			//获取 资产分类 下拉框的值
+			//获取 分类 下拉框的值
 			data.field["categoryId"]=xmSelect.get("#categoryId",true).getValue("value");
 			if(data.field["categoryId"] && data.field["categoryId"].length>0) {
 				data.field["categoryId"]=data.field["categoryId"][0];
 			}
-			//获取 生产厂商 下拉框的值
+			//获取 厂商 下拉框的值
 			data.field["manufacturerId"]=xmSelect.get("#manufacturerId",true).getValue("value");
 			if(data.field["manufacturerId"] && data.field["manufacturerId"].length>0) {
 				data.field["manufacturerId"]=data.field["manufacturerId"][0];
@@ -232,7 +243,8 @@ function FormPage() {
 			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
-	                admin.finishPopupCenter();
+					var index=admin.getTempData('eam-goods-form-data-popup-index');
+	                admin.finishPopupCenter(index);
 	            } else {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }

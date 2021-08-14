@@ -1,14 +1,16 @@
 /**
  * 服务明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:31
+ * @since 2021-08-14 08:54:05
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-ops/ops-service-detail";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -86,6 +88,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-service-detail-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -117,6 +120,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	

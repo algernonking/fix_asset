@@ -4,9 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
-import com.dt.platform.domain.ops.HostPosition;
-import com.dt.platform.ops.page.HostPositionPageController;
-import com.dt.platform.proxy.ops.HostPositionServiceProxy;
+
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostPositionGtr extends BaseCodeGenerator{

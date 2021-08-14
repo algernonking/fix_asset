@@ -1,14 +1,16 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-11 14:38:43
+ * @since 2021-08-14 08:53:18
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-datacenter/dc-area";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -69,6 +71,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('dc-area-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -98,6 +101,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	
@@ -127,7 +138,8 @@ function FormPage() {
 			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
-	                admin.finishPopupCenter();
+					var index=admin.getTempData('dc-area-form-data-popup-index');
+	                admin.finishPopupCenter(index);
 	            } else {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:20
- * @sign 4407C412592DD98ED9CFC2D197E33B7E
+ * @since 2021-08-14 14:29:36
+ * @sign B373743EC06CEF8070570695FD88E4AB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,7 +45,7 @@ public class HostOs extends Entity {
 	 * 服务内容：服务内容
 	*/
 	@ApiModelProperty(required = false,value="服务内容" , notes = "服务内容")
-	private String serviceDetailId;
+	private String serviceInfoId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -138,17 +138,17 @@ public class HostOs extends Entity {
 	 * 服务内容
 	 * @return 服务内容
 	*/
-	public String getServiceDetailId() {
-		return serviceDetailId;
+	public String getServiceInfoId() {
+		return serviceInfoId;
 	}
 	
 	/**
 	 * 设置 服务内容
-	 * @param serviceDetailId 服务内容
+	 * @param serviceInfoId 服务内容
 	 * @return 当前对象
 	*/
-	public HostOs setServiceDetailId(String serviceDetailId) {
-		this.serviceDetailId=serviceDetailId;
+	public HostOs setServiceInfoId(String serviceInfoId) {
+		this.serviceInfoId=serviceInfoId;
 		return this;
 	}
 	

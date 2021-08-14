@@ -35,7 +35,7 @@ import java.util.Date;
  * 数据库实例 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 21:59:10
+ * @since 2021-08-14 14:29:33
 */
 
 
@@ -67,7 +67,8 @@ public class DbInstanceServiceImpl extends SuperService<DbInstance> implements I
 	 * */
 	@Override
 	public Result insert(DbInstance dbInstance) {
-		return super.insert(dbInstance);
+		Result r=super.insert(dbInstance);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class DbInstanceServiceImpl extends SuperService<DbInstance> implements I
 	 * */
 	@Override
 	public Result update(DbInstance dbInstance , SaveMode mode) {
-		return super.update(dbInstance , mode);
+		Result r=super.update(dbInstance , mode);
+		return r;
 	}
 	
 	/**

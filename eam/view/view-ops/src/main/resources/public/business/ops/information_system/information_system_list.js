@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:29:23
+ * @since 2021-08-14 14:29:30
  */
 
 
@@ -52,36 +52,36 @@ function ListPage() {
 				limit: 50,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' },
-					{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') } ,
-					{ field: 'pid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('父节点') } ,
-					{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') } ,
-					{ field: 'profile', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('介绍') } ,
-					{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getDictText(SELECT_STATUS_DATA,d.status);}} ,
-					{ field: 'opsMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运维模式'), templet:function (d){ return fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod);}} ,
-					{ field: 'devMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('开发模式'), templet:function (d){ return fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod);}} ,
-					{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') } ,
-					{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') } ,
-					{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属组织') } ,
-					{ field: 'lastdrillDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('演练时间') } ,
-					{ field: 'onlineDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('上线时间') } ,
-					{ field: 'offlineDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('下线时间') } ,
-					{ field: 'osInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作系统') } ,
-					{ field: 'dbInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库') } ,
-					{ field: 'appInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用') } ,
-					{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('信息分级'), templet:function (d){ return fox.getDictText(SELECT_GRADE_DATA,d.grade);}} ,
-					{ field: 'rto', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RTO') } ,
-					{ field: 'rpo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RPO') } ,
-					{ field: 'hardwareInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('硬件信息') } ,
-					{ field: 'backupInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份信息') } ,
-					{ field: 'sameplaceBacupInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('本地备份') } ,
-					{ field: 'diffplaceBackupInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('异地备份') } ,
-					{ field: 'archMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归档模式') } ,
-					{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') } ,
-					{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') } ,
-					{ field: 'createTime', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('创建时间') } ,
-					{ field: 'row-space', align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true},
-					{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					{ fixed: 'left',type:'checkbox' }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'pid', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('父节点') }
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'profile', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('介绍') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getDictText(SELECT_STATUS_DATA,d.status);}}
+					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet:function (d){ return fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod);}}
+					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod);}}
+					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') }
+					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') }
+					,{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属组织') }
+					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return fox.dateFormat(d.lastdrillDate); }}
+					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineDate); }}
+					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineDate); }}
+					,{ field: 'osInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('操作系统') }
+					,{ field: 'dbInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('数据库') }
+					,{ field: 'appInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('应用') }
+					,{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统分级'), templet:function (d){ return fox.getDictText(SELECT_GRADE_DATA,d.grade);}}
+					,{ field: 'rto', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RTO') }
+					,{ field: 'rpo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RPO') }
+					,{ field: 'hardwareInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('硬件信息') }
+					,{ field: 'backupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备份信息') }
+					,{ field: 'sameplaceBacupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('本地备份') }
+					,{ field: 'diffplaceBackupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('异地备份') }
+					,{ field: 'archMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('归档模式') }
+					,{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),

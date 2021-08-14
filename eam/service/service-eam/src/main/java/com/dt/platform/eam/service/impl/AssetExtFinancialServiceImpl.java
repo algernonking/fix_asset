@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产财务属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 11:06:06
+ * @since 2021-08-14 08:53:27
 */
 
 
@@ -67,7 +67,8 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	 * */
 	@Override
 	public Result insert(AssetExtFinancial assetExtFinancial) {
-		return super.insert(assetExtFinancial);
+		Result r=super.insert(assetExtFinancial);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	 * */
 	@Override
 	public Result update(AssetExtFinancial assetExtFinancial , SaveMode mode) {
-		return super.update(assetExtFinancial , mode);
+		Result r=super.update(assetExtFinancial , mode);
+		return r;
 	}
 	
 	/**

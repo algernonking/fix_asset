@@ -12,7 +12,7 @@
 
     <artifactId>view-common</artifactId>
     <name>view-common</name>
-    <description>Data Center View</description>
+    <description>Common View</description>
 
     <dependencies>
         <dependency>

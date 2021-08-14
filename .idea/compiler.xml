@@ -6,21 +6,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="view-hrm" />
-        <module name="view-ops" />
-        <module name="view-console" />
-        <module name="service-hrm" />
-        <module name="wrapper-all" />
-        <module name="service-eam" />
-        <module name="service-common" />
         <module name="view-common" />
-        <module name="view-eam" />
-        <module name="service-datacenter" />
-        <module name="proxy" />
-        <module name="framework" />
         <module name="domain" />
-        <module name="generator" />
+        <module name="service-eam" />
+        <module name="view-eam" />
+        <module name="view-knowledgebase" />
+        <module name="wrapper-all" />
+        <module name="service-datacenter" />
+        <module name="framework" />
+        <module name="service-knowledgebase" />
+        <module name="service-hrm" />
         <module name="view-datacenter" />
+        <module name="generator" />
+        <module name="proxy" />
+        <module name="view-console" />
+        <module name="view-ops" />
+        <module name="view-hrm" />
+        <module name="service-common" />
         <module name="service-ops" />
       </profile>
     </annotationProcessing>
@@ -34,12 +36,14 @@
       <module name="service-datacenter" target="1.8" />
       <module name="service-eam" target="1.8" />
       <module name="service-hrm" target="1.8" />
+      <module name="service-knowledgebase" target="1.8" />
       <module name="service-ops" target="1.8" />
       <module name="view-common" target="1.8" />
       <module name="view-console" target="1.8" />
       <module name="view-datacenter" target="1.8" />
       <module name="view-eam" target="1.8" />
       <module name="view-hrm" target="1.8" />
+      <module name="view-knowledgebase" target="1.8" />
       <module name="view-ops" target="1.8" />
       <module name="wrapper-all" target="1.8" />
     </bytecodeTargetLevel>
@@ -54,12 +58,14 @@
       <module name="service-datacenter" options="-parameters" />
       <module name="service-eam" options="-parameters" />
       <module name="service-hrm" options="-parameters" />
+      <module name="service-knowledgebase" options="-parameters" />
       <module name="service-ops" options="-parameters" />
       <module name="view-common" options="-parameters" />
       <module name="view-console" options="-parameters" />
       <module name="view-datacenter" options="-parameters" />
       <module name="view-eam" options="-parameters" />
       <module name="view-hrm" options="-parameters" />
+      <module name="view-knowledgebase" options="-parameters" />
       <module name="view-ops" options="-parameters" />
       <module name="wrapper-all" options="-parameters" />
     </option>

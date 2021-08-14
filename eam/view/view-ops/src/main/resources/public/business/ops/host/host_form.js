@@ -1,14 +1,16 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 22:20:33
+ * @since 2021-08-14 14:29:45
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-ops/ops-host";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -150,10 +152,12 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#offlineTime',
+			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#onlineTime',
+			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 		//渲染 hostDbIds 下拉字段
@@ -220,6 +224,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-host-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -265,6 +270,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	
