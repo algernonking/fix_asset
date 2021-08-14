@@ -8,10 +8,10 @@ import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
 
-    public static final String BASIC_DATA_MENU_ID="471620638545543168";
-    public static final String BASIC_SETTING_MENU_ID="471986431431016449";
+    public static final String BASIC_MGR_MENU_ID="472037131183718400";
+    public static final String BASIC_SETTING_MENU_ID="472811438801420289";
 
-    public static final String BASIC_ASSET_MGR_MENU_ID="471985490283724800";
+
 
     //
     private String appId="service-knowledgebase";

@@ -1,13 +1,15 @@
 package com.dt.platform.generator.module.kn;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.knowledgebase.page.ContentPageController;
+import com.dt.platform.proxy.knowledgebase.ContentServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class KnContentGtr extends BaseCodeGenerator {
 
 
     public KnContentGtr() {
-        super(EAMTables.KN_CONTENT.$TABLE,BASIC_DATA_MENU_ID);
+        super(EAMTables.KN_CONTENT.$TABLE,BASIC_MGR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -33,12 +35,12 @@ public class KnContentGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         KnContentGtr g=new KnContentGtr();
         //生成代码
-        g.generateCode();
+      //  g.generateCode();
 
         //移除之前生成的菜单，视情况执行
 //        g.removeByBatchId("471622036347682816");
         //生成菜单
-//        g.generateMenu(BrandServiceProxy.class, BrandPageController.class);
+  //      g.generateMenu(ContentServiceProxy.class, ContentPageController.class);
     }
 
 }

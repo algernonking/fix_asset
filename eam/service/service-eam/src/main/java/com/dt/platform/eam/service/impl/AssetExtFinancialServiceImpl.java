@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产财务属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 08:53:27
+ * @since 2021-08-14 16:47:20
 */
 
 

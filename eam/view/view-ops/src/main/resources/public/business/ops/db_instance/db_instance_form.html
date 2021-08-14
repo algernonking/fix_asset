@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 14:29:33
+ * @since 2021-08-14 16:47:40
  */
  -->
  <!DOCTYPE html>
@@ -98,6 +98,15 @@
 
 
                     <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份时间')}">备份时间</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="backupTime" id="backupTime" name="backupTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('备份时间') }" type="text" class="layui-input"    lay-verify=""   />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <div id="backupStatus" input-type="select" th:data="${dict.toArray('ops_db_backup_status')}"></div>
@@ -128,15 +137,6 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份方式')}">备份方式</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <div id="backupMethod" input-type="select" th:data="${dict.toArray('ops_db_backup_method')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备份时间')}">备份时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="backupTime" id="backupTime" name="backupTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('备份时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 

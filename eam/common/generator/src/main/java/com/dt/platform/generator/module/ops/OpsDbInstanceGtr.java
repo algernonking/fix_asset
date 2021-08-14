@@ -91,11 +91,11 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_DB_INSTANCE.LABELS,
                         EAMTables.OPS_DB_INSTANCE.NOTES,
                 }, new Object[] {
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
                 }
         );

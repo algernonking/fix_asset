@@ -9,7 +9,7 @@ import com.dt.platform.domain.ops.ServiceCategory;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:01:43
+ * @since 2021-08-14 16:47:51
  * @sign C76E500B932E95AD19FB1FDEFB3062C1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

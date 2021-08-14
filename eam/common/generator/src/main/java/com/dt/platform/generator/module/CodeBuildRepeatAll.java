@@ -11,7 +11,8 @@ public class CodeBuildRepeatAll {
                 "com.dt.platform.generator.module.common.CodeBuildRepeat",
                 "com.dt.platform.generator.module.dc.CodeBuildRepeat",
                 "com.dt.platform.generator.module.eam.CodeBuildRepeat",
-                "com.dt.platform.generator.module.ops.CodeBuildRepeat"
+                "com.dt.platform.generator.module.ops.CodeBuildRepeat",
+                "com.dt.platform.generator.module.kn.CodeBuildRepeat"
         };
         String [] pars={"1"};
         for(int i=0;i<clasnamearr.length;i++){

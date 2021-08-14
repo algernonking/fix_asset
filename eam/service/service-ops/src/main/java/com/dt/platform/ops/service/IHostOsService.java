@@ -22,7 +22,7 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 操作系统 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 14:29:36
+ * @since 2021-08-14 16:47:41
 */
 
 public interface IHostOsService extends ISuperService<HostOs> {

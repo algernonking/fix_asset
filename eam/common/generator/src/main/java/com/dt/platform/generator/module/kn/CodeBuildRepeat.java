@@ -7,18 +7,7 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.kn";
         String[] clasnamearr={
-                "EamAssetExtEquipmentGtr",
-                "EamAssetExtFinancialGtr",
-                "EamAssetExtMaintainerGtr",
-                "BrandGtr",
-                "EamAreaGtr",
-                "EamGoodsGtr",
-                "EamMaintainerGtr",
-                "EamManufacturerGtr",
-                "EamResidualStrategyGtr",
-                "EamSupplierGtr",
-                "EamSafetylevelGtr",
-                "EamWarehouseGtr"
+                "KnGradeGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);
