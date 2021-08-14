@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:31:33
+ * @since 2021-08-14 21:00:47
  */
  -->
  <!DOCTYPE html>
@@ -31,70 +31,51 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 分类 , categoryId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('分类')}" class="search-label">分类</span><span class="search-colon">:</span></div>
-                        <input id="categoryId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('标题')}" class="search-label">标题</span><span class="search-colon">:</span></div>
                         <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 简介 , profile ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('简介')}" class="search-label">简介</span><span class="search-colon">:</span></div>
-                        <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 关键字 , keyWords ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('关键字')}" class="search-label">关键字</span><span class="search-colon">:</span></div>
-                        <input id="keyWords" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('标签')}" class="search-label">标签</span><span class="search-colon">:</span></div>
-                        <input id="label" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 知识内容 , content ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('知识内容')}" class="search-label">知识内容</span><span class="search-colon">:</span></div>
-                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 内容类型 , ontentType ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('内容类型')}" class="search-label">内容类型</span><span class="search-colon">:</span></div>
-                        <input id="ontentType" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- review_count , reviewCount ,typeName=number_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('review_count')}" class="search-label">review_count</span><span class="search-colon">:</span></div>
-                            <input id="reviewCount" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
-                    </div>
-                    <!-- 附件 , attach ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('附件')}" class="search-label">附件</span><span class="search-colon">:</span></div>
-                        <input id="attach" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 显示 , display ,typeName=number_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('显示')}" class="search-label">显示</span><span class="search-colon">:</span></div>
-                            <input id="display" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
-                    </div>
-                    <!-- 分享 , shareUrl ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('分享')}" class="search-label">分享</span><span class="search-colon">:</span></div>
-                        <input id="shareUrl" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 等级 , gradeId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 等级 , gradeId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('等级')}" class="search-label">等级</span><span class="search-colon">:</span></div>
-                        <input id="gradeId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div id="gradeId" th:data="${'/service-knowledgebase/kn-grade/query-list'}" style="width:140px"></div>
                     </div>
+                    <!-- 是否显示 , display ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('是否显示')}" class="search-label">是否显示</span><span class="search-colon">:</span></div>
+
+
+                        <div id="display" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" style="width:140px"></div>
+
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 内容类型 , contentType ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('内容类型')}" class="search-label">内容类型</span><span class="search-colon">:</span></div>
+
+
+                        <div id="contentType" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" style="width:140px"></div>
+
+                    </div>
+                    <!-- 简介 , profile ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('简介')}" class="search-label">简介</span><span class="search-colon">:</span></div>
+                        <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -105,6 +86,7 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
@@ -137,6 +119,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var RADIO_CONTENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}]];
+    var RADIO_DISPLAY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}]];
     var AUTH_PREFIX="kn_content";
 </script>
 

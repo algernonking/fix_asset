@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:31:34
+ * @since 2021-08-14 21:00:49
  */
 
 
@@ -54,19 +54,14 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类') }
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return fox.joinLabel(d.grade,"hierarchyName");}}
 					,{ field: 'title', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标题') }
-					,{ field: 'profile', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('简介') }
-					,{ field: 'keyWords', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('关键字') }
-					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('知识内容') }
-					,{ field: 'ontentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型') }
-					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('review_count') }
+					,{ field: 'contentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型'), templet:function (d){ return fox.getEnumText(RADIO_CONTENTTYPE_DATA,d.contentType);}}
+					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') }
 					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') }
-					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('显示') }
-					,{ field: 'shareUrl', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分享') }
-					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级') }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}
+					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet: function (d) { return fox.joinLabel(d.grade,"name");}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -98,18 +93,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.categoryId={ value: $("#categoryId").val()};
+		value.categoryId={ value: xmSelect.get("#categoryId",true).getValue("value"), fillBy:"grade",field:"id" };
 		value.title={ value: $("#title").val()};
 		value.profile={ value: $("#profile").val()};
-		value.keyWords={ value: $("#keyWords").val()};
-		value.label={ value: $("#label").val()};
-		value.content={ value: $("#content").val()};
-		value.ontentType={ value: $("#ontentType").val()};
-		value.reviewCount={ value: $("#reviewCount").val()};
-		value.attach={ value: $("#attach").val()};
-		value.display={ value: $("#display").val()};
-		value.shareUrl={ value: $("#shareUrl").val()};
-		value.gradeId={ value: $("#gradeId").val()};
+		value.contentType={ value: xmSelect.get("#contentType",true).getValue("value")};
+		value.display={ value: xmSelect.get("#display",true).getValue("value")};
+		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), fillBy:"grade",field:"id" };
 		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
@@ -140,6 +129,80 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 categoryId 下拉字段
+		fox.renderSelectBox({
+			el: "categoryId",
+			radio: false,
+			size: "small",
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].hierarchyName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 contentType 搜索框
+		fox.renderSelectBox({
+			el: "contentType",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 display 搜索框
+		fox.renderSelectBox({
+			el: "display",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 gradeId 下拉字段
+		fox.renderSelectBox({
+			el: "gradeId",
+			radio: false,
+			size: "small",
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -285,7 +348,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/knowledgebase/content/content_form.html' + queryString,
 			finish: function () {

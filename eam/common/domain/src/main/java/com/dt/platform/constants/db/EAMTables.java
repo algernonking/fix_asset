@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-14 16:51:23
+ * @since 2021-08-14 20:36:37
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2890,19 +2890,14 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 状态,valid:有效,invalud:无效
-		*/
-		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","valid:有效,invalud:无效",false,false,true);
-		
-		/**
 		 * 名称
 		*/
 		public static final DBField CATEGORY_NAME = new DBField(DBDataType.STRING , "category_name","categoryName","名称","名称",false,false,true);
 		
 		/**
-		 * 全称
+		 * 具体名称
 		*/
-		public static final DBField CATEGORY_FULLNAME = new DBField(DBDataType.STRING , "category_fullname","categoryFullname","全称","全称",false,false,true);
+		public static final DBField CATEGORY_FULLNAME = new DBField(DBDataType.STRING , "category_fullname","categoryFullname","具体名称","具体名称",false,false,true);
 		
 		/**
 		 * 编码
@@ -2974,7 +2969,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
 		
 		public KN_CATEGORY() {
-			this.init($NAME,"知识分类" , ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"知识分类" , ID , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final KN_CATEGORY $TABLE=new KN_CATEGORY();
 	}
@@ -3027,11 +3022,12 @@ public class EAMTables {
 		/**
 		 * 内容类型
 		*/
-		public static final DBField ONTENT_TYPE = new DBField(DBDataType.STRING , "ontent_type","ontentType","内容类型","内容类型",false,false,true);
+		public static final DBField CONTENT_TYPE = new DBField(DBDataType.STRING , "content_type","contentType","内容类型","内容类型",false,false,true);
 		
 		/**
+		 * 阅读数
 		*/
-		public static final DBField REVIEW_COUNT = new DBField(DBDataType.DECIMAL , "review_count","reviewCount","review_count","review_count",false,false,true);
+		public static final DBField REVIEW_COUNT = new DBField(DBDataType.DECIMAL , "review_count","reviewCount","阅读数","阅读数",false,false,true);
 		
 		/**
 		 * 附件
@@ -3039,14 +3035,14 @@ public class EAMTables {
 		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
 		
 		/**
-		 * 显示
+		 * 是否显示
 		*/
-		public static final DBField DISPLAY = new DBField(DBDataType.INTEGER , "display","display","显示","显示",false,false,true);
+		public static final DBField DISPLAY = new DBField(DBDataType.INTEGER , "display","display","是否显示","是否显示",false,false,true);
 		
 		/**
-		 * 分享
+		 * 链接地址
 		*/
-		public static final DBField SHARE_URL = new DBField(DBDataType.STRING , "share_url","shareUrl","分享","分享",false,false,true);
+		public static final DBField LINK_ADDRESS = new DBField(DBDataType.STRING , "link_address","linkAddress","链接地址","链接地址",false,false,true);
 		
 		/**
 		 * 等级
@@ -3098,7 +3094,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
 		
 		public KN_CONTENT() {
-			this.init($NAME,"知识库内容" , ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , ONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , SHARE_URL , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"知识库内容" , ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final KN_CONTENT $TABLE=new KN_CONTENT();
 	}

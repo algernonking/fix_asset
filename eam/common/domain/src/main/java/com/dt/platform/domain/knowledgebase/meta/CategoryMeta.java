@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:44
- * @sign B34634A08DDF809DE97E01B93D49D808
+ * @since 2021-08-14 20:41:31
+ * @sign D2396E509353555EA64A93B41E373894
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,16 +26,6 @@ public class CategoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Category,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Category.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , valid:有效,invalud:无效 , 类型: java.lang.String
-	*/
-	public static final String STATUS="status";
-	
-	/**
-	 * 状态 , valid:有效,invalud:无效 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Category,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Category.class ,STATUS, java.lang.String.class, "状态", "valid:有效,invalud:无效", java.lang.String.class, null);
-	
-	/**
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_NAME="categoryName";
@@ -46,14 +36,14 @@ public class CategoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Category,java.lang.String> CATEGORY_NAME_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Category.class ,CATEGORY_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * 全称 , 类型: java.lang.String
+	 * 具体名称 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_FULLNAME="categoryFullname";
 	
 	/**
-	 * 全称 , 类型: java.lang.String
+	 * 具体名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Category,java.lang.String> CATEGORY_FULLNAME_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Category.class ,CATEGORY_FULLNAME, java.lang.String.class, "全称", "全称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Category,java.lang.String> CATEGORY_FULLNAME_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Category.class ,CATEGORY_FULLNAME, java.lang.String.class, "具体名称", "具体名称", java.lang.String.class, null);
 	
 	/**
 	 * 编码 , 类型: java.lang.String
@@ -198,7 +188,7 @@ public class CategoryMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -220,17 +210,6 @@ public class CategoryMeta {
 		}
 		
 		/**
-		 * 设置 状态
-		 * @param status 状态
-		 * @return 当前对象
-		*/
-		public Category setStatus(String status) {
-			super.change(STATUS,super.getStatus(),status);
-			super.setStatus(status);
-			return this;
-		}
-		
-		/**
 		 * 设置 名称
 		 * @param categoryName 名称
 		 * @return 当前对象
@@ -242,8 +221,8 @@ public class CategoryMeta {
 		}
 		
 		/**
-		 * 设置 全称
-		 * @param categoryFullname 全称
+		 * 设置 具体名称
+		 * @param categoryFullname 具体名称
 		 * @return 当前对象
 		*/
 		public Category setCategoryFullname(String categoryFullname) {

@@ -1,6 +1,10 @@
 package com.dt.platform.generator.module.kn;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.knowledgebase.Category;
+import com.dt.platform.domain.knowledgebase.Grade;
+import com.dt.platform.domain.ops.HostPosition;
+import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.knowledgebase.page.GradePageController;
 import com.dt.platform.proxy.knowledgebase.GradeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -13,8 +17,6 @@ public class KnGradeGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
-
 
         cfg.view().field(EAMTables.KN_GRADE.ID).basic().hidden(true);
 

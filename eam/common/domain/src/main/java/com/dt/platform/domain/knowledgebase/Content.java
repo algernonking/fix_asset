@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:31:31
- * @sign BF756B41BCCB69BFCB9774A725C23752
+ * @since 2021-08-14 21:00:40
+ * @sign 266296C0D77D4C016E3B3F85323D0F45
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -76,12 +76,12 @@ public class Content extends Entity {
 	 * 内容类型：内容类型
 	*/
 	@ApiModelProperty(required = false,value="内容类型" , notes = "内容类型")
-	private String ontentType;
+	private String contentType;
 	
 	/**
-	 * review_count：review_count
+	 * 阅读数：阅读数
 	*/
-	@ApiModelProperty(required = false,value="review_count" , notes = "review_count")
+	@ApiModelProperty(required = false,value="阅读数" , notes = "阅读数")
 	private BigDecimal reviewCount;
 	
 	/**
@@ -91,16 +91,16 @@ public class Content extends Entity {
 	private String attach;
 	
 	/**
-	 * 显示：显示
+	 * 是否显示：是否显示
 	*/
-	@ApiModelProperty(required = false,value="显示" , notes = "显示")
+	@ApiModelProperty(required = false,value="是否显示" , notes = "是否显示")
 	private Integer display;
 	
 	/**
-	 * 分享：分享
+	 * 链接地址：链接地址
 	*/
-	@ApiModelProperty(required = false,value="分享" , notes = "分享")
-	private String shareUrl;
+	@ApiModelProperty(required = false,value="链接地址" , notes = "链接地址")
+	private String linkAddress;
 	
 	/**
 	 * 等级：等级
@@ -161,6 +161,18 @@ public class Content extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 知识分级：知识分级
+	*/
+	@ApiModelProperty(required = false,value="知识分级" , notes = "知识分级")
+	private Grade grade;
+	
+	/**
+	 * 知识分类：知识分类
+	*/
+	@ApiModelProperty(required = false,value="知识分类" , notes = "知识分类")
+	private Category category;
 	
 	/**
 	 * 获得 主键<br>
@@ -300,32 +312,32 @@ public class Content extends Entity {
 	 * 内容类型
 	 * @return 内容类型
 	*/
-	public String getOntentType() {
-		return ontentType;
+	public String getContentType() {
+		return contentType;
 	}
 	
 	/**
 	 * 设置 内容类型
-	 * @param ontentType 内容类型
+	 * @param contentType 内容类型
 	 * @return 当前对象
 	*/
-	public Content setOntentType(String ontentType) {
-		this.ontentType=ontentType;
+	public Content setContentType(String contentType) {
+		this.contentType=contentType;
 		return this;
 	}
 	
 	/**
-	 * 获得 review_count<br>
-	 * review_count
-	 * @return review_count
+	 * 获得 阅读数<br>
+	 * 阅读数
+	 * @return 阅读数
 	*/
 	public BigDecimal getReviewCount() {
 		return reviewCount;
 	}
 	
 	/**
-	 * 设置 review_count
-	 * @param reviewCount review_count
+	 * 设置 阅读数
+	 * @param reviewCount 阅读数
 	 * @return 当前对象
 	*/
 	public Content setReviewCount(BigDecimal reviewCount) {
@@ -353,17 +365,17 @@ public class Content extends Entity {
 	}
 	
 	/**
-	 * 获得 显示<br>
-	 * 显示
-	 * @return 显示
+	 * 获得 是否显示<br>
+	 * 是否显示
+	 * @return 是否显示
 	*/
 	public Integer getDisplay() {
 		return display;
 	}
 	
 	/**
-	 * 设置 显示
-	 * @param display 显示
+	 * 设置 是否显示
+	 * @param display 是否显示
 	 * @return 当前对象
 	*/
 	public Content setDisplay(Integer display) {
@@ -372,21 +384,21 @@ public class Content extends Entity {
 	}
 	
 	/**
-	 * 获得 分享<br>
-	 * 分享
-	 * @return 分享
+	 * 获得 链接地址<br>
+	 * 链接地址
+	 * @return 链接地址
 	*/
-	public String getShareUrl() {
-		return shareUrl;
+	public String getLinkAddress() {
+		return linkAddress;
 	}
 	
 	/**
-	 * 设置 分享
-	 * @param shareUrl 分享
+	 * 设置 链接地址
+	 * @param linkAddress 链接地址
 	 * @return 当前对象
 	*/
-	public Content setShareUrl(String shareUrl) {
-		this.shareUrl=shareUrl;
+	public Content setLinkAddress(String linkAddress) {
+		this.linkAddress=linkAddress;
 		return this;
 	}
 	
@@ -577,6 +589,44 @@ public class Content extends Entity {
 	*/
 	public Content setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 知识分级<br>
+	 * 知识分级
+	 * @return 知识分级
+	*/
+	public Grade getGrade() {
+		return grade;
+	}
+	
+	/**
+	 * 设置 知识分级
+	 * @param grade 知识分级
+	 * @return 当前对象
+	*/
+	public Content setGrade(Grade grade) {
+		this.grade=grade;
+		return this;
+	}
+	
+	/**
+	 * 获得 知识分类<br>
+	 * 知识分类
+	 * @return 知识分类
+	*/
+	public Category getCategory() {
+		return category;
+	}
+	
+	/**
+	 * 设置 知识分类
+	 * @param category 知识分类
+	 * @return 当前对象
+	*/
+	public Content setCategory(Category category) {
+		this.category=category;
 		return this;
 	}
 

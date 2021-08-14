@@ -4,13 +4,15 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.knowledgebase.Content;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.knowledgebase.Grade;
+import com.dt.platform.domain.knowledgebase.Category;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:31:32
- * @sign BF756B41BCCB69BFCB9774A725C23752
+ * @since 2021-08-14 21:00:40
+ * @sign 266296C0D77D4C016E3B3F85323D0F45
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -89,22 +91,22 @@ public class ContentMeta {
 	/**
 	 * 内容类型 , 类型: java.lang.String
 	*/
-	public static final String ONTENT_TYPE="ontentType";
+	public static final String CONTENT_TYPE="contentType";
 	
 	/**
 	 * 内容类型 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> ONTENT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,ONTENT_TYPE, java.lang.String.class, "内容类型", "内容类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> CONTENT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,CONTENT_TYPE, java.lang.String.class, "内容类型", "内容类型", java.lang.String.class, null);
 	
 	/**
-	 * review_count , 类型: java.math.BigDecimal
+	 * 阅读数 , 类型: java.math.BigDecimal
 	*/
 	public static final String REVIEW_COUNT="reviewCount";
 	
 	/**
-	 * review_count , 类型: java.math.BigDecimal
+	 * 阅读数 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.math.BigDecimal> REVIEW_COUNT_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,REVIEW_COUNT, java.math.BigDecimal.class, "review_count", "review_count", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.math.BigDecimal> REVIEW_COUNT_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,REVIEW_COUNT, java.math.BigDecimal.class, "阅读数", "阅读数", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 附件 , 类型: java.lang.String
@@ -117,24 +119,24 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
 	
 	/**
-	 * 显示 , 类型: java.lang.Integer
+	 * 是否显示 , 类型: java.lang.Integer
 	*/
 	public static final String DISPLAY="display";
 	
 	/**
-	 * 显示 , 类型: java.lang.Integer
+	 * 是否显示 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.Integer> DISPLAY_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,DISPLAY, java.lang.Integer.class, "显示", "显示", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.Integer> DISPLAY_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,DISPLAY, java.lang.Integer.class, "是否显示", "是否显示", java.lang.Integer.class, null);
 	
 	/**
-	 * 分享 , 类型: java.lang.String
+	 * 链接地址 , 类型: java.lang.String
 	*/
-	public static final String SHARE_URL="shareUrl";
+	public static final String LINK_ADDRESS="linkAddress";
 	
 	/**
-	 * 分享 , 类型: java.lang.String
+	 * 链接地址 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> SHARE_URL_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,SHARE_URL, java.lang.String.class, "分享", "分享", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> LINK_ADDRESS_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,LINK_ADDRESS, java.lang.String.class, "链接地址", "链接地址", java.lang.String.class, null);
 	
 	/**
 	 * 等级 , 类型: java.lang.String
@@ -237,9 +239,29 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
+	*/
+	public static final String GRADE="grade";
+	
+	/**
+	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,com.dt.platform.domain.knowledgebase.Grade> GRADE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,GRADE, com.dt.platform.domain.knowledgebase.Grade.class, "知识分级", "知识分级", com.dt.platform.domain.knowledgebase.Grade.class, null);
+	
+	/**
+	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
+	*/
+	public static final String CATEGORY="category";
+	
+	/**
+	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,com.dt.platform.domain.knowledgebase.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,CATEGORY, com.dt.platform.domain.knowledgebase.Category.class, "知识分类", "知识分类", com.dt.platform.domain.knowledgebase.Category.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , ONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , SHARE_URL , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , GRADE , CATEGORY };
 	
 	/**
 	 * 代理类
@@ -328,18 +350,18 @@ public class ContentMeta {
 		
 		/**
 		 * 设置 内容类型
-		 * @param ontentType 内容类型
+		 * @param contentType 内容类型
 		 * @return 当前对象
 		*/
-		public Content setOntentType(String ontentType) {
-			super.change(ONTENT_TYPE,super.getOntentType(),ontentType);
-			super.setOntentType(ontentType);
+		public Content setContentType(String contentType) {
+			super.change(CONTENT_TYPE,super.getContentType(),contentType);
+			super.setContentType(contentType);
 			return this;
 		}
 		
 		/**
-		 * 设置 review_count
-		 * @param reviewCount review_count
+		 * 设置 阅读数
+		 * @param reviewCount 阅读数
 		 * @return 当前对象
 		*/
 		public Content setReviewCount(BigDecimal reviewCount) {
@@ -360,8 +382,8 @@ public class ContentMeta {
 		}
 		
 		/**
-		 * 设置 显示
-		 * @param display 显示
+		 * 设置 是否显示
+		 * @param display 是否显示
 		 * @return 当前对象
 		*/
 		public Content setDisplay(Integer display) {
@@ -371,13 +393,13 @@ public class ContentMeta {
 		}
 		
 		/**
-		 * 设置 分享
-		 * @param shareUrl 分享
+		 * 设置 链接地址
+		 * @param linkAddress 链接地址
 		 * @return 当前对象
 		*/
-		public Content setShareUrl(String shareUrl) {
-			super.change(SHARE_URL,super.getShareUrl(),shareUrl);
-			super.setShareUrl(shareUrl);
+		public Content setLinkAddress(String linkAddress) {
+			super.change(LINK_ADDRESS,super.getLinkAddress(),linkAddress);
+			super.setLinkAddress(linkAddress);
 			return this;
 		}
 		
@@ -488,6 +510,28 @@ public class ContentMeta {
 		public Content setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 知识分级
+		 * @param grade 知识分级
+		 * @return 当前对象
+		*/
+		public Content setGrade(Grade grade) {
+			super.change(GRADE,super.getGrade(),grade);
+			super.setGrade(grade);
+			return this;
+		}
+		
+		/**
+		 * 设置 知识分类
+		 * @param category 知识分类
+		 * @return 当前对象
+		*/
+		public Content setCategory(Category category) {
+			super.change(CATEGORY,super.getCategory(),category);
+			super.setCategory(category);
 			return this;
 		}
 	}

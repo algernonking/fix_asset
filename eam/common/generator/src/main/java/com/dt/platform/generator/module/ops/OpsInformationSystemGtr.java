@@ -59,7 +59,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{EAMTables.OPS_INFORMATION_SYSTEM.NAME,EAMTables.OPS_INFORMATION_SYSTEM.NOTES,EAMTables.OPS_INFORMATION_SYSTEM.LABELS},
-                new Object[]{EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO,EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT}
+                new Object[]{EAMTables.OPS_INFORMATION_SYSTEM.STATUS,EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT}
 
         );
 

@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.knowledgebase.meta.GradeMeta;
+import com.dt.platform.domain.knowledgebase.Category;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 知识分级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:46:17
+ * @since 2021-08-14 19:00:55
 */
 
 @Api(tags = "知识分级")
@@ -66,7 +67,7 @@ public class GradeController extends SuperController {
 	@ApiOperation(value = "添加知识分级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GradeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478981334048440320"),
-		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = GradeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "一级"),
 		@ApiImplicitParam(name = GradeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
@@ -120,7 +121,7 @@ public class GradeController extends SuperController {
 	@ApiOperation(value = "更新知识分级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GradeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478981334048440320"),
-		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = GradeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "一级"),
 		@ApiImplicitParam(name = GradeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
@@ -140,7 +141,7 @@ public class GradeController extends SuperController {
 	@ApiOperation(value = "保存知识分级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GradeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478981334048440320"),
-		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = GradeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "一级"),
 		@ApiImplicitParam(name = GradeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
@@ -199,7 +200,7 @@ public class GradeController extends SuperController {
 	@ApiOperation(value = "查询知识分级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GradeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478981334048440320"),
-		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = GradeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "一级"),
 		@ApiImplicitParam(name = GradeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
@@ -220,7 +221,7 @@ public class GradeController extends SuperController {
 	@ApiOperation(value = "分页查询知识分级")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GradeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478981334048440320"),
-		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = GradeVOMeta.CODE , value = "编号" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = GradeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "一级"),
 		@ApiImplicitParam(name = GradeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})

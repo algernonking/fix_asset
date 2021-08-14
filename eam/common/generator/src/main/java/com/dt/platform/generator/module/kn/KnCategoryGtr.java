@@ -16,8 +16,18 @@ public class KnCategoryGtr extends BaseCodeGenerator {
 
 
 
+
         cfg.view().field(EAMTables.KN_CATEGORY.ID).basic().hidden(true);
 
+
+        cfg.view().field(EAMTables.KN_CATEGORY.CATEGORY_CODE).search().hidden(true);
+
+        cfg.view().field(EAMTables.KN_CATEGORY.CATEGORY_NAME).search().hidden(true);
+        cfg.view().field(EAMTables.KN_CATEGORY.SORT).search().hidden(true);
+        cfg.view().field(EAMTables.KN_CATEGORY.PARENT_ID).search().hidden(true);
+        cfg.view().field(EAMTables.KN_CATEGORY.HIERARCHY).search().hidden(true);
+        cfg.view().field(EAMTables.KN_CATEGORY.HIERARCHY_NAME).search().hidden(true);
+        cfg.view().field(EAMTables.KN_CATEGORY.NOTES).search().hidden(true);
 
 
 
@@ -35,12 +45,12 @@ public class KnCategoryGtr extends BaseCodeGenerator {
     public static void main(String[] args) throws Exception {
         KnCategoryGtr g=new KnCategoryGtr();
         //生成代码
-     //   g.generateCode();
+        g.generateCode();
 
         //移除之前生成的菜单，视情况执行
 //        g.removeByBatchId("471622036347682816");
         //生成菜单
-        g.generateMenu(CategoryServiceProxy.class, CategoryPageController.class);
+   //     g.generateMenu(CategoryServiceProxy.class, CategoryPageController.class);
     }
 
 }

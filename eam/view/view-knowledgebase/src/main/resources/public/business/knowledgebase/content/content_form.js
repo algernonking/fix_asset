@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:31:34
+ * @since 2021-08-14 21:00:51
  */
 
 function FormPage() {
@@ -27,8 +27,6 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
-		//调整窗口的高度与位置
-		adjustPopup();
 	}
 
 	/**
@@ -64,6 +62,67 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		//渲染 categoryId 下拉字段
+		fox.renderSelectBox({
+			el: "categoryId",
+			radio: true,
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].hierarchyName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+	    //渲染图片字段
+		foxup.render({
+			el:"attach",
+			maxFileCount: 3,
+			displayFileName: true,
+			accept: "file",
+			exts:'doc|zip|xlsx|rar|docx|txt|svg',
+			afterPreview:function(elId,index,fileId,upload){
+				adjustPopup();
+			},
+			afterUpload:function (result,index,upload) {
+				console.log("文件上传后回调")
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+			}
+	    });
+		//渲染 gradeId 下拉字段
+		fox.renderSelectBox({
+			el: "gradeId",
+			radio: true,
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -81,10 +140,20 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+			//设置 附件 显示附件
+		    if($("#attach").val()) {
+				foxup.fill("attach",$("#attach").val());
+		    } else {
+				adjustPopup();
+			}
 
 
 
 
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.grade);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#gradeId",formData.grade);
 
 
 
@@ -127,6 +196,16 @@ function FormPage() {
 
 
 
+			//获取 分类 下拉框的值
+			data.field["categoryId"]=xmSelect.get("#categoryId",true).getValue("value");
+			if(data.field["categoryId"] && data.field["categoryId"].length>0) {
+				data.field["categoryId"]=data.field["categoryId"][0];
+			}
+			//获取 等级 下拉框的值
+			data.field["gradeId"]=xmSelect.get("#gradeId",true).getValue("value");
+			if(data.field["gradeId"] && data.field["gradeId"].length>0) {
+				data.field["gradeId"]=data.field["gradeId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

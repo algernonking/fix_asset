@@ -1,14 +1,16 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 13:57:23
+ * @since 2021-08-14 19:44:13
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset";
-	
+
+	const disableCreateNew=false;
+	const disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -209,7 +211,13 @@ function FormPage() {
 			}
 		});
 		laydate.render({
+			elem: '#productionDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
+		laydate.render({
 			elem: '#storageTime',
+			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 	}
@@ -219,6 +227,7 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-form-data');
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -268,6 +277,14 @@ function FormPage() {
                 opacity:'1.0'
             },100);
         },1);
+
+        //
+		if(disableModify) {
+			fox.lockForm($("#data-form"),true);
+		}
+
+
+
         
 	}
 	

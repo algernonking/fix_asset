@@ -3,13 +3,14 @@ package com.dt.platform.domain.knowledgebase.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.knowledgebase.Grade;
 import java.util.Date;
+import com.dt.platform.domain.knowledgebase.Category;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:46:16
- * @sign C90E6A215FDC59DE4510EAD02432D4FF
+ * @since 2021-08-14 19:00:54
+ * @sign F7D4F73D71D6BC601295DA7D707071BC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -136,9 +137,29 @@ public class GradeMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Grade,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Grade.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
+	*/
+	public static final String GRADE="grade";
+	
+	/**
+	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Grade,com.dt.platform.domain.knowledgebase.Grade> GRADE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Grade.class ,GRADE, com.dt.platform.domain.knowledgebase.Grade.class, "知识分级", "知识分级", com.dt.platform.domain.knowledgebase.Grade.class, null);
+	
+	/**
+	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
+	*/
+	public static final String CATEGORY="category";
+	
+	/**
+	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Grade,com.dt.platform.domain.knowledgebase.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Grade.class ,CATEGORY, com.dt.platform.domain.knowledgebase.Category.class, "知识分类", "知识分类", com.dt.platform.domain.knowledgebase.Category.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , CODE , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , GRADE , CATEGORY };
 	
 	/**
 	 * 代理类
@@ -277,6 +298,28 @@ public class GradeMeta {
 		public Grade setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 知识分级
+		 * @param grade 知识分级
+		 * @return 当前对象
+		*/
+		public Grade setGrade(Grade grade) {
+			super.change(GRADE,super.getGrade(),grade);
+			super.setGrade(grade);
+			return this;
+		}
+		
+		/**
+		 * 设置 知识分类
+		 * @param category 知识分类
+		 * @return 当前对象
+		*/
+		public Grade setCategory(Category category) {
+			super.change(CATEGORY,super.getCategory(),category);
+			super.setCategory(category);
 			return this;
 		}
 	}

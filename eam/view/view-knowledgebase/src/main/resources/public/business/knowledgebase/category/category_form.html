@@ -2,7 +2,7 @@
 /**
  * 知识分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:51
+ * @since 2021-08-14 20:41:35
  */
  -->
  <!DOCTYPE html>
@@ -48,15 +48,6 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('状态')}">状态</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="status" id="status" name="status" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('状态') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div></div>
                     <div class="layui-input-block layui-input-block-c1">
                         <input lay-filter="categoryName" id="categoryName" name="categoryName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
@@ -66,9 +57,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('全称')}">全称</div></div>
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('具体名称')}">具体名称</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="categoryFullname" id="categoryFullname" name="categoryFullname" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('全称') }" type="text" class="layui-input"   />
+                        <input lay-filter="categoryFullname" id="categoryFullname" name="categoryFullname" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('具体名称') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 

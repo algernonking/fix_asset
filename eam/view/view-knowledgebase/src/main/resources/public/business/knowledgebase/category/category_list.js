@@ -1,7 +1,7 @@
 /**
  * 知识分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:50
+ * @since 2021-08-14 20:41:34
  */
 
 
@@ -54,9 +54,8 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态') }
 					,{ field: 'categoryName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
-					,{ field: 'categoryFullname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('全称') }
+					,{ field: 'categoryFullname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('具体名称') }
 					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') }
 					,{ field: 'parentId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('父节点') }
 					,{ field: 'sort', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('排序') }
@@ -94,15 +93,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.status={ value: $("#status").val()};
-		value.categoryName={ value: $("#categoryName").val()};
 		value.categoryFullname={ value: $("#categoryFullname").val()};
-		value.categoryCode={ value: $("#categoryCode").val()};
-		value.parentId={ value: $("#parentId").val()};
-		value.sort={ value: $("#sort").val()};
-		value.hierarchy={ value: $("#hierarchy").val()};
-		value.hierarchyName={ value: $("#hierarchyName").val()};
-		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}

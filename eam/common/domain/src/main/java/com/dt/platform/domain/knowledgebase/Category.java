@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:44
- * @sign B34634A08DDF809DE97E01B93D49D808
+ * @since 2021-08-14 20:41:31
+ * @sign D2396E509353555EA64A93B41E373894
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,21 +36,15 @@ public class Category extends Entity {
 	private String id;
 	
 	/**
-	 * 状态：valid:有效,invalud:无效
-	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "valid:有效,invalud:无效")
-	private String status;
-	
-	/**
 	 * 名称：名称
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String categoryName;
 	
 	/**
-	 * 全称：全称
+	 * 具体名称：具体名称
 	*/
-	@ApiModelProperty(required = false,value="全称" , notes = "全称")
+	@ApiModelProperty(required = false,value="具体名称" , notes = "具体名称")
 	private String categoryFullname;
 	
 	/**
@@ -157,25 +151,6 @@ public class Category extends Entity {
 	}
 	
 	/**
-	 * 获得 状态<br>
-	 * valid:有效,invalud:无效
-	 * @return 状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 状态
-	 * @param status 状态
-	 * @return 当前对象
-	*/
-	public Category setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 名称<br>
 	 * 名称
 	 * @return 名称
@@ -195,17 +170,17 @@ public class Category extends Entity {
 	}
 	
 	/**
-	 * 获得 全称<br>
-	 * 全称
-	 * @return 全称
+	 * 获得 具体名称<br>
+	 * 具体名称
+	 * @return 具体名称
 	*/
 	public String getCategoryFullname() {
 		return categoryFullname;
 	}
 	
 	/**
-	 * 设置 全称
-	 * @param categoryFullname 全称
+	 * 设置 具体名称
+	 * @param categoryFullname 具体名称
 	 * @return 当前对象
 	*/
 	public Category setCategoryFullname(String categoryFullname) {

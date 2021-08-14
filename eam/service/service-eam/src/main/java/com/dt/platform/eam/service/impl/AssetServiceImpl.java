@@ -35,7 +35,7 @@ import java.util.Date;
  * 资产表 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 13:57:17
+ * @since 2021-08-14 19:44:08
 */
 
 
@@ -67,7 +67,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public Result insert(Asset asset) {
-		return super.insert(asset);
+		Result r=super.insert(asset);
+		return r;
 	}
 	
 	/**
@@ -134,7 +135,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public Result update(Asset asset , SaveMode mode) {
-		return super.update(asset , mode);
+		Result r=super.update(asset , mode);
+		return r;
 	}
 	
 	/**

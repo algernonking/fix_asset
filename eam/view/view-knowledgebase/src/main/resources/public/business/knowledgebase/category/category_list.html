@@ -2,7 +2,7 @@
 /**
  * 知识分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:48
+ * @since 2021-08-14 20:41:33
  */
  -->
  <!DOCTYPE html>
@@ -31,50 +31,10 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 状态 , status ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 具体名称 , categoryFullname ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('状态')}" class="search-label">状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 名称 , categoryName ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="categoryName" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 全称 , categoryFullname ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('全称')}" class="search-label">全称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('具体名称')}" class="search-label">具体名称</span><span class="search-colon">:</span></div>
                         <input id="categoryFullname" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 编码 , categoryCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('编码')}" class="search-label">编码</span><span class="search-colon">:</span></div>
-                        <input id="categoryCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 父节点 , parentId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('父节点')}" class="search-label">父节点</span><span class="search-colon">:</span></div>
-                        <input id="parentId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 排序 , sort ,typeName=number_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('排序')}" class="search-label">排序</span><span class="search-colon">:</span></div>
-                            <input id="sort" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
-                    </div>
-                    <!-- 节点路径 , hierarchy ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('节点路径')}" class="search-label">节点路径</span><span class="search-colon">:</span></div>
-                        <input id="hierarchy" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 节点路径名称 , hierarchyName ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('节点路径名称')}" class="search-label">节点路径名称</span><span class="search-colon">:</span></div>
-                        <input id="hierarchyName" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

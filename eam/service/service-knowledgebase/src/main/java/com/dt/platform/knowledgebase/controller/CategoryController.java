@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 知识分类 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 17:34:44
+ * @since 2021-08-14 20:41:31
 */
 
 @Api(tags = "知识分类")
@@ -66,9 +66,8 @@ public class CategoryController extends SuperController {
 	@ApiOperation(value = "添加知识分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
@@ -126,9 +125,8 @@ public class CategoryController extends SuperController {
 	@ApiOperation(value = "更新知识分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
@@ -152,9 +150,8 @@ public class CategoryController extends SuperController {
 	@ApiOperation(value = "保存知识分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
@@ -217,9 +214,8 @@ public class CategoryController extends SuperController {
 	@ApiOperation(value = "查询知识分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
@@ -244,9 +240,8 @@ public class CategoryController extends SuperController {
 	@ApiOperation(value = "分页查询知识分类")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),

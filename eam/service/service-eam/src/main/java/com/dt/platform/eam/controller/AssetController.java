@@ -57,7 +57,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产表 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-13 13:57:17
+ * @since 2021-08-14 19:44:08
 */
 
 @Api(tags = "资产")
