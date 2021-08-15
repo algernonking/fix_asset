@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:38
+ * @since 2021-08-15 18:34:43
  */
  -->
  <!DOCTYPE html>
@@ -51,10 +51,10 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 硬件信息 , hardwareInfo ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('硬件信息')}" class="search-label">硬件信息</span><span class="search-colon">:</span></div>
-                        <input id="hardwareInfo" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('状态')}" class="search-label">状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${dict.toArray('ops_system_status')}" style="width:140px"></div>
                     </div>
                     <!-- 业务联系人 , businessContact ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">

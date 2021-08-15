@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:36
- * @sign 04A8C96C318AE682ABFC2257F0DFD556
+ * @since 2021-08-15 18:34:41
+ * @sign 9713BAA6EA16714582EB40F531B3D331
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,7 +38,7 @@ public class Warehouse extends Entity {
 	/**
 	 * 名称：名称
 	*/
-	@ApiModelProperty(required = true,value="名称" , notes = "名称")
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String warehouseName;
 	
 	/**

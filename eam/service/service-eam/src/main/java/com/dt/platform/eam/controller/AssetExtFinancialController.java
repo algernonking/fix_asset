@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetExtFinancialMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.eam.Supplier;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -46,13 +47,13 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 资产财务属性 接口控制器
+ * 资产财务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:20
+ * @since 2021-08-15 18:34:25
 */
 
-@Api(tags = "资产财务属性")
+@Api(tags = "资产财务")
 @ApiSort(0)
 @RestController("EamAssetExtFinancialController")
 public class AssetExtFinancialController extends SuperController {
@@ -62,17 +63,18 @@ public class AssetExtFinancialController extends SuperController {
 
 	
 	/**
-	 * 添加资产财务属性
+	 * 添加资产财务
 	*/
-	@ApiOperation(value = "添加资产财务属性")
+	@ApiOperation(value = "添加资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务维度资产类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEORG_ID , value = "管理组织ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_DETAIL , value = "来源详情" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -80,12 +82,16 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "管理组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
+	@NotNull(name = AssetExtFinancialVOMeta.ASSET_NUMBER)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
@@ -101,9 +107,9 @@ public class AssetExtFinancialController extends SuperController {
 
 	
 	/**
-	 * 删除资产财务属性
+	 * 删除资产财务
 	*/
-	@ApiOperation(value = "删除资产财务属性")
+	@ApiOperation(value = "删除资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
@@ -118,10 +124,10 @@ public class AssetExtFinancialController extends SuperController {
 	
 	
 	/**
-	 * 批量删除资产财务属性 <br>
+	 * 批量删除资产财务 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-	@ApiOperation(value = "批量删除资产财务属性")
+	@ApiOperation(value = "批量删除资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 	})
@@ -135,17 +141,18 @@ public class AssetExtFinancialController extends SuperController {
 	}
 	
 	/**
-	 * 更新资产财务属性
+	 * 更新资产财务
 	*/
-	@ApiOperation(value = "更新资产财务属性")
+	@ApiOperation(value = "更新资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务维度资产类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEORG_ID , value = "管理组织ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_DETAIL , value = "来源详情" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -153,12 +160,16 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "管理组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetExtFinancialVOMeta.PAGE_INDEX , AssetExtFinancialVOMeta.PAGE_SIZE , AssetExtFinancialVOMeta.SEARCH_FIELD , AssetExtFinancialVOMeta.FUZZY_FIELD , AssetExtFinancialVOMeta.SEARCH_VALUE , AssetExtFinancialVOMeta.SORT_FIELD , AssetExtFinancialVOMeta.SORT_TYPE , AssetExtFinancialVOMeta.IDS } ) 
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
+	@NotNull(name = AssetExtFinancialVOMeta.ASSET_NUMBER)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
@@ -174,17 +185,18 @@ public class AssetExtFinancialController extends SuperController {
 	
 	
 	/**
-	 * 保存资产财务属性
+	 * 保存资产财务
 	*/
-	@ApiOperation(value = "保存资产财务属性")
+	@ApiOperation(value = "保存资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务维度资产类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEORG_ID , value = "管理组织ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_DETAIL , value = "来源详情" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -192,12 +204,16 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "管理组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtFinancialVOMeta.PAGE_INDEX , AssetExtFinancialVOMeta.PAGE_SIZE , AssetExtFinancialVOMeta.SEARCH_FIELD , AssetExtFinancialVOMeta.FUZZY_FIELD , AssetExtFinancialVOMeta.SEARCH_VALUE , AssetExtFinancialVOMeta.SORT_FIELD , AssetExtFinancialVOMeta.SORT_TYPE , AssetExtFinancialVOMeta.IDS } )
 	@NotNull(name = AssetExtFinancialVOMeta.ID)
+	@NotNull(name = AssetExtFinancialVOMeta.ASSET_NUMBER)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE)
 	@NotNull(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE)
 	@NotNull(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE)
@@ -213,9 +229,9 @@ public class AssetExtFinancialController extends SuperController {
 
 	
 	/**
-	 * 获取资产财务属性
+	 * 获取资产财务
 	*/
-	@ApiOperation(value = "获取资产财务属性")
+	@ApiOperation(value = "获取资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})
@@ -226,16 +242,18 @@ public class AssetExtFinancialController extends SuperController {
 	public Result<AssetExtFinancial> getById(String id) {
 		Result<AssetExtFinancial> result=new Result<>();
 		AssetExtFinancial assetExtFinancial=assetExtFinancialService.getById(id);
+		// 关联出 供应商 数据
+		assetExtFinancialService.join(assetExtFinancial,AssetExtFinancialMeta.SUPPLIER);
 		result.success(true).data(assetExtFinancial);
 		return result;
 	}
 
 
 	/**
-	 * 批量删除资产财务属性 <br>
+	 * 批量删除资产财务 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除资产财务属性")
+		@ApiOperation(value = "批量删除资产财务")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = AssetExtFinancialVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
@@ -252,17 +270,18 @@ public class AssetExtFinancialController extends SuperController {
 
 	
 	/**
-	 * 查询资产财务属性
+	 * 查询资产财务
 	*/
-	@ApiOperation(value = "查询资产财务属性")
+	@ApiOperation(value = "查询资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务维度资产类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEORG_ID , value = "管理组织ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_DETAIL , value = "来源详情" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -270,9 +289,12 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "管理组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtFinancialVOMeta.PAGE_INDEX , AssetExtFinancialVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetExtFinancialServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -286,17 +308,18 @@ public class AssetExtFinancialController extends SuperController {
 
 	
 	/**
-	 * 分页查询资产财务属性
+	 * 分页查询资产财务
 	*/
-	@ApiOperation(value = "分页查询资产财务属性")
+	@ApiOperation(value = "分页查询资产财务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务维度资产类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TYPE_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEORG_ID , value = "管理组织ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SOURCE_DETAIL , value = "来源详情" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -304,9 +327,12 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "管理组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetExtFinancialServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -314,6 +340,8 @@ public class AssetExtFinancialController extends SuperController {
 	public Result<PagedList<AssetExtFinancial>> queryPagedList(AssetExtFinancialVO sample) {
 		Result<PagedList<AssetExtFinancial>> result=new Result<>();
 		PagedList<AssetExtFinancial> list=assetExtFinancialService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 供应商 数据
+		assetExtFinancialService.join(list,AssetExtFinancialMeta.SUPPLIER);
 		result.success(true).data(list);
 		return result;
 	}

@@ -10,10 +10,10 @@ import com.dt.platform.proxy.eam.AssetExtMaintainerServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 资产维保属性 模版页面控制器
+ * 资产维保 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:21
+ * @since 2021-08-15 18:34:26
 */
 
 @Controller("EamAssetExtMaintainerPageController")
@@ -38,7 +38,7 @@ public class AssetExtMaintainerPageController extends ViewController {
 	}
 	
 	/**
-	 * 资产维保属性 功能主页面
+	 * 资产维保 功能主页面
 	 */
 	@RequestMapping("/asset_ext_maintainer_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class AssetExtMaintainerPageController extends ViewController {
 	}
 
 	/**
-	 * 资产维保属性 表单页面
+	 * 资产维保 表单页面
 	 */
 	@RequestMapping("/asset_ext_maintainer_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

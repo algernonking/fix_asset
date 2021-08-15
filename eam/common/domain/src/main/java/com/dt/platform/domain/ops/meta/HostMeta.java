@@ -13,8 +13,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:46
- * @sign D96D1A32144838CB194AA7199CC64D58
+ * @since 2021-08-15 18:34:51
+ * @sign 810E3DB54E908FC3AEA23D5D8C5AD21A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,14 +51,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_TYPE, java.lang.String.class, "主机类型", "主机类型", java.lang.String.class, null);
 	
 	/**
-	 * 主机状态online , offline , 类型: java.lang.String
+	 * 主机状态(online , offline) , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 主机状态online , offline , 类型: java.lang.String
+	 * 主机状态(online , offline) , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,STATUS, java.lang.String.class, "主机状态online", "offline", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,STATUS, java.lang.String.class, "主机状态(online", "offline)", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -111,14 +111,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,POSITION_ID, java.lang.String.class, "位置", "位置", java.lang.String.class, null);
 	
 	/**
-	 * 监控状态:valid , invalid|unknow , 类型: java.lang.String
+	 * 监控状态(valid , ,nvalid,unknow) , 类型: java.lang.String
 	*/
 	public static final String MONITOR_STATUS="monitorStatus";
 	
 	/**
-	 * 监控状态:valid , invalid|unknow , 类型: java.lang.String
+	 * 监控状态(valid , ,nvalid,unknow) , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> MONITOR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,MONITOR_STATUS, java.lang.String.class, "监控状态:valid", "invalid|unknow", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> MONITOR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,MONITOR_STATUS, java.lang.String.class, "监控状态(valid", ",nvalid,unknow)", java.lang.String.class, null);
 	
 	/**
 	 * 负责人 , 类型: java.lang.String
@@ -487,8 +487,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 主机状态online
-		 * @param status 主机状态online
+		 * 设置 主机状态(online
+		 * @param status 主机状态(online
 		 * @return 当前对象
 		*/
 		public Host setStatus(String status) {
@@ -553,8 +553,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 监控状态:valid
-		 * @param monitorStatus 监控状态:valid
+		 * 设置 监控状态(valid
+		 * @param monitorStatus 监控状态(valid
 		 * @return 当前对象
 		*/
 		public Host setMonitorStatus(String monitorStatus) {

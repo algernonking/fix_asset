@@ -32,10 +32,10 @@ import java.util.Date;
 
 /**
  * <p>
- * 品牌表 服务实现
+ * 品牌 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:23
+ * @since 2021-08-15 18:34:27
 */
 
 

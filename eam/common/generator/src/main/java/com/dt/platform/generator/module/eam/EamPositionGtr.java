@@ -2,20 +2,24 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.eam.page.PositionPageController;
+import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamAreaGtr extends BaseCodeGenerator{
-    public EamAreaGtr() {
-        super(EAMTables.EAM_AREA.$TABLE,BASIC_DATA_MENU_ID);
+public class EamPositionGtr extends BaseCodeGenerator{
+    public EamPositionGtr() {
+        super(EAMTables.EAM_POSITION.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-        cfg.view().field(EAMTables.EAM_AREA.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_AREA.AREA_NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_AREA.AREA_NOTES).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.EAM_AREA.CREATE_TIME).table().disable(true);
+
+        cfg.view().field(EAMTables.EAM_POSITION.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_POSITION.NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_POSITION.NOTES).search().fuzzySearch();
+
+        cfg.view().field(EAMTables.EAM_POSITION.CREATE_TIME).table().disable(true);
 //
         //文件生成覆盖模式
         cfg.overrides()
@@ -28,13 +32,13 @@ public class EamAreaGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        EamAreaGtr g=new EamAreaGtr();
+        EamPositionGtr g=new EamPositionGtr();
         //生成代码
-         g.generateCode();
+         //g.generateCode();
 
 
         //生成菜单
         //  g.removeByBatchId("");
-      //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+        g.generateMenu(PositionServiceProxy.class, PositionPageController.class);
     }
 }

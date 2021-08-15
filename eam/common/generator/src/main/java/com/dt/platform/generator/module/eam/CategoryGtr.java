@@ -21,9 +21,9 @@ public class CategoryGtr extends BaseCodeGenerator{
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
-                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
                 .setFormPage(WriteMode.IGNORE) //表单HTML页
                 .setListPage(WriteMode.IGNORE); //列表HTML页
         cfg.buildAll();

@@ -18,10 +18,10 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 资产财务属性 服务接口
+ * 资产财务 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:20
+ * @since 2021-08-15 18:34:24
 */
 
 public interface IAssetExtFinancialService extends ISuperService<AssetExtFinancial> {
@@ -43,7 +43,7 @@ public interface IAssetExtFinancialService extends ISuperService<AssetExtFinanci
 	
 		
 	/**
-	 * 按主键删除 资产财务属性
+	 * 按主键删除 资产财务
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IAssetExtFinancialService extends ISuperService<AssetExtFinanci
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 资产财务属性
+	 * 按主键删除 资产财务
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IAssetExtFinancialService extends ISuperService<AssetExtFinanci
 	
 		
 	/**
-	 * 按主键更新字段 资产财务属性
+	 * 按主键更新字段 资产财务
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +124,7 @@ public interface IAssetExtFinancialService extends ISuperService<AssetExtFinanci
  
 		
 	/**
-	 * 按主键获取 资产财务属性
+	 * 按主键获取 资产财务
 	 *
 	 * @param id 主键
 	 * @return AssetExtFinancial 数据对象

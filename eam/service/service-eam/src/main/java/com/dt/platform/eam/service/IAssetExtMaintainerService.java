@@ -18,10 +18,10 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 资产维保属性 服务接口
+ * 资产维保 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:21
+ * @since 2021-08-15 18:34:26
 */
 
 public interface IAssetExtMaintainerService extends ISuperService<AssetExtMaintainer> {
@@ -43,7 +43,7 @@ public interface IAssetExtMaintainerService extends ISuperService<AssetExtMainta
 	
 		
 	/**
-	 * 按主键删除 资产维保属性
+	 * 按主键删除 资产维保
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IAssetExtMaintainerService extends ISuperService<AssetExtMainta
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 资产维保属性
+	 * 按主键删除 资产维保
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IAssetExtMaintainerService extends ISuperService<AssetExtMainta
 	
 		
 	/**
-	 * 按主键更新字段 资产维保属性
+	 * 按主键更新字段 资产维保
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +124,7 @@ public interface IAssetExtMaintainerService extends ISuperService<AssetExtMainta
  
 		
 	/**
-	 * 按主键获取 资产维保属性
+	 * 按主键获取 资产维保
 	 *
 	 * @param id 主键
 	 * @return AssetExtMaintainer 数据对象

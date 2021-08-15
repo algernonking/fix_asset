@@ -6,8 +6,8 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_ASSET_EXT_FINANCIAL;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:20
- * @sign 804C387374F1AFD9F3B9844CD3D102C6
+ * @since 2021-08-15 18:34:24
+ * @sign 06A0CE694DA8E6E808ACBF3FDCE56544
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,15 +37,15 @@ public class AssetExtFinancial extends Entity {
 	private String id;
 	
 	/**
-	 * 资产ID：资产ID
+	 * 资产：资产
 	*/
-	@ApiModelProperty(required = false,value="资产ID" , notes = "资产ID")
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
 	
 	/**
-	 * 财务维度资产类型：财务维度资产类型
+	 * 财务分类：财务分类
 	*/
-	@ApiModelProperty(required = false,value="财务维度资产类型" , notes = "财务维度资产类型")
+	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
 	private String typeId;
 	
 	/**
@@ -55,22 +55,28 @@ public class AssetExtFinancial extends Entity {
 	private String assetCode;
 	
 	/**
-	 * 管理组织ID：管理组织ID
+	 * 来源：来源
 	*/
-	@ApiModelProperty(required = false,value="管理组织ID" , notes = "管理组织ID")
-	private String manageorgId;
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private String sourceId;
+	
+	/**
+	 * 来源详情：来源详情
+	*/
+	@ApiModelProperty(required = false,value="来源详情" , notes = "来源详情")
+	private String sourceDetail;
+	
+	/**
+	 * 资产数量：资产数量
+	*/
+	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
+	private Integer assetNumber;
 	
 	/**
 	 * 资产供应商：资产供应商
 	*/
 	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
 	private String supplierId;
-	
-	/**
-	 * 采购日期：采购日期
-	*/
-	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期")
-	private Date purchaseDate;
 	
 	/**
 	 * 税额：税额
@@ -115,22 +121,40 @@ public class AssetExtFinancial extends Entity {
 	private BigDecimal purchaseUnitPrice;
 	
 	/**
-	 * 入账时间：入账时间
-	*/
-	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
-	private BigDecimal entryTime;
-	
-	/**
 	 * 使用期限(月)：使用期限(月)
 	*/
 	@ApiModelProperty(required = false,value="使用期限(月)" , notes = "使用期限(月)")
 	private BigDecimal serviceLife;
 	
 	/**
+	 * 采购日期：采购日期
+	*/
+	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期")
+	private Date purchaseDate;
+	
+	/**
+	 * 入库时间：入库时间
+	*/
+	@ApiModelProperty(required = false,value="入库时间" , notes = "入库时间")
+	private Date storageTime;
+	
+	/**
+	 * 入账时间：入账时间
+	*/
+	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
+	private Date entryTime;
+	
+	/**
+	 * 管理组织：管理组织
+	*/
+	@ApiModelProperty(required = false,value="管理组织" , notes = "管理组织")
+	private String managementOrganizationId;
+	
+	/**
 	 * 财务备注：财务备注
 	*/
 	@ApiModelProperty(required = false,value="财务备注" , notes = "财务备注")
-	private String financialNotes;
+	private String notes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -181,6 +205,12 @@ public class AssetExtFinancial extends Entity {
 	private Integer version;
 	
 	/**
+	 * 供应商：供应商
+	*/
+	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
+	private Supplier supplier;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -200,17 +230,17 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 资产ID<br>
-	 * 资产ID
-	 * @return 资产ID
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
 	*/
 	public String getAssetId() {
 		return assetId;
 	}
 	
 	/**
-	 * 设置 资产ID
-	 * @param assetId 资产ID
+	 * 设置 资产
+	 * @param assetId 资产
 	 * @return 当前对象
 	*/
 	public AssetExtFinancial setAssetId(String assetId) {
@@ -219,17 +249,17 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 财务维度资产类型<br>
-	 * 财务维度资产类型
-	 * @return 财务维度资产类型
+	 * 获得 财务分类<br>
+	 * 财务分类
+	 * @return 财务分类
 	*/
 	public String getTypeId() {
 		return typeId;
 	}
 	
 	/**
-	 * 设置 财务维度资产类型
-	 * @param typeId 财务维度资产类型
+	 * 设置 财务分类
+	 * @param typeId 财务分类
 	 * @return 当前对象
 	*/
 	public AssetExtFinancial setTypeId(String typeId) {
@@ -257,21 +287,59 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 管理组织ID<br>
-	 * 管理组织ID
-	 * @return 管理组织ID
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
 	*/
-	public String getManageorgId() {
-		return manageorgId;
+	public String getSourceId() {
+		return sourceId;
 	}
 	
 	/**
-	 * 设置 管理组织ID
-	 * @param manageorgId 管理组织ID
+	 * 设置 来源
+	 * @param sourceId 来源
 	 * @return 当前对象
 	*/
-	public AssetExtFinancial setManageorgId(String manageorgId) {
-		this.manageorgId=manageorgId;
+	public AssetExtFinancial setSourceId(String sourceId) {
+		this.sourceId=sourceId;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源详情<br>
+	 * 来源详情
+	 * @return 来源详情
+	*/
+	public String getSourceDetail() {
+		return sourceDetail;
+	}
+	
+	/**
+	 * 设置 来源详情
+	 * @param sourceDetail 来源详情
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setSourceDetail(String sourceDetail) {
+		this.sourceDetail=sourceDetail;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产数量<br>
+	 * 资产数量
+	 * @return 资产数量
+	*/
+	public Integer getAssetNumber() {
+		return assetNumber;
+	}
+	
+	/**
+	 * 设置 资产数量
+	 * @param assetNumber 资产数量
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setAssetNumber(Integer assetNumber) {
+		this.assetNumber=assetNumber;
 		return this;
 	}
 	
@@ -291,25 +359,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setSupplierId(String supplierId) {
 		this.supplierId=supplierId;
-		return this;
-	}
-	
-	/**
-	 * 获得 采购日期<br>
-	 * 采购日期
-	 * @return 采购日期
-	*/
-	public Date getPurchaseDate() {
-		return purchaseDate;
-	}
-	
-	/**
-	 * 设置 采购日期
-	 * @param purchaseDate 采购日期
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setPurchaseDate(Date purchaseDate) {
-		this.purchaseDate=purchaseDate;
 		return this;
 	}
 	
@@ -447,25 +496,6 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 入账时间<br>
-	 * 入账时间
-	 * @return 入账时间
-	*/
-	public BigDecimal getEntryTime() {
-		return entryTime;
-	}
-	
-	/**
-	 * 设置 入账时间
-	 * @param entryTime 入账时间
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setEntryTime(BigDecimal entryTime) {
-		this.entryTime=entryTime;
-		return this;
-	}
-	
-	/**
 	 * 获得 使用期限(月)<br>
 	 * 使用期限(月)
 	 * @return 使用期限(月)
@@ -485,21 +515,97 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
+	 * 获得 采购日期<br>
+	 * 采购日期
+	 * @return 采购日期
+	*/
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+	
+	/**
+	 * 设置 采购日期
+	 * @param purchaseDate 采购日期
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate=purchaseDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 入库时间<br>
+	 * 入库时间
+	 * @return 入库时间
+	*/
+	public Date getStorageTime() {
+		return storageTime;
+	}
+	
+	/**
+	 * 设置 入库时间
+	 * @param storageTime 入库时间
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setStorageTime(Date storageTime) {
+		this.storageTime=storageTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 入账时间<br>
+	 * 入账时间
+	 * @return 入账时间
+	*/
+	public Date getEntryTime() {
+		return entryTime;
+	}
+	
+	/**
+	 * 设置 入账时间
+	 * @param entryTime 入账时间
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setEntryTime(Date entryTime) {
+		this.entryTime=entryTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理组织<br>
+	 * 管理组织
+	 * @return 管理组织
+	*/
+	public String getManagementOrganizationId() {
+		return managementOrganizationId;
+	}
+	
+	/**
+	 * 设置 管理组织
+	 * @param managementOrganizationId 管理组织
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setManagementOrganizationId(String managementOrganizationId) {
+		this.managementOrganizationId=managementOrganizationId;
+		return this;
+	}
+	
+	/**
 	 * 获得 财务备注<br>
 	 * 财务备注
 	 * @return 财务备注
 	*/
-	public String getFinancialNotes() {
-		return financialNotes;
+	public String getNotes() {
+		return notes;
 	}
 	
 	/**
 	 * 设置 财务备注
-	 * @param financialNotes 财务备注
+	 * @param notes 财务备注
 	 * @return 当前对象
 	*/
-	public AssetExtFinancial setFinancialNotes(String financialNotes) {
-		this.financialNotes=financialNotes;
+	public AssetExtFinancial setNotes(String notes) {
+		this.notes=notes;
 		return this;
 	}
 	
@@ -652,6 +758,25 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 供应商<br>
+	 * 供应商
+	 * @return 供应商
+	*/
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	
+	/**
+	 * 设置 供应商
+	 * @param supplier 供应商
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setSupplier(Supplier supplier) {
+		this.supplier=supplier;
 		return this;
 	}
 

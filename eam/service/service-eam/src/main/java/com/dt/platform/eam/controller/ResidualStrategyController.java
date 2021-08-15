@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧策略 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:31
+ * @since 2021-08-15 18:34:36
 */
 
 @Api(tags = "折旧策略")

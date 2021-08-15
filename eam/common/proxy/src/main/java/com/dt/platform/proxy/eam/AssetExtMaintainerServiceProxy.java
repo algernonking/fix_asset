@@ -16,10 +16,10 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 资产维保属性  控制器服务代理
+ * 资产维保  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:21
+ * @since 2021-08-15 18:34:26
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetExtMaintainerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -41,117 +41,117 @@ public interface AssetExtMaintainerServiceProxy {
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 	
 	/**
-	 * 添加资产维保属性
+	 * 添加资产维保
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
 	
 	/**
-	 * 删除资产维保属性
+	 * 删除资产维保
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
 
 	/**
-	 * 批量删除资产维保属性
+	 * 批量删除资产维保
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
 	;
 	
 	/**
-	 * 更新资产维保属性
+	 * 更新资产维保
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
 	
 	
 	/**
-	 * 保存资产维保属性
+	 * 保存资产维保
 	 */
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取单个资产维保属性
+	 * 获取单个资产维保
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
 
 	/**
-	 * 获取多个资产维保属性
+	 * 获取多个资产维保
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
 	;
 
 	/**
-	 * 查询资产维保属性
+	 * 查询资产维保
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
 	
 	/**
-	 * 分页查询资产维保属性
+	 * 分页查询资产维保
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
 	
 	/**
-	 * 导出资产维保属性数据(Excel)
+	 * 导出资产维保数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
 
 	/**
-	 * 下载资产维保属性导入模版(Excel)
+	 * 下载资产维保导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
-	 * 导入资产维保属性数据(Excel)
+	 * 导入资产维保数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 	
 	/**
-	 * 添加资产维保属性
+	 * 添加资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.INSERT)
 	Result insert(AssetExtMaintainerVO assetExtMaintainerVO);
 	
 	/**
-	 * 删除资产维保属性
+	 * 删除资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.DELETE)
 	Result deleteById(String id);
 
 	/**
-	 * 批量删除资产维保属性
+	 * 批量删除资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.DELETE_BY_IDS)
 	Result deleteByIds(List<String> ids);
 
 	/**
-	 * 更新资产维保属性
+	 * 更新资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.UPDATE)
 	Result update(AssetExtMaintainerVO assetExtMaintainerVO);
 	
 	/**
-	 * 更新资产维保属性
+	 * 更新资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.SAVE)
 	Result save(AssetExtMaintainerVO assetExtMaintainerVO);
 	
 	/**
-	 * 获取资产维保属性
+	 * 获取资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.GET_BY_ID)
 	Result<AssetExtMaintainer> getById(String id);
 
 	/**
-	 * 批量删除资产维保属性
+	 * 批量删除资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.GET_BY_IDS)
 	Result<List<AssetExtMaintainer>> getByIds(List<String> ids);
 	/**
-	 * 查询资产维保属性
+	 * 查询资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.QUERY_LIST)
 	Result<List<AssetExtMaintainer>> queryList(AssetExtMaintainerVO sample);
 	
 	/**
-	 * 分页查询资产维保属性
+	 * 分页查询资产维保
 	*/
 	@RequestMapping(AssetExtMaintainerServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<AssetExtMaintainer>> queryPagedList(AssetExtMaintainerVO sample);

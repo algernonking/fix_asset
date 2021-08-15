@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 维保厂商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:28
+ * @since 2021-08-15 18:34:33
 */
 
 public interface IMaintainerService extends ISuperService<Maintainer> {

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 19:44:07
- * @sign EFF88A68926C72E498C600846161D06D
+ * @since 2021-08-15 17:43:29
+ * @sign B2792CE3A9D50D68036F270DA94652DC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,22 +36,22 @@ public class Asset extends Entity {
 	private String id;
 	
 	/**
-	 * 单据编号：单据编号
+	 * 分类ID：分类ID
 	*/
-	@ApiModelProperty(required = false,value="单据编号" , notes = "单据编号")
+	@ApiModelProperty(required = false,value="分类ID" , notes = "分类ID")
+	private String categoryId;
+	
+	/**
+	 * 业务编号：业务编号
+	*/
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String busiCode;
 	
 	/**
 	 * 批次代码：批次代码
 	*/
-	@ApiModelProperty(required = true,value="批次代码" , notes = "批次代码")
+	@ApiModelProperty(required = false,value="批次代码" , notes = "批次代码")
 	private String batchCode;
-	
-	/**
-	 * 资产状态：资产状态
-	*/
-	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态")
-	private String status;
 	
 	/**
 	 * 资产编号：资产编号
@@ -60,10 +60,22 @@ public class Asset extends Entity {
 	private String assetCode;
 	
 	/**
-	 * 分类ID：分类ID
+	 * 资产状态：资产状态
 	*/
-	@ApiModelProperty(required = false,value="分类ID" , notes = "分类ID")
-	private String categoryId;
+	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态")
+	private String status;
+	
+	/**
+	 * 是否显示：是否显示
+	*/
+	@ApiModelProperty(required = false,value="是否显示" , notes = "是否显示")
+	private String display;
+	
+	/**
+	 * 是否报废：是否报废
+	*/
+	@ApiModelProperty(required = false,value="是否报废" , notes = "是否报废")
+	private String scrap;
 	
 	/**
 	 * 标准型号ID：标准型号ID
@@ -92,7 +104,7 @@ public class Asset extends Entity {
 	/**
 	 * 标准型号规格型号：标准型号规格型号
 	*/
-	@ApiModelProperty(required = true,value="标准型号规格型号" , notes = "标准型号规格型号")
+	@ApiModelProperty(required = false,value="标准型号规格型号" , notes = "标准型号规格型号")
 	private String model;
 	
 	/**
@@ -108,52 +120,10 @@ public class Asset extends Entity {
 	private String unit;
 	
 	/**
-	 * 资产RFID：资产RFID
+	 * 序列号：序列号
 	*/
-	@ApiModelProperty(required = false,value="资产RFID" , notes = "资产RFID")
-	private String rfid;
-	
-	/**
-	 * 资产序列号：资产序列号
-	*/
-	@ApiModelProperty(required = false,value="资产序列号" , notes = "资产序列号")
-	private String sn;
-	
-	/**
-	 * 资产数量：资产数量
-	*/
-	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
-	private Integer assetNumber;
-	
-	/**
-	 * 来源：来源
-	*/
-	@ApiModelProperty(required = false,value="来源" , notes = "来源")
-	private String sourceId;
-	
-	/**
-	 * 来源详情：来源详情
-	*/
-	@ApiModelProperty(required = false,value="来源详情" , notes = "来源详情")
-	private String sourceDetail;
-	
-	/**
-	 * 存放区域：存放区域
-	*/
-	@ApiModelProperty(required = false,value="存放区域" , notes = "存放区域")
-	private String areaId;
-	
-	/**
-	 * 存放地点：存放地点
-	*/
-	@ApiModelProperty(required = false,value="存放地点" , notes = "存放地点")
-	private String placeDetail;
-	
-	/**
-	 * 使用人员：使用人员
-	*/
-	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
+	@ApiModelProperty(required = false,value="序列号" , notes = "序列号")
+	private String serialNumber;
 	
 	/**
 	 * 生产日期：生产日期
@@ -162,22 +132,34 @@ public class Asset extends Entity {
 	private Date productionDate;
 	
 	/**
-	 * 入库时间：入库时间
+	 * 资产RFID：资产RFID
 	*/
-	@ApiModelProperty(required = false,value="入库时间" , notes = "入库时间")
-	private Date storageTime;
+	@ApiModelProperty(required = false,value="资产RFID" , notes = "资产RFID")
+	private String rfid;
 	
 	/**
-	 * 是否显示：是否显示
+	 * 使用组织ID：使用组织ID
 	*/
-	@ApiModelProperty(required = false,value="是否显示" , notes = "是否显示")
-	private String display;
+	@ApiModelProperty(required = false,value="使用组织ID" , notes = "使用组织ID")
+	private String usedOrganizationId;
 	
 	/**
-	 * 是否报废：是否报废
+	 * 使用人员：使用人员
 	*/
-	@ApiModelProperty(required = true,value="是否报废" , notes = "是否报废")
-	private String scrap;
+	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
+	private String userId;
+	
+	/**
+	 * 存放位置：存放位置
+	*/
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
+	private String positionId;
+	
+	/**
+	 * 详细位置：详细位置
+	*/
+	@ApiModelProperty(required = false,value="详细位置" , notes = "详细位置")
+	private String positionDetail;
 	
 	/**
 	 * 插入方式：插入方式
@@ -189,7 +171,7 @@ public class Asset extends Entity {
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String assetsNotes;
+	private String notes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -246,16 +228,10 @@ public class Asset extends Entity {
 	private AssetExtFinancial assetFinancial;
 	
 	/**
-	 * 采购单价：采购单价
-	*/
-	@ApiModelProperty(required = false,value="采购单价" , notes = "采购单价")
-	private String purchaseUnitPrice;
-	
-	/**
 	 * 维保信息：维保信息
 	*/
 	@ApiModelProperty(required = false,value="维保信息" , notes = "维保信息")
-	private AssetExtMaintainer assetMaintainer;
+	private AssetExtFinancial assetMaintainer;
 	
 	/**
 	 * 设备信息：设备信息
@@ -294,10 +270,10 @@ public class Asset extends Entity {
 	private Brand brand;
 	
 	/**
-	 * 区域：区域
+	 * 位置：位置
 	*/
-	@ApiModelProperty(required = false,value="区域" , notes = "区域")
-	private Area area;
+	@ApiModelProperty(required = false,value="位置" , notes = "位置")
+	private Position position;
 	
 	/**
 	 * 获得 主键<br>
@@ -319,17 +295,36 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 单据编号<br>
-	 * 单据编号
-	 * @return 单据编号
+	 * 获得 分类ID<br>
+	 * 分类ID
+	 * @return 分类ID
+	*/
+	public String getCategoryId() {
+		return categoryId;
+	}
+	
+	/**
+	 * 设置 分类ID
+	 * @param categoryId 分类ID
+	 * @return 当前对象
+	*/
+	public Asset setCategoryId(String categoryId) {
+		this.categoryId=categoryId;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
 	*/
 	public String getBusiCode() {
 		return busiCode;
 	}
 	
 	/**
-	 * 设置 单据编号
-	 * @param busiCode 单据编号
+	 * 设置 业务编号
+	 * @param busiCode 业务编号
 	 * @return 当前对象
 	*/
 	public Asset setBusiCode(String busiCode) {
@@ -357,25 +352,6 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 资产状态<br>
-	 * 资产状态
-	 * @return 资产状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 资产状态
-	 * @param status 资产状态
-	 * @return 当前对象
-	*/
-	public Asset setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 资产编号<br>
 	 * 资产编号
 	 * @return 资产编号
@@ -395,21 +371,59 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 分类ID<br>
-	 * 分类ID
-	 * @return 分类ID
+	 * 获得 资产状态<br>
+	 * 资产状态
+	 * @return 资产状态
 	*/
-	public String getCategoryId() {
-		return categoryId;
+	public String getStatus() {
+		return status;
 	}
 	
 	/**
-	 * 设置 分类ID
-	 * @param categoryId 分类ID
+	 * 设置 资产状态
+	 * @param status 资产状态
 	 * @return 当前对象
 	*/
-	public Asset setCategoryId(String categoryId) {
-		this.categoryId=categoryId;
+	public Asset setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否显示<br>
+	 * 是否显示
+	 * @return 是否显示
+	*/
+	public String getDisplay() {
+		return display;
+	}
+	
+	/**
+	 * 设置 是否显示
+	 * @param display 是否显示
+	 * @return 当前对象
+	*/
+	public Asset setDisplay(String display) {
+		this.display=display;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否报废<br>
+	 * 是否报废
+	 * @return 是否报废
+	*/
+	public String getScrap() {
+		return scrap;
+	}
+	
+	/**
+	 * 设置 是否报废
+	 * @param scrap 是否报废
+	 * @return 当前对象
+	*/
+	public Asset setScrap(String scrap) {
+		this.scrap=scrap;
 		return this;
 	}
 	
@@ -547,154 +561,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 资产RFID<br>
-	 * 资产RFID
-	 * @return 资产RFID
+	 * 获得 序列号<br>
+	 * 序列号
+	 * @return 序列号
 	*/
-	public String getRfid() {
-		return rfid;
+	public String getSerialNumber() {
+		return serialNumber;
 	}
 	
 	/**
-	 * 设置 资产RFID
-	 * @param rfid 资产RFID
+	 * 设置 序列号
+	 * @param serialNumber 序列号
 	 * @return 当前对象
 	*/
-	public Asset setRfid(String rfid) {
-		this.rfid=rfid;
-		return this;
-	}
-	
-	/**
-	 * 获得 资产序列号<br>
-	 * 资产序列号
-	 * @return 资产序列号
-	*/
-	public String getSn() {
-		return sn;
-	}
-	
-	/**
-	 * 设置 资产序列号
-	 * @param sn 资产序列号
-	 * @return 当前对象
-	*/
-	public Asset setSn(String sn) {
-		this.sn=sn;
-		return this;
-	}
-	
-	/**
-	 * 获得 资产数量<br>
-	 * 资产数量
-	 * @return 资产数量
-	*/
-	public Integer getAssetNumber() {
-		return assetNumber;
-	}
-	
-	/**
-	 * 设置 资产数量
-	 * @param assetNumber 资产数量
-	 * @return 当前对象
-	*/
-	public Asset setAssetNumber(Integer assetNumber) {
-		this.assetNumber=assetNumber;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源<br>
-	 * 来源
-	 * @return 来源
-	*/
-	public String getSourceId() {
-		return sourceId;
-	}
-	
-	/**
-	 * 设置 来源
-	 * @param sourceId 来源
-	 * @return 当前对象
-	*/
-	public Asset setSourceId(String sourceId) {
-		this.sourceId=sourceId;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源详情<br>
-	 * 来源详情
-	 * @return 来源详情
-	*/
-	public String getSourceDetail() {
-		return sourceDetail;
-	}
-	
-	/**
-	 * 设置 来源详情
-	 * @param sourceDetail 来源详情
-	 * @return 当前对象
-	*/
-	public Asset setSourceDetail(String sourceDetail) {
-		this.sourceDetail=sourceDetail;
-		return this;
-	}
-	
-	/**
-	 * 获得 存放区域<br>
-	 * 存放区域
-	 * @return 存放区域
-	*/
-	public String getAreaId() {
-		return areaId;
-	}
-	
-	/**
-	 * 设置 存放区域
-	 * @param areaId 存放区域
-	 * @return 当前对象
-	*/
-	public Asset setAreaId(String areaId) {
-		this.areaId=areaId;
-		return this;
-	}
-	
-	/**
-	 * 获得 存放地点<br>
-	 * 存放地点
-	 * @return 存放地点
-	*/
-	public String getPlaceDetail() {
-		return placeDetail;
-	}
-	
-	/**
-	 * 设置 存放地点
-	 * @param placeDetail 存放地点
-	 * @return 当前对象
-	*/
-	public Asset setPlaceDetail(String placeDetail) {
-		this.placeDetail=placeDetail;
-		return this;
-	}
-	
-	/**
-	 * 获得 使用人员<br>
-	 * 使用人员
-	 * @return 使用人员
-	*/
-	public String getUserId() {
-		return userId;
-	}
-	
-	/**
-	 * 设置 使用人员
-	 * @param userId 使用人员
-	 * @return 当前对象
-	*/
-	public Asset setUserId(String userId) {
-		this.userId=userId;
+	public Asset setSerialNumber(String serialNumber) {
+		this.serialNumber=serialNumber;
 		return this;
 	}
 	
@@ -718,59 +599,97 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 入库时间<br>
-	 * 入库时间
-	 * @return 入库时间
+	 * 获得 资产RFID<br>
+	 * 资产RFID
+	 * @return 资产RFID
 	*/
-	public Date getStorageTime() {
-		return storageTime;
+	public String getRfid() {
+		return rfid;
 	}
 	
 	/**
-	 * 设置 入库时间
-	 * @param storageTime 入库时间
+	 * 设置 资产RFID
+	 * @param rfid 资产RFID
 	 * @return 当前对象
 	*/
-	public Asset setStorageTime(Date storageTime) {
-		this.storageTime=storageTime;
+	public Asset setRfid(String rfid) {
+		this.rfid=rfid;
 		return this;
 	}
 	
 	/**
-	 * 获得 是否显示<br>
-	 * 是否显示
-	 * @return 是否显示
+	 * 获得 使用组织ID<br>
+	 * 使用组织ID
+	 * @return 使用组织ID
 	*/
-	public String getDisplay() {
-		return display;
+	public String getUsedOrganizationId() {
+		return usedOrganizationId;
 	}
 	
 	/**
-	 * 设置 是否显示
-	 * @param display 是否显示
+	 * 设置 使用组织ID
+	 * @param usedOrganizationId 使用组织ID
 	 * @return 当前对象
 	*/
-	public Asset setDisplay(String display) {
-		this.display=display;
+	public Asset setUsedOrganizationId(String usedOrganizationId) {
+		this.usedOrganizationId=usedOrganizationId;
 		return this;
 	}
 	
 	/**
-	 * 获得 是否报废<br>
-	 * 是否报废
-	 * @return 是否报废
+	 * 获得 使用人员<br>
+	 * 使用人员
+	 * @return 使用人员
 	*/
-	public String getScrap() {
-		return scrap;
+	public String getUserId() {
+		return userId;
 	}
 	
 	/**
-	 * 设置 是否报废
-	 * @param scrap 是否报废
+	 * 设置 使用人员
+	 * @param userId 使用人员
 	 * @return 当前对象
 	*/
-	public Asset setScrap(String scrap) {
-		this.scrap=scrap;
+	public Asset setUserId(String userId) {
+		this.userId=userId;
+		return this;
+	}
+	
+	/**
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
+	*/
+	public String getPositionId() {
+		return positionId;
+	}
+	
+	/**
+	 * 设置 存放位置
+	 * @param positionId 存放位置
+	 * @return 当前对象
+	*/
+	public Asset setPositionId(String positionId) {
+		this.positionId=positionId;
+		return this;
+	}
+	
+	/**
+	 * 获得 详细位置<br>
+	 * 详细位置
+	 * @return 详细位置
+	*/
+	public String getPositionDetail() {
+		return positionDetail;
+	}
+	
+	/**
+	 * 设置 详细位置
+	 * @param positionDetail 详细位置
+	 * @return 当前对象
+	*/
+	public Asset setPositionDetail(String positionDetail) {
+		this.positionDetail=positionDetail;
 		return this;
 	}
 	
@@ -798,17 +717,17 @@ public class Asset extends Entity {
 	 * 备注
 	 * @return 备注
 	*/
-	public String getAssetsNotes() {
-		return assetsNotes;
+	public String getNotes() {
+		return notes;
 	}
 	
 	/**
 	 * 设置 备注
-	 * @param assetsNotes 备注
+	 * @param notes 备注
 	 * @return 当前对象
 	*/
-	public Asset setAssetsNotes(String assetsNotes) {
-		this.assetsNotes=assetsNotes;
+	public Asset setNotes(String notes) {
+		this.notes=notes;
 		return this;
 	}
 	
@@ -984,30 +903,11 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 采购单价<br>
-	 * 采购单价
-	 * @return 采购单价
-	*/
-	public String getPurchaseUnitPrice() {
-		return purchaseUnitPrice;
-	}
-	
-	/**
-	 * 设置 采购单价
-	 * @param purchaseUnitPrice 采购单价
-	 * @return 当前对象
-	*/
-	public Asset setPurchaseUnitPrice(String purchaseUnitPrice) {
-		this.purchaseUnitPrice=purchaseUnitPrice;
-		return this;
-	}
-	
-	/**
 	 * 获得 维保信息<br>
 	 * 维保信息
 	 * @return 维保信息
 	*/
-	public AssetExtMaintainer getAssetMaintainer() {
+	public AssetExtFinancial getAssetMaintainer() {
 		return assetMaintainer;
 	}
 	
@@ -1016,7 +916,7 @@ public class Asset extends Entity {
 	 * @param assetMaintainer 维保信息
 	 * @return 当前对象
 	*/
-	public Asset setAssetMaintainer(AssetExtMaintainer assetMaintainer) {
+	public Asset setAssetMaintainer(AssetExtFinancial assetMaintainer) {
 		this.assetMaintainer=assetMaintainer;
 		return this;
 	}
@@ -1136,21 +1036,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 区域<br>
-	 * 区域
-	 * @return 区域
+	 * 获得 位置<br>
+	 * 位置
+	 * @return 位置
 	*/
-	public Area getArea() {
-		return area;
+	public Position getPosition() {
+		return position;
 	}
 	
 	/**
-	 * 设置 区域
-	 * @param area 区域
+	 * 设置 位置
+	 * @param position 位置
 	 * @return 当前对象
 	*/
-	public Asset setArea(Area area) {
-		this.area=area;
+	public Asset setPosition(Position position) {
+		this.position=position;
 		return this;
 	}
 

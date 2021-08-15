@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:51
- * @sign C76E500B932E95AD19FB1FDEFB3062C1
+ * @since 2021-08-15 18:34:58
+ * @sign 20944402DD36552A747E148CECF7A99B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class ServiceInfo extends Entity {
 	private String id;
 	
 	/**
-	 * 服务ID：服务ID
+	 * 服务分类：服务分类
 	*/
-	@ApiModelProperty(required = false,value="服务ID" , notes = "服务ID")
+	@ApiModelProperty(required = false,value="服务分类" , notes = "服务分类")
 	private String serviceCategoryId;
 	
 	/**
@@ -139,17 +139,17 @@ public class ServiceInfo extends Entity {
 	}
 	
 	/**
-	 * 获得 服务ID<br>
-	 * 服务ID
-	 * @return 服务ID
+	 * 获得 服务分类<br>
+	 * 服务分类
+	 * @return 服务分类
 	*/
 	public String getServiceCategoryId() {
 		return serviceCategoryId;
 	}
 	
 	/**
-	 * 设置 服务ID
-	 * @param serviceCategoryId 服务ID
+	 * 设置 服务分类
+	 * @param serviceCategoryId 服务分类
 	 * @return 当前对象
 	*/
 	public ServiceInfo setServiceCategoryId(String serviceCategoryId) {

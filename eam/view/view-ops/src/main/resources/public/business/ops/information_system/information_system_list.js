@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:38
+ * @since 2021-08-15 18:34:43
  */
 
 
@@ -111,9 +111,9 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.name={ value: $("#name").val()};
+		value.status={ value: xmSelect.get("#status",true).getValue("value")};
 		value.technicalContact={ value: $("#technicalContact").val()};
 		value.businessContact={ value: $("#businessContact").val()};
-		value.hardwareInfo={ value: $("#hardwareInfo").val()};
 		value.labels={ value: $("#labels").val()};
 		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
@@ -145,6 +145,23 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	

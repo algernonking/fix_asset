@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:51
+ * @since 2021-08-15 18:34:58
 */
 
 @Api(tags = "服务")
@@ -67,7 +67,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "添加服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -123,7 +123,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "更新服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -145,7 +145,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "保存服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -208,7 +208,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "查询服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -231,7 +231,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "分页查询服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务ID" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),

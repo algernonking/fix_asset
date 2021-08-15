@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 19:44:11
+ * @since 2021-08-15 17:43:31
  */
  -->
  <!DOCTYPE html>
@@ -36,25 +36,20 @@
                         <div class="search-label-div"><span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , busiCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('资产编号')}" class="search-label">资产编号</span><span class="search-colon">:</span></div>
-                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 序列 , sn ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('序列')}" class="search-label">序列</span><span class="search-colon">:</span></div>
-                        <input id="sn" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('业务编号')}" class="search-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="busiCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 单据编号 , busiCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 序列 , serialNumber ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('单据编号')}" class="search-label">单据编号</span><span class="search-colon">:</span></div>
-                        <input id="busiCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('序列')}" class="search-label">序列</span><span class="search-colon">:</span></div>
+                        <input id="serialNumber" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 资产状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -66,45 +61,15 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 使用人员 , userId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('使用人员')}" class="search-label">使用人员</span><span class="search-colon">:</span></div>
-                        <input id="userId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 备注 , assetsNotes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="assetsNotes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 规格型号 , model ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('来源')}" class="search-label">来源</span><span class="search-colon">:</span></div>
-                        <div id="sourceId" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
-                    </div>
-
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
-                    <!-- 来源详情 , sourceDetail ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('来源详情')}" class="search-label">来源详情</span><span class="search-colon">:</span></div>
-                        <input id="sourceDetail" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 存放地点 , placeDetail ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('存放地点')}" class="search-label">存放地点</span><span class="search-colon">:</span></div>
-                        <input id="placeDetail" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 入库时间 , storageTime ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('入库时间')}" class="search-label">入库时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="storageTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
-                    <!-- 批次代码 , batchCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('批次代码')}" class="search-label">批次代码</span><span class="search-colon">:</span></div>
-                        <input id="batchCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('规格型号')}" class="search-label">规格型号</span><span class="search-colon">:</span></div>
+                        <input id="model" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -149,7 +114,6 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
-    var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
     var AUTH_PREFIX="eam_asset";
 </script>
 

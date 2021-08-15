@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 19:44:12
+ * @since 2021-08-15 17:43:31
  */
 
 
@@ -54,11 +54,13 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'busiCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据编号') }
-					,{ field: 'batchCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('批次代码') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') }
 					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}}
+					,{ field: 'busiCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
+					,{ field: 'batchCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('批次代码') }
+					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
+					,{ field: 'display', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否显示') }
+					,{ field: 'scrap', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否报废') }
 					,{ field: 'goodsId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物品档案'), templet: function (d) { return fox.joinLabel(d.goods,"name");}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
 					,{ field: 'manufacturerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('厂商'), templet: function (d) { return fox.joinLabel(d.manufacturer,"manufacturerName");}}
@@ -66,22 +68,16 @@ function ListPage() {
 					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号') }
 					,{ field: 'pictureId', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('标准型号物品图片'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.pictureId+'" />'; } }
 					,{ field: 'unit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单位') }
-					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产RFID') }
-					,{ field: 'sn', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列') }
-					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') }
-					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源'), templet:function (d){ return fox.getDictText(SELECT_SOURCEID_DATA,d.sourceId);}}
-					,{ field: 'sourceDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源详情') }
-					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"areaName");}}
-					,{ field: 'placeDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放地点') }
-					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
+					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列') }
 					,{ field: 'productionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生产日期'), templet: function (d) { return fox.dateFormat(d.productionDate); }}
-					,{ field: 'storageTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }}
-					,{ field: 'display', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否显示') }
-					,{ field: 'scrap', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('是否报废') }
+					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产RFID') }
+					,{ field: 'usedOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用组织ID') }
+					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
+					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
 					,{ field: 'insertType', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('插入方式') }
-					,{ field: 'assetsNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
-					,{ field: 'purchaseUnitPrice', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -113,17 +109,11 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.busiCode={ value: $("#busiCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.batchCode={ value: $("#batchCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value")};
-		value.assetCode={ value: $("#assetCode").val()};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.sn={ value: $("#sn").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value")};
-		value.sourceDetail={ value: $("#sourceDetail").val()};
-		value.placeDetail={ value: $("#placeDetail").val()};
-		value.userId={ value: $("#userId").val()};
-		value.storageTime={ value: $("#storageTime").val()};
-		value.assetsNotes={ value: $("#assetsNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -169,27 +159,6 @@ function ListPage() {
 				}
 				return opts;
 			}
-		});
-		//渲染 sourceId 下拉字段
-		fox.renderSelectBox({
-			el: "sourceId",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		laydate.render({
-			elem: '#storageTime',
-			trigger:"click"
 		});
 		fox.renderSearchInputs();
 	}

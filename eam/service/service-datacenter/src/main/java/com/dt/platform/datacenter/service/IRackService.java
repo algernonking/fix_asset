@@ -18,10 +18,10 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 机柜管理 服务接口
+ * 机柜 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:17
+ * @since 2021-08-15 18:34:21
 */
 
 public interface IRackService extends ISuperService<Rack> {
@@ -43,7 +43,7 @@ public interface IRackService extends ISuperService<Rack> {
 	
 		
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 机柜
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IRackService extends ISuperService<Rack> {
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 机柜管理
+	 * 按主键删除 机柜
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IRackService extends ISuperService<Rack> {
 	
 		
 	/**
-	 * 按主键更新字段 机柜管理
+	 * 按主键更新字段 机柜
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +124,7 @@ public interface IRackService extends ISuperService<Rack> {
  
 		
 	/**
-	 * 按主键获取 机柜管理
+	 * 按主键获取 机柜
 	 *
 	 * @param id 主键
 	 * @return Rack 数据对象

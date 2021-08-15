@@ -9,8 +9,8 @@ import com.dt.platform.domain.ops.ServiceCategory;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:51
- * @sign C76E500B932E95AD19FB1FDEFB3062C1
+ * @since 2021-08-15 18:34:58
+ * @sign 20944402DD36552A747E148CECF7A99B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,14 +27,14 @@ public class ServiceInfoMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 服务ID , 类型: java.lang.String
+	 * 服务分类 , 类型: java.lang.String
 	*/
 	public static final String SERVICE_CATEGORY_ID="serviceCategoryId";
 	
 	/**
-	 * 服务ID , 类型: java.lang.String
+	 * 服务分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> SERVICE_CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,SERVICE_CATEGORY_ID, java.lang.String.class, "服务ID", "服务ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> SERVICE_CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,SERVICE_CATEGORY_ID, java.lang.String.class, "服务分类", "服务分类", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -191,8 +191,8 @@ public class ServiceInfoMeta {
 		}
 		
 		/**
-		 * 设置 服务ID
-		 * @param serviceCategoryId 服务ID
+		 * 设置 服务分类
+		 * @param serviceCategoryId 服务分类
 		 * @return 当前对象
 		*/
 		public ServiceInfo setServiceCategoryId(String serviceCategoryId) {

@@ -10,10 +10,10 @@ import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 机柜管理 模版页面控制器
+ * 机柜 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:17
+ * @since 2021-08-15 18:34:21
 */
 
 @Controller("DcRackPageController")
@@ -38,7 +38,7 @@ public class RackPageController extends ViewController {
 	}
 	
 	/**
-	 * 机柜管理 功能主页面
+	 * 机柜 功能主页面
 	 */
 	@RequestMapping("/rack_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class RackPageController extends ViewController {
 	}
 
 	/**
-	 * 机柜管理 表单页面
+	 * 机柜 表单页面
 	 */
 	@RequestMapping("/rack_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

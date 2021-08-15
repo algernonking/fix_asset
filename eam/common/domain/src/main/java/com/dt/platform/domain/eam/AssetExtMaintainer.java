@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:21
- * @sign 766FB2901682721DE3DCA43A2EAC6FFC
+ * @since 2021-08-15 18:34:26
+ * @sign 04C14B8E1404382FCCB6191CE9FD8195
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class AssetExtMaintainer extends Entity {
 	private String id;
 	
 	/**
-	 * 资产ID：资产ID
+	 * 资产：资产
 	*/
-	@ApiModelProperty(required = false,value="资产ID" , notes = "资产ID")
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
 	
 	/**
@@ -51,13 +51,13 @@ public class AssetExtMaintainer extends Entity {
 	 * 维保开始时间：维保开始时间
 	*/
 	@ApiModelProperty(required = false,value="维保开始时间" , notes = "维保开始时间")
-	private Date maintenanceStarttime;
+	private Date maintenanceStartTime;
 	
 	/**
 	 * 维保到期时间：维保到期时间
 	*/
 	@ApiModelProperty(required = false,value="维保到期时间" , notes = "维保到期时间")
-	private Date maintenanceEndtime;
+	private Date maintenanceEndTime;
 	
 	/**
 	 * 备注：备注
@@ -114,6 +114,12 @@ public class AssetExtMaintainer extends Entity {
 	private Integer version;
 	
 	/**
+	 * 维保商：维保商
+	*/
+	@ApiModelProperty(required = false,value="维保商" , notes = "维保商")
+	private Maintainer maintnainer;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -133,17 +139,17 @@ public class AssetExtMaintainer extends Entity {
 	}
 	
 	/**
-	 * 获得 资产ID<br>
-	 * 资产ID
-	 * @return 资产ID
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
 	*/
 	public String getAssetId() {
 		return assetId;
 	}
 	
 	/**
-	 * 设置 资产ID
-	 * @param assetId 资产ID
+	 * 设置 资产
+	 * @param assetId 资产
 	 * @return 当前对象
 	*/
 	public AssetExtMaintainer setAssetId(String assetId) {
@@ -175,17 +181,17 @@ public class AssetExtMaintainer extends Entity {
 	 * 维保开始时间
 	 * @return 维保开始时间
 	*/
-	public Date getMaintenanceStarttime() {
-		return maintenanceStarttime;
+	public Date getMaintenanceStartTime() {
+		return maintenanceStartTime;
 	}
 	
 	/**
 	 * 设置 维保开始时间
-	 * @param maintenanceStarttime 维保开始时间
+	 * @param maintenanceStartTime 维保开始时间
 	 * @return 当前对象
 	*/
-	public AssetExtMaintainer setMaintenanceStarttime(Date maintenanceStarttime) {
-		this.maintenanceStarttime=maintenanceStarttime;
+	public AssetExtMaintainer setMaintenanceStartTime(Date maintenanceStartTime) {
+		this.maintenanceStartTime=maintenanceStartTime;
 		return this;
 	}
 	
@@ -194,17 +200,17 @@ public class AssetExtMaintainer extends Entity {
 	 * 维保到期时间
 	 * @return 维保到期时间
 	*/
-	public Date getMaintenanceEndtime() {
-		return maintenanceEndtime;
+	public Date getMaintenanceEndTime() {
+		return maintenanceEndTime;
 	}
 	
 	/**
 	 * 设置 维保到期时间
-	 * @param maintenanceEndtime 维保到期时间
+	 * @param maintenanceEndTime 维保到期时间
 	 * @return 当前对象
 	*/
-	public AssetExtMaintainer setMaintenanceEndtime(Date maintenanceEndtime) {
-		this.maintenanceEndtime=maintenanceEndtime;
+	public AssetExtMaintainer setMaintenanceEndTime(Date maintenanceEndTime) {
+		this.maintenanceEndTime=maintenanceEndTime;
 		return this;
 	}
 	
@@ -376,6 +382,25 @@ public class AssetExtMaintainer extends Entity {
 	*/
 	public AssetExtMaintainer setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保商<br>
+	 * 维保商
+	 * @return 维保商
+	*/
+	public Maintainer getMaintnainer() {
+		return maintnainer;
+	}
+	
+	/**
+	 * 设置 维保商
+	 * @param maintnainer 维保商
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setMaintnainer(Maintainer maintnainer) {
+		this.maintnainer=maintnainer;
 		return this;
 	}
 

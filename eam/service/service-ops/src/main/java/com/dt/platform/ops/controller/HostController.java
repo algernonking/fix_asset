@@ -52,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:48
+ * @since 2021-08-15 18:34:54
 */
 
 @Api(tags = "主机")
@@ -72,13 +72,13 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
 		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
-		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态(online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态(valid" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
@@ -92,14 +92,12 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "ops"),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-13 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
-		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = true , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = HostVOMeta.ID)
-	@NotNull(name = HostVOMeta.HOST_IP)
-	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.INSERT)
 	public Result insert(HostVO hostVO) {
@@ -150,13 +148,13 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
 		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
-		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态(online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态(valid" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
@@ -170,14 +168,12 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "ops"),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-13 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
-		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = true , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { HostVOMeta.PAGE_INDEX , HostVOMeta.PAGE_SIZE , HostVOMeta.SEARCH_FIELD , HostVOMeta.FUZZY_FIELD , HostVOMeta.SEARCH_VALUE , HostVOMeta.SORT_FIELD , HostVOMeta.SORT_TYPE , HostVOMeta.IDS } ) 
 	@NotNull(name = HostVOMeta.ID)
-	@NotNull(name = HostVOMeta.HOST_IP)
-	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.UPDATE)
 	public Result update(HostVO hostVO) {
@@ -194,13 +190,13 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
 		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
-		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态(online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态(valid" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
@@ -214,14 +210,12 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "ops"),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-13 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
-		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = true , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostVOMeta.PAGE_INDEX , HostVOMeta.PAGE_SIZE , HostVOMeta.SEARCH_FIELD , HostVOMeta.FUZZY_FIELD , HostVOMeta.SEARCH_VALUE , HostVOMeta.SORT_FIELD , HostVOMeta.SORT_TYPE , HostVOMeta.IDS } )
 	@NotNull(name = HostVOMeta.ID)
-	@NotNull(name = HostVOMeta.HOST_IP)
-	@NotNull(name = HostVOMeta.ARCH)
 	@SentinelResource(value = HostServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostServiceProxy.SAVE)
 	public Result save(HostVO hostVO) {
@@ -287,13 +281,13 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
 		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
-		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态(online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态(valid" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
@@ -307,7 +301,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "ops"),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-13 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
-		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = true , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -330,13 +324,13 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
 		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
-		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态online" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态(online" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境prod" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = HostVOMeta.POSITION_ID , value = "位置" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态:valid" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = HostVOMeta.MONITOR_STATUS , value = "监控状态(valid" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.DIRECTOR_USERNAME , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_MEMORY , value = "内存" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_CPU , value = "CPU" , required = false , dataTypeClass=BigDecimal.class , example = "1.00"),
@@ -350,7 +344,7 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "ops"),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-13 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
-		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = true , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档1归档0不归档" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

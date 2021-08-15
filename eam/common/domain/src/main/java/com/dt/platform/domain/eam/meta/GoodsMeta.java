@@ -12,8 +12,8 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:26
- * @sign 8C92599713D301CB1BB891E008819137
+ * @since 2021-08-15 18:34:31
+ * @sign C1B0AC78D5A0C0C419F6BE030323C231
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -30,24 +30,24 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , used|unsed , 类型: java.lang.String
+	 * 状态(used , unsed) , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 状态 , used|unsed , 类型: java.lang.String
+	 * 状态(used , unsed) , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态", "used|unsed", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态(used", "unsed)", java.lang.String.class, null);
 	
 	/**
-	 * 分类ID , 类型: java.lang.String
+	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_ID="categoryId";
 	
 	/**
-	 * 分类ID , 类型: java.lang.String
+	 * 资产分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY_ID, java.lang.String.class, "分类ID", "分类ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY_ID, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
 	
 	/**
 	 * 标准型号物品名称 , 类型: java.lang.String
@@ -264,8 +264,8 @@ public class GoodsMeta {
 		}
 		
 		/**
-		 * 设置 状态
-		 * @param status 状态
+		 * 设置 状态(used
+		 * @param status 状态(used
 		 * @return 当前对象
 		*/
 		public Goods setStatus(String status) {
@@ -275,8 +275,8 @@ public class GoodsMeta {
 		}
 		
 		/**
-		 * 设置 分类ID
-		 * @param categoryId 分类ID
+		 * 设置 资产分类
+		 * @param categoryId 资产分类
 		 * @return 当前对象
 		*/
 		public Goods setCategoryId(String categoryId) {

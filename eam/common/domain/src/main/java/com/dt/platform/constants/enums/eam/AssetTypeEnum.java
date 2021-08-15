@@ -13,7 +13,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetTypeEnum implements CodeTextEnum {
 
-	ASSET_NORMAL("asset_normal" , "资产"),
+	ASSET("asset" , "资产"),
 	ASSET_SOFTWARE("asset_software" , "软件资产"),
 	ASSET_CONSUMABLES("asset_consumables" , "耗材"),
 	ASSET_SPAREPARTS("asset_spareparts" , "备品备件")

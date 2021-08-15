@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:26
- * @sign 8C92599713D301CB1BB891E008819137
+ * @since 2021-08-15 18:34:31
+ * @sign C1B0AC78D5A0C0C419F6BE030323C231
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,15 +37,15 @@ public class Goods extends Entity {
 	private String id;
 	
 	/**
-	 * 状态：used|unsed
+	 * 状态(used：unsed)
 	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "used|unsed")
+	@ApiModelProperty(required = false,value="状态(used" , notes = "unsed)")
 	private String status;
 	
 	/**
-	 * 分类ID：分类ID
+	 * 资产分类：资产分类
 	*/
-	@ApiModelProperty(required = false,value="分类ID" , notes = "分类ID")
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
 	private String categoryId;
 	
 	/**
@@ -182,17 +182,17 @@ public class Goods extends Entity {
 	}
 	
 	/**
-	 * 获得 状态<br>
-	 * used|unsed
-	 * @return 状态
+	 * 获得 状态(used<br>
+	 * unsed)
+	 * @return 状态(used
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 状态
-	 * @param status 状态
+	 * 设置 状态(used
+	 * @param status 状态(used
 	 * @return 当前对象
 	*/
 	public Goods setStatus(String status) {
@@ -201,17 +201,17 @@ public class Goods extends Entity {
 	}
 	
 	/**
-	 * 获得 分类ID<br>
-	 * 分类ID
-	 * @return 分类ID
+	 * 获得 资产分类<br>
+	 * 资产分类
+	 * @return 资产分类
 	*/
 	public String getCategoryId() {
 		return categoryId;
 	}
 	
 	/**
-	 * 设置 分类ID
-	 * @param categoryId 分类ID
+	 * 设置 资产分类
+	 * @param categoryId 资产分类
 	 * @return 当前对象
 	*/
 	public Goods setCategoryId(String categoryId) {

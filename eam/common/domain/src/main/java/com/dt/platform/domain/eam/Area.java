@@ -3,7 +3,7 @@ package com.dt.platform.domain.eam;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_AREA;
+import com.dt.platform.constants.db.EAMTables.EAM_POSITION;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -26,7 +26,7 @@ public class Area extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_AREA.$TABLE;
+	public static final DBTable TABLE =EAM_POSITION.$TABLE;
 	
 	/**
 	 * 主键：主键

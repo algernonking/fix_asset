@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:18
- * @sign 1E15C087FCF4AF131F23E047FD27C2EA
+ * @since 2021-08-15 18:34:23
+ * @sign C461818A29F09170CDE307D6F3941E09
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class AssetExtEquipment extends Entity {
 	private String id;
 	
 	/**
-	 * 资产ID：资产ID
+	 * 资产：资产
 	*/
-	@ApiModelProperty(required = false,value="资产ID" , notes = "资产ID")
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
 	
 	/**
@@ -78,9 +78,21 @@ public class AssetExtEquipment extends Entity {
 	private String equipmentDesc;
 	
 	/**
-	 * 机柜ID：机柜ID
+	 * 区域：区域
 	*/
-	@ApiModelProperty(required = false,value="机柜ID" , notes = "机柜ID")
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String areaId;
+	
+	/**
+	 * 层级：层级
+	*/
+	@ApiModelProperty(required = false,value="层级" , notes = "层级")
+	private String layerId;
+	
+	/**
+	 * 机柜：机柜
+	*/
+	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
 	private String rackId;
 	
 	/**
@@ -163,17 +175,17 @@ public class AssetExtEquipment extends Entity {
 	}
 	
 	/**
-	 * 获得 资产ID<br>
-	 * 资产ID
-	 * @return 资产ID
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
 	*/
 	public String getAssetId() {
 		return assetId;
 	}
 	
 	/**
-	 * 设置 资产ID
-	 * @param assetId 资产ID
+	 * 设置 资产
+	 * @param assetId 资产
 	 * @return 当前对象
 	*/
 	public AssetExtEquipment setAssetId(String assetId) {
@@ -296,17 +308,55 @@ public class AssetExtEquipment extends Entity {
 	}
 	
 	/**
-	 * 获得 机柜ID<br>
-	 * 机柜ID
-	 * @return 机柜ID
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public String getAreaId() {
+		return areaId;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param areaId 区域
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setAreaId(String areaId) {
+		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 层级<br>
+	 * 层级
+	 * @return 层级
+	*/
+	public String getLayerId() {
+		return layerId;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layerId 层级
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setLayerId(String layerId) {
+		this.layerId=layerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜<br>
+	 * 机柜
+	 * @return 机柜
 	*/
 	public String getRackId() {
 		return rackId;
 	}
 	
 	/**
-	 * 设置 机柜ID
-	 * @param rackId 机柜ID
+	 * 设置 机柜
+	 * @param rackId 机柜
 	 * @return 当前对象
 	*/
 	public AssetExtEquipment setRackId(String rackId) {

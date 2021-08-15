@@ -10,10 +10,10 @@ import com.dt.platform.proxy.eam.BrandServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 品牌表 模版页面控制器
+ * 品牌 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:23
+ * @since 2021-08-15 18:34:28
 */
 
 @Controller("EamBrandPageController")

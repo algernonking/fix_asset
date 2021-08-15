@@ -1,0 +1,12 @@
+SELECT
+     CONCAT(' ALTER TABLE  eam.',TABLE_NAME,' modify ',' ',COLUMN_NAME,' ',COLUMN_TYPE,'     CHARACTER SET utf8mb4 collate utf8mb4_general_ci  comment ''',column_comment,'''; ') sql2
+     -- , t.*
+    FROM
+    information_schema.columns t
+WHERE
+    TABLE_SCHEMA = 'eam'
+    and  DATA_TYPE='varchar'
+    and collation_name='utf8_general_ci'
+
+
+     select * from   information_schema.tables t  where  TABLE_SCHEMA = 'eam'

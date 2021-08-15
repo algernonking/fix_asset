@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:13
- * @sign 2B963E391B74E2EC634140ABE40E210A
+ * @since 2021-08-15 18:34:17
+ * @sign 1AE02B51809C3C724191198B7DE97D20
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,7 +38,7 @@ public class Area extends Entity {
 	/**
 	 * 类型：类型
 	*/
-	@ApiModelProperty(required = true,value="类型" , notes = "类型")
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
 	private String type;
 	
 	/**

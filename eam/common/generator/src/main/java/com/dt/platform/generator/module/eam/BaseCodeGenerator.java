@@ -13,6 +13,9 @@ public class BaseCodeGenerator {
 
     public static final String BASIC_ASSET_MGR_MENU_ID="471985490283724800";
 
+    public static final String BASIC_ASSET_CHANGE_MENU_ID="479208678382108672";
+
+
     //
     private String appId="service-eam";
 

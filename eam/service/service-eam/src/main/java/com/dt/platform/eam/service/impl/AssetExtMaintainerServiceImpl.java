@@ -32,10 +32,10 @@ import java.util.Date;
 
 /**
  * <p>
- * 资产维保属性 服务实现
+ * 资产维保 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:21
+ * @since 2021-08-15 18:34:26
 */
 
 
@@ -83,7 +83,7 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	
 	
 	/**
-	 * 按主键删除 资产维保属性
+	 * 按主键删除 资产维保
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -104,7 +104,7 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	}
 	
 	/**
-	 * 按主键删除 资产维保属性
+	 * 按主键删除 资产维保
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -152,7 +152,7 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	
 	
 	/**
-	 * 按主键更新字段 资产维保属性
+	 * 按主键更新字段 资产维保
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,7 +166,7 @@ public class AssetExtMaintainerServiceImpl extends SuperService<AssetExtMaintain
 	
 	
 	/**
-	 * 按主键获取 资产维保属性
+	 * 按主键获取 资产维保
 	 *
 	 * @param id 主键
 	 * @return AssetExtMaintainer 数据对象

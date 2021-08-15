@@ -45,10 +45,8 @@ public class KnContentGtr extends BaseCodeGenerator {
 //        cfg.view().field(EAMTables.KN_CONTENT.CONTENT_TYPE).search().hidden(true);
 
 
+        cfg.view().field(EAMTables.KN_CONTENT.ATTACH).table().disable(true);
 
-
-
-        cfg.view().field(EAMTables.KN_CONTENT.ATTACH).table().hidden(true);
         cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.PROFILE).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.LINK_ADDRESS).table().disable(true);

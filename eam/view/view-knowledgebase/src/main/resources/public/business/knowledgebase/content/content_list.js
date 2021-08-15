@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 21:00:49
+ * @since 2021-08-15 18:35:01
  */
 
 
@@ -59,7 +59,6 @@ function ListPage() {
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('知识内容') }
 					,{ field: 'contentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型'), templet:function (d){ return fox.getEnumText(RADIO_CONTENTTYPE_DATA,d.contentType);}}
 					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') }
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') }
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}
 					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet: function (d) { return fox.joinLabel(d.grade,"name");}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:18
- * @sign 1E15C087FCF4AF131F23E047FD27C2EA
+ * @since 2021-08-15 18:34:23
+ * @sign C461818A29F09170CDE307D6F3941E09
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,14 +26,14 @@ public class AssetExtEquipmentMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 资产ID , 类型: java.lang.String
+	 * 资产 , 类型: java.lang.String
 	*/
 	public static final String ASSET_ID="assetId";
 	
 	/**
-	 * 资产ID , 类型: java.lang.String
+	 * 资产 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,ASSET_ID, java.lang.String.class, "资产ID", "资产ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
 	
 	/**
 	 * 设备IP , 类型: java.lang.String
@@ -96,14 +96,34 @@ public class AssetExtEquipmentMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> EQUIPMENT_DESC_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,EQUIPMENT_DESC, java.lang.String.class, "描述", "描述", java.lang.String.class, null);
 	
 	/**
-	 * 机柜ID , 类型: java.lang.String
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final String AREA_ID="areaId";
+	
+	/**
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
+	
+	/**
+	 * 层级 , 类型: java.lang.String
+	*/
+	public static final String LAYER_ID="layerId";
+	
+	/**
+	 * 层级 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> LAYER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
+	
+	/**
+	 * 机柜 , 类型: java.lang.String
 	*/
 	public static final String RACK_ID="rackId";
 	
 	/**
-	 * 机柜ID , 类型: java.lang.String
+	 * 机柜 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> RACK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_ID, java.lang.String.class, "机柜ID", "机柜ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> RACK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_ID, java.lang.String.class, "机柜", "机柜", java.lang.String.class, null);
 	
 	/**
 	 * 机柜上位置编号 , 类型: java.lang.Integer
@@ -208,7 +228,7 @@ public class AssetExtEquipmentMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , AREA_ID , LAYER_ID , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -230,8 +250,8 @@ public class AssetExtEquipmentMeta {
 		}
 		
 		/**
-		 * 设置 资产ID
-		 * @param assetId 资产ID
+		 * 设置 资产
+		 * @param assetId 资产
 		 * @return 当前对象
 		*/
 		public AssetExtEquipment setAssetId(String assetId) {
@@ -307,8 +327,30 @@ public class AssetExtEquipmentMeta {
 		}
 		
 		/**
-		 * 设置 机柜ID
-		 * @param rackId 机柜ID
+		 * 设置 区域
+		 * @param areaId 区域
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setAreaId(String areaId) {
+			super.change(AREA_ID,super.getAreaId(),areaId);
+			super.setAreaId(areaId);
+			return this;
+		}
+		
+		/**
+		 * 设置 层级
+		 * @param layerId 层级
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setLayerId(String layerId) {
+			super.change(LAYER_ID,super.getLayerId(),layerId);
+			super.setLayerId(layerId);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜
+		 * @param rackId 机柜
 		 * @return 当前对象
 		*/
 		public AssetExtEquipment setRackId(String rackId) {

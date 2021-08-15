@@ -18,10 +18,10 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 设备属性扩展 服务接口
+ * 设备属性 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:18
+ * @since 2021-08-15 18:34:23
 */
 
 public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipment> {
@@ -43,7 +43,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	
 		
 	/**
-	 * 按主键删除 设备属性扩展
+	 * 按主键删除 设备属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 设备属性扩展
+	 * 按主键删除 设备属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	
 		
 	/**
-	 * 按主键更新字段 设备属性扩展
+	 * 按主键更新字段 设备属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +124,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
  
 		
 	/**
-	 * 按主键获取 设备属性扩展
+	 * 按主键获取 设备属性
 	 *
 	 * @param id 主键
 	 * @return AssetExtEquipment 数据对象

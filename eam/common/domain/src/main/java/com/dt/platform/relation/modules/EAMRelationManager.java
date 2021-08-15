@@ -38,8 +38,8 @@ public class EAMRelationManager extends RelationManager {
 
 
         // 关联区域
-        this.property(AssetMeta.AREA_PROP)
-                .using(EAMTables.EAM_ASSET.AREA_ID).join(EAMTables.EAM_AREA.ID);
+        this.property(AssetMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
 
 
         // 关联品牌

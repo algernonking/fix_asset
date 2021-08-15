@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 19:44:13
+ * @since 2021-08-15 17:43:32
  */
  -->
  <!DOCTYPE html>
@@ -71,7 +71,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('序列')}">序列</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="sn" id="sn" name="sn" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('序列') }" type="text" class="layui-input"   />
+                        <input lay-filter="serialNumber" id="serialNumber" name="serialNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('序列') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="assetsNotes" id="assetsNotes" name="assetsNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -141,24 +141,6 @@
 
 
                 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('来源')}">来源</div></div>
-                        <div class="layui-input-block ">
-                            <div id="sourceId" input-type="select" th:data="${dict.toArray('eam_source')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('来源详情')}">来源详情</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="sourceDetail" id="sourceDetail" name="sourceDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('来源详情') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('图片')}">图片</div></div>
                     <div class="layui-upload layui-input-block ">
@@ -201,33 +183,9 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('存放地点')}">存放地点</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="placeDetail" id="placeDetail" name="placeDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('存放地点') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-            <!--结束：栏次输入框循环-->
-        </div>
-         <!--开始：group 循环-->
-
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
-            <legend>财务信息</legend>
-        </fieldset>
-
-        <div class="layui-row form-row">
-
-             <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
-
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('采购单价')}">采购单价</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="purchaseUnitPrice" id="purchaseUnitPrice" name="purchaseUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('采购单价') }" type="text" class="layui-input"   />
+                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -258,8 +216,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
-    var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
-    var VALIDATE_CONFIG={"areaId":{"labelInForm":"区域","inputType":"select_box","required":true},"storageTime":{"date":true,"labelInForm":"入库时间","inputType":"date_input"},"goodsId":{"labelInForm":"物品档案","inputType":"select_box","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"positionId":{"labelInForm":"存放位置","inputType":"select_box","required":true},"goodsId":{"labelInForm":"物品档案","inputType":"select_box","required":true},"brandId":{"labelInForm":"品牌","inputType":"select_box","required":true},"manufacturerId":{"labelInForm":"厂商","inputType":"select_box","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset";
 </script>
 

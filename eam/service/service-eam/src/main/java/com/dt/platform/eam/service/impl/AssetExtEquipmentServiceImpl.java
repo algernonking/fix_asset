@@ -32,10 +32,10 @@ import java.util.Date;
 
 /**
  * <p>
- * 设备属性扩展 服务实现
+ * 设备属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:18
+ * @since 2021-08-15 18:34:23
 */
 
 
@@ -83,7 +83,7 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	
 	
 	/**
-	 * 按主键删除 设备属性扩展
+	 * 按主键删除 设备属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -104,7 +104,7 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	}
 	
 	/**
-	 * 按主键删除 设备属性扩展
+	 * 按主键删除 设备属性
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -152,7 +152,7 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	
 	
 	/**
-	 * 按主键更新字段 设备属性扩展
+	 * 按主键更新字段 设备属性
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,7 +166,7 @@ public class AssetExtEquipmentServiceImpl extends SuperService<AssetExtEquipment
 	
 	
 	/**
-	 * 按主键获取 设备属性扩展
+	 * 按主键获取 设备属性
 	 *
 	 * @param id 主键
 	 * @return AssetExtEquipment 数据对象

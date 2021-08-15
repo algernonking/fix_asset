@@ -48,13 +48,13 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 机柜管理 接口控制器
+ * 机柜 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:17
+ * @since 2021-08-15 18:34:21
 */
 
-@Api(tags = "机柜管理")
+@Api(tags = "机柜")
 @ApiSort(0)
 @RestController("DcRackController")
 public class RackController extends SuperController {
@@ -64,9 +64,9 @@ public class RackController extends SuperController {
 
 	
 	/**
-	 * 添加机柜管理
+	 * 添加机柜
 	*/
-	@ApiOperation(value = "添加机柜管理")
+	@ApiOperation(value = "添加机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
 		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
@@ -88,9 +88,9 @@ public class RackController extends SuperController {
 
 	
 	/**
-	 * 删除机柜管理
+	 * 删除机柜
 	*/
-	@ApiOperation(value = "删除机柜管理")
+	@ApiOperation(value = "删除机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512")
 	})
@@ -105,10 +105,10 @@ public class RackController extends SuperController {
 	
 	
 	/**
-	 * 批量删除机柜管理 <br>
+	 * 批量删除机柜 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-	@ApiOperation(value = "批量删除机柜管理")
+	@ApiOperation(value = "批量删除机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 	})
@@ -122,9 +122,9 @@ public class RackController extends SuperController {
 	}
 	
 	/**
-	 * 更新机柜管理
+	 * 更新机柜
 	*/
-	@ApiOperation(value = "更新机柜管理")
+	@ApiOperation(value = "更新机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
 		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
@@ -146,9 +146,9 @@ public class RackController extends SuperController {
 	
 	
 	/**
-	 * 保存机柜管理
+	 * 保存机柜
 	*/
-	@ApiOperation(value = "保存机柜管理")
+	@ApiOperation(value = "保存机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
 		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
@@ -170,9 +170,9 @@ public class RackController extends SuperController {
 
 	
 	/**
-	 * 获取机柜管理
+	 * 获取机柜
 	*/
-	@ApiOperation(value = "获取机柜管理")
+	@ApiOperation(value = "获取机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})
@@ -193,10 +193,10 @@ public class RackController extends SuperController {
 
 
 	/**
-	 * 批量删除机柜管理 <br>
+	 * 批量删除机柜 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除机柜管理")
+		@ApiOperation(value = "批量删除机柜")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = RackVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
@@ -213,9 +213,9 @@ public class RackController extends SuperController {
 
 	
 	/**
-	 * 查询机柜管理
+	 * 查询机柜
 	*/
-	@ApiOperation(value = "查询机柜管理")
+	@ApiOperation(value = "查询机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
 		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),
@@ -238,9 +238,9 @@ public class RackController extends SuperController {
 
 	
 	/**
-	 * 分页查询机柜管理
+	 * 分页查询机柜
 	*/
-	@ApiOperation(value = "分页查询机柜管理")
+	@ApiOperation(value = "分页查询机柜")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = RackVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473612259805888512"),
 		@ApiImplicitParam(name = RackVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "473609613774684160"),

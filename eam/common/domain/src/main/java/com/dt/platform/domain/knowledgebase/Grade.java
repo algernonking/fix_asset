@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 19:00:54
- * @sign F7D4F73D71D6BC601295DA7D707071BC
+ * @since 2021-08-15 18:35:03
+ * @sign C90E6A215FDC59DE4510EAD02432D4FF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -100,18 +100,6 @@ public class Grade extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="version" , notes = "version")
 	private Integer version;
-	
-	/**
-	 * 知识分级：知识分级
-	*/
-	@ApiModelProperty(required = false,value="知识分级" , notes = "知识分级")
-	private Grade grade;
-	
-	/**
-	 * 知识分类：知识分类
-	*/
-	@ApiModelProperty(required = false,value="知识分类" , notes = "知识分类")
-	private Category category;
 	
 	/**
 	 * 获得 主键<br>
@@ -338,44 +326,6 @@ public class Grade extends Entity {
 	*/
 	public Grade setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 知识分级<br>
-	 * 知识分级
-	 * @return 知识分级
-	*/
-	public Grade getGrade() {
-		return grade;
-	}
-	
-	/**
-	 * 设置 知识分级
-	 * @param grade 知识分级
-	 * @return 当前对象
-	*/
-	public Grade setGrade(Grade grade) {
-		this.grade=grade;
-		return this;
-	}
-	
-	/**
-	 * 获得 知识分类<br>
-	 * 知识分类
-	 * @return 知识分类
-	*/
-	public Category getCategory() {
-		return category;
-	}
-	
-	/**
-	 * 设置 知识分类
-	 * @param category 知识分类
-	 * @return 当前对象
-	*/
-	public Grade setCategory(Category category) {
-		this.category=category;
 		return this;
 	}
 

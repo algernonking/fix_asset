@@ -16,10 +16,10 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 机柜管理  控制器服务代理
+ * 机柜  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:17
+ * @since 2021-08-15 18:34:21
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -41,117 +41,117 @@ public interface RackServiceProxy {
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 	
 	/**
-	 * 添加机柜管理
+	 * 添加机柜
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
 	
 	/**
-	 * 删除机柜管理
+	 * 删除机柜
 	 */
 	public static final String DELETE = API_PREFIX + "delete";
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
 	;
 	
 	/**
-	 * 更新机柜管理
+	 * 更新机柜
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
 	
 	
 	/**
-	 * 保存机柜管理
+	 * 保存机柜
 	 */
 	public static final String SAVE = API_PREFIX + "save";
 	
 	/**
-	 * 获取单个机柜管理
+	 * 获取单个机柜
 	 */
 	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
 
 	/**
-	 * 获取多个机柜管理
+	 * 获取多个机柜
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
 	;
 
 	/**
-	 * 查询机柜管理
+	 * 查询机柜
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
 	
 	/**
-	 * 分页查询机柜管理
+	 * 分页查询机柜
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
 	
 	/**
-	 * 导出机柜管理数据(Excel)
+	 * 导出机柜数据(Excel)
 	 */
 	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
 
 	/**
-	 * 下载机柜管理导入模版(Excel)
+	 * 下载机柜导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
 	
 	/**
-	 * 导入机柜管理数据(Excel)
+	 * 导入机柜数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 	
 	/**
-	 * 添加机柜管理
+	 * 添加机柜
 	*/
 	@RequestMapping(RackServiceProxy.INSERT)
 	Result insert(RackVO rackVO);
 	
 	/**
-	 * 删除机柜管理
+	 * 删除机柜
 	*/
 	@RequestMapping(RackServiceProxy.DELETE)
 	Result deleteById(String id);
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜
 	*/
 	@RequestMapping(RackServiceProxy.DELETE_BY_IDS)
 	Result deleteByIds(List<String> ids);
 
 	/**
-	 * 更新机柜管理
+	 * 更新机柜
 	*/
 	@RequestMapping(RackServiceProxy.UPDATE)
 	Result update(RackVO rackVO);
 	
 	/**
-	 * 更新机柜管理
+	 * 更新机柜
 	*/
 	@RequestMapping(RackServiceProxy.SAVE)
 	Result save(RackVO rackVO);
 	
 	/**
-	 * 获取机柜管理
+	 * 获取机柜
 	*/
 	@RequestMapping(RackServiceProxy.GET_BY_ID)
 	Result<Rack> getById(String id);
 
 	/**
-	 * 批量删除机柜管理
+	 * 批量删除机柜
 	*/
 	@RequestMapping(RackServiceProxy.GET_BY_IDS)
 	Result<List<Rack>> getByIds(List<String> ids);
 	/**
-	 * 查询机柜管理
+	 * 查询机柜
 	*/
 	@RequestMapping(RackServiceProxy.QUERY_LIST)
 	Result<List<Rack>> queryList(RackVO sample);
 	
 	/**
-	 * 分页查询机柜管理
+	 * 分页查询机柜
 	*/
 	@RequestMapping(RackServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Rack>> queryPagedList(RackVO sample);

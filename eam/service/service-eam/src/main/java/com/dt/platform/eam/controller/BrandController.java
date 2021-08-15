@@ -45,10 +45,10 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 品牌表 接口控制器
+ * 品牌 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 16:47:23
+ * @since 2021-08-15 18:34:28
 */
 
 @Api(tags = "品牌")

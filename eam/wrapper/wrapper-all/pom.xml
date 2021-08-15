@@ -163,6 +163,7 @@
 
 	</dependencies>
 	<dependencyManagement></dependencyManagement>
+
 	<build>
 		<defaultGoal>compile</defaultGoal>
 		<resources>
