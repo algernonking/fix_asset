@@ -35,7 +35,7 @@ import java.util.Date;
  * 设备属性 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:23
+ * @since 2021-08-15 19:33:45
 */
 
 

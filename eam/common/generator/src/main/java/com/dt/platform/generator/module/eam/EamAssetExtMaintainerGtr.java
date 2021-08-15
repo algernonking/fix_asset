@@ -27,6 +27,10 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 
 
+
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.ID).basic().hidden();
+
+
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID)
                 .basic().label("维保商").search().hidden()
                 .form().selectBox().queryApi(MaintainerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)

@@ -3,8 +3,8 @@ package com.dt.platform.eam.service;
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.AssetExtEquipment;
-import com.dt.platform.domain.eam.AssetExtEquipmentVO;
+import com.dt.platform.domain.eam.AssetExtSoftware;
+import com.dt.platform.domain.eam.AssetExtSoftwareVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,32 +18,32 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 设备属性 服务接口
+ * 资产软件数据 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:45
+ * @since 2021-08-15 20:36:19
 */
 
-public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipment> {
+public interface IAssetExtSoftwareService extends ISuperService<AssetExtSoftware> {
 	
 	/**
 	 * 插入实体
-	 * @param assetExtEquipment 实体数据
+	 * @param assetExtSoftware 实体数据
 	 * @return 插入是否成功
 	 * */
-	Result insert(AssetExtEquipment assetExtEquipment);
+	Result insert(AssetExtSoftware assetExtSoftware);
  
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetExtEquipmentList 实体数据清单
+	 * @param assetExtSoftwareList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	Result insertList(List<AssetExtEquipment> assetExtEquipmentList);
+	Result insertList(List<AssetExtSoftware> assetExtSoftwareList);
 	
 	
 		
 	/**
-	 * 按主键删除 设备属性
+	 * 按主键删除 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 设备属性
+	 * 按主键删除 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	
 		
 	/**
-	 * 按主键更新字段 设备属性
+	 * 按主键更新字段 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -83,75 +83,75 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	
 	/**
 	 * 更新实体
-	 * @param assetExtEquipment 数据对象
+	 * @param assetExtSoftware 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result update(AssetExtEquipment assetExtEquipment , SaveMode mode);
+	Result update(AssetExtSoftware assetExtSoftware , SaveMode mode);
 	
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetExtEquipmentList 数据对象列表
+	 * @param assetExtSoftwareList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result updateList(List<AssetExtEquipment> assetExtEquipmentList, SaveMode mode);
+	Result updateList(List<AssetExtSoftware> assetExtSoftwareList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param assetExtEquipment 实体数据
+	 * @param assetExtSoftware 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result save(AssetExtEquipment assetExtEquipment , SaveMode mode);
+	Result save(AssetExtSoftware assetExtSoftware , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
-	 * @param assetExtEquipmentList 实体数据清单
+	 * @param assetExtSoftwareList 实体数据清单
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result saveList(List<AssetExtEquipment> assetExtEquipmentList , SaveMode mode);
+	Result saveList(List<AssetExtSoftware> assetExtSoftwareList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
-	 * @param assetExtEquipment  实体对象
+	 * @param assetExtSoftware  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
 	 * */
-	boolean checkExists(AssetExtEquipment assetExtEquipment,DBField... field);
+	boolean checkExists(AssetExtSoftware assetExtSoftware,DBField... field);
  
 		
 	/**
-	 * 按主键获取 设备属性
+	 * 按主键获取 资产软件数据
 	 *
 	 * @param id 主键
-	 * @return AssetExtEquipment 数据对象
+	 * @return AssetExtSoftware 数据对象
 	 */
-	AssetExtEquipment getById(String id);
+	AssetExtSoftware getById(String id);
 		
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<AssetExtEquipment> getByIds(List<String> ids);
+	List<AssetExtSoftware> getByIds(List<String> ids);
 
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetExtEquipment 数据对象
+	 * @param assetExtSoftware 数据对象
 	 * @return 判断结果
 	 */
-	Result<AssetExtEquipment> checkExists(AssetExtEquipment assetExtEquipment);
+	Result<AssetExtSoftware> checkExists(AssetExtSoftware assetExtSoftware);
 
 	/**
 	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(AssetExtEquipment sample);
+	ConditionExpr buildQueryCondition(AssetExtSoftware sample);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
@@ -159,14 +159,14 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(AssetExtEquipment sample,String tableAliase);
+	ConditionExpr buildQueryCondition(AssetExtSoftware sample,String tableAliase);
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	List<AssetExtEquipment> queryList(AssetExtEquipment sample);
+	List<AssetExtSoftware> queryList(AssetExtSoftware sample);
  
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -175,7 +175,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<AssetExtEquipment> queryList(AssetExtEquipment sample,ConditionExpr condition,OrderBy orderBy);
+	List<AssetExtSoftware> queryList(AssetExtSoftware sample,ConditionExpr condition,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -183,7 +183,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<AssetExtEquipment> queryList(AssetExtEquipment sample,OrderBy orderBy);
+	List<AssetExtSoftware> queryList(AssetExtSoftware sample,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -191,14 +191,14 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	List<AssetExtEquipment> queryList(AssetExtEquipment sample,ConditionExpr condition);
+	List<AssetExtSoftware> queryList(AssetExtSoftware sample,ConditionExpr condition);
 	
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	AssetExtEquipment queryEntity(AssetExtEquipment sample);
+	AssetExtSoftware queryEntity(AssetExtSoftware sample);
 	
 	/**
 	 * 分页查询实体集
@@ -207,7 +207,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<AssetExtEquipment> queryPagedList(AssetExtEquipment sample,int pageSize,int pageIndex);
+	PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -218,7 +218,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<AssetExtEquipment> queryPagedList(AssetExtEquipment sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -228,7 +228,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	PagedList<AssetExtEquipment> queryPagedList(AssetExtEquipment sample,ConditionExpr condition,int pageSize,int pageIndex);
+	PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample,ConditionExpr condition,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -238,7 +238,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<AssetExtEquipment> queryPagedList(AssetExtEquipment sample,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample,OrderBy orderBy,int pageSize,int pageIndex);
  
  	/**
 	 * 查询指定字段的数据清单
@@ -264,7 +264,7 @@ public interface IAssetExtEquipmentService extends ISuperService<AssetExtEquipme
 	/**
 	 * 导出 Excel
 	 * */
-	ExcelWriter exportExcel(AssetExtEquipment sample);
+	ExcelWriter exportExcel(AssetExtSoftware sample);
 
 	/**
 	 * 导出用于数据导入的 Excel 模版

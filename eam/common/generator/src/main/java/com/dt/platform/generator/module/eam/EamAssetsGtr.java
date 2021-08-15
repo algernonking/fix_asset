@@ -23,16 +23,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetMaintainer","维保信息","维保信息");
         cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
 
-//        cfg.getPoClassFile().addSimpleProperty(String.class,"purchaseUnitPrice","采购单价","采购单价");
-
-        //数据来自外部表
-//        cfg.view().field(AssetMeta.PURCHASE_UNIT_PRICE)
-//                .basic().label("采购单价").form().numberInput();
-//        ;
-
-
-
-
 
 
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
@@ -41,6 +31,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","位置","位置");
+
 
 
 
@@ -131,32 +122,30 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET.CATEGORY_ID,
                         EAMTables.EAM_ASSET.STATUS,
-                        EAMTables.EAM_ASSET.GOODS_ID,
                         EAMTables.EAM_ASSET.SERIAL_NUMBER,
                         EAMTables.EAM_ASSET.NOTES,
+                        EAMTables.EAM_ASSET.PICTURE_ID,
+                        EAMTables.EAM_ASSET.RFID
 
                 }, new Object[] {
+                        EAMTables.EAM_ASSET.GOODS_ID,
                         EAMTables.EAM_ASSET.NAME,
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
                         EAMTables.EAM_ASSET.MODEL,
                         EAMTables.EAM_ASSET.BRAND_ID,
-
-                }, new Object[] {
-                        EAMTables.EAM_ASSET.UNIT,
-
-                        EAMTables.EAM_ASSET.PICTURE_ID
+                        EAMTables.EAM_ASSET.UNIT
                 }
         );
 
-        cfg.view().form().addGroup("所属信息",
-                new Object[] {
-                        AssetExtFinancialMeta.ASSET_CODE
-                },
-                new Object[] {
-                        EAMTables.EAM_ASSET.POSITION_DETAIL
-                }
-        );
-
+//        cfg.view().form().addGroup("所属信息",
+//                new Object[] {
+//                        AssetExtFinancialMeta.ASSET_CODE
+//                },
+//                new Object[] {
+//                        EAMTables.EAM_ASSET.POSITION_DETAIL
+//                }
+//        );
+//
 
         //文件生成覆盖模式
         cfg.overrides()

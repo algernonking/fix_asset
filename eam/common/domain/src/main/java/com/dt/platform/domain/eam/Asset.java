@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 17:43:29
- * @sign B2792CE3A9D50D68036F270DA94652DC
+ * @since 2021-08-15 20:16:27
+ * @sign BADC2682359437A54D8AB2782BAA136C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class Asset extends Entity {
 	private String id;
 	
 	/**
-	 * 分类ID：分类ID
+	 * 资产分类：资产分类
 	*/
-	@ApiModelProperty(required = false,value="分类ID" , notes = "分类ID")
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
 	private String categoryId;
 	
 	/**
@@ -78,9 +78,9 @@ public class Asset extends Entity {
 	private String scrap;
 	
 	/**
-	 * 标准型号ID：标准型号ID
+	 * 标准物品档案：标准物品档案
 	*/
-	@ApiModelProperty(required = false,value="标准型号ID" , notes = "标准型号ID")
+	@ApiModelProperty(required = false,value="标准物品档案" , notes = "标准物品档案")
 	private String goodsId;
 	
 	/**
@@ -138,9 +138,9 @@ public class Asset extends Entity {
 	private String rfid;
 	
 	/**
-	 * 使用组织ID：使用组织ID
+	 * 使用组织：使用组织
 	*/
-	@ApiModelProperty(required = false,value="使用组织ID" , notes = "使用组织ID")
+	@ApiModelProperty(required = false,value="使用组织" , notes = "使用组织")
 	private String usedOrganizationId;
 	
 	/**
@@ -295,17 +295,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 分类ID<br>
-	 * 分类ID
-	 * @return 分类ID
+	 * 获得 资产分类<br>
+	 * 资产分类
+	 * @return 资产分类
 	*/
 	public String getCategoryId() {
 		return categoryId;
 	}
 	
 	/**
-	 * 设置 分类ID
-	 * @param categoryId 分类ID
+	 * 设置 资产分类
+	 * @param categoryId 资产分类
 	 * @return 当前对象
 	*/
 	public Asset setCategoryId(String categoryId) {
@@ -428,17 +428,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 标准型号ID<br>
-	 * 标准型号ID
-	 * @return 标准型号ID
+	 * 获得 标准物品档案<br>
+	 * 标准物品档案
+	 * @return 标准物品档案
 	*/
 	public String getGoodsId() {
 		return goodsId;
 	}
 	
 	/**
-	 * 设置 标准型号ID
-	 * @param goodsId 标准型号ID
+	 * 设置 标准物品档案
+	 * @param goodsId 标准物品档案
 	 * @return 当前对象
 	*/
 	public Asset setGoodsId(String goodsId) {
@@ -618,17 +618,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用组织ID<br>
-	 * 使用组织ID
-	 * @return 使用组织ID
+	 * 获得 使用组织<br>
+	 * 使用组织
+	 * @return 使用组织
 	*/
 	public String getUsedOrganizationId() {
 		return usedOrganizationId;
 	}
 	
 	/**
-	 * 设置 使用组织ID
-	 * @param usedOrganizationId 使用组织ID
+	 * 设置 使用组织
+	 * @param usedOrganizationId 使用组织
 	 * @return 当前对象
 	*/
 	public Asset setUsedOrganizationId(String usedOrganizationId) {

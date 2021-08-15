@@ -1,7 +1,7 @@
 /**
  * 设备属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:23
+ * @since 2021-08-15 19:33:49
  */
 
 function FormPage() {
@@ -64,6 +64,60 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		//渲染 areaId 下拉字段
+		fox.renderSelectBox({
+			el: "areaId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 layerId 下拉字段
+		fox.renderSelectBox({
+			el: "layerId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 rackId 下拉字段
+		fox.renderSelectBox({
+			el: "rackId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].rackName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -85,6 +139,12 @@ function FormPage() {
 
 
 
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
 
 
 
@@ -127,6 +187,21 @@ function FormPage() {
 
 
 
+			//获取 区域 下拉框的值
+			data.field["areaId"]=xmSelect.get("#areaId",true).getValue("value");
+			if(data.field["areaId"] && data.field["areaId"].length>0) {
+				data.field["areaId"]=data.field["areaId"][0];
+			}
+			//获取 层级 下拉框的值
+			data.field["layerId"]=xmSelect.get("#layerId",true).getValue("value");
+			if(data.field["layerId"] && data.field["layerId"].length>0) {
+				data.field["layerId"]=data.field["layerId"][0];
+			}
+			//获取 机柜 下拉框的值
+			data.field["rackId"]=xmSelect.get("#rackId",true).getValue("value");
+			if(data.field["rackId"] && data.field["rackId"].length>0) {
+				data.field["rackId"]=data.field["rackId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

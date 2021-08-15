@@ -29,6 +29,8 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.ID).basic().hidden();
+
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID)
                 .basic().label("供应商").search().hidden()
@@ -41,6 +43,8 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
                 .basic().label("资产来源").search().hidden()
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
+
+
 
         cfg.view().search().inputLayout(
                 new Object[]{EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL},
@@ -59,7 +63,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
-
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.MANAGEMENT_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
@@ -67,7 +71,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_DATE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_UNIT_PRICE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.NAV_PRICE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
+
                 }
         );
 

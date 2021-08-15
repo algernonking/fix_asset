@@ -3,13 +3,16 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import java.util.Date;
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
+import com.dt.platform.domain.datacenter.Rack;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:23
- * @sign C461818A29F09170CDE307D6F3941E09
+ * @since 2021-08-15 19:33:45
+ * @sign 5F8F30CC0A3729D5F2AD65C24FCF154B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -226,9 +229,39 @@ public class AssetExtEquipmentMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
+	*/
+	public static final String AREA="area";
+	
+	/**
+	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,com.dt.platform.domain.datacenter.Area> AREA_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "区域", com.dt.platform.domain.datacenter.Area.class, null);
+	
+	/**
+	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
+	*/
+	public static final String LAYER="layer";
+	
+	/**
+	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,com.dt.platform.domain.datacenter.Layer> LAYER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,LAYER, com.dt.platform.domain.datacenter.Layer.class, "层级", "层级", com.dt.platform.domain.datacenter.Layer.class, null);
+	
+	/**
+	 * 机柜 , 类型: com.dt.platform.domain.datacenter.Rack
+	*/
+	public static final String RACK="rack";
+	
+	/**
+	 * 机柜 , 类型: com.dt.platform.domain.datacenter.Rack
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,com.dt.platform.domain.datacenter.Rack> RACK_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK, com.dt.platform.domain.datacenter.Rack.class, "机柜", "机柜", com.dt.platform.domain.datacenter.Rack.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , AREA_ID , LAYER_ID , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , AREA_ID , LAYER_ID , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER , RACK };
 	
 	/**
 	 * 代理类
@@ -466,6 +499,39 @@ public class AssetExtEquipmentMeta {
 		public AssetExtEquipment setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 区域
+		 * @param area 区域
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setArea(Area area) {
+			super.change(AREA,super.getArea(),area);
+			super.setArea(area);
+			return this;
+		}
+		
+		/**
+		 * 设置 层级
+		 * @param layer 层级
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setLayer(Layer layer) {
+			super.change(LAYER,super.getLayer(),layer);
+			super.setLayer(layer);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜
+		 * @param rack 机柜
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setRack(Rack rack) {
+			super.change(RACK,super.getRack(),rack);
+			super.setRack(rack);
 			return this;
 		}
 	}

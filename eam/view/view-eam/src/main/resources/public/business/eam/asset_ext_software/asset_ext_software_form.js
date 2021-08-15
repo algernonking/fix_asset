@@ -1,13 +1,13 @@
 /**
- * 资产财务 列表页 JS 脚本
+ * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:12
+ * @since 2021-08-15 20:36:22
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-asset-ext-financial";
+	const moduleURL="/service-eam/eam-asset-ext-software";
 
 	const disableCreateNew=false;
 	const disableModify=false;
@@ -44,7 +44,7 @@ function FormPage() {
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
-			admin.putTempData('eam-asset-ext-financial-form-area', area);
+			admin.putTempData('eam-asset-ext-software-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -64,9 +64,9 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
-		//渲染 sourceId 下拉字段
+		//渲染 distributionMode 下拉字段
 		fox.renderSelectBox({
-			el: "sourceId",
+			el: "distributionMode",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -80,46 +80,13 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染 supplierId 下拉字段
-		fox.renderSelectBox({
-			el: "supplierId",
-			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].supplierName,value:data[i].id});
-				}
-				return opts;
-			}
-		});
-		laydate.render({
-			elem: '#purchaseDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#storageTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#entryTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
 	}
 	
 	/**
       * 填充表单数据
       */
 	function fillFormData() {
-		var formData = admin.getTempData('eam-asset-ext-financial-form-data');
+		var formData = admin.getTempData('eam-asset-ext-software-form-data');
 
 		//如果是新建
 		if(!formData.id) {
@@ -134,10 +101,8 @@ function FormPage() {
 
 
 
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
+			//设置  发行方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#distributionMode",formData.distributionMode,SELECT_DISTRIBUTIONMODE_DATA);
 
 
 
@@ -180,15 +145,10 @@ function FormPage() {
 
 
 
-			//获取 资产来源 下拉框的值
-			data.field["sourceId"]=xmSelect.get("#sourceId",true).getValue("value");
-			if(data.field["sourceId"] && data.field["sourceId"].length>0) {
-				data.field["sourceId"]=data.field["sourceId"][0];
-			}
-			//获取 供应商 下拉框的值
-			data.field["supplierId"]=xmSelect.get("#supplierId",true).getValue("value");
-			if(data.field["supplierId"] && data.field["supplierId"].length>0) {
-				data.field["supplierId"]=data.field["supplierId"][0];
+			//获取 发行方式 下拉框的值
+			data.field["distributionMode"]=xmSelect.get("#distributionMode",true).getValue("value");
+			if(data.field["distributionMode"] && data.field["distributionMode"].length>0) {
+				data.field["distributionMode"]=data.field["distributionMode"][0];
 			}
 
 			//校验表单
@@ -201,7 +161,7 @@ function FormPage() {
 			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
-					var index=admin.getTempData('eam-asset-ext-financial-form-data-popup-index');
+					var index=admin.getTempData('eam-asset-ext-software-form-data-popup-index');
 	                admin.finishPopupCenter(index);
 	            } else {
 	                layer.msg(data.message, {icon: 2, time: 1000});

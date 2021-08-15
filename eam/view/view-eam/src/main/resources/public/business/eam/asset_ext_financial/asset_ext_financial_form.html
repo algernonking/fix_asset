@@ -2,7 +2,7 @@
 /**
  * 资产财务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:25
+ * @since 2021-08-15 19:33:12
  */
  -->
  <!DOCTYPE html>
@@ -94,6 +94,15 @@
                     </div>
 
 
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('财务备注')}">财务备注</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务备注') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -151,15 +160,6 @@
                             <input lay-filter="navPrice" id="navPrice" name="navPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产净值') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
                         </div>
                     </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('财务备注')}">财务备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务备注') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->

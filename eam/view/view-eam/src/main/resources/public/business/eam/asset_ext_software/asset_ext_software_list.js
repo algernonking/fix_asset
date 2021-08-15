@@ -1,7 +1,7 @@
 /**
- * 设备属性 列表页 JS 脚本
+ * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:48
+ * @since 2021-08-15 20:36:21
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-asset-ext-equipment";
+	const moduleURL="/service-eam/eam-asset-ext-software";
 	
 	/**
       * 入口函数，初始化
@@ -53,19 +53,11 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
-					,{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备IP') }
-					,{ field: 'manageIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理IP') }
-					,{ field: 'equipmentCpu', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备CPU') }
-					,{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备内存') }
-					,{ field: 'equipmentNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
-					,{ field: 'equipmentDesc', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('描述') }
-					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return fox.joinLabel(d.area,"name");}}
-					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return fox.joinLabel(d.layer,"name");}}
-					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('机柜'), templet: function (d) { return fox.joinLabel(d.rack,"rackName");}}
-					,{ field: 'rackUpPositionNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜上位置编号') }
-					,{ field: 'rackDownPositionNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜下位置编号') }
+					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') }
+					,{ field: 'distributionMode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('发行方式'), templet:function (d){ return fox.getDictText(SELECT_DISTRIBUTIONMODE_DATA,d.distributionMode);}}
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -97,10 +89,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.equipmentIp={ value: $("#equipmentIp").val()};
-		value.manageIp={ value: $("#manageIp").val()};
-		value.equipmentNotes={ value: $("#equipmentNotes").val()};
-		value.equipmentDesc={ value: $("#equipmentDesc").val()};
+		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -197,11 +186,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('设备属性')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产软件数据')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('设备属性')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产软件数据')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -241,7 +230,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('设备属性')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('资产软件数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -266,23 +255,23 @@ function ListPage() {
 	function showEditForm(data) {
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-asset-ext-equipment-form-data', data);
-		var area=admin.getTempData('eam-asset-ext-equipment-form-area');
+		admin.putTempData('eam-asset-ext-software-form-data', data);
+		var area=admin.getTempData('eam-asset-ext-software-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('设备属性')) : (fox.translate('添加')+fox.translate('设备属性'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产软件数据')) : (fox.translate('添加')+fox.translate('资产软件数据'));
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["500px",height+"px"],
 			type: 2,
-			content: '/business/eam/asset_ext_equipment/asset_ext_equipment_form.html' + queryString,
+			content: '/business/eam/asset_ext_software/asset_ext_software_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-asset-ext-equipment-form-data-popup-index', index);
+		admin.putTempData('eam-asset-ext-software-form-data-popup-index', index);
 	};
 
 };

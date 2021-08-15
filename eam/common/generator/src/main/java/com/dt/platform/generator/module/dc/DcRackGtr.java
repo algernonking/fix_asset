@@ -60,6 +60,7 @@ public class DcRackGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(RackMeta.LAYER).muliti(false);
 
+        cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).form().numberInput().range(0.0,100.0).step(1.0);
 
         //文件生成覆盖模式
         cfg.overrides()

@@ -16,8 +16,8 @@ import com.dt.platform.domain.eam.Position;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 17:43:29
- * @sign B2792CE3A9D50D68036F270DA94652DC
+ * @since 2021-08-15 20:16:27
+ * @sign BADC2682359437A54D8AB2782BAA136C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,14 +34,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 分类ID , 类型: java.lang.String
+	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_ID="categoryId";
 	
 	/**
-	 * 分类ID , 类型: java.lang.String
+	 * 资产分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATEGORY_ID, java.lang.String.class, "分类ID", "分类ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATEGORY_ID, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
 	
 	/**
 	 * 业务编号 , 类型: java.lang.String
@@ -104,14 +104,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SCRAP_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SCRAP, java.lang.String.class, "是否报废", "是否报废", java.lang.String.class, null);
 	
 	/**
-	 * 标准型号ID , 类型: java.lang.String
+	 * 标准物品档案 , 类型: java.lang.String
 	*/
 	public static final String GOODS_ID="goodsId";
 	
 	/**
-	 * 标准型号ID , 类型: java.lang.String
+	 * 标准物品档案 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> GOODS_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,GOODS_ID, java.lang.String.class, "标准型号ID", "标准型号ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> GOODS_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,GOODS_ID, java.lang.String.class, "标准物品档案", "标准物品档案", java.lang.String.class, null);
 	
 	/**
 	 * 标准型号资产名称 , 类型: java.lang.String
@@ -204,14 +204,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> RFID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RFID, java.lang.String.class, "资产RFID", "资产RFID", java.lang.String.class, null);
 	
 	/**
-	 * 使用组织ID , 类型: java.lang.String
+	 * 使用组织 , 类型: java.lang.String
 	*/
 	public static final String USED_ORGANIZATION_ID="usedOrganizationId";
 	
 	/**
-	 * 使用组织ID , 类型: java.lang.String
+	 * 使用组织 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USED_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USED_ORGANIZATION_ID, java.lang.String.class, "使用组织ID", "使用组织ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USED_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USED_ORGANIZATION_ID, java.lang.String.class, "使用组织", "使用组织", java.lang.String.class, null);
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
@@ -458,8 +458,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 分类ID
-		 * @param categoryId 分类ID
+		 * 设置 资产分类
+		 * @param categoryId 资产分类
 		 * @return 当前对象
 		*/
 		public Asset setCategoryId(String categoryId) {
@@ -535,8 +535,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 标准型号ID
-		 * @param goodsId 标准型号ID
+		 * 设置 标准物品档案
+		 * @param goodsId 标准物品档案
 		 * @return 当前对象
 		*/
 		public Asset setGoodsId(String goodsId) {
@@ -645,8 +645,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 使用组织ID
-		 * @param usedOrganizationId 使用组织ID
+		 * 设置 使用组织
+		 * @param usedOrganizationId 使用组织
 		 * @return 当前对象
 		*/
 		public Asset setUsedOrganizationId(String usedOrganizationId) {

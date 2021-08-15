@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetExtFinancial;
-import com.dt.platform.domain.eam.AssetExtFinancialVO;
+import com.dt.platform.domain.eam.AssetExtSoftware;
+import com.dt.platform.domain.eam.AssetExtSoftwareVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetExtFinancialService;
+import com.dt.platform.eam.service.IAssetExtSoftwareService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 资产财务 服务实现
+ * 资产软件数据 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:09
+ * @since 2021-08-15 20:36:19
 */
 
 
-@Service("EamAssetExtFinancialService")
-public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial> implements IAssetExtFinancialService {
+@Service("EamAssetExtSoftwareService")
+public class AssetExtSoftwareServiceImpl extends SuperService<AssetExtSoftware> implements IAssetExtSoftwareService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,38 +62,38 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	
 	/**
 	 * 插入实体
-	 * @param assetExtFinancial 实体数据
+	 * @param assetExtSoftware 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(AssetExtFinancial assetExtFinancial) {
-		Result r=super.insert(assetExtFinancial);
+	public Result insert(AssetExtSoftware assetExtSoftware) {
+		Result r=super.insert(assetExtSoftware);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetExtFinancialList 实体数据清单
+	 * @param assetExtSoftwareList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<AssetExtFinancial> assetExtFinancialList) {
-		return super.insertList(assetExtFinancialList);
+	public Result insertList(List<AssetExtSoftware> assetExtSoftwareList) {
+		return super.insertList(assetExtSoftwareList);
 	}
 	
 	
 	/**
-	 * 按主键删除 资产财务
+	 * 按主键删除 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		AssetExtFinancial assetExtFinancial = new AssetExtFinancial();
+		AssetExtSoftware assetExtSoftware = new AssetExtSoftware();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetExtFinancial.setId(id);
+		assetExtSoftware.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(assetExtFinancial);
+			boolean suc = dao.deleteEntity(assetExtSoftware);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -104,20 +104,20 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	}
 	
 	/**
-	 * 按主键删除 资产财务
+	 * 按主键删除 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		AssetExtFinancial assetExtFinancial = new AssetExtFinancial();
+		AssetExtSoftware assetExtSoftware = new AssetExtSoftware();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetExtFinancial.setId(id);
-		assetExtFinancial.setDeleted(dao.getDBTreaty().getTrueValue());
-		assetExtFinancial.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		assetExtFinancial.setDeleteTime(new Date());
+		assetExtSoftware.setId(id);
+		assetExtSoftware.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetExtSoftware.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetExtSoftware.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(assetExtFinancial,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetExtSoftware,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -129,30 +129,30 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	
 	/**
 	 * 更新实体
-	 * @param assetExtFinancial 数据对象
+	 * @param assetExtSoftware 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(AssetExtFinancial assetExtFinancial , SaveMode mode) {
-		Result r=super.update(assetExtFinancial , mode);
+	public Result update(AssetExtSoftware assetExtSoftware , SaveMode mode) {
+		Result r=super.update(assetExtSoftware , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetExtFinancialList 数据对象列表
+	 * @param assetExtSoftwareList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<AssetExtFinancial> assetExtFinancialList , SaveMode mode) {
-		return super.updateList(assetExtFinancialList , mode);
+	public Result updateList(List<AssetExtSoftware> assetExtSoftwareList , SaveMode mode) {
+		return super.updateList(assetExtSoftwareList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 资产财务
+	 * 按主键更新字段 资产软件数据
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,20 +166,20 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	
 	
 	/**
-	 * 按主键获取 资产财务
+	 * 按主键获取 资产软件数据
 	 *
 	 * @param id 主键
-	 * @return AssetExtFinancial 数据对象
+	 * @return AssetExtSoftware 数据对象
 	 */
-	public AssetExtFinancial getById(String id) {
-		AssetExtFinancial sample = new AssetExtFinancial();
+	public AssetExtSoftware getById(String id) {
+		AssetExtSoftware sample = new AssetExtSoftware();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<AssetExtFinancial> getByIds(List<String> ids) {
+	public List<AssetExtSoftware> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -192,7 +192,7 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<AssetExtFinancial> queryList(AssetExtFinancial sample) {
+	public List<AssetExtSoftware> queryList(AssetExtSoftware sample) {
 		return super.queryList(sample);
 	}
 	
@@ -206,7 +206,7 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetExtFinancial> queryPagedList(AssetExtFinancial sample, int pageSize, int pageIndex) {
+	public PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -220,25 +220,25 @@ public class AssetExtFinancialServiceImpl extends SuperService<AssetExtFinancial
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetExtFinancial> queryPagedList(AssetExtFinancial sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetExtSoftware> queryPagedList(AssetExtSoftware sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetExtFinancial 数据对象
+	 * @param assetExtSoftware 数据对象
 	 * @return 判断结果
 	 */
-	public Result<AssetExtFinancial> checkExists(AssetExtFinancial assetExtFinancial) {
+	public Result<AssetExtSoftware> checkExists(AssetExtSoftware assetExtSoftware) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetExtFinancial, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetExtSoftware, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(AssetExtFinancial sample) {
+	public ExcelWriter exportExcel(AssetExtSoftware sample) {
 		return super.exportExcel(sample);
 	}
 

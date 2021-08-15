@@ -7,6 +7,9 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_EXT_EQUIPMENT;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
+import com.dt.platform.domain.datacenter.Rack;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:23
- * @sign C461818A29F09170CDE307D6F3941E09
+ * @since 2021-08-15 19:33:45
+ * @sign 5F8F30CC0A3729D5F2AD65C24FCF154B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -154,6 +157,24 @@ public class AssetExtEquipment extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 区域：区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private Area area;
+	
+	/**
+	 * 层级：层级
+	*/
+	@ApiModelProperty(required = false,value="层级" , notes = "层级")
+	private Layer layer;
+	
+	/**
+	 * 机柜：机柜
+	*/
+	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
+	private Rack rack;
 	
 	/**
 	 * 获得 主键<br>
@@ -551,6 +572,63 @@ public class AssetExtEquipment extends Entity {
 	*/
 	public AssetExtEquipment setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public Area getArea() {
+		return area;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param area 区域
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setArea(Area area) {
+		this.area=area;
+		return this;
+	}
+	
+	/**
+	 * 获得 层级<br>
+	 * 层级
+	 * @return 层级
+	*/
+	public Layer getLayer() {
+		return layer;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layer 层级
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setLayer(Layer layer) {
+		this.layer=layer;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜<br>
+	 * 机柜
+	 * @return 机柜
+	*/
+	public Rack getRack() {
+		return rack;
+	}
+	
+	/**
+	 * 设置 机柜
+	 * @param rack 机柜
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setRack(Rack rack) {
+		this.rack=rack;
 		return this;
 	}
 

@@ -33,6 +33,9 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetExtEquipmentMeta;
+import com.dt.platform.domain.datacenter.Area;
+import com.dt.platform.domain.datacenter.Layer;
+import com.dt.platform.domain.datacenter.Rack;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 设备属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:23
+ * @since 2021-08-15 19:33:45
 */
 
 @Api(tags = "设备属性")
@@ -195,6 +198,12 @@ public class AssetExtEquipmentController extends SuperController {
 	public Result<AssetExtEquipment> getById(String id) {
 		Result<AssetExtEquipment> result=new Result<>();
 		AssetExtEquipment assetExtEquipment=assetExtEquipmentService.getById(id);
+		// 关联出 区域 数据
+		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.AREA);
+		// 关联出 层级 数据
+		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.LAYER);
+		// 关联出 机柜 数据
+		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.RACK);
 		result.success(true).data(assetExtEquipment);
 		return result;
 	}
@@ -275,6 +284,12 @@ public class AssetExtEquipmentController extends SuperController {
 	public Result<PagedList<AssetExtEquipment>> queryPagedList(AssetExtEquipmentVO sample) {
 		Result<PagedList<AssetExtEquipment>> result=new Result<>();
 		PagedList<AssetExtEquipment> list=assetExtEquipmentService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 区域 数据
+		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.AREA);
+		// 关联出 层级 数据
+		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.LAYER);
+		// 关联出 机柜 数据
+		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.RACK);
 		result.success(true).data(list);
 		return result;
 	}

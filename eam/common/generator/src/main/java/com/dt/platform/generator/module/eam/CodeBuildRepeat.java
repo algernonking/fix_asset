@@ -10,6 +10,7 @@ public class CodeBuildRepeat {
                 "EamAssetExtEquipmentGtr",
                 "EamAssetExtFinancialGtr",
                 "EamAssetExtMaintainerGtr",
+                "EamAssetExtSoftwareGtr",
                 "BrandGtr",
                 "EamPositionGtr",
                 "EamGoodsGtr",
