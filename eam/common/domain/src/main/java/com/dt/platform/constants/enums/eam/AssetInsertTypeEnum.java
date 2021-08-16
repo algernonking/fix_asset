@@ -13,8 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetInsertTypeEnum implements CodeTextEnum {
 
-	TYPE_DIRECT("direct" , "登记"),
-	TYPE_STOCK("stock" , "库存");
+	DIRECT("direct" , "登记"),
+	STOCK("stock" , "库存");
 
 	private String code;
 	private String text;

@@ -25,7 +25,7 @@ public class EamAssetExtSoftwareGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ID).basic().hidden();
 
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.REMAIN_NUMBER).basic().search().hidden();
+
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID).basic().search().hidden();
 

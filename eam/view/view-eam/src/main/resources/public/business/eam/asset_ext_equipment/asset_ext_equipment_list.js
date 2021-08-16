@@ -1,7 +1,7 @@
 /**
- * 设备属性 列表页 JS 脚本
+ * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:48
+ * @since 2021-08-16 17:09:26
  */
 
 
@@ -53,7 +53,7 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
 					,{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备IP') }
 					,{ field: 'manageIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理IP') }
@@ -197,11 +197,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('设备属性')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产设备数据')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('设备属性')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产设备数据')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -241,7 +241,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('设备属性')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('资产设备数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -270,7 +270,7 @@ function ListPage() {
 		var area=admin.getTempData('eam-asset-ext-equipment-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('设备属性')) : (fox.translate('添加')+fox.translate('设备属性'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产设备数据')) : (fox.translate('添加')+fox.translate('资产设备数据'));
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,

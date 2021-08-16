@@ -2,7 +2,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:36:22
+ * @since 2021-08-16 17:09:33
  */
  -->
  <!DOCTYPE html>
@@ -53,15 +53,6 @@
                         <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"   />
                     </div>
                 </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('剩余数量')}">剩余数量</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="remainNumber" id="remainNumber" name="remainNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('剩余数量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
-                        </div>
-                    </div>
 
 
                 

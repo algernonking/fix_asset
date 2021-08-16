@@ -132,7 +132,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .basic().label("信息系统")
                 .search().inputWidth(200)
                 .table().sort(false)
-                .form().selectBox().queryApi(InformationSystemServiceProxy.QUERY_LIST)
+                .form().validate().required().form().selectBox().queryApi(InformationSystemServiceProxy.QUERY_LIST)
                 .valueField(InformationSystemMeta.ID).textField(InformationSystemMeta.NAME)
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
@@ -148,7 +148,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_HOST.ENVIRONMENT).basic().label("所在环境")
-                .form().selectBox().dict(DictEnum.OPS_ENV);
+                .form().selectBox().dict(DictEnum.OPS_ENVIRONMENT);
 
 
         cfg.view().field(EAMTables.OPS_HOST.STATUS).basic().label("主机状态")
@@ -157,7 +157,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_HOST.MONITOR_STATUS).basic().label("监控状态")
-                .form().validate().required()
+
                 .form().radioBox().enumType(HostMonitorStatusEnum.class);
 
 
@@ -175,9 +175,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 new Object[] {
                         EAMTables.OPS_HOST.SYSTEM_ID,
                         EAMTables.OPS_HOST.HOST_TYPE,
+                        EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.HOST_NAME,
                         EAMTables.OPS_HOST.POSITION_ID,
-                        EAMTables.OPS_HOST.STATUS,
+
 
 
                 }, new Object[] {

@@ -1,7 +1,7 @@
 /**
- * 设备属性 列表页 JS 脚本
+ * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:49
+ * @since 2021-08-16 17:09:26
  */
 
 function FormPage() {

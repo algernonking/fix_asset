@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:16:36
+ * @since 2021-08-16 15:36:28
  */
 
 function FormPage() {
@@ -181,24 +181,6 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
-		//渲染 positionId 下拉字段
-		fox.renderSelectBox({
-			el: "positionId",
-			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
 	}
 	
 	/**
@@ -236,8 +218,6 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#manufacturerId",formData.manufacturer);
 			//设置  品牌 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#brandId",formData.brand);
-			//设置  存放位置 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
 
 
@@ -304,11 +284,6 @@ function FormPage() {
 			data.field["brandId"]=xmSelect.get("#brandId",true).getValue("value");
 			if(data.field["brandId"] && data.field["brandId"].length>0) {
 				data.field["brandId"]=data.field["brandId"][0];
-			}
-			//获取 存放位置 下拉框的值
-			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
-			if(data.field["positionId"] && data.field["positionId"].length>0) {
-				data.field["positionId"]=data.field["positionId"][0];
 			}
 
 			//校验表单

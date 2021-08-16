@@ -2,15 +2,14 @@ package com.dt.platform.domain.eam.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetExtSoftware;
-import java.math.BigDecimal;
 import java.util.Date;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:36:18
- * @sign 05569804236931E3005B383C4B0438A9
+ * @since 2021-08-16 17:09:33
+ * @sign A045F8D20D131565E4AB4D89368AB769
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -35,16 +34,6 @@ public class AssetExtSoftwareMeta {
 	 * 资产 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtSoftware,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtSoftware.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
-	
-	/**
-	 * 剩余数量 , 类型: java.math.BigDecimal
-	*/
-	public static final String REMAIN_NUMBER="remainNumber";
-	
-	/**
-	 * 剩余数量 , 类型: java.math.BigDecimal
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtSoftware,java.math.BigDecimal> REMAIN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtSoftware.class ,REMAIN_NUMBER, java.math.BigDecimal.class, "剩余数量", "剩余数量", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 发行方式 , 类型: java.lang.String
@@ -149,7 +138,7 @@ public class AssetExtSoftwareMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , REMAIN_NUMBER , DISTRIBUTION_MODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , DISTRIBUTION_MODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -178,17 +167,6 @@ public class AssetExtSoftwareMeta {
 		public AssetExtSoftware setAssetId(String assetId) {
 			super.change(ASSET_ID,super.getAssetId(),assetId);
 			super.setAssetId(assetId);
-			return this;
-		}
-		
-		/**
-		 * 设置 剩余数量
-		 * @param remainNumber 剩余数量
-		 * @return 当前对象
-		*/
-		public AssetExtSoftware setRemainNumber(BigDecimal remainNumber) {
-			super.change(REMAIN_NUMBER,super.getRemainNumber(),remainNumber);
-			super.setRemainNumber(remainNumber);
 			return this;
 		}
 		

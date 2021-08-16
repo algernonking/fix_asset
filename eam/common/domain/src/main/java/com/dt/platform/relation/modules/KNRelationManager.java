@@ -31,8 +31,6 @@ public class KNRelationManager extends RelationManager {
         this.property(ContentMeta.CATEGORY_PROP)
                 .using(EAMTables.KN_CONTENT.CATEGORY_ID).join(EAMTables.KN_CATEGORY.ID);
 
-        this.property(ContentMeta.GRADE_PROP)
-                .using(EAMTables.KN_CONTENT.GRADE_ID).join(EAMTables.KN_GRADE.ID);
 
     }
 

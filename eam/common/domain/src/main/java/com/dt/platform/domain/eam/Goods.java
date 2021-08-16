@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:31
- * @sign C1B0AC78D5A0C0C419F6BE030323C231
+ * @since 2021-08-16 17:09:39
+ * @sign 21631DAD848DAF98514F082927F01763
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,9 +37,9 @@ public class Goods extends Entity {
 	private String id;
 	
 	/**
-	 * 状态(used：unsed)
+	 * 状态：状态
 	*/
-	@ApiModelProperty(required = false,value="状态(used" , notes = "unsed)")
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
 	private String status;
 	
 	/**
@@ -182,17 +182,17 @@ public class Goods extends Entity {
 	}
 	
 	/**
-	 * 获得 状态(used<br>
-	 * unsed)
-	 * @return 状态(used
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 状态(used
-	 * @param status 状态(used
+	 * 设置 状态
+	 * @param status 状态
 	 * @return 当前对象
 	*/
 	public Goods setStatus(String status) {

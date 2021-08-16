@@ -33,7 +33,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetExtSoftwareMeta;
-import java.math.BigDecimal;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产软件数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:36:19
+ * @since 2021-08-16 17:09:33
 */
 
 @Api(tags = "资产软件数据")
@@ -68,7 +67,6 @@ public class AssetExtSoftwareController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -123,7 +121,6 @@ public class AssetExtSoftwareController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -144,7 +141,6 @@ public class AssetExtSoftwareController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -204,7 +200,6 @@ public class AssetExtSoftwareController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -226,7 +221,6 @@ public class AssetExtSoftwareController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

@@ -13,8 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum CommonStatusEnum implements CodeTextEnum {
 
-	STATUS_VALID("valid" , "有效"),
-	STATUS_INVALID("invalid" , "无效")
+	VALID("valid" , "有效"),
+	INVALID("invalid" , "无效")
 	;
 	private String code;
 	private String text;

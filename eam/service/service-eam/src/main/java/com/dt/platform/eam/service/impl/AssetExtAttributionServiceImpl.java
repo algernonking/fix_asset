@@ -1,4 +1,4 @@
-package com.dt.platform.knowledgebase.service.impl;
+package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.knowledgebase.Grade;
-import com.dt.platform.domain.knowledgebase.GradeVO;
+import com.dt.platform.domain.eam.AssetExtAttribution;
+import com.dt.platform.domain.eam.AssetExtAttributionVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.knowledgebase.service.IGradeService;
+import com.dt.platform.eam.service.IAssetExtAttributionService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 知识分级 服务实现
+ * 资产归属数据 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:03
+ * @since 2021-08-16 17:09:24
 */
 
 
-@Service("KnGradeService")
-public class GradeServiceImpl extends SuperService<Grade> implements IGradeService {
+@Service("EamAssetExtAttributionService")
+public class AssetExtAttributionServiceImpl extends SuperService<AssetExtAttribution> implements IAssetExtAttributionService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,38 +62,38 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	
 	/**
 	 * 插入实体
-	 * @param grade 实体数据
+	 * @param assetExtAttribution 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Grade grade) {
-		Result r=super.insert(grade);
+	public Result insert(AssetExtAttribution assetExtAttribution) {
+		Result r=super.insert(assetExtAttribution);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param gradeList 实体数据清单
+	 * @param assetExtAttributionList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Grade> gradeList) {
-		return super.insertList(gradeList);
+	public Result insertList(List<AssetExtAttribution> assetExtAttributionList) {
+		return super.insertList(assetExtAttributionList);
 	}
 	
 	
 	/**
-	 * 按主键删除 知识分级
+	 * 按主键删除 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Grade grade = new Grade();
+		AssetExtAttribution assetExtAttribution = new AssetExtAttribution();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		grade.setId(id);
+		assetExtAttribution.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(grade);
+			boolean suc = dao.deleteEntity(assetExtAttribution);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -104,20 +104,20 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	}
 	
 	/**
-	 * 按主键删除 知识分级
+	 * 按主键删除 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Grade grade = new Grade();
+		AssetExtAttribution assetExtAttribution = new AssetExtAttribution();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		grade.setId(id);
-		grade.setDeleted(dao.getDBTreaty().getTrueValue());
-		grade.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		grade.setDeleteTime(new Date());
+		assetExtAttribution.setId(id);
+		assetExtAttribution.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetExtAttribution.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetExtAttribution.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(grade,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetExtAttribution,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -129,30 +129,30 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	
 	/**
 	 * 更新实体
-	 * @param grade 数据对象
+	 * @param assetExtAttribution 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Grade grade , SaveMode mode) {
-		Result r=super.update(grade , mode);
+	public Result update(AssetExtAttribution assetExtAttribution , SaveMode mode) {
+		Result r=super.update(assetExtAttribution , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param gradeList 数据对象列表
+	 * @param assetExtAttributionList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Grade> gradeList , SaveMode mode) {
-		return super.updateList(gradeList , mode);
+	public Result updateList(List<AssetExtAttribution> assetExtAttributionList , SaveMode mode) {
+		return super.updateList(assetExtAttributionList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 知识分级
+	 * 按主键更新字段 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,20 +166,20 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	
 	
 	/**
-	 * 按主键获取 知识分级
+	 * 按主键获取 资产归属数据
 	 *
 	 * @param id 主键
-	 * @return Grade 数据对象
+	 * @return AssetExtAttribution 数据对象
 	 */
-	public Grade getById(String id) {
-		Grade sample = new Grade();
+	public AssetExtAttribution getById(String id) {
+		AssetExtAttribution sample = new AssetExtAttribution();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Grade> getByIds(List<String> ids) {
+	public List<AssetExtAttribution> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -192,7 +192,7 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Grade> queryList(Grade sample) {
+	public List<AssetExtAttribution> queryList(AssetExtAttribution sample) {
 		return super.queryList(sample);
 	}
 	
@@ -206,7 +206,7 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Grade> queryPagedList(Grade sample, int pageSize, int pageIndex) {
+	public PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -220,25 +220,25 @@ public class GradeServiceImpl extends SuperService<Grade> implements IGradeServi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Grade> queryPagedList(Grade sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param grade 数据对象
+	 * @param assetExtAttribution 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Grade> checkExists(Grade grade) {
+	public Result<AssetExtAttribution> checkExists(AssetExtAttribution assetExtAttribution) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(grade, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetExtAttribution, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Grade sample) {
+	public ExcelWriter exportExcel(AssetExtAttribution sample) {
 		return super.exportExcel(sample);
 	}
 

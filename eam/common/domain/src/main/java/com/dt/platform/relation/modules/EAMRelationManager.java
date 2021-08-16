@@ -3,6 +3,7 @@ package com.dt.platform.relation.modules;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.domain.eam.AssetExtAttribution;
 import com.dt.platform.domain.eam.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
 
@@ -16,12 +17,28 @@ public class EAMRelationManager extends RelationManager {
         this.setupAssetFinancial();
         this.setupAssetMaintainer();
         this.setupAssetEaintainer();
+        this.setupAssetAssetExtAttribution();
     }
     public void setupProperties() {
 
 
     }
-    public void setupAssetEaintainer() {
+    public void setupAssetAssetExtAttribution() {
+
+
+        // 关联位置
+        this.property(AssetExtAttributionMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
+
+
+        // 关联仓库
+        this.property(AssetExtAttributionMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.WAREHOUSE_ID).join(EAMTables.EAM_WAREHOUSE.ID);
+
+
+
+    }
+        public void setupAssetEaintainer() {
 
         // 关联区域
         this.property(AssetExtEquipmentMeta.AREA_PROP)
@@ -38,6 +55,7 @@ public class EAMRelationManager extends RelationManager {
     }
 
     public void setupAssetMaintainer() {
+
         // 关联维保商
         this.property(AssetExtMaintainerMeta.MAINTNAINER_PROP)
                 .using(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
@@ -67,30 +85,32 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetMeta.BRAND_PROP)
                 .using(EAMTables.EAM_ASSET.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
 
-
-        // 关联存放位置
-        this.property(AssetMeta.POSITION_PROP)
-                .using(EAMTables.EAM_ASSET.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
-
-
         // 关联生产厂商
         this.property(AssetMeta.MANUFACTURER_PROP)
                 .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_MANUFACTURER.ID);
 
 
 
+
         // 关联设备数据
         this.property(AssetMeta.ASSET_EQUIPMENT_PROP)
-                .using(EAMTables.EAM_ASSET.GOODS_ID).join(EAMTables.EAM_ASSET_EXT_EQUIPMENT.ID);
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_EQUIPMENT.ASSET_ID);
 
         // 关联财务数据
         this.property(AssetMeta.ASSET_FINANCIAL_PROP)
-                .using(EAMTables.EAM_ASSET.GOODS_ID).join(EAMTables.EAM_ASSET_EXT_FINANCIAL.ID);
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_ID);
 
         // 关联维保数据
         this.property(AssetMeta.ASSET_MAINTAINER_PROP)
-                .using(EAMTables.EAM_ASSET.GOODS_ID).join(EAMTables.EAM_ASSET_EXT_MAINTAINER.ID);
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID);
 
+        // 关联归属数据
+        this.property(AssetMeta.ASSET_EXT_ATTRIBUTION_PROP)
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.ASSET_ID);
+
+        // 关联软件数据
+        this.property(AssetMeta.ASSET_EXT_SOFTWARE_PROP)
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID);
 
 
     }
@@ -100,6 +120,7 @@ public class EAMRelationManager extends RelationManager {
 
     }
     private void setupGoods() {
+
         // 关联品牌
         this.property(GoodsMeta.BRAND_PROP)
                 .using(EAMTables.EAM_GOODS.BRAND_ID).join(EAMTables.EAM_BRAND.ID);

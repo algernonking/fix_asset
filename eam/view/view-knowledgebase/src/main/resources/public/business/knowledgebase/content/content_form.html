@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
+ * @since 2021-08-16 17:06:42
  */
  -->
  <!DOCTYPE html>
@@ -50,7 +50,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('等级')}">等级</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="gradeId" input-type="select" th:data="${'/service-knowledgebase/kn-grade/query-list'}"></div>
+                            <div id="gradeId" input-type="select" th:data="${dict.toArray('kn_grade')}"></div>
                         </div>
                     </div>
 
@@ -216,6 +216,7 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var RADIO_CONTENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}]];
     var RADIO_DISPLAY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}]];
+    var SELECT_GRADEID_DATA = [[${dict.toArray('kn_grade')}]];
     var VALIDATE_CONFIG={"gradeId":{"labelInForm":"等级","inputType":"select_box","required":true},"display":{"labelInForm":"是否显示","inputType":"radio_box","required":true},"title":{"labelInForm":"标题","inputType":"text_input","required":true},"contentType":{"labelInForm":"内容类型","inputType":"radio_box","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"content":{"labelInForm":"知识内容","inputType":"text_area","required":true}};
     var AUTH_PREFIX="kn_content";
 </script>

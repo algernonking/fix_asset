@@ -43,15 +43,23 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
         );
 
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME).basic().form().label("开始时间");
+
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME).basic().form().label("结束时间");
+
         //分成分组布局
         cfg.view().formWindow().width(1000);
+
         cfg.view().form().addGroup("维保属性",
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
+                }
+                , new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
+
                 }
         );
 

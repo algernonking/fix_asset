@@ -1,4 +1,4 @@
-package com.dt.platform.domain.knowledgebase;
+package com.dt.platform.domain.eam;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:03
- * @sign FD40CE0861C1D8691F22E6A0D5E6689A
+ * @since 2021-08-16 17:09:24
+ * @sign 10404270DADCC34E211AA2B481777CA9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class GradeVO extends Grade {
+public class AssetExtAttributionVO extends AssetExtAttribution {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class GradeVO extends Grade {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public GradeVO setPageIndex(Integer pageIndex) {
+	public AssetExtAttributionVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class GradeVO extends Grade {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public GradeVO setPageSize(Integer pageSize) {
+	public AssetExtAttributionVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class GradeVO extends Grade {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public GradeVO setSearchField(String searchField) {
+	public AssetExtAttributionVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class GradeVO extends Grade {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public GradeVO setFuzzyField(String fuzzyField) {
+	public AssetExtAttributionVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class GradeVO extends Grade {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public GradeVO setSearchValue(String searchValue) {
+	public AssetExtAttributionVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class GradeVO extends Grade {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public GradeVO setSortField(String sortField) {
+	public AssetExtAttributionVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class GradeVO extends Grade {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public GradeVO setSortType(String sortType) {
+	public AssetExtAttributionVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class GradeVO extends Grade {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public GradeVO setIds(List<String> ids) {
+	public AssetExtAttributionVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class GradeVO extends Grade {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public GradeVO addId(String id) {
+	public AssetExtAttributionVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

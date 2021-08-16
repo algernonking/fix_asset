@@ -1,7 +1,7 @@
 /**
- * 资产财务 列表页 JS 脚本
+ * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:11
+ * @since 2021-08-16 17:09:28
  */
 
 
@@ -53,13 +53,14 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
 					,{ field: 'typeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务分类') }
 					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务编号') }
 					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产来源'), templet:function (d){ return fox.getDictText(SELECT_SOURCEID_DATA,d.sourceId);}}
 					,{ field: 'sourceDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源详情') }
 					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') }
+					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') }
 					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('供应商'), templet: function (d) { return fox.joinLabel(d.supplier,"supplierName");}}
 					,{ field: 'taxamountRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('税额') }
 					,{ field: 'taxamountPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('含税金额') }
@@ -68,11 +69,10 @@ function ListPage() {
 					,{ field: 'residualsRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('残值率') }
 					,{ field: 'navPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产净值') }
 					,{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') }
-					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限(月)') }
+					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') }
 					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('采购日期'), templet: function (d) { return fox.dateFormat(d.purchaseDate); }}
 					,{ field: 'storageTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }}
 					,{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间'), templet: function (d) { return fox.dateFormat(d.entryTime); }}
-					,{ field: 'managementOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理组织') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -205,11 +205,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产财务')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产财务数据')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产财务')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产财务数据')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -249,7 +249,7 @@ function ListPage() {
 				
 			} else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('资产财务')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('资产财务数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -278,7 +278,7 @@ function ListPage() {
 		var area=admin.getTempData('eam-asset-ext-financial-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产财务')) : (fox.translate('添加')+fox.translate('资产财务'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产财务数据')) : (fox.translate('添加')+fox.translate('资产财务数据'));
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,

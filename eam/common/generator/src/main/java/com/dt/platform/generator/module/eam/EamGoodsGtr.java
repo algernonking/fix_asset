@@ -25,9 +25,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
 
 
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
-
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
-
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
 
 

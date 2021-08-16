@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:16:27
- * @sign BADC2682359437A54D8AB2782BAA136C
+ * @since 2021-08-16 15:36:22
+ * @sign B416C9E9DC6120641DBE2BC01DE9D059
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,15 +42,21 @@ public class Asset extends Entity {
 	private String categoryId;
 	
 	/**
+	 * 资产编码：资产编码
+	*/
+	@ApiModelProperty(required = false,value="资产编码" , notes = "资产编码")
+	private String categoryCode;
+	
+	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String busiCode;
 	
 	/**
-	 * 批次代码：批次代码
+	 * 批次编码：批次编码
 	*/
-	@ApiModelProperty(required = false,value="批次代码" , notes = "批次代码")
+	@ApiModelProperty(required = false,value="批次编码" , notes = "批次编码")
 	private String batchCode;
 	
 	/**
@@ -138,28 +144,10 @@ public class Asset extends Entity {
 	private String rfid;
 	
 	/**
-	 * 使用组织：使用组织
+	 * 附件：附件
 	*/
-	@ApiModelProperty(required = false,value="使用组织" , notes = "使用组织")
-	private String usedOrganizationId;
-	
-	/**
-	 * 使用人员：使用人员
-	*/
-	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
-	
-	/**
-	 * 存放位置：存放位置
-	*/
-	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
-	private String positionId;
-	
-	/**
-	 * 详细位置：详细位置
-	*/
-	@ApiModelProperty(required = false,value="详细位置" , notes = "详细位置")
-	private String positionDetail;
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attach;
 	
 	/**
 	 * 插入方式：插入方式
@@ -240,10 +228,16 @@ public class Asset extends Entity {
 	private AssetExtEquipment assetEquipment;
 	
 	/**
-	 * 物品档案：物品档案
+	 * 软件信息：软件信息
 	*/
-	@ApiModelProperty(required = false,value="物品档案" , notes = "物品档案")
-	private Goods goods;
+	@ApiModelProperty(required = false,value="软件信息" , notes = "软件信息")
+	private AssetExtSoftware assetExtSoftware;
+	
+	/**
+	 * 归属信息：归属信息
+	*/
+	@ApiModelProperty(required = false,value="归属信息" , notes = "归属信息")
+	private AssetExtAttribution assetExtAttribution;
 	
 	/**
 	 * 资产分类：资产分类
@@ -252,10 +246,10 @@ public class Asset extends Entity {
 	private Category category;
 	
 	/**
-	 * 维保厂商：维保厂商
+	 * 物品档案：物品档案
 	*/
-	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
-	private Maintainer maintainer;
+	@ApiModelProperty(required = false,value="物品档案" , notes = "物品档案")
+	private Goods goods;
 	
 	/**
 	 * 生产厂商：生产厂商
@@ -268,12 +262,6 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="品牌" , notes = "品牌")
 	private Brand brand;
-	
-	/**
-	 * 位置：位置
-	*/
-	@ApiModelProperty(required = false,value="位置" , notes = "位置")
-	private Position position;
 	
 	/**
 	 * 获得 主键<br>
@@ -314,6 +302,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 资产编码<br>
+	 * 资产编码
+	 * @return 资产编码
+	*/
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+	
+	/**
+	 * 设置 资产编码
+	 * @param categoryCode 资产编码
+	 * @return 当前对象
+	*/
+	public Asset setCategoryCode(String categoryCode) {
+		this.categoryCode=categoryCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -333,17 +340,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 批次代码<br>
-	 * 批次代码
-	 * @return 批次代码
+	 * 获得 批次编码<br>
+	 * 批次编码
+	 * @return 批次编码
 	*/
 	public String getBatchCode() {
 		return batchCode;
 	}
 	
 	/**
-	 * 设置 批次代码
-	 * @param batchCode 批次代码
+	 * 设置 批次编码
+	 * @param batchCode 批次编码
 	 * @return 当前对象
 	*/
 	public Asset setBatchCode(String batchCode) {
@@ -618,78 +625,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用组织<br>
-	 * 使用组织
-	 * @return 使用组织
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
 	*/
-	public String getUsedOrganizationId() {
-		return usedOrganizationId;
+	public String getAttach() {
+		return attach;
 	}
 	
 	/**
-	 * 设置 使用组织
-	 * @param usedOrganizationId 使用组织
+	 * 设置 附件
+	 * @param attach 附件
 	 * @return 当前对象
 	*/
-	public Asset setUsedOrganizationId(String usedOrganizationId) {
-		this.usedOrganizationId=usedOrganizationId;
-		return this;
-	}
-	
-	/**
-	 * 获得 使用人员<br>
-	 * 使用人员
-	 * @return 使用人员
-	*/
-	public String getUserId() {
-		return userId;
-	}
-	
-	/**
-	 * 设置 使用人员
-	 * @param userId 使用人员
-	 * @return 当前对象
-	*/
-	public Asset setUserId(String userId) {
-		this.userId=userId;
-		return this;
-	}
-	
-	/**
-	 * 获得 存放位置<br>
-	 * 存放位置
-	 * @return 存放位置
-	*/
-	public String getPositionId() {
-		return positionId;
-	}
-	
-	/**
-	 * 设置 存放位置
-	 * @param positionId 存放位置
-	 * @return 当前对象
-	*/
-	public Asset setPositionId(String positionId) {
-		this.positionId=positionId;
-		return this;
-	}
-	
-	/**
-	 * 获得 详细位置<br>
-	 * 详细位置
-	 * @return 详细位置
-	*/
-	public String getPositionDetail() {
-		return positionDetail;
-	}
-	
-	/**
-	 * 设置 详细位置
-	 * @param positionDetail 详细位置
-	 * @return 当前对象
-	*/
-	public Asset setPositionDetail(String positionDetail) {
-		this.positionDetail=positionDetail;
+	public Asset setAttach(String attach) {
+		this.attach=attach;
 		return this;
 	}
 	
@@ -941,21 +891,40 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 物品档案<br>
-	 * 物品档案
-	 * @return 物品档案
+	 * 获得 软件信息<br>
+	 * 软件信息
+	 * @return 软件信息
 	*/
-	public Goods getGoods() {
-		return goods;
+	public AssetExtSoftware getAssetExtSoftware() {
+		return assetExtSoftware;
 	}
 	
 	/**
-	 * 设置 物品档案
-	 * @param goods 物品档案
+	 * 设置 软件信息
+	 * @param assetExtSoftware 软件信息
 	 * @return 当前对象
 	*/
-	public Asset setGoods(Goods goods) {
-		this.goods=goods;
+	public Asset setAssetExtSoftware(AssetExtSoftware assetExtSoftware) {
+		this.assetExtSoftware=assetExtSoftware;
+		return this;
+	}
+	
+	/**
+	 * 获得 归属信息<br>
+	 * 归属信息
+	 * @return 归属信息
+	*/
+	public AssetExtAttribution getAssetExtAttribution() {
+		return assetExtAttribution;
+	}
+	
+	/**
+	 * 设置 归属信息
+	 * @param assetExtAttribution 归属信息
+	 * @return 当前对象
+	*/
+	public Asset setAssetExtAttribution(AssetExtAttribution assetExtAttribution) {
+		this.assetExtAttribution=assetExtAttribution;
 		return this;
 	}
 	
@@ -979,21 +948,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 维保厂商<br>
-	 * 维保厂商
-	 * @return 维保厂商
+	 * 获得 物品档案<br>
+	 * 物品档案
+	 * @return 物品档案
 	*/
-	public Maintainer getMaintainer() {
-		return maintainer;
+	public Goods getGoods() {
+		return goods;
 	}
 	
 	/**
-	 * 设置 维保厂商
-	 * @param maintainer 维保厂商
+	 * 设置 物品档案
+	 * @param goods 物品档案
 	 * @return 当前对象
 	*/
-	public Asset setMaintainer(Maintainer maintainer) {
-		this.maintainer=maintainer;
+	public Asset setGoods(Goods goods) {
+		this.goods=goods;
 		return this;
 	}
 	
@@ -1032,25 +1001,6 @@ public class Asset extends Entity {
 	*/
 	public Asset setBrand(Brand brand) {
 		this.brand=brand;
-		return this;
-	}
-	
-	/**
-	 * 获得 位置<br>
-	 * 位置
-	 * @return 位置
-	*/
-	public Position getPosition() {
-		return position;
-	}
-	
-	/**
-	 * 设置 位置
-	 * @param position 位置
-	 * @return 当前对象
-	*/
-	public Asset setPosition(Position position) {
-		this.position=position;
 		return this;
 	}
 

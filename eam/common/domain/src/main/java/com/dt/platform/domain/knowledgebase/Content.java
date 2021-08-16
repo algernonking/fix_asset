@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
- * @sign 266296C0D77D4C016E3B3F85323D0F45
+ * @since 2021-08-16 17:06:42
+ * @sign B2F3C164DE91BB6543ED33CCBC7114A0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -161,12 +161,6 @@ public class Content extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="version" , notes = "version")
 	private Integer version;
-	
-	/**
-	 * 知识分级：知识分级
-	*/
-	@ApiModelProperty(required = false,value="知识分级" , notes = "知识分级")
-	private Grade grade;
 	
 	/**
 	 * 知识分类：知识分类
@@ -589,25 +583,6 @@ public class Content extends Entity {
 	*/
 	public Content setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 知识分级<br>
-	 * 知识分级
-	 * @return 知识分级
-	*/
-	public Grade getGrade() {
-		return grade;
-	}
-	
-	/**
-	 * 设置 知识分级
-	 * @param grade 知识分级
-	 * @return 当前对象
-	*/
-	public Content setGrade(Grade grade) {
-		this.grade=grade;
 		return this;
 	}
 	

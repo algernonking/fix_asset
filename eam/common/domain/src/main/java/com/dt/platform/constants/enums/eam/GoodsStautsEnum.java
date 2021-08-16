@@ -15,8 +15,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum GoodsStautsEnum implements CodeTextEnum {
 
-	GOODS_VALID("valid" , "有效"),
-	GOODS_INVALID("invalid" , "无效")
+	VALID("valid" , "有效"),
+	INVALID("invalid" , "无效")
 	;
 	
 	private String code;

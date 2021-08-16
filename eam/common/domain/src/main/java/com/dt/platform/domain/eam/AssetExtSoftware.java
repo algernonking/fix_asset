@@ -6,7 +6,6 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_ASSET_EXT_SOFTWARE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -17,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:36:18
- * @sign 05569804236931E3005B383C4B0438A9
+ * @since 2021-08-16 17:09:33
+ * @sign A045F8D20D131565E4AB4D89368AB769
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -41,12 +40,6 @@ public class AssetExtSoftware extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
-	
-	/**
-	 * 剩余数量：剩余数量
-	*/
-	@ApiModelProperty(required = false,value="剩余数量" , notes = "剩余数量")
-	private BigDecimal remainNumber;
 	
 	/**
 	 * 发行方式：发行方式
@@ -143,25 +136,6 @@ public class AssetExtSoftware extends Entity {
 	*/
 	public AssetExtSoftware setAssetId(String assetId) {
 		this.assetId=assetId;
-		return this;
-	}
-	
-	/**
-	 * 获得 剩余数量<br>
-	 * 剩余数量
-	 * @return 剩余数量
-	*/
-	public BigDecimal getRemainNumber() {
-		return remainNumber;
-	}
-	
-	/**
-	 * 设置 剩余数量
-	 * @param remainNumber 剩余数量
-	 * @return 当前对象
-	*/
-	public AssetExtSoftware setRemainNumber(BigDecimal remainNumber) {
-		this.remainNumber=remainNumber;
 		return this;
 	}
 	

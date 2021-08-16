@@ -1,10 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
-import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
@@ -22,15 +20,16 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetFinancial","财务信息","财务信息");
         cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetMaintainer","维保信息","维保信息");
         cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
+        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
+        cfg.getPoClassFile().addSimpleProperty(AssetExtAttribution.class,"assetExtAttribution","归属信息","归属信息");
 
 
 
-        cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
+
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
-        cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintainer","维保厂商","维保厂商");
+        cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
-        cfg.getPoClassFile().addSimpleProperty(Position.class,"position","位置","位置");
 
 
 
@@ -52,6 +51,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
 
+        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().validate().required().form().label("状态").selectBox().enumType(AssetStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("分类").search().hidden()
@@ -62,31 +62,22 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)
                 .basic().label("物品档案").search().hidden()
-                .form().validate().required()
                 .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(GoodsMeta.ID).textField(GoodsMeta.NAME).fillBy(AssetMeta.GOODS).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.BRAND_ID)
-                .basic().label("品牌").search().form().validate().required()
+                .basic().label("品牌").search()
                 .form().selectBox().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillBy(AssetMeta.BRAND).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.MANUFACTURER_ID)
                 .basic().label("厂商").search().hidden()
-                .form().validate().required()
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(AssetMeta.MANUFACTURER).muliti(false);
 
 
-        cfg.view().field(EAMTables.EAM_ASSET.POSITION_ID)
-                .basic().label("存放位置").search().hidden()
-                .form().validate().required()
-                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetMeta.POSITION).muliti(false);
 
-
-        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().label("状态").selectBox().enumType(AssetStatusEnum.class);
 
 
 
@@ -98,7 +89,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .basic().label("规格型号");
 
         cfg.view().field(EAMTables.EAM_ASSET.UNIT)
-                .basic().label("单位");
+                .basic().label("计量单位");
 
         cfg.view().field(EAMTables.EAM_ASSET.SERIAL_NUMBER)
                 .basic().label("序列");
@@ -109,7 +100,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.EAM_ASSET.NAME,EAMTables.EAM_ASSET.POSITION_ID,EAMTables.EAM_ASSET.BUSI_CODE},
+                new Object[]{EAMTables.EAM_ASSET.NAME,EAMTables.EAM_ASSET.BUSI_CODE},
                 new Object[]{EAMTables.EAM_ASSET.SERIAL_NUMBER,EAMTables.EAM_ASSET.CATEGORY_ID,EAMTables.EAM_ASSET.STATUS},
                 new Object[]{EAMTables.EAM_ASSET.NOTES,EAMTables.EAM_ASSET.MODEL,EAMTables.EAM_ASSET.MANUFACTURER_ID}
 
@@ -122,20 +113,32 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET.CATEGORY_ID,
                         EAMTables.EAM_ASSET.STATUS,
-                        EAMTables.EAM_ASSET.SERIAL_NUMBER,
-                        EAMTables.EAM_ASSET.NOTES,
-                        EAMTables.EAM_ASSET.PICTURE_ID,
-                        EAMTables.EAM_ASSET.RFID
-
+                        EAMTables.EAM_ASSET.NAME,
+                        EAMTables.EAM_ASSET.ASSET_CODE
                 }, new Object[] {
                         EAMTables.EAM_ASSET.GOODS_ID,
-                        EAMTables.EAM_ASSET.NAME,
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
                         EAMTables.EAM_ASSET.MODEL,
                         EAMTables.EAM_ASSET.BRAND_ID,
-                        EAMTables.EAM_ASSET.UNIT
+
+
+                }, new Object[] {
+                        EAMTables.EAM_ASSET.UNIT,
+
+                        EAMTables.EAM_ASSET.SERIAL_NUMBER,
+//                        EAMTables.EAM_ASSET.RFID,
+                       EAMTables.EAM_ASSET.NOTES
                 }
         );
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET.PICTURE_ID
+                }
+        );
+
+
+
 
 //        cfg.view().form().addGroup("所属信息",
 //                new Object[] {

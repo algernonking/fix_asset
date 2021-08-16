@@ -4,15 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.knowledgebase.Content;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.dt.platform.domain.knowledgebase.Grade;
 import com.dt.platform.domain.knowledgebase.Category;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
- * @sign 266296C0D77D4C016E3B3F85323D0F45
+ * @since 2021-08-16 17:06:42
+ * @sign B2F3C164DE91BB6543ED33CCBC7114A0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -239,16 +238,6 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
-	*/
-	public static final String GRADE="grade";
-	
-	/**
-	 * 知识分级 , 类型: com.dt.platform.domain.knowledgebase.Grade
-	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,com.dt.platform.domain.knowledgebase.Grade> GRADE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,GRADE, com.dt.platform.domain.knowledgebase.Grade.class, "知识分级", "知识分级", com.dt.platform.domain.knowledgebase.Grade.class, null);
-	
-	/**
 	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
 	*/
 	public static final String CATEGORY="category";
@@ -261,7 +250,7 @@ public class ContentMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , GRADE , CATEGORY };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY };
 	
 	/**
 	 * 代理类
@@ -510,17 +499,6 @@ public class ContentMeta {
 		public Content setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
-			return this;
-		}
-		
-		/**
-		 * 设置 知识分级
-		 * @param grade 知识分级
-		 * @return 当前对象
-		*/
-		public Content setGrade(Grade grade) {
-			super.change(GRADE,super.getGrade(),grade);
-			super.setGrade(grade);
 			return this;
 		}
 		

@@ -1,7 +1,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 20:36:21
+ * @since 2021-08-16 17:09:33
  */
 
 
@@ -55,7 +55,6 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
-					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') }
 					,{ field: 'distributionMode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('发行方式'), templet:function (d){ return fox.getDictText(SELECT_DISTRIBUTIONMODE_DATA,d.distributionMode);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

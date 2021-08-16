@@ -1,8 +1,8 @@
 <!-- 
 /**
- * 资产维保 列表页 JS 脚本
+ * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:26
+ * @since 2021-08-16 17:09:31
  */
  -->
  <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-	<title th:text="${lang.translate('资产维保')}">资产维保</title>
+	<title th:text="${lang.translate('资产维保数据')}">资产维保数据</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
@@ -38,7 +38,7 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                     <div class="layui-form-item" >
@@ -61,22 +61,27 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('维保开始时间')}">维保开始时间</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('开始时间')}">开始时间</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="maintenanceStartTime" id="maintenanceStartTime" name="maintenanceStartTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('维保开始时间') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="maintenanceStartTime" id="maintenanceStartTime" name="maintenanceStartTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('开始时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('维保到期时间')}">维保到期时间</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('结束时间')}">结束时间</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="maintenanceEndTime" id="maintenanceEndTime" name="maintenanceEndTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('维保到期时间') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="maintenanceEndTime" id="maintenanceEndTime" name="maintenanceEndTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('结束时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 

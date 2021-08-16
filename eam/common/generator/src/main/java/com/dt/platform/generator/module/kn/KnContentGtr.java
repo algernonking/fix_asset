@@ -1,19 +1,20 @@
 package com.dt.platform.generator.module.kn;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum;
 import com.dt.platform.domain.knowledgebase.Category;
-import com.dt.platform.domain.knowledgebase.Grade;
+
 import com.dt.platform.domain.knowledgebase.meta.CategoryMeta;
 import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
-import com.dt.platform.domain.knowledgebase.meta.GradeMeta;
+
 
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.knowledgebase.page.ContentPageController;
 import com.dt.platform.proxy.knowledgebase.CategoryServiceProxy;
 import com.dt.platform.proxy.knowledgebase.ContentServiceProxy;
-import com.dt.platform.proxy.knowledgebase.GradeServiceProxy;
+
 import com.github.foxnic.generator.config.WriteMode;
 
 public class KnContentGtr extends BaseCodeGenerator {
@@ -25,7 +26,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-        cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
+     //   cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","知识分类","知识分类");
 
 
@@ -61,10 +62,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.GRADE_ID)
-                .form().validate().required().form()
-                .selectBox().queryApi(GradeServiceProxy.QUERY_LIST)
-                .textField(GradeMeta.NAME).valueField(GradeMeta.ID)
-                .paging(false).muliti(false).fillBy(ContentMeta.GRADE);
+                .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE);
 
 
         cfg.view().field(EAMTables.KN_CONTENT.TITLE)
@@ -88,7 +86,7 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .form().validate().required().form()
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME)
-                .paging(false).muliti(false).fillBy(ContentMeta.GRADE);
+                .paging(false).muliti(false).fillBy(ContentMeta.CATEGORY);
 
 
         cfg.view().search().inputLayout(

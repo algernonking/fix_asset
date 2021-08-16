@@ -38,6 +38,8 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetExtFinancialMeta.SUPPLIER).muliti(false);
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE)
+                .basic().label("使用期限").search().hidden();
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
@@ -59,18 +61,21 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
+
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.MANAGEMENT_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_UNIT_PRICE,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NAV_PRICE,
+                }
+                , new Object[] {
+
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_DATE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_UNIT_PRICE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NAV_PRICE,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
 
                 }
         );

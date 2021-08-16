@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
+ * @since 2021-08-16 17:06:43
  */
 
 function FormPage() {
@@ -107,18 +107,14 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "gradeId",
 			radio: true,
-			filterable: true,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			filterable: false,
 			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
-				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
+					opts.push({name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
@@ -153,7 +149,7 @@ function FormPage() {
 			//设置  分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.grade);
 			//设置  等级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#gradeId",formData.grade);
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
 
 
 

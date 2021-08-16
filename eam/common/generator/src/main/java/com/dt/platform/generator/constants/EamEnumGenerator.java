@@ -50,11 +50,11 @@ public class EamEnumGenerator  {
 		String dcp=this.configs.getProjectConfigs().getDomainConstantsPackage();
 		
 		//字典 sys_dict
-		EnumConfig	info=new EnumConfig(SYS_DICT.CODE, SYS_DICT.NAME , new ConditionExpr("deleted=0 and module in ('eam','hrm','ops')"));
+		EnumConfig	info=new EnumConfig(SYS_DICT.CODE, SYS_DICT.NAME , new ConditionExpr("deleted=0 and module in ('kn','eam','hrm','ops')"));
 		new EnumClassFile(dao,configs.getDomianProject(),info,dcp,"DictEnum").save(true);
 		
 		//生成字典枚举
-		RcdSet rs=dao.query("select * from sys_dict_item where deleted=0 and dict_id in (select id from sys_dict where deleted=0 and module in ('eam','hrm','ops') ) order by dict_code,sort asc");
+		RcdSet rs=dao.query("select * from sys_dict_item where deleted=0 and dict_id in (select id from sys_dict where deleted=0 and module in ('kn','eam','hrm','ops') ) order by dict_code,sort asc");
 		Map<String,List<Rcd>> gps=rs.getGroupedMap(SYS_DICT_ITEM.DICT_CODE,String.class);
 		for (String dictCode : gps.keySet()) {
 			List<Rcd> g=gps.get(dictCode);

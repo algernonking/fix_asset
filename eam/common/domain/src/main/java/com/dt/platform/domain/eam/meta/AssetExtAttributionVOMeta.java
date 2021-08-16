@@ -1,19 +1,19 @@
-package com.dt.platform.domain.knowledgebase.meta;
+package com.dt.platform.domain.eam.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
-import com.dt.platform.domain.knowledgebase.GradeVO;
+import com.dt.platform.domain.eam.AssetExtAttributionVO;
 import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:03
- * @sign FD40CE0861C1D8691F22E6A0D5E6689A
+ * @since 2021-08-16 17:09:24
+ * @sign 10404270DADCC34E211AA2B481777CA9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class GradeVOMeta extends GradeMeta {
+public class AssetExtAttributionVOMeta extends AssetExtAttributionMeta {
 	
 	/**
 	 * 页码 , 类型: java.lang.Integer
@@ -23,7 +23,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 页码 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.Integer> PAGE_INDEX_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,PAGE_INDEX, java.lang.Integer.class, "页码", "", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.Integer> PAGE_INDEX_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,PAGE_INDEX, java.lang.Integer.class, "页码", "", java.lang.Integer.class, null);
 	
 	/**
 	 * 分页大小 , 类型: java.lang.Integer
@@ -33,7 +33,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 分页大小 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.Integer> PAGE_SIZE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,PAGE_SIZE, java.lang.Integer.class, "分页大小", "", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.Integer> PAGE_SIZE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,PAGE_SIZE, java.lang.Integer.class, "分页大小", "", java.lang.Integer.class, null);
 	
 	/**
 	 * 搜索字段 , 类型: java.lang.String
@@ -43,7 +43,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 搜索字段 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> SEARCH_FIELD_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,SEARCH_FIELD, java.lang.String.class, "搜索字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> SEARCH_FIELD_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,SEARCH_FIELD, java.lang.String.class, "搜索字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 模糊搜索字段 , 类型: java.lang.String
@@ -53,7 +53,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 模糊搜索字段 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> FUZZY_FIELD_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,FUZZY_FIELD, java.lang.String.class, "模糊搜索字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> FUZZY_FIELD_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,FUZZY_FIELD, java.lang.String.class, "模糊搜索字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 搜索的值 , 类型: java.lang.String
@@ -63,7 +63,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 搜索的值 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> SEARCH_VALUE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> SEARCH_VALUE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
 	
 	/**
 	 * 排序字段 , 类型: java.lang.String
@@ -73,7 +73,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 排序字段 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> SORT_FIELD_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,SORT_FIELD, java.lang.String.class, "排序字段", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> SORT_FIELD_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,SORT_FIELD, java.lang.String.class, "排序字段", "", java.lang.String.class, null);
 	
 	/**
 	 * 排序方式 , 类型: java.lang.String
@@ -83,7 +83,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 排序方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> SORT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> SORT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,SORT_TYPE, java.lang.String.class, "排序方式", "", java.lang.String.class, null);
 	
 	/**
 	 * 主键清单 , 用于接收批量主键参数 , 集合类型: LIST , 类型: java.lang.String
@@ -93,7 +93,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 主键清单 , 用于接收批量主键参数 , 集合类型: LIST , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.knowledgebase.GradeVO,java.lang.String> IDS_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.GradeVO.class ,IDS, java.util.List.class, "主键清单", "用于接收批量主键参数", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttributionVO,java.lang.String> IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttributionVO.class ,IDS, java.util.List.class, "主键清单", "用于接收批量主键参数", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -103,7 +103,7 @@ public class GradeVOMeta extends GradeMeta {
 	/**
 	 * 代理类
 	*/
-	public static class $$proxy$$ extends com.dt.platform.domain.knowledgebase.GradeVO {
+	public static class $$proxy$$ extends com.dt.platform.domain.eam.AssetExtAttributionVO {
 
 		private static final long serialVersionUID = 1L;
 
@@ -113,7 +113,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param pageIndex 页码
 		 * @return 当前对象
 		*/
-		public GradeVO setPageIndex(Integer pageIndex) {
+		public AssetExtAttributionVO setPageIndex(Integer pageIndex) {
 			super.change(PAGE_INDEX,super.getPageIndex(),pageIndex);
 			super.setPageIndex(pageIndex);
 			return this;
@@ -124,7 +124,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param pageSize 分页大小
 		 * @return 当前对象
 		*/
-		public GradeVO setPageSize(Integer pageSize) {
+		public AssetExtAttributionVO setPageSize(Integer pageSize) {
 			super.change(PAGE_SIZE,super.getPageSize(),pageSize);
 			super.setPageSize(pageSize);
 			return this;
@@ -135,7 +135,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param searchField 搜索字段
 		 * @return 当前对象
 		*/
-		public GradeVO setSearchField(String searchField) {
+		public AssetExtAttributionVO setSearchField(String searchField) {
 			super.change(SEARCH_FIELD,super.getSearchField(),searchField);
 			super.setSearchField(searchField);
 			return this;
@@ -146,7 +146,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param fuzzyField 模糊搜索字段
 		 * @return 当前对象
 		*/
-		public GradeVO setFuzzyField(String fuzzyField) {
+		public AssetExtAttributionVO setFuzzyField(String fuzzyField) {
 			super.change(FUZZY_FIELD,super.getFuzzyField(),fuzzyField);
 			super.setFuzzyField(fuzzyField);
 			return this;
@@ -157,7 +157,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param searchValue 搜索的值
 		 * @return 当前对象
 		*/
-		public GradeVO setSearchValue(String searchValue) {
+		public AssetExtAttributionVO setSearchValue(String searchValue) {
 			super.change(SEARCH_VALUE,super.getSearchValue(),searchValue);
 			super.setSearchValue(searchValue);
 			return this;
@@ -168,7 +168,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param sortField 排序字段
 		 * @return 当前对象
 		*/
-		public GradeVO setSortField(String sortField) {
+		public AssetExtAttributionVO setSortField(String sortField) {
 			super.change(SORT_FIELD,super.getSortField(),sortField);
 			super.setSortField(sortField);
 			return this;
@@ -179,7 +179,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param sortType 排序方式
 		 * @return 当前对象
 		*/
-		public GradeVO setSortType(String sortType) {
+		public AssetExtAttributionVO setSortType(String sortType) {
 			super.change(SORT_TYPE,super.getSortType(),sortType);
 			super.setSortType(sortType);
 			return this;
@@ -190,7 +190,7 @@ public class GradeVOMeta extends GradeMeta {
 		 * @param ids 主键清单
 		 * @return 当前对象
 		*/
-		public GradeVO setIds(List<String> ids) {
+		public AssetExtAttributionVO setIds(List<String> ids) {
 			super.change(IDS,super.getIds(),ids);
 			super.setIds(ids);
 			return this;

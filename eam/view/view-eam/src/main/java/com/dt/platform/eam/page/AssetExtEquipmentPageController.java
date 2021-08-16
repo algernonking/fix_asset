@@ -10,10 +10,10 @@ import com.dt.platform.proxy.eam.AssetExtEquipmentServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 设备属性 模版页面控制器
+ * 资产设备数据 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:48
+ * @since 2021-08-16 17:09:26
 */
 
 @Controller("EamAssetExtEquipmentPageController")
@@ -38,7 +38,7 @@ public class AssetExtEquipmentPageController extends ViewController {
 	}
 	
 	/**
-	 * 设备属性 功能主页面
+	 * 资产设备数据 功能主页面
 	 */
 	@RequestMapping("/asset_ext_equipment_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class AssetExtEquipmentPageController extends ViewController {
 	}
 
 	/**
-	 * 设备属性 表单页面
+	 * 资产设备数据 表单页面
 	 */
 	@RequestMapping("/asset_ext_equipment_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

@@ -10,10 +10,10 @@ import com.dt.platform.proxy.eam.AssetExtFinancialServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 资产财务 模版页面控制器
+ * 资产财务数据 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:11
+ * @since 2021-08-16 17:09:28
 */
 
 @Controller("EamAssetExtFinancialPageController")
@@ -38,7 +38,7 @@ public class AssetExtFinancialPageController extends ViewController {
 	}
 	
 	/**
-	 * 资产财务 功能主页面
+	 * 资产财务数据 功能主页面
 	 */
 	@RequestMapping("/asset_ext_financial_list.html")
 	public String list(Model model,HttpServletRequest request) {
@@ -46,7 +46,7 @@ public class AssetExtFinancialPageController extends ViewController {
 	}
 
 	/**
-	 * 资产财务 表单页面
+	 * 资产财务数据 表单页面
 	 */
 	@RequestMapping("/asset_ext_financial_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {

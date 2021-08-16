@@ -1,10 +1,10 @@
-package com.dt.platform.knowledgebase.service;
+package com.dt.platform.eam.service;
 
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.knowledgebase.Grade;
-import com.dt.platform.domain.knowledgebase.GradeVO;
+import com.dt.platform.domain.eam.AssetExtAttribution;
+import com.dt.platform.domain.eam.AssetExtAttributionVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,32 +18,32 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 知识分级 服务接口
+ * 资产归属数据 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:03
+ * @since 2021-08-16 17:09:24
 */
 
-public interface IGradeService extends ISuperService<Grade> {
+public interface IAssetExtAttributionService extends ISuperService<AssetExtAttribution> {
 	
 	/**
 	 * 插入实体
-	 * @param grade 实体数据
+	 * @param assetExtAttribution 实体数据
 	 * @return 插入是否成功
 	 * */
-	Result insert(Grade grade);
+	Result insert(AssetExtAttribution assetExtAttribution);
  
 	/**
 	 * 批量插入实体，事务内
-	 * @param gradeList 实体数据清单
+	 * @param assetExtAttributionList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	Result insertList(List<Grade> gradeList);
+	Result insertList(List<AssetExtAttribution> assetExtAttributionList);
 	
 	
 		
 	/**
-	 * 按主键删除 知识分级
+	 * 按主键删除 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +51,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 知识分级
+	 * 按主键删除 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +74,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	
 		
 	/**
-	 * 按主键更新字段 知识分级
+	 * 按主键更新字段 资产归属数据
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -83,75 +83,75 @@ public interface IGradeService extends ISuperService<Grade> {
 	
 	/**
 	 * 更新实体
-	 * @param grade 数据对象
+	 * @param assetExtAttribution 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result update(Grade grade , SaveMode mode);
+	Result update(AssetExtAttribution assetExtAttribution , SaveMode mode);
 	
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param gradeList 数据对象列表
+	 * @param assetExtAttributionList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result updateList(List<Grade> gradeList, SaveMode mode);
+	Result updateList(List<AssetExtAttribution> assetExtAttributionList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param grade 实体数据
+	 * @param assetExtAttribution 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result save(Grade grade , SaveMode mode);
+	Result save(AssetExtAttribution assetExtAttribution , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
-	 * @param gradeList 实体数据清单
+	 * @param assetExtAttributionList 实体数据清单
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result saveList(List<Grade> gradeList , SaveMode mode);
+	Result saveList(List<AssetExtAttribution> assetExtAttributionList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
-	 * @param grade  实体对象
+	 * @param assetExtAttribution  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
 	 * */
-	boolean checkExists(Grade grade,DBField... field);
+	boolean checkExists(AssetExtAttribution assetExtAttribution,DBField... field);
  
 		
 	/**
-	 * 按主键获取 知识分级
+	 * 按主键获取 资产归属数据
 	 *
 	 * @param id 主键
-	 * @return Grade 数据对象
+	 * @return AssetExtAttribution 数据对象
 	 */
-	Grade getById(String id);
+	AssetExtAttribution getById(String id);
 		
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<Grade> getByIds(List<String> ids);
+	List<AssetExtAttribution> getByIds(List<String> ids);
 
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param grade 数据对象
+	 * @param assetExtAttribution 数据对象
 	 * @return 判断结果
 	 */
-	Result<Grade> checkExists(Grade grade);
+	Result<AssetExtAttribution> checkExists(AssetExtAttribution assetExtAttribution);
 
 	/**
 	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Grade sample);
+	ConditionExpr buildQueryCondition(AssetExtAttribution sample);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
@@ -159,14 +159,14 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(Grade sample,String tableAliase);
+	ConditionExpr buildQueryCondition(AssetExtAttribution sample,String tableAliase);
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	List<Grade> queryList(Grade sample);
+	List<AssetExtAttribution> queryList(AssetExtAttribution sample);
  
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -175,7 +175,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Grade> queryList(Grade sample,ConditionExpr condition,OrderBy orderBy);
+	List<AssetExtAttribution> queryList(AssetExtAttribution sample,ConditionExpr condition,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -183,7 +183,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<Grade> queryList(Grade sample,OrderBy orderBy);
+	List<AssetExtAttribution> queryList(AssetExtAttribution sample,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -191,14 +191,14 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	List<Grade> queryList(Grade sample,ConditionExpr condition);
+	List<AssetExtAttribution> queryList(AssetExtAttribution sample,ConditionExpr condition);
 	
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	Grade queryEntity(Grade sample);
+	AssetExtAttribution queryEntity(AssetExtAttribution sample);
 	
 	/**
 	 * 分页查询实体集
@@ -207,7 +207,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<Grade> queryPagedList(Grade sample,int pageSize,int pageIndex);
+	PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -218,7 +218,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Grade> queryPagedList(Grade sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -228,7 +228,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	PagedList<Grade> queryPagedList(Grade sample,ConditionExpr condition,int pageSize,int pageIndex);
+	PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample,ConditionExpr condition,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -238,7 +238,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<Grade> queryPagedList(Grade sample,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<AssetExtAttribution> queryPagedList(AssetExtAttribution sample,OrderBy orderBy,int pageSize,int pageIndex);
  
  	/**
 	 * 查询指定字段的数据清单
@@ -264,7 +264,7 @@ public interface IGradeService extends ISuperService<Grade> {
 	/**
 	 * 导出 Excel
 	 * */
-	ExcelWriter exportExcel(Grade sample);
+	ExcelWriter exportExcel(AssetExtAttribution sample);
 
 	/**
 	 * 导出用于数据导入的 Excel 模版

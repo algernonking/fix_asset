@@ -1,7 +1,7 @@
 /**
- * 资产财务 列表页 JS 脚本
+ * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:12
+ * @since 2021-08-16 17:09:28
  */
 
 function FormPage() {

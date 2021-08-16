@@ -1,13 +1,13 @@
 /**
- * 知识分级 列表页 JS 脚本
+ * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:03
+ * @since 2021-08-16 17:09:24
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-knowledgebase/kn-grade";
+	const moduleURL="/service-eam/eam-asset-ext-attribution";
 
 	const disableCreateNew=false;
 	const disableModify=false;
@@ -44,7 +44,7 @@ function FormPage() {
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
-			admin.putTempData('kn-grade-form-area', area);
+			admin.putTempData('eam-asset-ext-attribution-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -64,13 +64,49 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].supplierName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 warehouseId 下拉字段
+		fox.renderSelectBox({
+			el: "warehouseId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].supplierName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
       * 填充表单数据
       */
 	function fillFormData() {
-		var formData = admin.getTempData('kn-grade-form-data');
+		var formData = admin.getTempData('eam-asset-ext-attribution-form-data');
 
 		//如果是新建
 		if(!formData.id) {
@@ -85,6 +121,10 @@ function FormPage() {
 
 
 
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 
 
 
@@ -127,6 +167,16 @@ function FormPage() {
 
 
 
+			//获取 存放位置 下拉框的值
+			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
+			if(data.field["positionId"] && data.field["positionId"].length>0) {
+				data.field["positionId"]=data.field["positionId"][0];
+			}
+			//获取 仓库 下拉框的值
+			data.field["warehouseId"]=xmSelect.get("#warehouseId",true).getValue("value");
+			if(data.field["warehouseId"] && data.field["warehouseId"].length>0) {
+				data.field["warehouseId"]=data.field["warehouseId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -138,7 +188,7 @@ function FormPage() {
 			    layer.closeAll('loading');
 	            if (data.success) {
 	                layer.msg(data.message, {icon: 1, time: 500});
-					var index=admin.getTempData('kn-grade-form-data-popup-index');
+					var index=admin.getTempData('eam-asset-ext-attribution-form-data-popup-index');
 	                admin.finishPopupCenter(index);
 	            } else {
 	                layer.msg(data.message, {icon: 2, time: 1000});

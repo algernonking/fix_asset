@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:54
+ * @since 2021-08-16 17:06:36
  */
  -->
  <!DOCTYPE html>
@@ -42,7 +42,7 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('信息系统')}">信息系统</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('信息系统')}">信息系统</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <div id="systemId" input-type="select" th:data="${'/service-ops/ops-information-system/query-list'}"></div>
                         </div>
@@ -56,6 +56,15 @@
                             <div id="hostType" input-type="select" th:data="${dict.toArray('ops_host_type')}"></div>
                         </div>
                     </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('主机状态')}">主机状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" th:value="${e.code}" th:title="${e.text}">
+                    </div>
+                </div>
 
 
                 
@@ -76,15 +85,6 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('主机状态')}">主机状态</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" th:value="${e.code}" th:title="${e.text}">
-                    </div>
-                </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -94,7 +94,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('所在环境')}">所在环境</div></div>
                         <div class="layui-input-block ">
-                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_env')}"></div>
+                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_environment')}"></div>
                         </div>
                     </div>
 
@@ -329,7 +329,7 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div></div>
                     <div class="layui-input-block ">
                         <input input-type="radio" type="radio" name="monitorStatus" lay-filter="monitorStatus" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}" th:value="${e.code}" th:title="${e.text}">
                     </div>
@@ -386,10 +386,10 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_HOSTTYPE_DATA = [[${dict.toArray('ops_host_type')}]];
     var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}]];
-    var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_env')}]];
+    var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_environment')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
     var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
-    var VALIDATE_CONFIG={"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"monitorStatus":{"labelInForm":"监控状态","inputType":"radio_box","required":true},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
+    var VALIDATE_CONFIG={"systemId":{"labelInForm":"信息系统","inputType":"select_box","required":true},"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_host";
 </script>
 

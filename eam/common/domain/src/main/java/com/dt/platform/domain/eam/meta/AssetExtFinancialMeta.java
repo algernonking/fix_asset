@@ -10,8 +10,8 @@ import com.dt.platform.domain.eam.Supplier;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:08
- * @sign 06A0CE694DA8E6E808ACBF3FDCE56544
+ * @since 2021-08-16 17:09:28
+ * @sign EB03C4F68A0CE0C043404721CABC98B1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -86,6 +86,16 @@ public class AssetExtFinancialMeta {
 	 * 资产数量 , 类型: java.lang.Integer
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.Integer> ASSET_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ASSET_NUMBER, java.lang.Integer.class, "资产数量", "资产数量", java.lang.Integer.class, null);
+	
+	/**
+	 * 剩余数量 , 类型: java.lang.Integer
+	*/
+	public static final String REMAIN_NUMBER="remainNumber";
+	
+	/**
+	 * 剩余数量 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.Integer> REMAIN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,REMAIN_NUMBER, java.lang.Integer.class, "剩余数量", "剩余数量", java.lang.Integer.class, null);
 	
 	/**
 	 * 资产供应商 , 类型: java.lang.String
@@ -208,16 +218,6 @@ public class AssetExtFinancialMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.util.Date> ENTRY_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ENTRY_TIME, java.util.Date.class, "入账时间", "入账时间", java.util.Date.class, null);
 	
 	/**
-	 * 管理组织 , 类型: java.lang.String
-	*/
-	public static final String MANAGEMENT_ORGANIZATION_ID="managementOrganizationId";
-	
-	/**
-	 * 管理组织 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> MANAGEMENT_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,MANAGEMENT_ORGANIZATION_ID, java.lang.String.class, "管理组织", "管理组织", java.lang.String.class, null);
-	
-	/**
 	 * 财务备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -320,7 +320,7 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , SOURCE_ID , SOURCE_DETAIL , ASSET_NUMBER , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , SERVICE_LIFE , PURCHASE_DATE , STORAGE_TIME , ENTRY_TIME , MANAGEMENT_ORGANIZATION_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER };
+	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , SOURCE_ID , SOURCE_DETAIL , ASSET_NUMBER , REMAIN_NUMBER , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , SERVICE_LIFE , PURCHASE_DATE , STORAGE_TIME , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER };
 	
 	/**
 	 * 代理类
@@ -404,6 +404,17 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setAssetNumber(Integer assetNumber) {
 			super.change(ASSET_NUMBER,super.getAssetNumber(),assetNumber);
 			super.setAssetNumber(assetNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 剩余数量
+		 * @param remainNumber 剩余数量
+		 * @return 当前对象
+		*/
+		public AssetExtFinancial setRemainNumber(Integer remainNumber) {
+			super.change(REMAIN_NUMBER,super.getRemainNumber(),remainNumber);
+			super.setRemainNumber(remainNumber);
 			return this;
 		}
 		
@@ -536,17 +547,6 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setEntryTime(Date entryTime) {
 			super.change(ENTRY_TIME,super.getEntryTime(),entryTime);
 			super.setEntryTime(entryTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 管理组织
-		 * @param managementOrganizationId 管理组织
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setManagementOrganizationId(String managementOrganizationId) {
-			super.change(MANAGEMENT_ORGANIZATION_ID,super.getManagementOrganizationId(),managementOrganizationId);
-			super.setManagementOrganizationId(managementOrganizationId);
 			return this;
 		}
 		

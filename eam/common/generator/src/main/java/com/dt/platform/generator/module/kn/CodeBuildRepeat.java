@@ -8,7 +8,6 @@ public class CodeBuildRepeat {
         String pstr="com.dt.platform.generator.module.kn";
         String[] clasnamearr={
                 "KnContentGtr",
-                "KnGradeGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

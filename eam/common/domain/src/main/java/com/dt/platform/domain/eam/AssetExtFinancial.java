@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 19:33:08
- * @sign 06A0CE694DA8E6E808ACBF3FDCE56544
+ * @since 2021-08-16 17:09:28
+ * @sign EB03C4F68A0CE0C043404721CABC98B1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,6 +71,12 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
 	private Integer assetNumber;
+	
+	/**
+	 * 剩余数量：剩余数量
+	*/
+	@ApiModelProperty(required = false,value="剩余数量" , notes = "剩余数量")
+	private Integer remainNumber;
 	
 	/**
 	 * 资产供应商：资产供应商
@@ -143,12 +149,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
 	private Date entryTime;
-	
-	/**
-	 * 管理组织：管理组织
-	*/
-	@ApiModelProperty(required = false,value="管理组织" , notes = "管理组织")
-	private String managementOrganizationId;
 	
 	/**
 	 * 财务备注：财务备注
@@ -340,6 +340,25 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setAssetNumber(Integer assetNumber) {
 		this.assetNumber=assetNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 剩余数量<br>
+	 * 剩余数量
+	 * @return 剩余数量
+	*/
+	public Integer getRemainNumber() {
+		return remainNumber;
+	}
+	
+	/**
+	 * 设置 剩余数量
+	 * @param remainNumber 剩余数量
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setRemainNumber(Integer remainNumber) {
+		this.remainNumber=remainNumber;
 		return this;
 	}
 	
@@ -568,25 +587,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setEntryTime(Date entryTime) {
 		this.entryTime=entryTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 管理组织<br>
-	 * 管理组织
-	 * @return 管理组织
-	*/
-	public String getManagementOrganizationId() {
-		return managementOrganizationId;
-	}
-	
-	/**
-	 * 设置 管理组织
-	 * @param managementOrganizationId 管理组织
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setManagementOrganizationId(String managementOrganizationId) {
-		this.managementOrganizationId=managementOrganizationId;
 		return this;
 	}
 	

@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
+ * @since 2021-08-16 17:06:42
  */
 
 
@@ -60,7 +60,7 @@ function ListPage() {
 					,{ field: 'contentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型'), templet:function (d){ return fox.getEnumText(RADIO_CONTENTTYPE_DATA,d.contentType);}}
 					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') }
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}
-					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet: function (d) { return fox.joinLabel(d.grade,"name");}}
+					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet:function (d){ return fox.getDictText(SELECT_GRADEID_DATA,d.gradeId);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -97,7 +97,7 @@ function ListPage() {
 		value.profile={ value: $("#profile").val()};
 		value.contentType={ value: xmSelect.get("#contentType",true).getValue("value")};
 		value.display={ value: xmSelect.get("#display",true).getValue("value")};
-		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), fillBy:"grade",field:"id" };
+		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value")};
 		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
@@ -186,18 +186,14 @@ function ListPage() {
 			el: "gradeId",
 			radio: false,
 			size: "small",
-			filterable: true,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			filterable: false,
 			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
-				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
+					opts.push({name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}

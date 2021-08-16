@@ -34,7 +34,6 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
 import java.math.BigDecimal;
-import com.dt.platform.domain.knowledgebase.Grade;
 import com.dt.platform.domain.knowledgebase.Category;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -51,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 知识库内容 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:35:01
+ * @since 2021-08-16 17:06:42
 */
 
 @Api(tags = "知识库内容")
@@ -202,9 +201,7 @@ public class ContentController extends SuperController {
 		Result<Content> result=new Result<>();
 		Content content=contentService.getById(id);
 		// 关联出 分类 数据
-		contentService.join(content,ContentMeta.GRADE);
-		// 关联出 等级 数据
-		contentService.join(content,ContentMeta.GRADE);
+		contentService.join(content,ContentMeta.CATEGORY);
 		result.success(true).data(content);
 		return result;
 	}
@@ -288,9 +285,7 @@ public class ContentController extends SuperController {
 		Result<PagedList<Content>> result=new Result<>();
 		PagedList<Content> list=contentService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 分类 数据
-		contentService.join(list,ContentMeta.GRADE);
-		// 关联出 等级 数据
-		contentService.join(list,ContentMeta.GRADE);
+		contentService.join(list,ContentMeta.CATEGORY);
 		result.success(true).data(list);
 		return result;
 	}

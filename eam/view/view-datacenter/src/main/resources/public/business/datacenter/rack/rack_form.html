@@ -2,7 +2,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-15 18:34:21
+ * @since 2021-08-16 17:09:21
  */
  -->
  <!DOCTYPE html>
@@ -86,7 +86,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('容量')}">容量</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
+                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="0.0" max-value="100.0"  scale="0"/>
                         </div>
                     </div>
 
