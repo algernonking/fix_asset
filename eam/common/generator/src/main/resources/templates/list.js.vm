@@ -515,16 +515,8 @@ function ListPage() {
 				
 			}
 			#for(b:opColumnButtons)
-			else if (layEvent === '#(b.id)') { // #(b.title)
-				#if(b.actionName=="open_window")
-				var index=admin.popupCenter({
-					title: "#(b.windowTitle)",
-					resize: false,
-					area: ["500px","500px"],
-					type: 2,
-					content: "#(b.uri)"
-				});
-				#end
+			else if (layEvent === '#(b.id)') { // #(b.label)
+				#(b.jsFunction.name)(data);
 			}
 			#end
 			#if(isTree)else if (layEvent === 'drill') {
@@ -564,6 +556,13 @@ function ListPage() {
 		});
 		admin.putTempData('#(formDataKey)-popup-index', index);
 	};
+
+	#for(b:opColumnButtons)
+	/**
+	 * #(b.label) 操作
+	 */
+	#(b.jsFunction.source)
+	#end
 
 };
 
