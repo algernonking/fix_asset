@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:06:43
+ * @since 2021-08-16 17:10:35
  */
 
 function FormPage() {
@@ -147,7 +147,7 @@ function FormPage() {
 
 
 			//设置  分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#categoryId",formData.grade);
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
 			//设置  等级 设置下拉框勾选
 			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
 
