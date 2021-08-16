@@ -143,6 +143,9 @@
     #if(!disableSingleDelete)
     <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
     #end
+    #for(b:opColumnButtons)
+    <a class="layui-btn layui-btn-xs" lay-event="#(b.id)" th:text="${lang.translate('#(b.title)')}">#(b.title)</a>
+    #end
 </script>
 
 #if(hasLogicField)

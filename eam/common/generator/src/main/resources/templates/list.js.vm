@@ -513,7 +513,21 @@ function ListPage() {
 					});
 				});
 				
-			}  #if(isTree)else if (layEvent === 'drill') {
+			}
+			#for(b:opColumnButtons)
+			else if (layEvent === '#(b.id)') { // #(b.title)
+				#if(b.actionName=="open_window")
+				var index=admin.popupCenter({
+					title: "#(b.windowTitle)",
+					resize: false,
+					area: ["500px","500px"],
+					type: 2,
+					content: "#(b.uri)"
+				});
+				#end
+			}
+			#end
+			#if(isTree)else if (layEvent === 'drill') {
 			
 				#(parentIdVar) = data.#(idPropertyName);
 				navStack.push([data.id,data.label]);
