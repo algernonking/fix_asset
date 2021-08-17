@@ -32,14 +32,22 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID)
-                .basic().label("维保商").search().hidden()
+                .basic().label("维保商")
                 .form().selectBox().queryApi(MaintainerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(MaintainerMeta.ID).textField(MaintainerMeta.MAINTAINER_NAME).fillBy(AssetExtMaintainerMeta.MAINTNAINER).muliti(false);
+                .valueField(MaintainerMeta.ID).
+                textField(MaintainerMeta.MAINTAINER_NAME).
+                fillBy(AssetExtMaintainerMeta.MAINTNAINER).muliti(false);
 
 
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES,EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID},
-                new Object[]{EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME}
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES,
+                },
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME}
 
         );
 
@@ -53,7 +61,6 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup("维保属性",
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
                 }
@@ -61,6 +68,13 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
 
                 }
+        );
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES
+                }
+
         );
 
 

@@ -10,8 +10,8 @@ import com.dt.platform.domain.eam.Supplier;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:28
- * @sign EB03C4F68A0CE0C043404721CABC98B1
+ * @since 2021-08-17 16:04:40
+ * @sign 637D649AF57723282EFCE1461EAFC9FC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -178,14 +178,14 @@ public class AssetExtFinancialMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> PURCHASE_UNIT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,PURCHASE_UNIT_PRICE, java.math.BigDecimal.class, "采购单价", "采购单价", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 使用期限(月) , 类型: java.math.BigDecimal
+	 * 使用期限 , 类型: java.math.BigDecimal
 	*/
 	public static final String SERVICE_LIFE="serviceLife";
 	
 	/**
-	 * 使用期限(月) , 类型: java.math.BigDecimal
+	 * 使用期限 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限(月)", "使用期限(月)", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 采购日期 , 类型: java.util.Date
@@ -507,8 +507,8 @@ public class AssetExtFinancialMeta {
 		}
 		
 		/**
-		 * 设置 使用期限(月)
-		 * @param serviceLife 使用期限(月)
+		 * 设置 使用期限
+		 * @param serviceLife 使用期限
 		 * @return 当前对象
 		*/
 		public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {

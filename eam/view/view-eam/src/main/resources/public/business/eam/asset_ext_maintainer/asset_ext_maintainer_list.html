@@ -2,7 +2,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
+ * @since 2021-08-17 15:46:18
  */
  -->
  <!DOCTYPE html>
@@ -31,26 +31,31 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 维保开始时间 , maintenanceStartTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('维保开始时间')}" class="search-label">维保开始时间</span><span class="search-colon">:</span></div>
+                            <input type="text" id="maintenanceStartTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
+                    <!-- 维保商 , maintainerId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('维保商')}" class="search-label">维保商</span><span class="search-colon">:</span></div>
+                        <div id="maintainerId" th:data="${'/service-eam/eam-maintainer/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('资产')}" class="search-label">资产</span><span class="search-colon">:</span></div>
                         <input id="assetId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 维保开始时间 , maintenanceStartTime ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('维保开始时间')}" class="search-label">维保开始时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="maintenanceStartTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
                     <!-- 维保到期时间 , maintenanceEndTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('维保到期时间')}" class="search-label">维保到期时间</span><span class="search-colon">:</span></div>

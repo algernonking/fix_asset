@@ -2,7 +2,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:33
+ * @since 2021-08-17 15:46:19
  */
  -->
  <!DOCTYPE html>
@@ -31,10 +31,10 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 发行方式 , distributionMode ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('发行方式')}" class="search-label">发行方式</span><span class="search-colon">:</span></div>
+                        <div id="distributionMode" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
                     </div>
 
 

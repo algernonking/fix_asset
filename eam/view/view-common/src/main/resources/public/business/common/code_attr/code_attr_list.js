@@ -1,7 +1,7 @@
 /**
  * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:14
+ * @since 2021-08-17 15:24:16
  */
 
 
@@ -57,8 +57,9 @@ function ListPage() {
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('占位符') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码名称') }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('属性类型'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}}
-					,{ field: 'sort', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('排序') }
+					,{ field: 'sort', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('排序') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -262,7 +263,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -291,6 +293,7 @@ function ListPage() {
 		});
 		admin.putTempData('sys-code-attr-form-data-popup-index', index);
 	};
+
 
 };
 

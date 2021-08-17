@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产财务数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:28
+ * @since 2021-08-17 16:04:41
 */
 
 @Api(tags = "资产财务数据")
@@ -83,7 +83,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
@@ -161,7 +161,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
@@ -205,7 +205,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
@@ -290,7 +290,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),
@@ -328,7 +328,7 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.RESIDUALS_RATE , value = "残值率" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.NAV_PRICE , value = "资产净值" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_UNIT_PRICE , value = "采购单价" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限(月)" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.STORAGE_TIME , value = "入库时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ENTRY_TIME , value = "入账时间" , required = false , dataTypeClass=Date.class),

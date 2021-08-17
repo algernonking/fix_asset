@@ -2,7 +2,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:26
+ * @since 2021-08-17 15:46:14
  */
  -->
  <!DOCTYPE html>
@@ -31,6 +31,16 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 机柜 , rackId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('机柜')}" class="search-label">机柜</span><span class="search-colon">:</span></div>
+                        <div id="rackId" th:data="${'/service-datacenter/dc-rack/query-list'}" style="width:140px"></div>
+                    </div>
+                    <!-- 区域 , areaId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('区域')}" class="search-label">区域</span><span class="search-colon">:</span></div>
+                        <div id="areaId" th:data="${'/service-datacenter/dc-area/query-list'}" style="width:140px"></div>
+                    </div>
                     <!-- 管理IP , manageIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('管理IP')}" class="search-label">管理IP</span><span class="search-colon">:</span></div>
@@ -46,6 +56,11 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 层级 , layerId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('层级')}" class="search-label">层级</span><span class="search-colon">:</span></div>
+                        <div id="layerId" th:data="${'/service-datacenter/dc-layer/query-list'}" style="width:140px"></div>
+                    </div>
                     <!-- 备注 , equipmentNotes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>

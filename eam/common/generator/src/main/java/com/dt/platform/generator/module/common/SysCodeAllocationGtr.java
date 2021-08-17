@@ -20,14 +20,13 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(CodeRule.class,"rule","编码规则","编码规则");
 
 
-        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID).search().hidden(true);
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.ID).basic().hidden();
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).search().hidden();
-        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.CREATE_TIME).table().disable(true);
+
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID).search().hidden();
-
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).search().hidden();
+        cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID).search().hidden();
 
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).basic().label("业务模块")
@@ -35,15 +34,11 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                 .enumType(CodeModuleEnum.class);
 
 
-
-
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
-                .basic().label("编码规则").search().hidden()
+                .basic().label("编码规则")
                 .form().validate().required()
                 .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
-
-
 
 
 

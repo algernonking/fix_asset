@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:05
+ * @since 2021-08-17 16:21:42
  */
  -->
  <!DOCTYPE html>
@@ -36,30 +36,35 @@
                         <div class="search-label-div"><span th:text="${lang.translate('实例名称')}" class="search-label">实例名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 备份状态 , backupStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('备份状态')}" class="search-label">备份状态</span><span class="search-colon">:</span></div>
+                        <div id="backupStatus" th:data="${dict.toArray('ops_db_backup_status')}" style="width:140px"></div>
                     </div>
-                    <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 备份策略 , backupStrategy ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('标签')}" class="search-label">标签</span><span class="search-colon">:</span></div>
-                        <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('备份策略')}" class="search-label">备份策略</span><span class="search-colon">:</span></div>
+                        <input id="backupStrategy" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 日志模式 , logMethod ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('日志模式')}" class="search-label">日志模式</span><span class="search-colon">:</span></div>
+                        <div id="logMethod" th:data="${dict.toArray('ops_db_log_method')}" style="width:140px"></div>
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 备份策略 , backupStrategy ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备份策略')}" class="search-label">备份策略</span><span class="search-colon">:</span></div>
-                        <input id="backupStrategy" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('标签')}" class="search-label">标签</span><span class="search-colon">:</span></div>
+                        <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备份状态 , backupStatus ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备份状态')}" class="search-label">备份状态</span><span class="search-colon">:</span></div>
-                        <div id="backupStatus" th:data="${dict.toArray('ops_db_backup_status')}" style="width:140px"></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

@@ -1,7 +1,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
+ * @since 2021-08-17 15:46:18
  */
 
 
@@ -91,6 +91,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.assetId={ value: $("#assetId").val()};
+		value.maintainerId={ value: xmSelect.get("#maintainerId",true).getValue("value"), fillBy:"maintnainer",field:"id" };
 		value.maintenanceStartTime={ value: $("#maintenanceStartTime").val()};
 		value.maintenanceEndTime={ value: $("#maintenanceEndTime").val()};
 		value.notes={ value: $("#notes").val()};
@@ -123,6 +124,25 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 maintainerId 下拉字段
+		fox.renderSelectBox({
+			el: "maintainerId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].maintainerName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#maintenanceStartTime',
 			trigger:"click"
@@ -256,7 +276,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -285,6 +306,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-maintainer-form-data-popup-index', index);
 	};
+
 
 };
 

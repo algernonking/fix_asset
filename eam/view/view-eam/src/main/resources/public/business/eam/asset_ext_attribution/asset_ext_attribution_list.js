@@ -1,7 +1,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:24
+ * @since 2021-08-17 15:46:13
  */
 
 
@@ -95,7 +95,7 @@ function ListPage() {
 		var value = {};
 		value.managementOrganizationId={ value: $("#managementOrganizationId").val()};
 		value.userOrganizationId={ value: $("#userOrganizationId").val()};
-		value.userId={ value: $("#userId").val()};
+		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id" };
 		value.positionDetail={ value: $("#positionDetail").val()};
 		value.notes={ value: $("#notes").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
@@ -127,6 +127,25 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].supplierName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -252,7 +271,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -281,6 +301,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-attribution-form-data-popup-index', index);
 	};
+
 
 };
 

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:32
- * @sign A9BF9AA8E25E5EE4D8AA0DC9F4998C7E
+ * @since 2021-08-17 15:51:51
+ * @sign 9FFCE64E49C610F1B16A508757F14131
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class ServiceCategory extends Entity {
 	private String id;
 	
 	/**
-	 * 服务分组DB：OS,MIDDLEWARE,OTHER
+	 * 服务分组：服务分组
 	*/
-	@ApiModelProperty(required = false,value="服务分组DB" , notes = "OS,MIDDLEWARE,OTHER")
+	@ApiModelProperty(required = false,value="服务分组" , notes = "服务分组")
 	private String groupId;
 	
 	/**
@@ -121,17 +121,17 @@ public class ServiceCategory extends Entity {
 	}
 	
 	/**
-	 * 获得 服务分组DB<br>
-	 * OS,MIDDLEWARE,OTHER
-	 * @return 服务分组DB
+	 * 获得 服务分组<br>
+	 * 服务分组
+	 * @return 服务分组
 	*/
 	public String getGroupId() {
 		return groupId;
 	}
 	
 	/**
-	 * 设置 服务分组DB
-	 * @param groupId 服务分组DB
+	 * 设置 服务分组
+	 * @param groupId 服务分组
 	 * @return 当前对象
 	*/
 	public ServiceCategory setGroupId(String groupId) {

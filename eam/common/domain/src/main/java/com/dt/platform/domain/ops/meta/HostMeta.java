@@ -13,8 +13,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:18
- * @sign 810E3DB54E908FC3AEA23D5D8C5AD21A
+ * @since 2021-08-17 15:51:45
+ * @sign 7D224B38E1106A09EB71B664A490AB5E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,14 +51,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_TYPE, java.lang.String.class, "主机类型", "主机类型", java.lang.String.class, null);
 	
 	/**
-	 * 主机状态(online , offline) , 类型: java.lang.String
+	 * 主机状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 主机状态(online , offline) , 类型: java.lang.String
+	 * 主机状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,STATUS, java.lang.String.class, "主机状态(online", "offline)", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,STATUS, java.lang.String.class, "主机状态", "主机状态", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -91,14 +91,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_VIP_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_VIP, java.lang.String.class, "VIP", "VIP", java.lang.String.class, null);
 	
 	/**
-	 * 运行环境prod , uat,tst , 类型: java.lang.String
+	 * 运行环境 , 类型: java.lang.String
 	*/
 	public static final String ENVIRONMENT="environment";
 	
 	/**
-	 * 运行环境prod , uat,tst , 类型: java.lang.String
+	 * 运行环境 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> ENVIRONMENT_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ENVIRONMENT, java.lang.String.class, "运行环境prod", "uat,tst", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> ENVIRONMENT_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ENVIRONMENT, java.lang.String.class, "运行环境", "运行环境", java.lang.String.class, null);
 	
 	/**
 	 * 位置 , 类型: java.lang.String
@@ -111,14 +111,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,POSITION_ID, java.lang.String.class, "位置", "位置", java.lang.String.class, null);
 	
 	/**
-	 * 监控状态(valid , ,nvalid,unknow) , 类型: java.lang.String
+	 * 监控状态 , 类型: java.lang.String
 	*/
 	public static final String MONITOR_STATUS="monitorStatus";
 	
 	/**
-	 * 监控状态(valid , ,nvalid,unknow) , 类型: java.lang.String
+	 * 监控状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> MONITOR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,MONITOR_STATUS, java.lang.String.class, "监控状态(valid", ",nvalid,unknow)", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> MONITOR_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,MONITOR_STATUS, java.lang.String.class, "监控状态", "监控状态", java.lang.String.class, null);
 	
 	/**
 	 * 负责人 , 类型: java.lang.String
@@ -251,14 +251,14 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.util.Date> ONLINE_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ONLINE_TIME, java.util.Date.class, "上线时间", "上线时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否归档1归档0不归档 , 类型: java.lang.String
+	 * 是否归档 , 类型: java.lang.String
 	*/
 	public static final String ARCH="arch";
 	
 	/**
-	 * 是否归档1归档0不归档 , 类型: java.lang.String
+	 * 是否归档 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> ARCH_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ARCH, java.lang.String.class, "是否归档1归档0不归档", "是否归档1归档0不归档", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> ARCH_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,ARCH, java.lang.String.class, "是否归档", "是否归档", java.lang.String.class, null);
 	
 	/**
 	 * 标签 , 类型: java.lang.String
@@ -487,8 +487,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 主机状态(online
-		 * @param status 主机状态(online
+		 * 设置 主机状态
+		 * @param status 主机状态
 		 * @return 当前对象
 		*/
 		public Host setStatus(String status) {
@@ -531,8 +531,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 运行环境prod
-		 * @param environment 运行环境prod
+		 * 设置 运行环境
+		 * @param environment 运行环境
 		 * @return 当前对象
 		*/
 		public Host setEnvironment(String environment) {
@@ -553,8 +553,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 监控状态(valid
-		 * @param monitorStatus 监控状态(valid
+		 * 设置 监控状态
+		 * @param monitorStatus 监控状态
 		 * @return 当前对象
 		*/
 		public Host setMonitorStatus(String monitorStatus) {
@@ -707,8 +707,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 是否归档1归档0不归档
-		 * @param arch 是否归档1归档0不归档
+		 * 设置 是否归档
+		 * @param arch 是否归档
 		 * @return 当前对象
 		*/
 		public Host setArch(String arch) {

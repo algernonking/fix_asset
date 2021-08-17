@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:01
- * @sign 7FF33F13522A084F72AC62376C1AD5E5
+ * @since 2021-08-17 16:24:28
+ * @sign CD323197665BC9D219152E72F49CA314
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,14 +26,14 @@ public class InformationSystemMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 父节点 , 默认无为0 , 类型: java.lang.String
+	 * 父节点 , 类型: java.lang.String
 	*/
 	public static final String PID="pid";
 	
 	/**
-	 * 父节点 , 默认无为0 , 类型: java.lang.String
+	 * 父节点 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> PID_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,PID, java.lang.String.class, "父节点", "默认无为0", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> PID_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,PID, java.lang.String.class, "父节点", "父节点", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String

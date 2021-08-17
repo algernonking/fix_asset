@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:01
+ * @since 2021-08-17 16:24:32
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                 <div class="layui-form-item" >
@@ -47,6 +47,15 @@
                         <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
                     </div>
                 </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('系统分级')}">系统分级</div></div>
+                        <div class="layui-input-block ">
+                            <div id="grade" input-type="select" th:data="${dict.toArray('ops_system_grade')}"></div>
+                        </div>
+                    </div>
 
 
                 
@@ -67,28 +76,10 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('技术联系人')}">技术联系人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="technicalContact" id="technicalContact" name="technicalContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('技术联系人') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('业务联系人')}">业务联系人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="businessContact" id="businessContact" name="businessContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务联系人') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                 <div class="layui-form-item" >
@@ -97,15 +88,6 @@
                         <input lay-filter="belongOrgInfo" id="belongOrgInfo" name="belongOrgInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属组织') }" type="text" class="layui-input"   />
                     </div>
                 </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('系统分级')}">系统分级</div></div>
-                        <div class="layui-input-block ">
-                            <div id="grade" input-type="select" th:data="${dict.toArray('ops_system_grade')}"></div>
-                        </div>
-                    </div>
 
 
                 
@@ -124,6 +106,29 @@
                             <input input-type="date" lay-filter="offlineDate" id="offlineDate" name="offlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('技术联系人')}">技术联系人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="technicalContact" id="technicalContact" name="technicalContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('技术联系人') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务联系人')}">业务联系人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="businessContact" id="businessContact" name="businessContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务联系人') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
 
 
                 
@@ -148,7 +153,7 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                     <div class="layui-form-item" >
@@ -166,24 +171,6 @@
                             <div id="devMethod" input-type="select" th:data="${dict.toArray('ops_system_dev_method')}"></div>
                         </div>
                     </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('演练时间')}">演练时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('演练时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备份信息')}">备份信息</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="backupInfo" id="backupInfo" name="backupInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份信息') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
 
 
                 
@@ -207,22 +194,13 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('RPO')}">RPO</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('备份信息')}">备份信息</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="rpo" id="rpo" name="rpo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('RPO') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('RTO')}">RTO</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="rto" id="rto" name="rto" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('RTO') }" type="text" class="layui-input"   />
+                        <input lay-filter="backupInfo" id="backupInfo" name="backupInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份信息') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -254,13 +232,36 @@
                 </div>
 
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('RPO')}">RPO</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                        <input lay-filter="rpo" id="rpo" name="rpo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('RPO') }" type="text" class="layui-input"   />
                     </div>
                 </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('RTO')}">RTO</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="rto" id="rto" name="rto" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('RTO') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('演练时间')}">演练时间</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('演练时间') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
 
 
                 <!--结束：栏次内字段循环-->

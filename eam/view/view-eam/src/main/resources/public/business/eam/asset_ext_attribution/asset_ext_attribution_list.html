@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:24
+ * @since 2021-08-17 15:46:13
  */
  -->
  <!DOCTYPE html>
@@ -31,26 +31,31 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 管理组织 , managementOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('管理组织')}" class="search-label">管理组织</span><span class="search-colon">:</span></div>
-                        <input id="managementOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('详细位置')}" class="search-label">详细位置</span><span class="search-colon">:</span></div>
+                        <input id="positionDetail" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('存放位置')}" class="search-label">存放位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 使用组织 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('使用组织')}" class="search-label">使用组织</span><span class="search-colon">:</span></div>
                         <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 使用人员 , userId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 管理组织 , managementOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('使用人员')}" class="search-label">使用人员</span><span class="search-colon">:</span></div>
-                        <input id="userId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('管理组织')}" class="search-label">管理组织</span><span class="search-colon">:</span></div>
+                        <input id="managementOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('详细位置')}" class="search-label">详细位置</span><span class="search-colon">:</span></div>
-                        <input id="positionDetail" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
@@ -65,6 +70,7 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 

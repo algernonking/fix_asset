@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:18
- * @sign 810E3DB54E908FC3AEA23D5D8C5AD21A
+ * @since 2021-08-17 15:51:45
+ * @sign 7D224B38E1106A09EB71B664A490AB5E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,9 +51,9 @@ public class Host extends Entity {
 	private String hostType;
 	
 	/**
-	 * 主机状态(online：offline)
+	 * 主机状态：主机状态
 	*/
-	@ApiModelProperty(required = false,value="主机状态(online" , notes = "offline)")
+	@ApiModelProperty(required = false,value="主机状态" , notes = "主机状态")
 	private String status;
 	
 	/**
@@ -75,9 +75,9 @@ public class Host extends Entity {
 	private String hostVip;
 	
 	/**
-	 * 运行环境prod：uat,tst
+	 * 运行环境：运行环境
 	*/
-	@ApiModelProperty(required = false,value="运行环境prod" , notes = "uat,tst")
+	@ApiModelProperty(required = false,value="运行环境" , notes = "运行环境")
 	private String environment;
 	
 	/**
@@ -87,9 +87,9 @@ public class Host extends Entity {
 	private String positionId;
 	
 	/**
-	 * 监控状态(valid：,nvalid,unknow)
+	 * 监控状态：监控状态
 	*/
-	@ApiModelProperty(required = false,value="监控状态(valid" , notes = ",nvalid,unknow)")
+	@ApiModelProperty(required = false,value="监控状态" , notes = "监控状态")
 	private String monitorStatus;
 	
 	/**
@@ -171,9 +171,9 @@ public class Host extends Entity {
 	private Date onlineTime;
 	
 	/**
-	 * 是否归档1归档0不归档：是否归档1归档0不归档
+	 * 是否归档：是否归档
 	*/
-	@ApiModelProperty(required = false,value="是否归档1归档0不归档" , notes = "是否归档1归档0不归档")
+	@ApiModelProperty(required = false,value="是否归档" , notes = "是否归档")
 	private String arch;
 	
 	/**
@@ -342,17 +342,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 主机状态(online<br>
-	 * offline)
-	 * @return 主机状态(online
+	 * 获得 主机状态<br>
+	 * 主机状态
+	 * @return 主机状态
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 主机状态(online
-	 * @param status 主机状态(online
+	 * 设置 主机状态
+	 * @param status 主机状态
 	 * @return 当前对象
 	*/
 	public Host setStatus(String status) {
@@ -418,17 +418,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 运行环境prod<br>
-	 * uat,tst
-	 * @return 运行环境prod
+	 * 获得 运行环境<br>
+	 * 运行环境
+	 * @return 运行环境
 	*/
 	public String getEnvironment() {
 		return environment;
 	}
 	
 	/**
-	 * 设置 运行环境prod
-	 * @param environment 运行环境prod
+	 * 设置 运行环境
+	 * @param environment 运行环境
 	 * @return 当前对象
 	*/
 	public Host setEnvironment(String environment) {
@@ -456,17 +456,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 监控状态(valid<br>
-	 * ,nvalid,unknow)
-	 * @return 监控状态(valid
+	 * 获得 监控状态<br>
+	 * 监控状态
+	 * @return 监控状态
 	*/
 	public String getMonitorStatus() {
 		return monitorStatus;
 	}
 	
 	/**
-	 * 设置 监控状态(valid
-	 * @param monitorStatus 监控状态(valid
+	 * 设置 监控状态
+	 * @param monitorStatus 监控状态
 	 * @return 当前对象
 	*/
 	public Host setMonitorStatus(String monitorStatus) {
@@ -722,17 +722,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 是否归档1归档0不归档<br>
-	 * 是否归档1归档0不归档
-	 * @return 是否归档1归档0不归档
+	 * 获得 是否归档<br>
+	 * 是否归档
+	 * @return 是否归档
 	*/
 	public String getArch() {
 		return arch;
 	}
 	
 	/**
-	 * 设置 是否归档1归档0不归档
-	 * @param arch 是否归档1归档0不归档
+	 * 设置 是否归档
+	 * @param arch 是否归档
 	 * @return 当前对象
 	*/
 	public Host setArch(String arch) {

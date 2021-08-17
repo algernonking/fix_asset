@@ -17,12 +17,10 @@ public class DcLayerGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_LAYER.ID).basic().hidden(true);
 
-
-
-
         cfg.view().field(EAMTables.DC_LAYER.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.DC_LAYER.CREATE_TIME).table().disable(true);
         cfg.view().field(EAMTables.DC_LAYER.NOTES).search().fuzzySearch();
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

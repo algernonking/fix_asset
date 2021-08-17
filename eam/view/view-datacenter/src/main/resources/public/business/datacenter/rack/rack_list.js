@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:21
+ * @since 2021-08-17 15:35:57
  */
 
 
@@ -61,6 +61,7 @@ function ListPage() {
 					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量') }
 					,{ field: 'rackLabels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
 					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -287,7 +288,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -316,6 +318,7 @@ function ListPage() {
 		});
 		admin.putTempData('dc-rack-form-data-popup-index', index);
 	};
+
 
 };
 

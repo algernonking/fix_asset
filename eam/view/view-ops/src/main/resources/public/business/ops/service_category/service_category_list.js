@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:32
+ * @since 2021-08-17 15:51:51
  */
 
 
@@ -261,7 +261,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -290,6 +291,7 @@ function ListPage() {
 		});
 		admin.putTempData('ops-service-category-form-data-popup-index', index);
 	};
+
 
 };
 

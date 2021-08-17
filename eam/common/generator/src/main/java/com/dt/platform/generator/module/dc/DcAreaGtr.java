@@ -18,15 +18,11 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_AREA.ID).basic().hidden(true);
 
-
-        cfg.view().field(EAMTables.DC_AREA.CREATE_TIME).table().disable(true);
-
-
         cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();
-
         cfg.view().field(EAMTables.DC_AREA.POSITION).search().fuzzySearch();
-
         cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
+
+
 
         cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
               .form().validate().required().form().radioBox().enumType(AreaTypeEnum.class);

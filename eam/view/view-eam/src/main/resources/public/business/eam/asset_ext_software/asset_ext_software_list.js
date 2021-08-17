@@ -1,7 +1,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:33
+ * @since 2021-08-17 15:46:19
  */
 
 
@@ -88,7 +88,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.notes={ value: $("#notes").val()};
+		value.distributionMode={ value: xmSelect.get("#distributionMode",true).getValue("value")};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -118,6 +118,23 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 distributionMode 下拉字段
+		fox.renderSelectBox({
+			el: "distributionMode",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -243,7 +260,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -272,6 +290,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-software-form-data-popup-index', index);
 	};
+
 
 };
 

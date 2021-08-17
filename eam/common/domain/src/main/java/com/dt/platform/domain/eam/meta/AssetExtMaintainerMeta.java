@@ -9,7 +9,7 @@ import com.dt.platform.domain.eam.Maintainer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
+ * @since 2021-08-17 15:46:18
  * @sign 04C14B8E1404382FCCB6191CE9FD8195
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

@@ -82,6 +82,7 @@ public class BaseCodeGenerator {
     }
 
     public ModuleContext createModuleConfig(int apiSort) {
+
         return createModuleConfig(this.table, tablePrefix, apiSort);
     }
 

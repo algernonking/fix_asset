@@ -33,26 +33,38 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID)
-                .basic().label("供应商").search().hidden()
+                .basic().label("供应商")
                 .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetExtFinancialMeta.SUPPLIER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE)
-                .basic().label("使用期限").search().hidden();
+                .basic().label("使用期限");
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
-                .basic().label("资产来源").search().hidden()
+                .basic().label("资产来源")
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
 
 
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL},
-                new Object[]{EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES}
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
+                },
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME
+
+                }
+
 
         );
+
 
 
         //分成分组布局
@@ -79,6 +91,8 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 
                 }
         );
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

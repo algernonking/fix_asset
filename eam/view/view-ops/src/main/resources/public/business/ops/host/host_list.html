@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:27
+ * @since 2021-08-17 15:51:47
  */
  -->
  <!DOCTYPE html>
@@ -36,55 +36,73 @@
                         <div class="search-label-div"><span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span></div>
                         <input id="hostName" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备注 , hostNotes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 信息系统 , systemId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="hostNotes" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('标签')}" class="search-label">标签</span><span class="search-colon">:</span></div>
-                        <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
-                    <!-- IP , hostIp ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('IP')}" class="search-label">IP</span><span class="search-colon">:</span></div>
-                        <input id="hostIp" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('信息系统')}" class="search-label">信息系统</span><span class="search-colon">:</span></div>
+                        <div id="systemId" th:data="${'/service-ops/ops-information-system/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 服务IP , hostVip ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('服务IP')}" class="search-label">服务IP</span><span class="search-colon">:</span></div>
                         <input id="hostVip" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <!-- IP , hostIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('所在位置')}" class="search-label">所在位置</span><span class="search-colon">:</span></div>
-                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:200px"></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('IP')}" class="search-label">IP</span><span class="search-colon">:</span></div>
+                        <input id="hostIp" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('所在位置')}" class="search-label">所在位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:140px"></div>
+                    </div>
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('操作系统')}" class="search-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('数据库')}" class="search-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('中间件')}" class="search-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:200px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 所在环境 , environment ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('所在环境')}" class="search-label">所在环境</span><span class="search-colon">:</span></div>
+                        <div id="environment" th:data="${dict.toArray('ops_environment')}" style="width:140px"></div>
+                    </div>
+                    <!-- 主机状态 , status ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('主机状态')}" class="search-label">主机状态</span><span class="search-colon">:</span></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" style="width:140px"></div>
+
+                    </div>
+                    <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('标签')}" class="search-label">标签</span><span class="search-colon">:</span></div>
+                        <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 备注 , hostNotes ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="hostNotes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

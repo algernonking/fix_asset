@@ -37,7 +37,6 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS.NOTES).basic().label("备注").search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID)
-                .search().hidden()
                 .form().label("图片").upload().acceptSingleImage().displayFileName(false);
 
 
@@ -45,44 +44,77 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .form().validate().required().form().radioBox().enumType(GoodsStautsEnum.class);
 
         cfg.view().field(EAMTables.EAM_GOODS.CATEGORY_ID)
-                .basic().label("分类").search().hidden()
+                .basic().label("分类")
                 .form().validate().required()
                 .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(GoodsMeta.CATEGORY).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
-                .basic().label("品牌").search().hidden()
+                .basic().label("品牌")
                 .form().validate().required()
                 .form().selectBox().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillBy(GoodsMeta.BRAND).muliti(false);
 
         cfg.view().field(EAMTables.EAM_GOODS.MANUFACTURER_ID)
-                .basic().label("厂商").search().hidden()
+                .basic().label("厂商")
                 .form().validate().required()
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(GoodsMeta.MANUFACTURER).muliti(false);
+
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_GOODS.NAME,
+                        EAMTables.EAM_GOODS.CATEGORY_ID,
+                        EAMTables.EAM_GOODS.BRAND_ID,
+                        EAMTables.EAM_GOODS.STATUS
+                },
+                new Object[]{
+                        EAMTables.EAM_GOODS.NOTES
+
+                }
+
+        );
+
+
 
 
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_GOODS.CATEGORY_ID,
-                        EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.NAME,
                         EAMTables.EAM_GOODS.MODEL,
-                        EAMTables.EAM_GOODS.NOTES
-
-
                 }, new Object[] {
+
+                        EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.MANUFACTURER_ID,
                         EAMTables.EAM_GOODS.BRAND_ID,
-                        EAMTables.EAM_GOODS.UNIT,
+
+                }, new Object[] {
                         EAMTables.EAM_GOODS.REFERENCE_PRICE,
+                        EAMTables.EAM_GOODS.UNIT,
+
+
+                 }
+        );
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_GOODS.NOTES
+
+                }
+        );
+
+        cfg.view().search().inputLayout(
+                new Object[]{
                         EAMTables.EAM_GOODS.PICTURE_ID
 
                 }
         );
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
