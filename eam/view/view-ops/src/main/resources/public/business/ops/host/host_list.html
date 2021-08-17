@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:52
+ * @since 2021-08-17 22:01:59
  */
  -->
  <!DOCTYPE html>
@@ -41,14 +41,14 @@
                         <div class="search-label-div"><span th:text="${lang.translate('信息系统')}" class="search-label">信息系统</span><span class="search-colon">:</span></div>
                         <div id="systemId" th:data="${'/service-ops/ops-information-system/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 服务IP , hostVip ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 虚拟VIP , hostVip ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('服务IP')}" class="search-label">服务IP</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('虚拟VIP')}" class="search-label">虚拟VIP</span><span class="search-colon">:</span></div>
                         <input id="hostVip" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- IP , hostIp ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 物理IP , hostIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('IP')}" class="search-label">IP</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('物理IP')}" class="search-label">物理IP</span><span class="search-colon">:</span></div>
                         <input id="hostIp" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 

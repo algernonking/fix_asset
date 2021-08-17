@@ -13,8 +13,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:50
- * @sign 7D224B38E1106A09EB71B664A490AB5E
+ * @since 2021-08-17 22:01:55
+ * @sign B2F02B0409FC779079CA7F71F71E7718
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,24 +71,24 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_NAME_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * IP , 类型: java.lang.String
+	 * 物理IP , 类型: java.lang.String
 	*/
 	public static final String HOST_IP="hostIp";
 	
 	/**
-	 * IP , 类型: java.lang.String
+	 * 物理IP , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_IP_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_IP, java.lang.String.class, "IP", "IP", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_IP_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_IP, java.lang.String.class, "物理IP", "物理IP", java.lang.String.class, null);
 	
 	/**
-	 * VIP , 类型: java.lang.String
+	 * 虚拟VIP , 类型: java.lang.String
 	*/
 	public static final String HOST_VIP="hostVip";
 	
 	/**
-	 * VIP , 类型: java.lang.String
+	 * 虚拟VIP , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_VIP_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_VIP, java.lang.String.class, "VIP", "VIP", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_VIP_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_VIP, java.lang.String.class, "虚拟VIP", "虚拟VIP", java.lang.String.class, null);
 	
 	/**
 	 * 运行环境 , 类型: java.lang.String
@@ -509,8 +509,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 IP
-		 * @param hostIp IP
+		 * 设置 物理IP
+		 * @param hostIp 物理IP
 		 * @return 当前对象
 		*/
 		public Host setHostIp(String hostIp) {
@@ -520,8 +520,8 @@ public class HostMeta {
 		}
 		
 		/**
-		 * 设置 VIP
-		 * @param hostVip VIP
+		 * 设置 虚拟VIP
+		 * @param hostVip 虚拟VIP
 		 * @return 当前对象
 		*/
 		public Host setHostVip(String hostVip) {

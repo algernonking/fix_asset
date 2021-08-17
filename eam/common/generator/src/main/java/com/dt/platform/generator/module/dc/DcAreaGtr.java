@@ -10,8 +10,13 @@ import com.github.foxnic.generator.config.WriteMode;
 
 
 public class DcAreaGtr extends BaseCodeGenerator {
+//
+//    public DcAreaGtr() {
+//        super(EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+//    }
+
     public DcAreaGtr() {
-        super(EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+        super(AreaServiceProxy.class, AreaPageController.class,EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -41,13 +46,11 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
     public static void main(String[] args) throws Exception {
         DcAreaGtr g=new DcAreaGtr();
+        g.reGenerateMenu();
         //生成代码
-        g.generateCode();
-
-        //移除之前生成的菜单，视情况执行
-       // System.out.println("############"+g.getTablePrefix());
-        g.removeByBatchId("473608218912751616");
+        //g.generateCode();
         //生成菜单
-       g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+     //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+     //  g.reGenerateMenu(AreaServiceProxy.class,AreaPageController.class);
     }
 }

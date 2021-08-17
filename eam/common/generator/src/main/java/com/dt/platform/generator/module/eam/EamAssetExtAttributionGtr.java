@@ -35,13 +35,13 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_ID)
                 .basic().label("存放位置")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(PositionMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetExtAttributionMeta.POSITION).muliti(false);
+                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetExtAttributionMeta.POSITION).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.WAREHOUSE_ID)
                 .basic().label("仓库")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(WarehouseMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetExtAttributionMeta.WAREHOUSE).muliti(false);
+                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillBy(AssetExtAttributionMeta.WAREHOUSE).muliti(false);
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -66,11 +66,11 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.MANAGEMENT_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.WAREHOUSE_ID,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.WAREHOUSE_ID,
+                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.MANAGER_ID,
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USER_ID,
-
                 },
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_ID,
@@ -78,7 +78,6 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
                 }
 
         );
-
 
 
             cfg.view().form().addGroup(null,

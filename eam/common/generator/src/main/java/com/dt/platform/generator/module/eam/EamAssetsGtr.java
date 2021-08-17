@@ -49,7 +49,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
 
-
+        cfg.view().field(EAMTables.EAM_ASSET.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().validate().required().form().label("状态").selectBox().enumType(AssetStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)

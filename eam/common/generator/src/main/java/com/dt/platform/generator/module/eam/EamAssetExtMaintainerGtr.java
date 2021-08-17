@@ -44,7 +44,7 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID,
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME}
@@ -60,19 +60,24 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
         cfg.view().form().addGroup("维保属性",
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
+
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_NAME,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,
+
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
                 }
                 , new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.DIRECTOR_ID,
 
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.NOTES
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION
                 }
 
         );

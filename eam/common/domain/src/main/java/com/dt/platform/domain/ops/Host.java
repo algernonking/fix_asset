@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:50
- * @sign 7D224B38E1106A09EB71B664A490AB5E
+ * @since 2021-08-17 22:01:55
+ * @sign B2F02B0409FC779079CA7F71F71E7718
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -63,15 +63,15 @@ public class Host extends Entity {
 	private String hostName;
 	
 	/**
-	 * IP：IP
+	 * 物理IP：物理IP
 	*/
-	@ApiModelProperty(required = false,value="IP" , notes = "IP")
+	@ApiModelProperty(required = false,value="物理IP" , notes = "物理IP")
 	private String hostIp;
 	
 	/**
-	 * VIP：VIP
+	 * 虚拟VIP：虚拟VIP
 	*/
-	@ApiModelProperty(required = false,value="VIP" , notes = "VIP")
+	@ApiModelProperty(required = false,value="虚拟VIP" , notes = "虚拟VIP")
 	private String hostVip;
 	
 	/**
@@ -380,17 +380,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 IP<br>
-	 * IP
-	 * @return IP
+	 * 获得 物理IP<br>
+	 * 物理IP
+	 * @return 物理IP
 	*/
 	public String getHostIp() {
 		return hostIp;
 	}
 	
 	/**
-	 * 设置 IP
-	 * @param hostIp IP
+	 * 设置 物理IP
+	 * @param hostIp 物理IP
 	 * @return 当前对象
 	*/
 	public Host setHostIp(String hostIp) {
@@ -399,17 +399,17 @@ public class Host extends Entity {
 	}
 	
 	/**
-	 * 获得 VIP<br>
-	 * VIP
-	 * @return VIP
+	 * 获得 虚拟VIP<br>
+	 * 虚拟VIP
+	 * @return 虚拟VIP
 	*/
 	public String getHostVip() {
 		return hostVip;
 	}
 	
 	/**
-	 * 设置 VIP
-	 * @param hostVip VIP
+	 * 设置 虚拟VIP
+	 * @param hostVip 虚拟VIP
 	 * @return 当前对象
 	*/
 	public Host setHostVip(String hostVip) {

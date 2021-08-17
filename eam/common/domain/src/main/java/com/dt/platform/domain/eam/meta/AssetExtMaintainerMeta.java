@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.Maintainer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:27
- * @sign 04C14B8E1404382FCCB6191CE9FD8195
+ * @since 2021-08-17 22:01:27
+ * @sign 1F2E94C369F59952979C5C480F70FB31
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -47,6 +47,46 @@ public class AssetExtMaintainerMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> MAINTAINER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,MAINTAINER_ID, java.lang.String.class, "维保厂商", "维保厂商", java.lang.String.class, null);
 	
 	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final String MAINTAINER_NAME="maintainerName";
+	
+	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> MAINTAINER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,MAINTAINER_NAME, java.lang.String.class, "维保厂商", "维保厂商", java.lang.String.class, null);
+	
+	/**
+	 * 联系人 , 类型: java.lang.String
+	*/
+	public static final String CONTACTS="contacts";
+	
+	/**
+	 * 联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,CONTACTS, java.lang.String.class, "联系人", "联系人", java.lang.String.class, null);
+	
+	/**
+	 * 联系方式 , 类型: java.lang.String
+	*/
+	public static final String CONTACT_INFORMATION="contactInformation";
+	
+	/**
+	 * 联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,CONTACT_INFORMATION, java.lang.String.class, "联系方式", "联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 负责人 , 类型: java.lang.String
+	*/
+	public static final String DIRECTOR_ID="directorId";
+	
+	/**
+	 * 负责人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> DIRECTOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,DIRECTOR_ID, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
+	
+	/**
 	 * 维保开始时间 , 类型: java.util.Date
 	*/
 	public static final String MAINTENANCE_START_TIME="maintenanceStartTime";
@@ -69,12 +109,12 @@ public class AssetExtMaintainerMeta {
 	/**
 	 * 备注 , 类型: java.lang.String
 	*/
-	public static final String NOTES="notes";
+	public static final String MAINTENANCE_DESCRIPTION="maintenanceDescription";
 	
 	/**
 	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> MAINTENANCE_DESCRIPTION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,MAINTENANCE_DESCRIPTION, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -169,7 +209,7 @@ public class AssetExtMaintainerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER };
+	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR_ID , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , MAINTENANCE_DESCRIPTION , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER };
 	
 	/**
 	 * 代理类
@@ -213,6 +253,50 @@ public class AssetExtMaintainerMeta {
 		}
 		
 		/**
+		 * 设置 维保厂商
+		 * @param maintainerName 维保厂商
+		 * @return 当前对象
+		*/
+		public AssetExtMaintainer setMaintainerName(String maintainerName) {
+			super.change(MAINTAINER_NAME,super.getMaintainerName(),maintainerName);
+			super.setMaintainerName(maintainerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 联系人
+		 * @param contacts 联系人
+		 * @return 当前对象
+		*/
+		public AssetExtMaintainer setContacts(String contacts) {
+			super.change(CONTACTS,super.getContacts(),contacts);
+			super.setContacts(contacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 联系方式
+		 * @param contactInformation 联系方式
+		 * @return 当前对象
+		*/
+		public AssetExtMaintainer setContactInformation(String contactInformation) {
+			super.change(CONTACT_INFORMATION,super.getContactInformation(),contactInformation);
+			super.setContactInformation(contactInformation);
+			return this;
+		}
+		
+		/**
+		 * 设置 负责人
+		 * @param directorId 负责人
+		 * @return 当前对象
+		*/
+		public AssetExtMaintainer setDirectorId(String directorId) {
+			super.change(DIRECTOR_ID,super.getDirectorId(),directorId);
+			super.setDirectorId(directorId);
+			return this;
+		}
+		
+		/**
 		 * 设置 维保开始时间
 		 * @param maintenanceStartTime 维保开始时间
 		 * @return 当前对象
@@ -236,12 +320,12 @@ public class AssetExtMaintainerMeta {
 		
 		/**
 		 * 设置 备注
-		 * @param notes 备注
+		 * @param maintenanceDescription 备注
 		 * @return 当前对象
 		*/
-		public AssetExtMaintainer setNotes(String notes) {
-			super.change(NOTES,super.getNotes(),notes);
-			super.setNotes(notes);
+		public AssetExtMaintainer setMaintenanceDescription(String maintenanceDescription) {
+			super.change(MAINTENANCE_DESCRIPTION,super.getMaintenanceDescription(),maintenanceDescription);
+			super.setMaintenanceDescription(maintenanceDescription);
 			return this;
 		}
 		

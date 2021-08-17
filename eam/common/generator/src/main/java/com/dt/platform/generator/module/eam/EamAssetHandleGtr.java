@@ -30,7 +30,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
                     new Object[]{
                             EAMTables.EAM_ASSET_HANDLE.NAME,
                             EAMTables.EAM_ASSET_HANDLE.TYPE,
-                            EAMTables.EAM_ASSET_HANDLE.BUSI_CODE,
+                            EAMTables.EAM_ASSET_HANDLE.BUSINESS_CODE,
                             EAMTables.EAM_ASSET_HANDLE.NOTES
                     },
                     new Object[]{
@@ -51,7 +51,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_HANDLE.OPERUSER_ID,
-                        EAMTables.EAM_ASSET_HANDLE.BUSI_CODE,
+                        EAMTables.EAM_ASSET_HANDLE.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_HANDLE.PROC_ID
                 }
         );

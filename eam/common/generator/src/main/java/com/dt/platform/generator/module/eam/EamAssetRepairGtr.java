@@ -25,7 +25,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NOTES).search().fuzzySearch();
+
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
                 .form().validate().required()
@@ -40,12 +40,11 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.NAME,
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
-                        EAMTables.EAM_ASSET_REPAIR.BUSI_CODE,
-                        EAMTables.EAM_ASSET_REPAIR.NOTES
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE,
+                        EAMTables.EAM_ASSET_REPAIR.CONTENT,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_REPAIR.CONTENT,
-                        EAMTables.EAM_ASSET_REPAIR.REPAIR_DATE
+                        EAMTables.EAM_ASSET_REPAIR.PROC_ID
                 }
 
         );
@@ -55,13 +54,14 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
+                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
                         EAMTables.EAM_ASSET_REPAIR.NAME,
-                        EAMTables.EAM_ASSET_REPAIR.REPAIR_DATE,
-
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE,
 
                 }, new Object[] {
+                        EAMTables.EAM_ASSET_REPAIR.STATUS,
                         EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
-                        EAMTables.EAM_ASSET_REPAIR.BUSI_CODE,
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_REPAIR.PROC_ID
                 }
         );
@@ -69,7 +69,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.CONTENT,
-                        EAMTables.EAM_ASSET_REPAIR.NOTES,
+
                         EAMTables.EAM_ASSET_REPAIR.PICTURE_ID,
                 }
 

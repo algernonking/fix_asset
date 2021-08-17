@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:22
- * @sign BD64FBAAF3C7B35F1B91C3B992590B13
+ * @since 2021-08-17 22:01:23
+ * @sign B5D34358112F83C2ED81F39D6B6E7965
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,10 +42,16 @@ public class AssetExtAttribution extends Entity {
 	private String assetId;
 	
 	/**
-	 * 管理组织：管理组织
+	 * 所属组织：所属组织
 	*/
-	@ApiModelProperty(required = false,value="管理组织" , notes = "管理组织")
+	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
 	private String managementOrganizationId;
+	
+	/**
+	 * 管理人员：管理人员
+	*/
+	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
+	private String managerId;
 	
 	/**
 	 * 使用组织：使用组织
@@ -182,21 +188,40 @@ public class AssetExtAttribution extends Entity {
 	}
 	
 	/**
-	 * 获得 管理组织<br>
-	 * 管理组织
-	 * @return 管理组织
+	 * 获得 所属组织<br>
+	 * 所属组织
+	 * @return 所属组织
 	*/
 	public String getManagementOrganizationId() {
 		return managementOrganizationId;
 	}
 	
 	/**
-	 * 设置 管理组织
-	 * @param managementOrganizationId 管理组织
+	 * 设置 所属组织
+	 * @param managementOrganizationId 所属组织
 	 * @return 当前对象
 	*/
 	public AssetExtAttribution setManagementOrganizationId(String managementOrganizationId) {
 		this.managementOrganizationId=managementOrganizationId;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人员<br>
+	 * 管理人员
+	 * @return 管理人员
+	*/
+	public String getManagerId() {
+		return managerId;
+	}
+	
+	/**
+	 * 设置 管理人员
+	 * @param managerId 管理人员
+	 * @return 当前对象
+	*/
+	public AssetExtAttribution setManagerId(String managerId) {
+		this.managerId=managerId;
 		return this;
 	}
 	

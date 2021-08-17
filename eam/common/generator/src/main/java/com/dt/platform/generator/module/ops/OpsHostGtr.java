@@ -58,7 +58,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
-        cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).basic().label("服务IP").search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
 
 

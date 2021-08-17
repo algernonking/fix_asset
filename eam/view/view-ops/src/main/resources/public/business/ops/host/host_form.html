@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:52
+ * @since 2021-08-17 22:01:59
  */
  -->
  <!DOCTYPE html>
@@ -171,18 +171,18 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('IP')}">IP</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('物理IP')}">物理IP</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"   />
+                        <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('物理IP') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('服务IP')}">服务IP</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('虚拟VIP')}">虚拟VIP</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('服务IP') }" type="text" class="layui-input"   />
+                        <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟VIP') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 

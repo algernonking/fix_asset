@@ -76,10 +76,11 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
+                        EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
                         EAMTables.OPS_INFORMATION_SYSTEM.NAME,
                         EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
                         EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
+
                 }, new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,

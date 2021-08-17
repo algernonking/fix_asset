@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:52
+ * @since 2021-08-17 22:01:59
  */
 
 
@@ -58,8 +58,8 @@ function ListPage() {
 					,{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}}
 					,{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
-					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('IP') }
-					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务IP') }
+					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理IP') }
+					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('虚拟VIP') }
 					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}}
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}}

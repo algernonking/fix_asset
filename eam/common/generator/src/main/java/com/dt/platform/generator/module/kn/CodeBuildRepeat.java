@@ -16,7 +16,7 @@ public class CodeBuildRepeat {
                 Method method=clazz.getMethod("generateCode");
                 method.invoke(clazz.newInstance());
             }catch(Exception e){
-                System.err.println("这个类真的不存在!");
+                System.err.println(clasnamearr[i]+"这个类真的不存在!");
             }
             System.out.println("------------------------invoke finish------------------------");
         }
