@@ -9,7 +9,7 @@ import com.dt.platform.domain.common.CodeRule;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 15:24:05
+ * @since 2021-08-17 16:25:07
  * @sign BA335B07CD3BCA1E6B3B84CE15C64D6D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
