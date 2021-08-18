@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:21
+ * @since 2021-08-18 11:53:03
  */
 
 function FormPage() {
@@ -62,6 +62,11 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
+		laydate.render({
+			elem: '#businessDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
 			el: "type",
@@ -77,11 +82,6 @@ function FormPage() {
 				}
 				return opts;
 			}
-		});
-		laydate.render({
-			elem: '#repairDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
 		});
 		laydate.render({
 			elem: '#planFinishDate',

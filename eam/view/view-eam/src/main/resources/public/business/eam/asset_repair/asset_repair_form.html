@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:21
+ * @since 2021-08-18 11:53:03
  */
  -->
  <!DOCTYPE html>
@@ -48,18 +48,27 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('单据名称')}">单据名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('维修状态')}">维修状态</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="repairStatus" id="repairStatus" name="repairStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('维修状态') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('报修日期')}">报修日期</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务日期')}">业务日期</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="repairDate" id="repairDate" name="repairDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('报修日期') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="businessDate" id="businessDate" name="businessDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('业务日期') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 
@@ -71,6 +80,15 @@
 
 
                 <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('办理状态')}">办理状态</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="status" id="status" name="status" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('办理状态') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('报修人')}">报修人</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="operuserId" id="operuserId" name="operuserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('报修人') }" type="text" class="layui-input"   />
@@ -80,9 +98,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('单据编号')}">单据编号</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务编号')}">业务编号</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="busiCode" id="busiCode" name="busiCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据编号') }" type="text" class="layui-input"   />
+                        <input lay-filter="businessCode" id="businessCode" name="businessCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务编号') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -113,15 +131,6 @@
                     <div class="layui-form-label "><div th:text="${lang.translate('报修内容')}">报修内容</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('报修内容') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -164,7 +173,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_TYPE_DATA = [[${dict.toArray('eam_repair_type')}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"单据名称","inputType":"text_input","required":true},"type":{"labelInForm":"报修类型","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"业务名称","inputType":"text_input","required":true},"type":{"labelInForm":"报修类型","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset_repair";
 </script>
 

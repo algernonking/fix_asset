@@ -57,10 +57,8 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().width(1000);
-
         cfg.view().form().addGroup("维保属性",
                 new Object[] {
-
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_NAME,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,

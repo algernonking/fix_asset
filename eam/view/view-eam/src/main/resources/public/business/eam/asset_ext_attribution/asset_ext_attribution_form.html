@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:01:23
+ * @since 2021-08-18 11:53:05
  */
  -->
  <!DOCTYPE html>
@@ -58,18 +58,27 @@
                 </div>
 
 
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('仓库')}">仓库</div></div>
                         <div class="layui-input-block ">
                             <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
                         </div>
                     </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('管理人员')}">管理人员</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="managerId" id="managerId" name="managerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理人员') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
 
 
                 

@@ -9,7 +9,7 @@ JAVA=java
 
 
 ####################### Configure ###################################
-app_name="wrapper-all-0.0.2.RELEASE.jar"
+app_name="app.jar"
 app_dir=/tmp/eam
 app_log=$app_dir/log
 app_log_file=$app_log/app.log

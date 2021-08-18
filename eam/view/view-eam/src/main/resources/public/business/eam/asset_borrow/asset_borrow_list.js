@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:01:30
+ * @since 2021-08-18 11:53:00
  */
 
 
@@ -56,12 +56,12 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
+					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') }
-					,{ field: 'borrowDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借用时间'), templet: function (d) { return fox.dateFormat(d.borrowDate); }}
+					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return fox.dateFormat(d.borrowTime); }}
 					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return fox.dateFormat(d.planReturnDate); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借出说明') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
@@ -95,16 +95,10 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.id={ value: $("#id").val()};
 		value.name={ value: $("#name").val()};
-		value.businessCode={ value: $("#businessCode").val()};
 		value.procId={ value: $("#procId").val()};
 		value.status={ value: $("#status").val()};
-		value.businessDate={ value: $("#businessDate").val()};
-		value.originatorId={ value: $("#originatorId").val()};
-		value.borrowerId={ value: $("#borrowerId").val()};
-		value.borrowDate={ value: $("#borrowDate").val()};
-		value.planReturnDate={ value: $("#planReturnDate").val()};
+		value.borrowTime={ value: $("#borrowTime").val()};
 		value.content={ value: $("#content").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
@@ -136,15 +130,7 @@ function ListPage() {
 		fox.switchSearchRow();
 
 		laydate.render({
-			elem: '#businessDate',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#borrowDate',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#planReturnDate',
+			elem: '#borrowTime',
 			trigger:"click"
 		});
 		fox.renderSearchInputs();
@@ -293,7 +279,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/eam/asset_borrow/asset_borrow_form.html' + queryString,
 			finish: function () {

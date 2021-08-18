@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:20
- * @sign B328CF029A7B9398289C2B14B5EB0B78
+ * @since 2021-08-18 11:53:02
+ * @sign 87BAF73A1FE0343E68C921402C3A7D3F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,40 +36,52 @@ public class AssetRepair extends Entity {
 	private String id;
 	
 	/**
+	 * 业务名称：业务名称
+	*/
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
+	
+	/**
+	 * 业务编号：业务编号
+	*/
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
+	private String businessCode;
+	
+	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
+	
+	/**
 	 * 流程：流程
 	*/
 	@ApiModelProperty(required = false,value="流程" , notes = "流程")
 	private String procId;
 	
 	/**
-	 * 单据状态：单据状态
+	 * 办理状态：办理状态
 	*/
-	@ApiModelProperty(required = false,value="单据状态" , notes = "单据状态")
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
 	
 	/**
-	 * 单据编号：单据编号
+	 * 制单人：制单人
 	*/
-	@ApiModelProperty(required = false,value="单据编号" , notes = "单据编号")
-	private String busiCode;
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
-	 * 单据名称：单据名称
+	 * 维修状态：维修状态
 	*/
-	@ApiModelProperty(required = true,value="单据名称" , notes = "单据名称")
-	private String name;
+	@ApiModelProperty(required = false,value="维修状态" , notes = "维修状态")
+	private String repairStatus;
 	
 	/**
 	 * 报修类型：报修类型
 	*/
 	@ApiModelProperty(required = false,value="报修类型" , notes = "报修类型")
 	private String type;
-	
-	/**
-	 * 报修日期：报修日期
-	*/
-	@ApiModelProperty(required = false,value="报修日期" , notes = "报修日期")
-	private Date repairDate;
 	
 	/**
 	 * 计划完成日期：计划完成日期
@@ -100,12 +112,6 @@ public class AssetRepair extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="图片" , notes = "图片")
 	private String pictureId;
-	
-	/**
-	 * 备注：备注
-	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -175,6 +181,63 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
+	*/
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 设置 业务名称
+	 * @param name 业务名称
+	 * @return 当前对象
+	*/
+	public AssetRepair setName(String name) {
+		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
+	*/
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
+	 * @return 当前对象
+	*/
+	public AssetRepair setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetRepair setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 流程<br>
 	 * 流程
 	 * @return 流程
@@ -194,17 +257,17 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
-	 * 获得 单据状态<br>
-	 * 单据状态
-	 * @return 单据状态
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 单据状态
-	 * @param status 单据状态
+	 * 设置 办理状态
+	 * @param status 办理状态
 	 * @return 当前对象
 	*/
 	public AssetRepair setStatus(String status) {
@@ -213,40 +276,40 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
-	 * 获得 单据编号<br>
-	 * 单据编号
-	 * @return 单据编号
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
 	*/
-	public String getBusiCode() {
-		return busiCode;
+	public String getOriginatorId() {
+		return originatorId;
 	}
 	
 	/**
-	 * 设置 单据编号
-	 * @param busiCode 单据编号
+	 * 设置 制单人
+	 * @param originatorId 制单人
 	 * @return 当前对象
 	*/
-	public AssetRepair setBusiCode(String busiCode) {
-		this.busiCode=busiCode;
+	public AssetRepair setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
 	/**
-	 * 获得 单据名称<br>
-	 * 单据名称
-	 * @return 单据名称
+	 * 获得 维修状态<br>
+	 * 维修状态
+	 * @return 维修状态
 	*/
-	public String getName() {
-		return name;
+	public String getRepairStatus() {
+		return repairStatus;
 	}
 	
 	/**
-	 * 设置 单据名称
-	 * @param name 单据名称
+	 * 设置 维修状态
+	 * @param repairStatus 维修状态
 	 * @return 当前对象
 	*/
-	public AssetRepair setName(String name) {
-		this.name=name;
+	public AssetRepair setRepairStatus(String repairStatus) {
+		this.repairStatus=repairStatus;
 		return this;
 	}
 	
@@ -266,25 +329,6 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setType(String type) {
 		this.type=type;
-		return this;
-	}
-	
-	/**
-	 * 获得 报修日期<br>
-	 * 报修日期
-	 * @return 报修日期
-	*/
-	public Date getRepairDate() {
-		return repairDate;
-	}
-	
-	/**
-	 * 设置 报修日期
-	 * @param repairDate 报修日期
-	 * @return 当前对象
-	*/
-	public AssetRepair setRepairDate(Date repairDate) {
-		this.repairDate=repairDate;
 		return this;
 	}
 	
@@ -380,25 +424,6 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setPictureId(String pictureId) {
 		this.pictureId=pictureId;
-		return this;
-	}
-	
-	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
-	*/
-	public String getNotes() {
-		return notes;
-	}
-	
-	/**
-	 * 设置 备注
-	 * @param notes 备注
-	 * @return 当前对象
-	*/
-	public AssetRepair setNotes(String notes) {
-		this.notes=notes;
 		return this;
 	}
 	

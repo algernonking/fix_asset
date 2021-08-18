@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:11:45
- * @sign 54AB9E9733F2028D545213FA81BB5C23
+ * @since 2021-08-18 11:52:58
+ * @sign 5669A3D39B30512297B4B594874DAED2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,12 @@ public class AssetCollection extends Entity {
 	private String businessCode;
 	
 	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
+	
+	/**
 	 * 流程：流程
 	*/
 	@ApiModelProperty(required = false,value="流程" , notes = "流程")
@@ -58,12 +64,6 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
-	
-	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
 	
 	/**
 	 * 制单人：制单人
@@ -156,6 +156,12 @@ public class AssetCollection extends Entity {
 	private Integer version;
 	
 	/**
+	 * 存放位置：存放位置
+	*/
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
+	private Position position;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -213,6 +219,25 @@ public class AssetCollection extends Entity {
 	}
 	
 	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetCollection setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 流程<br>
 	 * 流程
 	 * @return 流程
@@ -247,25 +272,6 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setStatus(String status) {
 		this.status=status;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public AssetCollection setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
 		return this;
 	}
 	
@@ -551,6 +557,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
+	*/
+	public Position getPosition() {
+		return position;
+	}
+	
+	/**
+	 * 设置 存放位置
+	 * @param position 存放位置
+	 * @return 当前对象
+	*/
+	public AssetCollection setPosition(Position position) {
+		this.position=position;
 		return this;
 	}
 

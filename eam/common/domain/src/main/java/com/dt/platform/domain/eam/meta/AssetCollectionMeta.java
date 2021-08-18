@@ -3,13 +3,14 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetCollection;
 import java.util.Date;
+import com.dt.platform.domain.eam.Position;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:11:45
- * @sign 54AB9E9733F2028D545213FA81BB5C23
+ * @since 2021-08-18 11:52:58
+ * @sign 5669A3D39B30512297B4B594874DAED2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,6 +47,16 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
+	
+	/**
 	 * 流程 , 类型: java.lang.String
 	*/
 	public static final String PROC_ID="procId";
@@ -64,16 +75,6 @@ public class AssetCollectionMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final String BUSINESS_DATE="businessDate";
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -226,9 +227,19 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final String POSITION="position";
+	
+	/**
+	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_DATE , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION };
 	
 	/**
 	 * 代理类
@@ -272,6 +283,17 @@ public class AssetCollectionMeta {
 		}
 		
 		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public AssetCollection setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
+			return this;
+		}
+		
+		/**
 		 * 设置 流程
 		 * @param procId 流程
 		 * @return 当前对象
@@ -290,17 +312,6 @@ public class AssetCollectionMeta {
 		public AssetCollection setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
-		 * @return 当前对象
-		*/
-		public AssetCollection setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
 			return this;
 		}
 		
@@ -466,6 +477,17 @@ public class AssetCollectionMeta {
 		public AssetCollection setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 存放位置
+		 * @param position 存放位置
+		 * @return 当前对象
+		*/
+		public AssetCollection setPosition(Position position) {
+			super.change(POSITION,super.getPosition(),position);
+			super.setPosition(position);
 			return this;
 		}
 	}

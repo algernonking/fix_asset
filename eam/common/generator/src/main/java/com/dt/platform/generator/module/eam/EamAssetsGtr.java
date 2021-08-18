@@ -33,7 +33,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
 
-
         cfg.view().field(EAMTables.EAM_ASSET.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.SCRAP).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.DISPLAY).basic().hidden(true);
@@ -89,7 +88,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .basic().label("计量单位");
 
         cfg.view().field(EAMTables.EAM_ASSET.SERIAL_NUMBER)
-                .basic().label("序列");
+                .basic().label("序列号");
 
         cfg.view().field(EAMTables.EAM_ASSET.PICTURE_ID)
                 .form().label("图片").upload().acceptSingleImage().displayFileName(false);;

@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:20
+ * @since 2021-08-18 11:53:02
  */
  -->
  <!DOCTYPE html>
@@ -31,9 +31,9 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 单据名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('单据名称')}" class="search-label">单据名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div"><span th:text="${lang.translate('业务名称')}" class="search-label">业务名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 报修类型 , type ,typeName=select_box, isHideInSearch=false -->
@@ -41,30 +41,25 @@
                         <div class="search-label-div"><span th:text="${lang.translate('报修类型')}" class="search-label">报修类型</span><span class="search-colon">:</span></div>
                         <div id="type" th:data="${dict.toArray('eam_repair_type')}" style="width:140px"></div>
                     </div>
-                    <!-- 单据编号 , busiCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('单据编号')}" class="search-label">单据编号</span><span class="search-colon">:</span></div>
-                        <input id="busiCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('业务日期')}" class="search-label">业务日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="businessDate"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 报修内容 , content ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('报修内容')}" class="search-label">报修内容</span><span class="search-colon">:</span></div>
+                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 报修内容 , content ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 流程 , procId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('报修内容')}" class="search-label">报修内容</span><span class="search-colon">:</span></div>
-                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 报修日期 , repairDate ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('报修日期')}" class="search-label">报修日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="repairDate"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <div class="search-label-div"><span th:text="${lang.translate('流程')}" class="search-label">流程</span><span class="search-colon">:</span></div>
+                        <input id="procId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

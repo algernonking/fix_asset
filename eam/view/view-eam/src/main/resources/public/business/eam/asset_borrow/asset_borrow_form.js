@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:01:31
+ * @since 2021-08-18 11:53:00
  */
 
 function FormPage() {
@@ -70,7 +70,7 @@ function FormPage() {
 			trigger:"click"
 		});
 		laydate.render({
-			elem: '#borrowDate',
+			elem: '#borrowTime',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});

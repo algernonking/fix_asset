@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:20
+ * @since 2021-08-18 11:53:03
  */
 
 
@@ -54,18 +54,19 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') }
+					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
+					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据状态') }
-					,{ field: 'busiCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据编号') }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据名称') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
+					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态') }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修类型'), templet:function (d){ return fox.getDictText(SELECT_TYPE_DATA,d.type);}}
-					,{ field: 'repairDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('报修日期'), templet: function (d) { return fox.dateFormat(d.repairDate); }}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return fox.dateFormat(d.planFinishDate); }}
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成发起'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') }
 					,{ field: 'operuserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') }
 					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -97,12 +98,11 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.busiCode={ value: $("#busiCode").val()};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessDate={ value: $("#businessDate").val()};
+		value.procId={ value: $("#procId").val()};
 		value.type={ value: xmSelect.get("#type",true).getValue("value")};
-		value.repairDate={ value: $("#repairDate").val()};
 		value.content={ value: $("#content").val()};
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -132,6 +132,10 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		laydate.render({
+			elem: '#businessDate',
+			trigger:"click"
+		});
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
 			el: "type",
@@ -148,10 +152,6 @@ function ListPage() {
 				}
 				return opts;
 			}
-		});
-		laydate.render({
-			elem: '#repairDate',
-			trigger:"click"
 		});
 		fox.renderSearchInputs();
 	}

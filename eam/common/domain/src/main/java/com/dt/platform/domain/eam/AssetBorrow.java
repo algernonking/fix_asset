@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:01:27
- * @sign 0BEF8DEFAD57AA47B7418C5CAA461151
+ * @since 2021-08-18 11:53:00
+ * @sign 1AAD5A8FD99D8AF9FE21FF1F515F58DF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,12 @@ public class AssetBorrow extends Entity {
 	private String businessCode;
 	
 	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
+	
+	/**
 	 * 流程：流程
 	*/
 	@ApiModelProperty(required = false,value="流程" , notes = "流程")
@@ -58,12 +64,6 @@ public class AssetBorrow extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
-	
-	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
 	
 	/**
 	 * 制单人：制单人
@@ -78,10 +78,10 @@ public class AssetBorrow extends Entity {
 	private String borrowerId;
 	
 	/**
-	 * 借用时间：借用时间
+	 * 借出时间：借出时间
 	*/
-	@ApiModelProperty(required = false,value="借用时间" , notes = "借用时间")
-	private Date borrowDate;
+	@ApiModelProperty(required = false,value="借出时间" , notes = "借出时间")
+	private Date borrowTime;
 	
 	/**
 	 * 预计归还时间：预计归还时间
@@ -201,6 +201,25 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetBorrow setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 流程<br>
 	 * 流程
 	 * @return 流程
@@ -235,25 +254,6 @@ public class AssetBorrow extends Entity {
 	*/
 	public AssetBorrow setStatus(String status) {
 		this.status=status;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public AssetBorrow setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
 		return this;
 	}
 	
@@ -296,21 +296,21 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
-	 * 获得 借用时间<br>
-	 * 借用时间
-	 * @return 借用时间
+	 * 获得 借出时间<br>
+	 * 借出时间
+	 * @return 借出时间
 	*/
-	public Date getBorrowDate() {
-		return borrowDate;
+	public Date getBorrowTime() {
+		return borrowTime;
 	}
 	
 	/**
-	 * 设置 借用时间
-	 * @param borrowDate 借用时间
+	 * 设置 借出时间
+	 * @param borrowTime 借出时间
 	 * @return 当前对象
 	*/
-	public AssetBorrow setBorrowDate(Date borrowDate) {
-		this.borrowDate=borrowDate;
+	public AssetBorrow setBorrowTime(Date borrowTime) {
+		this.borrowTime=borrowTime;
 		return this;
 	}
 	

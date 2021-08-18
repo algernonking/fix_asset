@@ -15,6 +15,45 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
 
+        //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_ASSET_BORROW.NAME,
+                        EAMTables.EAM_ASSET_BORROW.PROC_ID,
+                        EAMTables.EAM_ASSET_BORROW.STATUS,
+                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME
+                },
+                new Object[]{
+                        EAMTables.EAM_ASSET_BORROW.CONTENT
+                }
+
+        );
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required();
+
+
+
+        //分成分组布局
+        cfg.view().formWindow().width(1000);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME,
+                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID
+                }, new Object[] {
+                        EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE
+                }, new Object[] {
+                        EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID
+
+                }
+
+        );
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_BORROW.CONTENT,
+                }
+        );
 
 
 
