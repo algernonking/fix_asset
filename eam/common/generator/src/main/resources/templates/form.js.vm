@@ -176,7 +176,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('#(formDataKey)');
-
+		#if(jsBeforeDataFill!=null)
+		#(jsBeforeDataFill.name)(formData);
+		#end
 		#if(isSimplePK)
 		//如果是新建
 		if(!formData.#(idPropertyName)) {
@@ -314,6 +316,10 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
+	#if(jsBeforeDataFill!=null)
+	#(jsBeforeDataFill.source)
+	#end
 
 }
 
