@@ -10,7 +10,7 @@ function FormPage() {
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -24,10 +24,10 @@ function FormPage() {
 
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -63,13 +63,13 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
+
 	    #for(f : fields)
 	    #if(f.typeName.equals("upload"))
 	    //渲染图片字段
@@ -170,7 +170,7 @@ function FormPage() {
 	    #end
 	    #end
 	}
-	
+
 	/**
       * 填充表单数据
       */
@@ -191,7 +191,6 @@ function FormPage() {
 			form.val('data-form', formData);
 
 	     	#for(f : fields)
-			#if(f.isInFormLayout)
 		    #if(f.typeName.equals("upload"))
 			//设置 #(f.labelInForm) 显示附件
 		    if($("##(f.varName)").val()) {
@@ -225,7 +224,6 @@ function FormPage() {
 			#end
 			#end
 			#end
-			#end
 
 
 
@@ -236,7 +234,7 @@ function FormPage() {
 			#(jsAfterDataFill.name)(formData);
 			#end
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -257,19 +255,18 @@ function FormPage() {
 		}
 
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
-
 	    	#for(f : fields)
-			#if(f.isInFormLayout)
+			#if(!f.isHideInForm)
 		    #if(f.typeName.equals("logic_switch"))
 			//处理 #(f.labelInForm) 默认值
 		    if(!data.field.#(f.varName)) data.field.#(f.varName)=0;
@@ -277,9 +274,8 @@ function FormPage() {
 			#end
 		    #end
 
-
 			#for(f : fields)
-			#if(f.isInFormLayout)
+			#if(!f.isHideInForm)
 			#if(f.typeName.equals("check_box"))
 			//处理 #(f.labelInForm) 默认值
 			data.field["#(f.varName)"]=fox.getCheckedValue("#(f.varName)");
@@ -287,18 +283,11 @@ function FormPage() {
 			#end
 			#end
 
-
-
 			#for(f : fields)
-			#if(f.isInFormLayout)
+			#if(!f.isHideInForm)
 			#if(f.typeName.equals("select_box"))
 			//获取 #(f.labelInForm) 下拉框的值
-			data.field["#(f.varName)"]=xmSelect.get("##(f.varName)",true).getValue("value");
-			#if(!f.selectField.muliti)
-			if(data.field["#(f.varName)"] && data.field["#(f.varName)"].length>0) {
-				data.field["#(f.varName)"]=data.field["#(f.varName)"][0];
-			}
-			#end
+			data.field["#(f.varName)"]=fox.getSelectedValue("#(f.varName)",#(f.selectField.muliti));
 			#end
 			#end
 			#end
@@ -319,13 +308,13 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
 
 	#if(jsBeforeDataFill!=null)
