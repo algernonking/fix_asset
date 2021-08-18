@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产退库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:55:22
+ * @since 2021-08-18 11:57:32
 */
 
 @Api(tags = "资产退库")
@@ -196,6 +196,8 @@ public class AssetReturnController extends SuperController {
 	public Result<AssetReturn> getById(String id) {
 		Result<AssetReturn> result=new Result<>();
 		AssetReturn assetReturn=assetReturnService.getById(id);
+		// 关联出 存放位置 数据
+		assetReturnService.join(assetReturn,AssetReturnMeta.POSITION);
 		result.success(true).data(assetReturn);
 		return result;
 	}
@@ -274,6 +276,8 @@ public class AssetReturnController extends SuperController {
 	public Result<PagedList<AssetReturn>> queryPagedList(AssetReturnVO sample) {
 		Result<PagedList<AssetReturn>> result=new Result<>();
 		PagedList<AssetReturn> list=assetReturnService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 存放位置 数据
+		assetReturnService.join(list,AssetReturnMeta.POSITION);
 		result.success(true).data(list);
 		return result;
 	}

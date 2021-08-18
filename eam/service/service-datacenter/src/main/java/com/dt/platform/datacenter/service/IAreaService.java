@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 区域 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:01:16
+ * @since 2021-08-18 14:01:34
 */
 
 public interface IAreaService extends ISuperService<Area> {

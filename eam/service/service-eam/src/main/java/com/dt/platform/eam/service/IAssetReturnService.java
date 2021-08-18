@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资产退库 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:55:22
+ * @since 2021-08-18 11:57:32
 */
 
 public interface IAssetReturnService extends ISuperService<AssetReturn> {

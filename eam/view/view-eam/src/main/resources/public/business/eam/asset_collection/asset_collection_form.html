@@ -2,7 +2,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:52:58
+ * @since 2021-08-18 11:57:45
  */
  -->
  <!DOCTYPE html>
@@ -61,12 +61,12 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('领用后位置')}">领用后位置</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="positionId" id="positionId" name="positionId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用后位置') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-input-block ">
+                            <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 

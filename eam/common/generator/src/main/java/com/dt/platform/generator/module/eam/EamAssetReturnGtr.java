@@ -82,7 +82,7 @@ public class EamAssetReturnGtr extends BaseCodeGenerator {
         //生成代码
         g.generateCode();
         //生成菜单
-//        g.generateMenu(MaintainerServiceProxy.class,MaintainerPageController.class);
+        //g.generateMenu(MaintainerServiceProxy.class,MaintainerPageController.class);
     }
 
 }

@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:52:58
+ * @since 2021-08-18 11:57:45
  */
 
 
@@ -63,7 +63,7 @@ function ListPage() {
 					,{ field: 'actualCollectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际领用日期'), templet: function (d) { return fox.dateFormat(d.actualCollectionDate); }}
 					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后使用组织') }
 					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
-					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后位置') }
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用说明') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

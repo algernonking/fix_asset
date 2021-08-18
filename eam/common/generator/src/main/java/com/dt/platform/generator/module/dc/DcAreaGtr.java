@@ -46,9 +46,9 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
     public static void main(String[] args) throws Exception {
         DcAreaGtr g=new DcAreaGtr();
-        g.reGenerateMenu();
+       // g.reGenerateMenu();
         //生成代码
-        //g.generateCode();
+        g.generateCode();
         //生成菜单
      //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
      //  g.reGenerateMenu(AreaServiceProxy.class,AreaPageController.class);
