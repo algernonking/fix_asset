@@ -20,7 +20,7 @@ public class DcAreaGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.DC_AREA.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();

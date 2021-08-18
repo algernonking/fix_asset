@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 编码规则  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:01:33
+ * @since 2021-08-18 14:34:00
 */
 
 @FeignClient(value = ServiceNames.COMMON, contextId = CodeRuleServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

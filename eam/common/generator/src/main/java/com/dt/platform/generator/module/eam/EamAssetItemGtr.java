@@ -11,7 +11,7 @@ public class EamAssetItemGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
 
 

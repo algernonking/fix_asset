@@ -27,9 +27,11 @@ public class CodeBuildRepeat {
                 Method method=clazz.getMethod("generateCode");
                 method.invoke(clazz.newInstance());
             }catch(Exception e){
+                e.printStackTrace();
                 System.err.println(clasnamearr[i]+"这个类真的不存在!");
             }
-            System.out.println("------------------------invoke finish------------------------");
+            System.out.println("------------------------"+clasnamearr[i]+"invoke finish------------------------");
+
         }
     }
 }

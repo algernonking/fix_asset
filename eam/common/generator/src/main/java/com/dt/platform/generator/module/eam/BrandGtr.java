@@ -11,7 +11,7 @@ public class BrandGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_BRAND.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 

@@ -21,7 +21,7 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
 

@@ -24,7 +24,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Host.class,"host","所在位置","所在位置");
         cfg.getPoClassFile().addSimpleProperty(ServiceInfo.class,"database","数据库","数据库");
 

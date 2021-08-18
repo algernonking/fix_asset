@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 机柜 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:01:37
+ * @since 2021-08-18 14:34:05
 */
 
 public interface IRackService extends ISuperService<Rack> {

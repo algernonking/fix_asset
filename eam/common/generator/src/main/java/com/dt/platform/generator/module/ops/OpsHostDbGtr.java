@@ -11,7 +11,7 @@ public class OpsHostDbGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         //指定该表为关系表
         cfg.setRelationField(EAMTables.OPS_HOST_DB.HOST_ID, EAMTables.OPS_HOST_DB.SERVICE_INFO_ID,true);
 

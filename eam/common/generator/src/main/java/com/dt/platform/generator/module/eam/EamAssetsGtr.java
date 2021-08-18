@@ -16,7 +16,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetFinancial","财务信息","财务信息");
         cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetMaintainer","维保信息","维保信息");
         cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");

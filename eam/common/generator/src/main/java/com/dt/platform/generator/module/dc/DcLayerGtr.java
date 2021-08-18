@@ -14,7 +14,7 @@ public class DcLayerGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.DC_LAYER.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.DC_LAYER.NAME).search().fuzzySearch();

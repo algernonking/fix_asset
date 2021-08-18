@@ -3,7 +3,7 @@ package com.dt.platform.domain.eam;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_ASSET_RETURN;
+import com.dt.platform.constants.db.EAMTables.EAM_ASSET_COLLECTION_RETURN;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -16,17 +16,17 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:57:32
- * @sign 56CB41CF5467CBDB0E9862174A0FA9CE
+ * @since 2021-08-18 14:54:48
+ * @sign AF9022C4CA9D1E3AA725FCBDB279168E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "eam_asset_return")
-public class AssetReturn extends Entity {
+@Table(name = "eam_asset_collection_return")
+public class AssetCollectionReturn extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_ASSET_RETURN.$TABLE;
+	public static final DBTable TABLE =EAM_ASSET_COLLECTION_RETURN.$TABLE;
 	
 	/**
 	 * 主键：主键
@@ -75,7 +75,7 @@ public class AssetReturn extends Entity {
 	 * 退库日期：退库日期
 	*/
 	@ApiModelProperty(required = false,value="退库日期" , notes = "退库日期")
-	private Date returnDate;
+	private Date actualCollectionDate;
 	
 	/**
 	 * 退库使用组织：退库使用组织
@@ -169,7 +169,7 @@ public class AssetReturn extends Entity {
 	 * @param id 主键
 	 * @return 当前对象
 	*/
-	public AssetReturn setId(String id) {
+	public AssetCollectionReturn setId(String id) {
 		this.id=id;
 		return this;
 	}
@@ -188,7 +188,7 @@ public class AssetReturn extends Entity {
 	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetReturn setName(String name) {
+	public AssetCollectionReturn setName(String name) {
 		this.name=name;
 		return this;
 	}
@@ -207,7 +207,7 @@ public class AssetReturn extends Entity {
 	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
-	public AssetReturn setBusinessCode(String businessCode) {
+	public AssetCollectionReturn setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
 		return this;
 	}
@@ -226,7 +226,7 @@ public class AssetReturn extends Entity {
 	 * @param businessDate 业务日期
 	 * @return 当前对象
 	*/
-	public AssetReturn setBusinessDate(Date businessDate) {
+	public AssetCollectionReturn setBusinessDate(Date businessDate) {
 		this.businessDate=businessDate;
 		return this;
 	}
@@ -245,7 +245,7 @@ public class AssetReturn extends Entity {
 	 * @param procId 流程
 	 * @return 当前对象
 	*/
-	public AssetReturn setProcId(String procId) {
+	public AssetCollectionReturn setProcId(String procId) {
 		this.procId=procId;
 		return this;
 	}
@@ -264,7 +264,7 @@ public class AssetReturn extends Entity {
 	 * @param status 办理状态
 	 * @return 当前对象
 	*/
-	public AssetReturn setStatus(String status) {
+	public AssetCollectionReturn setStatus(String status) {
 		this.status=status;
 		return this;
 	}
@@ -283,7 +283,7 @@ public class AssetReturn extends Entity {
 	 * @param originatorId 制单人
 	 * @return 当前对象
 	*/
-	public AssetReturn setOriginatorId(String originatorId) {
+	public AssetCollectionReturn setOriginatorId(String originatorId) {
 		this.originatorId=originatorId;
 		return this;
 	}
@@ -293,17 +293,17 @@ public class AssetReturn extends Entity {
 	 * 退库日期
 	 * @return 退库日期
 	*/
-	public Date getReturnDate() {
-		return returnDate;
+	public Date getActualCollectionDate() {
+		return actualCollectionDate;
 	}
 	
 	/**
 	 * 设置 退库日期
-	 * @param returnDate 退库日期
+	 * @param actualCollectionDate 退库日期
 	 * @return 当前对象
 	*/
-	public AssetReturn setReturnDate(Date returnDate) {
-		this.returnDate=returnDate;
+	public AssetCollectionReturn setActualCollectionDate(Date actualCollectionDate) {
+		this.actualCollectionDate=actualCollectionDate;
 		return this;
 	}
 	
@@ -321,7 +321,7 @@ public class AssetReturn extends Entity {
 	 * @param userOrganizationId 退库使用组织
 	 * @return 当前对象
 	*/
-	public AssetReturn setUserOrganizationId(String userOrganizationId) {
+	public AssetCollectionReturn setUserOrganizationId(String userOrganizationId) {
 		this.userOrganizationId=userOrganizationId;
 		return this;
 	}
@@ -340,7 +340,7 @@ public class AssetReturn extends Entity {
 	 * @param positionId 退库后位置
 	 * @return 当前对象
 	*/
-	public AssetReturn setPositionId(String positionId) {
+	public AssetCollectionReturn setPositionId(String positionId) {
 		this.positionId=positionId;
 		return this;
 	}
@@ -359,7 +359,7 @@ public class AssetReturn extends Entity {
 	 * @param positionDetail 详细位置
 	 * @return 当前对象
 	*/
-	public AssetReturn setPositionDetail(String positionDetail) {
+	public AssetCollectionReturn setPositionDetail(String positionDetail) {
 		this.positionDetail=positionDetail;
 		return this;
 	}
@@ -378,7 +378,7 @@ public class AssetReturn extends Entity {
 	 * @param content 退库说明
 	 * @return 当前对象
 	*/
-	public AssetReturn setContent(String content) {
+	public AssetCollectionReturn setContent(String content) {
 		this.content=content;
 		return this;
 	}
@@ -397,7 +397,7 @@ public class AssetReturn extends Entity {
 	 * @param createBy 创建人ID
 	 * @return 当前对象
 	*/
-	public AssetReturn setCreateBy(String createBy) {
+	public AssetCollectionReturn setCreateBy(String createBy) {
 		this.createBy=createBy;
 		return this;
 	}
@@ -416,7 +416,7 @@ public class AssetReturn extends Entity {
 	 * @param createTime 创建时间
 	 * @return 当前对象
 	*/
-	public AssetReturn setCreateTime(Date createTime) {
+	public AssetCollectionReturn setCreateTime(Date createTime) {
 		this.createTime=createTime;
 		return this;
 	}
@@ -435,7 +435,7 @@ public class AssetReturn extends Entity {
 	 * @param updateBy 修改人ID
 	 * @return 当前对象
 	*/
-	public AssetReturn setUpdateBy(String updateBy) {
+	public AssetCollectionReturn setUpdateBy(String updateBy) {
 		this.updateBy=updateBy;
 		return this;
 	}
@@ -454,7 +454,7 @@ public class AssetReturn extends Entity {
 	 * @param updateTime 修改时间
 	 * @return 当前对象
 	*/
-	public AssetReturn setUpdateTime(Date updateTime) {
+	public AssetCollectionReturn setUpdateTime(Date updateTime) {
 		this.updateTime=updateTime;
 		return this;
 	}
@@ -473,7 +473,7 @@ public class AssetReturn extends Entity {
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
-	public AssetReturn setDeleted(Integer deleted) {
+	public AssetCollectionReturn setDeleted(Integer deleted) {
 		this.deleted=deleted;
 		return this;
 	}
@@ -492,7 +492,7 @@ public class AssetReturn extends Entity {
 	 * @param deleteBy 删除人ID
 	 * @return 当前对象
 	*/
-	public AssetReturn setDeleteBy(String deleteBy) {
+	public AssetCollectionReturn setDeleteBy(String deleteBy) {
 		this.deleteBy=deleteBy;
 		return this;
 	}
@@ -511,7 +511,7 @@ public class AssetReturn extends Entity {
 	 * @param deleteTime 删除时间
 	 * @return 当前对象
 	*/
-	public AssetReturn setDeleteTime(Date deleteTime) {
+	public AssetCollectionReturn setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
 		return this;
 	}
@@ -530,7 +530,7 @@ public class AssetReturn extends Entity {
 	 * @param version version
 	 * @return 当前对象
 	*/
-	public AssetReturn setVersion(Integer version) {
+	public AssetCollectionReturn setVersion(Integer version) {
 		this.version=version;
 		return this;
 	}
@@ -549,7 +549,7 @@ public class AssetReturn extends Entity {
 	 * @param position 存放位置
 	 * @return 当前对象
 	*/
-	public AssetReturn setPosition(Position position) {
+	public AssetCollectionReturn setPosition(Position position) {
 		this.position=position;
 		return this;
 	}
@@ -557,7 +557,7 @@ public class AssetReturn extends Entity {
 	/**
 	 * 将自己转换成指定类型的PO
 	 * @param poType  PO类型
-	 * @return AssetReturn , 转换好的 AssetReturn 对象
+	 * @return AssetCollectionReturn , 转换好的 AssetCollectionReturn 对象
 	*/
 	@Transient
 	public <T extends Entity> T toPO(Class<T> poType) {
@@ -567,7 +567,7 @@ public class AssetReturn extends Entity {
 	/**
 	 * 将自己转换成任意指定类型
 	 * @param pojoType  Pojo类型
-	 * @return AssetReturn , 转换好的 PoJo 对象
+	 * @return AssetCollectionReturn , 转换好的 PoJo 对象
 	*/
 	@Transient
 	public <T> T toPojo(Class<T> pojoType) {
@@ -584,35 +584,35 @@ public class AssetReturn extends Entity {
 	}
 
 	/**
-	 * 将 Map 转换成 AssetReturn
-	 * @param assetReturnMap 包含实体信息的 Map 对象
-	 * @return AssetReturn , 转换好的的 AssetReturn 对象
+	 * 将 Map 转换成 AssetCollectionReturn
+	 * @param assetCollectionReturnMap 包含实体信息的 Map 对象
+	 * @return AssetCollectionReturn , 转换好的的 AssetCollectionReturn 对象
 	*/
 	@Transient
-	public static AssetReturn createFrom(Map<String,Object> assetReturnMap) {
-		if(assetReturnMap==null) return null;
-		AssetReturn po = EntityContext.create(AssetReturn.class, assetReturnMap);
+	public static AssetCollectionReturn createFrom(Map<String,Object> assetCollectionReturnMap) {
+		if(assetCollectionReturnMap==null) return null;
+		AssetCollectionReturn po = EntityContext.create(AssetCollectionReturn.class, assetCollectionReturnMap);
 		return po;
 	}
 
 	/**
-	 * 将 Pojo 转换成 AssetReturn
+	 * 将 Pojo 转换成 AssetCollectionReturn
 	 * @param pojo 包含实体信息的 Pojo 对象
-	 * @return AssetReturn , 转换好的的 AssetReturn 对象
+	 * @return AssetCollectionReturn , 转换好的的 AssetCollectionReturn 对象
 	*/
 	@Transient
-	public static AssetReturn createFrom(Object pojo) {
+	public static AssetCollectionReturn createFrom(Object pojo) {
 		if(pojo==null) return null;
-		AssetReturn po = EntityContext.create(AssetReturn.class,pojo);
+		AssetCollectionReturn po = EntityContext.create(AssetCollectionReturn.class,pojo);
 		return po;
 	}
 
 	/**
-	 * 创建一个 AssetReturn，等同于 new
-	 * @return AssetReturn 对象
+	 * 创建一个 AssetCollectionReturn，等同于 new
+	 * @return AssetCollectionReturn 对象
 	*/
 	@Transient
-	public static AssetReturn create() {
-		return EntityContext.create(AssetReturn.class);
+	public static AssetCollectionReturn create() {
+		return EntityContext.create(AssetCollectionReturn.class);
 	}
 }

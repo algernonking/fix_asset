@@ -29,7 +29,7 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Area.class,"area","区域","区域");
 
         cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","层级");

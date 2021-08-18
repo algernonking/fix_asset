@@ -20,7 +20,7 @@ public class EamAssetExtSoftwareGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
 
-
+        System.out.println(this.getClass().getName());
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ID).basic().hidden();

@@ -19,7 +19,7 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(ServiceCategory.class,"serviceCategory","服务","");
 
 

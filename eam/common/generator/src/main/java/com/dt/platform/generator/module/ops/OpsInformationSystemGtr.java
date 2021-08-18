@@ -12,8 +12,8 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
-
+        System.out.println(this.getClass().getName());
+       // System.out.println(11111);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
 

@@ -14,8 +14,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetStatusEnum implements CodeTextEnum {
 
 	IDLE("idle" , "闲置"),
-	USING("using" , "使用中"),
-	BORROW("borrow" , "借用"),
+	USING("using" , "在用"),
+	BORROW("borrow" , "借用中"),
+	ALLOCATING("allocating" , "调拨中"),
 	SCRAP("scrap" , "报废")
 	;
 	private String code;

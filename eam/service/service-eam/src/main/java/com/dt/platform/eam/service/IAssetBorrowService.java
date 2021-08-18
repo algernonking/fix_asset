@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资产借用 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:57:47
+ * @since 2021-08-18 14:34:12
 */
 
 public interface IAssetBorrowService extends ISuperService<AssetBorrow> {

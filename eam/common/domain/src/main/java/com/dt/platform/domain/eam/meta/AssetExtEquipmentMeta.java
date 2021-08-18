@@ -11,7 +11,7 @@ import com.dt.platform.domain.datacenter.Rack;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:57:52
+ * @since 2021-08-18 14:34:18
  * @sign 5F8F30CC0A3729D5F2AD65C24FCF154B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

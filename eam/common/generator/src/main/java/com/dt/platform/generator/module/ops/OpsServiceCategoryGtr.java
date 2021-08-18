@@ -14,7 +14,7 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.CREATE_TIME).table().hidden();
         cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.NAME).search().fuzzySearch();
