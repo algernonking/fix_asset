@@ -55,7 +55,7 @@
 		<module>./view/view-common</module>
 		<module>./view/view-knowledgebase</module>
 
-		
+
 		<!-- 聚合 -->
 		<module>./wrapper/wrapper-all</module>
 	</modules>
