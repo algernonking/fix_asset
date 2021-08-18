@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:12
- * @sign 1AAD5A8FD99D8AF9FE21FF1F515F58DF
+ * @since 2021-08-18 17:36:33
+ * @sign F44F94FE0605EB898F539D6AB1E572F1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,16 +46,6 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final String BUSINESS_DATE="businessDate";
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
-	
-	/**
 	 * 流程 , 类型: java.lang.String
 	*/
 	public static final String PROC_ID="procId";
@@ -74,6 +64,16 @@ public class AssetBorrowMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 资产状态 , 类型: java.lang.String
+	*/
+	public static final String ASSET_STATUS="assetStatus";
+	
+	/**
+	 * 资产状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ASSET_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_STATUS, java.lang.String.class, "资产状态", "资产状态", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -124,6 +124,16 @@ public class AssetBorrowMeta {
 	 * 借出说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,CONTENT, java.lang.String.class, "借出说明", "借出说明", java.lang.String.class, null);
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -208,7 +218,7 @@ public class AssetBorrowMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ASSET_STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -252,17 +262,6 @@ public class AssetBorrowMeta {
 		}
 		
 		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
-		 * @return 当前对象
-		*/
-		public AssetBorrow setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
-			return this;
-		}
-		
-		/**
 		 * 设置 流程
 		 * @param procId 流程
 		 * @return 当前对象
@@ -281,6 +280,17 @@ public class AssetBorrowMeta {
 		public AssetBorrow setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产状态
+		 * @param assetStatus 资产状态
+		 * @return 当前对象
+		*/
+		public AssetBorrow setAssetStatus(String assetStatus) {
+			super.change(ASSET_STATUS,super.getAssetStatus(),assetStatus);
+			super.setAssetStatus(assetStatus);
 			return this;
 		}
 		
@@ -336,6 +346,17 @@ public class AssetBorrowMeta {
 		public AssetBorrow setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public AssetBorrow setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
 			return this;
 		}
 		

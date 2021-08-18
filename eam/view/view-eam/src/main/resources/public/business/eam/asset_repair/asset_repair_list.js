@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:14
+ * @since 2021-08-18 18:00:28
  */
 
 
@@ -42,6 +42,10 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+			var ps={};
+			var contitions={};
+
+
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
@@ -50,24 +54,22 @@ function ListPage() {
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
+				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') }
+					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
-					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
-					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态') }
+					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态'), templet:function (d){ return fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus);}}
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修类型'), templet:function (d){ return fox.getDictText(SELECT_TYPE_DATA,d.type);}}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return fox.dateFormat(d.planFinishDate); }}
-					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成发起'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
+					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') }
 					,{ field: 'operuserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') }
-					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
 				]],
@@ -98,11 +100,13 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.businessDate={ value: $("#businessDate").val()};
-		value.procId={ value: $("#procId").val()};
+		value.businessCode={ value: $("#businessCode").val()};
+		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
+		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+		value.repairStatus={ value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr")};
 		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
-		value.content={ value: $("#content").val()};
+		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.operuserId={ value: $("#operuserId").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -137,8 +141,46 @@ function ListPage() {
 		fox.switchSearchRow();
 
 		laydate.render({
-			elem: '#businessDate',
+			elem: '#businessDate-begin',
 			trigger:"click"
+		});
+		laydate.render({
+			elem: '#businessDate-end',
+			trigger:"click"
+		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 repairStatus 下拉字段
+		fox.renderSelectBox({
+			el: "repairStatus",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
 		});
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
@@ -216,6 +258,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
+			admin.putTempData('eam-asset-repair-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -326,6 +369,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-repair-form-data-popup-index', index);
 	};
+
 
 
 };

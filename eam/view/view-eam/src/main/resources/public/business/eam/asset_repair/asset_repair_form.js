@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:14
+ * @since 2021-08-18 18:00:31
  */
 
 function FormPage() {
@@ -75,6 +75,38 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 repairStatus 下拉字段
+		fox.renderSelectBox({
+			el: "repairStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
 			el: "type",
@@ -128,7 +160,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-repair-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -148,6 +179,10 @@ function FormPage() {
 
 
 
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
 			//设置  报修类型 设置下拉框勾选
 			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
 
@@ -194,6 +229,16 @@ function FormPage() {
 
 
 
+			//获取 办理状态 下拉框的值
+			data.field["status"]=xmSelect.get("#status",true).getValue("value");
+			if(data.field["status"] && data.field["status"].length>0) {
+				data.field["status"]=data.field["status"][0];
+			}
+			//获取 维修状态 下拉框的值
+			data.field["repairStatus"]=xmSelect.get("#repairStatus",true).getValue("value");
+			if(data.field["repairStatus"] && data.field["repairStatus"].length>0) {
+				data.field["repairStatus"]=data.field["repairStatus"][0];
+			}
 			//获取 报修类型 下拉框的值
 			data.field["type"]=xmSelect.get("#type",true).getValue("value");
 			if(data.field["type"] && data.field["type"].length>0) {
@@ -224,6 +269,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

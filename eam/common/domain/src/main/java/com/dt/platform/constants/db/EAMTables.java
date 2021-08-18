@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-18 14:48:51
+ * @since 2021-08-18 17:11:02
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -523,11 +523,6 @@ public class EAMTables {
 		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
 		
 		/**
-		 * 业务日期
-		*/
-		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
-		
-		/**
 		 * 流程
 		*/
 		public static final DBField PROC_ID = new DBField(DBDataType.STRING , "proc_id","procId","流程","流程",false,false,true);
@@ -540,7 +535,7 @@ public class EAMTables {
 		/**
 		 * 资产状态
 		*/
-		public static final DBField ASSET_STATUS = new DBField(DBDataType.STRING , "asset_status","assetStatus","资产状态","资产状态",false,false,true);
+		public static final DBField ASSET_STATUS = new DBField(DBDataType.STRING , "asset_status","assetStatus","资产状态","资产状态",false,false,false);
 		
 		/**
 		 * 制单人
@@ -566,6 +561,11 @@ public class EAMTables {
 		 * 借出说明
 		*/
 		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","借出说明","借出说明",false,false,true);
+		
+		/**
+		 * 业务日期
+		*/
+		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -607,7 +607,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_BORROW() {
-			this.init($NAME,"资产借用" , ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ASSET_STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产借用" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ASSET_STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_BORROW $TABLE=new EAM_ASSET_BORROW();
 	}
@@ -718,11 +718,6 @@ public class EAMTables {
 		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
 		
 		/**
-		 * 业务日期
-		*/
-		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
-		
-		/**
 		 * 流程
 		*/
 		public static final DBField PROC_ID = new DBField(DBDataType.STRING , "proc_id","procId","流程","流程",false,false,true);
@@ -768,6 +763,11 @@ public class EAMTables {
 		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","领用说明","领用说明",false,false,true);
 		
 		/**
+		 * 业务日期
+		*/
+		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
+		
+		/**
 		 * 创建人ID
 		*/
 		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
@@ -807,7 +807,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_COLLECTION() {
-			this.init($NAME,"资产领用" , ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产领用" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_COLLECTION $TABLE=new EAM_ASSET_COLLECTION();
 	}
@@ -838,11 +838,6 @@ public class EAMTables {
 		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
 		
 		/**
-		 * 业务日期
-		*/
-		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
-		
-		/**
 		 * 流程
 		*/
 		public static final DBField PROC_ID = new DBField(DBDataType.STRING , "proc_id","procId","流程","流程",false,false,true);
@@ -860,7 +855,7 @@ public class EAMTables {
 		/**
 		 * 退库日期
 		*/
-		public static final DBField ACTUAL_COLLECTION_DATE = new DBField(DBDataType.DATE , "actual_collection_date","actualCollectionDate","退库日期","退库日期",false,false,true);
+		public static final DBField RETURN_DATE = new DBField(DBDataType.DATE , "return_date","returnDate","退库日期","退库日期",false,false,true);
 		
 		/**
 		 * 退库使用组织
@@ -881,6 +876,11 @@ public class EAMTables {
 		 * 退库说明
 		*/
 		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","退库说明","退库说明",false,false,true);
+		
+		/**
+		 * 业务日期
+		*/
+		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -922,7 +922,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_COLLECTION_RETURN() {
-			this.init($NAME,"资产退库" , ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产退库" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_COLLECTION_RETURN $TABLE=new EAM_ASSET_COLLECTION_RETURN();
 	}

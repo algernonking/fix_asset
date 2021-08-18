@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:54:51
+ * @since 2021-08-18 17:38:22
  */
  -->
  <!DOCTYPE html>
@@ -41,7 +41,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('退库日期')}">退库日期</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="actualCollectionDate" id="actualCollectionDate" name="actualCollectionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('退库日期') }" type="text" class="layui-input"    lay-verify="|required"   />
+                            <input input-type="date" lay-filter="returnDate" id="returnDate" name="returnDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('退库日期') }" type="text" class="layui-input"    lay-verify="|required"   />
                         </div>
                     </div>
 
@@ -62,20 +62,11 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
                         <div class="layui-input-block ">
                             <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
                         </div>
                     </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -106,9 +97,30 @@
 
 
                 <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('退库说明')}">退库说明</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('退库说明') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('退库说明') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -120,6 +132,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 250px"></div>
 
 
     </form>
@@ -138,7 +151,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"positionId":{"labelInForm":"存放位置","inputType":"select_box","required":true},"actualCollectionDate":{"labelInForm":"退库日期","inputType":"date_input","required":true}};
+    var VALIDATE_CONFIG={"returnDate":{"labelInForm":"退库日期","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_collection_return";
 </script>
 

@@ -1,7 +1,10 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.AssetHandle;
 import com.dt.platform.eam.page.AssetBorrowPageController;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -16,22 +19,39 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         System.out.println(this.getClass().getName());
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
+
+
+
+        //System.err.println(cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).search().
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_BORROW.NAME,
-                        EAMTables.EAM_ASSET_BORROW.PROC_ID,
                         EAMTables.EAM_ASSET_BORROW.STATUS,
+                        EAMTables.EAM_ASSET_BORROW.ASSET_STATUS,
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME
                 },
                 new Object[]{
+                        EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
                         EAMTables.EAM_ASSET_BORROW.CONTENT
                 }
-
         );
 
+        cfg.view().list().disableSpaceColumn();
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).table().disable().search().fuzzySearch();
 
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().disable();
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ASSET_STATUS).form().selectBox().enumType(AssetBorrowStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
 
 
@@ -39,24 +59,21 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME,
-                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID
+                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
+                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME
                 }, new Object[] {
                         EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE
                 }, new Object[] {
                         EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID
-
                 }
-
         );
+
+
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW.CONTENT,
                 }
         );
-
-
-
 
 
         //文件生成覆盖模式

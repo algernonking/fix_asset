@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.Position;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:11
- * @sign 5669A3D39B30512297B4B594874DAED2
+ * @since 2021-08-18 17:39:23
+ * @sign F1DA4D57BBE648CBFAE5C3F843B9E27E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,16 +45,6 @@ public class AssetCollectionMeta {
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final String BUSINESS_DATE="businessDate";
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 流程 , 类型: java.lang.String
@@ -145,6 +135,16 @@ public class AssetCollectionMeta {
 	 * 领用说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,CONTENT, java.lang.String.class, "领用说明", "领用说明", java.lang.String.class, null);
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -239,7 +239,7 @@ public class AssetCollectionMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION };
 	
 	/**
 	 * 代理类
@@ -279,17 +279,6 @@ public class AssetCollectionMeta {
 		public AssetCollection setBusinessCode(String businessCode) {
 			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
 			super.setBusinessCode(businessCode);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
-		 * @return 当前对象
-		*/
-		public AssetCollection setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
 			return this;
 		}
 		
@@ -389,6 +378,17 @@ public class AssetCollectionMeta {
 		public AssetCollection setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public AssetCollection setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
 			return this;
 		}
 		

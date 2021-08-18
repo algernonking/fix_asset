@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:14
- * @sign 87BAF73A1FE0343E68C921402C3A7D3F
+ * @since 2021-08-18 18:00:23
+ * @sign 41B16D0F3758BFA197CCF8C0A7FD91EC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -116,14 +116,14 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.util.Date> PLAN_FINISH_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,PLAN_FINISH_DATE, java.util.Date.class, "计划完成日期", "计划完成日期", java.util.Date.class, null);
 	
 	/**
-	 * 实际完成发起 , 类型: java.util.Date
+	 * 实际完成日期 , 类型: java.util.Date
 	*/
 	public static final String ACTUAL_FINISH_DATE="actualFinishDate";
 	
 	/**
-	 * 实际完成发起 , 类型: java.util.Date
+	 * 实际完成日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.util.Date> ACTUAL_FINISH_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ACTUAL_FINISH_DATE, java.util.Date.class, "实际完成发起", "实际完成发起", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.util.Date> ACTUAL_FINISH_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ACTUAL_FINISH_DATE, java.util.Date.class, "实际完成日期", "实际完成日期", java.util.Date.class, null);
 	
 	/**
 	 * 报修内容 , 类型: java.lang.String
@@ -359,8 +359,8 @@ public class AssetRepairMeta {
 		}
 		
 		/**
-		 * 设置 实际完成发起
-		 * @param actualFinishDate 实际完成发起
+		 * 设置 实际完成日期
+		 * @param actualFinishDate 实际完成日期
 		 * @return 当前对象
 		*/
 		public AssetRepair setActualFinishDate(Date actualFinishDate) {

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:54:48
- * @sign AF9022C4CA9D1E3AA725FCBDB279168E
+ * @since 2021-08-18 17:38:14
+ * @sign 2657732B03D52914993F33F2214A2C82
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,12 +48,6 @@ public class AssetCollectionReturn extends Entity {
 	private String businessCode;
 	
 	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
-	
-	/**
 	 * 流程：流程
 	*/
 	@ApiModelProperty(required = false,value="流程" , notes = "流程")
@@ -75,7 +69,7 @@ public class AssetCollectionReturn extends Entity {
 	 * 退库日期：退库日期
 	*/
 	@ApiModelProperty(required = false,value="退库日期" , notes = "退库日期")
-	private Date actualCollectionDate;
+	private Date returnDate;
 	
 	/**
 	 * 退库使用组织：退库使用组织
@@ -100,6 +94,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="退库说明" , notes = "退库说明")
 	private String content;
+	
+	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -213,25 +213,6 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public AssetCollectionReturn setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
-		return this;
-	}
-	
-	/**
 	 * 获得 流程<br>
 	 * 流程
 	 * @return 流程
@@ -293,17 +274,17 @@ public class AssetCollectionReturn extends Entity {
 	 * 退库日期
 	 * @return 退库日期
 	*/
-	public Date getActualCollectionDate() {
-		return actualCollectionDate;
+	public Date getReturnDate() {
+		return returnDate;
 	}
 	
 	/**
 	 * 设置 退库日期
-	 * @param actualCollectionDate 退库日期
+	 * @param returnDate 退库日期
 	 * @return 当前对象
 	*/
-	public AssetCollectionReturn setActualCollectionDate(Date actualCollectionDate) {
-		this.actualCollectionDate=actualCollectionDate;
+	public AssetCollectionReturn setReturnDate(Date returnDate) {
+		this.returnDate=returnDate;
 		return this;
 	}
 	
@@ -380,6 +361,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
 		return this;
 	}
 	

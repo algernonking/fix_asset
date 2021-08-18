@@ -2,7 +2,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:11
+ * @since 2021-08-18 17:39:32
  */
  -->
  <!DOCTYPE html>
@@ -38,19 +38,19 @@
             <div class="layui-col-xs4 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('实际领用日期')}">实际领用日期</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="actualCollectionDate" id="actualCollectionDate" name="actualCollectionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('实际领用日期') }" type="text" class="layui-input"    lay-verify="|required"   />
-                        </div>
-                    </div>
-
-
-                
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('领用后使用组织')}">领用后使用组织</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用后使用组织') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -62,20 +62,20 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('实际领用日期')}">实际领用日期</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
+                            <input input-type="date" lay-filter="actualCollectionDate" id="actualCollectionDate" name="actualCollectionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('实际领用日期') }" type="text" class="layui-input"    lay-verify="|required"   />
                         </div>
                     </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-input-block ">
+                            <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -106,9 +106,30 @@
 
 
                 <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('领用说明')}">领用说明</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用说明') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用说明') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -120,6 +141,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 250px"></div>
 
 
     </form>
@@ -138,6 +160,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var VALIDATE_CONFIG={"actualCollectionDate":{"labelInForm":"实际领用日期","inputType":"date_input","required":true},"userOrganizationId":{"labelInForm":"领用后使用组织","inputType":"text_input","required":true},"userId":{"labelInForm":"使用人员","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_collection";
 </script>

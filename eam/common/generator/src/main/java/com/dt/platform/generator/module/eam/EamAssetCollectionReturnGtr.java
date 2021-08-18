@@ -23,19 +23,32 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
+
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT
                 }
         );
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ACTUAL_COLLECTION_DATE).form().validate().required();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.PROC_ID).table().disable();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.NAME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CREATE_TIME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).form().textArea().height(30).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
                 .basic().label("存放位置")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
@@ -45,21 +58,27 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
+        cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ACTUAL_COLLECTION_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_DETAIL
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID
                 }, new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID
 
                 }
 
         );
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_DETAIL
+                }
+        );
+
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT,

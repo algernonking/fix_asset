@@ -2,6 +2,8 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetRepairStatusEnum;
 import com.dt.platform.domain.eam.meta.CategoryMeta;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
 import com.dt.platform.eam.page.AssetHandlePageController;
@@ -27,48 +29,79 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();
 
 
+
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE).search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE).search();
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.CREATE_TIME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).table().hidden();
+
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.CONTENT).search()
+                .form().validate().required().
+                form().textArea().height(30)
+                .search().fuzzySearch();
+
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().selectBox().enumType(AssetRepairStatusEnum.class);
+
+
+
+
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
-                .form().validate().required()
                 .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
 
+
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_REPAIR.NAME,
-                        EAMTables.EAM_ASSET_REPAIR.TYPE,
-                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE,
-                        EAMTables.EAM_ASSET_REPAIR.CONTENT,
+                        EAMTables.EAM_ASSET_REPAIR.STATUS,
+                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE
+
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_REPAIR.PROC_ID
+                        EAMTables.EAM_ASSET_REPAIR.TYPE,
+                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_REPAIR.CONTENT
                 }
 
         );
+
+
+
 
 
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_REPAIR.NAME,
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
                         EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
-                        EAMTables.EAM_ASSET_REPAIR.NAME,
-                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_REPAIR.STATUS,
+                        EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE,
                         EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
-                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_REPAIR.PROC_ID
+
+
+                }, new Object[] {
+                        EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID,
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.CONTENT,
-
                         EAMTables.EAM_ASSET_REPAIR.PICTURE_ID,
                 }
 

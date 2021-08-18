@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:12
+ * @since 2021-08-18 17:36:40
  */
 
 function FormPage() {
@@ -10,7 +10,7 @@ function FormPage() {
 	const moduleURL="/service-eam/eam-asset-borrow";
 
 	var disableCreateNew=false;
-	var disableModify=false;
+	var disableModify=true;
 	/**
       * 入口函数，初始化
       */
@@ -72,10 +72,37 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 	   
-		laydate.render({
-			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetStatus 下拉字段
+		fox.renderSelectBox({
+			el: "assetStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
 		});
 		laydate.render({
 			elem: '#borrowTime',
@@ -87,6 +114,11 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+		laydate.render({
+			elem: '#businessDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 	}
 	
 	/**
@@ -94,7 +126,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-borrow-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -108,6 +139,10 @@ function FormPage() {
 
 
 
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
 
 
 
@@ -152,6 +187,16 @@ function FormPage() {
 
 
 
+			//获取 办理状态 下拉框的值
+			data.field["status"]=xmSelect.get("#status",true).getValue("value");
+			if(data.field["status"] && data.field["status"].length>0) {
+				data.field["status"]=data.field["status"][0];
+			}
+			//获取 资产状态 下拉框的值
+			data.field["assetStatus"]=xmSelect.get("#assetStatus",true).getValue("value");
+			if(data.field["assetStatus"] && data.field["assetStatus"].length>0) {
+				data.field["assetStatus"]=data.field["assetStatus"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -177,6 +222,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

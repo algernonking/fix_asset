@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:54:51
+ * @since 2021-08-18 17:38:23
  */
 
 function FormPage() {
@@ -73,12 +73,7 @@ function FormPage() {
 		fox.renderFormInputs(form);
 	   
 		laydate.render({
-			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#actualCollectionDate',
+			elem: '#returnDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
@@ -100,6 +95,11 @@ function FormPage() {
 				return opts;
 			}
 		});
+		laydate.render({
+			elem: '#businessDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 	}
 	
 	/**
@@ -107,7 +107,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-collection-return-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -197,6 +196,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

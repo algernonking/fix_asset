@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:11
- * @sign 5669A3D39B30512297B4B594874DAED2
+ * @since 2021-08-18 17:39:23
+ * @sign F1DA4D57BBE648CBFAE5C3F843B9E27E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,12 +46,6 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
-	
-	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
 	
 	/**
 	 * 流程：流程
@@ -106,6 +100,12 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="领用说明" , notes = "领用说明")
 	private String content;
+	
+	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -215,25 +215,6 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public AssetCollection setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
 		return this;
 	}
 	
@@ -405,6 +386,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetCollection setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
 		return this;
 	}
 	

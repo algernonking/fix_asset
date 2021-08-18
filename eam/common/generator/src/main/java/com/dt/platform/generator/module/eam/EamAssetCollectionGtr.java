@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.AssetExtAttributionMeta;
@@ -28,20 +29,40 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION.PROC_ID,
                         EAMTables.EAM_ASSET_COLLECTION.STATUS,
-                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE
+                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE,
+
                 },
                 new Object[]{
+                        EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USER_ID,
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT
+
                 }
         );
 
-
-
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE).search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID).form().validate().required();
+
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE).form().validate().required();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CREATE_TIME).table().disable();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CREATE_TIME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).table().hidden();
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_ID)
                 .basic().label("存放位置")
@@ -50,20 +71,29 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width(1080);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE,
                         EAMTables.EAM_ASSET_COLLECTION.USER_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID
+
+
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL,
+                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID
+
+
                 }, new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID
                 }
         );
 
-
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL,
+                }
+        );
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT,

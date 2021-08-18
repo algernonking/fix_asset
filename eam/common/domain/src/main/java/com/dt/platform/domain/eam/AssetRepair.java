@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:14
- * @sign 87BAF73A1FE0343E68C921402C3A7D3F
+ * @since 2021-08-18 18:00:23
+ * @sign 41B16D0F3758BFA197CCF8C0A7FD91EC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -90,9 +90,9 @@ public class AssetRepair extends Entity {
 	private Date planFinishDate;
 	
 	/**
-	 * 实际完成发起：实际完成发起
+	 * 实际完成日期：实际完成日期
 	*/
-	@ApiModelProperty(required = false,value="实际完成发起" , notes = "实际完成发起")
+	@ApiModelProperty(required = false,value="实际完成日期" , notes = "实际完成日期")
 	private Date actualFinishDate;
 	
 	/**
@@ -352,17 +352,17 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
-	 * 获得 实际完成发起<br>
-	 * 实际完成发起
-	 * @return 实际完成发起
+	 * 获得 实际完成日期<br>
+	 * 实际完成日期
+	 * @return 实际完成日期
 	*/
 	public Date getActualFinishDate() {
 		return actualFinishDate;
 	}
 	
 	/**
-	 * 设置 实际完成发起
-	 * @param actualFinishDate 实际完成发起
+	 * 设置 实际完成日期
+	 * @param actualFinishDate 实际完成日期
 	 * @return 当前对象
 	*/
 	public AssetRepair setActualFinishDate(Date actualFinishDate) {

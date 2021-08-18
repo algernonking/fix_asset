@@ -30,10 +30,6 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
         );
 
 
-
-
-
-
         //分成分组布局
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,

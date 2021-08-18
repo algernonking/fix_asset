@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.Position;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:54:48
- * @sign AF9022C4CA9D1E3AA725FCBDB279168E
+ * @since 2021-08-18 17:38:14
+ * @sign 2657732B03D52914993F33F2214A2C82
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -47,16 +47,6 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final String BUSINESS_DATE="businessDate";
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
-	
-	/**
 	 * 流程 , 类型: java.lang.String
 	*/
 	public static final String PROC_ID="procId";
@@ -89,12 +79,12 @@ public class AssetCollectionReturnMeta {
 	/**
 	 * 退库日期 , 类型: java.util.Date
 	*/
-	public static final String ACTUAL_COLLECTION_DATE="actualCollectionDate";
+	public static final String RETURN_DATE="returnDate";
 	
 	/**
 	 * 退库日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> ACTUAL_COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ACTUAL_COLLECTION_DATE, java.util.Date.class, "退库日期", "退库日期", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,RETURN_DATE, java.util.Date.class, "退库日期", "退库日期", java.util.Date.class, null);
 	
 	/**
 	 * 退库使用组织 , 类型: java.lang.String
@@ -135,6 +125,16 @@ public class AssetCollectionReturnMeta {
 	 * 退库说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,CONTENT, java.lang.String.class, "退库说明", "退库说明", java.lang.String.class, null);
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -229,7 +229,7 @@ public class AssetCollectionReturnMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION };
 	
 	/**
 	 * 代理类
@@ -273,17 +273,6 @@ public class AssetCollectionReturnMeta {
 		}
 		
 		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
-		 * @return 当前对象
-		*/
-		public AssetCollectionReturn setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
-			return this;
-		}
-		
-		/**
 		 * 设置 流程
 		 * @param procId 流程
 		 * @return 当前对象
@@ -318,12 +307,12 @@ public class AssetCollectionReturnMeta {
 		
 		/**
 		 * 设置 退库日期
-		 * @param actualCollectionDate 退库日期
+		 * @param returnDate 退库日期
 		 * @return 当前对象
 		*/
-		public AssetCollectionReturn setActualCollectionDate(Date actualCollectionDate) {
-			super.change(ACTUAL_COLLECTION_DATE,super.getActualCollectionDate(),actualCollectionDate);
-			super.setActualCollectionDate(actualCollectionDate);
+		public AssetCollectionReturn setReturnDate(Date returnDate) {
+			super.change(RETURN_DATE,super.getReturnDate(),returnDate);
+			super.setReturnDate(returnDate);
 			return this;
 		}
 		
@@ -368,6 +357,17 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
 			return this;
 		}
 		

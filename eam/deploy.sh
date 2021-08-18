@@ -52,9 +52,15 @@ echo "tar zcvf $app_tar $content"
 tar zcvf $app_tar $content
 mv $app_tar $tmp_dir
 ####################### Create Remote Runnning Script ###############
+demo_sql=$tmp_dir/demo.sql
+echo "use eam_demo;">$demo_sql
+echo "source full.sql;">>$demo_sql
 if [[ $ops_remotefile_recreate -eq 1 ]];then
 	echo "">$ops_remotefile_recreate_file
-	echo "UPLOAD sf=$tmp_dir/$app_tar @@ dd=/tmp @@ df=app.tar" >>$ops_remotefile_recreate_file
+	echo "UPLOAD sf=$tmp_dir/$app_tar  @@ dd=/tmp @@ df=app.tar"  >>$ops_remotefile_recreate_file
+	echo "UPLOAD sf=$demo_sql          @@ dd=/tmp @@ df=demo.sql" >>$ops_remotefile_recreate_file
+	echo "/usr/bin/mysqldump -uroot -proot_pwd -h127.0.0.1 eam>/tmp/full.sql"					>>$ops_remotefile_recreate_file
+	echo "/usr/bin/mysql -uroot -proot_pwd -h127.0.0.1         <demo.sql"				    	>>$ops_remotefile_recreate_file
 	echo "app_dir=/tmp/eam"										>>$ops_remotefile_recreate_file
 	echo "mkdir -p \$app_dir"									>>$ops_remotefile_recreate_file
 	echo "cd \$app_dir"		    								>>$ops_remotefile_recreate_file
