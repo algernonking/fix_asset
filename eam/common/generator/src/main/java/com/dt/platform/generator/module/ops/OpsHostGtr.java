@@ -22,7 +22,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(InformationSystem.class,"infoSystem","信息系统","信息系统");
 
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");

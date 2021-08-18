@@ -16,7 +16,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(CodeRule.class,"rule","编码规则","编码规则");
 
 

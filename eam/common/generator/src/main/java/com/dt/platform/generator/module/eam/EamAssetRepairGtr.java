@@ -21,7 +21,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();

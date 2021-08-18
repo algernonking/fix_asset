@@ -19,7 +19,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
 

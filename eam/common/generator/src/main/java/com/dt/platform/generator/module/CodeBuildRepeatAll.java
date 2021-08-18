@@ -23,7 +23,7 @@ public class CodeBuildRepeatAll {
                 method.invoke(null,(Object)pars);
             }catch(Exception e){
                 e.printStackTrace();
-                System.out.println("######这个类真的不存在!##########");
+                System.out.println(clasnamearr[i]+"######这个类真的不存在!##########");
             }
 
         }

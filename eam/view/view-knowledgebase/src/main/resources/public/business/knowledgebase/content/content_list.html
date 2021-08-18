@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 22:02:05
+ * @since 2021-08-18 14:34:53
  */
  -->
  <!DOCTYPE html>
@@ -33,22 +33,22 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('分类')}" class="search-label">分类</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
                         <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('标题')}" class="search-label">标题</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
                         <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 等级 , gradeId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('等级')}" class="search-label">等级</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('等级')}" class="search-label gradeId-label">等级</span><span class="search-colon">:</span></div>
                         <div id="gradeId" th:data="${dict.toArray('kn_grade')}" style="width:140px"></div>
                     </div>
                     <!-- 是否显示 , display ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('是否显示')}" class="search-label">是否显示</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('是否显示')}" class="search-label display-label">是否显示</span><span class="search-colon">:</span></div>
 
 
                         <div id="display" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" style="width:140px"></div>
@@ -61,12 +61,12 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('备注')}" class="search-label">备注</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 内容类型 , contentType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('内容类型')}" class="search-label">内容类型</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('内容类型')}" class="search-label contentType-label">内容类型</span><span class="search-colon">:</span></div>
 
 
                         <div id="contentType" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" style="width:140px"></div>
@@ -74,7 +74,7 @@
                     </div>
                     <!-- 简介 , profile ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('简介')}" class="search-label">简介</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('简介')}" class="search-label profile-label">简介</span><span class="search-colon">:</span></div>
                         <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
@@ -106,13 +106,17 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('kn_content:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-            <button th:if="${perm.checkAuth('kn_content:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('kn_content:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
-    <a th:if="${perm.checkAuth('kn_content:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+    <a th:if="${perm.checkAuth('kn_content:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
+    <a th:if="${perm.checkAnyAuth('kn_content:update','kn_content:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+
     <a th:if="${perm.checkAuth('kn_content:delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 

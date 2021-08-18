@@ -22,7 +22,7 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 

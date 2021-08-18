@@ -25,7 +25,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
 
 

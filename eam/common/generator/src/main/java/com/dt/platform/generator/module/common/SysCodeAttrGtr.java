@@ -10,7 +10,7 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.SYS_CODE_ATTR.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).search().fuzzySearch();

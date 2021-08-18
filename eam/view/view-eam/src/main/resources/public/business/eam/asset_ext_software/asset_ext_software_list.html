@@ -2,7 +2,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:53:11
+ * @since 2021-08-18 14:34:22
  */
  -->
  <!DOCTYPE html>
@@ -33,7 +33,7 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 发行方式 , distributionMode ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('发行方式')}" class="search-label">发行方式</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('发行方式')}" class="search-label distributionMode-label">发行方式</span><span class="search-colon">:</span></div>
                         <div id="distributionMode" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
                     </div>
 
@@ -64,13 +64,17 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_asset_ext_software:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-            <button th:if="${perm.checkAuth('eam_asset_ext_software:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('eam_asset_ext_software:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
-    <a th:if="${perm.checkAuth('eam_asset_ext_software:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+    <a th:if="${perm.checkAuth('eam_asset_ext_software:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
+    <a th:if="${perm.checkAnyAuth('eam_asset_ext_software:update','eam_asset_ext_software:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+
     <a th:if="${perm.checkAuth('eam_asset_ext_software:delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 

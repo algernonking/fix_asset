@@ -11,7 +11,7 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.SYS_CODE_RULE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).search().fuzzySearch();
 

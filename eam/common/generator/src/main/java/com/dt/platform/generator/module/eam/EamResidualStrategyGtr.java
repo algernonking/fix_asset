@@ -15,7 +15,7 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.VALUE).basic().search().hidden(true);

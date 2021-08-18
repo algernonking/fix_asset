@@ -12,7 +12,7 @@ public class OpsHostOsGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
         cfg.setRelationField(EAMTables.OPS_HOST_OS.HOST_ID, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
 
 

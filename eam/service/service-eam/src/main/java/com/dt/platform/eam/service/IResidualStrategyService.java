@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 折旧策略 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:53:20
+ * @since 2021-08-18 14:34:31
 */
 
 public interface IResidualStrategyService extends ISuperService<ResidualStrategy> {

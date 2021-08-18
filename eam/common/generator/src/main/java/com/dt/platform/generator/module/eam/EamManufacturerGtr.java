@@ -10,7 +10,7 @@ public class EamManufacturerGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_MANUFACTURER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NOTES).search().fuzzySearch();

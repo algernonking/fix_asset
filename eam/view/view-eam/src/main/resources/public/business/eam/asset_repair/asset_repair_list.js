@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:53:03
+ * @since 2021-08-18 14:34:14
  */
 
 
@@ -10,7 +10,7 @@ function ListPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-repair";
-	
+	var dataTable=null;
 	/**
       * 入口函数，初始化
       */
@@ -43,7 +43,7 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 			var h=$(".search-bar").height();
-			fox.renderTable({
+			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print'],
@@ -101,9 +101,13 @@ function ListPage() {
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessDate={ value: $("#businessDate").val()};
 		value.procId={ value: $("#procId").val()};
-		value.type={ value: xmSelect.get("#type",true).getValue("value")};
+		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
 		value.content={ value: $("#content").val()};
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
+		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		if(sortField) {
+			ps.sortField=sortField;
+			ps.sortType=sortType;
+		}
 		table.reload('data-table', { where : ps });
 	}
     
@@ -248,7 +252,7 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
-	
+			admin.putTempData('eam-asset-repair-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -256,13 +260,27 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						 showEditForm(data.data);
+						admin.putTempData('eam-asset-repair-form-data-form-action', "edit",true);
+						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-				
-			} else if (layEvent === 'del') { // 删除
+			} else if (layEvent === 'view') { // 修改
+				//延迟显示加载动画，避免界面闪动
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
+					clearTimeout(task);
+					layer.closeAll('loading');
+					if(data.success) {
+						admin.putTempData('eam-asset-repair-form-data-form-action', "view",true);
+						showEditForm(data.data);
+					} else {
+						layer.msg(data.message, {icon: 1, time: 1500});
+					}
+				});
+			}
+			else if (layEvent === 'del') { // 删除
 			
 				layer.confirm(fox.translate('确定删除此')+fox.translate('资产报修')+fox.translate('吗？'), function (i) {
 					layer.close(i);

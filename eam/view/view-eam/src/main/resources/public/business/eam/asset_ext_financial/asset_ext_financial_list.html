@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:53:08
+ * @since 2021-08-18 14:34:19
  */
  -->
  <!DOCTYPE html>
@@ -33,22 +33,22 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('供应商')}" class="search-label">供应商</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('供应商')}" class="search-label supplierId-label">供应商</span><span class="search-colon">:</span></div>
                         <div id="supplierId" th:data="${'/service-eam/eam-supplier/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 资产来源 , sourceId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('资产来源')}" class="search-label">资产来源</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产来源')}" class="search-label sourceId-label">资产来源</span><span class="search-colon">:</span></div>
                         <div id="sourceId" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
                     </div>
                     <!-- 来源详情 , sourceDetail ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('来源详情')}" class="search-label">来源详情</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('来源详情')}" class="search-label sourceDetail-label">来源详情</span><span class="search-colon">:</span></div>
                         <input id="sourceDetail" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 财务编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('财务编号')}" class="search-label">财务编号</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('财务编号')}" class="search-label assetCode-label">财务编号</span><span class="search-colon">:</span></div>
                         <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
@@ -58,17 +58,17 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 入库时间 , storageTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('入库时间')}" class="search-label">入库时间</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('入库时间')}" class="search-label storageTime-label">入库时间</span><span class="search-colon">:</span></div>
                             <input type="text" id="storageTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
                     <!-- 财务分类 , typeId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('财务分类')}" class="search-label">财务分类</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('财务分类')}" class="search-label typeId-label">财务分类</span><span class="search-colon">:</span></div>
                         <input id="typeId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('入账时间')}" class="search-label">入账时间</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('入账时间')}" class="search-label entryTime-label">入账时间</span><span class="search-colon">:</span></div>
                             <input type="text" id="entryTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
@@ -100,13 +100,17 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_asset_ext_financial:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-            <button th:if="${perm.checkAuth('eam_asset_ext_financial:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('eam_asset_ext_financial:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
-    <a th:if="${perm.checkAuth('eam_asset_ext_financial:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+    <a th:if="${perm.checkAuth('eam_asset_ext_financial:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
+    <a th:if="${perm.checkAnyAuth('eam_asset_ext_financial:update','eam_asset_ext_financial:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+
     <a th:if="${perm.checkAuth('eam_asset_ext_financial:delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 

@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:52:59
+ * @since 2021-08-18 14:34:11
  */
 
 function FormPage() {
@@ -9,15 +9,23 @@ function FormPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-collection";
 
-	const disableCreateNew=false;
-	const disableModify=false;
+	var disableCreateNew=false;
+	var disableModify=false;
 	/**
       * 入口函数，初始化
       */
 	this.init=function(layui) { 	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
-		
+
+		//如果没有修改和保存权限，
+		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
+			disableModify=true;
+		}
+		if(admin.getTempData('eam-asset-collection-form-data-form-action')=="view") {
+			disableModify=true;
+		}
+
 		//渲染表单组件
 		renderFormFields();
 		
@@ -74,6 +82,24 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 	}
 	
 	/**
@@ -95,6 +121,8 @@ function FormPage() {
 
 
 
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
 
 
@@ -112,14 +140,16 @@ function FormPage() {
             },100);
         },1);
 
-        //
-		if(disableModify) {
+        //禁用编辑
+		if(disableModify || disableCreateNew) {
 			fox.lockForm($("#data-form"),true);
+			$("#submit-button").hide();
+			$("#cancel-button").css("margin-right","15px")
+		} else {
+			$("#submit-button").show();
+			$("#cancel-button").css("margin-right","0px")
 		}
 
-
-
-        
 	}
 	
 	/**
@@ -137,6 +167,11 @@ function FormPage() {
 
 
 
+			//获取 存放位置 下拉框的值
+			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
+			if(data.field["positionId"] && data.field["positionId"].length>0) {
+				data.field["positionId"]=data.field["positionId"][0];
+			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

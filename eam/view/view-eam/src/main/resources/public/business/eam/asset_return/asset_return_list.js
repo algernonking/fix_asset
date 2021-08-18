@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:55:25
+ * @since 2021-08-18 11:57:39
  */
 
 
@@ -62,7 +62,7 @@ function ListPage() {
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return fox.dateFormat(d.returnDate); }}
 					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库使用组织') }
-					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库后位置') }
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库说明') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

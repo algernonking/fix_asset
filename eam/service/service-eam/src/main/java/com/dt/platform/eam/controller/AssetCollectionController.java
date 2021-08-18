@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产领用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:52:58
+ * @since 2021-08-18 14:34:11
 */
 
 @Api(tags = "资产领用")
@@ -199,6 +199,8 @@ public class AssetCollectionController extends SuperController {
 	public Result<AssetCollection> getById(String id) {
 		Result<AssetCollection> result=new Result<>();
 		AssetCollection assetCollection=assetCollectionService.getById(id);
+		// 关联出 存放位置 数据
+		assetCollectionService.join(assetCollection,AssetCollectionMeta.POSITION);
 		result.success(true).data(assetCollection);
 		return result;
 	}
@@ -279,6 +281,8 @@ public class AssetCollectionController extends SuperController {
 	public Result<PagedList<AssetCollection>> queryPagedList(AssetCollectionVO sample) {
 		Result<PagedList<AssetCollection>> result=new Result<>();
 		PagedList<AssetCollection> list=assetCollectionService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 存放位置 数据
+		assetCollectionService.join(list,AssetCollectionMeta.POSITION);
 		result.success(true).data(list);
 		return result;
 	}

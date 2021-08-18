@@ -9,7 +9,7 @@ public class EamSupplierGtr extends BaseCodeGenerator{
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
         cfg.view().field(EAMTables.EAM_SUPPLIER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NOTES).search().fuzzySearch();

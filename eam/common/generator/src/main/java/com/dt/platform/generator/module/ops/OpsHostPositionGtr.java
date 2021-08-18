@@ -16,7 +16,7 @@ public class OpsHostPositionGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
         cfg.view().field(EAMTables.OPS_HOST_POSITION.ID).basic().hidden(true);
 

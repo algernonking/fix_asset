@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:55:21
- * @sign B96BF5008F28A6B6641190D4A6BDCA48
+ * @since 2021-08-18 15:00:58
+ * @sign 725B2AA605DB08BD95E35C80FFDEA844
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class AssetReturnVO extends AssetReturn {
+public class AssetBorrowReturnVO extends AssetBorrowReturn {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setPageIndex(Integer pageIndex) {
+	public AssetBorrowReturnVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setPageSize(Integer pageSize) {
+	public AssetBorrowReturnVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setSearchField(String searchField) {
+	public AssetBorrowReturnVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setFuzzyField(String fuzzyField) {
+	public AssetBorrowReturnVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setSearchValue(String searchValue) {
+	public AssetBorrowReturnVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setSortField(String sortField) {
+	public AssetBorrowReturnVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setSortType(String sortType) {
+	public AssetBorrowReturnVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public AssetReturnVO setIds(List<String> ids) {
+	public AssetBorrowReturnVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class AssetReturnVO extends AssetReturn {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public AssetReturnVO addId(String id) {
+	public AssetBorrowReturnVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

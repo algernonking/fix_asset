@@ -13,7 +13,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
 
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.NAME).search().fuzzySearch();

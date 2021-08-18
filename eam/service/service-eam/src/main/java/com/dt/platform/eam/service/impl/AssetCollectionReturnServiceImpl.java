@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetReturn;
-import com.dt.platform.domain.eam.AssetReturnVO;
+import com.dt.platform.domain.eam.AssetCollectionReturn;
+import com.dt.platform.domain.eam.AssetCollectionReturnVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,7 +26,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetReturnService;
+import com.dt.platform.eam.service.IAssetCollectionReturnService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
@@ -35,12 +35,12 @@ import java.util.Date;
  * 资产退库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 11:55:22
+ * @since 2021-08-18 14:54:48
 */
 
 
-@Service("EamAssetReturnService")
-public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements IAssetReturnService {
+@Service("EamAssetCollectionReturnService")
+public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollectionReturn> implements IAssetCollectionReturnService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,23 +62,23 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	
 	/**
 	 * 插入实体
-	 * @param assetReturn 实体数据
+	 * @param assetCollectionReturn 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(AssetReturn assetReturn) {
-		Result r=super.insert(assetReturn);
+	public Result insert(AssetCollectionReturn assetCollectionReturn) {
+		Result r=super.insert(assetCollectionReturn);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetReturnList 实体数据清单
+	 * @param assetCollectionReturnList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<AssetReturn> assetReturnList) {
-		return super.insertList(assetReturnList);
+	public Result insertList(List<AssetCollectionReturn> assetCollectionReturnList) {
+		return super.insertList(assetCollectionReturnList);
 	}
 	
 	
@@ -89,11 +89,11 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		AssetReturn assetReturn = new AssetReturn();
+		AssetCollectionReturn assetCollectionReturn = new AssetCollectionReturn();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetReturn.setId(id);
+		assetCollectionReturn.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(assetReturn);
+			boolean suc = dao.deleteEntity(assetCollectionReturn);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -110,14 +110,14 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		AssetReturn assetReturn = new AssetReturn();
+		AssetCollectionReturn assetCollectionReturn = new AssetCollectionReturn();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetReturn.setId(id);
-		assetReturn.setDeleted(dao.getDBTreaty().getTrueValue());
-		assetReturn.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		assetReturn.setDeleteTime(new Date());
+		assetCollectionReturn.setId(id);
+		assetCollectionReturn.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetCollectionReturn.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetCollectionReturn.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(assetReturn,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetCollectionReturn,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -129,25 +129,25 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	
 	/**
 	 * 更新实体
-	 * @param assetReturn 数据对象
+	 * @param assetCollectionReturn 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(AssetReturn assetReturn , SaveMode mode) {
-		Result r=super.update(assetReturn , mode);
+	public Result update(AssetCollectionReturn assetCollectionReturn , SaveMode mode) {
+		Result r=super.update(assetCollectionReturn , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetReturnList 数据对象列表
+	 * @param assetCollectionReturnList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<AssetReturn> assetReturnList , SaveMode mode) {
-		return super.updateList(assetReturnList , mode);
+	public Result updateList(List<AssetCollectionReturn> assetCollectionReturnList , SaveMode mode) {
+		return super.updateList(assetCollectionReturnList , mode);
 	}
 	
 	
@@ -169,17 +169,17 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * 按主键获取 资产退库
 	 *
 	 * @param id 主键
-	 * @return AssetReturn 数据对象
+	 * @return AssetCollectionReturn 数据对象
 	 */
-	public AssetReturn getById(String id) {
-		AssetReturn sample = new AssetReturn();
+	public AssetCollectionReturn getById(String id) {
+		AssetCollectionReturn sample = new AssetCollectionReturn();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<AssetReturn> getByIds(List<String> ids) {
+	public List<AssetCollectionReturn> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -192,7 +192,7 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<AssetReturn> queryList(AssetReturn sample) {
+	public List<AssetCollectionReturn> queryList(AssetCollectionReturn sample) {
 		return super.queryList(sample);
 	}
 	
@@ -206,7 +206,7 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetReturn> queryPagedList(AssetReturn sample, int pageSize, int pageIndex) {
+	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -220,25 +220,25 @@ public class AssetReturnServiceImpl extends SuperService<AssetReturn> implements
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetReturn> queryPagedList(AssetReturn sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetReturn 数据对象
+	 * @param assetCollectionReturn 数据对象
 	 * @return 判断结果
 	 */
-	public Result<AssetReturn> checkExists(AssetReturn assetReturn) {
+	public Result<AssetCollectionReturn> checkExists(AssetCollectionReturn assetCollectionReturn) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetReturn, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetCollectionReturn, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(AssetReturn sample) {
+	public ExcelWriter exportExcel(AssetCollectionReturn sample) {
 		return super.exportExcel(sample);
 	}
 

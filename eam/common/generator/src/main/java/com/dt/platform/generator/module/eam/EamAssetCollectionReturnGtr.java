@@ -2,42 +2,44 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.eam.Position;
+
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
-import com.dt.platform.domain.eam.meta.AssetReturnMeta;
 import com.dt.platform.domain.eam.meta.PositionMeta;
+import com.dt.platform.eam.page.AssetCollectionReturnPageController;
+import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class EamAssetReturnGtr extends BaseCodeGenerator {
+public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
-    public EamAssetReturnGtr() {
-        super(EAMTables.EAM_ASSET_RETURN.$TABLE,BASIC_DATA_MENU_ID);
+    public EamAssetCollectionReturnGtr() {
+        super(EAMTables.EAM_ASSET_COLLECTION_RETURN.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
-
+        System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_RETURN.BUSINESS_DATE,
-                        EAMTables.EAM_ASSET_RETURN.ORIGINATOR_ID,
-                        EAMTables.EAM_ASSET_RETURN.CONTENT,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_RETURN.STATUS
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS
                 }
         );
 
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_RETURN.POSITION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_RETURN.RETURN_DATE).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_RETURN.POSITION_ID)
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ACTUAL_COLLECTION_DATE).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
                 .basic().label("存放位置")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetReturnMeta.POSITION).muliti(false);
+                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
 
@@ -46,21 +48,21 @@ public class EamAssetReturnGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_RETURN.RETURN_DATE,
-                        EAMTables.EAM_ASSET_RETURN.USER_ORGANIZATION_ID
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ACTUAL_COLLECTION_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_RETURN.POSITION_ID,
-                        EAMTables.EAM_ASSET_RETURN.POSITION_DETAIL
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_DETAIL
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_RETURN.ORIGINATOR_ID
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID
 
                 }
 
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_BORROW.CONTENT,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT,
                 }
         );
 
@@ -77,12 +79,12 @@ public class EamAssetReturnGtr extends BaseCodeGenerator {
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {
-        EamAssetReturnGtr g=new EamAssetReturnGtr();
+        EamAssetCollectionReturnGtr g=new EamAssetCollectionReturnGtr();
 
         //生成代码
         g.generateCode();
         //生成菜单
-//        g.generateMenu(MaintainerServiceProxy.class,MaintainerPageController.class);
+       // g.generateMenu(AssetCollectionReturnServiceProxy.class, AssetCollectionReturnPageController.class);
     }
 
 }

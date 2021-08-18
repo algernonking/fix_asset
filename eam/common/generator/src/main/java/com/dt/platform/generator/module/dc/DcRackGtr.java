@@ -31,7 +31,7 @@ public class DcRackGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
 //        //第一步：配置好后，生成代码
         cfg.getPoClassFile().addSimpleProperty(Area.class,"area","区域","");
         cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","");

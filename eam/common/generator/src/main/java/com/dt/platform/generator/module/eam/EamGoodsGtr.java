@@ -22,7 +22,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
     }
 
     public void generateCode() throws Exception {
-
+        System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
