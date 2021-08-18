@@ -255,7 +255,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow();
+		fox.switchSearchRow(#(searchRowsDisplay));
 
 	#for(f : searchFields)
 	#if(!f.isHideInSearch)
@@ -419,7 +419,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(function (ex){
+			fox.switchSearchRow(#(searchRowsDisplay),function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
