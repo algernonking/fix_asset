@@ -2,7 +2,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:26
+ * @since 2021-08-18 11:53:07
  */
  -->
  <!DOCTYPE html>
@@ -38,12 +38,12 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('区域')}">区域</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('区域')}">区域</div></div>
+                        <div class="layui-input-block ">
                             <div id="areaId" input-type="select" th:data="${'/service-datacenter/dc-area/query-list'}"></div>
                         </div>
                     </div>
@@ -51,58 +51,17 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('层级')}">层级</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('层级')}">层级</div></div>
+                        <div class="layui-input-block ">
                             <div id="layerId" input-type="select" th:data="${'/service-datacenter/dc-layer/query-list'}"></div>
                         </div>
                     </div>
 
 
                 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('机柜')}">机柜</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="rackId" input-type="select" th:data="${'/service-datacenter/dc-rack/query-list'}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('机柜上位置编号')}">机柜上位置编号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="rackUpPositionNumber" id="rackUpPositionNumber" name="rackUpPositionNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('机柜上位置编号') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="0.0" max-value="100.0"  scale="0"/>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('机柜下位置编号')}">机柜下位置编号</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="rackDownPositionNumber" id="rackDownPositionNumber" name="rackDownPositionNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('机柜下位置编号') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="0.0" max-value="100.0"  scale="0"/>
-                        </div>
-                    </div>
-
-
-                
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="equipmentNotes" id="equipmentNotes" name="equipmentNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
-
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备IP')}">设备IP</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('设备IP')}">设备IP</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="equipmentIp" id="equipmentIp" name="equipmentIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备IP') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -110,17 +69,22 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('管理IP')}">管理IP</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('管理IP')}">管理IP</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="manageIp" id="manageIp" name="manageIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理IP') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备CPU')}">设备CPU</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('设备CPU')}">设备CPU</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="equipmentCpu" id="equipmentCpu" name="equipmentCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备CPU') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -128,8 +92,8 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备内存')}">设备内存</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('设备内存')}">设备内存</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="equipmentMemory" id="equipmentMemory" name="equipmentMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备内存') }" type="text" class="layui-input"   />
                     </div>
                 </div>
@@ -137,9 +101,62 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('描述')}">描述</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('描述')}">描述</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="equipmentDesc" id="equipmentDesc" name="equipmentDesc" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('描述') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('机柜')}">机柜</div></div>
+                        <div class="layui-input-block ">
+                            <div id="rackId" input-type="select" th:data="${'/service-datacenter/dc-rack/query-list'}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('机柜上位置编号')}">机柜上位置编号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackUpPositionNumber" id="rackUpPositionNumber" name="rackUpPositionNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('机柜上位置编号') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0"/>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('机柜下位置编号')}">机柜下位置编号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackDownPositionNumber" id="rackDownPositionNumber" name="rackDownPositionNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('机柜下位置编号') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0"/>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="equipmentNotes" id="equipmentNotes" name="equipmentNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 

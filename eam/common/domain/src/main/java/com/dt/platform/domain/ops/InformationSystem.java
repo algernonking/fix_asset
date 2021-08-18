@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:01
- * @sign 7FF33F13522A084F72AC62376C1AD5E5
+ * @since 2021-08-17 22:01:47
+ * @sign CD323197665BC9D219152E72F49CA314
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +36,9 @@ public class InformationSystem extends Entity {
 	private String id;
 	
 	/**
-	 * 父节点：默认无为0
+	 * 父节点：父节点
 	*/
-	@ApiModelProperty(required = false,value="父节点" , notes = "默认无为0")
+	@ApiModelProperty(required = false,value="父节点" , notes = "父节点")
 	private String pid;
 	
 	/**
@@ -254,7 +254,7 @@ public class InformationSystem extends Entity {
 	
 	/**
 	 * 获得 父节点<br>
-	 * 默认无为0
+	 * 父节点
 	 * @return 父节点
 	*/
 	public String getPid() {

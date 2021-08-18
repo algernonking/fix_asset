@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:28
+ * @since 2021-08-18 11:53:08
  */
  -->
  <!DOCTYPE html>
@@ -31,30 +31,45 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 财务编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('财务编号')}" class="search-label">财务编号</span><span class="search-colon">:</span></div>
-                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('供应商')}" class="search-label">供应商</span><span class="search-colon">:</span></div>
+                        <div id="supplierId" th:data="${'/service-eam/eam-supplier/query-list'}" style="width:140px"></div>
+                    </div>
+                    <!-- 资产来源 , sourceId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('资产来源')}" class="search-label">资产来源</span><span class="search-colon">:</span></div>
+                        <div id="sourceId" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
                     </div>
                     <!-- 来源详情 , sourceDetail ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('来源详情')}" class="search-label">来源详情</span><span class="search-colon">:</span></div>
                         <input id="sourceDetail" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 财务编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('财务编号')}" class="search-label">财务编号</span><span class="search-colon">:</span></div>
+                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 入库时间 , storageTime ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div"><span th:text="${lang.translate('入库时间')}" class="search-label">入库时间</span><span class="search-colon">:</span></div>
+                            <input type="text" id="storageTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
                     <!-- 财务分类 , typeId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('财务分类')}" class="search-label">财务分类</span><span class="search-colon">:</span></div>
                         <input id="typeId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 财务备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('财务备注')}" class="search-label">财务备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('入账时间')}" class="search-label">入账时间</span><span class="search-colon">:</span></div>
+                            <input type="text" id="entryTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 

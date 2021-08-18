@@ -9,8 +9,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:46
- * @sign 42BAAF943FDCE93ECDB73800DA62D5B7
+ * @since 2021-08-18 11:53:20
+ * @sign CC357C18532D06FCC425410B4B84B6DF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,14 +57,14 @@ public class ResidualStrategyMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.ResidualStrategy,java.lang.String> STRATEGY_DESCRIBE_PROP = new BeanProperty(com.dt.platform.domain.eam.ResidualStrategy.class ,STRATEGY_DESCRIBE, java.lang.String.class, "策略描述", "策略描述", java.lang.String.class, null);
 	
 	/**
-	 * 残值率 , -1则使用资产设置的残值 , 类型: java.math.BigDecimal
+	 * 残值率 , 类型: java.math.BigDecimal
 	*/
 	public static final String RESIDUALVALUE_RATE="residualvalueRate";
 	
 	/**
-	 * 残值率 , -1则使用资产设置的残值 , 类型: java.math.BigDecimal
+	 * 残值率 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.ResidualStrategy,java.math.BigDecimal> RESIDUALVALUE_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.ResidualStrategy.class ,RESIDUALVALUE_RATE, java.math.BigDecimal.class, "残值率", "-1则使用资产设置的残值", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.ResidualStrategy,java.math.BigDecimal> RESIDUALVALUE_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.ResidualStrategy.class ,RESIDUALVALUE_RATE, java.math.BigDecimal.class, "残值率", "残值率", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 折旧率 , 类型: java.math.BigDecimal

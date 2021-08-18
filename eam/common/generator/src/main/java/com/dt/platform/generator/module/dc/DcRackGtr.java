@@ -38,13 +38,16 @@ public class DcRackGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_RACK.ID).basic().hidden(true);
         cfg.view().field(EAMTables.DC_RACK.ID).search().hidden();
-        cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).search().hidden();
+
         cfg.view().field(EAMTables.DC_RACK.RACK_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_RACK.RACK_LABELS).search().fuzzySearch();
-//
 
-         cfg.view().field(EAMTables.DC_RACK.CREATE_TIME).table().disable(true);
+
+
+        cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).search().hidden();
+
+
 
 
         cfg.view().field(EAMTables.DC_RACK.RACK_CODE).form().validate().required();

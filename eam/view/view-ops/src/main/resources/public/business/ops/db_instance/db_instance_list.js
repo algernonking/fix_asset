@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:05
+ * @since 2021-08-17 22:01:48
  */
 
 
@@ -97,6 +97,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.logMethod={ value: xmSelect.get("#logMethod",true).getValue("value")};
 		value.backupStrategy={ value: $("#backupStrategy").val()};
 		value.backupStatus={ value: xmSelect.get("#backupStatus",true).getValue("value")};
 		value.labels={ value: $("#labels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -130,6 +131,23 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 logMethod 下拉字段
+		fox.renderSelectBox({
+			el: "logMethod",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 backupStatus 下拉字段
 		fox.renderSelectBox({
 			el: "backupStatus",
@@ -272,7 +290,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -301,6 +320,7 @@ function ListPage() {
 		});
 		admin.putTempData('ops-db-instance-form-data-popup-index', index);
 	};
+
 
 };
 

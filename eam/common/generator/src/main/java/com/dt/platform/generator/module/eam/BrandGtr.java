@@ -12,24 +12,15 @@ public class BrandGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
 
-
-
         cfg.view().field(EAMTables.EAM_BRAND.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 
-        cfg.view().field(EAMTables.EAM_BRAND.CREATE_TIME).table().disable(true);
 
-
-
-//        cfg.view().table().columnLayout(
-//                //常规列
-//                EAMTables.EAM_BRAND.BRAND_NAME,
-//                EAMTables.EAM_BRAND.CREATE_TIME
-//
-//        );
 
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.EAM_BRAND.BRAND_NAME}
+                new Object[]{
+                        EAMTables.EAM_BRAND.BRAND_NAME
+                }
         );
 
         //文件生成覆盖模式

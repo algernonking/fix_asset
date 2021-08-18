@@ -1,7 +1,7 @@
 /**
  * 折旧策略 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:46
+ * @since 2021-08-18 11:53:20
  */
 
 
@@ -249,7 +249,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -278,6 +279,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-residual-strategy-form-data-popup-index', index);
 	};
+
 
 };
 

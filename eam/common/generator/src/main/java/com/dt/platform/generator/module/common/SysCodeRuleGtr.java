@@ -14,10 +14,16 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).search().fuzzySearch();
+
+
         cfg.view().field(EAMTables.SYS_CODE_RULE.NOTES).search().hidden();
         cfg.view().field(EAMTables.SYS_CODE_RULE.RULE).search().hidden();
         cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).search().hidden();
+
+
+
         cfg.view().field(EAMTables.SYS_CODE_RULE.CREATE_TIME).table().hidden(true);
+
 
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).basic().label("业务模块")

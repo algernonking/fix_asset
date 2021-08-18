@@ -1,7 +1,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:26
+ * @since 2021-08-18 11:53:07
  */
 
 
@@ -101,6 +101,9 @@ function ListPage() {
 		value.manageIp={ value: $("#manageIp").val()};
 		value.equipmentNotes={ value: $("#equipmentNotes").val()};
 		value.equipmentDesc={ value: $("#equipmentDesc").val()};
+		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value"), fillBy:"area",field:"id" };
+		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id" };
+		value.rackId={ value: xmSelect.get("#rackId",true).getValue("value"), fillBy:"rack",field:"id" };
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -130,6 +133,63 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 areaId 下拉字段
+		fox.renderSelectBox({
+			el: "areaId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 layerId 下拉字段
+		fox.renderSelectBox({
+			el: "layerId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 rackId 下拉字段
+		fox.renderSelectBox({
+			el: "rackId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].rackName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -255,7 +315,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -284,6 +345,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-equipment-form-data-popup-index', index);
 	};
+
 
 };
 

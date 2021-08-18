@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:30
+ * @since 2021-08-17 22:02:02
  */
 
 
@@ -92,7 +92,6 @@ function ListPage() {
 		var value = {};
 		value.serviceCategoryId={ value: xmSelect.get("#serviceCategoryId",true).getValue("value"), fillBy:"serviceCategory",field:"id" };
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.patch={ value: $("#patch").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
@@ -266,7 +265,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -295,6 +295,7 @@ function ListPage() {
 		});
 		admin.putTempData('ops-service-info-form-data-popup-index', index);
 	};
+
 
 };
 

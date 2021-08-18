@@ -10,7 +10,7 @@ import com.dt.platform.domain.knowledgebase.Category;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:33
+ * @since 2021-08-17 22:02:05
  * @sign B2F3C164DE91BB6543ED33CCBC7114A0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

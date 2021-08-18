@@ -41,18 +41,18 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID)
-                .basic().label("区域").search().hidden()
+                .basic().label("区域")
                 .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillBy(AssetExtEquipmentMeta.AREA).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID)
-                .basic().label("层级").search().hidden()
+                .basic().label("层级")
                 .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(AssetExtEquipmentMeta.LAYER).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID)
-                .basic().label("机柜").search().hidden()
+                .basic().label("机柜")
                 .form().selectBox().queryApi(RackServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(RackMeta.ID).textField(RackMeta.RACK_NAME).fillBy(AssetExtEquipmentMeta.RACK).muliti(false);
 
@@ -61,9 +61,17 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER).form().numberInput().range(0.0,100.0).step(1.0);
 
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,EAMTables.EAM_ASSET_EXT_EQUIPMENT.MANAGE_IP,EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_IP}
-                ,new Object[]{EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_NOTES,EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_DESC}
-
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.MANAGE_IP,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_IP
+                }
+                ,new Object[]{
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_NOTES,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_DESC
+                }
         );
 
         //分成分组布局
@@ -72,18 +80,32 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_NOTES
-                }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_IP,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.MANAGE_IP,
+                }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_CPU,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_MEMORY,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_DESC
+                },
+                new Object[] {
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER,
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER,
                 }
         );
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_NOTES
+
+                }
+
+
+        );
+
+
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

@@ -24,17 +24,17 @@ public class EamAssetExtSoftwareGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ID).basic().hidden();
-
-
-
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID).basic().search().hidden();
 
-
-
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.DISTRIBUTION_MODE)
-                .basic().label("发行方式").search().hidden()
+                .basic().label("发行方式")
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_ASSET_EXT_SOFTWARE.DISTRIBUTION_MODE
+                }
+        );
 
 
         //文件生成覆盖模式

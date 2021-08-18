@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:28
+ * @since 2021-08-18 11:53:08
  */
 
 
@@ -107,8 +107,11 @@ function ListPage() {
 		var value = {};
 		value.typeId={ value: $("#typeId").val()};
 		value.assetCode={ value: $("#assetCode").val()};
+		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value")};
 		value.sourceDetail={ value: $("#sourceDetail").val()};
-		value.notes={ value: $("#notes").val()};
+		value.supplierId={ value: xmSelect.get("#supplierId",true).getValue("value"), fillBy:"supplier",field:"id" };
+		value.storageTime={ value: $("#storageTime").val()};
+		value.entryTime={ value: $("#entryTime").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		table.reload('data-table', { where : ps });
 	}
@@ -138,6 +141,50 @@ function ListPage() {
 
 		fox.switchSearchRow();
 
+		//渲染 sourceId 下拉字段
+		fox.renderSelectBox({
+			el: "sourceId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 supplierId 下拉字段
+		fox.renderSelectBox({
+			el: "supplierId",
+			radio: false,
+			size: "small",
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].supplierName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#storageTime',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#entryTime',
+			trigger:"click"
+		});
 		fox.renderSearchInputs();
 	}
 	
@@ -263,7 +310,8 @@ function ListPage() {
 					});
 				});
 				
-			}  
+			}
+			
 		});
  
     };
@@ -292,6 +340,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-financial-form-data-popup-index', index);
 	};
+
 
 };
 

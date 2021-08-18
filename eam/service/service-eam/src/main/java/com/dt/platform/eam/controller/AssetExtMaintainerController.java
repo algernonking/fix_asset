@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产维保数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
+ * @since 2021-08-17 22:01:27
 */
 
 @Api(tags = "资产维保数据")
@@ -69,9 +69,13 @@ public class AssetExtMaintainerController extends SuperController {
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479361938078302208"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "472013393872551936"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_START_TIME , value = "维保开始时间" , required = false , dataTypeClass=Date.class , example = "2021-08-04 12:00:00"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_END_TIME , value = "维保到期时间" , required = false , dataTypeClass=Date.class , example = "2021-08-15 12:00:00"),
-		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_DESCRIPTION , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetExtMaintainerVOMeta.ID)
@@ -125,9 +129,13 @@ public class AssetExtMaintainerController extends SuperController {
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479361938078302208"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "472013393872551936"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_START_TIME , value = "维保开始时间" , required = false , dataTypeClass=Date.class , example = "2021-08-04 12:00:00"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_END_TIME , value = "维保到期时间" , required = false , dataTypeClass=Date.class , example = "2021-08-15 12:00:00"),
-		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_DESCRIPTION , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetExtMaintainerVOMeta.PAGE_INDEX , AssetExtMaintainerVOMeta.PAGE_SIZE , AssetExtMaintainerVOMeta.SEARCH_FIELD , AssetExtMaintainerVOMeta.FUZZY_FIELD , AssetExtMaintainerVOMeta.SEARCH_VALUE , AssetExtMaintainerVOMeta.SORT_FIELD , AssetExtMaintainerVOMeta.SORT_TYPE , AssetExtMaintainerVOMeta.IDS } ) 
 	@NotNull(name = AssetExtMaintainerVOMeta.ID)
@@ -147,9 +155,13 @@ public class AssetExtMaintainerController extends SuperController {
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479361938078302208"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "472013393872551936"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_START_TIME , value = "维保开始时间" , required = false , dataTypeClass=Date.class , example = "2021-08-04 12:00:00"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_END_TIME , value = "维保到期时间" , required = false , dataTypeClass=Date.class , example = "2021-08-15 12:00:00"),
-		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_DESCRIPTION , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtMaintainerVOMeta.PAGE_INDEX , AssetExtMaintainerVOMeta.PAGE_SIZE , AssetExtMaintainerVOMeta.SEARCH_FIELD , AssetExtMaintainerVOMeta.FUZZY_FIELD , AssetExtMaintainerVOMeta.SEARCH_VALUE , AssetExtMaintainerVOMeta.SORT_FIELD , AssetExtMaintainerVOMeta.SORT_TYPE , AssetExtMaintainerVOMeta.IDS } )
 	@NotNull(name = AssetExtMaintainerVOMeta.ID)
@@ -210,9 +222,13 @@ public class AssetExtMaintainerController extends SuperController {
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479361938078302208"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "472013393872551936"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_START_TIME , value = "维保开始时间" , required = false , dataTypeClass=Date.class , example = "2021-08-04 12:00:00"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_END_TIME , value = "维保到期时间" , required = false , dataTypeClass=Date.class , example = "2021-08-15 12:00:00"),
-		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_DESCRIPTION , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtMaintainerVOMeta.PAGE_INDEX , AssetExtMaintainerVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetExtMaintainerServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -233,9 +249,13 @@ public class AssetExtMaintainerController extends SuperController {
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479361938078302208"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "472013393872551936"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.DIRECTOR_ID , value = "负责人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_START_TIME , value = "维保开始时间" , required = false , dataTypeClass=Date.class , example = "2021-08-04 12:00:00"),
 		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_END_TIME , value = "维保到期时间" , required = false , dataTypeClass=Date.class , example = "2021-08-15 12:00:00"),
-		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetExtMaintainerVOMeta.MAINTENANCE_DESCRIPTION , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetExtMaintainerServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

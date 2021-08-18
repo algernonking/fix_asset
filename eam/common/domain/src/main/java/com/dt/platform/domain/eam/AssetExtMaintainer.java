@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
- * @sign 04C14B8E1404382FCCB6191CE9FD8195
+ * @since 2021-08-17 22:01:27
+ * @sign 1F2E94C369F59952979C5C480F70FB31
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,30 @@ public class AssetExtMaintainer extends Entity {
 	private String maintainerId;
 	
 	/**
+	 * 维保厂商：维保厂商
+	*/
+	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
+	private String maintainerName;
+	
+	/**
+	 * 联系人：联系人
+	*/
+	@ApiModelProperty(required = false,value="联系人" , notes = "联系人")
+	private String contacts;
+	
+	/**
+	 * 联系方式：联系方式
+	*/
+	@ApiModelProperty(required = false,value="联系方式" , notes = "联系方式")
+	private String contactInformation;
+	
+	/**
+	 * 负责人：负责人
+	*/
+	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
+	private String directorId;
+	
+	/**
 	 * 维保开始时间：维保开始时间
 	*/
 	@ApiModelProperty(required = false,value="维保开始时间" , notes = "维保开始时间")
@@ -63,7 +87,7 @@ public class AssetExtMaintainer extends Entity {
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	private String maintenanceDescription;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -177,6 +201,82 @@ public class AssetExtMaintainer extends Entity {
 	}
 	
 	/**
+	 * 获得 维保厂商<br>
+	 * 维保厂商
+	 * @return 维保厂商
+	*/
+	public String getMaintainerName() {
+		return maintainerName;
+	}
+	
+	/**
+	 * 设置 维保厂商
+	 * @param maintainerName 维保厂商
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setMaintainerName(String maintainerName) {
+		this.maintainerName=maintainerName;
+		return this;
+	}
+	
+	/**
+	 * 获得 联系人<br>
+	 * 联系人
+	 * @return 联系人
+	*/
+	public String getContacts() {
+		return contacts;
+	}
+	
+	/**
+	 * 设置 联系人
+	 * @param contacts 联系人
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setContacts(String contacts) {
+		this.contacts=contacts;
+		return this;
+	}
+	
+	/**
+	 * 获得 联系方式<br>
+	 * 联系方式
+	 * @return 联系方式
+	*/
+	public String getContactInformation() {
+		return contactInformation;
+	}
+	
+	/**
+	 * 设置 联系方式
+	 * @param contactInformation 联系方式
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setContactInformation(String contactInformation) {
+		this.contactInformation=contactInformation;
+		return this;
+	}
+	
+	/**
+	 * 获得 负责人<br>
+	 * 负责人
+	 * @return 负责人
+	*/
+	public String getDirectorId() {
+		return directorId;
+	}
+	
+	/**
+	 * 设置 负责人
+	 * @param directorId 负责人
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setDirectorId(String directorId) {
+		this.directorId=directorId;
+		return this;
+	}
+	
+	/**
 	 * 获得 维保开始时间<br>
 	 * 维保开始时间
 	 * @return 维保开始时间
@@ -219,17 +319,17 @@ public class AssetExtMaintainer extends Entity {
 	 * 备注
 	 * @return 备注
 	*/
-	public String getNotes() {
-		return notes;
+	public String getMaintenanceDescription() {
+		return maintenanceDescription;
 	}
 	
 	/**
 	 * 设置 备注
-	 * @param notes 备注
+	 * @param maintenanceDescription 备注
 	 * @return 当前对象
 	*/
-	public AssetExtMaintainer setNotes(String notes) {
-		this.notes=notes;
+	public AssetExtMaintainer setMaintenanceDescription(String maintenanceDescription) {
+		this.maintenanceDescription=maintenanceDescription;
 		return this;
 	}
 	

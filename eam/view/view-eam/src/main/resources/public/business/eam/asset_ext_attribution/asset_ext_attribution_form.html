@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:24
+ * @since 2021-08-18 11:53:05
  */
  -->
  <!DOCTYPE html>
@@ -42,20 +42,29 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('管理组织')}">管理组织</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="managementOrganizationId" id="managementOrganizationId" name="managementOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理组织') }" type="text" class="layui-input"   />
+                    <div class="layui-form-label "><div th:text="${lang.translate('所属组织')}">所属组织</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="managementOrganizationId" id="managementOrganizationId" name="managementOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属组织') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('使用组织')}">使用组织</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('使用组织')}">使用组织</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用组织') }" type="text" class="layui-input"   />
                     </div>
                 </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('仓库')}">仓库</div></div>
+                        <div class="layui-input-block ">
+                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
+                        </div>
+                    </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -65,18 +74,18 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('使用人员')}">使用人员</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+                    <div class="layui-form-label "><div th:text="${lang.translate('管理人员')}">管理人员</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="managerId" id="managerId" name="managerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理人员') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                    <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -88,8 +97,8 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-input-block ">
                             <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
                         </div>
                     </div>
@@ -97,9 +106,30 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 

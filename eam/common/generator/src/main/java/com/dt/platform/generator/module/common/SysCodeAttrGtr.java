@@ -12,13 +12,16 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
         cfg.view().field(EAMTables.SYS_CODE_ATTR.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.CODE).search().hidden();
+
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.SYS_CODE_ATTR.NOTES).search().fuzzySearch();
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).search().hidden();
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).table().hidden();
 
-        cfg.view().field(EAMTables.SYS_CODE_ATTR.CREATE_TIME).table().disable(true);
+
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.CODE).search().hidden();
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.SORT).
+                search().hidden();
+
+
 
         cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性类型")
                 .form().validate().required().form().radioBox().enumType(CodeAttrTypeEnum.class);

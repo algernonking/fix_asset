@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:32
- * @sign A9BF9AA8E25E5EE4D8AA0DC9F4998C7E
+ * @since 2021-08-17 22:02:03
+ * @sign 9FFCE64E49C610F1B16A508757F14131
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,14 +26,14 @@ public class ServiceCategoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceCategory,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceCategory.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 服务分组DB , OS,MIDDLEWARE,OTHER , 类型: java.lang.String
+	 * 服务分组 , 类型: java.lang.String
 	*/
 	public static final String GROUP_ID="groupId";
 	
 	/**
-	 * 服务分组DB , OS,MIDDLEWARE,OTHER , 类型: java.lang.String
+	 * 服务分组 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.ServiceCategory,java.lang.String> GROUP_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceCategory.class ,GROUP_ID, java.lang.String.class, "服务分组DB", "OS,MIDDLEWARE,OTHER", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceCategory,java.lang.String> GROUP_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceCategory.class ,GROUP_ID, java.lang.String.class, "服务分组", "服务分组", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -160,8 +160,8 @@ public class ServiceCategoryMeta {
 		}
 		
 		/**
-		 * 设置 服务分组DB
-		 * @param groupId 服务分组DB
+		 * 设置 服务分组
+		 * @param groupId 服务分组
 		 * @return 当前对象
 		*/
 		public ServiceCategory setGroupId(String groupId) {

@@ -2,7 +2,7 @@
 /**
  * 折旧策略 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:46
+ * @since 2021-08-18 11:53:20
  */
  -->
  <!DOCTYPE html>
@@ -77,7 +77,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('残值率')}">残值率</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="residualvalueRate" id="residualvalueRate" name="residualvalueRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('残值率') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
+                            <input lay-filter="residualvalueRate" id="residualvalueRate" name="residualvalueRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('残值率') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('折旧率')}">折旧率</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="depreciationRate" id="depreciationRate" name="depreciationRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('折旧率') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
+                            <input lay-filter="depreciationRate" id="depreciationRate" name="depreciationRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('折旧率') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
                         </div>
                     </div>
 
@@ -149,7 +149,7 @@
                     <div class="layui-form-item" style="display: none")>
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('是否已删除')}">是否已删除</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="deleted" id="deleted" name="deleted" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否已删除') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
+                            <input lay-filter="deleted" id="deleted" name="deleted" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否已删除') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
                         </div>
                     </div>
 
@@ -176,7 +176,7 @@
                     <div class="layui-form-item" style="display: none")>
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('version')}">version</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="version" id="version" name="version" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('version') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value=""  scale="0"/>
+                            <input lay-filter="version" id="version" name="version" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('version') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
                         </div>
                     </div>
 

@@ -74,9 +74,23 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                 .form().selectBox().dict(DictEnum.OPS_DB_LOG_METHOD).paging(false);
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
-                .form().label("备份时间").dateInput()
-                .search();
+                .form().label("备份时间").dateInput();
 
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_DB_INSTANCE.NAME,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD
+                },
+                new Object[]{
+                        EAMTables.OPS_DB_INSTANCE.LABELS,
+                        EAMTables.OPS_DB_INSTANCE.NOTES
+                }
+
+        );
 
 
 
@@ -88,19 +102,26 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_DB_INSTANCE.HOST_ID,
                         EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
                         EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
-                        EAMTables.OPS_DB_INSTANCE.LABELS,
-                        EAMTables.OPS_DB_INSTANCE.NOTES,
+
                 }, new Object[] {
                         EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+
+                },
+                new Object[] {
                         EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
                 }
         );
 
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.OPS_DB_INSTANCE.NOTES,
+                }
 
+        );
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

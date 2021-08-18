@@ -56,8 +56,8 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH)
-                .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(3)
-                .search().hidden();
+                .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(3);
+
 
 
 
@@ -90,8 +90,17 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.KN_CONTENT.CATEGORY_ID,EAMTables.KN_CONTENT.TITLE,EAMTables.KN_CONTENT.GRADE_ID,EAMTables.KN_CONTENT.DISPLAY},
-                new Object[]{EAMTables.KN_CONTENT.NOTES,EAMTables.KN_CONTENT.CONTENT_TYPE,EAMTables.KN_CONTENT.PROFILE}
+                new Object[]{
+                        EAMTables.KN_CONTENT.CATEGORY_ID,
+                        EAMTables.KN_CONTENT.TITLE,
+                        EAMTables.KN_CONTENT.GRADE_ID,
+                        EAMTables.KN_CONTENT.DISPLAY
+                },
+                new Object[]{
+                        EAMTables.KN_CONTENT.NOTES,
+                        EAMTables.KN_CONTENT.CONTENT_TYPE,
+                        EAMTables.KN_CONTENT.PROFILE
+                }
 
         );
 

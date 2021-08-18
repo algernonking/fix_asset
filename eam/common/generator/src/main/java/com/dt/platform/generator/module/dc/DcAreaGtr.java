@@ -10,23 +10,24 @@ import com.github.foxnic.generator.config.WriteMode;
 
 
 public class DcAreaGtr extends BaseCodeGenerator {
+//
+//    public DcAreaGtr() {
+//        super(EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+//    }
+
     public DcAreaGtr() {
-        super(EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
+        super(AreaServiceProxy.class, AreaPageController.class,EAMTables.DC_AREA.$TABLE,BASIC_DATA_MENU_ID);
     }
 
     public void generateCode() throws Exception {
 
         cfg.view().field(EAMTables.DC_AREA.ID).basic().hidden(true);
 
-
-        cfg.view().field(EAMTables.DC_AREA.CREATE_TIME).table().disable(true);
-
-
         cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();
-
         cfg.view().field(EAMTables.DC_AREA.POSITION).search().fuzzySearch();
-
         cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
+
+
 
         cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
               .form().validate().required().form().radioBox().enumType(AreaTypeEnum.class);
@@ -45,13 +46,11 @@ public class DcAreaGtr extends BaseCodeGenerator {
 
     public static void main(String[] args) throws Exception {
         DcAreaGtr g=new DcAreaGtr();
+        g.reGenerateMenu();
         //生成代码
-        g.generateCode();
-
-        //移除之前生成的菜单，视情况执行
-       // System.out.println("############"+g.getTablePrefix());
-        g.removeByBatchId("473608218912751616");
+        //g.generateCode();
         //生成菜单
-       g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+     //  g.generateMenu(AreaServiceProxy.class, AreaPageController.class);
+     //  g.reGenerateMenu(AreaServiceProxy.class,AreaPageController.class);
     }
 }

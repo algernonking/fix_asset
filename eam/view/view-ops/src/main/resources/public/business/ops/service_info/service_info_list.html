@@ -2,7 +2,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:10:30
+ * @since 2021-08-17 22:02:02
  */
  -->
  <!DOCTYPE html>
@@ -31,20 +31,15 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 服务类型 , serviceCategoryId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('服务类型')}" class="search-label">服务类型</span><span class="search-colon">:</span></div>
-                        <div id="serviceCategoryId" th:data="${'/service-ops/ops-service-category/query-list'}" style="width:140px"></div>
-                    </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div"><span th:text="${lang.translate('名称')}" class="search-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 补丁 , patch ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 服务类型 , serviceCategoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('补丁')}" class="search-label">补丁</span><span class="search-colon">:</span></div>
-                        <input id="patch" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div"><span th:text="${lang.translate('服务类型')}" class="search-label">服务类型</span><span class="search-colon">:</span></div>
+                        <div id="serviceCategoryId" th:data="${'/service-ops/ops-service-category/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">

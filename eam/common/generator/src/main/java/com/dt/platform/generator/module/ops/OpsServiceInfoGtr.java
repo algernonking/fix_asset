@@ -31,6 +31,7 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.NOTES).search().fuzzySearch();
 //
+
 //        String resourceNameField="res_"+OpsServiceMeta.SERVICE_NAME;
 //        cfg.view().field(resourceNameField)
 //                .basic().label("服务类型")
@@ -42,6 +43,22 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
                 .form().validate().required()
                 .form().selectBox().queryApi(ServiceCategoryServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(ServiceCategoryMeta.ID).textField(ServiceCategoryMeta.NAME).fillBy(ServiceInfoMeta.SERVICE_CATEGORY).muliti(false);
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_SERVICE_INFO.NAME,
+                        EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID,
+                        EAMTables.OPS_SERVICE_INFO.NOTES
+
+                }
+
+
+        );
+
+
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

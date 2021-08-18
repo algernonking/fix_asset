@@ -58,8 +58,17 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
-                new Object[]{EAMTables.OPS_INFORMATION_SYSTEM.NAME,EAMTables.OPS_INFORMATION_SYSTEM.NOTES,EAMTables.OPS_INFORMATION_SYSTEM.LABELS},
-                new Object[]{EAMTables.OPS_INFORMATION_SYSTEM.STATUS,EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT}
+                new Object[]{
+                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
+                        EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
+                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
+                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES
+                },
+                new Object[]{
+
+                        EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
+                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT
+                }
 
         );
 
@@ -67,41 +76,40 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
-                        EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
-                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
-
+                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
+                        EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
+                        EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
 
                 }, new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
                         EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,
                         EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE,
+                },
+                new Object[] {
+                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
+                        EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
                         EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
-
-
                 }
         );
         cfg.view().form().addGroup("运维信息",
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD,
                         EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD,
-                        EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.OS_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.DB_INFO
                 },
                 new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.RPO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.RTO,
+                        EAMTables.OPS_INFORMATION_SYSTEM.BACKUP_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.SAMEPLACE_BACUP_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.DIFFPLACE_BACKUP_INFO,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES
-
-                }
+                }  ,
+                new Object[] {
+                        EAMTables.OPS_INFORMATION_SYSTEM.RPO,
+                        EAMTables.OPS_INFORMATION_SYSTEM.RTO,
+                        EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE
+              }
         );
 
 

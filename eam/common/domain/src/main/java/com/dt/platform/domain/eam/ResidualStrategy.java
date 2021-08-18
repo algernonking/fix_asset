@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:46
- * @sign 42BAAF943FDCE93ECDB73800DA62D5B7
+ * @since 2021-08-18 11:53:20
+ * @sign CC357C18532D06FCC425410B4B84B6DF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -55,9 +55,9 @@ public class ResidualStrategy extends Entity {
 	private String strategyDescribe;
 	
 	/**
-	 * 残值率：-1则使用资产设置的残值
+	 * 残值率：残值率
 	*/
-	@ApiModelProperty(required = false,value="残值率" , notes = "-1则使用资产设置的残值")
+	@ApiModelProperty(required = false,value="残值率" , notes = "残值率")
 	private BigDecimal residualvalueRate;
 	
 	/**
@@ -204,7 +204,7 @@ public class ResidualStrategy extends Entity {
 	
 	/**
 	 * 获得 残值率<br>
-	 * -1则使用资产设置的残值
+	 * 残值率
 	 * @return 残值率
 	*/
 	public BigDecimal getResidualvalueRate() {

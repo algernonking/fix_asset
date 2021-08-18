@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资产维保数据 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:31
+ * @since 2021-08-17 22:01:27
 */
 
 public interface IAssetExtMaintainerService extends ISuperService<AssetExtMaintainer> {

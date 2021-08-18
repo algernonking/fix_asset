@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:28
- * @sign EB03C4F68A0CE0C043404721CABC98B1
+ * @since 2021-08-18 11:53:08
+ * @sign 637D649AF57723282EFCE1461EAFC9FC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -127,9 +127,9 @@ public class AssetExtFinancial extends Entity {
 	private BigDecimal purchaseUnitPrice;
 	
 	/**
-	 * 使用期限(月)：使用期限(月)
+	 * 使用期限：使用期限
 	*/
-	@ApiModelProperty(required = false,value="使用期限(月)" , notes = "使用期限(月)")
+	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
 	private BigDecimal serviceLife;
 	
 	/**
@@ -515,17 +515,17 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 使用期限(月)<br>
-	 * 使用期限(月)
-	 * @return 使用期限(月)
+	 * 获得 使用期限<br>
+	 * 使用期限
+	 * @return 使用期限
 	*/
 	public BigDecimal getServiceLife() {
 		return serviceLife;
 	}
 	
 	/**
-	 * 设置 使用期限(月)
-	 * @param serviceLife 使用期限(月)
+	 * 设置 使用期限
+	 * @param serviceLife 使用期限
 	 * @return 当前对象
 	*/
 	public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {

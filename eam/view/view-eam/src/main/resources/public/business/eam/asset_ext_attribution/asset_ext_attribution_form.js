@@ -1,7 +1,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 17:09:24
+ * @since 2021-08-18 11:53:05
  */
 
 function FormPage() {
@@ -77,7 +77,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].supplierName,value:data[i].id});
+					opts.push({name:data[i].name,value:data[i].id});
 				}
 				return opts;
 			}
@@ -95,7 +95,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].supplierName,value:data[i].id});
+					opts.push({name:data[i].warehouseName,value:data[i].id});
 				}
 				return opts;
 			}
