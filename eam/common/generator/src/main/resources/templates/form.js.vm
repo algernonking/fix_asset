@@ -230,6 +230,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+			#if(jsAfterDataFill!=null)
+			#(jsAfterDataFill.name)(formData);
+			#end
 		}
 		
 		//渐显效果
@@ -264,23 +267,28 @@ function FormPage() {
 
 
 	    	#for(f : fields)
+			#if(!f.isHideInForm)
 		    #if(f.typeName.equals("logic_switch"))
 			//处理 #(f.labelInForm) 默认值
 		    if(!data.field.#(f.varName)) data.field.#(f.varName)=0;
 		    #end
+			#end
 		    #end
 
 
 			#for(f : fields)
+			#if(!f.isHideInForm)
 			#if(f.typeName.equals("check_box"))
 			//处理 #(f.labelInForm) 默认值
 			data.field["#(f.varName)"]=fox.getCheckedValue("#(f.varName)");
 			#end
 			#end
+			#end
 
 
 
 			#for(f : fields)
+			#if(!f.isHideInForm)
 			#if(f.typeName.equals("select_box"))
 			//获取 #(f.labelInForm) 下拉框的值
 			data.field["#(f.varName)"]=xmSelect.get("##(f.varName)",true).getValue("value");
@@ -288,6 +296,7 @@ function FormPage() {
 			if(data.field["#(f.varName)"] && data.field["#(f.varName)"].length>0) {
 				data.field["#(f.varName)"]=data.field["#(f.varName)"][0];
 			}
+			#end
 			#end
 			#end
 			#end
@@ -319,6 +328,9 @@ function FormPage() {
 
 	#if(jsBeforeDataFill!=null)
 	#(jsBeforeDataFill.source)
+	#end
+	#if(jsAfterDataFill!=null)
+	#(jsAfterDataFill.source)
 	#end
 
 }
