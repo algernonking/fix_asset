@@ -11,7 +11,7 @@ function ListPage() {
 	#end
 	//模块基础路径
 	const moduleURL="#(moduleURL)";
-	
+	var dataTable=null;
 	/**
       * 入口函数，初始化
       */
@@ -48,7 +48,7 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 			var h=$(".search-bar").height();
-			fox.renderTable({
+			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print'],
@@ -144,21 +144,21 @@ function ListPage() {
 		#for(f : searchFields)
 		#if(!f.isHideInSearch)
 		#if(f.typeName.equals("logic_switch"))
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")};
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#else if(f.typeName.equals("radio_box"))
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")};
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
 		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.textField)" };
 		#else
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.valueField)" };
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.valueField)", label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#end
 		#else
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end};
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
 		#end
 		#else if(f.typeName.equals("check_box"))
-		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end};
+		value.#(f.varName)={ value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
 		#else if(f.typeName.equals("date_input"))
 		#if(f.search.searchInRange)
 		value.#(f.varName)={ begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
@@ -176,8 +176,12 @@ function ListPage() {
 		#end
 		#end
 		#end
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
-		#if(isTree) 
+		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		if(sortField) {
+			ps.sortField=sortField;
+			ps.sortType=sortType;
+		}
+		#if(isTree)
 		// 树形结构锁定上级ID
 		ps.#(parentIdVar)=#(parentIdVar);
 		#end
@@ -483,7 +487,7 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
-	
+			admin.putTempData('#(formDataKey)-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -491,13 +495,27 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						 showEditForm(data.data);
+						admin.putTempData('#(formDataKey)-form-action', "edit",true);
+						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-				
-			} else if (layEvent === 'del') { // 删除
+			} else if (layEvent === 'view') { // 修改
+				//延迟显示加载动画，避免界面闪动
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
+					clearTimeout(task);
+					layer.closeAll('loading');
+					if(data.success) {
+						admin.putTempData('#(formDataKey)-form-action', "view",true);
+						showEditForm(data.data);
+					} else {
+						layer.msg(data.message, {icon: 1, time: 1500});
+					}
+				});
+			}
+			else if (layEvent === 'del') { // 删除
 			
 				layer.confirm(fox.translate('确定删除此')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 					layer.close(i);

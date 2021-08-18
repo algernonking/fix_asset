@@ -173,7 +173,7 @@
 <div class="model-form-footer">
     <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" #if(disableCreateNew && disableModify) style="margin-right: 15px" #end>取消</button>
     #if(!disableCreateNew || !disableModify)
-    <button th:if="${perm.checkAnyAuth('#(authPrefix):create','#(authPrefix):update','#(authPrefix):save')}" class="layui-btn" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button th:if="${perm.checkAnyAuth('#(authPrefix):create','#(authPrefix):update','#(authPrefix):save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
     #end
 </div>
 

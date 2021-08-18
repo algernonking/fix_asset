@@ -32,7 +32,7 @@
                     <!-- #(f.labelInSearch) , #(f.varName) ,typeName=#(f.typeName), isHideInSearch=#(f.isHideInSearch) -->
                     #if(!f.isHideInSearch)
                     <div class="search-unit">
-                        <div class="search-label-div"><span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label">#(f.labelInSearch)</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="#if(f.search.labelWidth!=null)width:#(f.search.labelWidth)px#end"><span th:text="${lang.translate('#(f.labelInSearch)')}" class="search-label #(f.varName)-label">#(f.labelInSearch)</span><span class="search-colon">:</span></div>
                         #if(f.typeName.equals("logic_switch"))
                         <div id="#(f.varName)" data='[{"name":"#(f.logicField.labelOn)","value":"#(f.logicField.valueOn)"},{"name":"#(f.logicField.labelOff)","value":"#(f.logicField.valueOff)"}]' style="width:#(f.search.inputWidth)px"></div>
                         #else if(f.typeName.equals("select_box"))
@@ -122,7 +122,7 @@
         #end
         #if(!disableBatchDelete)
         #if(isSimplePK)
-            <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
         #end
         #end
     </div>
@@ -133,13 +133,15 @@
 	#if(isTree) 
 	<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" th:text="${lang.translate('下级')}">下级</a>
 	#end
+
     #if(!disableFormView)
-    #if(disableModify)
-    <a th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('查看')}">查看</a>
-    #else
-    <a th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <a th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
     #end
+    #if(!disableModify)
+    <a th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
     #end
+
+
     #if(!disableSingleDelete)
     <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
     #end
