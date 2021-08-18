@@ -1,7 +1,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:18
+ * @since 2021-08-18 20:41:09
  */
 
 function FormPage() {
@@ -133,7 +133,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-ext-equipment-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -143,6 +142,116 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
 
 
 
@@ -197,21 +306,6 @@ function FormPage() {
 
 
 
-			//获取 区域 下拉框的值
-			data.field["areaId"]=xmSelect.get("#areaId",true).getValue("value");
-			if(data.field["areaId"] && data.field["areaId"].length>0) {
-				data.field["areaId"]=data.field["areaId"][0];
-			}
-			//获取 层级 下拉框的值
-			data.field["layerId"]=xmSelect.get("#layerId",true).getValue("value");
-			if(data.field["layerId"] && data.field["layerId"].length>0) {
-				data.field["layerId"]=data.field["layerId"][0];
-			}
-			//获取 机柜 下拉框的值
-			data.field["rackId"]=xmSelect.get("#rackId",true).getValue("value");
-			if(data.field["rackId"] && data.field["rackId"].length>0) {
-				data.field["rackId"]=data.field["rackId"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -237,6 +331,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

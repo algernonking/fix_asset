@@ -1,7 +1,7 @@
 /**
  * 资产借用归还 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 15:01:06
+ * @since 2021-08-18 20:40:56
  */
 
 function FormPage() {
@@ -84,7 +84,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-borrow-return-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -93,6 +92,18 @@ function FormPage() {
 		if (formData) {
 			fm[0].reset();
 			form.val('data-form', formData);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -167,6 +178,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

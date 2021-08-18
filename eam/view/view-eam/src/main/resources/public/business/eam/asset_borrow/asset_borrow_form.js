@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 17:36:40
+ * @since 2021-08-18 21:02:46
  */
 
 function FormPage() {
@@ -147,6 +147,86 @@ function FormPage() {
 
 
 
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+
+
+
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
@@ -187,16 +267,6 @@ function FormPage() {
 
 
 
-			//获取 办理状态 下拉框的值
-			data.field["status"]=xmSelect.get("#status",true).getValue("value");
-			if(data.field["status"] && data.field["status"].length>0) {
-				data.field["status"]=data.field["status"][0];
-			}
-			//获取 资产状态 下拉框的值
-			data.field["assetStatus"]=xmSelect.get("#assetStatus",true).getValue("value");
-			if(data.field["assetStatus"] && data.field["assetStatus"].length>0) {
-				data.field["assetStatus"]=data.field["assetStatus"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

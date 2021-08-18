@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:33:57
+ * @since 2021-08-18 20:40:45
  */
 
 function FormPage() {
@@ -112,7 +112,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('sys-code-allocation-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -122,6 +121,22 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  业务模块 设置下拉框勾选
+			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
+			//设置  编码规则 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#ruleId",formData.rule);
+
+
+
+
+			//设置  业务模块 设置下拉框勾选
+			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
+			//设置  编码规则 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#ruleId",formData.rule);
 
 
 
@@ -209,6 +224,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

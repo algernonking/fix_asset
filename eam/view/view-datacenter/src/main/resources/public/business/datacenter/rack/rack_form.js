@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:05
+ * @since 2021-08-18 20:40:55
  */
 
 function FormPage() {
@@ -113,7 +113,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('dc-rack-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -123,6 +122,54 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
+
+
+
+
+			//设置  区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.area);
+			//设置  层级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#layerId",formData.layer);
 
 
 
@@ -210,6 +257,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

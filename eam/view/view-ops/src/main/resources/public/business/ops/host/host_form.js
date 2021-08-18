@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:47
+ * @since 2021-08-18 20:41:56
  */
 
 function FormPage() {
@@ -232,7 +232,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-host-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -242,6 +241,546 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
+
+
+
+
+			//设置  信息系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#systemId",formData.infoSystem);
+			//设置  主机类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#hostType",formData.hostType,SELECT_HOSTTYPE_DATA);
+			//设置  所在环境 设置下拉框勾选
+			fox.setSelectValue4Dict("#environment",formData.environment,SELECT_ENVIRONMENT_DATA);
+			//设置  所在位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  改密策略 设置下拉框勾选
+			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
+			//设置  中间件 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostMiddlewareIds",formData.hostMiddlewareList);
+			//设置  操作系统 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostOsIds",formData.hostOsList);
 
 
 
@@ -306,37 +845,6 @@ function FormPage() {
 
 
 
-			//获取 信息系统 下拉框的值
-			data.field["systemId"]=xmSelect.get("#systemId",true).getValue("value");
-			if(data.field["systemId"] && data.field["systemId"].length>0) {
-				data.field["systemId"]=data.field["systemId"][0];
-			}
-			//获取 主机类型 下拉框的值
-			data.field["hostType"]=xmSelect.get("#hostType",true).getValue("value");
-			if(data.field["hostType"] && data.field["hostType"].length>0) {
-				data.field["hostType"]=data.field["hostType"][0];
-			}
-			//获取 所在环境 下拉框的值
-			data.field["environment"]=xmSelect.get("#environment",true).getValue("value");
-			if(data.field["environment"] && data.field["environment"].length>0) {
-				data.field["environment"]=data.field["environment"][0];
-			}
-			//获取 所在位置 下拉框的值
-			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
-			if(data.field["positionId"] && data.field["positionId"].length>0) {
-				data.field["positionId"]=data.field["positionId"][0];
-			}
-			//获取 改密策略 下拉框的值
-			data.field["passwordStrategyId"]=xmSelect.get("#passwordStrategyId",true).getValue("value");
-			if(data.field["passwordStrategyId"] && data.field["passwordStrategyId"].length>0) {
-				data.field["passwordStrategyId"]=data.field["passwordStrategyId"][0];
-			}
-			//获取 数据库 下拉框的值
-			data.field["hostDbIds"]=xmSelect.get("#hostDbIds",true).getValue("value");
-			//获取 中间件 下拉框的值
-			data.field["hostMiddlewareIds"]=xmSelect.get("#hostMiddlewareIds",true).getValue("value");
-			//获取 操作系统 下拉框的值
-			data.field["hostOsIds"]=xmSelect.get("#hostOsIds",true).getValue("value");
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -362,6 +870,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

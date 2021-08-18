@@ -12,8 +12,12 @@ import com.github.foxnic.generator.config.WriteMode;
 public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
     public EamAssetBorrowGtr() {
-        super(EAMTables.EAM_ASSET_BORROW.$TABLE,BASIC_DATA_MENU_ID);
+        super(
+                AssetBorrowServiceProxy.class, AssetBorrowPageController.class,
+                EAMTables.EAM_ASSET_BORROW.$TABLE,BASIC_DATA_MENU_ID);
     }
+
+
 
     public void generateCode() throws Exception {
 
@@ -22,7 +26,27 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
 
 
-        //System.err.println(cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).search().
+       // cfg.view().list().disableSpaceColumn();
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).table().disable().search().fuzzySearch();
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().disable();
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ASSET_STATUS).form().selectBox().enumType(AssetBorrowStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
+
+
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,
@@ -35,26 +59,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_BORROW.CONTENT
                 }
         );
-
-        cfg.view().list().disableSpaceColumn();
-        cfg.view().formWindow().bottomSpace(250);
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).table().disable().search().fuzzySearch();
-
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().disable();
-
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ASSET_STATUS).form().selectBox().enumType(AssetBorrowStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
-
-
-
         //分成分组布局
         cfg.view().formWindow().width(1000);
         cfg.view().form().addGroup(null,
@@ -90,8 +94,11 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         //生成代码
         g.generateCode();
+       // g.reGenerateMenu();;
         //生成菜单
         //g.generateMenu(AssetBorrowServiceProxy.class, AssetBorrowPageController.class);
     }
+
+
 
 }

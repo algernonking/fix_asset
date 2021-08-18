@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:30
+ * @since 2021-08-18 20:41:35
  * @sign 5E0067CB73A2FAD378EA6F251B3BD5B7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

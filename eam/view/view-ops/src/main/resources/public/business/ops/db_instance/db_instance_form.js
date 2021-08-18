@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:39
+ * @since 2021-08-18 20:41:44
  */
 
 function FormPage() {
@@ -189,7 +189,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-db-instance-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -199,6 +198,198 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
+
+
+
+
+			//设置  主机 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostId",formData.host);
+			//设置  数据库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#databaseId",formData.database);
+			//设置  日志模式 设置下拉框勾选
+			fox.setSelectValue4Dict("#logMethod",formData.logMethod,SELECT_LOGMETHOD_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupType",formData.backupType,SELECT_BACKUPTYPE_DATA);
+			//设置  备份状态 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupStatus",formData.backupStatus,SELECT_BACKUPSTATUS_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#backupMethod",formData.backupMethod,SELECT_BACKUPMETHOD_DATA);
 
 
 
@@ -259,36 +450,6 @@ function FormPage() {
 
 
 
-			//获取 主机 下拉框的值
-			data.field["hostId"]=xmSelect.get("#hostId",true).getValue("value");
-			if(data.field["hostId"] && data.field["hostId"].length>0) {
-				data.field["hostId"]=data.field["hostId"][0];
-			}
-			//获取 数据库 下拉框的值
-			data.field["databaseId"]=xmSelect.get("#databaseId",true).getValue("value");
-			if(data.field["databaseId"] && data.field["databaseId"].length>0) {
-				data.field["databaseId"]=data.field["databaseId"][0];
-			}
-			//获取 日志模式 下拉框的值
-			data.field["logMethod"]=xmSelect.get("#logMethod",true).getValue("value");
-			if(data.field["logMethod"] && data.field["logMethod"].length>0) {
-				data.field["logMethod"]=data.field["logMethod"][0];
-			}
-			//获取 备份状态 下拉框的值
-			data.field["backupType"]=xmSelect.get("#backupType",true).getValue("value");
-			if(data.field["backupType"] && data.field["backupType"].length>0) {
-				data.field["backupType"]=data.field["backupType"][0];
-			}
-			//获取 备份状态 下拉框的值
-			data.field["backupStatus"]=xmSelect.get("#backupStatus",true).getValue("value");
-			if(data.field["backupStatus"] && data.field["backupStatus"].length>0) {
-				data.field["backupStatus"]=data.field["backupStatus"][0];
-			}
-			//获取 备份方式 下拉框的值
-			data.field["backupMethod"]=xmSelect.get("#backupMethod",true).getValue("value");
-			if(data.field["backupMethod"] && data.field["backupMethod"].length>0) {
-				data.field["backupMethod"]=data.field["backupMethod"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -314,6 +475,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

@@ -74,6 +74,7 @@ public class BaseCodeGenerator {
                 String parent_id=menu_rs.getRcd(0).getString("parent_id");
                 System.out.println("current parent_id:"+parent_id);
                 removeByBatchId(batch_id);
+                this.parentMenuId=parent_id;
                 generateMenu(proxyType,pageType);
             }
         }

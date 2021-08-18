@@ -37,6 +37,8 @@ public class BaseCodeGenerator {
 
     protected ModuleContext cfg;
 
+
+
     public BaseCodeGenerator(DBTable table,String parentMenuId) {
         this.table=table;
         this.parentMenuId=parentMenuId;
@@ -81,6 +83,7 @@ public class BaseCodeGenerator {
                 String parent_id=menu_rs.getRcd(0).getString("parent_id");
                 System.out.println("current parent_id:"+parent_id);
                 removeByBatchId(batch_id);
+                this.parentMenuId=parent_id;
                 generateMenu(proxyType,pageType);
             }
         }
@@ -133,4 +136,6 @@ public class BaseCodeGenerator {
         MenuGenerator mg=new MenuGenerator(appId,MenuGenerator.SUPER_ADMIN_ROLE_ID,table, proxyType, pageType);
         mg.generate(parentMenuId);
     }
+
+
 }

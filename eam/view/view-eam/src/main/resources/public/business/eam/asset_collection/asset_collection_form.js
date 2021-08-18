@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 17:39:33
+ * @since 2021-08-18 20:41:02
  */
 
 function FormPage() {
@@ -144,6 +144,94 @@ function FormPage() {
 
 
 
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+
+
+
+
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
@@ -184,16 +272,6 @@ function FormPage() {
 
 
 
-			//获取 办理状态 下拉框的值
-			data.field["status"]=xmSelect.get("#status",true).getValue("value");
-			if(data.field["status"] && data.field["status"].length>0) {
-				data.field["status"]=data.field["status"][0];
-			}
-			//获取 存放位置 下拉框的值
-			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
-			if(data.field["positionId"] && data.field["positionId"].length>0) {
-				data.field["positionId"]=data.field["positionId"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

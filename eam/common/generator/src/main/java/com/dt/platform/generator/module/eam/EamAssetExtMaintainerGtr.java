@@ -61,7 +61,6 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_NAME,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,

@@ -1,7 +1,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:22
+ * @since 2021-08-18 20:41:13
  */
 
 function FormPage() {
@@ -95,7 +95,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-ext-software-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -105,6 +104,18 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  发行方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#distributionMode",formData.distributionMode,SELECT_DISTRIBUTIONMODE_DATA);
+
+
+
+
+			//设置  发行方式 设置下拉框勾选
+			fox.setSelectValue4Dict("#distributionMode",formData.distributionMode,SELECT_DISTRIBUTIONMODE_DATA);
 
 
 
@@ -185,6 +196,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

@@ -1,7 +1,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:27
+ * @since 2021-08-18 20:48:04
  */
 
 
@@ -10,7 +10,7 @@ function ListPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-ext-maintainer";
-	
+	var dataTable=null;
 	/**
       * 入口函数，初始化
       */
@@ -42,23 +42,32 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+			var ps={};
+			var contitions={};
+
+
 			var h=$(".search-bar").height();
-			fox.renderTable({
+			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print'],
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
+				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
 					,{ field: 'maintainerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保商'), templet: function (d) { return fox.joinLabel(d.maintnainer,"maintainerName");}}
+					,{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保厂商') }
+					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') }
+					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') }
+					,{ field: 'directorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') }
 					,{ field: 'maintenanceStartTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保开始时间'), templet: function (d) { return fox.dateFormat(d.maintenanceStartTime); }}
 					,{ field: 'maintenanceEndTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保到期时间'), templet: function (d) { return fox.dateFormat(d.maintenanceEndTime); }}
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'maintenanceDescription', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
@@ -91,11 +100,15 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.assetId={ value: $("#assetId").val()};
-		value.maintainerId={ value: xmSelect.get("#maintainerId",true).getValue("value"), fillBy:"maintnainer",field:"id" };
+		value.maintainerId={ value: xmSelect.get("#maintainerId",true).getValue("value"), fillBy:"maintnainer",field:"id", label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
+		value.contactInformation={ value: $("#contactInformation").val()};
 		value.maintenanceStartTime={ value: $("#maintenanceStartTime").val()};
 		value.maintenanceEndTime={ value: $("#maintenanceEndTime").val()};
-		value.notes={ value: $("#notes").val()};
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
+		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		if(sortField) {
+			ps.sortField=sortField;
+			ps.sortType=sortType;
+		}
 		table.reload('data-table', { where : ps });
 	}
     
@@ -210,6 +223,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
+			admin.putTempData('eam-asset-ext-maintainer-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -246,7 +260,7 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
-	
+			admin.putTempData('eam-asset-ext-maintainer-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -254,13 +268,27 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						 showEditForm(data.data);
+						admin.putTempData('eam-asset-ext-maintainer-form-data-form-action', "edit",true);
+						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-				
-			} else if (layEvent === 'del') { // 删除
+			} else if (layEvent === 'view') { // 修改
+				//延迟显示加载动画，避免界面闪动
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
+					clearTimeout(task);
+					layer.closeAll('loading');
+					if(data.success) {
+						admin.putTempData('eam-asset-ext-maintainer-form-data-form-action', "view",true);
+						showEditForm(data.data);
+					} else {
+						layer.msg(data.message, {icon: 1, time: 1500});
+					}
+				});
+			}
+			else if (layEvent === 'del') { // 删除
 			
 				layer.confirm(fox.translate('确定删除此')+fox.translate('资产维保数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
@@ -306,6 +334,7 @@ function ListPage() {
 		});
 		admin.putTempData('eam-asset-ext-maintainer-form-data-popup-index', index);
 	};
+
 
 
 };

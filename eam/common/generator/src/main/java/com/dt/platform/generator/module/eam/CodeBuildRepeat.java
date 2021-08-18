@@ -7,6 +7,8 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.eam";
         String[] clasnamearr={
+                "EamAssetAllocationGtr",
+                "EamAssetTranferGtr",
                 "EamAssetBorrowReturnGtr",
                 "EamAssetCollectionReturnGtr",
                 "EamAssetItemGtr",

@@ -1,7 +1,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:27
+ * @since 2021-08-18 20:48:05
  */
 
 function FormPage() {
@@ -9,15 +9,23 @@ function FormPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-ext-maintainer";
 
-	const disableCreateNew=false;
-	const disableModify=false;
+	var disableCreateNew=false;
+	var disableModify=false;
 	/**
       * 入口函数，初始化
       */
 	this.init=function(layui) { 	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
-		
+
+		//如果没有修改和保存权限，
+		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
+			disableModify=true;
+		}
+		if(admin.getTempData('eam-asset-ext-maintainer-form-data-form-action')=="view") {
+			disableModify=true;
+		}
+
 		//渲染表单组件
 		renderFormFields();
 		
@@ -99,7 +107,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-ext-maintainer-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -109,6 +116,54 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+
+
+
+
+			//设置  维保商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
 
 
 
@@ -132,14 +187,16 @@ function FormPage() {
             },100);
         },1);
 
-        //
-		if(disableModify) {
+        //禁用编辑
+		if(disableModify || disableCreateNew) {
 			fox.lockForm($("#data-form"),true);
+			$("#submit-button").hide();
+			$("#cancel-button").css("margin-right","15px")
+		} else {
+			$("#submit-button").show();
+			$("#cancel-button").css("margin-right","0px")
 		}
 
-
-
-        
 	}
 	
 	/**
@@ -157,11 +214,6 @@ function FormPage() {
 
 
 
-			//获取 维保商 下拉框的值
-			data.field["maintainerId"]=xmSelect.get("#maintainerId",true).getValue("value");
-			if(data.field["maintainerId"] && data.field["maintainerId"].length>0) {
-				data.field["maintainerId"]=data.field["maintainerId"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -187,6 +239,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

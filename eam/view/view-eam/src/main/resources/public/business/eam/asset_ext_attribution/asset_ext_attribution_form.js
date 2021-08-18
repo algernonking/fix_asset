@@ -1,7 +1,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:16
+ * @since 2021-08-18 20:41:07
  */
 
 function FormPage() {
@@ -115,7 +115,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-ext-attribution-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -125,6 +124,70 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
+
+
+
+
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 
 
 
@@ -177,16 +240,6 @@ function FormPage() {
 
 
 
-			//获取 存放位置 下拉框的值
-			data.field["positionId"]=xmSelect.get("#positionId",true).getValue("value");
-			if(data.field["positionId"] && data.field["positionId"].length>0) {
-				data.field["positionId"]=data.field["positionId"][0];
-			}
-			//获取 仓库 下拉框的值
-			data.field["warehouseId"]=xmSelect.get("#warehouseId",true).getValue("value");
-			if(data.field["warehouseId"] && data.field["warehouseId"].length>0) {
-				data.field["warehouseId"]=data.field["warehouseId"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -212,6 +265,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

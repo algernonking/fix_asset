@@ -2,7 +2,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 16:25:27
+ * @since 2021-08-18 20:48:05
  */
  -->
  <!DOCTYPE html>
@@ -41,12 +41,21 @@
             <div class="layui-col-xs4 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('维保商')}">维保商</div></div>
-                        <div class="layui-input-block ">
-                            <div id="maintainerId" input-type="select" th:data="${'/service-eam/eam-maintainer/query-list'}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('维保厂商')}">维保厂商</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="maintainerName" id="maintainerName" name="maintainerName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('维保厂商') }" type="text" class="layui-input"   />
                     </div>
+                </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('联系人')}">联系人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="contacts" id="contacts" name="contacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系人') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -63,18 +72,27 @@
                     </div>
 
 
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('结束时间')}">结束时间</div></div>
                         <div class="layui-input-block ">
                             <input input-type="date" lay-filter="maintenanceEndTime" id="maintenanceEndTime" name="maintenanceEndTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('结束时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="directorId" id="directorId" name="directorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -91,9 +109,9 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('联系方式')}">联系方式</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                        <input lay-filter="contactInformation" id="contactInformation" name="contactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系方式') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -113,7 +131,7 @@
 
 <div class="model-form-footer">
     <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_ext_maintainer:create','eam_asset_ext_maintainer:update','eam_asset_ext_maintainer:save')}" class="layui-btn" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset_ext_maintainer:create','eam_asset_ext_maintainer:update','eam_asset_ext_maintainer:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>

@@ -1,7 +1,7 @@
 /**
  * 风险等级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:34
+ * @since 2021-08-18 20:41:40
  */
 
 function FormPage() {
@@ -79,7 +79,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-safetylevel-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -88,6 +87,10 @@ function FormPage() {
 		if (formData) {
 			fm[0].reset();
 			form.val('data-form', formData);
+
+
+
+
 
 
 
@@ -162,6 +165,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

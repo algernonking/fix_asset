@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 18:00:31
+ * @since 2021-08-18 20:41:06
  */
 
 function FormPage() {
@@ -169,6 +169,126 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+
+
+
+
+			//设置  办理状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  维修状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
+			//设置  报修类型 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
 			//设置 图片 显示附件
 		    if($("#pictureId").val()) {
 				foxup.fill("pictureId",$("#pictureId").val());
@@ -229,21 +349,6 @@ function FormPage() {
 
 
 
-			//获取 办理状态 下拉框的值
-			data.field["status"]=xmSelect.get("#status",true).getValue("value");
-			if(data.field["status"] && data.field["status"].length>0) {
-				data.field["status"]=data.field["status"][0];
-			}
-			//获取 维修状态 下拉框的值
-			data.field["repairStatus"]=xmSelect.get("#repairStatus",true).getValue("value");
-			if(data.field["repairStatus"] && data.field["repairStatus"].length>0) {
-				data.field["repairStatus"]=data.field["repairStatus"][0];
-			}
-			//获取 报修类型 下拉框的值
-			data.field["type"]=xmSelect.get("#type",true).getValue("value");
-			if(data.field["type"] && data.field["type"].length>0) {
-				data.field["type"]=data.field["type"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

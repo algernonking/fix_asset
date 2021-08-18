@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:54
+ * @since 2021-08-18 20:42:03
  */
 
 function FormPage() {
@@ -134,7 +134,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('kn-content-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -144,12 +143,102 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-			//设置 附件 显示附件
-		    if($("#attach").val()) {
-				foxup.fill("attach",$("#attach").val());
-		    } else {
-				adjustPopup();
-			}
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
+
+
+
+
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//设置  等级 设置下拉框勾选
+			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
 
 
 
@@ -202,16 +291,6 @@ function FormPage() {
 
 
 
-			//获取 分类 下拉框的值
-			data.field["categoryId"]=xmSelect.get("#categoryId",true).getValue("value");
-			if(data.field["categoryId"] && data.field["categoryId"].length>0) {
-				data.field["categoryId"]=data.field["categoryId"][0];
-			}
-			//获取 等级 下拉框的值
-			data.field["gradeId"]=xmSelect.get("#gradeId",true).getValue("value");
-			if(data.field["gradeId"] && data.field["gradeId"].length>0) {
-				data.field["gradeId"]=data.field["gradeId"][0];
-			}
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -237,6 +316,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

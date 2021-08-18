@@ -1,7 +1,7 @@
 /**
  * 品牌 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:23
+ * @since 2021-08-18 20:41:15
  */
 
 function FormPage() {
@@ -79,7 +79,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-brand-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -162,6 +161,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 

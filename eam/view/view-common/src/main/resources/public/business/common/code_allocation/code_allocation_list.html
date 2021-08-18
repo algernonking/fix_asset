@@ -2,7 +2,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:33:53
+ * @since 2021-08-18 20:40:40
  */
  -->
  <!DOCTYPE html>
@@ -75,7 +75,7 @@
     <a th:if="${perm.checkAnyAuth('sys_code_allocation:update','sys_code_allocation:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
 
 
-    <a th:if="${perm.checkAuth('sys_code_allocation:delete')}" class="layui-btn layui-btn-xs" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <a th:if="${perm.checkAuth('sys_code_allocation:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 
 

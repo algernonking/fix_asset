@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:37
+ * @since 2021-08-18 20:41:43
  */
 
 
@@ -42,6 +42,10 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+			var ps={};
+			var contitions={};
+
+
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
@@ -50,6 +54,7 @@ function ListPage() {
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
+				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
@@ -225,6 +230,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
+			admin.putTempData('ops-information-system-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -335,6 +341,7 @@ function ListPage() {
 		});
 		admin.putTempData('ops-information-system-form-data-popup-index', index);
 	};
+
 
 
 };

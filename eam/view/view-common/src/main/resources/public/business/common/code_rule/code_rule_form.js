@@ -1,7 +1,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 14:34:00
+ * @since 2021-08-18 20:40:49
  */
 
 function FormPage() {
@@ -95,7 +95,6 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('sys-code-rule-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -105,6 +104,24 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+
+
+
+
+			//设置  业务模块 设置下拉框勾选
+			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
+
+
+
+
+			//设置  业务模块 设置下拉框勾选
+			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
+
+
+
+
+			//设置  业务模块 设置下拉框勾选
+			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
 
 
 
@@ -185,6 +202,7 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 	    
     }
+
 
 }
 
