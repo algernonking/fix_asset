@@ -13,7 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetHandleStatusEnum implements CodeTextEnum {
 
-	AGREEN("agreen" , "已生效"),
+	COMPLETE("complete" , "已完成"),
+	INCOMPLETE("incomplete" , "未完成"),
 	DENY("deny" , "拒绝"),
 	APPROVE("approve" , "审批中"),
 	CANCEL("cancel" , "取消")

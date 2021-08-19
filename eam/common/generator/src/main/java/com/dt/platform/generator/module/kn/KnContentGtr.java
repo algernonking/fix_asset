@@ -66,8 +66,6 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE);
 
 
-        cfg.view().field(EAMTables.KN_CONTENT.TITLE)
-                .form().validate().required().form();
 
 
 
@@ -88,6 +86,10 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME)
                 .paging(false).muliti(false).fillBy(ContentMeta.CATEGORY);
+
+        cfg.view().field(EAMTables.KN_CONTENT.TITLE)
+                .form().validate().required().form();
+
 
 
         cfg.view().search().inputLayout(

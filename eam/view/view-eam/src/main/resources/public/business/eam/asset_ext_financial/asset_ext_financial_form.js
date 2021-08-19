@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:10
+ * @since 2021-08-19 13:01:44
  */
 
 function FormPage() {
@@ -14,7 +14,7 @@ function FormPage() {
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -28,10 +28,10 @@ function FormPage() {
 
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -65,29 +65,13 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
-		//渲染 sourceId 下拉字段
-		fox.renderSelectBox({
-			el: "sourceId",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
+
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -107,22 +91,12 @@ function FormPage() {
 			}
 		});
 		laydate.render({
-			elem: '#purchaseDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#storageTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
 			elem: '#entryTime',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 	}
-	
+
 	/**
       * 填充表单数据
       */
@@ -141,160 +115,6 @@ function FormPage() {
 
 
 
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
-			//设置  供应商 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
-
-
-
-
-			//设置  资产来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
 			//设置  供应商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
 
@@ -304,7 +124,7 @@ function FormPage() {
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -325,32 +145,20 @@ function FormPage() {
 		}
 
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
 
 
-
-
-
-
-			//获取 资产来源 下拉框的值
-			data.field["sourceId"]=xmSelect.get("#sourceId",true).getValue("value");
-			if(data.field["sourceId"] && data.field["sourceId"].length>0) {
-				data.field["sourceId"]=data.field["sourceId"][0];
-			}
 			//获取 供应商 下拉框的值
-			data.field["supplierId"]=xmSelect.get("#supplierId",true).getValue("value");
-			if(data.field["supplierId"] && data.field["supplierId"].length>0) {
-				data.field["supplierId"]=data.field["supplierId"][0];
-			}
+			data.field["supplierId"]=fox.getSelectedValue("supplierId",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -368,13 +176,13 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
 
 

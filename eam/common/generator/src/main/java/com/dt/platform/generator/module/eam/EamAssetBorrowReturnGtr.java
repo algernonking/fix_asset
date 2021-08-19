@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.PositionMeta;
@@ -18,6 +19,9 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
+
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+
 
 
         cfg.view().search().inputLayout(

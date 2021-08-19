@@ -15,6 +15,13 @@ public class OpsHostDbGtr extends BaseCodeGenerator{
         //指定该表为关系表
         cfg.setRelationField(EAMTables.OPS_HOST_DB.HOST_ID, EAMTables.OPS_HOST_DB.SERVICE_INFO_ID,true);
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_HOST_DB.ID,
+                }
+        );
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

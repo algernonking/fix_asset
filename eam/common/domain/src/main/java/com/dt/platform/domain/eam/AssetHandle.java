@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 10:18:49
- * @sign B01AAEFE38571F139290CD8CBBC13341
+ * @since 2021-08-19 09:07:05
+ * @sign 27CCB669BB6805E5B8F550ACB76B0CAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,21 +43,21 @@ public class AssetHandle extends Entity {
 	private String procId;
 	
 	/**
-	 * 单据状态：单据状态
+	 * 办理状态：办理状态
 	*/
-	@ApiModelProperty(required = false,value="单据状态" , notes = "单据状态")
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
 	
 	/**
-	 * 单据编号：单据编号
+	 * 业务编号：业务编号
 	*/
-	@ApiModelProperty(required = false,value="单据编号" , notes = "单据编号")
-	private String busiCode;
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
+	private String businessCode;
 	
 	/**
-	 * 单据名称：单据名称
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="单据名称" , notes = "单据名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -163,6 +163,12 @@ public class AssetHandle extends Entity {
 	private Integer version;
 	
 	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -201,17 +207,17 @@ public class AssetHandle extends Entity {
 	}
 	
 	/**
-	 * 获得 单据状态<br>
-	 * 单据状态
-	 * @return 单据状态
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 单据状态
-	 * @param status 单据状态
+	 * 设置 办理状态
+	 * @param status 办理状态
 	 * @return 当前对象
 	*/
 	public AssetHandle setStatus(String status) {
@@ -220,36 +226,36 @@ public class AssetHandle extends Entity {
 	}
 	
 	/**
-	 * 获得 单据编号<br>
-	 * 单据编号
-	 * @return 单据编号
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
 	*/
-	public String getBusiCode() {
-		return busiCode;
+	public String getBusinessCode() {
+		return businessCode;
 	}
 	
 	/**
-	 * 设置 单据编号
-	 * @param busiCode 单据编号
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
-	public AssetHandle setBusiCode(String busiCode) {
-		this.busiCode=busiCode;
+	public AssetHandle setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
 		return this;
 	}
 	
 	/**
-	 * 获得 单据名称<br>
-	 * 单据名称
-	 * @return 单据名称
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * 设置 单据名称
-	 * @param name 单据名称
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
 	public AssetHandle setName(String name) {
@@ -577,6 +583,25 @@ public class AssetHandle extends Entity {
 	*/
 	public AssetHandle setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetHandle setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

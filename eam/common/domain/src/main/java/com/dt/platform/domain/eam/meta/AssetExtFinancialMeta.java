@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetExtFinancial;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.Supplier;
+import com.dt.platform.domain.eam.Asset;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:10
- * @sign 637D649AF57723282EFCE1461EAFC9FC
+ * @since 2021-08-19 13:01:44
+ * @sign 17E56C678F33DF8C1157E2485586A5E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -56,46 +57,6 @@ public class AssetExtFinancialMeta {
 	 * 财务编号 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> ASSET_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ASSET_CODE, java.lang.String.class, "财务编号", "财务编号", java.lang.String.class, null);
-	
-	/**
-	 * 来源 , 类型: java.lang.String
-	*/
-	public static final String SOURCE_ID="sourceId";
-	
-	/**
-	 * 来源 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> SOURCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SOURCE_ID, java.lang.String.class, "来源", "来源", java.lang.String.class, null);
-	
-	/**
-	 * 来源详情 , 类型: java.lang.String
-	*/
-	public static final String SOURCE_DETAIL="sourceDetail";
-	
-	/**
-	 * 来源详情 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> SOURCE_DETAIL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SOURCE_DETAIL, java.lang.String.class, "来源详情", "来源详情", java.lang.String.class, null);
-	
-	/**
-	 * 资产数量 , 类型: java.lang.Integer
-	*/
-	public static final String ASSET_NUMBER="assetNumber";
-	
-	/**
-	 * 资产数量 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.Integer> ASSET_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ASSET_NUMBER, java.lang.Integer.class, "资产数量", "资产数量", java.lang.Integer.class, null);
-	
-	/**
-	 * 剩余数量 , 类型: java.lang.Integer
-	*/
-	public static final String REMAIN_NUMBER="remainNumber";
-	
-	/**
-	 * 剩余数量 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.Integer> REMAIN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,REMAIN_NUMBER, java.lang.Integer.class, "剩余数量", "剩余数量", java.lang.Integer.class, null);
 	
 	/**
 	 * 资产供应商 , 类型: java.lang.String
@@ -178,36 +139,6 @@ public class AssetExtFinancialMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> PURCHASE_UNIT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,PURCHASE_UNIT_PRICE, java.math.BigDecimal.class, "采购单价", "采购单价", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
-	*/
-	public static final String SERVICE_LIFE="serviceLife";
-	
-	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
-	
-	/**
-	 * 采购日期 , 类型: java.util.Date
-	*/
-	public static final String PURCHASE_DATE="purchaseDate";
-	
-	/**
-	 * 采购日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.util.Date> PURCHASE_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,PURCHASE_DATE, java.util.Date.class, "采购日期", "采购日期", java.util.Date.class, null);
-	
-	/**
-	 * 入库时间 , 类型: java.util.Date
-	*/
-	public static final String STORAGE_TIME="storageTime";
-	
-	/**
-	 * 入库时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.util.Date> STORAGE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,STORAGE_TIME, java.util.Date.class, "入库时间", "入库时间", java.util.Date.class, null);
-	
-	/**
 	 * 入账时间 , 类型: java.util.Date
 	*/
 	public static final String ENTRY_TIME="entryTime";
@@ -216,6 +147,16 @@ public class AssetExtFinancialMeta {
 	 * 入账时间 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.util.Date> ENTRY_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ENTRY_TIME, java.util.Date.class, "入账时间", "入账时间", java.util.Date.class, null);
+	
+	/**
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final String SERVICE_LIFE="serviceLife";
+	
+	/**
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 财务备注 , 类型: java.lang.String
@@ -318,9 +259,19 @@ public class AssetExtFinancialMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,com.dt.platform.domain.eam.Supplier> SUPPLIER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SUPPLIER, com.dt.platform.domain.eam.Supplier.class, "供应商", "供应商", com.dt.platform.domain.eam.Supplier.class, null);
 	
 	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET="asset";
+	
+	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , SOURCE_ID , SOURCE_DETAIL , ASSET_NUMBER , REMAIN_NUMBER , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , SERVICE_LIFE , PURCHASE_DATE , STORAGE_TIME , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER };
+	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
 	
 	/**
 	 * 代理类
@@ -371,50 +322,6 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setAssetCode(String assetCode) {
 			super.change(ASSET_CODE,super.getAssetCode(),assetCode);
 			super.setAssetCode(assetCode);
-			return this;
-		}
-		
-		/**
-		 * 设置 来源
-		 * @param sourceId 来源
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setSourceId(String sourceId) {
-			super.change(SOURCE_ID,super.getSourceId(),sourceId);
-			super.setSourceId(sourceId);
-			return this;
-		}
-		
-		/**
-		 * 设置 来源详情
-		 * @param sourceDetail 来源详情
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setSourceDetail(String sourceDetail) {
-			super.change(SOURCE_DETAIL,super.getSourceDetail(),sourceDetail);
-			super.setSourceDetail(sourceDetail);
-			return this;
-		}
-		
-		/**
-		 * 设置 资产数量
-		 * @param assetNumber 资产数量
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setAssetNumber(Integer assetNumber) {
-			super.change(ASSET_NUMBER,super.getAssetNumber(),assetNumber);
-			super.setAssetNumber(assetNumber);
-			return this;
-		}
-		
-		/**
-		 * 设置 剩余数量
-		 * @param remainNumber 剩余数量
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setRemainNumber(Integer remainNumber) {
-			super.change(REMAIN_NUMBER,super.getRemainNumber(),remainNumber);
-			super.setRemainNumber(remainNumber);
 			return this;
 		}
 		
@@ -507,39 +414,6 @@ public class AssetExtFinancialMeta {
 		}
 		
 		/**
-		 * 设置 使用期限
-		 * @param serviceLife 使用期限
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
-			super.change(SERVICE_LIFE,super.getServiceLife(),serviceLife);
-			super.setServiceLife(serviceLife);
-			return this;
-		}
-		
-		/**
-		 * 设置 采购日期
-		 * @param purchaseDate 采购日期
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setPurchaseDate(Date purchaseDate) {
-			super.change(PURCHASE_DATE,super.getPurchaseDate(),purchaseDate);
-			super.setPurchaseDate(purchaseDate);
-			return this;
-		}
-		
-		/**
-		 * 设置 入库时间
-		 * @param storageTime 入库时间
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setStorageTime(Date storageTime) {
-			super.change(STORAGE_TIME,super.getStorageTime(),storageTime);
-			super.setStorageTime(storageTime);
-			return this;
-		}
-		
-		/**
 		 * 设置 入账时间
 		 * @param entryTime 入账时间
 		 * @return 当前对象
@@ -547,6 +421,17 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setEntryTime(Date entryTime) {
 			super.change(ENTRY_TIME,super.getEntryTime(),entryTime);
 			super.setEntryTime(entryTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 使用期限
+		 * @param serviceLife 使用期限
+		 * @return 当前对象
+		*/
+		public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
+			super.change(SERVICE_LIFE,super.getServiceLife(),serviceLife);
+			super.setServiceLife(serviceLife);
 			return this;
 		}
 		
@@ -657,6 +542,17 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setSupplier(Supplier supplier) {
 			super.change(SUPPLIER,super.getSupplier(),supplier);
 			super.setSupplier(supplier);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产
+		 * @param asset 资产
+		 * @return 当前对象
+		*/
+		public AssetExtFinancial setAsset(Asset asset) {
+			super.change(ASSET,super.getAsset(),asset);
+			super.setAsset(asset);
 			return this;
 		}
 	}

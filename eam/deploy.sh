@@ -71,6 +71,7 @@ if [[ $ops_remotefile_recreate -eq 1 ]];then
 	fi
 	echo "tar xvf app.tar"										>>$ops_remotefile_recreate_file
 	echo "sleep 2"										        >>$ops_remotefile_recreate_file
+	echo "cd \$app_dir"		    								>>$ops_remotefile_recreate_file
 	echo "nohup sh run.sh restart &"					>>$ops_remotefile_recreate_file
 	echo "exit 0"												      >>$ops_remotefile_recreate_file
 fi

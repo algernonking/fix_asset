@@ -24,6 +24,14 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.GROUP_ID).basic().label("服务分组")
                 .form().validate().required().form().radioBox().enumType(ServiceTypeEnum.class);
 
+        cfg.view().search().inputLayout(
+                new Object[]{
+
+                        EAMTables.OPS_SERVICE_CATEGORY.NAME,
+                        EAMTables.OPS_SERVICE_CATEGORY.NOTES
+                }
+        );
+
 
         //文件生成覆盖模式
         cfg.overrides()

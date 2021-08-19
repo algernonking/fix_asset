@@ -22,6 +22,9 @@ public class DcLayerGtr extends BaseCodeGenerator {
 
 
 
+        cfg.view().field(EAMTables.DC_LAYER.NAME).form().validate().required();
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

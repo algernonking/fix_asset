@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:43
+ * @since 2021-08-19 13:02:01
  */
  -->
  <!DOCTYPE html>
@@ -51,9 +51,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -293,7 +293,7 @@
     var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
     var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];
     var SELECT_GRADE_DATA = [[${dict.toArray('ops_system_grade')}]];
-    var VALIDATE_CONFIG={"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="ops_information_system";
 </script>
 

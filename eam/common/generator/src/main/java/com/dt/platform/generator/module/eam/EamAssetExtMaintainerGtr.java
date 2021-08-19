@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtMaintainer;
 import com.dt.platform.domain.eam.Maintainer;
@@ -26,7 +27,7 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 
-
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.ID).basic().hidden();
 

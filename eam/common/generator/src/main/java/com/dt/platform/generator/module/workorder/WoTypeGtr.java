@@ -20,6 +20,14 @@ public class WoTypeGtr extends BaseCodeGenerator{
 
 
 
+        cfg.view().search().inputLayout(
+                new Object[]{
+
+                        EAMTables.WORKORDER_CATEGORY.NAME,
+
+                }
+        );
+
 
         //文件生成覆盖模式
         cfg.overrides()

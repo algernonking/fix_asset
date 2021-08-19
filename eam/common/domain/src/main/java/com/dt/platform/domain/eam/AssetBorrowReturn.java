@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:56
- * @sign 389215A7C44A85AF447361E64434D807
+ * @since 2021-08-19 13:01:32
+ * @sign 89DD32360781A5E9722AE04CD8C29A43
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,6 +106,12 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
 	
 	/**
 	 * 获得 主键<br>
@@ -351,6 +357,25 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	public AssetBorrowReturn setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

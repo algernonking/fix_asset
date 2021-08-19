@@ -65,6 +65,8 @@ public class DcRackGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).form().numberInput().range(0.0,100.0).step(1.0);
 
+        cfg.view().field(EAMTables.DC_RACK.RACK_NAME).form().validate().required();
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.page.AssetTranferPageController;
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -15,12 +16,13 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE).search().range();
-
 
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).table().disable();

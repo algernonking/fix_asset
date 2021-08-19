@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetExtMaintainer;
 import java.util.Date;
 import com.dt.platform.domain.eam.Maintainer;
+import com.dt.platform.domain.eam.Asset;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:47:57
- * @sign 1F2E94C369F59952979C5C480F70FB31
+ * @since 2021-08-19 13:01:45
+ * @sign BD48AF6AEE3CF955CB3FA270A72CE006
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -207,9 +208,19 @@ public class AssetExtMaintainerMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,com.dt.platform.domain.eam.Maintainer> MAINTNAINER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,MAINTNAINER, com.dt.platform.domain.eam.Maintainer.class, "维保商", "维保商", com.dt.platform.domain.eam.Maintainer.class, null);
 	
 	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET="asset";
+	
+	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR_ID , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , MAINTENANCE_DESCRIPTION , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER };
+	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR_ID , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , MAINTENANCE_DESCRIPTION , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER , ASSET };
 	
 	/**
 	 * 代理类
@@ -425,6 +436,17 @@ public class AssetExtMaintainerMeta {
 		public AssetExtMaintainer setMaintnainer(Maintainer maintnainer) {
 			super.change(MAINTNAINER,super.getMaintnainer(),maintnainer);
 			super.setMaintnainer(maintnainer);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产
+		 * @param asset 资产
+		 * @return 当前对象
+		*/
+		public AssetExtMaintainer setAsset(Asset asset) {
+			super.change(ASSET,super.getAsset(),asset);
+			super.setAsset(asset);
 			return this;
 		}
 	}

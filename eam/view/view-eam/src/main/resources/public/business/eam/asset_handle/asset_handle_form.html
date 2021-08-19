@@ -2,7 +2,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 10:18:53
+ * @since 2021-08-19 09:07:08
  */
  -->
  <!DOCTYPE html>
@@ -48,9 +48,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('单据名称')}">单据名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -80,9 +80,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('单据编号')}">单据编号</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务编号')}">业务编号</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="busiCode" id="busiCode" name="busiCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据编号') }" type="text" class="layui-input"   />
+                        <input lay-filter="businessCode" id="businessCode" name="businessCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务编号') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -153,7 +153,7 @@
 
 <div class="model-form-footer">
     <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_handle:create','eam_asset_handle:update','eam_asset_handle:save')}" class="layui-btn" style="margin-right: 15px"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset_handle:create','eam_asset_handle:update','eam_asset_handle:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
@@ -164,7 +164,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_TYPE_DATA = [[${dict.toArray('eam_handle_type')}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"单据名称","inputType":"text_input","required":true},"type":{"labelInForm":"处置类型","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"业务名称","inputType":"text_input","required":true},"type":{"labelInForm":"处置类型","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset_handle";
 </script>
 

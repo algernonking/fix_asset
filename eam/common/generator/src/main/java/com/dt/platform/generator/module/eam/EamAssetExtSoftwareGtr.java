@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetExtSoftware;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.meta.AssetExtFinancialMeta;
@@ -21,6 +22,8 @@ public class EamAssetExtSoftwareGtr extends BaseCodeGenerator {
 
 
         System.out.println(this.getClass().getName());
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_SOFTWARE.ID).basic().hidden();

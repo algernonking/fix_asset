@@ -35,7 +35,6 @@ import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
 import java.math.BigDecimal;
 import com.dt.platform.domain.eam.Category;
-import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.Manufacturer;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -52,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 物品档案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:29
+ * @since 2021-08-19 13:01:51
 */
 
 @Api(tags = "物品档案")
@@ -75,7 +74,6 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
@@ -136,7 +134,6 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
@@ -163,7 +160,6 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
@@ -197,8 +193,6 @@ public class GoodsController extends SuperController {
 		goodsService.join(goods,GoodsMeta.CATEGORY);
 		// 关联出 厂商 数据
 		goodsService.join(goods,GoodsMeta.MANUFACTURER);
-		// 关联出 品牌 数据
-		goodsService.join(goods,GoodsMeta.BRAND);
 		result.success(true).data(goods);
 		return result;
 	}
@@ -235,7 +229,6 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
@@ -263,7 +256,6 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
@@ -279,8 +271,6 @@ public class GoodsController extends SuperController {
 		goodsService.join(list,GoodsMeta.CATEGORY);
 		// 关联出 厂商 数据
 		goodsService.join(list,GoodsMeta.MANUFACTURER);
-		// 关联出 品牌 数据
-		goodsService.join(list,GoodsMeta.BRAND);
 		result.success(true).data(list);
 		return result;
 	}

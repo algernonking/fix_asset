@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:47:57
- * @sign 1F2E94C369F59952979C5C480F70FB31
+ * @since 2021-08-19 13:01:45
+ * @sign BD48AF6AEE3CF955CB3FA270A72CE006
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -142,6 +142,12 @@ public class AssetExtMaintainer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="维保商" , notes = "维保商")
 	private Maintainer maintnainer;
+	
+	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
 	
 	/**
 	 * 获得 主键<br>
@@ -501,6 +507,25 @@ public class AssetExtMaintainer extends Entity {
 	*/
 	public AssetExtMaintainer setMaintnainer(Maintainer maintnainer) {
 		this.maintnainer=maintnainer;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetExtMaintainer setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

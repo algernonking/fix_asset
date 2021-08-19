@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 10:18:54
+ * @since 2021-08-19 09:07:09
  */
 
 function FormPage() {
@@ -9,21 +9,29 @@ function FormPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-handle";
 
-	const disableCreateNew=false;
-	const disableModify=false;
+	var disableCreateNew=false;
+	var disableModify=false;
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
-		
+
+		//如果没有修改和保存权限，
+		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
+			disableModify=true;
+		}
+		if(admin.getTempData('eam-asset-handle-form-data-form-action')=="view") {
+			disableModify=true;
+		}
+
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -55,13 +63,13 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
+
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
 			el: "type",
@@ -114,13 +122,12 @@ function FormPage() {
 			}
 	    });
 	}
-	
+
 	/**
       * 填充表单数据
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-handle-form-data');
-
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -149,7 +156,7 @@ function FormPage() {
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -159,36 +166,31 @@ function FormPage() {
             },100);
         },1);
 
-        //
-		if(disableModify) {
+        //禁用编辑
+		if(disableModify || disableCreateNew) {
 			fox.lockForm($("#data-form"),true);
+			$("#submit-button").hide();
+			$("#cancel-button").css("margin-right","15px")
+		} else {
+			$("#submit-button").show();
+			$("#cancel-button").css("margin-right","0px")
 		}
 
-
-
-        
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
 
 
-
-
-
-
 			//获取 处置类型 下拉框的值
-			data.field["type"]=xmSelect.get("#type",true).getValue("value");
-			if(data.field["type"] && data.field["type"].length>0) {
-				data.field["type"]=data.field["type"][0];
-			}
+			data.field["type"]=fox.getSelectedValue("type",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -206,14 +208,15 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
+
 
 }
 

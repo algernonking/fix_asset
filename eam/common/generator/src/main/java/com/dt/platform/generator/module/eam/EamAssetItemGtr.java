@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.Asset;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class EamAssetItemGtr extends BaseCodeGenerator {
@@ -14,6 +15,12 @@ public class EamAssetItemGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_ASSET_ITEM.ID,
+                }
+        );
 
 
         //文件生成覆盖模式

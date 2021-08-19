@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:58
+ * @since 2021-08-19 13:01:33
  */
  -->
  <!DOCTYPE html>
@@ -151,6 +151,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var VALIDATE_CONFIG={"returnDate":{"labelInForm":"退库日期","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_collection_return";
 </script>

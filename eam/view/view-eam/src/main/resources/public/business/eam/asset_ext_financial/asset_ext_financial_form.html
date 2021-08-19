@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:10
+ * @since 2021-08-19 13:01:44
  */
  -->
  <!DOCTYPE html>
@@ -58,24 +58,6 @@
                     </div>
 
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产来源')}">资产来源</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="sourceId" input-type="select" th:data="${dict.toArray('eam_source')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('来源详情')}">来源详情</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="sourceDetail" id="sourceDetail" name="sourceDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('来源详情') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -124,27 +106,9 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('入库时间')}">入库时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="storageTime" id="storageTime" name="storageTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('入库时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('入账时间')}">入账时间</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input input-type="date" lay-filter="entryTime" id="entryTime" name="entryTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('入账时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('采购日期')}">采购日期</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="purchaseDate" id="purchaseDate" name="purchaseDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('采购日期') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 
@@ -183,7 +147,6 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
     var VALIDATE_CONFIG={};
     var AUTH_PREFIX="eam_asset_ext_financial";
 </script>

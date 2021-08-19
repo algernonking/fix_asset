@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetHandle;
 import java.math.BigDecimal;
 import java.util.Date;
+import com.dt.platform.domain.eam.Asset;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 10:18:49
- * @sign B01AAEFE38571F139290CD8CBBC13341
+ * @since 2021-08-19 09:07:05
+ * @sign 27CCB669BB6805E5B8F550ACB76B0CAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,34 +38,34 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
 	
 	/**
-	 * 单据状态 , 类型: java.lang.String
+	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 单据状态 , 类型: java.lang.String
+	 * 办理状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,STATUS, java.lang.String.class, "单据状态", "单据状态", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
-	 * 单据编号 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final String BUSI_CODE="busiCode";
+	public static final String BUSINESS_CODE="businessCode";
 	
 	/**
-	 * 单据编号 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> BUSI_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,BUSI_CODE, java.lang.String.class, "单据编号", "单据编号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
-	 * 单据名称 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
 	
 	/**
-	 * 单据名称 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,NAME, java.lang.String.class, "单据名称", "单据名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 处置类型 , 类型: java.lang.String
@@ -237,9 +238,19 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET="asset";
+	
+	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PROC_ID , STATUS , BUSI_CODE , NAME , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , OPERUSER_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , OPERUSER_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET };
 	
 	/**
 	 * 代理类
@@ -272,8 +283,8 @@ public class AssetHandleMeta {
 		}
 		
 		/**
-		 * 设置 单据状态
-		 * @param status 单据状态
+		 * 设置 办理状态
+		 * @param status 办理状态
 		 * @return 当前对象
 		*/
 		public AssetHandle setStatus(String status) {
@@ -283,19 +294,19 @@ public class AssetHandleMeta {
 		}
 		
 		/**
-		 * 设置 单据编号
-		 * @param busiCode 单据编号
+		 * 设置 业务编号
+		 * @param businessCode 业务编号
 		 * @return 当前对象
 		*/
-		public AssetHandle setBusiCode(String busiCode) {
-			super.change(BUSI_CODE,super.getBusiCode(),busiCode);
-			super.setBusiCode(busiCode);
+		public AssetHandle setBusinessCode(String businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
 			return this;
 		}
 		
 		/**
-		 * 设置 单据名称
-		 * @param name 单据名称
+		 * 设置 业务名称
+		 * @param name 业务名称
 		 * @return 当前对象
 		*/
 		public AssetHandle setName(String name) {
@@ -488,6 +499,17 @@ public class AssetHandleMeta {
 		public AssetHandle setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产
+		 * @param asset 资产
+		 * @return 当前对象
+		*/
+		public AssetHandle setAsset(Asset asset) {
+			super.change(ASSET,super.getAsset(),asset);
+			super.setAsset(asset);
 			return this;
 		}
 	}

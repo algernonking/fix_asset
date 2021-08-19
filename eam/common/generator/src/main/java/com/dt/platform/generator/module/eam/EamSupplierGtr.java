@@ -14,6 +14,17 @@ public class EamSupplierGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NOTES).search().fuzzySearch();
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_SUPPLIER.SUPPLIER_NAME,
+                        EAMTables.EAM_SUPPLIER.SUPPLIER_NOTES,
+
+                }
+        );
+
+        cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NAME).form().validate().required();
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:43
+ * @since 2021-08-19 13:02:01
  */
 
 function FormPage() {
@@ -14,7 +14,7 @@ function FormPage() {
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -28,10 +28,10 @@ function FormPage() {
 
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -65,13 +65,13 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
+
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -152,7 +152,7 @@ function FormPage() {
 			}
 		});
 	}
-	
+
 	/**
       * 填充表单数据
       */
@@ -183,298 +183,10 @@ function FormPage() {
 
 
 
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
-			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
-			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
-			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
-
-
-
-
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -495,32 +207,26 @@ function FormPage() {
 		}
 
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
 
 
-
-
-
-
+			//获取 状态 下拉框的值
+			data.field["status"]=fox.getSelectedValue("status",false);
 			//获取 运维模式 下拉框的值
-			data.field["opsMethod"]=xmSelect.get("#opsMethod",true).getValue("value");
-			if(data.field["opsMethod"] && data.field["opsMethod"].length>0) {
-				data.field["opsMethod"]=data.field["opsMethod"][0];
-			}
+			data.field["opsMethod"]=fox.getSelectedValue("opsMethod",false);
 			//获取 开发模式 下拉框的值
-			data.field["devMethod"]=xmSelect.get("#devMethod",true).getValue("value");
-			if(data.field["devMethod"] && data.field["devMethod"].length>0) {
-				data.field["devMethod"]=data.field["devMethod"][0];
-			}
+			data.field["devMethod"]=fox.getSelectedValue("devMethod",false);
+			//获取 系统分级 下拉框的值
+			data.field["grade"]=fox.getSelectedValue("grade",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -538,13 +244,13 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
 
 

@@ -1,7 +1,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:49
+ * @since 2021-08-19 13:01:23
  */
 
 function FormPage() {
@@ -14,7 +14,7 @@ function FormPage() {
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -28,10 +28,10 @@ function FormPage() {
 
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -65,13 +65,13 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
+
 		//渲染 module 下拉字段
 		fox.renderSelectBox({
 			el: "module",
@@ -89,7 +89,7 @@ function FormPage() {
 			}
 		});
 	}
-	
+
 	/**
       * 填充表单数据
       */
@@ -114,28 +114,10 @@ function FormPage() {
 
 
 
-			//设置  业务模块 设置下拉框勾选
-			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
-
-
-
-
-			//设置  业务模块 设置下拉框勾选
-			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
-
-
-
-
-			//设置  业务模块 设置下拉框勾选
-			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
-
-
-
-
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -156,27 +138,20 @@ function FormPage() {
 		}
 
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
 
 
-
-
-
-
 			//获取 业务模块 下拉框的值
-			data.field["module"]=xmSelect.get("#module",true).getValue("value");
-			if(data.field["module"] && data.field["module"].length>0) {
-				data.field["module"]=data.field["module"][0];
-			}
+			data.field["module"]=fox.getSelectedValue("module",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -194,13 +169,13 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
 
 

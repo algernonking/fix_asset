@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:09
- * @sign 5F8F30CC0A3729D5F2AD65C24FCF154B
+ * @since 2021-08-19 13:01:42
+ * @sign DD1A2F501C11E4AEE89229997DC2D977
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -175,6 +175,12 @@ public class AssetExtEquipment extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
 	private Rack rack;
+	
+	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
 	
 	/**
 	 * 获得 主键<br>
@@ -629,6 +635,25 @@ public class AssetExtEquipment extends Entity {
 	*/
 	public AssetExtEquipment setRack(Rack rack) {
 		this.rack=rack;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

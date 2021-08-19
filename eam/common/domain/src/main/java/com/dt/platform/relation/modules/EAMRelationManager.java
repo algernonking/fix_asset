@@ -4,6 +4,7 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.domain.eam.AssetExtAttribution;
+import com.dt.platform.domain.eam.AssetTranfer;
 import com.dt.platform.domain.eam.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
 
@@ -13,18 +14,110 @@ public class EAMRelationManager extends RelationManager {
         this.setupRelations();
         this.setupProperties();
         this.setupGoods();
+
         this.setupAsset();
+
         this.setupAssetFinancial();
         this.setupAssetMaintainer();
         this.setupAssetEaintainer();
         this.setupAssetAssetExtAttribution();
+
+        this.setupAssetBorrow();
+        this.setupAssetCollection();
+        this.setupAssetCollectionReturn();
+
+
+        this.setupAssetHandle();
+        this.setupAssetRepair();
+        this.setupAssetTranfer();
+
+
     }
     public void setupProperties() {
 
 
     }
-    public void setupAssetAssetExtAttribution() {
 
+
+    public void setupAssetBorrow() {
+        // 关联资产
+        this.property(AssetBorrowMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_BORROW.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+
+    }
+
+
+    public void setupAssetCollection() {
+        // 关联资产
+        this.property(AssetCollectionMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION.ID)
+                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+
+        // 关联位置
+        this.property(AssetCollectionMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION.POSITION_ID)
+                .join( EAMTables.EAM_POSITION.ID);
+
+    }
+
+
+    public void setupAssetCollectionReturn() {
+        // 关联资产
+        this.property(AssetCollectionReturnMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID)
+                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+        // 关联位置
+        this.property(AssetCollectionReturnMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
+                .join( EAMTables.EAM_POSITION.ID);
+
+    }
+
+
+    public void setupAssetRepair() {
+        // 关联资产
+        this.property(AssetRepairMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_REPAIR.ID)
+                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+
+    }
+
+    public void setupAssetTranfer() {
+        // 关联资产
+        this.property(AssetTranferMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.ID)
+                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+    }
+
+    public void setupAssetHandle() {
+        // 关联资产
+        this.property(AssetHandleMeta.ASSET_PROP)
+                .using(EAMTables.EAM_ASSET_HANDLE.ID)
+                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+    }
+
+
+
+    public void setupAssetAssetExtAttribution() {
 
         // 关联位置
         this.property(AssetExtAttributionMeta.POSITION_PROP)
@@ -81,9 +174,9 @@ public class EAMRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
 
 
-        // 关联品牌
-        this.property(AssetMeta.BRAND_PROP)
-                .using(EAMTables.EAM_ASSET.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
+//        // 关联品牌
+//        this.property(AssetMeta.BRAND_PROP)
+//                .using(EAMTables.EAM_ASSET.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
 
         // 关联生产厂商
         this.property(AssetMeta.MANUFACTURER_PROP)
@@ -100,18 +193,23 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetMeta.ASSET_FINANCIAL_PROP)
                 .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_ID);
 
+
+
         // 关联维保数据
         this.property(AssetMeta.ASSET_MAINTAINER_PROP)
                 .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID);
 
         // 关联归属数据
-        this.property(AssetMeta.ASSET_EXT_ATTRIBUTION_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.ASSET_ID);
+//        this.property(AssetMeta.ASSET_EXT_ATTRIBUTION_PROP)
+//                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.ASSET_ID);
 
         // 关联软件数据
         this.property(AssetMeta.ASSET_EXT_SOFTWARE_PROP)
                 .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID);
 
+        // 关联仓库
+        this.property(AssetMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_ASSET.WAREHOUSE_ID).join(EAMTables.EAM_ASSET.ID);
 
     }
 
@@ -122,8 +220,8 @@ public class EAMRelationManager extends RelationManager {
     private void setupGoods() {
 
         // 关联品牌
-        this.property(GoodsMeta.BRAND_PROP)
-                .using(EAMTables.EAM_GOODS.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
+//        this.property(GoodsMeta.BRAND_PROP)
+//                .using(EAMTables.EAM_GOODS.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
 
         // 关联生产厂商
         this.property(GoodsMeta.MANUFACTURER_PROP)

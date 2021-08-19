@@ -24,12 +24,22 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.CREATE_TIME).table().hidden(true);
 
+        cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).form().validate().required();
 
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).basic().label("业务模块")
                 .form().validate().required().form().selectBox()
                 .enumType(CodeModuleEnum.class).form().selectBox().paging(false).muliti(false);
 
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.SYS_CODE_RULE.NAME,
+                        EAMTables.SYS_CODE_RULE.MODULE,
+                        EAMTables.SYS_CODE_RULE.NOTES,
+                }
+        );
 
         //文件生成覆盖模式
         cfg.overrides()

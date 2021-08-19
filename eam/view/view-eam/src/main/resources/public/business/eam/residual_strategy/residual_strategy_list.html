@@ -2,7 +2,7 @@
 /**
  * 折旧策略 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:37
+ * @since 2021-08-19 13:01:55
  */
  -->
  <!DOCTYPE html>
@@ -36,11 +36,6 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 策略描述 , strategyDescribe ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('策略描述')}" class="search-label strategyDescribe-label">策略描述</span><span class="search-colon">:</span></div>
-                        <input id="strategyDescribe" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
@@ -58,7 +53,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 44px">
+        <div style="margin-top: 42px">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

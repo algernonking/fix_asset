@@ -36,11 +36,10 @@ import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import com.dt.platform.domain.eam.AssetExtSoftware;
-import com.dt.platform.domain.eam.AssetExtAttribution;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
-import com.dt.platform.domain.eam.Brand;
+import com.dt.platform.domain.eam.Warehouse;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -56,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-16 15:36:22
+ * @since 2021-08-19 15:11:31
 */
 
 @Api(tags = "资产")
@@ -73,31 +72,44 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "添加资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "资产编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "479383892382449664"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSI_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = true , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.INSERT_TYPE , value = "插入方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetVOMeta.ID)
+	@NotNull(name = AssetVOMeta.CATEGORY_ID)
+	@NotNull(name = AssetVOMeta.STATUS)
+	@NotNull(name = AssetVOMeta.NAME)
+	@NotNull(name = AssetVOMeta.ASSET_NUMBER)
 	@SentinelResource(value = AssetServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.INSERT)
 	public Result insert(AssetVO assetVO) {
@@ -111,7 +123,7 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetVOMeta.ID)
@@ -145,31 +157,44 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "更新资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "资产编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "479383892382449664"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSI_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = true , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.INSERT_TYPE , value = "插入方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } ) 
 	@NotNull(name = AssetVOMeta.ID)
+	@NotNull(name = AssetVOMeta.CATEGORY_ID)
+	@NotNull(name = AssetVOMeta.STATUS)
+	@NotNull(name = AssetVOMeta.NAME)
+	@NotNull(name = AssetVOMeta.ASSET_NUMBER)
 	@SentinelResource(value = AssetServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.UPDATE)
 	public Result update(AssetVO assetVO) {
@@ -183,31 +208,44 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "保存资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "资产编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "479383892382449664"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSI_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = true , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.INSERT_TYPE , value = "插入方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
 	@NotNull(name = AssetVOMeta.ID)
+	@NotNull(name = AssetVOMeta.CATEGORY_ID)
+	@NotNull(name = AssetVOMeta.STATUS)
+	@NotNull(name = AssetVOMeta.NAME)
+	@NotNull(name = AssetVOMeta.ASSET_NUMBER)
 	@SentinelResource(value = AssetServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.SAVE)
 	public Result save(AssetVO assetVO) {
@@ -236,8 +274,8 @@ public class AssetController extends SuperController {
 		assetService.join(asset,AssetMeta.GOODS);
 		// 关联出 厂商 数据
 		assetService.join(asset,AssetMeta.MANUFACTURER);
-		// 关联出 品牌 数据
-		assetService.join(asset,AssetMeta.BRAND);
+		// 关联出 仓库 数据
+		assetService.join(asset,AssetMeta.WAREHOUSE);
 		result.success(true).data(asset);
 		return result;
 	}
@@ -268,28 +306,37 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "查询资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "资产编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "479383892382449664"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSI_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = true , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.INSERT_TYPE , value = "插入方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -307,28 +354,37 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "资产编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480694174237077504"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "479383892382449664"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSI_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "资产状态" , required = true , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.BRAND_ID , value = "标准型号品牌" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = true , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.INSERT_TYPE , value = "插入方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -342,8 +398,8 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.GOODS);
 		// 关联出 厂商 数据
 		assetService.join(list,AssetMeta.MANUFACTURER);
-		// 关联出 品牌 数据
-		assetService.join(list,AssetMeta.BRAND);
+		// 关联出 仓库 数据
+		assetService.join(list,AssetMeta.WAREHOUSE);
 		result.success(true).data(list);
 		return result;
 	}

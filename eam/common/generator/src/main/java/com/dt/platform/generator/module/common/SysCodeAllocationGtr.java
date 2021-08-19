@@ -34,11 +34,22 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                 .enumType(CodeModuleEnum.class);
 
 
+
+
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
                 .basic().label("编码规则")
                 .form().validate().required()
                 .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
                 .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.SYS_CODE_ALLOCATION.MODULE,
+                        EAMTables.SYS_CODE_ALLOCATION.RULE_ID,
+                        EAMTables.SYS_CODE_ALLOCATION.NOTES,
+                }
+        );
 
 
 

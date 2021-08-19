@@ -15,6 +15,18 @@ public class EamSafetylevelGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).search().fuzzySearch();
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME,
+                        EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE,
+
+                }
+        );
+
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).form().validate().required();
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口

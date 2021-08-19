@@ -15,6 +15,13 @@ public class OpsHostOsGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
         cfg.setRelationField(EAMTables.OPS_HOST_OS.HOST_ID, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
 
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_HOST_OS.ID,
+                }
+        );
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

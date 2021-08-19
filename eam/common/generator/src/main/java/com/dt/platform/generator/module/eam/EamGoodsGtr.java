@@ -25,8 +25,11 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
-        cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
+
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
+
+
+
 
 
         cfg.view().field(EAMTables.EAM_GOODS.ID).basic().hidden(true);
@@ -49,12 +52,12 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(GoodsMeta.CATEGORY).muliti(false);
 
-
-        cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
-                .basic().label("品牌")
-                .form().validate().required()
-                .form().selectBox().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillBy(GoodsMeta.BRAND).muliti(false);
+//
+//        cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
+//                .basic().label("品牌")
+//                .form().validate().required()
+//                .form().selectBox().queryApi(BrandServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+//                .valueField(BrandMeta.ID).textField(BrandMeta.BRAND_NAME).fillBy(GoodsMeta.BRAND).muliti(false);
 
         cfg.view().field(EAMTables.EAM_GOODS.MANUFACTURER_ID)
                 .basic().label("厂商")
@@ -63,12 +66,15 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(GoodsMeta.MANUFACTURER).muliti(false);
 
 
+        cfg.view().field(EAMTables.EAM_GOODS.NAME).form().validate().required();
+
+
 
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_GOODS.NAME,
                         EAMTables.EAM_GOODS.CATEGORY_ID,
-                        EAMTables.EAM_GOODS.BRAND_ID,
+//                        EAMTables.EAM_GOODS.BRAND_ID,
                         EAMTables.EAM_GOODS.STATUS
                 },
                 new Object[]{
@@ -91,7 +97,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
 
                         EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.MANUFACTURER_ID,
-                        EAMTables.EAM_GOODS.BRAND_ID,
+//                        EAMTables.EAM_GOODS.BRAND_ID,
 
                 }, new Object[] {
                         EAMTables.EAM_GOODS.REFERENCE_PRICE,

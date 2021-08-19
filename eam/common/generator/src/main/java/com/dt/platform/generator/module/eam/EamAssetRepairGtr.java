@@ -4,6 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetRepairStatusEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.meta.CategoryMeta;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
 import com.dt.platform.eam.page.AssetHandlePageController;
@@ -24,6 +25,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();

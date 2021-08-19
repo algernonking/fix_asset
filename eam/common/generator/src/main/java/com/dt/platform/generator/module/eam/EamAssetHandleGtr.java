@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.page.AssetHandlePageController;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -14,6 +15,8 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+
 
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.NAME).search().fuzzySearch();

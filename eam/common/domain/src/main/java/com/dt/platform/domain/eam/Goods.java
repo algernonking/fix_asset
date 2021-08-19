@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:29
- * @sign 21631DAD848DAF98514F082927F01763
+ * @since 2021-08-19 13:01:51
+ * @sign CD6120902F7C964D5A4411976A4AD767
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,12 +65,6 @@ public class Goods extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="标准型号厂商" , notes = "标准型号厂商")
 	private String manufacturerId;
-	
-	/**
-	 * 标准型号品牌：标准型号品牌
-	*/
-	@ApiModelProperty(required = false,value="标准型号品牌" , notes = "标准型号品牌")
-	private String brandId;
 	
 	/**
 	 * 标准型号计量单位：标准型号计量单位
@@ -149,12 +143,6 @@ public class Goods extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
 	private Category category;
-	
-	/**
-	 * 品牌：品牌
-	*/
-	@ApiModelProperty(required = false,value="品牌" , notes = "品牌")
-	private Brand brand;
 	
 	/**
 	 * 生产厂商：生产厂商
@@ -273,25 +261,6 @@ public class Goods extends Entity {
 	*/
 	public Goods setManufacturerId(String manufacturerId) {
 		this.manufacturerId=manufacturerId;
-		return this;
-	}
-	
-	/**
-	 * 获得 标准型号品牌<br>
-	 * 标准型号品牌
-	 * @return 标准型号品牌
-	*/
-	public String getBrandId() {
-		return brandId;
-	}
-	
-	/**
-	 * 设置 标准型号品牌
-	 * @param brandId 标准型号品牌
-	 * @return 当前对象
-	*/
-	public Goods setBrandId(String brandId) {
-		this.brandId=brandId;
 		return this;
 	}
 	
@@ -539,25 +508,6 @@ public class Goods extends Entity {
 	*/
 	public Goods setCategory(Category category) {
 		this.category=category;
-		return this;
-	}
-	
-	/**
-	 * 获得 品牌<br>
-	 * 品牌
-	 * @return 品牌
-	*/
-	public Brand getBrand() {
-		return brand;
-	}
-	
-	/**
-	 * 设置 品牌
-	 * @param brand 品牌
-	 * @return 当前对象
-	*/
-	public Goods setBrand(Brand brand) {
-		this.brand=brand;
 		return this;
 	}
 	

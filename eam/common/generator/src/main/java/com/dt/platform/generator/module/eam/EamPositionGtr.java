@@ -19,6 +19,18 @@ public class EamPositionGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_POSITION.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_POSITION.NOTES).search().fuzzySearch();
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_POSITION.NAME,
+                        EAMTables.EAM_POSITION.NOTES,
+
+                }
+        );
+
+        cfg.view().field(EAMTables.EAM_POSITION.NAME).form().validate().required();
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

@@ -5,15 +5,14 @@ import com.dt.platform.domain.eam.Goods;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.Category;
-import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.Manufacturer;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:29
- * @sign 21631DAD848DAF98514F082927F01763
+ * @since 2021-08-19 13:01:51
+ * @sign CD6120902F7C964D5A4411976A4AD767
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -78,16 +77,6 @@ public class GoodsMeta {
 	 * 标准型号厂商 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> MANUFACTURER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,MANUFACTURER_ID, java.lang.String.class, "标准型号厂商", "标准型号厂商", java.lang.String.class, null);
-	
-	/**
-	 * 标准型号品牌 , 类型: java.lang.String
-	*/
-	public static final String BRAND_ID="brandId";
-	
-	/**
-	 * 标准型号品牌 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> BRAND_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND_ID, java.lang.String.class, "标准型号品牌", "标准型号品牌", java.lang.String.class, null);
 	
 	/**
 	 * 标准型号计量单位 , 类型: java.lang.String
@@ -220,16 +209,6 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY, com.dt.platform.domain.eam.Category.class, "资产分类", "资产分类", com.dt.platform.domain.eam.Category.class, null);
 	
 	/**
-	 * 品牌 , 类型: com.dt.platform.domain.eam.Brand
-	*/
-	public static final String BRAND="brand";
-	
-	/**
-	 * 品牌 , 类型: com.dt.platform.domain.eam.Brand
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,com.dt.platform.domain.eam.Brand> BRAND_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,BRAND, com.dt.platform.domain.eam.Brand.class, "品牌", "品牌", com.dt.platform.domain.eam.Brand.class, null);
-	
-	/**
 	 * 生产厂商 , 类型: com.dt.platform.domain.eam.Manufacturer
 	*/
 	public static final String MANUFACTURER="manufacturer";
@@ -242,7 +221,7 @@ public class GoodsMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , CATEGORY_ID , NAME , MODEL , MANUFACTURER_ID , BRAND_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , BRAND , MANUFACTURER };
+	public static final String[] $PROPS={ ID , STATUS , CATEGORY_ID , NAME , MODEL , MANUFACTURER_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER };
 	
 	/**
 	 * 代理类
@@ -315,17 +294,6 @@ public class GoodsMeta {
 		public Goods setManufacturerId(String manufacturerId) {
 			super.change(MANUFACTURER_ID,super.getManufacturerId(),manufacturerId);
 			super.setManufacturerId(manufacturerId);
-			return this;
-		}
-		
-		/**
-		 * 设置 标准型号品牌
-		 * @param brandId 标准型号品牌
-		 * @return 当前对象
-		*/
-		public Goods setBrandId(String brandId) {
-			super.change(BRAND_ID,super.getBrandId(),brandId);
-			super.setBrandId(brandId);
 			return this;
 		}
 		
@@ -469,17 +437,6 @@ public class GoodsMeta {
 		public Goods setCategory(Category category) {
 			super.change(CATEGORY,super.getCategory(),category);
 			super.setCategory(category);
-			return this;
-		}
-		
-		/**
-		 * 设置 品牌
-		 * @param brand 品牌
-		 * @return 当前对象
-		*/
-		public Goods setBrand(Brand brand) {
-			super.change(BRAND,super.getBrand(),brand);
-			super.setBrand(brand);
 			return this;
 		}
 		

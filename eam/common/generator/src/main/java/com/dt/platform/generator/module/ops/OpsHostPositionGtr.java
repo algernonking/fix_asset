@@ -24,6 +24,15 @@ public class OpsHostPositionGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST_POSITION.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST_POSITION.NAME).search().fuzzySearch();
 
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_HOST_POSITION.NAME,
+                        EAMTables.OPS_HOST_POSITION.NOTES,
+                }
+        );
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

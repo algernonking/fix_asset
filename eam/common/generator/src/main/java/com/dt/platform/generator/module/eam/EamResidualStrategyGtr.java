@@ -28,6 +28,16 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
                 .form().validate().required().form().radioBox().enumType(CommonStatusEnum.class);
 
 
+        cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.NAME).form().validate().required();
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_RESIDUAL_STRATEGY.NAME,
+                        EAMTables.EAM_RESIDUAL_STRATEGY.NOTES,
+
+                }
+        );
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

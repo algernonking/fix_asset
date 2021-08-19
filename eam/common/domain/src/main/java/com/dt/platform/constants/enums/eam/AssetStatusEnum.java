@@ -16,7 +16,8 @@ public enum AssetStatusEnum implements CodeTextEnum {
 	IDLE("idle" , "闲置"),
 	USING("using" , "在用"),
 	BORROW("borrow" , "借用中"),
-	ALLOCATING("allocating" , "调拨中"),
+	REPAIR("repair" , "维修中"),
+	ALLOCATING("allocate" , "调拨中"),
 	SCRAP("scrap" , "报废")
 	;
 	private String code;

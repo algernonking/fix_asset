@@ -26,6 +26,18 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ATTR.TYPE).basic().label("属性类型")
                 .form().validate().required().form().radioBox().enumType(CodeAttrTypeEnum.class);
 
+        cfg.view().field(EAMTables.SYS_CODE_ATTR.NAME).form().validate().required();
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.SYS_CODE_ATTR.NAME,
+                        EAMTables.SYS_CODE_ATTR.CODE,
+                        EAMTables.SYS_CODE_ATTR.NOTES,
+                }
+        );
+
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

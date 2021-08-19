@@ -36,6 +36,7 @@ import com.dt.platform.domain.eam.meta.AssetExtEquipmentMeta;
 import com.dt.platform.domain.datacenter.Area;
 import com.dt.platform.domain.datacenter.Layer;
 import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.eam.Asset;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产设备数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:09
+ * @since 2021-08-19 13:01:42
 */
 
 @Api(tags = "资产设备数据")

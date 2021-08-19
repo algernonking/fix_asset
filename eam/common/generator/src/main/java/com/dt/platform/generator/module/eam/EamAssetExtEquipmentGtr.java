@@ -7,6 +7,7 @@ import com.dt.platform.domain.datacenter.Rack;
 import com.dt.platform.domain.datacenter.meta.AreaMeta;
 import com.dt.platform.domain.datacenter.meta.LayerMeta;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.meta.AssetExtEquipmentMeta;
@@ -35,6 +36,11 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","层级");
 
         cfg.getPoClassFile().addSimpleProperty(Rack.class,"rack","机柜","机柜");
+
+
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+
+
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.ID).basic().hidden();
 

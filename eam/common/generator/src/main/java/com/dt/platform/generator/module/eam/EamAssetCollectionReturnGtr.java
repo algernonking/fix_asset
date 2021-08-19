@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.Position;
 
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
@@ -20,6 +22,8 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
+
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -47,6 +51,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)

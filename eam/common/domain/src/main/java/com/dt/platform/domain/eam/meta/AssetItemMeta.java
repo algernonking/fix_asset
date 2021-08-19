@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:01
- * @sign AE0B13A5D2CA119A3577373F2502F22B
+ * @since 2021-08-19 13:01:35
+ * @sign 9617089DA53ADEE2DF10CEE1AABA1631
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -24,6 +24,16 @@ public class AssetItemMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
+	 * 处理 , 类型: java.lang.String
+	*/
+	public static final String HANDLE_ID="handleId";
+	
+	/**
+	 * 处理 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> HANDLE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,HANDLE_ID, java.lang.String.class, "处理", "处理", java.lang.String.class, null);
 	
 	/**
 	 * 资产 , 类型: java.lang.String
@@ -118,7 +128,7 @@ public class AssetItemMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , HANDLE_ID , ASSET_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -136,6 +146,17 @@ public class AssetItemMeta {
 		public AssetItem setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
+			return this;
+		}
+		
+		/**
+		 * 设置 处理
+		 * @param handleId 处理
+		 * @return 当前对象
+		*/
+		public AssetItem setHandleId(String handleId) {
+			super.change(HANDLE_ID,super.getHandleId(),handleId);
+			super.setHandleId(handleId);
 			return this;
 		}
 		

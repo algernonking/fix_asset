@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetTranferMeta;
+import com.dt.platform.domain.eam.Asset;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产转移 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 22:01:19
+ * @since 2021-08-19 13:01:30
 */
 
 @Api(tags = "资产转移")
@@ -65,16 +66,16 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "添加资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -93,7 +94,7 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetTranferVOMeta.ID)
@@ -127,16 +128,16 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "更新资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } ) 
@@ -155,16 +156,16 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "保存资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } )
@@ -222,16 +223,16 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "查询资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE } )
@@ -250,16 +251,16 @@ public class AssetTranferController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询资产转移")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480668065630007296"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.OUT_USER_ORGANIZATION_ID , value = "调出使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.IN_USER_ORGANIZATION_ID , value = "调入使用组织" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 	})
 	@ApiOperationSupport(order=8)

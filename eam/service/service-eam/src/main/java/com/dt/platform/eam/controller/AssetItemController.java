@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:01
+ * @since 2021-08-19 13:01:35
 */
 
 @Api(tags = "资产")
@@ -66,10 +66,12 @@ public class AssetItemController extends SuperController {
 	@ApiOperation(value = "添加资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetItemVOMeta.ID)
+	@NotNull(name = AssetItemVOMeta.HANDLE_ID)
 	@NotNull(name = AssetItemVOMeta.ASSET_ID)
 	@SentinelResource(value = AssetItemServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetItemServiceProxy.INSERT)
@@ -119,10 +121,12 @@ public class AssetItemController extends SuperController {
 	@ApiOperation(value = "更新资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } ) 
 	@NotNull(name = AssetItemVOMeta.ID)
+	@NotNull(name = AssetItemVOMeta.HANDLE_ID)
 	@NotNull(name = AssetItemVOMeta.ASSET_ID)
 	@SentinelResource(value = AssetItemServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetItemServiceProxy.UPDATE)
@@ -138,10 +142,12 @@ public class AssetItemController extends SuperController {
 	@ApiOperation(value = "保存资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } )
 	@NotNull(name = AssetItemVOMeta.ID)
+	@NotNull(name = AssetItemVOMeta.HANDLE_ID)
 	@NotNull(name = AssetItemVOMeta.ASSET_ID)
 	@SentinelResource(value = AssetItemServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetItemServiceProxy.SAVE)
@@ -196,6 +202,7 @@ public class AssetItemController extends SuperController {
 	@ApiOperation(value = "查询资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE } )
@@ -215,6 +222,7 @@ public class AssetItemController extends SuperController {
 	@ApiOperation(value = "分页查询资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

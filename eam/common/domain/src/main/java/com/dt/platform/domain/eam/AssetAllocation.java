@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 21:59:50
- * @sign A0189B3BBF7C75E78B5C5E482CA367C4
+ * @since 2021-08-19 13:01:28
+ * @sign 403409E3F21D2CE25575E55863B7B01D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -142,6 +142,12 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
 	
 	/**
 	 * 获得 主键<br>
@@ -501,6 +507,25 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetAllocation setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

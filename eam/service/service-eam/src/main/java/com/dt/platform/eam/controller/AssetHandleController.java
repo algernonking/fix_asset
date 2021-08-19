@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetHandleMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.eam.Asset;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产处置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-17 10:18:49
+ * @since 2021-08-19 09:07:06
 */
 
 @Api(tags = "资产处置")
@@ -68,9 +69,9 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "单据状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.BUSI_CODE , value = "单据编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "单据名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
@@ -132,9 +133,9 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "单据状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.BUSI_CODE , value = "单据编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "单据名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
@@ -162,9 +163,9 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "单据状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.BUSI_CODE , value = "单据编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "单据名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
@@ -231,9 +232,9 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "单据状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.BUSI_CODE , value = "单据编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "单据名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
@@ -262,9 +263,9 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "单据状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.BUSI_CODE , value = "单据编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "单据名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),

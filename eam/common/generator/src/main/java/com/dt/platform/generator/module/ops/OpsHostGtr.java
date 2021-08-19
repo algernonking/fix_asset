@@ -155,6 +155,9 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().radioBox().enumType(HostMonitorStatusEnum.class);
 
 
+
+        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).form().validate().required();
+
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{

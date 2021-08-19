@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.domain.eam.AssetHandle;
 import com.dt.platform.eam.page.AssetBorrowPageController;
@@ -24,7 +25,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
 
-
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
        // cfg.view().list().disableSpaceColumn();
         cfg.view().formWindow().bottomSpace(250);

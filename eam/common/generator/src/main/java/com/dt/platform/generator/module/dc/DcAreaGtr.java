@@ -32,6 +32,7 @@ public class DcAreaGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
               .form().validate().required().form().radioBox().enumType(AreaTypeEnum.class);
 
+        cfg.view().field(EAMTables.DC_AREA.NAME).form().validate().required();
 
         //文件生成覆盖模式
         cfg.overrides()

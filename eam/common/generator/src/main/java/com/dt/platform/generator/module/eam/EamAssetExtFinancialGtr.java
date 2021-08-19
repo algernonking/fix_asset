@@ -2,10 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
-import com.dt.platform.domain.eam.AssetExtFinancial;
-import com.dt.platform.domain.eam.AssetExtMaintainer;
-import com.dt.platform.domain.eam.Maintainer;
-import com.dt.platform.domain.eam.Supplier;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetExtFinancialMeta;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.eam.meta.ManufacturerMeta;
@@ -28,6 +25,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
 
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.ID).basic().hidden();
 
@@ -42,23 +40,24 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 .basic().label("使用期限");
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
-                .basic().label("资产来源")
-                .form().selectBox().dict(DictEnum.EAM_SOURCE);
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
+//                .basic().label("资产来源")
+//                .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
+
 
                 }
 
@@ -73,8 +72,8 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
@@ -84,9 +83,9 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 }
                 , new Object[] {
 
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_DATE,
+//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_DATE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
 
                 }

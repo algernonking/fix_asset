@@ -1,10 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.eam.AssetExtAttribution;
-import com.dt.platform.domain.eam.Maintainer;
-import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.Warehouse;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.AssetExtAttributionPageController;
 import com.dt.platform.proxy.eam.AssetExtAttributionServiceProxy;
@@ -28,6 +25,7 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
 
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_ATTRIBUTION.ID).basic().hidden();
 

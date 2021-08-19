@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:10
- * @sign 637D649AF57723282EFCE1461EAFC9FC
+ * @since 2021-08-19 13:01:44
+ * @sign 17E56C678F33DF8C1157E2485586A5E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -53,30 +53,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="财务编号" , notes = "财务编号")
 	private String assetCode;
-	
-	/**
-	 * 来源：来源
-	*/
-	@ApiModelProperty(required = false,value="来源" , notes = "来源")
-	private String sourceId;
-	
-	/**
-	 * 来源详情：来源详情
-	*/
-	@ApiModelProperty(required = false,value="来源详情" , notes = "来源详情")
-	private String sourceDetail;
-	
-	/**
-	 * 资产数量：资产数量
-	*/
-	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
-	private Integer assetNumber;
-	
-	/**
-	 * 剩余数量：剩余数量
-	*/
-	@ApiModelProperty(required = false,value="剩余数量" , notes = "剩余数量")
-	private Integer remainNumber;
 	
 	/**
 	 * 资产供应商：资产供应商
@@ -127,28 +103,16 @@ public class AssetExtFinancial extends Entity {
 	private BigDecimal purchaseUnitPrice;
 	
 	/**
-	 * 使用期限：使用期限
-	*/
-	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
-	private BigDecimal serviceLife;
-	
-	/**
-	 * 采购日期：采购日期
-	*/
-	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期")
-	private Date purchaseDate;
-	
-	/**
-	 * 入库时间：入库时间
-	*/
-	@ApiModelProperty(required = false,value="入库时间" , notes = "入库时间")
-	private Date storageTime;
-	
-	/**
 	 * 入账时间：入账时间
 	*/
 	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
 	private Date entryTime;
+	
+	/**
+	 * 使用期限：使用期限
+	*/
+	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
+	private BigDecimal serviceLife;
 	
 	/**
 	 * 财务备注：财务备注
@@ -209,6 +173,12 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
 	private Supplier supplier;
+	
+	/**
+	 * 资产：资产
+	*/
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
+	private Asset asset;
 	
 	/**
 	 * 获得 主键<br>
@@ -283,82 +253,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setAssetCode(String assetCode) {
 		this.assetCode=assetCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源<br>
-	 * 来源
-	 * @return 来源
-	*/
-	public String getSourceId() {
-		return sourceId;
-	}
-	
-	/**
-	 * 设置 来源
-	 * @param sourceId 来源
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setSourceId(String sourceId) {
-		this.sourceId=sourceId;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源详情<br>
-	 * 来源详情
-	 * @return 来源详情
-	*/
-	public String getSourceDetail() {
-		return sourceDetail;
-	}
-	
-	/**
-	 * 设置 来源详情
-	 * @param sourceDetail 来源详情
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setSourceDetail(String sourceDetail) {
-		this.sourceDetail=sourceDetail;
-		return this;
-	}
-	
-	/**
-	 * 获得 资产数量<br>
-	 * 资产数量
-	 * @return 资产数量
-	*/
-	public Integer getAssetNumber() {
-		return assetNumber;
-	}
-	
-	/**
-	 * 设置 资产数量
-	 * @param assetNumber 资产数量
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setAssetNumber(Integer assetNumber) {
-		this.assetNumber=assetNumber;
-		return this;
-	}
-	
-	/**
-	 * 获得 剩余数量<br>
-	 * 剩余数量
-	 * @return 剩余数量
-	*/
-	public Integer getRemainNumber() {
-		return remainNumber;
-	}
-	
-	/**
-	 * 设置 剩余数量
-	 * @param remainNumber 剩余数量
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setRemainNumber(Integer remainNumber) {
-		this.remainNumber=remainNumber;
 		return this;
 	}
 	
@@ -515,63 +409,6 @@ public class AssetExtFinancial extends Entity {
 	}
 	
 	/**
-	 * 获得 使用期限<br>
-	 * 使用期限
-	 * @return 使用期限
-	*/
-	public BigDecimal getServiceLife() {
-		return serviceLife;
-	}
-	
-	/**
-	 * 设置 使用期限
-	 * @param serviceLife 使用期限
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
-		this.serviceLife=serviceLife;
-		return this;
-	}
-	
-	/**
-	 * 获得 采购日期<br>
-	 * 采购日期
-	 * @return 采购日期
-	*/
-	public Date getPurchaseDate() {
-		return purchaseDate;
-	}
-	
-	/**
-	 * 设置 采购日期
-	 * @param purchaseDate 采购日期
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setPurchaseDate(Date purchaseDate) {
-		this.purchaseDate=purchaseDate;
-		return this;
-	}
-	
-	/**
-	 * 获得 入库时间<br>
-	 * 入库时间
-	 * @return 入库时间
-	*/
-	public Date getStorageTime() {
-		return storageTime;
-	}
-	
-	/**
-	 * 设置 入库时间
-	 * @param storageTime 入库时间
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setStorageTime(Date storageTime) {
-		this.storageTime=storageTime;
-		return this;
-	}
-	
-	/**
 	 * 获得 入账时间<br>
 	 * 入账时间
 	 * @return 入账时间
@@ -587,6 +424,25 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setEntryTime(Date entryTime) {
 		this.entryTime=entryTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用期限<br>
+	 * 使用期限
+	 * @return 使用期限
+	*/
+	public BigDecimal getServiceLife() {
+		return serviceLife;
+	}
+	
+	/**
+	 * 设置 使用期限
+	 * @param serviceLife 使用期限
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
+		this.serviceLife=serviceLife;
 		return this;
 	}
 	
@@ -777,6 +633,25 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setSupplier(Supplier supplier) {
 		this.supplier=supplier;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
+	*/
+	public Asset getAsset() {
+		return asset;
+	}
+	
+	/**
+	 * 设置 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setAsset(Asset asset) {
+		this.asset=asset;
 		return this;
 	}
 

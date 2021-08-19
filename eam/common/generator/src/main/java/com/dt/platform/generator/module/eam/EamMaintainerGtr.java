@@ -15,6 +15,20 @@ public class EamMaintainerGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).search().fuzzySearch();
 
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.EAM_MAINTAINER.MAINTAINER_NAME,
+                        EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES,
+
+                }
+        );
+
+
+        cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).form().validate().required();
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口

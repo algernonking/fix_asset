@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:10
+ * @since 2021-08-19 13:01:44
  */
 
 
@@ -62,10 +62,6 @@ function ListPage() {
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
 					,{ field: 'typeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务分类') }
 					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务编号') }
-					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产来源'), templet:function (d){ return fox.getDictText(SELECT_SOURCEID_DATA,d.sourceId);}}
-					,{ field: 'sourceDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('来源详情') }
-					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') }
-					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') }
 					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('供应商'), templet: function (d) { return fox.joinLabel(d.supplier,"supplierName");}}
 					,{ field: 'taxamountRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('税额') }
 					,{ field: 'taxamountPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('含税金额') }
@@ -74,14 +70,12 @@ function ListPage() {
 					,{ field: 'residualsRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('残值率') }
 					,{ field: 'navPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产净值') }
 					,{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') }
-					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') }
-					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('采购日期'), templet: function (d) { return fox.dateFormat(d.purchaseDate); }}
-					,{ field: 'storageTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入库时间'), templet: function (d) { return fox.dateFormat(d.storageTime); }}
 					,{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间'), templet: function (d) { return fox.dateFormat(d.entryTime); }}
+					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -112,10 +106,7 @@ function ListPage() {
 		var value = {};
 		value.typeId={ value: $("#typeId").val()};
 		value.assetCode={ value: $("#assetCode").val()};
-		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), label:xmSelect.get("#sourceId",true).getValue("nameStr")};
-		value.sourceDetail={ value: $("#sourceDetail").val()};
 		value.supplierId={ value: xmSelect.get("#supplierId",true).getValue("value"), fillBy:"supplier",field:"id", label:xmSelect.get("#supplierId",true).getValue("nameStr") };
-		value.storageTime={ value: $("#storageTime").val()};
 		value.entryTime={ value: $("#entryTime").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -148,25 +139,8 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow();
+		fox.switchSearchRow(1);
 
-		//渲染 sourceId 下拉字段
-		fox.renderSelectBox({
-			el: "sourceId",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -185,10 +159,6 @@ function ListPage() {
 				}
 				return opts;
 			}
-		});
-		laydate.render({
-			elem: '#storageTime',
-			trigger:"click"
 		});
 		laydate.render({
 			elem: '#entryTime',
@@ -214,7 +184,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(function (ex){
+			fox.switchSearchRow(1,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {

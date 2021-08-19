@@ -55,6 +55,8 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).basic().label("演练时间").form().numberInput();
 
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
+
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(

@@ -16,7 +16,7 @@ public class BrandGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).search().fuzzySearch();
 
 
-
+        cfg.view().field(EAMTables.EAM_BRAND.BRAND_NAME).form().validate().required();
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_BRAND.BRAND_NAME

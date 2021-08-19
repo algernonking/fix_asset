@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:41:01
- * @sign AE0B13A5D2CA119A3577373F2502F22B
+ * @since 2021-08-19 13:01:35
+ * @sign 9617089DA53ADEE2DF10CEE1AABA1631
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,12 @@ public class AssetItem extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 处理：处理
+	*/
+	@ApiModelProperty(required = true,value="处理" , notes = "处理")
+	private String handleId;
 	
 	/**
 	 * 资产：资产
@@ -105,6 +111,25 @@ public class AssetItem extends Entity {
 	*/
 	public AssetItem setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 处理<br>
+	 * 处理
+	 * @return 处理
+	*/
+	public String getHandleId() {
+		return handleId;
+	}
+	
+	/**
+	 * 设置 处理
+	 * @param handleId 处理
+	 * @return 当前对象
+	*/
+	public AssetItem setHandleId(String handleId) {
+		this.handleId=handleId;
 		return this;
 	}
 	
