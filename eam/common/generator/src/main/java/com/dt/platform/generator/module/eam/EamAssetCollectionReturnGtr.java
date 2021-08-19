@@ -23,7 +23,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
 
         cfg.view().search().inputLayout(
                 new Object[]{

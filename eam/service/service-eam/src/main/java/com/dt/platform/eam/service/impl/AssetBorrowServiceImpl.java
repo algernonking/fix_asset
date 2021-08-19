@@ -2,6 +2,11 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +46,8 @@ import java.util.Date;
 
 @Service("EamAssetBorrowService")
 public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements IAssetBorrowService {
-	
+
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -54,7 +60,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -67,6 +73,14 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	@Override
 	public Result insert(AssetBorrow assetBorrow) {
+
+		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+
+		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		assetBorrow.setBusinessCode(codeResult.getData().toString());
 		Result r=super.insert(assetBorrow);
 		return r;
 	}

@@ -36,6 +36,12 @@
             <artifactId>proxy</artifactId>  
             <version>${platform.version}</version> 
         </dependency>
+        <dependency>
+            <groupId>com.dt.platform</groupId>
+            <artifactId>service-common</artifactId>
+            <version>0.0.2.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <defaultGoal>compile</defaultGoal>

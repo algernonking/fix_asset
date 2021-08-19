@@ -15,6 +15,7 @@ function listFunction(data) {
     });
 }
 
+
 //[beforeDataFill]
 function beforeDataFill(data) {
     //$("#assetCode").prop("disabled",true);

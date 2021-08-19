@@ -25,7 +25,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
 
        // cfg.view().list().disableSpaceColumn();
         cfg.view().formWindow().bottomSpace(250);
@@ -39,7 +39,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().disable();
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ASSET_STATUS).form().selectBox().enumType(AssetBorrowStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
@@ -51,7 +50,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,
-                        EAMTables.EAM_ASSET_BORROW.ASSET_STATUS,
+
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME
                 },
                 new Object[]{
@@ -83,7 +82,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页

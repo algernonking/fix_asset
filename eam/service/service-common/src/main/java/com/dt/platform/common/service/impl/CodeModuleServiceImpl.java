@@ -1,29 +1,15 @@
 package com.dt.platform.common.service.impl;
 
 
-import com.dt.platform.common.service.ICodeAttrService;
-import com.dt.platform.common.service.ICodeParseService;
+import com.dt.platform.common.service.ICodeModuleService;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
-import com.dt.platform.domain.common.CodeAttr;
 import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.sql.expr.ConditionExpr;
-import com.github.foxnic.sql.meta.DBField;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.stereotype.Service;
-
+import com.github.foxnic.api.transter.Result;
 import javax.annotation.Resource;
-import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -37,7 +23,7 @@ import java.util.*;
 
 
 @Service("CodeParseService")
-public class CodeParseServiceImpl implements ICodeParseService {
+public class CodeModuleServiceImpl implements ICodeModuleService {
 	
 	/**
 	 * 注入DAO对象
@@ -83,12 +69,17 @@ public class CodeParseServiceImpl implements ICodeParseService {
 	 * @param module 传入业务编码模块
 	 * @return 返回编号
 	 * */
-	public String getBusinessCode(String module){
-		Rcd rs=dao.queryRecord("select b.rule rule from sys_code_allocation a,sys_code_rule b where a.rule_id=b.id and a.deleted=0 and b.deleted=0 and a.module=?");
+	public Result generateCode(String module){
+		Result result = new Result();
+		Rcd rs=dao.queryRecord("select b.rule rule from sys_code_allocation a,sys_code_rule b where a.rule_id=b.id and a.deleted=0 and b.deleted=0 and a.module=?",module);
 		if(rs==null){
-			return "";
+			ErrorDesc.failure().message("id 不允许为 null 。");
 		}
-		return parseCode(rs.getString("rule"));
+		String code=parseCode(rs.getString("rule"));
+		result.success(true);
+		result.data(code);
+		return result;
+
 	}
 
 	/**

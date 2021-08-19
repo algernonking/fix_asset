@@ -29,7 +29,7 @@ import java.util.Random;
  * @since 2021-08-08 09:13:29
 */
 
-public interface ICodeParseService {
+public interface ICodeModuleService {
 
 
     /**
@@ -37,7 +37,7 @@ public interface ICodeParseService {
      * @param module 传入业务编码模块
      * @return 返回编号
      * */
-    String getBusinessCode(String module);
+    Result generateCode(String module);
 
     /**
      * 生成编码

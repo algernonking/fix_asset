@@ -26,7 +26,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
 
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素

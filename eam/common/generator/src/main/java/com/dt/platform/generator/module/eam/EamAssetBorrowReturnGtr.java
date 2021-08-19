@@ -20,7 +20,7 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
 
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
 
 
 

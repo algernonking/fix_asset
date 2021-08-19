@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-19 11:17:13
+ * @since 2021-08-19 21:40:09
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -260,6 +260,75 @@ public class EAMTables {
 			this.init($NAME,"机柜" , ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final DC_RACK $TABLE=new DC_RACK();
+	}
+	
+	/**
+	*/
+	public static class EAM_APPROVE_CONFIGURE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_approve_configure";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
+		
+		public EAM_APPROVE_CONFIGURE() {
+			this.init($NAME,"" , ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_APPROVE_CONFIGURE $TABLE=new EAM_APPROVE_CONFIGURE();
 	}
 	
 	/**
@@ -688,11 +757,6 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
 		
 		/**
-		 * 资产状态
-		*/
-		public static final DBField ASSET_STATUS = new DBField(DBDataType.STRING , "asset_status","assetStatus","资产状态","资产状态",false,false,false);
-		
-		/**
 		 * 制单人
 		*/
 		public static final DBField ORIGINATOR_ID = new DBField(DBDataType.STRING , "originator_id","originatorId","制单人","制单人",false,false,true);
@@ -762,9 +826,84 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_BORROW() {
-			this.init($NAME,"资产借用" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ASSET_STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产借用" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_BORROW $TABLE=new EAM_ASSET_BORROW();
+	}
+	
+	/**
+	 * 资产借用数据
+	*/
+	public static class EAM_ASSET_BORROW_DATA extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_borrow_data";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 资产
+		*/
+		public static final DBField BORROW_ASSET_ID = new DBField(DBDataType.STRING , "borrow_asset_id","borrowAssetId","资产","资产",false,false,true);
+		
+		/**
+		 * 借前资产状态
+		*/
+		public static final DBField  ASSET_STATUS_BEFORE = new DBField(DBDataType.STRING , " asset_status_before"," assetStatusBefore","借前资产状态","借前资产状态",false,false,true);
+		
+		/**
+		 * 借前使用人
+		*/
+		public static final DBField USER_ID_BEFORE = new DBField(DBDataType.STRING , "user_id_before","userIdBefore","借前使用人","借前使用人",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public EAM_ASSET_BORROW_DATA() {
+			this.init($NAME,"资产借用数据" , ID , BORROW_ASSET_ID ,  ASSET_STATUS_BEFORE , USER_ID_BEFORE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_ASSET_BORROW_DATA $TABLE=new EAM_ASSET_BORROW_DATA();
 	}
 	
 	/**

@@ -2,15 +2,12 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetCollectionReturn;
-import com.dt.platform.domain.eam.AssetCollectionReturnVO;
+import com.dt.platform.domain.eam.AssetBorrowData;
+import com.dt.platform.domain.eam.AssetBorrowDataVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -29,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetCollectionReturnService;
+import com.dt.platform.eam.service.IAssetBorrowDataService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 资产退库 服务实现
+ * 资产借用数据 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:33
+ * @since 2021-08-19 21:42:06
 */
 
 
-@Service("EamAssetCollectionReturnService")
-public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollectionReturn> implements IAssetCollectionReturnService {
+@Service("EamAssetBorrowDataService")
+public class AssetBorrowDataServiceImpl extends SuperService<AssetBorrowData> implements IAssetBorrowDataService {
 	
 	/**
 	 * 注入DAO对象
@@ -65,43 +62,38 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	
 	/**
 	 * 插入实体
-	 * @param assetCollectionReturn 实体数据
+	 * @param assetBorrowData 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(AssetCollectionReturn assetCollectionReturn) {
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}
-		assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
-		Result r=super.insert(assetCollectionReturn);
+	public Result insert(AssetBorrowData assetBorrowData) {
+		Result r=super.insert(assetBorrowData);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetCollectionReturnList 实体数据清单
+	 * @param assetBorrowDataList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<AssetCollectionReturn> assetCollectionReturnList) {
-		return super.insertList(assetCollectionReturnList);
+	public Result insertList(List<AssetBorrowData> assetBorrowDataList) {
+		return super.insertList(assetBorrowDataList);
 	}
 	
 	
 	/**
-	 * 按主键删除 资产退库
+	 * 按主键删除 资产借用数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		AssetCollectionReturn assetCollectionReturn = new AssetCollectionReturn();
+		AssetBorrowData assetBorrowData = new AssetBorrowData();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetCollectionReturn.setId(id);
+		assetBorrowData.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(assetCollectionReturn);
+			boolean suc = dao.deleteEntity(assetBorrowData);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -112,20 +104,20 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	}
 	
 	/**
-	 * 按主键删除 资产退库
+	 * 按主键删除 资产借用数据
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		AssetCollectionReturn assetCollectionReturn = new AssetCollectionReturn();
+		AssetBorrowData assetBorrowData = new AssetBorrowData();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetCollectionReturn.setId(id);
-		assetCollectionReturn.setDeleted(dao.getDBTreaty().getTrueValue());
-		assetCollectionReturn.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		assetCollectionReturn.setDeleteTime(new Date());
+		assetBorrowData.setId(id);
+		assetBorrowData.setDeleted(dao.getDBTreaty().getTrueValue());
+		assetBorrowData.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		assetBorrowData.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(assetCollectionReturn,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(assetBorrowData,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -137,30 +129,30 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	
 	/**
 	 * 更新实体
-	 * @param assetCollectionReturn 数据对象
+	 * @param assetBorrowData 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(AssetCollectionReturn assetCollectionReturn , SaveMode mode) {
-		Result r=super.update(assetCollectionReturn , mode);
+	public Result update(AssetBorrowData assetBorrowData , SaveMode mode) {
+		Result r=super.update(assetBorrowData , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetCollectionReturnList 数据对象列表
+	 * @param assetBorrowDataList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<AssetCollectionReturn> assetCollectionReturnList , SaveMode mode) {
-		return super.updateList(assetCollectionReturnList , mode);
+	public Result updateList(List<AssetBorrowData> assetBorrowDataList , SaveMode mode) {
+		return super.updateList(assetBorrowDataList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 资产退库
+	 * 按主键更新字段 资产借用数据
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -174,20 +166,20 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	
 	
 	/**
-	 * 按主键获取 资产退库
+	 * 按主键获取 资产借用数据
 	 *
 	 * @param id 主键
-	 * @return AssetCollectionReturn 数据对象
+	 * @return AssetBorrowData 数据对象
 	 */
-	public AssetCollectionReturn getById(String id) {
-		AssetCollectionReturn sample = new AssetCollectionReturn();
+	public AssetBorrowData getById(String id) {
+		AssetBorrowData sample = new AssetBorrowData();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<AssetCollectionReturn> getByIds(List<String> ids) {
+	public List<AssetBorrowData> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -200,7 +192,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<AssetCollectionReturn> queryList(AssetCollectionReturn sample) {
+	public List<AssetBorrowData> queryList(AssetBorrowData sample) {
 		return super.queryList(sample);
 	}
 	
@@ -214,7 +206,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, int pageSize, int pageIndex) {
+	public PagedList<AssetBorrowData> queryPagedList(AssetBorrowData sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -228,25 +220,25 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<AssetBorrowData> queryPagedList(AssetBorrowData sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetCollectionReturn 数据对象
+	 * @param assetBorrowData 数据对象
 	 * @return 判断结果
 	 */
-	public Result<AssetCollectionReturn> checkExists(AssetCollectionReturn assetCollectionReturn) {
+	public Result<AssetBorrowData> checkExists(AssetBorrowData assetBorrowData) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetCollectionReturn, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(assetBorrowData, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(AssetCollectionReturn sample) {
+	public ExcelWriter exportExcel(AssetBorrowData sample) {
 		return super.exportExcel(sample);
 	}
 

@@ -1,7 +1,7 @@
 /**
- * 资产借用 列表页 JS 脚本
+ * 资产借用数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:24
+ * @since 2021-08-19 21:42:08
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-asset-borrow";
+	const moduleURL="/service-eam/eam-asset-borrow-data";
 	var dataTable=null;
 	/**
       * 入口函数，初始化
@@ -58,15 +58,11 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus);}}
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
-					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') }
-					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return fox.dateFormat(d.borrowTime); }}
-					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return fox.dateFormat(d.planReturnDate); }}
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借出说明') }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
+					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
+					,{ field: 'borrowAssetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
+					,{ field: ' assetStatusBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前资产状态') }
+					,{ field: 'userIdBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前使用人') }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -97,12 +93,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
-		value.borrowerId={ value: $("#borrowerId").val()};
-		value.borrowTime={ begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
-		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.id={ value: $("#id").val()};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -134,50 +125,8 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(2);
+		fox.switchSearchRow(1);
 
-		//渲染 status 下拉字段
-		fox.renderSelectBox({
-			el: "status",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 assetStatus 下拉字段
-		fox.renderSelectBox({
-			el: "assetStatus",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		laydate.render({
-			elem: '#borrowTime-begin',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#borrowTime-end',
-			trigger:"click"
-		});
 		fox.renderSearchInputs();
 	}
 	
@@ -198,7 +147,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(2,function (ex){
+			fox.switchSearchRow(1,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -237,7 +186,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
-			admin.putTempData('eam-asset-borrow-form-data-form-action', "create",true);
+			admin.putTempData('eam-asset-borrow-data-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -246,11 +195,11 @@ function ListPage() {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产借用')+"!");
+            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产借用数据')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产借用')+fox.translate('吗？'), function (i) {
+			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
 				layer.close(i);
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -274,7 +223,7 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
-			admin.putTempData('eam-asset-borrow-form-data-form-action', "",true);
+			admin.putTempData('eam-asset-borrow-data-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -282,7 +231,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-asset-borrow-form-data-form-action', "edit",true);
+						admin.putTempData('eam-asset-borrow-data-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
@@ -295,7 +244,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-asset-borrow-form-data-form-action', "view",true);
+						admin.putTempData('eam-asset-borrow-data-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
@@ -304,7 +253,7 @@ function ListPage() {
 			}
 			else if (layEvent === 'del') { // 删除
 			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('资产借用')+fox.translate('吗？'), function (i) {
+				layer.confirm(fox.translate('确定删除此')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
@@ -330,23 +279,23 @@ function ListPage() {
 	function showEditForm(data) {
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-asset-borrow-form-data', data);
-		var area=admin.getTempData('eam-asset-borrow-form-area');
+		admin.putTempData('eam-asset-borrow-data-form-data', data);
+		var area=admin.getTempData('eam-asset-borrow-data-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产借用')) : (fox.translate('添加')+fox.translate('资产借用'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产借用数据')) : (fox.translate('添加')+fox.translate('资产借用数据'));
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["500px",height+"px"],
 			type: 2,
-			content: '/business/eam/asset_borrow/asset_borrow_form.html' + queryString,
+			content: '/business/eam/asset_borrow_data/asset_borrow_data_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-asset-borrow-form-data-popup-index', index);
+		admin.putTempData('eam-asset-borrow-data-form-data-popup-index', index);
 	};
 
 

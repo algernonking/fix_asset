@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:20
- * @sign 0760A7DEBC911779E2E3D10C1DFD8E3C
+ * @since 2021-08-19 21:42:06
+ * @sign EA08AD591B115BA2E418CD6606688632
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class AssetBorrowVO extends AssetBorrow {
+public class AssetBorrowDataVO extends AssetBorrowData {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setPageIndex(Integer pageIndex) {
+	public AssetBorrowDataVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setPageSize(Integer pageSize) {
+	public AssetBorrowDataVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setSearchField(String searchField) {
+	public AssetBorrowDataVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setFuzzyField(String fuzzyField) {
+	public AssetBorrowDataVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setSearchValue(String searchValue) {
+	public AssetBorrowDataVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setSortField(String sortField) {
+	public AssetBorrowDataVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setSortType(String sortType) {
+	public AssetBorrowDataVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO setIds(List<String> ids) {
+	public AssetBorrowDataVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class AssetBorrowVO extends AssetBorrow {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public AssetBorrowVO addId(String id) {
+	public AssetBorrowDataVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

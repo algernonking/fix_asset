@@ -193,6 +193,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().form().jsAfterDataFill("afterDataFill");
         cfg.view().form().jsBeforeDataFill("beforeDataFill");
         cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
+
 //
 //        cfg.getFormConfig().setJsAfterDataFill(      new JSFunctions(this.getClass(),"asset_functions.js")    ));
       //  cfg.getFormConfig().setJsAfterDataFill(new JSFunctions(this.getClass(),"asset_functions.js"));
