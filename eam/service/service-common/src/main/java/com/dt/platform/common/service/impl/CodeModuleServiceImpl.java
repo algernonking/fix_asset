@@ -226,10 +226,9 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 				seqSource=attr[i];
 			}
 		}
-		System.out.println("##############"+seqSource);
-		dao.createSequence(seqSource, SequenceType.AI,5);
-		System.out.println("############2##"+seqSource);
-		return dao.getNextSequenceValue(seqSource);
+		//后期再优化去掉create
+		this.dao.createSequence(seqSource, SequenceType.AI,8);
+		return this.dao.getNextSequenceValue(seqSource);
 	}
 
 

@@ -9,6 +9,7 @@ import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.PositionMeta;
 import com.dt.platform.eam.page.AssetBorrowReturnPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowReturnServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
@@ -26,7 +27,7 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetBorrowReturnVOMeta.ASSET_IDS);
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetBorrowReturnVOMeta.ASSET_IDS);
 
         cfg.view().search().inputLayout(
                 new Object[]{

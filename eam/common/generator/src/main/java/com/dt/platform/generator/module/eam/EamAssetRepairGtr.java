@@ -14,6 +14,7 @@ import com.dt.platform.eam.page.AssetRepairPageController;
 import com.dt.platform.eam.page.PositionPageController;
 import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.proxy.eam.CategoryServiceProxy;
@@ -30,7 +31,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);

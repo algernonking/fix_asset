@@ -7,6 +7,7 @@ import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
 import com.dt.platform.domain.eam.meta.AssetTranferVOMeta;
 import com.dt.platform.eam.page.AssetTranferPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -21,7 +22,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);

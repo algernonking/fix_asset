@@ -2,7 +2,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 15:18:26
+ * @since 2021-08-20 16:12:46
  */
  -->
  <!DOCTYPE html>
@@ -73,6 +73,8 @@
 
     <a th:if="${perm.checkAuth('eam_approve_configure:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
     <a th:if="${perm.checkAnyAuth('eam_approve_configure:update','eam_approve_configure:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+
+
     <a th:if="${perm.checkAuth('eam_approve_configure:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 
@@ -85,6 +87,7 @@
     var AUTH_PREFIX="eam_approve_configure";
 </script>
 
+<script th:src="'/business/eam/approve_configure/approve_configure_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/approve_configure/approve_configure_list.js?'+${cacheKey}"></script>
 
 </body>

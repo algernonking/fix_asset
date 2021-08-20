@@ -5,7 +5,7 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.*;
-import com.github.foxnic.generator.builder.view.config.JSFunctions;
+
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
 
@@ -187,11 +187,11 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET.ATTACH
                 }
         );
-        cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
-       // cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
-
-        cfg.view().form().jsAfterDataFill("afterDataFill");
-        cfg.view().form().jsBeforeDataFill("beforeDataFill");
+//        cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
+//       // cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
+//
+//        cfg.view().form().jsAfterDataFill("afterDataFill");
+//        cfg.view().form().jsBeforeDataFill("beforeDataFill");
       //  cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
 
 //

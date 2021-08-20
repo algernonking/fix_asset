@@ -9,6 +9,7 @@ import com.dt.platform.domain.eam.meta.AssetAllocationVOMeta;
 import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
 import com.dt.platform.eam.page.AssetAllocationPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -24,7 +25,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);

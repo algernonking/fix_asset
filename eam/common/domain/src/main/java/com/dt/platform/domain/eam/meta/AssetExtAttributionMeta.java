@@ -11,7 +11,7 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 09:41:34
+ * @since 2021-08-20 16:13:12
  * @sign A3B6DADC364E0C74F25F4F1AF9C5D5A6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

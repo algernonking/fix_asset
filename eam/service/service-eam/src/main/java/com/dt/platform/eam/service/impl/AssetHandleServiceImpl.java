@@ -26,6 +26,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.eam.service.IAssetHandleService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,7 +37,7 @@ import java.util.Date;
  * 资产处置 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 09:25:40
+ * @since 2021-08-20 16:13:09
 */
 
 
@@ -53,6 +55,8 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private AssetItemServiceImpl assetItemServiceImpl;
 
 	
 	@Override
@@ -66,8 +70,13 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(AssetHandle assetHandle) {
 		Result r=super.insert(assetHandle);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetHandle.getId(), assetHandle.getAssetIds());
+		}
 		return r;
 	}
 	
@@ -134,8 +143,13 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(AssetHandle assetHandle , SaveMode mode) {
 		Result r=super.update(assetHandle , mode);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetHandle.getId(), assetHandle.getAssetIds());
+		}
 		return r;
 	}
 	
