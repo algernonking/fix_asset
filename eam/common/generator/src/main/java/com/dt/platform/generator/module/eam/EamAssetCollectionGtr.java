@@ -4,11 +4,11 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
-import com.dt.platform.domain.eam.meta.AssetExtAttributionMeta;
-import com.dt.platform.domain.eam.meta.PositionMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.AssetBorrowPageController;
 import com.dt.platform.eam.page.AssetCollectionPageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
@@ -27,7 +27,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
-
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetCollectionVOMeta.ASSET_IDS);
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
@@ -75,7 +76,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width(1080);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.USER_ID,

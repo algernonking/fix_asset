@@ -41,7 +41,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetBorrow() {
         // 关联资产
-        this.property(AssetBorrowMeta.ASSET_PROP)
+        this.property(AssetBorrowMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_BORROW.ID )
                 .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)
@@ -53,7 +53,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetCollection() {
         // 关联资产
-        this.property(AssetCollectionMeta.ASSET_PROP)
+        this.property(AssetCollectionMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_COLLECTION.ID)
                 .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)
@@ -70,7 +70,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetCollectionReturn() {
         // 关联资产
-        this.property(AssetCollectionReturnMeta.ASSET_PROP)
+        this.property(AssetCollectionReturnMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID)
                 .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)
@@ -86,7 +86,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetRepair() {
         // 关联资产
-        this.property(AssetRepairMeta.ASSET_PROP)
+        this.property(AssetRepairMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_REPAIR.ID)
                 .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)
@@ -97,7 +97,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetTranfer() {
         // 关联资产
-        this.property(AssetTranferMeta.ASSET_PROP)
+        this.property(AssetTranferMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.ID)
                 .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)
@@ -107,7 +107,7 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetHandle() {
         // 关联资产
-        this.property(AssetHandleMeta.ASSET_PROP)
+        this.property(AssetHandleMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_HANDLE.ID)
                 .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID)

@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:34
+ * @since 2021-08-20 14:24:33
  */
 
 
@@ -349,9 +349,6 @@ function ListPage() {
 				});
 				
 			}
-			else if (layEvent === 'list-function') { // labtel
-				listFunction(data);
-			}
 			
 		});
  
@@ -372,7 +369,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["95%",height+"px"],
 			type: 2,
 			content: '/business/eam/asset/asset_form.html' + queryString,
 			finish: function () {
@@ -382,24 +379,6 @@ function ListPage() {
 		admin.putTempData('eam-asset-form-data-popup-index', index);
 	};
 
-	/**
-	 * labtel 操作
-	 */
-	/**
-	 * 打开字典条窗口
-	 * */
-	function listFunction(data) {
-	    admin.putTempData("dictId",data.id,true);
-	    var index = admin.popupCenter({
-	        title: "条目",
-	        resize: false,
-	        id: 'dictItemsWindow',
-	        area: ["800px", "600px"],
-	        type: 2,
-	        content: "/business/system/dict_item/dict_item_list.html"
-	    });
-	}
-	
 
 
 };

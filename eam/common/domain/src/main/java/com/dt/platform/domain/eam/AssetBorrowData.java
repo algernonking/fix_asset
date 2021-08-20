@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:42:06
- * @sign 57C41B73B412F482D17AF6843848737C
+ * @since 2021-08-20 09:41:22
+ * @sign 5FFB0CF1F6B0A5ED338DABCDE0945D0B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,7 +39,7 @@ public class AssetBorrowData extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private String borrowAssetId;
+	private String assetId;
 	
 	/**
 	 * 借前资产状态：借前资产状态
@@ -125,17 +125,17 @@ public class AssetBorrowData extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public String getBorrowAssetId() {
-		return borrowAssetId;
+	public String getAssetId() {
+		return assetId;
 	}
 	
 	/**
 	 * 设置 资产
-	 * @param borrowAssetId 资产
+	 * @param assetId 资产
 	 * @return 当前对象
 	*/
-	public AssetBorrowData setBorrowAssetId(String borrowAssetId) {
-		this.borrowAssetId=borrowAssetId;
+	public AssetBorrowData setAssetId(String assetId) {
+		this.assetId=assetId;
 		return this;
 	}
 	

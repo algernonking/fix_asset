@@ -2,9 +2,6 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +35,7 @@ import java.util.Date;
  * 资产退库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:33
+ * @since 2021-08-20 09:25:36
 */
 
 
@@ -70,11 +67,6 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * */
 	@Override
 	public Result insert(AssetCollectionReturn assetCollectionReturn) {
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}
-		assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
 		Result r=super.insert(assetCollectionReturn);
 		return r;
 	}

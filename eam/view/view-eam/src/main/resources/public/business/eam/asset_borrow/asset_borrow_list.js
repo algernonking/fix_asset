@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:24
+ * @since 2021-08-20 09:30:49
  */
 
 
@@ -60,7 +60,6 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus);}}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') }
 					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return fox.dateFormat(d.borrowTime); }}
@@ -99,7 +98,6 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
 		value.borrowerId={ value: $("#borrowerId").val()};
 		value.borrowTime={ begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -139,23 +137,6 @@ function ListPage() {
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 assetStatus 下拉字段
-		fox.renderSelectBox({
-			el: "assetStatus",
 			radio: false,
 			size: "small",
 			filterable: false,

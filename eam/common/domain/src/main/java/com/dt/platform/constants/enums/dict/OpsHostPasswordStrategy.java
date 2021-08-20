@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-08-17 09:59:11
+ * @since 2021-08-20 15:03:08
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -12,14 +12,14 @@ package com.dt.platform.constants.enums.dict;
 public enum OpsHostPasswordStrategy {
 	
 	/**
-	 * 不改
-	*/
-	UNCHANGE("unchange" , "不改"),
-	
-	/**
 	 * OpsTools
 	*/
 	OPS("ops" , "OpsTools"),
+	
+	/**
+	 * 不改
+	*/
+	UNCHANGE("unchange" , "不改"),
 	;
 	
 	private String code;

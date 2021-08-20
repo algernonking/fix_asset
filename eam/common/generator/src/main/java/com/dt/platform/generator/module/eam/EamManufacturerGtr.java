@@ -15,7 +15,7 @@ public class EamManufacturerGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MANUFACTURER.MANUFACTURER_NOTES).search().fuzzySearch();
 
-
+        //eam_asset_change_data
 
         cfg.view().search().inputLayout(
                 new Object[]{

@@ -152,7 +152,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("95%");
         cfg.view().form().addGroup("基本属性",
                 new Object[] {
                         EAMTables.EAM_ASSET.CATEGORY_ID,
@@ -188,11 +188,11 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 }
         );
         cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
-        cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
+       // cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
 
         cfg.view().form().jsAfterDataFill("afterDataFill");
         cfg.view().form().jsBeforeDataFill("beforeDataFill");
-        cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
+      //  cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
 
 //
 //        cfg.getFormConfig().setJsAfterDataFill(      new JSFunctions(this.getClass(),"asset_functions.js")    ));

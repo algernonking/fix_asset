@@ -3,7 +3,10 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
+import com.dt.platform.domain.eam.meta.AssetTranferVOMeta;
 import com.dt.platform.eam.page.AssetTranferPageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -17,6 +20,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
@@ -53,7 +58,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         );
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().form().addGroup(null,
                 new Object[] {

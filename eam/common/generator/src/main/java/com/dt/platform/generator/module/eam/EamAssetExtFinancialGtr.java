@@ -67,7 +67,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("财务属性",
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,

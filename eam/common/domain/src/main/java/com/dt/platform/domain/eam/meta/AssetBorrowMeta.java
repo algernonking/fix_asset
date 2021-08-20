@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetBorrow;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:20
- * @sign D204F3CEF20D33D9675EEE3FE8AE2AB9
+ * @since 2021-08-20 09:30:46
+ * @sign 350335F5487407D6E650E3524143ACE0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,16 +66,6 @@ public class AssetBorrowMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
-	
-	/**
-	 * 资产状态 , 类型: java.lang.String
-	*/
-	public static final String ASSET_STATUS="assetStatus";
-	
-	/**
-	 * 资产状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ASSET_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_STATUS, java.lang.String.class, "资产状态", "资产状态", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -217,19 +208,29 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final String ASSET="asset";
+	public static final String ASSET_LIST="assetList";
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String ASSET_IDS="assetIds";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ASSET_STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -291,17 +292,6 @@ public class AssetBorrowMeta {
 		public AssetBorrow setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
-			return this;
-		}
-		
-		/**
-		 * 设置 资产状态
-		 * @param assetStatus 资产状态
-		 * @return 当前对象
-		*/
-		public AssetBorrow setAssetStatus(String assetStatus) {
-			super.change(ASSET_STATUS,super.getAssetStatus(),assetStatus);
-			super.setAssetStatus(assetStatus);
 			return this;
 		}
 		
@@ -461,12 +451,23 @@ public class AssetBorrowMeta {
 		
 		/**
 		 * 设置 资产
-		 * @param asset 资产
+		 * @param assetList 资产
 		 * @return 当前对象
 		*/
-		public AssetBorrow setAsset(Asset asset) {
-			super.change(ASSET,super.getAsset(),asset);
-			super.setAsset(asset);
+		public AssetBorrow setAssetList(List<Asset> assetList) {
+			super.change(ASSET_LIST,super.getAssetList(),assetList);
+			super.setAssetList(assetList);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetIds 资产列表
+		 * @return 当前对象
+		*/
+		public AssetBorrow setAssetIds(List<String> assetIds) {
+			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
+			super.setAssetIds(assetIds);
 			return this;
 		}
 	}

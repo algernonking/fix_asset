@@ -79,6 +79,8 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			return codeResult;
 		}
 
+
+
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		assetBorrow.setBusinessCode(codeResult.getData().toString());
 		Result r=super.insert(assetBorrow);
