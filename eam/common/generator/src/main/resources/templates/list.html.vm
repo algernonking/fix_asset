@@ -190,6 +190,7 @@
     var AUTH_PREFIX="#(authPrefix)";
 </script>
 
+<script th:src="'#(extURI)?'+${cacheKey}"></script>
 <script th:src="'#(jsURI)?'+${cacheKey}"></script>
 
 </body>

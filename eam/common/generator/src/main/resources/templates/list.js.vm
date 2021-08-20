@@ -47,15 +47,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-			#if(beforeQueryFunc!=null)
-			#(beforeQueryFunc.name)(contitions);
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
-			#end
-
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -187,9 +185,7 @@ function ListPage() {
 		#end
 		#end
 		#end
-		#if(beforeQueryFunc!=null)
-		#(beforeQueryFunc.name)(value);
-		#end
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -549,7 +545,7 @@ function ListPage() {
 			}
 			#for(b:opColumnButtons)
 			else if (layEvent === '#(b.id)') { // #(b.label)
-				#(b.jsFunction.name)(data);
+				window.pageExt.list.#(b.functionName)(data);
 			}
 			#end
 			#if(isTree)else if (layEvent === 'drill') {
@@ -590,25 +586,13 @@ function ListPage() {
 		admin.putTempData('#(formDataKey)-popup-index', index);
 	};
 
-	#for(b:opColumnButtons)
-	/**
-	 * #(b.label) 操作
-	 */
-	#(b.jsFunction.source)
-	#end
-
-	#if(beforeQueryFunc!=null)
-	#(beforeQueryFunc.source);
-	#end
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });
