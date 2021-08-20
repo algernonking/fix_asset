@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:42:06
- * @sign 57C41B73B412F482D17AF6843848737C
+ * @since 2021-08-20 09:41:22
+ * @sign 5FFB0CF1F6B0A5ED338DABCDE0945D0B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -28,12 +28,12 @@ public class AssetBorrowDataMeta {
 	/**
 	 * 资产 , 类型: java.lang.String
 	*/
-	public static final String BORROW_ASSET_ID="borrowAssetId";
+	public static final String ASSET_ID="assetId";
 	
 	/**
 	 * 资产 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowData,java.lang.String> BORROW_ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowData.class ,BORROW_ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowData,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowData.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
 	
 	/**
 	 * 借前资产状态 , 类型: java.lang.String
@@ -138,7 +138,7 @@ public class AssetBorrowDataMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BORROW_ASSET_ID , ASSET_STATUS_BEFORE , USER_ID_BEFORE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , ASSET_STATUS_BEFORE , USER_ID_BEFORE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -161,12 +161,12 @@ public class AssetBorrowDataMeta {
 		
 		/**
 		 * 设置 资产
-		 * @param borrowAssetId 资产
+		 * @param assetId 资产
 		 * @return 当前对象
 		*/
-		public AssetBorrowData setBorrowAssetId(String borrowAssetId) {
-			super.change(BORROW_ASSET_ID,super.getBorrowAssetId(),borrowAssetId);
-			super.setBorrowAssetId(borrowAssetId);
+		public AssetBorrowData setAssetId(String assetId) {
+			super.change(ASSET_ID,super.getAssetId(),assetId);
+			super.setAssetId(assetId);
 			return this;
 		}
 		

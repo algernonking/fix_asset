@@ -110,7 +110,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.KN_CONTENT.CATEGORY_ID,

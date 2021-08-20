@@ -5,12 +5,15 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetRepairStatusEnum;
 import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.meta.AssetHandleVOMeta;
+import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
 import com.dt.platform.domain.eam.meta.CategoryMeta;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
 import com.dt.platform.eam.page.AssetHandlePageController;
 import com.dt.platform.eam.page.AssetRepairPageController;
 import com.dt.platform.eam.page.PositionPageController;
 import com.dt.platform.eam.service.IAssetHandleService;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.proxy.eam.CategoryServiceProxy;
@@ -26,6 +29,9 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
+
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();
@@ -82,7 +88,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.NAME,

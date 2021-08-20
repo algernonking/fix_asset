@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetHandle;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 09:07:05
- * @sign 27CCB669BB6805E5B8F550ACB76B0CAF
+ * @since 2021-08-20 09:25:40
+ * @sign D489E871DC5EC432562690269248E41B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -238,19 +239,29 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final String ASSET="asset";
+	public static final String ASSET_LIST="assetList";
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String ASSET_IDS="assetIds";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , OPERUSER_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET };
+	public static final String[] $PROPS={ ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , OPERUSER_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -504,12 +515,23 @@ public class AssetHandleMeta {
 		
 		/**
 		 * 设置 资产
-		 * @param asset 资产
+		 * @param assetList 资产
 		 * @return 当前对象
 		*/
-		public AssetHandle setAsset(Asset asset) {
-			super.change(ASSET,super.getAsset(),asset);
-			super.setAsset(asset);
+		public AssetHandle setAssetList(List<Asset> assetList) {
+			super.change(ASSET_LIST,super.getAssetList(),assetList);
+			super.setAssetList(assetList);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetIds 资产列表
+		 * @return 当前对象
+		*/
+		public AssetHandle setAssetIds(List<String> assetIds) {
+			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
+			super.setAssetIds(assetIds);
 			return this;
 		}
 	}

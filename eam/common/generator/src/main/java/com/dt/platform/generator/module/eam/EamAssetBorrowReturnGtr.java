@@ -3,9 +3,13 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.Position;
+import com.dt.platform.domain.eam.meta.AssetAllocationVOMeta;
+import com.dt.platform.domain.eam.meta.AssetBorrowReturnVOMeta;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.PositionMeta;
 import com.dt.platform.eam.page.AssetBorrowReturnPageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowReturnServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -21,8 +25,8 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
-
-
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetBorrowReturnVOMeta.ASSET_IDS);
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -35,7 +39,7 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW_RETURN.RETURN_DATE,

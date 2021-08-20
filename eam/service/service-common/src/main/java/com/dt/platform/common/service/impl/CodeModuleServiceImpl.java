@@ -4,6 +4,7 @@ package com.dt.platform.common.service.impl;
 import com.dt.platform.common.service.ICodeModuleService;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
 import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.commons.busi.id.SequenceType;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
@@ -225,7 +226,11 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 				seqSource=attr[i];
 			}
 		}
-		return "";
+		System.out.println("##############"+seqSource);
+		dao.createSequence(seqSource, SequenceType.AI,5);
+		System.out.println("############2##"+seqSource);
+		return dao.getNextSequenceValue(seqSource);
 	}
+
 
 }

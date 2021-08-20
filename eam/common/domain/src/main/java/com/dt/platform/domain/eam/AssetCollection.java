@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_COLLECTION;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:36
- * @sign 81D1A7905F3226FFEA5C127B4FD4A4FD
+ * @since 2021-08-20 09:25:34
+ * @sign EE97B74892D2A67FC5BA82F8860B146E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -165,7 +167,13 @@ public class AssetCollection extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -590,17 +598,58 @@ public class AssetCollection extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
 	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public AssetCollection setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
 	 * @param asset 资产
 	 * @return 当前对象
 	*/
-	public AssetCollection setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetCollection addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetCollection setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetCollection addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
 		return this;
 	}
 

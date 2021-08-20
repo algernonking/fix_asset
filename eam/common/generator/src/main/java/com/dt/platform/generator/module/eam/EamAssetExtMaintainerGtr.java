@@ -57,7 +57,7 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME).basic().form().label("结束时间");
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("维保属性",
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_NAME,

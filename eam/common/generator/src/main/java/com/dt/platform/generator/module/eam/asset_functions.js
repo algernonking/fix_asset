@@ -31,7 +31,7 @@ function afterDataFill(data) {
     console.log("afterDataFill"+data);
 }
 
-//beforeTableDataQuery
+//[beforeTableDataQuery]
 function beforeTableDataQuery(data) {
     console.log("afterDataFill"+data);
 }

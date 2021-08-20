@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:36
+ * @since 2021-08-20 14:24:35
  */
 
 function FormPage() {
@@ -352,17 +352,18 @@ function FormPage() {
     }
 
 	function beforeDataFill(data) {
-		//$("#assetCode").prop("disabled",true);
-		$("#assetCode").attr("readonly","readonly");
-		$("#warehouseId").hide();
-		$("#assetCode").attr('placeholder','系统自动生成');
-		console.log("beforeDataFill",data);
+	    //$("#assetCode").prop("disabled",true);
+	    $("#assetCode").attr("readonly","readonly");
+	    //$("#warehouseId").hide();
+	    $("#assetCode").attr('placeholder','系统自动生成');
+	    console.log("beforeDataFill",data);
 	}
 	
 	
 	function afterDataFill(data) {
-	    console.log("afterDataFill",data);
+	    console.log("afterDataFill"+data);
 	}
+	
 
 }
 

@@ -6,7 +6,11 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.domain.eam.AssetHandle;
+import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
+import com.dt.platform.domain.ops.meta.HostVOMeta;
 import com.dt.platform.eam.page.AssetBorrowPageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -26,6 +30,8 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
 
        // cfg.view().list().disableSpaceColumn();
         cfg.view().formWindow().bottomSpace(250);
@@ -60,7 +66,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 }
         );
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
@@ -78,6 +84,8 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_BORROW.CONTENT,
                 }
         );
+
+
 
 
         //文件生成覆盖模式

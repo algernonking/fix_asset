@@ -10,15 +10,14 @@ import com.github.foxnic.api.constant.CodeTextEnum;
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
 */
 
-
-public enum CommonStatusEnum implements CodeTextEnum {
+public enum StatusValidEnum implements CodeTextEnum {
 
 	VALID("valid" , "有效"),
 	INVALID("invalid" , "无效")
 	;
 	private String code;
 	private String text;
-	private CommonStatusEnum(String code, String text)  {
+	private StatusValidEnum(String code, String text)  {
 		this.code=code;
 		this.text=text;
 	}

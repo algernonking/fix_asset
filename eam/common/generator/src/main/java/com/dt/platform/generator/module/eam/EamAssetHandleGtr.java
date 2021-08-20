@@ -3,7 +3,10 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
+import com.dt.platform.domain.eam.meta.AssetHandleVOMeta;
 import com.dt.platform.eam.page.AssetHandlePageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -16,6 +19,8 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
 
         System.out.println(this.getClass().getName());
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetHandleVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.ID).basic().hidden(true);
@@ -44,7 +49,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
             );
 
 
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_HANDLE.TYPE,

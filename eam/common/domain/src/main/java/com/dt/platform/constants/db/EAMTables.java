@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-08-19 21:40:09
+ * @since 2021-08-20 14:48:42
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -263,6 +263,7 @@ public class EAMTables {
 	}
 	
 	/**
+	 * 资产审批配置
 	*/
 	public static class EAM_APPROVE_CONFIGURE extends DBTable {
 		
@@ -280,6 +281,16 @@ public class EAMTables {
 		 * 名称
 		*/
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 审批类型
+		*/
+		public static final DBField APPROVAL_TYPE = new DBField(DBDataType.STRING , "approval_type","approvalType","审批类型","审批类型",false,false,false);
+		
+		/**
+		 * 审批状态
+		*/
+		public static final DBField APPROVAL_STATUS = new DBField(DBDataType.STRING , "approval_status","approvalStatus","审批状态","审批状态",false,false,false);
 		
 		/**
 		 * 备注
@@ -326,7 +337,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
 		
 		public EAM_APPROVE_CONFIGURE() {
-			this.init($NAME,"" , ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产审批配置" , ID , NAME , APPROVAL_TYPE , APPROVAL_STATUS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_APPROVE_CONFIGURE $TABLE=new EAM_APPROVE_CONFIGURE();
 	}
@@ -849,7 +860,7 @@ public class EAMTables {
 		/**
 		 * 资产
 		*/
-		public static final DBField BORROW_ASSET_ID = new DBField(DBDataType.STRING , "borrow_asset_id","borrowAssetId","资产","资产",false,false,true);
+		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
 		
 		/**
 		 * 借前资产状态
@@ -901,7 +912,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_BORROW_DATA() {
-			this.init($NAME,"资产借用数据" , ID , BORROW_ASSET_ID ,  ASSET_STATUS_BEFORE , USER_ID_BEFORE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产借用数据" , ID , ASSET_ID ,  ASSET_STATUS_BEFORE , USER_ID_BEFORE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_BORROW_DATA $TABLE=new EAM_ASSET_BORROW_DATA();
 	}
@@ -984,6 +995,96 @@ public class EAMTables {
 			this.init($NAME,"资产借用归还" , ID , BORROW_ID , ORIGINATOR_ID , RETURN_DATE , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_BORROW_RETURN $TABLE=new EAM_ASSET_BORROW_RETURN();
+	}
+	
+	/**
+	 * 变更明细
+	*/
+	public static class EAM_ASSET_CHANGE_DATA extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_change_data";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 资产
+		*/
+		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
+		
+		/**
+		 * 变更号
+		*/
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","变更号","变更号",false,false,true);
+		
+		/**
+		 * 变更类型
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","变更类型","变更类型",false,false,true);
+		
+		/**
+		 * 变更内容
+		*/
+		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","变更内容","变更内容",false,false,true);
+		
+		/**
+		 * 变更人
+		*/
+		public static final DBField CHANGE_USER_ID = new DBField(DBDataType.DATE , "change_user_id","changeUserId","变更人","变更人",false,false,true);
+		
+		/**
+		 * 变更时间
+		*/
+		public static final DBField CHANGE_TIME = new DBField(DBDataType.DATE , "change_time","changeTime","变更时间","变更时间",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public EAM_ASSET_CHANGE_DATA() {
+			this.init($NAME,"变更明细" , ID , ASSET_ID , BUSINESS_CODE , TYPE , CONTENT , CHANGE_USER_ID , CHANGE_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_ASSET_CHANGE_DATA $TABLE=new EAM_ASSET_CHANGE_DATA();
 	}
 	
 	/**
@@ -1219,6 +1320,96 @@ public class EAMTables {
 			this.init($NAME,"资产退库" , ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_COLLECTION_RETURN $TABLE=new EAM_ASSET_COLLECTION_RETURN();
+	}
+	
+	/**
+	 * 变更明细
+	*/
+	public static class EAM_ASSET_DATA_CHANGE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_change";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 资产
+		*/
+		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
+		
+		/**
+		 * 变更号
+		*/
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","变更号","变更号",false,false,true);
+		
+		/**
+		 * 变更类型
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","变更类型","变更类型",false,false,true);
+		
+		/**
+		 * 变更内容
+		*/
+		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","变更内容","变更内容",false,false,true);
+		
+		/**
+		 * 变更人
+		*/
+		public static final DBField CHANGE_USER_ID = new DBField(DBDataType.DATE , "change_user_id","changeUserId","变更人","变更人",false,false,true);
+		
+		/**
+		 * 变更时间
+		*/
+		public static final DBField CHANGE_TIME = new DBField(DBDataType.DATE , "change_time","changeTime","变更时间","变更时间",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public EAM_ASSET_DATA_CHANGE() {
+			this.init($NAME,"变更明细" , ID , ASSET_ID , BUSINESS_CODE , TYPE , CONTENT , CHANGE_USER_ID , CHANGE_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_ASSET_DATA_CHANGE $TABLE=new EAM_ASSET_DATA_CHANGE();
 	}
 	
 	/**

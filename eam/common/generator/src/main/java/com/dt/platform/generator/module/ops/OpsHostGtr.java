@@ -185,7 +185,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_HOST.SYSTEM_ID,

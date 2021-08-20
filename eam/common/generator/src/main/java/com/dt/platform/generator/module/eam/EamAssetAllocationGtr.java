@@ -5,7 +5,11 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetAllocation;
 import com.dt.platform.domain.eam.Position;
+import com.dt.platform.domain.eam.meta.AssetAllocationVOMeta;
+import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
 import com.dt.platform.eam.page.AssetAllocationPageController;
+import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
+import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -19,6 +23,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.service().addRelationSaveAction(AssetHandleServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);
@@ -58,7 +64,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID,
