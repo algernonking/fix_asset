@@ -191,6 +191,7 @@ function FormPage() {
 			form.val('data-form', formData);
 
 	     	#for(f : fields)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("upload"))
 			//设置 #(f.labelInForm) 显示附件
 		    if($("##(f.varName)").val()) {
@@ -199,20 +200,24 @@ function FormPage() {
 				adjustPopup();
 			}
 		    #end
+			#end
 		    #end
 
 
 			#for(f : fields)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("check_box"))
 			//设置 #(f.labelInForm) 显示复选框勾选
 		    if(formData["#(f.varName)"]) {
 				fox.setCheckedValue("#(f.varName)",formData["#(f.varName)"]);
 		    }
 		    #end
+			#end
 		    #end
 
 
 			#for(f : fields)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("select_box"))
 			//设置  #(f.labelInForm) 设置下拉框勾选
 			#if(f.selectField.queryApi!=null && f.selectField.fillBy!=null)
@@ -221,6 +226,7 @@ function FormPage() {
 			fox.setSelectValue4Dict("##(f.varName)",formData.#(f.varName),SELECT_#(f.varName.toUpperCase())_DATA);
 			#elseif(f.selectField.enumTypeName!=null)
 			fox.setSelectValue4Enum("##(f.varName)",formData.#(f.varName),SELECT_#(f.varName.toUpperCase())_DATA);
+			#end
 			#end
 			#end
 			#end
@@ -266,7 +272,7 @@ function FormPage() {
 			data.field = form.val("data-form");
 
 	    	#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("logic_switch"))
 			//处理 #(f.labelInForm) 默认值
 		    if(!data.field.#(f.varName)) data.field.#(f.varName)=0;
@@ -275,7 +281,7 @@ function FormPage() {
 		    #end
 
 			#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("check_box"))
 			//处理 #(f.labelInForm) 默认值
 			data.field["#(f.varName)"]=fox.getCheckedValue("#(f.varName)");
@@ -284,7 +290,7 @@ function FormPage() {
 			#end
 
 			#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("select_box"))
 			//获取 #(f.labelInForm) 下拉框的值
 			data.field["#(f.varName)"]=fox.getSelectedValue("#(f.varName)",#(f.selectField.muliti));

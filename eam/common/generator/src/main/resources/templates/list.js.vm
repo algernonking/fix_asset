@@ -580,7 +580,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["#(formWindow.width)px",height+"px"],
+			area: ["#(formWindow.width)",height+"px"],
 			type: 2,
 			content: '#(formURI)' + queryString,
 			finish: function () {
