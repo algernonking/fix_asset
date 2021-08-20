@@ -73,8 +73,6 @@
 
     <a th:if="${perm.checkAuth('eam_approve_configure:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
     <a th:if="${perm.checkAnyAuth('eam_approve_configure:update','eam_approve_configure:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
-
-
     <a th:if="${perm.checkAuth('eam_approve_configure:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 </script>
 
