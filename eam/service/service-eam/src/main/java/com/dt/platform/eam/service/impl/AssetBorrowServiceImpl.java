@@ -3,8 +3,12 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.ApproveConfigure;
+import com.dt.platform.eam.service.IApproveConfigureService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +64,8 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	public DAO dao() { return dao; }
 
 
+	@Autowired
+	IApproveConfigureService approveConfigureService;
 
 	@Override
 	public Object generateId(Field field) {
@@ -78,9 +84,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
-
-
-
+		ApproveConfigure approveConfigure=new ApproveConfigure();
+		System.out.println(approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code()));
+		approveConfigureService.queryEntity(approveConfigure);
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		assetBorrow.setBusinessCode(codeResult.getData().toString());
 		Result r=super.insert(assetBorrow);

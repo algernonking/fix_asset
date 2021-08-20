@@ -24,7 +24,6 @@ public class EamPositionGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_POSITION.NAME,
                         EAMTables.EAM_POSITION.NOTES,
-
                 }
         );
 

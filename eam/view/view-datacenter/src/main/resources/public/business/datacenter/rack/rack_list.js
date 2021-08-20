@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:55
+ * @since 2021-08-20 16:43:36
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -68,7 +72,7 @@ function ListPage() {
 					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 125 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -103,6 +107,7 @@ function ListPage() {
 		value.rackName={ value: $("#rackName").val()};
 		value.rackLabels={ value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.rackNotes={ value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -134,7 +139,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow();
+		fox.switchSearchRow(1);
 
 		//渲染 areaId 下拉字段
 		fox.renderSelectBox({
@@ -192,7 +197,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(function (ex){
+			fox.switchSearchRow(1,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -343,16 +348,13 @@ function ListPage() {
 		admin.putTempData('dc-rack-form-data-popup-index', index);
 	};
 
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });
