@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:23
+ * @since 2021-08-21 10:00:59
  */
 
 
@@ -66,7 +66,7 @@ function ListPage() {
 					,{ field: 'pid', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('父节点') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
 					,{ field: 'profile', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('介绍') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getDictText(SELECT_STATUS_DATA,d.status);}}
+					,{ field: 'status', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getDictText(RADIO_STATUS_DATA,d.status);}}
 					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet:function (d){ return fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod);}}
 					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod);}}
 					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') }
@@ -159,13 +159,12 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
-		//渲染 status 下拉字段
+		//渲染 status 搜索框
 		fox.renderSelectBox({
 			el: "status",
-			radio: false,
 			size: "small",
-			filterable: false,
-			//转换数据
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];

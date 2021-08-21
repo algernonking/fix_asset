@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:23
+ * @since 2021-08-21 10:01:00
  */
 
 function FormPage() {
@@ -72,22 +72,6 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 status 下拉字段
-		fox.renderSelectBox({
-			el: "status",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
 		//渲染 opsMethod 下拉字段
 		fox.renderSelectBox({
 			el: "opsMethod",
@@ -174,8 +158,6 @@ function FormPage() {
 
 
 
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Dict("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  运维模式 设置下拉框勾选
 			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
 			//设置  开发模式 设置下拉框勾选
@@ -225,8 +207,6 @@ function FormPage() {
 
 
 
-			//获取 状态 下拉框的值
-			data.field["status"]=fox.getSelectedValue("status",false);
 			//获取 运维模式 下拉框的值
 			data.field["opsMethod"]=fox.getSelectedValue("opsMethod",false);
 			//获取 开发模式 下拉框的值

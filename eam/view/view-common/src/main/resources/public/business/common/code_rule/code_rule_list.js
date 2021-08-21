@@ -1,7 +1,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:31
+ * @since 2021-08-21 08:34:58
  */
 
 
@@ -64,8 +64,8 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码名称') }
+					,{ field: 'module', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('模块'), templet: function (d) { return fox.joinLabel(d.module,"label");}}
 					,{ field: 'rule', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码规则') }
-					,{ field: 'module', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务模块'), templet:function (d){ return fox.getEnumText(SELECT_MODULE_DATA,d.module);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -294,7 +294,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/common/code_rule/code_rule_form.html' + queryString,
 			finish: function () {

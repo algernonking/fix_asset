@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:51
+ * @since 2021-08-21 08:43:57
  */
  -->
  <!DOCTYPE html>
@@ -36,9 +36,9 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 退库使用组织 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 退库后公司/部门 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('退库使用组织')}" class="search-label userOrganizationId-label">退库使用组织</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('退库后公司/部门')}" class="search-label userOrganizationId-label">退库后公司/部门</span><span class="search-colon">:</span></div>
                         <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 退库日期 , returnDate ,typeName=date_input, isHideInSearch=false -->
@@ -53,20 +53,15 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('制单人')}" class="search-label originatorId-label">制单人</span><span class="search-colon">:</span></div>
-                        <input id="originatorId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
                         <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
-                    </div>
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 退库说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

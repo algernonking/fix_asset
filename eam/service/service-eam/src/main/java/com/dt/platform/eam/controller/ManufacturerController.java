@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 生产厂商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:15
+ * @since 2021-08-20 20:18:36
 */
 
 @Api(tags = "生产厂商")

@@ -1,7 +1,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:59
+ * @since 2021-08-20 20:18:23
  */
 
 
@@ -64,9 +64,9 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
-					,{ field: 'managementOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属组织') }
+					,{ field: 'managementCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司') }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理人员') }
-					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用组织') }
+					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') }
 					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
@@ -103,7 +103,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.managementOrganizationId={ value: $("#managementOrganizationId").val()};
+		value.managementCompanyId={ value: $("#managementCompanyId").val()};
 		value.userOrganizationId={ value: $("#userOrganizationId").val()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.positionDetail={ value: $("#positionDetail").val()};

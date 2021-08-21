@@ -96,6 +96,12 @@ public class EAMRelationManager extends RelationManager {
     }
 
     public void setupAssetTranfer() {
+
+        // 关联位置
+        this.property(AssetTranferMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
+
+
         // 关联资产
         this.property(AssetTranferMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.ID)

@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:22
+ * @since 2021-08-21 08:34:48
 */
 
 @Api(tags = "编码分配")
@@ -67,8 +67,8 @@ public class CodeAllocationController extends SuperController {
 	@ApiOperation(value = "添加编码分配")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_allocate"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产编码生成规则"),
 	})
 	@ApiOperationSupport(order=1)
@@ -121,8 +121,8 @@ public class CodeAllocationController extends SuperController {
 	@ApiOperation(value = "更新编码分配")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_allocate"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产编码生成规则"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CodeAllocationVOMeta.PAGE_INDEX , CodeAllocationVOMeta.PAGE_SIZE , CodeAllocationVOMeta.SEARCH_FIELD , CodeAllocationVOMeta.FUZZY_FIELD , CodeAllocationVOMeta.SEARCH_VALUE , CodeAllocationVOMeta.SORT_FIELD , CodeAllocationVOMeta.SORT_TYPE , CodeAllocationVOMeta.IDS } ) 
@@ -141,8 +141,8 @@ public class CodeAllocationController extends SuperController {
 	@ApiOperation(value = "保存编码分配")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_allocate"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产编码生成规则"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeAllocationVOMeta.PAGE_INDEX , CodeAllocationVOMeta.PAGE_SIZE , CodeAllocationVOMeta.SEARCH_FIELD , CodeAllocationVOMeta.FUZZY_FIELD , CodeAllocationVOMeta.SEARCH_VALUE , CodeAllocationVOMeta.SORT_FIELD , CodeAllocationVOMeta.SORT_TYPE , CodeAllocationVOMeta.IDS } )
@@ -202,8 +202,8 @@ public class CodeAllocationController extends SuperController {
 	@ApiOperation(value = "查询编码分配")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_allocate"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产编码生成规则"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeAllocationVOMeta.PAGE_INDEX , CodeAllocationVOMeta.PAGE_SIZE } )
@@ -223,8 +223,8 @@ public class CodeAllocationController extends SuperController {
 	@ApiOperation(value = "分页查询编码分配")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
-		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_allocate"),
+		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产编码生成规则"),
 	})
 	@ApiOperationSupport(order=8)

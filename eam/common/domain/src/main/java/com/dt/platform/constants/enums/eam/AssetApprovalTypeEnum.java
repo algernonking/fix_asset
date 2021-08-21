@@ -14,9 +14,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetApprovalTypeEnum implements CodeTextEnum {
 
 	BORROW("borrow" , "借用"),
-	ASSET_SOFTWARE("asset_software" , "软件资产"),
-	ASSET_CONSUMABLES("asset_consumables" , "耗材"),
-	ASSET_SPAREPARTS("asset_spareparts" , "备品备件")
+	COLLECTION("collection" , "领用"),
+	COLLECTION_RETURN("collection_return" , "退库"),
+	REPAIR("repair" , "报修")
 	;
 	private String code;
 	private String text;

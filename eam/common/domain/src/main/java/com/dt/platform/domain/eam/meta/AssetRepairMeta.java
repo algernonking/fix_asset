@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:53
- * @sign ED60FE11CBB68B74DD29BC90693AE6D6
+ * @since 2021-08-20 21:17:05
+ * @sign A5320D411313EAE0EE902069B537AB2C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -28,16 +28,6 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
-	
-	/**
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final String BUSINESS_CODE="businessCode";
@@ -46,16 +36,6 @@ public class AssetRepairMeta {
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final String BUSINESS_DATE="businessDate";
-	
-	/**
-	 * 业务日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 流程 , 类型: java.lang.String
@@ -78,14 +58,14 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final String ORIGINATOR_ID="originatorId";
+	public static final String NAME="name";
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 维修状态 , 类型: java.lang.String
@@ -156,6 +136,26 @@ public class AssetRepairMeta {
 	 * 图片 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> PICTURE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,PICTURE_ID, java.lang.String.class, "图片", "图片", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -260,7 +260,7 @@ public class AssetRepairMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , BUSINESS_DATE , PROC_ID , STATUS , ORIGINATOR_ID , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , OPERUSER_ID , PICTURE_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , OPERUSER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -282,17 +282,6 @@ public class AssetRepairMeta {
 		}
 		
 		/**
-		 * 设置 业务名称
-		 * @param name 业务名称
-		 * @return 当前对象
-		*/
-		public AssetRepair setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
-			return this;
-		}
-		
-		/**
 		 * 设置 业务编号
 		 * @param businessCode 业务编号
 		 * @return 当前对象
@@ -300,17 +289,6 @@ public class AssetRepairMeta {
 		public AssetRepair setBusinessCode(String businessCode) {
 			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
 			super.setBusinessCode(businessCode);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
-		 * @return 当前对象
-		*/
-		public AssetRepair setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
 			return this;
 		}
 		
@@ -337,13 +315,13 @@ public class AssetRepairMeta {
 		}
 		
 		/**
-		 * 设置 制单人
-		 * @param originatorId 制单人
+		 * 设置 业务名称
+		 * @param name 业务名称
 		 * @return 当前对象
 		*/
-		public AssetRepair setOriginatorId(String originatorId) {
-			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
-			super.setOriginatorId(originatorId);
+		public AssetRepair setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
 			return this;
 		}
 		
@@ -421,6 +399,28 @@ public class AssetRepairMeta {
 		public AssetRepair setPictureId(String pictureId) {
 			super.change(PICTURE_ID,super.getPictureId(),pictureId);
 			super.setPictureId(pictureId);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public AssetRepair setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public AssetRepair setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
 			return this;
 		}
 		

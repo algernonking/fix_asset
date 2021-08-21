@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:38
+ * @since 2021-08-21 10:24:44
  */
 
 
@@ -148,7 +148,6 @@ function ListPage() {
 			radio: false,
 			size: "small",
 			filterable: true,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -373,7 +372,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["90%",height+"px"],
 			type: 2,
 			content: '/business/knowledgebase/content/content_form.html' + queryString,
 			finish: function () {

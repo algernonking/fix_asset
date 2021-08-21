@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:08:07
+ * @since 2021-08-21 09:16:10
 */
 
 @Api(tags = "资产")
@@ -88,9 +88,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_COMPANY_ID , value = "所属单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -173,9 +173,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_COMPANY_ID , value = "所属单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -224,9 +224,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_COMPANY_ID , value = "所属单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -322,9 +322,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_COMPANY_ID , value = "所属单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -370,9 +370,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.MANAGEMENT_COMPANY_ID , value = "所属单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USER_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),

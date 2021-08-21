@@ -27,7 +27,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
-            console.log('beforeDataFill',data);
+            $("#assetCode").attr("readonly","readonly");
+            $("#assetCode").attr('placeholder','系统自动生成');
         },
         /**
          * 表单数据填充后

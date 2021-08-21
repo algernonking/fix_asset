@@ -50,7 +50,9 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.HOST_ID).basic().label("主机")
                 .form().selectBox().queryApi(HostServiceProxy.QUERY_PAGED_LIST)
                 .valueField(HostMeta.ID).textField(HostMeta.HOST_NAME)
-                .toolbar(true).paging(true).muliti(false).fillBy(DbInstanceMeta.HOST);
+                .toolbar(false).filter(true).paging(true).muliti(false).fillBy(DbInstanceMeta.HOST);
+
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).form().validate().required();
 
 
 
@@ -75,7 +77,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
                 .form().label("备份时间").dateInput();
-
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).form().textArea().height(30);
 
 
         cfg.view().search().inputLayout(

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资产审批配置 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:38
+ * @since 2021-08-21 09:55:24
 */
 
 public interface IApproveConfigureService extends ISuperService<ApproveConfigure> {

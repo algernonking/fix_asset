@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:53
- * @sign ED60FE11CBB68B74DD29BC90693AE6D6
+ * @since 2021-08-20 21:17:04
+ * @sign A5320D411313EAE0EE902069B537AB2C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,22 +38,10 @@ public class AssetRepair extends Entity {
 	private String id;
 	
 	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
-	
-	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
-	
-	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
 	
 	/**
 	 * 流程：流程
@@ -68,10 +56,10 @@ public class AssetRepair extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
 	 * 维修状态：维修状态
@@ -114,6 +102,18 @@ public class AssetRepair extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="图片" , notes = "图片")
 	private String pictureId;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
+	
+	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -195,25 +195,6 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetRepair setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -229,25 +210,6 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public AssetRepair setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
 		return this;
 	}
 	
@@ -290,21 +252,21 @@ public class AssetRepair extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetRepair setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetRepair setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
@@ -438,6 +400,44 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setPictureId(String pictureId) {
 		this.pictureId=pictureId;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetRepair setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public AssetRepair setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
 		return this;
 	}
 	

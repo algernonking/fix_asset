@@ -1,7 +1,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:38
+ * @since 2021-08-21 09:55:32
  */
 
 
@@ -62,10 +62,10 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称'), templet:function (d){ return fox.getEnumText(SELECT_NAME_DATA,d.name);}}
-					,{ field: 'approvalType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批类型'), templet:function (d){ return fox.getDictText(SELECT_APPROVALTYPE_DATA,d.approvalType);}}
-					,{ field: 'approvalStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批状态'), templet:function (d){ return fox.getEnumText(SELECT_APPROVALSTATUS_DATA,d.approvalStatus);}}
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
+					,{ field: 'approvalType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批类型'), templet:function (d){ return fox.getEnumText(SELECT_APPROVALTYPE_DATA,d.approvalType);}}
+					,{ field: 'approvalStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批状态'), templet:function (d){ return fox.getEnumText(RADIO_APPROVALSTATUS_DATA,d.approvalStatus);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -98,7 +98,9 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.name={ value: xmSelect.get("#name",true).getValue("value"), label:xmSelect.get("#name",true).getValue("nameStr")};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.approvalStatus={ value: xmSelect.get("#approvalStatus",true).getValue("value"), label:xmSelect.get("#approvalStatus",true).getValue("nameStr")};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -133,13 +135,12 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
-		//渲染 name 下拉字段
+		//渲染 approvalStatus 搜索框
 		fox.renderSelectBox({
-			el: "name",
-			radio: false,
+			el: "approvalStatus",
 			size: "small",
-			filterable: false,
-			//转换数据
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -311,7 +312,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["800px",height+"px"],
 			type: 2,
 			content: '/business/eam/approve_configure/approve_configure_form.html' + queryString,
 			finish: function () {

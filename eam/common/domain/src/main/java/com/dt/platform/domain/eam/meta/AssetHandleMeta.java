@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:56
- * @sign D489E871DC5EC432562690269248E41B
+ * @since 2021-08-20 20:18:19
+ * @sign F32988CDF1005B639C103075D8F8A375
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,16 +39,6 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
 	
 	/**
-	 * 办理状态 , 类型: java.lang.String
-	*/
-	public static final String STATUS="status";
-	
-	/**
-	 * 办理状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
-	
-	/**
 	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final String BUSINESS_CODE="businessCode";
@@ -67,6 +57,16 @@ public class AssetHandleMeta {
 	 * 业务名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
+	
+	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
 	 * 处置类型 , 类型: java.lang.String
@@ -129,14 +129,14 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.util.Date> ACTUAL_FINISH_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ACTUAL_FINISH_DATE, java.util.Date.class, "实际完成时间", "实际完成时间", java.util.Date.class, null);
 	
 	/**
-	 * 制单人 , 操作人 , 类型: java.lang.String
+	 * 制单人 , 类型: java.lang.String
 	*/
-	public static final String OPERUSER_ID="operuserId";
+	public static final String ORIGINATOR_ID="originatorId";
 	
 	/**
-	 * 制单人 , 操作人 , 类型: java.lang.String
+	 * 制单人 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> OPERUSER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,OPERUSER_ID, java.lang.String.class, "制单人", "操作人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 图片 , 类型: java.lang.String
@@ -261,7 +261,7 @@ public class AssetHandleMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PROC_ID , STATUS , BUSINESS_CODE , NAME , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , OPERUSER_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -294,17 +294,6 @@ public class AssetHandleMeta {
 		}
 		
 		/**
-		 * 设置 办理状态
-		 * @param status 办理状态
-		 * @return 当前对象
-		*/
-		public AssetHandle setStatus(String status) {
-			super.change(STATUS,super.getStatus(),status);
-			super.setStatus(status);
-			return this;
-		}
-		
-		/**
 		 * 设置 业务编号
 		 * @param businessCode 业务编号
 		 * @return 当前对象
@@ -323,6 +312,17 @@ public class AssetHandleMeta {
 		public AssetHandle setName(String name) {
 			super.change(NAME,super.getName(),name);
 			super.setName(name);
+			return this;
+		}
+		
+		/**
+		 * 设置 办理状态
+		 * @param status 办理状态
+		 * @return 当前对象
+		*/
+		public AssetHandle setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		
@@ -394,12 +394,12 @@ public class AssetHandleMeta {
 		
 		/**
 		 * 设置 制单人
-		 * @param operuserId 制单人
+		 * @param originatorId 制单人
 		 * @return 当前对象
 		*/
-		public AssetHandle setOperuserId(String operuserId) {
-			super.change(OPERUSER_ID,super.getOperuserId(),operuserId);
-			super.setOperuserId(operuserId);
+		public AssetHandle setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
 			return this;
 		}
 		

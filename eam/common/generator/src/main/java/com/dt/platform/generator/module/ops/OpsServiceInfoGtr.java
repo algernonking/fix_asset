@@ -41,7 +41,7 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID)
                 .basic().label("服务类型")
                 .form().validate().required()
-                .form().selectBox().queryApi(ServiceCategoryServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(ServiceCategoryServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ServiceCategoryMeta.ID).textField(ServiceCategoryMeta.NAME).fillBy(ServiceInfoMeta.SERVICE_CATEGORY).muliti(false);
 
 

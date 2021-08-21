@@ -57,12 +57,11 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,
-
+                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
                         EAMTables.EAM_ASSET_BORROW.CONTENT
                 }
         );

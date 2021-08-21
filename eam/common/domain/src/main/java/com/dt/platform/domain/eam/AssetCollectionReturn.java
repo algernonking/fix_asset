@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:51
- * @sign A627A708B97BD4881EE782D5DAE354E1
+ * @since 2021-08-21 08:43:52
+ * @sign 210EF806F9A2980EF3B9147C5990AFAB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,12 +38,6 @@ public class AssetCollectionReturn extends Entity {
 	private String id;
 	
 	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
-	
-	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
@@ -56,16 +50,16 @@ public class AssetCollectionReturn extends Entity {
 	private String procId;
 	
 	/**
+	 * 业务名称：业务名称
+	*/
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
+	
+	/**
 	 * 办理状态：办理状态
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
-	
-	/**
-	 * 制单人：制单人
-	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
 	
 	/**
 	 * 退库日期：退库日期
@@ -74,9 +68,9 @@ public class AssetCollectionReturn extends Entity {
 	private Date returnDate;
 	
 	/**
-	 * 退库使用组织：退库使用组织
+	 * 退库后公司/部门：退库后公司/部门
 	*/
-	@ApiModelProperty(required = false,value="退库使用组织" , notes = "退库使用组织")
+	@ApiModelProperty(required = false,value="退库后公司/部门" , notes = "退库后公司/部门")
 	private String userOrganizationId;
 	
 	/**
@@ -96,6 +90,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="退库说明" , notes = "退库说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -189,25 +189,6 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetCollectionReturn setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -246,6 +227,25 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
+	*/
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 设置 业务名称
+	 * @param name 业务名称
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setName(String name) {
+		this.name=name;
+		return this;
+	}
+	
+	/**
 	 * 获得 办理状态<br>
 	 * 办理状态
 	 * @return 办理状态
@@ -261,25 +261,6 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setStatus(String status) {
 		this.status=status;
-		return this;
-	}
-	
-	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
-	*/
-	public String getOriginatorId() {
-		return originatorId;
-	}
-	
-	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
-	 * @return 当前对象
-	*/
-	public AssetCollectionReturn setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -303,17 +284,17 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 退库使用组织<br>
-	 * 退库使用组织
-	 * @return 退库使用组织
+	 * 获得 退库后公司/部门<br>
+	 * 退库后公司/部门
+	 * @return 退库后公司/部门
 	*/
 	public String getUserOrganizationId() {
 		return userOrganizationId;
 	}
 	
 	/**
-	 * 设置 退库使用组织
-	 * @param userOrganizationId 退库使用组织
+	 * 设置 退库后公司/部门
+	 * @param userOrganizationId 退库后公司/部门
 	 * @return 当前对象
 	*/
 	public AssetCollectionReturn setUserOrganizationId(String userOrganizationId) {
@@ -375,6 +356,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

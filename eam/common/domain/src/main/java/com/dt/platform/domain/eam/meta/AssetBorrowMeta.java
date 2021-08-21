@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:46
- * @sign 350335F5487407D6E650E3524143ACE0
+ * @since 2021-08-20 20:18:09
+ * @sign 36103AA6C1DFF0C2FFCE870129C362C5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,16 +26,6 @@ public class AssetBorrowMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 业务编号 , 类型: java.lang.String
@@ -68,14 +58,14 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final String ORIGINATOR_ID="originatorId";
+	public static final String NAME="name";
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 借用人 , 类型: java.lang.String
@@ -116,6 +106,16 @@ public class AssetBorrowMeta {
 	 * 借出说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,CONTENT, java.lang.String.class, "借出说明", "借出说明", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 业务日期 , 类型: java.util.Date
@@ -230,7 +230,7 @@ public class AssetBorrowMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -248,17 +248,6 @@ public class AssetBorrowMeta {
 		public AssetBorrow setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务名称
-		 * @param name 业务名称
-		 * @return 当前对象
-		*/
-		public AssetBorrow setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
 			return this;
 		}
 		
@@ -296,13 +285,13 @@ public class AssetBorrowMeta {
 		}
 		
 		/**
-		 * 设置 制单人
-		 * @param originatorId 制单人
+		 * 设置 业务名称
+		 * @param name 业务名称
 		 * @return 当前对象
 		*/
-		public AssetBorrow setOriginatorId(String originatorId) {
-			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
-			super.setOriginatorId(originatorId);
+		public AssetBorrow setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
 			return this;
 		}
 		
@@ -347,6 +336,17 @@ public class AssetBorrowMeta {
 		public AssetBorrow setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public AssetBorrow setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
 			return this;
 		}
 		

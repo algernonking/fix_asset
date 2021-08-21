@@ -30,7 +30,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.MODULE).basic().label("业务模块")
-                .form().validate().required().form().selectBox().paging(false).muliti(false).filter(false).toolbar(false)
+                .form().validate().required().form().selectBox().paging(false).muliti(false).filter(true).toolbar(false)
                 .enumType(CodeModuleEnum.class);
 
 
@@ -39,7 +39,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
                 .basic().label("编码规则")
                 .form().validate().required()
-                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
 
 
@@ -51,7 +51,8 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                 }
         );
 
-
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("1000px");
 
         //文件生成覆盖模式
         cfg.overrides()

@@ -2,7 +2,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:10
+ * @since 2021-08-21 09:30:40
  */
  -->
  <!DOCTYPE html>
@@ -31,10 +31,28 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=false -->
+                    <!-- 物品名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('标准型号物品图片')}" class="search-label pictureId-label">标准型号物品图片</span><span class="search-colon">:</span></div>
-                        <input id="pictureId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('物品名称')}" class="search-label name-label">物品名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.GoodsStautsEnum')}" style="width:140px"></div>
+
+                    </div>
+                    <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
+                        <div id="categoryId" th:data="${'/service-eam/eam-category/query-paged-list'}" style="width:140px"></div>
+                    </div>
+                    <!-- 厂商 , manufacturerId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
+                        <div id="manufacturerId" th:data="${'/service-eam/eam-manufacturer/query-list'}" style="width:140px"></div>
                     </div>
 
 

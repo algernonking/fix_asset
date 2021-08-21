@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:26
+ * @since 2021-08-21 08:34:52
  */
 
 
@@ -293,7 +293,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/common/code_allocation/code_allocation_form.html' + queryString,
 			finish: function () {

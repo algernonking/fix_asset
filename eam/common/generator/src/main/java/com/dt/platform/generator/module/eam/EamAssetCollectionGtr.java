@@ -29,20 +29,22 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
+
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionVOMeta.ASSET_IDS);
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.STATUS,
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION.USER_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
 
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ID,
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT
 
                 }
@@ -51,13 +53,13 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE).search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID).form().validate().required();
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).form().validate().required();
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CREATE_TIME).table().disable();
 
@@ -71,7 +73,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_ID)
                 .basic().label("存放位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
@@ -85,7 +87,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.ACTUAL_COLLECTION_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_ID
 
 
@@ -107,7 +109,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页

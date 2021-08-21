@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:44:38
+ * @since 2021-08-21 10:24:41
  */
  -->
  <!DOCTYPE html>
@@ -59,11 +59,6 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 内容类型 , contentType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('内容类型')}" class="search-label contentType-label">内容类型</span><span class="search-colon">:</span></div>
@@ -76,6 +71,11 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('简介')}" class="search-label profile-label">简介</span><span class="search-colon">:</span></div>
                         <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

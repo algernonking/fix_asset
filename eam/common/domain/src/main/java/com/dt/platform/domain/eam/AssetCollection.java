@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:50
- * @sign EE97B74892D2A67FC5BA82F8860B146E
+ * @since 2021-08-20 20:54:09
+ * @sign A0F1E50A7B948521E4A8550CD0BC55C2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,12 +36,6 @@ public class AssetCollection extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
-	
-	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
 	
 	/**
 	 * 业务编号：业务编号
@@ -62,21 +56,15 @@ public class AssetCollection extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
-	 * 实际领用日期：实际领用日期
+	 * 领用后公司/部门：领用后公司/部门
 	*/
-	@ApiModelProperty(required = false,value="实际领用日期" , notes = "实际领用日期")
-	private Date actualCollectionDate;
-	
-	/**
-	 * 领用后使用组织：领用后使用组织
-	*/
-	@ApiModelProperty(required = false,value="领用后使用组织" , notes = "领用后使用组织")
+	@ApiModelProperty(required = false,value="领用后公司/部门" , notes = "领用后公司/部门")
 	private String userOrganizationId;
 	
 	/**
@@ -92,6 +80,12 @@ public class AssetCollection extends Entity {
 	private String positionId;
 	
 	/**
+	 * 领用日期：领用日期
+	*/
+	@ApiModelProperty(required = false,value="领用日期" , notes = "领用日期")
+	private Date collectionDate;
+	
+	/**
 	 * 详细位置：详细位置
 	*/
 	@ApiModelProperty(required = false,value="详细位置" , notes = "详细位置")
@@ -102,6 +96,12 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="领用说明" , notes = "领用说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -195,25 +195,6 @@ public class AssetCollection extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetCollection setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -271,55 +252,36 @@ public class AssetCollection extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetCollection setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetCollection setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 实际领用日期<br>
-	 * 实际领用日期
-	 * @return 实际领用日期
-	*/
-	public Date getActualCollectionDate() {
-		return actualCollectionDate;
-	}
-	
-	/**
-	 * 设置 实际领用日期
-	 * @param actualCollectionDate 实际领用日期
-	 * @return 当前对象
-	*/
-	public AssetCollection setActualCollectionDate(Date actualCollectionDate) {
-		this.actualCollectionDate=actualCollectionDate;
-		return this;
-	}
-	
-	/**
-	 * 获得 领用后使用组织<br>
-	 * 领用后使用组织
-	 * @return 领用后使用组织
+	 * 获得 领用后公司/部门<br>
+	 * 领用后公司/部门
+	 * @return 领用后公司/部门
 	*/
 	public String getUserOrganizationId() {
 		return userOrganizationId;
 	}
 	
 	/**
-	 * 设置 领用后使用组织
-	 * @param userOrganizationId 领用后使用组织
+	 * 设置 领用后公司/部门
+	 * @param userOrganizationId 领用后公司/部门
 	 * @return 当前对象
 	*/
 	public AssetCollection setUserOrganizationId(String userOrganizationId) {
@@ -366,6 +328,25 @@ public class AssetCollection extends Entity {
 	}
 	
 	/**
+	 * 获得 领用日期<br>
+	 * 领用日期
+	 * @return 领用日期
+	*/
+	public Date getCollectionDate() {
+		return collectionDate;
+	}
+	
+	/**
+	 * 设置 领用日期
+	 * @param collectionDate 领用日期
+	 * @return 当前对象
+	*/
+	public AssetCollection setCollectionDate(Date collectionDate) {
+		this.collectionDate=collectionDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 详细位置<br>
 	 * 详细位置
 	 * @return 详细位置
@@ -400,6 +381,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetCollection setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

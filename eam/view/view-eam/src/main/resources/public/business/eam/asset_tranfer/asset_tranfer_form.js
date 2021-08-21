@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:44
+ * @since 2021-08-20 21:13:49
  */
 
 function FormPage() {
@@ -88,6 +88,25 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#businessDate',
 			format:"yyyy-MM-dd HH:mm:ss",
@@ -116,6 +135,8 @@ function FormPage() {
 
 
 
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
 
 
@@ -159,6 +180,8 @@ function FormPage() {
 
 
 
+			//获取 存放位置 下拉框的值
+			data.field["positionId"]=fox.getSelectedValue("positionId",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

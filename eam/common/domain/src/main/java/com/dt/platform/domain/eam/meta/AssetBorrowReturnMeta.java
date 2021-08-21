@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:47
- * @sign 6FA4DA966193CFB95AFCE4A38620F9E3
+ * @since 2021-08-20 20:51:46
+ * @sign 6A8A10243BB7E5E2D5D57680CBA079B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,16 +38,6 @@ public class AssetBorrowReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowReturn,java.lang.String> BORROW_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowReturn.class ,BORROW_ID, java.lang.String.class, "借用单", "借用单", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
-	*/
-	public static final String ORIGINATOR_ID="originatorId";
-	
-	/**
-	 * 制单人 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowReturn,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowReturn.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
-	
-	/**
 	 * 归还时间 , 类型: java.util.Date
 	*/
 	public static final String RETURN_DATE="returnDate";
@@ -66,6 +56,16 @@ public class AssetBorrowReturnMeta {
 	 * 归还说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowReturn,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowReturn.class ,CONTENT, java.lang.String.class, "归还说明", "归还说明", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrowReturn,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrowReturn.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -170,7 +170,7 @@ public class AssetBorrowReturnMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BORROW_ID , ORIGINATOR_ID , RETURN_DATE , CONTENT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BORROW_ID , RETURN_DATE , CONTENT , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -203,17 +203,6 @@ public class AssetBorrowReturnMeta {
 		}
 		
 		/**
-		 * 设置 制单人
-		 * @param originatorId 制单人
-		 * @return 当前对象
-		*/
-		public AssetBorrowReturn setOriginatorId(String originatorId) {
-			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
-			super.setOriginatorId(originatorId);
-			return this;
-		}
-		
-		/**
 		 * 设置 归还时间
 		 * @param returnDate 归还时间
 		 * @return 当前对象
@@ -232,6 +221,17 @@ public class AssetBorrowReturnMeta {
 		public AssetBorrowReturn setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public AssetBorrowReturn setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
 			return this;
 		}
 		

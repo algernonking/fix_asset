@@ -84,11 +84,12 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
+		assetBorrow.setBusinessCode(codeResult.getData().toString());
 		ApproveConfigure approveConfigure=new ApproveConfigure();
 		System.out.println(approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code()));
 		approveConfigureService.queryEntity(approveConfigure);
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-		assetBorrow.setBusinessCode(codeResult.getData().toString());
+
 		Result r=super.insert(assetBorrow);
 		return r;
 	}

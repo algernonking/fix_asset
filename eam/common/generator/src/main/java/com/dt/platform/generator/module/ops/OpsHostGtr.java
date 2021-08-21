@@ -132,6 +132,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
 
+        cfg.view().field(HostMeta.HOST_NOTES).form().textArea().height(30);
+
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()

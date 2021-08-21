@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:53
+ * @since 2021-08-20 21:17:13
  */
 
 
@@ -63,17 +63,17 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
+					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') }
 					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态'), templet:function (d){ return fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus);}}
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修类型'), templet:function (d){ return fox.getDictText(SELECT_TYPE_DATA,d.type);}}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return fox.dateFormat(d.planFinishDate); }}
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') }
 					,{ field: 'operuserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -105,12 +105,12 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val()};
-		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.repairStatus={ value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr")};
 		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.operuserId={ value: $("#operuserId").val()};
+		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -145,14 +145,6 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
-		laydate.render({
-			elem: '#businessDate-begin',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#businessDate-end',
-			trigger:"click"
-		});
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -203,6 +195,14 @@ function ListPage() {
 				}
 				return opts;
 			}
+		});
+		laydate.render({
+			elem: '#businessDate-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#businessDate-end',
+			trigger:"click"
 		});
 		fox.renderSearchInputs();
 	}

@@ -33,6 +33,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+
             console.log('afterDataFill',data);
         }
     }

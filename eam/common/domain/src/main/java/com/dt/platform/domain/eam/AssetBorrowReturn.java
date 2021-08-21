@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:43:47
- * @sign 6FA4DA966193CFB95AFCE4A38620F9E3
+ * @since 2021-08-20 20:51:46
+ * @sign 6A8A10243BB7E5E2D5D57680CBA079B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -44,12 +44,6 @@ public class AssetBorrowReturn extends Entity {
 	private String borrowId;
 	
 	/**
-	 * 制单人：制单人
-	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
-	
-	/**
 	 * 归还时间：归还时间
 	*/
 	@ApiModelProperty(required = false,value="归还时间" , notes = "归还时间")
@@ -60,6 +54,12 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="归还说明" , notes = "归还说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -160,25 +160,6 @@ public class AssetBorrowReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
-	*/
-	public String getOriginatorId() {
-		return originatorId;
-	}
-	
-	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
-	 * @return 当前对象
-	*/
-	public AssetBorrowReturn setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
-		return this;
-	}
-	
-	/**
 	 * 获得 归还时间<br>
 	 * 归还时间
 	 * @return 归还时间
@@ -213,6 +194,25 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	public AssetBorrowReturn setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

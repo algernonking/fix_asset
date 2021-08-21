@@ -37,19 +37,16 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
-
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT
                 }
         );
 
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE).search().fuzzySearch();
-
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.PROC_ID).table().disable();
@@ -59,11 +56,12 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
                 .basic().label("存放位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
