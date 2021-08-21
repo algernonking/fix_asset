@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 10:24:44
+ * @since 2021-08-21 15:46:31
  */
 
 
@@ -65,7 +65,6 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return fox.joinLabel(d.category,"hierarchyName");}}
 					,{ field: 'title', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标题') }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('知识内容') }
 					,{ field: 'contentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型'), templet:function (d){ return fox.getEnumText(RADIO_CONTENTTYPE_DATA,d.contentType);}}
 					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') }
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}

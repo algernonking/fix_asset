@@ -1,7 +1,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 08:34:58
+ * @since 2021-08-21 17:51:08
  */
 
 
@@ -64,7 +64,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码名称') }
-					,{ field: 'module', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('模块'), templet: function (d) { return fox.joinLabel(d.module,"label");}}
+					,{ field: 'moduleId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('模块'), templet: function (d) { return fox.joinLabel(d.module,"label");}}
 					,{ field: 'rule', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码规则') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

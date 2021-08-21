@@ -2,6 +2,9 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +75,15 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	@Override
 	@Transactional
 	public Result insert(AssetCollection assetCollection) {
+
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		assetCollection.setBusinessCode(codeResult.getData().toString());
+
+
 		Result r=super.insert(assetCollection);
 		//保存关系
 		if(r.success()) {

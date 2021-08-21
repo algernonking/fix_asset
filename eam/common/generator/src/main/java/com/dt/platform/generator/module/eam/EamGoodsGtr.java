@@ -1,7 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.eam.GoodsStautsEnum;
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
+
 import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -44,7 +45,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_GOODS.STATUS).basic().label("状态")
-                .form().validate().required().form().radioBox().enumType(GoodsStautsEnum.class);
+                .form().validate().required().form().radioBox().enumType(StatusEnableEnum.class);
 
         cfg.view().field(EAMTables.EAM_GOODS.CATEGORY_ID)
                 .basic().label("分类")

@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 20:18:46
+ * @since 2021-08-21 15:46:20
  */
  -->
  <!DOCTYPE html>
@@ -38,10 +38,10 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('实例名称')}">实例名称</div></div>
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('实例名称')}">实例名称</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('实例名称') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('实例名称') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -187,7 +187,7 @@
     var SELECT_BACKUPTYPE_DATA = [[${dict.toArray('ops_db_backup_type')}]];
     var SELECT_BACKUPSTATUS_DATA = [[${dict.toArray('ops_db_backup_status')}]];
     var SELECT_BACKUPMETHOD_DATA = [[${dict.toArray('ops_db_backup_method')}]];
-    var VALIDATE_CONFIG={"backupTime":{"date":true,"labelInForm":"备份时间","inputType":"date_input"}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"实例名称","inputType":"text_area","required":true},"backupTime":{"date":true,"labelInForm":"备份时间","inputType":"date_input"}};
     var AUTH_PREFIX="ops_db_instance";
 </script>
 

@@ -2,7 +2,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 09:30:40
+ * @since 2021-08-21 18:49:55
  */
  -->
  <!DOCTYPE html>
@@ -41,7 +41,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
 
 
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.GoodsStautsEnum')}" style="width:140px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:140px"></div>
 
                     </div>
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
@@ -99,7 +99,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.GoodsStautsEnum')}]];
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var AUTH_PREFIX="eam_goods";
 </script>
 

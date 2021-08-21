@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产审批配置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 09:55:24
+ * @since 2021-08-21 15:45:39
 */
 
 @Api(tags = "资产审批配置")
@@ -66,8 +66,8 @@ public class ApproveConfigureController extends SuperController {
 	@ApiOperation(value = "添加资产审批配置")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产新增"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "asset_insert"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产借用"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "borrow"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = true , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -123,8 +123,8 @@ public class ApproveConfigureController extends SuperController {
 	@ApiOperation(value = "更新资产审批配置")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产新增"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "asset_insert"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产借用"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "borrow"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = true , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -146,8 +146,8 @@ public class ApproveConfigureController extends SuperController {
 	@ApiOperation(value = "保存资产审批配置")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产新增"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "asset_insert"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产借用"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "borrow"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = true , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -208,8 +208,8 @@ public class ApproveConfigureController extends SuperController {
 	@ApiOperation(value = "查询资产审批配置")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产新增"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "asset_insert"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产借用"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "borrow"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = true , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -230,8 +230,8 @@ public class ApproveConfigureController extends SuperController {
 	@ApiOperation(value = "分页查询资产审批配置")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产新增"),
-		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "asset_insert"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产借用"),
+		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_TYPE , value = "审批类型" , required = true , dataTypeClass=String.class , example = "borrow"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = true , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

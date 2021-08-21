@@ -4,6 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.oauth.Menu;
 import org.github.foxnic.web.domain.oauth.meta.MenuMeta;
 import org.github.foxnic.web.proxy.oauth.MenuServiceProxy;
 
@@ -15,13 +16,15 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
+
+        cfg.getPoClassFile().addSimpleProperty(Menu.class,"module","关联模块","关联模块");
         cfg.view().field(EAMTables.SYS_CODE_RULE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).search().fuzzySearch();
 
 
         cfg.view().field(EAMTables.SYS_CODE_RULE.NOTES).search().hidden();
         cfg.view().field(EAMTables.SYS_CODE_RULE.RULE).search().hidden();
-        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).search().hidden();
+        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE_ID).search().hidden();
 
 
 
@@ -30,10 +33,10 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).form().validate().required();
 
 
-        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE)
+        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE_ID)
                 .basic().label("模块")
                 .form().validate().required()
-                .form().selectBox().queryApi(MenuServiceProxy.QUERY_LIST+"?parentId=0").paging(false).filter(false).toolbar(false)
+                .form().selectBox().queryApi(MenuServiceProxy.QUERY_LIST+"?parentId=0").paging(false).filter(true).toolbar(false)
                 .valueField(MenuMeta.ID).textField(MenuMeta.LABEL).fillBy(CodeRuleMeta.MODULE).muliti(false);
 
 
@@ -42,7 +45,7 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.SYS_CODE_RULE.NAME,
-                        EAMTables.SYS_CODE_RULE.MODULE,
+                        EAMTables.SYS_CODE_RULE.MODULE_ID,
                         EAMTables.SYS_CODE_RULE.NOTES,
                 }
         );
@@ -52,7 +55,7 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.SYS_CODE_RULE.NAME,
-                        EAMTables.SYS_CODE_RULE.MODULE,
+                        EAMTables.SYS_CODE_RULE.MODULE_ID,
                         EAMTables.SYS_CODE_RULE.RULE,
                         EAMTables.SYS_CODE_RULE.NOTES,
 

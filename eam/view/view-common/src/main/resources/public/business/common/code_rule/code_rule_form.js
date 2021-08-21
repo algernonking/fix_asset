@@ -1,7 +1,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 08:34:58
+ * @since 2021-08-21 17:51:08
  */
 
 function FormPage() {
@@ -72,12 +72,14 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 module 下拉字段
+		//渲染 moduleId 下拉字段
 		fox.renderSelectBox({
-			el: "module",
+			el: "moduleId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -113,7 +115,7 @@ function FormPage() {
 
 
 			//设置  模块 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#module",formData.module);
+			fox.setSelectValue4QueryApi("#moduleId",formData.module);
 
 
 
@@ -158,7 +160,7 @@ function FormPage() {
 
 
 			//获取 模块 下拉框的值
-			data.field["module"]=fox.getSelectedValue("module",false);
+			data.field["moduleId"]=fox.getSelectedValue("moduleId",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

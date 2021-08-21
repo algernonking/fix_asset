@@ -37,7 +37,7 @@ import java.util.Date;
  * 主机 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 10:03:55
+ * @since 2021-08-21 15:46:25
 */
 
 
@@ -79,6 +79,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 		Result r=super.insert(host);
 		//保存关系
 		if(r.success()) {
+			System.out.println(host.getHostOsIds().size()+" "+host.getHostOsIds());
 			hostMidServiceImpl.saveRelation(host.getId(), host.getHostMiddlewareIds());
 			hostOsServiceImpl.saveRelation(host.getId(), host.getHostOsIds());
 			hostDbServiceImpl.saveRelation(host.getId(), host.getHostDbIds());

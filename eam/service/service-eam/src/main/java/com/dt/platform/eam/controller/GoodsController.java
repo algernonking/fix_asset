@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 物品档案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 09:30:34
+ * @since 2021-08-21 18:49:52
 */
 
 @Api(tags = "物品档案")
@@ -71,12 +71,12 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
 		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "物品名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "规格型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "计量单位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -131,12 +131,12 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
 		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "物品名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "规格型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "计量单位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { GoodsVOMeta.PAGE_INDEX , GoodsVOMeta.PAGE_SIZE , GoodsVOMeta.SEARCH_FIELD , GoodsVOMeta.FUZZY_FIELD , GoodsVOMeta.SEARCH_VALUE , GoodsVOMeta.SORT_FIELD , GoodsVOMeta.SORT_TYPE , GoodsVOMeta.IDS } ) 
@@ -157,12 +157,12 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
 		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "物品名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "规格型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "计量单位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { GoodsVOMeta.PAGE_INDEX , GoodsVOMeta.PAGE_SIZE , GoodsVOMeta.SEARCH_FIELD , GoodsVOMeta.FUZZY_FIELD , GoodsVOMeta.SEARCH_VALUE , GoodsVOMeta.SORT_FIELD , GoodsVOMeta.SORT_TYPE , GoodsVOMeta.IDS } )
@@ -226,12 +226,12 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
 		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "物品名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "规格型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "计量单位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { GoodsVOMeta.PAGE_INDEX , GoodsVOMeta.PAGE_SIZE } )
@@ -253,12 +253,12 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
 		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "标准参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "物品名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "规格型号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "厂商" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.UNIT , value = "计量单位" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = GoodsVOMeta.REFERENCE_PRICE , value = "参考单价" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

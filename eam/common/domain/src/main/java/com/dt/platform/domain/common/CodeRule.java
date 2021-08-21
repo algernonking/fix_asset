@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.SYS_CODE_RULE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import org.github.foxnic.web.domain.oauth.Menu;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 08:34:58
- * @sign 9EE557B29B6DD203C31662FA60C3F4D1
+ * @since 2021-08-21 17:51:08
+ * @sign D720B313194939748B92CB787611DCBC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,7 +46,7 @@ public class CodeRule extends Entity {
 	 * 业务模块：业务模块
 	*/
 	@ApiModelProperty(required = false,value="业务模块" , notes = "业务模块")
-	private String module;
+	private String moduleId;
 	
 	/**
 	 * 编码规则：编码规则
@@ -108,6 +109,12 @@ public class CodeRule extends Entity {
 	private Integer version;
 	
 	/**
+	 * 关联模块：关联模块
+	*/
+	@ApiModelProperty(required = false,value="关联模块" , notes = "关联模块")
+	private Menu module;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -150,17 +157,17 @@ public class CodeRule extends Entity {
 	 * 业务模块
 	 * @return 业务模块
 	*/
-	public String getModule() {
-		return module;
+	public String getModuleId() {
+		return moduleId;
 	}
 	
 	/**
 	 * 设置 业务模块
-	 * @param module 业务模块
+	 * @param moduleId 业务模块
 	 * @return 当前对象
 	*/
-	public CodeRule setModule(String module) {
-		this.module=module;
+	public CodeRule setModuleId(String moduleId) {
+		this.moduleId=moduleId;
 		return this;
 	}
 	
@@ -351,6 +358,25 @@ public class CodeRule extends Entity {
 	*/
 	public CodeRule setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 关联模块<br>
+	 * 关联模块
+	 * @return 关联模块
+	*/
+	public Menu getModule() {
+		return module;
+	}
+	
+	/**
+	 * 设置 关联模块
+	 * @param module 关联模块
+	 * @return 当前对象
+	*/
+	public CodeRule setModule(Menu module) {
+		this.module=module;
 		return this;
 	}
 

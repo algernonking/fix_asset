@@ -3,14 +3,16 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
-import com.dt.platform.constants.enums.DictEnum;
+
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.ApproveConfigure;
+import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IApproveConfigureService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.api.error.CommonError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,7 @@ import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetBorrowService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+
 import java.util.Date;
 
 /**
@@ -63,6 +66,8 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired
+	private AssetItemServiceImpl assetItemServiceImpl;
 
 	@Autowired
 	IApproveConfigureService approveConfigureService;
@@ -80,17 +85,33 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result insert(AssetBorrow assetBorrow) {
 
+		//资产数量
+		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+		}
+
+		//编码
 		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
 		assetBorrow.setBusinessCode(codeResult.getData().toString());
+
+
+		//审批
 		ApproveConfigure approveConfigure=new ApproveConfigure();
-		System.out.println(approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code()));
-		approveConfigureService.queryEntity(approveConfigure);
+		approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code());
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 
+
+
+
 		Result r=super.insert(assetBorrow);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetBorrow.getId(), assetBorrow.getAssetIds());
+		}
+
 		return r;
 	}
 	
