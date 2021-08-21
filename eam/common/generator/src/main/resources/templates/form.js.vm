@@ -176,9 +176,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('#(formDataKey)');
-		#if(jsBeforeDataFill!=null)
-		#(jsBeforeDataFill.name)(formData);
-		#end
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		#if(isSimplePK)
 		//如果是新建
 		if(!formData.#(idPropertyName)) {
@@ -191,6 +191,7 @@ function FormPage() {
 			form.val('data-form', formData);
 
 	     	#for(f : fields)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("upload"))
 			//设置 #(f.labelInForm) 显示附件
 		    if($("##(f.varName)").val()) {
@@ -199,20 +200,24 @@ function FormPage() {
 				adjustPopup();
 			}
 		    #end
+			#end
 		    #end
 
 
 			#for(f : fields)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("check_box"))
 			//设置 #(f.labelInForm) 显示复选框勾选
 		    if(formData["#(f.varName)"]) {
 				fox.setCheckedValue("#(f.varName)",formData["#(f.varName)"]);
 		    }
 		    #end
+			#end
 		    #end
 
 
 			#for(f : fields)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("select_box"))
 			//设置  #(f.labelInForm) 设置下拉框勾选
 			#if(f.selectField.queryApi!=null && f.selectField.fillBy!=null)
@@ -224,15 +229,16 @@ function FormPage() {
 			#end
 			#end
 			#end
+			#end
 
 
 
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
-			#if(jsAfterDataFill!=null)
-			#(jsAfterDataFill.name)(formData);
-			#end
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -266,7 +272,7 @@ function FormPage() {
 			data.field = form.val("data-form");
 
 	    	#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 		    #if(f.typeName.equals("logic_switch"))
 			//处理 #(f.labelInForm) 默认值
 		    if(!data.field.#(f.varName)) data.field.#(f.varName)=0;
@@ -275,7 +281,7 @@ function FormPage() {
 		    #end
 
 			#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("check_box"))
 			//处理 #(f.labelInForm) 默认值
 			data.field["#(f.varName)"]=fox.getCheckedValue("#(f.varName)");
@@ -284,7 +290,7 @@ function FormPage() {
 			#end
 
 			#for(f : fields)
-			#if(!f.isHideInForm)
+			#if(f.isFormElem)
 			#if(f.typeName.equals("select_box"))
 			//获取 #(f.labelInForm) 下拉框的值
 			data.field["#(f.varName)"]=fox.getSelectedValue("#(f.varName)",#(f.selectField.muliti));
@@ -294,6 +300,11 @@ function FormPage() {
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
+
+			if(window.pageExt.form.beforeSubmit) {
+				var doNext=window.pageExt.form.beforeSubmit(data.field);
+				if(!doNext) return ;
+			}
 
 	    	var api=moduleURL+"/"+(data.field.#(idPropertyName)?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);
@@ -316,22 +327,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-	#if(jsBeforeDataFill!=null)
-	#(jsBeforeDataFill.source)
-	#end
-	#if(jsAfterDataFill!=null)
-	#(jsAfterDataFill.source)
-	#end
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

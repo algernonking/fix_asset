@@ -125,6 +125,9 @@
         <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
         #end
         #end
+        #for(b:toolButtons)
+        <button id="#(b.id)" class="layui-btn icon-btn layui-btn-sm #if(b.css!=null) #(b.css) #end" lay-event="tool-#(b.id)">#if(b.iconHtml!=null) #(b.iconHtml) #end<span th:text="${lang.translate('#(b.label)')}">#(b.label)</span></button>
+        #end
     </div>
 </script>
 
@@ -145,8 +148,13 @@
     #if(!disableSingleDelete)
     <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
     #end
+
     #for(b:opColumnButtons)
-    <a class="layui-btn layui-btn-xs" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</a>
+    <a class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</a>
+    #end
+
+    #if(opColumnMenus!=null && opColumnMenus.size()>0)
+    <a class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue" lay-event="ops-more"><span th:text="${lang.translate('更多')}">更多</span><i class="layui-icon layui-icon-down"></i></a>
     #end
 </script>
 
@@ -190,6 +198,7 @@
     var AUTH_PREFIX="#(authPrefix)";
 </script>
 
+<script th:src="'#(extURI)?'+${cacheKey}"></script>
 <script th:src="'#(jsURI)?'+${cacheKey}"></script>
 
 </body>
