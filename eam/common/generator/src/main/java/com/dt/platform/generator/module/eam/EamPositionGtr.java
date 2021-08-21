@@ -24,7 +24,6 @@ public class EamPositionGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_POSITION.NAME,
                         EAMTables.EAM_POSITION.NOTES,
-
                 }
         );
 
@@ -44,11 +43,11 @@ public class EamPositionGtr extends BaseCodeGenerator{
     public static void main(String[] args) throws Exception {
         EamPositionGtr g=new EamPositionGtr();
         //生成代码
-         //g.generateCode();
+         g.generateCode();
 
 
         //生成菜单
         //  g.removeByBatchId("");
-        g.generateMenu(PositionServiceProxy.class, PositionPageController.class);
+       // g.generateMenu(PositionServiceProxy.class, PositionPageController.class);
     }
 }

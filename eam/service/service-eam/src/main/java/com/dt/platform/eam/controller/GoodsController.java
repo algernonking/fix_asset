@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 物品档案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:51
+ * @since 2021-08-21 09:30:34
 */
 
 @Api(tags = "物品档案")
@@ -69,8 +69,8 @@ public class GoodsController extends SuperController {
 	@ApiOperation(value = "添加物品档案")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
-		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
+		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
@@ -129,8 +129,8 @@ public class GoodsController extends SuperController {
 	@ApiOperation(value = "更新物品档案")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
-		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
+		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
@@ -155,8 +155,8 @@ public class GoodsController extends SuperController {
 	@ApiOperation(value = "保存物品档案")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
-		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
+		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
@@ -224,8 +224,8 @@ public class GoodsController extends SuperController {
 	@ApiOperation(value = "查询物品档案")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
-		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
+		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),
@@ -251,8 +251,8 @@ public class GoodsController extends SuperController {
 	@ApiOperation(value = "分页查询物品档案")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = GoodsVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "474282035079282688"),
-		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "474275619551576064"),
+		@ApiImplicitParam(name = GoodsVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NAME , value = "标准型号物品名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class),

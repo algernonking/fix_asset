@@ -2,7 +2,10 @@ package com.dt.platform.generator.module.common;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.oauth.meta.MenuMeta;
+import org.github.foxnic.web.proxy.oauth.MenuServiceProxy;
 
 public class SysCodeRuleGtr extends BaseCodeGenerator {
 
@@ -27,9 +30,12 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_RULE.NAME).form().validate().required();
 
 
-        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE).basic().label("业务模块")
-                .form().validate().required().form().selectBox()
-                .enumType(CodeModuleEnum.class).form().selectBox().paging(false).muliti(false);
+        cfg.view().field(EAMTables.SYS_CODE_RULE.MODULE)
+                .basic().label("模块")
+                .form().validate().required()
+                .form().selectBox().queryApi(MenuServiceProxy.QUERY_LIST+"?parentId=0").paging(false).filter(false).toolbar(false)
+                .valueField(MenuMeta.ID).textField(MenuMeta.LABEL).fillBy(CodeRuleMeta.MODULE).muliti(false);
+
 
 
 
@@ -40,6 +46,21 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
                         EAMTables.SYS_CODE_RULE.NOTES,
                 }
         );
+
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("1000px");
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.SYS_CODE_RULE.NAME,
+                        EAMTables.SYS_CODE_RULE.MODULE,
+                        EAMTables.SYS_CODE_RULE.RULE,
+                        EAMTables.SYS_CODE_RULE.NOTES,
+
+
+                }
+        );
+
+
 
         //文件生成覆盖模式
         cfg.overrides()

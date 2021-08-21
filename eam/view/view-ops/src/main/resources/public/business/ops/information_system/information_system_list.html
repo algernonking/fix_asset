@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:01
+ * @since 2021-08-21 10:00:56
  */
  -->
  <!DOCTYPE html>
@@ -36,10 +36,13 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+
                         <div id="status" th:data="${dict.toArray('ops_system_status')}" style="width:140px"></div>
+
+
                     </div>
                     <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -111,13 +114,14 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
+    var RADIO_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
     var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
     var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];
     var SELECT_GRADE_DATA = [[${dict.toArray('ops_system_grade')}]];
     var AUTH_PREFIX="ops_information_system";
 </script>
 
+<script th:src="'/business/ops/information_system/information_system_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/information_system/information_system_list.js?'+${cacheKey}"></script>
 
 </body>

@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:51
- * @sign CD6120902F7C964D5A4411976A4AD767
+ * @since 2021-08-21 09:30:33
+ * @sign 13DECB181D46D3A8911618E51FEEBFEF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,16 +37,16 @@ public class Goods extends Entity {
 	private String id;
 	
 	/**
-	 * 状态：状态
-	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "状态")
-	private String status;
-	
-	/**
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
 	private String categoryId;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 标准型号物品名称：标准型号物品名称
@@ -170,25 +170,6 @@ public class Goods extends Entity {
 	}
 	
 	/**
-	 * 获得 状态<br>
-	 * 状态
-	 * @return 状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 状态
-	 * @param status 状态
-	 * @return 当前对象
-	*/
-	public Goods setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 资产分类<br>
 	 * 资产分类
 	 * @return 资产分类
@@ -204,6 +185,25 @@ public class Goods extends Entity {
 	*/
 	public Goods setCategoryId(String categoryId) {
 		this.categoryId=categoryId;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public Goods setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	

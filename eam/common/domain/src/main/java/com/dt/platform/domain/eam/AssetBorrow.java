@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_BORROW;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:20
- * @sign D204F3CEF20D33D9675EEE3FE8AE2AB9
+ * @since 2021-08-20 20:18:09
+ * @sign 36103AA6C1DFF0C2FFCE870129C362C5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,12 +36,6 @@ public class AssetBorrow extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
-	
-	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
 	
 	/**
 	 * 业务编号：业务编号
@@ -60,16 +56,10 @@ public class AssetBorrow extends Entity {
 	private String status;
 	
 	/**
-	 * 资产状态：资产状态
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="资产状态" , notes = "资产状态")
-	private String assetStatus;
-	
-	/**
-	 * 制单人：制单人
-	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
 	 * 借用人：借用人
@@ -94,6 +84,12 @@ public class AssetBorrow extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="借出说明" , notes = "借出说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -153,7 +149,13 @@ public class AssetBorrow extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -171,25 +173,6 @@ public class AssetBorrow extends Entity {
 	*/
 	public AssetBorrow setId(String id) {
 		this.id=id;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetBorrow setName(String name) {
-		this.name=name;
 		return this;
 	}
 	
@@ -251,40 +234,21 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
-	 * 获得 资产状态<br>
-	 * 资产状态
-	 * @return 资产状态
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getAssetStatus() {
-		return assetStatus;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 资产状态
-	 * @param assetStatus 资产状态
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetBorrow setAssetStatus(String assetStatus) {
-		this.assetStatus=assetStatus;
-		return this;
-	}
-	
-	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
-	*/
-	public String getOriginatorId() {
-		return originatorId;
-	}
-	
-	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
-	 * @return 当前对象
-	*/
-	public AssetBorrow setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetBorrow setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
@@ -361,6 +325,25 @@ public class AssetBorrow extends Entity {
 	*/
 	public AssetBorrow setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetBorrow setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -540,17 +523,58 @@ public class AssetBorrow extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
 	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public AssetBorrow setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
 	 * @param asset 资产
 	 * @return 当前对象
 	*/
-	public AssetBorrow setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetBorrow addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrow setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrow addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
 		return this;
 	}
 

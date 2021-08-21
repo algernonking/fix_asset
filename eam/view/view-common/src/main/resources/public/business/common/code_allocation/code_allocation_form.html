@@ -2,7 +2,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:18
+ * @since 2021-08-21 08:34:53
  */
  -->
  <!DOCTYPE html>
@@ -152,6 +152,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 250px"></div>
 
 
     </form>
@@ -175,6 +176,7 @@
     var AUTH_PREFIX="sys_code_allocation";
 </script>
 
+<script th:src="'/business/common/code_allocation/code_allocation_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/common/code_allocation/code_allocation_form.js?'+${cacheKey}"></script>
 
 </body>

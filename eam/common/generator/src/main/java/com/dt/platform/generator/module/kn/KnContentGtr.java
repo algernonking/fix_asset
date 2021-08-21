@@ -48,7 +48,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH).table().disable(true);
-
+        cfg.view().field(EAMTables.KN_CONTENT.CONTENT).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.PROFILE).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.LINK_ADDRESS).table().disable(true);
@@ -80,12 +80,14 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT)
                 .form().validate().required().form().textArea().height(450);
 
+        cfg.view().field(EAMTables.KN_CONTENT.NOTES)
+                .form().form().textArea().height(30);
 
         cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID)
                 .form().validate().required().form()
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
-                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME)
-                .paging(false).muliti(false).fillBy(ContentMeta.CATEGORY);
+                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true)
+                .paging(false).toolbar(false).muliti(false).fillBy(ContentMeta.CATEGORY);
 
         cfg.view().field(EAMTables.KN_CONTENT.TITLE)
                 .form().validate().required().form();
@@ -100,9 +102,9 @@ public class KnContentGtr extends BaseCodeGenerator {
                         EAMTables.KN_CONTENT.DISPLAY
                 },
                 new Object[]{
-                        EAMTables.KN_CONTENT.NOTES,
                         EAMTables.KN_CONTENT.CONTENT_TYPE,
-                        EAMTables.KN_CONTENT.PROFILE
+                        EAMTables.KN_CONTENT.PROFILE,
+                        EAMTables.KN_CONTENT.NOTES,
                 }
 
         );
@@ -110,7 +112,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("90%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.KN_CONTENT.CATEGORY_ID,

@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetItemService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import com.dt.platform.constants.db.EAMTables.*;
 
 /**
  * <p>
  * 资产 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:35
+ * @since 2021-08-20 20:18:21
 */
 
 
@@ -257,5 +258,13 @@ public class AssetItemServiceImpl extends SuperService<AssetItem> implements IAs
 		return super.buildExcelStructure(isForExport);
 	}
 
+	/**
+     * 保存关系
+     * @param handleId 处理
+     * @param assetIds 资产清单
+     */
+	public void saveRelation(String handleId,List<String> assetIds) {
+		super.saveRelation(EAM_ASSET_ITEM.HANDLE_ID,handleId, EAM_ASSET_ITEM.ASSET_ID,assetIds,true);
+	}
 
 }

@@ -5,7 +5,7 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.*;
-import com.github.foxnic.generator.builder.view.config.JSFunctions;
+
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
 
@@ -55,7 +55,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NUMBER).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.REMAIN_NUMBER).table().disable(true);
 
-        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_ORGANIZATION_ID).table().hidden(true);
+        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.BATCH_CODE).table().hidden(true);
@@ -93,25 +93,25 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().validate().required().form().
+        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().
                 label("状态").selectBox().enumType(AssetStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("分类")
                 .form().validate().required()
-                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
+                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(AssetMeta.CATEGORY).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)
                 .basic().label("物品档案")
-                .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(GoodsMeta.ID).textField(GoodsMeta.NAME).fillBy(AssetMeta.GOODS).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.WAREHOUSE_ID)
                 .basic().label("仓库")
-                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillBy(AssetMeta.WAREHOUSE).muliti(false);
 
 //
@@ -122,12 +122,12 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.MANUFACTURER_ID)
                 .basic().label("厂商")
-                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(AssetMeta.MANUFACTURER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.USER_ORGANIZATION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_ORGANIZATION_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET.NOTES).form().textArea().height(30);
 
 
@@ -152,24 +152,23 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("95%");
         cfg.view().form().addGroup("基本属性",
                 new Object[] {
                         EAMTables.EAM_ASSET.CATEGORY_ID,
-                        EAMTables.EAM_ASSET.STATUS,
                         EAMTables.EAM_ASSET.NAME,
                         EAMTables.EAM_ASSET.ASSET_CODE,
                         EAMTables.EAM_ASSET.SERIAL_NUMBER,
-
                         EAMTables.EAM_ASSET.POSITION_ID,
                         EAMTables.EAM_ASSET.POSITION_DETAIL,
+                        EAMTables.EAM_ASSET.SOURCE_ID,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET.MANAGEMENT_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID,
                         EAMTables.EAM_ASSET.USER_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET.MANAGER_ID,
                         EAMTables.EAM_ASSET.USER_ID,
-                        EAMTables.EAM_ASSET.SOURCE_ID,
+
                         EAMTables.EAM_ASSET.GOODS_ID,
                 }, new Object[] {
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
@@ -187,19 +186,19 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET.ATTACH
                 }
         );
-        cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
-        cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
-
-        cfg.view().form().jsAfterDataFill("afterDataFill");
-        cfg.view().form().jsBeforeDataFill("beforeDataFill");
-        cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
+//        cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
+//       // cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
+//
+//        cfg.view().form().jsAfterDataFill("afterDataFill");
+//        cfg.view().form().jsBeforeDataFill("beforeDataFill");
+      //  cfg.view().list().jsBeforeQuery("beforeTableDataQuery");
 
 //
 //        cfg.getFormConfig().setJsAfterDataFill(      new JSFunctions(this.getClass(),"asset_functions.js")    ));
       //  cfg.getFormConfig().setJsAfterDataFill(new JSFunctions(this.getClass(),"asset_functions.js"));
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页

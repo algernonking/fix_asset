@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:16
+ * @since 2021-08-21 10:24:47
  */
 
 function FormPage() {
@@ -75,7 +75,6 @@ function FormPage() {
 			el: "categoryId",
 			radio: true,
 			filterable: true,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -134,6 +133,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('kn-content-form-data');
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -163,6 +165,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -226,16 +231,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

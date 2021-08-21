@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:39
+ * @since 2021-08-20 21:17:21
  */
 
 function FormPage() {
@@ -70,11 +70,6 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		laydate.render({
-			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -153,6 +148,11 @@ function FormPage() {
 				adjustPopup();
 			}
 	    });
+		laydate.render({
+			elem: '#businessDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 	}
 
 	/**
@@ -160,6 +160,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-repair-form-data');
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -179,8 +182,6 @@ function FormPage() {
 
 
 
-			//设置  办理状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  维修状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
 			//设置  报修类型 设置下拉框勾选
@@ -191,6 +192,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -225,8 +229,6 @@ function FormPage() {
 
 
 
-			//获取 办理状态 下拉框的值
-			data.field["status"]=fox.getSelectedValue("status",false);
 			//获取 维修状态 下拉框的值
 			data.field["repairStatus"]=fox.getSelectedValue("repairStatus",false);
 			//获取 报修类型 下拉框的值
@@ -256,16 +258,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

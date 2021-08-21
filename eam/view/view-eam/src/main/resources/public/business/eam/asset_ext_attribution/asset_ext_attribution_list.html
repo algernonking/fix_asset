@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:41
+ * @since 2021-08-20 20:18:23
  */
  -->
  <!DOCTYPE html>
@@ -41,15 +41,15 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
                         <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 使用组织 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 所属公司 , managementCompanyId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用组织')}" class="search-label userOrganizationId-label">使用组织</span><span class="search-colon">:</span></div>
-                        <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属公司')}" class="search-label managementCompanyId-label">所属公司</span><span class="search-colon">:</span></div>
+                        <input id="managementCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 所属组织 , managementOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 使用公司/部门 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属组织')}" class="search-label managementOrganizationId-label">所属组织</span><span class="search-colon">:</span></div>
-                        <input id="managementOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用公司/部门')}" class="search-label userOrganizationId-label">使用公司/部门</span><span class="search-colon">:</span></div>
+                        <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -109,6 +109,7 @@
     var AUTH_PREFIX="eam_asset_ext_attribution";
 </script>
 
+<script th:src="'/business/eam/asset_ext_attribution/asset_ext_attribution_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_ext_attribution/asset_ext_attribution_list.js?'+${cacheKey}"></script>
 
 </body>

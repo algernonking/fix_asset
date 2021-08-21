@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_BORROW_RETURN;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:32
- * @sign 89DD32360781A5E9722AE04CD8C29A43
+ * @since 2021-08-20 20:51:46
+ * @sign 6A8A10243BB7E5E2D5D57680CBA079B6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,12 +44,6 @@ public class AssetBorrowReturn extends Entity {
 	private String borrowId;
 	
 	/**
-	 * 制单人：制单人
-	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
-	
-	/**
 	 * 归还时间：归还时间
 	*/
 	@ApiModelProperty(required = false,value="归还时间" , notes = "归还时间")
@@ -58,6 +54,12 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="归还说明" , notes = "归还说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -111,7 +113,13 @@ public class AssetBorrowReturn extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -152,25 +160,6 @@ public class AssetBorrowReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
-	*/
-	public String getOriginatorId() {
-		return originatorId;
-	}
-	
-	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
-	 * @return 当前对象
-	*/
-	public AssetBorrowReturn setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
-		return this;
-	}
-	
-	/**
 	 * 获得 归还时间<br>
 	 * 归还时间
 	 * @return 归还时间
@@ -205,6 +194,25 @@ public class AssetBorrowReturn extends Entity {
 	*/
 	public AssetBorrowReturn setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -365,17 +373,58 @@ public class AssetBorrowReturn extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
 	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
 	 * @param asset 资产
 	 * @return 当前对象
 	*/
-	public AssetBorrowReturn setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetBorrowReturn addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrowReturn addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
 		return this;
 	}
 

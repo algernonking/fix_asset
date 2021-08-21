@@ -1,7 +1,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:42
+ * @since 2021-08-20 20:18:24
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -109,6 +113,7 @@ function ListPage() {
 		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value"), fillBy:"area",field:"id", label:xmSelect.get("#areaId",true).getValue("nameStr") };
 		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id", label:xmSelect.get("#layerId",true).getValue("nameStr") };
 		value.rackId={ value: xmSelect.get("#rackId",true).getValue("value"), fillBy:"rack",field:"id", label:xmSelect.get("#rackId",true).getValue("nameStr") };
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -370,16 +375,13 @@ function ListPage() {
 		admin.putTempData('eam-asset-ext-equipment-form-data-popup-index', index);
 	};
 
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

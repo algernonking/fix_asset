@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetCollection;
 import java.util.Date;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:36
- * @sign 81D1A7905F3226FFEA5C127B4FD4A4FD
+ * @since 2021-08-20 20:54:09
+ * @sign A0F1E50A7B948521E4A8550CD0BC55C2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,16 +27,6 @@ public class AssetCollectionMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 业务编号 , 类型: java.lang.String
@@ -68,34 +59,24 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final String ORIGINATOR_ID="originatorId";
+	public static final String NAME="name";
 	
 	/**
-	 * 制单人 , 类型: java.lang.String
+	 * 业务名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
-	 * 实际领用日期 , 类型: java.util.Date
-	*/
-	public static final String ACTUAL_COLLECTION_DATE="actualCollectionDate";
-	
-	/**
-	 * 实际领用日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> ACTUAL_COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ACTUAL_COLLECTION_DATE, java.util.Date.class, "实际领用日期", "实际领用日期", java.util.Date.class, null);
-	
-	/**
-	 * 领用后使用组织 , 类型: java.lang.String
+	 * 领用后公司/部门 , 类型: java.lang.String
 	*/
 	public static final String USER_ORGANIZATION_ID="userOrganizationId";
 	
 	/**
-	 * 领用后使用组织 , 类型: java.lang.String
+	 * 领用后公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USER_ORGANIZATION_ID, java.lang.String.class, "领用后使用组织", "领用后使用组织", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USER_ORGANIZATION_ID, java.lang.String.class, "领用后公司/部门", "领用后公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
@@ -118,6 +99,16 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,POSITION_ID, java.lang.String.class, "领用后位置", "领用后位置", java.lang.String.class, null);
 	
 	/**
+	 * 领用日期 , 类型: java.util.Date
+	*/
+	public static final String COLLECTION_DATE="collectionDate";
+	
+	/**
+	 * 领用日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,COLLECTION_DATE, java.util.Date.class, "领用日期", "领用日期", java.util.Date.class, null);
+	
+	/**
 	 * 详细位置 , 类型: java.lang.String
 	*/
 	public static final String POSITION_DETAIL="positionDetail";
@@ -136,6 +127,16 @@ public class AssetCollectionMeta {
 	 * 领用说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,CONTENT, java.lang.String.class, "领用说明", "领用说明", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 业务日期 , 类型: java.util.Date
@@ -238,19 +239,29 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final String ASSET="asset";
+	public static final String ASSET_LIST="assetList";
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String ASSET_IDS="assetIds";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , ACTUAL_COLLECTION_DATE , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -268,17 +279,6 @@ public class AssetCollectionMeta {
 		public AssetCollection setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务名称
-		 * @param name 业务名称
-		 * @return 当前对象
-		*/
-		public AssetCollection setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
 			return this;
 		}
 		
@@ -316,30 +316,19 @@ public class AssetCollectionMeta {
 		}
 		
 		/**
-		 * 设置 制单人
-		 * @param originatorId 制单人
+		 * 设置 业务名称
+		 * @param name 业务名称
 		 * @return 当前对象
 		*/
-		public AssetCollection setOriginatorId(String originatorId) {
-			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
-			super.setOriginatorId(originatorId);
+		public AssetCollection setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
 			return this;
 		}
 		
 		/**
-		 * 设置 实际领用日期
-		 * @param actualCollectionDate 实际领用日期
-		 * @return 当前对象
-		*/
-		public AssetCollection setActualCollectionDate(Date actualCollectionDate) {
-			super.change(ACTUAL_COLLECTION_DATE,super.getActualCollectionDate(),actualCollectionDate);
-			super.setActualCollectionDate(actualCollectionDate);
-			return this;
-		}
-		
-		/**
-		 * 设置 领用后使用组织
-		 * @param userOrganizationId 领用后使用组织
+		 * 设置 领用后公司/部门
+		 * @param userOrganizationId 领用后公司/部门
 		 * @return 当前对象
 		*/
 		public AssetCollection setUserOrganizationId(String userOrganizationId) {
@@ -371,6 +360,17 @@ public class AssetCollectionMeta {
 		}
 		
 		/**
+		 * 设置 领用日期
+		 * @param collectionDate 领用日期
+		 * @return 当前对象
+		*/
+		public AssetCollection setCollectionDate(Date collectionDate) {
+			super.change(COLLECTION_DATE,super.getCollectionDate(),collectionDate);
+			super.setCollectionDate(collectionDate);
+			return this;
+		}
+		
+		/**
 		 * 设置 详细位置
 		 * @param positionDetail 详细位置
 		 * @return 当前对象
@@ -389,6 +389,17 @@ public class AssetCollectionMeta {
 		public AssetCollection setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public AssetCollection setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
 			return this;
 		}
 		
@@ -504,12 +515,23 @@ public class AssetCollectionMeta {
 		
 		/**
 		 * 设置 资产
-		 * @param asset 资产
+		 * @param assetList 资产
 		 * @return 当前对象
 		*/
-		public AssetCollection setAsset(Asset asset) {
-			super.change(ASSET,super.getAsset(),asset);
-			super.setAsset(asset);
+		public AssetCollection setAssetList(List<Asset> assetList) {
+			super.change(ASSET_LIST,super.getAssetList(),assetList);
+			super.setAssetList(assetList);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetIds 资产列表
+		 * @return 当前对象
+		*/
+		public AssetCollection setAssetIds(List<String> assetIds) {
+			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
+			super.setAssetIds(assetIds);
 			return this;
 		}
 	}

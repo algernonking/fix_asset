@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_ALLOCATION;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:28
- * @sign 403409E3F21D2CE25575E55863B7B01D
+ * @since 2021-08-20 20:57:54
+ * @sign EA6ABFFF77643554C704EAEB249F43AF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,12 +36,6 @@ public class AssetAllocation extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
-	
-	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
 	
 	/**
 	 * 业务编号：业务编号
@@ -60,22 +56,22 @@ public class AssetAllocation extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
-	 * 调出所属组织：调出所属组织
+	 * 调出所属公司：调出所属公司
 	*/
-	@ApiModelProperty(required = false,value="调出所属组织" , notes = "调出所属组织")
-	private String outManagementOrganizationId;
+	@ApiModelProperty(required = false,value="调出所属公司" , notes = "调出所属公司")
+	private String outManagementCompanyId;
 	
 	/**
-	 * 调入所属组织：调入所属组织
+	 * 调入所属公司：调入所属公司
 	*/
-	@ApiModelProperty(required = false,value="调入所属组织" , notes = "调入所属组织")
-	private String inManagementOrganizationId;
+	@ApiModelProperty(required = false,value="调入所属公司" , notes = "调入所属公司")
+	private String inManagementCompanyId;
 	
 	/**
 	 * 调入管理员：调入管理员
@@ -88,6 +84,12 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="调拨说明" , notes = "调拨说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -147,7 +149,13 @@ public class AssetAllocation extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -165,25 +173,6 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setId(String id) {
 		this.id=id;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetAllocation setName(String name) {
-		this.name=name;
 		return this;
 	}
 	
@@ -245,59 +234,59 @@ public class AssetAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetAllocation setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 调出所属组织<br>
-	 * 调出所属组织
-	 * @return 调出所属组织
+	 * 获得 调出所属公司<br>
+	 * 调出所属公司
+	 * @return 调出所属公司
 	*/
-	public String getOutManagementOrganizationId() {
-		return outManagementOrganizationId;
+	public String getOutManagementCompanyId() {
+		return outManagementCompanyId;
 	}
 	
 	/**
-	 * 设置 调出所属组织
-	 * @param outManagementOrganizationId 调出所属组织
+	 * 设置 调出所属公司
+	 * @param outManagementCompanyId 调出所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOutManagementOrganizationId(String outManagementOrganizationId) {
-		this.outManagementOrganizationId=outManagementOrganizationId;
+	public AssetAllocation setOutManagementCompanyId(String outManagementCompanyId) {
+		this.outManagementCompanyId=outManagementCompanyId;
 		return this;
 	}
 	
 	/**
-	 * 获得 调入所属组织<br>
-	 * 调入所属组织
-	 * @return 调入所属组织
+	 * 获得 调入所属公司<br>
+	 * 调入所属公司
+	 * @return 调入所属公司
 	*/
-	public String getInManagementOrganizationId() {
-		return inManagementOrganizationId;
+	public String getInManagementCompanyId() {
+		return inManagementCompanyId;
 	}
 	
 	/**
-	 * 设置 调入所属组织
-	 * @param inManagementOrganizationId 调入所属组织
+	 * 设置 调入所属公司
+	 * @param inManagementCompanyId 调入所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setInManagementOrganizationId(String inManagementOrganizationId) {
-		this.inManagementOrganizationId=inManagementOrganizationId;
+	public AssetAllocation setInManagementCompanyId(String inManagementCompanyId) {
+		this.inManagementCompanyId=inManagementCompanyId;
 		return this;
 	}
 	
@@ -336,6 +325,25 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetAllocation setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -515,17 +523,58 @@ public class AssetAllocation extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
 	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public AssetAllocation setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
 	 * @param asset 资产
 	 * @return 当前对象
 	*/
-	public AssetAllocation setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetAllocation addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetAllocation setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetAllocation addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
 		return this;
 	}
 

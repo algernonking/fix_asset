@@ -37,7 +37,7 @@ import java.util.Date;
  * 主机 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:08
+ * @since 2021-08-21 10:03:55
 */
 
 
@@ -55,13 +55,10 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	 * */
 	public DAO dao() { return dao; }
 
-
 	@Autowired 
 	private HostMidServiceImpl hostMidServiceImpl;
-
 	@Autowired 
 	private HostOsServiceImpl hostOsServiceImpl;
-
 	@Autowired 
 	private HostDbServiceImpl hostDbServiceImpl;
 

@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:51
- * @sign CD6120902F7C964D5A4411976A4AD767
+ * @since 2021-08-21 09:30:33
+ * @sign 13DECB181D46D3A8911618E51FEEBFEF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -29,16 +29,6 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , 类型: java.lang.String
-	*/
-	public static final String STATUS="status";
-	
-	/**
-	 * 状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
-	
-	/**
 	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_ID="categoryId";
@@ -47,6 +37,16 @@ public class GoodsMeta {
 	 * 资产分类 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,CATEGORY_ID, java.lang.String.class, "资产分类", "资产分类", java.lang.String.class, null);
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
 	 * 标准型号物品名称 , 类型: java.lang.String
@@ -221,7 +221,7 @@ public class GoodsMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , CATEGORY_ID , NAME , MODEL , MANUFACTURER_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , STATUS , NAME , MODEL , MANUFACTURER_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER };
 	
 	/**
 	 * 代理类
@@ -243,17 +243,6 @@ public class GoodsMeta {
 		}
 		
 		/**
-		 * 设置 状态
-		 * @param status 状态
-		 * @return 当前对象
-		*/
-		public Goods setStatus(String status) {
-			super.change(STATUS,super.getStatus(),status);
-			super.setStatus(status);
-			return this;
-		}
-		
-		/**
 		 * 设置 资产分类
 		 * @param categoryId 资产分类
 		 * @return 当前对象
@@ -261,6 +250,17 @@ public class GoodsMeta {
 		public Goods setCategoryId(String categoryId) {
 			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
 			super.setCategoryId(categoryId);
+			return this;
+		}
+		
+		/**
+		 * 设置 状态
+		 * @param status 状态
+		 * @return 当前对象
+		*/
+		public Goods setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		

@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产处置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 09:07:06
+ * @since 2021-08-20 20:18:19
 */
 
 @Api(tags = "资产处置")
@@ -69,16 +69,16 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_DATE , value = "处理日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PLAN_FINISH_DATE , value = "计划完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.OPERUSER_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -133,16 +133,16 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_DATE , value = "处理日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PLAN_FINISH_DATE , value = "计划完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.OPERUSER_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -163,16 +163,16 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_DATE , value = "处理日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PLAN_FINISH_DATE , value = "计划完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.OPERUSER_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -232,16 +232,16 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_DATE , value = "处理日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PLAN_FINISH_DATE , value = "计划完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.OPERUSER_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -263,16 +263,16 @@ public class AssetHandleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetHandleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.TYPE , value = "处置类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.CONTENT , value = "内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_NUMBER , value = "处置数量" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.HANDLE_DATE , value = "处理日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PLAN_FINISH_DATE , value = "计划完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetHandleVOMeta.OPERUSER_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

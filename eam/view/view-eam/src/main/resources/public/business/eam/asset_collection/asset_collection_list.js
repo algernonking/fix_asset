@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:36
+ * @since 2021-08-20 20:54:22
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -60,13 +64,13 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
-					,{ field: 'actualCollectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际领用日期'), templet: function (d) { return fox.dateFormat(d.actualCollectionDate); }}
-					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后使用组织') }
+					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后公司/部门') }
 					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
+					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('领用日期'), templet: function (d) { return fox.dateFormat(d.collectionDate); }}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用说明') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -100,11 +104,12 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.actualCollectionDate={ begin: $("#actualCollectionDate-begin").val(), end: $("#actualCollectionDate-end").val() };
 		value.userOrganizationId={ value: $("#userOrganizationId").val()};
 		value.userId={ value: $("#userId").val()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+		value.collectionDate={ begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -155,22 +160,15 @@ function ListPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#actualCollectionDate-begin',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#actualCollectionDate-end',
-			trigger:"click"
-		});
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
 			radio: false,
 			size: "small",
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -181,6 +179,14 @@ function ListPage() {
 				}
 				return opts;
 			}
+		});
+		laydate.render({
+			elem: '#collectionDate-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#collectionDate-end',
+			trigger:"click"
 		});
 		fox.renderSearchInputs();
 	}
@@ -343,7 +349,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1080px",height+"px"],
+			area: ["1000px",height+"px"],
 			type: 2,
 			content: '/business/eam/asset_collection/asset_collection_form.html' + queryString,
 			finish: function () {
@@ -353,16 +359,13 @@ function ListPage() {
 		admin.putTempData('eam-asset-collection-form-data-popup-index', index);
 	};
 
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

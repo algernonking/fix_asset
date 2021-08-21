@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 09:07:05
- * @sign 27CCB669BB6805E5B8F550ACB76B0CAF
+ * @since 2021-08-20 20:18:19
+ * @sign F32988CDF1005B639C103075D8F8A375
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,12 +45,6 @@ public class AssetHandle extends Entity {
 	private String procId;
 	
 	/**
-	 * 办理状态：办理状态
-	*/
-	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
-	private String status;
-	
-	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
@@ -59,6 +55,12 @@ public class AssetHandle extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
+	
+	/**
+	 * 办理状态：办理状态
+	*/
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
+	private String status;
 	
 	/**
 	 * 处置类型：处置类型
@@ -97,10 +99,10 @@ public class AssetHandle extends Entity {
 	private Date actualFinishDate;
 	
 	/**
-	 * 制单人：操作人
+	 * 制单人：制单人
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "操作人")
-	private String operuserId;
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 图片：图片
@@ -166,7 +168,13 @@ public class AssetHandle extends Entity {
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
+	
+	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -207,25 +215,6 @@ public class AssetHandle extends Entity {
 	}
 	
 	/**
-	 * 获得 办理状态<br>
-	 * 办理状态
-	 * @return 办理状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 办理状态
-	 * @param status 办理状态
-	 * @return 当前对象
-	*/
-	public AssetHandle setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -260,6 +249,25 @@ public class AssetHandle extends Entity {
 	*/
 	public AssetHandle setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 办理状态
+	 * @param status 办理状态
+	 * @return 当前对象
+	*/
+	public AssetHandle setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -379,20 +387,20 @@ public class AssetHandle extends Entity {
 	
 	/**
 	 * 获得 制单人<br>
-	 * 操作人
+	 * 制单人
 	 * @return 制单人
 	*/
-	public String getOperuserId() {
-		return operuserId;
+	public String getOriginatorId() {
+		return originatorId;
 	}
 	
 	/**
 	 * 设置 制单人
-	 * @param operuserId 制单人
+	 * @param originatorId 制单人
 	 * @return 当前对象
 	*/
-	public AssetHandle setOperuserId(String operuserId) {
-		this.operuserId=operuserId;
+	public AssetHandle setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -591,17 +599,58 @@ public class AssetHandle extends Entity {
 	 * 资产
 	 * @return 资产
 	*/
-	public Asset getAsset() {
-		return asset;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
 	 * 设置 资产
+	 * @param assetList 资产
+	 * @return 当前对象
+	*/
+	public AssetHandle setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
 	 * @param asset 资产
 	 * @return 当前对象
 	*/
-	public AssetHandle setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetHandle addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetHandle setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetHandle addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
 		return this;
 	}
 

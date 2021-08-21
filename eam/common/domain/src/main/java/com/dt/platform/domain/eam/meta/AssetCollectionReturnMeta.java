@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetCollectionReturn;
 import java.util.Date;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:33
- * @sign A24D30A2E80D059AD4DA24CE600526C4
+ * @since 2021-08-21 08:43:53
+ * @sign 210EF806F9A2980EF3B9147C5990AFAB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,16 +27,6 @@ public class AssetCollectionReturnMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 业务编号 , 类型: java.lang.String
@@ -58,6 +49,16 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
 	
 	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final String NAME="name";
+	
+	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
+	
+	/**
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
@@ -66,16 +67,6 @@ public class AssetCollectionReturnMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
-	
-	/**
-	 * 制单人 , 类型: java.lang.String
-	*/
-	public static final String ORIGINATOR_ID="originatorId";
-	
-	/**
-	 * 制单人 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 退库日期 , 类型: java.util.Date
@@ -88,14 +79,14 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,RETURN_DATE, java.util.Date.class, "退库日期", "退库日期", java.util.Date.class, null);
 	
 	/**
-	 * 退库使用组织 , 类型: java.lang.String
+	 * 退库后公司/部门 , 类型: java.lang.String
 	*/
 	public static final String USER_ORGANIZATION_ID="userOrganizationId";
 	
 	/**
-	 * 退库使用组织 , 类型: java.lang.String
+	 * 退库后公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,USER_ORGANIZATION_ID, java.lang.String.class, "退库使用组织", "退库使用组织", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,USER_ORGANIZATION_ID, java.lang.String.class, "退库后公司/部门", "退库后公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 退库后位置 , 类型: java.lang.String
@@ -126,6 +117,16 @@ public class AssetCollectionReturnMeta {
 	 * 退库说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,CONTENT, java.lang.String.class, "退库说明", "退库说明", java.lang.String.class, null);
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
 	 * 业务日期 , 类型: java.util.Date
@@ -228,19 +229,29 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final String ASSET="asset";
+	public static final String ASSET_LIST="assetList";
 	
 	/**
-	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String ASSET_IDS="assetIds";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , ORIGINATOR_ID , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -258,17 +269,6 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务名称
-		 * @param name 业务名称
-		 * @return 当前对象
-		*/
-		public AssetCollectionReturn setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
 			return this;
 		}
 		
@@ -295,6 +295,17 @@ public class AssetCollectionReturnMeta {
 		}
 		
 		/**
+		 * 设置 业务名称
+		 * @param name 业务名称
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
+			return this;
+		}
+		
+		/**
 		 * 设置 办理状态
 		 * @param status 办理状态
 		 * @return 当前对象
@@ -302,17 +313,6 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
-			return this;
-		}
-		
-		/**
-		 * 设置 制单人
-		 * @param originatorId 制单人
-		 * @return 当前对象
-		*/
-		public AssetCollectionReturn setOriginatorId(String originatorId) {
-			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
-			super.setOriginatorId(originatorId);
 			return this;
 		}
 		
@@ -328,8 +328,8 @@ public class AssetCollectionReturnMeta {
 		}
 		
 		/**
-		 * 设置 退库使用组织
-		 * @param userOrganizationId 退库使用组织
+		 * 设置 退库后公司/部门
+		 * @param userOrganizationId 退库后公司/部门
 		 * @return 当前对象
 		*/
 		public AssetCollectionReturn setUserOrganizationId(String userOrganizationId) {
@@ -368,6 +368,17 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
 			return this;
 		}
 		
@@ -483,12 +494,23 @@ public class AssetCollectionReturnMeta {
 		
 		/**
 		 * 设置 资产
-		 * @param asset 资产
+		 * @param assetList 资产
 		 * @return 当前对象
 		*/
-		public AssetCollectionReturn setAsset(Asset asset) {
-			super.change(ASSET,super.getAsset(),asset);
-			super.setAsset(asset);
+		public AssetCollectionReturn setAssetList(List<Asset> assetList) {
+			super.change(ASSET_LIST,super.getAssetList(),assetList);
+			super.setAssetList(assetList);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetIds 资产列表
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setAssetIds(List<String> assetIds) {
+			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
+			super.setAssetIds(assetIds);
 			return this;
 		}
 	}

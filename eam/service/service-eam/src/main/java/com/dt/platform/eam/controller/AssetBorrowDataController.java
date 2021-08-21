@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:42:06
+ * @since 2021-08-20 20:18:13
 */
 
 @Api(tags = "资产借用数据")
@@ -66,8 +66,8 @@ public class AssetBorrowDataController extends SuperController {
 	@ApiOperation(value = "添加资产借用数据")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta.BORROW_ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta. ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -120,8 +120,8 @@ public class AssetBorrowDataController extends SuperController {
 	@ApiOperation(value = "更新资产借用数据")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta.BORROW_ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta. ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowDataVOMeta.PAGE_INDEX , AssetBorrowDataVOMeta.PAGE_SIZE , AssetBorrowDataVOMeta.SEARCH_FIELD , AssetBorrowDataVOMeta.FUZZY_FIELD , AssetBorrowDataVOMeta.SEARCH_VALUE , AssetBorrowDataVOMeta.SORT_FIELD , AssetBorrowDataVOMeta.SORT_TYPE , AssetBorrowDataVOMeta.IDS } ) 
@@ -140,8 +140,8 @@ public class AssetBorrowDataController extends SuperController {
 	@ApiOperation(value = "保存资产借用数据")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta.BORROW_ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta. ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowDataVOMeta.PAGE_INDEX , AssetBorrowDataVOMeta.PAGE_SIZE , AssetBorrowDataVOMeta.SEARCH_FIELD , AssetBorrowDataVOMeta.FUZZY_FIELD , AssetBorrowDataVOMeta.SEARCH_VALUE , AssetBorrowDataVOMeta.SORT_FIELD , AssetBorrowDataVOMeta.SORT_TYPE , AssetBorrowDataVOMeta.IDS } )
@@ -199,8 +199,8 @@ public class AssetBorrowDataController extends SuperController {
 	@ApiOperation(value = "查询资产借用数据")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta.BORROW_ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta. ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowDataVOMeta.PAGE_INDEX , AssetBorrowDataVOMeta.PAGE_SIZE } )
@@ -220,8 +220,8 @@ public class AssetBorrowDataController extends SuperController {
 	@ApiOperation(value = "分页查询资产借用数据")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta.BORROW_ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowDataVOMeta. ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

@@ -83,5 +83,6 @@ fi
 
 ####################### Deploy ######################################
 ops=/Users/lank/IdeaProjectsnew/eam/eam/ops.jar
+echo "$JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file">>/tmp/ops.log
 $JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file
 exit 0

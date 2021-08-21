@@ -36,7 +36,8 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
                 }
         );
 
-
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("1000px");
 
 
         //文件生成覆盖模式

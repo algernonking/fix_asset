@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 09:07:07
+ * @since 2021-08-20 20:18:19
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -60,16 +64,16 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('处置类型'), templet:function (d){ return fox.getDictText(SELECT_TYPE_DATA,d.type);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容') }
 					,{ field: 'handleNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('处置数量') }
 					,{ field: 'handleDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('处理日期'), templet: function (d) { return fox.dateFormat(d.handleDate); }}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成时间'), templet: function (d) { return fox.dateFormat(d.planFinishDate); }}
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成时间'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
-					,{ field: 'operuserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
@@ -109,6 +113,7 @@ function ListPage() {
 		value.content={ value: $("#content").val()};
 		value.handleDate={ value: $("#handleDate").val()};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -334,16 +339,13 @@ function ListPage() {
 		admin.putTempData('eam-asset-handle-form-data-popup-index', index);
 	};
 
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:22
- * @sign C27B873187A93686C54C74683BCD4340
+ * @since 2021-08-21 08:34:58
+ * @sign 9EE557B29B6DD203C31662FA60C3F4D1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,16 +42,16 @@ public class CodeRule extends Entity {
 	private String name;
 	
 	/**
-	 * 编码规则：编码规则
-	*/
-	@ApiModelProperty(required = false,value="编码规则" , notes = "编码规则")
-	private String rule;
-	
-	/**
 	 * 业务模块：业务模块
 	*/
 	@ApiModelProperty(required = false,value="业务模块" , notes = "业务模块")
 	private String module;
+	
+	/**
+	 * 编码规则：编码规则
+	*/
+	@ApiModelProperty(required = false,value="编码规则" , notes = "编码规则")
+	private String rule;
 	
 	/**
 	 * 备注：备注
@@ -146,25 +146,6 @@ public class CodeRule extends Entity {
 	}
 	
 	/**
-	 * 获得 编码规则<br>
-	 * 编码规则
-	 * @return 编码规则
-	*/
-	public String getRule() {
-		return rule;
-	}
-	
-	/**
-	 * 设置 编码规则
-	 * @param rule 编码规则
-	 * @return 当前对象
-	*/
-	public CodeRule setRule(String rule) {
-		this.rule=rule;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务模块<br>
 	 * 业务模块
 	 * @return 业务模块
@@ -180,6 +161,25 @@ public class CodeRule extends Entity {
 	*/
 	public CodeRule setModule(String module) {
 		this.module=module;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码规则<br>
+	 * 编码规则
+	 * @return 编码规则
+	*/
+	public String getRule() {
+		return rule;
+	}
+	
+	/**
+	 * 设置 编码规则
+	 * @param rule 编码规则
+	 * @return 当前对象
+	*/
+	public CodeRule setRule(String rule) {
+		this.rule=rule;
 		return this;
 	}
 	

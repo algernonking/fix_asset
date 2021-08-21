@@ -9,6 +9,7 @@ import com.github.foxnic.springboot.spring.SpringUtil;
 import com.github.foxnic.sql.meta.DBDataType;
 import com.github.foxnic.sql.treaty.DBTreaty;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
+import org.github.foxnic.web.framework.cache.FoxnicDataCacheManager;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,6 +50,9 @@ public class DAOConfig {
 			dao.setSequenceTable(FoxnicWeb.SYS_SEQUENCE.$NAME);
 			dao.setSequenceProcedure("NEXT_VAL");
 
+			//设置缓存
+			FoxnicDataCacheManager cacheManager=new FoxnicDataCacheManager();
+			dao.setDataCacheManager(cacheManager);
 
 			//设置SQL扫描
 			SQLoader.addTQLScanPackage(dao,SpringUtil.getStartupClass().getPackage().getName());

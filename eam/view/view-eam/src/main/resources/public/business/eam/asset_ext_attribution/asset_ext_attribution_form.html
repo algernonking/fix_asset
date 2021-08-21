@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:41
+ * @since 2021-08-20 20:18:23
  */
  -->
  <!DOCTYPE html>
@@ -42,18 +42,18 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('所属组织')}">所属组织</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('所属公司')}">所属公司</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="managementOrganizationId" id="managementOrganizationId" name="managementOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属组织') }" type="text" class="layui-input"   />
+                        <input lay-filter="managementCompanyId" id="managementCompanyId" name="managementCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属公司') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('使用组织')}">使用组织</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('使用公司/部门')}">使用公司/部门</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用组织') }" type="text" class="layui-input"   />
+                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用公司/部门') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -163,6 +163,7 @@
     var AUTH_PREFIX="eam_asset_ext_attribution";
 </script>
 
+<script th:src="'/business/eam/asset_ext_attribution/asset_ext_attribution_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_ext_attribution/asset_ext_attribution_form.js?'+${cacheKey}"></script>
 
 </body>

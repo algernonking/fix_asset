@@ -24,6 +24,7 @@ public class OpsHostPositionGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST_POSITION.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST_POSITION.NAME).search().fuzzySearch();
 
+        cfg.view().field(EAMTables.OPS_HOST_POSITION.NAME).form().validate().required();
 
         cfg.view().search().inputLayout(
                 new Object[]{

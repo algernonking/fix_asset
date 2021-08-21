@@ -36,8 +36,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS).basic().label("状态")
                 .form().validate().required()
-                .form().selectBox().dict(DictEnum.OPS_SYSTEM_STATUS).paging(false);
-
+                .form().radioBox().dict(DictEnum.OPS_SYSTEM_STATUS);
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).basic().label("运维模式")
                 .form().selectBox().dict(DictEnum.OPS_SYSTEM_OPS_METHOD).paging(false);
@@ -75,7 +74,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         );
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:30
- * @sign 7F41570137C24DA53D6E5298E95A7F8C
+ * @since 2021-08-21 09:16:09
+ * @sign 53AB89BD9706D4EA231D20626AE1B690
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -126,10 +126,10 @@ public class Asset extends Entity {
 	private String serialNumber;
 	
 	/**
-	 * 所属组织：所属组织
+	 * 所属单位：所属单位
 	*/
-	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
-	private String managementOrganizationId;
+	@ApiModelProperty(required = false,value="所属单位" , notes = "所属单位")
+	private String managementCompanyId;
 	
 	/**
 	 * 管理人员：管理人员
@@ -138,9 +138,9 @@ public class Asset extends Entity {
 	private String managerId;
 	
 	/**
-	 * 使用组织：使用组织
+	 * 使用公司/部门：使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="使用组织" , notes = "使用组织")
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
 	private String userOrganizationId;
 	
 	/**
@@ -616,21 +616,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 所属组织<br>
-	 * 所属组织
-	 * @return 所属组织
+	 * 获得 所属单位<br>
+	 * 所属单位
+	 * @return 所属单位
 	*/
-	public String getManagementOrganizationId() {
-		return managementOrganizationId;
+	public String getManagementCompanyId() {
+		return managementCompanyId;
 	}
 	
 	/**
-	 * 设置 所属组织
-	 * @param managementOrganizationId 所属组织
+	 * 设置 所属单位
+	 * @param managementCompanyId 所属单位
 	 * @return 当前对象
 	*/
-	public Asset setManagementOrganizationId(String managementOrganizationId) {
-		this.managementOrganizationId=managementOrganizationId;
+	public Asset setManagementCompanyId(String managementCompanyId) {
+		this.managementCompanyId=managementCompanyId;
 		return this;
 	}
 	
@@ -654,17 +654,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用组织<br>
-	 * 使用组织
-	 * @return 使用组织
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
 	*/
 	public String getUserOrganizationId() {
 		return userOrganizationId;
 	}
 	
 	/**
-	 * 设置 使用组织
-	 * @param userOrganizationId 使用组织
+	 * 设置 使用公司/部门
+	 * @param userOrganizationId 使用公司/部门
 	 * @return 当前对象
 	*/
 	public Asset setUserOrganizationId(String userOrganizationId) {

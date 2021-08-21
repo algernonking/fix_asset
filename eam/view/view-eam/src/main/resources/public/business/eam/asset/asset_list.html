@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:32
+ * @since 2021-08-21 09:16:12
  */
  -->
  <!DOCTYPE html>
@@ -116,7 +116,6 @@
 
 
     <a th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
-    <a class="layui-btn layui-btn-xs" lay-event="list-function" th:text="${lang.translate('labtel')}">labtel</a>
 </script>
 
 
@@ -127,6 +126,7 @@
     var AUTH_PREFIX="eam_asset";
 </script>
 
+<script th:src="'/business/eam/asset/asset_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_list.js?'+${cacheKey}"></script>
 
 </body>

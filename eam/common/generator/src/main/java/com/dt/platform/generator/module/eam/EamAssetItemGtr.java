@@ -14,14 +14,14 @@ public class EamAssetItemGtr extends BaseCodeGenerator {
 
         System.out.println(this.getClass().getName());
 
-
-
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_ITEM.ID,
                 }
         );
 
+        //指定该表为关系表
+        cfg.setRelationField(EAMTables.EAM_ASSET_ITEM.HANDLE_ID, EAMTables.EAM_ASSET_ITEM.ASSET_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()

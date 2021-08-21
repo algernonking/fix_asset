@@ -26,6 +26,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.eam.service.IAssetRepairService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,7 +37,7 @@ import java.util.Date;
  * 资产报修 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:39
+ * @since 2021-08-20 21:17:05
 */
 
 
@@ -53,6 +55,8 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private AssetItemServiceImpl assetItemServiceImpl;
 
 	
 	@Override
@@ -66,8 +70,13 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(AssetRepair assetRepair) {
 		Result r=super.insert(assetRepair);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetRepair.getId(), assetRepair.getAssetIds());
+		}
 		return r;
 	}
 	
@@ -134,8 +143,13 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(AssetRepair assetRepair , SaveMode mode) {
 		Result r=super.update(assetRepair , mode);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetRepair.getId(), assetRepair.getAssetIds());
+		}
 		return r;
 	}
 	

@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:16
+ * @since 2021-08-21 10:24:44
  */
  -->
  <!DOCTYPE html>
@@ -136,10 +136,10 @@
             <div class="layui-col-xs12 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -217,10 +217,11 @@
     var RADIO_CONTENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}]];
     var RADIO_DISPLAY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}]];
     var SELECT_GRADEID_DATA = [[${dict.toArray('kn_grade')}]];
-    var VALIDATE_CONFIG={"gradeId":{"labelInForm":"等级","inputType":"select_box","required":true},"display":{"labelInForm":"是否显示","inputType":"radio_box","required":true},"title":{"labelInForm":"标题","inputType":"text_input","required":true},"contentType":{"labelInForm":"内容类型","inputType":"radio_box","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"content":{"labelInForm":"知识内容","inputType":"text_area","required":true}};
+    var VALIDATE_CONFIG={"gradeId":{"labelInForm":"等级","inputType":"select_box","required":true},"notes":{"labelInForm":"备注","inputType":"text_area","required":true},"display":{"labelInForm":"是否显示","inputType":"radio_box","required":true},"title":{"labelInForm":"标题","inputType":"text_input","required":true},"contentType":{"labelInForm":"内容类型","inputType":"radio_box","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true},"content":{"labelInForm":"知识内容","inputType":"text_area","required":true}};
     var AUTH_PREFIX="kn_content";
 </script>
 
+<script th:src="'/business/knowledgebase/content/content_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/knowledgebase/content/content_form.js?'+${cacheKey}"></script>
 
 </body>

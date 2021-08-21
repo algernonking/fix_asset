@@ -4,6 +4,7 @@ package com.dt.platform.common.service.impl;
 import com.dt.platform.common.service.ICodeModuleService;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
 import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.commons.busi.id.SequenceType;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
@@ -71,9 +72,10 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 	 * */
 	public Result generateCode(String module){
 		Result result = new Result();
+		System.out.println("generateCode:"+module);
 		Rcd rs=dao.queryRecord("select b.rule rule from sys_code_allocation a,sys_code_rule b where a.rule_id=b.id and a.deleted=0 and b.deleted=0 and a.module=?",module);
 		if(rs==null){
-			ErrorDesc.failure().message("id 不允许为 null 。");
+			return ErrorDesc.failure().message("资产编号不允许为 null 。");
 		}
 		String code=parseCode(rs.getString("rule"));
 		result.success(true);
@@ -225,7 +227,10 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 				seqSource=attr[i];
 			}
 		}
-		return "";
+		//后期再优化去掉create
+		this.dao.createSequence(seqSource, SequenceType.AI,8);
+		return this.dao.getNextSequenceValue(seqSource);
 	}
+
 
 }

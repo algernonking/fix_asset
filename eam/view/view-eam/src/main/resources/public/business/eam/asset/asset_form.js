@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:36
+ * @since 2021-08-21 09:16:21
  */
 
 function FormPage() {
@@ -77,7 +77,6 @@ function FormPage() {
 			filterable: true,
 			paging: true,
 			pageRemote: true,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -112,9 +111,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "goodsId",
 			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -130,9 +130,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "manufacturerId",
 			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -170,9 +171,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "warehouseId",
 			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "warehouseName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -234,7 +236,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('eam-asset-form-data');
-		beforeDataFill(formData);
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -262,8 +266,6 @@ function FormPage() {
 
 			//设置  分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.category);
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  物品档案 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选
@@ -278,7 +280,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
-			afterDataFill(formData);
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -315,8 +319,6 @@ function FormPage() {
 
 			//获取 分类 下拉框的值
 			data.field["categoryId"]=fox.getSelectedValue("categoryId",false);
-			//获取 状态 下拉框的值
-			data.field["status"]=fox.getSelectedValue("status",false);
 			//获取 物品档案 下拉框的值
 			data.field["goodsId"]=fox.getSelectedValue("goodsId",false);
 			//获取 厂商 下拉框的值
@@ -350,28 +352,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-	function beforeDataFill(data) {
-		//$("#assetCode").prop("disabled",true);
-		$("#assetCode").attr("readonly","readonly");
-		$("#warehouseId").hide();
-		$("#assetCode").attr('placeholder','系统自动生成');
-		console.log("beforeDataFill",data);
-	}
-	
-	
-	function afterDataFill(data) {
-	    console.log("afterDataFill",data);
-	}
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

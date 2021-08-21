@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 15:11:34
+ * @since 2021-08-21 09:16:17
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -68,9 +72,9 @@ function ListPage() {
 					,{ field: 'model', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('规格型号') }
 					,{ field: 'unit', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('计量单位') }
 					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') }
-					,{ field: 'managementOrganizationId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属组织') }
+					,{ field: 'managementCompanyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属单位') }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('管理人员') }
-					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用组织') }
+					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') }
 					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置') }
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('详细位置') }
@@ -116,6 +120,7 @@ function ListPage() {
 		value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -157,7 +162,6 @@ function ListPage() {
 			filterable: true,
 			paging: true,
 			pageRemote: true,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -194,9 +198,10 @@ function ListPage() {
 			el: "manufacturerId",
 			radio: false,
 			size: "small",
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -349,9 +354,6 @@ function ListPage() {
 				});
 				
 			}
-			else if (layEvent === 'list-function') { // labtel
-				listFunction(data);
-			}
 			
 		});
  
@@ -372,7 +374,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["95%",height+"px"],
 			type: 2,
 			content: '/business/eam/asset/asset_form.html' + queryString,
 			finish: function () {
@@ -382,34 +384,13 @@ function ListPage() {
 		admin.putTempData('eam-asset-form-data-popup-index', index);
 	};
 
-	/**
-	 * labtel 操作
-	 */
-	/**
-	 * 打开字典条窗口
-	 * */
-	function listFunction(data) {
-	    admin.putTempData("dictId",data.id,true);
-	    var index = admin.popupCenter({
-	        title: "条目",
-	        resize: false,
-	        id: 'dictItemsWindow',
-	        area: ["800px", "600px"],
-	        type: 2,
-	        content: "/business/system/dict_item/dict_item_list.html"
-	    });
-	}
-	
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

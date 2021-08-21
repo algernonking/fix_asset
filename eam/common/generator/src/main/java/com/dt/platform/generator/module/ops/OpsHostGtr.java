@@ -132,6 +132,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
 
+        cfg.view().field(HostMeta.HOST_NOTES).form().textArea().height(30);
+
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
@@ -185,7 +187,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         //分成分组布局
-        cfg.view().formWindow().width(1000);
+        cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_HOST.SYSTEM_ID,

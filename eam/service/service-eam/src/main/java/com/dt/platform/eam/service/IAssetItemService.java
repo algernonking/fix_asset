@@ -15,13 +15,14 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import com.dt.platform.constants.db.EAMTables.*;
 
 /**
  * <p>
  * 资产 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:35
+ * @since 2021-08-20 20:18:21
 */
 
 public interface IAssetItemService extends ISuperService<AssetItem> {
@@ -284,5 +285,11 @@ public interface IAssetItemService extends ISuperService<AssetItem> {
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
 
+	/**
+	 * 保存关系
+	 * @param handleId 处理
+	 * @param assetIds 资产清单
+	 */
+	void saveRelation(String handleId,List<String> assetIds);
  
 }

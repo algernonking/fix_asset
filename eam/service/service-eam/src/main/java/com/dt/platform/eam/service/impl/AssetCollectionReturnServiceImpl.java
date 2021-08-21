@@ -2,9 +2,6 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +26,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.eam.service.IAssetCollectionReturnService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -38,7 +37,7 @@ import java.util.Date;
  * 资产退库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:33
+ * @since 2021-08-21 08:43:53
 */
 
 
@@ -56,6 +55,8 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private AssetItemServiceImpl assetItemServiceImpl;
 
 	
 	@Override
@@ -69,13 +70,13 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(AssetCollectionReturn assetCollectionReturn) {
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}
-		assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
 		Result r=super.insert(assetCollectionReturn);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetCollectionReturn.getId(), assetCollectionReturn.getAssetIds());
+		}
 		return r;
 	}
 	
@@ -142,8 +143,13 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(AssetCollectionReturn assetCollectionReturn , SaveMode mode) {
 		Result r=super.update(assetCollectionReturn , mode);
+		//保存关系
+		if(r.success()) {
+			assetItemServiceImpl.saveRelation(assetCollectionReturn.getId(), assetCollectionReturn.getAssetIds());
+		}
 		return r;
 	}
 	

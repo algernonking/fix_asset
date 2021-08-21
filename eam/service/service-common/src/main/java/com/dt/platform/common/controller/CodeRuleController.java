@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码规则 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:22
+ * @since 2021-08-21 08:34:58
 */
 
 @Api(tags = "编码规则")
@@ -67,8 +67,8 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -122,8 +122,8 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } ) 
@@ -143,8 +143,8 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } )
@@ -171,6 +171,8 @@ public class CodeRuleController extends SuperController {
 	public Result<CodeRule> getById(String id) {
 		Result<CodeRule> result=new Result<>();
 		CodeRule codeRule=codeRuleService.getById(id);
+		// 关联出 模块 数据
+		codeRuleService.join(codeRule,CodeRuleMeta.MODULE);
 		result.success(true).data(codeRule);
 		return result;
 	}
@@ -203,8 +205,8 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE } )
@@ -225,8 +227,8 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -235,6 +237,8 @@ public class CodeRuleController extends SuperController {
 	public Result<PagedList<CodeRule>> queryPagedList(CodeRuleVO sample) {
 		Result<PagedList<CodeRule>> result=new Result<>();
 		PagedList<CodeRule> list=codeRuleService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 模块 数据
+		codeRuleService.join(list,CodeRuleMeta.MODULE);
 		result.success(true).data(list);
 		return result;
 	}

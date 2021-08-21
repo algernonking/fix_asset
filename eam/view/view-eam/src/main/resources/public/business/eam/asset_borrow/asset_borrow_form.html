@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:07:24
+ * @since 2021-08-20 20:18:09
  */
  -->
  <!DOCTYPE html>
@@ -131,11 +131,11 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}]];
     var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"text_input","required":true},"borrowTime":{"labelInForm":"借出时间","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_borrow";
 </script>
 
+<script th:src="'/business/eam/asset_borrow/asset_borrow_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_borrow/asset_borrow_form.js?'+${cacheKey}"></script>
 
 </body>

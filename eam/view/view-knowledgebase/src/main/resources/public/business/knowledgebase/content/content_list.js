@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:16
+ * @since 2021-08-21 10:24:44
  */
 
 
@@ -42,9 +42,13 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
+			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
 
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
@@ -104,6 +108,7 @@ function ListPage() {
 		value.display={ value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr")};
 		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr")};
 		value.notes={ value: $("#notes").val()};
+		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -143,7 +148,6 @@ function ListPage() {
 			radio: false,
 			size: "small",
 			filterable: true,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -368,7 +372,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["90%",height+"px"],
 			type: 2,
 			content: '/business/knowledgebase/content/content_form.html' + queryString,
 			finish: function () {
@@ -378,16 +382,13 @@ function ListPage() {
 		admin.putTempData('kn-content-form-data-popup-index', index);
 	};
 
-
-
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

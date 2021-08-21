@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:33
+ * @since 2021-08-21 08:43:59
  */
  -->
  <!DOCTYPE html>
@@ -48,9 +48,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('退库使用组织')}">退库使用组织</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('退库后公司/部门')}">退库后公司/部门</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('退库使用组织') }" type="text" class="layui-input"   />
+                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('退库后公司/部门') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -156,6 +156,7 @@
     var AUTH_PREFIX="eam_asset_collection_return";
 </script>
 
+<script th:src="'/business/eam/asset_collection_return/asset_collection_return_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_collection_return/asset_collection_return_form.js?'+${cacheKey}"></script>
 
 </body>

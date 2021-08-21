@@ -2,7 +2,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:36
+ * @since 2021-08-20 20:54:20
  */
  -->
  <!DOCTYPE html>
@@ -36,17 +36,17 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 领用后使用组织 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 使用人员 , userId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('领用后使用组织')}" class="search-label userOrganizationId-label">领用后使用组织</span><span class="search-colon">:</span></div>
-                        <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用人员')}" class="search-label userId-label">使用人员</span><span class="search-colon">:</span></div>
+                        <input id="userId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 实际领用日期 , actualCollectionDate ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 领用日期 , collectionDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('实际领用日期')}" class="search-label actualCollectionDate-label">实际领用日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="actualCollectionDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('领用日期')}" class="search-label collectionDate-label">领用日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="collectionDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                             <span class="search-dash">-</span>
-                            <input type="text" id="actualCollectionDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            <input type="text" id="collectionDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 
@@ -58,15 +58,15 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 领用后公司/部门 , userOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('领用后公司/部门')}" class="search-label userOrganizationId-label">领用后公司/部门</span><span class="search-colon">:</span></div>
+                        <input id="userOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
                     <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
                         <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
-                    </div>
-                    <!-- 使用人员 , userId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用人员')}" class="search-label userId-label">使用人员</span><span class="search-colon">:</span></div>
-                        <input id="userId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 领用说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
@@ -122,6 +122,7 @@
     var AUTH_PREFIX="eam_asset_collection";
 </script>
 
+<script th:src="'/business/eam/asset_collection/asset_collection_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_collection/asset_collection_list.js?'+${cacheKey}"></script>
 
 </body>
