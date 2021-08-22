@@ -2,203 +2,214 @@ package com.dt.platform.domain.eam.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Category;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-31 12:16:02
- * @sign C4EC2BB104E157C89786CFDC11BAD8AE
+ * @since 2021-08-22 10:21:51
+ * @sign 7CABEADBEB1FE47C45B6C8B70EE0A8E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
 public class CategoryMeta {
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
 	public static final String ID="id";
 	
 	/**
-	 * 主键
+	 * 主键 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , valid:有效,invalud:无效
+	 * 状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 状态 , valid:有效,invalud:无效
+	 * 状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> STATUS_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,STATUS, java.lang.String.class, "状态", "valid:有效,invalud:无效", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_NAME="categoryName";
 	
 	/**
-	 * 名称
+	 * 名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
 	
 	/**
-	 * 全称
+	 * 全称 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_FULLNAME="categoryFullname";
 	
 	/**
-	 * 全称
+	 * 全称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_FULLNAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_FULLNAME, java.lang.String.class, "全称", "全称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_FULLNAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_FULLNAME, java.lang.String.class, "全称", "全称", java.lang.String.class, null);
 	
 	/**
-	 * 编码
+	 * 编码 , 类型: java.lang.String
 	*/
 	public static final String CATEGORY_CODE="categoryCode";
 	
 	/**
-	 * 编码
+	 * 编码 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_CODE_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CATEGORY_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,CATEGORY_CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
 	
 	/**
-	 * 父节点
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final String SERVICE_LIFE="serviceLife";
+	
+	/**
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 父节点 , 类型: java.lang.String
 	*/
 	public static final String PARENT_ID="parentId";
 	
 	/**
-	 * 父节点
+	 * 父节点 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> PARENT_ID_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,PARENT_ID, java.lang.String.class, "父节点", "父节点", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> PARENT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,PARENT_ID, java.lang.String.class, "父节点", "父节点", java.lang.String.class, null);
 	
 	/**
-	 * sort
+	 * 排序 , 类型: java.lang.Integer
 	*/
 	public static final String SORT="sort";
 	
 	/**
-	 * sort
+	 * 排序 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> SORT_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,SORT, java.lang.Integer.class, "sort", "sort", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> SORT_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
 	
 	/**
-	 * 节点路径
+	 * 节点路径 , 类型: java.lang.String
 	*/
 	public static final String HIERARCHY="hierarchy";
 	
 	/**
-	 * 节点路径
+	 * 节点路径 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> HIERARCHY_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,HIERARCHY, java.lang.String.class, "节点路径", "节点路径", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> HIERARCHY_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,HIERARCHY, java.lang.String.class, "节点路径", "节点路径", java.lang.String.class, null);
 	
 	/**
-	 * 节点路径名称
+	 * 节点路径名称 , 类型: java.lang.String
 	*/
 	public static final String HIERARCHY_NAME="hierarchyName";
 	
 	/**
-	 * 节点路径名称
+	 * 节点路径名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> HIERARCHY_NAME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,HIERARCHY_NAME, java.lang.String.class, "节点路径名称", "节点路径名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> HIERARCHY_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,HIERARCHY_NAME, java.lang.String.class, "节点路径名称", "节点路径名称", java.lang.String.class, null);
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 备注
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> NOTES_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
 	
 	/**
-	 * 创建人ID
+	 * 创建人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CREATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
 	public static final String CREATE_TIME="createTime";
 	
 	/**
-	 * 创建时间
+	 * 创建时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> CREATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
 	public static final String UPDATE_BY="updateBy";
 	
 	/**
-	 * 修改人ID
+	 * 修改人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> UPDATE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
 	public static final String UPDATE_TIME="updateTime";
 	
 	/**
-	 * 修改时间
+	 * 修改时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> UPDATE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
 	public static final String DELETED="deleted";
 	
 	/**
-	 * 是否已删除
+	 * 是否已删除 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> DELETED_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
 	public static final String DELETE_BY="deleteBy";
 	
 	/**
-	 * 删除人ID
+	 * 删除人ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> DELETE_BY_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
 	public static final String DELETE_TIME="deleteTime";
 	
 	/**
-	 * 删除时间
+	 * 删除时间 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> DELETE_TIME_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version
+	 * version , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> VERSION_PROP=new BeanProperty(com.dt.platform.domain.eam.Category.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Category,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Category.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , STATUS , CATEGORY_NAME , CATEGORY_FULLNAME , CATEGORY_CODE , SERVICE_LIFE , PARENT_ID , SORT , HIERARCHY , HIERARCHY_NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -264,6 +275,17 @@ public class CategoryMeta {
 		}
 		
 		/**
+		 * 设置 使用期限
+		 * @param serviceLife 使用期限
+		 * @return 当前对象
+		*/
+		public Category setServiceLife(BigDecimal serviceLife) {
+			super.change(SERVICE_LIFE,super.getServiceLife(),serviceLife);
+			super.setServiceLife(serviceLife);
+			return this;
+		}
+		
+		/**
 		 * 设置 父节点
 		 * @param parentId 父节点
 		 * @return 当前对象
@@ -275,8 +297,8 @@ public class CategoryMeta {
 		}
 		
 		/**
-		 * 设置 sort
-		 * @param sort sort
+		 * 设置 排序
+		 * @param sort 排序
 		 * @return 当前对象
 		*/
 		public Category setSort(Integer sort) {

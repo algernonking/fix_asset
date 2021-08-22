@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:51
- * @sign 210EF806F9A2980EF3B9147C5990AFAB
+ * @since 2021-08-22 10:16:38
+ * @sign ABAFD11BCC70DD97D4AEB3D3D3878341
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,7 +71,7 @@ public class AssetCollectionReturn extends Entity {
 	 * 退库后公司/部门：退库后公司/部门
 	*/
 	@ApiModelProperty(required = false,value="退库后公司/部门" , notes = "退库后公司/部门")
-	private String userOrganizationId;
+	private String useOrganizationId;
 	
 	/**
 	 * 退库后位置：退库后位置
@@ -288,17 +288,17 @@ public class AssetCollectionReturn extends Entity {
 	 * 退库后公司/部门
 	 * @return 退库后公司/部门
 	*/
-	public String getUserOrganizationId() {
-		return userOrganizationId;
+	public String getUseOrganizationId() {
+		return useOrganizationId;
 	}
 	
 	/**
 	 * 设置 退库后公司/部门
-	 * @param userOrganizationId 退库后公司/部门
+	 * @param useOrganizationId 退库后公司/部门
 	 * @return 当前对象
 	*/
-	public AssetCollectionReturn setUserOrganizationId(String userOrganizationId) {
-		this.userOrganizationId=userOrganizationId;
+	public AssetCollectionReturn setUseOrganizationId(String useOrganizationId) {
+		this.useOrganizationId=useOrganizationId;
 		return this;
 	}
 	

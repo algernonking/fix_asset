@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:30
+ * @since 2021-08-21 21:10:59
  */
 
 
@@ -63,7 +63,7 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务分组'), templet:function (d){ return fox.getEnumText(RADIO_GROUPID_DATA,d.groupId);}}
+					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('服务分组'), templet: function (d) { return fox.joinLabel(d.group,"name");}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
@@ -294,7 +294,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["800px",height+"px"],
 			type: 2,
 			content: '/business/ops/service_category/service_category_form.html' + queryString,
 			finish: function () {

@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:50
- * @sign A0F1E50A7B948521E4A8550CD0BC55C2
+ * @since 2021-08-22 10:16:37
+ * @sign DABDD363A6B16988EE5D7FE583F53C41
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,13 +65,13 @@ public class AssetCollection extends Entity {
 	 * 领用后公司/部门：领用后公司/部门
 	*/
 	@ApiModelProperty(required = false,value="领用后公司/部门" , notes = "领用后公司/部门")
-	private String userOrganizationId;
+	private String useOrganizationId;
 	
 	/**
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
+	private String useUserId;
 	
 	/**
 	 * 领用后位置：领用后位置
@@ -275,17 +275,17 @@ public class AssetCollection extends Entity {
 	 * 领用后公司/部门
 	 * @return 领用后公司/部门
 	*/
-	public String getUserOrganizationId() {
-		return userOrganizationId;
+	public String getUseOrganizationId() {
+		return useOrganizationId;
 	}
 	
 	/**
 	 * 设置 领用后公司/部门
-	 * @param userOrganizationId 领用后公司/部门
+	 * @param useOrganizationId 领用后公司/部门
 	 * @return 当前对象
 	*/
-	public AssetCollection setUserOrganizationId(String userOrganizationId) {
-		this.userOrganizationId=userOrganizationId;
+	public AssetCollection setUseOrganizationId(String useOrganizationId) {
+		this.useOrganizationId=useOrganizationId;
 		return this;
 	}
 	
@@ -294,17 +294,17 @@ public class AssetCollection extends Entity {
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public String getUserId() {
-		return userId;
+	public String getUseUserId() {
+		return useUserId;
 	}
 	
 	/**
 	 * 设置 使用人员
-	 * @param userId 使用人员
+	 * @param useUserId 使用人员
 	 * @return 当前对象
 	*/
-	public AssetCollection setUserId(String userId) {
-		this.userId=userId;
+	public AssetCollection setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
 		return this;
 	}
 	

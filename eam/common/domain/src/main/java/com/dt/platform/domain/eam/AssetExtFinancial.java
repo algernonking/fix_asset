@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:01
- * @sign 17E56C678F33DF8C1157E2485586A5E8
+ * @since 2021-08-22 10:16:48
+ * @sign 3A351866AD84C6C5C7F2246047056CD7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,7 +46,7 @@ public class AssetExtFinancial extends Entity {
 	 * 财务分类：财务分类
 	*/
 	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
-	private String typeId;
+	private String categoryId;
 	
 	/**
 	 * 财务编号：财务编号
@@ -59,6 +59,12 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
 	private String supplierId;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private String ownCompanyId;
 	
 	/**
 	 * 税额：税额
@@ -107,12 +113,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
 	private Date entryTime;
-	
-	/**
-	 * 使用期限：使用期限
-	*/
-	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
-	private BigDecimal serviceLife;
 	
 	/**
 	 * 财务备注：财务备注
@@ -223,17 +223,17 @@ public class AssetExtFinancial extends Entity {
 	 * 财务分类
 	 * @return 财务分类
 	*/
-	public String getTypeId() {
-		return typeId;
+	public String getCategoryId() {
+		return categoryId;
 	}
 	
 	/**
 	 * 设置 财务分类
-	 * @param typeId 财务分类
+	 * @param categoryId 财务分类
 	 * @return 当前对象
 	*/
-	public AssetExtFinancial setTypeId(String typeId) {
-		this.typeId=typeId;
+	public AssetExtFinancial setCategoryId(String categoryId) {
+		this.categoryId=categoryId;
 		return this;
 	}
 	
@@ -272,6 +272,25 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setSupplierId(String supplierId) {
 		this.supplierId=supplierId;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public String getOwnCompanyId() {
+		return ownCompanyId;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownCompanyId 所属公司
+	 * @return 当前对象
+	*/
+	public AssetExtFinancial setOwnCompanyId(String ownCompanyId) {
+		this.ownCompanyId=ownCompanyId;
 		return this;
 	}
 	
@@ -424,25 +443,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setEntryTime(Date entryTime) {
 		this.entryTime=entryTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 使用期限<br>
-	 * 使用期限
-	 * @return 使用期限
-	*/
-	public BigDecimal getServiceLife() {
-		return serviceLife;
-	}
-	
-	/**
-	 * 设置 使用期限
-	 * @param serviceLife 使用期限
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
-		this.serviceLife=serviceLife;
 		return this;
 	}
 	

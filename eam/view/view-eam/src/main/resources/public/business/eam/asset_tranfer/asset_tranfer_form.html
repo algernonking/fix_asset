@@ -2,7 +2,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:44
+ * @since 2021-08-22 10:16:31
  */
  -->
  <!DOCTYPE html>
@@ -41,7 +41,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('调出使用公司/部门')}">调出使用公司/部门</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="outUserOrganizationId" id="outUserOrganizationId" name="outUserOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调出使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="outUseOrganizationId" id="outUseOrganizationId" name="outUseOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调出使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+                        <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('调入使用公司/部门')}">调入使用公司/部门</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="inUserOrganizationId" id="inUserOrganizationId" name="inUserOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调入使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="inUseOrganizationId" id="inUseOrganizationId" name="inUseOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调入使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -149,7 +149,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"inUserOrganizationId":{"labelInForm":"调入使用公司/部门","inputType":"text_input","required":true},"outUserOrganizationId":{"labelInForm":"调出使用公司/部门","inputType":"text_input","required":true},"managerId":{"labelInForm":"调入管理员","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"inUseOrganizationId":{"labelInForm":"调入使用公司/部门","inputType":"text_input","required":true},"managerId":{"labelInForm":"调入管理员","inputType":"text_input","required":true},"outUseOrganizationId":{"labelInForm":"调出使用公司/部门","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_tranfer";
 </script>
 

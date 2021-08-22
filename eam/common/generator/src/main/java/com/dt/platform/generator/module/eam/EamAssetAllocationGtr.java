@@ -43,22 +43,22 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_MANAGEMENT_COMPANY_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.IN_MANAGEMENT_COMPANY_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID).form().validate().required();
+
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_ALLOCATION.STATUS,
-                        EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID,
+
                         EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_ALLOCATION.OUT_MANAGEMENT_COMPANY_ID,
-                        EAMTables.EAM_ASSET_ALLOCATION.IN_MANAGEMENT_COMPANY_ID,
+                        EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID,
+                        EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET_ALLOCATION.CONTENT,
                 }
         );
@@ -68,12 +68,12 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID,
+
                         EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID,
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_ALLOCATION.OUT_MANAGEMENT_COMPANY_ID
+                        EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_ALLOCATION.IN_MANAGEMENT_COMPANY_ID
+                        EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID
                 }
         );
 

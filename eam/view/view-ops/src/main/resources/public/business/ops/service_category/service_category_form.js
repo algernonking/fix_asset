@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:30
+ * @since 2021-08-21 21:10:59
  */
 
 function FormPage() {
@@ -72,6 +72,25 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -95,6 +114,8 @@ function FormPage() {
 
 
 
+			//设置  服务分组 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#groupId",formData.group);
 
 
 
@@ -138,6 +159,8 @@ function FormPage() {
 
 
 
+			//获取 服务分组 下拉框的值
+			data.field["groupId"]=fox.getSelectedValue("groupId",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

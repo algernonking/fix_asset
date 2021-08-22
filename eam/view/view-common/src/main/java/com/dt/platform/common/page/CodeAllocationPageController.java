@@ -50,6 +50,8 @@ public class CodeAllocationPageController extends ViewController {
 	 */
 	@RequestMapping("/code_allocation_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+
+
 		return prefix+"/code_allocation_form";
 	}
 }

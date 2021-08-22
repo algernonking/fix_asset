@@ -45,8 +45,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USER_ORGANIZATION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.IN_USER_ORGANIZATION_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).form().form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
@@ -58,8 +58,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_TRANFER.OUT_USER_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_TRANFER.IN_USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_TRANFER.CONTENT,
 
                 }
@@ -76,11 +76,11 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_TRANFER.OUT_USER_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_TRANFER.USER_ID,
+                        EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_TRANFER.USE_USER_ID,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_TRANFER.IN_USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_TRANFER.MANAGER_ID,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_TRANFER.POSITION_ID,

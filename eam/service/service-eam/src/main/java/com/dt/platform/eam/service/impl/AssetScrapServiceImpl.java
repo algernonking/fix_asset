@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,20 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Override
 	@Transactional
 	public Result insert(AssetScrap assetScrap) {
+		//资产数量
+		if(assetScrap.getAssetIds()==null||assetScrap.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+		}
+		//制单人
+		if(assetScrap.getOriginatorId()==null||"".equals(assetScrap.getOriginatorId())){
+			assetScrap.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetScrap.getBusinessDate()==null){
+			assetScrap.setBusinessDate(new Date());
+		}
+
+
 		//编码
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_SCRAP.code());
 		if(!codeResult.isSuccess()){

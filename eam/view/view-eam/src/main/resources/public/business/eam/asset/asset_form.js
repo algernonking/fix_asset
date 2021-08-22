@@ -12,7 +12,7 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	/**
-      * 入口函数，初始化
+      * 入口函数，初始化xmSelect
       */
 	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
@@ -73,6 +73,12 @@ function FormPage() {
 		//渲染 categoryId 下拉字段
 		fox.renderSelectBox({
 			el: "categoryId",
+			on:function(data){
+				console.log(this);
+				console.log("categoryIddata2222111111");
+				console.log(data);
+				console.log(data.change.value);
+			},
 			radio: true,
 			filterable: true,
 			paging: true,
@@ -266,6 +272,7 @@ function FormPage() {
 
 			//设置  分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+
 			//设置  物品档案 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选

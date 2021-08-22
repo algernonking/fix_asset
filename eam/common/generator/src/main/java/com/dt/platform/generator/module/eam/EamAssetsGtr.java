@@ -55,7 +55,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NUMBER).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.REMAIN_NUMBER).table().disable(true);
 
-        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID).table().hidden(true);
+        //cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.BATCH_CODE).table().hidden(true);
@@ -126,8 +126,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(AssetMeta.MANUFACTURER).muliti(false);
 
 
-        cfg.view().field(EAMTables.EAM_ASSET.USER_ORGANIZATION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).form().validate().required();
+      //  cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET.NOTES).form().textArea().height(30);
 
 
@@ -164,10 +164,10 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET.SOURCE_ID,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET.MANAGEMENT_COMPANY_ID,
-                        EAMTables.EAM_ASSET.USER_ORGANIZATION_ID,
+                      //  EAMTables.EAM_ASSET.OWN_COMPANY_ID,
+                        EAMTables.EAM_ASSET.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET.MANAGER_ID,
-                        EAMTables.EAM_ASSET.USER_ID,
+                        EAMTables.EAM_ASSET.USE_USER_ID,
 
                         EAMTables.EAM_ASSET.GOODS_ID,
                 }, new Object[] {

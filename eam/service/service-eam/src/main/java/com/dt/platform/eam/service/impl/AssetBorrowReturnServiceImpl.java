@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.eam.common.AssetCommonError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,11 +74,8 @@ public class AssetBorrowReturnServiceImpl extends SuperService<AssetBorrowReturn
 	@Override
 	@Transactional
 	public Result insert(AssetBorrowReturn assetBorrowReturn) {
+
 		Result r=super.insert(assetBorrowReturn);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetBorrowReturn.getId(), assetBorrowReturn.getAssetIds());
-		}
 		return r;
 	}
 	
@@ -146,10 +145,6 @@ public class AssetBorrowReturnServiceImpl extends SuperService<AssetBorrowReturn
 	@Transactional
 	public Result update(AssetBorrowReturn assetBorrowReturn , SaveMode mode) {
 		Result r=super.update(assetBorrowReturn , mode);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetBorrowReturn.getId(), assetBorrowReturn.getAssetIds());
-		}
 		return r;
 	}
 	

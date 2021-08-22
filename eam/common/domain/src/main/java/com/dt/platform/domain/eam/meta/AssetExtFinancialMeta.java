@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:01
- * @sign 17E56C678F33DF8C1157E2485586A5E8
+ * @since 2021-08-22 10:16:48
+ * @sign 3A351866AD84C6C5C7F2246047056CD7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -41,12 +41,12 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 财务分类 , 类型: java.lang.String
 	*/
-	public static final String TYPE_ID="typeId";
+	public static final String CATEGORY_ID="categoryId";
 	
 	/**
 	 * 财务分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> TYPE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,TYPE_ID, java.lang.String.class, "财务分类", "财务分类", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,CATEGORY_ID, java.lang.String.class, "财务分类", "财务分类", java.lang.String.class, null);
 	
 	/**
 	 * 财务编号 , 类型: java.lang.String
@@ -67,6 +67,16 @@ public class AssetExtFinancialMeta {
 	 * 资产供应商 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> SUPPLIER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SUPPLIER_ID, java.lang.String.class, "资产供应商", "资产供应商", java.lang.String.class, null);
+	
+	/**
+	 * 所属公司 , 类型: java.lang.String
+	*/
+	public static final String OWN_COMPANY_ID="ownCompanyId";
+	
+	/**
+	 * 所属公司 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,OWN_COMPANY_ID, java.lang.String.class, "所属公司", "所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 税额 , 类型: java.math.BigDecimal
@@ -147,16 +157,6 @@ public class AssetExtFinancialMeta {
 	 * 入账时间 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.util.Date> ENTRY_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,ENTRY_TIME, java.util.Date.class, "入账时间", "入账时间", java.util.Date.class, null);
-	
-	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
-	*/
-	public static final String SERVICE_LIFE="serviceLife";
-	
-	/**
-	 * 使用期限 , 类型: java.math.BigDecimal
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 财务备注 , 类型: java.lang.String
@@ -271,7 +271,7 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , TYPE_ID , ASSET_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , SERVICE_LIFE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , OWN_COMPANY_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
 	
 	/**
 	 * 代理类
@@ -305,12 +305,12 @@ public class AssetExtFinancialMeta {
 		
 		/**
 		 * 设置 财务分类
-		 * @param typeId 财务分类
+		 * @param categoryId 财务分类
 		 * @return 当前对象
 		*/
-		public AssetExtFinancial setTypeId(String typeId) {
-			super.change(TYPE_ID,super.getTypeId(),typeId);
-			super.setTypeId(typeId);
+		public AssetExtFinancial setCategoryId(String categoryId) {
+			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
+			super.setCategoryId(categoryId);
 			return this;
 		}
 		
@@ -333,6 +333,17 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setSupplierId(String supplierId) {
 			super.change(SUPPLIER_ID,super.getSupplierId(),supplierId);
 			super.setSupplierId(supplierId);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属公司
+		 * @param ownCompanyId 所属公司
+		 * @return 当前对象
+		*/
+		public AssetExtFinancial setOwnCompanyId(String ownCompanyId) {
+			super.change(OWN_COMPANY_ID,super.getOwnCompanyId(),ownCompanyId);
+			super.setOwnCompanyId(ownCompanyId);
 			return this;
 		}
 		
@@ -421,17 +432,6 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setEntryTime(Date entryTime) {
 			super.change(ENTRY_TIME,super.getEntryTime(),entryTime);
 			super.setEntryTime(entryTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 使用期限
-		 * @param serviceLife 使用期限
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setServiceLife(BigDecimal serviceLife) {
-			super.change(SERVICE_LIFE,super.getServiceLife(),serviceLife);
-			super.setServiceLife(serviceLife);
 			return this;
 		}
 		

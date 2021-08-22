@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.ServiceInfo;
 import java.util.Date;
 import com.dt.platform.domain.ops.ServiceCategory;
+import com.dt.platform.domain.ops.ServiceGroup;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 18:43:52
- * @sign 20944402DD36552A747E148CECF7A99B
+ * @since 2021-08-21 21:10:58
+ * @sign 91D7C81DE416089769B2CA994691D792
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -25,6 +26,16 @@ public class ServiceInfoMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
+	 * 服务分组 , 类型: java.lang.String
+	*/
+	public static final String GROUP_ID="groupId";
+	
+	/**
+	 * 服务分组 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> GROUP_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,GROUP_ID, java.lang.String.class, "服务分组", "服务分组", java.lang.String.class, null);
 	
 	/**
 	 * 服务分类 , 类型: java.lang.String
@@ -167,9 +178,19 @@ public class ServiceInfoMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,com.dt.platform.domain.ops.ServiceCategory> SERVICE_CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,SERVICE_CATEGORY, com.dt.platform.domain.ops.ServiceCategory.class, "服务", "", com.dt.platform.domain.ops.ServiceCategory.class, null);
 	
 	/**
+	 * 服务分组 , 类型: com.dt.platform.domain.ops.ServiceGroup
+	*/
+	public static final String GROUP="group";
+	
+	/**
+	 * 服务分组 , 类型: com.dt.platform.domain.ops.ServiceGroup
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,com.dt.platform.domain.ops.ServiceGroup> GROUP_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,GROUP, com.dt.platform.domain.ops.ServiceGroup.class, "服务分组", "服务分组", com.dt.platform.domain.ops.ServiceGroup.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , SERVICE_CATEGORY_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SERVICE_CATEGORY };
+	public static final String[] $PROPS={ ID , GROUP_ID , SERVICE_CATEGORY_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SERVICE_CATEGORY , GROUP };
 	
 	/**
 	 * 代理类
@@ -187,6 +208,17 @@ public class ServiceInfoMeta {
 		public ServiceInfo setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
+			return this;
+		}
+		
+		/**
+		 * 设置 服务分组
+		 * @param groupId 服务分组
+		 * @return 当前对象
+		*/
+		public ServiceInfo setGroupId(String groupId) {
+			super.change(GROUP_ID,super.getGroupId(),groupId);
+			super.setGroupId(groupId);
 			return this;
 		}
 		
@@ -341,6 +373,17 @@ public class ServiceInfoMeta {
 		public ServiceInfo setServiceCategory(ServiceCategory serviceCategory) {
 			super.change(SERVICE_CATEGORY,super.getServiceCategory(),serviceCategory);
 			super.setServiceCategory(serviceCategory);
+			return this;
+		}
+		
+		/**
+		 * 设置 服务分组
+		 * @param group 服务分组
+		 * @return 当前对象
+		*/
+		public ServiceInfo setGroup(ServiceGroup group) {
+			super.change(GROUP,super.getGroup(),group);
+			super.setGroup(group);
 			return this;
 		}
 	}

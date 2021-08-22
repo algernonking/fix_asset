@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:50
+ * @since 2021-08-22 10:16:37
  */
 
 
@@ -64,8 +64,8 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后公司/部门') }
-					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后公司/部门') }
+					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('领用日期'), templet: function (d) { return fox.dateFormat(d.collectionDate); }}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
@@ -104,8 +104,8 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.userOrganizationId={ value: $("#userOrganizationId").val()};
-		value.userId={ value: $("#userId").val()};
+		value.useOrganizationId={ value: $("#useOrganizationId").val()};
+		value.useUserId={ value: $("#useUserId").val()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.collectionDate={ begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};

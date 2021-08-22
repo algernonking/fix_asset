@@ -35,9 +35,9 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetExtFinancialMeta.SUPPLIER).muliti(false);
 
-
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE)
-                .basic().label("使用期限");
+//
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE)
+//                .basic().label("使用期限");
 
 
 //        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID)
@@ -49,7 +49,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.CATEGORY_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
@@ -70,14 +70,14 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("财务属性",
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.TYPE_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.CATEGORY_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
+                      //  EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_UNIT_PRICE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.NAV_PRICE,
                 }

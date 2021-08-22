@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:42
- * @sign EA6ABFFF77643554C704EAEB249F43AF
+ * @since 2021-08-22 10:16:28
+ * @sign 72FBCA0516D1B9C0E86636B520D178F7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,19 +65,19 @@ public class AssetAllocation extends Entity {
 	 * 调出所属公司：调出所属公司
 	*/
 	@ApiModelProperty(required = false,value="调出所属公司" , notes = "调出所属公司")
-	private String outManagementCompanyId;
+	private String outOwnCompanyId;
 	
 	/**
 	 * 调入所属公司：调入所属公司
 	*/
 	@ApiModelProperty(required = false,value="调入所属公司" , notes = "调入所属公司")
-	private String inManagementCompanyId;
+	private String inOwnCompanyId;
 	
 	/**
 	 * 调入管理员：调入管理员
 	*/
 	@ApiModelProperty(required = false,value="调入管理员" , notes = "调入管理员")
-	private String managerId;
+	private String inManagerId;
 	
 	/**
 	 * 调拨说明：调拨说明
@@ -257,17 +257,17 @@ public class AssetAllocation extends Entity {
 	 * 调出所属公司
 	 * @return 调出所属公司
 	*/
-	public String getOutManagementCompanyId() {
-		return outManagementCompanyId;
+	public String getOutOwnCompanyId() {
+		return outOwnCompanyId;
 	}
 	
 	/**
 	 * 设置 调出所属公司
-	 * @param outManagementCompanyId 调出所属公司
+	 * @param outOwnCompanyId 调出所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOutManagementCompanyId(String outManagementCompanyId) {
-		this.outManagementCompanyId=outManagementCompanyId;
+	public AssetAllocation setOutOwnCompanyId(String outOwnCompanyId) {
+		this.outOwnCompanyId=outOwnCompanyId;
 		return this;
 	}
 	
@@ -276,17 +276,17 @@ public class AssetAllocation extends Entity {
 	 * 调入所属公司
 	 * @return 调入所属公司
 	*/
-	public String getInManagementCompanyId() {
-		return inManagementCompanyId;
+	public String getInOwnCompanyId() {
+		return inOwnCompanyId;
 	}
 	
 	/**
 	 * 设置 调入所属公司
-	 * @param inManagementCompanyId 调入所属公司
+	 * @param inOwnCompanyId 调入所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setInManagementCompanyId(String inManagementCompanyId) {
-		this.inManagementCompanyId=inManagementCompanyId;
+	public AssetAllocation setInOwnCompanyId(String inOwnCompanyId) {
+		this.inOwnCompanyId=inOwnCompanyId;
 		return this;
 	}
 	
@@ -295,17 +295,17 @@ public class AssetAllocation extends Entity {
 	 * 调入管理员
 	 * @return 调入管理员
 	*/
-	public String getManagerId() {
-		return managerId;
+	public String getInManagerId() {
+		return inManagerId;
 	}
 	
 	/**
 	 * 设置 调入管理员
-	 * @param managerId 调入管理员
+	 * @param inManagerId 调入管理员
 	 * @return 当前对象
 	*/
-	public AssetAllocation setManagerId(String managerId) {
-		this.managerId=managerId;
+	public AssetAllocation setInManagerId(String inManagerId) {
+		this.inManagerId=inManagerId;
 		return this;
 	}
 	

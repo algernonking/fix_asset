@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.eam.common.AssetCommonError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,6 +74,12 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	@Override
 	@Transactional
 	public Result insert(AssetHandle assetHandle) {
+		//资产数量
+		if(assetHandle.getAssetIds()==null||assetHandle.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+		}
+
+
 		Result r=super.insert(assetHandle);
 		//保存关系
 		if(r.success()) {

@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:44
+ * @since 2021-08-22 10:16:31
  */
 
 
@@ -64,10 +64,10 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'outUserOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出使用公司/部门') }
-					,{ field: 'inUserOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入使用公司/部门') }
+					,{ field: 'outUseOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出使用公司/部门') }
+					,{ field: 'inUseOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入使用公司/部门') }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') }
-					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
+					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置详情') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('转移说明') }
@@ -105,8 +105,8 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outUserOrganizationId={ value: $("#outUserOrganizationId").val()};
-		value.inUserOrganizationId={ value: $("#inUserOrganizationId").val()};
+		value.outUseOrganizationId={ value: $("#outUseOrganizationId").val()};
+		value.inUseOrganizationId={ value: $("#inUseOrganizationId").val()};
 		value.managerId={ value: $("#managerId").val()};
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };

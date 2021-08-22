@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:01
+ * @since 2021-08-22 10:16:48
  */
 
 
@@ -64,9 +64,10 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
-					,{ field: 'typeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务分类') }
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务分类') }
 					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务编号') }
 					,{ field: 'supplierId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('供应商'), templet: function (d) { return fox.joinLabel(d.supplier,"supplierName");}}
+					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司') }
 					,{ field: 'taxamountRate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('税额') }
 					,{ field: 'taxamountPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('含税金额') }
 					,{ field: 'originalUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产原值(单价)') }
@@ -75,7 +76,6 @@ function ListPage() {
 					,{ field: 'navPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产净值') }
 					,{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') }
 					,{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间'), templet: function (d) { return fox.dateFormat(d.entryTime); }}
-					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -108,7 +108,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.typeId={ value: $("#typeId").val()};
+		value.categoryId={ value: $("#categoryId").val()};
 		value.assetCode={ value: $("#assetCode").val()};
 		value.supplierId={ value: xmSelect.get("#supplierId",true).getValue("value"), fillBy:"supplier",field:"id", label:xmSelect.get("#supplierId",true).getValue("nameStr") };
 		value.entryTime={ value: $("#entryTime").val()};

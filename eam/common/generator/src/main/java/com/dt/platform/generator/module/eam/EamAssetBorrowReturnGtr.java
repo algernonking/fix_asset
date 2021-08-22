@@ -27,7 +27,7 @@ public class EamAssetBorrowReturnGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetBorrowReturnVOMeta.ASSET_IDS);
+      //  cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetBorrowReturnVOMeta.ASSET_IDS);
 
         cfg.view().search().inputLayout(
                 new Object[]{

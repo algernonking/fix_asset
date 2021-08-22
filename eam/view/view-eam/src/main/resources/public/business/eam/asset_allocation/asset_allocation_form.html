@@ -2,7 +2,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:42
+ * @since 2021-08-22 10:16:28
  */
  -->
  <!DOCTYPE html>
@@ -39,15 +39,6 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('调入管理员')}">调入管理员</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="managerId" id="managerId" name="managerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调入管理员') }" type="text" class="layui-input"    lay-verify="|required"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"   />
@@ -64,7 +55,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('调出所属公司')}">调出所属公司</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="outManagementCompanyId" id="outManagementCompanyId" name="outManagementCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调出所属公司') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="outOwnCompanyId" id="outOwnCompanyId" name="outOwnCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调出所属公司') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -78,7 +69,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('调入所属公司')}">调入所属公司</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="inManagementCompanyId" id="inManagementCompanyId" name="inManagementCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调入所属公司') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="inOwnCompanyId" id="inOwnCompanyId" name="inOwnCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('调入所属公司') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -131,7 +122,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"outManagementCompanyId":{"labelInForm":"调出所属公司","inputType":"text_input","required":true},"managerId":{"labelInForm":"调入管理员","inputType":"text_input","required":true},"inManagementCompanyId":{"labelInForm":"调入所属公司","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"inOwnCompanyId":{"labelInForm":"调入所属公司","inputType":"text_input","required":true},"outOwnCompanyId":{"labelInForm":"调出所属公司","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_allocation";
 </script>
 

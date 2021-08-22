@@ -35,8 +35,23 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+
+          //  id="categoryId"
         }
     }
+
+    fox.renderSelectBox({
+        el: "#categoryId",
+        on:function(data){
+            console.log("hello 22 you ");
+            console.log(this);
+            console.log("hello you ");
+            console.log(data);
+        }
+    });
+
+
+
     //
     window.pageExt={form:form,list:list};
 });

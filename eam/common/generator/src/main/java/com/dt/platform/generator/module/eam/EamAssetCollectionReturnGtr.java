@@ -35,7 +35,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
                 },
                 new Object[]{
@@ -73,7 +73,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USER_ORGANIZATION_ID
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID
@@ -100,7 +100,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页

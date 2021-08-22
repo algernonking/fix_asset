@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:44
- * @sign E6DF744B4A804BD267F4ED9C4710668C
+ * @since 2021-08-22 10:16:30
+ * @sign 0E988BCC5F157F0EBA454726213F5D3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,13 +65,13 @@ public class AssetTranfer extends Entity {
 	 * 调出使用公司/部门：调出使用公司/部门
 	*/
 	@ApiModelProperty(required = false,value="调出使用公司/部门" , notes = "调出使用公司/部门")
-	private String outUserOrganizationId;
+	private String outUseOrganizationId;
 	
 	/**
 	 * 调入使用公司/部门：调入使用公司/部门
 	*/
 	@ApiModelProperty(required = false,value="调入使用公司/部门" , notes = "调入使用公司/部门")
-	private String inUserOrganizationId;
+	private String inUseOrganizationId;
 	
 	/**
 	 * 调入管理员：调入管理员
@@ -83,7 +83,7 @@ public class AssetTranfer extends Entity {
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
+	private String useUserId;
 	
 	/**
 	 * 位置：位置
@@ -281,17 +281,17 @@ public class AssetTranfer extends Entity {
 	 * 调出使用公司/部门
 	 * @return 调出使用公司/部门
 	*/
-	public String getOutUserOrganizationId() {
-		return outUserOrganizationId;
+	public String getOutUseOrganizationId() {
+		return outUseOrganizationId;
 	}
 	
 	/**
 	 * 设置 调出使用公司/部门
-	 * @param outUserOrganizationId 调出使用公司/部门
+	 * @param outUseOrganizationId 调出使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetTranfer setOutUserOrganizationId(String outUserOrganizationId) {
-		this.outUserOrganizationId=outUserOrganizationId;
+	public AssetTranfer setOutUseOrganizationId(String outUseOrganizationId) {
+		this.outUseOrganizationId=outUseOrganizationId;
 		return this;
 	}
 	
@@ -300,17 +300,17 @@ public class AssetTranfer extends Entity {
 	 * 调入使用公司/部门
 	 * @return 调入使用公司/部门
 	*/
-	public String getInUserOrganizationId() {
-		return inUserOrganizationId;
+	public String getInUseOrganizationId() {
+		return inUseOrganizationId;
 	}
 	
 	/**
 	 * 设置 调入使用公司/部门
-	 * @param inUserOrganizationId 调入使用公司/部门
+	 * @param inUseOrganizationId 调入使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetTranfer setInUserOrganizationId(String inUserOrganizationId) {
-		this.inUserOrganizationId=inUserOrganizationId;
+	public AssetTranfer setInUseOrganizationId(String inUseOrganizationId) {
+		this.inUseOrganizationId=inUseOrganizationId;
 		return this;
 	}
 	
@@ -338,17 +338,17 @@ public class AssetTranfer extends Entity {
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public String getUserId() {
-		return userId;
+	public String getUseUserId() {
+		return useUserId;
 	}
 	
 	/**
 	 * 设置 使用人员
-	 * @param userId 使用人员
+	 * @param useUserId 使用人员
 	 * @return 当前对象
 	*/
-	public AssetTranfer setUserId(String userId) {
-		this.userId=userId;
+	public AssetTranfer setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
 		return this;
 	}
 	

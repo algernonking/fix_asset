@@ -73,7 +73,7 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 	public Result generateCode(String module){
 		Result result = new Result();
 		System.out.println("generateCode:"+module);
-		Rcd rs=dao.queryRecord("select b.rule rule from sys_code_allocation a,sys_code_rule b where a.rule_id=b.id and a.deleted=0 and b.deleted=0 and a.module=?",module);
+		Rcd rs=dao.queryRecord("select b.rule rule from sys_code_allocation a,sys_code_rule b where a.rule_id=b.id and a.deleted=0 and b.deleted=0 and a.code=?",module);
 		if(rs==null){
 			return ErrorDesc.failure().message("资产编号不允许为 null 。");
 		}

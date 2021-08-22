@@ -3,6 +3,8 @@ package com.dt.platform.ops.controller;
  
 import java.util.List;
 
+import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.ops.service.IHostService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 数据库实例 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:20
+ * @since 2021-08-21 21:10:44
 */
 
 @Api(tags = "数据库实例")
@@ -186,7 +188,10 @@ public class DbInstanceController extends SuperController {
 		return result;
 	}
 
-	
+	@Autowired
+	private IHostService hostService;
+
+
 	/**
 	 * 获取数据库实例
 	*/
@@ -205,6 +210,10 @@ public class DbInstanceController extends SuperController {
 		dbInstanceService.join(dbInstance,DbInstanceMeta.HOST);
 		// 关联出 数据库 数据
 		dbInstanceService.join(dbInstance,DbInstanceMeta.DATABASE);
+		Host h=dbInstance.getHost();
+		hostService.join(h, HostMeta.INFO_SYSTEM);
+		dbInstance.setHost(h);
+
 		result.success(true).data(dbInstance);
 		return result;
 	}
@@ -291,6 +300,10 @@ public class DbInstanceController extends SuperController {
 		dbInstanceService.join(list,DbInstanceMeta.HOST);
 		// 关联出 数据库 数据
 		dbInstanceService.join(list,DbInstanceMeta.DATABASE);
+
+
+
+
 		result.success(true).data(list);
 		return result;
 	}

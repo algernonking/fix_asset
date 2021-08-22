@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:42
- * @sign EA6ABFFF77643554C704EAEB249F43AF
+ * @since 2021-08-22 10:16:28
+ * @sign 72FBCA0516D1B9C0E86636B520D178F7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -70,32 +70,32 @@ public class AssetAllocationMeta {
 	/**
 	 * 调出所属公司 , 类型: java.lang.String
 	*/
-	public static final String OUT_MANAGEMENT_COMPANY_ID="outManagementCompanyId";
+	public static final String OUT_OWN_COMPANY_ID="outOwnCompanyId";
 	
 	/**
 	 * 调出所属公司 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> OUT_MANAGEMENT_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,OUT_MANAGEMENT_COMPANY_ID, java.lang.String.class, "调出所属公司", "调出所属公司", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> OUT_OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,OUT_OWN_COMPANY_ID, java.lang.String.class, "调出所属公司", "调出所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 调入所属公司 , 类型: java.lang.String
 	*/
-	public static final String IN_MANAGEMENT_COMPANY_ID="inManagementCompanyId";
+	public static final String IN_OWN_COMPANY_ID="inOwnCompanyId";
 	
 	/**
 	 * 调入所属公司 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> IN_MANAGEMENT_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,IN_MANAGEMENT_COMPANY_ID, java.lang.String.class, "调入所属公司", "调入所属公司", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> IN_OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,IN_OWN_COMPANY_ID, java.lang.String.class, "调入所属公司", "调入所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 调入管理员 , 类型: java.lang.String
 	*/
-	public static final String MANAGER_ID="managerId";
+	public static final String IN_MANAGER_ID="inManagerId";
 	
 	/**
 	 * 调入管理员 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,MANAGER_ID, java.lang.String.class, "调入管理员", "调入管理员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> IN_MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,IN_MANAGER_ID, java.lang.String.class, "调入管理员", "调入管理员", java.lang.String.class, null);
 	
 	/**
 	 * 调拨说明 , 类型: java.lang.String
@@ -230,7 +230,7 @@ public class AssetAllocationMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_MANAGEMENT_COMPANY_ID , IN_MANAGEMENT_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , IN_MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -297,34 +297,34 @@ public class AssetAllocationMeta {
 		
 		/**
 		 * 设置 调出所属公司
-		 * @param outManagementCompanyId 调出所属公司
+		 * @param outOwnCompanyId 调出所属公司
 		 * @return 当前对象
 		*/
-		public AssetAllocation setOutManagementCompanyId(String outManagementCompanyId) {
-			super.change(OUT_MANAGEMENT_COMPANY_ID,super.getOutManagementCompanyId(),outManagementCompanyId);
-			super.setOutManagementCompanyId(outManagementCompanyId);
+		public AssetAllocation setOutOwnCompanyId(String outOwnCompanyId) {
+			super.change(OUT_OWN_COMPANY_ID,super.getOutOwnCompanyId(),outOwnCompanyId);
+			super.setOutOwnCompanyId(outOwnCompanyId);
 			return this;
 		}
 		
 		/**
 		 * 设置 调入所属公司
-		 * @param inManagementCompanyId 调入所属公司
+		 * @param inOwnCompanyId 调入所属公司
 		 * @return 当前对象
 		*/
-		public AssetAllocation setInManagementCompanyId(String inManagementCompanyId) {
-			super.change(IN_MANAGEMENT_COMPANY_ID,super.getInManagementCompanyId(),inManagementCompanyId);
-			super.setInManagementCompanyId(inManagementCompanyId);
+		public AssetAllocation setInOwnCompanyId(String inOwnCompanyId) {
+			super.change(IN_OWN_COMPANY_ID,super.getInOwnCompanyId(),inOwnCompanyId);
+			super.setInOwnCompanyId(inOwnCompanyId);
 			return this;
 		}
 		
 		/**
 		 * 设置 调入管理员
-		 * @param managerId 调入管理员
+		 * @param inManagerId 调入管理员
 		 * @return 当前对象
 		*/
-		public AssetAllocation setManagerId(String managerId) {
-			super.change(MANAGER_ID,super.getManagerId(),managerId);
-			super.setManagerId(managerId);
+		public AssetAllocation setInManagerId(String inManagerId) {
+			super.change(IN_MANAGER_ID,super.getInManagerId(),inManagerId);
+			super.setInManagerId(inManagerId);
 			return this;
 		}
 		

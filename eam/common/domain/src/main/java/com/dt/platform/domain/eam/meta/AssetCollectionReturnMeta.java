@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:51
- * @sign 210EF806F9A2980EF3B9147C5990AFAB
+ * @since 2021-08-22 10:16:38
+ * @sign ABAFD11BCC70DD97D4AEB3D3D3878341
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -81,12 +81,12 @@ public class AssetCollectionReturnMeta {
 	/**
 	 * 退库后公司/部门 , 类型: java.lang.String
 	*/
-	public static final String USER_ORGANIZATION_ID="userOrganizationId";
+	public static final String USE_ORGANIZATION_ID="useOrganizationId";
 	
 	/**
 	 * 退库后公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,USER_ORGANIZATION_ID, java.lang.String.class, "退库后公司/部门", "退库后公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,USE_ORGANIZATION_ID, java.lang.String.class, "退库后公司/部门", "退库后公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 退库后位置 , 类型: java.lang.String
@@ -251,7 +251,7 @@ public class AssetCollectionReturnMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USER_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -329,12 +329,12 @@ public class AssetCollectionReturnMeta {
 		
 		/**
 		 * 设置 退库后公司/部门
-		 * @param userOrganizationId 退库后公司/部门
+		 * @param useOrganizationId 退库后公司/部门
 		 * @return 当前对象
 		*/
-		public AssetCollectionReturn setUserOrganizationId(String userOrganizationId) {
-			super.change(USER_ORGANIZATION_ID,super.getUserOrganizationId(),userOrganizationId);
-			super.setUserOrganizationId(userOrganizationId);
+		public AssetCollectionReturn setUseOrganizationId(String useOrganizationId) {
+			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
+			super.setUseOrganizationId(useOrganizationId);
 			return this;
 		}
 		

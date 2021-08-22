@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 18:43:57
+ * @since 2021-08-21 21:10:58
  */
 
 
@@ -63,6 +63,7 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
+					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('服务分组'), templet: function (d) { return fox.joinLabel(d.group,"name");}}
 					,{ field: 'serviceCategoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务类型'), templet: function (d) { return fox.joinLabel(d.serviceCategory,"name");}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
 					,{ field: 'patch', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('补丁') }
@@ -99,6 +100,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
+		value.groupId={ value: xmSelect.get("#groupId",true).getValue("value"), fillBy:"group",field:"code", label:xmSelect.get("#groupId",true).getValue("nameStr") };
 		value.serviceCategoryId={ value: xmSelect.get("#serviceCategoryId",true).getValue("value"), fillBy:"serviceCategory",field:"id", label:xmSelect.get("#serviceCategoryId",true).getValue("nameStr") };
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -136,6 +138,26 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: false,
+			size: "small",
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 serviceCategoryId 下拉字段
 		fox.renderSelectBox({
 			el: "serviceCategoryId",
@@ -317,7 +339,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["800px",height+"px"],
 			type: 2,
 			content: '/business/ops/service_info/service_info_form.html' + queryString,
 			finish: function () {

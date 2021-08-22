@@ -93,7 +93,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(HostMeta.HOST_DB_IDS)
                 .basic().label("数据库")
                 .table().sort(false)
-                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=db")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.HOST_DB_LIST).muliti(true);
@@ -102,7 +102,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(HostMeta.HOST_MIDDLEWARE_IDS)
                 .basic().label("中间件")
                 .table().sort(false)
-                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=mid")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.HOST_MIDDLEWARE_LIST).muliti(true);
@@ -110,7 +110,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(HostMeta.HOST_OS_IDS)
                 .basic().label("操作系统")
                 .table().sort(false)
-                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.HOST_OS_LIST).muliti(true);

@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
+import com.dt.platform.domain.ops.ServiceGroup;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:30
+ * @since 2021-08-21 21:10:59
 */
 
 @Api(tags = "服务类型")
@@ -168,6 +169,8 @@ public class ServiceCategoryController extends SuperController {
 	public Result<ServiceCategory> getById(String id) {
 		Result<ServiceCategory> result=new Result<>();
 		ServiceCategory serviceCategory=serviceCategoryService.getById(id);
+		// 关联出 服务分组 数据
+		serviceCategoryService.join(serviceCategory,ServiceCategoryMeta.GROUP);
 		result.success(true).data(serviceCategory);
 		return result;
 	}
@@ -230,6 +233,8 @@ public class ServiceCategoryController extends SuperController {
 	public Result<PagedList<ServiceCategory>> queryPagedList(ServiceCategoryVO sample) {
 		Result<PagedList<ServiceCategory>> result=new Result<>();
 		PagedList<ServiceCategory> list=serviceCategoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 服务分组 数据
+		serviceCategoryService.join(list,ServiceCategoryMeta.GROUP);
 		result.success(true).data(list);
 		return result;
 	}

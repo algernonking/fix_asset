@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,13 +77,26 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	@Transactional
 	public Result insert(AssetCollection assetCollection) {
 
+		//资产数量
+		if(assetCollection.getAssetIds()==null||assetCollection.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+		}
+
+		//制单人
+		if(assetCollection.getOriginatorId()==null||"".equals(assetCollection.getOriginatorId())){
+			assetCollection.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetCollection.getBusinessDate()==null){
+			assetCollection.setBusinessDate(new Date());
+		}
+
 		//编码
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
 		assetCollection.setBusinessCode(codeResult.getData().toString());
-
 
 		Result r=super.insert(assetCollection);
 		//保存关系

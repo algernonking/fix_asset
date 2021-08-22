@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:25
+ * @since 2021-08-21 21:10:55
  */
  -->
  <!DOCTYPE html>
@@ -64,17 +64,17 @@
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('操作系统')}" class="search-label hostOsIds-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}" style="width:140px"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('数据库')}" class="search-label hostDbIds-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}" style="width:140px"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('中间件')}" class="search-label hostMiddlewareIds-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}" style="width:140px"></div>
                     </div>
 
 

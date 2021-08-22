@@ -89,6 +89,14 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
 			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
 		}
+		//制单人
+		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
+			assetBorrow.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetBorrow.getBusinessDate()==null){
+			assetBorrow.setBusinessDate(new Date());
+		}
 
 		//编码
 		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());

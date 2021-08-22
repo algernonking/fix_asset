@@ -11,8 +11,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:50
- * @sign A0F1E50A7B948521E4A8550CD0BC55C2
+ * @since 2021-08-22 10:16:37
+ * @sign DABDD363A6B16988EE5D7FE583F53C41
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,22 +71,22 @@ public class AssetCollectionMeta {
 	/**
 	 * 领用后公司/部门 , 类型: java.lang.String
 	*/
-	public static final String USER_ORGANIZATION_ID="userOrganizationId";
+	public static final String USE_ORGANIZATION_ID="useOrganizationId";
 	
 	/**
 	 * 领用后公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USER_ORGANIZATION_ID, java.lang.String.class, "领用后公司/部门", "领用后公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_ORGANIZATION_ID, java.lang.String.class, "领用后公司/部门", "领用后公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final String USER_ID="userId";
+	public static final String USE_USER_ID="useUserId";
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
 	
 	/**
 	 * 领用后位置 , 类型: java.lang.String
@@ -261,7 +261,7 @@ public class AssetCollectionMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , POSITION , ASSET_LIST , ASSET_IDS };
 	
 	/**
 	 * 代理类
@@ -328,23 +328,23 @@ public class AssetCollectionMeta {
 		
 		/**
 		 * 设置 领用后公司/部门
-		 * @param userOrganizationId 领用后公司/部门
+		 * @param useOrganizationId 领用后公司/部门
 		 * @return 当前对象
 		*/
-		public AssetCollection setUserOrganizationId(String userOrganizationId) {
-			super.change(USER_ORGANIZATION_ID,super.getUserOrganizationId(),userOrganizationId);
-			super.setUserOrganizationId(userOrganizationId);
+		public AssetCollection setUseOrganizationId(String useOrganizationId) {
+			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
+			super.setUseOrganizationId(useOrganizationId);
 			return this;
 		}
 		
 		/**
 		 * 设置 使用人员
-		 * @param userId 使用人员
+		 * @param useUserId 使用人员
 		 * @return 当前对象
 		*/
-		public AssetCollection setUserId(String userId) {
-			super.change(USER_ID,super.getUserId(),userId);
-			super.setUserId(userId);
+		public AssetCollection setUseUserId(String useUserId) {
+			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
+			super.setUseUserId(useUserId);
 			return this;
 		}
 		

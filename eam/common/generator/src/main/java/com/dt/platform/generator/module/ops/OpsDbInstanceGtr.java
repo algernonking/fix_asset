@@ -77,7 +77,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
                 .form().label("备份时间").dateInput();
-        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).form().textArea().height(30);
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.NOTES).form().textArea().height(30);
 
 
         cfg.view().search().inputLayout(

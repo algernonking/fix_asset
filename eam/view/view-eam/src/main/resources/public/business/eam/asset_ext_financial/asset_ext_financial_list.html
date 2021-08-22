@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:01
+ * @since 2021-08-22 10:16:48
  */
  -->
  <!DOCTYPE html>
@@ -36,10 +36,10 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('供应商')}" class="search-label supplierId-label">供应商</span><span class="search-colon">:</span></div>
                         <div id="supplierId" th:data="${'/service-eam/eam-supplier/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 财务分类 , typeId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 财务分类 , categoryId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('财务分类')}" class="search-label typeId-label">财务分类</span><span class="search-colon">:</span></div>
-                        <input id="typeId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('财务分类')}" class="search-label categoryId-label">财务分类</span><span class="search-colon">:</span></div>
+                        <input id="categoryId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">

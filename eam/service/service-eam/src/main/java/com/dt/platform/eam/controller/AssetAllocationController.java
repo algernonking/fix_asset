@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产调拨 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:42
+ * @since 2021-08-22 10:16:28
 */
 
 @Api(tags = "资产调拨")
@@ -71,9 +71,9 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_MANAGEMENT_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGEMENT_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_OWN_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_OWN_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -133,9 +133,9 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_MANAGEMENT_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGEMENT_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_OWN_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_OWN_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -161,9 +161,9 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_MANAGEMENT_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGEMENT_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_OWN_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_OWN_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -228,9 +228,9 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_MANAGEMENT_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGEMENT_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_OWN_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_OWN_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -256,9 +256,9 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_MANAGEMENT_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGEMENT_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetAllocationVOMeta.MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.OUT_OWN_COMPANY_ID , value = "调出所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_OWN_COMPANY_ID , value = "调入所属公司" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.IN_MANAGER_ID , value = "调入管理员" , required = false , dataTypeClass=String.class , example = "121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),

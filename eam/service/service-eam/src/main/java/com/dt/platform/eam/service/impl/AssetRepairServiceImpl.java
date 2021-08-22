@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,22 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Override
 	@Transactional
 	public Result insert(AssetRepair assetRepair) {
+
+
+		//资产数量
+		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+		}
+		//制单人
+		if(assetRepair.getOriginatorId()==null||"".equals(assetRepair.getOriginatorId())){
+			assetRepair.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetRepair.getBusinessDate()==null){
+			assetRepair.setBusinessDate(new Date());
+		}
+
+
 
 		//编码
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_REPAIR.code());

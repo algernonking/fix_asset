@@ -37,13 +37,13 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.STATUS,
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
                         EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
 
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT
 
@@ -55,8 +55,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).form().validate().required();
 
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).form().validate().required();
@@ -82,8 +82,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.USER_ORGANIZATION_ID
+                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID
 
 
                 }, new Object[] {

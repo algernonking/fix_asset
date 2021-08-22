@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:51
+ * @since 2021-08-22 10:16:38
  */
 
 
@@ -65,7 +65,7 @@ function ListPage() {
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
 					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return fox.dateFormat(d.returnDate); }}
-					,{ field: 'userOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库后公司/部门') }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库后公司/部门') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库说明') }
@@ -104,7 +104,7 @@ function ListPage() {
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.returnDate={ begin: $("#returnDate-begin").val(), end: $("#returnDate-end").val() };
-		value.userOrganizationId={ value: $("#userOrganizationId").val()};
+		value.useOrganizationId={ value: $("#useOrganizationId").val()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);

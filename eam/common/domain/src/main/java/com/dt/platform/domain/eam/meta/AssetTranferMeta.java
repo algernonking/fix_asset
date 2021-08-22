@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Position;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:44
- * @sign E6DF744B4A804BD267F4ED9C4710668C
+ * @since 2021-08-22 10:16:30
+ * @sign 0E988BCC5F157F0EBA454726213F5D3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -71,22 +71,22 @@ public class AssetTranferMeta {
 	/**
 	 * 调出使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final String OUT_USER_ORGANIZATION_ID="outUserOrganizationId";
+	public static final String OUT_USE_ORGANIZATION_ID="outUseOrganizationId";
 	
 	/**
 	 * 调出使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> OUT_USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,OUT_USER_ORGANIZATION_ID, java.lang.String.class, "调出使用公司/部门", "调出使用公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> OUT_USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,OUT_USE_ORGANIZATION_ID, java.lang.String.class, "调出使用公司/部门", "调出使用公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 调入使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final String IN_USER_ORGANIZATION_ID="inUserOrganizationId";
+	public static final String IN_USE_ORGANIZATION_ID="inUseOrganizationId";
 	
 	/**
 	 * 调入使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> IN_USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,IN_USER_ORGANIZATION_ID, java.lang.String.class, "调入使用公司/部门", "调入使用公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> IN_USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,IN_USE_ORGANIZATION_ID, java.lang.String.class, "调入使用公司/部门", "调入使用公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 调入管理员 , 类型: java.lang.String
@@ -101,12 +101,12 @@ public class AssetTranferMeta {
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final String USER_ID="userId";
+	public static final String USE_USER_ID="useUserId";
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,USE_USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
 	
 	/**
 	 * 位置 , 类型: java.lang.String
@@ -271,7 +271,7 @@ public class AssetTranferMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USER_ORGANIZATION_ID , IN_USER_ORGANIZATION_ID , MANAGER_ID , USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , POSITION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , POSITION };
 	
 	/**
 	 * 代理类
@@ -338,23 +338,23 @@ public class AssetTranferMeta {
 		
 		/**
 		 * 设置 调出使用公司/部门
-		 * @param outUserOrganizationId 调出使用公司/部门
+		 * @param outUseOrganizationId 调出使用公司/部门
 		 * @return 当前对象
 		*/
-		public AssetTranfer setOutUserOrganizationId(String outUserOrganizationId) {
-			super.change(OUT_USER_ORGANIZATION_ID,super.getOutUserOrganizationId(),outUserOrganizationId);
-			super.setOutUserOrganizationId(outUserOrganizationId);
+		public AssetTranfer setOutUseOrganizationId(String outUseOrganizationId) {
+			super.change(OUT_USE_ORGANIZATION_ID,super.getOutUseOrganizationId(),outUseOrganizationId);
+			super.setOutUseOrganizationId(outUseOrganizationId);
 			return this;
 		}
 		
 		/**
 		 * 设置 调入使用公司/部门
-		 * @param inUserOrganizationId 调入使用公司/部门
+		 * @param inUseOrganizationId 调入使用公司/部门
 		 * @return 当前对象
 		*/
-		public AssetTranfer setInUserOrganizationId(String inUserOrganizationId) {
-			super.change(IN_USER_ORGANIZATION_ID,super.getInUserOrganizationId(),inUserOrganizationId);
-			super.setInUserOrganizationId(inUserOrganizationId);
+		public AssetTranfer setInUseOrganizationId(String inUseOrganizationId) {
+			super.change(IN_USE_ORGANIZATION_ID,super.getInUseOrganizationId(),inUseOrganizationId);
+			super.setInUseOrganizationId(inUseOrganizationId);
 			return this;
 		}
 		
@@ -371,12 +371,12 @@ public class AssetTranferMeta {
 		
 		/**
 		 * 设置 使用人员
-		 * @param userId 使用人员
+		 * @param useUserId 使用人员
 		 * @return 当前对象
 		*/
-		public AssetTranfer setUserId(String userId) {
-			super.change(USER_ID,super.getUserId(),userId);
-			super.setUserId(userId);
+		public AssetTranfer setUseUserId(String useUserId) {
+			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
+			super.setUseUserId(useUserId);
 			return this;
 		}
 		

@@ -2,7 +2,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:44
+ * @since 2021-08-22 10:16:31
  */
  -->
  <!DOCTYPE html>
@@ -58,15 +58,15 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 调出使用公司/部门 , outUserOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 调出使用公司/部门 , outUseOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUserOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="outUserOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUseOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
+                        <input id="outUseOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 调入使用公司/部门 , inUserOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 调入使用公司/部门 , inUseOrganizationId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUserOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="inUserOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUseOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
+                        <input id="inUseOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 转移说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

@@ -55,7 +55,14 @@
             <input lay-filter="categoryName" id="categoryName" name="categoryName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
         </div>
     </div>
-    
+
+    <div class="layui-form-item" >
+        <label class="layui-form-label" th:text="${lang.translate('使用期限')}">使用期限</label>
+        <div class="layui-input-block">
+            <input lay-filter="serviceLife" id="serviceLife" name="serviceLife" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用期限(月)') }" type="number" class="layui-input"   />
+        </div>
+    </div>
+
 
 
     <div class="layui-form-item" >

@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:46:25
+ * @since 2021-08-21 21:10:55
  */
  -->
  <!DOCTYPE html>
@@ -220,7 +220,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('操作系统')}">操作系统</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}"></div>
                         </div>
                     </div>
 
@@ -234,7 +234,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数据库')}">数据库</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}"></div>
                         </div>
                     </div>
 
@@ -248,7 +248,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('中间件')}">中间件</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}"></div>
                         </div>
                     </div>
 
