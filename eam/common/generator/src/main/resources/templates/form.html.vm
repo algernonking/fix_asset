@@ -46,6 +46,19 @@
 
         #for(g : groups) <!--开始：group 循环-->
 
+        #if(g.type.equals("iframe"))
+        #if(g.title!=null)
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>#(g.title)</legend>
+        </fieldset>
+        #end
+        <div class="layui-row form-row" style="text-align: center;">
+            <iframe js-fn="#(g.iframeLoadJsFunctionName)" class="form-iframe" frameborder="0"></iframe>
+        </div>
+
+
+        #else if(g.type.equals("normal"))
+
         #if(g.title!=null)
         <fieldset class="layui-elem-field layui-field-title form-group-title">
             <legend>#(g.title)</legend>
@@ -158,6 +171,7 @@
             </div>
             #end <!--结束：栏次输入框循环-->
         </div>
+        #end
         #end <!--结束：group循环-->
 
         <div style="height: 8px"></div>
