@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产归属数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:12
+ * @since 2021-08-22 13:16:14
 */
 
 @Api(tags = "资产归属数据")
@@ -70,10 +70,9 @@ public class AssetExtAttributionController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
@@ -130,10 +129,9 @@ public class AssetExtAttributionController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
@@ -156,10 +154,9 @@ public class AssetExtAttributionController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
@@ -225,10 +222,9 @@ public class AssetExtAttributionController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),
@@ -252,10 +248,9 @@ public class AssetExtAttributionController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGEMENT_ORGANIZATION_ID , value = "所属组织" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ORGANIZATION_ID , value = "使用组织" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtAttributionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtAttributionVOMeta.WAREHOUSE_ID , value = "仓库" , required = false , dataTypeClass=String.class),

@@ -6,6 +6,7 @@ import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 
@@ -14,9 +15,12 @@ public class OPSRelationManager extends RelationManager {
     protected void config() {
         this.setupRelations();
         this.setupProperties();
-        this.setupOpsServiceDetail();
+
         this.setupOpsHost();
         this.setupOpsDbInstance();
+
+        this.setupOpsServiceCategory();
+        this.setupOpsServiceInfo();
     }
 
     public void setupProperties() {
@@ -27,11 +31,25 @@ public class OPSRelationManager extends RelationManager {
 
     }
 
-    private void setupOpsServiceDetail() {
 
+    private void setupOpsServiceCategory() {
+
+        //关联服务分组
+        this.property(ServiceCategoryMeta.GROUP_PROP)
+                .using(EAMTables.OPS_SERVICE_CATEGORY.GROUP_ID).join(EAMTables.OPS_SERVICE_GROUP.CODE);
+
+
+    }
+
+
+    private void setupOpsServiceInfo() {
         //关联服务类型
         this.property(ServiceInfoMeta.SERVICE_CATEGORY_PROP)
                 .using(EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID).join(EAMTables.OPS_SERVICE_CATEGORY.ID);
+
+        //关联服务分组
+        this.property(ServiceInfoMeta.GROUP_PROP)
+                .using(EAMTables.OPS_SERVICE_INFO.GROUP_ID).join(EAMTables.OPS_SERVICE_GROUP.CODE);
 
     }
 

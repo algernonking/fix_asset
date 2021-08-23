@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:12
- * @sign A3B6DADC364E0C74F25F4F1AF9C5D5A6
+ * @since 2021-08-22 13:16:14
+ * @sign 101F684DCB2CCD6776342EB389CA625C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -39,16 +39,6 @@ public class AssetExtAttributionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
 	
 	/**
-	 * 所属组织 , 类型: java.lang.String
-	*/
-	public static final String MANAGEMENT_ORGANIZATION_ID="managementOrganizationId";
-	
-	/**
-	 * 所属组织 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> MANAGEMENT_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,MANAGEMENT_ORGANIZATION_ID, java.lang.String.class, "所属组织", "所属组织", java.lang.String.class, null);
-	
-	/**
 	 * 管理人员 , 类型: java.lang.String
 	*/
 	public static final String MANAGER_ID="managerId";
@@ -59,24 +49,24 @@ public class AssetExtAttributionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,MANAGER_ID, java.lang.String.class, "管理人员", "管理人员", java.lang.String.class, null);
 	
 	/**
-	 * 使用组织 , 类型: java.lang.String
+	 * 使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final String USER_ORGANIZATION_ID="userOrganizationId";
+	public static final String USE_ORGANIZATION_ID="useOrganizationId";
 	
 	/**
-	 * 使用组织 , 类型: java.lang.String
+	 * 使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,USER_ORGANIZATION_ID, java.lang.String.class, "使用组织", "使用组织", java.lang.String.class, null);
-	
-	/**
-	 * 使用人员 , 类型: java.lang.String
-	*/
-	public static final String USER_ID="userId";
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,USE_ORGANIZATION_ID, java.lang.String.class, "使用公司/部门", "使用公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
+	public static final String USE_USER_ID="useUserId";
+	
+	/**
+	 * 使用人员 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtAttribution,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtAttribution.class ,USE_USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
 	
 	/**
 	 * 存放位置 , 类型: java.lang.String
@@ -231,7 +221,7 @@ public class AssetExtAttributionMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , MANAGEMENT_ORGANIZATION_ID , MANAGER_ID , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , WAREHOUSE , POSITION , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , WAREHOUSE , POSITION , ASSET };
 	
 	/**
 	 * 代理类
@@ -264,17 +254,6 @@ public class AssetExtAttributionMeta {
 		}
 		
 		/**
-		 * 设置 所属组织
-		 * @param managementOrganizationId 所属组织
-		 * @return 当前对象
-		*/
-		public AssetExtAttribution setManagementOrganizationId(String managementOrganizationId) {
-			super.change(MANAGEMENT_ORGANIZATION_ID,super.getManagementOrganizationId(),managementOrganizationId);
-			super.setManagementOrganizationId(managementOrganizationId);
-			return this;
-		}
-		
-		/**
 		 * 设置 管理人员
 		 * @param managerId 管理人员
 		 * @return 当前对象
@@ -286,24 +265,24 @@ public class AssetExtAttributionMeta {
 		}
 		
 		/**
-		 * 设置 使用组织
-		 * @param userOrganizationId 使用组织
+		 * 设置 使用公司/部门
+		 * @param useOrganizationId 使用公司/部门
 		 * @return 当前对象
 		*/
-		public AssetExtAttribution setUserOrganizationId(String userOrganizationId) {
-			super.change(USER_ORGANIZATION_ID,super.getUserOrganizationId(),userOrganizationId);
-			super.setUserOrganizationId(userOrganizationId);
+		public AssetExtAttribution setUseOrganizationId(String useOrganizationId) {
+			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
+			super.setUseOrganizationId(useOrganizationId);
 			return this;
 		}
 		
 		/**
 		 * 设置 使用人员
-		 * @param userId 使用人员
+		 * @param useUserId 使用人员
 		 * @return 当前对象
 		*/
-		public AssetExtAttribution setUserId(String userId) {
-			super.change(USER_ID,super.getUserId(),userId);
-			super.setUserId(userId);
+		public AssetExtAttribution setUseUserId(String useUserId) {
+			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
+			super.setUseUserId(useUserId);
 			return this;
 		}
 		

@@ -3,13 +3,14 @@ package com.dt.platform.domain.common.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.common.CodeRule;
 import java.util.Date;
+import org.github.foxnic.web.domain.oauth.Menu;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:22
- * @sign C27B873187A93686C54C74683BCD4340
+ * @since 2021-08-21 17:51:08
+ * @sign D720B313194939748B92CB787611DCBC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,6 +37,16 @@ public class CodeRuleMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,NAME, java.lang.String.class, "编码名称", "编码名称", java.lang.String.class, null);
 	
 	/**
+	 * 业务模块 , 类型: java.lang.String
+	*/
+	public static final String MODULE_ID="moduleId";
+	
+	/**
+	 * 业务模块 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> MODULE_ID_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,MODULE_ID, java.lang.String.class, "业务模块", "业务模块", java.lang.String.class, null);
+	
+	/**
 	 * 编码规则 , 类型: java.lang.String
 	*/
 	public static final String RULE="rule";
@@ -44,16 +55,6 @@ public class CodeRuleMeta {
 	 * 编码规则 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> RULE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,RULE, java.lang.String.class, "编码规则", "编码规则", java.lang.String.class, null);
-	
-	/**
-	 * 业务模块 , 类型: java.lang.String
-	*/
-	public static final String MODULE="module";
-	
-	/**
-	 * 业务模块 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.String> MODULE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,MODULE, java.lang.String.class, "业务模块", "业务模块", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -146,9 +147,19 @@ public class CodeRuleMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 关联模块 , 类型: org.github.foxnic.web.domain.oauth.Menu
+	*/
+	public static final String MODULE="module";
+	
+	/**
+	 * 关联模块 , 类型: org.github.foxnic.web.domain.oauth.Menu
+	*/
+	public static final BeanProperty<com.dt.platform.domain.common.CodeRule,org.github.foxnic.web.domain.oauth.Menu> MODULE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeRule.class ,MODULE, org.github.foxnic.web.domain.oauth.Menu.class, "关联模块", "关联模块", org.github.foxnic.web.domain.oauth.Menu.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , RULE , MODULE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , MODULE_ID , RULE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MODULE };
 	
 	/**
 	 * 代理类
@@ -181,6 +192,17 @@ public class CodeRuleMeta {
 		}
 		
 		/**
+		 * 设置 业务模块
+		 * @param moduleId 业务模块
+		 * @return 当前对象
+		*/
+		public CodeRule setModuleId(String moduleId) {
+			super.change(MODULE_ID,super.getModuleId(),moduleId);
+			super.setModuleId(moduleId);
+			return this;
+		}
+		
+		/**
 		 * 设置 编码规则
 		 * @param rule 编码规则
 		 * @return 当前对象
@@ -188,17 +210,6 @@ public class CodeRuleMeta {
 		public CodeRule setRule(String rule) {
 			super.change(RULE,super.getRule(),rule);
 			super.setRule(rule);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务模块
-		 * @param module 业务模块
-		 * @return 当前对象
-		*/
-		public CodeRule setModule(String module) {
-			super.change(MODULE,super.getModule(),module);
-			super.setModule(module);
 			return this;
 		}
 		
@@ -298,6 +309,17 @@ public class CodeRuleMeta {
 		public CodeRule setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 关联模块
+		 * @param module 关联模块
+		 * @return 当前对象
+		*/
+		public CodeRule setModule(Menu module) {
+			super.change(MODULE,super.getModule(),module);
+			super.setModule(module);
 			return this;
 		}
 	}

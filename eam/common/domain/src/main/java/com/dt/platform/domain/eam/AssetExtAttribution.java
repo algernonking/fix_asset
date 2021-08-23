@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:12
- * @sign A3B6DADC364E0C74F25F4F1AF9C5D5A6
+ * @since 2021-08-22 13:16:14
+ * @sign 101F684DCB2CCD6776342EB389CA625C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,28 +42,22 @@ public class AssetExtAttribution extends Entity {
 	private String assetId;
 	
 	/**
-	 * 所属组织：所属组织
-	*/
-	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
-	private String managementOrganizationId;
-	
-	/**
 	 * 管理人员：管理人员
 	*/
 	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
 	private String managerId;
 	
 	/**
-	 * 使用组织：使用组织
+	 * 使用公司/部门：使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="使用组织" , notes = "使用组织")
-	private String userOrganizationId;
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private String useOrganizationId;
 	
 	/**
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
+	private String useUserId;
 	
 	/**
 	 * 存放位置：存放位置
@@ -194,25 +188,6 @@ public class AssetExtAttribution extends Entity {
 	}
 	
 	/**
-	 * 获得 所属组织<br>
-	 * 所属组织
-	 * @return 所属组织
-	*/
-	public String getManagementOrganizationId() {
-		return managementOrganizationId;
-	}
-	
-	/**
-	 * 设置 所属组织
-	 * @param managementOrganizationId 所属组织
-	 * @return 当前对象
-	*/
-	public AssetExtAttribution setManagementOrganizationId(String managementOrganizationId) {
-		this.managementOrganizationId=managementOrganizationId;
-		return this;
-	}
-	
-	/**
 	 * 获得 管理人员<br>
 	 * 管理人员
 	 * @return 管理人员
@@ -232,21 +207,21 @@ public class AssetExtAttribution extends Entity {
 	}
 	
 	/**
-	 * 获得 使用组织<br>
-	 * 使用组织
-	 * @return 使用组织
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
 	*/
-	public String getUserOrganizationId() {
-		return userOrganizationId;
+	public String getUseOrganizationId() {
+		return useOrganizationId;
 	}
 	
 	/**
-	 * 设置 使用组织
-	 * @param userOrganizationId 使用组织
+	 * 设置 使用公司/部门
+	 * @param useOrganizationId 使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetExtAttribution setUserOrganizationId(String userOrganizationId) {
-		this.userOrganizationId=userOrganizationId;
+	public AssetExtAttribution setUseOrganizationId(String useOrganizationId) {
+		this.useOrganizationId=useOrganizationId;
 		return this;
 	}
 	
@@ -255,17 +230,17 @@ public class AssetExtAttribution extends Entity {
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public String getUserId() {
-		return userId;
+	public String getUseUserId() {
+		return useUserId;
 	}
 	
 	/**
 	 * 设置 使用人员
-	 * @param userId 使用人员
+	 * @param useUserId 使用人员
 	 * @return 当前对象
 	*/
-	public AssetExtAttribution setUserId(String userId) {
-		this.userId=userId;
+	public AssetExtAttribution setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
 		return this;
 	}
 	

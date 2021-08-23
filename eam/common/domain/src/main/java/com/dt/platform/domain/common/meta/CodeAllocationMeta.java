@@ -9,8 +9,8 @@ import com.dt.platform.domain.common.CodeRule;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:13
- * @sign BA335B07CD3BCA1E6B3B84CE15C64D6D
+ * @since 2021-08-21 19:02:14
+ * @sign 9087B481048D4C7B9839630956E16DBC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,14 +27,14 @@ public class CodeAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 业务模块 , 类型: java.lang.String
+	 * 业务编码 , 类型: java.lang.String
 	*/
-	public static final String MODULE="module";
+	public static final String CODE="code";
 	
 	/**
-	 * 业务模块 , 类型: java.lang.String
+	 * 业务编码 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> MODULE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,MODULE, java.lang.String.class, "业务模块", "业务模块", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,CODE, java.lang.String.class, "业务编码", "业务编码", java.lang.String.class, null);
 	
 	/**
 	 * 规则ID , 类型: java.lang.String
@@ -149,7 +149,7 @@ public class CodeAllocationMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , MODULE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , RULE };
+	public static final String[] $PROPS={ ID , CODE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , RULE };
 	
 	/**
 	 * 代理类
@@ -171,13 +171,13 @@ public class CodeAllocationMeta {
 		}
 		
 		/**
-		 * 设置 业务模块
-		 * @param module 业务模块
+		 * 设置 业务编码
+		 * @param code 业务编码
 		 * @return 当前对象
 		*/
-		public CodeAllocation setModule(String module) {
-			super.change(MODULE,super.getModule(),module);
-			super.setModule(module);
+		public CodeAllocation setCode(String code) {
+			super.change(CODE,super.getCode(),code);
+			super.setCode(code);
 			return this;
 		}
 		

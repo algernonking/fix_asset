@@ -2,7 +2,8 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 
-import com.dt.platform.constants.enums.eam.CommonStatusEnum;
+
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.eam.page.ResidualStrategyPageController;
 import com.dt.platform.proxy.eam.ResidualStrategyServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -25,7 +26,7 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.STATUS).basic().label("状态")
-                .form().validate().required().form().radioBox().enumType(CommonStatusEnum.class);
+                .form().validate().required().form().radioBox().enumType(StatusEnableEnum.class);
 
 
         cfg.view().field(EAMTables.EAM_RESIDUAL_STRATEGY.NAME).form().validate().required();

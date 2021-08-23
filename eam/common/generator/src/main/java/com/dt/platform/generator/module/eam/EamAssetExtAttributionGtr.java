@@ -45,8 +45,8 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_DETAIL,
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_ID,
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USER_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.MANAGEMENT_ORGANIZATION_ID
+                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USE_ORGANIZATION_ID,
+
                 }
                 ,new Object[]{
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.NOTES
@@ -62,13 +62,13 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("1000px");
         cfg.view().form().addGroup("归属属性",
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.MANAGEMENT_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USER_ORGANIZATION_ID,
+
+                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.WAREHOUSE_ID,
 
                 }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.MANAGER_ID,
-                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USER_ID,
+                        EAMTables.EAM_ASSET_EXT_ATTRIBUTION.USE_USER_ID,
                 },
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_ATTRIBUTION.POSITION_ID,

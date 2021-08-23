@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:55
+ * @since 2021-08-21 15:45:34
  */
 
 function FormPage() {
@@ -14,7 +14,7 @@ function FormPage() {
 	/**
       * 入口函数，初始化
       */
-	this.init=function(layui) { 	
+	this.init=function(layui) {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
@@ -28,10 +28,10 @@ function FormPage() {
 
 		//渲染表单组件
 		renderFormFields();
-		
+
 		//填充表单数据
 		fillFormData();
-		
+
 		//绑定提交事件
 		bindButtonEvent();
 
@@ -65,19 +65,21 @@ function FormPage() {
 			}
 		},250);
 	}
-	
+
 	/**
       * 渲染表单组件
       */
 	function renderFormFields() {
 		fox.renderFormInputs(form);
-	   
+
 		//渲染 areaId 下拉字段
 		fox.renderSelectBox({
 			el: "areaId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -93,8 +95,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "layerId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -107,12 +111,15 @@ function FormPage() {
 			}
 		});
 	}
-	
+
 	/**
       * 填充表单数据
       */
 	function fillFormData() {
 		var formData = admin.getTempData('dc-rack-form-data');
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -134,58 +141,13 @@ function FormPage() {
 
 
 
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
-
-
-
-
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
-		
+
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");
@@ -206,32 +168,22 @@ function FormPage() {
 		}
 
 	}
-	
+
 	/**
       * 保存数据，表单提交事件
       */
     function bindButtonEvent() {
-    
+
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
 			data.field = form.val("data-form");
 
 
 
-
-
-
-
 			//获取 区域 下拉框的值
-			data.field["areaId"]=xmSelect.get("#areaId",true).getValue("value");
-			if(data.field["areaId"] && data.field["areaId"].length>0) {
-				data.field["areaId"]=data.field["areaId"][0];
-			}
+			data.field["areaId"]=fox.getSelectedValue("areaId",false);
 			//获取 层级 下拉框的值
-			data.field["layerId"]=xmSelect.get("#layerId",true).getValue("value");
-			if(data.field["layerId"] && data.field["layerId"].length>0) {
-				data.field["layerId"]=data.field["layerId"][0];
-			}
+			data.field["layerId"]=fox.getSelectedValue("layerId",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
@@ -249,24 +201,20 @@ function FormPage() {
 	                layer.msg(data.message, {icon: 2, time: 1000});
 	            }
 	        }, "POST");
-	        
+
 	        return false;
 	    });
-	    
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
-	    
+
     }
-
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.eam.common.AssetCommonError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,7 @@ import java.util.Date;
  * 资产处置 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:09
+ * @since 2021-08-21 15:45:55
 */
 
 
@@ -72,6 +74,12 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	@Override
 	@Transactional
 	public Result insert(AssetHandle assetHandle) {
+		//资产数量
+		if(assetHandle.getAssetIds()==null||assetHandle.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+		}
+
+
 		Result r=super.insert(assetHandle);
 		//保存关系
 		if(r.success()) {

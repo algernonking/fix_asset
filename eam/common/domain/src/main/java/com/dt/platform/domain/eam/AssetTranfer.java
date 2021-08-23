@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:58
- * @sign 8D9AEA5340A879F6E58C9AB8CA73ED07
+ * @since 2021-08-22 13:15:57
+ * @sign 0E988BCC5F157F0EBA454726213F5D3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -62,22 +62,16 @@ public class AssetTranfer extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 调出使用公司/部门：调出使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = false,value="调出使用公司/部门" , notes = "调出使用公司/部门")
+	private String outUseOrganizationId;
 	
 	/**
-	 * 调出使用组织：调出使用组织
+	 * 调入使用公司/部门：调入使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="调出使用组织" , notes = "调出使用组织")
-	private String outUserOrganizationId;
-	
-	/**
-	 * 调入使用组织：调入使用组织
-	*/
-	@ApiModelProperty(required = false,value="调入使用组织" , notes = "调入使用组织")
-	private String inUserOrganizationId;
+	@ApiModelProperty(required = false,value="调入使用公司/部门" , notes = "调入使用公司/部门")
+	private String inUseOrganizationId;
 	
 	/**
 	 * 调入管理员：调入管理员
@@ -86,10 +80,34 @@ public class AssetTranfer extends Entity {
 	private String managerId;
 	
 	/**
+	 * 使用人员：使用人员
+	*/
+	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
+	private String useUserId;
+	
+	/**
+	 * 位置：位置
+	*/
+	@ApiModelProperty(required = false,value="位置" , notes = "位置")
+	private String positionId;
+	
+	/**
+	 * 位置详情：位置详情
+	*/
+	@ApiModelProperty(required = false,value="位置详情" , notes = "位置详情")
+	private String positionDetail;
+	
+	/**
 	 * 转移说明：转移说明
 	*/
 	@ApiModelProperty(required = false,value="转移说明" , notes = "转移说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -156,6 +174,12 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
 	private List<String> assetIds;
+	
+	/**
+	 * 位置：位置
+	*/
+	@ApiModelProperty(required = false,value="位置" , notes = "位置")
+	private Position position;
 	
 	/**
 	 * 获得 主键<br>
@@ -253,59 +277,40 @@ public class AssetTranfer extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 调出使用公司/部门<br>
+	 * 调出使用公司/部门
+	 * @return 调出使用公司/部门
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getOutUseOrganizationId() {
+		return outUseOrganizationId;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 调出使用公司/部门
+	 * @param outUseOrganizationId 调出使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetTranfer setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetTranfer setOutUseOrganizationId(String outUseOrganizationId) {
+		this.outUseOrganizationId=outUseOrganizationId;
 		return this;
 	}
 	
 	/**
-	 * 获得 调出使用组织<br>
-	 * 调出使用组织
-	 * @return 调出使用组织
+	 * 获得 调入使用公司/部门<br>
+	 * 调入使用公司/部门
+	 * @return 调入使用公司/部门
 	*/
-	public String getOutUserOrganizationId() {
-		return outUserOrganizationId;
+	public String getInUseOrganizationId() {
+		return inUseOrganizationId;
 	}
 	
 	/**
-	 * 设置 调出使用组织
-	 * @param outUserOrganizationId 调出使用组织
+	 * 设置 调入使用公司/部门
+	 * @param inUseOrganizationId 调入使用公司/部门
 	 * @return 当前对象
 	*/
-	public AssetTranfer setOutUserOrganizationId(String outUserOrganizationId) {
-		this.outUserOrganizationId=outUserOrganizationId;
-		return this;
-	}
-	
-	/**
-	 * 获得 调入使用组织<br>
-	 * 调入使用组织
-	 * @return 调入使用组织
-	*/
-	public String getInUserOrganizationId() {
-		return inUserOrganizationId;
-	}
-	
-	/**
-	 * 设置 调入使用组织
-	 * @param inUserOrganizationId 调入使用组织
-	 * @return 当前对象
-	*/
-	public AssetTranfer setInUserOrganizationId(String inUserOrganizationId) {
-		this.inUserOrganizationId=inUserOrganizationId;
+	public AssetTranfer setInUseOrganizationId(String inUseOrganizationId) {
+		this.inUseOrganizationId=inUseOrganizationId;
 		return this;
 	}
 	
@@ -329,6 +334,63 @@ public class AssetTranfer extends Entity {
 	}
 	
 	/**
+	 * 获得 使用人员<br>
+	 * 使用人员
+	 * @return 使用人员
+	*/
+	public String getUseUserId() {
+		return useUserId;
+	}
+	
+	/**
+	 * 设置 使用人员
+	 * @param useUserId 使用人员
+	 * @return 当前对象
+	*/
+	public AssetTranfer setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
+		return this;
+	}
+	
+	/**
+	 * 获得 位置<br>
+	 * 位置
+	 * @return 位置
+	*/
+	public String getPositionId() {
+		return positionId;
+	}
+	
+	/**
+	 * 设置 位置
+	 * @param positionId 位置
+	 * @return 当前对象
+	*/
+	public AssetTranfer setPositionId(String positionId) {
+		this.positionId=positionId;
+		return this;
+	}
+	
+	/**
+	 * 获得 位置详情<br>
+	 * 位置详情
+	 * @return 位置详情
+	*/
+	public String getPositionDetail() {
+		return positionDetail;
+	}
+	
+	/**
+	 * 设置 位置详情
+	 * @param positionDetail 位置详情
+	 * @return 当前对象
+	*/
+	public AssetTranfer setPositionDetail(String positionDetail) {
+		this.positionDetail=positionDetail;
+		return this;
+	}
+	
+	/**
 	 * 获得 转移说明<br>
 	 * 转移说明
 	 * @return 转移说明
@@ -344,6 +406,25 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetTranfer setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -575,6 +656,25 @@ public class AssetTranfer extends Entity {
 	public AssetTranfer addAssetId(String assetId) {
 		if(this.assetIds==null) assetIds=new ArrayList<>();
 		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 位置<br>
+	 * 位置
+	 * @return 位置
+	*/
+	public Position getPosition() {
+		return position;
+	}
+	
+	/**
+	 * 设置 位置
+	 * @param position 位置
+	 * @return 当前对象
+	*/
+	public AssetTranfer setPosition(Position position) {
+		this.position=position;
 		return this;
 	}
 

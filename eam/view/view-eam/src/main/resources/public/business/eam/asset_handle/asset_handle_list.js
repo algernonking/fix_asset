@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:09
+ * @since 2021-08-22 13:16:10
  */
 
 
@@ -64,16 +64,16 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
 					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态') }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('处置类型'), templet:function (d){ return fox.getDictText(SELECT_TYPE_DATA,d.type);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容') }
 					,{ field: 'handleNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('处置数量') }
 					,{ field: 'handleDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('处理日期'), templet: function (d) { return fox.dateFormat(d.handleDate); }}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成时间'), templet: function (d) { return fox.dateFormat(d.planFinishDate); }}
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成时间'), templet: function (d) { return fox.dateFormat(d.actualFinishDate); }}
-					,{ field: 'operuserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}

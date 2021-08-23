@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:54
- * @sign 8A0EBAF7540A72CC16D2001E3D15F2DD
+ * @since 2021-08-22 13:15:56
+ * @sign 72FBCA0516D1B9C0E86636B520D178F7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,12 +36,6 @@ public class AssetAllocation extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
-	
-	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
 	
 	/**
 	 * 业务编号：业务编号
@@ -62,34 +56,40 @@ public class AssetAllocation extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
-	 * 调出所属组织：调出所属组织
+	 * 调出所属公司：调出所属公司
 	*/
-	@ApiModelProperty(required = false,value="调出所属组织" , notes = "调出所属组织")
-	private String outManagementOrganizationId;
+	@ApiModelProperty(required = false,value="调出所属公司" , notes = "调出所属公司")
+	private String outOwnCompanyId;
 	
 	/**
-	 * 调入所属组织：调入所属组织
+	 * 调入所属公司：调入所属公司
 	*/
-	@ApiModelProperty(required = false,value="调入所属组织" , notes = "调入所属组织")
-	private String inManagementOrganizationId;
+	@ApiModelProperty(required = false,value="调入所属公司" , notes = "调入所属公司")
+	private String inOwnCompanyId;
 	
 	/**
 	 * 调入管理员：调入管理员
 	*/
 	@ApiModelProperty(required = false,value="调入管理员" , notes = "调入管理员")
-	private String managerId;
+	private String inManagerId;
 	
 	/**
 	 * 调拨说明：调拨说明
 	*/
 	@ApiModelProperty(required = false,value="调拨说明" , notes = "调拨说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -177,25 +177,6 @@ public class AssetAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetAllocation setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -253,59 +234,59 @@ public class AssetAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetAllocation setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 调出所属组织<br>
-	 * 调出所属组织
-	 * @return 调出所属组织
+	 * 获得 调出所属公司<br>
+	 * 调出所属公司
+	 * @return 调出所属公司
 	*/
-	public String getOutManagementOrganizationId() {
-		return outManagementOrganizationId;
+	public String getOutOwnCompanyId() {
+		return outOwnCompanyId;
 	}
 	
 	/**
-	 * 设置 调出所属组织
-	 * @param outManagementOrganizationId 调出所属组织
+	 * 设置 调出所属公司
+	 * @param outOwnCompanyId 调出所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOutManagementOrganizationId(String outManagementOrganizationId) {
-		this.outManagementOrganizationId=outManagementOrganizationId;
+	public AssetAllocation setOutOwnCompanyId(String outOwnCompanyId) {
+		this.outOwnCompanyId=outOwnCompanyId;
 		return this;
 	}
 	
 	/**
-	 * 获得 调入所属组织<br>
-	 * 调入所属组织
-	 * @return 调入所属组织
+	 * 获得 调入所属公司<br>
+	 * 调入所属公司
+	 * @return 调入所属公司
 	*/
-	public String getInManagementOrganizationId() {
-		return inManagementOrganizationId;
+	public String getInOwnCompanyId() {
+		return inOwnCompanyId;
 	}
 	
 	/**
-	 * 设置 调入所属组织
-	 * @param inManagementOrganizationId 调入所属组织
+	 * 设置 调入所属公司
+	 * @param inOwnCompanyId 调入所属公司
 	 * @return 当前对象
 	*/
-	public AssetAllocation setInManagementOrganizationId(String inManagementOrganizationId) {
-		this.inManagementOrganizationId=inManagementOrganizationId;
+	public AssetAllocation setInOwnCompanyId(String inOwnCompanyId) {
+		this.inOwnCompanyId=inOwnCompanyId;
 		return this;
 	}
 	
@@ -314,17 +295,17 @@ public class AssetAllocation extends Entity {
 	 * 调入管理员
 	 * @return 调入管理员
 	*/
-	public String getManagerId() {
-		return managerId;
+	public String getInManagerId() {
+		return inManagerId;
 	}
 	
 	/**
 	 * 设置 调入管理员
-	 * @param managerId 调入管理员
+	 * @param inManagerId 调入管理员
 	 * @return 当前对象
 	*/
-	public AssetAllocation setManagerId(String managerId) {
-		this.managerId=managerId;
+	public AssetAllocation setInManagerId(String inManagerId) {
+		this.inManagerId=inManagerId;
 		return this;
 	}
 	
@@ -344,6 +325,25 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetAllocation setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:56
+ * @since 2021-08-22 13:15:56
  */
 
 
@@ -64,11 +64,11 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
-					,{ field: 'outManagementOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出所属组织') }
-					,{ field: 'inManagementOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入所属组织') }
-					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') }
+					,{ field: 'outOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出所属公司') }
+					,{ field: 'inOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入所属公司') }
+					,{ field: 'inManagerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调拨说明') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -102,9 +102,8 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outManagementOrganizationId={ value: $("#outManagementOrganizationId").val()};
-		value.inManagementOrganizationId={ value: $("#inManagementOrganizationId").val()};
-		value.managerId={ value: $("#managerId").val()};
+		value.outOwnCompanyId={ value: $("#outOwnCompanyId").val()};
+		value.inOwnCompanyId={ value: $("#inOwnCompanyId").val()};
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);

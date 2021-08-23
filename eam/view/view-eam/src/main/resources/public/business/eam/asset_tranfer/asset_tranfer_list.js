@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:58
+ * @since 2021-08-22 13:15:59
  */
 
 
@@ -64,11 +64,14 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return fox.getEnumText(SELECT_STATUS_DATA,d.status);}}
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
-					,{ field: 'outUserOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出使用组织') }
-					,{ field: 'inUserOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入使用组织') }
+					,{ field: 'outUseOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出使用公司/部门') }
+					,{ field: 'inUseOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入使用公司/部门') }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') }
+					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
+					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置详情') }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('转移说明') }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return fox.dateFormat(d.businessDate); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -102,8 +105,8 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outUserOrganizationId={ value: $("#outUserOrganizationId").val()};
-		value.inUserOrganizationId={ value: $("#inUserOrganizationId").val()};
+		value.outUseOrganizationId={ value: $("#outUseOrganizationId").val()};
+		value.inUseOrganizationId={ value: $("#inUseOrganizationId").val()};
 		value.managerId={ value: $("#managerId").val()};
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };

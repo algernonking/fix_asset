@@ -6,6 +6,7 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_CATEGORY;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-07-31 12:16:02
- * @sign C4EC2BB104E157C89786CFDC11BAD8AE
+ * @since 2021-08-22 10:21:51
+ * @sign 7CABEADBEB1FE47C45B6C8B70EE0A8E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +37,9 @@ public class Category extends Entity {
 	private String id;
 	
 	/**
-	 * 状态：valid:有效,invalud:无效
+	 * 状态：状态
 	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "valid:有效,invalud:无效")
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
 	private String status;
 	
 	/**
@@ -60,33 +61,39 @@ public class Category extends Entity {
 	private String categoryCode;
 	
 	/**
+	 * 使用期限：使用期限
+	*/
+	@ApiModelProperty(required = true,value="使用期限" , notes = "使用期限")
+	private BigDecimal serviceLife;
+	
+	/**
 	 * 父节点：父节点
 	*/
-	@ApiModelProperty(required = true,value="父节点" , notes = "父节点")
+	@ApiModelProperty(required = false,value="父节点" , notes = "父节点")
 	private String parentId;
 	
 	/**
-	 * sort：sort
+	 * 排序：排序
 	*/
-	@ApiModelProperty(required = false,value="sort" , notes = "sort")
+	@ApiModelProperty(required = false,value="排序" , notes = "排序")
 	private Integer sort;
 	
 	/**
 	 * 节点路径：节点路径
 	*/
-	@ApiModelProperty(required = true,value="节点路径" , notes = "节点路径")
+	@ApiModelProperty(required = false,value="节点路径" , notes = "节点路径")
 	private String hierarchy;
 	
 	/**
 	 * 节点路径名称：节点路径名称
 	*/
-	@ApiModelProperty(required = true,value="节点路径名称" , notes = "节点路径名称")
+	@ApiModelProperty(required = false,value="节点路径名称" , notes = "节点路径名称")
 	private String hierarchyName;
 	
 	/**
 	 * 备注：备注
 	*/
-	@ApiModelProperty(required = true,value="备注" , notes = "备注")
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
 	
 	/**
@@ -134,7 +141,7 @@ public class Category extends Entity {
 	/**
 	 * version：version
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = false,value="version" , notes = "version")
 	private Integer version;
 	
 	/**
@@ -158,7 +165,7 @@ public class Category extends Entity {
 	
 	/**
 	 * 获得 状态<br>
-	 * valid:有效,invalud:无效
+	 * 状态
 	 * @return 状态
 	*/
 	public String getStatus() {
@@ -233,6 +240,25 @@ public class Category extends Entity {
 	}
 	
 	/**
+	 * 获得 使用期限<br>
+	 * 使用期限
+	 * @return 使用期限
+	*/
+	public BigDecimal getServiceLife() {
+		return serviceLife;
+	}
+	
+	/**
+	 * 设置 使用期限
+	 * @param serviceLife 使用期限
+	 * @return 当前对象
+	*/
+	public Category setServiceLife(BigDecimal serviceLife) {
+		this.serviceLife=serviceLife;
+		return this;
+	}
+	
+	/**
 	 * 获得 父节点<br>
 	 * 父节点
 	 * @return 父节点
@@ -252,17 +278,17 @@ public class Category extends Entity {
 	}
 	
 	/**
-	 * 获得 sort<br>
-	 * sort
-	 * @return sort
+	 * 获得 排序<br>
+	 * 排序
+	 * @return 排序
 	*/
 	public Integer getSort() {
 		return sort;
 	}
 	
 	/**
-	 * 设置 sort
-	 * @param sort sort
+	 * 设置 排序
+	 * @param sort 排序
 	 * @return 当前对象
 	*/
 	public Category setSort(Integer sort) {

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:13
- * @sign 20944402DD36552A747E148CECF7A99B
+ * @since 2021-08-21 21:10:58
+ * @sign 91D7C81DE416089769B2CA994691D792
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,12 @@ public class ServiceInfo extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 服务分组：服务分组
+	*/
+	@ApiModelProperty(required = false,value="服务分组" , notes = "服务分组")
+	private String groupId;
 	
 	/**
 	 * 服务分类：服务分类
@@ -120,6 +126,12 @@ public class ServiceInfo extends Entity {
 	private ServiceCategory serviceCategory;
 	
 	/**
+	 * 服务分组：服务分组
+	*/
+	@ApiModelProperty(required = false,value="服务分组" , notes = "服务分组")
+	private ServiceGroup group;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -135,6 +147,25 @@ public class ServiceInfo extends Entity {
 	*/
 	public ServiceInfo setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 服务分组<br>
+	 * 服务分组
+	 * @return 服务分组
+	*/
+	public String getGroupId() {
+		return groupId;
+	}
+	
+	/**
+	 * 设置 服务分组
+	 * @param groupId 服务分组
+	 * @return 当前对象
+	*/
+	public ServiceInfo setGroupId(String groupId) {
+		this.groupId=groupId;
 		return this;
 	}
 	
@@ -400,6 +431,25 @@ public class ServiceInfo extends Entity {
 	*/
 	public ServiceInfo setServiceCategory(ServiceCategory serviceCategory) {
 		this.serviceCategory=serviceCategory;
+		return this;
+	}
+	
+	/**
+	 * 获得 服务分组<br>
+	 * 服务分组
+	 * @return 服务分组
+	*/
+	public ServiceGroup getGroup() {
+		return group;
+	}
+	
+	/**
+	 * 设置 服务分组
+	 * @param group 服务分组
+	 * @return 当前对象
+	*/
+	public ServiceInfo setGroup(ServiceGroup group) {
+		this.group=group;
 		return this;
 	}
 

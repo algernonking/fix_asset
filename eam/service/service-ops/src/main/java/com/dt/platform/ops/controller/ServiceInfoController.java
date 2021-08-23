@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.domain.ops.ServiceCategory;
+import com.dt.platform.domain.ops.ServiceGroup;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:13
+ * @since 2021-08-21 21:10:58
 */
 
 @Api(tags = "服务")
@@ -67,6 +68,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "添加服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
@@ -123,6 +125,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "更新服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
@@ -145,6 +148,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "保存服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
@@ -175,6 +179,8 @@ public class ServiceInfoController extends SuperController {
 	public Result<ServiceInfo> getById(String id) {
 		Result<ServiceInfo> result=new Result<>();
 		ServiceInfo serviceInfo=serviceInfoService.getById(id);
+		// 关联出 服务分组 数据
+		serviceInfoService.join(serviceInfo,ServiceInfoMeta.GROUP);
 		// 关联出 服务类型 数据
 		serviceInfoService.join(serviceInfo,ServiceInfoMeta.SERVICE_CATEGORY);
 		result.success(true).data(serviceInfo);
@@ -208,6 +214,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "查询服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
@@ -231,6 +238,7 @@ public class ServiceInfoController extends SuperController {
 	@ApiOperation(value = "分页查询服务")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
@@ -243,6 +251,8 @@ public class ServiceInfoController extends SuperController {
 	public Result<PagedList<ServiceInfo>> queryPagedList(ServiceInfoVO sample) {
 		Result<PagedList<ServiceInfo>> result=new Result<>();
 		PagedList<ServiceInfo> list=serviceInfoService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 服务分组 数据
+		serviceInfoService.join(list,ServiceInfoMeta.GROUP);
 		// 关联出 服务类型 数据
 		serviceInfoService.join(list,ServiceInfoMeta.SERVICE_CATEGORY);
 		result.success(true).data(list);

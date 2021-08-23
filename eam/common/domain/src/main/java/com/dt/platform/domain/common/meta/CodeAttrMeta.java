@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:21
- * @sign 7240478BBCF43E6ABECF8B1F1634FC55
+ * @since 2021-08-21 17:51:06
+ * @sign EEE26585C96E03FDD2638CFE225BCB33
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -24,16 +24,6 @@ public class CodeAttrMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 占位符 , 类型: java.lang.String
-	*/
-	public static final String CODE="code";
-	
-	/**
-	 * 占位符 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CODE, java.lang.String.class, "占位符", "占位符", java.lang.String.class, null);
 	
 	/**
 	 * 编码名称 , 类型: java.lang.String
@@ -54,6 +44,16 @@ public class CodeAttrMeta {
 	 * 编码类型 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,TYPE, java.lang.String.class, "编码类型", "编码类型", java.lang.String.class, null);
+	
+	/**
+	 * 占位符 , 类型: java.lang.String
+	*/
+	public static final String CODE="code";
+	
+	/**
+	 * 占位符 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAttr,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAttr.class ,CODE, java.lang.String.class, "占位符", "占位符", java.lang.String.class, null);
 	
 	/**
 	 * 排序 , 类型: java.lang.Integer
@@ -158,7 +158,7 @@ public class CodeAttrMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , NAME , TYPE , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , TYPE , CODE , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -176,17 +176,6 @@ public class CodeAttrMeta {
 		public CodeAttr setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 占位符
-		 * @param code 占位符
-		 * @return 当前对象
-		*/
-		public CodeAttr setCode(String code) {
-			super.change(CODE,super.getCode(),code);
-			super.setCode(code);
 			return this;
 		}
 		
@@ -209,6 +198,17 @@ public class CodeAttrMeta {
 		public CodeAttr setType(String type) {
 			super.change(TYPE,super.getType(),type);
 			super.setType(type);
+			return this;
+		}
+		
+		/**
+		 * 设置 占位符
+		 * @param code 占位符
+		 * @return 当前对象
+		*/
+		public CodeAttr setCode(String code) {
+			super.change(CODE,super.getCode(),code);
+			super.setCode(code);
 			return this;
 		}
 		

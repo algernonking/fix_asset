@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:02
- * @sign 5FFB0CF1F6B0A5ED338DABCDE0945D0B
+ * @since 2021-08-22 13:16:03
+ * @sign 5E6F993C000C3E7D5ED4105D44740B43
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,7 +38,7 @@ public class AssetBorrowDataMeta {
 	/**
 	 * 借前资产状态 , 类型: java.lang.String
 	*/
-	public static final String ASSET_STATUS_BEFORE=" assetStatusBefore";
+	public static final String ASSET_STATUS_BEFORE="assetStatusBefore";
 	
 	/**
 	 * 借前资产状态 , 类型: java.lang.String
@@ -172,12 +172,12 @@ public class AssetBorrowDataMeta {
 		
 		/**
 		 * 设置 借前资产状态
-		 * @param  assetStatusBefore 借前资产状态
+		 * @param assetStatusBefore 借前资产状态
 		 * @return 当前对象
 		*/
-		public AssetBorrowData setAssetStatusBefore(String  assetStatusBefore) {
-			super.change(ASSET_STATUS_BEFORE,super.getAssetStatusBefore(), assetStatusBefore);
-			super.setAssetStatusBefore( assetStatusBefore);
+		public AssetBorrowData setAssetStatusBefore(String assetStatusBefore) {
+			super.change(ASSET_STATUS_BEFORE,super.getAssetStatusBefore(),assetStatusBefore);
+			super.setAssetStatusBefore(assetStatusBefore);
 			return this;
 		}
 		

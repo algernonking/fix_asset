@@ -2,6 +2,8 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.eam.common.AssetCommonError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,7 @@ import java.util.Date;
  * 资产退库 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:05
+ * @since 2021-08-21 15:45:51
 */
 
 
@@ -72,6 +74,23 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Override
 	@Transactional
 	public Result insert(AssetCollectionReturn assetCollectionReturn) {
+
+
+		//资产数量
+		if(assetCollectionReturn.getAssetIds()==null||assetCollectionReturn.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+		}
+		//制单人
+		if(assetCollectionReturn.getOriginatorId()==null||"".equals(assetCollectionReturn.getOriginatorId())){
+			assetCollectionReturn.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetCollectionReturn.getBusinessDate()==null){
+			assetCollectionReturn.setBusinessDate(new Date());
+		}
+
+
+
 		Result r=super.insert(assetCollectionReturn);
 		//保存关系
 		if(r.success()) {

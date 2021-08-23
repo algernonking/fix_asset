@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:01
+ * @since 2021-08-22 17:16:11
  */
  -->
  <!DOCTYPE html>
@@ -41,12 +41,12 @@
             <div class="layui-col-xs4 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <div id="status" input-type="select" th:data="${dict.toArray('ops_system_status')}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${dict.toArray('ops_system_status')}" th:value="${e.code}" th:title="${e.text}">
                     </div>
+                </div>
 
 
                 
@@ -289,14 +289,15 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
+    var RADIO_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
     var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
     var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];
     var SELECT_GRADE_DATA = [[${dict.toArray('ops_system_grade')}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_information_system";
 </script>
 
+<script th:src="'/business/ops/information_system/information_system_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/information_system/information_system_form.js?'+${cacheKey}"></script>
 
 </body>

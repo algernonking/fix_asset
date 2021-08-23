@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:19
+ * @since 2021-08-21 19:02:30
  */
 
 function FormPage() {
@@ -72,9 +72,9 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 module 下拉字段
+		//渲染 code 下拉字段
 		fox.renderSelectBox({
-			el: "module",
+			el: "code",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -92,8 +92,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "ruleId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -112,6 +114,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('sys-code-allocation-form-data');
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -125,8 +130,8 @@ function FormPage() {
 
 
 
-			//设置  业务模块 设置下拉框勾选
-			fox.setSelectValue4Enum("#module",formData.module,SELECT_MODULE_DATA);
+			//设置  业务编码 设置下拉框勾选
+			fox.setSelectValue4Enum("#code",formData.code,SELECT_CODE_DATA);
 			//设置  编码规则 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#ruleId",formData.rule);
 
@@ -135,6 +140,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -169,8 +177,8 @@ function FormPage() {
 
 
 
-			//获取 业务模块 下拉框的值
-			data.field["module"]=fox.getSelectedValue("module",false);
+			//获取 业务编码 下拉框的值
+			data.field["code"]=fox.getSelectedValue("code",false);
 			//获取 编码规则 下拉框的值
 			data.field["ruleId"]=fox.getSelectedValue("ruleId",false);
 
@@ -198,16 +206,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

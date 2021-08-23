@@ -2,7 +2,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-18 20:40:55
+ * @since 2021-08-21 15:45:34
  */
  -->
  <!DOCTYPE html>
@@ -75,9 +75,9 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div></div>
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="rackName" id="rackName" name="rackName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"   />
+                        <input lay-filter="rackName" id="rackName" name="rackName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -206,10 +206,11 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"areaId":{"labelInForm":"区域","inputType":"select_box","required":true},"layerId":{"labelInForm":"层级","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"areaId":{"labelInForm":"区域","inputType":"select_box","required":true},"layerId":{"labelInForm":"层级","inputType":"select_box","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="dc_rack";
 </script>
 
+<script th:src="'/business/datacenter/rack/rack_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/datacenter/rack/rack_form.js?'+${cacheKey}"></script>
 
 </body>

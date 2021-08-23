@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:09
- * @sign D489E871DC5EC432562690269248E41B
+ * @since 2021-08-22 13:16:10
+ * @sign F32988CDF1005B639C103075D8F8A375
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,12 +45,6 @@ public class AssetHandle extends Entity {
 	private String procId;
 	
 	/**
-	 * 办理状态：办理状态
-	*/
-	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
-	private String status;
-	
-	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
@@ -61,6 +55,12 @@ public class AssetHandle extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
+	
+	/**
+	 * 办理状态：办理状态
+	*/
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
+	private String status;
 	
 	/**
 	 * 处置类型：处置类型
@@ -99,10 +99,10 @@ public class AssetHandle extends Entity {
 	private Date actualFinishDate;
 	
 	/**
-	 * 制单人：操作人
+	 * 制单人：制单人
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "操作人")
-	private String operuserId;
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 图片：图片
@@ -215,25 +215,6 @@ public class AssetHandle extends Entity {
 	}
 	
 	/**
-	 * 获得 办理状态<br>
-	 * 办理状态
-	 * @return 办理状态
-	*/
-	public String getStatus() {
-		return status;
-	}
-	
-	/**
-	 * 设置 办理状态
-	 * @param status 办理状态
-	 * @return 当前对象
-	*/
-	public AssetHandle setStatus(String status) {
-		this.status=status;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -268,6 +249,25 @@ public class AssetHandle extends Entity {
 	*/
 	public AssetHandle setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 办理状态
+	 * @param status 办理状态
+	 * @return 当前对象
+	*/
+	public AssetHandle setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -387,20 +387,20 @@ public class AssetHandle extends Entity {
 	
 	/**
 	 * 获得 制单人<br>
-	 * 操作人
+	 * 制单人
 	 * @return 制单人
 	*/
-	public String getOperuserId() {
-		return operuserId;
+	public String getOriginatorId() {
+		return originatorId;
 	}
 	
 	/**
 	 * 设置 制单人
-	 * @param operuserId 制单人
+	 * @param originatorId 制单人
 	 * @return 当前对象
 	*/
-	public AssetHandle setOperuserId(String operuserId) {
-		this.operuserId=operuserId;
+	public AssetHandle setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

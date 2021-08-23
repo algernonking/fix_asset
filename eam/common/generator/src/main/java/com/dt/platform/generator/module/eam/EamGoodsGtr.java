@@ -1,7 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.constants.enums.eam.GoodsStautsEnum;
+import com.dt.platform.constants.enums.common.StatusEnableEnum;
+
 import com.dt.platform.domain.eam.Brand;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -40,16 +41,16 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS.NOTES).basic().label("备注").search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_GOODS.PICTURE_ID)
-                .form().label("图片").upload().acceptSingleImage().displayFileName(false);
+                .form().label("图片").upload().acceptSingleImage().maxFileCount(1).displayFileName(false);
 
 
         cfg.view().field(EAMTables.EAM_GOODS.STATUS).basic().label("状态")
-                .form().validate().required().form().radioBox().enumType(GoodsStautsEnum.class);
+                .form().validate().required().form().radioBox().enumType(StatusEnableEnum.class);
 
         cfg.view().field(EAMTables.EAM_GOODS.CATEGORY_ID)
                 .basic().label("分类")
                 .form().validate().required()
-                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(true)
+                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(GoodsMeta.CATEGORY).muliti(false);
 
 //
@@ -62,7 +63,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_GOODS.MANUFACTURER_ID)
                 .basic().label("厂商")
                 .form().validate().required()
-                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(GoodsMeta.MANUFACTURER).muliti(false);
 
 
@@ -73,52 +74,41 @@ public class EamGoodsGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_GOODS.NAME,
+                        EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.CATEGORY_ID,
-//                        EAMTables.EAM_GOODS.BRAND_ID,
-                        EAMTables.EAM_GOODS.STATUS
-                },
-                new Object[]{
-                        EAMTables.EAM_GOODS.NOTES
-
+                        EAMTables.EAM_GOODS.MANUFACTURER_ID
                 }
-
         );
 
 
 
-
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_GOODS.CATEGORY_ID,
+                        EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.NAME,
                         EAMTables.EAM_GOODS.MODEL,
                 }, new Object[] {
-
-                        EAMTables.EAM_GOODS.STATUS,
                         EAMTables.EAM_GOODS.MANUFACTURER_ID,
-//                        EAMTables.EAM_GOODS.BRAND_ID,
-
-                }, new Object[] {
                         EAMTables.EAM_GOODS.REFERENCE_PRICE,
                         EAMTables.EAM_GOODS.UNIT,
-
-
-                 }
-        );
-        cfg.view().search().inputLayout(
-                new Object[]{
-                        EAMTables.EAM_GOODS.NOTES
-
                 }
         );
 
-        cfg.view().search().inputLayout(
-                new Object[]{
+
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_GOODS.NOTES,
                         EAMTables.EAM_GOODS.PICTURE_ID
 
                 }
         );
+
+
+
+
 
 
         //文件生成覆盖模式

@@ -2,7 +2,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:22
+ * @since 2021-08-21 17:51:08
  */
  -->
  <!DOCTYPE html>
@@ -81,10 +81,10 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_MODULE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
     var AUTH_PREFIX="sys_code_rule";
 </script>
 
+<script th:src="'/business/common/code_rule/code_rule_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/common/code_rule/code_rule_list.js?'+${cacheKey}"></script>
 
 </body>

@@ -2,6 +2,7 @@ package com.dt.platform.domain.eam.meta;
 
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Asset;
+import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtEquipment;
@@ -15,8 +16,8 @@ import com.dt.platform.domain.eam.Warehouse;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:08:06
- * @sign 7F41570137C24DA53D6E5298E95A7F8C
+ * @since 2021-08-22 12:42:00
+ * @sign 65F9BE1DEF044B467DA903B2DF80F7A4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -173,6 +174,16 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> UNIT_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,UNIT, java.lang.String.class, "标准型号计量单位", "标准型号计量单位", java.lang.String.class, null);
 	
 	/**
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final String SERVICE_LIFE="serviceLife";
+	
+	/**
+	 * 使用期限 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
+	
+	/**
 	 * 序列号 , 类型: java.lang.String
 	*/
 	public static final String SERIAL_NUMBER="serialNumber";
@@ -183,14 +194,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SERIAL_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERIAL_NUMBER, java.lang.String.class, "序列号", "序列号", java.lang.String.class, null);
 	
 	/**
-	 * 所属组织 , 类型: java.lang.String
+	 * 使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final String MANAGEMENT_ORGANIZATION_ID="managementOrganizationId";
+	public static final String USE_ORGANIZATION_ID="useOrganizationId";
 	
 	/**
-	 * 所属组织 , 类型: java.lang.String
+	 * 使用公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MANAGEMENT_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGEMENT_ORGANIZATION_ID, java.lang.String.class, "所属组织", "所属组织", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_ORGANIZATION_ID, java.lang.String.class, "使用公司/部门", "使用公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 管理人员 , 类型: java.lang.String
@@ -203,24 +214,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER_ID, java.lang.String.class, "管理人员", "管理人员", java.lang.String.class, null);
 	
 	/**
-	 * 使用组织 , 类型: java.lang.String
+	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final String USER_ORGANIZATION_ID="userOrganizationId";
-	
-	/**
-	 * 使用组织 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USER_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USER_ORGANIZATION_ID, java.lang.String.class, "使用组织", "使用组织", java.lang.String.class, null);
+	public static final String USE_USER_ID="useUserId";
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
 	*/
-	public static final String USER_ID="userId";
-	
-	/**
-	 * 使用人员 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_USER_ID, java.lang.String.class, "使用人员", "使用人员", java.lang.String.class, null);
 	
 	/**
 	 * 存放位置 , 类型: java.lang.String
@@ -495,7 +496,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERIAL_NUMBER , MANAGEMENT_ORGANIZATION_ID , MANAGER_ID , USER_ORGANIZATION_ID , USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE };
 	
 	/**
 	 * 代理类
@@ -671,6 +672,17 @@ public class AssetMeta {
 		}
 		
 		/**
+		 * 设置 使用期限
+		 * @param serviceLife 使用期限
+		 * @return 当前对象
+		*/
+		public Asset setServiceLife(BigDecimal serviceLife) {
+			super.change(SERVICE_LIFE,super.getServiceLife(),serviceLife);
+			super.setServiceLife(serviceLife);
+			return this;
+		}
+		
+		/**
 		 * 设置 序列号
 		 * @param serialNumber 序列号
 		 * @return 当前对象
@@ -682,13 +694,13 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 所属组织
-		 * @param managementOrganizationId 所属组织
+		 * 设置 使用公司/部门
+		 * @param useOrganizationId 使用公司/部门
 		 * @return 当前对象
 		*/
-		public Asset setManagementOrganizationId(String managementOrganizationId) {
-			super.change(MANAGEMENT_ORGANIZATION_ID,super.getManagementOrganizationId(),managementOrganizationId);
-			super.setManagementOrganizationId(managementOrganizationId);
+		public Asset setUseOrganizationId(String useOrganizationId) {
+			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
+			super.setUseOrganizationId(useOrganizationId);
 			return this;
 		}
 		
@@ -704,24 +716,13 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 使用组织
-		 * @param userOrganizationId 使用组织
-		 * @return 当前对象
-		*/
-		public Asset setUserOrganizationId(String userOrganizationId) {
-			super.change(USER_ORGANIZATION_ID,super.getUserOrganizationId(),userOrganizationId);
-			super.setUserOrganizationId(userOrganizationId);
-			return this;
-		}
-		
-		/**
 		 * 设置 使用人员
-		 * @param userId 使用人员
+		 * @param useUserId 使用人员
 		 * @return 当前对象
 		*/
-		public Asset setUserId(String userId) {
-			super.change(USER_ID,super.getUserId(),userId);
-			super.setUserId(userId);
+		public Asset setUseUserId(String useUserId) {
+			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
+			super.setUseUserId(useUserId);
 			return this;
 		}
 		

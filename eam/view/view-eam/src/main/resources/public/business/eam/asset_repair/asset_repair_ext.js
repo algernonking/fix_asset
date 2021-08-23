@@ -34,6 +34,43 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+            console.log(laydate);
+            var action=admin.getTempData('eam-asset-repair-form-data-form-action')
+            if(action=="create"){
+                laydate.render({
+                    elem: '#planFinishDate',
+                    format:"yyyy-MM-dd HH:mm:ss",
+                    trigger:"click",
+                    value:new Date()
+                });
+
+                //渲染 repairStatus 下拉字段
+                fox.renderSelectBox({
+                    el: "repairStatus",
+                    radio: true,
+                    filterable: false,
+                    //转换数据
+                    transform:function(data) {
+                        //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                        var opts=[];
+                        if(!data) return opts;
+                        for (var i = 0; i < data.length; i++) {
+                            if(i==0&&action=="create"){
+                                opts.push({name:data[i].text,value:data[i].code,selected: true});
+                            }else{
+                                opts.push({name:data[i].text,value:data[i].code});
+                            }
+
+                        }
+                        return opts;
+                    }
+                });
+
+
+            }
+
+
+
         }
     }
     //

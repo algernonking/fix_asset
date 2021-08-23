@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:21
+ * @since 2021-08-21 17:51:06
 */
 
 @Api(tags = "编码属性")
@@ -66,9 +66,9 @@ public class CodeAttrController extends SuperController {
 	@ApiOperation(value = "添加编码属性")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAttrVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -122,9 +122,9 @@ public class CodeAttrController extends SuperController {
 	@ApiOperation(value = "更新编码属性")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAttrVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -144,9 +144,9 @@ public class CodeAttrController extends SuperController {
 	@ApiOperation(value = "保存编码属性")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAttrVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -205,9 +205,9 @@ public class CodeAttrController extends SuperController {
 	@ApiOperation(value = "查询编码属性")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAttrVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -228,9 +228,9 @@ public class CodeAttrController extends SuperController {
 	@ApiOperation(value = "分页查询编码属性")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeAttrVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeAttrVOMeta.CODE , value = "占位符" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

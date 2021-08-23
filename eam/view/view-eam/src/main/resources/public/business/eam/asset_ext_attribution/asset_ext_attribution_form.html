@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:12
+ * @since 2021-08-22 13:16:14
  */
  -->
  <!DOCTYPE html>
@@ -42,18 +42,9 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('所属组织')}">所属组织</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('使用公司/部门')}">使用公司/部门</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="managementOrganizationId" id="managementOrganizationId" name="managementOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属组织') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('使用组织')}">使用组织</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用组织') }" type="text" class="layui-input"   />
+                        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用公司/部门') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -85,7 +76,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+                        <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 

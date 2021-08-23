@@ -18,7 +18,8 @@ public class CodeBuildRepeat {
                 "OpsHostGtr",
                 "OpsHostPositionGtr",
                 "OpsServiceInfoGtr",
-                "OpsServiceCategoryGtr"
+                "OpsServiceCategoryGtr",
+                "OpsServiceGroupGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

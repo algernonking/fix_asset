@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:02
+ * @since 2021-08-21 21:10:45
  */
  -->
  <!DOCTYPE html>
@@ -31,7 +31,7 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 实例名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 实例名称 , name ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('实例名称')}" class="search-label name-label">实例名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
@@ -118,6 +118,7 @@
     var AUTH_PREFIX="ops_db_instance";
 </script>
 
+<script th:src="'/business/ops/db_instance/db_instance_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/db_instance/db_instance_list.js?'+${cacheKey}"></script>
 
 </body>

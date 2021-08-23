@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +41,7 @@ import java.util.Date;
  * 资产调拨 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:54
+ * @since 2021-08-20 20:57:55
 */
 
 
@@ -72,7 +76,34 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Override
 	@Transactional
 	public Result insert(AssetAllocation assetAllocation) {
+
+
+		//资产数量
+		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+		}
+		//制单人
+		if(assetAllocation.getOriginatorId()==null||"".equals(assetAllocation.getOriginatorId())){
+			assetAllocation.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetAllocation.getBusinessDate()==null){
+			assetAllocation.setBusinessDate(new Date());
+		}
+
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		assetAllocation.setBusinessCode(codeResult.getData().toString());
+
+
+
+
+
 		Result r=super.insert(assetAllocation);
+
 		//保存关系
 		if(r.success()) {
 			assetItemServiceImpl.saveRelation(assetAllocation.getId(), assetAllocation.getAssetIds());

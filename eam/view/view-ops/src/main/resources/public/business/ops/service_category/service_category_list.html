@@ -2,7 +2,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:14
+ * @since 2021-08-21 21:10:59
  */
  -->
  <!DOCTYPE html>
@@ -86,10 +86,10 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var RADIO_GROUPID_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.ServiceTypeEnum')}]];
     var AUTH_PREFIX="ops_service_category";
 </script>
 
+<script th:src="'/business/ops/service_category/service_category_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/service_category/service_category_list.js?'+${cacheKey}"></script>
 
 </body>

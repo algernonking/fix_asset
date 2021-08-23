@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +41,7 @@ import java.util.Date;
  * 资产转移 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:58
+ * @since 2021-08-20 21:13:42
 */
 
 
@@ -72,6 +76,29 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	@Override
 	@Transactional
 	public Result insert(AssetTranfer assetTranfer) {
+
+		//资产数量
+		if(assetTranfer.getAssetIds()==null||assetTranfer.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+		}
+		//制单人
+		if(assetTranfer.getOriginatorId()==null||"".equals(assetTranfer.getOriginatorId())){
+			assetTranfer.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetTranfer.getBusinessDate()==null){
+			assetTranfer.setBusinessDate(new Date());
+		}
+
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_TRANFER.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		assetTranfer.setBusinessCode(codeResult.getData().toString());
+
+
+
 		Result r=super.insert(assetTranfer);
 		//保存关系
 		if(r.success()) {

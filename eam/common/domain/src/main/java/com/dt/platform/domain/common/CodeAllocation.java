@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:13
- * @sign BA335B07CD3BCA1E6B3B84CE15C64D6D
+ * @since 2021-08-21 19:02:14
+ * @sign 9087B481048D4C7B9839630956E16DBC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,10 +36,10 @@ public class CodeAllocation extends Entity {
 	private String id;
 	
 	/**
-	 * 业务模块：业务模块
+	 * 业务编码：业务编码
 	*/
-	@ApiModelProperty(required = false,value="业务模块" , notes = "业务模块")
-	private String module;
+	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
+	private String code;
 	
 	/**
 	 * 规则ID：规则ID
@@ -127,21 +127,21 @@ public class CodeAllocation extends Entity {
 	}
 	
 	/**
-	 * 获得 业务模块<br>
-	 * 业务模块
-	 * @return 业务模块
+	 * 获得 业务编码<br>
+	 * 业务编码
+	 * @return 业务编码
 	*/
-	public String getModule() {
-		return module;
+	public String getCode() {
+		return code;
 	}
 	
 	/**
-	 * 设置 业务模块
-	 * @param module 业务模块
+	 * 设置 业务编码
+	 * @param code 业务编码
 	 * @return 当前对象
 	*/
-	public CodeAllocation setModule(String module) {
-		this.module=module;
+	public CodeAllocation setCode(String code) {
+		this.code=code;
 		return this;
 	}
 	

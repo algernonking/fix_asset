@@ -2,7 +2,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:56
+ * @since 2021-08-22 13:15:56
  */
  -->
  <!DOCTYPE html>
@@ -36,11 +36,6 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 调拨说明 , content ,typeName=text_area, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调拨说明')}" class="search-label content-label">调拨说明</span><span class="search-colon">:</span></div>
-                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
@@ -58,20 +53,20 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 调入所属组织 , inManagementOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 调出所属公司 , outOwnCompanyId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入所属组织')}" class="search-label inManagementOrganizationId-label">调入所属组织</span><span class="search-colon">:</span></div>
-                        <input id="inManagementOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出所属公司')}" class="search-label outOwnCompanyId-label">调出所属公司</span><span class="search-colon">:</span></div>
+                        <input id="outOwnCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 调出所属组织 , outManagementOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 调入所属公司 , inOwnCompanyId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出所属组织')}" class="search-label outManagementOrganizationId-label">调出所属组织</span><span class="search-colon">:</span></div>
-                        <input id="outManagementOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入所属公司')}" class="search-label inOwnCompanyId-label">调入所属公司</span><span class="search-colon">:</span></div>
+                        <input id="inOwnCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 调入管理员 , managerId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 调拨说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入管理员')}" class="search-label managerId-label">调入管理员</span><span class="search-colon">:</span></div>
-                        <input id="managerId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调拨说明')}" class="search-label content-label">调拨说明</span><span class="search-colon">:</span></div>
+                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

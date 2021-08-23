@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +41,7 @@ import java.util.Date;
  * 资产领用 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:03
+ * @since 2021-08-20 20:54:09
 */
 
 
@@ -72,6 +76,28 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	@Override
 	@Transactional
 	public Result insert(AssetCollection assetCollection) {
+
+		//资产数量
+		if(assetCollection.getAssetIds()==null||assetCollection.getAssetIds().size()==0){
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+		}
+
+		//制单人
+		if(assetCollection.getOriginatorId()==null||"".equals(assetCollection.getOriginatorId())){
+			assetCollection.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+		}
+		//业务时间
+		if(assetCollection.getBusinessDate()==null){
+			assetCollection.setBusinessDate(new Date());
+		}
+
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		assetCollection.setBusinessCode(codeResult.getData().toString());
+
 		Result r=super.insert(assetCollection);
 		//保存关系
 		if(r.success()) {

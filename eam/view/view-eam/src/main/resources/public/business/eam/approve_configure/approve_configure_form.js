@@ -1,7 +1,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:49
+ * @since 2021-08-22 13:15:52
  */
 
 function FormPage() {
@@ -72,41 +72,9 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 name 下拉字段
-		fox.renderSelectBox({
-			el: "name",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
 		//渲染 approvalType 下拉字段
 		fox.renderSelectBox({
 			el: "approvalType",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 approvalStatus 下拉字段
-		fox.renderSelectBox({
-			el: "approvalStatus",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -143,12 +111,8 @@ function FormPage() {
 
 
 
-			//设置  名称 设置下拉框勾选
-			fox.setSelectValue4Enum("#name",formData.name,SELECT_NAME_DATA);
 			//设置  审批类型 设置下拉框勾选
-			fox.setSelectValue4Dict("#approvalType",formData.approvalType,SELECT_APPROVALTYPE_DATA);
-			//设置  审批状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#approvalStatus",formData.approvalStatus,SELECT_APPROVALSTATUS_DATA);
+			fox.setSelectValue4Enum("#approvalType",formData.approvalType,SELECT_APPROVALTYPE_DATA);
 
 
 
@@ -192,12 +156,8 @@ function FormPage() {
 
 
 
-			//获取 名称 下拉框的值
-			data.field["name"]=fox.getSelectedValue("name",false);
 			//获取 审批类型 下拉框的值
 			data.field["approvalType"]=fox.getSelectedValue("approvalType",false);
-			//获取 审批状态 下拉框的值
-			data.field["approvalStatus"]=fox.getSelectedValue("approvalStatus",false);
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;

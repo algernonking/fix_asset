@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:10
+ * @since 2021-08-22 16:57:45
  */
  -->
  <!DOCTYPE html>
@@ -41,12 +41,12 @@
             <div class="layui-col-xs4 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('信息系统')}">信息系统</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <div id="systemId" input-type="select" th:data="${'/service-ops/ops-information-system/query-list'}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="hostName" id="hostName" name="hostName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
+                </div>
 
 
                 
@@ -73,19 +73,42 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="hostName" id="hostName" name="hostName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('信息系统')}">信息系统</div></div>
+                        <div class="layui-input-block ">
+                            <div id="systemId" input-type="select" th:data="${'/service-ops/ops-information-system/query-list'}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('所在环境')}">所在环境</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="offlineTime" id="offlineTime" name="offlineTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"    lay-verify=""   />
+                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_environment')}"></div>
+                        </div>
+                    </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('所在位置')}">所在位置</div></div>
+                        <div class="layui-input-block ">
+                            <div id="positionId" input-type="select" th:data="${'/service-ops/ops-host-position/query-list'}"></div>
                         </div>
                     </div>
 
@@ -99,36 +122,13 @@
                     </div>
 
 
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('所在环境')}">所在环境</div></div>
-                        <div class="layui-input-block ">
-                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_environment')}"></div>
-                        </div>
-                    </div>
-
-
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('所在位置')}">所在位置</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
                         <div class="layui-input-block ">
-                            <div id="positionId" input-type="select" th:data="${'/service-ops/ops-host-position/query-list'}"></div>
+                            <input input-type="date" lay-filter="offlineTime" id="offlineTime" name="offlineTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
-
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -220,7 +220,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('操作系统')}">操作系统</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}"></div>
                         </div>
                     </div>
 
@@ -234,7 +234,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数据库')}">数据库</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}"></div>
                         </div>
                     </div>
 
@@ -248,7 +248,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('中间件')}">中间件</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}"></div>
                         </div>
                     </div>
 
@@ -388,10 +388,10 @@
             <div class="layui-col-xs12 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostNotes" id="hostNotes" name="hostNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="hostNotes" id="hostNotes" name="hostNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -426,10 +426,11 @@
     var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_environment')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
     var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
-    var VALIDATE_CONFIG={"hostName":{"labelInForm":"名称","inputType":"text_input","required":true},"systemId":{"labelInForm":"信息系统","inputType":"select_box","required":true},"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
+    var VALIDATE_CONFIG={"hostName":{"labelInForm":"名称","inputType":"text_input","required":true},"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_host";
 </script>
 
+<script th:src="'/business/ops/host/host_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/host/host_form.js?'+${cacheKey}"></script>
 
 </body>

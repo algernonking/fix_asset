@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:01:21
- * @sign 7240478BBCF43E6ABECF8B1F1634FC55
+ * @since 2021-08-21 17:51:06
+ * @sign EEE26585C96E03FDD2638CFE225BCB33
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,12 +36,6 @@ public class CodeAttr extends Entity {
 	private String id;
 	
 	/**
-	 * 占位符：占位符
-	*/
-	@ApiModelProperty(required = false,value="占位符" , notes = "占位符")
-	private String code;
-	
-	/**
 	 * 编码名称：编码名称
 	*/
 	@ApiModelProperty(required = false,value="编码名称" , notes = "编码名称")
@@ -52,6 +46,12 @@ public class CodeAttr extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="编码类型" , notes = "编码类型")
 	private String type;
+	
+	/**
+	 * 占位符：占位符
+	*/
+	@ApiModelProperty(required = false,value="占位符" , notes = "占位符")
+	private String code;
 	
 	/**
 	 * 排序：排序
@@ -133,25 +133,6 @@ public class CodeAttr extends Entity {
 	}
 	
 	/**
-	 * 获得 占位符<br>
-	 * 占位符
-	 * @return 占位符
-	*/
-	public String getCode() {
-		return code;
-	}
-	
-	/**
-	 * 设置 占位符
-	 * @param code 占位符
-	 * @return 当前对象
-	*/
-	public CodeAttr setCode(String code) {
-		this.code=code;
-		return this;
-	}
-	
-	/**
 	 * 获得 编码名称<br>
 	 * 编码名称
 	 * @return 编码名称
@@ -186,6 +167,25 @@ public class CodeAttr extends Entity {
 	*/
 	public CodeAttr setType(String type) {
 		this.type=type;
+		return this;
+	}
+	
+	/**
+	 * 获得 占位符<br>
+	 * 占位符
+	 * @return 占位符
+	*/
+	public String getCode() {
+		return code;
+	}
+	
+	/**
+	 * 设置 占位符
+	 * @param code 占位符
+	 * @return 当前对象
+	*/
+	public CodeAttr setCode(String code) {
+		this.code=code;
 		return this;
 	}
 	

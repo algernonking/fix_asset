@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:13:22
+ * @since 2021-08-22 13:16:28
  */
 
 function FormPage() {
@@ -77,7 +77,6 @@ function FormPage() {
 			filterable: true,
 			paging: true,
 			pageRemote: true,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
 			//转换数据
 			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -96,9 +95,10 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "manufacturerId",
 			radio: true,
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -151,6 +151,12 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+			//设置 图片 显示附件
+		    if($("#pictureId").val()) {
+				foxup.fill("pictureId",$("#pictureId").val());
+		    } else {
+				adjustPopup();
+			}
 
 
 

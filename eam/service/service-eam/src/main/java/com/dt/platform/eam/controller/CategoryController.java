@@ -74,9 +74,10 @@ public class CategoryController extends SuperController {
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "sort" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.SERVICE_LIFE , value = "使用周期" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -162,9 +163,10 @@ public class CategoryController extends SuperController {
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "全称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "sort" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.SERVICE_LIFE , value = "使用周期" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CategoryVOMeta.PAGE_INDEX , CategoryVOMeta.PAGE_SIZE , CategoryVOMeta.SEARCH_FIELD , CategoryVOMeta.FUZZY_FIELD , CategoryVOMeta.SEARCH_VALUE , CategoryVOMeta.SORT_FIELD , CategoryVOMeta.SORT_TYPE , CategoryVOMeta.IDS } ) 

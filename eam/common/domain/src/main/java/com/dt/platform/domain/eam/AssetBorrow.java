@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:59
- * @sign 350335F5487407D6E650E3524143ACE0
+ * @since 2021-08-22 13:16:00
+ * @sign 36103AA6C1DFF0C2FFCE870129C362C5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,12 +36,6 @@ public class AssetBorrow extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
-	
-	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
-	private String name;
 	
 	/**
 	 * 业务编号：业务编号
@@ -62,10 +56,10 @@ public class AssetBorrow extends Entity {
 	private String status;
 	
 	/**
-	 * 制单人：制单人
+	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private String originatorId;
+	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
 	 * 借用人：借用人
@@ -90,6 +84,12 @@ public class AssetBorrow extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="借出说明" , notes = "借出说明")
 	private String content;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 业务日期：业务日期
@@ -177,25 +177,6 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetBorrow setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 业务编号<br>
 	 * 业务编号
 	 * @return 业务编号
@@ -253,21 +234,21 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
 	*/
-	public String getOriginatorId() {
-		return originatorId;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originatorId 制单人
+	 * 设置 业务名称
+	 * @param name 业务名称
 	 * @return 当前对象
 	*/
-	public AssetBorrow setOriginatorId(String originatorId) {
-		this.originatorId=originatorId;
+	public AssetBorrow setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
@@ -344,6 +325,25 @@ public class AssetBorrow extends Entity {
 	*/
 	public AssetBorrow setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetBorrow setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	

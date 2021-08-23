@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:13
+ * @since 2021-08-21 21:10:58
  */
 
 function FormPage() {
@@ -72,12 +72,33 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 serviceCategoryId 下拉字段
 		fox.renderSelectBox({
 			el: "serviceCategoryId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -96,6 +117,9 @@ function FormPage() {
       */
 	function fillFormData() {
 		var formData = admin.getTempData('ops-service-info-form-data');
+
+		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
+
 		//如果是新建
 		if(!formData.id) {
 			adjustPopup();
@@ -109,6 +133,8 @@ function FormPage() {
 
 
 
+			//设置  服务分组 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#groupId",formData.group);
 			//设置  服务类型 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#serviceCategoryId",formData.serviceCategory);
 
@@ -117,6 +143,9 @@ function FormPage() {
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
+
+		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+
 		}
 
 		//渐显效果
@@ -151,6 +180,8 @@ function FormPage() {
 
 
 
+			//获取 服务分组 下拉框的值
+			data.field["groupId"]=fox.getSelectedValue("groupId",false);
 			//获取 服务类型 下拉框的值
 			data.field["serviceCategoryId"]=fox.getSelectedValue("serviceCategoryId",false);
 
@@ -178,16 +209,12 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
-
-
 }
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select',
-	foxnicUpload: 'upload/foxnic-upload'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
-	(new FormPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new FormPage()).init(layui);
+	},1);
 });

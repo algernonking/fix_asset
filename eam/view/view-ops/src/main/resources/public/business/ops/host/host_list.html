@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:10
+ * @since 2021-08-22 16:57:44
  */
  -->
  <!DOCTYPE html>
@@ -64,17 +64,17 @@
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('操作系统')}" class="search-label hostOsIds-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}" style="width:140px"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('数据库')}" class="search-label hostDbIds-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}" style="width:140px"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('中间件')}" class="search-label hostMiddlewareIds-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list'}" style="width:140px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}" style="width:140px"></div>
                     </div>
 
 
@@ -99,7 +99,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('标签')}" class="search-label labels-label">标签</span><span class="search-colon">:</span></div>
                         <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备注 , hostNotes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 备注 , hostNotes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label hostNotes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="hostNotes" class="layui-input search-input" style="width: 140px" type="text" />
@@ -158,6 +158,7 @@
     var AUTH_PREFIX="ops_host";
 </script>
 
+<script th:src="'/business/ops/host/host_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/ops/host/host_list.js?'+${cacheKey}"></script>
 
 </body>

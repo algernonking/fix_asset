@@ -3,13 +3,14 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.ServiceCategory;
 import java.util.Date;
+import com.dt.platform.domain.ops.ServiceGroup;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 13:02:14
- * @sign 9FFCE64E49C610F1B16A508757F14131
+ * @since 2021-08-21 21:10:59
+ * @sign D3CBBA1DED4710AA95531FF77E7C47A3
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -136,9 +137,19 @@ public class ServiceCategoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceCategory,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceCategory.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 服务分组 , 类型: com.dt.platform.domain.ops.ServiceGroup
+	*/
+	public static final String GROUP="group";
+	
+	/**
+	 * 服务分组 , 类型: com.dt.platform.domain.ops.ServiceGroup
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceCategory,com.dt.platform.domain.ops.ServiceGroup> GROUP_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceCategory.class ,GROUP, com.dt.platform.domain.ops.ServiceGroup.class, "服务分组", "服务分组", com.dt.platform.domain.ops.ServiceGroup.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , GROUP_ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , GROUP_ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , GROUP };
 	
 	/**
 	 * 代理类
@@ -277,6 +288,17 @@ public class ServiceCategoryMeta {
 		public ServiceCategory setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 服务分组
+		 * @param group 服务分组
+		 * @return 当前对象
+		*/
+		public ServiceCategory setGroup(ServiceGroup group) {
+			super.change(GROUP,super.getGroup(),group);
+			super.setGroup(group);
 			return this;
 		}
 	}

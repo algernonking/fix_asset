@@ -2,7 +2,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:49
+ * @since 2021-08-22 13:15:51
  */
  -->
  <!DOCTYPE html>
@@ -35,40 +35,57 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('名称')}">名称</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="name" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('审批状态')}">审批状态</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="approvalStatus" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('审批类型')}">审批类型</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="approvalType" input-type="select" th:data="${dict.toArray('eam_asset_approval_type')}"></div>
-                        </div>
-                    </div>
+                </div>
 
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                    <div class="layui-form-label "><div th:text="${lang.translate('审批状态')}">审批状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="approvalStatus" lay-filter="approvalStatus" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('审批类型')}">审批类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="approvalType" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum')}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -80,6 +97,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 250px"></div>
 
 
     </form>
@@ -98,10 +116,9 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_NAME_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var SELECT_APPROVALTYPE_DATA = [[${dict.toArray('eam_asset_approval_type')}]];
-    var SELECT_APPROVALSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
-    var VALIDATE_CONFIG={"approvalStatus":{"labelInForm":"审批状态","inputType":"select_box","required":true},"approvalType":{"labelInForm":"审批类型","inputType":"select_box","required":true}};
+    var SELECT_APPROVALTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum')}]];
+    var RADIO_APPROVALSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var VALIDATE_CONFIG={"approvalStatus":{"labelInForm":"审批状态","inputType":"radio_box","required":true},"approvalType":{"labelInForm":"审批类型","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_approve_configure";
 </script>
 

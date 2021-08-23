@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +39,7 @@ import java.util.Date;
  * 资产 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:08:07
+ * @since 2021-08-21 09:16:10
 */
 
 
@@ -67,6 +71,29 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public Result insert(Asset asset) {
+
+		//采购时间
+		if(asset.getPurchaseDate()==null){
+			asset.setPurchaseDate(new Date());
+		}
+
+		//编号
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		asset.setAssetCode(codeResult.getData().toString());
+
+		//状态
+		if(asset.getStatus()==null || asset.getStatus().trim().length()==0){
+
+			if(asset.getUseUserId()==null || asset.getUseUserId().trim().length()==0){
+				asset.setStatus(AssetStatusEnum.IDLE.code());
+			} else{
+				asset.setStatus(AssetStatusEnum.USING.code());
+			}
+		}
+
 		Result r=super.insert(asset);
 		return r;
 	}

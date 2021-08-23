@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 16:12:59
+ * @since 2021-08-22 13:16:00
  */
  -->
  <!DOCTYPE html>
@@ -36,6 +36,11 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
+                    <!-- 借用人 , borrowerId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('借用人')}" class="search-label borrowerId-label">借用人</span><span class="search-colon">:</span></div>
+                        <input id="borrowerId" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
                     <!-- 借出时间 , borrowTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('借出时间')}" class="search-label borrowTime-label">借出时间</span><span class="search-colon">:</span></div>
@@ -52,11 +57,6 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 借用人 , borrowerId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('借用人')}" class="search-label borrowerId-label">借用人</span><span class="search-colon">:</span></div>
-                        <input id="borrowerId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 借出说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

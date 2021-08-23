@@ -56,8 +56,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 form().textArea().height(30)
                 .search().fuzzySearch();
 
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().selectBox().enumType(AssetRepairStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().form().selectBox().enumType(AssetHandleStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().validate().required().form().selectBox().enumType(AssetRepairStatusEnum.class);
 
 
 
@@ -72,14 +72,13 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.STATUS,
-                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
+                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
                         EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE
-
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_REPAIR.TYPE,
-                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
                         EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_REPAIR.TYPE,
+                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
                         EAMTables.EAM_ASSET_REPAIR.CONTENT
                 }
 
@@ -93,16 +92,13 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.NAME,
-                        EAMTables.EAM_ASSET_REPAIR.TYPE,
                         EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
-
                 }, new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE,
-                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
-
+                        EAMTables.EAM_ASSET_REPAIR.TYPE,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID,
+                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
                 }
         );
 
@@ -119,7 +115,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
