@@ -260,6 +260,16 @@ function FormPage() {
 			$("#cancel-button").css("margin-right","0px")
 		}
 
+		//调用 iframe 加载过程
+		var formIfrs=$(".form-iframe");
+		for (var i = 0; i < formIfrs.length; i++) {
+			var jsFn=$(formIfrs[i]).attr("js-fn");
+			if(window.pageExt.form){
+				jsFn=window.pageExt.form[jsFn];
+				jsFn && jsFn($(formIfrs[i]),$(formIfrs[i])[0].contentWindow,formData);
+			}
+		}
+
 	}
 
 	/**
@@ -300,6 +310,11 @@ function FormPage() {
 
 			//校验表单
 			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
+
+			if(window.pageExt.form.beforeSubmit) {
+				var doNext=window.pageExt.form.beforeSubmit(data.field);
+				if(!doNext) return ;
+			}
 
 	    	var api=moduleURL+"/"+(data.field.#(idPropertyName)?"update":"insert");
 	        var task=setTimeout(function(){layer.load(2);},1000);

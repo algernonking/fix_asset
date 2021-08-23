@@ -18,7 +18,7 @@ function ListPage() {
 	this.init=function(layui) {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 		
      	//渲染表格
      	renderTable();
@@ -55,7 +55,7 @@ function ListPage() {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
 
-			var h=$(".search-bar").height();
+			var h=#if(searchDisabled)-16; #else $(".search-bar").height();#end
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
@@ -433,6 +433,7 @@ function ListPage() {
 		//头工具栏事件
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
+			var selected=#if(isSimplePK)getCheckedList("#(idPropertyName)");#else getCheckedList();#end
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -440,6 +441,11 @@ function ListPage() {
 				#if(isSimplePK)
 				case 'batch-del':
 					batchDelete();
+					break;
+				#end
+				#for(b:toolButtons)
+				case 'tool-#(b.id)':
+					window.pageExt.list.#(b.functionName) && window.pageExt.list.#(b.functionName)(selected,obj);
 					break;
 				#end
 				case 'other':
@@ -548,6 +554,21 @@ function ListPage() {
 				window.pageExt.list.#(b.functionName)(data);
 			}
 			#end
+			#if(opColumnMenus!=null && opColumnMenus.size()>0)
+			else if(obj.event === 'ops-more'){
+				//更多下拉菜单
+				dropdown.render({
+					elem: this
+					,show: true //外部事件触发即显示
+					,data: #(opColumnMenuData)
+					,click: function(menu, othis){
+						window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,data, othis);
+					}
+					,align: 'right'
+					,style: 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);'
+				});
+			}
+			#end
 			#if(isTree)else if (layEvent === 'drill') {
 			
 				#(parentIdVar) = data.#(idPropertyName);
@@ -578,6 +599,7 @@ function ListPage() {
 			offset: [top,null],
 			area: ["#(formWindow.width)",height+"px"],
 			type: 2,
+			id:"#(formDataKey)-win",
 			content: '#(formURI)' + queryString,
 			finish: function () {
 				refreshTableData();
@@ -589,7 +611,7 @@ function ListPage() {
 };
 
 
-layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','dropdown'],function() {
 	var task=setInterval(function (){
 		if(!window["pageExt"]) return;
 		clearInterval(task);

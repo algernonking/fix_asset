@@ -14,15 +14,22 @@
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+        #if(marginDisabled)
+        .layui-card-body .layui-table {
+            margin:0px;
+        }
+        #end
+    </style>
 </head>
 
 <body style="overflow-y: hidden">
 
-<div class="layui-card">
+<div class="#if(!marginDisabled)layui-card#else layui-card-no-shadow #end">
  
-    <div class="layui-card-body">
+    <div class="layui-card-body" style="#if(marginDisabled)padding:0px#end">
 
-        <div class="search-bar">
+        <div class="search-bar" style="#if(searchDisabled) display: none; #end">
 
             <div class="search-input-rows" style="opacity: 0">
                 #for(searchFields : searchRows)
@@ -102,7 +109,7 @@
             </div>
         </div>
 
-        <div style="margin-top: #(searchRowsDisplay * 42)px">
+        <div style="margin-top: #if(searchDisabled)0px #else #(searchRowsDisplay * 42)px #end">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -125,6 +132,9 @@
         <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
         #end
         #end
+        #for(b:toolButtons)
+        <button id="#(b.id)" class="layui-btn icon-btn layui-btn-sm #if(b.css!=null) #(b.css) #end" lay-event="tool-#(b.id)">#if(b.iconHtml!=null) #(b.iconHtml) #end<span th:text="${lang.translate('#(b.label)')}">#(b.label)</span></button>
+        #end
     </div>
 </script>
 
@@ -145,8 +155,13 @@
     #if(!disableSingleDelete)
     <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
     #end
+
     #for(b:opColumnButtons)
-    <a class="layui-btn layui-btn-xs" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</a>
+    <a class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</a>
+    #end
+
+    #if(opColumnMenus!=null && opColumnMenus.size()>0)
+    <a class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue" lay-event="ops-more"><span th:text="${lang.translate('更多')}">更多</span><i class="layui-icon layui-icon-down"></i></a>
     #end
 </script>
 
