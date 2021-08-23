@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 09:16:18
+ * @since 2021-08-22 12:42:04
  */
  -->
  <!DOCTYPE html>
@@ -69,15 +69,6 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('序列号')}">序列号</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="serialNumber" id="serialNumber" name="serialNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('序列号') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
                     <div class="layui-input-block ">
                         <input lay-filter="positionId" id="positionId" name="positionId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('存放位置') }" type="text" class="layui-input"   />
@@ -110,18 +101,27 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('所属单位')}">所属单位</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('序列号')}">序列号</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="managementCompanyId" id="managementCompanyId" name="managementCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属单位') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="serialNumber" id="serialNumber" name="serialNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('序列号') }" type="text" class="layui-input"   />
                     </div>
                 </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用期限')}">使用期限</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="serviceLife" id="serviceLife" name="serviceLife" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用期限') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                        </div>
+                    </div>
 
 
                 
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('使用公司/部门')}">使用公司/部门</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userOrganizationId" id="userOrganizationId" name="userOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
+                        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
                     </div>
                 </div>
 
@@ -139,7 +139,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userId" id="userId" name="userId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+                        <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
@@ -266,7 +266,7 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
-    var VALIDATE_CONFIG={"managementCompanyId":{"labelInForm":"所属单位","inputType":"text_input","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"userOrganizationId":{"labelInForm":"使用公司/部门","inputType":"text_input","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true},"useOrganizationId":{"labelInForm":"使用公司/部门","inputType":"text_input","required":true},"categoryId":{"labelInForm":"分类","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset";
 </script>
 

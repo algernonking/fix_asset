@@ -127,7 +127,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(HostMeta.SYSTEM_ID)
                 .basic().label("信息系统")
                 .table().sort(false)
-                .form().validate().required().form().selectBox().queryApi(InformationSystemServiceProxy.QUERY_LIST)
+                .form().selectBox().queryApi(InformationSystemServiceProxy.QUERY_LIST)
                 .valueField(InformationSystemMeta.ID).textField(InformationSystemMeta.NAME)
                 .toolbar(false).paging(false)
                 .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
@@ -137,7 +137,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
-                .form().selectBox().dict(DictEnum.OPS_HOST_TYPE);
+                .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)
@@ -187,22 +187,26 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         //分成分组布局
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("90%");
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
-                        EAMTables.OPS_HOST.SYSTEM_ID,
+                        EAMTables.OPS_HOST.HOST_NAME,
                         EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.HOST_TYPE
 
                 }, new Object[] {
-                        EAMTables.OPS_HOST.HOST_NAME,
-                        EAMTables.OPS_HOST.OFFLINE_TIME,
-                        EAMTables.OPS_HOST.ONLINE_TIME
+
+                        EAMTables.OPS_HOST.SYSTEM_ID,
+                        EAMTables.OPS_HOST.ENVIRONMENT,
+                        EAMTables.OPS_HOST.DIRECTOR_USERNAME
 
                 },new Object[] {
-                        EAMTables.OPS_HOST.ENVIRONMENT,
                         EAMTables.OPS_HOST.POSITION_ID,
-                        EAMTables.OPS_HOST.DIRECTOR_USERNAME
+                        EAMTables.OPS_HOST.ONLINE_TIME,
+                        EAMTables.OPS_HOST.OFFLINE_TIME,
+
+
+
                 }
 
 

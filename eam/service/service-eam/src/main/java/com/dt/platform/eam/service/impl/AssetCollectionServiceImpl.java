@@ -79,7 +79,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 
 		//资产数量
 		if(assetCollection.getAssetIds()==null||assetCollection.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 
 		//制单人

@@ -56,8 +56,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 form().textArea().height(30)
                 .search().fuzzySearch();
 
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().selectBox().enumType(AssetRepairStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().form().selectBox().enumType(AssetHandleStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().validate().required().form().selectBox().enumType(AssetRepairStatusEnum.class);
 
 
 

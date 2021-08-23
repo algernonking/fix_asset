@@ -33,6 +33,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+            var action=admin.getTempData('ops-information-system-form-data-form-action')
+
+            if(action=="create"){
+                $('input[name=status]:first').prop("checked","true")
+            }
             console.log('afterDataFill',data);
         }
     }

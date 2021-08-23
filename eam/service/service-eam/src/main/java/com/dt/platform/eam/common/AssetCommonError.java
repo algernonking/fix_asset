@@ -24,7 +24,12 @@ public class AssetCommonError extends ErrorDefinition {
     /**
      * 操作失败
      */
-    public static final String ASSSET_DATA_NOT_SELECT = PREFIX + "01";
+    public static final String ASSET_DATA_NOT_SELECT = PREFIX + "01";
+
+    /**
+     * 操作失败
+     */
+    public static final String ASSET_DATA_NOT_SELECT_TXT = "未选择资产";
 
 
     public void init() {
@@ -32,7 +37,7 @@ public class AssetCommonError extends ErrorDefinition {
 
             new ErrorDesc(SUCCESS, SUCCESS_TEXT);
             new ErrorDesc(FALIURE, FALIURE_TEXT);
-            new ErrorDesc(ASSSET_DATA_NOT_SELECT, "未选择资产");
+            new ErrorDesc(ASSET_DATA_NOT_SELECT, ASSET_DATA_NOT_SELECT_TXT);
 
         } catch (Exception e) {
             e.printStackTrace();

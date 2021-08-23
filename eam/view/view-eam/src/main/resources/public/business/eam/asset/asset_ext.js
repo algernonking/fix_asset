@@ -35,20 +35,70 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+            var action=admin.getTempData('eam-asset-form-data-form-action')
+            var as=admin.getTempData('eam-asset-form-data');
+            console.log(admin);
+            console.log(as);
+            var categoryselectdisabled=true;
+            if(action=="create"){
+                categoryselectdisabled=false;
+            }
 
-          //  id="categoryId"
+            //分类
+            fox.renderSelectBox({
+                el: "categoryId",
+                radio: true,
+                disabled:categoryselectdisabled,
+                filterable: true,
+                paging: true,
+                pageRemote: true,
+                //转换数据
+                searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+                on:function(data){
+                    if(data.change.length>0){
+                        $("#serviceLife").val(data.change[0].serviceLife);
+                    }
+                }
+                ,transform: function(data) {
+                    var opts=[];
+                    if(!data) return opts;
+                    for (var i = 0; i < data.length; i++) {
+                        if(!data[i]) continue;
+                        if(i==0&&action=="create"){
+                            opts.push({name:data[i].hierarchyName,value:data[i].id,serviceLife:data[i].serviceLife, selected: true});
+                        }else{
+                            opts.push({name:data[i].hierarchyName,value:data[i].id,serviceLife:data[i].serviceLife});
+                        }
+                    }
+                    return opts;
+                }
+            })
+
+            //渲染 sourceId 下拉字段
+            fox.renderSelectBox({
+                el: "sourceId",
+                radio: true,
+                filterable: false,
+                transform: function(data) {
+                    var opts=[];
+                    for (var i = 0; i < data.length; i++) {
+                        if(!data[i]) continue;
+                        if(i==0&&action=="create"){
+                            opts.push({name:data[i].text,value:data[i].code,selected: true});
+                        }else{
+                            opts.push({name:data[i].text,value:data[i].code});
+                        }
+                    }
+                    return opts;
+                }
+            });
+
+
+
         }
     }
 
-    fox.renderSelectBox({
-        el: "#categoryId",
-        on:function(data){
-            console.log("hello 22 you ");
-            console.log(this);
-            console.log("hello you ");
-            console.log(data);
-        }
-    });
+
 
 
 

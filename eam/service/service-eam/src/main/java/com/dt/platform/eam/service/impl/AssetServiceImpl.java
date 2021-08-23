@@ -72,6 +72,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result insert(Asset asset) {
 
+		//采购时间
+		if(asset.getPurchaseDate()==null){
+			asset.setPurchaseDate(new Date());
+		}
+
 		//编号
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
 		if(!codeResult.isSuccess()){
@@ -81,7 +86,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		//状态
 		if(asset.getStatus()==null || asset.getStatus().trim().length()==0){
-			if(asset.getUserId()==null || asset.getUserId().trim().length()==0){
+
+			if(asset.getUseUserId()==null || asset.getUseUserId().trim().length()==0){
 				asset.setStatus(AssetStatusEnum.IDLE.code());
 			} else{
 				asset.setStatus(AssetStatusEnum.USING.code());

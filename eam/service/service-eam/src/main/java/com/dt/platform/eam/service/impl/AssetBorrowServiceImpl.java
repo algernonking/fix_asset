@@ -87,7 +87,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 
 		//资产数量
 		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 		//制单人
 		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){

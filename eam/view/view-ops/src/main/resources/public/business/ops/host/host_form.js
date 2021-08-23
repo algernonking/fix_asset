@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 21:10:55
+ * @since 2021-08-22 16:57:46
  */
 
 function FormPage() {
@@ -95,7 +95,7 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "hostType",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]

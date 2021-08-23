@@ -78,7 +78,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public Result insert(AssetScrap assetScrap) {
 		//资产数量
 		if(assetScrap.getAssetIds()==null||assetScrap.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 		//制单人
 		if(assetScrap.getOriginatorId()==null||"".equals(assetScrap.getOriginatorId())){

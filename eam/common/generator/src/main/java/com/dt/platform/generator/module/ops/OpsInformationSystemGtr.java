@@ -74,7 +74,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         );
 
         //分成分组布局
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("90%");
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,

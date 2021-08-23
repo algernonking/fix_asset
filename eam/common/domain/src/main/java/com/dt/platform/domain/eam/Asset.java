@@ -6,6 +6,7 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_ASSET;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 09:16:09
- * @sign 53AB89BD9706D4EA231D20626AE1B690
+ * @since 2021-08-22 12:42:00
+ * @sign 65F9BE1DEF044B467DA903B2DF80F7A4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -120,16 +121,22 @@ public class Asset extends Entity {
 	private String unit;
 	
 	/**
+	 * 使用期限：使用期限
+	*/
+	@ApiModelProperty(required = true,value="使用期限" , notes = "使用期限")
+	private BigDecimal serviceLife;
+	
+	/**
 	 * 序列号：序列号
 	*/
 	@ApiModelProperty(required = false,value="序列号" , notes = "序列号")
 	private String serialNumber;
 	
 	/**
-	 * 所属单位：所属单位
+	 * 使用公司/部门：使用公司/部门
 	*/
-	@ApiModelProperty(required = false,value="所属单位" , notes = "所属单位")
-	private String managementCompanyId;
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private String useOrganizationId;
 	
 	/**
 	 * 管理人员：管理人员
@@ -138,16 +145,10 @@ public class Asset extends Entity {
 	private String managerId;
 	
 	/**
-	 * 使用公司/部门：使用公司/部门
-	*/
-	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
-	private String userOrganizationId;
-	
-	/**
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private String userId;
+	private String useUserId;
 	
 	/**
 	 * 存放位置：存放位置
@@ -597,6 +598,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 使用期限<br>
+	 * 使用期限
+	 * @return 使用期限
+	*/
+	public BigDecimal getServiceLife() {
+		return serviceLife;
+	}
+	
+	/**
+	 * 设置 使用期限
+	 * @param serviceLife 使用期限
+	 * @return 当前对象
+	*/
+	public Asset setServiceLife(BigDecimal serviceLife) {
+		this.serviceLife=serviceLife;
+		return this;
+	}
+	
+	/**
 	 * 获得 序列号<br>
 	 * 序列号
 	 * @return 序列号
@@ -616,21 +636,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 所属单位<br>
-	 * 所属单位
-	 * @return 所属单位
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
 	*/
-	public String getManagementCompanyId() {
-		return managementCompanyId;
+	public String getUseOrganizationId() {
+		return useOrganizationId;
 	}
 	
 	/**
-	 * 设置 所属单位
-	 * @param managementCompanyId 所属单位
+	 * 设置 使用公司/部门
+	 * @param useOrganizationId 使用公司/部门
 	 * @return 当前对象
 	*/
-	public Asset setManagementCompanyId(String managementCompanyId) {
-		this.managementCompanyId=managementCompanyId;
+	public Asset setUseOrganizationId(String useOrganizationId) {
+		this.useOrganizationId=useOrganizationId;
 		return this;
 	}
 	
@@ -654,40 +674,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用公司/部门<br>
-	 * 使用公司/部门
-	 * @return 使用公司/部门
-	*/
-	public String getUserOrganizationId() {
-		return userOrganizationId;
-	}
-	
-	/**
-	 * 设置 使用公司/部门
-	 * @param userOrganizationId 使用公司/部门
-	 * @return 当前对象
-	*/
-	public Asset setUserOrganizationId(String userOrganizationId) {
-		this.userOrganizationId=userOrganizationId;
-		return this;
-	}
-	
-	/**
 	 * 获得 使用人员<br>
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public String getUserId() {
-		return userId;
+	public String getUseUserId() {
+		return useUserId;
 	}
 	
 	/**
 	 * 设置 使用人员
-	 * @param userId 使用人员
+	 * @param useUserId 使用人员
 	 * @return 当前对象
 	*/
-	public Asset setUserId(String userId) {
-		this.userId=userId;
+	public Asset setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
 		return this;
 	}
 	

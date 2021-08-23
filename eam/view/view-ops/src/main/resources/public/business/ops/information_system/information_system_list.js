@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 21:10:41
+ * @since 2021-08-22 17:16:11
  */
 
 
@@ -336,7 +336,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["90%",height+"px"],
 			type: 2,
 			content: '/business/ops/information_system/information_system_form.html' + queryString,
 			finish: function () {

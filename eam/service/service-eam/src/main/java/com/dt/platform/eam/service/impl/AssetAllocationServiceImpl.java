@@ -80,7 +80,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 		//资产数量
 		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 		//制单人
 		if(assetAllocation.getOriginatorId()==null||"".equals(assetAllocation.getOriginatorId())){

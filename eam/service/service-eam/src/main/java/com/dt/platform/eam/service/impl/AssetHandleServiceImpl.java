@@ -76,7 +76,7 @@ public class AssetHandleServiceImpl extends SuperService<AssetHandle> implements
 	public Result insert(AssetHandle assetHandle) {
 		//资产数量
 		if(assetHandle.getAssetIds()==null||assetHandle.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 
 

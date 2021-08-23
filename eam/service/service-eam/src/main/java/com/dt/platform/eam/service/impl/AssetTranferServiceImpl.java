@@ -79,7 +79,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 
 		//资产数量
 		if(assetTranfer.getAssetIds()==null||assetTranfer.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 		//制单人
 		if(assetTranfer.getOriginatorId()==null||"".equals(assetTranfer.getOriginatorId())){

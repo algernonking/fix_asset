@@ -11,7 +11,7 @@ import com.dt.platform.domain.eam.Position;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 10:16:30
+ * @since 2021-08-22 13:15:58
  * @sign 0E988BCC5F157F0EBA454726213F5D3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

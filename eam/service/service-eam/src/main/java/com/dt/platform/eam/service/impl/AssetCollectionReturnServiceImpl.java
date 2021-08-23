@@ -78,7 +78,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 		//资产数量
 		if(assetCollectionReturn.getAssetIds()==null||assetCollectionReturn.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSSET_DATA_NOT_SELECT);
+			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 		}
 		//制单人
 		if(assetCollectionReturn.getOriginatorId()==null||"".equals(assetCollectionReturn.getOriginatorId())){

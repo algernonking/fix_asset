@@ -33,6 +33,54 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+            var action=admin.getTempData('ops-host-form-data-form-action')
+
+            if(action=="create"){
+                //渲染 environment 下拉字段
+                fox.renderSelectBox({
+                    el: "environment",
+                    radio: true,
+                    filterable: false,
+                    //转换数据
+                    transform: function(data) {
+                        //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                        var opts=[];
+                        for (var i = 0; i < data.length; i++) {
+                            if(!data[i]) continue;
+                            if(i==0){
+                                opts.push({name:data[i].text,value:data[i].code,selected: true});
+                            }else{
+                                opts.push({name:data[i].text,value:data[i].code});
+                            }
+                        }
+                        return opts;
+                    }
+                });
+                $('input[name=status]:first').prop("checked","true")
+                $('input[name=monitorStatus]:first').prop("checked","true")
+
+                fox.renderSelectBox({
+                    el: "hostType",
+                    radio: true,
+                    filterable: true,
+                    //转换数据
+                    transform: function(data) {
+                        //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                        var opts=[];
+                        for (var i = 0; i < data.length; i++) {
+                            if(!data[i]) continue;
+                            if(i==0){
+                                opts.push({name:data[i].text,value:data[i].code  ,selected: true});
+                            }else{
+                                opts.push({name:data[i].text,value:data[i].code});
+                            }
+                        }
+                        return opts;
+                    }
+                });
+            }
+
+
             console.log('afterDataFill',data);
         }
     }
