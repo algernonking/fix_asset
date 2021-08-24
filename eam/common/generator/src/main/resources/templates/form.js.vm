@@ -349,6 +349,14 @@ function FormPage() {
 	        return false;
 	    });
 
+		#for(f : fields)
+		#if(f.typeName.equals("button"))
+		$("##(f.varName)-button").click(function(){
+			window.pageExt.form.#(f.buttonField.action.functionName) && window.pageExt.form.#(f.buttonField.action.functionName)(getFormData(),$("##(f.varName)"),$(this));
+		});
+		#end
+		#end
+
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 

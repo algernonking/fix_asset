@@ -177,7 +177,14 @@
                             <input input-type="date" lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end"  #end  />
                         </div>
                     </div>
-
+                #else if(f.typeName.equals("button"))
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                        <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
+                        <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
+                            <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)"  type="hidden" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />
+                            <button id="#(f.varName)-button" type="button" class="layui-btn #if(f.buttonField.action.css!=null) #(f.buttonField.action.css) #end" >#if(f.buttonField.action.iconHtml!=null) #(f.buttonField.action.iconHtml) #end<span th:text="${lang.translate('#(f.buttonField.text)')}">按钮文本</span></button>
+                        </div>
+                    </div>
                 #else
 
                 <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>

@@ -51,6 +51,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('#(b.functionName)',data);
         },
         #end
+        #for(f : fields)
+        #if(f.typeName.equals("button"))
+        #(f.buttonField.action.functionName):function (data,input,button) {
+            console.log("#(f.buttonField.action.functionName)",data,input,button);
+            top.layer.prompt(function(value, index, elem){
+                //设置隐藏域
+                input.val(value);
+                //设置按钮
+                button.text(value);
+                top.layer.close(index);
+            });
+        },
+        #end
+        #end
         other:function(){
 
         }
