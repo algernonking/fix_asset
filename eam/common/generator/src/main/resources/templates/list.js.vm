@@ -618,6 +618,11 @@ function ListPage() {
 		admin.putTempData('#(formDataKey)-popup-index', index);
 	};
 
+	window.module={
+		refreshTableData: refreshTableData,
+		getCheckedList: getCheckedList
+	};
+
 };
 
 

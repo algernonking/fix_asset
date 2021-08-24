@@ -203,6 +203,12 @@
     #end
     #end
     var AUTH_PREFIX="#(authPrefix)";
+
+    #for(v:jsVariables)
+    // #(v.note)
+    var #(v.name) = #(v.value) ;
+    #end
+
 </script>
 
 <script th:src="'#(extURI)?'+${cacheKey}"></script>
