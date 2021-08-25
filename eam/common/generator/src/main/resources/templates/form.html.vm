@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
@@ -110,7 +111,7 @@
                 <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
-                        <input input-type="switch" type="checkbox" checked="" id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)" value="#(f.logicField.valueOn)">
+                        <input input-type="switch" type="checkbox" checked="" id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;" value="#(f.logicField.valueOn)">
                     </div>
                 </div>
 
@@ -225,6 +226,7 @@
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
