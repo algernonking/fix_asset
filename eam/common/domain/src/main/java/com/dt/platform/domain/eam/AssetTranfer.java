@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:15:57
- * @sign 0E988BCC5F157F0EBA454726213F5D3E
+ * @since 2021-08-25 10:32:32
+ * @sign 083AA91A35E8AAF572D2D99C4A12B7B9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -180,6 +181,12 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="位置" , notes = "位置")
 	private Position position;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Person originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -675,6 +682,25 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setPosition(Position position) {
 		this.position=position;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Person getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public AssetTranfer setOriginator(Person originator) {
+		this.originator=originator;
 		return this;
 	}
 

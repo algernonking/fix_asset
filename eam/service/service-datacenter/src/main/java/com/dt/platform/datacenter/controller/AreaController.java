@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 15:45:31
+ * @since 2021-08-24 13:50:05
 */
 
 @Api(tags = "区域")
@@ -76,6 +76,8 @@ public class AreaController extends SuperController {
 	@SentinelResource(value = AreaServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AreaServiceProxy.INSERT)
 	public Result insert(AreaVO areaVO) {
+		this.getSessionUser().getUser().getPerson().getName();
+		this.getSessionUser().getUser().getName();
 		Result result=areaService.insert(areaVO);
 		return result;
 	}

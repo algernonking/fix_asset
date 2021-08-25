@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码规则 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 17:51:08
+ * @since 2021-08-24 13:50:04
 */
 
 @Api(tags = "编码规则")
@@ -68,7 +68,7 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -123,7 +123,7 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -144,7 +144,7 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -206,7 +206,7 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -228,7 +228,7 @@ public class CodeRuleController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = CodeRuleVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NAME , value = "编码名称" , required = false , dataTypeClass=String.class , example = "EAM资产编号"),
-		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRuleVOMeta.MODULE_ID , value = "业务模块" , required = false , dataTypeClass=String.class , example = "eam"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

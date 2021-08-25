@@ -2,7 +2,7 @@
 /**
  * 服务分组 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 21:11:01
+ * @since 2021-08-24 13:51:07
  */
  -->
  <!DOCTYPE html>
@@ -18,15 +18,17 @@
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
 </head>
 
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
  
-    <div class="layui-card-body">
+    <div class="layui-card-body" style="">
 
-        <div class="search-bar">
+        <div class="search-bar" style="">
 
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
@@ -48,7 +50,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px">
+        <div style="margin-top: 42px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -76,12 +78,16 @@
 
 
     <a th:if="${perm.checkAuth('ops_service_group:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+
+
 </script>
 
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var AUTH_PREFIX="ops_service_group";
+
+
 </script>
 
 <script th:src="'/business/ops/service_group/service_group_ext.js?'+${cacheKey}"></script>

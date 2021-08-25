@@ -14,6 +14,7 @@ import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
@@ -29,6 +30,9 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人员","使用人员");
+
 
 
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionVOMeta.ASSET_IDS);
@@ -79,7 +83,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
@@ -106,6 +110,10 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT,
                 }
         );
+
+        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
+        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+
 
         //文件生成覆盖模式
         cfg.overrides()

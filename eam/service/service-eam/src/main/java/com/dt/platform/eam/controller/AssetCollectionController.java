@@ -35,6 +35,7 @@ import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
+import org.github.foxnic.web.domain.hrm.Person;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产领用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:05
+ * @since 2021-08-25 10:43:56
 */
 
 @Api(tags = "资产领用")

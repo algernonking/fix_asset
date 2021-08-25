@@ -13,6 +13,7 @@ import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
@@ -26,7 +27,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
-
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE).search().fuzzySearch();
@@ -65,7 +66,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
 
@@ -82,6 +83,10 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_ALLOCATION.CONTENT,
                 }
         );
+
+
+        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
+        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
 
 
 

@@ -6,6 +6,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.*;
 
+import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
 
@@ -25,13 +26,14 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
         //cfg.getPoClassFile().addSimpleProperty(AssetExtAttribution.class,"assetExtAttribution","归属信息","归属信息");
 
+        cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
 
-
+       // cfg.getPoClassFile().addSimpleProperty(Person.class,"position","存放位置","软件信息");
      //   cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");
 
 
@@ -114,6 +116,12 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillBy(AssetMeta.WAREHOUSE).muliti(false);
 
+        cfg.view().field(EAMTables.EAM_ASSET.POSITION_ID)
+                .basic().label("位置")
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillBy(AssetMeta.POSITION).muliti(false);
+
+
 //
 //        cfg.view().field(EAMTables.EAM_ASSET.BRAND_ID)
 //                .basic().label("品牌")
@@ -127,7 +135,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).form().validate().required();
-      //  cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).form().validate().required();
+
         cfg.view().field(EAMTables.EAM_ASSET.NOTES).form().textArea().height(30);
 
 
@@ -180,12 +188,23 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         );
 
 
+
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET.NOTES,
                         EAMTables.EAM_ASSET.ATTACH
                 }
         );
+
+
+        cfg.view().form().addTab(
+                new Tab("基本信息","loadBaseInfoIframe"),
+                new Tab("维保信息","loadMaintainerIframe"),
+                new Tab("财务信息","loadFinancialIframe")
+        );
+
+
+
 //        cfg.addJsFuncs(new JSFunctions(this.getClass(),"asset_functions.js"));
 //       // cfg.view().list().operationColumn().addActionButton("labtel","listFunction");
 //

@@ -32,53 +32,67 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.ID).basic().hidden();
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME).basic().form().label("开始时间");
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME).basic().form().label("结束时间");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME).search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME).search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.DIRECTOR).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_DESCRIPTION).search().fuzzySearch();
+
+
         cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID)
                 .basic().label("维保商")
-                .form().selectBox().queryApi(MaintainerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+               // .form().validate().required()
+                .form().selectBox().queryApi(MaintainerServiceProxy.QUERY_LIST)
+                .paging(false).filter(true).toolbar(false)
                 .valueField(MaintainerMeta.ID).
                 textField(MaintainerMeta.MAINTAINER_NAME).
                 fillBy(AssetExtMaintainerMeta.MAINTNAINER).muliti(false);
 
-
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_DESCRIPTION).form().textArea().height(30);
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.DIRECTOR,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_DESCRIPTION,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME}
-
-        );
-
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME).basic().form().label("开始时间");
-
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME).basic().form().label("结束时间");
-
-        //分成分组布局
-        cfg.view().formWindow().width("1000px");
-        cfg.view().form().addGroup("维保属性",
-                new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_NAME,
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
-
-                }, new Object[] {
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
                         EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
                 }
-                , new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.DIRECTOR_ID,
 
+        );
+
+
+        //分成分组布局
+        cfg.view().formWindow().width("85%");
+        cfg.view().form().addGroup("维保属性",
+                new Object[] {
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.DIRECTOR,
+                }, new Object[] {
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACTS,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION,
+
+                }
+                , new Object[] {
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_START_TIME,
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_END_TIME
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_MAINTAINER.CONTACT_INFORMATION
+                        EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTENANCE_DESCRIPTION
                 }
 
         );
+
 
 
         //文件生成覆盖模式

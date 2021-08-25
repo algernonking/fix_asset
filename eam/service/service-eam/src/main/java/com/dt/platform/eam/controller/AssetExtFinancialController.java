@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产财务数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:18
+ * @since 2021-08-25 10:32:50
 */
 
 @Api(tags = "资产财务数据")
@@ -70,7 +70,7 @@ public class AssetExtFinancialController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
@@ -141,7 +141,7 @@ public class AssetExtFinancialController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
@@ -178,7 +178,7 @@ public class AssetExtFinancialController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
@@ -256,7 +256,7 @@ public class AssetExtFinancialController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
@@ -288,7 +288,7 @@ public class AssetExtFinancialController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),

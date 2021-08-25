@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:07
- * @sign ABAFD11BCC70DD97D4AEB3D3D3878341
+ * @since 2021-08-25 10:32:40
+ * @sign 6296981A4B8E960B333321A9ACC89AEE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -168,6 +169,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
 	private List<String> assetIds;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Person originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -625,6 +632,25 @@ public class AssetCollectionReturn extends Entity {
 	public AssetCollectionReturn addAssetId(String assetId) {
 		if(this.assetIds==null) assetIds=new ArrayList<>();
 		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Person getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setOriginator(Person originator) {
+		this.originator=originator;
 		return this;
 	}
 

@@ -37,6 +37,7 @@ import java.math.BigDecimal;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import com.dt.platform.domain.eam.AssetExtSoftware;
+import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -56,7 +57,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 12:42:01
+ * @since 2021-08-24 17:39:21
 */
 
 @Api(tags = "资产")
@@ -104,6 +105,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_TYPE , value = "审批类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetVOMeta.ID)
@@ -190,6 +194,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_TYPE , value = "审批类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } ) 
 	@NotNull(name = AssetVOMeta.ID)
@@ -242,6 +249,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_TYPE , value = "审批类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
 	@NotNull(name = AssetVOMeta.ID)
@@ -270,6 +280,9 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.GET_BY_ID)
 	public Result<Asset> getById(String id) {
+
+		System.out.println("@@@@@@@@@"+this.getSessionUser().getUser().getPerson().getName());
+
 		Result<Asset> result=new Result<>();
 		Asset asset=assetService.getById(id);
 		// 关联出 分类 数据
@@ -278,6 +291,8 @@ public class AssetController extends SuperController {
 		assetService.join(asset,AssetMeta.GOODS);
 		// 关联出 厂商 数据
 		assetService.join(asset,AssetMeta.MANUFACTURER);
+		// 关联出 位置 数据
+		assetService.join(asset,AssetMeta.POSITION);
 		// 关联出 仓库 数据
 		assetService.join(asset,AssetMeta.WAREHOUSE);
 		result.success(true).data(asset);
@@ -341,6 +356,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_TYPE , value = "审批类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -389,6 +407,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_TYPE , value = "审批类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVE_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -402,6 +423,8 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.GOODS);
 		// 关联出 厂商 数据
 		assetService.join(list,AssetMeta.MANUFACTURER);
+		// 关联出 位置 数据
+		assetService.join(list,AssetMeta.POSITION);
 		// 关联出 仓库 数据
 		assetService.join(list,AssetMeta.WAREHOUSE);
 		result.success(true).data(list);

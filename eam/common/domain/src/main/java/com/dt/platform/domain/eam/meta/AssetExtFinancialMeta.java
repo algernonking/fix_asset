@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:18
- * @sign 3A351866AD84C6C5C7F2246047056CD7
+ * @since 2021-08-25 10:32:50
+ * @sign EBD6B6A22946E1A11E2459049B2D25A1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -41,12 +41,12 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 财务分类 , 类型: java.lang.String
 	*/
-	public static final String CATEGORY_ID="categoryId";
+	public static final String FINANCIAL_CATEGORY_ID="financialCategoryId";
 	
 	/**
 	 * 财务分类 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,CATEGORY_ID, java.lang.String.class, "财务分类", "财务分类", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> FINANCIAL_CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,FINANCIAL_CATEGORY_ID, java.lang.String.class, "财务分类", "财务分类", java.lang.String.class, null);
 	
 	/**
 	 * 财务编号 , 类型: java.lang.String
@@ -271,7 +271,7 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , OWN_COMPANY_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , FINANCIAL_CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , OWN_COMPANY_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
 	
 	/**
 	 * 代理类
@@ -305,12 +305,12 @@ public class AssetExtFinancialMeta {
 		
 		/**
 		 * 设置 财务分类
-		 * @param categoryId 财务分类
+		 * @param financialCategoryId 财务分类
 		 * @return 当前对象
 		*/
-		public AssetExtFinancial setCategoryId(String categoryId) {
-			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
-			super.setCategoryId(categoryId);
+		public AssetExtFinancial setFinancialCategoryId(String financialCategoryId) {
+			super.change(FINANCIAL_CATEGORY_ID,super.getFinancialCategoryId(),financialCategoryId);
+			super.setFinancialCategoryId(financialCategoryId);
 			return this;
 		}
 		

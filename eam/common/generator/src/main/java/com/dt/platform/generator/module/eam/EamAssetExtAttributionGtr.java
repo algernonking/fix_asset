@@ -59,7 +59,7 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup("归属属性",
                 new Object[] {
 
@@ -94,7 +94,8 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+        ; //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

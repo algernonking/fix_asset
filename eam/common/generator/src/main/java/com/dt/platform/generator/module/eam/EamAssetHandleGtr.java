@@ -10,6 +10,7 @@ import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetHandleGtr extends BaseCodeGenerator{
     public EamAssetHandleGtr() {
@@ -23,6 +24,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetHandleVOMeta.ASSET_IDS);
 
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.NAME).search().fuzzySearch();
@@ -50,7 +52,7 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
             );
 
 
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_HANDLE.TYPE,
@@ -77,6 +79,8 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
 
 
 
+        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
+        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
 
 //
         //文件生成覆盖模式

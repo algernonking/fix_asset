@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:18
+ * @since 2021-08-25 10:32:50
  */
 
 function FormPage() {
@@ -52,6 +52,7 @@ function FormPage() {
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			if(area==null) return;
 			admin.putTempData('eam-asset-ext-financial-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
@@ -150,6 +151,47 @@ function FormPage() {
 			$("#cancel-button").css("margin-right","0px")
 		}
 
+		//调用 iframe 加载过程
+		var formIfrs=$(".form-iframe");
+		for (var i = 0; i < formIfrs.length; i++) {
+			var jsFn=$(formIfrs[i]).attr("js-fn");
+			if(window.pageExt.form){
+				jsFn=window.pageExt.form[jsFn];
+				jsFn && jsFn($(formIfrs[i]),$(formIfrs[i])[0].contentWindow,formData);
+			}
+		}
+
+	}
+
+	function getFormData() {
+		var data=form.val("data-form");
+
+
+
+		//获取 供应商 下拉框的值
+		data["supplierId"]=fox.getSelectedValue("supplierId",false);
+
+		return data;
+	}
+
+	function verifyForm(data) {
+		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
+	}
+
+	function saveForm(data) {
+		var api=moduleURL+"/"+(data.id?"update":"insert");
+		var task=setTimeout(function(){layer.load(2);},1000);
+		admin.request(api, data, function (data) {
+			clearTimeout(task);
+			layer.closeAll('loading');
+			if (data.success) {
+				layer.msg(data.message, {icon: 1, time: 500});
+				var index=admin.getTempData('eam-asset-ext-financial-form-data-popup-index');
+				admin.finishPopupCenter(index);
+			} else {
+				layer.msg(data.message, {icon: 2, time: 1000});
+			}
+		}, "POST");
 	}
 
 	/**
@@ -159,37 +201,31 @@ function FormPage() {
 
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
-			data.field = form.val("data-form");
-
-
-
-			//获取 供应商 下拉框的值
-			data.field["supplierId"]=fox.getSelectedValue("supplierId",false);
+			data.field = getFormData();
 
 			//校验表单
-			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
+			if(!verifyForm(data.field)) return;
 
-	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
-	        var task=setTimeout(function(){layer.load(2);},1000);
-	        admin.request(api, data.field, function (data) {
-	            clearTimeout(task);
-			    layer.closeAll('loading');
-	            if (data.success) {
-	                layer.msg(data.message, {icon: 1, time: 500});
-					var index=admin.getTempData('eam-asset-ext-financial-form-data-popup-index');
-	                admin.finishPopupCenter(index);
-	            } else {
-	                layer.msg(data.message, {icon: 2, time: 1000});
-	            }
-	        }, "POST");
-
+			if(window.pageExt.form.beforeSubmit) {
+				var doNext=window.pageExt.form.beforeSubmit(data.field);
+				if(!doNext) return ;
+			}
+			saveForm(data.field);
 	        return false;
 	    });
+
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
+
+    window.module={
+		getFormData: getFormData,
+		verifyForm: verifyForm,
+		saveForm: saveForm
+	};
+
 }
 
 layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {

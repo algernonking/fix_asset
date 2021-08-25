@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 变更明细 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:15:54
+ * @since 2021-08-25 10:32:28
 */
 
 public interface IAssetDataChangeService extends ISuperService<AssetDataChange> {

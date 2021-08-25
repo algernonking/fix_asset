@@ -10,3 +10,9 @@ WHERE
 
 
      select * from   information_schema.tables t  where  TABLE_SCHEMA = 'eam'
+
+
+	   List<Host> hosts= CollectorUtil.collectList(list,DbInstance::getHost);
+
+		dbInstanceService.dao().join(hosts, HostMeta.INFO_SYSTEM);
+		result.success(true).data(list);

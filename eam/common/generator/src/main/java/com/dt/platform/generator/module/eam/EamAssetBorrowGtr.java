@@ -13,7 +13,9 @@ import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
@@ -32,8 +34,13 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"borrower","借用人","借用人");
 
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
+
+
+
 
        // cfg.view().list().disableSpaceColumn();
         cfg.view().formWindow().bottomSpace(250);
@@ -67,7 +74,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 }
         );
         //分成分组布局
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
@@ -87,7 +94,8 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         );
 
 
-
+        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
+        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -95,7 +103,10 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
+
+        //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {
