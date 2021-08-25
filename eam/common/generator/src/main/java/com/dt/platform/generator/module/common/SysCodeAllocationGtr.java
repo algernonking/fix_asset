@@ -70,7 +70,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         );
 
         cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[]{
                         EAMTables.SYS_CODE_ALLOCATION.CODE,

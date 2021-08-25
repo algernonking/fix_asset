@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-08-20 15:03:08
+ * @since 2021-08-23 09:56:24
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -15,6 +15,21 @@ public enum EamSource {
 	 * 采购
 	*/
 	PURCHASE("purchase" , "采购"),
+	
+	/**
+	 * 其他
+	*/
+	OTHER("other" , "其他"),
+	
+	/**
+	 * 捐赠
+	*/
+	DONATION("donation" , "捐赠"),
+	
+	/**
+	 * 自建
+	*/
+	SELFBUILD("selfbuild" , "自建"),
 	;
 	
 	private String code;

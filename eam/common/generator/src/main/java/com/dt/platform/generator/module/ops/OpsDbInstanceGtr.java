@@ -3,6 +3,8 @@ package com.dt.platform.generator.module.ops;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 
+import com.dt.platform.domain.common.meta.CodeAllocationMeta;
+import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.HostPosition;
 
@@ -25,6 +27,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
+
         cfg.getPoClassFile().addSimpleProperty(Host.class,"host","所在位置","所在位置");
         cfg.getPoClassFile().addSimpleProperty(ServiceInfo.class,"database","数据库","数据库");
 
@@ -77,7 +80,14 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
                 .form().label("备份时间").dateInput();
+
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.NOTES).form().textArea().height(30);
+
+
+        String resourceNameField="res_"+EAMTables.OPS_HOST.HOST_IP;
+        cfg.view().field(resourceNameField)
+                .basic().label("IP")
+                .table().fillBy(DbInstanceMeta.HOST, HostMeta.HOST_IP);
 
 
         cfg.view().search().inputLayout(
@@ -97,7 +107,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("90%");
         cfg.view().form().addGroup(null ,
                 new Object[] {
                         EAMTables.OPS_DB_INSTANCE.NAME,

@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:18
- * @sign 3A351866AD84C6C5C7F2246047056CD7
+ * @since 2021-08-25 10:32:50
+ * @sign EBD6B6A22946E1A11E2459049B2D25A1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,7 +46,7 @@ public class AssetExtFinancial extends Entity {
 	 * 财务分类：财务分类
 	*/
 	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
-	private String categoryId;
+	private String financialCategoryId;
 	
 	/**
 	 * 财务编号：财务编号
@@ -223,17 +223,17 @@ public class AssetExtFinancial extends Entity {
 	 * 财务分类
 	 * @return 财务分类
 	*/
-	public String getCategoryId() {
-		return categoryId;
+	public String getFinancialCategoryId() {
+		return financialCategoryId;
 	}
 	
 	/**
 	 * 设置 财务分类
-	 * @param categoryId 财务分类
+	 * @param financialCategoryId 财务分类
 	 * @return 当前对象
 	*/
-	public AssetExtFinancial setCategoryId(String categoryId) {
-		this.categoryId=categoryId;
+	public AssetExtFinancial setFinancialCategoryId(String financialCategoryId) {
+		this.financialCategoryId=financialCategoryId;
 		return this;
 	}
 	

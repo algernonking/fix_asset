@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 12:42:05
+ * @since 2021-08-24 17:39:31
  */
 
 function FormPage() {
@@ -50,6 +50,7 @@ function FormPage() {
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			if(area==null) return;
 			admin.putTempData('eam-asset-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
@@ -167,6 +168,25 @@ function FormPage() {
 				adjustPopup();
 			}
 	    });
+		//渲染 positionId 下拉字段
+		fox.renderSelectBox({
+			el: "positionId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		//渲染 warehouseId 下拉字段
 		fox.renderSelectBox({
 			el: "warehouseId",
@@ -270,6 +290,8 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#manufacturerId",formData.manufacturer);
+			//设置  位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
 			//设置  仓库 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 			//设置  来源 设置下拉框勾选
@@ -304,6 +326,57 @@ function FormPage() {
 			$("#cancel-button").css("margin-right","0px")
 		}
 
+		//调用 iframe 加载过程
+		var formIfrs=$(".form-iframe");
+		for (var i = 0; i < formIfrs.length; i++) {
+			var jsFn=$(formIfrs[i]).attr("js-fn");
+			if(window.pageExt.form){
+				jsFn=window.pageExt.form[jsFn];
+				jsFn && jsFn($(formIfrs[i]),$(formIfrs[i])[0].contentWindow,formData);
+			}
+		}
+
+	}
+
+	function getFormData() {
+		var data=form.val("data-form");
+
+
+
+		//获取 分类 下拉框的值
+		data["categoryId"]=fox.getSelectedValue("categoryId",false);
+		//获取 物品档案 下拉框的值
+		data["goodsId"]=fox.getSelectedValue("goodsId",false);
+		//获取 厂商 下拉框的值
+		data["manufacturerId"]=fox.getSelectedValue("manufacturerId",false);
+		//获取 位置 下拉框的值
+		data["positionId"]=fox.getSelectedValue("positionId",false);
+		//获取 仓库 下拉框的值
+		data["warehouseId"]=fox.getSelectedValue("warehouseId",false);
+		//获取 来源 下拉框的值
+		data["sourceId"]=fox.getSelectedValue("sourceId",false);
+
+		return data;
+	}
+
+	function verifyForm(data) {
+		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
+	}
+
+	function saveForm(data) {
+		var api=moduleURL+"/"+(data.id?"update":"insert");
+		var task=setTimeout(function(){layer.load(2);},1000);
+		admin.request(api, data, function (data) {
+			clearTimeout(task);
+			layer.closeAll('loading');
+			if (data.success) {
+				layer.msg(data.message, {icon: 1, time: 500});
+				var index=admin.getTempData('eam-asset-form-data-popup-index');
+				admin.finishPopupCenter(index);
+			} else {
+				layer.msg(data.message, {icon: 2, time: 1000});
+			}
+		}, "POST");
 	}
 
 	/**
@@ -313,38 +386,16 @@ function FormPage() {
 
 	    form.on('submit(submit-button)', function (data) {
 	    	//debugger;
-			data.field = form.val("data-form");
-
-
-
-			//获取 分类 下拉框的值
-			data.field["categoryId"]=fox.getSelectedValue("categoryId",false);
-			//获取 物品档案 下拉框的值
-			data.field["goodsId"]=fox.getSelectedValue("goodsId",false);
-			//获取 厂商 下拉框的值
-			data.field["manufacturerId"]=fox.getSelectedValue("manufacturerId",false);
-			//获取 仓库 下拉框的值
-			data.field["warehouseId"]=fox.getSelectedValue("warehouseId",false);
-			//获取 来源 下拉框的值
-			data.field["sourceId"]=fox.getSelectedValue("sourceId",false);
+			data.field = getFormData();
 
 			//校验表单
-			if(!fox.formVerify("data-form",data,VALIDATE_CONFIG)) return;
+			if(!verifyForm(data.field)) return;
 
-	    	var api=moduleURL+"/"+(data.field.id?"update":"insert");
-	        var task=setTimeout(function(){layer.load(2);},1000);
-	        admin.request(api, data.field, function (data) {
-	            clearTimeout(task);
-			    layer.closeAll('loading');
-	            if (data.success) {
-	                layer.msg(data.message, {icon: 1, time: 500});
-					var index=admin.getTempData('eam-asset-form-data-popup-index');
-	                admin.finishPopupCenter(index);
-	            } else {
-	                layer.msg(data.message, {icon: 2, time: 1000});
-	            }
-	        }, "POST");
-
+			if(window.pageExt.form.beforeSubmit) {
+				var doNext=window.pageExt.form.beforeSubmit(data.field);
+				if(!doNext) return ;
+			}
+			saveForm(data.field);
 	        return false;
 	    });
 
@@ -352,6 +403,13 @@ function FormPage() {
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
 
     }
+
+    window.module={
+		getFormData: getFormData,
+		verifyForm: verifyForm,
+		saveForm: saveForm
+	};
+
 }
 
 layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload','laydate'],function() {

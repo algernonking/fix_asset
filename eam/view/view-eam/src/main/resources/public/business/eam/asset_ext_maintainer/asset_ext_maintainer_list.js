@@ -1,7 +1,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:19
+ * @since 2021-08-25 10:32:52
  */
 
 
@@ -17,7 +17,7 @@ function ListPage() {
 	this.init=function(layui) {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 		
      	//渲染表格
      	renderTable();
@@ -54,7 +54,7 @@ function ListPage() {
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
-				defaultToolbar: ['filter', 'print'],
+				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
@@ -68,7 +68,7 @@ function ListPage() {
 					,{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保厂商') }
 					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') }
 					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') }
-					,{ field: 'directorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') }
+					,{ field: 'director', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') }
 					,{ field: 'maintenanceStartTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保开始时间'), templet: function (d) { return fox.dateFormat(d.maintenanceStartTime); }}
 					,{ field: 'maintenanceEndTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('维保到期时间'), templet: function (d) { return fox.dateFormat(d.maintenanceEndTime); }}
 					,{ field: 'maintenanceDescription', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
@@ -103,11 +103,13 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.assetId={ value: $("#assetId").val()};
 		value.maintainerId={ value: xmSelect.get("#maintainerId",true).getValue("value"), fillBy:"maintnainer",field:"id", label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
+		value.contacts={ value: $("#contacts").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.contactInformation={ value: $("#contactInformation").val()};
-		value.maintenanceStartTime={ value: $("#maintenanceStartTime").val()};
-		value.maintenanceEndTime={ value: $("#maintenanceEndTime").val()};
+		value.director={ value: $("#director").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.maintenanceStartTime={ begin: $("#maintenanceStartTime-begin").val(), end: $("#maintenanceStartTime-end").val() };
+		value.maintenanceEndTime={ begin: $("#maintenanceEndTime-begin").val(), end: $("#maintenanceEndTime-end").val() };
+		value.maintenanceDescription={ value: $("#maintenanceDescription").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -147,9 +149,10 @@ function ListPage() {
 			el: "maintainerId",
 			radio: false,
 			size: "small",
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			filterable: true,
 			//转换数据
+			searchField: "maintainerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
@@ -162,11 +165,19 @@ function ListPage() {
 			}
 		});
 		laydate.render({
-			elem: '#maintenanceStartTime',
+			elem: '#maintenanceStartTime-begin',
 			trigger:"click"
 		});
 		laydate.render({
-			elem: '#maintenanceEndTime',
+			elem: '#maintenanceStartTime-end',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#maintenanceEndTime-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#maintenanceEndTime-end',
 			trigger:"click"
 		});
 		fox.renderSearchInputs();
@@ -207,18 +218,18 @@ function ListPage() {
 		//头工具栏事件
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
+			var selected=getCheckedList("id");
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
 					break;
 				case 'batch-del':
-					batchDelete();
+					batchDelete(selected);
+					break;
+				case 'refresh-data':
+					refreshTableData();
 					break;
 				case 'other':
-					break;
-					//自定义头工具栏右侧图标 - 提示
-				case 'LAYTABLE_TIPS':
-					layer.alert('这是工具栏右侧自定义的一个图标按钮');
 					break;
 			};
 		});
@@ -233,7 +244,7 @@ function ListPage() {
         };
 		
         //批量删除按钮点击事件
-        function batchDelete() {
+        function batchDelete(selected) {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
@@ -243,6 +254,10 @@ function ListPage() {
             //调用批量删除接口
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产维保数据')+fox.translate('吗？'), function (i) {
 				layer.close(i);
+				if(window.pageExt.list.beforeBatchDelete) {
+					var doNext=window.pageExt.list.beforeBatchDelete(selected);
+					if(!doNext) return;
+				}
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     layer.closeAll('loading');
@@ -253,6 +268,7 @@ function ListPage() {
                         layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
+
 			});
         }
 	}
@@ -297,6 +313,12 @@ function ListPage() {
 			
 				layer.confirm(fox.translate('确定删除此')+fox.translate('资产维保数据')+fox.translate('吗？'), function (i) {
 					layer.close(i);
+
+					if(window.pageExt.list.beforeSingleDelete) {
+						var doNext=window.pageExt.list.beforeSingleDelete(data);
+						if(!doNext) return;
+					}
+
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
 						layer.closeAll('loading');
@@ -330,8 +352,9 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["1000px",height+"px"],
+			area: ["85%",height+"px"],
 			type: 2,
+			id:"eam-asset-ext-maintainer-form-data-win",
 			content: '/business/eam/asset_ext_maintainer/asset_ext_maintainer_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
@@ -340,10 +363,15 @@ function ListPage() {
 		admin.putTempData('eam-asset-ext-maintainer-form-data-popup-index', index);
 	};
 
+	window.module={
+		refreshTableData: refreshTableData,
+		getCheckedList: getCheckedList
+	};
+
 };
 
 
-layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','dropdown'],function() {
 	var task=setInterval(function (){
 		if(!window["pageExt"]) return;
 		clearInterval(task);

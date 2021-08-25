@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetScrap;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:15:40
- * @sign 91AF89E50B5D3B7E480A5D52C3D6F4F8
+ * @since 2021-08-25 10:32:12
+ * @sign 172F3C6F765E0E166890E70B26D17FC3
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -218,9 +219,19 @@ public class AssetScrapMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SCRAP_DATE , CONTENT , CLEAN_STATUS , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SCRAP_DATE , CONTENT , CLEAN_STATUS , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -447,6 +458,17 @@ public class AssetScrapMeta {
 		public AssetScrap setAssetIds(List<String> assetIds) {
 			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
 			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public AssetScrap setOriginator(Person originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
 			return this;
 		}
 	}

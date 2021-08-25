@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:19
- * @sign BD48AF6AEE3CF955CB3FA270A72CE006
+ * @since 2021-08-25 10:32:52
+ * @sign FF2EB72813C4D794E9ADF56369D790EE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -69,7 +69,7 @@ public class AssetExtMaintainer extends Entity {
 	 * 负责人：负责人
 	*/
 	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
-	private String directorId;
+	private String director;
 	
 	/**
 	 * 维保开始时间：维保开始时间
@@ -268,17 +268,17 @@ public class AssetExtMaintainer extends Entity {
 	 * 负责人
 	 * @return 负责人
 	*/
-	public String getDirectorId() {
-		return directorId;
+	public String getDirector() {
+		return director;
 	}
 	
 	/**
 	 * 设置 负责人
-	 * @param directorId 负责人
+	 * @param director 负责人
 	 * @return 当前对象
 	*/
-	public AssetExtMaintainer setDirectorId(String directorId) {
-		this.directorId=directorId;
+	public AssetExtMaintainer setDirector(String director) {
+		this.director=director;
 		return this;
 	}
 	

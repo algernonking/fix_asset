@@ -11,6 +11,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    var action=admin.getTempData('eam-asset-collection-form-data-form-action')
+
     //列表页的扩展
     var list={
         /**
@@ -32,9 +34,40 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 表单数据填充后
          * */
+
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+            //制单人处理
+            $("#originatorId").attr("disabled","disabled").css("background-color","#e6e6e6");
+            if(action=="create"){
+                $("#originatorId").attr("value",PERSON_NAME );
+                $("#originatorId").attr("userId",PERSON_ID);
+            }else{
+                if (data.originator.name){
+                    $("#originatorId").attr("value", data.originator.name);
+                }
+            }
+
+
+
+        },
+        /**
+         * 数据提交前，如果返回 false，停止后续步骤的执行
+         * */
+        beforeSubmit:function (data) {
+
+            console.log("beforeSubmit",data);
+            //制单人处理
+            if(action=="create"){
+                data.originatorId=PERSON_ID;
+            }
+
+
+
+            return true;
         }
+
+
     }
     //
     window.pageExt={form:form,list:list};

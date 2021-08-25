@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 12:42:02
+ * @since 2021-08-24 17:39:23
  */
  -->
  <!DOCTYPE html>
@@ -18,15 +18,17 @@
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
 </head>
 
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
  
-    <div class="layui-card-body">
+    <div class="layui-card-body" style="">
 
-        <div class="search-bar">
+        <div class="search-bar" style="">
 
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
@@ -88,7 +90,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 84px">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -116,6 +118,8 @@
 
 
     <a th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+
+
 </script>
 
 
@@ -124,6 +128,8 @@
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
     var AUTH_PREFIX="eam_asset";
+
+
 </script>
 
 <script th:src="'/business/eam/asset/asset_ext.js?'+${cacheKey}"></script>

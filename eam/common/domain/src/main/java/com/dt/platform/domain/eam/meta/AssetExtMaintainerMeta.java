@@ -10,8 +10,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:19
- * @sign BD48AF6AEE3CF955CB3FA270A72CE006
+ * @since 2021-08-25 10:32:52
+ * @sign FF2EB72813C4D794E9ADF56369D790EE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -80,12 +80,12 @@ public class AssetExtMaintainerMeta {
 	/**
 	 * 负责人 , 类型: java.lang.String
 	*/
-	public static final String DIRECTOR_ID="directorId";
+	public static final String DIRECTOR="director";
 	
 	/**
 	 * 负责人 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> DIRECTOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,DIRECTOR_ID, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtMaintainer,java.lang.String> DIRECTOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtMaintainer.class ,DIRECTOR, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
 	
 	/**
 	 * 维保开始时间 , 类型: java.util.Date
@@ -220,7 +220,7 @@ public class AssetExtMaintainerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR_ID , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , MAINTENANCE_DESCRIPTION , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_TIME , MAINTENANCE_END_TIME , MAINTENANCE_DESCRIPTION , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MAINTNAINER , ASSET };
 	
 	/**
 	 * 代理类
@@ -298,12 +298,12 @@ public class AssetExtMaintainerMeta {
 		
 		/**
 		 * 设置 负责人
-		 * @param directorId 负责人
+		 * @param director 负责人
 		 * @return 当前对象
 		*/
-		public AssetExtMaintainer setDirectorId(String directorId) {
-			super.change(DIRECTOR_ID,super.getDirectorId(),directorId);
-			super.setDirectorId(directorId);
+		public AssetExtMaintainer setDirector(String director) {
+			super.change(DIRECTOR,super.getDirector(),director);
+			super.setDirector(director);
 			return this;
 		}
 		

@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 12:42:00
- * @sign 65F9BE1DEF044B467DA903B2DF80F7A4
+ * @since 2021-08-24 17:39:21
+ * @sign F2B317D6F9B7D37C8E09D155ADBDA10D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -265,6 +265,24 @@ public class Asset extends Entity {
 	private Integer version;
 	
 	/**
+	 * 审批类型：审批类型
+	*/
+	@ApiModelProperty(required = false,value="审批类型" , notes = "审批类型")
+	private String approveType;
+	
+	/**
+	 * 审批状态：审批状态
+	*/
+	@ApiModelProperty(required = false,value="审批状态" , notes = "审批状态")
+	private String approveStatus;
+	
+	/**
+	 * 业务编码：业务编码
+	*/
+	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
+	private String businessCode;
+	
+	/**
 	 * 财务信息：财务信息
 	*/
 	@ApiModelProperty(required = false,value="财务信息" , notes = "财务信息")
@@ -287,6 +305,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="软件信息" , notes = "软件信息")
 	private AssetExtSoftware assetExtSoftware;
+	
+	/**
+	 * 存放位置：存放位置
+	*/
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
+	private Position position;
 	
 	/**
 	 * 资产分类：资产分类
@@ -1054,6 +1078,63 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 审批类型<br>
+	 * 审批类型
+	 * @return 审批类型
+	*/
+	public String getApproveType() {
+		return approveType;
+	}
+	
+	/**
+	 * 设置 审批类型
+	 * @param approveType 审批类型
+	 * @return 当前对象
+	*/
+	public Asset setApproveType(String approveType) {
+		this.approveType=approveType;
+		return this;
+	}
+	
+	/**
+	 * 获得 审批状态<br>
+	 * 审批状态
+	 * @return 审批状态
+	*/
+	public String getApproveStatus() {
+		return approveStatus;
+	}
+	
+	/**
+	 * 设置 审批状态
+	 * @param approveStatus 审批状态
+	 * @return 当前对象
+	*/
+	public Asset setApproveStatus(String approveStatus) {
+		this.approveStatus=approveStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编码<br>
+	 * 业务编码
+	 * @return 业务编码
+	*/
+	public String getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编码
+	 * @param businessCode 业务编码
+	 * @return 当前对象
+	*/
+	public Asset setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 财务信息<br>
 	 * 财务信息
 	 * @return 财务信息
@@ -1126,6 +1207,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setAssetExtSoftware(AssetExtSoftware assetExtSoftware) {
 		this.assetExtSoftware=assetExtSoftware;
+		return this;
+	}
+	
+	/**
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
+	*/
+	public Position getPosition() {
+		return position;
+	}
+	
+	/**
+	 * 设置 存放位置
+	 * @param position 存放位置
+	 * @return 当前对象
+	*/
+	public Asset setPosition(Position position) {
+		this.position=position;
 		return this;
 	}
 	

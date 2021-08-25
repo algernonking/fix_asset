@@ -7,6 +7,7 @@ import java.util.Date;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import com.dt.platform.domain.eam.AssetExtSoftware;
+import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -16,8 +17,8 @@ import com.dt.platform.domain.eam.Warehouse;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 12:42:00
- * @sign 65F9BE1DEF044B467DA903B2DF80F7A4
+ * @since 2021-08-24 17:39:21
+ * @sign F2B317D6F9B7D37C8E09D155ADBDA10D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -414,6 +415,36 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 审批类型 , 类型: java.lang.String
+	*/
+	public static final String APPROVE_TYPE="approveType";
+	
+	/**
+	 * 审批类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> APPROVE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,APPROVE_TYPE, java.lang.String.class, "审批类型", "审批类型", java.lang.String.class, null);
+	
+	/**
+	 * 审批状态 , 类型: java.lang.String
+	*/
+	public static final String APPROVE_STATUS="approveStatus";
+	
+	/**
+	 * 审批状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> APPROVE_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,APPROVE_STATUS, java.lang.String.class, "审批状态", "审批状态", java.lang.String.class, null);
+	
+	/**
+	 * 业务编码 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_CODE="businessCode";
+	
+	/**
+	 * 业务编码 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,BUSINESS_CODE, java.lang.String.class, "业务编码", "业务编码", java.lang.String.class, null);
+	
+	/**
 	 * 财务信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
 	*/
 	public static final String ASSET_FINANCIAL="assetFinancial";
@@ -452,6 +483,16 @@ public class AssetMeta {
 	 * 软件信息 , 类型: com.dt.platform.domain.eam.AssetExtSoftware
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtSoftware> ASSET_EXT_SOFTWARE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_EXT_SOFTWARE, com.dt.platform.domain.eam.AssetExtSoftware.class, "软件信息", "软件信息", com.dt.platform.domain.eam.AssetExtSoftware.class, null);
+	
+	/**
+	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final String POSITION="position";
+	
+	/**
+	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
 	
 	/**
 	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
@@ -496,7 +537,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE };
 	
 	/**
 	 * 代理类
@@ -936,6 +977,39 @@ public class AssetMeta {
 		}
 		
 		/**
+		 * 设置 审批类型
+		 * @param approveType 审批类型
+		 * @return 当前对象
+		*/
+		public Asset setApproveType(String approveType) {
+			super.change(APPROVE_TYPE,super.getApproveType(),approveType);
+			super.setApproveType(approveType);
+			return this;
+		}
+		
+		/**
+		 * 设置 审批状态
+		 * @param approveStatus 审批状态
+		 * @return 当前对象
+		*/
+		public Asset setApproveStatus(String approveStatus) {
+			super.change(APPROVE_STATUS,super.getApproveStatus(),approveStatus);
+			super.setApproveStatus(approveStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务编码
+		 * @param businessCode 业务编码
+		 * @return 当前对象
+		*/
+		public Asset setBusinessCode(String businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
+			return this;
+		}
+		
+		/**
 		 * 设置 财务信息
 		 * @param assetFinancial 财务信息
 		 * @return 当前对象
@@ -976,6 +1050,17 @@ public class AssetMeta {
 		public Asset setAssetExtSoftware(AssetExtSoftware assetExtSoftware) {
 			super.change(ASSET_EXT_SOFTWARE,super.getAssetExtSoftware(),assetExtSoftware);
 			super.setAssetExtSoftware(assetExtSoftware);
+			return this;
+		}
+		
+		/**
+		 * 设置 存放位置
+		 * @param position 存放位置
+		 * @return 当前对象
+		*/
+		public Asset setPosition(Position position) {
+			super.change(POSITION,super.getPosition(),position);
+			super.setPosition(position);
 			return this;
 		}
 		

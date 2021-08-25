@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-08-20 15:03:08
+ * @since 2021-08-23 09:56:24
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -12,14 +12,14 @@ package com.dt.platform.constants.enums.dict;
 public enum OpsHostType {
 	
 	/**
-	 * 业务系统
-	*/
-	BUSINESS("business" , "业务系统"),
-	
-	/**
 	 * 办公系统
 	*/
 	OFFICE("office" , "办公系统"),
+	
+	/**
+	 * 业务系统
+	*/
+	BUSINESS("business" , "业务系统"),
 	;
 	
 	private String code;

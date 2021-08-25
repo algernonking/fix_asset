@@ -6,13 +6,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:10
- * @sign F32988CDF1005B639C103075D8F8A375
+ * @since 2021-08-25 10:32:44
+ * @sign E45471E1867B6F017BFC263FFF6073E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -259,9 +260,19 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -532,6 +543,17 @@ public class AssetHandleMeta {
 		public AssetHandle setAssetIds(List<String> assetIds) {
 			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
 			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public AssetHandle setOriginator(Person originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
 			return this;
 		}
 	}

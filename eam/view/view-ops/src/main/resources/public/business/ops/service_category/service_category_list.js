@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 21:10:59
+ * @since 2021-08-24 13:51:05
  */
 
 
@@ -17,7 +17,7 @@ function ListPage() {
 	this.init=function(layui) {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 		
      	//渲染表格
      	renderTable();
@@ -54,7 +54,7 @@ function ListPage() {
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
-				defaultToolbar: ['filter', 'print'],
+				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
@@ -171,18 +171,18 @@ function ListPage() {
 		//头工具栏事件
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
+			var selected=getCheckedList("id");
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
 					break;
 				case 'batch-del':
-					batchDelete();
+					batchDelete(selected);
+					break;
+				case 'refresh-data':
+					refreshTableData();
 					break;
 				case 'other':
-					break;
-					//自定义头工具栏右侧图标 - 提示
-				case 'LAYTABLE_TIPS':
-					layer.alert('这是工具栏右侧自定义的一个图标按钮');
 					break;
 			};
 		});
@@ -197,7 +197,7 @@ function ListPage() {
         };
 		
         //批量删除按钮点击事件
-        function batchDelete() {
+        function batchDelete(selected) {
           
 			var ids=getCheckedList("id");
             if(ids.length==0) {
@@ -207,6 +207,10 @@ function ListPage() {
             //调用批量删除接口
 			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('服务类型')+fox.translate('吗？'), function (i) {
 				layer.close(i);
+				if(window.pageExt.list.beforeBatchDelete) {
+					var doNext=window.pageExt.list.beforeBatchDelete(selected);
+					if(!doNext) return;
+				}
 				layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     layer.closeAll('loading');
@@ -217,6 +221,7 @@ function ListPage() {
                         layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
+
 			});
         }
 	}
@@ -261,6 +266,12 @@ function ListPage() {
 			
 				layer.confirm(fox.translate('确定删除此')+fox.translate('服务类型')+fox.translate('吗？'), function (i) {
 					layer.close(i);
+
+					if(window.pageExt.list.beforeSingleDelete) {
+						var doNext=window.pageExt.list.beforeSingleDelete(data);
+						if(!doNext) return;
+					}
+
 					layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
 						layer.closeAll('loading');
@@ -296,6 +307,7 @@ function ListPage() {
 			offset: [top,null],
 			area: ["800px",height+"px"],
 			type: 2,
+			id:"ops-service-category-form-data-win",
 			content: '/business/ops/service_category/service_category_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
@@ -304,10 +316,15 @@ function ListPage() {
 		admin.putTempData('ops-service-category-form-data-popup-index', index);
 	};
 
+	window.module={
+		refreshTableData: refreshTableData,
+		getCheckedList: getCheckedList
+	};
+
 };
 
 
-layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','dropdown'],function() {
 	var task=setInterval(function (){
 		if(!window["pageExt"]) return;
 		clearInterval(task);

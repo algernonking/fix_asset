@@ -5,13 +5,14 @@ import com.dt.platform.domain.eam.AssetBorrow;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:00
- * @sign 36103AA6C1DFF0C2FFCE870129C362C5
+ * @since 2021-08-25 10:46:48
+ * @sign 23CA17873B710DA8601269894AD5A1EB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -228,9 +229,29 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
+	 * 借用人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String BORROWER="borrower";
+	
+	/**
+	 * 借用人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,org.github.foxnic.web.domain.hrm.Person> BORROWER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,BORROWER, org.github.foxnic.web.domain.hrm.Person.class, "借用人", "借用人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , ORIGINATOR , BORROWER };
 	
 	/**
 	 * 代理类
@@ -468,6 +489,28 @@ public class AssetBorrowMeta {
 		public AssetBorrow setAssetIds(List<String> assetIds) {
 			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
 			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public AssetBorrow setOriginator(Person originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 借用人
+		 * @param borrower 借用人
+		 * @return 当前对象
+		*/
+		public AssetBorrow setBorrower(Person borrower) {
+			super.change(BORROWER,super.getBorrower(),borrower);
+			super.setBorrower(borrower);
 			return this;
 		}
 	}

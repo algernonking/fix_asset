@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 编码分配 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-21 19:02:27
+ * @since 2021-08-24 13:49:58
 */
 
 @Controller("SysCodeAllocationPageController")
@@ -50,8 +50,6 @@ public class CodeAllocationPageController extends ViewController {
 	 */
 	@RequestMapping("/code_allocation_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-
-
 		return prefix+"/code_allocation_form";
 	}
 }

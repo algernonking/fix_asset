@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Person;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-22 13:16:00
- * @sign 36103AA6C1DFF0C2FFCE870129C362C5
+ * @since 2021-08-25 10:46:48
+ * @sign 23CA17873B710DA8601269894AD5A1EB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -156,6 +157,18 @@ public class AssetBorrow extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
 	private List<String> assetIds;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Person originator;
+	
+	/**
+	 * 借用人：借用人
+	*/
+	@ApiModelProperty(required = false,value="借用人" , notes = "借用人")
+	private Person borrower;
 	
 	/**
 	 * 获得 主键<br>
@@ -575,6 +588,44 @@ public class AssetBorrow extends Entity {
 	public AssetBorrow addAssetId(String assetId) {
 		if(this.assetIds==null) assetIds=new ArrayList<>();
 		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Person getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public AssetBorrow setOriginator(Person originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 借用人<br>
+	 * 借用人
+	 * @return 借用人
+	*/
+	public Person getBorrower() {
+		return borrower;
+	}
+	
+	/**
+	 * 设置 借用人
+	 * @param borrower 借用人
+	 * @return 当前对象
+	*/
+	public AssetBorrow setBorrower(Person borrower) {
+		this.borrower=borrower;
 		return this;
 	}
 

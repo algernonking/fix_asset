@@ -49,7 +49,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.CATEGORY_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.FINANCIAL_CATEGORY_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
@@ -67,10 +67,10 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 
 
         //分成分组布局
-        cfg.view().formWindow().width("1000px");
+        cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup("财务属性",
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.CATEGORY_ID,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.FINANCIAL_CATEGORY_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
 //                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,

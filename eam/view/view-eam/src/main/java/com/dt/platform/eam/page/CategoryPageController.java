@@ -31,6 +31,7 @@ public class CategoryPageController extends ViewController {
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
 	public CategoryServiceProxy proxy() {
+
 		if(proxy==null) {
 			proxy=CategoryServiceProxy.api();
 		}
