@@ -42,11 +42,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(action=="create"){
                 $("#originatorId").attr("value",PERSON_NAME );
                 $("#originatorId").attr("userId",PERSON_ID);
+
+                //领用日期处理
+                var now = new Date();
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                $('#collectionDate').val(today);
+
+
             }else{
                 if (data.originator.name){
                     $("#originatorId").attr("value", data.originator.name);
                 }
             }
+
 
 
 
@@ -61,8 +71,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(action=="create"){
                 data.originatorId=PERSON_ID;
             }
-
-
 
             return true;
         }

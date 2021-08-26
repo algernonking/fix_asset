@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:55
+ * @since 2021-08-25 22:28:43
  */
 
 function FormPage() {
@@ -319,6 +319,7 @@ function FormPage() {
 			saveForm(data.field);
 	        return false;
 	    });
+
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

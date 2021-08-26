@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
+ * @since 2021-08-26 08:57:39
  */
 
 function FormPage() {
@@ -93,7 +93,7 @@ function FormPage() {
 	    //渲染图片字段
 		foxup.render({
 			el:"attach",
-			maxFileCount: 3,
+			maxFileCount: 1,
 			displayFileName: true,
 			accept: "file",
 			exts:'doc|zip|xlsx|rar|docx|txt|svg',
@@ -127,6 +127,8 @@ function FormPage() {
 				return opts;
 			}
 		});
+
+
 	}
 
 	/**
@@ -254,6 +256,7 @@ function FormPage() {
 			saveForm(data.field);
 	        return false;
 	    });
+
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

@@ -3,6 +3,7 @@ package com.dt.platform.knowledgebase.controller;
  
 import java.util.List;
 
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 知识分类 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 20:41:31
+ * @since 2021-08-26 09:23:37
 */
 
 @Api(tags = "知识分类")
@@ -65,22 +66,42 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "添加知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = CategoryVOMeta.ID)
 	@SentinelResource(value = CategoryServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CategoryServiceProxy.INSERT)
 	public Result insert(CategoryVO categoryVO) {
+		categoryVO.setSort(9999);
+		if(StringUtil.isBlank(categoryVO.getParentId())) {
+			categoryVO.setParentId("0");
+		}
 		Result result=categoryService.insert(categoryVO);
+		if(result.success()) {
+			Category currentCategory=new Category();
+			currentCategory.setId(categoryVO.getId());
+			if("0".equals(categoryVO.getParentId())){
+				currentCategory.setHierarchy(categoryVO.getId());
+				currentCategory.setHierarchyName(categoryVO.getCategoryName());
+			}else{
+				Category parentCategory=categoryService.getById(categoryVO.getParentId());
+				currentCategory.setHierarchy(parentCategory.getHierarchy()+"/"+categoryVO.getId());
+				currentCategory.setHierarchyName(parentCategory.getHierarchyName()+"/"+categoryVO.getCategoryName());
+			}
+			categoryService.update(currentCategory,SaveMode.NOT_NULL_FIELDS);
+			categoryVO.setHierarchy(currentCategory.getHierarchy());
+			categoryVO.setHierarchyName(currentCategory.getHierarchyName());
+			result.data(categoryVO);
+		}
 		return result;
 	}
 
@@ -90,14 +111,20 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "删除知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = CategoryVOMeta.ID)
 	@SentinelResource(value = CategoryServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CategoryServiceProxy.DELETE)
 	public Result deleteById(String id) {
-		Result result=categoryService.deleteByIdLogical(id);
+		Result<Category> result=new Result<>();
+		List<Category> list=categoryService.queryList(Category.create().setParentId(id));
+		if(list.size()>0){
+			result.success(false).message("请先删除下级节点");
+		}else{
+			return categoryService.deleteByIdLogical(id);
+		}
 		return result;
 	}
 	
@@ -124,22 +151,27 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "更新知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CategoryVOMeta.PAGE_INDEX , CategoryVOMeta.PAGE_SIZE , CategoryVOMeta.SEARCH_FIELD , CategoryVOMeta.FUZZY_FIELD , CategoryVOMeta.SEARCH_VALUE , CategoryVOMeta.SORT_FIELD , CategoryVOMeta.SORT_TYPE , CategoryVOMeta.IDS } ) 
 	@NotNull(name = CategoryVOMeta.ID)
 	@SentinelResource(value = CategoryServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CategoryServiceProxy.UPDATE)
 	public Result update(CategoryVO categoryVO) {
+
 		Result result=categoryService.update(categoryVO,SaveMode.NOT_NULL_FIELDS);
+		if(result.isSuccess()){
+			//更新分类名称
+			return categoryService.updateHierarchy(categoryVO.getId());
+		}
 		return result;
 	}
 	
@@ -149,15 +181,15 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "保存知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CategoryVOMeta.PAGE_INDEX , CategoryVOMeta.PAGE_SIZE , CategoryVOMeta.SEARCH_FIELD , CategoryVOMeta.FUZZY_FIELD , CategoryVOMeta.SEARCH_VALUE , CategoryVOMeta.SORT_FIELD , CategoryVOMeta.SORT_TYPE , CategoryVOMeta.IDS } )
 	@NotNull(name = CategoryVOMeta.ID)
@@ -213,15 +245,15 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "查询知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CategoryVOMeta.PAGE_INDEX , CategoryVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = CategoryServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -239,15 +271,15 @@ public class CategoryController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询知识分类")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CategoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_FULLNAME , value = "具体名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.CATEGORY_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.PARENT_ID , value = "父节点" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY , value = "节点路径" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = CategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "12"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = CategoryServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

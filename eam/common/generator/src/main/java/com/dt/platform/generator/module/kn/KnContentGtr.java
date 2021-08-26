@@ -57,7 +57,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH)
-                .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(3);
+                .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(1);
 
 
 
@@ -78,7 +78,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT)
-                .form().validate().required().form().textArea().height(450);
+                .form().validate().required().form().textArea().height(350);
 
         cfg.view().field(EAMTables.KN_CONTENT.NOTES)
                 .form().form().textArea().height(30);
@@ -92,54 +92,52 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.KN_CONTENT.TITLE)
                 .form().validate().required().form();
 
-
+        cfg.view().field(EAMTables.KN_CONTENT.PROFILE).form().textArea().height(25);
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.KN_CONTENT.CATEGORY_ID,
                         EAMTables.KN_CONTENT.TITLE,
+                        EAMTables.KN_CONTENT.CATEGORY_ID,
                         EAMTables.KN_CONTENT.GRADE_ID,
                         EAMTables.KN_CONTENT.DISPLAY
                 },
                 new Object[]{
                         EAMTables.KN_CONTENT.CONTENT_TYPE,
                         EAMTables.KN_CONTENT.PROFILE,
-                        EAMTables.KN_CONTENT.NOTES,
+
                 }
 
         );
-
-
 
         //分成分组布局
         cfg.view().formWindow().width("90%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.KN_CONTENT.TITLE,
                         EAMTables.KN_CONTENT.CATEGORY_ID,
                         EAMTables.KN_CONTENT.GRADE_ID,
-                        EAMTables.KN_CONTENT.TITLE,
-                        EAMTables.KN_CONTENT.PROFILE,
-                        EAMTables.KN_CONTENT.KEY_WORDS,
-
 
                 }, new Object[] {
                         EAMTables.KN_CONTENT.DISPLAY,
+                        EAMTables.KN_CONTENT.KEY_WORDS,
+                        EAMTables.KN_CONTENT.LABEL,
+                }, new Object[] {
                         EAMTables.KN_CONTENT.CONTENT_TYPE,
                         EAMTables.KN_CONTENT.LINK_ADDRESS,
-                        EAMTables.KN_CONTENT.LABEL
-
-                }
-        );
-        cfg.view().form().addGroup(null,
-                new Object[] {
-                        EAMTables.KN_CONTENT.NOTES
                 }
         );
 
+
         cfg.view().form().addGroup(null,
                 new Object[] {
+
+                        EAMTables.KN_CONTENT.PROFILE
+                },
+                new Object[] {
+
                         EAMTables.KN_CONTENT.ATTACH
                 }
+
         );
         cfg.view().form().addGroup(null,
                 new Object[] {
@@ -155,8 +153,6 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         //生成代码
-
-
         cfg.buildAll();
     }
 

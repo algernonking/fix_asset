@@ -17,6 +17,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
 
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.CREATE_TIME).table().disable(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ARCH_METHOD).table().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.HARDWARE_INFO).table().hidden(true);
@@ -62,11 +63,11 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.OPS_INFORMATION_SYSTEM.NAME,
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
-                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
+                        EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
                         EAMTables.OPS_INFORMATION_SYSTEM.NOTES
                 },
                 new Object[]{
-
+                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
                         EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
                         EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT
                 }
@@ -75,6 +76,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         //分成分组布局
         cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().bottomSpace(50);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,

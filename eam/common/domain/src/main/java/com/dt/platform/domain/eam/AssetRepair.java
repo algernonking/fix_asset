@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:42
- * @sign C019E325187D8F8DB8CF21BDC0B0AB46
+ * @since 2021-08-25 21:22:30
+ * @sign 0A800D4EADC881A91DAA5E29022D343B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -96,7 +96,7 @@ public class AssetRepair extends Entity {
 	 * 报修人：报修人
 	*/
 	@ApiModelProperty(required = false,value="报修人" , notes = "报修人")
-	private String operuserId;
+	private String reportUserId;
 	
 	/**
 	 * 图片：图片
@@ -181,6 +181,12 @@ public class AssetRepair extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Person originator;
+	
+	/**
+	 * 报修人：报修人
+	*/
+	@ApiModelProperty(required = false,value="报修人" , notes = "报修人")
+	private Person reportUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -377,17 +383,17 @@ public class AssetRepair extends Entity {
 	 * 报修人
 	 * @return 报修人
 	*/
-	public String getOperuserId() {
-		return operuserId;
+	public String getReportUserId() {
+		return reportUserId;
 	}
 	
 	/**
 	 * 设置 报修人
-	 * @param operuserId 报修人
+	 * @param reportUserId 报修人
 	 * @return 当前对象
 	*/
-	public AssetRepair setOperuserId(String operuserId) {
-		this.operuserId=operuserId;
+	public AssetRepair setReportUserId(String reportUserId) {
+		this.reportUserId=reportUserId;
 		return this;
 	}
 	
@@ -676,6 +682,25 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setOriginator(Person originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 报修人<br>
+	 * 报修人
+	 * @return 报修人
+	*/
+	public Person getReportUser() {
+		return reportUser;
+	}
+	
+	/**
+	 * 设置 报修人
+	 * @param reportUser 报修人
+	 * @return 当前对象
+	*/
+	public AssetRepair setReportUser(Person reportUser) {
+		this.reportUser=reportUser;
 		return this;
 	}
 

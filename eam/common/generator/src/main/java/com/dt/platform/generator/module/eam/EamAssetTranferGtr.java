@@ -33,6 +33,13 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","位置","位置");
         cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
+
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","调入管理员","调入管理员");
+
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人","使用人");
+
+
+
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).search().fuzzySearch();

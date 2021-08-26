@@ -167,7 +167,6 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.SYSTEM_ID,
                         EAMTables.OPS_HOST.HOST_VIP,
                         EAMTables.OPS_HOST.HOST_IP,
-
                 },
                 new Object[]{
                         EAMTables.OPS_HOST.POSITION_ID,
@@ -180,11 +179,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.LABELS,
                         EAMTables.OPS_HOST.HOST_NOTES,
-
                 }
-
         );
-
 
         //分成分组布局
         cfg.view().formWindow().width("90%");
@@ -193,23 +189,15 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.HOST_NAME,
                         EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.HOST_TYPE
-
                 }, new Object[] {
-
                         EAMTables.OPS_HOST.SYSTEM_ID,
                         EAMTables.OPS_HOST.ENVIRONMENT,
                         EAMTables.OPS_HOST.DIRECTOR_USERNAME
-
                 },new Object[] {
                         EAMTables.OPS_HOST.POSITION_ID,
                         EAMTables.OPS_HOST.ONLINE_TIME,
                         EAMTables.OPS_HOST.OFFLINE_TIME,
-
-
-
                 }
-
-
         );
         cfg.view().form().addGroup("操作系统",
                 new Object[] {
@@ -219,11 +207,9 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 new Object[] {
                         EAMTables.OPS_HOST.HOST_IP,
                         EAMTables.OPS_HOST.HOST_VIP
-
                 },
                 new Object[] {
                         EAMTables.OPS_HOST.HOST_CONF
-
                 }
         );
         cfg.view().form().addGroup("系统、数据库和中间件",
@@ -286,7 +272,9 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS);
+        ; //列表HTML页
         //生成代码
         cfg.buildAll();
     }

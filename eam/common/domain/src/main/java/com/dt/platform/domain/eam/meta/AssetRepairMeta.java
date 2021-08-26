@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Person;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:42
- * @sign C019E325187D8F8DB8CF21BDC0B0AB46
+ * @since 2021-08-25 21:22:30
+ * @sign 0A800D4EADC881A91DAA5E29022D343B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -121,12 +121,12 @@ public class AssetRepairMeta {
 	/**
 	 * 报修人 , 类型: java.lang.String
 	*/
-	public static final String OPERUSER_ID="operuserId";
+	public static final String REPORT_USER_ID="reportUserId";
 	
 	/**
 	 * 报修人 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> OPERUSER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,OPERUSER_ID, java.lang.String.class, "报修人", "报修人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> REPORT_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER_ID, java.lang.String.class, "报修人", "报修人", java.lang.String.class, null);
 	
 	/**
 	 * 图片 , 类型: java.lang.String
@@ -269,9 +269,19 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
 	
 	/**
+	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String REPORT_USER="reportUser";
+	
+	/**
+	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Person> REPORT_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER, org.github.foxnic.web.domain.hrm.Person.class, "报修人", "报修人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , OPERUSER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER };
 	
 	/**
 	 * 代理类
@@ -393,12 +403,12 @@ public class AssetRepairMeta {
 		
 		/**
 		 * 设置 报修人
-		 * @param operuserId 报修人
+		 * @param reportUserId 报修人
 		 * @return 当前对象
 		*/
-		public AssetRepair setOperuserId(String operuserId) {
-			super.change(OPERUSER_ID,super.getOperuserId(),operuserId);
-			super.setOperuserId(operuserId);
+		public AssetRepair setReportUserId(String reportUserId) {
+			super.change(REPORT_USER_ID,super.getReportUserId(),reportUserId);
+			super.setReportUserId(reportUserId);
 			return this;
 		}
 		
@@ -553,6 +563,17 @@ public class AssetRepairMeta {
 		public AssetRepair setOriginator(Person originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 报修人
+		 * @param reportUser 报修人
+		 * @return 当前对象
+		*/
+		public AssetRepair setReportUser(Person reportUser) {
+			super.change(REPORT_USER,super.getReportUser(),reportUser);
+			super.setReportUser(reportUser);
 			return this;
 		}
 	}

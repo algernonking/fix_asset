@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:53
+ * @since 2021-08-26 05:50:31
  */
 
 
@@ -71,7 +71,7 @@ function ListPage() {
 					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod);}}
 					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') }
 					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') }
-					,{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属组织') }
+					,{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属公司/部门') }
 					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return fox.dateFormat(d.lastdrillDate); }}
 					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineDate); }}
 					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineDate); }}
@@ -88,7 +88,6 @@ function ListPage() {
 					,{ field: 'archMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('归档模式') }
 					,{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -123,6 +122,7 @@ function ListPage() {
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.technicalContact={ value: $("#technicalContact").val()};
 		value.businessContact={ value: $("#businessContact").val()};
+		value.grade={ value: xmSelect.get("#grade",true).getValue("value"), label:xmSelect.get("#grade",true).getValue("nameStr")};
 		value.labels={ value: $("#labels").val()};
 		value.notes={ value: $("#notes").val()};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
@@ -165,6 +165,23 @@ function ListPage() {
 			size: "small",
 			radio: false,
 			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 grade 下拉字段
+		fox.renderSelectBox({
+			el: "grade",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];

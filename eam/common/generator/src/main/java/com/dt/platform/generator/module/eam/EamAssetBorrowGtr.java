@@ -61,7 +61,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
 
-
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,

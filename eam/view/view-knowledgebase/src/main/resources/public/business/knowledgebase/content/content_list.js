@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
+ * @since 2021-08-26 08:57:36
  */
 
 
@@ -106,7 +106,6 @@ function ListPage() {
 		value.contentType={ value: xmSelect.get("#contentType",true).getValue("value"), label:xmSelect.get("#contentType",true).getValue("nameStr")};
 		value.display={ value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr")};
 		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr")};
-		value.notes={ value: $("#notes").val()};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {

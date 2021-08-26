@@ -42,6 +42,7 @@ import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
 import com.dt.platform.domain.eam.Warehouse;
+import org.github.foxnic.web.domain.hrm.Person;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -57,7 +58,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 17:39:21
+ * @since 2021-08-25 12:15:36
 */
 
 @Api(tags = "资产")
@@ -280,9 +281,6 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.GET_BY_ID)
 	public Result<Asset> getById(String id) {
-
-		System.out.println("@@@@@@@@@"+this.getSessionUser().getUser().getPerson().getName());
-
 		Result<Asset> result=new Result<>();
 		Asset asset=assetService.getById(id);
 		// 关联出 分类 数据

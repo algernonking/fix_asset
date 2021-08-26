@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
+ * @since 2021-08-26 08:57:37
  */
  -->
  <!DOCTYPE html>
@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
@@ -36,9 +37,18 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
+            <div class="layui-col-xs4 form-column">
 
 
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('标题')}">标题</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标题') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    </div>
+                </div>
+
+
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('分类')}">分类</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
@@ -56,20 +66,16 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('标题')}">标题</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标题') }" type="text" class="layui-input"    lay-verify="|required"   />
-                    </div>
-                </div>
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
 
 
-                
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('简介')}">简介</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('是否显示')}">是否显示</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="profile" id="profile" name="profile" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('简介') }" type="text" class="layui-input"   />
+                        <input input-type="radio" type="radio" name="display" lay-filter="display" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" th:value="${e.code}" th:title="${e.text}">
                     </div>
                 </div>
 
@@ -83,21 +89,21 @@
                 </div>
 
 
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs6 form-column">
-
-
+                
                 <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('是否显示')}">是否显示</div><div class="layui-required">*</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="display" lay-filter="display" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input lay-filter="label" id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('内容类型')}">内容类型</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
@@ -115,15 +121,6 @@
                 </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="label" id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
@@ -135,29 +132,21 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-form-label "><div th:text="${lang.translate('简介')}">简介</div></div>
                     <div class="layui-input-block ">
-                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 30px" ></textarea>
+                        <textarea lay-filter="profile" id="profile" name="profile" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('简介') }" class="layui-textarea" style="height: 25px" ></textarea>
                     </div>
                 </div>
 
 
                 <!--结束：栏次内字段循环-->
             </div>
-            <!--结束：栏次输入框循环-->
-        </div>
-         <!--开始：group 循环-->
-
-
-
-        <div class="layui-row form-row">
-
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
                 <div class="layui-form-item" >
@@ -188,7 +177,7 @@
                     <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('知识内容')}">知识内容</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('知识内容') }" class="layui-textarea" style="height: 450px" ></textarea>
+                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('知识内容') }" class="layui-textarea" style="height: 350px" ></textarea>
                     </div>
                 </div>
 
@@ -214,6 +203,7 @@
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];

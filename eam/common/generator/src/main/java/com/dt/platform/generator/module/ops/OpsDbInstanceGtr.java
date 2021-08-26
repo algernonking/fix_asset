@@ -51,6 +51,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.HOST_ID).basic().label("主机")
+                .form().validate().required()
                 .form().selectBox().queryApi(HostServiceProxy.QUERY_PAGED_LIST)
                 .valueField(HostMeta.ID).textField(HostMeta.HOST_NAME)
                 .toolbar(false).filter(true).paging(true).muliti(false).fillBy(DbInstanceMeta.HOST);
@@ -60,6 +61,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).basic().label("数据库")
+                .form().validate().required()
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false).muliti(false).fillBy(DbInstanceMeta.DATABASE);
@@ -81,6 +83,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME)
                 .form().label("备份时间").dateInput();
 
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE).form().numberInput().scale(2).allowNegative(false);
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.NOTES).form().textArea().height(30);
 
 
@@ -98,31 +101,46 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_DB_INSTANCE.LOG_METHOD
                 },
                 new Object[]{
+                      //  resourceNameField,
                         EAMTables.OPS_DB_INSTANCE.LABELS,
                         EAMTables.OPS_DB_INSTANCE.NOTES
                 }
-
         );
 
 
-
+        cfg.view().list().columnLayout(
+                new Object[]{
+                        EAMTables.OPS_DB_INSTANCE.HOST_ID,
+                        resourceNameField,
+                        EAMTables.OPS_DB_INSTANCE.NAME,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
+                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
+                        EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
+                        EAMTables.OPS_DB_INSTANCE.NOTES,
+                }
+        );
 
         cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().bottomSpace(150);
         cfg.view().form().addGroup(null ,
                 new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.NAME,
                         EAMTables.OPS_DB_INSTANCE.HOST_ID,
-                        EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
                         EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
 
                 }, new Object[] {
+                        EAMTables.OPS_DB_INSTANCE.DATABASE_ID,
+                        EAMTables.OPS_DB_INSTANCE.NAME,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_TIME,
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
-
                 },
                 new Object[] {
-                        EAMTables.OPS_DB_INSTANCE.BACKUP_TYPE,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_METHOD,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_SIZE,
                 }
@@ -140,7 +158,8 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         //生成代码
         cfg.buildAll();
     }

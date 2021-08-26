@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产报修 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:42
+ * @since 2021-08-25 21:22:30
 */
 
 @Api(tags = "资产报修")
@@ -77,7 +77,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetRepairVOMeta.OPERUSER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -142,7 +142,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetRepairVOMeta.OPERUSER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -173,7 +173,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetRepairVOMeta.OPERUSER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -243,7 +243,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetRepairVOMeta.OPERUSER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -274,7 +274,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PLAN_FINISH_DATE , value = "计划完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ACTUAL_FINISH_DATE , value = "实际完成日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.CONTENT , value = "报修内容" , required = false , dataTypeClass=String.class , example = "1212"),
-		@ApiImplicitParam(name = AssetRepairVOMeta.OPERUSER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.REPORT_USER_ID , value = "报修人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),

@@ -35,7 +35,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterDataFill:function (data) {
             var action=admin.getTempData('ops-host-form-data-form-action')
 
+            laydate.render({
+                elem: '#onlineTime',
+                format:"yyyy-MM-dd",
+                trigger:"click"
+            });
+
             if(action=="create"){
+                //上线日期处理
+                var now = new Date();
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                $('#onlineTime').val(today);
+
+
+
                 //渲染 environment 下拉字段
                 fox.renderSelectBox({
                     el: "environment",
@@ -70,7 +85,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                         for (var i = 0; i < data.length; i++) {
                             if(!data[i]) continue;
                             if(i==0){
-                                opts.push({name:data[i].text,value:data[i].code  ,selected: true});
+                                opts.push({name:data[i].text,value:data[i].code,selected: true});
                             }else{
                                 opts.push({name:data[i].text,value:data[i].code});
                             }

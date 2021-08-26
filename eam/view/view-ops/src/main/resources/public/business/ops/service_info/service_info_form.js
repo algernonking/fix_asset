@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:04
+ * @since 2021-08-25 21:23:13
  */
 
 function FormPage() {
@@ -232,6 +232,7 @@ function FormPage() {
 			saveForm(data.field);
 	        return false;
 	    });
+
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

@@ -12,13 +12,14 @@ import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
 import com.dt.platform.domain.eam.Warehouse;
+import org.github.foxnic.web.domain.hrm.Person;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 17:39:21
- * @sign F2B317D6F9B7D37C8E09D155ADBDA10D
+ * @since 2021-08-25 12:15:36
+ * @sign 9E68F6558C6B0A576EE9894B4BFD136B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -535,9 +536,29 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,WAREHOUSE, com.dt.platform.domain.eam.Warehouse.class, "仓库", "仓库", com.dt.platform.domain.eam.Warehouse.class, null);
 	
 	/**
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String USE_USER="use_user";
+	
+	/**
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Person> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_USER, org.github.foxnic.web.domain.hrm.Person.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
+	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final String MANAGER="manager";
+	
+	/**
+	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Person> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER, org.github.foxnic.web.domain.hrm.Person.class, "管理人员", "管理人员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER };
 	
 	/**
 	 * 代理类
@@ -1105,6 +1126,28 @@ public class AssetMeta {
 		public Asset setWarehouse(Warehouse warehouse) {
 			super.change(WAREHOUSE,super.getWarehouse(),warehouse);
 			super.setWarehouse(warehouse);
+			return this;
+		}
+		
+		/**
+		 * 设置 使用人员
+		 * @param use_user 使用人员
+		 * @return 当前对象
+		*/
+		public Asset setUseUser(Person use_user) {
+			super.change(USE_USER,super.getUseUser(),use_user);
+			super.setUseUser(use_user);
+			return this;
+		}
+		
+		/**
+		 * 设置 管理人员
+		 * @param manager 管理人员
+		 * @return 当前对象
+		*/
+		public Asset setManager(Person manager) {
+			super.change(MANAGER,super.getManager(),manager);
+			super.setManager(manager);
 			return this;
 		}
 	}

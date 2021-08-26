@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产退库  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:40
+ * @since 2021-08-25 21:22:28
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetCollectionReturnServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

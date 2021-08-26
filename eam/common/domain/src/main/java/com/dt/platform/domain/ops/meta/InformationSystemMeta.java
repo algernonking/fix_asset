@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:53
- * @sign CD323197665BC9D219152E72F49CA314
+ * @since 2021-08-26 05:50:25
+ * @sign F0D56F8DE95CED78E08288958DF13CAD
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,14 +106,14 @@ public class InformationSystemMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> BUSINESS_CONTACT_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BUSINESS_CONTACT, java.lang.String.class, "业务联系人", "业务联系人", java.lang.String.class, null);
 	
 	/**
-	 * 所属组织 , 类型: java.lang.String
+	 * 所属公司/部门 , 类型: java.lang.String
 	*/
 	public static final String BELONG_ORG_INFO="belongOrgInfo";
 	
 	/**
-	 * 所属组织 , 类型: java.lang.String
+	 * 所属公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> BELONG_ORG_INFO_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORG_INFO, java.lang.String.class, "所属组织", "所属组织", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> BELONG_ORG_INFO_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORG_INFO, java.lang.String.class, "所属公司/部门", "所属公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 最后一次演练 , 类型: java.util.Date
@@ -468,8 +468,8 @@ public class InformationSystemMeta {
 		}
 		
 		/**
-		 * 设置 所属组织
-		 * @param belongOrgInfo 所属组织
+		 * 设置 所属公司/部门
+		 * @param belongOrgInfo 所属公司/部门
 		 * @return 当前对象
 		*/
 		public InformationSystem setBelongOrgInfo(String belongOrgInfo) {
