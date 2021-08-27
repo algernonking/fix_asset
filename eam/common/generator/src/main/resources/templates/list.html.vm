@@ -179,7 +179,7 @@
 #end
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     #for(f:fields)
     #if(f.typeName.equals("radio_box"))
     #if(f.radioField.dictCode!=null)
