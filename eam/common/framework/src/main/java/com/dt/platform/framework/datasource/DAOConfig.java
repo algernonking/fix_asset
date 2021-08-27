@@ -81,6 +81,8 @@ public class DAOConfig {
 		//
 		dbTreaty.setUserIdDataType(DBDataType.STRING);
 		//
+		dbTreaty.setTenantIdField("tenant_id");
+		//
 		dbTreaty.setCreateTimeField("create_time");
 		dbTreaty.setCreateUserIdField("create_by");
 		//
