@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 知识库内容 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-26 08:57:32
+ * @since 2021-08-29 12:16:30
 */
 
 @Api(tags = "知识库内容")
@@ -68,12 +68,12 @@ public class ContentController extends SuperController {
 	@ApiOperation(value = "添加知识库内容")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480381466249797632"),
-		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "483565479521165313"),
 		@ApiImplicitParam(name = ContentVOMeta.TITLE , value = "标题" , required = false , dataTypeClass=String.class , example = "12asdfsdf"),
 		@ApiImplicitParam(name = ContentVOMeta.PROFILE , value = "简介" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.KEY_WORDS , value = "关键字" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "<p>1212</p>"),
 		@ApiImplicitParam(name = ContentVOMeta.CONTENT_TYPE , value = "内容类型" , required = false , dataTypeClass=String.class , example = "article"),
 		@ApiImplicitParam(name = ContentVOMeta.REVIEW_COUNT , value = "阅读数" , required = false , dataTypeClass=BigDecimal.class , example = "0"),
 		@ApiImplicitParam(name = ContentVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
@@ -132,12 +132,12 @@ public class ContentController extends SuperController {
 	@ApiOperation(value = "更新知识库内容")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480381466249797632"),
-		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "483565479521165313"),
 		@ApiImplicitParam(name = ContentVOMeta.TITLE , value = "标题" , required = false , dataTypeClass=String.class , example = "12asdfsdf"),
 		@ApiImplicitParam(name = ContentVOMeta.PROFILE , value = "简介" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.KEY_WORDS , value = "关键字" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "<p>1212</p>"),
 		@ApiImplicitParam(name = ContentVOMeta.CONTENT_TYPE , value = "内容类型" , required = false , dataTypeClass=String.class , example = "article"),
 		@ApiImplicitParam(name = ContentVOMeta.REVIEW_COUNT , value = "阅读数" , required = false , dataTypeClass=BigDecimal.class , example = "0"),
 		@ApiImplicitParam(name = ContentVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
@@ -162,12 +162,12 @@ public class ContentController extends SuperController {
 	@ApiOperation(value = "保存知识库内容")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480381466249797632"),
-		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "483565479521165313"),
 		@ApiImplicitParam(name = ContentVOMeta.TITLE , value = "标题" , required = false , dataTypeClass=String.class , example = "12asdfsdf"),
 		@ApiImplicitParam(name = ContentVOMeta.PROFILE , value = "简介" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.KEY_WORDS , value = "关键字" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "<p>1212</p>"),
 		@ApiImplicitParam(name = ContentVOMeta.CONTENT_TYPE , value = "内容类型" , required = false , dataTypeClass=String.class , example = "article"),
 		@ApiImplicitParam(name = ContentVOMeta.REVIEW_COUNT , value = "阅读数" , required = false , dataTypeClass=BigDecimal.class , example = "0"),
 		@ApiImplicitParam(name = ContentVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
@@ -233,12 +233,12 @@ public class ContentController extends SuperController {
 	@ApiOperation(value = "查询知识库内容")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480381466249797632"),
-		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "483565479521165313"),
 		@ApiImplicitParam(name = ContentVOMeta.TITLE , value = "标题" , required = false , dataTypeClass=String.class , example = "12asdfsdf"),
 		@ApiImplicitParam(name = ContentVOMeta.PROFILE , value = "简介" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.KEY_WORDS , value = "关键字" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "<p>1212</p>"),
 		@ApiImplicitParam(name = ContentVOMeta.CONTENT_TYPE , value = "内容类型" , required = false , dataTypeClass=String.class , example = "article"),
 		@ApiImplicitParam(name = ContentVOMeta.REVIEW_COUNT , value = "阅读数" , required = false , dataTypeClass=BigDecimal.class , example = "0"),
 		@ApiImplicitParam(name = ContentVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
@@ -264,12 +264,12 @@ public class ContentController extends SuperController {
 	@ApiOperation(value = "分页查询知识库内容")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480381466249797632"),
-		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "479027782127452160"),
+		@ApiImplicitParam(name = ContentVOMeta.CATEGORY_ID , value = "分类" , required = false , dataTypeClass=String.class , example = "483565479521165313"),
 		@ApiImplicitParam(name = ContentVOMeta.TITLE , value = "标题" , required = false , dataTypeClass=String.class , example = "12asdfsdf"),
 		@ApiImplicitParam(name = ContentVOMeta.PROFILE , value = "简介" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.KEY_WORDS , value = "关键字" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContentVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "1212"),
+		@ApiImplicitParam(name = ContentVOMeta.CONTENT , value = "知识内容" , required = false , dataTypeClass=String.class , example = "<p>1212</p>"),
 		@ApiImplicitParam(name = ContentVOMeta.CONTENT_TYPE , value = "内容类型" , required = false , dataTypeClass=String.class , example = "article"),
 		@ApiImplicitParam(name = ContentVOMeta.REVIEW_COUNT , value = "阅读数" , required = false , dataTypeClass=BigDecimal.class , example = "0"),
 		@ApiImplicitParam(name = ContentVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),

@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:22:30
+ * @since 2021-08-29 12:15:37
  */
  -->
  <!DOCTYPE html>
@@ -159,9 +159,9 @@
     var AUTH_PREFIX="eam_asset_repair";
 
     // 用户ID
-    var PERSON_ID = [[${user.getUser().getPerson().getId()}]] ;
+    var EMPLOYEE_ID = [[${user.getUser().getActivatedEmployeeId()}]] ;
     // 用户姓名
-    var PERSON_NAME = [[${user.getUser().getPerson().getName()}]] ;
+    var EMPLOYEE_NAME = [[${user.getUser().getActivatedEmployeeName()}]] ;
 
 </script>
 

@@ -40,7 +40,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
 
 
-
+ 
 
        // cfg.view().list().disableSpaceColumn();
         cfg.view().formWindow().bottomSpace(250);
@@ -93,8 +93,9 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         );
 
 
-        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
-        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
+
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -105,6 +106,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
 
+ 
         //列表HTML页
         cfg.buildAll();
     }

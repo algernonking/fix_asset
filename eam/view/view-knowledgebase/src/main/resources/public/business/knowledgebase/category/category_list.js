@@ -89,6 +89,7 @@ function ListPage() {
 		console.log(treeNode);
 		if(treeNode==null) return;
 		editingNode=treeNode;
+		console.log($("#form-view"));
 		$("#form-view")[0].contentWindow.loadFormData(treeNode.id);
 	}
 

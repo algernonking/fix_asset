@@ -40,8 +40,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //制单人处理
             $("#originatorId").attr("disabled","disabled").css("background-color","#e6e6e6");
             if(action=="create"){
-                $("#originatorId").attr("value",PERSON_NAME );
-                $("#originatorId").attr("userId",PERSON_ID);
+                $("#originatorId").attr("value",EMPLOYEE_NAME );
+                $("#originatorId").attr("userId",EMPLOYEE_ID);
 
                 //领用日期处理
                 var now = new Date();

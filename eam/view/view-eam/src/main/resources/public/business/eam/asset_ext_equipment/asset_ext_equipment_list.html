@@ -2,7 +2,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:22:38
+ * @since 2021-08-29 12:15:44
  */
  -->
  <!DOCTYPE html>
@@ -121,7 +121,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var AUTH_PREFIX="eam_asset_ext_equipment";
 
 

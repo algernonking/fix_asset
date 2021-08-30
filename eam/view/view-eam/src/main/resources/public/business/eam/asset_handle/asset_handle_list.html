@@ -2,7 +2,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:22:32
+ * @since 2021-08-29 12:15:39
  */
  -->
  <!DOCTYPE html>
@@ -116,7 +116,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_TYPE_DATA = [[${dict.toArray('eam_handle_type')}]];
     var AUTH_PREFIX="eam_asset_handle";
 

@@ -2,7 +2,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:22:14
+ * @since 2021-08-29 12:15:18
  */
  -->
  <!DOCTYPE html>
@@ -99,7 +99,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_APPROVALTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum')}]];
     var RADIO_APPROVALSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var AUTH_PREFIX="eam_approve_configure";

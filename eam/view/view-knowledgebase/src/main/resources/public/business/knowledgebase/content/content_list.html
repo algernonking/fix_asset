@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-26 08:57:35
+ * @since 2021-08-29 12:16:30
  */
  -->
  <!DOCTYPE html>
@@ -122,7 +122,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var RADIO_CONTENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}]];
     var RADIO_DISPLAY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}]];
     var SELECT_GRADEID_DATA = [[${dict.toArray('kn_grade')}]];

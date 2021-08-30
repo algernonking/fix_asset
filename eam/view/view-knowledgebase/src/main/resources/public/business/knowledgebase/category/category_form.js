@@ -1,10 +1,8 @@
-
 /**
  * 资产分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
  * @since 2021-07-31 06:43:12
  */
-
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
@@ -77,6 +75,30 @@ function FormPage() {
 
 	}
 
+	// function fillFormData() {
+	// 	var formData = admin.getTempData('eam-category-form-data');
+	// 	// //如果是新建
+	// 	// if(!formData.id) {
+	// 	// 	adjustPopup();
+	// 	// }
+	// 	// var fm=$('#data-form');
+	// 	// if (formData) {
+	// 	// 	fm[0].reset();
+	// 	// 	form.val('data-form', formData);
+	//     //  	fm.attr('method', 'POST');
+	//     //  	renderFormFields();
+	// 	// }
+	// 	//
+	// 	// //渐显效果
+	// 	// fm.css("opacity","0.0");
+	//     // fm.css("display","");
+	//     // setTimeout(function (){
+	//     //     fm.animate({
+	//     //         opacity:'1.0'
+	//     //     },100);
+	//     // },1);
+	//
+	// }
 
 	function loadFormData(id) {
 		admin.request(moduleURL+"/get-by-id",{id:id},function(r) {
@@ -127,3 +149,16 @@ function FormPage() {
 	}
 
 }
+
+layui.config({
+	dir: layuiPath,
+	base: '/module/'
+}).extend({
+	xmSelect: 'xm-select/xm-select',
+	foxnicUpload: 'upload/foxnic-upload'
+}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','foxnicUpload'],function() {
+	(new FormPage()).init(layui);
+});
+
+
+

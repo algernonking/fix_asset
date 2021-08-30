@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-26 05:50:28
+ * @since 2021-08-29 12:16:10
  */
  -->
  <!DOCTYPE html>
@@ -124,7 +124,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var RADIO_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
     var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
     var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];

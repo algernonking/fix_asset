@@ -78,10 +78,10 @@ public class KnContentGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT)
-                .form().validate().required().form().textArea().height(350);
+              .form().textArea().height(350);
 
         cfg.view().field(EAMTables.KN_CONTENT.NOTES)
-                .form().form().textArea().height(30);
+                .form().form().textArea().height(18);
 
         cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID)
                 .form().validate().required().form()
@@ -110,7 +110,7 @@ public class KnContentGtr extends BaseCodeGenerator {
         );
 
         //分成分组布局
-        cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().width("95%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.KN_CONTENT.TITLE,
@@ -150,7 +150,7 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
+                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         //生成代码
         cfg.buildAll();

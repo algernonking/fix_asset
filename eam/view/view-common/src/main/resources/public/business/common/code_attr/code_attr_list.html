@@ -2,7 +2,7 @@
 /**
  * 编码属性 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:21:53
+ * @since 2021-08-29 12:15:03
  */
  -->
  <!DOCTYPE html>
@@ -91,7 +91,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeAttrTypeEnum')}]];
     var AUTH_PREFIX="sys_code_attr";
 

@@ -22,8 +22,28 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     }
 
     var action=admin.getTempData('kn-content-form-data-form-action');
+    function loadJs(url,callback){
+        var script=document.createElement('script');
+        script.type="text/javascript";
+        if(typeof(callback)!="undefined"){
+            if(script.readyState){
+                script.onreadystatechange=function(){
+                    if(script.readyState == "loaded" || script.readyState == "complete"){
+                        script.onreadystatechange=null;
+                        callback();
+                    }
+                }
+            }else{
+                script.onload=function(){
+                    callback();
+                }
+            }
+        }
+        script.src=url;
+        document.body.appendChild(script);
+    }
 
-
+    var editor;
     //表单页的扩展
     var form={
         /**
@@ -31,17 +51,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+
         },
         /**
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
-            $('input[name=display]:first').prop("checked","true")
-            $('input[name=contentType]:first').prop("checked","true")
 
             if(action=="create") {
+                $('input[name=display]:first').prop("checked","true");
+                $('input[name=contentType]:first').prop("checked","true");
                 setTimeout(function (){
+                    //设置第一个
                     //渲染 categoryId 下拉字段
                     fox.renderSelectBox({
                         el: "categoryId",
@@ -62,7 +84,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                                 }else{
                                     opts.push({name:data[i].hierarchyName,value:data[i].id});
                                 }
-
                             }
                             return opts;
                         }
@@ -86,15 +107,37 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                                 }else{
                                     opts.push({name:data[i].text,value:data[i].code});
                                 }
-
                             }
                             return opts;
                         }
                     });
                 },500);
-
             }
 
+            //处理编辑区域
+            $('#content').parent().html("<div id=\"content_editor\"></div>");
+            //https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js
+            var url="/assets/js/wangEditor.min.js";
+            var url="wangEditor.min.js";
+            loadJs(url,function(){
+                const E = window.wangEditor
+                editor  = new E("#content_editor");
+                editor.create()
+                editor.txt.html(data.content);
+                if(action=="view"){
+                    editor.disable();
+                }
+            });
+        },
+
+        /**
+         * 数据提交前，如果返回 false，停止后续步骤的执行
+         * */
+        beforeSubmit:function (data) {
+            console.log("beforeSubmit",data);
+            console.log(editor);
+            data.content=editor.txt.html();
+            return true;
         }
 
 

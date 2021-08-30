@@ -164,10 +164,16 @@ public class EAMRelationManager extends RelationManager {
     public void setupAssetHandle() {
         // 关联资产
         this.property(AssetHandleMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_HANDLE.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_HANDLE.ID).join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+
+//        this.property(AssetHandleMeta.ASSET_LIST_PROP)
+//                .join(
+//                        with(EAMTables.EAM_ASSET_HANDLE.ID),
+//                        with(EAMTables.EAM_ASSET_ITEM.HANDLE_ID).contition().addorderby()
+//                );
+
 
         // 关联制单人
         this.property(AssetHandleMeta.ORIGINATOR_PROP)

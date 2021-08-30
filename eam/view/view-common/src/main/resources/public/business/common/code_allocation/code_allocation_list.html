@@ -2,7 +2,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 21:21:46
+ * @since 2021-08-29 12:14:59
  */
  -->
  <!DOCTYPE html>
@@ -86,7 +86,7 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_CODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
     var AUTH_PREFIX="sys_code_allocation";
 
