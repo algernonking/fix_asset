@@ -4,6 +4,9 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum;
 import com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum;
+import com.dt.platform.domain.common.meta.CodeAllocationMeta;
+import com.dt.platform.domain.common.meta.CodeRuleMeta;
+import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.knowledgebase.Category;
 
 import com.dt.platform.domain.knowledgebase.meta.CategoryMeta;
@@ -16,6 +19,13 @@ import com.dt.platform.proxy.knowledgebase.CategoryServiceProxy;
 import com.dt.platform.proxy.knowledgebase.ContentServiceProxy;
 
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.meta.EmployeeMeta;
+import org.github.foxnic.web.domain.hrm.meta.EmployeeVOMeta;
+import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
+import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
+import org.github.foxnic.web.proxy.hrm.PersonServiceProxy;
 
 public class KnContentGtr extends BaseCodeGenerator {
 
@@ -29,8 +39,10 @@ public class KnContentGtr extends BaseCodeGenerator {
       //  System.out.println("111");
      //   cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","知识分类","知识分类");
-
-
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"editor","编辑人","编辑人");
+        cfg.view().field(EAMTables.KN_CONTENT.TITLE).table().search().fuzzySearch();
+        cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().search().fuzzySearch();
+        cfg.view().field(EAMTables.KN_CONTENT.PROFILE).table().search().fuzzySearch();
 
         cfg.view().field(EAMTables.KN_CONTENT.ID).basic().hidden(true);
 //        cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID).search().hidden(true);
@@ -46,7 +58,6 @@ public class KnContentGtr extends BaseCodeGenerator {
 //        cfg.view().field(EAMTables.KN_CONTENT.DISPLAY).search().hidden(true);
 //        cfg.view().field(EAMTables.KN_CONTENT.CONTENT_TYPE).search().hidden(true);
 
-
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.NOTES).table().disable(true);
@@ -54,7 +65,7 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.KN_CONTENT.LINK_ADDRESS).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.KEY_WORDS).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.LABEL).table().disable(true);
-
+        cfg.view().field(EAMTables.KN_CONTENT.EDITOR_ID).table().disable(true);
 
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH)
                 .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(1);
@@ -89,11 +100,24 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true)
                 .paging(false).toolbar(false).muliti(false).fillBy(ContentMeta.CATEGORY);
 
+
+        //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
+        String resourceNameField="res_"+EAMTables.KN_CONTENT.EDITOR_ID;
+        cfg.view().field(resourceNameField)
+                .basic().label("编辑人")
+                .table().fillBy(ContentMeta.EDITOR,PersonMeta.NAME);
+
+
+
+
         cfg.view().field(EAMTables.KN_CONTENT.TITLE)
                 .form().validate().required().form();
 
         cfg.view().field(EAMTables.KN_CONTENT.PROFILE).form().textArea().height(25);
 
+        cfg.view().list().operationColumn().addActionButton("预览","reviewKnFunction");
+        cfg.view().list().addToolButton("知识库","knFunction",null) ;
+        cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.KN_CONTENT.TITLE,
@@ -145,13 +169,18 @@ public class KnContentGtr extends BaseCodeGenerator {
                 }
         );
 
+
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE) //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS);
         //生成代码
         cfg.buildAll();
     }

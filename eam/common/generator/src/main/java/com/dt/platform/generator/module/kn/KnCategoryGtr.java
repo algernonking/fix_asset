@@ -38,7 +38,8 @@ public class KnCategoryGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
-                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
+                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS) //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS);
         //生成代码
         cfg.buildAll();
     }

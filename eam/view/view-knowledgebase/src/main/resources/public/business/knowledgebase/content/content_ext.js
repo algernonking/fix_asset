@@ -13,6 +13,15 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //列表页的扩展
     var list={
+        knFunction:function (selected,obj){
+            window.open("../search/search.html");
+            console.log('knFunction',selected,obj);
+        },
+
+        reviewKnFunction:function (data){
+            window.open("../search/knbaselook.html?id="+data.id);
+            console.log('reviewKnFunction',data);
+        },
         /**
          * 查询前调用
          * */
@@ -134,8 +143,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            if(action=="create") {
+                data.editor_id=EMPLOYEE_ID;
+            }
             console.log("beforeSubmit",data);
-            console.log(editor);
             data.content=editor.txt.html();
             return true;
         }

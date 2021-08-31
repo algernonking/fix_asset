@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 模板文件  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-30 11:06:46
+ * @since 2021-08-31 15:16:41
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = TplFileServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

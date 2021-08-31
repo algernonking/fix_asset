@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:30
+ * @since 2021-08-31 22:25:37
  */
 
 
@@ -73,8 +73,9 @@ function ListPage() {
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}
 					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet:function (d){ return fox.getDictText(SELECT_GRADEID_DATA,d.gradeId);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'resEditorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('编辑人') , templet: function (d) { return fox.getProperty(d,["editor","name"]);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -104,8 +105,8 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.categoryId={ value: xmSelect.get("#categoryId",true).getValue("value"), fillBy:"category",field:"id", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
-		value.title={ value: $("#title").val()};
-		value.profile={ value: $("#profile").val()};
+		value.title={ value: $("#title").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.profile={ value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.contentType={ value: xmSelect.get("#contentType",true).getValue("value"), label:xmSelect.get("#contentType",true).getValue("nameStr")};
 		value.display={ value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr")};
 		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr")};
@@ -258,6 +259,9 @@ function ListPage() {
 				case 'batch-del':
 					batchDelete(selected);
 					break;
+				case 'tool-kn-function':
+					window.pageExt.list.knFunction && window.pageExt.list.knFunction(selected,obj);
+					break;
 				case 'refresh-data':
 					refreshTableData();
 					break;
@@ -363,6 +367,9 @@ function ListPage() {
 					});
 				});
 				
+			}
+			else if (layEvent === 'review-kn-function') { // 预览
+				window.pageExt.list.reviewKnFunction(data);
 			}
 			
 		});

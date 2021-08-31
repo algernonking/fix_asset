@@ -2,7 +2,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:15
+ * @since 2021-08-31 15:16:50
  */
  -->
  <!DOCTYPE html>
@@ -106,6 +106,7 @@
 
     <a th:if="${perm.checkAuth('eam_asset_scrap:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
 
+    <a class="layui-btn layui-btn-xs " lay-event="download-bill" th:text="${lang.translate('单据')}">单据</a>
 
 </script>
 

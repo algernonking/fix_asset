@@ -80,6 +80,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);

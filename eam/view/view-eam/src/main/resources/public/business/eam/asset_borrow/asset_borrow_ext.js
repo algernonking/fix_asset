@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:28
+ * @since 2021-08-31 15:17:10
  */
 
 layui.config({
@@ -57,6 +57,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
+        },
+        downloadBill:function (data){
+            console.log('downloadBill',data);
         },
         other:function(){
 

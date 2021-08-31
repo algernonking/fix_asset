@@ -22,7 +22,7 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 资产 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:41
+ * @since 2021-08-31 15:17:22
 */
 
 public interface IAssetItemService extends ISuperService<AssetItem> {

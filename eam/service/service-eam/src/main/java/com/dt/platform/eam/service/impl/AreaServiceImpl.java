@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.dt.platform.domain.eam.Area;
 import com.dt.platform.domain.eam.AreaVO;
+
+import java.util.Arrays;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -67,6 +69,7 @@ public class AreaServiceImpl extends SuperService<Area> implements IAreaService 
 	 * */
 	@Override
 	public Result insert(Area area) {
+
 		Result r=super.insert(area);
 		return r;
 	}

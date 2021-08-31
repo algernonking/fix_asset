@@ -97,6 +97,9 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 }
         );
 
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
+
         cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
         cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 

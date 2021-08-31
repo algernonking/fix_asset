@@ -104,35 +104,35 @@
     }
     function search(){
         var ct=$("#searchtext").val();
-        // console.log("ct:"+ct);
-        // console.log("PageSize:"+PageSize);
-        // console.log("selectPage:"+selectPage);
+        console.log(ct);
         $.ajax({
             type : "POST",
-            url : project + "/api/ops/knBase/ext/selectPageSearch.do",
+            url : project + "service-knowledgebase/kn-content/query-paged-list",
+            ContentType : "application/json",
             data : {
                 pageIndex:selectPage,
                 pageSize:PageSize,
-                fullsearch:ct
+                content:ct
             },
             dataType : 'json',
             success : function(res) {
                 //填充搜索内容
                 var searchhtml="";
-                if(res.data.length>0){
-                    for(var j=0;j<res.data.length;j++){
+                if(res.code==0&&res.data.list.length){
+                    for(var j=0;j<res.data.list.length;j++){
                         searchhtml=searchhtml+"<div class=\"item\"> "
-                        var type=res.data[j].type;
+                        var object=res.data.list[j];
+                        var type=object.contentType;
                         var href="";
                         // console.log(type);
-                        if(type=="local"||type=="inter"){
-                            href="knbaselook.html?id="+res.data[j].id;
-                        }else if(type=="remote"){
-                            href=res.data[j].shareurl;
+                        if(type=="article"){
+                            href="knbaselook.html?id="+object.id;
+                        }else {
+                            href=object.linkAddress;
                         }
-                        searchhtml=searchhtml+"    <div class=\"header\"><a target=\"_blank\" href=\""+href+"\" >"+res.data[j].title+"</a></div>"
-                        searchhtml=searchhtml+"    <div class=\"profile\">"+res.data[j].profile+"</div>"
-                        searchhtml=searchhtml+"    <div class=\"footer text-secondary\"><span class=\"text-info\">"+res.data[j].catname+"</span>     阅读数: "+res.data[j].reviewcnt+"</div>"
+                        searchhtml=searchhtml+"    <div class=\"header\"><a target=\"_blank\" href=\""+href+"\" >"+object.title+"</a></div>"
+                        searchhtml=searchhtml+"    <div class=\"profile\">"+object.profile+"</div>"
+                        searchhtml=searchhtml+"    <div class=\"footer text-secondary\"><span class=\"text-info\">"+object.category.hierarchyName+"</span>     阅读数: "+object.reviewCount+"</div>"
                         searchhtml=searchhtml+"</div>"
                     }
                 }else{
@@ -141,7 +141,7 @@
                 $("#searchct").html(searchhtml);
                 //计算分页数据
                 var pagehtml=""
-                var Count=res.iTotalRecords;
+                var Count=res.data.totalRowCount;
                 var PageCount=parseInt(Count/PageSize);
                 if(Count%PageSize!=0){
                     PageCount++;

@@ -2,12 +2,23 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.alibaba.fastjson.JSON;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.api.error.CommonError;
+import com.github.foxnic.commons.log.Logger;
+import com.github.foxnic.springboot.web.DownloadUtil;
+import org.github.foxnic.web.domain.storage.File;
+import org.github.foxnic.web.proxy.storage.FileServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
 import com.dt.platform.domain.eam.TplFile;
 import com.dt.platform.domain.eam.TplFileVO;
+
+import java.io.IOException;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -28,6 +39,8 @@ import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
 import com.dt.platform.eam.service.ITplFileService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.wildfly.common.os.Process;
+
 import java.util.Date;
 
 /**
@@ -41,13 +54,18 @@ import java.util.Date;
 
 @Service("EamTplFileService")
 public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFileService {
-	
+
+
 	/**
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-	
+
+	@Value("${storage.mode}")
+	private String storageMode;
+
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -256,6 +274,64 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 	public ExcelStructure buildExcelStructure(boolean isForExport) {
 		return super.buildExcelStructure(isForExport);
 	}
+
+
+//
+//	public File getFile(String code) {
+//
+//		TplFile sample = new TplFile();
+//		sample.setCode(code);
+//		List<TplFile> list=this.queryList(sample);
+//		if(list.size()==0){
+//			return null;
+//		}
+//		TplFile file=list.get(0);
+//
+//		Result result=null;
+//
+//
+//		byte[] bytes=null;
+//		try {
+//
+//			bytes=this.getStorageSupport().read(fileInfo);
+//			if(bytes==null) {
+//				result= ErrorDesc.failure(CommonError.FILE_INVALID).message("file read error");
+//			} else {
+//				DownloadUtil.writeToOutput(response, bytes, fileInfo.getFileName(), null, inline);
+//			}
+//			return;
+//		}catch (Exception e) {
+//			Logger.error(e.getMessage(),e);
+//			result= ErrorDesc.failure(CommonError.FILE_INVALID).message(e.getMessage());
+//		}
+//
+//		if(result!=null) {
+//			try {
+//				response.setCharacterEncoding("UTF-8");
+//				response.getWriter().write(JSON.toJSONString(result));
+//			} catch (IOException e) {
+//				Logger.error("下载失败，输出异常",e);
+//			}
+//		}
+
+
+
+//		Result result = new Result();
+//		TplFile sample = new TplFile();
+//		sample.setCode(code);
+//		List<TplFile> list=this.queryList(sample);
+//		if(list.size()>0){
+//			Result<File> file=FileServiceProxy.api().getById(list.get(0).getFileId());
+//			if(!file.isSuccess()){
+//				return ErrorDesc.failure().message(file.getMessage());
+//			}
+//			result.data(file.getData().getLocation());
+//			result.success(true);
+//		}
+//		return result;
+
+	//	return null
+//	}
 
 
 }

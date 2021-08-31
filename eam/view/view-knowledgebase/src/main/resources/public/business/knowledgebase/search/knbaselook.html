@@ -100,10 +100,10 @@
     if(!id){
         alert('未获取ID');
     }else{
-        var project = "/dt";
+        var project = "/";
         $.ajax({
             type : "POST",
-            url : project + "/api/ops/knBase/ext/selectById.do",
+            url : project + "service-knowledgebase/kn-content/get-by-id",
             data : {
                 id:id
             },
@@ -119,12 +119,14 @@
                     m = date.getMinutes() + ':';
                     s = date.getSeconds();
                     var lt=Y+M+D+h+m+s;
-                    var desc="<span>"+rdata.lusername+"</span>·<span style=\"margin-left:0px\"></span><span>"+lt+"</span>"
+                    var ut=rdata.createTime;
+                    var user="管理人"
+                    var desc="<span>"+user+"</span>·<span style=\"margin-left:0px\"></span><span>"+ut+"</span>"
                     var code="<span>No."+rdata.id+"</span>";
                     $("#desc").html(desc);
                     $("#title").html(rdata.title);
                     $("#code").html(code);
-                    $("#ct").html(rdata.ct);
+                    $("#ct").html(rdata.content);
                     $("#split").html("<hr>")
                     if(rdata.attach&&rdata.attach.length>0){
                         var attachhtml='附件:<a href=\"../../../../api/file/filedown.do?id="+rdata.attach+"\">下载</a>'

@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模板文件 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-30 11:06:46
+ * @since 2021-08-31 15:16:42
 */
 
 @Api(tags = "模板文件")
@@ -65,10 +65,10 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "添加模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
+		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -86,7 +86,7 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "删除模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = TplFileVOMeta.ID)
@@ -120,10 +120,10 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "更新模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
+		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE , TplFileVOMeta.SEARCH_FIELD , TplFileVOMeta.FUZZY_FIELD , TplFileVOMeta.SEARCH_VALUE , TplFileVOMeta.SORT_FIELD , TplFileVOMeta.SORT_TYPE , TplFileVOMeta.IDS } ) 
@@ -141,10 +141,10 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "保存模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
+		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE , TplFileVOMeta.SEARCH_FIELD , TplFileVOMeta.FUZZY_FIELD , TplFileVOMeta.SEARCH_VALUE , TplFileVOMeta.SORT_FIELD , TplFileVOMeta.SORT_TYPE , TplFileVOMeta.IDS } )
@@ -201,10 +201,10 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "查询模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
+		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE } )
@@ -223,10 +223,10 @@ public class TplFileController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询模板文件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
+		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

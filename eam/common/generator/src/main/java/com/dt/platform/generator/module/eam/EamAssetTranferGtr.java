@@ -40,6 +40,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
 
 
 
+
+
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).search().fuzzySearch();
@@ -79,6 +81,9 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
+
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
 
         //分成分组布局
         cfg.view().formWindow().width("85%");

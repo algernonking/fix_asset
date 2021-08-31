@@ -5,13 +5,14 @@ import com.dt.platform.domain.knowledgebase.Content;
 import java.math.BigDecimal;
 import java.util.Date;
 import com.dt.platform.domain.knowledgebase.Category;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:30
- * @sign B2F3C164DE91BB6543ED33CCBC7114A0
+ * @since 2021-08-31 22:25:31
+ * @sign 711CB882BFDAAAA96970CC7D8907F204
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -148,6 +149,16 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> GRADE_ID_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,GRADE_ID, java.lang.String.class, "等级", "等级", java.lang.String.class, null);
 	
 	/**
+	 * 编辑人 , 类型: java.lang.String
+	*/
+	public static final String EDITOR_ID="editorId";
+	
+	/**
+	 * 编辑人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> EDITOR_ID_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,EDITOR_ID, java.lang.String.class, "编辑人", "编辑人", java.lang.String.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -248,9 +259,19 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,com.dt.platform.domain.knowledgebase.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,CATEGORY, com.dt.platform.domain.knowledgebase.Category.class, "知识分类", "知识分类", com.dt.platform.domain.knowledgebase.Category.class, null);
 	
 	/**
+	 * 编辑人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String EDITOR="editor";
+	
+	/**
+	 * 编辑人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,org.github.foxnic.web.domain.hrm.Employee> EDITOR_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,EDITOR, org.github.foxnic.web.domain.hrm.Employee.class, "编辑人", "编辑人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , EDITOR_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , EDITOR };
 	
 	/**
 	 * 代理类
@@ -404,6 +425,17 @@ public class ContentMeta {
 		}
 		
 		/**
+		 * 设置 编辑人
+		 * @param editorId 编辑人
+		 * @return 当前对象
+		*/
+		public Content setEditorId(String editorId) {
+			super.change(EDITOR_ID,super.getEditorId(),editorId);
+			super.setEditorId(editorId);
+			return this;
+		}
+		
+		/**
 		 * 设置 备注
 		 * @param notes 备注
 		 * @return 当前对象
@@ -510,6 +542,17 @@ public class ContentMeta {
 		public Content setCategory(Category category) {
 			super.change(CATEGORY,super.getCategory(),category);
 			super.setCategory(category);
+			return this;
+		}
+		
+		/**
+		 * 设置 编辑人
+		 * @param editor 编辑人
+		 * @return 当前对象
+		*/
+		public Content setEditor(Employee editor) {
+			super.change(EDITOR,super.getEditor(),editor);
+			super.setEditor(editor);
 			return this;
 		}
 	}
