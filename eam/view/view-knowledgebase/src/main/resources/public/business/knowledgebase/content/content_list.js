@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
+ * @since 2021-08-31 22:25:37
  */
 
 
@@ -18,7 +18,10 @@ function ListPage() {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
-		
+
+		if(window.pageExt.list.beforeInit) {
+			window.pageExt.list.beforeInit();
+		}
      	//渲染表格
      	renderTable();
 		//初始化搜索输入框组件
@@ -70,8 +73,9 @@ function ListPage() {
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return fox.getEnumText(RADIO_DISPLAY_DATA,d.display);}}
 					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet:function (d){ return fox.getDictText(SELECT_GRADEID_DATA,d.gradeId);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'resEditorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('编辑人') , templet: function (d) { return fox.getProperty(d,["editor","name"]);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
@@ -101,12 +105,11 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.categoryId={ value: xmSelect.get("#categoryId",true).getValue("value"), fillBy:"category",field:"id", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
-		value.title={ value: $("#title").val()};
-		value.profile={ value: $("#profile").val()};
+		value.title={ value: $("#title").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.profile={ value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.contentType={ value: xmSelect.get("#contentType",true).getValue("value"), label:xmSelect.get("#contentType",true).getValue("nameStr")};
 		value.display={ value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr")};
 		value.gradeId={ value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr")};
-		value.notes={ value: $("#notes").val()};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -256,6 +259,9 @@ function ListPage() {
 				case 'batch-del':
 					batchDelete(selected);
 					break;
+				case 'tool-kn-function':
+					window.pageExt.list.knFunction && window.pageExt.list.knFunction(selected,obj);
+					break;
 				case 'refresh-data':
 					refreshTableData();
 					break;
@@ -362,6 +368,9 @@ function ListPage() {
 				});
 				
 			}
+			else if (layEvent === 'review-kn-function') { // 预览
+				window.pageExt.list.reviewKnFunction(data);
+			}
 			
 		});
  
@@ -371,6 +380,10 @@ function ListPage() {
      * 打开编辑窗口
      */
 	function showEditForm(data) {
+		if(window.pageExt.list.beforeEdit) {
+			var doNext=window.pageExt.list.beforeEdit(data);
+			if(!doNext) return;
+		}
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('kn-content-form-data', data);
@@ -382,7 +395,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["90%",height+"px"],
+			area: ["95%",height+"px"],
 			type: 2,
 			id:"kn-content-form-data-win",
 			content: '/business/knowledgebase/content/content_form.html' + queryString,

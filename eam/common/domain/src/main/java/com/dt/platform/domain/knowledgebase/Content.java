@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
- * @sign B2F3C164DE91BB6543ED33CCBC7114A0
+ * @since 2021-08-31 22:25:31
+ * @sign 711CB882BFDAAAA96970CC7D8907F204
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -109,6 +110,12 @@ public class Content extends Entity {
 	private String gradeId;
 	
 	/**
+	 * 编辑人：编辑人
+	*/
+	@ApiModelProperty(required = false,value="编辑人" , notes = "编辑人")
+	private String editorId;
+	
+	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
@@ -167,6 +174,12 @@ public class Content extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="知识分类" , notes = "知识分类")
 	private Category category;
+	
+	/**
+	 * 编辑人：编辑人
+	*/
+	@ApiModelProperty(required = false,value="编辑人" , notes = "编辑人")
+	private Employee editor;
 	
 	/**
 	 * 获得 主键<br>
@@ -416,6 +429,25 @@ public class Content extends Entity {
 	}
 	
 	/**
+	 * 获得 编辑人<br>
+	 * 编辑人
+	 * @return 编辑人
+	*/
+	public String getEditorId() {
+		return editorId;
+	}
+	
+	/**
+	 * 设置 编辑人
+	 * @param editorId 编辑人
+	 * @return 当前对象
+	*/
+	public Content setEditorId(String editorId) {
+		this.editorId=editorId;
+		return this;
+	}
+	
+	/**
 	 * 获得 备注<br>
 	 * 备注
 	 * @return 备注
@@ -602,6 +634,25 @@ public class Content extends Entity {
 	*/
 	public Content setCategory(Category category) {
 		this.category=category;
+		return this;
+	}
+	
+	/**
+	 * 获得 编辑人<br>
+	 * 编辑人
+	 * @return 编辑人
+	*/
+	public Employee getEditor() {
+		return editor;
+	}
+	
+	/**
+	 * 设置 编辑人
+	 * @param editor 编辑人
+	 * @return 当前对象
+	*/
+	public Content setEditor(Employee editor) {
+		this.editor=editor;
 		return this;
 	}
 

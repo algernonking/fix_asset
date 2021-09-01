@@ -33,10 +33,15 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).search().fuzzySearch();
 
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE).search().range();
+
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).form().validate().required();
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CONTENT).form().textArea().height(30);
 
+
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE).form().validate().required();
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -54,6 +59,9 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CLEAN_STATUS).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().disable();
 
+
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
@@ -80,8 +88,8 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
 
 
 
-        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
-        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
 
         //文件生成覆盖模式
@@ -90,7 +98,8 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页; //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

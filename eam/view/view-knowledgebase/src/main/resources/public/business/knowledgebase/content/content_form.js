@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:51:08
+ * @since 2021-08-31 22:25:38
  */
 
 function FormPage() {
@@ -24,6 +24,10 @@ function FormPage() {
 		}
 		if(admin.getTempData('kn-content-form-data-form-action')=="view") {
 			disableModify=true;
+		}
+
+		if(window.pageExt.form.beforeInit) {
+			window.pageExt.form.beforeInit();
 		}
 
 		//渲染表单组件
@@ -93,7 +97,7 @@ function FormPage() {
 	    //渲染图片字段
 		foxup.render({
 			el:"attach",
-			maxFileCount: 3,
+			maxFileCount: 1,
 			displayFileName: true,
 			accept: "file",
 			exts:'doc|zip|xlsx|rar|docx|txt|svg',
@@ -161,13 +165,12 @@ function FormPage() {
 			//设置  等级 设置下拉框勾选
 			fox.setSelectValue4Dict("#gradeId",formData.gradeId,SELECT_GRADEID_DATA);
 
-
-
+			//处理fillBy
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 
-		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
 
 		}
 
@@ -254,6 +257,7 @@ function FormPage() {
 			saveForm(data.field);
 	        return false;
 	    });
+
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

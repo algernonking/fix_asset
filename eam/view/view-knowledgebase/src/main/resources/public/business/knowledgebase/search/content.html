@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知识库</title>
+    <script src="./jquery.min.js"></script>
+    <script>
+        window.paceOptions = {
+            ajax: {
+                trackMethods: ['GET', 'POST'],
+            },
+            document:false,
+            elements: false,
+            eventLag:false,
+            restartOnPushState: false,
+            restartOnRequestAfter: false,
+            startOnPageLoad:false,
+        };
+    </script>
+    <script src="./pace/pace.js"></script>
+    <link href="./pace/themes/blue/pace-theme-loading-bar.css" rel="stylesheet" />
+</head>
+<body>
+<style>
+    /* table 样式 */
+    table {
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+    }
+    table td,
+    table th {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        padding: 3px 5px;
+    }
+    table th {
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+    }
+    /* blockquote 样式 */
+    blockquote {
+        display: block;
+        border-left: 8px solid #d0e5f2;
+        padding: 5px 10px;
+        margin: 10px 0;
+        line-height: 1.4;
+        font-size: 100%;
+        background-color: #f1f1f1;
+    }
+    /* code 样式 */
+    code {
+        word-break:break-all!important;
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        background-color: #f1f1f1;
+        border-radius: 3px;
+        padding: 3px 5px;
+        margin: 0 3px;
+    }
+    pre code {
+        display: block;
+    }
+    pre code xmp{ white-space:pre-wrap; word-wrap:break-word}
+    /* ul ol 样式 */
+    ul, ol {
+        margin: 10px 0 10px 20px;
+    }
+</style>
+<div style="width:100%;margin-top:20px;font-size:25px;text-align: center">
+    <span id="title">加载中...</span>
+</div>
+<div style="font-size: 10px;color:#6c757d!important" id="desc" >
+</div>
+<div style="font-size: 10px;color:#6c757d!important" id="code">
+</div>
+<div>
+    <span style="font-size: 12px" id="attach">
+    </span>
+</div>
+<div id="split">
+</div>
+<div id="ct" style="width:100%">
+</div>
+<script>
+    $(document).ajaxStart(function() { window.Pace.restart();});
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+    var id=getQueryVariable("id")
+    if(!id){
+        alert('未获取ID');
+    }else{
+        var project = "/";
+        $.ajax({
+            type : "POST",
+            url : project + "service-knowledgebase/kn-content/get-by-id",
+            data : {
+                id:id
+            },
+            dataType : 'json',
+            success : function(res) {
+                if(res.success){
+                    var rdata=res.data;
+                    var date = new Date(rdata.lasttime);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes() + ':';
+                    s = date.getSeconds();
+                    var lt=Y+M+D+h+m+s;
+                    var ut=rdata.createTime;
+                    var desc="<span>"+rdata.lusername+"</span>·<span style=\"margin-left:0px\"></span><span>"+lt+"</span>"
+                    var code="<span>No."+rdata.id+"</span>";
+                    $("#desc").html(desc);
+                    $("#title").html(rdata.title);
+                    $("#code").html(code);
+                    $("#ct").html(rdata.content);
+                    $("#split").html("<hr>")
+                    if(rdata.attach&&rdata.attach.length>0){
+                        var attachhtml='附件:<a href=\"../../../../api/file/filedown.do?id="+rdata.attach+"\">下载</a>'
+                        $("#attach").html(attachhtml);
+                    }
+                }else{
+                    $("#title").html("加载数据失败")
+                    alert("获取数据失败!");
+                }
+            }
+        });
+
+    }
+
+</script>
+</body>
+</html>

@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:32
- * @sign 083AA91A35E8AAF572D2D99C4A12B7B9
+ * @since 2021-08-31 15:17:07
+ * @sign 5AD0C2E9402F02956C5FE27540A9825C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -187,6 +187,18 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Person originator;
+	
+	/**
+	 * 调入管理员：调入管理员
+	*/
+	@ApiModelProperty(required = false,value="调入管理员" , notes = "调入管理员")
+	private Person manager;
+	
+	/**
+	 * 使用人：使用人
+	*/
+	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
+	private Person useUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -701,6 +713,44 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setOriginator(Person originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 调入管理员<br>
+	 * 调入管理员
+	 * @return 调入管理员
+	*/
+	public Person getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 调入管理员
+	 * @param manager 调入管理员
+	 * @return 当前对象
+	*/
+	public AssetTranfer setManager(Person manager) {
+		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用人<br>
+	 * 使用人
+	 * @return 使用人
+	*/
+	public Person getUseUser() {
+		return useUser;
+	}
+	
+	/**
+	 * 设置 使用人
+	 * @param useUser 使用人
+	 * @return 当前对象
+	*/
+	public AssetTranfer setUseUser(Person useUser) {
+		this.useUser=useUser;
 		return this;
 	}
 

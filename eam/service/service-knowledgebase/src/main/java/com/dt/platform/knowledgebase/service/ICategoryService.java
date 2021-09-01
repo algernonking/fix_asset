@@ -21,11 +21,18 @@ import com.github.foxnic.dao.data.SaveMode;
  * 知识分类 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 20:41:31
+ * @since 2021-08-26 09:23:37
 */
 
 public interface ICategoryService extends ISuperService<Category> {
-	
+
+	/**
+	 * 更新分类路径及名称
+	 * @param id 主键
+	 * @return 插入是否成功
+	 * */
+	Result updateHierarchy(String id);
+
 	/**
 	 * 插入实体
 	 * @param category 实体数据

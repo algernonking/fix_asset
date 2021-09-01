@@ -29,8 +29,7 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
-
-        ; //列表HTML页
+        //列表HTML页
         cfg.buildAll();
     }
 

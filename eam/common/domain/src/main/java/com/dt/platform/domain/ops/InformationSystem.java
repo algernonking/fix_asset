@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:53
- * @sign CD323197665BC9D219152E72F49CA314
+ * @since 2021-08-29 12:16:10
+ * @sign F0D56F8DE95CED78E08288958DF13CAD
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -84,9 +84,9 @@ public class InformationSystem extends Entity {
 	private String businessContact;
 	
 	/**
-	 * 所属组织：所属组织
+	 * 所属公司/部门：所属公司/部门
 	*/
-	@ApiModelProperty(required = false,value="所属组织" , notes = "所属组织")
+	@ApiModelProperty(required = false,value="所属公司/部门" , notes = "所属公司/部门")
 	private String belongOrgInfo;
 	
 	/**
@@ -405,17 +405,17 @@ public class InformationSystem extends Entity {
 	}
 	
 	/**
-	 * 获得 所属组织<br>
-	 * 所属组织
-	 * @return 所属组织
+	 * 获得 所属公司/部门<br>
+	 * 所属公司/部门
+	 * @return 所属公司/部门
 	*/
 	public String getBelongOrgInfo() {
 		return belongOrgInfo;
 	}
 	
 	/**
-	 * 设置 所属组织
-	 * @param belongOrgInfo 所属组织
+	 * 设置 所属公司/部门
+	 * @param belongOrgInfo 所属公司/部门
 	 * @return 当前对象
 	*/
 	public InformationSystem setBelongOrgInfo(String belongOrgInfo) {

@@ -35,7 +35,6 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).search().range();
 
 
-
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).table().hidden();
@@ -49,11 +48,11 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
-
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_ALLOCATION.STATUS,
-
                         EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE
                 },
                 new Object[]{
@@ -85,8 +84,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         );
 
 
-        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
-        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
 
 
@@ -96,7 +95,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE) //列表HTML页
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

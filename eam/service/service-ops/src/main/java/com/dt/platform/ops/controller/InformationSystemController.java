@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 信息系统 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:53
+ * @since 2021-08-29 12:16:10
 */
 
 @Api(tags = "信息系统")
@@ -74,7 +74,7 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LASTDRILL_DATE , value = "最后一次演练" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.ONLINE_DATE , value = "上线时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.OFFLINE_DATE , value = "下线时间" , required = false , dataTypeClass=Date.class),
@@ -150,7 +150,7 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LASTDRILL_DATE , value = "最后一次演练" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.ONLINE_DATE , value = "上线时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.OFFLINE_DATE , value = "下线时间" , required = false , dataTypeClass=Date.class),
@@ -192,7 +192,7 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LASTDRILL_DATE , value = "最后一次演练" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.ONLINE_DATE , value = "上线时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.OFFLINE_DATE , value = "下线时间" , required = false , dataTypeClass=Date.class),
@@ -273,7 +273,7 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LASTDRILL_DATE , value = "最后一次演练" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.ONLINE_DATE , value = "上线时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.OFFLINE_DATE , value = "下线时间" , required = false , dataTypeClass=Date.class),
@@ -316,7 +316,7 @@ public class InformationSystemController extends SuperController {
 		@ApiImplicitParam(name = InformationSystemVOMeta.DEV_METHOD , value = "开发模式" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = InformationSystemVOMeta.TECHNICAL_CONTACT , value = "技术联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.BUSINESS_CONTACT , value = "业务联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属组织" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InformationSystemVOMeta.BELONG_ORG_INFO , value = "所属公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.LASTDRILL_DATE , value = "最后一次演练" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.ONLINE_DATE , value = "上线时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InformationSystemVOMeta.OFFLINE_DATE , value = "下线时间" , required = false , dataTypeClass=Date.class),

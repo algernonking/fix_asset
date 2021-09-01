@@ -33,6 +33,15 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","位置","位置");
         cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
+
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","调入管理员","调入管理员");
+
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人","使用人");
+
+
+
+
+
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).search().fuzzySearch();
@@ -73,6 +82,9 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
+
         //分成分组布局
         cfg.view().formWindow().width("85%");
         cfg.view().formWindow().bottomSpace(250);
@@ -96,8 +108,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 }
         );
 
-        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
-        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
 
         //文件生成覆盖模式

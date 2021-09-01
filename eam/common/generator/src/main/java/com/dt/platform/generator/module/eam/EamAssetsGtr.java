@@ -9,6 +9,7 @@ import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import org.github.foxnic.web.domain.hrm.Person;
 
 
 public class EamAssetsGtr extends BaseCodeGenerator {
@@ -32,6 +33,9 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
+
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"use_user","使用人员","使用人员");
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","管理人员","管理人员");
 
        // cfg.getPoClassFile().addSimpleProperty(Person.class,"position","存放位置","软件信息");
      //   cfg.getPoClassFile().addSimpleProperty(Brand.class,"brand","品牌","品牌");

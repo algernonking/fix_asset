@@ -41,7 +41,7 @@ public class EamAssetBorrowDataGtr extends BaseCodeGenerator {
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.IGNORE) //表单HTML页
                 .setListPage(WriteMode.IGNORE)
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
+                .setExtendJsFile(WriteMode.IGNORE);
         ; //列表HTML页
         cfg.buildAll();
     }

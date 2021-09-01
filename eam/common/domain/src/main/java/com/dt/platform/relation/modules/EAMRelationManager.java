@@ -125,6 +125,10 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetRepairMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
+        // 报修人
+        this.property(AssetRepairMeta.REPORT_USER_PROP)
+                .using(EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
 
     }
 
@@ -146,15 +150,30 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetTranferMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
+        // 关联管理人员
+        this.property(AssetTranferMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        // 关联使用人员
+        this.property(AssetTranferMeta.USE_USER_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+
     }
 
     public void setupAssetHandle() {
         // 关联资产
         this.property(AssetHandleMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_HANDLE.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_HANDLE.ID).join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+
+//        this.property(AssetHandleMeta.ASSET_LIST_PROP)
+//                .join(
+//                        with(EAMTables.EAM_ASSET_HANDLE.ID),
+//                        with(EAMTables.EAM_ASSET_ITEM.HANDLE_ID).contition().addorderby()
+//                );
+
 
         // 关联制单人
         this.property(AssetHandleMeta.ORIGINATOR_PROP)
@@ -205,6 +224,14 @@ public class EAMRelationManager extends RelationManager {
     }
 
     public void setupAsset() {
+
+        // 关联使用人
+        this.property(AssetMeta.USE_USER_PROP)
+                .using(EAMTables.EAM_ASSET.USE_USER_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        // 关联管理人员
+        this.property(AssetMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET.MANUFACTURER_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 
         // 关联物品档案

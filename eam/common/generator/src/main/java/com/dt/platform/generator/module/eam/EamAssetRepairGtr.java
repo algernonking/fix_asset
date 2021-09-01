@@ -35,6 +35,9 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
         cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
+        cfg.getPoClassFile().addSimpleProperty(Person.class,"reportUser","报修人","报修人");
+
+
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();
 
@@ -69,6 +72,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
 
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().width(250);
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -79,7 +84,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
-                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
+                        EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID,
                         EAMTables.EAM_ASSET_REPAIR.CONTENT
                 }
 
@@ -87,8 +92,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().form().addJsVariable("PERSON_ID",   "[[${user.getUser().getPerson().getId()}]]","用户ID");
-        cfg.view().form().addJsVariable("PERSON_NAME", "[[${user.getUser().getPerson().getName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
 
         cfg.view().formWindow().width("85%");
@@ -101,7 +106,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_REPAIR.OPERUSER_ID,
+                        EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID,
                 }
         );
 

@@ -23,6 +23,8 @@ public class EamSupplierGtr extends BaseCodeGenerator{
                 }
         );
 
+        //eam_tpl_file
+
         cfg.view().field(EAMTables.EAM_SUPPLIER.SUPPLIER_NAME).form().validate().required();
 
         //文件生成覆盖模式

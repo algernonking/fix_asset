@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Person;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 17:39:21
- * @sign F2B317D6F9B7D37C8E09D155ADBDA10D
+ * @since 2021-08-25 12:15:35
+ * @sign 9E68F6558C6B0A576EE9894B4BFD136B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -335,6 +336,18 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
 	private Warehouse warehouse;
+	
+	/**
+	 * 使用人员：使用人员
+	*/
+	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
+	private Person use_user;
+	
+	/**
+	 * 管理人员：管理人员
+	*/
+	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
+	private Person manager;
 	
 	/**
 	 * 获得 主键<br>
@@ -1302,6 +1315,44 @@ public class Asset extends Entity {
 	*/
 	public Asset setWarehouse(Warehouse warehouse) {
 		this.warehouse=warehouse;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用人员<br>
+	 * 使用人员
+	 * @return 使用人员
+	*/
+	public Person getUseUser() {
+		return use_user;
+	}
+	
+	/**
+	 * 设置 使用人员
+	 * @param use_user 使用人员
+	 * @return 当前对象
+	*/
+	public Asset setUseUser(Person use_user) {
+		this.use_user=use_user;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人员<br>
+	 * 管理人员
+	 * @return 管理人员
+	*/
+	public Person getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 管理人员
+	 * @param manager 管理人员
+	 * @return 当前对象
+	*/
+	public Asset setManager(Person manager) {
+		this.manager=manager;
 		return this;
 	}
 

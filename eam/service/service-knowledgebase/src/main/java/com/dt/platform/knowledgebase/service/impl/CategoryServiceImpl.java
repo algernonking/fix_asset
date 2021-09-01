@@ -2,6 +2,11 @@ package com.dt.platform.knowledgebase.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.github.foxnic.api.error.CommonError;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.sql.expr.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +40,7 @@ import java.util.Date;
  * 知识分类 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-14 20:41:31
+ * @since 2021-08-26 09:23:37
 */
 
 
@@ -59,7 +64,39 @@ public class CategoryServiceImpl extends SuperService<Category> implements ICate
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
+	/**
+	 * 更新分类路径及名称
+	 * @param id 主键
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result updateHierarchy(String id) {
+		Rcd category_rs = dao.queryRecord("select id,category_name categoryName,hierarchy from kn_category where deleted='0' and id=?", id);
+		String hierarchy=category_rs.getString("hierarchy");
+		String split="/";
+		String afterHierarchyName="";
+		String[] ids = hierarchy.split(split);
+		for (int i = 0; i < ids.length;i++) {
+			afterHierarchyName = afterHierarchyName + split+ dao.queryRecord("select category_name categoryName from kn_category where deleted='0' and id=?", ids[i]).getString("categoryName");
+		}
+		afterHierarchyName = afterHierarchyName.replaceFirst(split, "");
+		Update ups = new Update("kn_category");
+		ups.set("hierarchy_name", afterHierarchyName);
+		ups.where().and("id=?", id);
+		dao.execute(ups);
+		RcdSet rds = dao.query("select id,category_name categoryName,hierarchy from kn_category where deleted='0' and parent_id=?", id);
+		for (int j = 0; j < rds.size(); j++) {
+			updateHierarchy(rds.getRcd(j).getString("id"));
+		}
+		Result r=new Result();
+		r.success(true);
+		r.message(CommonError.SUCCESS_TEXT);
+		return r;
+	}
+
+
 	/**
 	 * 插入实体
 	 * @param category 实体数据

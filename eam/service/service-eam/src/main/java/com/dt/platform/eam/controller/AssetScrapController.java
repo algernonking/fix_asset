@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产报废 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 10:32:17
+ * @since 2021-08-31 15:16:50
 */
 
 @Api(tags = "资产报废")

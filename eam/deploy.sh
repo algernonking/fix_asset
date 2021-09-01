@@ -80,7 +80,6 @@ fi
 if [[ $ops_node_file_recreate -eq 1 ]];then
 	echo "39.105.191.22|22|root|123456|hostname=ops">$ops_node_file
 fi
-
 ####################### Deploy ######################################
 ops=/Users/lank/IdeaProjectsnew/eam/eam/ops.jar
 echo "$JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file">>/tmp/ops.log

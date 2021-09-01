@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 13:50:55
+ * @since 2021-08-29 12:16:12
  */
  -->
  <!DOCTYPE html>
@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
@@ -39,17 +40,8 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('实例名称')}">实例名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('实例名称') }" type="text" class="layui-input"    lay-verify="|required"   />
-                    </div>
-                </div>
-
-
-                
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('主机')}">主机</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('主机')}">主机</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <div id="hostId" input-type="select" th:data="${'/service-ops/ops-host/query-paged-list'}"></div>
                         </div>
@@ -58,9 +50,9 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('数据库')}">数据库</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
                         <div class="layui-input-block ">
-                            <div id="databaseId" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
+                            <div id="backupStatus" input-type="select" th:data="${dict.toArray('ops_db_backup_status')}"></div>
                         </div>
                     </div>
 
@@ -74,6 +66,15 @@
                     </div>
 
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
+                        <div class="layui-input-block ">
+                            <div id="backupType" input-type="select" th:data="${dict.toArray('ops_db_backup_type')}"></div>
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -81,21 +82,29 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('备份时间')}">备份时间</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('数据库')}">数据库</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="backupTime" id="backupTime" name="backupTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('备份时间') }" type="text" class="layui-input"    lay-verify=""   />
+                            <div id="databaseId" input-type="select" th:data="${'/service-ops/ops-service-info/query-list'}"></div>
                         </div>
                     </div>
 
 
                 
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('实例名称')}">实例名称</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('实例名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    </div>
+                </div>
+
+
+                
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('备份时间')}">备份时间</div></div>
                         <div class="layui-input-block ">
-                            <div id="backupStatus" input-type="select" th:data="${dict.toArray('ops_db_backup_status')}"></div>
+                            <input input-type="date" lay-filter="backupTime" id="backupTime" name="backupTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('备份时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
-
 
                 
                 <div class="layui-form-item" >
@@ -113,15 +122,6 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('备份状态')}">备份状态</div></div>
-                        <div class="layui-input-block ">
-                            <div id="backupType" input-type="select" th:data="${dict.toArray('ops_db_backup_type')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备份方式')}">备份方式</div></div>
                         <div class="layui-input-block ">
                             <div id="backupMethod" input-type="select" th:data="${dict.toArray('ops_db_backup_method')}"></div>
@@ -133,7 +133,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备份大小')}">备份大小</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="backupSize" id="backupSize" name="backupSize" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份大小') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="backupSize" id="backupSize" name="backupSize" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份大小') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="false" step="1.0"   scale="2"/>
                         </div>
                     </div>
 
@@ -167,6 +167,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 150px"></div>
 
 
     </form>
@@ -181,6 +182,7 @@
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
@@ -188,7 +190,7 @@
     var SELECT_BACKUPTYPE_DATA = [[${dict.toArray('ops_db_backup_type')}]];
     var SELECT_BACKUPSTATUS_DATA = [[${dict.toArray('ops_db_backup_status')}]];
     var SELECT_BACKUPMETHOD_DATA = [[${dict.toArray('ops_db_backup_method')}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"实例名称","inputType":"text_input","required":true},"backupTime":{"date":true,"labelInForm":"备份时间","inputType":"date_input"}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"实例名称","inputType":"text_input","required":true},"hostId":{"labelInForm":"主机","inputType":"select_box","required":true},"databaseId":{"labelInForm":"数据库","inputType":"select_box","required":true},"backupTime":{"date":true,"labelInForm":"备份时间","inputType":"date_input"}};
     var AUTH_PREFIX="ops_db_instance";
 
 
