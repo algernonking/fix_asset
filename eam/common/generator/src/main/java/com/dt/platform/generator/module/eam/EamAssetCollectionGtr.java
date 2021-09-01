@@ -14,6 +14,7 @@ import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetCollectionGtr extends BaseCodeGenerator {
@@ -30,8 +31,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人员","使用人员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
 
 
 

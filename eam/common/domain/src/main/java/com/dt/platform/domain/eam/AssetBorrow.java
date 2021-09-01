@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:10
- * @sign 23CA17873B710DA8601269894AD5A1EB
+ * @since 2021-09-01 08:02:44
+ * @sign 9618ABD2A8E85E5861EB6E35917B8564
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -162,13 +162,13 @@ public class AssetBorrow extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 借用人：借用人
 	*/
 	@ApiModelProperty(required = false,value="借用人" , notes = "借用人")
-	private Person borrower;
+	private Employee borrower;
 	
 	/**
 	 * 获得 主键<br>
@@ -596,7 +596,7 @@ public class AssetBorrow extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -605,7 +605,7 @@ public class AssetBorrow extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetBorrow setOriginator(Person originator) {
+	public AssetBorrow setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}
@@ -615,7 +615,7 @@ public class AssetBorrow extends Entity {
 	 * 借用人
 	 * @return 借用人
 	*/
-	public Person getBorrower() {
+	public Employee getBorrower() {
 		return borrower;
 	}
 	
@@ -624,7 +624,7 @@ public class AssetBorrow extends Entity {
 	 * @param borrower 借用人
 	 * @return 当前对象
 	*/
-	public AssetBorrow setBorrower(Person borrower) {
+	public AssetBorrow setBorrower(Employee borrower) {
 		this.borrower=borrower;
 		return this;
 	}

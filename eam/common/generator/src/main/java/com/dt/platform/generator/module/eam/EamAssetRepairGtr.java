@@ -20,6 +20,7 @@ import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.proxy.eam.CategoryServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetRepairGtr extends BaseCodeGenerator{
@@ -33,9 +34,9 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"reportUser","报修人","报修人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"reportUser","报修人","报修人");
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);

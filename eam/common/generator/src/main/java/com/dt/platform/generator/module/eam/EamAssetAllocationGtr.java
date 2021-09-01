@@ -13,6 +13,7 @@ import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetAllocationGtr extends BaseCodeGenerator {
@@ -27,7 +28,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE).search().fuzzySearch();

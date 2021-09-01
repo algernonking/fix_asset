@@ -7,6 +7,7 @@ import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.commons.busi.id.SequenceType;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.spec.DAO;
+import com.github.foxnic.dao.spec.DBSequence;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.stereotype.Service;
 import com.github.foxnic.api.transter.Result;
@@ -227,9 +228,11 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 				seqSource=attr[i];
 			}
 		}
-		//后期再优化去掉create
-		this.dao.createSequence(seqSource, SequenceType.AI,8);
-		return this.dao.getNextSequenceValue(seqSource);
+		DBSequence seq=dao.getSequence(seqSource);
+		if(!seq.exists()){
+			seq.create(SequenceType.AI,phLength);
+		}
+		return seq.next();
 	}
 
 

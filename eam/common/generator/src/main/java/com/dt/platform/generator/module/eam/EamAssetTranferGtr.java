@@ -14,6 +14,7 @@ import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetTranferGtr extends BaseCodeGenerator {
@@ -34,9 +35,9 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
 
 
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","调入管理员","调入管理员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","调入管理员","调入管理员");
 
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人","使用人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人","使用人");
 
 
 

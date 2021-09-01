@@ -125,14 +125,16 @@
                         var type=object.contentType;
                         var href="";
                         // console.log(type);
-                        if(type=="article"){
-                            href="knbaselook.html?id="+object.id;
-                        }else {
+                        if(type=="linkAdress"){
                             href=object.linkAddress;
+                        }else{
+                            href="knbaselook.html?id="+object.id;
                         }
                         searchhtml=searchhtml+"    <div class=\"header\"><a target=\"_blank\" href=\""+href+"\" >"+object.title+"</a></div>"
                         searchhtml=searchhtml+"    <div class=\"profile\">"+object.profile+"</div>"
-                        searchhtml=searchhtml+"    <div class=\"footer text-secondary\"><span class=\"text-info\">"+object.category.hierarchyName+"</span>     阅读数: "+object.reviewCount+"</div>"
+                        if(object.category&&object.category.hierarchyName){
+                            searchhtml=searchhtml+"    <div class=\"footer text-secondary\"><span class=\"text-info\">"+object.category.hierarchyName+"</span>     阅读数: "+object.reviewCount+"</div>"
+                        }
                         searchhtml=searchhtml+"</div>"
                     }
                 }else{

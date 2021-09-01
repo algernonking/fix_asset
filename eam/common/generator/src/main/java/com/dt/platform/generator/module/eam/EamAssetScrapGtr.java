@@ -10,6 +10,7 @@ import com.dt.platform.eam.page.AssetScrapPageController;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetScrapGtr extends BaseCodeGenerator {
@@ -25,7 +26,7 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
 
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetScrapVOMeta.ASSET_IDS);
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
 
         cfg.view().field(EAMTables.EAM_MAINTAINER.ID).basic().hidden(true);

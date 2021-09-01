@@ -37,7 +37,7 @@ public class KnContentGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
       //  System.out.println("111");
-     //   cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
+     //  cfg.getPoClassFile().addSimpleProperty(Grade.class,"grade","知识分级","知识分级");
         cfg.getPoClassFile().addSimpleProperty(Category.class,"category","知识分类","知识分类");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"editor","编辑人","编辑人");
         cfg.view().field(EAMTables.KN_CONTENT.TITLE).table().search().fuzzySearch();
@@ -66,17 +66,11 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.KN_CONTENT.KEY_WORDS).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.LABEL).table().disable(true);
         cfg.view().field(EAMTables.KN_CONTENT.EDITOR_ID).table().disable(true);
-
         cfg.view().field(EAMTables.KN_CONTENT.ATTACH)
                 .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(1);
 
-
-
-
         cfg.view().field(EAMTables.KN_CONTENT.GRADE_ID)
                 .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE);
-
-
 
 
 
