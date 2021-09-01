@@ -96,7 +96,7 @@
                 #for(f : col)
                 #if(f.typeName.equals("upload"))
 
-                <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-upload layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         <input input-type="upload" id="#(f.varName)"  name="#(f.varName)" lay-filter="#(f.varName)" style="display: none">
@@ -108,7 +108,7 @@
 
                 #elseif(f.typeName.equals("logic_switch"))
 
-                <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         <input input-type="switch" type="checkbox" checked="" id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;" value="#(f.logicField.valueOn)">
@@ -117,7 +117,7 @@
 
                 #else if(f.typeName.equals("radio_box"))
 
-                <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         #if(f.radioField.dictCode!=null)
@@ -131,7 +131,7 @@
 
                 #else if(f.typeName.equals("check_box"))
 
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             #if(f.checkField.dictCode!=null)
@@ -145,7 +145,7 @@
 
                 #else if(f.typeName.equals("text_area"))
 
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         <textarea lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.labelInForm)') }" class="layui-textarea" style="height: #(f.textArea.height)px" ></textarea>
@@ -154,7 +154,7 @@
 
                 #else if(f.typeName.equals("select_box"))
 
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             <div id="#(f.varName)" input-type="select" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end"></div>
@@ -163,7 +163,7 @@
 
                 #else if(f.typeName.equals("number_input"))
 
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  autocomplete="off" input-type="number_input" integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)"  #if(f.numberInput.minValue!=null) min-value="#(f.numberInput.minValue)" #end #if(f.numberInput.maxValue!=null) max-value="#(f.numberInput.maxValue)" #end  scale="#(f.numberInput.scale)"/>
@@ -172,14 +172,14 @@
 
                 #else if(f.typeName.equals("date_input"))
 
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             <input input-type="date" lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end"  #end  />
                         </div>
                     </div>
                 #else if(f.typeName.equals("button"))
-                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                    <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)"  type="hidden" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />
@@ -188,7 +188,7 @@
                     </div>
                 #else
 
-                <div class="layui-form-item" #if(f.isHideInForm)style="display: none")#end>
+                <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />

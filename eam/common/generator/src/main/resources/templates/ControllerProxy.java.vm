@@ -43,7 +43,7 @@ public interface #(simpleName) {
 	 * 批量删除#(topic)
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	#end;
+	#end
 	
 	/**
 	 * 更新#(topic)
