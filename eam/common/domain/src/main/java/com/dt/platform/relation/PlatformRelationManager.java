@@ -22,7 +22,8 @@ public class PlatformRelationManager extends RelationManager {
 				new EAMRelationManager(),
 				new OPSRelationManager(),
 				new CommonRelationManager(),
-				new DCRelationManager()
+				new DCRelationManager(),
+				new ContractRelationManager()
 
 		);
 		//启动动态刷入

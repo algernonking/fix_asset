@@ -7,22 +7,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="view-hrm" />
-        <module name="domain" />
-        <module name="view-console" />
+        <module name="view-ops" />
+        <module name="framework" />
+        <module name="view-eam" />
         <module name="service-hrm" />
         <module name="view-knowledgebase" />
         <module name="wrapper-all" />
-        <module name="generator" />
         <module name="service-eam" />
         <module name="service-common" />
         <module name="service-knowledgebase" />
         <module name="view-common" />
-        <module name="view-eam" />
+        <module name="view-datacenter" />
         <module name="service-datacenter" />
         <module name="proxy" />
-        <module name="view-ops" />
-        <module name="framework" />
-        <module name="view-datacenter" />
+        <module name="view-console" />
+        <module name="domain" />
+        <module name="view-contract" />
+        <module name="generator" />
+        <module name="service-contract" />
         <module name="service-ops" />
       </profile>
     </annotationProcessing>
@@ -33,6 +35,7 @@
       <module name="parent" target="1.8" />
       <module name="proxy" target="1.8" />
       <module name="service-common" target="1.8" />
+      <module name="service-contract" target="1.8" />
       <module name="service-datacenter" target="1.8" />
       <module name="service-eam" target="1.8" />
       <module name="service-hrm" target="1.8" />
@@ -40,6 +43,7 @@
       <module name="service-ops" target="1.8" />
       <module name="view-common" target="1.8" />
       <module name="view-console" target="1.8" />
+      <module name="view-contract" target="1.8" />
       <module name="view-datacenter" target="1.8" />
       <module name="view-eam" target="1.8" />
       <module name="view-hrm" target="1.8" />
@@ -55,6 +59,7 @@
       <module name="generator" options="-parameters" />
       <module name="proxy" options="-parameters" />
       <module name="service-common" options="-parameters" />
+      <module name="service-contract" options="-parameters" />
       <module name="service-datacenter" options="-parameters" />
       <module name="service-eam" options="-parameters" />
       <module name="service-hrm" options="-parameters" />
@@ -62,6 +67,7 @@
       <module name="service-ops" options="-parameters" />
       <module name="view-common" options="-parameters" />
       <module name="view-console" options="-parameters" />
+      <module name="view-contract" options="-parameters" />
       <module name="view-datacenter" options="-parameters" />
       <module name="view-eam" options="-parameters" />
       <module name="view-hrm" options="-parameters" />

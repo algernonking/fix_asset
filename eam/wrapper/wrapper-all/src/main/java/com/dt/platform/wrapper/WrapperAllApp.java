@@ -18,7 +18,8 @@ import com.dt.platform.framework.PlatformMeta;
 		PlatformMeta.DATACENTER_PACKAGE,
 		PlatformMeta.OPS_PACKAGE,
 		PlatformMeta.COMMON_PACKAGE,
-		PlatformMeta.KNOWLEDGEBASE_PACKAGE
+		PlatformMeta.KNOWLEDGEBASE_PACKAGE,
+		PlatformMeta.CONTRACT_PACKAGE
 
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})

@@ -45,6 +45,7 @@
 		<module>./service/service-ops</module>
 		<module>./service/service-common</module>
 		<module>./service/service-knowledgebase</module>
+		<module>./service/service-contract</module>
 
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
@@ -54,6 +55,7 @@
 		<module>./view/view-ops</module>
 		<module>./view/view-common</module>
 		<module>./view/view-knowledgebase</module>
+		<module>./view/view-contract</module>
 
 
 		<!-- 聚合 -->

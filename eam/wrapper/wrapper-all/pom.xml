@@ -53,6 +53,7 @@
 			<version>${platform.version}</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>service-common</artifactId>
@@ -66,6 +67,20 @@
 			<version>${platform.version}</version>
 		</dependency>
 
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-contract</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-knowledgebase</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
 
 
 
@@ -108,9 +123,10 @@
 		</dependency>
 
 
+
 		<dependency>
 			<groupId>com.dt.platform</groupId>
-			<artifactId>service-knowledgebase</artifactId>
+			<artifactId>view-contract</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 

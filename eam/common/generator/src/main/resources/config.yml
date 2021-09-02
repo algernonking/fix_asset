@@ -93,5 +93,16 @@ applications:
     viewProjectPath: /view/view-knowledgebase
     viewPrefixPath: public/business/knowledgebase
     wrapperProjectPath: /wrapper/wrapper-all
+  #合同模块
+  service-contract:
+    nacosGroup: service
+    nacosDataId: service-contract.yml
+    serviceProjectPath: /service/service-contract
+    packageName: com.dt.platform.contract
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: CONTRACT
+    viewProjectPath: /view/view-contract
+    viewPrefixPath: public/business/contract
+    wrapperProjectPath: /wrapper/wrapper-all
  
     
