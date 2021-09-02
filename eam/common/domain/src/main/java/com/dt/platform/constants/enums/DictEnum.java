@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-08-23 09:56:23
+ * @since 2021-09-02 20:55:57
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -57,6 +57,16 @@ public enum DictEnum implements CodeTextEnum {
 	 * 资产审批类型
 	*/
 	EAM_ASSET_APPROVAL_TYPE("eam_asset_approval_type" , "资产审批类型"),
+	
+	/**
+	 * 用户凭证
+	*/
+	OPS_USER_VOUCHER("ops_user_voucher" , "用户凭证"),
+	
+	/**
+	 * 凭证类型
+	*/
+	OPS_VOUCHER_TYPE("ops_voucher_type" , "凭证类型"),
 	
 	/**
 	 * 数据库日志模式

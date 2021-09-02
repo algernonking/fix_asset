@@ -18,6 +18,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions) {
             console.log('beforeQuery',conditions);
+        },
+        /**
+         * 打开凭证条目窗口
+         * */
+        openHostVoucherWindow: function (data) {
+            admin.putTempData("ownerId",data.id,true);
+            var index = admin.popupCenter({
+                title: data.hostName+"的凭证条目",
+                resize: false,
+                id: 'hostVoucherWindow',
+                area: ["80%", "600px"],
+                type: 2,
+                content: "/business/ops/voucher/voucher_list.html"
+            });
         }
     }
 

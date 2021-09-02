@@ -1,7 +1,7 @@
 /**
- * 合同分类 列表页 JS 脚本
+ * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-01 21:06:50
+ * @since 2021-09-02 13:48:32
  */
 
 layui.config({
@@ -93,6 +93,54 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("beforeSubmit",data);
             return true;
         },
+        /**
+         *  加载 基本信息
+         */
+        loadBaseInfoIframe:function (ifr,win,data) {
+            // debugger
+            console.log("loadBaseInfoIframe",ifr,data);
+            //设置 iframe 高度
+            ifr.parents(".layui-tab").height("550px");
+            ifr.height("500px");
+            //设置参数
+            admin.putTempData("eam-asset-form-data",data,true);
+            //设置地址
+            win.location="/business/eam/asset/asset_form.html";
+        },
+
+
+
+        /**
+         *  加载 维保信息
+         */
+        loadMaintainerIframe:function (ifr,win,data) {
+            // debugger
+            console.log("loadMaintainerIframe",ifr,data);
+            //设置 iframe 高度
+            ifr.parents(".layui-tab").height("550px");
+            ifr.height("500px");
+            //设置参数
+            admin.putTempData("eam-asset-ext-maintainer-form-data",data,true);
+            //设置地址
+            win.location="/business/eam/asset_ext_maintainer/asset_ext_maintainer_form.html";
+        },
+
+
+        /**
+         *  加载 财务信息
+         */
+        loadFinancialIframe:function (ifr,win,data) {
+            // debugger
+            console.log("loadFinancialIframe",ifr,data);
+            //设置 iframe 高度
+            ifr.parents(".layui-tab").height("550px");
+            ifr.height("500px");
+            //设置参数
+            admin.putTempData("eam-asset-ext-financial-form-data",data,true);
+            //设置地址
+            win.location="/business/eam/asset_ext_financial/asset_ext_financial_form.html";
+        },
+
 
         other:function(){
 

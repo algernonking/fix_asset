@@ -1,0 +1,77 @@
+package com.dt.platform.generator.module.ops;
+
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.constants.enums.ops.VoucherTypeEnum;
+import com.github.foxnic.generator.config.WriteMode;
+
+public class OpsVoucherGtr extends BaseCodeGenerator{
+
+
+    public OpsVoucherGtr() {
+        super(EAMTables.OPS_VOUCHER.$TABLE,BASIC_DATA_MENU_ID);
+    }
+
+    public void generateCode() throws Exception {
+        System.out.println(this.getClass().getName());
+
+
+
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.OPS_VOUCHER.TYPE,
+                        EAMTables.OPS_VOUCHER.NOTES
+                }
+
+        );
+
+        cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).search().fuzzySearch();
+
+        cfg.view().field(EAMTables.OPS_VOUCHER.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_VOUCHER.ID).table().disable(true);
+        cfg.view().field(EAMTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
+        cfg.view().field(EAMTables.OPS_VOUCHER.OWNER_ID).table().hidden(true);
+
+
+
+
+        cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form().validate().required().form()
+                .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE).paging(false).muliti(false).filter(true);
+
+        cfg.view().field(EAMTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
+                .selectBox().dict(DictEnum.OPS_USER_VOUCHER).paging(false).muliti(false).filter(true);
+
+
+
+        cfg.view().formWindow().bottomSpace(120);
+        cfg.view().formWindow().width("800px");
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.OPS_VOUCHER.TYPE,
+                        EAMTables.OPS_VOUCHER.USER_CODE,
+                        EAMTables.OPS_VOUCHER.VOUCHER,
+                        EAMTables.OPS_VOUCHER.NOTES,
+                }
+        );
+
+        //文件生成覆盖模式
+        cfg.overrides()
+                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
+                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+        //生成代码
+        cfg.buildAll();
+    }
+
+    public static void main(String[] args) throws Exception {
+        OpsVoucherGtr g=new OpsVoucherGtr();
+        //生成代码
+        g.generateCode();
+        //移除之前生成的菜单，视情况执行
+        //g.removeByBatchId("478921035245158400");
+        // g.generateMenu(VoucherServiceProxy.class, VoucherPageController.class);
+    }
+}

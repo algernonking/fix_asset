@@ -7,6 +7,7 @@ import com.dt.platform.constants.enums.datacenter.AreaTypeEnum;
 import com.dt.platform.datacenter.page.AreaPageController;
 import com.dt.platform.proxy.datacenter.AreaServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.constants.enums.DictEnum;
 
 
 public class DcAreaGtr extends BaseCodeGenerator {
@@ -26,7 +27,6 @@ public class DcAreaGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.DC_AREA.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_AREA.POSITION).search().fuzzySearch();
         cfg.view().field(EAMTables.DC_AREA.NOTES).search().fuzzySearch();
-
 
 
         cfg.view().field(EAMTables.DC_AREA.TYPE).basic().label("类型")
