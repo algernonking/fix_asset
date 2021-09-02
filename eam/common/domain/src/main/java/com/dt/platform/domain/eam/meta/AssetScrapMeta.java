@@ -5,14 +5,14 @@ import com.dt.platform.domain.eam.AssetScrap;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:16:48
- * @sign 172F3C6F765E0E166890E70B26D17FC3
+ * @since 2021-09-02 12:54:23
+ * @sign 8F621C70117C785018F67025106153DE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -219,14 +219,14 @@ public class AssetScrapMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -466,7 +466,7 @@ public class AssetScrapMeta {
 		 * @param originator 制单人
 		 * @return 当前对象
 		*/
-		public AssetScrap setOriginator(Person originator) {
+		public AssetScrap setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
 			return this;

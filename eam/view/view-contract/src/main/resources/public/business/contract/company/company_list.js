@@ -1,7 +1,7 @@
 /**
  * 单位 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:47:11
+ * @since 2021-09-02 11:49:12
  */
 
 
@@ -65,13 +65,11 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单位') }
 					,{ field: 'address', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('地址') }
 					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') }
-					,{ field: 'contact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') }
+					,{ field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') }
 					,{ field: 'creditCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('信用代码') }
-					,{ field: 'profile', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('介绍') }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -104,14 +102,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.id={ value: $("#id").val()};
-		value.name={ value: $("#name").val()};
-		value.address={ value: $("#address").val()};
-		value.contacts={ value: $("#contacts").val()};
-		value.contact={ value: $("#contact").val()};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.address={ value: $("#address").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.contacts={ value: $("#contacts").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.contactInformation={ value: $("#contactInformation").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.creditCode={ value: $("#creditCode").val()};
-		value.profile={ value: $("#profile").val()};
-		value.notes={ value: $("#notes").val()};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -144,7 +140,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
 		fox.renderSearchInputs();
 	}
@@ -166,7 +162,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -322,7 +318,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["85%",height+"px"],
 			type: 2,
 			id:"cont-company-form-data-win",
 			content: '/business/contract/company/company_form.html' + queryString,

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:16:48
- * @sign 172F3C6F765E0E166890E70B26D17FC3
+ * @since 2021-09-02 12:54:23
+ * @sign 8F621C70117C785018F67025106153DE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -156,7 +156,7 @@ public class AssetScrap extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -565,7 +565,7 @@ public class AssetScrap extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -574,7 +574,7 @@ public class AssetScrap extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetScrap setOriginator(Person originator) {
+	public AssetScrap setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}

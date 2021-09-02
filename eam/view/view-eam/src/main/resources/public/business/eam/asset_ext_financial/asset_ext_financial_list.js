@@ -1,7 +1,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:26
+ * @since 2021-09-02 12:54:50
  */
 
 
@@ -339,6 +339,7 @@ function ListPage() {
 		}
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
+		console.log("edit"+data);
 		admin.putTempData('eam-asset-ext-financial-form-data', data);
 		var area=admin.getTempData('eam-asset-ext-financial-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);

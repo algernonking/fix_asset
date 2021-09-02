@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 资产 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 12:15:39
+ * @since 2021-09-02 13:56:55
 */
 
 @Controller("EamAssetPageController")
@@ -45,6 +45,8 @@ public class AssetPageController extends ViewController {
 		return prefix+"/asset_list";
 	}
 
+
+
 	/**
 	 * 资产 表单页面
 	 */
@@ -52,4 +54,13 @@ public class AssetPageController extends ViewController {
 	public String form(Model model,HttpServletRequest request , String id) {
 		return prefix+"/asset_form";
 	}
+
+	/**
+	 * 资产 表单页面
+	 */
+	@RequestMapping("/asset_form_base.html")
+	public String formBase(Model model,HttpServletRequest request , String id) {
+		return prefix+"/asset_form_base";
+	}
+
 }

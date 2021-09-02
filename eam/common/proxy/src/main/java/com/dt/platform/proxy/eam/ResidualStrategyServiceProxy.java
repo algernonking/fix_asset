@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 折旧策略  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:39
+ * @since 2021-09-02 12:55:03
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = ResidualStrategyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface ResidualStrategyServiceProxy {
 	 * 批量删除折旧策略
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新折旧策略

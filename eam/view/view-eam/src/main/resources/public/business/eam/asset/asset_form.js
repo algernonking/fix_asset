@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 12:15:46
+ * @since 2021-09-02 16:01:47
  */
 
 function FormPage() {
@@ -26,6 +26,10 @@ function FormPage() {
 			disableModify=true;
 		}
 
+		if(window.pageExt.form.beforeInit) {
+			window.pageExt.form.beforeInit();
+		}
+
 		//渲染表单组件
 		renderFormFields();
 
@@ -42,6 +46,7 @@ function FormPage() {
 	 * */
 	var adjustPopupTask=-1;
 	function adjustPopup() {
+		return;
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
@@ -297,13 +302,12 @@ function FormPage() {
 			//设置  来源 设置下拉框勾选
 			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
 
-
-
+			//处理fillBy
 
 	     	fm.attr('method', 'POST');
 	     	renderFormFields();
 
-		window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
 
 		}
 

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:16
- * @sign 66155E9A0C5E19E61094A77A2691A026
+ * @since 2021-09-02 12:54:40
+ * @sign C8F5A582F3B45A513B22B41C9442ED96
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -180,13 +180,13 @@ public class AssetCollection extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private Person useUser;
+	private Employee useUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -671,7 +671,7 @@ public class AssetCollection extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -680,7 +680,7 @@ public class AssetCollection extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetCollection setOriginator(Person originator) {
+	public AssetCollection setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}
@@ -690,7 +690,7 @@ public class AssetCollection extends Entity {
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public Person getUseUser() {
+	public Employee getUseUser() {
 		return useUser;
 	}
 	
@@ -699,7 +699,7 @@ public class AssetCollection extends Entity {
 	 * @param useUser 使用人员
 	 * @return 当前对象
 	*/
-	public AssetCollection setUseUser(Person useUser) {
+	public AssetCollection setUseUser(Employee useUser) {
 		this.useUser=useUser;
 		return this;
 	}

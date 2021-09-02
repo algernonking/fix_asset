@@ -45,6 +45,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 //                .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES).form().textArea().height(30);
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -68,30 +69,28 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().width("85%");
-        cfg.view().form().addGroup("财务属性",
+        cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.FINANCIAL_CATEGORY_ID,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
-//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_ID,
-//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SOURCE_DETAIL,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_CODE,
-                      //  EAMTables.EAM_ASSET_EXT_FINANCIAL.SERVICE_LIFE,
+                        EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_UNIT_PRICE,
-                        EAMTables.EAM_ASSET_EXT_FINANCIAL.NAV_PRICE,
                 }
                 , new Object[] {
-
-//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.STORAGE_TIME,
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.ENTRY_TIME,
-//                        EAMTables.EAM_ASSET_EXT_FINANCIAL.PURCHASE_DATE,
+                }
+        );
+        cfg.view().form().addGroup(null,
+                new Object[] {
                         EAMTables.EAM_ASSET_EXT_FINANCIAL.NOTES,
-
                 }
         );
 
 
+
+        cfg.view().form().disableFooter();
 
         //文件生成覆盖模式
         cfg.overrides()
@@ -99,7 +98,7 @@ public class EamAssetExtFinancialGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

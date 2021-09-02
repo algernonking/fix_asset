@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:47:08
- * @sign 859C17088E136238C836BE98FC63C525
+ * @since 2021-09-02 11:49:08
+ * @sign 70213853CA7DB1ED5329BE4E2AF3D2C0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -58,12 +58,12 @@ public class CompanyMeta {
 	/**
 	 * 联系方式 , 类型: java.lang.String
 	*/
-	public static final String CONTACT="contact";
+	public static final String CONTACT_INFORMATION="contactInformation";
 	
 	/**
 	 * 联系方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Company,java.lang.String> CONTACT_PROP = new BeanProperty(com.dt.platform.domain.contract.Company.class ,CONTACT, java.lang.String.class, "联系方式", "联系方式", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Company,java.lang.String> CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Company.class ,CONTACT_INFORMATION, java.lang.String.class, "联系方式", "联系方式", java.lang.String.class, null);
 	
 	/**
 	 * 信用代码 , 类型: java.lang.String
@@ -178,7 +178,7 @@ public class CompanyMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , ADDRESS , CONTACTS , CONTACT , CREDIT_CODE , PROFILE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , ADDRESS , CONTACTS , CONTACT_INFORMATION , CREDIT_CODE , PROFILE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -234,12 +234,12 @@ public class CompanyMeta {
 		
 		/**
 		 * 设置 联系方式
-		 * @param contact 联系方式
+		 * @param contactInformation 联系方式
 		 * @return 当前对象
 		*/
-		public Company setContact(String contact) {
-			super.change(CONTACT,super.getContact(),contact);
-			super.setContact(contact);
+		public Company setContactInformation(String contactInformation) {
+			super.change(CONTACT_INFORMATION,super.getContactInformation(),contactInformation);
+			super.setContactInformation(contactInformation);
 			return this;
 		}
 		

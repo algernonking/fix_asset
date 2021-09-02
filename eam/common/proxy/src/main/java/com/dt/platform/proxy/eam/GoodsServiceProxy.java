@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 物品档案  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:34
+ * @since 2021-09-02 12:54:58
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = GoodsServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface GoodsServiceProxy {
 	 * 批量删除物品档案
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新物品档案

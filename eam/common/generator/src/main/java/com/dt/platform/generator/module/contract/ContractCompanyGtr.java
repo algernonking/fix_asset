@@ -23,6 +23,60 @@ public class ContractCompanyGtr extends BaseCodeGenerator {
 
         System.out.println(this.getClass().getName());
 
+        cfg.view().field(EAMTables.CONT_COMPANY.ID).basic().hidden();
+
+        cfg.view().field(EAMTables.CONT_COMPANY.NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.ADDRESS).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.CONTACT_INFORMATION).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.CONTACTS).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.PROFILE).search().fuzzySearch();
+        cfg.view().field(EAMTables.CONT_COMPANY.ID).table().disable(true);
+        cfg.view().field(EAMTables.CONT_COMPANY.PROFILE).table().disable(true);
+
+        cfg.view().field(EAMTables.CONT_COMPANY.NAME).form().validate().required();
+        cfg.view().field(EAMTables.CONT_COMPANY.NOTES).form().textArea().height(30);
+
+        cfg.view().search().inputLayout(
+                new Object[]{
+                        EAMTables.CONT_COMPANY.NAME,
+                        EAMTables.CONT_COMPANY.CREDIT_CODE,
+                        EAMTables.CONT_COMPANY.ADDRESS,
+                        EAMTables.CONT_COMPANY.NOTES
+                },
+                new Object[]{
+                        EAMTables.CONT_COMPANY.CONTACTS,
+                        EAMTables.CONT_COMPANY.CONTACT_INFORMATION
+                }
+        );
+
+
+
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("85%");
+        cfg.view().form().addGroup(null,
+                new Object[]{
+                        EAMTables.CONT_COMPANY.NAME,
+                        EAMTables.CONT_COMPANY.PROFILE,
+                },
+                new Object[]{
+                        EAMTables.CONT_COMPANY.CREDIT_CODE,
+                        EAMTables.CONT_COMPANY.ADDRESS,
+                },
+                new Object[]{
+                        EAMTables.CONT_COMPANY.CONTACTS,
+                        EAMTables.CONT_COMPANY.CONTACT_INFORMATION
+
+                }
+        );
+        cfg.view().form().addGroup(null,
+                new Object[]{
+                        EAMTables.CONT_COMPANY.NOTES,
+
+                }
+        );
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -42,7 +96,6 @@ public class ContractCompanyGtr extends BaseCodeGenerator {
         g.generateCode();
 
         //生成菜单
-
         // g.generateMenu(CompanyServiceProxy.class, CompanyPageController.class);
 
     }

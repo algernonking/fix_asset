@@ -18,8 +18,8 @@ import org.github.foxnic.web.domain.hrm.Person;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 12:15:36
- * @sign 9E68F6558C6B0A576EE9894B4BFD136B
+ * @since 2021-09-02 16:01:39
+ * @sign 2A9C06AC119F4650CD6FFD3AECC31A0D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -196,14 +196,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SERIAL_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERIAL_NUMBER, java.lang.String.class, "序列号", "序列号", java.lang.String.class, null);
 	
 	/**
-	 * 使用公司/部门 , 类型: java.lang.String
+	 * 所属公司 , 类型: java.lang.String
 	*/
-	public static final String USE_ORGANIZATION_ID="useOrganizationId";
+	public static final String OWN_COMPANY_ID="ownCompanyId";
 	
 	/**
-	 * 使用公司/部门 , 类型: java.lang.String
+	 * 所属公司 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_ORGANIZATION_ID, java.lang.String.class, "使用公司/部门", "使用公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,OWN_COMPANY_ID, java.lang.String.class, "所属公司", "所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 管理人员 , 类型: java.lang.String
@@ -214,6 +214,16 @@ public class AssetMeta {
 	 * 管理人员 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER_ID, java.lang.String.class, "管理人员", "管理人员", java.lang.String.class, null);
+	
+	/**
+	 * 使用公司/部门 , 类型: java.lang.String
+	*/
+	public static final String USE_ORGANIZATION_ID="useOrganizationId";
+	
+	/**
+	 * 使用公司/部门 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_ORGANIZATION_ID, java.lang.String.class, "使用公司/部门", "使用公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 使用人员 , 类型: java.lang.String
@@ -558,7 +568,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER };
 	
 	/**
 	 * 代理类
@@ -756,13 +766,13 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 使用公司/部门
-		 * @param useOrganizationId 使用公司/部门
+		 * 设置 所属公司
+		 * @param ownCompanyId 所属公司
 		 * @return 当前对象
 		*/
-		public Asset setUseOrganizationId(String useOrganizationId) {
-			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
-			super.setUseOrganizationId(useOrganizationId);
+		public Asset setOwnCompanyId(String ownCompanyId) {
+			super.change(OWN_COMPANY_ID,super.getOwnCompanyId(),ownCompanyId);
+			super.setOwnCompanyId(ownCompanyId);
 			return this;
 		}
 		
@@ -774,6 +784,17 @@ public class AssetMeta {
 		public Asset setManagerId(String managerId) {
 			super.change(MANAGER_ID,super.getManagerId(),managerId);
 			super.setManagerId(managerId);
+			return this;
+		}
+		
+		/**
+		 * 设置 使用公司/部门
+		 * @param useOrganizationId 使用公司/部门
+		 * @return 当前对象
+		*/
+		public Asset setUseOrganizationId(String useOrganizationId) {
+			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
+			super.setUseOrganizationId(useOrganizationId);
 			return this;
 		}
 		

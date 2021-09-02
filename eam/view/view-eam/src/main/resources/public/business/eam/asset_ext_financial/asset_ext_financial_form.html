@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:26
+ * @since 2021-09-02 15:25:37
  */
  -->
  <!DOCTYPE html>
@@ -33,9 +33,6 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
-            <legend>财务属性</legend>
-        </fieldset>
 
         <div class="layui-row form-row">
 
@@ -44,50 +41,41 @@
 
 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('财务分类')}">财务分类</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"   />
-                    </div>
-                </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('供应商')}">供应商</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-list'}"></div>
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('财务编号')}">财务编号</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-label "><div th:text="${lang.translate('财务编号')}">财务编号</div></div>
+                    <div class="layui-input-block ">
                         <input lay-filter="assetCode" id="assetCode" name="assetCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务编号') }" type="text" class="layui-input"   />
                     </div>
                 </div>
 
 
                 
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('财务分类')}">财务分类</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('采购单价')}">采购单价</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="purchaseUnitPrice" id="purchaseUnitPrice" name="purchaseUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('采购单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                        <div class="layui-form-label "><div th:text="${lang.translate('供应商')}">供应商</div></div>
+                        <div class="layui-input-block ">
+                            <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-list'}"></div>
                         </div>
                     </div>
 
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产净值')}">资产净值</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="navPrice" id="navPrice" name="navPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产净值') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                        <div class="layui-form-label "><div th:text="${lang.translate('采购单价')}">采购单价</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="purchaseUnitPrice" id="purchaseUnitPrice" name="purchaseUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('采购单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
                         </div>
                     </div>
 
@@ -99,17 +87,30 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('入账时间')}">入账时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('入账时间')}">入账时间</div></div>
+                        <div class="layui-input-block ">
                             <input input-type="date" lay-filter="entryTime" id="entryTime" name="entryTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('入账时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('财务备注')}">财务备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务备注') }" type="text" class="layui-input"   />
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('财务备注')}">财务备注</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务备注') }" class="layui-textarea" style="height: 30px" ></textarea>
                     </div>
                 </div>
 
@@ -125,10 +126,6 @@
 
     </form>
 
-</div>
-<div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_ext_financial:create','eam_asset_ext_financial:update','eam_asset_ext_financial:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>

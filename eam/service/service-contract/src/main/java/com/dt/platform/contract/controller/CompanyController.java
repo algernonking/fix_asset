@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 单位 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:47:08
+ * @since 2021-09-02 11:49:09
 */
 
 @Api(tags = "单位")
@@ -69,7 +69,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CONTACT , value = "联系方式" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -79,7 +79,7 @@ public class CompanyController extends SuperController {
 	@NotNull(name = CompanyVOMeta.NAME)
 	@NotNull(name = CompanyVOMeta.ADDRESS)
 	@NotNull(name = CompanyVOMeta.CONTACTS)
-	@NotNull(name = CompanyVOMeta.CONTACT)
+	@NotNull(name = CompanyVOMeta.CONTACT_INFORMATION)
 	@NotNull(name = CompanyVOMeta.CREDIT_CODE)
 	@NotNull(name = CompanyVOMeta.PROFILE)
 	@SentinelResource(value = CompanyServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -133,7 +133,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CONTACT , value = "联系方式" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -143,7 +143,7 @@ public class CompanyController extends SuperController {
 	@NotNull(name = CompanyVOMeta.NAME)
 	@NotNull(name = CompanyVOMeta.ADDRESS)
 	@NotNull(name = CompanyVOMeta.CONTACTS)
-	@NotNull(name = CompanyVOMeta.CONTACT)
+	@NotNull(name = CompanyVOMeta.CONTACT_INFORMATION)
 	@NotNull(name = CompanyVOMeta.CREDIT_CODE)
 	@NotNull(name = CompanyVOMeta.PROFILE)
 	@SentinelResource(value = CompanyServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -163,7 +163,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CONTACT , value = "联系方式" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -173,7 +173,7 @@ public class CompanyController extends SuperController {
 	@NotNull(name = CompanyVOMeta.NAME)
 	@NotNull(name = CompanyVOMeta.ADDRESS)
 	@NotNull(name = CompanyVOMeta.CONTACTS)
-	@NotNull(name = CompanyVOMeta.CONTACT)
+	@NotNull(name = CompanyVOMeta.CONTACT_INFORMATION)
 	@NotNull(name = CompanyVOMeta.CREDIT_CODE)
 	@NotNull(name = CompanyVOMeta.PROFILE)
 	@SentinelResource(value = CompanyServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -232,7 +232,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CONTACT , value = "联系方式" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -257,7 +257,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CONTACT , value = "联系方式" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),

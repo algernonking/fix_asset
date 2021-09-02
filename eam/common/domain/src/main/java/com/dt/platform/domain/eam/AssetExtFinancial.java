@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:26
- * @sign EBD6B6A22946E1A11E2459049B2D25A1
+ * @since 2021-09-02 15:25:29
+ * @sign 22038B95AB9B222CD4607F09DD512DBE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,12 +59,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
 	private String supplierId;
-	
-	/**
-	 * 所属公司：所属公司
-	*/
-	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
-	private String ownCompanyId;
 	
 	/**
 	 * 税额：税额
@@ -272,25 +266,6 @@ public class AssetExtFinancial extends Entity {
 	*/
 	public AssetExtFinancial setSupplierId(String supplierId) {
 		this.supplierId=supplierId;
-		return this;
-	}
-	
-	/**
-	 * 获得 所属公司<br>
-	 * 所属公司
-	 * @return 所属公司
-	*/
-	public String getOwnCompanyId() {
-		return ownCompanyId;
-	}
-	
-	/**
-	 * 设置 所属公司
-	 * @param ownCompanyId 所属公司
-	 * @return 当前对象
-	*/
-	public AssetExtFinancial setOwnCompanyId(String ownCompanyId) {
-		this.ownCompanyId=ownCompanyId;
 		return this;
 	}
 	

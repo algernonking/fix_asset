@@ -2,7 +2,7 @@
 /**
  * 单位 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:47:10
+ * @since 2021-09-02 11:49:11
  */
  -->
  <!DOCTYPE html>
@@ -34,45 +34,40 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('主键')}" class="search-label id-label">主键</span><span class="search-colon">:</span></div>
-                        <input id="id" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 单位 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('单位')}" class="search-label name-label">单位</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 地址 , address ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('地址')}" class="search-label address-label">地址</span><span class="search-colon">:</span></div>
-                        <input id="address" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 联系人 , contacts ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('联系人')}" class="search-label contacts-label">联系人</span><span class="search-colon">:</span></div>
-                        <input id="contacts" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 联系方式 , contact ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('联系方式')}" class="search-label contact-label">联系方式</span><span class="search-colon">:</span></div>
-                        <input id="contact" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 信用代码 , creditCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('信用代码')}" class="search-label creditCode-label">信用代码</span><span class="search-colon">:</span></div>
                         <input id="creditCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 介绍 , profile ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 地址 , address ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('介绍')}" class="search-label profile-label">介绍</span><span class="search-colon">:</span></div>
-                        <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('地址')}" class="search-label address-label">地址</span><span class="search-colon">:</span></div>
+                        <input id="address" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 联系人 , contacts ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('联系人')}" class="search-label contacts-label">联系人</span><span class="search-colon">:</span></div>
+                        <input id="contacts" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 联系方式 , contactInformation ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('联系方式')}" class="search-label contactInformation-label">联系方式</span><span class="search-colon">:</span></div>
+                        <input id="contactInformation" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -86,7 +81,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

@@ -34,7 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.domain.eam.Asset;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产报修 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:19
+ * @since 2021-09-02 12:54:43
 */
 
 @Api(tags = "资产报修")

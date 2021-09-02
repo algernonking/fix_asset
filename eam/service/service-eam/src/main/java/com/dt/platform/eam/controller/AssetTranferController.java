@@ -36,6 +36,7 @@ import com.dt.platform.domain.eam.meta.AssetTranferMeta;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.Position;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产转移 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:07
+ * @since 2021-09-02 15:52:50
 */
 
 @Api(tags = "资产转移")

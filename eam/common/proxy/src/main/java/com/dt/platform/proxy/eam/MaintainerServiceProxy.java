@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 维保厂商  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:35
+ * @since 2021-09-02 12:54:59
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = MaintainerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface MaintainerServiceProxy {
 	 * 批量删除维保厂商
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新维保厂商

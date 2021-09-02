@@ -5,14 +5,14 @@ import com.dt.platform.domain.eam.AssetRepair;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:19
- * @sign 0A800D4EADC881A91DAA5E29022D343B
+ * @since 2021-09-02 12:54:43
+ * @sign 49145E53FA92FCC0309DB5AC12C8C3E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -259,24 +259,24 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
-	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String REPORT_USER="reportUser";
 	
 	/**
-	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 报修人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Person> REPORT_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER, org.github.foxnic.web.domain.hrm.Person.class, "报修人", "报修人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Employee> REPORT_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER, org.github.foxnic.web.domain.hrm.Employee.class, "报修人", "报修人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -560,7 +560,7 @@ public class AssetRepairMeta {
 		 * @param originator 制单人
 		 * @return 当前对象
 		*/
-		public AssetRepair setOriginator(Person originator) {
+		public AssetRepair setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
 			return this;
@@ -571,7 +571,7 @@ public class AssetRepairMeta {
 		 * @param reportUser 报修人
 		 * @return 当前对象
 		*/
-		public AssetRepair setReportUser(Person reportUser) {
+		public AssetRepair setReportUser(Employee reportUser) {
 			super.change(REPORT_USER,super.getReportUser(),reportUser);
 			super.setReportUser(reportUser);
 			return this;

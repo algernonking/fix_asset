@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:27:33
- * @sign 75920634A785EF7B4F19F2A72076401B
+ * @since 2021-09-02 12:01:02
+ * @sign CDB830B6EE5E05E0B1B7E74E276F97A8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -112,7 +112,7 @@ public class Contract extends Entity {
 	 * 我方单位：我方单位
 	*/
 	@ApiModelProperty(required = false,value="我方单位" , notes = "我方单位")
-	private String firstUnit;
+	private String firstCompanyName;
 	
 	/**
 	 * 我方联系人：我方联系人
@@ -124,31 +124,31 @@ public class Contract extends Entity {
 	 * 我方联系方式：我方联系方式
 	*/
 	@ApiModelProperty(required = false,value="我方联系方式" , notes = "我方联系方式")
-	private String firstContact;
+	private String firstContactInformation;
 	
 	/**
 	 * 对方单位：对方单位
 	*/
 	@ApiModelProperty(required = false,value="对方单位" , notes = "对方单位")
-	private String relatedUnitId;
+	private String relatedCompanyId;
 	
 	/**
 	 * 对方单位：对方单位
 	*/
 	@ApiModelProperty(required = false,value="对方单位" , notes = "对方单位")
-	private String relatedUnit;
-	
-	/**
-	 * 对方单位用户：对方单位用户
-	*/
-	@ApiModelProperty(required = false,value="对方单位用户" , notes = "对方单位用户")
-	private String relatedContacts;
+	private String relatedCompanyName;
 	
 	/**
 	 * 对方单位联系人：对方单位联系人
 	*/
 	@ApiModelProperty(required = false,value="对方单位联系人" , notes = "对方单位联系人")
-	private String relatedContact;
+	private String relatedContacts;
+	
+	/**
+	 * 对方单位联系方式：对方单位联系方式
+	*/
+	@ApiModelProperty(required = false,value="对方单位联系方式" , notes = "对方单位联系方式")
+	private String relatedContactInformation;
 	
 	/**
 	 * 监理单位：监理单位
@@ -166,7 +166,7 @@ public class Contract extends Entity {
 	 * 监理联系方式：监理联系方式
 	*/
 	@ApiModelProperty(required = false,value="监理联系方式" , notes = "监理联系方式")
-	private String supervisionContact;
+	private String supervisionContactInformation;
 	
 	/**
 	 * 生效时间：生效时间
@@ -504,17 +504,17 @@ public class Contract extends Entity {
 	 * 我方单位
 	 * @return 我方单位
 	*/
-	public String getFirstUnit() {
-		return firstUnit;
+	public String getFirstCompanyName() {
+		return firstCompanyName;
 	}
 	
 	/**
 	 * 设置 我方单位
-	 * @param firstUnit 我方单位
+	 * @param firstCompanyName 我方单位
 	 * @return 当前对象
 	*/
-	public Contract setFirstUnit(String firstUnit) {
-		this.firstUnit=firstUnit;
+	public Contract setFirstCompanyName(String firstCompanyName) {
+		this.firstCompanyName=firstCompanyName;
 		return this;
 	}
 	
@@ -542,17 +542,17 @@ public class Contract extends Entity {
 	 * 我方联系方式
 	 * @return 我方联系方式
 	*/
-	public String getFirstContact() {
-		return firstContact;
+	public String getFirstContactInformation() {
+		return firstContactInformation;
 	}
 	
 	/**
 	 * 设置 我方联系方式
-	 * @param firstContact 我方联系方式
+	 * @param firstContactInformation 我方联系方式
 	 * @return 当前对象
 	*/
-	public Contract setFirstContact(String firstContact) {
-		this.firstContact=firstContact;
+	public Contract setFirstContactInformation(String firstContactInformation) {
+		this.firstContactInformation=firstContactInformation;
 		return this;
 	}
 	
@@ -561,17 +561,17 @@ public class Contract extends Entity {
 	 * 对方单位
 	 * @return 对方单位
 	*/
-	public String getRelatedUnitId() {
-		return relatedUnitId;
+	public String getRelatedCompanyId() {
+		return relatedCompanyId;
 	}
 	
 	/**
 	 * 设置 对方单位
-	 * @param relatedUnitId 对方单位
+	 * @param relatedCompanyId 对方单位
 	 * @return 当前对象
 	*/
-	public Contract setRelatedUnitId(String relatedUnitId) {
-		this.relatedUnitId=relatedUnitId;
+	public Contract setRelatedCompanyId(String relatedCompanyId) {
+		this.relatedCompanyId=relatedCompanyId;
 		return this;
 	}
 	
@@ -580,36 +580,17 @@ public class Contract extends Entity {
 	 * 对方单位
 	 * @return 对方单位
 	*/
-	public String getRelatedUnit() {
-		return relatedUnit;
+	public String getRelatedCompanyName() {
+		return relatedCompanyName;
 	}
 	
 	/**
 	 * 设置 对方单位
-	 * @param relatedUnit 对方单位
+	 * @param relatedCompanyName 对方单位
 	 * @return 当前对象
 	*/
-	public Contract setRelatedUnit(String relatedUnit) {
-		this.relatedUnit=relatedUnit;
-		return this;
-	}
-	
-	/**
-	 * 获得 对方单位用户<br>
-	 * 对方单位用户
-	 * @return 对方单位用户
-	*/
-	public String getRelatedContacts() {
-		return relatedContacts;
-	}
-	
-	/**
-	 * 设置 对方单位用户
-	 * @param relatedContacts 对方单位用户
-	 * @return 当前对象
-	*/
-	public Contract setRelatedContacts(String relatedContacts) {
-		this.relatedContacts=relatedContacts;
+	public Contract setRelatedCompanyName(String relatedCompanyName) {
+		this.relatedCompanyName=relatedCompanyName;
 		return this;
 	}
 	
@@ -618,17 +599,36 @@ public class Contract extends Entity {
 	 * 对方单位联系人
 	 * @return 对方单位联系人
 	*/
-	public String getRelatedContact() {
-		return relatedContact;
+	public String getRelatedContacts() {
+		return relatedContacts;
 	}
 	
 	/**
 	 * 设置 对方单位联系人
-	 * @param relatedContact 对方单位联系人
+	 * @param relatedContacts 对方单位联系人
 	 * @return 当前对象
 	*/
-	public Contract setRelatedContact(String relatedContact) {
-		this.relatedContact=relatedContact;
+	public Contract setRelatedContacts(String relatedContacts) {
+		this.relatedContacts=relatedContacts;
+		return this;
+	}
+	
+	/**
+	 * 获得 对方单位联系方式<br>
+	 * 对方单位联系方式
+	 * @return 对方单位联系方式
+	*/
+	public String getRelatedContactInformation() {
+		return relatedContactInformation;
+	}
+	
+	/**
+	 * 设置 对方单位联系方式
+	 * @param relatedContactInformation 对方单位联系方式
+	 * @return 当前对象
+	*/
+	public Contract setRelatedContactInformation(String relatedContactInformation) {
+		this.relatedContactInformation=relatedContactInformation;
 		return this;
 	}
 	
@@ -675,17 +675,17 @@ public class Contract extends Entity {
 	 * 监理联系方式
 	 * @return 监理联系方式
 	*/
-	public String getSupervisionContact() {
-		return supervisionContact;
+	public String getSupervisionContactInformation() {
+		return supervisionContactInformation;
 	}
 	
 	/**
 	 * 设置 监理联系方式
-	 * @param supervisionContact 监理联系方式
+	 * @param supervisionContactInformation 监理联系方式
 	 * @return 当前对象
 	*/
-	public Contract setSupervisionContact(String supervisionContact) {
-		this.supervisionContact=supervisionContact;
+	public Contract setSupervisionContactInformation(String supervisionContactInformation) {
+		this.supervisionContactInformation=supervisionContactInformation;
 		return this;
 	}
 	

@@ -2,7 +2,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:27:36
+ * @since 2021-09-02 12:01:07
  */
  -->
  <!DOCTYPE html>
@@ -34,11 +34,6 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('主键')}" class="search-label id-label">主键</span><span class="search-colon">:</span></div>
-                        <input id="id" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 合同名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('合同名称')}" class="search-label name-label">合同名称</span><span class="search-colon">:</span></div>
@@ -49,106 +44,41 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('合同编号')}" class="search-label code-label">合同编号</span><span class="search-colon">:</span></div>
                         <input id="code" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 合同状态 , state ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('合同状态')}" class="search-label state-label">合同状态</span><span class="search-colon">:</span></div>
-                        <input id="state" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 资金状态 , fundStatus ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资金状态')}" class="search-label fundStatus-label">资金状态</span><span class="search-colon">:</span></div>
                         <input id="fundStatus" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 合同类型 , categoryId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 合同状态 , state ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('合同类型')}" class="search-label categoryId-label">合同类型</span><span class="search-colon">:</span></div>
-                        <input id="categoryId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('合同状态')}" class="search-label state-label">合同状态</span><span class="search-colon">:</span></div>
+                        <input id="state" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 我方身份 , identity ,typeName=text_input, isHideInSearch=false -->
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 我方单位 , firstCompanyName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('我方身份')}" class="search-label identity-label">我方身份</span><span class="search-colon">:</span></div>
-                        <input id="identity" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('我方单位')}" class="search-label firstCompanyName-label">我方单位</span><span class="search-colon">:</span></div>
+                        <input id="firstCompanyName" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 资金流向 , fundDirect ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 对方单位 , relatedCompanyId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资金流向')}" class="search-label fundDirect-label">资金流向</span><span class="search-colon">:</span></div>
-                        <input id="fundDirect" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位')}" class="search-label relatedCompanyId-label">对方单位</span><span class="search-colon">:</span></div>
+                        <input id="relatedCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 金额 , money ,typeName=number_input, isHideInSearch=false -->
+                    <!-- 对方单位 , relatedCompanyName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('金额')}" class="search-label money-label">金额</span><span class="search-colon">:</span></div>
-                            <input id="money" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位')}" class="search-label relatedCompanyName-label">对方单位</span><span class="search-colon">:</span></div>
+                        <input id="relatedCompanyName" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 总金额 , allmoney ,typeName=number_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('总金额')}" class="search-label allmoney-label">总金额</span><span class="search-colon">:</span></div>
-                            <input id="allmoney" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
-                    </div>
-                    <!-- 承办人 , userId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('承办人')}" class="search-label userId-label">承办人</span><span class="search-colon">:</span></div>
-                        <input id="userId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 承办人部门 , deptId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('承办人部门')}" class="search-label deptId-label">承办人部门</span><span class="search-colon">:</span></div>
-                        <input id="deptId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 关联招标 , biddingId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('关联招标')}" class="search-label biddingId-label">关联招标</span><span class="search-colon">:</span></div>
-                        <input id="biddingId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 我方单位 , firstUnit ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('我方单位')}" class="search-label firstUnit-label">我方单位</span><span class="search-colon">:</span></div>
-                        <input id="firstUnit" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 我方联系人 , firstContacts ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('我方联系人')}" class="search-label firstContacts-label">我方联系人</span><span class="search-colon">:</span></div>
-                        <input id="firstContacts" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 我方联系方式 , firstContact ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('我方联系方式')}" class="search-label firstContact-label">我方联系方式</span><span class="search-colon">:</span></div>
-                        <input id="firstContact" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 对方单位 , relatedUnitId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位')}" class="search-label relatedUnitId-label">对方单位</span><span class="search-colon">:</span></div>
-                        <input id="relatedUnitId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 对方单位 , relatedUnit ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位')}" class="search-label relatedUnit-label">对方单位</span><span class="search-colon">:</span></div>
-                        <input id="relatedUnit" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 对方单位用户 , relatedContacts ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位用户')}" class="search-label relatedContacts-label">对方单位用户</span><span class="search-colon">:</span></div>
-                        <input id="relatedContacts" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 对方单位联系人 , relatedContact ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('对方单位联系人')}" class="search-label relatedContact-label">对方单位联系人</span><span class="search-colon">:</span></div>
-                        <input id="relatedContact" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 监理单位 , supervisionUnit ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('监理单位')}" class="search-label supervisionUnit-label">监理单位</span><span class="search-colon">:</span></div>
-                        <input id="supervisionUnit" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 监理人 , supervisionContacts ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('监理人')}" class="search-label supervisionContacts-label">监理人</span><span class="search-colon">:</span></div>
-                        <input id="supervisionContacts" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 监理联系方式 , supervisionContact ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('监理联系方式')}" class="search-label supervisionContact-label">监理联系方式</span><span class="search-colon">:</span></div>
-                        <input id="supervisionContact" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 生效时间 , effectTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('生效时间')}" class="search-label effectTime-label">生效时间</span><span class="search-colon">:</span></div>
@@ -159,26 +89,6 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('失效时间')}" class="search-label lostEffectTime-label">失效时间</span><span class="search-colon">:</span></div>
                             <input type="text" id="lostEffectTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
-                    <!-- 结束时间 , endTime ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('结束时间')}" class="search-label endTime-label">结束时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="endTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
-                    <!-- 签订时间 , auditTime ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('签订时间')}" class="search-label auditTime-label">签订时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="auditTime"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
-                    <!-- 附件 , attach ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('附件')}" class="search-label attach-label">附件</span><span class="search-colon">:</span></div>
-                        <input id="attach" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
 
 
                 </div>
@@ -188,10 +98,11 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产财务数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:26
+ * @since 2021-09-02 15:25:31
 */
 
 @Api(tags = "资产财务数据")
@@ -73,7 +73,6 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -144,7 +143,6 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -181,7 +179,6 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -259,7 +256,6 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),
@@ -291,7 +287,6 @@ public class AssetExtFinancialController extends SuperController {
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ASSET_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtFinancialVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_RATE , value = "税额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = true , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetExtFinancialVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = true , dataTypeClass=BigDecimal.class),

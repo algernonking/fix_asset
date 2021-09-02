@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:27:37
+ * @since 2021-09-02 12:01:07
  */
 
 
@@ -78,23 +78,21 @@ function ListPage() {
 					,{ field: 'userId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('承办人') }
 					,{ field: 'deptId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('承办人部门') }
 					,{ field: 'biddingId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('关联招标') }
-					,{ field: 'firstUnit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('我方单位') }
+					,{ field: 'firstCompanyName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('我方单位') }
 					,{ field: 'firstContacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('我方联系人') }
-					,{ field: 'firstContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('我方联系方式') }
-					,{ field: 'relatedUnitId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位') }
-					,{ field: 'relatedUnit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位') }
-					,{ field: 'relatedContacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位用户') }
-					,{ field: 'relatedContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位联系人') }
+					,{ field: 'firstContactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('我方联系方式') }
+					,{ field: 'relatedCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位') }
+					,{ field: 'relatedCompanyName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位') }
+					,{ field: 'relatedContacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位联系人') }
+					,{ field: 'relatedContactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('对方单位联系方式') }
 					,{ field: 'supervisionUnit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理单位') }
 					,{ field: 'supervisionContacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理人') }
-					,{ field: 'supervisionContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理联系方式') }
+					,{ field: 'supervisionContactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理联系方式') }
 					,{ field: 'effectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生效时间'), templet: function (d) { return fox.dateFormat(d.effectTime); }}
 					,{ field: 'lostEffectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('失效时间'), templet: function (d) { return fox.dateFormat(d.lostEffectTime); }}
 					,{ field: 'endTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('结束时间'), templet: function (d) { return fox.dateFormat(d.endTime); }}
 					,{ field: 'auditTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('签订时间'), templet: function (d) { return fox.dateFormat(d.auditTime); }}
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'notes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -125,35 +123,15 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.id={ value: $("#id").val()};
-		value.name={ value: $("#name").val()};
-		value.code={ value: $("#code").val()};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.code={ value: $("#code").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.state={ value: $("#state").val()};
 		value.fundStatus={ value: $("#fundStatus").val()};
-		value.categoryId={ value: $("#categoryId").val()};
-		value.identity={ value: $("#identity").val()};
-		value.fundDirect={ value: $("#fundDirect").val()};
-		value.money={ value: $("#money").val()};
-		value.allmoney={ value: $("#allmoney").val()};
-		value.userId={ value: $("#userId").val()};
-		value.deptId={ value: $("#deptId").val()};
-		value.biddingId={ value: $("#biddingId").val()};
-		value.firstUnit={ value: $("#firstUnit").val()};
-		value.firstContacts={ value: $("#firstContacts").val()};
-		value.firstContact={ value: $("#firstContact").val()};
-		value.relatedUnitId={ value: $("#relatedUnitId").val()};
-		value.relatedUnit={ value: $("#relatedUnit").val()};
-		value.relatedContacts={ value: $("#relatedContacts").val()};
-		value.relatedContact={ value: $("#relatedContact").val()};
-		value.supervisionUnit={ value: $("#supervisionUnit").val()};
-		value.supervisionContacts={ value: $("#supervisionContacts").val()};
-		value.supervisionContact={ value: $("#supervisionContact").val()};
+		value.firstCompanyName={ value: $("#firstCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.relatedCompanyId={ value: $("#relatedCompanyId").val()};
+		value.relatedCompanyName={ value: $("#relatedCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.effectTime={ value: $("#effectTime").val()};
 		value.lostEffectTime={ value: $("#lostEffectTime").val()};
-		value.endTime={ value: $("#endTime").val()};
-		value.auditTime={ value: $("#auditTime").val()};
-		value.attach={ value: $("#attach").val()};
-		value.notes={ value: $("#notes").val()};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
@@ -186,7 +164,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
 		laydate.render({
 			elem: '#effectTime',
@@ -194,14 +172,6 @@ function ListPage() {
 		});
 		laydate.render({
 			elem: '#lostEffectTime',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#endTime',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#auditTime',
 			trigger:"click"
 		});
 		fox.renderSearchInputs();
@@ -224,7 +194,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -380,7 +350,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["95%",height+"px"],
 			type: 2,
 			id:"cont-contract-form-data-win",
 			content: '/business/contract/contract/contract_form.html' + queryString,

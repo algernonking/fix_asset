@@ -1,7 +1,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:28
+ * @since 2021-09-02 15:23:28
  */
 
 function FormPage() {
@@ -48,6 +48,7 @@ function FormPage() {
 	 * */
 	var adjustPopupTask=-1;
 	function adjustPopup() {
+		return;
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;

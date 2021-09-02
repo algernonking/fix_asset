@@ -6,14 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:16
- * @sign 66155E9A0C5E19E61094A77A2691A026
+ * @since 2021-09-02 12:54:40
+ * @sign C8F5A582F3B45A513B22B41C9442ED96
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -260,24 +260,24 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
-	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String USE_USER="useUser";
 	
 	/**
-	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Person> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_USER, org.github.foxnic.web.domain.hrm.Person.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Employee> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -561,7 +561,7 @@ public class AssetCollectionMeta {
 		 * @param originator 制单人
 		 * @return 当前对象
 		*/
-		public AssetCollection setOriginator(Person originator) {
+		public AssetCollection setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
 			return this;
@@ -572,7 +572,7 @@ public class AssetCollectionMeta {
 		 * @param useUser 使用人员
 		 * @return 当前对象
 		*/
-		public AssetCollection setUseUser(Person useUser) {
+		public AssetCollection setUseUser(Employee useUser) {
 			super.change(USE_USER,super.getUseUser(),useUser);
 			super.setUseUser(useUser);
 			return this;

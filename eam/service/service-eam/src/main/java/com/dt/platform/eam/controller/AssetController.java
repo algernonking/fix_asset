@@ -1,50 +1,64 @@
 package com.dt.platform.eam.controller;
 
  
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetVO;
-import com.dt.platform.domain.eam.meta.AssetMeta;
-import com.dt.platform.domain.eam.meta.AssetVOMeta;
-import com.dt.platform.eam.service.IAssetService;
-import com.dt.platform.proxy.eam.AssetServiceProxy;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.api.validate.annotations.NotNull;
-import com.github.foxnic.commons.io.StreamUtil;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.springboot.web.DownloadUtil;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.github.xiaoymin.knife4j.annotations.ApiSort;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
-import org.github.foxnic.web.framework.web.SuperController;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import org.github.foxnic.web.framework.web.SuperController;
+import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
-import java.math.BigDecimal;
+
+import com.dt.platform.proxy.eam.AssetServiceProxy;
+import com.dt.platform.domain.eam.meta.AssetVOMeta;
+import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.AssetVO;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.springboot.web.DownloadUtil;
+import com.github.foxnic.dao.data.PagedList;
 import java.util.Date;
-import java.util.List;
+import java.sql.Timestamp;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
+import com.github.foxnic.dao.excel.ValidateResult;
+import java.io.InputStream;
+import com.dt.platform.domain.eam.meta.AssetMeta;
+import java.math.BigDecimal;
+import com.dt.platform.domain.eam.AssetExtFinancial;
+import com.dt.platform.domain.eam.AssetExtEquipment;
+import com.dt.platform.domain.eam.AssetExtSoftware;
+import com.dt.platform.domain.eam.Position;
+import com.dt.platform.domain.eam.Category;
+import com.dt.platform.domain.eam.Goods;
+import com.dt.platform.domain.eam.Manufacturer;
+import com.dt.platform.domain.eam.Warehouse;
+import org.github.foxnic.web.domain.hrm.Person;
+import io.swagger.annotations.Api;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiImplicitParam;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.dt.platform.eam.service.IAssetService;
+import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 17:39:21
+ * @since 2021-09-02 16:01:40
 */
 
 @Api(tags = "资产")
@@ -78,8 +92,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = true , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -167,8 +182,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = true , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -222,8 +238,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = true , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -267,9 +284,6 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.GET_BY_ID)
 	public Result<Asset> getById(String id) {
-
-		System.out.println("@@@@@@@@@"+this.getSessionUser().getUser().getActivatedEmployeeName());
-
 		Result<Asset> result=new Result<>();
 		Asset asset=assetService.getById(id);
 		// 关联出 分类 数据
@@ -329,8 +343,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = true , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),
@@ -380,8 +395,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = true , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.USE_ORGANIZATION_ID , value = "使用公司/部门" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_ID , value = "存放位置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class),

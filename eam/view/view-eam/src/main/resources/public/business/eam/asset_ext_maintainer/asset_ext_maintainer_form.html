@@ -2,7 +2,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:28
+ * @since 2021-09-02 15:23:27
  */
  -->
  <!DOCTYPE html>
@@ -33,9 +33,6 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
-            <legend>维保属性</legend>
-        </fieldset>
 
         <div class="layui-row form-row">
 
@@ -137,10 +134,6 @@
 
     </form>
 
-</div>
-<div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_ext_maintainer:create','eam_asset_ext_maintainer:update','eam_asset_ext_maintainer:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>

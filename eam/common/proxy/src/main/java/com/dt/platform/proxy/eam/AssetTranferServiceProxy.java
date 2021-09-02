@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产转移  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:07
+ * @since 2021-09-02 15:52:49
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetTranferServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface AssetTranferServiceProxy {
 	 * 批量删除资产转移
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新资产转移

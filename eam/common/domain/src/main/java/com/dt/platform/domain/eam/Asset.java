@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 12:15:35
- * @sign 9E68F6558C6B0A576EE9894B4BFD136B
+ * @since 2021-09-02 16:01:39
+ * @sign 2A9C06AC119F4650CD6FFD3AECC31A0D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -134,16 +134,22 @@ public class Asset extends Entity {
 	private String serialNumber;
 	
 	/**
-	 * 使用公司/部门：使用公司/部门
+	 * 所属公司：所属公司
 	*/
-	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
-	private String useOrganizationId;
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private String ownCompanyId;
 	
 	/**
 	 * 管理人员：管理人员
 	*/
 	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
 	private String managerId;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private String useOrganizationId;
 	
 	/**
 	 * 使用人员：使用人员
@@ -673,21 +679,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 使用公司/部门<br>
-	 * 使用公司/部门
-	 * @return 使用公司/部门
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
 	*/
-	public String getUseOrganizationId() {
-		return useOrganizationId;
+	public String getOwnCompanyId() {
+		return ownCompanyId;
 	}
 	
 	/**
-	 * 设置 使用公司/部门
-	 * @param useOrganizationId 使用公司/部门
+	 * 设置 所属公司
+	 * @param ownCompanyId 所属公司
 	 * @return 当前对象
 	*/
-	public Asset setUseOrganizationId(String useOrganizationId) {
-		this.useOrganizationId=useOrganizationId;
+	public Asset setOwnCompanyId(String ownCompanyId) {
+		this.ownCompanyId=ownCompanyId;
 		return this;
 	}
 	
@@ -707,6 +713,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setManagerId(String managerId) {
 		this.managerId=managerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public String getUseOrganizationId() {
+		return useOrganizationId;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganizationId 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Asset setUseOrganizationId(String useOrganizationId) {
+		this.useOrganizationId=useOrganizationId;
 		return this;
 	}
 	

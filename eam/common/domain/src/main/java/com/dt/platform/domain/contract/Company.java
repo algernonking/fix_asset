@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:47:08
- * @sign 859C17088E136238C836BE98FC63C525
+ * @since 2021-09-02 11:49:08
+ * @sign 70213853CA7DB1ED5329BE4E2AF3D2C0
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,7 +57,7 @@ public class Company extends Entity {
 	 * 联系方式：联系方式
 	*/
 	@ApiModelProperty(required = true,value="联系方式" , notes = "联系方式")
-	private String contact;
+	private String contactInformation;
 	
 	/**
 	 * 信用代码：信用代码
@@ -206,17 +206,17 @@ public class Company extends Entity {
 	 * 联系方式
 	 * @return 联系方式
 	*/
-	public String getContact() {
-		return contact;
+	public String getContactInformation() {
+		return contactInformation;
 	}
 	
 	/**
 	 * 设置 联系方式
-	 * @param contact 联系方式
+	 * @param contactInformation 联系方式
 	 * @return 当前对象
 	*/
-	public Company setContact(String contact) {
-		this.contact=contact;
+	public Company setContactInformation(String contactInformation) {
+		this.contactInformation=contactInformation;
 		return this;
 	}
 	

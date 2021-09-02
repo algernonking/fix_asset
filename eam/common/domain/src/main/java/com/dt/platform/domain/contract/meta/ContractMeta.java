@@ -9,8 +9,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 09:27:33
- * @sign 75920634A785EF7B4F19F2A72076401B
+ * @since 2021-09-02 12:01:02
+ * @sign CDB830B6EE5E05E0B1B7E74E276F97A8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -149,12 +149,12 @@ public class ContractMeta {
 	/**
 	 * 我方单位 , 类型: java.lang.String
 	*/
-	public static final String FIRST_UNIT="firstUnit";
+	public static final String FIRST_COMPANY_NAME="firstCompanyName";
 	
 	/**
 	 * 我方单位 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_UNIT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_UNIT, java.lang.String.class, "我方单位", "我方单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_COMPANY_NAME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_COMPANY_NAME, java.lang.String.class, "我方单位", "我方单位", java.lang.String.class, null);
 	
 	/**
 	 * 我方联系人 , 类型: java.lang.String
@@ -169,52 +169,52 @@ public class ContractMeta {
 	/**
 	 * 我方联系方式 , 类型: java.lang.String
 	*/
-	public static final String FIRST_CONTACT="firstContact";
+	public static final String FIRST_CONTACT_INFORMATION="firstContactInformation";
 	
 	/**
 	 * 我方联系方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_CONTACT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_CONTACT, java.lang.String.class, "我方联系方式", "我方联系方式", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_CONTACT_INFORMATION, java.lang.String.class, "我方联系方式", "我方联系方式", java.lang.String.class, null);
 	
 	/**
 	 * 对方单位 , 类型: java.lang.String
 	*/
-	public static final String RELATED_UNIT_ID="relatedUnitId";
+	public static final String RELATED_COMPANY_ID="relatedCompanyId";
 	
 	/**
 	 * 对方单位 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_UNIT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_UNIT_ID, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_COMPANY_ID, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
 	
 	/**
 	 * 对方单位 , 类型: java.lang.String
 	*/
-	public static final String RELATED_UNIT="relatedUnit";
+	public static final String RELATED_COMPANY_NAME="relatedCompanyName";
 	
 	/**
 	 * 对方单位 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_UNIT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_UNIT, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_COMPANY_NAME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_COMPANY_NAME, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
 	
 	/**
-	 * 对方单位用户 , 类型: java.lang.String
+	 * 对方单位联系人 , 类型: java.lang.String
 	*/
 	public static final String RELATED_CONTACTS="relatedContacts";
 	
 	/**
-	 * 对方单位用户 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACTS, java.lang.String.class, "对方单位用户", "对方单位用户", java.lang.String.class, null);
-	
-	/**
 	 * 对方单位联系人 , 类型: java.lang.String
 	*/
-	public static final String RELATED_CONTACT="relatedContact";
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACTS, java.lang.String.class, "对方单位联系人", "对方单位联系人", java.lang.String.class, null);
 	
 	/**
-	 * 对方单位联系人 , 类型: java.lang.String
+	 * 对方单位联系方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACT, java.lang.String.class, "对方单位联系人", "对方单位联系人", java.lang.String.class, null);
+	public static final String RELATED_CONTACT_INFORMATION="relatedContactInformation";
+	
+	/**
+	 * 对方单位联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACT_INFORMATION, java.lang.String.class, "对方单位联系方式", "对方单位联系方式", java.lang.String.class, null);
 	
 	/**
 	 * 监理单位 , 类型: java.lang.String
@@ -239,12 +239,12 @@ public class ContractMeta {
 	/**
 	 * 监理联系方式 , 类型: java.lang.String
 	*/
-	public static final String SUPERVISION_CONTACT="supervisionContact";
+	public static final String SUPERVISION_CONTACT_INFORMATION="supervisionContactInformation";
 	
 	/**
 	 * 监理联系方式 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUPERVISION_CONTACT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUPERVISION_CONTACT, java.lang.String.class, "监理联系方式", "监理联系方式", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUPERVISION_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUPERVISION_CONTACT_INFORMATION, java.lang.String.class, "监理联系方式", "监理联系方式", java.lang.String.class, null);
 	
 	/**
 	 * 生效时间 , 类型: java.util.Date
@@ -389,7 +389,7 @@ public class ContractMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , STATE , FUND_STATUS , CATEGORY_ID , IDENTITY , FUND_DIRECT , MONEY , ALLMONEY , USER_ID , DEPT_ID , BIDDING_ID , FIRST_UNIT , FIRST_CONTACTS , FIRST_CONTACT , RELATED_UNIT_ID , RELATED_UNIT , RELATED_CONTACTS , RELATED_CONTACT , SUPERVISION_UNIT , SUPERVISION_CONTACTS , SUPERVISION_CONTACT , EFFECT_TIME , LOST_EFFECT_TIME , END_TIME , AUDIT_TIME , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , CODE , STATE , FUND_STATUS , CATEGORY_ID , IDENTITY , FUND_DIRECT , MONEY , ALLMONEY , USER_ID , DEPT_ID , BIDDING_ID , FIRST_COMPANY_NAME , FIRST_CONTACTS , FIRST_CONTACT_INFORMATION , RELATED_COMPANY_ID , RELATED_COMPANY_NAME , RELATED_CONTACTS , RELATED_CONTACT_INFORMATION , SUPERVISION_UNIT , SUPERVISION_CONTACTS , SUPERVISION_CONTACT_INFORMATION , EFFECT_TIME , LOST_EFFECT_TIME , END_TIME , AUDIT_TIME , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -544,12 +544,12 @@ public class ContractMeta {
 		
 		/**
 		 * 设置 我方单位
-		 * @param firstUnit 我方单位
+		 * @param firstCompanyName 我方单位
 		 * @return 当前对象
 		*/
-		public Contract setFirstUnit(String firstUnit) {
-			super.change(FIRST_UNIT,super.getFirstUnit(),firstUnit);
-			super.setFirstUnit(firstUnit);
+		public Contract setFirstCompanyName(String firstCompanyName) {
+			super.change(FIRST_COMPANY_NAME,super.getFirstCompanyName(),firstCompanyName);
+			super.setFirstCompanyName(firstCompanyName);
 			return this;
 		}
 		
@@ -566,40 +566,40 @@ public class ContractMeta {
 		
 		/**
 		 * 设置 我方联系方式
-		 * @param firstContact 我方联系方式
+		 * @param firstContactInformation 我方联系方式
 		 * @return 当前对象
 		*/
-		public Contract setFirstContact(String firstContact) {
-			super.change(FIRST_CONTACT,super.getFirstContact(),firstContact);
-			super.setFirstContact(firstContact);
+		public Contract setFirstContactInformation(String firstContactInformation) {
+			super.change(FIRST_CONTACT_INFORMATION,super.getFirstContactInformation(),firstContactInformation);
+			super.setFirstContactInformation(firstContactInformation);
 			return this;
 		}
 		
 		/**
 		 * 设置 对方单位
-		 * @param relatedUnitId 对方单位
+		 * @param relatedCompanyId 对方单位
 		 * @return 当前对象
 		*/
-		public Contract setRelatedUnitId(String relatedUnitId) {
-			super.change(RELATED_UNIT_ID,super.getRelatedUnitId(),relatedUnitId);
-			super.setRelatedUnitId(relatedUnitId);
+		public Contract setRelatedCompanyId(String relatedCompanyId) {
+			super.change(RELATED_COMPANY_ID,super.getRelatedCompanyId(),relatedCompanyId);
+			super.setRelatedCompanyId(relatedCompanyId);
 			return this;
 		}
 		
 		/**
 		 * 设置 对方单位
-		 * @param relatedUnit 对方单位
+		 * @param relatedCompanyName 对方单位
 		 * @return 当前对象
 		*/
-		public Contract setRelatedUnit(String relatedUnit) {
-			super.change(RELATED_UNIT,super.getRelatedUnit(),relatedUnit);
-			super.setRelatedUnit(relatedUnit);
+		public Contract setRelatedCompanyName(String relatedCompanyName) {
+			super.change(RELATED_COMPANY_NAME,super.getRelatedCompanyName(),relatedCompanyName);
+			super.setRelatedCompanyName(relatedCompanyName);
 			return this;
 		}
 		
 		/**
-		 * 设置 对方单位用户
-		 * @param relatedContacts 对方单位用户
+		 * 设置 对方单位联系人
+		 * @param relatedContacts 对方单位联系人
 		 * @return 当前对象
 		*/
 		public Contract setRelatedContacts(String relatedContacts) {
@@ -609,13 +609,13 @@ public class ContractMeta {
 		}
 		
 		/**
-		 * 设置 对方单位联系人
-		 * @param relatedContact 对方单位联系人
+		 * 设置 对方单位联系方式
+		 * @param relatedContactInformation 对方单位联系方式
 		 * @return 当前对象
 		*/
-		public Contract setRelatedContact(String relatedContact) {
-			super.change(RELATED_CONTACT,super.getRelatedContact(),relatedContact);
-			super.setRelatedContact(relatedContact);
+		public Contract setRelatedContactInformation(String relatedContactInformation) {
+			super.change(RELATED_CONTACT_INFORMATION,super.getRelatedContactInformation(),relatedContactInformation);
+			super.setRelatedContactInformation(relatedContactInformation);
 			return this;
 		}
 		
@@ -643,12 +643,12 @@ public class ContractMeta {
 		
 		/**
 		 * 设置 监理联系方式
-		 * @param supervisionContact 监理联系方式
+		 * @param supervisionContactInformation 监理联系方式
 		 * @return 当前对象
 		*/
-		public Contract setSupervisionContact(String supervisionContact) {
-			super.change(SUPERVISION_CONTACT,super.getSupervisionContact(),supervisionContact);
-			super.setSupervisionContact(supervisionContact);
+		public Contract setSupervisionContactInformation(String supervisionContactInformation) {
+			super.change(SUPERVISION_CONTACT_INFORMATION,super.getSupervisionContactInformation(),supervisionContactInformation);
+			super.setSupervisionContactInformation(supervisionContactInformation);
 			return this;
 		}
 		

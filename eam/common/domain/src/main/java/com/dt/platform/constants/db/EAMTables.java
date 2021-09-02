@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-09-02 09:42:01
+ * @since 2021-09-02 15:17:54
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -48,7 +48,7 @@ public class EAMTables {
 		/**
 		 * 联系方式
 		*/
-		public static final DBField CONTACT = new DBField(DBDataType.STRING , "contact","contact","联系方式","联系方式",false,false,false);
+		public static final DBField CONTACT_INFORMATION = new DBField(DBDataType.STRING , "contact_information","contactInformation","联系方式","联系方式",false,false,false);
 		
 		/**
 		 * 信用代码
@@ -105,7 +105,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,true);
 		
 		public CONT_COMPANY() {
-			this.init($NAME,"单位" , ID , NAME , ADDRESS , CONTACTS , CONTACT , CREDIT_CODE , PROFILE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"单位" , ID , NAME , ADDRESS , CONTACTS , CONTACT_INFORMATION , CREDIT_CODE , PROFILE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final CONT_COMPANY $TABLE=new CONT_COMPANY();
 	}
@@ -198,7 +198,7 @@ public class EAMTables {
 		/**
 		 * 我方联系方式
 		*/
-		public static final DBField FIRST_CONTACT = new DBField(DBDataType.STRING , "first_contact","firstContact","我方联系方式","我方联系方式",false,false,true);
+		public static final DBField FIRST_CONTACT_INFORMATION = new DBField(DBDataType.STRING , "first_contact_information","firstContactInformation","我方联系方式","我方联系方式",false,false,true);
 		
 		/**
 		 * 对方单位
@@ -211,14 +211,14 @@ public class EAMTables {
 		public static final DBField RELATED_COMPANY_NAME = new DBField(DBDataType.STRING , "related_company_name","relatedCompanyName","对方单位","对方单位",false,false,true);
 		
 		/**
-		 * 对方单位用户
-		*/
-		public static final DBField RELATED_CONTACTS = new DBField(DBDataType.STRING , "related_contacts","relatedContacts","对方单位用户","对方单位用户",false,false,true);
-		
-		/**
 		 * 对方单位联系人
 		*/
-		public static final DBField RELATED_CONTACT = new DBField(DBDataType.STRING , "related_contact","relatedContact","对方单位联系人","对方单位联系人",false,false,true);
+		public static final DBField RELATED_CONTACTS = new DBField(DBDataType.STRING , "related_contacts","relatedContacts","对方单位联系人","对方单位联系人",false,false,true);
+		
+		/**
+		 * 对方单位联系方式
+		*/
+		public static final DBField RELATED_CONTACT_INFORMATION = new DBField(DBDataType.STRING , "related_contact_information","relatedContactInformation","对方单位联系方式","对方单位联系方式",false,false,true);
 		
 		/**
 		 * 监理单位
@@ -233,7 +233,7 @@ public class EAMTables {
 		/**
 		 * 监理联系方式
 		*/
-		public static final DBField SUPERVISION_CONTACT = new DBField(DBDataType.STRING , "supervision_contact","supervisionContact","监理联系方式","监理联系方式",false,false,true);
+		public static final DBField SUPERVISION_CONTACT_INFORMATION = new DBField(DBDataType.STRING , "supervision_contact_information","supervisionContactInformation","监理联系方式","监理联系方式",false,false,true);
 		
 		/**
 		 * 生效时间
@@ -305,7 +305,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public CONT_CONTRACT() {
-			this.init($NAME,"合同" , ID , NAME , CODE , STATE , FUND_STATUS , CATEGORY_ID , IDENTITY , FUND_DIRECT , MONEY , ALLMONEY , USER_ID , DEPT_ID , BIDDING_ID , FIRST_COMPANY_NAME , FIRST_CONTACTS , FIRST_CONTACT , RELATED_COMPANY_ID , RELATED_COMPANY_NAME , RELATED_CONTACTS , RELATED_CONTACT , SUPERVISION_UNIT , SUPERVISION_CONTACTS , SUPERVISION_CONTACT , EFFECT_TIME , LOST_EFFECT_TIME , END_TIME , AUDIT_TIME , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"合同" , ID , NAME , CODE , STATE , FUND_STATUS , CATEGORY_ID , IDENTITY , FUND_DIRECT , MONEY , ALLMONEY , USER_ID , DEPT_ID , BIDDING_ID , FIRST_COMPANY_NAME , FIRST_CONTACTS , FIRST_CONTACT_INFORMATION , RELATED_COMPANY_ID , RELATED_COMPANY_NAME , RELATED_CONTACTS , RELATED_CONTACT_INFORMATION , SUPERVISION_UNIT , SUPERVISION_CONTACTS , SUPERVISION_CONTACT_INFORMATION , EFFECT_TIME , LOST_EFFECT_TIME , END_TIME , AUDIT_TIME , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final CONT_CONTRACT $TABLE=new CONT_CONTRACT();
 	}
@@ -1143,14 +1143,19 @@ public class EAMTables {
 		public static final DBField SERIAL_NUMBER = new DBField(DBDataType.STRING , "serial_number","serialNumber","序列号","序列号",false,false,true);
 		
 		/**
-		 * 使用公司/部门
+		 * 所属公司
 		*/
-		public static final DBField USE_ORGANIZATION_ID = new DBField(DBDataType.STRING , "use_organization_id","useOrganizationId","使用公司/部门","使用公司/部门",false,false,true);
+		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
 		
 		/**
 		 * 管理人员
 		*/
 		public static final DBField MANAGER_ID = new DBField(DBDataType.STRING , "manager_id","managerId","管理人员","管理人员",false,false,true);
+		
+		/**
+		 * 使用公司/部门
+		*/
+		public static final DBField USE_ORGANIZATION_ID = new DBField(DBDataType.STRING , "use_organization_id","useOrganizationId","使用公司/部门","使用公司/部门",false,false,true);
 		
 		/**
 		 * 使用人员
@@ -1267,7 +1272,7 @@ public class EAMTables {
 		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编码","业务编码",false,false,true);
 		
 		public EAM_ASSET() {
-			this.init($NAME,"资产" , ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE);
+			this.init($NAME,"资产" , ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE);
 		}
 		public static final EAM_ASSET $TABLE=new EAM_ASSET();
 	}
@@ -2303,11 +2308,6 @@ public class EAMTables {
 		public static final DBField SUPPLIER_ID = new DBField(DBDataType.STRING , "supplier_id","supplierId","资产供应商","资产供应商",false,false,true);
 		
 		/**
-		 * 所属公司
-		*/
-		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
-		
-		/**
 		 * 税额
 		*/
 		public static final DBField TAXAMOUNT_RATE = new DBField(DBDataType.DECIMAL , "taxamount_rate","taxamountRate","税额","税额",false,false,false);
@@ -2393,7 +2393,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
 		
 		public EAM_ASSET_EXT_FINANCIAL() {
-			this.init($NAME,"资产财务数据" , ID , ASSET_ID , FINANCIAL_CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , OWN_COMPANY_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产财务数据" , ID , ASSET_ID , FINANCIAL_CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_EXT_FINANCIAL $TABLE=new EAM_ASSET_EXT_FINANCIAL();
 	}

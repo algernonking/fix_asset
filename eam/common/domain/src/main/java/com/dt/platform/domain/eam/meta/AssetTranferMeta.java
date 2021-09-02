@@ -7,13 +7,14 @@ import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import com.dt.platform.domain.eam.Position;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:07
- * @sign 5AD0C2E9402F02956C5FE27540A9825C
+ * @since 2021-09-02 15:52:46
+ * @sign 6A9992F2D6B95A70C9968DC0F356F257
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -280,24 +281,24 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
 	
 	/**
-	 * 调入管理员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 调入管理员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String MANAGER="manager";
 	
 	/**
-	 * 调入管理员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 调入管理员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Person> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,MANAGER, org.github.foxnic.web.domain.hrm.Person.class, "调入管理员", "调入管理员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Employee> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,MANAGER, org.github.foxnic.web.domain.hrm.Employee.class, "调入管理员", "调入管理员", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
-	 * 使用人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String USE_USER="useUser";
 	
 	/**
-	 * 使用人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Person> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,USE_USER, org.github.foxnic.web.domain.hrm.Person.class, "使用人", "使用人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Employee> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,USE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "使用人", "使用人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -603,7 +604,7 @@ public class AssetTranferMeta {
 		 * @param manager 调入管理员
 		 * @return 当前对象
 		*/
-		public AssetTranfer setManager(Person manager) {
+		public AssetTranfer setManager(Employee manager) {
 			super.change(MANAGER,super.getManager(),manager);
 			super.setManager(manager);
 			return this;
@@ -614,7 +615,7 @@ public class AssetTranferMeta {
 		 * @param useUser 使用人
 		 * @return 当前对象
 		*/
-		public AssetTranfer setUseUser(Person useUser) {
+		public AssetTranfer setUseUser(Employee useUser) {
 			super.change(USE_USER,super.getUseUser(),useUser);
 			super.setUseUser(useUser);
 			return this;

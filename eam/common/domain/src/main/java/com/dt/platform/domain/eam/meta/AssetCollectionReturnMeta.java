@@ -6,14 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:17
- * @sign 6296981A4B8E960B333321A9ACC89AEE
+ * @since 2021-09-02 12:54:41
+ * @sign 39E0967F0DE45198D9375BD19DFB3DF2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -250,14 +250,14 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -530,7 +530,7 @@ public class AssetCollectionReturnMeta {
 		 * @param originator 制单人
 		 * @return 当前对象
 		*/
-		public AssetCollectionReturn setOriginator(Person originator) {
+		public AssetCollectionReturn setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
 			return this;

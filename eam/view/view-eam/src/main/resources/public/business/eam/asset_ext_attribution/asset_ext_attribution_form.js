@@ -1,7 +1,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:23
+ * @since 2021-09-02 12:54:47
  */
 
 function FormPage() {
@@ -40,7 +40,7 @@ function FormPage() {
 		bindButtonEvent();
 
 		//调整窗口的高度与位置
-		adjustPopup();
+		//adjustPopup();
 	}
 
 	/**

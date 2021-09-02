@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:19
- * @sign 0A800D4EADC881A91DAA5E29022D343B
+ * @since 2021-09-02 12:54:43
+ * @sign 49145E53FA92FCC0309DB5AC12C8C3E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -180,13 +180,13 @@ public class AssetRepair extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 报修人：报修人
 	*/
 	@ApiModelProperty(required = false,value="报修人" , notes = "报修人")
-	private Person reportUser;
+	private Employee reportUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -671,7 +671,7 @@ public class AssetRepair extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -680,7 +680,7 @@ public class AssetRepair extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetRepair setOriginator(Person originator) {
+	public AssetRepair setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}
@@ -690,7 +690,7 @@ public class AssetRepair extends Entity {
 	 * 报修人
 	 * @return 报修人
 	*/
-	public Person getReportUser() {
+	public Employee getReportUser() {
 		return reportUser;
 	}
 	
@@ -699,7 +699,7 @@ public class AssetRepair extends Entity {
 	 * @param reportUser 报修人
 	 * @return 当前对象
 	*/
-	public AssetRepair setReportUser(Person reportUser) {
+	public AssetRepair setReportUser(Employee reportUser) {
 		this.reportUser=reportUser;
 		return this;
 	}

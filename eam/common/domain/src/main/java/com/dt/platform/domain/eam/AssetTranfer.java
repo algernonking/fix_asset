@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:07
- * @sign 5AD0C2E9402F02956C5FE27540A9825C
+ * @since 2021-09-02 15:52:46
+ * @sign 6A9992F2D6B95A70C9968DC0F356F257
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -192,13 +193,13 @@ public class AssetTranfer extends Entity {
 	 * 调入管理员：调入管理员
 	*/
 	@ApiModelProperty(required = false,value="调入管理员" , notes = "调入管理员")
-	private Person manager;
+	private Employee manager;
 	
 	/**
 	 * 使用人：使用人
 	*/
 	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
-	private Person useUser;
+	private Employee useUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -721,7 +722,7 @@ public class AssetTranfer extends Entity {
 	 * 调入管理员
 	 * @return 调入管理员
 	*/
-	public Person getManager() {
+	public Employee getManager() {
 		return manager;
 	}
 	
@@ -730,7 +731,7 @@ public class AssetTranfer extends Entity {
 	 * @param manager 调入管理员
 	 * @return 当前对象
 	*/
-	public AssetTranfer setManager(Person manager) {
+	public AssetTranfer setManager(Employee manager) {
 		this.manager=manager;
 		return this;
 	}
@@ -740,7 +741,7 @@ public class AssetTranfer extends Entity {
 	 * 使用人
 	 * @return 使用人
 	*/
-	public Person getUseUser() {
+	public Employee getUseUser() {
 		return useUser;
 	}
 	
@@ -749,7 +750,7 @@ public class AssetTranfer extends Entity {
 	 * @param useUser 使用人
 	 * @return 当前对象
 	*/
-	public AssetTranfer setUseUser(Person useUser) {
+	public AssetTranfer setUseUser(Employee useUser) {
 		this.useUser=useUser;
 		return this;
 	}

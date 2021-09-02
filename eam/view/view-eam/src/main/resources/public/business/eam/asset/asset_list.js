@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-25 12:15:42
+ * @since 2021-09-02 16:01:44
  */
 
 
@@ -18,7 +18,10 @@ function ListPage() {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
-		
+
+		if(window.pageExt.list.beforeInit) {
+			window.pageExt.list.beforeInit();
+		}
      	//渲染表格
      	renderTable();
 		//初始化搜索输入框组件
@@ -73,8 +76,9 @@ function ListPage() {
 					,{ field: 'unit', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('计量单位') }
 					,{ field: 'serviceLife', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('使用期限') }
 					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') }
-					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') }
+					,{ field: 'ownCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司') }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('管理人员') }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') }
 					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('详细位置') }
@@ -377,6 +381,10 @@ function ListPage() {
      * 打开编辑窗口
      */
 	function showEditForm(data) {
+		if(window.pageExt.list.beforeEdit) {
+			var doNext=window.pageExt.list.beforeEdit(data);
+			if(!doNext) return;
+		}
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('eam-asset-form-data', data);
@@ -384,14 +392,15 @@ function ListPage() {
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
 		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('资产')) : (fox.translate('添加')+fox.translate('资产'));
+		height=800;
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,
-			offset: [top,null],
+			offset: ['30px'],
 			area: ["95%",height+"px"],
 			type: 2,
 			id:"eam-asset-form-data-win",
-			content: '/business/eam/asset/asset_form.html' + queryString,
+			content: '/business/eam/asset/asset_form_base.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}

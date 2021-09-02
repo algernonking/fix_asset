@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产维保数据  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:28
+ * @since 2021-09-02 15:23:20
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetExtMaintainerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface AssetExtMaintainerServiceProxy {
 	 * 批量删除资产维保数据
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新资产维保数据

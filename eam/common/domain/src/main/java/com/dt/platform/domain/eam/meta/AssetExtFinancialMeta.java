@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:26
- * @sign EBD6B6A22946E1A11E2459049B2D25A1
+ * @since 2021-09-02 15:25:29
+ * @sign 22038B95AB9B222CD4607F09DD512DBE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -67,16 +67,6 @@ public class AssetExtFinancialMeta {
 	 * 资产供应商 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> SUPPLIER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,SUPPLIER_ID, java.lang.String.class, "资产供应商", "资产供应商", java.lang.String.class, null);
-	
-	/**
-	 * 所属公司 , 类型: java.lang.String
-	*/
-	public static final String OWN_COMPANY_ID="ownCompanyId";
-	
-	/**
-	 * 所属公司 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtFinancial,java.lang.String> OWN_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtFinancial.class ,OWN_COMPANY_ID, java.lang.String.class, "所属公司", "所属公司", java.lang.String.class, null);
 	
 	/**
 	 * 税额 , 类型: java.math.BigDecimal
@@ -271,7 +261,7 @@ public class AssetExtFinancialMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , FINANCIAL_CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , OWN_COMPANY_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , FINANCIAL_CATEGORY_ID , ASSET_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SUPPLIER , ASSET };
 	
 	/**
 	 * 代理类
@@ -333,17 +323,6 @@ public class AssetExtFinancialMeta {
 		public AssetExtFinancial setSupplierId(String supplierId) {
 			super.change(SUPPLIER_ID,super.getSupplierId(),supplierId);
 			super.setSupplierId(supplierId);
-			return this;
-		}
-		
-		/**
-		 * 设置 所属公司
-		 * @param ownCompanyId 所属公司
-		 * @return 当前对象
-		*/
-		public AssetExtFinancial setOwnCompanyId(String ownCompanyId) {
-			super.change(OWN_COMPANY_ID,super.getOwnCompanyId(),ownCompanyId);
-			super.setOwnCompanyId(ownCompanyId);
 			return this;
 		}
 		

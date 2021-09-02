@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-31 15:17:03
- * @sign 6AD18F9831150BD07E997362A2C9E2C3
+ * @since 2021-09-02 12:54:31
+ * @sign C679FFD847EDCB14E7C7ABF9E7ABCCFB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -162,7 +162,7 @@ public class AssetAllocation extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -590,7 +590,7 @@ public class AssetAllocation extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -599,7 +599,7 @@ public class AssetAllocation extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetAllocation setOriginator(Person originator) {
+	public AssetAllocation setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}
