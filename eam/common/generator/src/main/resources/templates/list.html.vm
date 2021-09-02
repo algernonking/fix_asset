@@ -127,11 +127,11 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         #if(!disableCreateNew)
-        <button th:if="${perm.checkAuth('#(authPrefix):create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('#(authPrefix):create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
         #end
         #if(!disableBatchDelete)
         #if(isSimplePK)
-        <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('#(authPrefix):delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
         #end
         #end
         #for(b:toolButtons)
@@ -142,28 +142,28 @@
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
-	#if(isTree) 
-	<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" th:text="${lang.translate('下级')}">下级</a>
+	#if(isTree)
+    <button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" th:text="${lang.translate('下级')}">下级</button>
 	#end
 
     #if(!disableFormView)
-    <a th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
+    <button th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
     #end
     #if(!disableModify)
-    <a th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <button th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
     #end
 
 
     #if(!disableSingleDelete)
-    <a th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <button th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
     #end
 
     #for(b:opColumnButtons)
-    <a class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</a>
+    <button class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}">#(b.label)</button>
     #end
 
     #if(opColumnMenus!=null && opColumnMenus.size()>0)
-    <a class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue" lay-event="ops-more"><span th:text="${lang.translate('更多')}">更多</span><i class="layui-icon layui-icon-down"></i></a>
+    <button class="layui-btn layui-btn-xs layui-btn-primary layui-border-blue" lay-event="ops-more"><span th:text="${lang.translate('更多')}">更多</span><i class="layui-icon layui-icon-down"></i></button>
     #end
 </script>
 
@@ -172,7 +172,7 @@
 #for(f:fields)
 #if(f.typeName.equals("logic_switch"))
 <script type="text/html" id="cell-tpl-#(f.varName)">
-    <input type="checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(idPropertyName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}}/>
+    <input type="checkbox" class="switch-#(f.varName)" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(idPropertyName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}}/>
 </script>
 #end
 #end
