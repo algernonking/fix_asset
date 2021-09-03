@@ -1,7 +1,7 @@
 /**
  * 资产软件数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:53
+ * @since 2021-09-03 21:35:51
  */
 
 function FormPage() {
@@ -51,24 +51,24 @@ function FormPage() {
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
-		// adjustPopupTask=setTimeout(function () {
-		// 	var body=$("body");
-		// 	var bodyHeight=body.height();
-		// 	var footerHeight=$(".model-form-footer").height();
-		// 	var area=admin.changePopupArea(null,bodyHeight+footerHeight);
-		// 	if(area==null) return;
-		// 	admin.putTempData('eam-asset-ext-software-form-area', area);
-		// 	window.adjustPopup=adjustPopup;
-		// 	if(area.tooHeigh) {
-		// 		var windowHeight=area.iframeHeight;
-		// 		var finalHeight=windowHeight-footerHeight-16;
-		// 		//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
-		// 		$(".form-container").css("display","");
-		// 		$(".form-container").css("overflow-y","scroll");
-		// 		$(".form-container").css("height",finalHeight+"px");
-		// 		$(".form-container").attr("scroll","yes");
-		// 	}
-		// },250);
+		adjustPopupTask=setTimeout(function () {
+			var body=$("body");
+			var bodyHeight=body.height();
+			var footerHeight=$(".model-form-footer").height();
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			if(area==null) return;
+			admin.putTempData('eam-asset-ext-software-form-area', area);
+			window.adjustPopup=adjustPopup;
+			if(area.tooHeigh) {
+				var windowHeight=area.iframeHeight;
+				var finalHeight=windowHeight-footerHeight-16;
+				//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+				$(".form-container").css("display","");
+				$(".form-container").css("overflow-y","scroll");
+				$(".form-container").css("height",finalHeight+"px");
+				$(".form-container").attr("scroll","yes");
+			}
+		},250);
 	}
 
 	/**
@@ -199,13 +199,13 @@ function FormPage() {
 	    	//debugger;
 			data.field = getFormData();
 
-			//校验表单
-			if(!verifyForm(data.field)) return;
-
 			if(window.pageExt.form.beforeSubmit) {
 				var doNext=window.pageExt.form.beforeSubmit(data.field);
 				if(!doNext) return ;
 			}
+			//校验表单
+			if(!verifyForm(data.field)) return;
+
 			saveForm(data.field);
 	        return false;
 	    });
@@ -219,8 +219,11 @@ function FormPage() {
     window.module={
 		getFormData: getFormData,
 		verifyForm: verifyForm,
-		saveForm: saveForm
+		saveForm: saveForm,
+		adjustPopup: adjustPopup
 	};
+
+	window.pageExt.form.ending && window.pageExt.form.ending();
 
 }
 

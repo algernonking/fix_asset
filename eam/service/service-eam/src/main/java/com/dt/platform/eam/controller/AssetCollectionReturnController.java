@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产退库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:41
+ * @since 2021-09-03 21:35:36
 */
 
 @Api(tags = "资产退库")
@@ -80,6 +80,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.CONTENT , value = "退库说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
@@ -143,6 +144,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.CONTENT , value = "退库说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE , AssetCollectionReturnVOMeta.SEARCH_FIELD , AssetCollectionReturnVOMeta.FUZZY_FIELD , AssetCollectionReturnVOMeta.SEARCH_VALUE , AssetCollectionReturnVOMeta.SORT_FIELD , AssetCollectionReturnVOMeta.SORT_TYPE , AssetCollectionReturnVOMeta.IDS } ) 
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
@@ -172,6 +174,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.CONTENT , value = "退库说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE , AssetCollectionReturnVOMeta.SEARCH_FIELD , AssetCollectionReturnVOMeta.FUZZY_FIELD , AssetCollectionReturnVOMeta.SEARCH_VALUE , AssetCollectionReturnVOMeta.SORT_FIELD , AssetCollectionReturnVOMeta.SORT_TYPE , AssetCollectionReturnVOMeta.IDS } )
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
@@ -242,6 +245,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.CONTENT , value = "退库说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -271,6 +275,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.CONTENT , value = "退库说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

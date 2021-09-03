@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
+ * @since 2021-09-03 22:21:57
  */
  -->
  <!DOCTYPE html>
@@ -107,6 +107,15 @@
                             <input input-type="date" lay-filter="offlineDate" id="offlineDate" name="offlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                    </div>
+                </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>

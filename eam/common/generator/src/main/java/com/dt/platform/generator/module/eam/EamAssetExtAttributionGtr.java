@@ -94,7 +94,8 @@ public class EamAssetExtAttributionGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         ; //列表HTML页
         cfg.buildAll();
     }

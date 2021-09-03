@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 服务类型  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:26
+ * @since 2021-09-03 21:36:25
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = ServiceCategoryServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface ServiceCategoryServiceProxy {
 	 * 批量删除服务类型
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新服务类型

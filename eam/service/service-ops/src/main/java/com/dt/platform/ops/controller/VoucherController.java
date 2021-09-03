@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 凭证 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 09:03:41
+ * @since 2021-09-03 21:36:08
 */
 
 @Api(tags = "凭证")
@@ -69,7 +69,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=1)
@@ -87,7 +87,7 @@ public class VoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "删除凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = VoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485916761665843200")
+		@ApiImplicitParam(name = VoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485916761665843200"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = VoucherVOMeta.ID)
@@ -125,7 +125,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE , VoucherVOMeta.SEARCH_FIELD , VoucherVOMeta.FUZZY_FIELD , VoucherVOMeta.SEARCH_VALUE , VoucherVOMeta.SORT_FIELD , VoucherVOMeta.SORT_TYPE , VoucherVOMeta.IDS } ) 
@@ -147,7 +147,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE , VoucherVOMeta.SEARCH_FIELD , VoucherVOMeta.FUZZY_FIELD , VoucherVOMeta.SEARCH_VALUE , VoucherVOMeta.SORT_FIELD , VoucherVOMeta.SORT_TYPE , VoucherVOMeta.IDS } )
@@ -194,6 +194,7 @@ public class VoucherController extends SuperController {
 	public Result<List<Voucher>> getByIds(List<String> ids) {
 		Result<List<Voucher>> result=new Result<>();
 		List<Voucher> list=voucherService.getByIds(ids);
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -208,7 +209,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE } )
@@ -231,7 +232,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=8)
@@ -240,6 +241,15 @@ public class VoucherController extends SuperController {
 	public Result<PagedList<Voucher>> queryPagedList(VoucherVO sample) {
 		Result<PagedList<Voucher>> result=new Result<>();
 		PagedList<Voucher> list=voucherService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		for(int i=0;i<list.size();i++){
+			Voucher obj = list.get(i);
+			String voucherStr=obj.getVoucher();
+			if(voucherStr!=null&&voucherStr.length()>5){
+				list.get(i).setVoucher(voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***");
+			}else if(voucherStr!=null&&voucherStr.length()<=5){
+				list.get(i).setVoucher("****");
+			}
+		}
 		result.success(true).data(list);
 		return result;
 	}

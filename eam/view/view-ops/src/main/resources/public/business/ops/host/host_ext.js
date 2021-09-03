@@ -13,11 +13,25 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //列表页的扩展
     var list={
+
         /**
          * 查询前调用
          * */
         beforeQuery:function (conditions) {
-            console.log('beforeQuery',conditions);
+            //获得缓存中的字典ID
+            console.log("############################# start")
+            var systemIdValue=admin.getTempData("systemId");
+            console.log("conditions",conditions);
+            console.log("systemIdValue",systemIdValue)
+
+            if(systemIdValue){
+                if(!conditions["systemId"]) {
+                    conditions["systemId"]={value:[]};
+                }
+                conditions["systemId"].value.push(systemIdValue);
+            }
+            console.log("############################# end")
+            return true;
         },
         /**
          * 打开凭证条目窗口
@@ -37,12 +51,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //表单页的扩展
     var form={
-        /**
-         * 表单数据填充前
-         * */
-        beforeDataFill:function (data) {
-            console.log('beforeDataFill',data);
-        },
+
+
         /**
          * 表单数据填充后
          * */

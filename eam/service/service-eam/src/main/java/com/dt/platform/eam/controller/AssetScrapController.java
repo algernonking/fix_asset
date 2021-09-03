@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产报废 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:25
+ * @since 2021-09-03 21:35:19
 */
 
 @Api(tags = "资产报废")
@@ -77,6 +77,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetScrapVOMeta.ID)
@@ -138,6 +139,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE , AssetScrapVOMeta.SEARCH_FIELD , AssetScrapVOMeta.FUZZY_FIELD , AssetScrapVOMeta.SEARCH_VALUE , AssetScrapVOMeta.SORT_FIELD , AssetScrapVOMeta.SORT_TYPE , AssetScrapVOMeta.IDS } ) 
 	@NotNull(name = AssetScrapVOMeta.ID)
@@ -165,6 +167,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE , AssetScrapVOMeta.SEARCH_FIELD , AssetScrapVOMeta.FUZZY_FIELD , AssetScrapVOMeta.SEARCH_VALUE , AssetScrapVOMeta.SORT_FIELD , AssetScrapVOMeta.SORT_TYPE , AssetScrapVOMeta.IDS } )
 	@NotNull(name = AssetScrapVOMeta.ID)
@@ -231,6 +234,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetScrapServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -258,6 +262,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetScrapServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

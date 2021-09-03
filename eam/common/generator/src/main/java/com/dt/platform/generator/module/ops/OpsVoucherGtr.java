@@ -45,11 +45,14 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form().validate().required().form()
                 .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE).paging(false).muliti(false).filter(true);
 
+        cfg.view().field(EAMTables.OPS_VOUCHER.VOUCHER).form().validate().required();
+
         cfg.view().field(EAMTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
-                .selectBox().dict(DictEnum.OPS_USER_VOUCHER).paging(false).muliti(false).filter(true);
+                .form().selectBox().dict(DictEnum.OPS_USER_VOUCHER).filter(true).toolbar(false).muliti(false);
 
 
-
+        cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).form()
+               .textArea().height(30);
 
 
         cfg.view().formWindow().bottomSpace(120);
@@ -64,15 +67,17 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         );
 
         //cfg.setRelationField(EAMTables.OPS_VOUCHER.OWNER_ID, EAMTables.OPS_VOUCHER.USER_CODE,true);
-
+        cfg.view().list().operationColumn().addActionButton("历史记录","openHistoryVoucherWindow");
+        cfg.view().list().operationColumn().width(280);
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         //生成代码
         cfg.buildAll();
     }

@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:41
- * @sign 39E0967F0DE45198D9375BD19DFB3DF2
+ * @since 2021-09-03 21:35:36
+ * @sign 4FC1711E74DBAB9E0514746191DE479B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -103,6 +103,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
 	private Date businessDate;
+	
+	/**
+	 * 附件：附件
+	*/
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attach;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -401,6 +407,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setBusinessDate(Date businessDate) {
 		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
+	*/
+	public String getAttach() {
+		return attach;
+	}
+	
+	/**
+	 * 设置 附件
+	 * @param attach 附件
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setAttach(String attach) {
+		this.attach=attach;
 		return this;
 	}
 	

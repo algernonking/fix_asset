@@ -212,13 +212,13 @@ public class EAMRelationManager extends RelationManager {
 //    }
         public void setupAssetEaintainer() {
 
-        // 关联区域
-        this.property(AssetExtEquipmentMeta.AREA_PROP)
-                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(EAMTables.DC_AREA.ID);
-
-        // 关联层级
-        this.property(AssetExtEquipmentMeta.LAYER_PROP)
-                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+//        // 关联区域
+//        this.property(AssetExtEquipmentMeta.AREA_PROP)
+//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(EAMTables.DC_AREA.ID);
+//
+//        // 关联层级
+//        this.property(AssetExtEquipmentMeta.LAYER_PROP)
+//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(EAMTables.DC_LAYER.ID);
 
         // 关联机柜
         this.property(AssetExtEquipmentMeta.RACK_PROP)

@@ -1,7 +1,7 @@
 /**
  * 资产借用数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-19 21:42:08
+ * @since 2021-09-03 21:35:32
  */
 
 
@@ -17,8 +17,11 @@ function ListPage() {
 	this.init=function(layui) {
      	
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
-		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
-		
+		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
+
+		if(window.pageExt.list.beforeInit) {
+			window.pageExt.list.beforeInit();
+		}
      	//渲染表格
      	renderTable();
 		//初始化搜索输入框组件
@@ -42,15 +45,26 @@ function ListPage() {
 		fox.adjustSearchElement();
 		//
 		function renderTableInternal() {
+
 			var ps={};
 			var contitions={};
-
-
+			if(window.pageExt.list.beforeQuery){
+				window.pageExt.list.beforeQuery(contitions);
+			}
+			if(Object.keys(contitions).length>0) {
+				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+			}
+			var templet=window.pageExt.list.templet;
+			if(templet==null) {
+				templet=function(field,value,row) {
+					return value;
+				}
+			}
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
-				defaultToolbar: ['filter', 'print'],
+				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
 				height: 'full-'+(h+28),
 				limit: 50,
@@ -58,14 +72,15 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') }
-					,{ field: 'borrowAssetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') }
-					,{ field: ' assetStatusBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前资产状态') }
-					,{ field: 'userIdBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前使用人') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'assetStatusBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前资产状态') , templet: function (d) { return templet('assetStatusBefore',d.assetStatusBefore,d);}  }
+					,{ field: 'userIdBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前使用人') , templet: function (d) { return templet('userIdBefore',d.userIdBefore,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
+				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -94,6 +109,9 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.id={ value: $("#id").val()};
+		if(window.pageExt.list.beforeQuery){
+			if(!window.pageExt.list.beforeQuery(value)) return;
+		}
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -128,6 +146,7 @@ function ListPage() {
 		fox.switchSearchRow(1);
 
 		fox.renderSearchInputs();
+		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
 	
 	/**
@@ -165,18 +184,18 @@ function ListPage() {
 		//头工具栏事件
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
+			var selected=getCheckedList("id");
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
 					break;
 				case 'batch-del':
-					batchDelete();
+					batchDelete(selected);
+					break;
+				case 'refresh-data':
+					refreshTableData();
 					break;
 				case 'other':
-					break;
-					//自定义头工具栏右侧图标 - 提示
-				case 'LAYTABLE_TIPS':
-					layer.alert('这是工具栏右侧自定义的一个图标按钮');
 					break;
 			};
 		});
@@ -191,26 +210,36 @@ function ListPage() {
         };
 		
         //批量删除按钮点击事件
-        function batchDelete() {
-          
+        function batchDelete(selected) {
+
+        	if(window.pageExt.list.beforeBatchDelete) {
+				var doNext=window.pageExt.list.beforeBatchDelete(selected);
+				if(!doNext) return;
+			}
+
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产借用数据')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产借用数据')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
-				layer.close(i);
-				layer.load(2);
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
+				top.layer.close(i);
+				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-                    layer.closeAll('loading');
+					top.layer.closeAll('loading');
                     if (data.success) {
-                        layer.msg(data.message, {icon: 1, time: 500});
+						if(window.pageExt.list.afterBatchDelete) {
+							var doNext=window.pageExt.list.afterBatchDelete(data);
+							if(!doNext) return;
+						}
+                    	top.layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 1500});
+						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
+
 			});
         }
 	}
@@ -252,17 +281,27 @@ function ListPage() {
 				});
 			}
 			else if (layEvent === 'del') { // 删除
-			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
-					layer.close(i);
-					layer.load(2);
+
+				if(window.pageExt.list.beforeSingleDelete) {
+					var doNext=window.pageExt.list.beforeSingleDelete(data);
+					if(!doNext) return;
+				}
+
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产借用数据')+fox.translate('吗？'), function (i) {
+					top.layer.close(i);
+
+					top.layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-						layer.closeAll('loading');
+						top.layer.closeAll('loading');
 						if (data.success) {
-							layer.msg(data.message, {icon: 1, time: 500});
+							if(window.pageExt.list.afterSingleDelete) {
+								var doNext=window.pageExt.list.afterSingleDelete(data);
+								if(!doNext) return;
+							}
+							top.layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 1500});
+							top.layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
@@ -277,6 +316,10 @@ function ListPage() {
      * 打开编辑窗口
      */
 	function showEditForm(data) {
+		if(window.pageExt.list.beforeEdit) {
+			var doNext=window.pageExt.list.beforeEdit(data);
+			if(!doNext) return;
+		}
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('eam-asset-borrow-data-form-data', data);
@@ -290,6 +333,7 @@ function ListPage() {
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
+			id:"eam-asset-borrow-data-form-data-win",
 			content: '/business/eam/asset_borrow_data/asset_borrow_data_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
@@ -298,16 +342,20 @@ function ListPage() {
 		admin.putTempData('eam-asset-borrow-data-form-data-popup-index', index);
 	};
 
+	window.module={
+		refreshTableData: refreshTableData,
+		getCheckedList: getCheckedList
+	};
 
+	window.pageExt.list.ending && window.pageExt.list.ending();
 
 };
 
 
-layui.config({
-	dir: layuiPath,
-	base: '/module/'
-}).extend({
-	xmSelect: 'xm-select/xm-select'
-}).use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate'],function() {
-	(new ListPage()).init(layui);
+layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','dropdown'],function() {
+	var task=setInterval(function (){
+		if(!window["pageExt"]) return;
+		clearInterval(task);
+		(new ListPage()).init(layui);
+	},1);
 });

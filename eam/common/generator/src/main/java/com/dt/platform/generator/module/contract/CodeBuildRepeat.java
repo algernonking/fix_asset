@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 public class CodeBuildRepeat {
 
     public static void main(String[] args) throws Exception {
-        String pstr="com.dt.platform.generator.module.dc";
+        String pstr="com.dt.platform.generator.module.contract";
         String[] clasnamearr={
                 "ContractCategoryGtr",
                 "ContractCompanyGtr",

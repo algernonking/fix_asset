@@ -2,6 +2,11 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.domain.ops.*;
+import com.dt.platform.domain.ops.meta.InformationSystemMeta;
+import com.dt.platform.domain.ops.meta.InformationSystemVOMeta;
+import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
+import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsInformationSystemGtr extends BaseCodeGenerator{
@@ -13,9 +18,27 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
-       // System.out.println(11111);
+
+//        cfg.getPoClassFile().addListProperty(Host.class,"hostList","主机信息","主机信息");
+//
+//        cfg.getPoClassFile().addListProperty(String.class,"hostIds","主机信息","主机信息");
+
+
+        cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
+        cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
+
+
+        // System.out.println(11111);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).search().fuzzySearch();
+
+
+
+
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.CREATE_TIME).table().disable(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
@@ -58,6 +81,16 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
 
 
+
+        cfg.view().field(InformationSystemVOMeta.VOUCHER_IDS)
+                .basic().label("用户凭证")
+                .table().sort(false)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
+                .valueField("user_code").textField("voucher")
+                .toolbar(false).paging(false)
+                .fillBy(InformationSystemMeta.VOUCHER_LIST).muliti(true);
+
+
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -88,6 +121,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                         EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO,
                         EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,
                         EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE,
+                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES,
                 },
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
@@ -116,13 +150,18 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         );
 
 
+        cfg.view().list().operationColumn().addActionButton("凭证","openSystemVoucherWindow");
+        cfg.view().list().operationColumn().addActionButton("主机","openHostWindow");
+        cfg.view().list().operationColumn().width(290);
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         //生成代码
 
         cfg.buildAll();

@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 机柜  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:11
+ * @since 2021-09-03 21:35:12
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = RackServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface RackServiceProxy {
 	 * 批量删除机柜
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新机柜

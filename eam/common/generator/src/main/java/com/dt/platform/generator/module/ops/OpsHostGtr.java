@@ -23,6 +23,11 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
+
+
+        cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
+        cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
+
         cfg.getPoClassFile().addSimpleProperty(InformationSystem.class,"infoSystem","信息系统","信息系统");
 
         cfg.getPoClassFile().addSimpleProperty(HostPosition.class,"position","所在位置","所在位置");
@@ -133,6 +138,17 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
 
         cfg.view().field(HostMeta.HOST_NOTES).form().textArea().height(30);
+
+
+
+        cfg.view().field(HostVOMeta.VOUCHER_IDS)
+                .basic().label("用户凭证")
+                .table().sort(false)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
+                .valueField("user_code").textField("voucher")
+                .toolbar(false).paging(false)
+                .fillBy(HostMeta.VOUCHER_LIST).muliti(true);
+
 
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
@@ -260,6 +276,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 }
 
         );
+
 
 
 

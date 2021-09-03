@@ -67,13 +67,41 @@ public class DcRackGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.DC_RACK.RACK_NAME).form().validate().required();
 
+        cfg.view().field(EAMTables.DC_RACK.RACK_NOTES).form().textArea().height(30);
+
+        //分成分组布局
+        cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().bottomSpace(80);
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.DC_RACK.AREA_ID,
+                        EAMTables.DC_RACK.LAYER_ID,
+
+                }, new Object[] {
+                        EAMTables.DC_RACK.RACK_CODE,
+                        EAMTables.DC_RACK.RACK_NAME,
+
+                },new Object[] {
+                        EAMTables.DC_RACK.RACK_CAPTICAL,
+                        EAMTables.OPS_HOST.LABELS,
+
+                }
+        );
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.DC_RACK.RACK_NOTES,
+
+                }
+        );
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE) //列表HTML页
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
         //生成代码
         cfg.buildAll();
     }

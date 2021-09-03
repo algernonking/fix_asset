@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 单位 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 11:49:09
+ * @since 2021-09-03 21:36:32
 */
 
 @Api(tags = "单位")
@@ -65,12 +65,12 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "添加单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296"),
+		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class , example = "杭州一服科技有限公司"),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class , example = "34567y8u"),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -95,7 +95,7 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "删除单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = CompanyVOMeta.ID)
@@ -129,12 +129,12 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "更新单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296"),
+		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class , example = "杭州一服科技有限公司"),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class , example = "34567y8u"),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -159,12 +159,12 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "保存单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296"),
+		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class , example = "杭州一服科技有限公司"),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class , example = "34567y8u"),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -228,12 +228,12 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "查询单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296"),
+		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class , example = "杭州一服科技有限公司"),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class , example = "34567y8u"),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -253,12 +253,12 @@ public class CompanyController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询单位")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485780633629495296"),
+		@ApiImplicitParam(name = CompanyVOMeta.NAME , value = "单位" , required = true , dataTypeClass=String.class , example = "杭州一服科技有限公司"),
 		@ApiImplicitParam(name = CompanyVOMeta.ADDRESS , value = "地址" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACTS , value = "联系人" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CompanyVOMeta.CREDIT_CODE , value = "信用代码" , required = true , dataTypeClass=String.class , example = "34567y8u"),
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

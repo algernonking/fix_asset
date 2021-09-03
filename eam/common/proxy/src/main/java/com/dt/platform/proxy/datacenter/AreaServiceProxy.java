@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 区域  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:08
+ * @since 2021-09-03 21:35:04
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = AreaServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface AreaServiceProxy {
 	 * 批量删除区域
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新区域

@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import java.math.BigDecimal;
+import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.ServiceInfo;
@@ -52,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 19:49:19
+ * @since 2021-09-03 22:26:21
 */
 
 @Api(tags = "主机")
@@ -248,6 +249,8 @@ public class HostController extends SuperController {
 		hostService.join(host,HostMeta.HOST_MIDDLEWARE_LIST);
 		// 关联出 操作系统 数据
 		hostService.join(host,HostMeta.HOST_OS_LIST);
+		// 关联出 用户凭证 数据
+		hostService.join(host,HostMeta.VOUCHER_LIST);
 		result.success(true).data(host);
 		return result;
 	}
@@ -364,6 +367,8 @@ public class HostController extends SuperController {
 		hostService.join(list,HostMeta.HOST_MIDDLEWARE_LIST);
 		// 关联出 操作系统 数据
 		hostService.join(list,HostMeta.HOST_OS_LIST);
+		// 关联出 用户凭证 数据
+		hostService.join(list,HostMeta.VOUCHER_LIST);
 		result.success(true).data(list);
 		return result;
 	}

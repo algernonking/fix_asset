@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 19:49:26
+ * @since 2021-09-03 22:26:26
  */
 
 
@@ -48,11 +48,18 @@ function ListPage() {
 
 			var ps={};
 			var contitions={};
-			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(window.pageExt.list.beforeQuery){
+				window.pageExt.list.beforeQuery(contitions);
+			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
-
+			var templet=window.pageExt.list.templet;
+			if(templet==null) {
+				templet=function(field,value,row) {
+					return value;
+				}
+			}
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
@@ -65,38 +72,40 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return fox.joinLabel(d.infoSystem,"name");}}
-					,{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType);}}
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return fox.getEnumText(RADIO_STATUS_DATA,d.status);}}
-					,{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
-					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理IP') }
-					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('虚拟VIP') }
-					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment);}}
-					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return fox.joinLabel(d.position,"name");}}
-					,{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus);}}
-					,{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') }
-					,{ field: 'hostMemory', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('内存') }
-					,{ field: 'hostCpu', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('CPU') }
-					,{ field: 'hostConf', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他配置') }
-					,{ field: 'userOsAdmin', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('系统管理员') }
-					,{ field: 'userDbAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库管理员') }
-					,{ field: 'userDbUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库使用用户') }
-					,{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户') }
-					,{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户') }
-					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') }
-					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId);}}
-					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineTime); }}
-					,{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineTime); }}
-					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') }
-					,{ field: 'hostNotes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
-					,{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return fox.joinLabel(d.hostDbList,"name");}}
-					,{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return fox.joinLabel(d.hostMiddlewareList,"name");}}
-					,{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return fox.joinLabel(d.hostOsList,"name");}}
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return templet('systemId',fox.joinLabel(d.infoSystem,"name"),d);}}
+					,{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return templet('hostType',fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType),d);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
+					,{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('hostName',d.hostName,d);}  }
+					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理IP') , templet: function (d) { return templet('hostIp',d.hostIp,d);}  }
+					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('虚拟VIP') , templet: function (d) { return templet('hostVip',d.hostVip,d);}  }
+					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return templet('environment',fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment),d);}}
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
+					,{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return templet('monitorStatus',fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus),d);}}
+					,{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') , templet: function (d) { return templet('directorUsername',d.directorUsername,d);}  }
+					,{ field: 'hostMemory', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('内存') , templet: function (d) { return templet('hostMemory',d.hostMemory,d);}  }
+					,{ field: 'hostCpu', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('CPU') , templet: function (d) { return templet('hostCpu',d.hostCpu,d);}  }
+					,{ field: 'hostConf', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他配置') , templet: function (d) { return templet('hostConf',d.hostConf,d);}  }
+					,{ field: 'userOsAdmin', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('系统管理员') , templet: function (d) { return templet('userOsAdmin',d.userOsAdmin,d);}  }
+					,{ field: 'userDbAdmin', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库管理员') , templet: function (d) { return templet('userDbAdmin',d.userDbAdmin,d);}  }
+					,{ field: 'userDbUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库使用用户') , templet: function (d) { return templet('userDbUsed',d.userDbUsed,d);}  }
+					,{ field: 'userAppUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('应用使用用户') , templet: function (d) { return templet('userAppUsed',d.userAppUsed,d);}  }
+					,{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户') , templet: function (d) { return templet('userOpsOper',d.userOpsOper,d);}  }
+					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') , templet: function (d) { return templet('userOther',d.userOther,d);}  }
+					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return templet('passwordStrategyId',fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId),d);}}
+					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineTime',fox.dateFormat(d.offlineTime),d); }}
+					,{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineTime',fox.dateFormat(d.onlineTime),d); }}
+					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('labels',d.labels,d);}  }
+					,{ field: 'hostNotes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('hostNotes',d.hostNotes,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return templet('hostDbIds',fox.joinLabel(d.hostDbList,"name"),d);}}
+					,{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return templet('hostMiddlewareIds',fox.joinLabel(d.hostMiddlewareList,"name"),d);}}
+					,{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return templet('hostOsIds',fox.joinLabel(d.hostOsList,"name"),d);}}
+					,{ field: 'voucherIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('用户凭证'), templet: function (d) { return templet('voucherIds',fox.joinLabel(d.voucherList,"voucher"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
+				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -136,7 +145,9 @@ function ListPage() {
 		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
 		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"hostMiddlewareList",field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
 		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"hostOsList",field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
-		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
+		if(window.pageExt.list.beforeQuery){
+			if(!window.pageExt.list.beforeQuery(value)) return;
+		}
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -304,6 +315,7 @@ function ListPage() {
 			}
 		});
 		fox.renderSearchInputs();
+		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
 	
 	/**
@@ -368,27 +380,32 @@ function ListPage() {
 		
         //批量删除按钮点击事件
         function batchDelete(selected) {
-          
+
+        	if(window.pageExt.list.beforeBatchDelete) {
+				var doNext=window.pageExt.list.beforeBatchDelete(selected);
+				if(!doNext) return;
+			}
+
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('主机')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('主机')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('主机')+fox.translate('吗？'), function (i) {
-				layer.close(i);
-				if(window.pageExt.list.beforeBatchDelete) {
-					var doNext=window.pageExt.list.beforeBatchDelete(selected);
-					if(!doNext) return;
-				}
-				layer.load(2);
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('主机')+fox.translate('吗？'), function (i) {
+				top.layer.close(i);
+				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-                    layer.closeAll('loading');
+					top.layer.closeAll('loading');
                     if (data.success) {
-                        layer.msg(data.message, {icon: 1, time: 500});
+						if(window.pageExt.list.afterBatchDelete) {
+							var doNext=window.pageExt.list.afterBatchDelete(data);
+							if(!doNext) return;
+						}
+                    	top.layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 1500});
+						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
 
@@ -433,23 +450,27 @@ function ListPage() {
 				});
 			}
 			else if (layEvent === 'del') { // 删除
-			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('主机')+fox.translate('吗？'), function (i) {
-					layer.close(i);
 
-					if(window.pageExt.list.beforeSingleDelete) {
-						var doNext=window.pageExt.list.beforeSingleDelete(data);
-						if(!doNext) return;
-					}
+				if(window.pageExt.list.beforeSingleDelete) {
+					var doNext=window.pageExt.list.beforeSingleDelete(data);
+					if(!doNext) return;
+				}
 
-					layer.load(2);
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('主机')+fox.translate('吗？'), function (i) {
+					top.layer.close(i);
+
+					top.layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-						layer.closeAll('loading');
+						top.layer.closeAll('loading');
 						if (data.success) {
-							layer.msg(data.message, {icon: 1, time: 500});
+							if(window.pageExt.list.afterSingleDelete) {
+								var doNext=window.pageExt.list.afterSingleDelete(data);
+								if(!doNext) return;
+							}
+							top.layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 1500});
+							top.layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
@@ -497,6 +518,8 @@ function ListPage() {
 		refreshTableData: refreshTableData,
 		getCheckedList: getCheckedList
 	};
+
+	window.pageExt.list.ending && window.pageExt.list.ending();
 
 };
 

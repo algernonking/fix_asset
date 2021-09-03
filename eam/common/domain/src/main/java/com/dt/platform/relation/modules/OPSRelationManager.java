@@ -24,7 +24,11 @@ public class OPSRelationManager extends RelationManager {
         this.setupOpsServiceCategory();
         this.setupOpsServiceInfo();
 
-        this.setupVoucher();
+        this.setupVoucherOwner();
+
+        this.setupInfoSystem();
+
+
     }
 
     public void setupProperties() {
@@ -67,7 +71,31 @@ public class OPSRelationManager extends RelationManager {
 
     }
 
-    private void setupVoucher() {
+
+
+    private void setupInfoSystem() {
+
+        //用户凭证
+        this.property(InformationSystemMeta.VOUCHER_LIST_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
+                .after((voucherowner,voucher)->{
+                    Iterator var2 = voucher.iterator();
+                    while(var2.hasNext()) {
+                        Voucher obj = (Voucher)var2.next();
+                        String pwd="";
+                        String voucherStr=obj.getVoucher();
+                        if(voucherStr!=null&&voucherStr.length()>5){
+                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
+                        }
+                        obj.setVoucher("("+obj.getUserCode()+pwd+")");
+                    }
+                    return voucher;
+                });
+
+    }
+
+
+    private void setupVoucherOwner() {
         //用户凭证
         this.property(VoucherOwnerMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_VOUCHER_OWNER.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
@@ -77,9 +105,8 @@ public class OPSRelationManager extends RelationManager {
                         Voucher obj = (Voucher)var2.next();
                         String pwd="";
                         String voucherStr=obj.getVoucher();
-                         if(voucherStr!=null&&voucherStr.length()>4){
-                             System.out.println(voucherStr.substring(0,3));
-                             pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,3),"***" );
+                         if(voucherStr!=null&&voucherStr.length()>5){
+                             pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
                          }
                         obj.setVoucher("("+obj.getUserCode()+pwd+")");
                     }
@@ -88,6 +115,23 @@ public class OPSRelationManager extends RelationManager {
     }
 
     private void setupOpsHost() {
+
+        //用户凭证
+        this.property(HostMeta.VOUCHER_LIST_PROP)
+                .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
+                .after((voucherowner,voucher)->{
+                    Iterator var2 = voucher.iterator();
+                    while(var2.hasNext()) {
+                        Voucher obj = (Voucher)var2.next();
+                        String pwd="";
+                        String voucherStr=obj.getVoucher();
+                        if(voucherStr!=null&&voucherStr.length()>5){
+                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
+                        }
+                        obj.setVoucher("("+obj.getUserCode()+pwd+")");
+                    }
+                    return voucher;
+                });
 
         //数据库类别
         this.property(HostMeta.HOST_DB_LIST_PROP)

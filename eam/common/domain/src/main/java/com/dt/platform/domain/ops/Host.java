@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 19:49:06
- * @sign B2F02B0409FC779079CA7F71F71E7718
+ * @since 2021-09-03 22:26:12
+ * @sign BBCDB95D33BA3331FC5B729D154CE805
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -235,6 +235,18 @@ public class Host extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<Voucher> voucherList;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<String> voucherIds;
 	
 	/**
 	 * 信息系统：信息系统
@@ -927,6 +939,66 @@ public class Host extends Entity {
 	*/
 	public Host setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<Voucher> getVoucherList() {
+		return voucherList;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherList 凭证
+	 * @return 当前对象
+	*/
+	public Host setVoucherList(List<Voucher> voucherList) {
+		this.voucherList=voucherList;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucher 凭证
+	 * @return 当前对象
+	*/
+	public Host addVoucher(Voucher voucher) {
+		if(this.voucherList==null) voucherList=new ArrayList<>();
+		this.voucherList.add(voucher);
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<String> getVoucherIds() {
+		return voucherIds;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherIds 凭证
+	 * @return 当前对象
+	*/
+	public Host setVoucherIds(List<String> voucherIds) {
+		this.voucherIds=voucherIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucherId 凭证
+	 * @return 当前对象
+	*/
+	public Host addVoucherId(String voucherId) {
+		if(this.voucherIds==null) voucherIds=new ArrayList<>();
+		this.voucherIds.add(voucherId);
 		return this;
 	}
 	

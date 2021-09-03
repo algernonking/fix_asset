@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 编码分配  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:14:57
+ * @since 2021-09-03 21:34:53
 */
 
 @FeignClient(value = ServiceNames.COMMON, contextId = CodeAllocationServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface CodeAllocationServiceProxy {
 	 * 批量删除编码分配
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新编码分配

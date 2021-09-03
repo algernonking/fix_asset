@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:58
+ * @since 2021-09-03 21:35:56
  */
 
 function FormPage() {
@@ -253,13 +253,13 @@ function FormPage() {
 	    	//debugger;
 			data.field = getFormData();
 
-			//校验表单
-			if(!verifyForm(data.field)) return;
-
 			if(window.pageExt.form.beforeSubmit) {
 				var doNext=window.pageExt.form.beforeSubmit(data.field);
 				if(!doNext) return ;
 			}
+			//校验表单
+			if(!verifyForm(data.field)) return;
+
 			saveForm(data.field);
 	        return false;
 	    });
@@ -273,8 +273,11 @@ function FormPage() {
     window.module={
 		getFormData: getFormData,
 		verifyForm: verifyForm,
-		saveForm: saveForm
+		saveForm: saveForm,
+		adjustPopup: adjustPopup
 	};
+
+	window.pageExt.form.ending && window.pageExt.form.ending();
 
 }
 

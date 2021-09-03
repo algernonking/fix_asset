@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 信息系统  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
+ * @since 2021-09-03 22:21:51
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = InformationSystemServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface InformationSystemServiceProxy {
 	 * 批量删除信息系统
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新信息系统

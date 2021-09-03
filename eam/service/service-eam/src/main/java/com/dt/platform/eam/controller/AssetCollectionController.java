@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产领用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:40
+ * @since 2021-09-03 21:35:34
 */
 
 @Api(tags = "资产领用")
@@ -81,6 +81,7 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetCollectionVOMeta.ID)
@@ -145,6 +146,7 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetCollectionVOMeta.PAGE_INDEX , AssetCollectionVOMeta.PAGE_SIZE , AssetCollectionVOMeta.SEARCH_FIELD , AssetCollectionVOMeta.FUZZY_FIELD , AssetCollectionVOMeta.SEARCH_VALUE , AssetCollectionVOMeta.SORT_FIELD , AssetCollectionVOMeta.SORT_TYPE , AssetCollectionVOMeta.IDS } ) 
 	@NotNull(name = AssetCollectionVOMeta.ID)
@@ -175,6 +177,7 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionVOMeta.PAGE_INDEX , AssetCollectionVOMeta.PAGE_SIZE , AssetCollectionVOMeta.SEARCH_FIELD , AssetCollectionVOMeta.FUZZY_FIELD , AssetCollectionVOMeta.SEARCH_VALUE , AssetCollectionVOMeta.SORT_FIELD , AssetCollectionVOMeta.SORT_TYPE , AssetCollectionVOMeta.IDS } )
 	@NotNull(name = AssetCollectionVOMeta.ID)
@@ -246,6 +249,7 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionVOMeta.PAGE_INDEX , AssetCollectionVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetCollectionServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -276,6 +280,7 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetCollectionServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

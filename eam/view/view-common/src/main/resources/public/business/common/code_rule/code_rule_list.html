@@ -2,7 +2,7 @@
 /**
  * 编码规则 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:06
+ * @since 2021-09-03 21:35:02
  */
  -->
  <!DOCTYPE html>
@@ -67,19 +67,19 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('sys_code_rule:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('sys_code_rule:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('sys_code_rule:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('sys_code_rule:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <a th:if="${perm.checkAuth('sys_code_rule:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
-    <a th:if="${perm.checkAnyAuth('sys_code_rule:update','sys_code_rule:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <button th:if="${perm.checkAuth('sys_code_rule:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
+    <button th:if="${perm.checkAnyAuth('sys_code_rule:update','sys_code_rule:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
 
 
-    <a th:if="${perm.checkAuth('sys_code_rule:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <button th:if="${perm.checkAuth('sys_code_rule:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
 
 
 </script>

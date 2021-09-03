@@ -46,35 +46,35 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
 
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID)
-                .basic().label("区域")
-                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillBy(AssetExtEquipmentMeta.AREA).muliti(false);
-
-
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID)
-                .basic().label("层级")
-                .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(AssetExtEquipmentMeta.LAYER).muliti(false);
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID)
+//                .basic().label("区域")
+//                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+//                .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillBy(AssetExtEquipmentMeta.AREA).muliti(false);
+//
+//
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID)
+//                .basic().label("层级")
+//                .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+//                .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillBy(AssetExtEquipmentMeta.LAYER).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID)
                 .basic().label("机柜")
                 .form().selectBox().queryApi(RackServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
                 .valueField(RackMeta.ID).textField(RackMeta.RACK_NAME).fillBy(AssetExtEquipmentMeta.RACK).muliti(false);
 
-
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER).form().numberInput().range(0.0,100.0).step(1.0);
-        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER).form().numberInput().range(0.0,100.0).step(1.0);
+//
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER).form().numberInput().range(0.0,100.0).step(1.0);
+//        cfg.view().field(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER).form().numberInput().range(0.0,100.0).step(1.0);
 
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
+                    //    EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.MANAGE_IP,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_IP
                 }
                 ,new Object[]{
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
+                      //  EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_NOTES,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_DESC
                 }
@@ -84,8 +84,8 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup("设备属性",
                 new Object[] {
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
+                   //     EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID,
+                    //    EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.EQUIPMENT_IP,
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.MANAGE_IP,
                 }, new Object[] {
@@ -95,8 +95,8 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
                 },
                 new Object[] {
                         EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER,
-                        EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER,
+                     //   EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_UP_POSITION_NUMBER,
+                      //  EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_DOWN_POSITION_NUMBER,
                 }
         );
 
@@ -119,7 +119,8 @@ public class EamAssetExtEquipmentGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

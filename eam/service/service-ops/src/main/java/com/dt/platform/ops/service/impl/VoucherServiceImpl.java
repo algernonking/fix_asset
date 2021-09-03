@@ -2,6 +2,9 @@ package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.domain.ops.VoucherHistory;
+import com.dt.platform.ops.service.IVoucherHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +38,19 @@ import java.util.Date;
  * 凭证 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 09:03:41
+ * @since 2021-09-03 22:33:22
 */
 
 
 @Service("OpsVoucherService")
 public class VoucherServiceImpl extends SuperService<Voucher> implements IVoucherService {
-	
+
+
+	@Autowired
+	private IVoucherHistoryService voucherhistoryService;
+
 	/**
+	 *
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
@@ -135,6 +143,18 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	 * */
 	@Override
 	public Result update(Voucher voucher , SaveMode mode) {
+
+
+		Voucher cur_voucher=this.getById(voucher.getId());
+		if(!cur_voucher.getVoucher().equals(voucher.getVoucher())){
+			VoucherHistory vh=new VoucherHistory();
+			vh.setVoucherId(voucher.getId());
+			vh.setVoucher(cur_voucher.getVoucher());
+			vh.setNotes(cur_voucher.getNotes());
+			vh.setUserCode(cur_voucher.getUserCode());
+			voucherhistoryService.insert(vh);
+		}
+
 		Result r=super.update(voucher , mode);
 		return r;
 	}

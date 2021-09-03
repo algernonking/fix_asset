@@ -19,35 +19,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //列表页的扩展
     var list={
-        /**
-         * 查询前调用
-         * */
-        beforeQuery:function (conditions) {
-            console.log('beforeQuery',conditions);
-        },
-        /**
-         * 单行删除前调用，若返回false则不执行后续操作
-         * */
-        beforeSingleDelete:function (data) {
-            console.log('beforeSingleDelete',data);
-            return true;
-        },
-        /**
-         * 批量删除前调用，若返回false则不执行后续操作
-         * */
-        beforeBatchDelete:function (selected) {
-            console.log('beforeBatchDelete',selected);
-            return true;
-        },
-        /**
-         * 表格右侧操作列更多按钮事件
-         * */
-        moreAction:function (menu,data, it){
-            console.log('moreAction',menu,data,it);
-        },
-        other:function(){
 
-        }
     }
 
     var action=admin.getTempData('ops-db-instance-form-data-form-action')
@@ -56,12 +28,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var form={
 
 
-        /**
-         * 表单数据填充前
-         * */
-        beforeDataFill:function (data) {
-            console.log('beforeDataFill',data);
-        },
         /**
          * 表单数据填充后
          * */

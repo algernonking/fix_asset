@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产软件数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:53
+ * @since 2021-09-03 21:35:51
 */
 
 @Api(tags = "资产软件数据")
@@ -66,10 +66,10 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "添加资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "测试"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class , example = "purchase"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetExtSoftwareVOMeta.ID)
@@ -86,7 +86,7 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetExtSoftwareVOMeta.ID)
@@ -120,10 +120,10 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "更新资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "测试"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class , example = "purchase"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetExtSoftwareVOMeta.PAGE_INDEX , AssetExtSoftwareVOMeta.PAGE_SIZE , AssetExtSoftwareVOMeta.SEARCH_FIELD , AssetExtSoftwareVOMeta.FUZZY_FIELD , AssetExtSoftwareVOMeta.SEARCH_VALUE , AssetExtSoftwareVOMeta.SORT_FIELD , AssetExtSoftwareVOMeta.SORT_TYPE , AssetExtSoftwareVOMeta.IDS } ) 
 	@NotNull(name = AssetExtSoftwareVOMeta.ID)
@@ -140,10 +140,10 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "保存资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "测试"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class , example = "purchase"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtSoftwareVOMeta.PAGE_INDEX , AssetExtSoftwareVOMeta.PAGE_SIZE , AssetExtSoftwareVOMeta.SEARCH_FIELD , AssetExtSoftwareVOMeta.FUZZY_FIELD , AssetExtSoftwareVOMeta.SEARCH_VALUE , AssetExtSoftwareVOMeta.SORT_FIELD , AssetExtSoftwareVOMeta.SORT_TYPE , AssetExtSoftwareVOMeta.IDS } )
 	@NotNull(name = AssetExtSoftwareVOMeta.ID)
@@ -199,10 +199,10 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "查询资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "测试"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class , example = "purchase"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtSoftwareVOMeta.PAGE_INDEX , AssetExtSoftwareVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetExtSoftwareServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -220,10 +220,10 @@ public class AssetExtSoftwareController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询资产软件数据")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486221245893844992"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "测试"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.DISTRIBUTION_MODE , value = "发行方式" , required = false , dataTypeClass=String.class , example = "purchase"),
+		@ApiImplicitParam(name = AssetExtSoftwareVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetExtSoftwareServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

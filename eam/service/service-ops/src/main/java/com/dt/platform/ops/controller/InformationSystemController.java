@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
+import com.dt.platform.domain.ops.Voucher;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 信息系统 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
+ * @since 2021-09-03 22:21:51
 */
 
 @Api(tags = "信息系统")
@@ -234,6 +235,8 @@ public class InformationSystemController extends SuperController {
 	public Result<InformationSystem> getById(String id) {
 		Result<InformationSystem> result=new Result<>();
 		InformationSystem informationSystem=informationSystemService.getById(id);
+		// 关联出 用户凭证 数据
+		informationSystemService.join(informationSystem,InformationSystemMeta.VOUCHER_LIST);
 		result.success(true).data(informationSystem);
 		return result;
 	}
@@ -340,6 +343,8 @@ public class InformationSystemController extends SuperController {
 	public Result<PagedList<InformationSystem>> queryPagedList(InformationSystemVO sample) {
 		Result<PagedList<InformationSystem>> result=new Result<>();
 		PagedList<InformationSystem> list=informationSystemService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 用户凭证 数据
+		informationSystemService.join(list,InformationSystemMeta.VOUCHER_LIST);
 		result.success(true).data(list);
 		return result;
 	}

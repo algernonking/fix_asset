@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:55:05
+ * @since 2021-09-03 21:36:03
 */
 
 @Api(tags = "供应商")

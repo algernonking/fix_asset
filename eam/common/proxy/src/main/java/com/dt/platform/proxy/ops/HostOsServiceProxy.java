@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 操作系统  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:14
+ * @since 2021-09-03 21:36:14
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = HostOsServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface HostOsServiceProxy {
 	 * 批量删除操作系统
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新操作系统

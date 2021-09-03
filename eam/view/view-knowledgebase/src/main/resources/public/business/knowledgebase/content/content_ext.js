@@ -21,13 +21,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         reviewKnFunction:function (data){
             window.open("../search/knbaselook.html?id="+data.id);
             console.log('reviewKnFunction',data);
-        },
-        /**
-         * 查询前调用
-         * */
-        beforeQuery:function (conditions) {
-            console.log('beforeQuery',conditions);
         }
+
     }
 
     var action=admin.getTempData('kn-content-form-data-form-action');
@@ -55,13 +50,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var editor;
     //表单页的扩展
     var form={
-        /**
-         * 表单数据填充前
-         * */
-        beforeDataFill:function (data) {
-            console.log('beforeDataFill',data);
 
-        },
         /**
          * 表单数据填充后
          * */

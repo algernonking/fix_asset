@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.OPS_INFORMATION_SYSTEM;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
- * @sign F0D56F8DE95CED78E08288958DF13CAD
+ * @since 2021-09-03 22:21:50
+ * @sign 6349283065026AF9DF67CA99EE81F49D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -232,6 +234,18 @@ public class InformationSystem extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<Voucher> voucherList;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<String> voucherIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -876,6 +890,66 @@ public class InformationSystem extends Entity {
 	*/
 	public InformationSystem setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<Voucher> getVoucherList() {
+		return voucherList;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherList 凭证
+	 * @return 当前对象
+	*/
+	public InformationSystem setVoucherList(List<Voucher> voucherList) {
+		this.voucherList=voucherList;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucher 凭证
+	 * @return 当前对象
+	*/
+	public InformationSystem addVoucher(Voucher voucher) {
+		if(this.voucherList==null) voucherList=new ArrayList<>();
+		this.voucherList.add(voucher);
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<String> getVoucherIds() {
+		return voucherIds;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherIds 凭证
+	 * @return 当前对象
+	*/
+	public InformationSystem setVoucherIds(List<String> voucherIds) {
+		this.voucherIds=voucherIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucherId 凭证
+	 * @return 当前对象
+	*/
+	public InformationSystem addVoucherId(String voucherId) {
+		if(this.voucherIds==null) voucherIds=new ArrayList<>();
+		this.voucherIds.add(voucherId);
 		return this;
 	}
 

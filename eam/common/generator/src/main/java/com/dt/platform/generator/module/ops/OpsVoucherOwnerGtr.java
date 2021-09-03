@@ -97,7 +97,7 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         //生成代码
         cfg.buildAll();
     }

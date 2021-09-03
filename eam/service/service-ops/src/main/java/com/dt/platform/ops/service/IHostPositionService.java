@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 主机位置 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:21
+ * @since 2021-09-03 21:36:21
 */
 
 public interface IHostPositionService extends ISuperService<HostPosition> {

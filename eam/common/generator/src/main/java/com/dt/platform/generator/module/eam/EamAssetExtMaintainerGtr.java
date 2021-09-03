@@ -102,7 +102,7 @@ public class EamAssetExtMaintainerGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

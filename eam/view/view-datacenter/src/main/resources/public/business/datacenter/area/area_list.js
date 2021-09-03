@@ -1,7 +1,7 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:15:08
+ * @since 2021-09-03 21:35:04
  */
 
 
@@ -48,11 +48,18 @@ function ListPage() {
 
 			var ps={};
 			var contitions={};
-			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(window.pageExt.list.beforeQuery){
+				window.pageExt.list.beforeQuery(contitions);
+			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
-
+			var templet=window.pageExt.list.templet;
+			if(templet==null) {
+				templet=function(field,value,row) {
+					return value;
+				}
+			}
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
@@ -65,15 +72,16 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类型'), templet:function (d){ return fox.getEnumText(RADIO_TYPE_DATA,d.type);}}
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
-					,{ field: 'position', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置') }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return fox.dateFormat(d.createTime); }}
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类型'), templet:function (d){ return templet('type',fox.getEnumText(RADIO_TYPE_DATA,d.type),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'position', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置') , templet: function (d) { return templet('position',d.position,d);}  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
+				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -105,7 +113,9 @@ function ListPage() {
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.position={ value: $("#position").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
+		if(window.pageExt.list.beforeQuery){
+			if(!window.pageExt.list.beforeQuery(value)) return;
+		}
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -156,6 +166,7 @@ function ListPage() {
 			}
 		});
 		fox.renderSearchInputs();
+		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
 	
 	/**
@@ -220,27 +231,32 @@ function ListPage() {
 		
         //批量删除按钮点击事件
         function batchDelete(selected) {
-          
+
+        	if(window.pageExt.list.beforeBatchDelete) {
+				var doNext=window.pageExt.list.beforeBatchDelete(selected);
+				if(!doNext) return;
+			}
+
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('区域')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('区域')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('区域')+fox.translate('吗？'), function (i) {
-				layer.close(i);
-				if(window.pageExt.list.beforeBatchDelete) {
-					var doNext=window.pageExt.list.beforeBatchDelete(selected);
-					if(!doNext) return;
-				}
-				layer.load(2);
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('区域')+fox.translate('吗？'), function (i) {
+				top.layer.close(i);
+				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-                    layer.closeAll('loading');
+					top.layer.closeAll('loading');
                     if (data.success) {
-                        layer.msg(data.message, {icon: 1, time: 500});
+						if(window.pageExt.list.afterBatchDelete) {
+							var doNext=window.pageExt.list.afterBatchDelete(data);
+							if(!doNext) return;
+						}
+                    	top.layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 1500});
+						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
 
@@ -285,23 +301,27 @@ function ListPage() {
 				});
 			}
 			else if (layEvent === 'del') { // 删除
-			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('区域')+fox.translate('吗？'), function (i) {
-					layer.close(i);
 
-					if(window.pageExt.list.beforeSingleDelete) {
-						var doNext=window.pageExt.list.beforeSingleDelete(data);
-						if(!doNext) return;
-					}
+				if(window.pageExt.list.beforeSingleDelete) {
+					var doNext=window.pageExt.list.beforeSingleDelete(data);
+					if(!doNext) return;
+				}
 
-					layer.load(2);
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('区域')+fox.translate('吗？'), function (i) {
+					top.layer.close(i);
+
+					top.layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-						layer.closeAll('loading');
+						top.layer.closeAll('loading');
 						if (data.success) {
-							layer.msg(data.message, {icon: 1, time: 500});
+							if(window.pageExt.list.afterSingleDelete) {
+								var doNext=window.pageExt.list.afterSingleDelete(data);
+								if(!doNext) return;
+							}
+							top.layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 1500});
+							top.layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
@@ -346,6 +366,8 @@ function ListPage() {
 		refreshTableData: refreshTableData,
 		getCheckedList: getCheckedList
 	};
+
+	window.pageExt.list.ending && window.pageExt.list.ending();
 
 };
 

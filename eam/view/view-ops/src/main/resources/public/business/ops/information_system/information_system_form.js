@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
+ * @since 2021-09-03 22:21:58
  */
 
 function FormPage() {
@@ -140,6 +140,25 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 voucherIds 下拉字段
+		fox.renderSelectBox({
+			el: "voucherIds",
+			radio: false,
+			filterable: true,
+			//转换数据
+			searchField: "voucher", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].voucher,value:data[i].user_code});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -254,13 +273,13 @@ function FormPage() {
 	    	//debugger;
 			data.field = getFormData();
 
-			//校验表单
-			if(!verifyForm(data.field)) return;
-
 			if(window.pageExt.form.beforeSubmit) {
 				var doNext=window.pageExt.form.beforeSubmit(data.field);
 				if(!doNext) return ;
 			}
+			//校验表单
+			if(!verifyForm(data.field)) return;
+
 			saveForm(data.field);
 	        return false;
 	    });
@@ -274,8 +293,11 @@ function FormPage() {
     window.module={
 		getFormData: getFormData,
 		verifyForm: verifyForm,
-		saveForm: saveForm
+		saveForm: saveForm,
+		adjustPopup: adjustPopup
 	};
+
+	window.pageExt.form.ending && window.pageExt.form.ending();
 
 }
 

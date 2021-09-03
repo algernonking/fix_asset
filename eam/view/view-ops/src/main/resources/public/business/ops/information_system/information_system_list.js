@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:10
+ * @since 2021-09-03 22:21:57
  */
 
 
@@ -48,11 +48,18 @@ function ListPage() {
 
 			var ps={};
 			var contitions={};
-			window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(contitions);
+			if(window.pageExt.list.beforeQuery){
+				window.pageExt.list.beforeQuery(contitions);
+			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
-
+			var templet=window.pageExt.list.templet;
+			if(templet==null) {
+				templet=function(field,value,row) {
+					return value;
+				}
+			}
 			var h=$(".search-bar").height();
 			dataTable=fox.renderTable({
 				elem: '#data-table',
@@ -65,35 +72,37 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') }
-					,{ field: 'pid', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('父节点') }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') }
-					,{ field: 'profile', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('介绍') }
-					,{ field: 'status', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return fox.getDictText(RADIO_STATUS_DATA,d.status);}}
-					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet:function (d){ return fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod);}}
-					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod);}}
-					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') }
-					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') }
-					,{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属公司/部门') }
-					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return fox.dateFormat(d.lastdrillDate); }}
-					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return fox.dateFormat(d.onlineDate); }}
-					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return fox.dateFormat(d.offlineDate); }}
-					,{ field: 'osInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('操作系统') }
-					,{ field: 'dbInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('数据库') }
-					,{ field: 'appInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('应用') }
-					,{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统分级'), templet:function (d){ return fox.getDictText(SELECT_GRADE_DATA,d.grade);}}
-					,{ field: 'rto', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RTO') }
-					,{ field: 'rpo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RPO') }
-					,{ field: 'hardwareInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('硬件信息') }
-					,{ field: 'backupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备份信息') }
-					,{ field: 'sameplaceBacupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('本地备份') }
-					,{ field: 'diffplaceBackupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('异地备份') }
-					,{ field: 'archMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('归档模式') }
-					,{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'pid', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('父节点') , templet: function (d) { return templet('pid',d.pid,d);}  }
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'profile', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('介绍') , templet: function (d) { return templet('profile',d.profile,d);}  }
+					,{ field: 'status', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getDictText(RADIO_STATUS_DATA,d.status),d);}}
+					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet:function (d){ return templet('opsMethod',fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod),d);}}
+					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return templet('devMethod',fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod),d);}}
+					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') , templet: function (d) { return templet('technicalContact',d.technicalContact,d);}  }
+					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') , templet: function (d) { return templet('businessContact',d.businessContact,d);}  }
+					,{ field: 'belongOrgInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属公司/部门') , templet: function (d) { return templet('belongOrgInfo',d.belongOrgInfo,d);}  }
+					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return templet('lastdrillDate',fox.dateFormat(d.lastdrillDate),d); }}
+					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineDate',fox.dateFormat(d.onlineDate),d); }}
+					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineDate',fox.dateFormat(d.offlineDate),d); }}
+					,{ field: 'osInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('操作系统') , templet: function (d) { return templet('osInfo',d.osInfo,d);}  }
+					,{ field: 'dbInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('数据库') , templet: function (d) { return templet('dbInfo',d.dbInfo,d);}  }
+					,{ field: 'appInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('应用') , templet: function (d) { return templet('appInfo',d.appInfo,d);}  }
+					,{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统分级'), templet:function (d){ return templet('grade',fox.getDictText(SELECT_GRADE_DATA,d.grade),d);}}
+					,{ field: 'rto', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RTO') , templet: function (d) { return templet('rto',d.rto,d);}  }
+					,{ field: 'rpo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RPO') , templet: function (d) { return templet('rpo',d.rpo,d);}  }
+					,{ field: 'hardwareInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('硬件信息') , templet: function (d) { return templet('hardwareInfo',d.hardwareInfo,d);}  }
+					,{ field: 'backupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备份信息') , templet: function (d) { return templet('backupInfo',d.backupInfo,d);}  }
+					,{ field: 'sameplaceBacupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('本地备份') , templet: function (d) { return templet('sameplaceBacupInfo',d.sameplaceBacupInfo,d);}  }
+					,{ field: 'diffplaceBackupInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('异地备份') , templet: function (d) { return templet('diffplaceBackupInfo',d.diffplaceBackupInfo,d);}  }
+					,{ field: 'archMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('归档模式') , templet: function (d) { return templet('archMethod',d.archMethod,d);}  }
+					,{ field: 'labels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('labels',d.labels,d);}  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'voucherIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('用户凭证'), templet: function (d) { return templet('voucherIds',fox.joinLabel(d.voucherList,"voucher"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 290 }
 				]],
+				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -121,14 +130,16 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.name={ value: $("#name").val()};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.technicalContact={ value: $("#technicalContact").val()};
 		value.businessContact={ value: $("#businessContact").val()};
 		value.grade={ value: xmSelect.get("#grade",true).getValue("value"), label:xmSelect.get("#grade",true).getValue("nameStr")};
 		value.labels={ value: $("#labels").val()};
-		value.notes={ value: $("#notes").val()};
-		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		if(window.pageExt.list.beforeQuery){
+			if(!window.pageExt.list.beforeQuery(value)) return;
+		}
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {
 			ps.sortField=sortField;
@@ -196,6 +207,7 @@ function ListPage() {
 			}
 		});
 		fox.renderSearchInputs();
+		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
 	
 	/**
@@ -260,27 +272,32 @@ function ListPage() {
 		
         //批量删除按钮点击事件
         function batchDelete(selected) {
-          
+
+        	if(window.pageExt.list.beforeBatchDelete) {
+				var doNext=window.pageExt.list.beforeBatchDelete(selected);
+				if(!doNext) return;
+			}
+
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-            	layer.msg(fox.translate('请选择需要删除的')+fox.translate('信息系统')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('信息系统')+"!");
             	return;
             }
             //调用批量删除接口
-			layer.confirm(fox.translate('确定删除已选中的')+fox.translate('信息系统')+fox.translate('吗？'), function (i) {
-				layer.close(i);
-				if(window.pageExt.list.beforeBatchDelete) {
-					var doNext=window.pageExt.list.beforeBatchDelete(selected);
-					if(!doNext) return;
-				}
-				layer.load(2);
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('信息系统')+fox.translate('吗？'), function (i) {
+				top.layer.close(i);
+				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-                    layer.closeAll('loading');
+					top.layer.closeAll('loading');
                     if (data.success) {
-                        layer.msg(data.message, {icon: 1, time: 500});
+						if(window.pageExt.list.afterBatchDelete) {
+							var doNext=window.pageExt.list.afterBatchDelete(data);
+							if(!doNext) return;
+						}
+                    	top.layer.msg(data.message, {icon: 1, time: 500});
                         refreshTableData();
                     } else {
-                        layer.msg(data.message, {icon: 2, time: 1500});
+						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
 
@@ -325,27 +342,37 @@ function ListPage() {
 				});
 			}
 			else if (layEvent === 'del') { // 删除
-			
-				layer.confirm(fox.translate('确定删除此')+fox.translate('信息系统')+fox.translate('吗？'), function (i) {
-					layer.close(i);
 
-					if(window.pageExt.list.beforeSingleDelete) {
-						var doNext=window.pageExt.list.beforeSingleDelete(data);
-						if(!doNext) return;
-					}
+				if(window.pageExt.list.beforeSingleDelete) {
+					var doNext=window.pageExt.list.beforeSingleDelete(data);
+					if(!doNext) return;
+				}
 
-					layer.load(2);
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('信息系统')+fox.translate('吗？'), function (i) {
+					top.layer.close(i);
+
+					top.layer.load(2);
 					admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-						layer.closeAll('loading');
+						top.layer.closeAll('loading');
 						if (data.success) {
-							layer.msg(data.message, {icon: 1, time: 500});
+							if(window.pageExt.list.afterSingleDelete) {
+								var doNext=window.pageExt.list.afterSingleDelete(data);
+								if(!doNext) return;
+							}
+							top.layer.msg(data.message, {icon: 1, time: 500});
 							refreshTableData();
 						} else {
-							layer.msg(data.message, {icon: 2, time: 1500});
+							top.layer.msg(data.message, {icon: 2, time: 1500});
 						}
 					});
 				});
 				
+			}
+			else if (layEvent === 'open-system-voucher-window') { // 凭证
+				window.pageExt.list.openSystemVoucherWindow(data);
+			}
+			else if (layEvent === 'open-host-window') { // 主机
+				window.pageExt.list.openHostWindow(data);
 			}
 			
 		});
@@ -386,6 +413,8 @@ function ListPage() {
 		refreshTableData: refreshTableData,
 		getCheckedList: getCheckedList
 	};
+
+	window.pageExt.list.ending && window.pageExt.list.ending();
 
 };
 

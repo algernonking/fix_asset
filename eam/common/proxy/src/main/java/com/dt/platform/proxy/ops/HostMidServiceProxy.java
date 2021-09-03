@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 中间件  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:18
+ * @since 2021-09-03 21:36:17
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = HostMidServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface HostMidServiceProxy {
 	 * 批量删除中间件
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新中间件

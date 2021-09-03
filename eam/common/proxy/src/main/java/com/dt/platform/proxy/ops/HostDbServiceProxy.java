@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 数据库  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-29 12:16:16
+ * @since 2021-09-03 21:36:16
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = HostDbServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -54,7 +54,6 @@ public interface HostDbServiceProxy {
 	 * 批量删除数据库
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	;
 	
 	/**
 	 * 更新数据库

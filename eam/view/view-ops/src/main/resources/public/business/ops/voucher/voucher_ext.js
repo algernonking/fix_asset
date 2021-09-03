@@ -19,12 +19,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //列表页的扩展
     var list={
-        /**
-         * 列表页初始化前调用
-         * */
-        beforeInit:function () {
-            console.log("list:beforeInit");
-        },
+
         /**
          * 查询前调用
          * */
@@ -37,59 +32,28 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(!conditions["ownerId"]) conditions["ownerId"]={};
             conditions["ownerId"].value=ownerIdValue;
 
-        },
-        /**
-         * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
-         * */
-        beforeEdit:function (data) {
-            console.log('beforeEdit',data);
             return true;
         },
         /**
-         * 单行删除前调用，若返回false则不执行后续操作
+         * 打开凭证条目窗口
          * */
-        beforeSingleDelete:function (data) {
-            console.log('beforeSingleDelete',data);
-            return true;
+        openHistoryVoucherWindow: function (data) {
+            admin.putTempData("voucherId",data.id,true);
+            var index = admin.popupCenter({
+                title: "凭证历史条目",
+                resize: false,
+                id: 'hostVoucherHistoryWindow',
+                area: ["80%", "600px"],
+                type: 2,
+                content: "/business/ops/voucher_history/voucher_history_list.html"
+            });
         },
-        /**
-         * 批量删除前调用，若返回false则不执行后续操作
-         * */
-        beforeBatchDelete:function (selected) {
-            console.log('beforeBatchDelete',selected);
-            return true;
-        },
-        /**
-         * 表格右侧操作列更多按钮事件
-         * */
-        moreAction:function (menu,data, it){
 
-            console.log('moreAction',menu,data,it);
-        },
-        other:function(){
-
-        }
     }
 
     var form={
 
 
-        /**
-         * 表单初始化前调用
-         * */
-        beforeInit:function () {
-            //获取参数，并调整下拉框查询用的URL
-            //var companyId=admin.getTempData("companyId");
-            //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
-            console.log("form:beforeInit")
-        },
-        /**
-         * 表单数据填充前
-         * */
-        beforeDataFill:function (data) {
-
-            console.log('beforeDataFill',data);
-        },
         /**
          * 表单数据填充后
          * */
@@ -113,10 +77,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             }
             console.log("beforeSubmit",data);
             return true;
-        },
-
-        other:function(){
-
         }
     }
     //

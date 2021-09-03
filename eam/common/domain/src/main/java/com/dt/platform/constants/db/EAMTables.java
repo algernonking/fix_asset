@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-09-02 22:29:37
+ * @since 2021-09-03 23:05:09
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -843,6 +843,11 @@ public class EAMTables {
 		public static final DBField RACK_CAPTICAL = new DBField(DBDataType.DECIMAL , "rack_captical","rackCaptical","容量","容量",false,false,true);
 		
 		/**
+		 * PDU数量
+		*/
+		public static final DBField PDU_NUMBER = new DBField(DBDataType.INTEGER , "pdu_number","pduNumber","PDU数量","PDU数量",false,false,true);
+		
+		/**
 		 * 标签
 		*/
 		public static final DBField RACK_LABELS = new DBField(DBDataType.STRING , "rack_labels","rackLabels","标签","标签",false,false,true);
@@ -892,7 +897,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public DC_RACK() {
-			this.init($NAME,"机柜" , ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"机柜" , ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final DC_RACK $TABLE=new DC_RACK();
 	}
@@ -1528,6 +1533,11 @@ public class EAMTables {
 		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
+		 * 附件
+		*/
+		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
+		
+		/**
 		 * 创建人ID
 		*/
 		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
@@ -1567,7 +1577,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_BORROW() {
-			this.init($NAME,"资产借用" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产借用" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_BORROW $TABLE=new EAM_ASSET_BORROW();
 	}
@@ -1803,6 +1813,11 @@ public class EAMTables {
 		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
+		 * 附件
+		*/
+		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
+		
+		/**
 		 * 创建人ID
 		*/
 		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
@@ -1842,7 +1857,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_COLLECTION() {
-			this.init($NAME,"资产领用" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产领用" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_COLLECTION $TABLE=new EAM_ASSET_COLLECTION();
 	}
@@ -1918,6 +1933,11 @@ public class EAMTables {
 		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
+		 * 附件
+		*/
+		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
+		
+		/**
 		 * 创建人ID
 		*/
 		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
@@ -1957,7 +1977,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_COLLECTION_RETURN() {
-			this.init($NAME,"资产退库" , ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产退库" , ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_COLLECTION_RETURN $TABLE=new EAM_ASSET_COLLECTION_RETURN();
 	}
@@ -2173,6 +2193,16 @@ public class EAMTables {
 		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
 		
 		/**
+		 * 设备编号
+		*/
+		public static final DBField EQUIPMENT_CODE = new DBField(DBDataType.STRING , "equipment_code","equipmentCode","设备编号","设备编号",false,false,true);
+		
+		/**
+		 * 设备状态
+		*/
+		public static final DBField EQUIPMENT_STATUS = new DBField(DBDataType.STRING , "equipment_status","equipmentStatus","设备状态","设备状态",false,false,true);
+		
+		/**
 		 * 设备IP
 		*/
 		public static final DBField EQUIPMENT_IP = new DBField(DBDataType.STRING , "equipment_ip","equipmentIp","设备IP","设备IP",false,false,true);
@@ -2193,6 +2223,11 @@ public class EAMTables {
 		public static final DBField EQUIPMENT_MEMORY = new DBField(DBDataType.STRING , "equipment_memory","equipmentMemory","设备内存","设备内存",false,false,true);
 		
 		/**
+		 * PDU接口
+		*/
+		public static final DBField PDU = new DBField(DBDataType.STRING , "pdu","pdu","PDU接口","PDU接口",false,false,true);
+		
+		/**
 		 * 备注
 		*/
 		public static final DBField EQUIPMENT_NOTES = new DBField(DBDataType.STRING , "equipment_notes","equipmentNotes","备注","备注",false,false,true);
@@ -2203,16 +2238,6 @@ public class EAMTables {
 		public static final DBField EQUIPMENT_DESC = new DBField(DBDataType.STRING , "equipment_desc","equipmentDesc","描述","描述",false,false,true);
 		
 		/**
-		 * 区域
-		*/
-		public static final DBField AREA_ID = new DBField(DBDataType.STRING , "area_id","areaId","区域","区域",false,false,true);
-		
-		/**
-		 * 层级
-		*/
-		public static final DBField LAYER_ID = new DBField(DBDataType.STRING , "layer_id","layerId","层级","层级",false,false,true);
-		
-		/**
 		 * 机柜
 		*/
 		public static final DBField RACK_ID = new DBField(DBDataType.STRING , "rack_id","rackId","机柜","机柜",false,false,true);
@@ -2220,12 +2245,12 @@ public class EAMTables {
 		/**
 		 * 机柜上位置编号
 		*/
-		public static final DBField RACK_UP_POSITION_NUMBER = new DBField(DBDataType.INTEGER , "rack_up_position_number","rackUpPositionNumber","机柜上位置编号","机柜上位置编号",false,false,true);
+		public static final DBField RACK_UP_NUMBER = new DBField(DBDataType.INTEGER , "rack_up_number","rackUpNumber","机柜上位置编号","机柜上位置编号",false,false,true);
 		
 		/**
 		 * 机柜下位置编号
 		*/
-		public static final DBField RACK_DOWN_POSITION_NUMBER = new DBField(DBDataType.INTEGER , "rack_down_position_number","rackDownPositionNumber","机柜下位置编号","机柜下位置编号",false,false,true);
+		public static final DBField RACK_DOWN_NUMBER = new DBField(DBDataType.INTEGER , "rack_down_number","rackDownNumber","机柜下位置编号","机柜下位置编号",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -2267,7 +2292,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_EXT_EQUIPMENT() {
-			this.init($NAME,"资产设备数据" , ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , AREA_ID , LAYER_ID , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产设备数据" , ID , ASSET_ID , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , PDU , EQUIPMENT_NOTES , EQUIPMENT_DESC , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_EXT_EQUIPMENT $TABLE=new EAM_ASSET_EXT_EQUIPMENT();
 	}
@@ -3050,6 +3075,11 @@ public class EAMTables {
 		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
+		 * 附件
+		*/
+		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
+		
+		/**
 		 * 创建人ID
 		*/
 		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
@@ -3089,7 +3119,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_SCRAP() {
-			this.init($NAME,"资产报废" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SCRAP_DATE , CONTENT , CLEAN_STATUS , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产报废" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SCRAP_DATE , CONTENT , CLEAN_STATUS , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_SCRAP $TABLE=new EAM_ASSET_SCRAP();
 	}
@@ -6553,6 +6583,86 @@ public class EAMTables {
 			this.init($NAME,"凭证" , ID , TYPE , OWNER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_VOUCHER $TABLE=new OPS_VOUCHER();
+	}
+	
+	/**
+	 * 凭证记录
+	*/
+	public static class OPS_VOUCHER_HISTORY extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_voucher_history";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 凭证
+		*/
+		public static final DBField VOUCHER_ID = new DBField(DBDataType.STRING , "voucher_id","voucherId","凭证","凭证",false,false,true);
+		
+		/**
+		 * 用户
+		*/
+		public static final DBField USER_CODE = new DBField(DBDataType.STRING , "user_code","userCode","用户","用户",false,false,true);
+		
+		/**
+		 * 凭证
+		*/
+		public static final DBField VOUCHER = new DBField(DBDataType.STRING , "voucher","voucher","凭证","凭证",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		public OPS_VOUCHER_HISTORY() {
+			this.init($NAME,"凭证记录" , ID , VOUCHER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_VOUCHER_HISTORY $TABLE=new OPS_VOUCHER_HISTORY();
 	}
 	
 	/**

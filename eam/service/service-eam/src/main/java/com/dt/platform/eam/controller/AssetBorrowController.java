@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:35
+ * @since 2021-09-03 21:35:28
 */
 
 @Api(tags = "资产借用")
@@ -78,6 +78,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -140,6 +141,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } ) 
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -168,6 +170,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } )
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -237,6 +240,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetBorrowServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -265,6 +269,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetBorrowServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

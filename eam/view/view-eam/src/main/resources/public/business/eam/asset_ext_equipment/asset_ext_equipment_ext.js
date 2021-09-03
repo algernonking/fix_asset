@@ -1,7 +1,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 12:54:49
+ * @since 2021-09-03 21:35:45
  */
 
 layui.config({
@@ -25,11 +25,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeInit:function () {
             console.log("list:beforeInit");
         },
+        afterSearchInputReady: function() {
+            console.log("list:afterSearchInputReady");
+        },
         /**
          * 查询前调用
          * */
-        beforeQuery:function (conditions) {
+        beforeQuery:function (conditions,location) {
             console.log('beforeQuery',conditions);
+            return true;
+        },
+        /**
+         * 查询结果渲染后调用
+         * */
+        afterQuery : function () {
+
+        },
+        /**
+         * 进一步转换 list 数据
+         * */
+        templet:function (field,value,r) {
+            return value;
         },
         /**
          * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
@@ -45,6 +61,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeSingleDelete',data);
             return true;
         },
+        afterSingleDelete:function (data){
+            console.log('beforeSingleDelete',data);
+            return true;
+        },
         /**
          * 批量删除前调用，若返回false则不执行后续操作
          * */
@@ -53,12 +73,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
+         * 批量删除后调用，若返回false则不执行后续操作
+         * */
+        afterBatchDelete:function (data) {
+            console.log('afterBatchDelete',data);
+            return true;
+        },
+        /**
          * 表格右侧操作列更多按钮事件
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
-        other:function(){
+        /**
+         * 末尾执行
+         */
+        ending:function() {
 
         }
     }
@@ -93,8 +123,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("beforeSubmit",data);
             return true;
         },
-
-        other:function(){
+        /**
+         * 末尾执行
+         */
+        ending:function() {
 
         }
     }

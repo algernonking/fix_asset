@@ -28,8 +28,8 @@ public class EamAssetItemGtr extends BaseCodeGenerator {
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.IGNORE) //表单HTML页
-                .setListPage(WriteMode.IGNORE)
+                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.COVER_EXISTS_FILE);
         ; //列表HTML页
         cfg.buildAll();
