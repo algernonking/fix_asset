@@ -4,14 +4,15 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.domain.ops.ServiceCategory;
 import com.dt.platform.domain.ops.ServiceGroup;
-import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
-import com.dt.platform.domain.ops.meta.ServiceGroupMeta;
-import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
+import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.meta.*;
 import com.dt.platform.ops.page.VoucherOwnerPageController;
 import com.dt.platform.proxy.ops.ServiceCategoryServiceProxy;
 import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
+import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.dt.platform.proxy.ops.VoucherOwnerServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 
 public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
 
@@ -24,6 +25,8 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
 
 
+        cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
+        cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).search().fuzzySearch();
@@ -32,6 +35,7 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_VOUCHER.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.OPS_VOUCHER.ID).table().disable(true);
+        cfg.view().field(EAMTables.OPS_VOUCHER.CREATE_TIME).table().disable(true);
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
@@ -47,6 +51,16 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
                 .validate().required().form().selectBox()
                 .dict(DictEnum.OPS_VOUCHER_TYPE).filter(true).muliti(false).toolbar(false);
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).form().textArea().height(30);
+
+
+
+        cfg.view().field(VoucherOwnerMeta.VOUCHER_IDS)
+                .basic().label("用户凭证")
+                .table().sort(false)
+                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
+                .valueField("user_code").textField("voucher")
+                .toolbar(false).paging(false)
+                .fillBy(VoucherOwnerMeta.VOUCHER_LIST).muliti(true);
 
 
 
@@ -68,8 +82,6 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.OPS_VOUCHER_OWNER.NOTES
-
-
                 }
         );
 

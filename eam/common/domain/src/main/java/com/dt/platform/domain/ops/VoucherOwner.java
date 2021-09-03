@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.OPS_VOUCHER_OWNER;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 22:42:48
- * @sign 28AB803FB38BE22981BB980B763F83A2
+ * @since 2021-09-03 10:34:18
+ * @sign 4AAC41B6D8CF664B4FEA46483AC5DDF2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,6 +108,18 @@ public class VoucherOwner extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<Voucher> voucherList;
+	
+	/**
+	 * 凭证：凭证
+	*/
+	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
+	private List<String> voucherIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -351,6 +365,66 @@ public class VoucherOwner extends Entity {
 	*/
 	public VoucherOwner setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<Voucher> getVoucherList() {
+		return voucherList;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherList 凭证
+	 * @return 当前对象
+	*/
+	public VoucherOwner setVoucherList(List<Voucher> voucherList) {
+		this.voucherList=voucherList;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucher 凭证
+	 * @return 当前对象
+	*/
+	public VoucherOwner addVoucher(Voucher voucher) {
+		if(this.voucherList==null) voucherList=new ArrayList<>();
+		this.voucherList.add(voucher);
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证<br>
+	 * 凭证
+	 * @return 凭证
+	*/
+	public List<String> getVoucherIds() {
+		return voucherIds;
+	}
+	
+	/**
+	 * 设置 凭证
+	 * @param voucherIds 凭证
+	 * @return 当前对象
+	*/
+	public VoucherOwner setVoucherIds(List<String> voucherIds) {
+		this.voucherIds=voucherIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证
+	 * @param voucherId 凭证
+	 * @return 当前对象
+	*/
+	public VoucherOwner addVoucherId(String voucherId) {
+		if(this.voucherIds==null) voucherIds=new ArrayList<>();
+		this.voucherIds.add(voucherId);
 		return this;
 	}
 

@@ -3,6 +3,12 @@ package com.dt.platform.generator.module.ops;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.ops.VoucherTypeEnum;
+import com.dt.platform.domain.ops.ServiceInfo;
+import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
+import com.dt.platform.domain.ops.meta.VoucherMeta;
+import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsVoucherGtr extends BaseCodeGenerator{
@@ -44,6 +50,8 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
 
 
 
+
+
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
@@ -54,6 +62,9 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
                         EAMTables.OPS_VOUCHER.NOTES,
                 }
         );
+
+        //cfg.setRelationField(EAMTables.OPS_VOUCHER.OWNER_ID, EAMTables.OPS_VOUCHER.USER_CODE,true);
+
 
         //文件生成覆盖模式
         cfg.overrides()

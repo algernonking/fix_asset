@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
+import com.dt.platform.domain.ops.Voucher;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 所属凭证 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 22:42:49
+ * @since 2021-09-03 10:34:20
 */
 
 @Api(tags = "所属凭证")
@@ -68,8 +69,8 @@ public class VoucherOwnerController extends SuperController {
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485941502510379008"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.CATEGORY_CODE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "q'w"),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无安抚"),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = VoucherOwnerVOMeta.ID)
@@ -123,8 +124,8 @@ public class VoucherOwnerController extends SuperController {
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485941502510379008"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.CATEGORY_CODE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "q'w"),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无安抚"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { VoucherOwnerVOMeta.PAGE_INDEX , VoucherOwnerVOMeta.PAGE_SIZE , VoucherOwnerVOMeta.SEARCH_FIELD , VoucherOwnerVOMeta.FUZZY_FIELD , VoucherOwnerVOMeta.SEARCH_VALUE , VoucherOwnerVOMeta.SORT_FIELD , VoucherOwnerVOMeta.SORT_TYPE , VoucherOwnerVOMeta.IDS } ) 
 	@NotNull(name = VoucherOwnerVOMeta.ID)
@@ -144,8 +145,8 @@ public class VoucherOwnerController extends SuperController {
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485941502510379008"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.CATEGORY_CODE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "q'w"),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无安抚"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherOwnerVOMeta.PAGE_INDEX , VoucherOwnerVOMeta.PAGE_SIZE , VoucherOwnerVOMeta.SEARCH_FIELD , VoucherOwnerVOMeta.FUZZY_FIELD , VoucherOwnerVOMeta.SEARCH_VALUE , VoucherOwnerVOMeta.SORT_FIELD , VoucherOwnerVOMeta.SORT_TYPE , VoucherOwnerVOMeta.IDS } )
 	@NotNull(name = VoucherOwnerVOMeta.ID)
@@ -171,6 +172,8 @@ public class VoucherOwnerController extends SuperController {
 	public Result<VoucherOwner> getById(String id) {
 		Result<VoucherOwner> result=new Result<>();
 		VoucherOwner voucherOwner=voucherOwnerService.getById(id);
+		// 关联出 用户凭证 数据
+		voucherOwnerService.join(voucherOwner,VoucherOwnerMeta.VOUCHER_LIST);
 		result.success(true).data(voucherOwner);
 		return result;
 	}
@@ -204,8 +207,8 @@ public class VoucherOwnerController extends SuperController {
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485941502510379008"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.CATEGORY_CODE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "q'w"),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无安抚"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherOwnerVOMeta.PAGE_INDEX , VoucherOwnerVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = VoucherOwnerServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -226,8 +229,8 @@ public class VoucherOwnerController extends SuperController {
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "485941502510379008"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.CATEGORY_CODE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherOwnerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "q'w"),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
+		@ApiImplicitParam(name = VoucherOwnerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "驱蚊器无安抚"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = VoucherOwnerServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -235,6 +238,8 @@ public class VoucherOwnerController extends SuperController {
 	public Result<PagedList<VoucherOwner>> queryPagedList(VoucherOwnerVO sample) {
 		Result<PagedList<VoucherOwner>> result=new Result<>();
 		PagedList<VoucherOwner> list=voucherOwnerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 用户凭证 数据
+		voucherOwnerService.join(list,VoucherOwnerMeta.VOUCHER_LIST);
 		result.success(true).data(list);
 		return result;
 	}

@@ -4,11 +4,13 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 
 
-import com.dt.platform.domain.ops.meta.DbInstanceMeta;
-import com.dt.platform.domain.ops.meta.HostMeta;
-import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
-import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
+import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
+import org.github.foxnic.web.constants.db.FoxnicWeb;
+import org.github.foxnic.web.domain.system.UserTenant;
+
+import java.util.Iterator;
 
 public class OPSRelationManager extends RelationManager {
     @Override
@@ -21,6 +23,8 @@ public class OPSRelationManager extends RelationManager {
 
         this.setupOpsServiceCategory();
         this.setupOpsServiceInfo();
+
+        this.setupVoucher();
     }
 
     public void setupProperties() {
@@ -62,6 +66,27 @@ public class OPSRelationManager extends RelationManager {
                 .using(EAMTables.OPS_DB_INSTANCE.DATABASE_ID).join(EAMTables.OPS_SERVICE_INFO.ID);
 
     }
+
+    private void setupVoucher() {
+        //用户凭证
+        this.property(VoucherOwnerMeta.VOUCHER_LIST_PROP)
+                .using(EAMTables.OPS_VOUCHER_OWNER.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
+                .after((voucherowner,voucher)->{
+                    Iterator var2 = voucher.iterator();
+                    while(var2.hasNext()) {
+                        Voucher obj = (Voucher)var2.next();
+                        String pwd="";
+                        String voucherStr=obj.getVoucher();
+                         if(voucherStr!=null&&voucherStr.length()>4){
+                             System.out.println(voucherStr.substring(0,3));
+                             pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,3),"***" );
+                         }
+                        obj.setVoucher("("+obj.getUserCode()+pwd+")");
+                    }
+                    return voucher;
+                });
+    }
+
     private void setupOpsHost() {
 
         //数据库类别
