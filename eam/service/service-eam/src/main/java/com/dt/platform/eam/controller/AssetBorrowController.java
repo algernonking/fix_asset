@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:28
+ * @since 2021-09-04 14:26:30
 */
 
 @Api(tags = "资产借用")
@@ -198,7 +198,7 @@ public class AssetBorrowController extends SuperController {
 		Result<AssetBorrow> result=new Result<>();
 		AssetBorrow assetBorrow=assetBorrowService.getById(id);
 		// 关联出 制单人 数据
-		assetBorrowService.join(assetBorrow,AssetBorrowMeta.ORIGINATOR_ID);
+		assetBorrowService.join(assetBorrow,AssetBorrowMeta.ORIGINATOR);
 		result.success(true).data(assetBorrow);
 		return result;
 	}
@@ -278,7 +278,7 @@ public class AssetBorrowController extends SuperController {
 		Result<PagedList<AssetBorrow>> result=new Result<>();
 		PagedList<AssetBorrow> list=assetBorrowService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 制单人 数据
-		assetBorrowService.join(list,AssetBorrowMeta.ORIGINATOR_ID);
+		assetBorrowService.join(list,AssetBorrowMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
 	}

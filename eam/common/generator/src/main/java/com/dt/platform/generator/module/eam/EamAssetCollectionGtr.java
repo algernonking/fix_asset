@@ -73,6 +73,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH).table().hidden();
+
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 

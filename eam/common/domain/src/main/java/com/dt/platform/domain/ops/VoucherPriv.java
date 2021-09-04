@@ -1,13 +1,12 @@
-package com.dt.platform.domain.eam;
+package com.dt.platform.domain.ops;
 
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_TPL_FILE;
+import com.dt.platform.constants.db.EAMTables.OPS_VOUCHER_PRIV;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
-import org.github.foxnic.web.domain.storage.File;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,17 +16,17 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 08:15:11
- * @sign 33E11F2E768B646E8EA12CE7E6CE743A
+ * @since 2021-09-04 15:56:23
+ * @sign F469136AB98EFADA76AD81F93B0CFFBA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "eam_tpl_file")
-public class TplFile extends Entity {
+@Table(name = "ops_voucher_priv")
+public class VoucherPriv extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_TPL_FILE.$TABLE;
+	public static final DBTable TABLE =OPS_VOUCHER_PRIV.$TABLE;
 	
 	/**
 	 * 主键：主键
@@ -37,28 +36,22 @@ public class TplFile extends Entity {
 	private String id;
 	
 	/**
-	 * 名称：名称
+	 * 凭证类别：凭证类别
 	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
-	private String name;
+	@ApiModelProperty(required = true,value="凭证类别" , notes = "凭证类别")
+	private String type;
 	
 	/**
-	 * 业务编码：业务编码
+	 * 用户：用户
 	*/
-	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
-	private String code;
+	@ApiModelProperty(required = true,value="用户" , notes = "用户")
+	private String emplId;
 	
 	/**
-	 * 文件：文件
+	 * 状态：状态
 	*/
-	@ApiModelProperty(required = false,value="文件" , notes = "文件")
-	private String fileId;
-	
-	/**
-	 * 备注：备注
-	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	@ApiModelProperty(required = true,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -105,14 +98,8 @@ public class TplFile extends Entity {
 	/**
 	 * version：version
 	*/
-	@ApiModelProperty(required = false,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
-	
-	/**
-	 * 文件：文件
-	*/
-	@ApiModelProperty(required = false,value="文件" , notes = "文件")
-	private File file;
 	
 	/**
 	 * 获得 主键<br>
@@ -128,84 +115,65 @@ public class TplFile extends Entity {
 	 * @param id 主键
 	 * @return 当前对象
 	*/
-	public TplFile setId(String id) {
+	public VoucherPriv setId(String id) {
 		this.id=id;
 		return this;
 	}
 	
 	/**
-	 * 获得 名称<br>
-	 * 名称
-	 * @return 名称
+	 * 获得 凭证类别<br>
+	 * 凭证类别
+	 * @return 凭证类别
 	*/
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 	
 	/**
-	 * 设置 名称
-	 * @param name 名称
+	 * 设置 凭证类别
+	 * @param type 凭证类别
 	 * @return 当前对象
 	*/
-	public TplFile setName(String name) {
-		this.name=name;
+	public VoucherPriv setType(String type) {
+		this.type=type;
 		return this;
 	}
 	
 	/**
-	 * 获得 业务编码<br>
-	 * 业务编码
-	 * @return 业务编码
+	 * 获得 用户<br>
+	 * 用户
+	 * @return 用户
 	*/
-	public String getCode() {
-		return code;
+	public String getEmplId() {
+		return emplId;
 	}
 	
 	/**
-	 * 设置 业务编码
-	 * @param code 业务编码
+	 * 设置 用户
+	 * @param emplId 用户
 	 * @return 当前对象
 	*/
-	public TplFile setCode(String code) {
-		this.code=code;
+	public VoucherPriv setEmplId(String emplId) {
+		this.emplId=emplId;
 		return this;
 	}
 	
 	/**
-	 * 获得 文件<br>
-	 * 文件
-	 * @return 文件
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
 	*/
-	public String getFileId() {
-		return fileId;
+	public String getStatus() {
+		return status;
 	}
 	
 	/**
-	 * 设置 文件
-	 * @param fileId 文件
+	 * 设置 状态
+	 * @param status 状态
 	 * @return 当前对象
 	*/
-	public TplFile setFileId(String fileId) {
-		this.fileId=fileId;
-		return this;
-	}
-	
-	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
-	*/
-	public String getNotes() {
-		return notes;
-	}
-	
-	/**
-	 * 设置 备注
-	 * @param notes 备注
-	 * @return 当前对象
-	*/
-	public TplFile setNotes(String notes) {
-		this.notes=notes;
+	public VoucherPriv setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -223,7 +191,7 @@ public class TplFile extends Entity {
 	 * @param createBy 创建人ID
 	 * @return 当前对象
 	*/
-	public TplFile setCreateBy(String createBy) {
+	public VoucherPriv setCreateBy(String createBy) {
 		this.createBy=createBy;
 		return this;
 	}
@@ -242,7 +210,7 @@ public class TplFile extends Entity {
 	 * @param createTime 创建时间
 	 * @return 当前对象
 	*/
-	public TplFile setCreateTime(Date createTime) {
+	public VoucherPriv setCreateTime(Date createTime) {
 		this.createTime=createTime;
 		return this;
 	}
@@ -261,7 +229,7 @@ public class TplFile extends Entity {
 	 * @param updateBy 修改人ID
 	 * @return 当前对象
 	*/
-	public TplFile setUpdateBy(String updateBy) {
+	public VoucherPriv setUpdateBy(String updateBy) {
 		this.updateBy=updateBy;
 		return this;
 	}
@@ -280,7 +248,7 @@ public class TplFile extends Entity {
 	 * @param updateTime 修改时间
 	 * @return 当前对象
 	*/
-	public TplFile setUpdateTime(Date updateTime) {
+	public VoucherPriv setUpdateTime(Date updateTime) {
 		this.updateTime=updateTime;
 		return this;
 	}
@@ -299,7 +267,7 @@ public class TplFile extends Entity {
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
-	public TplFile setDeleted(Integer deleted) {
+	public VoucherPriv setDeleted(Integer deleted) {
 		this.deleted=deleted;
 		return this;
 	}
@@ -318,7 +286,7 @@ public class TplFile extends Entity {
 	 * @param deleteBy 删除人ID
 	 * @return 当前对象
 	*/
-	public TplFile setDeleteBy(String deleteBy) {
+	public VoucherPriv setDeleteBy(String deleteBy) {
 		this.deleteBy=deleteBy;
 		return this;
 	}
@@ -337,7 +305,7 @@ public class TplFile extends Entity {
 	 * @param deleteTime 删除时间
 	 * @return 当前对象
 	*/
-	public TplFile setDeleteTime(Date deleteTime) {
+	public VoucherPriv setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
 		return this;
 	}
@@ -356,34 +324,15 @@ public class TplFile extends Entity {
 	 * @param version version
 	 * @return 当前对象
 	*/
-	public TplFile setVersion(Integer version) {
+	public VoucherPriv setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 文件<br>
-	 * 文件
-	 * @return 文件
-	*/
-	public File getFile() {
-		return file;
-	}
-	
-	/**
-	 * 设置 文件
-	 * @param file 文件
-	 * @return 当前对象
-	*/
-	public TplFile setFile(File file) {
-		this.file=file;
 		return this;
 	}
 
 	/**
 	 * 将自己转换成指定类型的PO
 	 * @param poType  PO类型
-	 * @return TplFile , 转换好的 TplFile 对象
+	 * @return VoucherPriv , 转换好的 VoucherPriv 对象
 	*/
 	@Transient
 	public <T extends Entity> T toPO(Class<T> poType) {
@@ -393,7 +342,7 @@ public class TplFile extends Entity {
 	/**
 	 * 将自己转换成任意指定类型
 	 * @param pojoType  Pojo类型
-	 * @return TplFile , 转换好的 PoJo 对象
+	 * @return VoucherPriv , 转换好的 PoJo 对象
 	*/
 	@Transient
 	public <T> T toPojo(Class<T> pojoType) {
@@ -410,35 +359,35 @@ public class TplFile extends Entity {
 	}
 
 	/**
-	 * 将 Map 转换成 TplFile
-	 * @param tplFileMap 包含实体信息的 Map 对象
-	 * @return TplFile , 转换好的的 TplFile 对象
+	 * 将 Map 转换成 VoucherPriv
+	 * @param voucherPrivMap 包含实体信息的 Map 对象
+	 * @return VoucherPriv , 转换好的的 VoucherPriv 对象
 	*/
 	@Transient
-	public static TplFile createFrom(Map<String,Object> tplFileMap) {
-		if(tplFileMap==null) return null;
-		TplFile po = EntityContext.create(TplFile.class, tplFileMap);
+	public static VoucherPriv createFrom(Map<String,Object> voucherPrivMap) {
+		if(voucherPrivMap==null) return null;
+		VoucherPriv po = EntityContext.create(VoucherPriv.class, voucherPrivMap);
 		return po;
 	}
 
 	/**
-	 * 将 Pojo 转换成 TplFile
+	 * 将 Pojo 转换成 VoucherPriv
 	 * @param pojo 包含实体信息的 Pojo 对象
-	 * @return TplFile , 转换好的的 TplFile 对象
+	 * @return VoucherPriv , 转换好的的 VoucherPriv 对象
 	*/
 	@Transient
-	public static TplFile createFrom(Object pojo) {
+	public static VoucherPriv createFrom(Object pojo) {
 		if(pojo==null) return null;
-		TplFile po = EntityContext.create(TplFile.class,pojo);
+		VoucherPriv po = EntityContext.create(VoucherPriv.class,pojo);
 		return po;
 	}
 
 	/**
-	 * 创建一个 TplFile，等同于 new
-	 * @return TplFile 对象
+	 * 创建一个 VoucherPriv，等同于 new
+	 * @return VoucherPriv 对象
 	*/
 	@Transient
-	public static TplFile create() {
-		return EntityContext.create(TplFile.class);
+	public static VoucherPriv create() {
+		return EntityContext.create(VoucherPriv.class);
 	}
 }

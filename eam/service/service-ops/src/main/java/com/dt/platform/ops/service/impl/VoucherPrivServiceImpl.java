@@ -1,17 +1,13 @@
-package com.dt.platform.eam.service.impl;
+package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
-
-import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.eam.common.AssetCommonError;
-import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetCollection;
-import com.dt.platform.domain.eam.AssetCollectionVO;
+import com.dt.platform.domain.ops.VoucherPriv;
+import com.dt.platform.domain.ops.VoucherPrivVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -30,23 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import com.dt.platform.eam.service.IAssetCollectionService;
+import com.dt.platform.ops.service.IVoucherPrivService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 资产领用 服务实现
+ * 凭证权限 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-20 20:54:09
+ * @since 2021-09-04 15:56:25
 */
 
 
-@Service("EamAssetCollectionService")
-public class AssetCollectionServiceImpl extends SuperService<AssetCollection> implements IAssetCollectionService {
+@Service("OpsVoucherPrivService")
+public class VoucherPrivServiceImpl extends SuperService<VoucherPriv> implements IVoucherPrivService {
 	
 	/**
 	 * 注入DAO对象
@@ -59,8 +53,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * */
 	public DAO dao() { return dao; }
 
-	@Autowired 
-	private AssetItemServiceImpl assetItemServiceImpl;
 
 	
 	@Override
@@ -70,65 +62,38 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	
 	/**
 	 * 插入实体
-	 * @param assetCollection 实体数据
+	 * @param voucherPriv 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	@Transactional
-	public Result insert(AssetCollection assetCollection) {
-
-		//资产数量
-//		if(assetCollection.getAssetIds()==null||assetCollection.getAssetIds().size()==0){
-//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-//		}
-
-		//制单人
-		if(assetCollection.getOriginatorId()==null||"".equals(assetCollection.getOriginatorId())){
-			//assetCollection.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
-		}
-		//业务时间
-		if(assetCollection.getBusinessDate()==null){
-			assetCollection.setBusinessDate(new Date());
-		}
-
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}
-		assetCollection.setBusinessCode(codeResult.getData().toString());
-
-		Result r=super.insert(assetCollection);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetCollection.getId(), assetCollection.getAssetIds());
-		}
+	public Result insert(VoucherPriv voucherPriv) {
+		Result r=super.insert(voucherPriv);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetCollectionList 实体数据清单
+	 * @param voucherPrivList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<AssetCollection> assetCollectionList) {
-		return super.insertList(assetCollectionList);
+	public Result insertList(List<VoucherPriv> voucherPrivList) {
+		return super.insertList(voucherPrivList);
 	}
 	
 	
 	/**
-	 * 按主键删除 资产领用
+	 * 按主键删除 凭证权限
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		AssetCollection assetCollection = new AssetCollection();
+		VoucherPriv voucherPriv = new VoucherPriv();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetCollection.setId(id);
+		voucherPriv.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(assetCollection);
+			boolean suc = dao.deleteEntity(voucherPriv);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -139,20 +104,20 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	}
 	
 	/**
-	 * 按主键删除 资产领用
+	 * 按主键删除 凭证权限
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		AssetCollection assetCollection = new AssetCollection();
+		VoucherPriv voucherPriv = new VoucherPriv();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetCollection.setId(id);
-		assetCollection.setDeleted(dao.getDBTreaty().getTrueValue());
-		assetCollection.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		assetCollection.setDeleteTime(new Date());
+		voucherPriv.setId(id);
+		voucherPriv.setDeleted(dao.getDBTreaty().getTrueValue());
+		voucherPriv.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		voucherPriv.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(assetCollection,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(voucherPriv,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -164,35 +129,30 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	
 	/**
 	 * 更新实体
-	 * @param assetCollection 数据对象
+	 * @param voucherPriv 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	@Transactional
-	public Result update(AssetCollection assetCollection , SaveMode mode) {
-		Result r=super.update(assetCollection , mode);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetCollection.getId(), assetCollection.getAssetIds());
-		}
+	public Result update(VoucherPriv voucherPriv , SaveMode mode) {
+		Result r=super.update(voucherPriv , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetCollectionList 数据对象列表
+	 * @param voucherPrivList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<AssetCollection> assetCollectionList , SaveMode mode) {
-		return super.updateList(assetCollectionList , mode);
+	public Result updateList(List<VoucherPriv> voucherPrivList , SaveMode mode) {
+		return super.updateList(voucherPrivList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 资产领用
+	 * 按主键更新字段 凭证权限
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -206,20 +166,20 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	
 	
 	/**
-	 * 按主键获取 资产领用
+	 * 按主键获取 凭证权限
 	 *
 	 * @param id 主键
-	 * @return AssetCollection 数据对象
+	 * @return VoucherPriv 数据对象
 	 */
-	public AssetCollection getById(String id) {
-		AssetCollection sample = new AssetCollection();
+	public VoucherPriv getById(String id) {
+		VoucherPriv sample = new VoucherPriv();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<AssetCollection> getByIds(List<String> ids) {
+	public List<VoucherPriv> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -232,7 +192,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<AssetCollection> queryList(AssetCollection sample) {
+	public List<VoucherPriv> queryList(VoucherPriv sample) {
 		return super.queryList(sample);
 	}
 	
@@ -246,7 +206,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetCollection> queryPagedList(AssetCollection sample, int pageSize, int pageIndex) {
+	public PagedList<VoucherPriv> queryPagedList(VoucherPriv sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -260,25 +220,25 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetCollection> queryPagedList(AssetCollection sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<VoucherPriv> queryPagedList(VoucherPriv sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetCollection 数据对象
+	 * @param voucherPriv 数据对象
 	 * @return 判断结果
 	 */
-	public Result<AssetCollection> checkExists(AssetCollection assetCollection) {
+	public Result<VoucherPriv> checkExists(VoucherPriv voucherPriv) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetCollection, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(voucherPriv, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(AssetCollection sample) {
+	public ExcelWriter exportExcel(VoucherPriv sample) {
 		return super.exportExcel(sample);
 	}
 

@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:28
+ * @since 2021-09-04 14:26:33
  */
 
 
@@ -79,9 +79,8 @@ function ListPage() {
 					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借出说明') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') , templet: function (d) { return templet('attach',d.attach,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
-					,{ field: 'resOriginatorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('resOriginatorId',fox.getProperty(d,["originatorId","name"]),d);} }
+					,{ field: 'resOriginatorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('resOriginatorId',fox.getProperty(d,["originator","name"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],

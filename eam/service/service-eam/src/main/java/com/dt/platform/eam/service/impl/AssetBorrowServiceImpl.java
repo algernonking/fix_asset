@@ -86,11 +86,12 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	public Result insert(AssetBorrow assetBorrow) {
 
 		//资产数量
-		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
+//		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
 		//制单人
 		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
+
 			assetBorrow.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
 		}
 		//业务时间

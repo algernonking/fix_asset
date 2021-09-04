@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
+import org.github.foxnic.web.domain.storage.File;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模板文件 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:15
+ * @since 2021-09-04 08:15:12
 */
 
 @Api(tags = "模板文件")
@@ -171,6 +172,8 @@ public class TplFileController extends SuperController {
 	public Result<TplFile> getById(String id) {
 		Result<TplFile> result=new Result<>();
 		TplFile tplFile=tplFileService.getById(id);
+		// 关联出 存放位置 数据
+		tplFileService.join(tplFile,TplFileMeta.FILE);
 		result.success(true).data(tplFile);
 		return result;
 	}
@@ -235,6 +238,8 @@ public class TplFileController extends SuperController {
 	public Result<PagedList<TplFile>> queryPagedList(TplFileVO sample) {
 		Result<PagedList<TplFile>> result=new Result<>();
 		PagedList<TplFile> list=tplFileService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 存放位置 数据
+		tplFileService.join(list,TplFileMeta.FILE);
 		result.success(true).data(list);
 		return result;
 	}

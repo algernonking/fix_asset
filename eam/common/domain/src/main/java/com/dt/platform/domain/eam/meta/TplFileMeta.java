@@ -3,13 +3,14 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.TplFile;
 import java.util.Date;
+import org.github.foxnic.web.domain.storage.File;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:15
- * @sign 7ED1174377D61A3F7CEF0CC427921113
+ * @since 2021-09-04 08:15:11
+ * @sign 33E11F2E768B646E8EA12CE7E6CE743A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -146,9 +147,19 @@ public class TplFileMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 文件 , 类型: org.github.foxnic.web.domain.storage.File
+	*/
+	public static final String FILE="file";
+	
+	/**
+	 * 文件 , 类型: org.github.foxnic.web.domain.storage.File
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,org.github.foxnic.web.domain.storage.File> FILE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,FILE, org.github.foxnic.web.domain.storage.File.class, "文件", "文件", org.github.foxnic.web.domain.storage.File.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , FILE };
 	
 	/**
 	 * 代理类
@@ -298,6 +309,17 @@ public class TplFileMeta {
 		public TplFile setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 文件
+		 * @param file 文件
+		 * @return 当前对象
+		*/
+		public TplFile setFile(File file) {
+			super.change(FILE,super.getFile(),file);
+			super.setFile(file);
 			return this;
 		}
 	}

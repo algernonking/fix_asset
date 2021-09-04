@@ -64,7 +64,61 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 var select_type= xmSelect.get('#type', true);
                 select_userCode.update({ disabled: true });
                 select_type.update({ disabled: true });
+            }else{
+
+                setTimeout(function(){
+
+                    //渲染 type 下拉字段
+                    fox.renderSelectBox({
+                        el: "type",
+                        radio: true,
+                        filterable: true,
+                        //转换数据
+                        transform: function(data) {
+                            //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                            var opts=[];
+                            for (var i = 0; i < data.length; i++) {
+                                if(!data[i]) continue;
+                                if(i==0){
+                                    opts.push({name:data[i].text,value:data[i].code,selected:true});
+                                }else{
+                                    opts.push({name:data[i].text,value:data[i].code});
+                                }
+
+                            }
+                            return opts;
+                        }
+                    });
+                    //渲染 userCode 下拉字段
+                    fox.renderSelectBox({
+                        el: "userCode",
+                        radio: true,
+                        filterable: true,
+                        //转换数据
+                        transform: function(data) {
+                            //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                            var opts=[];
+                            for (var i = 0; i < data.length; i++) {
+                                if(!data[i]) continue;
+                                if(i==0){
+                                    opts.push({name:data[i].text,value:data[i].code,selected:true});
+                                }else{
+                                    opts.push({name:data[i].text,value:data[i].code});
+                                }
+
+                            }
+                            return opts;
+                        }
+                    });
+
+                },100)
+
+
+
+
             }
+
+
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行

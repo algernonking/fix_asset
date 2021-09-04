@@ -1,13 +1,13 @@
 /**
- * 资产借用 列表页 JS 脚本
+ * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 14:26:34
+ * @since 2021-09-04 15:56:32
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-asset-borrow";
+	const moduleURL="/service-ops/ops-voucher-priv";
 
 	var disableCreateNew=false;
 	var disableModify=false;
@@ -22,7 +22,7 @@ function FormPage() {
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-asset-borrow-form-data-form-action')=="view") {
+		if(admin.getTempData('ops-voucher-priv-form-data-form-action')=="view") {
 			disableModify=true;
 		}
 
@@ -57,7 +57,7 @@ function FormPage() {
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			if(area==null) return;
-			admin.putTempData('eam-asset-borrow-form-area', area);
+			admin.putTempData('ops-voucher-priv-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -77,36 +77,22 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 status 下拉字段
+		//渲染 type 下拉字段
 		fox.renderSelectBox({
-			el: "status",
-			radio: true,
-			filterable: false,
+			el: "type",
+			radio: false,
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
 			//转换数据
-			transform:function(data) {
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
-				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
 					opts.push({name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
-		});
-		laydate.render({
-			elem: '#borrowTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#planReturnDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
 		});
 	}
 
@@ -114,7 +100,7 @@ function FormPage() {
       * 填充表单数据
       */
 	function fillFormData() {
-		var formData = admin.getTempData('eam-asset-borrow-form-data');
+		var formData = admin.getTempData('ops-voucher-priv-form-data');
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -131,6 +117,8 @@ function FormPage() {
 
 
 
+			//设置  凭证类别 设置下拉框勾选
+			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
 
 			//处理fillBy
 
@@ -177,6 +165,8 @@ function FormPage() {
 
 
 
+		//获取 凭证类别 下拉框的值
+		data["type"]=fox.getSelectedValue("type",true);
 
 		return data;
 	}
@@ -193,7 +183,7 @@ function FormPage() {
 			layer.closeAll('loading');
 			if (data.success) {
 				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-asset-borrow-form-data-popup-index');
+				var index=admin.getTempData('ops-voucher-priv-form-data-popup-index');
 				admin.finishPopupCenter(index);
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});

@@ -17,6 +17,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+
+    var action=admin.getTempData('eam-asset-borrow-form-data-form-action')
+
     //列表页的扩展
     var list={
         /**
@@ -111,6 +114,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
+            //console.log( $("#borrowTime"))  ;
+
+
             console.log('beforeDataFill',data);
         },
         /**
@@ -118,11 +124,35 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+
+
+            //制单人处理
+            $("#originatorId").attr("disabled","disabled").css("background-color","#e6e6e6");
+            if(action=="create"){
+                $("#originatorId").attr("value",EMPLOYEE_NAME );
+
+                //借出日期处理
+                var now = new Date();
+                var day = ("0" + now.getDate()).slice(-2);
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                $('#borrowTime').val(today);
+
+
+            }else{
+                if (data.originator&&data.originator.name){
+                     $("#originatorId").attr("value", data.originator.name);
+                }
+            }
+
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
+            if(action=="create"){
+                data.originatorId=EMPLOYEE_ID;
+            }
             console.log("beforeSubmit",data);
             return true;
         },

@@ -39,11 +39,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
 
             }else{
-                if (data.originator.name){
-                    $("#originatorId").attr("value", data.originator.name);
-                }
+               // if (data.originator.name){
+                  //  $("#originatorId").attr("value", data.originator.name);
+                //}
             }
-
 
 
 
@@ -56,7 +55,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("beforeSubmit",data);
             //制单人处理
             if(action=="create"){
-                data.originatorId=PERSON_ID;
+                data.originatorId=EMPLOYEE_ID;
             }
 
             return true;

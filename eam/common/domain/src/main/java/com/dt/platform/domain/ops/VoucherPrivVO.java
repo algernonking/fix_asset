@@ -1,4 +1,4 @@
-package com.dt.platform.domain.eam;
+package com.dt.platform.domain.ops;
 
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 08:15:11
- * @sign 0407209EB5FB76A9AE8B178D41B2A26D
+ * @since 2021-09-04 15:56:23
+ * @sign 32A6A7FC3375BC913B75BC580C2C7C5D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class TplFileVO extends TplFile {
+public class VoucherPrivVO extends VoucherPriv {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class TplFileVO extends TplFile {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public TplFileVO setPageIndex(Integer pageIndex) {
+	public VoucherPrivVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class TplFileVO extends TplFile {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public TplFileVO setPageSize(Integer pageSize) {
+	public VoucherPrivVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class TplFileVO extends TplFile {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public TplFileVO setSearchField(String searchField) {
+	public VoucherPrivVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class TplFileVO extends TplFile {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public TplFileVO setFuzzyField(String fuzzyField) {
+	public VoucherPrivVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class TplFileVO extends TplFile {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public TplFileVO setSearchValue(String searchValue) {
+	public VoucherPrivVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class TplFileVO extends TplFile {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public TplFileVO setSortField(String sortField) {
+	public VoucherPrivVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class TplFileVO extends TplFile {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public TplFileVO setSortType(String sortType) {
+	public VoucherPrivVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class TplFileVO extends TplFile {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public TplFileVO setIds(List<String> ids) {
+	public VoucherPrivVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class TplFileVO extends TplFile {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public TplFileVO addId(String id) {
+	public VoucherPrivVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

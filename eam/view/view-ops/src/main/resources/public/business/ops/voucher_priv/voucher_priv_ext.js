@@ -1,7 +1,7 @@
 /**
- * 模板文件 列表页 JS 脚本
+ * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 08:15:14
+ * @since 2021-09-04 15:10:19
  */
 
 layui.config({

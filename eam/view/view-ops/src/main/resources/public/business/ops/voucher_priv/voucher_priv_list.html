@@ -1,8 +1,8 @@
 <!-- 
 /**
- * 模板文件 列表页 JS 脚本
+ * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 08:15:14
+ * @since 2021-09-04 15:56:28
  */
  -->
  <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-    <title th:text="${lang.translate('模板文件')}">模板文件</title>
+    <title th:text="${lang.translate('凭证权限')}">凭证权限</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
@@ -34,15 +34,23 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 凭证类别 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('凭证类别')}" class="search-label type-label">凭证类别</span><span class="search-colon">:</span></div>
+                        <div id="type" th:data="${dict.toArray('ops_voucher_type')}" style="width:140px"></div>
                     </div>
-                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" style="width:140px"></div>
+
+                    </div>
+                    <!-- 用户 , emplId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('用户')}" class="search-label emplId-label">用户</span><span class="search-colon">:</span></div>
+                        <input id="emplId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -72,19 +80,19 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_tpl_file:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_tpl_file:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('ops_voucher_priv:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_voucher_priv:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('eam_tpl_file:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_tpl_file:update','eam_tpl_file:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('ops_voucher_priv:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
+    <button th:if="${perm.checkAnyAuth('ops_voucher_priv:update','ops_voucher_priv:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('eam_tpl_file:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('ops_voucher_priv:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
 
 
 </script>
@@ -92,14 +100,15 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var SELECT_CODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
-    var AUTH_PREFIX="eam_tpl_file";
+    var SELECT_TYPE_DATA = [[${dict.toArray('ops_voucher_type')}]];
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}]];
+    var AUTH_PREFIX="ops_voucher_priv";
 
 
 </script>
 
-<script th:src="'/business/eam/tpl_file/tpl_file_ext.js?'+${cacheKey}"></script>
-<script th:src="'/business/eam/tpl_file/tpl_file_list.js?'+${cacheKey}"></script>
+<script th:src="'/business/ops/voucher_priv/voucher_priv_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/ops/voucher_priv/voucher_priv_list.js?'+${cacheKey}"></script>
 
 </body>
 </html>

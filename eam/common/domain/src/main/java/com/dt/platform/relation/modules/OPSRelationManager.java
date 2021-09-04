@@ -4,6 +4,7 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 
 
+import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
@@ -28,15 +29,26 @@ public class OPSRelationManager extends RelationManager {
 
         this.setupInfoSystem();
 
+        this.setupTplFile();
+
 
     }
+
+
+    public void setupTplFile() {
+
+    }
+
+
 
     public void setupProperties() {
 
     }
 
     private void setupRelations() {
-
+        //关联服务分组
+        this.property(TplFileMeta.FILE_PROP)
+                .using(EAMTables.EAM_TPL_FILE.FILE_ID).join(FoxnicWeb.SYS_FILE.ID);
     }
 
 

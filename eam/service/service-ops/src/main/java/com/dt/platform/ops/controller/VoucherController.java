@@ -3,6 +3,12 @@ package com.dt.platform.ops.controller;
  
 import java.util.List;
 
+
+import com.alibaba.fastjson.JSONArray;
+import com.dt.platform.constants.enums.common.StatusValidEnum;
+import com.dt.platform.domain.ops.VoucherPriv;
+import com.dt.platform.ops.service.IVoucherPrivService;
+import com.github.foxnic.sql.expr.ConditionExpr;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,7 +65,9 @@ public class VoucherController extends SuperController {
 	@Autowired
 	private IVoucherService voucherService;
 
-	
+	@Autowired
+	private IVoucherPrivService voucherPrivService;
+
 	/**
 	 * 添加凭证
 	*/
@@ -172,8 +180,22 @@ public class VoucherController extends SuperController {
 	@SentinelResource(value = VoucherServiceProxy.GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(VoucherServiceProxy.GET_BY_ID)
 	public Result<Voucher> getById(String id) {
+
 		Result<Voucher> result=new Result<>();
 		Voucher voucher=voucherService.getById(id);
+		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		System.out.println("employeeId:"+employeeId);
+		if(employeeId==null||"".equals(employeeId)){
+			return ErrorDesc.failureMessage("未获取用户ID");
+		}
+		VoucherPriv vp_query=new VoucherPriv();
+		vp_query.setEmplId(employeeId);
+		vp_query.setStatus(StatusValidEnum.VALID.code());
+		ConditionExpr ce=new ConditionExpr();
+		ce.andLike("type","\""+voucher.getType()+"\"");
+		if(voucherPrivService.queryList(vp_query, ce).size()==0){
+			return ErrorDesc.failureMessage("当前用户无权限");
+		}
 		result.success(true).data(voucher);
 		return result;
 	}

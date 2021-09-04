@@ -1,7 +1,7 @@
 /**
- * 模板文件 列表页 JS 脚本
+ * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 08:15:15
+ * @since 2021-09-04 15:56:31
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-tpl-file";
+	const moduleURL="/service-ops/ops-voucher-priv";
 	var dataTable=null;
 	/**
       * 入口函数，初始化
@@ -73,12 +73,10 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编码'), templet:function (d){ return templet('code',fox.getEnumText(SELECT_CODE_DATA,d.code),d);}}
-					,{ field: 'fileId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('文件') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证类别'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
+					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',d.emplId,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
-					,{ field: 'resFileId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置') , templet: function (d) { return templet('resFileId',fox.getProperty(d,["file","location"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -110,8 +108,9 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
+		value.emplId={ value: $("#emplId").val()};
+		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}
@@ -148,6 +147,40 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		//渲染 type 下拉字段
+		fox.renderSelectBox({
+			el: "type",
+			radio: false,
+			size: "small",
+			filterable: true,
+			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 搜索框
+		fox.renderSelectBox({
+			el: "status",
+			size: "small",
+			radio: false,
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -208,7 +241,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
-			admin.putTempData('eam-tpl-file-form-data-form-action', "create",true);
+			admin.putTempData('ops-voucher-priv-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -222,11 +255,11 @@ function ListPage() {
 
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('模板文件')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('凭证权限')+"!");
             	return;
             }
             //调用批量删除接口
-			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('模板文件')+fox.translate('吗？'), function (i) {
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('凭证权限')+fox.translate('吗？'), function (i) {
 				top.layer.close(i);
 				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -255,7 +288,7 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
-			admin.putTempData('eam-tpl-file-form-data-form-action', "",true);
+			admin.putTempData('ops-voucher-priv-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -263,7 +296,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-tpl-file-form-data-form-action', "edit",true);
+						admin.putTempData('ops-voucher-priv-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
@@ -276,7 +309,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-tpl-file-form-data-form-action', "view",true);
+						admin.putTempData('ops-voucher-priv-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
@@ -290,7 +323,7 @@ function ListPage() {
 					if(!doNext) return;
 				}
 
-				top.layer.confirm(fox.translate('确定删除此')+fox.translate('模板文件')+fox.translate('吗？'), function (i) {
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('凭证权限')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
 					top.layer.load(2);
@@ -325,24 +358,24 @@ function ListPage() {
 		}
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-tpl-file-form-data', data);
-		var area=admin.getTempData('eam-tpl-file-form-area');
+		admin.putTempData('ops-voucher-priv-form-data', data);
+		var area=admin.getTempData('ops-voucher-priv-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('模板文件')) : (fox.translate('添加')+fox.translate('模板文件'));
+		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('凭证权限')) : (fox.translate('添加')+fox.translate('凭证权限'));
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["80%",height+"px"],
+			area: ["800px",height+"px"],
 			type: 2,
-			id:"eam-tpl-file-form-data-win",
-			content: '/business/eam/tpl_file/tpl_file_form.html' + queryString,
+			id:"ops-voucher-priv-form-data-win",
+			content: '/business/ops/voucher_priv/voucher_priv_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-tpl-file-form-data-popup-index', index);
+		admin.putTempData('ops-voucher-priv-form-data-popup-index', index);
 	};
 
 	window.module={

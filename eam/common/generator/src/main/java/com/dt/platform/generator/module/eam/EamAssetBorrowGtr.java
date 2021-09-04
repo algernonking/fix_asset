@@ -51,15 +51,14 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().hidden();
-
-
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ATTACH).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
-
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+
+
 
 
         cfg.view().list().operationColumn().width(250);
@@ -98,8 +97,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         String resourceNameField="res_"+EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID;
         cfg.view().field(resourceNameField)
                 .basic().label("制单人")
-                .table().fillBy(AssetBorrowMeta.ORIGINATOR_ID, PersonMeta.NAME);
-
+                .table().fillBy(AssetBorrowMeta.ORIGINATOR, PersonMeta.NAME);
 
         cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
         cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
@@ -112,8 +110,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
  
         //列表HTML页
         cfg.buildAll();

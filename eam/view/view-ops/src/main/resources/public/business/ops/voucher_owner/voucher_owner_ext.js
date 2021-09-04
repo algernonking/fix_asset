@@ -17,6 +17,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+
+    var action=admin.getTempData('ops-voucher-owner-form-data-form-action');
+
     //列表页的扩展
     var list={
 
@@ -39,8 +42,47 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //表单页的扩展
     var form={
+        /**
+         * 表单数据填充后
+         * */
+        afterDataFill:function (data) {
 
+            if(data.id){
+                var select_categoryCode= xmSelect.get('#categoryCode', true);
+                select_categoryCode.update({ disabled: true });
+            }else{
+                setTimeout(function(){
+                    //渲染 categoryCode 下拉字段
+                    fox.renderSelectBox({
+                        el: "categoryCode",
+                        radio: true,
+                        filterable: true,
+                        //转换数据
+                        transform: function(data) {
+                            //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                            var opts=[];
+                            for (var i = 0; i < data.length; i++) {
+                                if(!data[i]) continue;
+                                if(i==0){
+                                    opts.push({name:data[i].text,value:data[i].code,selected:true});
+                                }else{
+                                    opts.push({name:data[i].text,value:data[i].code});
+                                }
+
+                            }
+                            return opts;
+                        }
+                    });
+
+                },100)
+
+            }
+
+
+        },
     }
+
+
     //
     window.pageExt={form:form,list:list};
 });
