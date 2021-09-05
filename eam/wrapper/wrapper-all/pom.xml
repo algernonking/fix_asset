@@ -35,6 +35,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.github.foxnic.web</groupId>
+			<artifactId>service-hrm</artifactId>
+			<version>${foxnic-web.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.foxnic.web</groupId>
+			<artifactId>service-pcm</artifactId>
+			<version>${foxnic-web.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>service-eam</artifactId>
 			<version>${platform.version}</version>
