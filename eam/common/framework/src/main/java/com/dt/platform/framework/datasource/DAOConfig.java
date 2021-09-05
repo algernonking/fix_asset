@@ -108,6 +108,15 @@ public class DAOConfig {
 				return  user.getUserId();
 			});
 		}
+
+		dbTreaty.setTenantIdHandler(()->{
+			SessionUser user=SessionUser.getCurrent();
+			if(user==null) return null;
+			if(user.getUser()!=null && user.getUser().getActivatedTenant()!=null) {
+				return user.getActivatedTenantId();
+			}
+			return null;
+		});
 		
 		//
 		return dbTreaty;
