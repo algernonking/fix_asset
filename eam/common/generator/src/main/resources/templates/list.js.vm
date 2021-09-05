@@ -125,7 +125,7 @@ function ListPage() {
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: #(operateColumnWidth) }
 					#end
 				]],
-				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
+				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{

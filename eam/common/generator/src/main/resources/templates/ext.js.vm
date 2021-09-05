@@ -34,7 +34,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 查询结果渲染后调用
          * */
-        afterQuery : function () {
+        afterQuery : function (data) {
 
         },
         /**
