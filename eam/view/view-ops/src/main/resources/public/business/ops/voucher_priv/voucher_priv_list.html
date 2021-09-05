@@ -2,7 +2,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 06:55:52
+ * @since 2021-09-05 12:20:11
  */
  -->
  <!DOCTYPE html>
@@ -34,6 +34,7 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 凭证类别 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('凭证类别')}" class="search-label type-label">凭证类别</span><span class="search-colon">:</span></div>
@@ -88,11 +89,11 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('ops_voucher_priv:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('ops_voucher_priv:update','ops_voucher_priv:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('ops_voucher_priv:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('ops_voucher_priv:update','ops_voucher_priv:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('ops_voucher_priv:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('ops_voucher_priv:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>

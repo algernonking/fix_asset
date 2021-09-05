@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 22:26:26
+ * @since 2021-09-05 12:20:23
  */
 
 
@@ -94,7 +94,7 @@ function ListPage() {
 					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') , templet: function (d) { return templet('userOther',d.userOther,d);}  }
 					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return templet('passwordStrategyId',fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId),d);}}
 					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineTime',fox.dateFormat(d.offlineTime),d); }}
-					,{ field: 'onlineTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineTime',fox.dateFormat(d.onlineTime),d); }}
+					,{ field: 'onlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineTime',fox.dateFormat(d.onlineTime),d); }}
 					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('labels',d.labels,d);}  }
 					,{ field: 'hostNotes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('hostNotes',d.hostNotes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
@@ -105,7 +105,7 @@ function ListPage() {
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
-				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
+				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{

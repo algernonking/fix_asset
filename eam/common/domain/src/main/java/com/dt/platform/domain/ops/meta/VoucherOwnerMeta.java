@@ -3,15 +3,16 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.VoucherOwner;
 import java.util.Date;
-import com.dt.platform.domain.ops.Voucher;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.List;
+import com.dt.platform.domain.ops.Voucher;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 20:39:19
- * @sign 4AAC41B6D8CF664B4FEA46483AC5DDF2
+ * @since 2021-09-05 20:53:15
+ * @sign 931952ECC483B4F758C8319A99B7B61B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -148,6 +149,16 @@ public class VoucherOwnerMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String VOUCHER_CATEGORY="voucherCategory";
+	
+	/**
+	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,org.github.foxnic.web.domain.system.DictItem> VOUCHER_CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,VOUCHER_CATEGORY, java.util.List.class, "凭证类型", "凭证类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 凭证 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.Voucher
 	*/
 	public static final String VOUCHER_LIST="voucherList";
@@ -170,7 +181,7 @@ public class VoucherOwnerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_CODE , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , VOUCHER_LIST , VOUCHER_IDS };
+	public static final String[] $PROPS={ ID , CATEGORY_CODE , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , VOUCHER_CATEGORY , VOUCHER_LIST , VOUCHER_IDS };
 	
 	/**
 	 * 代理类
@@ -320,6 +331,17 @@ public class VoucherOwnerMeta {
 		public VoucherOwner setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 凭证类型
+		 * @param voucherCategory 凭证类型
+		 * @return 当前对象
+		*/
+		public VoucherOwner setVoucherCategory(List<DictItem> voucherCategory) {
+			super.change(VOUCHER_CATEGORY,super.getVoucherCategory(),voucherCategory);
+			super.setVoucherCategory(voucherCategory);
 			return this;
 		}
 		

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 所属凭证 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 20:39:19
+ * @since 2021-09-05 20:53:15
 */
 
 public interface IVoucherOwnerService extends ISuperService<VoucherOwner> {

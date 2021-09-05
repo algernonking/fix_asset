@@ -1,7 +1,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:45
+ * @since 2021-09-05 12:19:50
  */
 
 
@@ -74,22 +74,25 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'equipmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备编号') , templet: function (d) { return templet('equipmentCode',d.equipmentCode,d);}  }
+					,{ field: 'equipmentStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备状态') , templet: function (d) { return templet('equipmentStatus',d.equipmentStatus,d);}  }
 					,{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备IP') , templet: function (d) { return templet('equipmentIp',d.equipmentIp,d);}  }
 					,{ field: 'manageIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('管理IP') , templet: function (d) { return templet('manageIp',d.manageIp,d);}  }
 					,{ field: 'equipmentCpu', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备CPU') , templet: function (d) { return templet('equipmentCpu',d.equipmentCpu,d);}  }
 					,{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备内存') , templet: function (d) { return templet('equipmentMemory',d.equipmentMemory,d);}  }
+					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级') , templet: function (d) { return templet('layerId',d.layerId,d);}  }
+					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域') , templet: function (d) { return templet('areaId',d.areaId,d);}  }
+					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('机柜'), templet: function (d) { return templet('rackId',fox.joinLabel(d.rack,"rackName"),d);}}
+					,{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
+					,{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
+					,{ field: 'pdu', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('PDU接口') , templet: function (d) { return templet('pdu',d.pdu,d);}  }
 					,{ field: 'equipmentNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('equipmentNotes',d.equipmentNotes,d);}  }
 					,{ field: 'equipmentDesc', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('描述') , templet: function (d) { return templet('equipmentDesc',d.equipmentDesc,d);}  }
-					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return templet('areaId',fox.joinLabel(d.area,"name"),d);}}
-					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return templet('layerId',fox.joinLabel(d.layer,"name"),d);}}
-					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('机柜'), templet: function (d) { return templet('rackId',fox.joinLabel(d.rack,"rackName"),d);}}
-					,{ field: 'rackUpPositionNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜上位置编号') , templet: function (d) { return templet('rackUpPositionNumber',d.rackUpPositionNumber,d);}  }
-					,{ field: 'rackDownPositionNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('机柜下位置编号') , templet: function (d) { return templet('rackDownPositionNumber',d.rackDownPositionNumber,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
-				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
+				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -119,11 +122,9 @@ function ListPage() {
 		var value = {};
 		value.equipmentIp={ value: $("#equipmentIp").val()};
 		value.manageIp={ value: $("#manageIp").val()};
+		value.rackId={ value: xmSelect.get("#rackId",true).getValue("value"), fillBy:"rack",field:"id", label:xmSelect.get("#rackId",true).getValue("nameStr") };
 		value.equipmentNotes={ value: $("#equipmentNotes").val()};
 		value.equipmentDesc={ value: $("#equipmentDesc").val()};
-		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value"), fillBy:"area",field:"id", label:xmSelect.get("#areaId",true).getValue("nameStr") };
-		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id", label:xmSelect.get("#layerId",true).getValue("nameStr") };
-		value.rackId={ value: xmSelect.get("#rackId",true).getValue("value"), fillBy:"rack",field:"id", label:xmSelect.get("#rackId",true).getValue("nameStr") };
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}
@@ -160,44 +161,6 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
-		//渲染 areaId 下拉字段
-		fox.renderSelectBox({
-			el: "areaId",
-			radio: false,
-			size: "small",
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
-		//渲染 layerId 下拉字段
-		fox.renderSelectBox({
-			el: "layerId",
-			radio: false,
-			size: "small",
-			filterable: false,
-			toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
 		//渲染 rackId 下拉字段
 		fox.renderSelectBox({
 			el: "rackId",

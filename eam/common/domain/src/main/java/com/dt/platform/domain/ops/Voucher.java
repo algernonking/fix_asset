@@ -7,6 +7,9 @@ import com.dt.platform.constants.db.EAMTables.OPS_VOUCHER;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import org.github.foxnic.web.domain.system.DictItem;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 18:43:33
- * @sign 1550FC514B43E3878DAF5F987C322B82
+ * @since 2021-09-05 21:13:48
+ * @sign 35E03D325C38F24493511E595DB03ABB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -112,6 +115,12 @@ public class Voucher extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 凭证类型：凭证类型
+	*/
+	@ApiModelProperty(required = false,value="凭证类型" , notes = "凭证类型")
+	private List<DictItem> voucherType;
 	
 	/**
 	 * 获得 主键<br>
@@ -376,6 +385,36 @@ public class Voucher extends Entity {
 	*/
 	public Voucher setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证类型<br>
+	 * 凭证类型
+	 * @return 凭证类型
+	*/
+	public List<DictItem> getVoucherType() {
+		return voucherType;
+	}
+	
+	/**
+	 * 设置 凭证类型
+	 * @param voucherType 凭证类型
+	 * @return 当前对象
+	*/
+	public Voucher setVoucherType(List<DictItem> voucherType) {
+		this.voucherType=voucherType;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证类型
+	 * @param entity 凭证类型
+	 * @return 当前对象
+	*/
+	public Voucher addVoucherType(DictItem entity) {
+		if(this.voucherType==null) voucherType=new ArrayList<>();
+		this.voucherType.add(entity);
 		return this;
 	}
 

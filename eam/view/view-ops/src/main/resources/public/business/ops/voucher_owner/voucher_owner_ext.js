@@ -56,17 +56,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     fox.renderSelectBox({
                         el: "categoryCode",
                         radio: true,
-                        filterable: true,
+                        filterable: false,
                         //转换数据
                         transform: function(data) {
                             //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
                             var opts=[];
+                            if(!data) return opts;
                             for (var i = 0; i < data.length; i++) {
                                 if(!data[i]) continue;
                                 if(i==0){
-                                    opts.push({name:data[i].text,value:data[i].code,selected:true});
+                                    opts.push({name:data[i].label,value:data[i].code,selected:true});
                                 }else{
-                                    opts.push({name:data[i].text,value:data[i].code});
+                                    opts.push({name:data[i].label,value:data[i].code});
                                 }
 
                             }

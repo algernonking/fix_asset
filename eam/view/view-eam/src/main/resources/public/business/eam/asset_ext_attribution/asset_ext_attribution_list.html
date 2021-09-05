@@ -2,7 +2,7 @@
 /**
  * 资产归属数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:43
+ * @since 2021-09-05 12:19:49
  */
  -->
  <!DOCTYPE html>
@@ -34,11 +34,16 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 管理人员 , managerId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('详细位置')}" class="search-label positionDetail-label">详细位置</span><span class="search-colon">:</span></div>
                         <input id="positionDetail" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
@@ -95,11 +100,11 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('eam_asset_ext_attribution:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_ext_attribution:update','eam_asset_ext_attribution:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('eam_asset_ext_attribution:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset_ext_attribution:update','eam_asset_ext_attribution:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('eam_asset_ext_attribution:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('eam_asset_ext_attribution:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>

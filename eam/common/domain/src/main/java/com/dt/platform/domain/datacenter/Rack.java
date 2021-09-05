@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:12
- * @sign 5CB5A32802E4AE817FA2D58DB9975B95
+ * @since 2021-09-05 12:19:21
+ * @sign 22BA4319B1447DD416CDCA047DAC2281
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -65,6 +65,12 @@ public class Rack extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="容量" , notes = "容量")
 	private BigDecimal rackCaptical;
+	
+	/**
+	 * PDU数量：PDU数量
+	*/
+	@ApiModelProperty(required = false,value="PDU数量" , notes = "PDU数量")
+	private Integer pduNumber;
 	
 	/**
 	 * 标签：标签
@@ -249,6 +255,25 @@ public class Rack extends Entity {
 	*/
 	public Rack setRackCaptical(BigDecimal rackCaptical) {
 		this.rackCaptical=rackCaptical;
+		return this;
+	}
+	
+	/**
+	 * 获得 PDU数量<br>
+	 * PDU数量
+	 * @return PDU数量
+	*/
+	public Integer getPduNumber() {
+		return pduNumber;
+	}
+	
+	/**
+	 * 设置 PDU数量
+	 * @param pduNumber PDU数量
+	 * @return 当前对象
+	*/
+	public Rack setPduNumber(Integer pduNumber) {
+		this.pduNumber=pduNumber;
 		return this;
 	}
 	

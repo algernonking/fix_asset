@@ -1,7 +1,7 @@
 /**
  * 区域 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:04
+ * @since 2021-09-05 12:19:18
  */
 
 layui.config({
@@ -38,7 +38,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 查询结果渲染后调用
          * */
-        afterQuery : function () {
+        afterQuery : function (data) {
 
         },
         /**

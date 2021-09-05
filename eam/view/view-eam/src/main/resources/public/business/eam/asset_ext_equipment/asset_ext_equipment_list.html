@@ -2,7 +2,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:45
+ * @since 2021-09-05 12:19:50
  */
  -->
  <!DOCTYPE html>
@@ -34,16 +34,22 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备编号 , equipmentCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备状态 , equipmentStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备CPU , equipmentCpu ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备内存 , equipmentMemory ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 层级 , layerId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 区域 , areaId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 机柜 , rackId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('机柜')}" class="search-label rackId-label">机柜</span><span class="search-colon">:</span></div>
                         <div id="rackId" th:data="${'/service-datacenter/dc-rack/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 区域 , areaId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('区域')}" class="search-label areaId-label">区域</span><span class="search-colon">:</span></div>
-                        <div id="areaId" th:data="${'/service-datacenter/dc-area/query-list'}" style="width:140px"></div>
-                    </div>
+                    <!-- 机柜上位置 , rackUpNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 机柜下位置 , rackDownNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- PDU接口 , pdu ,typeName=text_input, isHideInSearch=true -->
                     <!-- 管理IP , manageIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('管理IP')}" class="search-label manageIp-label">管理IP</span><span class="search-colon">:</span></div>
@@ -59,11 +65,6 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 层级 , layerId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('层级')}" class="search-label layerId-label">层级</span><span class="search-colon">:</span></div>
-                        <div id="layerId" th:data="${'/service-datacenter/dc-layer/query-list'}" style="width:140px"></div>
-                    </div>
                     <!-- 备注 , equipmentNotes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label equipmentNotes-label">备注</span><span class="search-colon">:</span></div>
@@ -110,11 +111,11 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('eam_asset_ext_equipment:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_ext_equipment:update','eam_asset_ext_equipment:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('eam_asset_ext_equipment:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset_ext_equipment:update','eam_asset_ext_equipment:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('eam_asset_ext_equipment:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('eam_asset_ext_equipment:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>

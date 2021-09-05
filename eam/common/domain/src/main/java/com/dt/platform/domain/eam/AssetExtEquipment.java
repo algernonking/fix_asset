@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:45
- * @sign DD1A2F501C11E4AEE89229997DC2D977
+ * @since 2021-09-05 12:19:50
+ * @sign C49E555FA66D085304686EC2B2564DFE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,6 +43,18 @@ public class AssetExtEquipment extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
+	
+	/**
+	 * 设备编号：设备编号
+	*/
+	@ApiModelProperty(required = false,value="设备编号" , notes = "设备编号")
+	private String equipmentCode;
+	
+	/**
+	 * 设备状态：设备状态
+	*/
+	@ApiModelProperty(required = false,value="设备状态" , notes = "设备状态")
+	private String equipmentStatus;
 	
 	/**
 	 * 设备IP：设备IP
@@ -69,6 +81,42 @@ public class AssetExtEquipment extends Entity {
 	private String equipmentMemory;
 	
 	/**
+	 * 层级：层级
+	*/
+	@ApiModelProperty(required = false,value="层级" , notes = "层级")
+	private String layerId;
+	
+	/**
+	 * 区域：区域
+	*/
+	@ApiModelProperty(required = false,value="区域" , notes = "区域")
+	private String areaId;
+	
+	/**
+	 * 机柜：机柜
+	*/
+	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
+	private String rackId;
+	
+	/**
+	 * 机柜上位置：机柜上位置
+	*/
+	@ApiModelProperty(required = false,value="机柜上位置" , notes = "机柜上位置")
+	private Integer rackUpNumber;
+	
+	/**
+	 * 机柜下位置：机柜下位置
+	*/
+	@ApiModelProperty(required = false,value="机柜下位置" , notes = "机柜下位置")
+	private Integer rackDownNumber;
+	
+	/**
+	 * PDU接口：PDU接口
+	*/
+	@ApiModelProperty(required = false,value="PDU接口" , notes = "PDU接口")
+	private String pdu;
+	
+	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
@@ -79,36 +127,6 @@ public class AssetExtEquipment extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="描述" , notes = "描述")
 	private String equipmentDesc;
-	
-	/**
-	 * 区域：区域
-	*/
-	@ApiModelProperty(required = false,value="区域" , notes = "区域")
-	private String areaId;
-	
-	/**
-	 * 层级：层级
-	*/
-	@ApiModelProperty(required = false,value="层级" , notes = "层级")
-	private String layerId;
-	
-	/**
-	 * 机柜：机柜
-	*/
-	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
-	private String rackId;
-	
-	/**
-	 * 机柜上位置编号：机柜上位置编号
-	*/
-	@ApiModelProperty(required = false,value="机柜上位置编号" , notes = "机柜上位置编号")
-	private Integer rackUpPositionNumber;
-	
-	/**
-	 * 机柜下位置编号：机柜下位置编号
-	*/
-	@ApiModelProperty(required = false,value="机柜下位置编号" , notes = "机柜下位置编号")
-	private Integer rackDownPositionNumber;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -221,6 +239,44 @@ public class AssetExtEquipment extends Entity {
 	}
 	
 	/**
+	 * 获得 设备编号<br>
+	 * 设备编号
+	 * @return 设备编号
+	*/
+	public String getEquipmentCode() {
+		return equipmentCode;
+	}
+	
+	/**
+	 * 设置 设备编号
+	 * @param equipmentCode 设备编号
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setEquipmentCode(String equipmentCode) {
+		this.equipmentCode=equipmentCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备状态<br>
+	 * 设备状态
+	 * @return 设备状态
+	*/
+	public String getEquipmentStatus() {
+		return equipmentStatus;
+	}
+	
+	/**
+	 * 设置 设备状态
+	 * @param equipmentStatus 设备状态
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setEquipmentStatus(String equipmentStatus) {
+		this.equipmentStatus=equipmentStatus;
+		return this;
+	}
+	
+	/**
 	 * 获得 设备IP<br>
 	 * 设备IP
 	 * @return 设备IP
@@ -297,6 +353,120 @@ public class AssetExtEquipment extends Entity {
 	}
 	
 	/**
+	 * 获得 层级<br>
+	 * 层级
+	 * @return 层级
+	*/
+	public String getLayerId() {
+		return layerId;
+	}
+	
+	/**
+	 * 设置 层级
+	 * @param layerId 层级
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setLayerId(String layerId) {
+		this.layerId=layerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 区域<br>
+	 * 区域
+	 * @return 区域
+	*/
+	public String getAreaId() {
+		return areaId;
+	}
+	
+	/**
+	 * 设置 区域
+	 * @param areaId 区域
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setAreaId(String areaId) {
+		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜<br>
+	 * 机柜
+	 * @return 机柜
+	*/
+	public String getRackId() {
+		return rackId;
+	}
+	
+	/**
+	 * 设置 机柜
+	 * @param rackId 机柜
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setRackId(String rackId) {
+		this.rackId=rackId;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜上位置<br>
+	 * 机柜上位置
+	 * @return 机柜上位置
+	*/
+	public Integer getRackUpNumber() {
+		return rackUpNumber;
+	}
+	
+	/**
+	 * 设置 机柜上位置
+	 * @param rackUpNumber 机柜上位置
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setRackUpNumber(Integer rackUpNumber) {
+		this.rackUpNumber=rackUpNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜下位置<br>
+	 * 机柜下位置
+	 * @return 机柜下位置
+	*/
+	public Integer getRackDownNumber() {
+		return rackDownNumber;
+	}
+	
+	/**
+	 * 设置 机柜下位置
+	 * @param rackDownNumber 机柜下位置
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setRackDownNumber(Integer rackDownNumber) {
+		this.rackDownNumber=rackDownNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 PDU接口<br>
+	 * PDU接口
+	 * @return PDU接口
+	*/
+	public String getPdu() {
+		return pdu;
+	}
+	
+	/**
+	 * 设置 PDU接口
+	 * @param pdu PDU接口
+	 * @return 当前对象
+	*/
+	public AssetExtEquipment setPdu(String pdu) {
+		this.pdu=pdu;
+		return this;
+	}
+	
+	/**
 	 * 获得 备注<br>
 	 * 备注
 	 * @return 备注
@@ -331,101 +501,6 @@ public class AssetExtEquipment extends Entity {
 	*/
 	public AssetExtEquipment setEquipmentDesc(String equipmentDesc) {
 		this.equipmentDesc=equipmentDesc;
-		return this;
-	}
-	
-	/**
-	 * 获得 区域<br>
-	 * 区域
-	 * @return 区域
-	*/
-	public String getAreaId() {
-		return areaId;
-	}
-	
-	/**
-	 * 设置 区域
-	 * @param areaId 区域
-	 * @return 当前对象
-	*/
-	public AssetExtEquipment setAreaId(String areaId) {
-		this.areaId=areaId;
-		return this;
-	}
-	
-	/**
-	 * 获得 层级<br>
-	 * 层级
-	 * @return 层级
-	*/
-	public String getLayerId() {
-		return layerId;
-	}
-	
-	/**
-	 * 设置 层级
-	 * @param layerId 层级
-	 * @return 当前对象
-	*/
-	public AssetExtEquipment setLayerId(String layerId) {
-		this.layerId=layerId;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜<br>
-	 * 机柜
-	 * @return 机柜
-	*/
-	public String getRackId() {
-		return rackId;
-	}
-	
-	/**
-	 * 设置 机柜
-	 * @param rackId 机柜
-	 * @return 当前对象
-	*/
-	public AssetExtEquipment setRackId(String rackId) {
-		this.rackId=rackId;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜上位置编号<br>
-	 * 机柜上位置编号
-	 * @return 机柜上位置编号
-	*/
-	public Integer getRackUpPositionNumber() {
-		return rackUpPositionNumber;
-	}
-	
-	/**
-	 * 设置 机柜上位置编号
-	 * @param rackUpPositionNumber 机柜上位置编号
-	 * @return 当前对象
-	*/
-	public AssetExtEquipment setRackUpPositionNumber(Integer rackUpPositionNumber) {
-		this.rackUpPositionNumber=rackUpPositionNumber;
-		return this;
-	}
-	
-	/**
-	 * 获得 机柜下位置编号<br>
-	 * 机柜下位置编号
-	 * @return 机柜下位置编号
-	*/
-	public Integer getRackDownPositionNumber() {
-		return rackDownPositionNumber;
-	}
-	
-	/**
-	 * 设置 机柜下位置编号
-	 * @param rackDownPositionNumber 机柜下位置编号
-	 * @return 当前对象
-	*/
-	public AssetExtEquipment setRackDownPositionNumber(Integer rackDownPositionNumber) {
-		this.rackDownPositionNumber=rackDownPositionNumber;
 		return this;
 	}
 	

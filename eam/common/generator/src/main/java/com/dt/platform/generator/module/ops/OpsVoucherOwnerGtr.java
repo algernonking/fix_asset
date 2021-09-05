@@ -7,11 +7,9 @@ import com.dt.platform.domain.ops.ServiceGroup;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.meta.*;
 import com.dt.platform.ops.page.VoucherOwnerPageController;
-import com.dt.platform.proxy.ops.ServiceCategoryServiceProxy;
-import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
-import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
-import com.dt.platform.proxy.ops.VoucherOwnerServiceProxy;
+import com.dt.platform.proxy.ops.*;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 
 public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
@@ -24,6 +22,8 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
+
+        cfg.getPoClassFile().addListProperty(DictItem.class,"voucherCategory","凭证类型","凭证类型");
 
         cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
         cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
@@ -48,8 +48,12 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).form().validate().required();
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form()
-                .validate().required().form().selectBox()
-                .dict(DictEnum.OPS_VOUCHER_TYPE).filter(true).muliti(false).toolbar(false);
+                .validate().required().form().selectBox().
+                queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST)
+                .valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false)
+                .filter(false).muliti(false).toolbar(false)
+               .fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
+
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).form().textArea().height(30);
 
 

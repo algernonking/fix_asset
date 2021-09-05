@@ -87,6 +87,7 @@ public class VoucherOwnerController extends SuperController {
 	public Result insert(VoucherOwnerVO voucherOwnerVO) {
 
 		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		System.out.println("employeeId"+employeeId);
 		Result verify_result=voucherPrivService.verifyUserPermissions(voucherOwnerVO.getCategoryCode(),employeeId);
 		if(!verify_result.isSuccess()){
 			return verify_result;
@@ -203,6 +204,7 @@ public class VoucherOwnerController extends SuperController {
 		Result<VoucherOwner> result=new Result<>();
 		// 关联出 用户凭证 数据
 		voucherOwnerService.join(voucherOwner,VoucherOwnerMeta.VOUCHER_LIST);
+		voucherOwnerService.join(voucherOwner,VoucherOwnerMeta.VOUCHER_CATEGORY);
 		result.success(true).data(voucherOwner);
 		return result;
 	}
@@ -277,7 +279,7 @@ public class VoucherOwnerController extends SuperController {
 		vp.setStatus(StatusValidEnum.VALID.code());
 		vp.setEmplId(employeeId);
 		VoucherPriv vp_data=voucherPrivService.queryEntity(vp);
-		if(vp_data==null){
+		if(employeeId==null||vp_data==null){
 			condition.and("id=?","0");
 		}else{
 			JSONArray obj= JSONArray.parseArray(vp_data.getType());
@@ -295,6 +297,7 @@ public class VoucherOwnerController extends SuperController {
 		PagedList<VoucherOwner> list=voucherOwnerService.queryPagedList(sample,condition,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 用户凭证 数据
 		voucherOwnerService.join(list,VoucherOwnerMeta.VOUCHER_LIST);
+		voucherOwnerService.join(list,VoucherOwnerMeta.VOUCHER_CATEGORY);
 		result.success(true).data(list);
 		return result;
 	}

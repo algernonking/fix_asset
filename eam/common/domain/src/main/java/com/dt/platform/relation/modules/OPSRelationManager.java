@@ -27,12 +27,18 @@ public class OPSRelationManager extends RelationManager {
 
         this.setupVoucherOwner();
 
+        this.setupVoucher();
+
         this.setupInfoSystem();
 
         this.setupTplFile();
 
 
+
     }
+
+
+
 
 
     public void setupTplFile() {
@@ -124,7 +130,21 @@ public class OPSRelationManager extends RelationManager {
                     }
                     return voucher;
                 });
+
+        //凭证类型
+        this.property(VoucherOwnerMeta.VOUCHER_CATEGORY_PROP)
+                .using(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE);
     }
+
+    public void setupVoucher() {
+
+        //凭证类型
+        this.property(VoucherMeta.VOUCHER_TYPE_PROP)
+                .using(EAMTables.OPS_VOUCHER.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE);
+
+    }
+
+
 
     private void setupOpsHost() {
 

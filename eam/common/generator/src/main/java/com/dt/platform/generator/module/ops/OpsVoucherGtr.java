@@ -8,8 +8,12 @@ import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.domain.ops.meta.VoucherMeta;
+import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
+import com.dt.platform.proxy.ops.VoucherPrivServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 
 public class OpsVoucherGtr extends BaseCodeGenerator{
 
@@ -23,6 +27,7 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
 
 
 
+        cfg.getPoClassFile().addListProperty(DictItem.class,"voucherType","凭证类型","凭证类型");
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -42,10 +47,18 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form().validate().required().form()
-                .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE).paging(false).muliti(false).filter(true);
+
+        cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form()
+                .validate().required().form().selectBox().
+                queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST)
+                .valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false)
+                .filter(false).muliti(false).toolbar(false)
+                .fillBy(VoucherMeta.VOUCHER_TYPE);
+
+
 
         cfg.view().field(EAMTables.OPS_VOUCHER.VOUCHER).form().validate().required();
+
 
         cfg.view().field(EAMTables.OPS_VOUCHER.USER_CODE).form().validate().required().form()
                 .form().selectBox().dict(DictEnum.OPS_USER_VOUCHER).filter(true).toolbar(false).muliti(false);
@@ -68,6 +81,7 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         );
 
         //cfg.setRelationField(EAMTables.OPS_VOUCHER.OWNER_ID, EAMTables.OPS_VOUCHER.USER_CODE,true);
+
         cfg.view().list().operationColumn().addActionButton("历史记录","openHistoryVoucherWindow");
         cfg.view().list().operationColumn().width(280);
 

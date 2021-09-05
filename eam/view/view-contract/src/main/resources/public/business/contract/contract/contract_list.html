@@ -2,7 +2,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:35
+ * @since 2021-09-05 12:20:38
  */
  -->
  <!DOCTYPE html>
@@ -34,11 +34,31 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 合同名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('合同名称')}" class="search-label name-label">合同名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 合同类型 , categoryId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 我方身份 , identity ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资金流向 , fundDirect ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 金额 , money ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 总金额 , allmoney ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 承办人 , userId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 承办人部门 , deptId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 关联招标 , biddingId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 我方联系人 , firstContacts ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 我方联系方式 , firstContactInformation ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 对方单位联系人 , relatedContacts ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 对方单位联系方式 , relatedContactInformation ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 监理单位 , supervisionUnit ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 监理人 , supervisionContacts ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 监理联系方式 , supervisionContactInformation ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 结束时间 , endTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 签订时间 , auditTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 附件 , attach ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 合同编号 , code ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('合同编号')}" class="search-label code-label">合同编号</span><span class="search-colon">:</span></div>
@@ -126,11 +146,11 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('cont_contract:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('cont_contract:update','cont_contract:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('cont_contract:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('cont_contract:update','cont_contract:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('cont_contract:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('cont_contract:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>

@@ -3,13 +3,15 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.Voucher;
 import java.util.Date;
+import org.github.foxnic.web.domain.system.DictItem;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 18:43:33
- * @sign 1550FC514B43E3878DAF5F987C322B82
+ * @since 2021-09-05 21:13:48
+ * @sign 35E03D325C38F24493511E595DB03ABB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -156,9 +158,19 @@ public class VoucherMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Voucher,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.Voucher.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String VOUCHER_TYPE="voucherType";
+	
+	/**
+	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Voucher,org.github.foxnic.web.domain.system.DictItem> VOUCHER_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.Voucher.class ,VOUCHER_TYPE, java.util.List.class, "凭证类型", "凭证类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , OWNER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , TYPE , OWNER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , VOUCHER_TYPE };
 	
 	/**
 	 * 代理类
@@ -319,6 +331,17 @@ public class VoucherMeta {
 		public Voucher setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 凭证类型
+		 * @param voucherType 凭证类型
+		 * @return 当前对象
+		*/
+		public Voucher setVoucherType(List<DictItem> voucherType) {
+			super.change(VOUCHER_TYPE,super.getVoucherType(),voucherType);
+			super.setVoucherType(voucherType);
 			return this;
 		}
 	}

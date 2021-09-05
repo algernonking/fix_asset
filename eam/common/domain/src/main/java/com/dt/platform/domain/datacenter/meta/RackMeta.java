@@ -11,8 +11,8 @@ import com.dt.platform.domain.datacenter.Layer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:12
- * @sign 5CB5A32802E4AE817FA2D58DB9975B95
+ * @since 2021-09-05 12:19:21
+ * @sign 22BA4319B1447DD416CDCA047DAC2281
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -77,6 +77,16 @@ public class RackMeta {
 	 * 容量 , 类型: java.math.BigDecimal
 	*/
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.math.BigDecimal> RACK_CAPTICAL_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,RACK_CAPTICAL, java.math.BigDecimal.class, "容量", "容量", java.math.BigDecimal.class, null);
+	
+	/**
+	 * PDU数量 , 类型: java.lang.Integer
+	*/
+	public static final String PDU_NUMBER="pduNumber";
+	
+	/**
+	 * PDU数量 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> PDU_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,PDU_NUMBER, java.lang.Integer.class, "PDU数量", "PDU数量", java.lang.Integer.class, null);
 	
 	/**
 	 * 标签 , 类型: java.lang.String
@@ -201,7 +211,7 @@ public class RackMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER };
+	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER };
 	
 	/**
 	 * 代理类
@@ -274,6 +284,17 @@ public class RackMeta {
 		public Rack setRackCaptical(BigDecimal rackCaptical) {
 			super.change(RACK_CAPTICAL,super.getRackCaptical(),rackCaptical);
 			super.setRackCaptical(rackCaptical);
+			return this;
+		}
+		
+		/**
+		 * 设置 PDU数量
+		 * @param pduNumber PDU数量
+		 * @return 当前对象
+		*/
+		public Rack setPduNumber(Integer pduNumber) {
+			super.change(PDU_NUMBER,super.getPduNumber(),pduNumber);
+			super.setPduNumber(pduNumber);
 			return this;
 		}
 		

@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:12
+ * @since 2021-09-05 12:19:21
  */
 
 
@@ -78,13 +78,14 @@ function ListPage() {
 					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') , templet: function (d) { return templet('rackCode',d.rackCode,d);}  }
 					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('rackName',d.rackName,d);}  }
 					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量') , templet: function (d) { return templet('rackCaptical',d.rackCaptical,d);}  }
+					,{ field: 'pduNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('PDU数量') , templet: function (d) { return templet('pduNumber',d.pduNumber,d);}  }
 					,{ field: 'rackLabels', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('rackLabels',d.rackLabels,d);}  }
 					,{ field: 'rackNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('rackNotes',d.rackNotes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
-				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
+				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -116,6 +117,7 @@ function ListPage() {
 		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id", label:xmSelect.get("#layerId",true).getValue("nameStr") };
 		value.rackCode={ value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.rackName={ value: $("#rackName").val()};
+		value.pduNumber={ value: $("#pduNumber").val()};
 		value.rackLabels={ value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.rackNotes={ value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		if(window.pageExt.list.beforeQuery){

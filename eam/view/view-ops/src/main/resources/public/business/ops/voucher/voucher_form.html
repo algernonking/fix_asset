@@ -2,7 +2,7 @@
 /**
  * 凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 18:43:37
+ * @since 2021-09-05 21:13:52
  */
  -->
  <!DOCTYPE html>
@@ -43,7 +43,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('类别')}">类别</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="type" input-type="select" th:data="${dict.toArray('ops_voucher_type')}"></div>
+                            <div id="type" input-type="select" th:data="${'/service-ops/ops-voucher-priv/query-type-list'}"></div>
                         </div>
                     </div>
 
@@ -101,7 +101,6 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_TYPE_DATA = [[${dict.toArray('ops_voucher_type')}]];
     var SELECT_USERCODE_DATA = [[${dict.toArray('ops_user_voucher')}]];
     var VALIDATE_CONFIG={"voucher":{"labelInForm":"凭证","inputType":"text_input","required":true},"type":{"labelInForm":"类别","inputType":"select_box","required":true},"userCode":{"labelInForm":"用户","inputType":"select_box","required":true}};
     var AUTH_PREFIX="ops_voucher";

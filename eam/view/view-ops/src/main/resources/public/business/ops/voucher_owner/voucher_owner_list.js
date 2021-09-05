@@ -1,7 +1,7 @@
 /**
  * 所属凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 20:39:23
+ * @since 2021-09-05 20:53:19
  */
 
 
@@ -72,7 +72,7 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类别'), templet:function (d){ return templet('categoryCode',fox.getDictText(SELECT_CATEGORYCODE_DATA,d.categoryCode),d);}}
+					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类别'), templet: function (d) { return templet('categoryCode',fox.joinLabel(d.voucherCategory,"label"),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'position', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置') , templet: function (d) { return templet('position',d.position,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
@@ -80,7 +80,7 @@ function ListPage() {
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
-				done: function () { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(); },
+				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
 				footer : {
 					exportExcel : admin.checkAuth(AUTH_PREFIX+":export"),
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
@@ -108,7 +108,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.categoryCode={ value: xmSelect.get("#categoryCode",true).getValue("value"), label:xmSelect.get("#categoryCode",true).getValue("nameStr")};
+		value.categoryCode={ value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory",field:"code", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		if(window.pageExt.list.beforeQuery){
@@ -152,14 +152,15 @@ function ListPage() {
 			el: "categoryCode",
 			radio: false,
 			size: "small",
-			filterable: true,
+			filterable: false,
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}

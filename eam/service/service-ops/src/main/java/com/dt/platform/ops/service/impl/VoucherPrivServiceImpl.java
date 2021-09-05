@@ -64,9 +64,9 @@ public class VoucherPrivServiceImpl extends SuperService<VoucherPriv> implements
 	 * */
 	@Override
 	public Result verifyUserPermissions(String type,String user_id) {
-
+		System.out.println("verifyUserPermissions:"+user_id);
 		if(user_id==null||"".equals(user_id)){
-			return ErrorDesc.failureMessage("未获取用户ID");
+			return ErrorDesc.failureMessage("当前用户EmplID为:"+user_id+",未匹配到权限资源。");
 		}
 		VoucherPriv vp_query=new VoucherPriv();
 		vp_query.setEmplId(user_id);

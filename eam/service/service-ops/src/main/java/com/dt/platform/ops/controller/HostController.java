@@ -53,7 +53,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 22:26:21
+ * @since 2021-09-05 12:20:23
 */
 
 @Api(tags = "主机")
@@ -71,10 +71,10 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "添加主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
-		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class , example = "478693133681430528"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "ERP系统"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "物理IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "虚拟VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境" , required = false , dataTypeClass=String.class , example = "[]"),
@@ -147,10 +147,10 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "更新主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
-		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class , example = "478693133681430528"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "ERP系统"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "物理IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "虚拟VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境" , required = false , dataTypeClass=String.class , example = "[]"),
@@ -189,10 +189,10 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "保存主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
-		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class , example = "478693133681430528"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "ERP系统"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "物理IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "虚拟VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境" , required = false , dataTypeClass=String.class , example = "[]"),
@@ -282,10 +282,10 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "查询主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
-		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class , example = "478693133681430528"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "ERP系统"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "物理IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "虚拟VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境" , required = false , dataTypeClass=String.class , example = "[]"),
@@ -325,10 +325,10 @@ public class HostController extends SuperController {
 	@ApiOperation(value = "分页查询主机")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478194091549523968"),
-		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.SYSTEM_ID , value = "信息系统" , required = false , dataTypeClass=String.class , example = "478693133681430528"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_TYPE , value = "主机类型" , required = false , dataTypeClass=String.class , example = "business"),
 		@ApiImplicitParam(name = HostVOMeta.STATUS , value = "主机状态" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "ERP系统"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_IP , value = "物理IP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.HOST_VIP , value = "虚拟VIP" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = HostVOMeta.ENVIRONMENT , value = "运行环境" , required = false , dataTypeClass=String.class , example = "[]"),

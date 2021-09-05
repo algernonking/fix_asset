@@ -1,8 +1,16 @@
 package com.dt.platform.ops.controller;
 
  
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.constants.enums.common.StatusValidEnum;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.DictItemVO;
+import org.github.foxnic.web.domain.system.meta.DictItemVOMeta;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +56,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 凭证权限 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 06:55:48
+ * @since 2021-09-05 12:20:11
 */
 
 @Api(tags = "凭证权限")
@@ -59,7 +67,8 @@ public class VoucherPrivController extends SuperController {
 	@Autowired
 	private IVoucherPrivService voucherPrivService;
 
-	
+
+
 	/**
 	 * 添加凭证权限
 	*/
@@ -182,6 +191,8 @@ public class VoucherPrivController extends SuperController {
 	}
 
 
+
+
 	/**
 	 * 批量删除凭证权限 <br>
 	 * 联合主键时，请自行调整实现
@@ -218,6 +229,54 @@ public class VoucherPrivController extends SuperController {
 	public Result<List<VoucherPriv>> queryList(VoucherPrivVO sample) {
 		Result<List<VoucherPriv>> result=new Result<>();
 		List<VoucherPriv> list=voucherPrivService.queryList(sample);
+		result.success(true).data(list);
+		return result;
+	}
+
+	/**
+	 * 查询凭证权限
+	 */
+	@ApiOperation(value = "查询凭证类型")
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherPrivVOMeta.PAGE_INDEX , VoucherPrivVOMeta.PAGE_SIZE } )
+	@SentinelResource(value = VoucherPrivServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(VoucherPrivServiceProxy.QUERY_TYPE_LIST)
+	public Result<List<DictItem>> queryVoucherTypeList() {
+		Result<List<DictItem>> result=new Result<>();
+
+		List<DictItem> list =new ArrayList<>();
+		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		//如果用户不存在
+		if(employeeId==null||"".equals(employeeId)){
+			result.success(true).data(list);
+			return result;
+		}
+
+		VoucherPriv vpQuery=new VoucherPriv();
+		vpQuery.setEmplId(employeeId);
+		vpQuery.setStatus(StatusValidEnum.VALID.code());
+		VoucherPriv vpData=voucherPrivService.queryEntity(vpQuery);
+		if(vpData==null||"[]".equals(vpData.getType())){
+			result.success(true).data(list);
+			return result;
+		}
+
+		String type=vpData.getType();
+		DictItemVO diVo=new DictItemVO();
+		diVo.setDictCode(DictEnum.OPS_VOUCHER_TYPE.code());
+		Result<List<DictItem>> dictItem_result=DictItemServiceProxy.api().queryList(diVo);
+		if(!dictItem_result.isSuccess()){
+			return dictItem_result;
+		}
+
+		List<DictItem> dictItem_list=dictItem_result.getData();
+		for(int i=0;i<dictItem_list.size();i++){
+			String tempType=dictItem_list.get(i).getCode();
+			System.out.println("tempType"+tempType+",type:"+type);
+			if(type.indexOf("\""+tempType+"\"")!=-1){
+				System.out.println("match it");
+				list.add(dictItem_list.get(i));
+			}
+		}
 		result.success(true).data(list);
 		return result;
 	}

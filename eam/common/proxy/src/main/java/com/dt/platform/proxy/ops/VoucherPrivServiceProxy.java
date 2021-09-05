@@ -1,5 +1,6 @@
 package com.dt.platform.proxy.ops;
 
+import org.github.foxnic.web.domain.system.DictItem;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
@@ -19,7 +20,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 凭证权限  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 06:55:47
+ * @since 2021-09-05 12:20:11
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = VoucherPrivServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -81,7 +82,13 @@ public interface VoucherPrivServiceProxy {
 	 * 查询凭证权限
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
+	/**
+	 * 查询凭证类型
+	 */
+	public static final String QUERY_TYPE_LIST = API_PREFIX + "query-type-list";
+
+
 	/**
 	 * 分页查询凭证权限
 	 */
@@ -148,6 +155,12 @@ public interface VoucherPrivServiceProxy {
 	*/
 	@RequestMapping(VoucherPrivServiceProxy.QUERY_LIST)
 	Result<List<VoucherPriv>> queryList(VoucherPrivVO sample);
+
+	/**
+	 * 查询凭证权限
+	 */
+	@RequestMapping(VoucherPrivServiceProxy.QUERY_TYPE_LIST)
+	Result<List<DictItem>> queryTypeList();
 	
 	/**
 	 * 分页查询凭证权限

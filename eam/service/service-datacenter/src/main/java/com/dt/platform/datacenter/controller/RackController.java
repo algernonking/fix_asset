@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:12
+ * @since 2021-09-05 12:19:21
 */
 
 @Api(tags = "机柜")
@@ -74,6 +74,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.PDU_NUMBER , value = "PDU数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -132,6 +133,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.PDU_NUMBER , value = "PDU数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -156,6 +158,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.PDU_NUMBER , value = "PDU数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -223,6 +226,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.PDU_NUMBER , value = "PDU数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -248,6 +252,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "01"),
 		@ApiImplicitParam(name = RackVOMeta.RACK_CAPTICAL , value = "容量" , required = false , dataTypeClass=BigDecimal.class , example = "50.00"),
+		@ApiImplicitParam(name = RackVOMeta.PDU_NUMBER , value = "PDU数量" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

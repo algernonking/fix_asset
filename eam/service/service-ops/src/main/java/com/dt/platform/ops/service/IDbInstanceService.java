@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 数据库实例 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:12
+ * @since 2021-09-05 12:20:16
 */
 
 public interface IDbInstanceService extends ISuperService<DbInstance> {

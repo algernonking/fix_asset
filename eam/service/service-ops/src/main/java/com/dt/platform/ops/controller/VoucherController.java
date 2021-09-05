@@ -8,6 +8,7 @@ import java.util.List;
 import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.constants.enums.common.StatusValidEnum;
 import com.dt.platform.domain.ops.VoucherPriv;
+import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
 import com.dt.platform.ops.service.IVoucherPrivService;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.springframework.web.bind.annotation.RestController;
@@ -201,6 +202,7 @@ public class VoucherController extends SuperController {
 		if(!verify_result.isSuccess()){
 			return verify_result;
 		}
+		voucherService.join(voucher,VoucherMeta.VOUCHER_TYPE);
 		result.success(true).data(voucher);
 		return result;
 	}
@@ -273,7 +275,7 @@ public class VoucherController extends SuperController {
 		vp.setStatus(StatusValidEnum.VALID.code());
 		vp.setEmplId(employeeId);
 		VoucherPriv vp_data=voucherPrivService.queryEntity(vp);
-		if(vp_data==null){
+		if(employeeId==null||vp_data==null){
 			condition.and("id=?","0");
 		}else{
 			JSONArray obj= JSONArray.parseArray(vp_data.getType());
@@ -299,6 +301,8 @@ public class VoucherController extends SuperController {
 				list.get(i).setVoucher("****");
 			}
 		}
+
+		voucherService.join(list,VoucherMeta.VOUCHER_TYPE);
 		result.success(true).data(list);
 		return result;
 	}

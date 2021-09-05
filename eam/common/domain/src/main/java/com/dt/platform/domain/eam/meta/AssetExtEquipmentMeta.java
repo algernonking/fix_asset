@@ -12,8 +12,8 @@ import com.dt.platform.domain.eam.Asset;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:45
- * @sign DD1A2F501C11E4AEE89229997DC2D977
+ * @since 2021-09-05 12:19:50
+ * @sign C49E555FA66D085304686EC2B2564DFE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,6 +38,26 @@ public class AssetExtEquipmentMeta {
 	 * 资产 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	
+	/**
+	 * 设备编号 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_CODE="equipmentCode";
+	
+	/**
+	 * 设备编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> EQUIPMENT_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,EQUIPMENT_CODE, java.lang.String.class, "设备编号", "设备编号", java.lang.String.class, null);
+	
+	/**
+	 * 设备状态 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_STATUS="equipmentStatus";
+	
+	/**
+	 * 设备状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> EQUIPMENT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,EQUIPMENT_STATUS, java.lang.String.class, "设备状态", "设备状态", java.lang.String.class, null);
 	
 	/**
 	 * 设备IP , 类型: java.lang.String
@@ -80,6 +100,66 @@ public class AssetExtEquipmentMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> EQUIPMENT_MEMORY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,EQUIPMENT_MEMORY, java.lang.String.class, "设备内存", "设备内存", java.lang.String.class, null);
 	
 	/**
+	 * 层级 , 类型: java.lang.String
+	*/
+	public static final String LAYER_ID="layerId";
+	
+	/**
+	 * 层级 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> LAYER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
+	
+	/**
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final String AREA_ID="areaId";
+	
+	/**
+	 * 区域 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
+	
+	/**
+	 * 机柜 , 类型: java.lang.String
+	*/
+	public static final String RACK_ID="rackId";
+	
+	/**
+	 * 机柜 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> RACK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_ID, java.lang.String.class, "机柜", "机柜", java.lang.String.class, null);
+	
+	/**
+	 * 机柜上位置 , 类型: java.lang.Integer
+	*/
+	public static final String RACK_UP_NUMBER="rackUpNumber";
+	
+	/**
+	 * 机柜上位置 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.Integer> RACK_UP_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_UP_NUMBER, java.lang.Integer.class, "机柜上位置", "机柜上位置", java.lang.Integer.class, null);
+	
+	/**
+	 * 机柜下位置 , 类型: java.lang.Integer
+	*/
+	public static final String RACK_DOWN_NUMBER="rackDownNumber";
+	
+	/**
+	 * 机柜下位置 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.Integer> RACK_DOWN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_DOWN_NUMBER, java.lang.Integer.class, "机柜下位置", "机柜下位置", java.lang.Integer.class, null);
+	
+	/**
+	 * PDU接口 , 类型: java.lang.String
+	*/
+	public static final String PDU="pdu";
+	
+	/**
+	 * PDU接口 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> PDU_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,PDU, java.lang.String.class, "PDU接口", "PDU接口", java.lang.String.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String EQUIPMENT_NOTES="equipmentNotes";
@@ -98,56 +178,6 @@ public class AssetExtEquipmentMeta {
 	 * 描述 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> EQUIPMENT_DESC_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,EQUIPMENT_DESC, java.lang.String.class, "描述", "描述", java.lang.String.class, null);
-	
-	/**
-	 * 区域 , 类型: java.lang.String
-	*/
-	public static final String AREA_ID="areaId";
-	
-	/**
-	 * 区域 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
-	
-	/**
-	 * 层级 , 类型: java.lang.String
-	*/
-	public static final String LAYER_ID="layerId";
-	
-	/**
-	 * 层级 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> LAYER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
-	
-	/**
-	 * 机柜 , 类型: java.lang.String
-	*/
-	public static final String RACK_ID="rackId";
-	
-	/**
-	 * 机柜 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.String> RACK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_ID, java.lang.String.class, "机柜", "机柜", java.lang.String.class, null);
-	
-	/**
-	 * 机柜上位置编号 , 类型: java.lang.Integer
-	*/
-	public static final String RACK_UP_POSITION_NUMBER="rackUpPositionNumber";
-	
-	/**
-	 * 机柜上位置编号 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.Integer> RACK_UP_POSITION_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_UP_POSITION_NUMBER, java.lang.Integer.class, "机柜上位置编号", "机柜上位置编号", java.lang.Integer.class, null);
-	
-	/**
-	 * 机柜下位置编号 , 类型: java.lang.Integer
-	*/
-	public static final String RACK_DOWN_POSITION_NUMBER="rackDownPositionNumber";
-	
-	/**
-	 * 机柜下位置编号 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetExtEquipment,java.lang.Integer> RACK_DOWN_POSITION_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetExtEquipment.class ,RACK_DOWN_POSITION_NUMBER, java.lang.Integer.class, "机柜下位置编号", "机柜下位置编号", java.lang.Integer.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -272,7 +302,7 @@ public class AssetExtEquipmentMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_NOTES , EQUIPMENT_DESC , AREA_ID , LAYER_ID , RACK_ID , RACK_UP_POSITION_NUMBER , RACK_DOWN_POSITION_NUMBER , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER , RACK , ASSET };
+	public static final String[] $PROPS={ ID , ASSET_ID , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , LAYER_ID , AREA_ID , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , PDU , EQUIPMENT_NOTES , EQUIPMENT_DESC , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER , RACK , ASSET };
 	
 	/**
 	 * 代理类
@@ -301,6 +331,28 @@ public class AssetExtEquipmentMeta {
 		public AssetExtEquipment setAssetId(String assetId) {
 			super.change(ASSET_ID,super.getAssetId(),assetId);
 			super.setAssetId(assetId);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备编号
+		 * @param equipmentCode 设备编号
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setEquipmentCode(String equipmentCode) {
+			super.change(EQUIPMENT_CODE,super.getEquipmentCode(),equipmentCode);
+			super.setEquipmentCode(equipmentCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备状态
+		 * @param equipmentStatus 设备状态
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setEquipmentStatus(String equipmentStatus) {
+			super.change(EQUIPMENT_STATUS,super.getEquipmentStatus(),equipmentStatus);
+			super.setEquipmentStatus(equipmentStatus);
 			return this;
 		}
 		
@@ -349,6 +401,72 @@ public class AssetExtEquipmentMeta {
 		}
 		
 		/**
+		 * 设置 层级
+		 * @param layerId 层级
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setLayerId(String layerId) {
+			super.change(LAYER_ID,super.getLayerId(),layerId);
+			super.setLayerId(layerId);
+			return this;
+		}
+		
+		/**
+		 * 设置 区域
+		 * @param areaId 区域
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setAreaId(String areaId) {
+			super.change(AREA_ID,super.getAreaId(),areaId);
+			super.setAreaId(areaId);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜
+		 * @param rackId 机柜
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setRackId(String rackId) {
+			super.change(RACK_ID,super.getRackId(),rackId);
+			super.setRackId(rackId);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜上位置
+		 * @param rackUpNumber 机柜上位置
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setRackUpNumber(Integer rackUpNumber) {
+			super.change(RACK_UP_NUMBER,super.getRackUpNumber(),rackUpNumber);
+			super.setRackUpNumber(rackUpNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 机柜下位置
+		 * @param rackDownNumber 机柜下位置
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setRackDownNumber(Integer rackDownNumber) {
+			super.change(RACK_DOWN_NUMBER,super.getRackDownNumber(),rackDownNumber);
+			super.setRackDownNumber(rackDownNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 PDU接口
+		 * @param pdu PDU接口
+		 * @return 当前对象
+		*/
+		public AssetExtEquipment setPdu(String pdu) {
+			super.change(PDU,super.getPdu(),pdu);
+			super.setPdu(pdu);
+			return this;
+		}
+		
+		/**
 		 * 设置 备注
 		 * @param equipmentNotes 备注
 		 * @return 当前对象
@@ -367,61 +485,6 @@ public class AssetExtEquipmentMeta {
 		public AssetExtEquipment setEquipmentDesc(String equipmentDesc) {
 			super.change(EQUIPMENT_DESC,super.getEquipmentDesc(),equipmentDesc);
 			super.setEquipmentDesc(equipmentDesc);
-			return this;
-		}
-		
-		/**
-		 * 设置 区域
-		 * @param areaId 区域
-		 * @return 当前对象
-		*/
-		public AssetExtEquipment setAreaId(String areaId) {
-			super.change(AREA_ID,super.getAreaId(),areaId);
-			super.setAreaId(areaId);
-			return this;
-		}
-		
-		/**
-		 * 设置 层级
-		 * @param layerId 层级
-		 * @return 当前对象
-		*/
-		public AssetExtEquipment setLayerId(String layerId) {
-			super.change(LAYER_ID,super.getLayerId(),layerId);
-			super.setLayerId(layerId);
-			return this;
-		}
-		
-		/**
-		 * 设置 机柜
-		 * @param rackId 机柜
-		 * @return 当前对象
-		*/
-		public AssetExtEquipment setRackId(String rackId) {
-			super.change(RACK_ID,super.getRackId(),rackId);
-			super.setRackId(rackId);
-			return this;
-		}
-		
-		/**
-		 * 设置 机柜上位置编号
-		 * @param rackUpPositionNumber 机柜上位置编号
-		 * @return 当前对象
-		*/
-		public AssetExtEquipment setRackUpPositionNumber(Integer rackUpPositionNumber) {
-			super.change(RACK_UP_POSITION_NUMBER,super.getRackUpPositionNumber(),rackUpPositionNumber);
-			super.setRackUpPositionNumber(rackUpPositionNumber);
-			return this;
-		}
-		
-		/**
-		 * 设置 机柜下位置编号
-		 * @param rackDownPositionNumber 机柜下位置编号
-		 * @return 当前对象
-		*/
-		public AssetExtEquipment setRackDownPositionNumber(Integer rackDownPositionNumber) {
-			super.change(RACK_DOWN_POSITION_NUMBER,super.getRackDownPositionNumber(),rackDownPositionNumber);
-			super.setRackDownPositionNumber(rackDownPositionNumber);
 			return this;
 		}
 		

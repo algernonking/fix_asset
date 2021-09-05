@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:23
+ * @since 2021-09-05 12:20:26
 */
 
 @Api(tags = "服务")
@@ -67,11 +67,11 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "添加服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "os"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621743190147072"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Redhat 7.8"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -90,7 +90,7 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "删除服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760")
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = ServiceInfoVOMeta.ID)
@@ -124,11 +124,11 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "更新服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "os"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621743190147072"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Redhat 7.8"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -147,11 +147,11 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "保存服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "os"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621743190147072"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Redhat 7.8"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -213,11 +213,11 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "查询服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "os"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621743190147072"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Redhat 7.8"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
@@ -237,11 +237,11 @@ public class ServiceInfoController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询服务")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "473626925345013760"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "db"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621482614816700"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle 11.2.0.4"),
-		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "223e5dc8-0ddc-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.GROUP_ID , value = "服务分组" , required = false , dataTypeClass=String.class , example = "os"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.SERVICE_CATEGORY_ID , value = "服务分类" , required = false , dataTypeClass=String.class , example = "473621743190147072"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Redhat 7.8"),
+		@ApiImplicitParam(name = ServiceInfoVOMeta.PATCH , value = "补丁" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})

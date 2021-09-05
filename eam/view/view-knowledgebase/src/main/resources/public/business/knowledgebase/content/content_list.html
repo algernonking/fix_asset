@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:28
+ * @since 2021-09-05 12:20:31
  */
  -->
  <!DOCTYPE html>
@@ -34,11 +34,21 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
                         <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 关键字 , keyWords ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 知识内容 , content ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 阅读数 , reviewCount ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
+                    <!-- 链接地址 , linkAddress ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编辑人 , editorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 编辑人 , resEditorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
@@ -112,13 +122,13 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('kn_content:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}">查看</button>
-    <button th:if="${perm.checkAnyAuth('kn_content:update','kn_content:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}">修改</button>
+    <button th:if="${perm.checkAuth('kn_content:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('kn_content:update','kn_content:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('kn_content:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}">删除</button>
+    <button th:if="${perm.checkAuth('kn_content:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
-    <button class="layui-btn layui-btn-xs " lay-event="review-kn-function" th:text="${lang.translate('预览')}">预览</button>
+    <button class="layui-btn layui-btn-xs " lay-event="review-kn-function" th:text="${lang.translate('预览')}" data-id="{{d.id}}">预览</button>
 
 </script>
 

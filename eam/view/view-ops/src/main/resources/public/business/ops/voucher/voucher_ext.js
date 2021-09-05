@@ -80,9 +80,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                             for (var i = 0; i < data.length; i++) {
                                 if(!data[i]) continue;
                                 if(i==0){
-                                    opts.push({name:data[i].text,value:data[i].code,selected:true});
+                                    opts.push({name:data[i].label,value:data[i].code,selected:true});
                                 }else{
-                                    opts.push({name:data[i].text,value:data[i].code});
+                                    opts.push({name:data[i].label,value:data[i].code});
                                 }
 
                             }

@@ -1,7 +1,7 @@
 /**
  * 凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 18:43:38
+ * @since 2021-09-05 21:13:53
  */
 
 function FormPage() {
@@ -81,14 +81,15 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "type",
 			radio: true,
-			filterable: true,
+			filterable: false,
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}
@@ -133,7 +134,7 @@ function FormPage() {
 
 
 			//设置  类别 设置下拉框勾选
-			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+			fox.setSelectValue4QueryApi("#type",formData.voucherType);
 			//设置  用户 设置下拉框勾选
 			fox.setSelectValue4Dict("#userCode",formData.userCode,SELECT_USERCODE_DATA);
 

@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 中间件 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:17
+ * @since 2021-09-05 12:20:22
 */
 
 @Api(tags = "中间件")
@@ -65,8 +65,8 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "添加中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832"),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473631451401682944"),
 	})
 	@ApiOperationSupport(order=1)
@@ -84,7 +84,7 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "删除中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520")
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = HostMidVOMeta.ID)
@@ -118,8 +118,8 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "更新中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832"),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473631451401682944"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } ) 
@@ -137,8 +137,8 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "保存中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832"),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473631451401682944"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
@@ -195,8 +195,8 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "查询中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832"),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473631451401682944"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE } )
@@ -215,8 +215,8 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478258463898603520"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478194091549523968"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "478957043902840832"),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473631451401682944"),
 	})
 	@ApiOperationSupport(order=8)

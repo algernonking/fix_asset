@@ -52,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产设备数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:35:45
+ * @since 2021-09-05 12:19:50
 */
 
 @Api(tags = "资产设备数据")
@@ -71,17 +71,20 @@ public class AssetExtEquipmentController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479376433093804032"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CODE , value = "设备编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_IP , value = "设备IP" , required = false , dataTypeClass=String.class , example = "lk"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class , example = "m"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class , example = ";l"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class , example = "klj"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_NUMBER , value = "机柜上位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_NUMBER , value = "机柜下位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.PDU , value = "PDU接口" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "k"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_DESC , value = "描述" , required = false , dataTypeClass=String.class , example = "lk"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "474323467634737152"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_POSITION_NUMBER , value = "机柜上位置编号" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_POSITION_NUMBER , value = "机柜下位置编号" , required = false , dataTypeClass=Integer.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetExtEquipmentVOMeta.ID)
@@ -134,17 +137,20 @@ public class AssetExtEquipmentController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479376433093804032"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CODE , value = "设备编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_IP , value = "设备IP" , required = false , dataTypeClass=String.class , example = "lk"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class , example = "m"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class , example = ";l"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class , example = "klj"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_NUMBER , value = "机柜上位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_NUMBER , value = "机柜下位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.PDU , value = "PDU接口" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "k"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_DESC , value = "描述" , required = false , dataTypeClass=String.class , example = "lk"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "474323467634737152"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_POSITION_NUMBER , value = "机柜上位置编号" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_POSITION_NUMBER , value = "机柜下位置编号" , required = false , dataTypeClass=Integer.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetExtEquipmentVOMeta.PAGE_INDEX , AssetExtEquipmentVOMeta.PAGE_SIZE , AssetExtEquipmentVOMeta.SEARCH_FIELD , AssetExtEquipmentVOMeta.FUZZY_FIELD , AssetExtEquipmentVOMeta.SEARCH_VALUE , AssetExtEquipmentVOMeta.SORT_FIELD , AssetExtEquipmentVOMeta.SORT_TYPE , AssetExtEquipmentVOMeta.IDS } ) 
 	@NotNull(name = AssetExtEquipmentVOMeta.ID)
@@ -163,17 +169,20 @@ public class AssetExtEquipmentController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479376433093804032"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CODE , value = "设备编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_IP , value = "设备IP" , required = false , dataTypeClass=String.class , example = "lk"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class , example = "m"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class , example = ";l"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class , example = "klj"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_NUMBER , value = "机柜上位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_NUMBER , value = "机柜下位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.PDU , value = "PDU接口" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "k"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_DESC , value = "描述" , required = false , dataTypeClass=String.class , example = "lk"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "474323467634737152"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_POSITION_NUMBER , value = "机柜上位置编号" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_POSITION_NUMBER , value = "机柜下位置编号" , required = false , dataTypeClass=Integer.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtEquipmentVOMeta.PAGE_INDEX , AssetExtEquipmentVOMeta.PAGE_SIZE , AssetExtEquipmentVOMeta.SEARCH_FIELD , AssetExtEquipmentVOMeta.FUZZY_FIELD , AssetExtEquipmentVOMeta.SEARCH_VALUE , AssetExtEquipmentVOMeta.SORT_FIELD , AssetExtEquipmentVOMeta.SORT_TYPE , AssetExtEquipmentVOMeta.IDS } )
 	@NotNull(name = AssetExtEquipmentVOMeta.ID)
@@ -199,10 +208,6 @@ public class AssetExtEquipmentController extends SuperController {
 	public Result<AssetExtEquipment> getById(String id) {
 		Result<AssetExtEquipment> result=new Result<>();
 		AssetExtEquipment assetExtEquipment=assetExtEquipmentService.getById(id);
-		// 关联出 区域 数据
-		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.AREA);
-		// 关联出 层级 数据
-		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.LAYER);
 		// 关联出 机柜 数据
 		assetExtEquipmentService.join(assetExtEquipment,AssetExtEquipmentMeta.RACK);
 		result.success(true).data(assetExtEquipment);
@@ -237,17 +242,20 @@ public class AssetExtEquipmentController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479376433093804032"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CODE , value = "设备编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_IP , value = "设备IP" , required = false , dataTypeClass=String.class , example = "lk"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class , example = "m"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class , example = ";l"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class , example = "klj"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_NUMBER , value = "机柜上位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_NUMBER , value = "机柜下位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.PDU , value = "PDU接口" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "k"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_DESC , value = "描述" , required = false , dataTypeClass=String.class , example = "lk"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "474323467634737152"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_POSITION_NUMBER , value = "机柜上位置编号" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_POSITION_NUMBER , value = "机柜下位置编号" , required = false , dataTypeClass=Integer.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetExtEquipmentVOMeta.PAGE_INDEX , AssetExtEquipmentVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetExtEquipmentServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -267,17 +275,20 @@ public class AssetExtEquipmentController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "479376433093804032"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CODE , value = "设备编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_STATUS , value = "设备状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_IP , value = "设备IP" , required = false , dataTypeClass=String.class , example = "lk"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class , example = "m"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class , example = ";l"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class , example = "klj"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_NUMBER , value = "机柜上位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_NUMBER , value = "机柜下位置" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.PDU , value = "PDU接口" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "k"),
 		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.EQUIPMENT_DESC , value = "描述" , required = false , dataTypeClass=String.class , example = "lk"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.AREA_ID , value = "区域" , required = false , dataTypeClass=String.class , example = "474323467634737152"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.LAYER_ID , value = "层级" , required = false , dataTypeClass=String.class , example = "473609718003138561"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_ID , value = "机柜" , required = false , dataTypeClass=String.class , example = "474323707775418368"),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_UP_POSITION_NUMBER , value = "机柜上位置编号" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = AssetExtEquipmentVOMeta.RACK_DOWN_POSITION_NUMBER , value = "机柜下位置编号" , required = false , dataTypeClass=Integer.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetExtEquipmentServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -285,10 +296,6 @@ public class AssetExtEquipmentController extends SuperController {
 	public Result<PagedList<AssetExtEquipment>> queryPagedList(AssetExtEquipmentVO sample) {
 		Result<PagedList<AssetExtEquipment>> result=new Result<>();
 		PagedList<AssetExtEquipment> list=assetExtEquipmentService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 区域 数据
-		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.AREA);
-		// 关联出 层级 数据
-		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.LAYER);
 		// 关联出 机柜 数据
 		assetExtEquipmentService.join(list,AssetExtEquipmentMeta.RACK);
 		result.success(true).data(list);

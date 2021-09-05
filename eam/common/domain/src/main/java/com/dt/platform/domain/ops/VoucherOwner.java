@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.OPS_VOUCHER_OWNER;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.Transient;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 20:39:19
- * @sign 4AAC41B6D8CF664B4FEA46483AC5DDF2
+ * @since 2021-09-05 20:53:15
+ * @sign 931952ECC483B4F758C8319A99B7B61B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -108,6 +109,12 @@ public class VoucherOwner extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 凭证类型：凭证类型
+	*/
+	@ApiModelProperty(required = false,value="凭证类型" , notes = "凭证类型")
+	private List<DictItem> voucherCategory;
 	
 	/**
 	 * 凭证：凭证
@@ -365,6 +372,36 @@ public class VoucherOwner extends Entity {
 	*/
 	public VoucherOwner setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证类型<br>
+	 * 凭证类型
+	 * @return 凭证类型
+	*/
+	public List<DictItem> getVoucherCategory() {
+		return voucherCategory;
+	}
+	
+	/**
+	 * 设置 凭证类型
+	 * @param voucherCategory 凭证类型
+	 * @return 当前对象
+	*/
+	public VoucherOwner setVoucherCategory(List<DictItem> voucherCategory) {
+		this.voucherCategory=voucherCategory;
+		return this;
+	}
+	
+	/**
+	 * 添加 凭证类型
+	 * @param entity 凭证类型
+	 * @return 当前对象
+	*/
+	public VoucherOwner addVoucherCategory(DictItem entity) {
+		if(this.voucherCategory==null) voucherCategory=new ArrayList<>();
+		this.voucherCategory.add(entity);
 		return this;
 	}
 	
