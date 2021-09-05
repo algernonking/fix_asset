@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 凭证权限 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 15:56:26
+ * @since 2021-09-05 06:55:48
 */
 
 @Api(tags = "凭证权限")

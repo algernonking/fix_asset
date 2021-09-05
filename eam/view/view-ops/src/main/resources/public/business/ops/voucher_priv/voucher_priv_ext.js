@@ -17,6 +17,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    var action=admin.getTempData('ops-voucher-priv-form-data-form-action');
+
+
     //列表页的扩展
     var list={
         /**
@@ -115,6 +118,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
+            if(action=="create"){
+                $('input[name=status]:first').prop("checked","true")
+            }
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行

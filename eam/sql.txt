@@ -16,3 +16,29 @@ WHERE
 
 		dbInstanceService.dao().join(hosts, HostMeta.INFO_SYSTEM);
 		result.success(true).data(list);
+
+INSERT INTO `ops_service_info` (`id`, `group_id`, `service_category_id`, `name`)VALUES (uuid(), 'os', '473621743190147072', 'Redhat 7.8');
+
+
+
+
+
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'mcs', 'mcs', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'cms', 'cms', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'ftp', 'ftp', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'app', 'app', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'mysql', 'mysql', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'admin', 'admin', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'administrator', 'administrator', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'opsuser', 'opsuser', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'tomcat', 'tomcat', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'was', 'was', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'weblogic', 'weblogic', 9999);
+
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL,  'administrator@vsphere.local', 'administrator@vsphere.local', 9999);
+
+
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '19', 'ops_host_type', NULL, 'ops', '运维系统', 9999);
+INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '19', 'ops_host_type', NULL, 'analyze', '分析系统', 9999);
+
+ops_host_type

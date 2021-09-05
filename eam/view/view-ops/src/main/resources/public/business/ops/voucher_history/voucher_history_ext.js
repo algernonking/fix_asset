@@ -38,7 +38,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //设置固定的查询条件
             if(!conditions["voucherId"]) conditions["voucherId"]={};
             conditions["voucherId"].value=voucherIdValue;
-
             return true;
         },
         /**

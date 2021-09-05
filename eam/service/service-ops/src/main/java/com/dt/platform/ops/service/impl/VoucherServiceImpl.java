@@ -67,18 +67,10 @@ public class VoucherServiceImpl extends SuperService<Voucher> implements IVouche
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
-	/**
-	 * 插入实体
-	 * @param voucher 实体数据
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result insert(Voucher voucher) {
-		Result r=super.insert(voucher);
-		return r;
-	}
-	
+
+
+
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param voucherList 实体数据清单

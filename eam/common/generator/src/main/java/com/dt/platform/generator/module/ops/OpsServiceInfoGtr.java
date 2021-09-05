@@ -60,9 +60,9 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.NAME).form().validate().required();
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_SERVICE_INFO.NAME,
                         EAMTables.OPS_SERVICE_INFO.GROUP_ID,
                         EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID,
+                        EAMTables.OPS_SERVICE_INFO.NAME,
                         EAMTables.OPS_SERVICE_INFO.NOTES
 
                 }

@@ -1,6 +1,7 @@
 package com.dt.platform.ops.controller;
 
  
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -85,6 +86,12 @@ public class VoucherController extends SuperController {
 	@SentinelResource(value = VoucherServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(VoucherServiceProxy.INSERT)
 	public Result insert(VoucherVO voucherVO) {
+
+		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		Result verify_result=voucherPrivService.verifyUserPermissions(voucherVO.getType(),employeeId);
+		if(!verify_result.isSuccess()){
+			return verify_result;
+		}
 		Result result=voucherService.insert(voucherVO);
 		return result;
 	}
@@ -102,6 +109,12 @@ public class VoucherController extends SuperController {
 	@SentinelResource(value = VoucherServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(VoucherServiceProxy.DELETE)
 	public Result deleteById(String id) {
+		Voucher voucher=voucherService.getById(id);
+		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		Result verify_result=voucherPrivService.verifyUserPermissions(voucher.getType(),employeeId);
+		if(!verify_result.isSuccess()){
+			return verify_result;
+		}
 		Result result=voucherService.deleteByIdLogical(id);
 		return result;
 	}
@@ -184,17 +197,9 @@ public class VoucherController extends SuperController {
 		Result<Voucher> result=new Result<>();
 		Voucher voucher=voucherService.getById(id);
 		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
-		System.out.println("employeeId:"+employeeId);
-		if(employeeId==null||"".equals(employeeId)){
-			return ErrorDesc.failureMessage("未获取用户ID");
-		}
-		VoucherPriv vp_query=new VoucherPriv();
-		vp_query.setEmplId(employeeId);
-		vp_query.setStatus(StatusValidEnum.VALID.code());
-		ConditionExpr ce=new ConditionExpr();
-		ce.andLike("type","\""+voucher.getType()+"\"");
-		if(voucherPrivService.queryList(vp_query, ce).size()==0){
-			return ErrorDesc.failureMessage("当前用户无权限");
+		Result verify_result=voucherPrivService.verifyUserPermissions(voucher.getType(),employeeId);
+		if(!verify_result.isSuccess()){
+			return verify_result;
 		}
 		result.success(true).data(voucher);
 		return result;
@@ -216,7 +221,6 @@ public class VoucherController extends SuperController {
 	public Result<List<Voucher>> getByIds(List<String> ids) {
 		Result<List<Voucher>> result=new Result<>();
 		List<Voucher> list=voucherService.getByIds(ids);
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -262,7 +266,30 @@ public class VoucherController extends SuperController {
 	@PostMapping(VoucherServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<Voucher>> queryPagedList(VoucherVO sample) {
 		Result<PagedList<Voucher>> result=new Result<>();
-		PagedList<Voucher> list=voucherService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		String employeeId=this.getSessionUser().getUser().getActivatedEmployeeId();
+		ConditionExpr condition=new ConditionExpr();
+		VoucherPriv vp=new VoucherPriv();
+		vp.setStatus(StatusValidEnum.VALID.code());
+		vp.setEmplId(employeeId);
+		VoucherPriv vp_data=voucherPrivService.queryEntity(vp);
+		if(vp_data==null){
+			condition.and("id=?","0");
+		}else{
+			JSONArray obj= JSONArray.parseArray(vp_data.getType());
+			List<String> items=new ArrayList<>();
+			for (int i=0;i<obj.size();i++){
+				items.add(obj.getString(i));
+			}
+			if(items.size()>0){
+				condition.andIn("type",items);
+			}else{
+				condition.and("id=?","0");
+			}
+
+		}
+
+		PagedList<Voucher> list=voucherService.queryPagedList(sample,condition,sample.getPageSize(),sample.getPageIndex());
 		for(int i=0;i<list.size();i++){
 			Voucher obj = list.get(i);
 			String voucherStr=obj.getVoucher();

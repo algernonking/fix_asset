@@ -7,9 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="view-hrm" />
-        <module name="view-ops" />
-        <module name="framework" />
-        <module name="view-eam" />
+        <module name="domain" />
+        <module name="view-console" />
         <module name="service-hrm" />
         <module name="view-knowledgebase" />
         <module name="wrapper-all" />
@@ -17,14 +16,15 @@
         <module name="service-common" />
         <module name="service-knowledgebase" />
         <module name="view-common" />
-        <module name="view-datacenter" />
+        <module name="view-eam" />
         <module name="service-datacenter" />
         <module name="proxy" />
-        <module name="view-console" />
-        <module name="domain" />
+        <module name="framework" />
+        <module name="view-ops" />
         <module name="view-contract" />
         <module name="generator" />
         <module name="service-contract" />
+        <module name="view-datacenter" />
         <module name="service-ops" />
       </profile>
     </annotationProcessing>

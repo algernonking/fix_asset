@@ -35,8 +35,8 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).search().fuzzySearch();
-
-
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT).search().fuzzySearch();
 
 
 

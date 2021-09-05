@@ -65,6 +65,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_CONF).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch();
 
 
 
@@ -75,6 +76,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).table().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).table().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME).table().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME).table().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.LABELS).table().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.CREATE_TIME).table().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.HOST_NOTES).table().hidden(true);

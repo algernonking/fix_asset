@@ -2,6 +2,8 @@ package com.dt.platform.ops.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.StatusValidEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,28 @@ public class VoucherPrivServiceImpl extends SuperService<VoucherPriv> implements
 	public DAO dao() { return dao; }
 
 
+	/**
+	 * 验证用户权限
+	 * @param type 类型
+	 * @param user_id 用户ID
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result verifyUserPermissions(String type,String user_id) {
+
+		if(user_id==null||"".equals(user_id)){
+			return ErrorDesc.failureMessage("未获取用户ID");
+		}
+		VoucherPriv vp_query=new VoucherPriv();
+		vp_query.setEmplId(user_id);
+		vp_query.setStatus(StatusValidEnum.VALID.code());
+		ConditionExpr ce=new ConditionExpr();
+		ce.andLike("type","\""+type+"\"");
+		if(this.queryList(vp_query, ce).size()==0){
+			return ErrorDesc.failureMessage("当前用户无权限");
+		}
+		return ErrorDesc.success();
+	}
 	
 	@Override
 	public Object generateId(Field field) {

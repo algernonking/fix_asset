@@ -2,7 +2,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-04 15:56:28
+ * @since 2021-09-05 06:55:52
  */
  -->
  <!DOCTYPE html>
@@ -37,20 +37,20 @@
                     <!-- 凭证类别 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('凭证类别')}" class="search-label type-label">凭证类别</span><span class="search-colon">:</span></div>
-                        <div id="type" th:data="${dict.toArray('ops_voucher_type')}" style="width:140px"></div>
+                        <div id="type" th:data="${dict.toArray('ops_voucher_type')}" style="width:180px"></div>
                     </div>
                     <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
 
 
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" style="width:140px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" style="width:180px"></div>
 
                     </div>
                     <!-- 用户 , emplId ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('用户')}" class="search-label emplId-label">用户</span><span class="search-colon">:</span></div>
-                        <input id="emplId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <input id="emplId" class="layui-input search-input" style="width: 180px" type="text" />
                     </div>
 
 

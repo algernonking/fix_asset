@@ -25,7 +25,17 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IVoucherPrivService extends ISuperService<VoucherPriv> {
-	
+
+	/**
+	 * 验证用户权限
+	 * @param type 类型
+	 * @param user_id 用户ID
+	 * @return 插入是否成功
+	 * */
+
+	public Result verifyUserPermissions(String type,String user_id);
+
+
 	/**
 	 * 插入实体
 	 * @param voucherPriv 实体数据

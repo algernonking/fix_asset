@@ -2,7 +2,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:36:25
+ * @since 2021-09-05 07:01:58
  */
  -->
  <!DOCTYPE html>
@@ -38,6 +38,11 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 服务分组 , groupId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('服务分组')}" class="search-label groupId-label">服务分组</span><span class="search-colon">:</span></div>
+                        <div id="groupId" th:data="${'/service-ops/ops-service-group/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">

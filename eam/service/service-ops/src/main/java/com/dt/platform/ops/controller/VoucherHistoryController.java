@@ -3,6 +3,7 @@ package com.dt.platform.ops.controller;
  
 import java.util.List;
 
+import com.dt.platform.domain.ops.Voucher;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -234,7 +235,10 @@ public class VoucherHistoryController extends SuperController {
 	@PostMapping(VoucherHistoryServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<VoucherHistory>> queryPagedList(VoucherHistoryVO sample) {
 		Result<PagedList<VoucherHistory>> result=new Result<>();
+
+
 		PagedList<VoucherHistory> list=voucherHistoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
 		result.success(true).data(list);
 		return result;
 	}

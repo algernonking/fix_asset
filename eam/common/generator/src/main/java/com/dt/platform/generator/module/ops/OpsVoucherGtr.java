@@ -54,6 +54,7 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).form()
                .textArea().height(30);
 
+        cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
