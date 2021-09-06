@@ -10,6 +10,9 @@ import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 
 
 public class EamAssetsGtr extends BaseCodeGenerator {
@@ -29,7 +32,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
 
-        cfg.getPoClassFile().addSimpleProperty(Category.class,"category","资产分类","资产分类");
+        cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
@@ -105,8 +108,10 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("分类")
                 .form().validate().required()
-                .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(AssetMeta.CATEGORY).muliti(false);
+                .form().selectBox().queryApi(CatalogServiceProxy.QUERY_PAGED_LIST)
+                .paging(true).filter(true).toolbar(false)
+                .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME)
+                .fillBy(AssetMeta.CATEGORY).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)

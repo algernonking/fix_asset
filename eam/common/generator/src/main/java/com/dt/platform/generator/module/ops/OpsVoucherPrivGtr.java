@@ -30,12 +30,13 @@ public class OpsVoucherPrivGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).form().validate().required();
 
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.TYPE).form().validate().required().form()
-                .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE).paging(false).muliti(true).filter(true).toolbar(true);
+                .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE)
+                .paging(false).muliti(true).filter(true).toolbar(true);
 
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.STATUS).form().validate().required().form()
                 .radioBox().enumType(StatusValidEnum.class);
 
-        cfg.view().formWindow().bottomSpace(80);
+        cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {

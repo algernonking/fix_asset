@@ -30,6 +30,8 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.POSITION).search().fuzzySearch();
+
 
 
         cfg.view().field(EAMTables.OPS_VOUCHER.ID).basic().hidden(true);
@@ -40,19 +42,15 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
                         EAMTables.OPS_VOUCHER_OWNER.NAME,
+                        EAMTables.OPS_VOUCHER_OWNER.POSITION,
                         EAMTables.OPS_VOUCHER_OWNER.NOTES
                 }
 
         );
 
+        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).form().validate().required();
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form()
-                .validate().required().form().selectBox().
-                queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST)
-                .valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false)
-                .filter(false).muliti(false).toolbar(false)
-               .fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NOTES).form().textArea().height(30);
 

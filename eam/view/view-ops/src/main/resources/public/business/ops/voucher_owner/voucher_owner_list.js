@@ -1,7 +1,7 @@
 /**
  * 所属凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 20:53:19
+ * @since 2021-09-06 11:16:35
  */
 
 
@@ -110,6 +110,7 @@ function ListPage() {
 		var value = {};
 		value.categoryCode={ value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory",field:"code", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.position={ value: $("#position").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;

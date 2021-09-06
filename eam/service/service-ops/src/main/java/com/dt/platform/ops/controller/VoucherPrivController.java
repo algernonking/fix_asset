@@ -97,7 +97,7 @@ public class VoucherPrivController extends SuperController {
 	*/
 	@ApiOperation(value = "删除凭证权限")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = VoucherPrivVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486554803770494976")
+		@ApiImplicitParam(name = VoucherPrivVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "486554803770494976"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = VoucherPrivVOMeta.ID)

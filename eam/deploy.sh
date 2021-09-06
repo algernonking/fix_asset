@@ -72,6 +72,16 @@ if [[ $ops_remotefile_recreate -eq 1 ]];then
 	echo "tar xvf app.tar"										>>$ops_remotefile_recreate_file
 	echo "sleep 2"										        >>$ops_remotefile_recreate_file
 	echo "cd \$app_dir"		    								>>$ops_remotefile_recreate_file
+	echo "mkdir package                        ">>$ops_remotefile_recreate_file
+  echo "rm -rf package/*                    ">>$ops_remotefile_recreate_file
+	echo "cp wrapper-all-0.0.2.RELEASE.jar package/  ">>$ops_remotefile_recreate_file
+	echo "cd package  ">>$ops_remotefile_recreate_file
+	echo "unzip wrapper-all-0.0.2.RELEASE.jar BOOT-INF/classes/application.yml ">>$ops_remotefile_recreate_file
+  echo "sed -i \"s/39.105.191.22:3306\/eam/127.0.0.1:3306\/eam_demo/g\" BOOT-INF/classes/application.yml ">>$ops_remotefile_recreate_file
+  echo "zip -u wrapper-all-0.0.2.RELEASE.jar  BOOT-INF/classes/application.yml ">>$ops_remotefile_recreate_file
+  echo "cd .. ">>$ops_remotefile_recreate_file
+  echo "rm -rf app.jar ">>$ops_remotefile_recreate_file
+  echo "mv package/wrapper-all-0.0.2.RELEASE.jar app.jar ">>$ops_remotefile_recreate_file
 	echo "nohup sh run.sh restart &"					>>$ops_remotefile_recreate_file
 	echo "exit 0"												      >>$ops_remotefile_recreate_file
 fi

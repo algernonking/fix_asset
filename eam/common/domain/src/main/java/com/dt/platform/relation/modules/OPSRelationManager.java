@@ -133,14 +133,16 @@ public class OPSRelationManager extends RelationManager {
 
         //凭证类型
         this.property(VoucherOwnerMeta.VOUCHER_CATEGORY_PROP)
-                .using(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE);
+                .using(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_voucher_type'");
     }
 
     public void setupVoucher() {
 
         //凭证类型
         this.property(VoucherMeta.VOUCHER_TYPE_PROP)
-                .using(EAMTables.OPS_VOUCHER.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE);
+                .using(EAMTables.OPS_VOUCHER.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_voucher_type'");;
 
     }
 
