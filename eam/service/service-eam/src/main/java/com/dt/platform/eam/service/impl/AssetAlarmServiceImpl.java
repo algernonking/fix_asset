@@ -3,17 +3,17 @@ package com.dt.platform.eam.service.impl;
 
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.service.IAssetAlarmService;
-import com.dt.platform.eam.service.IAssetReportService;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 
+@Service
 public class AssetAlarmServiceImpl extends SuperService<Asset> implements IAssetAlarmService {
 
 

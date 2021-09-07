@@ -172,7 +172,10 @@ function FormPage() {
 		#else if(f.typeName.equals("date_input"))
 		laydate.render({
 			elem: '##(f.varName)',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"#(f.dateField.format)",
+			#if(f.dateField.defaultValue=="now")
+			value:new Date(),
+			#end
 			trigger:"click"
 		});
 	    #end
