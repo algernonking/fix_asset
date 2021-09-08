@@ -111,7 +111,7 @@
                 <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
-                        <input input-type="switch" type="checkbox" checked="" id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;" value="#(f.logicField.valueOn)">
+                        <input input-type="switch" type="checkbox" #if(f.logicField.defaultValue)checked="yes"#end id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;" #if(f.logicField.defaultValue)value="#(f.logicField.valueOn)"#else value="#(f.logicField.valueOff)" #end>
                     </div>
                 </div>
 
@@ -121,10 +121,10 @@
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                         #if(f.radioField.dictCode!=null)
-                        <input input-type="radio" type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${dict.toArray('#(f.radioField.dictCode)')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${dict.toArray('#(f.radioField.dictCode)')}" th:value="${e.code}" th:title="${e.text}"  th:checked="${(e.code=='#(f.radioField.defaultValue)' || stat.index==#(f.radioField.defaultIndex))?'yes':'no'}">
                         #end
                         #if(f.radioField.enumTypeName!=null)
-                        <input input-type="radio" type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${enum.toArray('#(f.radioField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="#(f.varName)" lay-filter="#(f.varName)" th:each="e,stat:${enum.toArray('#(f.radioField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='#(f.radioField.defaultValue)' || stat.index==#(f.radioField.defaultIndex))?'yes':'no'}">
                         #end
                     </div>
                 </div>
@@ -135,10 +135,10 @@
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
                             #if(f.checkField.dictCode!=null)
-                                <input input-type="checkbox" type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${dict.toArray('#(f.checkField.dictCode)')}" th:value="${e.code}" th:title="${e.text}">
+                                <input input-type="checkbox" type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${dict.toArray('#(f.checkField.dictCode)')}" th:value="${e.code}" th:title="${e.text}" th:checked="${pageHelper.checkDefault(e.code,stat.index,'#(f.checkField.defaultValues)','#(f.checkField.defaultIndexs)')?'yes':'no'}">
                             #end
                             #if(f.checkField.enumTypeName!=null)
-                                <input input-type="checkbox" type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${enum.toArray('#(f.checkField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}">
+                                <input input-type="checkbox" type="checkbox" name="#(f.varName)" lay-filter="#(f.varName)" lay-skin="primary" th:each="e,stat:${enum.toArray('#(f.checkField.enumTypeName)')}" th:value="${e.code}" th:title="${e.text}" th:checked="${pageHelper.checkDefault(e.code,stat.index,'#(f.checkField.defaultValues)','#(f.checkField.defaultIndexs)')?'yes':'no'}">
                             #end
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                     <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                         <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                         <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
-                            <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  autocomplete="off" input-type="number_input" integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)"  #if(f.numberInput.minValue!=null) min-value="#(f.numberInput.minValue)" #end #if(f.numberInput.maxValue!=null) max-value="#(f.numberInput.maxValue)" #end  scale="#(f.numberInput.scale)"/>
+                            <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('#(f.labelInForm)') }" type="text" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  autocomplete="off" input-type="number_input" integer="#(f.numberInput.isInteger)" decimal="#(f.numberInput.isDecimal)" allow-negative="#(f.numberInput.allowNegative)" step="#(f.numberInput.step)"  #if(f.numberInput.minValue!=null) min-value="#(f.numberInput.minValue)" #end #if(f.numberInput.maxValue!=null) max-value="#(f.numberInput.maxValue)" #end  scale="#(f.numberInput.scale)" #if(f.numberInput.defaultValue!=null) value="#(f.numberInput.defaultValue)" #end/>
                         </div>
                     </div>
 

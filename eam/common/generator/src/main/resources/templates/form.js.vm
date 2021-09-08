@@ -133,10 +133,12 @@ function FormPage() {
 			#if(f.selectField.enumTypeName!=null)
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="#(f.selectField.defaultValues)".split(",");
+				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -148,11 +150,13 @@ function FormPage() {
 			#end
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="#(f.selectField.defaultValues)".split(",");
+				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -160,10 +164,12 @@ function FormPage() {
 			#if(f.selectField.dictCode!=null)
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="#(f.selectField.defaultValues)".split(",");
+				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -192,7 +198,7 @@ function FormPage() {
 
 		#if(isSimplePK)
 		//如果是新建
-		if(!formData.#(idPropertyName)) {
+		if(!formData || !formData.#(idPropertyName)) {
 			adjustPopup();
 		}
 		#end
