@@ -46,6 +46,10 @@ spring:
       #port: 6379
       #host: 127.0.0.1
 
+#禁止自动扫描API
+springfox:
+  documentation:
+    auto-startup: false
 
 
 security:
