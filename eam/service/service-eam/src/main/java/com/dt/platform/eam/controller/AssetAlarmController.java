@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiSort(0)
 @RestController("AssetAlarmController")
 public class AssetAlarmController extends SuperController {
-
-    @Autowired
-    IAssetAlarmService assetAlarmService;
+//
+//    @Autowired
+//    IAssetAlarmService assetAlarmService;
 
 
 

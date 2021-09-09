@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Person;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 16:01:39
- * @sign 2A9C06AC119F4650CD6FFD3AECC31A0D
+ * @since 2021-09-09 08:09:11
+ * @sign FE981C95127A51E19B7576868B7A1EBB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -53,7 +54,19 @@ public class Asset extends Entity {
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
-	private String busiCode;
+	private String businessCode;
+	
+	/**
+	 * 流程：流程
+	*/
+	@ApiModelProperty(required = false,value="流程" , notes = "流程")
+	private String procId;
+	
+	/**
+	 * 办理状态：办理状态
+	*/
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
+	private String status;
 	
 	/**
 	 * 批次编码：批次编码
@@ -71,7 +84,7 @@ public class Asset extends Entity {
 	 * 资产状态：资产状态
 	*/
 	@ApiModelProperty(required = true,value="资产状态" , notes = "资产状态")
-	private String status;
+	private String assetStatus;
 	
 	/**
 	 * 是否显示：是否显示
@@ -212,10 +225,130 @@ public class Asset extends Entity {
 	private String attach;
 	
 	/**
-	 * 备注：备注
+	 * 资产备注：资产备注
 	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	@ApiModelProperty(required = false,value="资产备注" , notes = "资产备注")
+	private String assetNotes;
+	
+	/**
+	 * 维保厂商：维保厂商
+	*/
+	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
+	private String maintainerId;
+	
+	/**
+	 * 维保厂商：维保厂商
+	*/
+	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
+	private String maintainerName;
+	
+	/**
+	 * 联系人：联系人
+	*/
+	@ApiModelProperty(required = false,value="联系人" , notes = "联系人")
+	private String contacts;
+	
+	/**
+	 * 联系方式：联系方式
+	*/
+	@ApiModelProperty(required = false,value="联系方式" , notes = "联系方式")
+	private String contactInformation;
+	
+	/**
+	 * 负责人：负责人
+	*/
+	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
+	private String director;
+	
+	/**
+	 * 维保开始时间：维保开始时间
+	*/
+	@ApiModelProperty(required = false,value="维保开始时间" , notes = "维保开始时间")
+	private Date maintenanceStartDate;
+	
+	/**
+	 * 维保到期时间：维保到期时间
+	*/
+	@ApiModelProperty(required = false,value="维保到期时间" , notes = "维保到期时间")
+	private Date maintenanceEndDate;
+	
+	/**
+	 * 维保备注：维保备注
+	*/
+	@ApiModelProperty(required = false,value="维保备注" , notes = "维保备注")
+	private String maintenanceNotes;
+	
+	/**
+	 * 财务分类：财务分类
+	*/
+	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
+	private String financialCategoryId;
+	
+	/**
+	 * 财务编号：财务编号
+	*/
+	@ApiModelProperty(required = false,value="财务编号" , notes = "财务编号")
+	private String financialCode;
+	
+	/**
+	 * 资产供应商：资产供应商
+	*/
+	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
+	private String supplierId;
+	
+	/**
+	 * 税额：税额
+	*/
+	@ApiModelProperty(required = true,value="税额" , notes = "税额")
+	private BigDecimal taxamountRate;
+	
+	/**
+	 * 含税金额：含税金额
+	*/
+	@ApiModelProperty(required = true,value="含税金额" , notes = "含税金额")
+	private BigDecimal taxamountPrice;
+	
+	/**
+	 * 资产原值(单价)：资产原值(单价)
+	*/
+	@ApiModelProperty(required = true,value="资产原值(单价)" , notes = "资产原值(单价)")
+	private BigDecimal originalUnitPrice;
+	
+	/**
+	 * 累计折旧：累计折旧
+	*/
+	@ApiModelProperty(required = true,value="累计折旧" , notes = "累计折旧")
+	private BigDecimal accumulatedDepreciation;
+	
+	/**
+	 * 残值率：残值率
+	*/
+	@ApiModelProperty(required = true,value="残值率" , notes = "残值率")
+	private BigDecimal residualsRate;
+	
+	/**
+	 * 资产净值：资产净值
+	*/
+	@ApiModelProperty(required = true,value="资产净值" , notes = "资产净值")
+	private BigDecimal navPrice;
+	
+	/**
+	 * 采购单价：采购单价
+	*/
+	@ApiModelProperty(required = false,value="采购单价" , notes = "采购单价")
+	private BigDecimal purchaseUnitPrice;
+	
+	/**
+	 * 入账时间：入账时间
+	*/
+	@ApiModelProperty(required = false,value="入账时间" , notes = "入账时间")
+	private Date entryTime;
+	
+	/**
+	 * 财务备注：财务备注
+	*/
+	@ApiModelProperty(required = false,value="财务备注" , notes = "财务备注")
+	private String financialNotes;
 	
 	/**
 	 * 标签：标签
@@ -272,24 +405,6 @@ public class Asset extends Entity {
 	private Integer version;
 	
 	/**
-	 * 审批类型：审批类型
-	*/
-	@ApiModelProperty(required = false,value="审批类型" , notes = "审批类型")
-	private String approveType;
-	
-	/**
-	 * 审批状态：审批状态
-	*/
-	@ApiModelProperty(required = false,value="审批状态" , notes = "审批状态")
-	private String approveStatus;
-	
-	/**
-	 * 业务编码：业务编码
-	*/
-	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
-	private String businessCode;
-	
-	/**
 	 * 财务信息：财务信息
 	*/
 	@ApiModelProperty(required = false,value="财务信息" , notes = "财务信息")
@@ -323,7 +438,7 @@ public class Asset extends Entity {
 	 * 资产分类：资产分类
 	*/
 	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private Category category;
+	private Catalog category;
 	
 	/**
 	 * 物品档案：物品档案
@@ -347,13 +462,25 @@ public class Asset extends Entity {
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private Person use_user;
+	private Person useUser;
 	
 	/**
 	 * 管理人员：管理人员
 	*/
 	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
 	private Person manager;
+	
+	/**
+	 * 供应商：供应商
+	*/
+	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
+	private Supplier supplier;
+	
+	/**
+	 * 维保商：维保商
+	*/
+	@ApiModelProperty(required = false,value="维保商" , notes = "维保商")
+	private Maintainer maintnainer;
 	
 	/**
 	 * 获得 主键<br>
@@ -417,17 +544,55 @@ public class Asset extends Entity {
 	 * 业务编号
 	 * @return 业务编号
 	*/
-	public String getBusiCode() {
-		return busiCode;
+	public String getBusinessCode() {
+		return businessCode;
 	}
 	
 	/**
 	 * 设置 业务编号
-	 * @param busiCode 业务编号
+	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
-	public Asset setBusiCode(String busiCode) {
-		this.busiCode=busiCode;
+	public Asset setBusinessCode(String businessCode) {
+		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 流程<br>
+	 * 流程
+	 * @return 流程
+	*/
+	public String getProcId() {
+		return procId;
+	}
+	
+	/**
+	 * 设置 流程
+	 * @param procId 流程
+	 * @return 当前对象
+	*/
+	public Asset setProcId(String procId) {
+		this.procId=procId;
+		return this;
+	}
+	
+	/**
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 办理状态
+	 * @param status 办理状态
+	 * @return 当前对象
+	*/
+	public Asset setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -474,17 +639,17 @@ public class Asset extends Entity {
 	 * 资产状态
 	 * @return 资产状态
 	*/
-	public String getStatus() {
-		return status;
+	public String getAssetStatus() {
+		return assetStatus;
 	}
 	
 	/**
 	 * 设置 资产状态
-	 * @param status 资产状态
+	 * @param assetStatus 资产状态
 	 * @return 当前对象
 	*/
-	public Asset setStatus(String status) {
-		this.status=status;
+	public Asset setAssetStatus(String assetStatus) {
+		this.assetStatus=assetStatus;
 		return this;
 	}
 	
@@ -926,21 +1091,401 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
+	 * 获得 资产备注<br>
+	 * 资产备注
+	 * @return 资产备注
 	*/
-	public String getNotes() {
-		return notes;
+	public String getAssetNotes() {
+		return assetNotes;
 	}
 	
 	/**
-	 * 设置 备注
-	 * @param notes 备注
+	 * 设置 资产备注
+	 * @param assetNotes 资产备注
 	 * @return 当前对象
 	*/
-	public Asset setNotes(String notes) {
-		this.notes=notes;
+	public Asset setAssetNotes(String assetNotes) {
+		this.assetNotes=assetNotes;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保厂商<br>
+	 * 维保厂商
+	 * @return 维保厂商
+	*/
+	public String getMaintainerId() {
+		return maintainerId;
+	}
+	
+	/**
+	 * 设置 维保厂商
+	 * @param maintainerId 维保厂商
+	 * @return 当前对象
+	*/
+	public Asset setMaintainerId(String maintainerId) {
+		this.maintainerId=maintainerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保厂商<br>
+	 * 维保厂商
+	 * @return 维保厂商
+	*/
+	public String getMaintainerName() {
+		return maintainerName;
+	}
+	
+	/**
+	 * 设置 维保厂商
+	 * @param maintainerName 维保厂商
+	 * @return 当前对象
+	*/
+	public Asset setMaintainerName(String maintainerName) {
+		this.maintainerName=maintainerName;
+		return this;
+	}
+	
+	/**
+	 * 获得 联系人<br>
+	 * 联系人
+	 * @return 联系人
+	*/
+	public String getContacts() {
+		return contacts;
+	}
+	
+	/**
+	 * 设置 联系人
+	 * @param contacts 联系人
+	 * @return 当前对象
+	*/
+	public Asset setContacts(String contacts) {
+		this.contacts=contacts;
+		return this;
+	}
+	
+	/**
+	 * 获得 联系方式<br>
+	 * 联系方式
+	 * @return 联系方式
+	*/
+	public String getContactInformation() {
+		return contactInformation;
+	}
+	
+	/**
+	 * 设置 联系方式
+	 * @param contactInformation 联系方式
+	 * @return 当前对象
+	*/
+	public Asset setContactInformation(String contactInformation) {
+		this.contactInformation=contactInformation;
+		return this;
+	}
+	
+	/**
+	 * 获得 负责人<br>
+	 * 负责人
+	 * @return 负责人
+	*/
+	public String getDirector() {
+		return director;
+	}
+	
+	/**
+	 * 设置 负责人
+	 * @param director 负责人
+	 * @return 当前对象
+	*/
+	public Asset setDirector(String director) {
+		this.director=director;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保开始时间<br>
+	 * 维保开始时间
+	 * @return 维保开始时间
+	*/
+	public Date getMaintenanceStartDate() {
+		return maintenanceStartDate;
+	}
+	
+	/**
+	 * 设置 维保开始时间
+	 * @param maintenanceStartDate 维保开始时间
+	 * @return 当前对象
+	*/
+	public Asset setMaintenanceStartDate(Date maintenanceStartDate) {
+		this.maintenanceStartDate=maintenanceStartDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保到期时间<br>
+	 * 维保到期时间
+	 * @return 维保到期时间
+	*/
+	public Date getMaintenanceEndDate() {
+		return maintenanceEndDate;
+	}
+	
+	/**
+	 * 设置 维保到期时间
+	 * @param maintenanceEndDate 维保到期时间
+	 * @return 当前对象
+	*/
+	public Asset setMaintenanceEndDate(Date maintenanceEndDate) {
+		this.maintenanceEndDate=maintenanceEndDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保备注<br>
+	 * 维保备注
+	 * @return 维保备注
+	*/
+	public String getMaintenanceNotes() {
+		return maintenanceNotes;
+	}
+	
+	/**
+	 * 设置 维保备注
+	 * @param maintenanceNotes 维保备注
+	 * @return 当前对象
+	*/
+	public Asset setMaintenanceNotes(String maintenanceNotes) {
+		this.maintenanceNotes=maintenanceNotes;
+		return this;
+	}
+	
+	/**
+	 * 获得 财务分类<br>
+	 * 财务分类
+	 * @return 财务分类
+	*/
+	public String getFinancialCategoryId() {
+		return financialCategoryId;
+	}
+	
+	/**
+	 * 设置 财务分类
+	 * @param financialCategoryId 财务分类
+	 * @return 当前对象
+	*/
+	public Asset setFinancialCategoryId(String financialCategoryId) {
+		this.financialCategoryId=financialCategoryId;
+		return this;
+	}
+	
+	/**
+	 * 获得 财务编号<br>
+	 * 财务编号
+	 * @return 财务编号
+	*/
+	public String getFinancialCode() {
+		return financialCode;
+	}
+	
+	/**
+	 * 设置 财务编号
+	 * @param financialCode 财务编号
+	 * @return 当前对象
+	*/
+	public Asset setFinancialCode(String financialCode) {
+		this.financialCode=financialCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产供应商<br>
+	 * 资产供应商
+	 * @return 资产供应商
+	*/
+	public String getSupplierId() {
+		return supplierId;
+	}
+	
+	/**
+	 * 设置 资产供应商
+	 * @param supplierId 资产供应商
+	 * @return 当前对象
+	*/
+	public Asset setSupplierId(String supplierId) {
+		this.supplierId=supplierId;
+		return this;
+	}
+	
+	/**
+	 * 获得 税额<br>
+	 * 税额
+	 * @return 税额
+	*/
+	public BigDecimal getTaxamountRate() {
+		return taxamountRate;
+	}
+	
+	/**
+	 * 设置 税额
+	 * @param taxamountRate 税额
+	 * @return 当前对象
+	*/
+	public Asset setTaxamountRate(BigDecimal taxamountRate) {
+		this.taxamountRate=taxamountRate;
+		return this;
+	}
+	
+	/**
+	 * 获得 含税金额<br>
+	 * 含税金额
+	 * @return 含税金额
+	*/
+	public BigDecimal getTaxamountPrice() {
+		return taxamountPrice;
+	}
+	
+	/**
+	 * 设置 含税金额
+	 * @param taxamountPrice 含税金额
+	 * @return 当前对象
+	*/
+	public Asset setTaxamountPrice(BigDecimal taxamountPrice) {
+		this.taxamountPrice=taxamountPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产原值(单价)<br>
+	 * 资产原值(单价)
+	 * @return 资产原值(单价)
+	*/
+	public BigDecimal getOriginalUnitPrice() {
+		return originalUnitPrice;
+	}
+	
+	/**
+	 * 设置 资产原值(单价)
+	 * @param originalUnitPrice 资产原值(单价)
+	 * @return 当前对象
+	*/
+	public Asset setOriginalUnitPrice(BigDecimal originalUnitPrice) {
+		this.originalUnitPrice=originalUnitPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 累计折旧<br>
+	 * 累计折旧
+	 * @return 累计折旧
+	*/
+	public BigDecimal getAccumulatedDepreciation() {
+		return accumulatedDepreciation;
+	}
+	
+	/**
+	 * 设置 累计折旧
+	 * @param accumulatedDepreciation 累计折旧
+	 * @return 当前对象
+	*/
+	public Asset setAccumulatedDepreciation(BigDecimal accumulatedDepreciation) {
+		this.accumulatedDepreciation=accumulatedDepreciation;
+		return this;
+	}
+	
+	/**
+	 * 获得 残值率<br>
+	 * 残值率
+	 * @return 残值率
+	*/
+	public BigDecimal getResidualsRate() {
+		return residualsRate;
+	}
+	
+	/**
+	 * 设置 残值率
+	 * @param residualsRate 残值率
+	 * @return 当前对象
+	*/
+	public Asset setResidualsRate(BigDecimal residualsRate) {
+		this.residualsRate=residualsRate;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产净值<br>
+	 * 资产净值
+	 * @return 资产净值
+	*/
+	public BigDecimal getNavPrice() {
+		return navPrice;
+	}
+	
+	/**
+	 * 设置 资产净值
+	 * @param navPrice 资产净值
+	 * @return 当前对象
+	*/
+	public Asset setNavPrice(BigDecimal navPrice) {
+		this.navPrice=navPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 采购单价<br>
+	 * 采购单价
+	 * @return 采购单价
+	*/
+	public BigDecimal getPurchaseUnitPrice() {
+		return purchaseUnitPrice;
+	}
+	
+	/**
+	 * 设置 采购单价
+	 * @param purchaseUnitPrice 采购单价
+	 * @return 当前对象
+	*/
+	public Asset setPurchaseUnitPrice(BigDecimal purchaseUnitPrice) {
+		this.purchaseUnitPrice=purchaseUnitPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 入账时间<br>
+	 * 入账时间
+	 * @return 入账时间
+	*/
+	public Date getEntryTime() {
+		return entryTime;
+	}
+	
+	/**
+	 * 设置 入账时间
+	 * @param entryTime 入账时间
+	 * @return 当前对象
+	*/
+	public Asset setEntryTime(Date entryTime) {
+		this.entryTime=entryTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 财务备注<br>
+	 * 财务备注
+	 * @return 财务备注
+	*/
+	public String getFinancialNotes() {
+		return financialNotes;
+	}
+	
+	/**
+	 * 设置 财务备注
+	 * @param financialNotes 财务备注
+	 * @return 当前对象
+	*/
+	public Asset setFinancialNotes(String financialNotes) {
+		this.financialNotes=financialNotes;
 		return this;
 	}
 	
@@ -1116,63 +1661,6 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 审批类型<br>
-	 * 审批类型
-	 * @return 审批类型
-	*/
-	public String getApproveType() {
-		return approveType;
-	}
-	
-	/**
-	 * 设置 审批类型
-	 * @param approveType 审批类型
-	 * @return 当前对象
-	*/
-	public Asset setApproveType(String approveType) {
-		this.approveType=approveType;
-		return this;
-	}
-	
-	/**
-	 * 获得 审批状态<br>
-	 * 审批状态
-	 * @return 审批状态
-	*/
-	public String getApproveStatus() {
-		return approveStatus;
-	}
-	
-	/**
-	 * 设置 审批状态
-	 * @param approveStatus 审批状态
-	 * @return 当前对象
-	*/
-	public Asset setApproveStatus(String approveStatus) {
-		this.approveStatus=approveStatus;
-		return this;
-	}
-	
-	/**
-	 * 获得 业务编码<br>
-	 * 业务编码
-	 * @return 业务编码
-	*/
-	public String getBusinessCode() {
-		return businessCode;
-	}
-	
-	/**
-	 * 设置 业务编码
-	 * @param businessCode 业务编码
-	 * @return 当前对象
-	*/
-	public Asset setBusinessCode(String businessCode) {
-		this.businessCode=businessCode;
-		return this;
-	}
-	
-	/**
 	 * 获得 财务信息<br>
 	 * 财务信息
 	 * @return 财务信息
@@ -1272,7 +1760,7 @@ public class Asset extends Entity {
 	 * 资产分类
 	 * @return 资产分类
 	*/
-	public Category getCategory() {
+	public Catalog getCategory() {
 		return category;
 	}
 	
@@ -1281,7 +1769,7 @@ public class Asset extends Entity {
 	 * @param category 资产分类
 	 * @return 当前对象
 	*/
-	public Asset setCategory(Category category) {
+	public Asset setCategory(Catalog category) {
 		this.category=category;
 		return this;
 	}
@@ -1349,16 +1837,16 @@ public class Asset extends Entity {
 	 * @return 使用人员
 	*/
 	public Person getUseUser() {
-		return use_user;
+		return useUser;
 	}
 	
 	/**
 	 * 设置 使用人员
-	 * @param use_user 使用人员
+	 * @param useUser 使用人员
 	 * @return 当前对象
 	*/
-	public Asset setUseUser(Person use_user) {
-		this.use_user=use_user;
+	public Asset setUseUser(Person useUser) {
+		this.useUser=useUser;
 		return this;
 	}
 	
@@ -1378,6 +1866,44 @@ public class Asset extends Entity {
 	*/
 	public Asset setManager(Person manager) {
 		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 供应商<br>
+	 * 供应商
+	 * @return 供应商
+	*/
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	
+	/**
+	 * 设置 供应商
+	 * @param supplier 供应商
+	 * @return 当前对象
+	*/
+	public Asset setSupplier(Supplier supplier) {
+		this.supplier=supplier;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保商<br>
+	 * 维保商
+	 * @return 维保商
+	*/
+	public Maintainer getMaintnainer() {
+		return maintnainer;
+	}
+	
+	/**
+	 * 设置 维保商
+	 * @param maintnainer 维保商
+	 * @return 当前对象
+	*/
+	public Asset setMaintnainer(Maintainer maintnainer) {
+		this.maintnainer=maintnainer;
 		return this;
 	}
 

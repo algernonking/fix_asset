@@ -1,19 +1,33 @@
 package com.dt.platform.eam.page;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
+import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.domain.eam.AssetAttributeItemVO;
+import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
+import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanNameUtil;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.AssetServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 资产 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 13:56:55
+ * @since 2021-09-07 16:11:51
 */
 
 @Controller("EamAssetPageController")
@@ -23,6 +37,9 @@ public class AssetPageController extends ViewController {
 	public static final String prefix="business/eam/asset";
 
 	private AssetServiceProxy proxy;
+
+
+	private AssetAttributeItemServiceProxy assetAttributeItemServiceProxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -45,22 +62,63 @@ public class AssetPageController extends ViewController {
 		return prefix+"/asset_list";
 	}
 
+	/**
+	 * 资产 功能主页面
+	 */
+	@RequestMapping("/asset_info_list.html")
+	public String infoList(Model model,HttpServletRequest request) {
 
+		System.out.println(model);
+		return prefix+"/asset_info_list";
+	}
 
 	/**
 	 * 资产 表单页面
 	 */
 	@RequestMapping("/asset_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+
 		return prefix+"/asset_form";
 	}
 
 	/**
 	 * 资产 表单页面
 	 */
-	@RequestMapping("/asset_form_base.html")
-	public String formBase(Model model,HttpServletRequest request , String id) {
-		return prefix+"/asset_form_base";
+	@RequestMapping("/asset_info_form.html")
+	public String infoForm(Model model,HttpServletRequest request , String id) {
+		//设置字段布局
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeOwnerEnum.BASE.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
+			model.addAttribute("attributeData3Column2",data.get("attributeData3Column2") );
+			model.addAttribute("attributeData3Column3",data.get("attributeData3Column3") );
+			model.addAttribute("attributeData1Column1",data.get("attributeData1Column1") );
+		}
+		//设置字段必选
+		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
+		attributeItem.setOwnerCode(AssetAttributeOwnerEnum.BASE.code());
+		attributeItem.setRequired(1);
+		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
+		JSONObject attributeItemRequiredObject=new JSONObject();
+		if(attributeItemRequiredListResult.isSuccess()){
+			List<AssetAttributeItem>  attributeItemRequiredList = attributeItemRequiredListResult.getData();
+			if(attributeItemRequiredList.size()>0){
+				for(int i=0;i<attributeItemRequiredList.size();i++){
+					JSONObject obj=new JSONObject();
+					obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
+					obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
+					obj.put("required",true);
+					attributeItemRequiredObject.put(BeanNameUtil.instance().getPropertyName(attributeItemRequiredList.get(i).getAttribute().getCode()),obj);
+				}
+			}
+		}
+		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
+		//CatalogServiceProxy.api().q
+		//
+
+		return prefix+"/asset_info_form";
 	}
+
 
 }

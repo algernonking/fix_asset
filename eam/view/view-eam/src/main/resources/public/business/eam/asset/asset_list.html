@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 16:01:43
+ * @since 2021-09-09 08:09:16
  */
  -->
  <!DOCTYPE html>
@@ -34,11 +34,57 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 资产状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 分类编码 , categoryCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产状态')}" class="search-label status-label">资产状态</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:140px"></div>
                     </div>
+                    <!-- 批次编码 , batchCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资产状态 , assetStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 是否显示 , display ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 是否报废 , scrap ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 物品档案 , goodsId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=true -->
+                    <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 使用期限 , serviceLife ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 所属公司 , ownCompanyId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 管理人员 , managerId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 使用公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 位置 , positionId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 详细位置 , positionDetail ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 剩余数量 , remainNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 采购日期 , purchaseDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 资产RFID , rfid ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
+                    <!-- 维保商 , maintainerId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 维保厂商 , maintainerName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 联系人 , contacts ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 联系方式 , contactInformation ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 负责人 , director ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 维保开始时间 , maintenanceStartDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 维保到期时间 , maintenanceEndDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 维保备注 , maintenanceNotes ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 财务分类 , financialCategoryId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 财务编号 , financialCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 税额 , taxamountRate ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 含税金额 , taxamountPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 资产原值(单价) , originalUnitPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 累计折旧 , accumulatedDepreciation ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 残值率 , residualsRate ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 资产净值 , navPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 采购单价 , purchaseUnitPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 财务备注 , financialNotes ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
@@ -67,17 +113,17 @@
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-eam/eam-category/query-paged-list'}" style="width:140px"></div>
+                        <div id="categoryId" th:data="${'/service-pcm/pcm-catalog/query-nodes'}" style="width:140px"></div>
                     </div>
                     <!-- 厂商 , manufacturerId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
                         <div id="manufacturerId" th:data="${'/service-eam/eam-manufacturer/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
+                    <!-- 资产备注 , assetNotes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产备注')}" class="search-label assetNotes-label">资产备注</span><span class="search-colon">:</span></div>
+                        <input id="assetNotes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -107,19 +153,19 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_asset:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_asset:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('eam_asset:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('eam_asset:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <a th:if="${perm.checkAuth('eam_asset:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
-    <a th:if="${perm.checkAnyAuth('eam_asset:update','eam_asset:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <button th:if="${perm.checkAuth('eam_asset:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset:update','eam_asset:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <a th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <button th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>

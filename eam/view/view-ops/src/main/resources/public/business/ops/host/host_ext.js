@@ -59,11 +59,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterDataFill:function (data) {
             var action=admin.getTempData('ops-host-form-data-form-action')
 
-            laydate.render({
-                elem: '#onlineTime',
-                format:"yyyy-MM-dd",
-                trigger:"click"
-            });
+
 
             if(action=="create"){
                 //上线日期处理
@@ -96,6 +92,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     }
                 });
                 $('input[name=status]:first').prop("checked","true")
+
                 $('input[name=monitorStatus]:first').prop("checked","true")
 
                 fox.renderSelectBox({

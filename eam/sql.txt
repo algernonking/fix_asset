@@ -21,6 +21,17 @@ INSERT INTO `ops_service_info` (`id`, `group_id`, `service_category_id`, `name`)
 
 
 
+INSERT INTO `eam_asset_attribute` (`id`, `code`, `label`) VALUES (uuid(), '1', '1');
+
+cat a|awk '{print $1 " " $NF}'|awk -F ',' '{print $1}'|awk '{print "INSERT INTO `INSERT INTO `eam_asset_attribute` (`id`, `code`, `label`) VALUES (uuid(),"$1 " " $2 ")"}'
+
+
+cat aaa|awk '{print "INSERT INTO `INSERT INTO `eam_asset_attribute` (`id`, `code`, `label`) VALUES (uuid(),"$1 ", " $2 ")"}'
+
+
+update eam_asset_attribute_item  b set dimension=(select dimension from eam_asset_attribute a where a.id=b.attribute_id)
+
+
 
 
 INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '26', 'ops_user_voucher', NULL, 'mcs', 'mcs', 9999);

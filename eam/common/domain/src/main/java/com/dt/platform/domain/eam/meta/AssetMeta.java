@@ -8,18 +8,20 @@ import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.AssetExtEquipment;
 import com.dt.platform.domain.eam.AssetExtSoftware;
 import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.Category;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
 import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.hrm.Person;
+import com.dt.platform.domain.eam.Supplier;
+import com.dt.platform.domain.eam.Maintainer;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-02 16:01:39
- * @sign 2A9C06AC119F4650CD6FFD3AECC31A0D
+ * @since 2021-09-09 08:09:11
+ * @sign FE981C95127A51E19B7576868B7A1EBB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -58,12 +60,32 @@ public class AssetMeta {
 	/**
 	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final String BUSI_CODE="busiCode";
+	public static final String BUSINESS_CODE="businessCode";
 	
 	/**
 	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> BUSI_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,BUSI_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
+	
+	/**
+	 * 流程 , 类型: java.lang.String
+	*/
+	public static final String PROC_ID="procId";
+	
+	/**
+	 * 流程 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
+	
+	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 办理状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
 	 * 批次编码 , 类型: java.lang.String
@@ -88,12 +110,12 @@ public class AssetMeta {
 	/**
 	 * 资产状态 , 类型: java.lang.String
 	*/
-	public static final String STATUS="status";
+	public static final String ASSET_STATUS="assetStatus";
 	
 	/**
 	 * 资产状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,STATUS, java.lang.String.class, "资产状态", "资产状态", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ASSET_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_STATUS, java.lang.String.class, "资产状态", "资产状态", java.lang.String.class, null);
 	
 	/**
 	 * 是否显示 , 类型: java.lang.String
@@ -326,14 +348,214 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
 	
 	/**
-	 * 备注 , 类型: java.lang.String
+	 * 资产备注 , 类型: java.lang.String
 	*/
-	public static final String NOTES="notes";
+	public static final String ASSET_NOTES="assetNotes";
 	
 	/**
-	 * 备注 , 类型: java.lang.String
+	 * 资产备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ASSET_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_NOTES, java.lang.String.class, "资产备注", "资产备注", java.lang.String.class, null);
+	
+	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final String MAINTAINER_ID="maintainerId";
+	
+	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MAINTAINER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTAINER_ID, java.lang.String.class, "维保厂商", "维保厂商", java.lang.String.class, null);
+	
+	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final String MAINTAINER_NAME="maintainerName";
+	
+	/**
+	 * 维保厂商 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MAINTAINER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTAINER_NAME, java.lang.String.class, "维保厂商", "维保厂商", java.lang.String.class, null);
+	
+	/**
+	 * 联系人 , 类型: java.lang.String
+	*/
+	public static final String CONTACTS="contacts";
+	
+	/**
+	 * 联系人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CONTACTS, java.lang.String.class, "联系人", "联系人", java.lang.String.class, null);
+	
+	/**
+	 * 联系方式 , 类型: java.lang.String
+	*/
+	public static final String CONTACT_INFORMATION="contactInformation";
+	
+	/**
+	 * 联系方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CONTACT_INFORMATION, java.lang.String.class, "联系方式", "联系方式", java.lang.String.class, null);
+	
+	/**
+	 * 负责人 , 类型: java.lang.String
+	*/
+	public static final String DIRECTOR="director";
+	
+	/**
+	 * 负责人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> DIRECTOR_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,DIRECTOR, java.lang.String.class, "负责人", "负责人", java.lang.String.class, null);
+	
+	/**
+	 * 维保开始时间 , 类型: java.util.Date
+	*/
+	public static final String MAINTENANCE_START_DATE="maintenanceStartDate";
+	
+	/**
+	 * 维保开始时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> MAINTENANCE_START_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTENANCE_START_DATE, java.util.Date.class, "维保开始时间", "维保开始时间", java.util.Date.class, null);
+	
+	/**
+	 * 维保到期时间 , 类型: java.util.Date
+	*/
+	public static final String MAINTENANCE_END_DATE="maintenanceEndDate";
+	
+	/**
+	 * 维保到期时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> MAINTENANCE_END_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTENANCE_END_DATE, java.util.Date.class, "维保到期时间", "维保到期时间", java.util.Date.class, null);
+	
+	/**
+	 * 维保备注 , 类型: java.lang.String
+	*/
+	public static final String MAINTENANCE_NOTES="maintenanceNotes";
+	
+	/**
+	 * 维保备注 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MAINTENANCE_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTENANCE_NOTES, java.lang.String.class, "维保备注", "维保备注", java.lang.String.class, null);
+	
+	/**
+	 * 财务分类 , 类型: java.lang.String
+	*/
+	public static final String FINANCIAL_CATEGORY_ID="financialCategoryId";
+	
+	/**
+	 * 财务分类 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> FINANCIAL_CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,FINANCIAL_CATEGORY_ID, java.lang.String.class, "财务分类", "财务分类", java.lang.String.class, null);
+	
+	/**
+	 * 财务编号 , 类型: java.lang.String
+	*/
+	public static final String FINANCIAL_CODE="financialCode";
+	
+	/**
+	 * 财务编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> FINANCIAL_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,FINANCIAL_CODE, java.lang.String.class, "财务编号", "财务编号", java.lang.String.class, null);
+	
+	/**
+	 * 资产供应商 , 类型: java.lang.String
+	*/
+	public static final String SUPPLIER_ID="supplierId";
+	
+	/**
+	 * 资产供应商 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SUPPLIER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SUPPLIER_ID, java.lang.String.class, "资产供应商", "资产供应商", java.lang.String.class, null);
+	
+	/**
+	 * 税额 , 类型: java.math.BigDecimal
+	*/
+	public static final String TAXAMOUNT_RATE="taxamountRate";
+	
+	/**
+	 * 税额 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAXAMOUNT_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAXAMOUNT_RATE, java.math.BigDecimal.class, "税额", "税额", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 含税金额 , 类型: java.math.BigDecimal
+	*/
+	public static final String TAXAMOUNT_PRICE="taxamountPrice";
+	
+	/**
+	 * 含税金额 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAXAMOUNT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAXAMOUNT_PRICE, java.math.BigDecimal.class, "含税金额", "含税金额", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 资产原值(单价) , 类型: java.math.BigDecimal
+	*/
+	public static final String ORIGINAL_UNIT_PRICE="originalUnitPrice";
+	
+	/**
+	 * 资产原值(单价) , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> ORIGINAL_UNIT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ORIGINAL_UNIT_PRICE, java.math.BigDecimal.class, "资产原值(单价)", "资产原值(单价)", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 累计折旧 , 类型: java.math.BigDecimal
+	*/
+	public static final String ACCUMULATED_DEPRECIATION="accumulatedDepreciation";
+	
+	/**
+	 * 累计折旧 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> ACCUMULATED_DEPRECIATION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ACCUMULATED_DEPRECIATION, java.math.BigDecimal.class, "累计折旧", "累计折旧", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 残值率 , 类型: java.math.BigDecimal
+	*/
+	public static final String RESIDUALS_RATE="residualsRate";
+	
+	/**
+	 * 残值率 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> RESIDUALS_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RESIDUALS_RATE, java.math.BigDecimal.class, "残值率", "残值率", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 资产净值 , 类型: java.math.BigDecimal
+	*/
+	public static final String NAV_PRICE="navPrice";
+	
+	/**
+	 * 资产净值 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> NAV_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,NAV_PRICE, java.math.BigDecimal.class, "资产净值", "资产净值", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 采购单价 , 类型: java.math.BigDecimal
+	*/
+	public static final String PURCHASE_UNIT_PRICE="purchaseUnitPrice";
+	
+	/**
+	 * 采购单价 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> PURCHASE_UNIT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PURCHASE_UNIT_PRICE, java.math.BigDecimal.class, "采购单价", "采购单价", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 入账时间 , 类型: java.util.Date
+	*/
+	public static final String ENTRY_TIME="entryTime";
+	
+	/**
+	 * 入账时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> ENTRY_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ENTRY_TIME, java.util.Date.class, "入账时间", "入账时间", java.util.Date.class, null);
+	
+	/**
+	 * 财务备注 , 类型: java.lang.String
+	*/
+	public static final String FINANCIAL_NOTES="financialNotes";
+	
+	/**
+	 * 财务备注 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> FINANCIAL_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,FINANCIAL_NOTES, java.lang.String.class, "财务备注", "财务备注", java.lang.String.class, null);
 	
 	/**
 	 * 标签 , 类型: java.lang.String
@@ -426,36 +648,6 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 审批类型 , 类型: java.lang.String
-	*/
-	public static final String APPROVE_TYPE="approveType";
-	
-	/**
-	 * 审批类型 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> APPROVE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,APPROVE_TYPE, java.lang.String.class, "审批类型", "审批类型", java.lang.String.class, null);
-	
-	/**
-	 * 审批状态 , 类型: java.lang.String
-	*/
-	public static final String APPROVE_STATUS="approveStatus";
-	
-	/**
-	 * 审批状态 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> APPROVE_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,APPROVE_STATUS, java.lang.String.class, "审批状态", "审批状态", java.lang.String.class, null);
-	
-	/**
-	 * 业务编码 , 类型: java.lang.String
-	*/
-	public static final String BUSINESS_CODE="businessCode";
-	
-	/**
-	 * 业务编码 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,BUSINESS_CODE, java.lang.String.class, "业务编码", "业务编码", java.lang.String.class, null);
-	
-	/**
 	 * 财务信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
 	*/
 	public static final String ASSET_FINANCIAL="assetFinancial";
@@ -506,14 +698,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
 	
 	/**
-	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
+	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
 	*/
 	public static final String CATEGORY="category";
 	
 	/**
-	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
+	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Category> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATEGORY, com.dt.platform.domain.eam.Category.class, "资产分类", "资产分类", com.dt.platform.domain.eam.Category.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.pcm.Catalog> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATEGORY, org.github.foxnic.web.domain.pcm.Catalog.class, "资产分类", "资产分类", org.github.foxnic.web.domain.pcm.Catalog.class, null);
 	
 	/**
 	 * 物品档案 , 类型: com.dt.platform.domain.eam.Goods
@@ -548,7 +740,7 @@ public class AssetMeta {
 	/**
 	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
 	*/
-	public static final String USE_USER="use_user";
+	public static final String USE_USER="useUser";
 	
 	/**
 	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
@@ -566,9 +758,29 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Person> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER, org.github.foxnic.web.domain.hrm.Person.class, "管理人员", "管理人员", org.github.foxnic.web.domain.hrm.Person.class, null);
 	
 	/**
+	 * 供应商 , 类型: com.dt.platform.domain.eam.Supplier
+	*/
+	public static final String SUPPLIER="supplier";
+	
+	/**
+	 * 供应商 , 类型: com.dt.platform.domain.eam.Supplier
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Supplier> SUPPLIER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SUPPLIER, com.dt.platform.domain.eam.Supplier.class, "供应商", "供应商", com.dt.platform.domain.eam.Supplier.class, null);
+	
+	/**
+	 * 维保商 , 类型: com.dt.platform.domain.eam.Maintainer
+	*/
+	public static final String MAINTNAINER="maintnainer";
+	
+	/**
+	 * 维保商 , 类型: com.dt.platform.domain.eam.Maintainer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Maintainer> MAINTNAINER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTNAINER, com.dt.platform.domain.eam.Maintainer.class, "维保商", "维保商", com.dt.platform.domain.eam.Maintainer.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSI_CODE , BATCH_CODE , ASSET_CODE , STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , APPROVE_TYPE , APPROVE_STATUS , BUSINESS_CODE , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER };
 	
 	/**
 	 * 代理类
@@ -613,12 +825,34 @@ public class AssetMeta {
 		
 		/**
 		 * 设置 业务编号
-		 * @param busiCode 业务编号
+		 * @param businessCode 业务编号
 		 * @return 当前对象
 		*/
-		public Asset setBusiCode(String busiCode) {
-			super.change(BUSI_CODE,super.getBusiCode(),busiCode);
-			super.setBusiCode(busiCode);
+		public Asset setBusinessCode(String businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程
+		 * @param procId 流程
+		 * @return 当前对象
+		*/
+		public Asset setProcId(String procId) {
+			super.change(PROC_ID,super.getProcId(),procId);
+			super.setProcId(procId);
+			return this;
+		}
+		
+		/**
+		 * 设置 办理状态
+		 * @param status 办理状态
+		 * @return 当前对象
+		*/
+		public Asset setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		
@@ -646,12 +880,12 @@ public class AssetMeta {
 		
 		/**
 		 * 设置 资产状态
-		 * @param status 资产状态
+		 * @param assetStatus 资产状态
 		 * @return 当前对象
 		*/
-		public Asset setStatus(String status) {
-			super.change(STATUS,super.getStatus(),status);
-			super.setStatus(status);
+		public Asset setAssetStatus(String assetStatus) {
+			super.change(ASSET_STATUS,super.getAssetStatus(),assetStatus);
+			super.setAssetStatus(assetStatus);
 			return this;
 		}
 		
@@ -909,13 +1143,233 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 备注
-		 * @param notes 备注
+		 * 设置 资产备注
+		 * @param assetNotes 资产备注
 		 * @return 当前对象
 		*/
-		public Asset setNotes(String notes) {
-			super.change(NOTES,super.getNotes(),notes);
-			super.setNotes(notes);
+		public Asset setAssetNotes(String assetNotes) {
+			super.change(ASSET_NOTES,super.getAssetNotes(),assetNotes);
+			super.setAssetNotes(assetNotes);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保厂商
+		 * @param maintainerId 维保厂商
+		 * @return 当前对象
+		*/
+		public Asset setMaintainerId(String maintainerId) {
+			super.change(MAINTAINER_ID,super.getMaintainerId(),maintainerId);
+			super.setMaintainerId(maintainerId);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保厂商
+		 * @param maintainerName 维保厂商
+		 * @return 当前对象
+		*/
+		public Asset setMaintainerName(String maintainerName) {
+			super.change(MAINTAINER_NAME,super.getMaintainerName(),maintainerName);
+			super.setMaintainerName(maintainerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 联系人
+		 * @param contacts 联系人
+		 * @return 当前对象
+		*/
+		public Asset setContacts(String contacts) {
+			super.change(CONTACTS,super.getContacts(),contacts);
+			super.setContacts(contacts);
+			return this;
+		}
+		
+		/**
+		 * 设置 联系方式
+		 * @param contactInformation 联系方式
+		 * @return 当前对象
+		*/
+		public Asset setContactInformation(String contactInformation) {
+			super.change(CONTACT_INFORMATION,super.getContactInformation(),contactInformation);
+			super.setContactInformation(contactInformation);
+			return this;
+		}
+		
+		/**
+		 * 设置 负责人
+		 * @param director 负责人
+		 * @return 当前对象
+		*/
+		public Asset setDirector(String director) {
+			super.change(DIRECTOR,super.getDirector(),director);
+			super.setDirector(director);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保开始时间
+		 * @param maintenanceStartDate 维保开始时间
+		 * @return 当前对象
+		*/
+		public Asset setMaintenanceStartDate(Date maintenanceStartDate) {
+			super.change(MAINTENANCE_START_DATE,super.getMaintenanceStartDate(),maintenanceStartDate);
+			super.setMaintenanceStartDate(maintenanceStartDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保到期时间
+		 * @param maintenanceEndDate 维保到期时间
+		 * @return 当前对象
+		*/
+		public Asset setMaintenanceEndDate(Date maintenanceEndDate) {
+			super.change(MAINTENANCE_END_DATE,super.getMaintenanceEndDate(),maintenanceEndDate);
+			super.setMaintenanceEndDate(maintenanceEndDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保备注
+		 * @param maintenanceNotes 维保备注
+		 * @return 当前对象
+		*/
+		public Asset setMaintenanceNotes(String maintenanceNotes) {
+			super.change(MAINTENANCE_NOTES,super.getMaintenanceNotes(),maintenanceNotes);
+			super.setMaintenanceNotes(maintenanceNotes);
+			return this;
+		}
+		
+		/**
+		 * 设置 财务分类
+		 * @param financialCategoryId 财务分类
+		 * @return 当前对象
+		*/
+		public Asset setFinancialCategoryId(String financialCategoryId) {
+			super.change(FINANCIAL_CATEGORY_ID,super.getFinancialCategoryId(),financialCategoryId);
+			super.setFinancialCategoryId(financialCategoryId);
+			return this;
+		}
+		
+		/**
+		 * 设置 财务编号
+		 * @param financialCode 财务编号
+		 * @return 当前对象
+		*/
+		public Asset setFinancialCode(String financialCode) {
+			super.change(FINANCIAL_CODE,super.getFinancialCode(),financialCode);
+			super.setFinancialCode(financialCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产供应商
+		 * @param supplierId 资产供应商
+		 * @return 当前对象
+		*/
+		public Asset setSupplierId(String supplierId) {
+			super.change(SUPPLIER_ID,super.getSupplierId(),supplierId);
+			super.setSupplierId(supplierId);
+			return this;
+		}
+		
+		/**
+		 * 设置 税额
+		 * @param taxamountRate 税额
+		 * @return 当前对象
+		*/
+		public Asset setTaxamountRate(BigDecimal taxamountRate) {
+			super.change(TAXAMOUNT_RATE,super.getTaxamountRate(),taxamountRate);
+			super.setTaxamountRate(taxamountRate);
+			return this;
+		}
+		
+		/**
+		 * 设置 含税金额
+		 * @param taxamountPrice 含税金额
+		 * @return 当前对象
+		*/
+		public Asset setTaxamountPrice(BigDecimal taxamountPrice) {
+			super.change(TAXAMOUNT_PRICE,super.getTaxamountPrice(),taxamountPrice);
+			super.setTaxamountPrice(taxamountPrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产原值(单价)
+		 * @param originalUnitPrice 资产原值(单价)
+		 * @return 当前对象
+		*/
+		public Asset setOriginalUnitPrice(BigDecimal originalUnitPrice) {
+			super.change(ORIGINAL_UNIT_PRICE,super.getOriginalUnitPrice(),originalUnitPrice);
+			super.setOriginalUnitPrice(originalUnitPrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 累计折旧
+		 * @param accumulatedDepreciation 累计折旧
+		 * @return 当前对象
+		*/
+		public Asset setAccumulatedDepreciation(BigDecimal accumulatedDepreciation) {
+			super.change(ACCUMULATED_DEPRECIATION,super.getAccumulatedDepreciation(),accumulatedDepreciation);
+			super.setAccumulatedDepreciation(accumulatedDepreciation);
+			return this;
+		}
+		
+		/**
+		 * 设置 残值率
+		 * @param residualsRate 残值率
+		 * @return 当前对象
+		*/
+		public Asset setResidualsRate(BigDecimal residualsRate) {
+			super.change(RESIDUALS_RATE,super.getResidualsRate(),residualsRate);
+			super.setResidualsRate(residualsRate);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产净值
+		 * @param navPrice 资产净值
+		 * @return 当前对象
+		*/
+		public Asset setNavPrice(BigDecimal navPrice) {
+			super.change(NAV_PRICE,super.getNavPrice(),navPrice);
+			super.setNavPrice(navPrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 采购单价
+		 * @param purchaseUnitPrice 采购单价
+		 * @return 当前对象
+		*/
+		public Asset setPurchaseUnitPrice(BigDecimal purchaseUnitPrice) {
+			super.change(PURCHASE_UNIT_PRICE,super.getPurchaseUnitPrice(),purchaseUnitPrice);
+			super.setPurchaseUnitPrice(purchaseUnitPrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 入账时间
+		 * @param entryTime 入账时间
+		 * @return 当前对象
+		*/
+		public Asset setEntryTime(Date entryTime) {
+			super.change(ENTRY_TIME,super.getEntryTime(),entryTime);
+			super.setEntryTime(entryTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 财务备注
+		 * @param financialNotes 财务备注
+		 * @return 当前对象
+		*/
+		public Asset setFinancialNotes(String financialNotes) {
+			super.change(FINANCIAL_NOTES,super.getFinancialNotes(),financialNotes);
+			super.setFinancialNotes(financialNotes);
 			return this;
 		}
 		
@@ -1019,39 +1473,6 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 审批类型
-		 * @param approveType 审批类型
-		 * @return 当前对象
-		*/
-		public Asset setApproveType(String approveType) {
-			super.change(APPROVE_TYPE,super.getApproveType(),approveType);
-			super.setApproveType(approveType);
-			return this;
-		}
-		
-		/**
-		 * 设置 审批状态
-		 * @param approveStatus 审批状态
-		 * @return 当前对象
-		*/
-		public Asset setApproveStatus(String approveStatus) {
-			super.change(APPROVE_STATUS,super.getApproveStatus(),approveStatus);
-			super.setApproveStatus(approveStatus);
-			return this;
-		}
-		
-		/**
-		 * 设置 业务编码
-		 * @param businessCode 业务编码
-		 * @return 当前对象
-		*/
-		public Asset setBusinessCode(String businessCode) {
-			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
-			super.setBusinessCode(businessCode);
-			return this;
-		}
-		
-		/**
 		 * 设置 财务信息
 		 * @param assetFinancial 财务信息
 		 * @return 当前对象
@@ -1111,7 +1532,7 @@ public class AssetMeta {
 		 * @param category 资产分类
 		 * @return 当前对象
 		*/
-		public Asset setCategory(Category category) {
+		public Asset setCategory(Catalog category) {
 			super.change(CATEGORY,super.getCategory(),category);
 			super.setCategory(category);
 			return this;
@@ -1152,12 +1573,12 @@ public class AssetMeta {
 		
 		/**
 		 * 设置 使用人员
-		 * @param use_user 使用人员
+		 * @param useUser 使用人员
 		 * @return 当前对象
 		*/
-		public Asset setUseUser(Person use_user) {
-			super.change(USE_USER,super.getUseUser(),use_user);
-			super.setUseUser(use_user);
+		public Asset setUseUser(Person useUser) {
+			super.change(USE_USER,super.getUseUser(),useUser);
+			super.setUseUser(useUser);
 			return this;
 		}
 		
@@ -1169,6 +1590,28 @@ public class AssetMeta {
 		public Asset setManager(Person manager) {
 			super.change(MANAGER,super.getManager(),manager);
 			super.setManager(manager);
+			return this;
+		}
+		
+		/**
+		 * 设置 供应商
+		 * @param supplier 供应商
+		 * @return 当前对象
+		*/
+		public Asset setSupplier(Supplier supplier) {
+			super.change(SUPPLIER,super.getSupplier(),supplier);
+			super.setSupplier(supplier);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保商
+		 * @param maintnainer 维保商
+		 * @return 当前对象
+		*/
+		public Asset setMaintnainer(Maintainer maintnainer) {
+			super.change(MAINTNAINER,super.getMaintnainer(),maintnainer);
+			super.setMaintnainer(maintnainer);
 			return this;
 		}
 	}

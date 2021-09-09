@@ -1,0 +1,170 @@
+<!-- 
+/**
+ * 资产 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-09-07 16:11:55
+ */
+ -->
+ <!DOCTYPE html>
+<html style="background-color: #FFFFFF;">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('资产')}">资产</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
+</head>
+
+<body style="overflow-y: hidden;">
+<div class="form-container"   >
+
+    <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none;height:800px">
+        <input name="id" id="id"  type="hidden"/>
+
+
+        <div style="display: inline-block;" class="layui-col-xs12">
+            <div class="layui-tab" style="padding-right: 8px;padding-left: 8px;">
+                <ul class="layui-tab-title">
+                    <li   class="layui-this" >基本信息</li>
+                    <li  >维保信息</li>
+                    <li  >财务信息</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item  layui-show ">
+                        <!--开始：3栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData3Column1.?[dimension == 'attribution']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column2.?[dimension == 'attribution']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column3.?[dimension == 'attribution']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--开始：单栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs12 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData1Column1.?[dimension == 'attribution']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item ">
+                        <!--开始：3栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData3Column1.?[dimension == 'maintainer']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column2.?[dimension == 'maintainer']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column3.?[dimension == 'maintainer']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--开始：单栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs12 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData1Column1.?[dimension == 'maintainer']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-tab-item ">
+                        <!--开始：3栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData3Column1.?[dimension == 'financial']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column2.?[dimension == 'financial']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column3.?[dimension == 'financial']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--开始：单栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs12 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData1Column1.?[dimension == 'financial']}">
+                                    <div th:replace="business/eam/asset/assetcolumn :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        <div style="height: 80px"></div>
+
+    </form>
+
+</div>
+<div class="model-form-footer">
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset:create','eam_asset:update','eam_asset:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+</div>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+    var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
+    var VALIDATE_CONFIG=  [[${attributeRequiredData}]];
+    var AUTH_PREFIX="eam_asset";
+
+
+</script>
+
+
+
+<script th:src="'/business/eam/asset/asset_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset/asset_info_form.js?'+${cacheKey}"></script>
+
+</body>
+</html>

@@ -60,10 +60,10 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CLEAN_STATUS).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().disable();
 
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
         cfg.view().list().operationColumn().width(250);
-
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");

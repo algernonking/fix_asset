@@ -38,7 +38,15 @@ public class EamAssetHandleGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET_HANDLE.PICTURE_ID).form().upload().maxFileCount(6);
 
-            cfg.view().search().inputLayout(
+
+        cfg.view().field(EAMTables.EAM_ASSET_HANDLE.HANDLE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
+        cfg.view().field(EAMTables.EAM_ASSET_HANDLE.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
+        cfg.view().field(EAMTables.EAM_ASSET_HANDLE.ACTUAL_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
+
+        cfg.view().search().inputLayout(
                     new Object[]{
                             EAMTables.EAM_ASSET_HANDLE.NAME,
                             EAMTables.EAM_ASSET_HANDLE.TYPE,

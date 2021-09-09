@@ -49,6 +49,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         );
 
+        cfg.view().field(EAMTables.OPS_DB_INSTANCE.BACKUP_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.HOST_ID).basic().label("主机")
                 .form().validate().required()

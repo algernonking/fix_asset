@@ -35,6 +35,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionReturnVOMeta.ASSET_IDS);
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
@@ -68,7 +69,9 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(250);

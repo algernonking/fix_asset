@@ -5,9 +5,12 @@ import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
+import com.dt.platform.domain.ops.Voucher;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
+
+import java.util.Iterator;
 
 public class EAMRelationManager extends RelationManager {
     @Override
@@ -17,8 +20,10 @@ public class EAMRelationManager extends RelationManager {
         this.setupGoods();
 
         this.setupAsset();
+
         this.setupAssetFinancial();
         this.setupAssetMaintainer();
+
         this.setupAssetEaintainer();
 
 
@@ -30,6 +35,7 @@ public class EAMRelationManager extends RelationManager {
         this.setupAssetTranfer();
 
         this.setupInventory();
+        this.setupAssetAttributeItem();
 
     }
     public void setupProperties() {
@@ -37,6 +43,15 @@ public class EAMRelationManager extends RelationManager {
 
     }
 
+    public void setupAssetAttributeItem() {
+        // 关联字段
+        this.property(AssetAttributeItemMeta.ATTRIBUTE_PROP)
+        .using(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.ATTRIBUTE_ID).join(EAMTables.EAM_ASSET_ATTRIBUTE.ID);
+
+    }
+
+
+    //select * from attrubte_item where id in (select * from attrube)
 
     public void setupInventory() {
 
@@ -243,6 +258,16 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAsset() {
 
+        // 关联维保商
+        this.property(AssetMeta.MAINTNAINER_PROP)
+                .using(EAMTables.EAM_ASSET.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
+
+
+        // 关联分类
+        this.property(AssetMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_ASSET.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
+
+
         // 关联使用人
         this.property(AssetMeta.USE_USER_PROP)
                 .using(EAMTables.EAM_ASSET.USE_USER_ID).join(FoxnicWeb.HRM_PERSON.ID);
@@ -256,14 +281,11 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetMeta.GOODS_PROP)
                 .using(EAMTables.EAM_ASSET.GOODS_ID).join(EAMTables.EAM_GOODS.ID);
 
-        // 关联分类
-        this.property(AssetMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_ASSET.CATEGORY_ID).join(EAMTables.EAM_CATEGORY.ID);
 
+        // 关联供应商
+        this.property(AssetMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_ASSET.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
 
-//        // 关联品牌
-//        this.property(AssetMeta.BRAND_PROP)
-//                .using(EAMTables.EAM_ASSET.BRAND_ID).join(EAMTables.EAM_BRAND.ID);
 
         // 关联生产厂商
         this.property(AssetMeta.MANUFACTURER_PROP)

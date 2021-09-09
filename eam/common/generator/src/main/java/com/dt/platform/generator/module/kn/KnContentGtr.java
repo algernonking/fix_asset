@@ -95,6 +95,8 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .paging(false).toolbar(false).muliti(false).fillBy(ContentMeta.CATEGORY);
 
 
+
+
         //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
         String resourceNameField="res_"+EAMTables.KN_CONTENT.EDITOR_ID;
         cfg.view().field(resourceNameField)

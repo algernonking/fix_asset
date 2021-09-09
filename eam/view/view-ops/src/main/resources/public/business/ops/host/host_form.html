@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:20:23
+ * @since 2021-09-08 17:59:18
  */
  -->
  <!DOCTYPE html>
@@ -42,20 +42,18 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="hostName" id="hostName" name="hostName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="hostName" id="hostName" name="hostName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('主机状态')}">主机状态</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -92,14 +90,12 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="directorUsername" id="directorUsername" name="directorUsername" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -151,7 +147,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('CPU')}">CPU</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="hostCpu" id="hostCpu" name="hostCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('CPU') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="hostCpu" id="hostCpu" name="hostCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('CPU') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -160,7 +156,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('内存')}">内存</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="hostMemory" id="hostMemory" name="hostMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('内存') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="hostMemory" id="hostMemory" name="hostMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('内存') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -171,19 +167,19 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('物理IP')}">物理IP</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('物理IP') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('物理IP') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
 
                 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('虚拟VIP')}">虚拟VIP</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟VIP') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟VIP') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -194,10 +190,10 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('其他配置')}">其他配置</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="hostConf" id="hostConf" name="hostConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他配置') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="hostConf" id="hostConf" name="hostConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他配置') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -272,19 +268,19 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('应用使用用户')}">应用使用用户</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
 
                 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('运维操作用户')}">运维操作用户</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userOpsOper" id="userOpsOper" name="userOpsOper" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运维操作用户') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="userOpsOper" id="userOpsOper" name="userOpsOper" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运维操作用户') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -295,19 +291,19 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('数据库管理员')}">数据库管理员</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
 
                 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('数据库使用用户')}">数据库使用用户</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -318,10 +314,10 @@
             <div class="layui-col-xs4 form-column">
 
 
-                <div class="layui-form-item" >
+                    <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
                     <div class="layui-input-block ">
-                        <input lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" type="text" class="layui-input"   />
+                        <textarea lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -346,7 +342,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="monitorStatus" lay-filter="monitorStatus" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="monitorStatus" lay-filter="monitorStatus" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -370,14 +366,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="labels" id="labels" name="labels" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="labels" id="labels" name="labels" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

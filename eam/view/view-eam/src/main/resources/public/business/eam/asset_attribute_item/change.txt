@@ -1,0 +1,1 @@
+					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.attribute.dimension),d);}}

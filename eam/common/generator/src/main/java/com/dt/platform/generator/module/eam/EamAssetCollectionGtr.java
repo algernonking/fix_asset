@@ -75,6 +75,8 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH).table().hidden();
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 

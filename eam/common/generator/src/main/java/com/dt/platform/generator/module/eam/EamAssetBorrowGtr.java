@@ -57,8 +57,9 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-
-
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
 
         cfg.view().list().operationColumn().width(250);
