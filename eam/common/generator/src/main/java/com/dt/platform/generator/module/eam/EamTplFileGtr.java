@@ -37,7 +37,10 @@ public class EamTplFileGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_TPL_FILE.NAME).form().validate().required();
+
         cfg.view().field(EAMTables.EAM_TPL_FILE.FILE_ID).form().validate().required().form().upload().maxFileCount(1);
+
+
         cfg.view().field(EAMTables.EAM_TPL_FILE.NOTES).form().textArea().height(30);
 
 
@@ -75,8 +78,8 @@ public class EamTplFileGtr extends BaseCodeGenerator{
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
+                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
                 .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页

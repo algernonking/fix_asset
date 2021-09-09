@@ -2,7 +2,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:24
+ * @since 2021-09-09 21:14:44
  */
  -->
  <!DOCTYPE html>
@@ -39,14 +39,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

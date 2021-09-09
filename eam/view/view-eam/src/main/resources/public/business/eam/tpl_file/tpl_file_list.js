@@ -1,7 +1,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:23
+ * @since 2021-09-09 21:14:41
  */
 
 
@@ -78,6 +78,7 @@ function ListPage() {
 					,{ field: 'fileId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('文件') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'tenantId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('租户') , templet: function (d) { return templet('tenantId',d.tenantId,d);}  }
 					,{ field: 'resFileId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置') , templet: function (d) { return templet('resFileId',fox.getProperty(d,["file","location"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -269,7 +270,7 @@ function ListPage() {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-			} else if (layEvent === 'view') { // 修改
+			} else if (layEvent === 'view') { // 查看
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
@@ -323,13 +324,18 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
+		var action=admin.getTempData('eam-tpl-file-form-data-form-action');
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('eam-tpl-file-form-data', data);
 		var area=admin.getTempData('eam-tpl-file-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('模板文件')) : (fox.translate('添加')+fox.translate('模板文件'));
+		var title = fox.translate('模板文件');
+		if(action=="create") title=fox.translate('添加')+title;
+		else if(action=="edit") title=fox.translate('修改')+title;
+		else if(action=="view") title=fox.translate('查看')+title;
+
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,

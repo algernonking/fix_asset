@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:46
+ * @since 2021-09-09 12:26:47
  */
 
 function FormPage() {
@@ -83,27 +83,29 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
 		});
 		laydate.render({
 			elem: '#handleDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#planFinishDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#actualFinishDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 	    //渲染图片字段
@@ -137,7 +139,7 @@ function FormPage() {
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
 		//如果是新建
-		if(!formData.id) {
+		if(!formData || !formData.id) {
 			adjustPopup();
 		}
 		var fm=$('#data-form');

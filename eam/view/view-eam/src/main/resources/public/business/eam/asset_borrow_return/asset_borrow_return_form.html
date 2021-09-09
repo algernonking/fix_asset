@@ -2,7 +2,7 @@
 /**
  * 资产借用归还 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:38
+ * @since 2021-09-09 12:26:32
  */
  -->
  <!DOCTYPE html>
@@ -52,14 +52,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs6 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -74,14 +72,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('归还说明')}">归还说明</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('归还说明') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('归还说明')}">归还说明</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('归还说明') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

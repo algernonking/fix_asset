@@ -185,6 +185,7 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		return dao.queryEntity(sample);
 	}
 
+
 	@Override
 	public List<AssetAttributeItem> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
@@ -205,6 +206,15 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	}
 
 
+
+	private void printList(List<AssetAttributeItem> list){
+		System.out.println("total:"+list.size());
+		for(int i=0;i<list.size();i++){
+			System.out.println("itemId:"+list.get(i).getId()+ ",dimension:"+list.get(i).getDimension()+",code:"+list.get(i).getAttribute().getCode());
+		}
+	}
+
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 *
@@ -213,39 +223,56 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	 * */
 	@Override
 	public HashMap<String, List<AssetAttributeItem>> queryListByModule(String module) {
-		System.out.println("#######"+module);
+
 
 		HashMap<String, List<AssetAttributeItem>> result=new HashMap<String, List<AssetAttributeItem>>();
-		AssetAttributeItemVO attributeitemThree=new AssetAttributeItemVO();
-		attributeitemThree.setOwnerCode(module);
+		AssetAttributeItemVO attributeitem=new AssetAttributeItemVO();
+		attributeitem.setOwnerCode(module);
 		//三栏数据
-		attributeitemThree.setLayoutType(3);
-		attributeitemThree.setFormShow(1);
-		attributeitemThree.setLayoutColumn(1);
-		Result<List<AssetAttributeItem>> attributeItemsColumnOneResult= AssetAttributeItemServiceProxy.api().queryList(attributeitemThree);
-		List<AssetAttributeItem> attributeItemsData3ColumnOneList=attributeItemsColumnOneResult.getData();
-		attributeitemThree.setLayoutColumn(2);
-		Result<List<AssetAttributeItem>> attributeItemsColumnTwoResult= AssetAttributeItemServiceProxy.api().queryList(attributeitemThree);
-		List<AssetAttributeItem> attributeItemsData3ColumnTwoList=attributeItemsColumnTwoResult.getData();
-		attributeitemThree.setLayoutColumn(3);
-		Result<List<AssetAttributeItem>> attributeItemsColumnThreeResult= AssetAttributeItemServiceProxy.api().queryList(attributeitemThree);
-		List<AssetAttributeItem> attributeItemsData3ColumnThreeList=attributeItemsColumnThreeResult.getData();
+		attributeitem.setLayoutType(3);
+		attributeitem.setFormShow(1);
+		attributeitem.setLayoutColumn(1);
+		List<AssetAttributeItem> attributeItemsData3ColumnOneList=queryList(attributeitem);
+		join(attributeItemsData3ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
+
+		attributeitem.setLayoutColumn(2);
+		List<AssetAttributeItem> attributeItemsData3ColumnTwoList=queryList(attributeitem);
+		join(attributeItemsData3ColumnTwoList,AssetAttributeItemMeta.ATTRIBUTE);
+
+		attributeitem.setLayoutColumn(3);
+		List<AssetAttributeItem> attributeItemsData3ColumnThreeList= queryList(attributeitem);
+		join(attributeItemsData3ColumnThreeList,AssetAttributeItemMeta.ATTRIBUTE);
+
 		result.put("attributeData3Column1",attributeItemsData3ColumnOneList);
 		result.put("attributeData3Column2",attributeItemsData3ColumnTwoList);
 		result.put("attributeData3Column3",attributeItemsData3ColumnThreeList);
+		printList(attributeItemsData3ColumnOneList);
+		printList(attributeItemsData3ColumnTwoList);
+		printList(attributeItemsData3ColumnThreeList);
 
-		System.out.println("#######"+attributeItemsData3ColumnOneList.size());
-		System.out.println("#######"+attributeItemsData3ColumnTwoList.size());
-		System.out.println("#######"+attributeItemsData3ColumnThreeList.size());
+		//二栏数据
+		attributeitem.setLayoutType(2);
+		attributeitem.setFormShow(1);
+		attributeitem.setLayoutColumn(1);
+		List<AssetAttributeItem> attributeItemsData2ColumnOneList=queryList(attributeitem);
+		join(attributeItemsData2ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
+
+		attributeitem.setLayoutColumn(2);
+		List<AssetAttributeItem> attributeItemsData2ColumnTwoList=queryList(attributeitem);
+		join(attributeItemsData2ColumnTwoList,AssetAttributeItemMeta.ATTRIBUTE);
+		result.put("attributeData2Column1",attributeItemsData2ColumnOneList);
+		result.put("attributeData2Column2",attributeItemsData2ColumnTwoList);
+		printList(attributeItemsData2ColumnOneList);
+		printList(attributeItemsData2ColumnOneList);
 
 		//单栏数据
-		AssetAttributeItemVO attributeitemOne=new AssetAttributeItemVO();
-		attributeitemOne.setOwnerCode(AssetAttributeOwnerEnum.BASE.code());
-		attributeitemOne.setLayoutType(1);
-		attributeitemOne.setFormShow(1);
-		Result<List<AssetAttributeItem>> attributeItemsOneResult= AssetAttributeItemServiceProxy.api().queryList(attributeitemOne);
-		List<AssetAttributeItem> attributeItemsData1ColumnOneList=attributeItemsOneResult.getData();
+		attributeitem.setLayoutType(1);
+		attributeitem.setFormShow(1);
+		//AssetAttributeItem.create().setOwnerCode(AssetAttributeOwnerEnum.BASE.code()).setLayoutType(1).setFormShow(1);
+		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem);
+		join(attributeItemsData1ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeData1Column1",attributeItemsData1ColumnOneList);
+		printList(attributeItemsData1ColumnOneList);
 
 		return result;
 	}

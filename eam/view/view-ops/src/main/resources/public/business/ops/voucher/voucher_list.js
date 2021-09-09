@@ -1,7 +1,7 @@
 /**
  * 凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 21:13:52
+ * @since 2021-09-09 12:27:29
  */
 
 
@@ -285,7 +285,7 @@ function ListPage() {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-			} else if (layEvent === 'view') { // 修改
+			} else if (layEvent === 'view') { // 查看
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
@@ -342,13 +342,18 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
+		var action=admin.getTempData('ops-voucher-form-data-form-action');
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('ops-voucher-form-data', data);
 		var area=admin.getTempData('ops-voucher-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('凭证')) : (fox.translate('添加')+fox.translate('凭证'));
+		var title = fox.translate('凭证');
+		if(action=="create") title=fox.translate('添加')+title;
+		else if(action=="edit") title=fox.translate('修改')+title;
+		else if(action=="view") title=fox.translate('查看')+title;
+
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,

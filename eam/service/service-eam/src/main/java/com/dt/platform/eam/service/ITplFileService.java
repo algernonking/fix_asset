@@ -25,14 +25,16 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface ITplFileService extends ISuperService<TplFile> {
-	
+
+
 	/**
 	 * 插入实体
-	 * @param tplFile 实体数据
-	 * @return 插入是否成功
+	 * @param code 参数
+	 * @return 返回流
 	 * */
-	Result insert(TplFile tplFile);
- 
+	InputStream getTplFileStreamByCode(String code);
+
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param tplFileList 实体数据清单

@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:20:15
+ * @since 2021-09-09 12:27:32
  */
  -->
  <!DOCTYPE html>
@@ -41,7 +41,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 介绍 , profile ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 介绍 , profile ,typeName=text_area, isHideInSearch=true -->
                     <!-- 运维模式 , opsMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 开发模式 , devMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 所属公司/部门 , belongOrgInfo ,typeName=text_input, isHideInSearch=true -->
@@ -87,12 +87,12 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('标签')}" class="search-label labels-label">标签</span><span class="search-colon">:</span></div>
                         <input id="labels" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 业务联系人 , businessContact ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务联系人 , businessContact ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务联系人')}" class="search-label businessContact-label">业务联系人</span><span class="search-colon">:</span></div>
                         <input id="businessContact" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 技术联系人 , technicalContact ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 技术联系人 , technicalContact ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('技术联系人')}" class="search-label technicalContact-label">技术联系人</span><span class="search-colon">:</span></div>
                         <input id="technicalContact" class="layui-input search-input" style="width: 140px" type="text" />

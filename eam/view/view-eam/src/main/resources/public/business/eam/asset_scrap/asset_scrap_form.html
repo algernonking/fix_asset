@@ -2,7 +2,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:28
+ * @since 2021-09-09 12:26:10
  */
  -->
  <!DOCTYPE html>
@@ -39,42 +39,36 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('报废时间')}">报废时间</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="scrapDate" id="scrapDate" name="scrapDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('报废时间') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('报废时间')}">报废时间</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="scrapDate" id="scrapDate" name="scrapDate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('报废时间') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -125,7 +119,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"scrapDate":{"labelInForm":"报废时间","inputType":"text_input","required":true},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"scrapDate":{"labelInForm":"报废时间","inputType":"text_input","required":true},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_scrap";
 
     // 用户ID

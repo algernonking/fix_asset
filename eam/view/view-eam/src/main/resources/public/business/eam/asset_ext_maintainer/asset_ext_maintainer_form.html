@@ -2,7 +2,7 @@
 /**
  * 资产维保数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:53
+ * @since 2021-09-09 12:27:00
  */
  -->
  <!DOCTYPE html>
@@ -48,37 +48,31 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="director" id="director" name="director" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="director" id="director" name="director" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('负责人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('联系人')}">联系人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="contacts" id="contacts" name="contacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系人') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('联系人')}">联系人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="contacts" id="contacts" name="contacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('联系方式')}">联系方式</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="contactInformation" id="contactInformation" name="contactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系方式') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('联系方式')}">联系方式</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="contactInformation" id="contactInformation" name="contactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('联系方式') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-08 17:59:17
+ * @since 2021-09-09 12:27:42
  */
  -->
  <!DOCTYPE html>
@@ -45,13 +45,13 @@
                     <!-- 负责人 , directorUsername ,typeName=text_input, isHideInSearch=true -->
                     <!-- 内存 , hostMemory ,typeName=number_input, isHideInSearch=true -->
                     <!-- CPU , hostCpu ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 其他配置 , hostConf ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 系统管理员 , userOsAdmin ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 数据库管理员 , userDbAdmin ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 数据库使用用户 , userDbUsed ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 应用使用用户 , userAppUsed ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 运维操作用户 , userOpsOper ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 其他用户 , userOther ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 其他配置 , hostConf ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 系统管理员 , userOsAdmin ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数据库管理员 , userDbAdmin ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数据库使用用户 , userDbUsed ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 应用使用用户 , userAppUsed ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 运维操作用户 , userOpsOper ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 其他用户 , userOther ,typeName=text_input, isHideInSearch=true -->
                     <!-- 改密策略 , passwordStrategyId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 下线时间 , offlineTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 上线时间 , onlineTime ,typeName=date_input, isHideInSearch=true -->
@@ -62,12 +62,12 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('信息系统')}" class="search-label systemId-label">信息系统</span><span class="search-colon">:</span></div>
                         <div id="systemId" th:data="${'/service-ops/ops-information-system/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 虚拟VIP , hostVip ,typeName=text_area, isHideInSearch=false -->
+                    <!-- 虚拟VIP , hostVip ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('虚拟VIP')}" class="search-label hostVip-label">虚拟VIP</span><span class="search-colon">:</span></div>
                         <input id="hostVip" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 物理IP , hostIp ,typeName=text_area, isHideInSearch=false -->
+                    <!-- 物理IP , hostIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('物理IP')}" class="search-label hostIp-label">物理IP</span><span class="search-colon">:</span></div>
                         <input id="hostIp" class="layui-input search-input" style="width: 140px" type="text" />

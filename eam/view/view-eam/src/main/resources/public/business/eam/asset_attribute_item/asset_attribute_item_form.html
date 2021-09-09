@@ -2,7 +2,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-08 13:43:45
+ * @since 2021-09-09 12:26:02
  */
  -->
  <!DOCTYPE html>
@@ -39,14 +39,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
-
-                <div class="layui-form-item" style="display: none">
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                     <div class="layui-form-item" >
@@ -61,7 +59,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属模块')}">所属模块</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="ownerCode" lay-filter="ownerCode" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="ownerCode" lay-filter="ownerCode" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -70,7 +68,7 @@
                 <div class="layui-form-item" style="display: none">
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属维度')}">所属维度</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="dimension" lay-filter="dimension" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="dimension" lay-filter="dimension" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -79,7 +77,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('必选')}">必选</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="required" lay-filter="required" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="required" lay-filter="required" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -88,7 +86,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('布局类型')}">布局类型</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="layoutType" lay-filter="layoutType" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeLayoutTypeEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="layoutType" lay-filter="layoutType" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeLayoutTypeEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -97,7 +95,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('行布局位置')}">行布局位置</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="layoutRow" id="layoutRow" name="layoutRow" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('行布局位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="layoutRow" id="layoutRow" name="layoutRow" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('行布局位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -106,7 +104,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('列布局位置')}">列布局位置</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="layoutColumn" id="layoutColumn" name="layoutColumn" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('列布局位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="layoutColumn" id="layoutColumn" name="layoutColumn" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('列布局位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -115,7 +113,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('表单显示')}">表单显示</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="formShow" lay-filter="formShow" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusShowHideEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="formShow" lay-filter="formShow" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusShowHideEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -124,7 +122,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('列表显示')}">列表显示</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="listShow" lay-filter="listShow" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusShowHideEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="listShow" lay-filter="listShow" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusShowHideEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -138,14 +136,12 @@
                 </div>
 
 
-                
-                <div class="layui-form-item" style="display: none">
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('创建人ID')}">创建人ID</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="createBy" id="createBy" name="createBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('创建人ID') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('创建人ID')}">创建人ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="createBy" id="createBy" name="createBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('创建人ID') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                     <div class="layui-form-item" style="display: none">
@@ -155,14 +151,12 @@
                         </div>
                     </div>
 
-                
-                <div class="layui-form-item" style="display: none">
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('修改人ID')}">修改人ID</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="updateBy" id="updateBy" name="updateBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('修改人ID') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('修改人ID')}">修改人ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="updateBy" id="updateBy" name="updateBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('修改人ID') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                     <div class="layui-form-item" style="display: none">
@@ -176,19 +170,17 @@
                     <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('是否已删除')}">是否已删除</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="deleted" id="deleted" name="deleted" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否已删除') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="deleted" id="deleted" name="deleted" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否已删除') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
 
-                
-                <div class="layui-form-item" style="display: none">
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('删除人ID')}">删除人ID</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="deleteBy" id="deleteBy" name="deleteBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('删除人ID') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('删除人ID')}">删除人ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="deleteBy" id="deleteBy" name="deleteBy" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('删除人ID') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                     <div class="layui-form-item" style="display: none">
@@ -202,19 +194,17 @@
                     <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('version')}">version</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="version" id="version" name="version" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('version') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="version" id="version" name="version" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('version') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性备注')}">属性备注</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="resNotes" id="resNotes" name="resNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性备注') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性备注')}">属性备注</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="resNotes" id="resNotes" name="resNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性备注') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

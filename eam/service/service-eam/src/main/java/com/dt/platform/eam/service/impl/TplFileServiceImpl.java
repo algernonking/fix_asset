@@ -10,6 +10,7 @@ import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.springboot.web.DownloadUtil;
 import org.github.foxnic.web.domain.storage.File;
 import org.github.foxnic.web.proxy.storage.FileServiceProxy;
+import org.github.foxnic.web.proxy.utils.StorageProxyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -65,7 +66,6 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 	@Value("${storage.mode}")
 	private String storageMode;
 
-
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -88,7 +88,21 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 		Result r=super.insert(tplFile);
 		return r;
 	}
-	
+
+	/**
+	 * 插入实体
+	 * @param code
+	 * @return 文件流
+	 * */
+	@Override
+	public InputStream getTplFileStreamByCode(String code) {
+		TplFile tplfile=queryEntity(TplFile.create().setCode(code));
+		if(tplfile!=null){
+			return StorageProxyUtil.getInputStream(tplfile.getFileId());
+		}
+		return null;
+	}
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param tplFileList 实体数据清单

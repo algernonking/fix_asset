@@ -2,7 +2,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:41
+ * @since 2021-09-09 12:26:38
  */
  -->
  <!DOCTYPE html>
@@ -39,23 +39,19 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用后公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('领用后公司/部门') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -84,14 +80,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -106,14 +100,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -164,7 +156,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"useOrganizationId":{"labelInForm":"领用后公司/部门","inputType":"text_input","required":true},"collectionDate":{"labelInForm":"领用日期","inputType":"date_input","required":true},"useUserId":{"labelInForm":"使用人员","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true},"useOrganizationId":{"labelInForm":"领用后公司/部门","inputType":"text_input","required":true},"collectionDate":{"date":true,"labelInForm":"领用日期","inputType":"date_input","required":true},"useUserId":{"labelInForm":"使用人员","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_collection";
 
     // 用户ID

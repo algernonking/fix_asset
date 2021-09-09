@@ -1,7 +1,7 @@
 /**
  * 层级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:20
+ * @since 2021-09-09 12:25:55
  */
 
 function FormPage() {
@@ -88,7 +88,7 @@ function FormPage() {
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
 		//如果是新建
-		if(!formData.id) {
+		if(!formData || !formData.id) {
 			adjustPopup();
 		}
 		var fm=$('#data-form');

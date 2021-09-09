@@ -1,7 +1,7 @@
 /**
  * 中间件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:20:22
+ * @since 2021-09-09 12:27:40
  */
 
 layui.config({

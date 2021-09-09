@@ -2,7 +2,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-06 12:37:33
+ * @since 2021-09-09 12:27:27
  */
  -->
  <!DOCTYPE html>
@@ -48,20 +48,18 @@
                     </div>
 
 
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('用户')}">用户</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <input lay-filter="emplId" id="emplId" name="emplId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('用户') }" type="text" class="layui-input"    lay-verify="|required"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('用户')}">用户</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="emplId" id="emplId" name="emplId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('用户') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" th:value="${e.code}" th:title="${e.text}">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -73,7 +71,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 80px"></div>
+        <div style="height: 120px"></div>
 
 
     </form>

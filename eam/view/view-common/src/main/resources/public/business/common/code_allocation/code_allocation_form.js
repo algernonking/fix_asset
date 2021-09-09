@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:11
+ * @since 2021-09-09 12:25:45
  */
 
 function FormPage() {
@@ -85,10 +85,12 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -103,11 +105,13 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
+					opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -123,7 +127,7 @@ function FormPage() {
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
 		//如果是新建
-		if(!formData.id) {
+		if(!formData || !formData.id) {
 			adjustPopup();
 		}
 		var fm=$('#data-form');

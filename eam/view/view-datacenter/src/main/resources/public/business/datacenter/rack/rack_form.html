@@ -2,7 +2,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:21
+ * @since 2021-09-09 12:25:57
  */
  -->
  <!DOCTYPE html>
@@ -62,23 +62,19 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="rackCode" id="rackCode" name="rackCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"    lay-verify="|required"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackCode" id="rackCode" name="rackCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="rackName" id="rackName" name="rackName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="rackName" id="rackName" name="rackName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -89,7 +85,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('容量')}">容量</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0"/>
+                            <input lay-filter="rackCaptical" id="rackCaptical" name="rackCaptical" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('容量') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   min-value="0.0"  max-value="100.0"  scale="0" />
                         </div>
                     </div>
 

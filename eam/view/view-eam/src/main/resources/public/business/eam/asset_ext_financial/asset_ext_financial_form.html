@@ -2,7 +2,7 @@
 /**
  * 资产财务数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:52
+ * @since 2021-09-09 12:26:58
  */
  -->
  <!DOCTYPE html>
@@ -39,23 +39,19 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('财务编号')}">财务编号</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="assetCode" id="assetCode" name="assetCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务编号') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('财务编号')}">财务编号</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="assetCode" id="assetCode" name="assetCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务编号') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('财务分类')}">财务分类</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('财务分类')}">财务分类</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -75,7 +71,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('采购单价')}">采购单价</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="purchaseUnitPrice" id="purchaseUnitPrice" name="purchaseUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('采购单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0"/>
+                            <input lay-filter="purchaseUnitPrice" id="purchaseUnitPrice" name="purchaseUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('采购单价') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -136,7 +132,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={};
+    var VALIDATE_CONFIG={"taxamountRate":{"labelInForm":"税额","inputType":"number_input","required":true},"originalUnitPrice":{"labelInForm":"资产原值(单价)","inputType":"number_input","required":true},"navPrice":{"labelInForm":"资产净值","inputType":"number_input","required":true},"residualsRate":{"labelInForm":"残值率","inputType":"number_input","required":true},"accumulatedDepreciation":{"labelInForm":"累计折旧","inputType":"number_input","required":true},"taxamountPrice":{"labelInForm":"含税金额","inputType":"number_input","required":true}};
     var AUTH_PREFIX="eam_asset_ext_financial";
 
 

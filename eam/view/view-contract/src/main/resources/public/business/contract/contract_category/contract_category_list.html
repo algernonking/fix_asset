@@ -2,7 +2,7 @@
 /**
  * 合同分类 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:20:33
+ * @since 2021-09-09 12:27:57
  */
  -->
  <!DOCTYPE html>
@@ -64,12 +64,12 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('排序')}" class="search-label sort-label">排序</span><span class="search-colon">:</span></div>
                             <input id="sort" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
                     </div>
-                    <!-- 节点路径 , hierarchy ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 节点路径 , hierarchy ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('节点路径')}" class="search-label hierarchy-label">节点路径</span><span class="search-colon">:</span></div>
                         <input id="hierarchy" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 节点路径名称 , hierarchyName ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 节点路径名称 , hierarchyName ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('节点路径名称')}" class="search-label hierarchyName-label">节点路径名称</span><span class="search-colon">:</span></div>
                         <input id="hierarchyName" class="layui-input search-input" style="width: 140px" type="text" />

@@ -2,7 +2,7 @@
 /**
  * 资产设备数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-05 12:19:50
+ * @since 2021-09-09 12:26:56
  */
  -->
  <!DOCTYPE html>
@@ -42,55 +42,45 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('设备IP')}">设备IP</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="equipmentIp" id="equipmentIp" name="equipmentIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备IP') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('设备IP')}">设备IP</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="equipmentIp" id="equipmentIp" name="equipmentIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备IP') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('管理IP')}">管理IP</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="manageIp" id="manageIp" name="manageIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理IP') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('管理IP')}">管理IP</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="manageIp" id="manageIp" name="manageIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理IP') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('设备CPU')}">设备CPU</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="equipmentCpu" id="equipmentCpu" name="equipmentCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备CPU') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('设备CPU')}">设备CPU</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="equipmentCpu" id="equipmentCpu" name="equipmentCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备CPU') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('设备内存')}">设备内存</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="equipmentMemory" id="equipmentMemory" name="equipmentMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备内存') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('设备内存')}">设备内存</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="equipmentMemory" id="equipmentMemory" name="equipmentMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备内存') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('描述')}">描述</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="equipmentDesc" id="equipmentDesc" name="equipmentDesc" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('描述') }" type="text" class="layui-input"   />
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('描述')}">描述</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="equipmentDesc" id="equipmentDesc" name="equipmentDesc" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('描述') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -119,14 +109,12 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
-
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block ">
-                        <input lay-filter="equipmentNotes" id="equipmentNotes" name="equipmentNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"   />
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="equipmentNotes" id="equipmentNotes" name="equipmentNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>

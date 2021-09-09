@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-08 17:59:18
+ * @since 2021-09-09 12:27:42
  */
  -->
  <!DOCTYPE html>
@@ -166,37 +166,31 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('物理IP')}">物理IP</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('物理IP') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('物理IP')}">物理IP</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="hostIp" id="hostIp" name="hostIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('物理IP') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('虚拟VIP')}">虚拟VIP</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟VIP') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('虚拟VIP')}">虚拟VIP</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="hostVip" id="hostVip" name="hostVip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('虚拟VIP') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('其他配置')}">其他配置</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="hostConf" id="hostConf" name="hostConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他配置') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('其他配置')}">其他配置</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="hostConf" id="hostConf" name="hostConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他配置') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -267,60 +261,50 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('应用使用用户')}">应用使用用户</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('应用使用用户')}">应用使用用户</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="userAppUsed" id="userAppUsed" name="userAppUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('应用使用用户') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('运维操作用户')}">运维操作用户</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="userOpsOper" id="userOpsOper" name="userOpsOper" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运维操作用户') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('运维操作用户')}">运维操作用户</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="userOpsOper" id="userOpsOper" name="userOpsOper" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('运维操作用户') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('数据库管理员')}">数据库管理员</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('数据库管理员')}">数据库管理员</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="userDbAdmin" id="userDbAdmin" name="userDbAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库管理员') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('数据库使用用户')}">数据库使用用户</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('数据库使用用户')}">数据库使用用户</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="userDbUsed" id="userDbUsed" name="userDbUsed" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数据库使用用户') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
