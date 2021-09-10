@@ -44,7 +44,9 @@ import java.util.Date;
 
 @Service("EamAssetAttributeService")
 public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> implements IAssetAttributeService {
-	
+
+
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -139,12 +141,12 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	@Override
 	public Result update(AssetAttribute assetAttribute , SaveMode mode) {
 		Result r=super.update(assetAttribute , mode);
-		if(r.success()){
-			AssetAttributeItemVO update=new AssetAttributeItemVO();
-			update.setAttributeId(assetAttribute.getId());
-			update.setDimension(assetAttribute.getDimension());
-			AssetAttributeItemServiceProxy.api().update(update);
-		}
+//		if(r.success()){
+//			AssetAttributeItemVO update=new AssetAttributeItemVO();
+//			update.setAttributeId(assetAttribute.getId());
+//			update.setDimension(assetAttribute.getDimension());
+//			AssetAttributeItemServiceProxy.api().update(update);
+//		}
 		return r;
 	}
 	

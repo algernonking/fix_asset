@@ -2,7 +2,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:59
+ * @since 2021-09-10 12:00:01
  */
  -->
  <!DOCTYPE html>
@@ -60,6 +60,13 @@
                         </div>
                     </div>
 
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('标签备注')}">标签备注</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="labelNotes" id="labelNotes" name="labelNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签备注') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
                 
                 <div class="layui-form-item" >
                     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属维度')}">所属维度</div><div class="layui-required">*</div></div>
@@ -76,6 +83,24 @@
                         <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
                 </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('是否必选')}">是否必选</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="required" id="required" name="required" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否必选') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('是否修改')}">是否修改</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="requiredModify" id="requiredModify" name="requiredModify" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('是否修改') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
 
 
                 
@@ -167,6 +192,13 @@
                         </div>
                     </div>
 
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('租户')}">租户</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="tenantId" id="tenantId" name="tenantId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('租户') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                 <!--结束：栏次内字段循环-->
             </div>

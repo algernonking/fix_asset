@@ -55,7 +55,7 @@
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
 
     <div class="layui-input-block layui-input-block-c1">
-        <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}"></div>
+        <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}"></div>
     </div>
 </div>
 
@@ -84,7 +84,7 @@
 <div  th:fragment="asset_status" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="assetStatus" id="assetStatus" name="assetStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产状态') }" type="text" class="layui-input"    lay-verify="|required"   />
+       <div id="assetStatus" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}"></div>
     </div>
 </div>
 
@@ -381,10 +381,17 @@
 
 
 
-<div  th:fragment="financial_category_id" class="layui-form-item" >
+<!--<div   class="layui-form-item" >-->
+<!--    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>-->
+<!--    <div class="layui-input-block layui-input-block-c1">-->
+<!--        <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"   />-->
+<!--    </div>-->
+<!--</div>-->
+
+<div th:fragment="financial_category_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="financialCategoryId" id="financialCategoryId" name="financialCategoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('财务分类') }" type="text" class="layui-input"   />
+        <div id="financialCategoryId" input-type="select" th:data="${'/service-eam/eam-category-finance/query-paged-list'}"></div>
     </div>
 </div>
 

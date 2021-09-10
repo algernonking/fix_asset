@@ -26,7 +26,8 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_SCRAP("eam_asset_scrap" , "EAM_资产单据-报废"),
 	EAM_ASSET_TRANFER("eam_asset_tranfer" , "EAM_资产单据-转移"),
 	EAM_ASSET_STOCK_OUT("eam_stock_out" , "EAM_资产库存出库编码"),
-	EAM_ASSET_STOCK_IN("eam_stock_in" , "EAM_资产库存入库编码")
+	EAM_ASSET_STOCK_IN("eam_stock_in" , "EAM_资产库存入库编码"),
+	EAM_ASSET_CARD("eam_asset_card" , "EAM_资产卡片"),
 	;
 
 	private String code;

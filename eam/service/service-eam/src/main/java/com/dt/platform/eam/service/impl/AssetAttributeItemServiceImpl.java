@@ -5,7 +5,9 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
+import com.dt.platform.eam.service.IAssetAttributeService;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +63,10 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	public DAO dao() { return dao; }
 
 
-	
+	@Autowired
+	IAssetAttributeService assetAttributeService;
+
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -74,6 +79,16 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	 * */
 	@Override
 	public Result insert(AssetAttributeItem assetAttributeItem) {
+		AssetAttribute assetAttribute =  assetAttributeService.getById(assetAttributeItem.getAttributeId());
+		if(assetAttribute.getRequiredModify().toString().equals("0")){
+			if(!assetAttribute.getRequired().toString().equals(assetAttributeItem.getRequired().toString())){
+				String requiredStr="可选";
+				if(assetAttribute.getRequired().toString().equals("1")) {
+					requiredStr="必选";
+				}
+				return ErrorDesc.failure().message("当前属性字段必选属性不允许修改,设置为:" +requiredStr);
+			}
+		}
 		Result r=super.insert(assetAttributeItem);
 		return r;
 	}
@@ -142,6 +157,16 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	 * */
 	@Override
 	public Result update(AssetAttributeItem assetAttributeItem , SaveMode mode) {
+		AssetAttribute assetAttribute =  assetAttributeService.getById(assetAttributeItem.getAttributeId());
+		if(assetAttribute.getRequiredModify().toString().equals("0")){
+			if(!assetAttribute.getRequired().toString().equals(assetAttributeItem.getRequired().toString())){
+				String requiredStr="可选";
+				if(assetAttribute.getRequired().toString().equals("1")) {
+					requiredStr="必选";
+				}
+				return ErrorDesc.failure().message("当前属性字段必选属性不允许修改,设置为:" +requiredStr);
+			}
+		}
 		Result r=super.update(assetAttributeItem , mode);
 		return r;
 	}
@@ -207,8 +232,8 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 
 
 
-	private void printList(List<AssetAttributeItem> list){
-		System.out.println("total:"+list.size());
+	private void printList(List<AssetAttributeItem> list,String type){
+		System.out.println("type:"+type+",total:"+list.size());
 		for(int i=0;i<list.size();i++){
 			System.out.println("itemId:"+list.get(i).getId()+ ",dimension:"+list.get(i).getDimension()+",code:"+list.get(i).getAttribute().getCode());
 		}
@@ -246,9 +271,9 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		result.put("attributeData3Column1",attributeItemsData3ColumnOneList);
 		result.put("attributeData3Column2",attributeItemsData3ColumnTwoList);
 		result.put("attributeData3Column3",attributeItemsData3ColumnThreeList);
-		printList(attributeItemsData3ColumnOneList);
-		printList(attributeItemsData3ColumnTwoList);
-		printList(attributeItemsData3ColumnThreeList);
+		printList(attributeItemsData3ColumnOneList,"three-1");
+		printList(attributeItemsData3ColumnTwoList,"three-2");
+		printList(attributeItemsData3ColumnThreeList,"three-3");
 
 		//二栏数据
 		attributeitem.setLayoutType(2);
@@ -260,19 +285,21 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		attributeitem.setLayoutColumn(2);
 		List<AssetAttributeItem> attributeItemsData2ColumnTwoList=queryList(attributeitem);
 		join(attributeItemsData2ColumnTwoList,AssetAttributeItemMeta.ATTRIBUTE);
+
 		result.put("attributeData2Column1",attributeItemsData2ColumnOneList);
 		result.put("attributeData2Column2",attributeItemsData2ColumnTwoList);
-		printList(attributeItemsData2ColumnOneList);
-		printList(attributeItemsData2ColumnOneList);
+		printList(attributeItemsData2ColumnOneList,"two-1");
+		printList(attributeItemsData2ColumnOneList,"two-1");
 
 		//单栏数据
 		attributeitem.setLayoutType(1);
 		attributeitem.setFormShow(1);
+		attributeitem.setLayoutColumn(1);
 		//AssetAttributeItem.create().setOwnerCode(AssetAttributeOwnerEnum.BASE.code()).setLayoutType(1).setFormShow(1);
 		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem);
 		join(attributeItemsData1ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeData1Column1",attributeItemsData1ColumnOneList);
-		printList(attributeItemsData1ColumnOneList);
+		printList(attributeItemsData1ColumnOneList,"one-1");
 
 		return result;
 	}

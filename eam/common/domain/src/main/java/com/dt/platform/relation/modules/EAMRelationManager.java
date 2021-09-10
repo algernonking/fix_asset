@@ -263,9 +263,6 @@ public class EAMRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
 
 
-        // 关联分类
-        this.property(AssetMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_ASSET.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
 
 
         // 关联使用人
@@ -297,25 +294,34 @@ public class EAMRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
 
 
-        // 关联设备数据
-        this.property(AssetMeta.ASSET_EQUIPMENT_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_EQUIPMENT.ASSET_ID);
+//        // 关联设备数据
+//        this.property(AssetMeta.ASSET_EQUIPMENT_PROP)
+//                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_EQUIPMENT.ASSET_ID);
+//
+//        // 关联财务数据
+//        this.property(AssetMeta.ASSET_FINANCIAL_PROP)
+//                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_ID);
+//
+//
+//
+//        // 关联维保数据
+//        this.property(AssetMeta.ASSET_MAINTAINER_PROP)
+//                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID);
+//
+//
+//
+//        // 关联软件数据
+//        this.property(AssetMeta.ASSET_EXT_SOFTWARE_PROP)
+//                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID);
 
-        // 关联财务数据
-        this.property(AssetMeta.ASSET_FINANCIAL_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_FINANCIAL.ASSET_ID);
+        // 关联财务分类
+        this.property(AssetMeta.CATEGORY_FINANCE_PROP)
+                .using(EAMTables.EAM_ASSET.FINANCIAL_CATEGORY_ID).join(EAMTables.EAM_CATEGORY_FINANCE.ID);
 
 
-
-        // 关联维保数据
-        this.property(AssetMeta.ASSET_MAINTAINER_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_MAINTAINER.ASSET_ID);
-
-
-
-        // 关联软件数据
-        this.property(AssetMeta.ASSET_EXT_SOFTWARE_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_EXT_SOFTWARE.ASSET_ID);
+        // 关联资产分类
+        this.property(AssetMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_ASSET.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
 
         // 关联仓库
         this.property(AssetMeta.WAREHOUSE_PROP)

@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:59
- * @sign C8DEFA503DA03235A2097AAB88B2E4FC
+ * @since 2021-09-10 11:59:57
+ * @sign 7726884A39F5776FBDE282769C247863
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,6 +46,16 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> LABEL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,LABEL, java.lang.String.class, "字段名称", "字段名称", java.lang.String.class, null);
 	
 	/**
+	 * 标签备注 , 类型: java.lang.String
+	*/
+	public static final String LABEL_NOTES="labelNotes";
+	
+	/**
+	 * 标签备注 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> LABEL_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,LABEL_NOTES, java.lang.String.class, "标签备注", "标签备注", java.lang.String.class, null);
+	
+	/**
 	 * 所属维度 , 类型: java.lang.String
 	*/
 	public static final String DIMENSION="dimension";
@@ -64,6 +74,26 @@ public class AssetAttributeMeta {
 	 * 状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
+	
+	/**
+	 * 是否必选 , 类型: java.lang.Integer
+	*/
+	public static final String REQUIRED="required";
+	
+	/**
+	 * 是否必选 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.Integer> REQUIRED_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED, java.lang.Integer.class, "是否必选", "是否必选", java.lang.Integer.class, null);
+	
+	/**
+	 * 是否修改 , 类型: java.lang.Integer
+	*/
+	public static final String REQUIRED_MODIFY="requiredModify";
+	
+	/**
+	 * 是否修改 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.Integer> REQUIRED_MODIFY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED_MODIFY, java.lang.Integer.class, "是否修改", "是否修改", java.lang.Integer.class, null);
 	
 	/**
 	 * 组件类型 , 类型: java.lang.String
@@ -176,9 +206,19 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , LABEL , DIMENSION , STATUS , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -222,6 +262,17 @@ public class AssetAttributeMeta {
 		}
 		
 		/**
+		 * 设置 标签备注
+		 * @param labelNotes 标签备注
+		 * @return 当前对象
+		*/
+		public AssetAttribute setLabelNotes(String labelNotes) {
+			super.change(LABEL_NOTES,super.getLabelNotes(),labelNotes);
+			super.setLabelNotes(labelNotes);
+			return this;
+		}
+		
+		/**
 		 * 设置 所属维度
 		 * @param dimension 所属维度
 		 * @return 当前对象
@@ -240,6 +291,28 @@ public class AssetAttributeMeta {
 		public AssetAttribute setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 是否必选
+		 * @param required 是否必选
+		 * @return 当前对象
+		*/
+		public AssetAttribute setRequired(Integer required) {
+			super.change(REQUIRED,super.getRequired(),required);
+			super.setRequired(required);
+			return this;
+		}
+		
+		/**
+		 * 设置 是否修改
+		 * @param requiredModify 是否修改
+		 * @return 当前对象
+		*/
+		public AssetAttribute setRequiredModify(Integer requiredModify) {
+			super.change(REQUIRED_MODIFY,super.getRequiredModify(),requiredModify);
+			super.setRequiredModify(requiredModify);
 			return this;
 		}
 		
@@ -361,6 +434,17 @@ public class AssetAttributeMeta {
 		public AssetAttribute setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public AssetAttribute setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 	}

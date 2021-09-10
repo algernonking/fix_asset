@@ -10,8 +10,10 @@ import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,6 +97,7 @@ public class AssetPageController extends ViewController {
 			model.addAttribute("attributeData3Column3",data.get("attributeData3Column3") );
 			model.addAttribute("attributeData1Column1",data.get("attributeData1Column1") );
 		}
+
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
 		attributeItem.setOwnerCode(AssetAttributeOwnerEnum.BASE.code());
@@ -113,9 +116,21 @@ public class AssetPageController extends ViewController {
 				}
 			}
 		}
+
 		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
-		//CatalogServiceProxy.api().q
-		//
+		CatalogVO catalog=new CatalogVO();
+		catalog.setCode("asset");
+		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(catalogList.get(0).getId());
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
 
 		return prefix+"/asset_info_form";
 	}

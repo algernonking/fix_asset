@@ -55,6 +55,7 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
 
 
 
+
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.OWNER_CODE).form().validate().required()
                 .form().radioBox().enumType(AssetAttributeOwnerEnum.class);
 

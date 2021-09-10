@@ -53,8 +53,8 @@ public class OPSRelationManager extends RelationManager {
 
     private void setupRelations() {
         //关联服务分组
-        this.property(TplFileMeta.FILE_PROP)
-                .using(EAMTables.EAM_TPL_FILE.FILE_ID).join(FoxnicWeb.SYS_FILE.ID);
+//        this.property(TplFileMeta.FILE_PROP)
+//                .using(EAMTables.EAM_TPL_FILE.FILE_ID).join(FoxnicWeb.SYS_FILE.ID);
     }
 
 

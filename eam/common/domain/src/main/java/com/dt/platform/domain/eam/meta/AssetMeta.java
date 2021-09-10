@@ -4,10 +4,8 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Asset;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.dt.platform.domain.eam.AssetExtFinancial;
-import com.dt.platform.domain.eam.AssetExtEquipment;
-import com.dt.platform.domain.eam.AssetExtSoftware;
 import com.dt.platform.domain.eam.Position;
+import com.dt.platform.domain.eam.CategoryFinance;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
@@ -20,8 +18,8 @@ import com.dt.platform.domain.eam.Maintainer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 08:09:11
- * @sign FE981C95127A51E19B7576868B7A1EBB
+ * @since 2021-09-10 15:55:00
+ * @sign 940395242412C0A4514F7F306038E85E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -648,44 +646,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
-	 * 财务信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
+	 * 租户 , 类型: java.lang.String
 	*/
-	public static final String ASSET_FINANCIAL="assetFinancial";
+	public static final String TENANT_ID="tenantId";
 	
 	/**
-	 * 财务信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
+	 * 租户 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtFinancial> ASSET_FINANCIAL_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_FINANCIAL, com.dt.platform.domain.eam.AssetExtFinancial.class, "财务信息", "财务信息", com.dt.platform.domain.eam.AssetExtFinancial.class, null);
-	
-	/**
-	 * 维保信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
-	*/
-	public static final String ASSET_MAINTAINER="assetMaintainer";
-	
-	/**
-	 * 维保信息 , 类型: com.dt.platform.domain.eam.AssetExtFinancial
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtFinancial> ASSET_MAINTAINER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_MAINTAINER, com.dt.platform.domain.eam.AssetExtFinancial.class, "维保信息", "维保信息", com.dt.platform.domain.eam.AssetExtFinancial.class, null);
-	
-	/**
-	 * 设备信息 , 类型: com.dt.platform.domain.eam.AssetExtEquipment
-	*/
-	public static final String ASSET_EQUIPMENT="assetEquipment";
-	
-	/**
-	 * 设备信息 , 类型: com.dt.platform.domain.eam.AssetExtEquipment
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtEquipment> ASSET_EQUIPMENT_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_EQUIPMENT, com.dt.platform.domain.eam.AssetExtEquipment.class, "设备信息", "设备信息", com.dt.platform.domain.eam.AssetExtEquipment.class, null);
-	
-	/**
-	 * 软件信息 , 类型: com.dt.platform.domain.eam.AssetExtSoftware
-	*/
-	public static final String ASSET_EXT_SOFTWARE="assetExtSoftware";
-	
-	/**
-	 * 软件信息 , 类型: com.dt.platform.domain.eam.AssetExtSoftware
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtSoftware> ASSET_EXT_SOFTWARE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ASSET_EXT_SOFTWARE, com.dt.platform.domain.eam.AssetExtSoftware.class, "软件信息", "软件信息", com.dt.platform.domain.eam.AssetExtSoftware.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
 	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
@@ -696,6 +664,16 @@ public class AssetMeta {
 	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,POSITION, com.dt.platform.domain.eam.Position.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
+	
+	/**
+	 * 财务分类 , 类型: com.dt.platform.domain.eam.CategoryFinance
+	*/
+	public static final String CATEGORY_FINANCE="categoryFinance";
+	
+	/**
+	 * 财务分类 , 类型: com.dt.platform.domain.eam.CategoryFinance
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.CategoryFinance> CATEGORY_FINANCE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATEGORY_FINANCE, com.dt.platform.domain.eam.CategoryFinance.class, "财务分类", "财务分类", com.dt.platform.domain.eam.CategoryFinance.class, null);
 	
 	/**
 	 * 资产分类 , 类型: org.github.foxnic.web.domain.pcm.Catalog
@@ -780,7 +758,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET_FINANCIAL , ASSET_MAINTAINER , ASSET_EQUIPMENT , ASSET_EXT_SOFTWARE , POSITION , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER };
 	
 	/**
 	 * 代理类
@@ -1473,46 +1451,13 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 财务信息
-		 * @param assetFinancial 财务信息
+		 * 设置 租户
+		 * @param tenantId 租户
 		 * @return 当前对象
 		*/
-		public Asset setAssetFinancial(AssetExtFinancial assetFinancial) {
-			super.change(ASSET_FINANCIAL,super.getAssetFinancial(),assetFinancial);
-			super.setAssetFinancial(assetFinancial);
-			return this;
-		}
-		
-		/**
-		 * 设置 维保信息
-		 * @param assetMaintainer 维保信息
-		 * @return 当前对象
-		*/
-		public Asset setAssetMaintainer(AssetExtFinancial assetMaintainer) {
-			super.change(ASSET_MAINTAINER,super.getAssetMaintainer(),assetMaintainer);
-			super.setAssetMaintainer(assetMaintainer);
-			return this;
-		}
-		
-		/**
-		 * 设置 设备信息
-		 * @param assetEquipment 设备信息
-		 * @return 当前对象
-		*/
-		public Asset setAssetEquipment(AssetExtEquipment assetEquipment) {
-			super.change(ASSET_EQUIPMENT,super.getAssetEquipment(),assetEquipment);
-			super.setAssetEquipment(assetEquipment);
-			return this;
-		}
-		
-		/**
-		 * 设置 软件信息
-		 * @param assetExtSoftware 软件信息
-		 * @return 当前对象
-		*/
-		public Asset setAssetExtSoftware(AssetExtSoftware assetExtSoftware) {
-			super.change(ASSET_EXT_SOFTWARE,super.getAssetExtSoftware(),assetExtSoftware);
-			super.setAssetExtSoftware(assetExtSoftware);
+		public Asset setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		
@@ -1524,6 +1469,17 @@ public class AssetMeta {
 		public Asset setPosition(Position position) {
 			super.change(POSITION,super.getPosition(),position);
 			super.setPosition(position);
+			return this;
+		}
+		
+		/**
+		 * 设置 财务分类
+		 * @param categoryFinance 财务分类
+		 * @return 当前对象
+		*/
+		public Asset setCategoryFinance(CategoryFinance categoryFinance) {
+			super.change(CATEGORY_FINANCE,super.getCategoryFinance(),categoryFinance);
+			super.setCategoryFinance(categoryFinance);
 			return this;
 		}
 		

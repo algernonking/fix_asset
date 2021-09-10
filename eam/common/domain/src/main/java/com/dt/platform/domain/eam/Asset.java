@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 08:09:11
- * @sign FE981C95127A51E19B7576868B7A1EBB
+ * @since 2021-09-10 15:55:00
+ * @sign 940395242412C0A4514F7F306038E85E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -107,7 +107,7 @@ public class Asset extends Entity {
 	/**
 	 * 标准型号资产名称：标准型号资产名称
 	*/
-	@ApiModelProperty(required = true,value="标准型号资产名称" , notes = "标准型号资产名称")
+	@ApiModelProperty(required = false,value="标准型号资产名称" , notes = "标准型号资产名称")
 	private String name;
 	
 	/**
@@ -137,7 +137,7 @@ public class Asset extends Entity {
 	/**
 	 * 使用期限：使用期限
 	*/
-	@ApiModelProperty(required = true,value="使用期限" , notes = "使用期限")
+	@ApiModelProperty(required = false,value="使用期限" , notes = "使用期限")
 	private BigDecimal serviceLife;
 	
 	/**
@@ -197,7 +197,7 @@ public class Asset extends Entity {
 	/**
 	 * 资产数量：资产数量
 	*/
-	@ApiModelProperty(required = true,value="资产数量" , notes = "资产数量")
+	@ApiModelProperty(required = false,value="资产数量" , notes = "资产数量")
 	private Integer assetNumber;
 	
 	/**
@@ -299,37 +299,37 @@ public class Asset extends Entity {
 	/**
 	 * 税额：税额
 	*/
-	@ApiModelProperty(required = true,value="税额" , notes = "税额")
+	@ApiModelProperty(required = false,value="税额" , notes = "税额")
 	private BigDecimal taxamountRate;
 	
 	/**
 	 * 含税金额：含税金额
 	*/
-	@ApiModelProperty(required = true,value="含税金额" , notes = "含税金额")
+	@ApiModelProperty(required = false,value="含税金额" , notes = "含税金额")
 	private BigDecimal taxamountPrice;
 	
 	/**
 	 * 资产原值(单价)：资产原值(单价)
 	*/
-	@ApiModelProperty(required = true,value="资产原值(单价)" , notes = "资产原值(单价)")
+	@ApiModelProperty(required = false,value="资产原值(单价)" , notes = "资产原值(单价)")
 	private BigDecimal originalUnitPrice;
 	
 	/**
 	 * 累计折旧：累计折旧
 	*/
-	@ApiModelProperty(required = true,value="累计折旧" , notes = "累计折旧")
+	@ApiModelProperty(required = false,value="累计折旧" , notes = "累计折旧")
 	private BigDecimal accumulatedDepreciation;
 	
 	/**
 	 * 残值率：残值率
 	*/
-	@ApiModelProperty(required = true,value="残值率" , notes = "残值率")
+	@ApiModelProperty(required = false,value="残值率" , notes = "残值率")
 	private BigDecimal residualsRate;
 	
 	/**
 	 * 资产净值：资产净值
 	*/
-	@ApiModelProperty(required = true,value="资产净值" , notes = "资产净值")
+	@ApiModelProperty(required = false,value="资产净值" , notes = "资产净值")
 	private BigDecimal navPrice;
 	
 	/**
@@ -395,7 +395,7 @@ public class Asset extends Entity {
 	/**
 	 * 删除时间：删除时间
 	*/
-	@ApiModelProperty(required = false,value="删除时间" , notes = "删除时间")
+	@ApiModelProperty(required = true,value="删除时间" , notes = "删除时间")
 	private Date deleteTime;
 	
 	/**
@@ -405,34 +405,22 @@ public class Asset extends Entity {
 	private Integer version;
 	
 	/**
-	 * 财务信息：财务信息
+	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="财务信息" , notes = "财务信息")
-	private AssetExtFinancial assetFinancial;
-	
-	/**
-	 * 维保信息：维保信息
-	*/
-	@ApiModelProperty(required = false,value="维保信息" , notes = "维保信息")
-	private AssetExtFinancial assetMaintainer;
-	
-	/**
-	 * 设备信息：设备信息
-	*/
-	@ApiModelProperty(required = false,value="设备信息" , notes = "设备信息")
-	private AssetExtEquipment assetEquipment;
-	
-	/**
-	 * 软件信息：软件信息
-	*/
-	@ApiModelProperty(required = false,value="软件信息" , notes = "软件信息")
-	private AssetExtSoftware assetExtSoftware;
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 存放位置：存放位置
 	*/
 	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
 	private Position position;
+	
+	/**
+	 * 财务分类：财务分类
+	*/
+	@ApiModelProperty(required = false,value="财务分类" , notes = "财务分类")
+	private CategoryFinance categoryFinance;
 	
 	/**
 	 * 资产分类：资产分类
@@ -1661,78 +1649,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 财务信息<br>
-	 * 财务信息
-	 * @return 财务信息
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
 	*/
-	public AssetExtFinancial getAssetFinancial() {
-		return assetFinancial;
+	public String getTenantId() {
+		return tenantId;
 	}
 	
 	/**
-	 * 设置 财务信息
-	 * @param assetFinancial 财务信息
+	 * 设置 租户
+	 * @param tenantId 租户
 	 * @return 当前对象
 	*/
-	public Asset setAssetFinancial(AssetExtFinancial assetFinancial) {
-		this.assetFinancial=assetFinancial;
-		return this;
-	}
-	
-	/**
-	 * 获得 维保信息<br>
-	 * 维保信息
-	 * @return 维保信息
-	*/
-	public AssetExtFinancial getAssetMaintainer() {
-		return assetMaintainer;
-	}
-	
-	/**
-	 * 设置 维保信息
-	 * @param assetMaintainer 维保信息
-	 * @return 当前对象
-	*/
-	public Asset setAssetMaintainer(AssetExtFinancial assetMaintainer) {
-		this.assetMaintainer=assetMaintainer;
-		return this;
-	}
-	
-	/**
-	 * 获得 设备信息<br>
-	 * 设备信息
-	 * @return 设备信息
-	*/
-	public AssetExtEquipment getAssetEquipment() {
-		return assetEquipment;
-	}
-	
-	/**
-	 * 设置 设备信息
-	 * @param assetEquipment 设备信息
-	 * @return 当前对象
-	*/
-	public Asset setAssetEquipment(AssetExtEquipment assetEquipment) {
-		this.assetEquipment=assetEquipment;
-		return this;
-	}
-	
-	/**
-	 * 获得 软件信息<br>
-	 * 软件信息
-	 * @return 软件信息
-	*/
-	public AssetExtSoftware getAssetExtSoftware() {
-		return assetExtSoftware;
-	}
-	
-	/**
-	 * 设置 软件信息
-	 * @param assetExtSoftware 软件信息
-	 * @return 当前对象
-	*/
-	public Asset setAssetExtSoftware(AssetExtSoftware assetExtSoftware) {
-		this.assetExtSoftware=assetExtSoftware;
+	public Asset setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	
@@ -1752,6 +1683,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setPosition(Position position) {
 		this.position=position;
+		return this;
+	}
+	
+	/**
+	 * 获得 财务分类<br>
+	 * 财务分类
+	 * @return 财务分类
+	*/
+	public CategoryFinance getCategoryFinance() {
+		return categoryFinance;
+	}
+	
+	/**
+	 * 设置 财务分类
+	 * @param categoryFinance 财务分类
+	 * @return 当前对象
+	*/
+	public Asset setCategoryFinance(CategoryFinance categoryFinance) {
+		this.categoryFinance=categoryFinance;
 		return this;
 	}
 	

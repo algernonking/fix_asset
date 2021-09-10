@@ -71,7 +71,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
+	//	@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "null" , required = null , dataTypeClass=null),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = TplFileVOMeta.ID)
@@ -127,7 +127,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE , TplFileVOMeta.SEARCH_FIELD , TplFileVOMeta.FUZZY_FIELD , TplFileVOMeta.SEARCH_VALUE , TplFileVOMeta.SORT_FIELD , TplFileVOMeta.SORT_TYPE , TplFileVOMeta.IDS } ) 
 	@NotNull(name = TplFileVOMeta.ID)
@@ -149,7 +149,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE , TplFileVOMeta.SEARCH_FIELD , TplFileVOMeta.FUZZY_FIELD , TplFileVOMeta.SEARCH_VALUE , TplFileVOMeta.SORT_FIELD , TplFileVOMeta.SORT_TYPE , TplFileVOMeta.IDS } )
 	@NotNull(name = TplFileVOMeta.ID)
@@ -176,7 +176,7 @@ public class TplFileController extends SuperController {
 		Result<TplFile> result=new Result<>();
 		TplFile tplFile=tplFileService.getById(id);
 		// 关联出 存放位置 数据
-		tplFileService.join(tplFile,TplFileMeta.FILE);
+	//	tplFileService.join(tplFile,TplFileMeta.FILE);
 		result.success(true).data(tplFile);
 		return result;
 	}
@@ -212,7 +212,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { TplFileVOMeta.PAGE_INDEX , TplFileVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = TplFileServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -235,7 +235,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = TplFileServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -244,7 +244,7 @@ public class TplFileController extends SuperController {
 		Result<PagedList<TplFile>> result=new Result<>();
 		PagedList<TplFile> list=tplFileService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 存放位置 数据
-		tplFileService.join(list,TplFileMeta.FILE);
+	//	tplFileService.join(list,TplFileMeta.FILE);
 		result.success(true).data(list);
 		return result;
 	}

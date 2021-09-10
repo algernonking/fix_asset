@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 08:09:28
+ * @since 2021-09-10 15:55:25
  */
 
 function FormPage() {
@@ -103,7 +103,25 @@ function FormPage() {
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="0".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 assetStatus 下拉字段
+		fox.renderSelectBox({
+			el: "assetStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -294,6 +312,29 @@ function FormPage() {
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
+		//渲染 financialCategoryId 下拉字段
+		fox.renderSelectBox({
+			el: "financialCategoryId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].hierarchyName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -354,10 +395,12 @@ function FormPage() {
 
 
 
-			//设置  分类 设置下拉框勾选
+			//设置  资产分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.category);
-			//设置  状态 设置下拉框勾选
+			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
+			//设置  资产状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
 			//设置  物品档案 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选
@@ -370,6 +413,8 @@ function FormPage() {
 			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
 			//设置  维保商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+			//设置  财务分类 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#financialCategoryId",formData.categoryFinance);
 			//设置  供应商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
 
@@ -418,10 +463,12 @@ function FormPage() {
 
 
 
-		//获取 分类 下拉框的值
+		//获取 资产分类 下拉框的值
 		data["categoryId"]=fox.getSelectedValue("categoryId",false);
-		//获取 状态 下拉框的值
+		//获取 办理状态 下拉框的值
 		data["status"]=fox.getSelectedValue("status",false);
+		//获取 资产状态 下拉框的值
+		data["assetStatus"]=fox.getSelectedValue("assetStatus",false);
 		//获取 物品档案 下拉框的值
 		data["goodsId"]=fox.getSelectedValue("goodsId",false);
 		//获取 厂商 下拉框的值
@@ -434,6 +481,8 @@ function FormPage() {
 		data["sourceId"]=fox.getSelectedValue("sourceId",false);
 		//获取 维保商 下拉框的值
 		data["maintainerId"]=fox.getSelectedValue("maintainerId",false);
+		//获取 财务分类 下拉框的值
+		data["financialCategoryId"]=fox.getSelectedValue("financialCategoryId",false);
 		//获取 供应商 下拉框的值
 		data["supplierId"]=fox.getSelectedValue("supplierId",false);
 

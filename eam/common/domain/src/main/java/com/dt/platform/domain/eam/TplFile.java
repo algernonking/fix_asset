@@ -7,7 +7,6 @@ import com.dt.platform.constants.db.EAMTables.EAM_TPL_FILE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
-import org.github.foxnic.web.domain.storage.File;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 21:14:32
- * @sign 9EC1CC4AA76AEB303855F748FB37C557
+ * @since 2021-09-10 16:32:25
+ * @sign 9CDFADA9D4A8D0B41FA953305B821C0E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -113,12 +112,6 @@ public class TplFile extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
-	
-	/**
-	 * 文件：文件
-	*/
-	@ApiModelProperty(required = false,value="文件" , notes = "文件")
-	private File file;
 	
 	/**
 	 * 获得 主键<br>
@@ -383,25 +376,6 @@ public class TplFile extends Entity {
 	*/
 	public TplFile setTenantId(String tenantId) {
 		this.tenantId=tenantId;
-		return this;
-	}
-	
-	/**
-	 * 获得 文件<br>
-	 * 文件
-	 * @return 文件
-	*/
-	public File getFile() {
-		return file;
-	}
-	
-	/**
-	 * 设置 文件
-	 * @param file 文件
-	 * @return 当前对象
-	*/
-	public TplFile setFile(File file) {
-		this.file=file;
 		return this;
 	}
 

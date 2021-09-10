@@ -2,7 +2,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:59
+ * @since 2021-09-10 12:00:00
  */
  -->
  <!DOCTYPE html>
@@ -36,6 +36,7 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字段编码 , code ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签备注 , labelNotes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 所属维度 , dimension ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('所属维度')}" class="search-label dimension-label">所属维度</span><span class="search-colon">:</span></div>
@@ -44,7 +45,10 @@
                         <div id="dimension" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" style="width:140px"></div>
 
                     </div>
+                    <!-- 是否必选 , required ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 是否修改 , requiredModify ,typeName=number_input, isHideInSearch=true -->
                     <!-- 组件内容 , componentContent ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 租户 , tenantId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>

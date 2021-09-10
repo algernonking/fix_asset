@@ -78,6 +78,7 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetAttributeItemVOMeta.ID)
@@ -139,6 +140,7 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE , AssetAttributeItemVOMeta.SEARCH_FIELD , AssetAttributeItemVOMeta.FUZZY_FIELD , AssetAttributeItemVOMeta.SEARCH_VALUE , AssetAttributeItemVOMeta.SORT_FIELD , AssetAttributeItemVOMeta.SORT_TYPE , AssetAttributeItemVOMeta.IDS } ) 
 	@NotNull(name = AssetAttributeItemVOMeta.ID)
@@ -166,6 +168,7 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE , AssetAttributeItemVOMeta.SEARCH_FIELD , AssetAttributeItemVOMeta.FUZZY_FIELD , AssetAttributeItemVOMeta.SEARCH_VALUE , AssetAttributeItemVOMeta.SORT_FIELD , AssetAttributeItemVOMeta.SORT_TYPE , AssetAttributeItemVOMeta.IDS } )
 	@NotNull(name = AssetAttributeItemVOMeta.ID)
@@ -234,6 +237,7 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetAttributeItemServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -263,6 +267,7 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetAttributeItemServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

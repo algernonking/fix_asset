@@ -21,7 +21,7 @@ public class EamTplFileGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(File.class,"file","文件","文件");
+
         cfg.view().field(EAMTables.EAM_TPL_FILE.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_TPL_FILE.NOTES).search().fuzzySearch();
@@ -70,10 +70,10 @@ public class EamTplFileGtr extends BaseCodeGenerator{
 
         //指定关联对象的属性填充单元格，为了避免名称重复，加一个前缀
         //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
-        String resourceNameField="res_"+EAMTables.EAM_TPL_FILE.FILE_ID;
-        cfg.view().field(resourceNameField)
-                .basic().label("存放位置")
-                .table().fillBy(TplFileMeta.FILE, FileMeta.LOCATION);
+//        String resourceNameField="res_"+EAMTables.EAM_TPL_FILE.FILE_ID;
+//        cfg.view().field(resourceNameField)
+//                .basic().label("存放位置")
+//                .table().fillBy(TplFileMeta.FILE, FileMeta.LOCATION);
 
         //文件生成覆盖模式
         cfg.overrides()

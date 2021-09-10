@@ -49,13 +49,7 @@ function FormPage() {
       */
 
 	function fillFormData(formData) {
-		//var formData = admin.getTempData('sys-menu-form-data');
-		// $('#data-form')[0].reset();
-		// if (formData) {
-		// 	form.val('data-form', formData);
-		// 	if(!formData.css) formData.css="";
-		// 	$("#icon-button-el").attr("class",formData.css);
-		// }
+
 
 			var fm=$('#data-form');
 			if (formData) {

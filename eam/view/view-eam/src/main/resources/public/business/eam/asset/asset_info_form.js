@@ -99,26 +99,68 @@ function FormPage() {
 		fox.renderFormInputs(form);
 
 		//渲染 categoryId 下拉字段
-		fox.renderSelectBox({
-			el: "categoryId",
-			radio: true,
+		var categorySelect = xmSelect.render({
+			el: '#categoryId',
+			prop: {
+				name: 'name',
+				value: 'id',
+			},
 			filterable: true,
-			paging: true,
-			pageRemote: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
+			tree: {
+				show: true,
+				expandedKeys: [ -1 ],
+			},
+			//显示为text模式
+			model: { label: { type: 'text' } },
+			//单选模式
+			radio: true,
+			//选中关闭
+			clickClose: true,
+			height: 'auto',
+			data:CATEGORY_TREE_DATA
+			// data: [
+			// 	{name: '销售员', value: -1, children: [
+			// 			{name: '张三', value: 100, children: []},
+			// 			{name: '李四1', value: 2},
+			// 			{name: '王五1', value: 3, disabled: true},
+			// 		]},
+			// 	{name: '奖品', value: -2, children: [
+			// 			{name: '奖品3', value: -3, children: [
+			// 					{name: '苹果3', value: 14},
+			// 					{name: '香蕉3', value: 15},
+			// 					{name: '葡萄3', value: 16},
+			// 				]},
+			// 			{name: '苹果2', value: 4, disabled: true},
+			// 			{name: '香蕉2', value: 5},
+			// 			{name: '葡萄2', value: 6},
+			// 		]},
+			// ]
+		})
+		// fox.renderSelectBox({
+		// 	el: "categoryId",
+		// 	tree: {
+		// 		show: true,
+		// 		expandedKeys: true,
+		// 	},
+		// 	radio: true,
+		// 	filterable: true,
+		// 	height: 'auto',
+		// 	paging: true,
+		// 	pageRemote: true,
+		// 	//转换数据
+		// 	searchField: "name", //请自行调整用于搜索的字段名称
+		// 	extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+		// 	transform: function(data) {
+		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+		// 		var opts=[];
+		// 		if(!data) return opts;
+		// 		for (var i = 0; i < data.length; i++) {
+		// 			if(!data[i]) continue;
+		// 			opts.push({name:data[i].name,value:data[i].id});
+		// 		}
+		// 		return opts;
+		// 	}
+		// });
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -214,6 +256,29 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 financialCategoryId 下拉字段
+		fox.renderSelectBox({
+			el: "financialCategoryId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "hierarchyName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].hierarchyName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 warehouseId 下拉字段
 		fox.renderSelectBox({
 			el: "warehouseId",
@@ -249,11 +314,7 @@ function FormPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#purchaseDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
+
 	    //渲染图片字段
 		foxup.render({
 			el:"attach",
@@ -295,16 +356,7 @@ function FormPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#maintenanceStartDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#maintenanceEndDate',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
-		});
+
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
 			el: "supplierId",
@@ -323,11 +375,29 @@ function FormPage() {
 				return opts;
 			}
 		});
+
+
 		laydate.render({
 			elem: '#entryTime',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+		laydate.render({
+			elem: '#maintenanceStartDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#maintenanceEndDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#purchaseDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+
 	}
 
 	/**

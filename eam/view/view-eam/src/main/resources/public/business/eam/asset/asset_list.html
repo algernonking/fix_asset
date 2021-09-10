@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 08:09:16
+ * @since 2021-09-10 15:55:07
  */
  -->
  <!DOCTYPE html>
@@ -35,16 +35,17 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资产分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 分类编码 , categoryCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:140px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
                     <!-- 批次编码 , batchCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 资产状态 , assetStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=true -->
                     <!-- 是否显示 , display ,typeName=text_input, isHideInSearch=true -->
                     <!-- 是否报废 , scrap ,typeName=text_input, isHideInSearch=true -->
                     <!-- 物品档案 , goodsId ,typeName=select_box, isHideInSearch=true -->
@@ -56,7 +57,7 @@
                     <!-- 使用公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 位置 , positionId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 详细位置 , positionDetail ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
                     <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
@@ -72,7 +73,7 @@
                     <!-- 维保开始时间 , maintenanceStartDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 维保到期时间 , maintenanceEndDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 维保备注 , maintenanceNotes ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 财务分类 , financialCategoryId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 财务分类 , financialCategoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 财务编号 , financialCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 税额 , taxamountRate ,typeName=number_input, isHideInSearch=true -->
@@ -85,6 +86,7 @@
                     <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 财务备注 , financialNotes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 租户 , tenantId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
@@ -110,11 +112,6 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-pcm/pcm-catalog/query-nodes'}" style="width:140px"></div>
-                    </div>
                     <!-- 厂商 , manufacturerId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
@@ -173,7 +170,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+    var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
     var AUTH_PREFIX="eam_asset";
 

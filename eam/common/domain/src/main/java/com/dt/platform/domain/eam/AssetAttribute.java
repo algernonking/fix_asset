@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:59
- * @sign C8DEFA503DA03235A2097AAB88B2E4FC
+ * @since 2021-09-10 11:59:57
+ * @sign 7726884A39F5776FBDE282769C247863
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,12 @@ public class AssetAttribute extends Entity {
 	private String label;
 	
 	/**
+	 * 标签备注：标签备注
+	*/
+	@ApiModelProperty(required = false,value="标签备注" , notes = "标签备注")
+	private String labelNotes;
+	
+	/**
 	 * 所属维度：所属维度
 	*/
 	@ApiModelProperty(required = false,value="所属维度" , notes = "所属维度")
@@ -58,6 +64,18 @@ public class AssetAttribute extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="状态" , notes = "状态")
 	private String status;
+	
+	/**
+	 * 是否必选：是否必选
+	*/
+	@ApiModelProperty(required = false,value="是否必选" , notes = "是否必选")
+	private Integer required;
+	
+	/**
+	 * 是否修改：是否修改
+	*/
+	@ApiModelProperty(required = false,value="是否修改" , notes = "是否修改")
+	private Integer requiredModify;
 	
 	/**
 	 * 组件类型：组件类型
@@ -126,6 +144,12 @@ public class AssetAttribute extends Entity {
 	private Integer version;
 	
 	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -183,6 +207,25 @@ public class AssetAttribute extends Entity {
 	}
 	
 	/**
+	 * 获得 标签备注<br>
+	 * 标签备注
+	 * @return 标签备注
+	*/
+	public String getLabelNotes() {
+		return labelNotes;
+	}
+	
+	/**
+	 * 设置 标签备注
+	 * @param labelNotes 标签备注
+	 * @return 当前对象
+	*/
+	public AssetAttribute setLabelNotes(String labelNotes) {
+		this.labelNotes=labelNotes;
+		return this;
+	}
+	
+	/**
 	 * 获得 所属维度<br>
 	 * 所属维度
 	 * @return 所属维度
@@ -217,6 +260,44 @@ public class AssetAttribute extends Entity {
 	*/
 	public AssetAttribute setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否必选<br>
+	 * 是否必选
+	 * @return 是否必选
+	*/
+	public Integer getRequired() {
+		return required;
+	}
+	
+	/**
+	 * 设置 是否必选
+	 * @param required 是否必选
+	 * @return 当前对象
+	*/
+	public AssetAttribute setRequired(Integer required) {
+		this.required=required;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否修改<br>
+	 * 是否修改
+	 * @return 是否修改
+	*/
+	public Integer getRequiredModify() {
+		return requiredModify;
+	}
+	
+	/**
+	 * 设置 是否修改
+	 * @param requiredModify 是否修改
+	 * @return 当前对象
+	*/
+	public AssetAttribute setRequiredModify(Integer requiredModify) {
+		this.requiredModify=requiredModify;
 		return this;
 	}
 	
@@ -426,6 +507,25 @@ public class AssetAttribute extends Entity {
 	*/
 	public AssetAttribute setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public AssetAttribute setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 

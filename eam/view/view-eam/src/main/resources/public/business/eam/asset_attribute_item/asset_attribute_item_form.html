@@ -2,7 +2,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:02
+ * @since 2021-09-10 12:06:01
  */
  -->
  <!DOCTYPE html>
@@ -198,6 +198,13 @@
                         </div>
                     </div>
 
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('租户')}">租户</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="tenantId" id="tenantId" name="tenantId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('租户') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性备注')}">属性备注</div></div>

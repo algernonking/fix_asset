@@ -38,7 +38,7 @@
                     <li  >财务信息</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item  layui-show ">
+                    <div class="layui-tab-item layui-show  layui-form model-form">
                         <!--开始：3栏模式 循环-->
                         <div class="layui-row form-row" >
                             <div class="layui-col-xs4 form-column">
@@ -153,13 +153,19 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+    var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+
     var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
-    var VALIDATE_CONFIG=  [[${attributeRequiredData}]];
+
+    var VALIDATE_CONFIG =  [[${attributeRequiredData}]];
+    var CATEGORY_TREE_DATA = [[${assetCategoryData}]];
     var AUTH_PREFIX="eam_asset";
 
 
 </script>
+
+
 
 
 

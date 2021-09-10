@@ -90,6 +90,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         downloadBill:function (data){
             console.log('downloadBill',data);
+            var downloadUrl="/service-eam/eam-asset-bill/query-borrow-bills";
+            fox.submit(downloadUrl);
+
         },
         /**
          * 末尾执行

@@ -37,12 +37,34 @@ public class AssetBillServiceImpl extends SuperService<Asset> implements IAssetB
     public DAO dao() { return dao; }
 
     @Override
-    public Result queryAssetBorrowBill(List<T> ids) {
-
-
+    public Result queryBorrowBills(List<T> ids) {
         return null;
     }
 
+    @Override
+    public Result queryCollectionBills(List<T> ids) {
+        return null;
+    }
+
+    @Override
+    public Result queryCollectionReturnBills(List<T> ids) {
+        return null;
+    }
+
+    @Override
+    public Result queryCollectionScrapBills(List<T> ids) {
+        return null;
+    }
+
+    @Override
+    public Result queryCollectionRepairBills(List<T> ids) {
+        return null;
+    }
+
+    @Override
+    public Result queryCollectionAllocationBills(List<T> ids) {
+        return null;
+    }
 
 
 }

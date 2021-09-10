@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.*;
@@ -24,12 +25,13 @@ public class EamAssetsGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
-        cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetFinancial","财务信息","财务信息");
-        cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetMaintainer","维保信息","维保信息");
-        cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
-        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
+//        cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetFinancial","财务信息","财务信息");
+//        cfg.getPoClassFile().addSimpleProperty(AssetExtFinancial.class,"assetMaintainer","维保信息","维保信息");
+//        cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
+//        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
 
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
+        cfg.getPoClassFile().addSimpleProperty(CategoryFinance.class,"categoryFinance","财务分类","财务分类");
         cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
@@ -38,6 +40,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","管理人员","管理人员");
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
@@ -90,7 +93,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET.SERIAL_NUMBER,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET.CATEGORY_ID,
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
                         EAMTables.EAM_ASSET.ASSET_NOTES,
 
@@ -116,17 +118,26 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID).form()
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
-        cfg.view().field(EAMTables.EAM_ASSET.NAME).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().
-                label("状态").selectBox().enumType(AssetStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
+                label("资产状态").selectBox().enumType(AssetStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
-                .basic().label("分类")
-                .form().validate().required()
+                .basic().label("资产分类")
                 .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
                 .paging(false).filter(false).toolbar(false)
                 .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME)
                 .fillBy(AssetMeta.CATEGORY).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_CATEGORY_ID)
+                .basic().label("财务分类")
+                .form().selectBox().queryApi(CategoryFinanceServiceProxy.QUERY_PAGED_LIST)
+                .paging(true).filter(true).toolbar(false)
+                .valueField(CategoryFinanceMeta.ID).textField(CategoryFinanceMeta.HIERARCHY_NAME)
+                .fillBy(AssetMeta.CATEGORY_FINANCE).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)
@@ -156,13 +167,14 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.PURCHASE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET.ENTRY_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
 
-        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).form().validate().required();
-
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).form().textArea().height(30);
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_NOTES).form().textArea().height(30);
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_NOTES).form().textArea().height(30);
 
+
+
+//        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).form();
+//        cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).form();
 
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME)

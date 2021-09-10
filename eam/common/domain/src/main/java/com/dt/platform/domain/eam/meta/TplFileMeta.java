@@ -3,14 +3,13 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.TplFile;
 import java.util.Date;
-import org.github.foxnic.web.domain.storage.File;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 21:14:32
- * @sign 9EC1CC4AA76AEB303855F748FB37C557
+ * @since 2021-09-10 16:32:25
+ * @sign 9CDFADA9D4A8D0B41FA953305B821C0E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -157,19 +156,9 @@ public class TplFileMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
-	 * 文件 , 类型: org.github.foxnic.web.domain.storage.File
-	*/
-	public static final String FILE="file";
-	
-	/**
-	 * 文件 , 类型: org.github.foxnic.web.domain.storage.File
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,org.github.foxnic.web.domain.storage.File> FILE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,FILE, org.github.foxnic.web.domain.storage.File.class, "文件", "文件", org.github.foxnic.web.domain.storage.File.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , FILE };
+	public static final String[] $PROPS={ ID , NAME , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -330,17 +319,6 @@ public class TplFileMeta {
 		public TplFile setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
-			return this;
-		}
-		
-		/**
-		 * 设置 文件
-		 * @param file 文件
-		 * @return 当前对象
-		*/
-		public TplFile setFile(File file) {
-			super.change(FILE,super.getFile(),file);
-			super.setFile(file);
 			return this;
 		}
 	}

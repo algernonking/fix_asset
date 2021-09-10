@@ -35,7 +35,45 @@ public interface IAssetBillService extends ISuperService<Asset> {
 	 * @param ids 单据ID
 	 * @return
 	 * */
-	public Result queryAssetBorrowBill(List<T> ids);
+	public Result queryBorrowBills(List<T> ids);
+
+
+	/**
+	 * 插入实体
+	 * @param ids 单据ID
+	 * @return
+	 * */
+	public Result queryCollectionBills(List<T> ids);
+
+
+	/**
+	 * 插入实体
+	 * @param ids 单据ID
+	 * @return
+	 * */
+	public Result queryCollectionReturnBills(List<T> ids);
+
+	/**
+	 * 插入实体
+	 * @param ids 单据ID
+	 * @return
+	 * */
+	public Result queryCollectionScrapBills(List<T> ids);
+
+	/**
+	 * 插入实体
+	 * @param ids 单据ID
+	 * @return
+	 * */
+	public Result queryCollectionRepairBills(List<T> ids);
+
+	/**
+	 * 插入实体
+	 * @param ids 单据ID
+	 * @return
+	 * */
+	public Result queryCollectionAllocationBills(List<T> ids);
+
 
 
 }
