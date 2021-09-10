@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:59
- * @sign 70213853CA7DB1ED5329BE4E2AF3D2C0
+ * @since 2021-09-10 16:45:09
+ * @sign 371C48EEE11F76AB45B87B6B7F0BEACE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -124,6 +124,12 @@ public class Company extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -426,6 +432,25 @@ public class Company extends Entity {
 	*/
 	public Company setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public Company setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 

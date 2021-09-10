@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 12:00:01
+ * @since 2021-09-10 16:42:41
  */
 
 
@@ -57,6 +57,7 @@ function ListPage() {
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
+					if(value==null) return "";
 					return value;
 				}
 			}
@@ -83,7 +84,6 @@ function ListPage() {
 					,{ field: 'componentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('组件类型'), templet:function (d){ return templet('componentType',fox.getEnumText(RADIO_COMPONENTTYPE_DATA,d.componentType),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
-					,{ field: 'tenantId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('租户') , templet: function (d) { return templet('tenantId',d.tenantId,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

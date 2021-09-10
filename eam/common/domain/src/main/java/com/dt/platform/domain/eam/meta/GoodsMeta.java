@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:09
- * @sign 1F3A5123EF239AD3E472542D0C49E633
+ * @since 2021-09-10 16:44:02
+ * @sign 7A60B53304CFC6EEBBB64605B4F496DC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -199,6 +199,16 @@ public class GoodsMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Goods,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Goods.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 资产分类 , 类型: com.dt.platform.domain.eam.Category
 	*/
 	public static final String CATEGORY="category";
@@ -221,7 +231,7 @@ public class GoodsMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , STATUS , NAME , MODEL , MANUFACTURER_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , MANUFACTURER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , STATUS , NAME , MODEL , MANUFACTURER_ID , UNIT , REFERENCE_PRICE , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , CATEGORY , MANUFACTURER };
 	
 	/**
 	 * 代理类
@@ -426,6 +436,17 @@ public class GoodsMeta {
 		public Goods setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public Goods setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

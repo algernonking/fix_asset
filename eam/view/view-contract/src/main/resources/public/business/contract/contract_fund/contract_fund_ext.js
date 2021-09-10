@@ -1,7 +1,7 @@
 /**
  * 资金明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:28:02
+ * @since 2021-09-10 16:45:13
  */
 
 layui.config({

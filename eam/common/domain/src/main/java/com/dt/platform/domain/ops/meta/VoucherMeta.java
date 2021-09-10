@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:29
- * @sign 35E03D325C38F24493511E595DB03ABB
+ * @since 2021-09-10 16:44:26
+ * @sign EDA9059EEA577CA9D634C53904FFF669
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -158,6 +158,16 @@ public class VoucherMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Voucher,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.Voucher.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Voucher,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Voucher.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final String VOUCHER_TYPE="voucherType";
@@ -170,7 +180,7 @@ public class VoucherMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , OWNER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , VOUCHER_TYPE };
+	public static final String[] $PROPS={ ID , TYPE , OWNER_ID , USER_CODE , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_TYPE };
 	
 	/**
 	 * 代理类
@@ -331,6 +341,17 @@ public class VoucherMeta {
 		public Voucher setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public Voucher setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

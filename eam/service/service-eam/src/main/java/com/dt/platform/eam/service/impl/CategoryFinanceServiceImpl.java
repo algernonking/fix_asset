@@ -96,23 +96,22 @@ public class CategoryFinanceServiceImpl extends SuperService<CategoryFinance> im
 	 * */
 	@Override
 	public Result updateHierarchy(String id) {
-		System.out.println("id###########"+id);
-		Rcd category_rs = dao.queryRecord("select id,category_name categoryName,hierarchy from eam_category_finance where deleted='0' and id=?", id);
-		String hierarchy=category_rs.getString("hierarchy");
+		CategoryFinance category= getById(id);
+		String hierarchy=category.getHierarchy();
 		String split="/";
 		String afterHierarchyName="";
 		String[] ids = hierarchy.split(split);
 		for (int i = 0; i < ids.length;i++) {
-			afterHierarchyName = afterHierarchyName + split+ dao.queryRecord("select category_name categoryName from eam_category_finance where deleted='0' and id=?", ids[i]).getString("categoryName");
+			afterHierarchyName = afterHierarchyName + split+ getById(ids[i]).getCategoryName();
 		}
 		afterHierarchyName = afterHierarchyName.replaceFirst(split, "");
 		Update ups = new Update("eam_category_finance");
 		ups.set("hierarchy_name", afterHierarchyName);
 		ups.where().and("id=?", id);
 		dao.execute(ups);
-		RcdSet rds = dao.query("select id,category_name categoryName,hierarchy from eam_category_finance where deleted='0' and parent_id=?", id);
-		for (int j = 0; j < rds.size(); j++) {
-			updateHierarchy(rds.getRcd(j).getString("id"));
+		List<CategoryFinance> categoryList=queryList(CategoryFinance.create().setParentId(id));
+		for (int j = 0; j < categoryList.size(); j++) {
+			updateHierarchy(categoryList.get(j).getId());
 		}
 		Result r=new Result();
 		r.success(true);

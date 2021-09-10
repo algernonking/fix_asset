@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:19
- * @sign 6A9992F2D6B95A70C9968DC0F356F257
+ * @since 2021-09-10 16:43:10
+ * @sign 59B0D3148F2FEA0CC0053E0F44873402
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -164,6 +164,12 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 资产：资产
@@ -616,6 +622,25 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public AssetTranfer setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

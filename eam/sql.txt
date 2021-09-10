@@ -9,7 +9,10 @@ WHERE
     and collation_name='utf8_general_ci'
 
 
-     select * from   information_schema.tables t  where  TABLE_SCHEMA = 'eam'
+
+update eam_supplier set tenant_id='T001';
+
+
 
 
 	   List<Host> hosts= CollectorUtil.collectList(list,DbInstance::getHost);
@@ -53,3 +56,8 @@ INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, 
 INSERT INTO `sys_dict_item` (`id`, `dict_id`, `dict_code`, `parent_id`, `code`, `label`, `sort`) VALUES(uuid(), '19', 'ops_host_type', NULL, 'analyze', '分析系统', 9999);
 
 ops_host_type
+
+
+--租户表设置
+select distinct  concat('update ', table_name ,' set tenant_id=\'T001\'; ')   from     information_schema.columns where column_name='TENANT_ID' and ( table_name like 'cont%' or table_name like 'eam%'
+or table_name  like 'ops%' or table_name  like 'kn%'   or table_name  like 'dc%')

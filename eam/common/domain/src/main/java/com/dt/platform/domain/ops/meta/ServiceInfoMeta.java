@@ -10,8 +10,8 @@ import com.dt.platform.domain.ops.ServiceGroup;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:47
- * @sign 91D7C81DE416089769B2CA994691D792
+ * @since 2021-09-10 16:44:52
+ * @sign 1D5898252C7CEB211F3444861BD03769
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -168,6 +168,16 @@ public class ServiceInfoMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.ServiceInfo,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.ServiceInfo.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 服务 , 类型: com.dt.platform.domain.ops.ServiceCategory
 	*/
 	public static final String SERVICE_CATEGORY="serviceCategory";
@@ -190,7 +200,7 @@ public class ServiceInfoMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , GROUP_ID , SERVICE_CATEGORY_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SERVICE_CATEGORY , GROUP };
+	public static final String[] $PROPS={ ID , GROUP_ID , SERVICE_CATEGORY_ID , NAME , PATCH , NOTES , SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SERVICE_CATEGORY , GROUP };
 	
 	/**
 	 * 代理类
@@ -362,6 +372,17 @@ public class ServiceInfoMeta {
 		public ServiceInfo setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public ServiceInfo setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

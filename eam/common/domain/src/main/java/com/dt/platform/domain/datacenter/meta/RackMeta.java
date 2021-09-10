@@ -11,8 +11,8 @@ import com.dt.platform.domain.datacenter.Layer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:57
- * @sign 22BA4319B1447DD416CDCA047DAC2281
+ * @since 2021-09-10 16:42:34
+ * @sign 0F0C493C4CAF026A5DBA3F3406F1BCE7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -189,6 +189,16 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
 	*/
 	public static final String AREA="area";
@@ -211,7 +221,7 @@ public class RackMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , AREA , LAYER };
+	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , AREA , LAYER };
 	
 	/**
 	 * 代理类
@@ -405,6 +415,17 @@ public class RackMeta {
 		public Rack setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public Rack setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

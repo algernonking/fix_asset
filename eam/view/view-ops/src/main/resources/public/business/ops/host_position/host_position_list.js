@@ -1,7 +1,7 @@
 /**
  * 主机位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:45
+ * @since 2021-09-10 16:44:49
  */
 
 
@@ -57,6 +57,7 @@ function ListPage() {
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
+					if(value==null) return "";
 					return value;
 				}
 			}

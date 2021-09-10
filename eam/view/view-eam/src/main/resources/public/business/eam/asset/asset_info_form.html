@@ -152,15 +152,17 @@
 <script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <script th:inline="javascript">
+
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
-
     var SELECT_SOURCEID_DATA = [[${dict.toArray('eam_source')}]];
+     var AUTH_PREFIX="eam_asset";
+
 
     var VALIDATE_CONFIG =  [[${attributeRequiredData}]];
     var CATEGORY_TREE_DATA = [[${assetCategoryData}]];
-    var AUTH_PREFIX="eam_asset";
+
 
 
 </script>

@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:07
- * @sign 332367B3DF9B8DE55AC5B8D837F0E12D
+ * @since 2021-09-10 16:42:52
+ * @sign 2663DFBEDFF2AF6D68D6E8CC5939776A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -145,6 +145,12 @@ public class AssetScrap extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 资产：资产
@@ -522,6 +528,25 @@ public class AssetScrap extends Entity {
 	*/
 	public AssetScrap setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public AssetScrap setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

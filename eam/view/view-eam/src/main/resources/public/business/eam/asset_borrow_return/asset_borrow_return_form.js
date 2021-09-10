@@ -1,7 +1,7 @@
 /**
  * 资产借用归还 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:32
+ * @since 2021-09-10 16:43:17
  */
 
 function FormPage() {
@@ -92,12 +92,14 @@ function FormPage() {
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
+		var hasData=true;
 		//如果是新建
 		if(!formData || !formData.id) {
 			adjustPopup();
+			hasData=false;
 		}
 		var fm=$('#data-form');
-		if (formData) {
+		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
 
@@ -125,7 +127,7 @@ function FormPage() {
         },1);
 
         //禁用编辑
-		if(disableModify || disableCreateNew) {
+		if((hasData && disableModify) || (!hasData &&disableCreateNew)) {
 			fox.lockForm($("#data-form"),true);
 			$("#submit-button").hide();
 			$("#cancel-button").css("margin-right","15px")

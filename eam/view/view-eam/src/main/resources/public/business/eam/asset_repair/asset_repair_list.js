@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:44
+ * @since 2021-09-10 16:43:30
  */
 
 
@@ -57,6 +57,7 @@ function ListPage() {
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
+					if(value==null) return "";
 					return value;
 				}
 			}

@@ -23,7 +23,7 @@ public class EamSafetylevelGtr extends BaseCodeGenerator{
 
                 }
         );
-
+        cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_CODE).form().validate().required();
         cfg.view().field(EAMTables.EAM_SAFETYLEVEL.SAFETY_NAME).form().validate().required();
 
 

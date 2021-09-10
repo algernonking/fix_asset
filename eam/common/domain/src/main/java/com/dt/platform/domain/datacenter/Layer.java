@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:55
- * @sign 6094431275ACAACDF09FB0BB29968B83
+ * @since 2021-09-10 16:42:31
+ * @sign 8BDF0C2829F6979A99F5C4A075C487DC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -94,6 +94,12 @@ public class Layer extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="版本" , notes = "版本")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -301,6 +307,25 @@ public class Layer extends Entity {
 	*/
 	public Layer setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public Layer setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 

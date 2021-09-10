@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:26:47
- * @sign 8603069082A0353DF847AE603DABEB11
+ * @since 2021-09-10 16:43:33
+ * @sign FF03A498C8F5AF3F9CEB5DA566200EBF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -164,6 +164,12 @@ public class AssetHandle extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 资产：资产
@@ -598,6 +604,25 @@ public class AssetHandle extends Entity {
 	*/
 	public AssetHandle setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public AssetHandle setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

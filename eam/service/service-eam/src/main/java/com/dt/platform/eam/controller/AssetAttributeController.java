@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产字段配置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 11:59:58
+ * @since 2021-09-10 16:42:40
 */
 
 @Api(tags = "资产字段配置")
@@ -72,11 +72,10 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -134,11 +133,10 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE , AssetAttributeVOMeta.SEARCH_FIELD , AssetAttributeVOMeta.FUZZY_FIELD , AssetAttributeVOMeta.SEARCH_VALUE , AssetAttributeVOMeta.SORT_FIELD , AssetAttributeVOMeta.SORT_TYPE , AssetAttributeVOMeta.IDS } ) 
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -162,11 +160,10 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE , AssetAttributeVOMeta.SEARCH_FIELD , AssetAttributeVOMeta.FUZZY_FIELD , AssetAttributeVOMeta.SEARCH_VALUE , AssetAttributeVOMeta.SORT_FIELD , AssetAttributeVOMeta.SORT_TYPE , AssetAttributeVOMeta.IDS } )
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -229,11 +226,10 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetAttributeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -258,11 +254,10 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.TENANT_ID , value = "租户" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetAttributeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

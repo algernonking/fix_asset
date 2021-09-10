@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 15:55:00
- * @sign 940395242412C0A4514F7F306038E85E
+ * @since 2021-09-10 17:13:45
+ * @sign 65FCC161D85A813F7DE7E01622C7C7D7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -83,7 +83,7 @@ public class Asset extends Entity {
 	/**
 	 * 资产状态：资产状态
 	*/
-	@ApiModelProperty(required = true,value="资产状态" , notes = "资产状态")
+	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态")
 	private String assetStatus;
 	
 	/**

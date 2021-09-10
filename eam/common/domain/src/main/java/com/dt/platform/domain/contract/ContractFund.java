@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:28:02
- * @sign C7E67FF022A95A22B5A8F959B56493E3
+ * @since 2021-09-10 16:45:13
+ * @sign BEC801E41D76FF5F086F55DC57DD3A4A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -113,6 +113,12 @@ public class ContractFund extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * tenant：id
+	*/
+	@ApiModelProperty(required = false,value="tenant" , notes = "id")
+	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -377,6 +383,25 @@ public class ContractFund extends Entity {
 	*/
 	public ContractFund setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 tenant<br>
+	 * id
+	 * @return tenant
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 tenant
+	 * @param tenantId tenant
+	 * @return 当前对象
+	*/
+	public ContractFund setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 

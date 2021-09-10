@@ -11,8 +11,8 @@ import com.dt.platform.domain.ops.ServiceInfo;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:34
- * @sign 52C1823AA35CA3E67CCEE12E395AEDC4
+ * @since 2021-09-10 16:44:32
+ * @sign 3CB8C26139A67EA20864A73657D10861
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -239,6 +239,16 @@ public class DbInstanceMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.DbInstance,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.DbInstance.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 所在位置 , 类型: com.dt.platform.domain.ops.Host
 	*/
 	public static final String HOST="host";
@@ -261,7 +271,7 @@ public class DbInstanceMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HOST_ID , DATABASE_ID , NAME , LOG_METHOD , BACKUP_STRATEGY , BACKUP_TYPE , BACKUP_DATAKEEP , BACKUP_STATUS , BACKUP_METHOD , BACKUP_TIME , BACKUP_SIZE , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , HOST , DATABASE };
+	public static final String[] $PROPS={ ID , HOST_ID , DATABASE_ID , NAME , LOG_METHOD , BACKUP_STRATEGY , BACKUP_TYPE , BACKUP_DATAKEEP , BACKUP_STATUS , BACKUP_METHOD , BACKUP_TIME , BACKUP_SIZE , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , HOST , DATABASE };
 	
 	/**
 	 * 代理类
@@ -510,6 +520,17 @@ public class DbInstanceMeta {
 		public DbInstance setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public DbInstance setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

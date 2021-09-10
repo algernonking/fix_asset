@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:25:57
- * @sign 22BA4319B1447DD416CDCA047DAC2281
+ * @since 2021-09-10 16:42:34
+ * @sign 0F0C493C4CAF026A5DBA3F3406F1BCE7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -131,6 +131,12 @@ public class Rack extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 区域
@@ -464,6 +470,25 @@ public class Rack extends Entity {
 	*/
 	public Rack setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public Rack setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

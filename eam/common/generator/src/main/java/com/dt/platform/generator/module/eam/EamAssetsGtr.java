@@ -87,16 +87,29 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET.STATUS,
-                        EAMTables.EAM_ASSET.ASSET_CODE,
+                        EAMTables.EAM_ASSET.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET.ASSET_STATUS,
+                        EAMTables.EAM_ASSET.SOURCE_ID,
+                },
+                new Object[]{
                         EAMTables.EAM_ASSET.NAME,
+                        EAMTables.EAM_ASSET.ASSET_CODE,
                         EAMTables.EAM_ASSET.MODEL,
                         EAMTables.EAM_ASSET.SERIAL_NUMBER,
+                },
+
+                new Object[]{
+                        EAMTables.EAM_ASSET.OWN_COMPANY_ID,
+                        EAMTables.EAM_ASSET.USE_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET.USE_USER_ID,
+                        EAMTables.EAM_ASSET.POSITION_ID,
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
                         EAMTables.EAM_ASSET.ASSET_NOTES,
-
+                        EAMTables.EAM_ASSET.PURCHASE_DATE,
                 }
+
 
         );
 

@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 15:55:07
+ * @since 2021-09-10 17:13:50
  */
  -->
  <!DOCTYPE html>
@@ -37,7 +37,6 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 分类编码 , categoryCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -45,24 +44,17 @@
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
                     <!-- 批次编码 , batchCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=true -->
                     <!-- 是否显示 , display ,typeName=text_input, isHideInSearch=true -->
                     <!-- 是否报废 , scrap ,typeName=text_input, isHideInSearch=true -->
                     <!-- 物品档案 , goodsId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=true -->
                     <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
                     <!-- 使用期限 , serviceLife ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 所属公司 , ownCompanyId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 管理人员 , managerId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 使用公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 位置 , positionId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
                     <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 剩余数量 , remainNumber ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 采购日期 , purchaseDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 资产RFID , rfid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
                     <!-- 维保商 , maintainerId ,typeName=select_box, isHideInSearch=true -->
@@ -86,16 +78,35 @@
                     <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 财务备注 , financialNotes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 租户 , tenantId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
-                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>
+                        <div id="assetStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:140px"></div>
+                    </div>
+                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('来源')}" class="search-label sourceId-label">来源</span><span class="search-colon">:</span></div>
+                        <div id="sourceId" th:data="${dict.toArray('eam_source')}" style="width:140px"></div>
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
+                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 规格型号 , model ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -112,6 +123,31 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 所属公司 , ownCompanyId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属公司')}" class="search-label ownCompanyId-label">所属公司</span><span class="search-colon">:</span></div>
+                        <input id="ownCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 使用公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用公司/部门')}" class="search-label useOrganizationId-label">使用公司/部门</span><span class="search-colon">:</span></div>
+                        <input id="useOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用人员')}" class="search-label useUserId-label">使用人员</span><span class="search-colon">:</span></div>
+                        <input id="useUserId" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('位置')}" class="search-label positionId-label">位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 厂商 , manufacturerId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
@@ -122,6 +158,13 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产备注')}" class="search-label assetNotes-label">资产备注</span><span class="search-colon">:</span></div>
                         <input id="assetNotes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 采购日期 , purchaseDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('采购日期')}" class="search-label purchaseDate-label">采购日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="purchaseDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="purchaseDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
 
 
                 </div>
@@ -131,6 +174,7 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 

@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:34
- * @sign 52C1823AA35CA3E67CCEE12E395AEDC4
+ * @since 2021-09-10 16:44:32
+ * @sign 3CB8C26139A67EA20864A73657D10861
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -161,6 +161,12 @@ public class DbInstance extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 所在位置：所在位置
@@ -589,6 +595,25 @@ public class DbInstance extends Entity {
 	*/
 	public DbInstance setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public DbInstance setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

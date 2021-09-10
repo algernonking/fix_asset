@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-09 12:27:49
- * @sign D3CBBA1DED4710AA95531FF77E7C47A3
+ * @since 2021-09-10 16:44:55
+ * @sign FFF22655F74025551F301D440D23F46B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -100,6 +100,12 @@ public class ServiceCategory extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="version" , notes = "version")
 	private Integer version;
+	
+	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 服务分组：服务分组
@@ -332,6 +338,25 @@ public class ServiceCategory extends Entity {
 	*/
 	public ServiceCategory setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public ServiceCategory setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	
