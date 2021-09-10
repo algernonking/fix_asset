@@ -62,6 +62,7 @@ function ListPage() {
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
+					if(value==null) return "";
 					return value;
 				}
 			}
