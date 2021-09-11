@@ -20,13 +20,16 @@ spring:
   datasource:
     druid:
       primary:
+        encrypt:
+          enable: true
+          file:
+            windows: d:/foxnic/passwd.txt
+            mac: /tmp/foxnic/passwd.txt
+            linux: /foxnic/passwd.txt
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://39.105.191.22:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
-        username: root
-        password: root_pwd
-        #url: jdbc:mysql://47.92.240.43:3306/foxnic-web?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
-        #username: tailoring
-        #password: Tailoring@2021111
+        url: a0WwT/76Vgi3kLk6HoY1zPYTublu7Nrfsfaw+3xe/NtQSPN/vG37pE0WeSGDP4mKHVNSz8z8CBtwpihb0Yuv2iOeWjorHS6Aszqc0Mvg1vvYPY9UXm2mFl1nF62HIksKwU7Sr1gASx/TMIpD6WhITqIMjF9il5QJJJrsWaul5CUxJKC43zAo0w5As8X1hKcFc5z408+y4rf5e617vboT2D34kRvuh7+VYQovLwf9Bshu/1ZfPf3Fdp/xzRnncfHr
+        username: tD5wkJAfnCt04A+Y+QN5GA==
+        password: PzLyR+OugBhJzu86Ttf1Eg==
         min-idle: 1
         initial-size: 2
         max-active: 64

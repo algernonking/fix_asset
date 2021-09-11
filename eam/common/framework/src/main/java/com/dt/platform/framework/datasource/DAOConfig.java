@@ -36,6 +36,10 @@ public class DAOConfig {
             @Qualifier(DatasourceConfig.PRIMARY_DATA_SOURCE_NAME) DataSource dataSource, DBTreaty dbTreaty) {
 		try {
 			if(printSQL==null) printSQL=false;
+
+			//解密数据库配置信息，并重新设置数据库连接
+			DBConfigs.reset(dataSource,DatasourceConfig.PRIMARY_DATASOURCE_CONFIG_KEY);
+
 			DAO dao= (new DAOBuilder().datasource(dataSource)).build();
 			dao.setPrintSQL(printSQL);
 			dao.setPrintSQLSimple(printSQL);
