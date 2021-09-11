@@ -26,14 +26,14 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	#if(isSimplePK)
 	/**
 	 * 批量物理删除，仅支持单字段主键表
-	 * @param ids 主键清单
+	 * @param #(idPropertyName)s 主键清单
 	 * @return 是否删除成功
 	 * */
 	<T> Result deleteByIdsPhysical(List<T> #(idPropertyName)s);
 	
 	/**
 	 * 批量逻辑删除，仅支持单字段主键表
-	 * @param ids 主键清单
+	 * @param #(idPropertyName)s 主键清单
 	 * @return 是否删除成功
 	 * */
 	<T> Result deleteByIdsLogical(List<T> #(idPropertyName)s);
