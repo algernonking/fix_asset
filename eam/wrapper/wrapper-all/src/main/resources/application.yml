@@ -99,8 +99,8 @@ storage:
     location:
       #在不同的环境下选择不同的路径
       windows: c:/uploads
-      mac: /tmp/uploads
-      linux: /tailoring/uploads
+      mac: /opt/upload
+      linux: /opt/upload
 
 develop:
   language: defaults

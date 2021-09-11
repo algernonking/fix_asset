@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:45:03
+ * @since 2021-09-10 22:13:26
  */
  -->
  <!DOCTYPE html>
@@ -35,13 +35,13 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
-                        <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
+                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:140px"></div>
                     </div>
                     <!-- 关键字 , keyWords ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 标签 , label ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
                     <!-- 知识内容 , content ,typeName=text_area, isHideInSearch=true -->
                     <!-- 阅读数 , reviewCount ,typeName=number_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
@@ -49,11 +49,6 @@
                     <!-- 编辑人 , editorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 编辑人 , resEditorId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:140px"></div>
-                    </div>
                     <!-- 等级 , gradeId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('等级')}" class="search-label gradeId-label">等级</span><span class="search-colon">:</span></div>
@@ -67,11 +62,6 @@
                         <div id="display" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" style="width:140px"></div>
 
                     </div>
-
-
-                </div>
-                <!-- 搜索输入区域 -->
-                <div class="layui-form toolbar search-inputs">
                     <!-- 内容类型 , contentType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('内容类型')}" class="search-label contentType-label">内容类型</span><span class="search-colon">:</span></div>
@@ -79,6 +69,16 @@
 
                         <div id="contentType" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" style="width:140px"></div>
 
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
+                        <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 简介 , profile ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

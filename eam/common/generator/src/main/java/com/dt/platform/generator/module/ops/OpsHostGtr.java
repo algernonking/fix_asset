@@ -175,20 +175,21 @@ public class OpsHostGtr extends BaseCodeGenerator{
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_HOST.HOST_NAME,
+                        EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.SYSTEM_ID,
                         EAMTables.OPS_HOST.HOST_VIP,
                         EAMTables.OPS_HOST.HOST_IP,
                 },
                 new Object[]{
-                        EAMTables.OPS_HOST.POSITION_ID,
+                        EAMTables.OPS_HOST.HOST_NAME,
+
                         HostMeta.HOST_OS_IDS,
                         HostMeta.HOST_DB_IDS,
                         HostMeta.HOST_MIDDLEWARE_IDS
                 },
                 new Object[]{
+                        EAMTables.OPS_HOST.POSITION_ID,
                         EAMTables.OPS_HOST.ENVIRONMENT,
-                        EAMTables.OPS_HOST.STATUS,
                         EAMTables.OPS_HOST.LABELS,
                         EAMTables.OPS_HOST.HOST_NOTES,
                 }
@@ -196,6 +197,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         //分成分组布局
         cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().bottomSpace(50);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_HOST.HOST_NAME,
@@ -278,6 +280,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         cfg.view().list().operationColumn().addActionButton("凭证","openHostVoucherWindow");
+
         cfg.view().list().operationColumn().width(250);
 
 

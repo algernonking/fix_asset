@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:45:03
- * @sign 711CB882BFDAAAA96970CC7D8907F204
+ * @since 2021-09-10 22:13:16
+ * @sign B2E9D3B86FB605DA731A9799AE8A4BF4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -249,6 +249,16 @@ public class ContentMeta {
 	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.knowledgebase.Content,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.knowledgebase.Content.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 知识分类 , 类型: com.dt.platform.domain.knowledgebase.Category
 	*/
 	public static final String CATEGORY="category";
@@ -271,7 +281,7 @@ public class ContentMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , EDITOR_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , CATEGORY , EDITOR };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , TITLE , PROFILE , KEY_WORDS , LABEL , CONTENT , CONTENT_TYPE , REVIEW_COUNT , ATTACH , DISPLAY , LINK_ADDRESS , GRADE_ID , EDITOR_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , CATEGORY , EDITOR };
 	
 	/**
 	 * 代理类
@@ -531,6 +541,17 @@ public class ContentMeta {
 		public Content setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public Content setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

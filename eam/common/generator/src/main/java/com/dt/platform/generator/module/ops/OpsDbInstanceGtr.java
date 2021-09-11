@@ -96,10 +96,10 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_DB_INSTANCE.NAME,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STATUS,
                         EAMTables.OPS_DB_INSTANCE.BACKUP_STRATEGY,
-                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD
+                        EAMTables.OPS_DB_INSTANCE.LOG_METHOD,
+                        EAMTables.OPS_DB_INSTANCE.NAME,
                 },
                 new Object[]{
                       //  resourceNameField,

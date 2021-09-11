@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:45:03
+ * @since 2021-09-10 22:13:31
  */
  -->
  <!DOCTYPE html>
@@ -37,14 +37,7 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('标题')}">标题</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标题') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
 
-                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('分类')}">分类</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
@@ -62,6 +55,13 @@
                     </div>
 
 
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标题')}">标题</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标题') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -71,37 +71,16 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('是否显示')}">是否显示</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="display" lay-filter="display" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                        <input input-type="radio" type="radio" name="display" lay-filter="display" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
                     </div>
                 </div>
 
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('关键字')}">关键字</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="keyWords" id="keyWords" name="keyWords" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('关键字') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
 
                 
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="label" id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" class="layui-textarea" style="height: 120px" ></textarea>
-                    </div>
-                </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('内容类型')}">内容类型</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="contentType" lay-filter="contentType" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                        <input input-type="radio" type="radio" name="contentType" lay-filter="contentType" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -110,6 +89,25 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('链接地址')}">链接地址</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="linkAddress" id="linkAddress" name="linkAddress" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('链接地址') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('关键字')}">关键字</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="keyWords" id="keyWords" name="keyWords" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('关键字') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="label" id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -181,6 +179,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 300px"></div>
 
 
     </form>

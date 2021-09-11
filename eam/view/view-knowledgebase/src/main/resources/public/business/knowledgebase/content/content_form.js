@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:45:03
+ * @since 2021-09-10 22:13:35
  */
 
 function FormPage() {
@@ -86,7 +86,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -126,7 +126,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;

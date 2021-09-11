@@ -203,6 +203,7 @@ function FormPage() {
 	}
 
 	function saveForm(data) {
+
 		var api=moduleURL+"/"+(data.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
 		admin.request(api, data, function (data) {
@@ -233,7 +234,10 @@ function FormPage() {
 			}
 			//校验表单
 			if(!verifyForm(data.field)) return;
-
+;
+			console.log("#####",data.field);
+			console.log("#####",data.id);
+			console.log("#####",data.id);
 			saveForm(data.field);
 	        return false;
 	    });

@@ -72,14 +72,17 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.GRADE).basic().label("系统分级")
                 .form().selectBox().dict(DictEnum.OPS_SYSTEM_GRADE).paging(false);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE).form().numberInput();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).form().numberInput();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).basic().label("演练时间").form().numberInput();
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).basic().label("演练时间").form().
+                dateInput().format("yyyy-MM-dd").search().range();
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
 
+
+        ;
 
 
         cfg.view().field(InformationSystemVOMeta.VOUCHER_IDS)
@@ -94,22 +97,25 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
+
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
                         EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
-                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES
+                        EAMTables.OPS_INFORMATION_SYSTEM.NAME,
+                        EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
+
                 },
                 new Object[]{
-                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
                         EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT,
-                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT
+                        EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT,
+                        EAMTables.OPS_INFORMATION_SYSTEM.LABELS,
+                        EAMTables.OPS_INFORMATION_SYSTEM.NOTES
                 }
 
         );
 
         //分成分组布局
         cfg.view().formWindow().width("90%");
-        cfg.view().formWindow().bottomSpace(50);
+        cfg.view().formWindow().bottomSpace(80);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,

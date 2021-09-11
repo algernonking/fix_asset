@@ -70,16 +70,17 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .form().upload().acceptExts("doc","zip","xlsx","rar","docx","txt","svg").maxFileCount(1);
 
         cfg.view().field(EAMTables.KN_CONTENT.GRADE_ID)
-                .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE);
+                .form().validate().required().form().selectBox().dict(DictEnum.KN_GRADE).defaultIndex(0);;
 
 
 
         cfg.view().field(EAMTables.KN_CONTENT.DISPLAY)
-                .form().validate().required().form().radioBox().enumType(KnowledgebaseDisplayEnum.class);
+                .form().validate().required().form().
+                radioBox().enumType(KnowledgebaseDisplayEnum.class).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT_TYPE)
-                .form().validate().required().form().radioBox().enumType(KnowledgebaseContentTypeEnum.class);
+                .form().validate().required().form().radioBox().enumType(KnowledgebaseContentTypeEnum.class).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.KN_CONTENT.CONTENT)
@@ -91,7 +92,7 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.KN_CONTENT.CATEGORY_ID)
                 .form().validate().required().form()
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
-                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true)
+                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true).defaultIndex(0)
                 .paging(false).toolbar(false).muliti(false).fillBy(ContentMeta.CATEGORY);
 
 
@@ -116,13 +117,13 @@ public class KnContentGtr extends BaseCodeGenerator {
         cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.KN_CONTENT.TITLE,
                         EAMTables.KN_CONTENT.CATEGORY_ID,
                         EAMTables.KN_CONTENT.GRADE_ID,
-                        EAMTables.KN_CONTENT.DISPLAY
+                        EAMTables.KN_CONTENT.DISPLAY,
+                        EAMTables.KN_CONTENT.CONTENT_TYPE,
                 },
                 new Object[]{
-                        EAMTables.KN_CONTENT.CONTENT_TYPE,
+                        EAMTables.KN_CONTENT.TITLE,
                         EAMTables.KN_CONTENT.PROFILE,
 
                 }
@@ -131,19 +132,20 @@ public class KnContentGtr extends BaseCodeGenerator {
 
         //分成分组布局
         cfg.view().formWindow().width("95%");
+        cfg.view().formWindow().bottomSpace(300);
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.KN_CONTENT.TITLE,
                         EAMTables.KN_CONTENT.CATEGORY_ID,
                         EAMTables.KN_CONTENT.GRADE_ID,
-
+                        EAMTables.KN_CONTENT.TITLE,
                 }, new Object[] {
                         EAMTables.KN_CONTENT.DISPLAY,
-                        EAMTables.KN_CONTENT.KEY_WORDS,
-                        EAMTables.KN_CONTENT.LABEL,
-                }, new Object[] {
                         EAMTables.KN_CONTENT.CONTENT_TYPE,
                         EAMTables.KN_CONTENT.LINK_ADDRESS,
+                }, new Object[] {
+                        EAMTables.KN_CONTENT.KEY_WORDS,
+                        EAMTables.KN_CONTENT.LABEL,
+
                 }
         );
 

@@ -166,7 +166,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.POSITION_ID)
                 .basic().label("位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillBy(AssetMeta.POSITION).muliti(false);
 
 

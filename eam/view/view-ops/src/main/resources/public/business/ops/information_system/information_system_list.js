@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:29
+ * @since 2021-09-10 21:30:03
  */
 
 
@@ -132,6 +132,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.profile={ value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.technicalContact={ value: $("#technicalContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessContact={ value: $("#businessContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};

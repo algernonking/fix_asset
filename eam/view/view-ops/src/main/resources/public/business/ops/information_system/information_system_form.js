@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:29
+ * @since 2021-09-10 21:30:06
  */
 
 function FormPage() {
@@ -115,17 +115,17 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#lastdrillDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#onlineDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#offlineDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		//渲染 grade 下拉字段

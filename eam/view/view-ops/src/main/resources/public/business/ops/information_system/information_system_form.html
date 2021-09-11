@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:29
+ * @since 2021-09-10 21:30:04
  */
  -->
  <!DOCTYPE html>
@@ -65,14 +65,12 @@
                     </div>
 
 
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('介绍')}">介绍</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="profile" id="profile" name="profile" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('介绍') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('介绍')}">介绍</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="profile" id="profile" name="profile" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('介绍') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -90,7 +88,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('上线时间')}">上线时间</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="onlineDate" id="onlineDate" name="onlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上线时间') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="onlineDate" id="onlineDate" name="onlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('上线时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 
@@ -98,7 +96,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('下线时间')}">下线时间</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="offlineDate" id="offlineDate" name="offlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="offlineDate" id="offlineDate" name="offlineDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('下线时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 
@@ -114,23 +112,19 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
-
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('技术联系人')}">技术联系人</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="technicalContact" id="technicalContact" name="technicalContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('技术联系人') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <div class="layui-form-label "><div th:text="${lang.translate('技术联系人')}">技术联系人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="technicalContact" id="technicalContact" name="technicalContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('技术联系人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
 
-
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('业务联系人')}">业务联系人</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="businessContact" id="businessContact" name="businessContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务联系人') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务联系人')}">业务联系人</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="businessContact" id="businessContact" name="businessContact" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务联系人') }" type="text" class="layui-input"  />
+                        </div>
                     </div>
-                </div>
-
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('标签')}">标签</div></div>
@@ -243,7 +237,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('演练时间')}">演练时间</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('演练时间') }" type="text" class="layui-input"   />
+                            <input input-type="date" lay-filter="lastdrillDate" id="lastdrillDate" name="lastdrillDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('演练时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 
@@ -277,7 +271,7 @@
     var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
     var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];
     var SELECT_GRADE_DATA = [[${dict.toArray('ops_system_grade')}]];
-    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"radio_box","required":true}};
+    var VALIDATE_CONFIG={"onlineDate":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineDate":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"lastdrillDate":{"date":true,"labelInForm":"演练时间","inputType":"date_input"},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_information_system";
 
 

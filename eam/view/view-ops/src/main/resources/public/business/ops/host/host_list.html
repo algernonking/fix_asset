@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:45
+ * @since 2021-09-10 21:33:28
  */
  -->
  <!DOCTYPE html>
@@ -36,10 +36,13 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 主机类型 , hostType ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 名称 , hostName ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 主机状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label hostName-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="hostName" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('主机状态')}" class="search-label status-label">主机状态</span><span class="search-colon">:</span></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" style="width:140px"></div>
+
                     </div>
                     <!-- 监控状态 , monitorStatus ,typeName=radio_box, isHideInSearch=true -->
                     <!-- 负责人 , directorUsername ,typeName=text_input, isHideInSearch=true -->
@@ -77,10 +80,10 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 名称 , hostName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('所在位置')}" class="search-label positionId-label">所在位置</span><span class="search-colon">:</span></div>
-                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label hostName-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="hostName" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -102,18 +105,15 @@
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+                    <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('所在位置')}" class="search-label positionId-label">所在位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:140px"></div>
+                    </div>
                     <!-- 所在环境 , environment ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('所在环境')}" class="search-label environment-label">所在环境</span><span class="search-colon">:</span></div>
                         <div id="environment" th:data="${dict.toArray('ops_environment')}" style="width:140px"></div>
-                    </div>
-                    <!-- 主机状态 , status ,typeName=radio_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('主机状态')}" class="search-label status-label">主机状态</span><span class="search-colon">:</span></div>
-
-
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.HostStatusEnum')}" style="width:140px"></div>
-
                     </div>
                     <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
