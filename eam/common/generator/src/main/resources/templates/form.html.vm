@@ -41,6 +41,10 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
+        #for(f : hiddenFields)
+        <input name="#(f.varName)" id="#(f.varName)"  type="hidden"/>
+        #end
+
         #for(g : groups) <!--开始：group 循环-->
 
         #if(g.type.equals("iframe"))
