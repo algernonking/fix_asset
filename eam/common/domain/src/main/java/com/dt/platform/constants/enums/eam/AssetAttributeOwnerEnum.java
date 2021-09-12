@@ -13,9 +13,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetAttributeOwnerEnum implements CodeTextEnum {
 
-	BASE("base" , "基本模块"),
-	EQUIPMENT("equipment" , "设备模块"),
+	ASSET("asset" , "资产"),
 	;
+
 	private String code;
 	private String text;
 	private AssetAttributeOwnerEnum(String code, String text)  {

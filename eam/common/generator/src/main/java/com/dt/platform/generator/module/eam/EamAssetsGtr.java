@@ -36,8 +36,10 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
+
         cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人员","使用人员");
         cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","管理人员","管理人员");
+
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 
@@ -53,24 +55,25 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_START_DATE).search().range();
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_END_DATE).search().range();
         cfg.view().field(EAMTables.EAM_ASSET.DIRECTOR).search().fuzzySearch();
-
         cfg.view().field(EAMTables.EAM_ASSET.CONTACTS).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET.MANAGE_IP).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_IP).search().fuzzySearch();
 
 
-        cfg.view().field(EAMTables.EAM_ASSET.CREATE_TIME).table().disable(true);
+
         cfg.view().field(EAMTables.EAM_ASSET.ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.SCRAP).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.DISPLAY).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.PICTURE_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.RFID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.ATTACH).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.ASSET_CODE).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_CODE).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.ASSET_NUMBER).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.REMAIN_NUMBER).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET.CREATE_TIME).table().disable(true);
+
+
+
         cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID).table().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET.BATCH_CODE).table().hidden(true);
@@ -119,7 +122,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetMeta.SUPPLIER).muliti(false);
 
 
-
         cfg.view().field(EAMTables.EAM_ASSET.MAINTAINER_ID)
                 .basic().label("维保商")
                 .form().selectBox().queryApi(MaintainerServiceProxy.QUERY_LIST)
@@ -130,7 +132,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID).form()
                 .form().selectBox().dict(DictEnum.EAM_SOURCE);
-
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
                 label("资产状态").selectBox().enumType(AssetStatusEnum.class);
@@ -179,6 +180,20 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_START_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET.PURCHASE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET.ENTRY_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+
+        cfg.view().field(EAMTables.EAM_ASSET.RACK_UP_NUMBER).form().numberInput().allowNegative(false).scale(0);
+        cfg.view().field(EAMTables.EAM_ASSET.RACK_DOWN_NUMBER).form().numberInput().allowNegative(false).scale(0);
+        cfg.view().field(EAMTables.EAM_ASSET.ASSET_NUMBER).form().numberInput().allowNegative(false).scale(0);
+        cfg.view().field(EAMTables.EAM_ASSET.REMAIN_NUMBER).form().numberInput().allowNegative(false).scale(0);
+
+        cfg.view().field(EAMTables.EAM_ASSET.SERVICE_LIFE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.TAXAMOUNT_RATE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.TAXAMOUNT_PRICE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.ORIGINAL_UNIT_PRICE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.ACCUMULATED_DEPRECIATION).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.RESIDUALS_RATE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.PURCHASE_UNIT_PRICE).form().numberInput().allowNegative(false).scale(2);
+
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).form().textArea().height(30);
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_NOTES).form().textArea().height(30);

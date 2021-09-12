@@ -111,10 +111,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(HostMeta.HOST_OS_IDS)
                 .basic().label("操作系统")
                 .table().sort(false)
-                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
+                .form().validate().required().form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false).defaultIndex(0)
-                .fillBy(HostMeta.HOST_OS_LIST).muliti(true);
+                .fillBy(HostMeta.HOST_OS_LIST).muliti(false);
 
 
         cfg.view().field(HostMeta.POSITION_ID)
@@ -149,7 +149,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
-                .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false);
+                .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
 
         cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)

@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:09
+ * @since 2021-09-12 13:03:55
  */
 
 layui.config({
@@ -45,6 +45,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
+            if(value==null) return "";
             return value;
         },
         /**

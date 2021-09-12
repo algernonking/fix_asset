@@ -2,7 +2,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:41
+ * @since 2021-09-12 13:04:10
  */
  -->
  <!DOCTYPE html>
@@ -45,9 +45,10 @@
                         <div id="dimension" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" style="width:140px"></div>
 
                     </div>
-                    <!-- 是否必选 , required ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 是否修改 , requiredModify ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 是否必选 , required ,typeName=radio_box, isHideInSearch=true -->
+                    <!-- 是否修改 , requiredModify ,typeName=radio_box, isHideInSearch=true -->
                     <!-- 组件内容 , componentContent ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 归属 , owner ,typeName=select_box, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
@@ -124,7 +125,10 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var RADIO_DIMENSION_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}]];
     var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}]];
+    var RADIO_REQUIRED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
+    var RADIO_REQUIREDMODIFY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
     var RADIO_COMPONENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum')}]];
+    var SELECT_OWNER_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum')}]];
     var AUTH_PREFIX="eam_asset_attribute";
 
 

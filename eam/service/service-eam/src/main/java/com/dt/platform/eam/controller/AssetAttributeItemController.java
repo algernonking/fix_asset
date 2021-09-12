@@ -73,10 +73,12 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_CONTENT , value = "列表内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SORT , value = "列表排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_ROW , value = "行布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_COLUMN , value = "列布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 
 	})
@@ -135,10 +137,12 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_CONTENT , value = "列表内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SORT , value = "列表排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_ROW , value = "行布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_COLUMN , value = "列布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	 })
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE , AssetAttributeItemVOMeta.SEARCH_FIELD , AssetAttributeItemVOMeta.FUZZY_FIELD , AssetAttributeItemVOMeta.SEARCH_VALUE , AssetAttributeItemVOMeta.SORT_FIELD , AssetAttributeItemVOMeta.SORT_TYPE , AssetAttributeItemVOMeta.IDS } ) 
@@ -162,10 +166,12 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_CONTENT , value = "列表内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SORT , value = "列表排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_ROW , value = "行布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_COLUMN , value = "列布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	 })
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE , AssetAttributeItemVOMeta.SEARCH_FIELD , AssetAttributeItemVOMeta.FUZZY_FIELD , AssetAttributeItemVOMeta.SEARCH_VALUE , AssetAttributeItemVOMeta.SORT_FIELD , AssetAttributeItemVOMeta.SORT_TYPE , AssetAttributeItemVOMeta.IDS } )
@@ -230,10 +236,12 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_CONTENT , value = "列表内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SORT , value = "列表排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_ROW , value = "行布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_COLUMN , value = "列布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	 })
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE } )
@@ -259,10 +267,12 @@ public class AssetAttributeItemController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_CONTENT , value = "列表内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SORT , value = "列表排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_ROW , value = "行布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_COLUMN , value = "列布局位置" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.FORM_SHOW , value = "表单显示" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LIST_SHOW , value = "列表显示" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
  	})
 	@ApiOperationSupport(order=8)

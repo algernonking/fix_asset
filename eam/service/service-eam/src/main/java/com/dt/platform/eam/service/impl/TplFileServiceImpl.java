@@ -85,6 +85,11 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 	 * */
 	@Override
 	public Result insert(TplFile tplFile) {
+		TplFile tplfile2=new TplFile();
+		tplfile2.setCode(tplFile.getCode());
+		if(queryList(tplfile2).size()>0){
+			return ErrorDesc.failure().message("业务编码重复");
+		}
 		Result r=super.insert(tplFile);
 		return r;
 	}

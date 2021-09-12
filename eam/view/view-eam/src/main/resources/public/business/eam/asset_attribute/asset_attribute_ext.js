@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:41
+ * @since 2021-09-12 11:59:00
  */
 
 layui.config({
@@ -45,6 +45,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
+            if(value==null) return "";
             return value;
         },
         /**
@@ -109,6 +110,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            if(data.id){
+                setTimeout(function(){
+                    var codeSelect=xmSelect.get('#owner', true);
+                    codeSelect.update({disabled: true})
+                },100);
+            }
         },
         /**
          * 表单数据填充后

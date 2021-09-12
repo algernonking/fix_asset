@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.AssetAttribute;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:44
- * @sign 167E161AC2B7FC4942080C12AB902862
+ * @since 2021-09-12 18:10:02
+ * @sign A9D7A8D31DABDEA846E2EF109D4CB614
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -77,6 +77,46 @@ public class AssetAttributeItemMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LAYOUT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LAYOUT_TYPE, java.lang.Integer.class, "布局类型", "布局类型", java.lang.Integer.class, null);
 	
 	/**
+	 * 列表显示 , 类型: java.lang.Integer
+	*/
+	public static final String LIST_SHOW="listShow";
+	
+	/**
+	 * 列表显示 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LIST_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SHOW, java.lang.Integer.class, "列表显示", "列表显示", java.lang.Integer.class, null);
+	
+	/**
+	 * 列表内容 , 类型: java.lang.String
+	*/
+	public static final String LIST_CONTENT="listContent";
+	
+	/**
+	 * 列表内容 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> LIST_CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_CONTENT, java.lang.String.class, "列表内容", "列表内容", java.lang.String.class, null);
+	
+	/**
+	 * 列表排序 , 类型: java.lang.Integer
+	*/
+	public static final String LIST_SORT="listSort";
+	
+	/**
+	 * 列表排序 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LIST_SORT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SORT, java.lang.Integer.class, "列表排序", "列表排序", java.lang.Integer.class, null);
+	
+	/**
+	 * 表单显示 , 类型: java.lang.Integer
+	*/
+	public static final String FORM_SHOW="formShow";
+	
+	/**
+	 * 表单显示 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> FORM_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,FORM_SHOW, java.lang.Integer.class, "表单显示", "表单显示", java.lang.Integer.class, null);
+	
+	/**
 	 * 行布局位置 , 类型: java.lang.Integer
 	*/
 	public static final String LAYOUT_ROW="layoutRow";
@@ -95,26 +135,6 @@ public class AssetAttributeItemMeta {
 	 * 列布局位置 , 类型: java.lang.Integer
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LAYOUT_COLUMN_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LAYOUT_COLUMN, java.lang.Integer.class, "列布局位置", "列布局位置", java.lang.Integer.class, null);
-	
-	/**
-	 * 表单显示 , 类型: java.lang.Integer
-	*/
-	public static final String FORM_SHOW="formShow";
-	
-	/**
-	 * 表单显示 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> FORM_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,FORM_SHOW, java.lang.Integer.class, "表单显示", "表单显示", java.lang.Integer.class, null);
-	
-	/**
-	 * 列表显示 , 类型: java.lang.Integer
-	*/
-	public static final String LIST_SHOW="listShow";
-	
-	/**
-	 * 列表显示 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LIST_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SHOW, java.lang.Integer.class, "列表显示", "列表显示", java.lang.Integer.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -229,7 +249,7 @@ public class AssetAttributeItemMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ATTRIBUTE_ID , OWNER_CODE , DIMENSION , REQUIRED , LAYOUT_TYPE , LAYOUT_ROW , LAYOUT_COLUMN , FORM_SHOW , LIST_SHOW , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTRIBUTE };
+	public static final String[] $PROPS={ ID , ATTRIBUTE_ID , OWNER_CODE , DIMENSION , REQUIRED , LAYOUT_TYPE , LIST_SHOW , LIST_CONTENT , LIST_SORT , FORM_SHOW , LAYOUT_ROW , LAYOUT_COLUMN , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTRIBUTE };
 	
 	/**
 	 * 代理类
@@ -306,6 +326,50 @@ public class AssetAttributeItemMeta {
 		}
 		
 		/**
+		 * 设置 列表显示
+		 * @param listShow 列表显示
+		 * @return 当前对象
+		*/
+		public AssetAttributeItem setListShow(Integer listShow) {
+			super.change(LIST_SHOW,super.getListShow(),listShow);
+			super.setListShow(listShow);
+			return this;
+		}
+		
+		/**
+		 * 设置 列表内容
+		 * @param listContent 列表内容
+		 * @return 当前对象
+		*/
+		public AssetAttributeItem setListContent(String listContent) {
+			super.change(LIST_CONTENT,super.getListContent(),listContent);
+			super.setListContent(listContent);
+			return this;
+		}
+		
+		/**
+		 * 设置 列表排序
+		 * @param listSort 列表排序
+		 * @return 当前对象
+		*/
+		public AssetAttributeItem setListSort(Integer listSort) {
+			super.change(LIST_SORT,super.getListSort(),listSort);
+			super.setListSort(listSort);
+			return this;
+		}
+		
+		/**
+		 * 设置 表单显示
+		 * @param formShow 表单显示
+		 * @return 当前对象
+		*/
+		public AssetAttributeItem setFormShow(Integer formShow) {
+			super.change(FORM_SHOW,super.getFormShow(),formShow);
+			super.setFormShow(formShow);
+			return this;
+		}
+		
+		/**
 		 * 设置 行布局位置
 		 * @param layoutRow 行布局位置
 		 * @return 当前对象
@@ -324,28 +388,6 @@ public class AssetAttributeItemMeta {
 		public AssetAttributeItem setLayoutColumn(Integer layoutColumn) {
 			super.change(LAYOUT_COLUMN,super.getLayoutColumn(),layoutColumn);
 			super.setLayoutColumn(layoutColumn);
-			return this;
-		}
-		
-		/**
-		 * 设置 表单显示
-		 * @param formShow 表单显示
-		 * @return 当前对象
-		*/
-		public AssetAttributeItem setFormShow(Integer formShow) {
-			super.change(FORM_SHOW,super.getFormShow(),formShow);
-			super.setFormShow(formShow);
-			return this;
-		}
-		
-		/**
-		 * 设置 列表显示
-		 * @param listShow 列表显示
-		 * @return 当前对象
-		*/
-		public AssetAttributeItem setListShow(Integer listShow) {
-			super.change(LIST_SHOW,super.getListShow(),listShow);
-			super.setListShow(listShow);
 			return this;
 		}
 		

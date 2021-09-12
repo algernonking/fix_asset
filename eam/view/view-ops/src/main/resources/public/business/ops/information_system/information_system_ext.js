@@ -116,6 +116,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         }
     }
 
+    var action=admin.getTempData('ops-information-system-form-data-form-action');
     //表单页的扩展
     var form={
         /**
@@ -132,16 +133,23 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            if(action=="create"){
+                setTimeout(function(){
+                    var now = new Date();
+                    var day = ("0" + now.getDate()).slice(-2);
+                    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                    $('#onlineDate').val(today);
+                    console.log(1111);
+                },100)
+
+            }
         },
         /**
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
-            var action=admin.getTempData('ops-information-system-form-data-form-action')
 
-            if(action=="create"){
-                $('input[name=status]:first').prop("checked","true")
-            }
             console.log('afterDataFill',data);
         },
         /**

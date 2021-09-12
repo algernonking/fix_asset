@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 09:04:27
+ * @since 2021-09-12 13:06:55
  */
 
 function FormPage() {
@@ -107,7 +107,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
@@ -228,7 +228,7 @@ function FormPage() {
 		//渲染 hostOsIds 下拉字段
 		fox.renderSelectBox({
 			el: "hostOsIds",
-			radio: false,
+			radio: true,
 			filterable: true,
 			//转换数据
 			searchField: "name", //请自行调整用于搜索的字段名称
@@ -369,7 +369,7 @@ function FormPage() {
 		//获取 中间件 下拉框的值
 		data["hostMiddlewareIds"]=fox.getSelectedValue("hostMiddlewareIds",true);
 		//获取 操作系统 下拉框的值
-		data["hostOsIds"]=fox.getSelectedValue("hostOsIds",true);
+		data["hostOsIds"]=fox.getSelectedValue("hostOsIds",false);
 
 		return data;
 	}

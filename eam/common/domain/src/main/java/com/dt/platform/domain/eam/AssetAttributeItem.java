@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:44
- * @sign 167E161AC2B7FC4942080C12AB902862
+ * @since 2021-09-12 18:10:01
+ * @sign A9D7A8D31DABDEA846E2EF109D4CB614
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -66,6 +66,30 @@ public class AssetAttributeItem extends Entity {
 	private Integer layoutType;
 	
 	/**
+	 * 列表显示：列表显示
+	*/
+	@ApiModelProperty(required = false,value="列表显示" , notes = "列表显示")
+	private Integer listShow;
+	
+	/**
+	 * 列表内容：列表内容
+	*/
+	@ApiModelProperty(required = false,value="列表内容" , notes = "列表内容")
+	private String listContent;
+	
+	/**
+	 * 列表排序：列表排序
+	*/
+	@ApiModelProperty(required = false,value="列表排序" , notes = "列表排序")
+	private Integer listSort;
+	
+	/**
+	 * 表单显示：表单显示
+	*/
+	@ApiModelProperty(required = false,value="表单显示" , notes = "表单显示")
+	private Integer formShow;
+	
+	/**
 	 * 行布局位置：行布局位置
 	*/
 	@ApiModelProperty(required = false,value="行布局位置" , notes = "行布局位置")
@@ -76,18 +100,6 @@ public class AssetAttributeItem extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="列布局位置" , notes = "列布局位置")
 	private Integer layoutColumn;
-	
-	/**
-	 * 表单显示：表单显示
-	*/
-	@ApiModelProperty(required = false,value="表单显示" , notes = "表单显示")
-	private Integer formShow;
-	
-	/**
-	 * 列表显示：列表显示
-	*/
-	@ApiModelProperty(required = false,value="列表显示" , notes = "列表显示")
-	private Integer listShow;
 	
 	/**
 	 * 备注：备注
@@ -270,6 +282,82 @@ public class AssetAttributeItem extends Entity {
 	}
 	
 	/**
+	 * 获得 列表显示<br>
+	 * 列表显示
+	 * @return 列表显示
+	*/
+	public Integer getListShow() {
+		return listShow;
+	}
+	
+	/**
+	 * 设置 列表显示
+	 * @param listShow 列表显示
+	 * @return 当前对象
+	*/
+	public AssetAttributeItem setListShow(Integer listShow) {
+		this.listShow=listShow;
+		return this;
+	}
+	
+	/**
+	 * 获得 列表内容<br>
+	 * 列表内容
+	 * @return 列表内容
+	*/
+	public String getListContent() {
+		return listContent;
+	}
+	
+	/**
+	 * 设置 列表内容
+	 * @param listContent 列表内容
+	 * @return 当前对象
+	*/
+	public AssetAttributeItem setListContent(String listContent) {
+		this.listContent=listContent;
+		return this;
+	}
+	
+	/**
+	 * 获得 列表排序<br>
+	 * 列表排序
+	 * @return 列表排序
+	*/
+	public Integer getListSort() {
+		return listSort;
+	}
+	
+	/**
+	 * 设置 列表排序
+	 * @param listSort 列表排序
+	 * @return 当前对象
+	*/
+	public AssetAttributeItem setListSort(Integer listSort) {
+		this.listSort=listSort;
+		return this;
+	}
+	
+	/**
+	 * 获得 表单显示<br>
+	 * 表单显示
+	 * @return 表单显示
+	*/
+	public Integer getFormShow() {
+		return formShow;
+	}
+	
+	/**
+	 * 设置 表单显示
+	 * @param formShow 表单显示
+	 * @return 当前对象
+	*/
+	public AssetAttributeItem setFormShow(Integer formShow) {
+		this.formShow=formShow;
+		return this;
+	}
+	
+	/**
 	 * 获得 行布局位置<br>
 	 * 行布局位置
 	 * @return 行布局位置
@@ -304,44 +392,6 @@ public class AssetAttributeItem extends Entity {
 	*/
 	public AssetAttributeItem setLayoutColumn(Integer layoutColumn) {
 		this.layoutColumn=layoutColumn;
-		return this;
-	}
-	
-	/**
-	 * 获得 表单显示<br>
-	 * 表单显示
-	 * @return 表单显示
-	*/
-	public Integer getFormShow() {
-		return formShow;
-	}
-	
-	/**
-	 * 设置 表单显示
-	 * @param formShow 表单显示
-	 * @return 当前对象
-	*/
-	public AssetAttributeItem setFormShow(Integer formShow) {
-		this.formShow=formShow;
-		return this;
-	}
-	
-	/**
-	 * 获得 列表显示<br>
-	 * 列表显示
-	 * @return 列表显示
-	*/
-	public Integer getListShow() {
-		return listShow;
-	}
-	
-	/**
-	 * 设置 列表显示
-	 * @param listShow 列表显示
-	 * @return 当前对象
-	*/
-	public AssetAttributeItem setListShow(Integer listShow) {
-		this.listShow=listShow;
 		return this;
 	}
 	

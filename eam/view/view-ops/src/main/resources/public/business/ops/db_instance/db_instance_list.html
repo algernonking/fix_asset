@@ -2,7 +2,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:32
+ * @since 2021-09-12 13:05:11
  */
  -->
  <!DOCTYPE html>
@@ -37,22 +37,17 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 主机 , hostId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 数据库 , databaseId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 实例名称 , name ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('实例名称')}" class="search-label name-label">实例名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
                     <!-- 备份状态 , backupType ,typeName=select_box, isHideInSearch=true -->
                     <!-- 备份保留时长 , backupDatakeep ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 备份方式 , backupMethod ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 上次备份 , backupTime ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 备份大小 , backupSize ,typeName=number_input, isHideInSearch=true -->
-                    <!-- IP , resHostIp ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备份状态 , backupStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备份状态')}" class="search-label backupStatus-label">备份状态</span><span class="search-colon">:</span></div>
                         <div id="backupStatus" th:data="${dict.toArray('ops_db_backup_status')}" style="width:140px"></div>
                     </div>
+                    <!-- 备份方式 , backupMethod ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 上次备份 , backupTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 备份大小 , backupSize ,typeName=number_input, isHideInSearch=true -->
+                    <!-- IP , resHostIp ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备份策略 , backupStrategy ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备份策略')}" class="search-label backupStrategy-label">备份策略</span><span class="search-colon">:</span></div>
@@ -62,6 +57,11 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('日志模式')}" class="search-label logMethod-label">日志模式</span><span class="search-colon">:</span></div>
                         <div id="logMethod" th:data="${dict.toArray('ops_db_log_method')}" style="width:140px"></div>
+                    </div>
+                    <!-- 实例名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('实例名称')}" class="search-label name-label">实例名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

@@ -18,8 +18,8 @@ import com.dt.platform.domain.eam.Maintainer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 17:13:45
- * @sign 65FCC161D85A813F7DE7E01622C7C7D7
+ * @since 2021-09-12 15:27:26
+ * @sign 39F242FD655652CDAA3B72AAAF0682C9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -556,6 +556,96 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> FINANCIAL_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,FINANCIAL_NOTES, java.lang.String.class, "财务备注", "财务备注", java.lang.String.class, null);
 	
 	/**
+	 * 设备编号 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_CODE="equipmentCode";
+	
+	/**
+	 * 设备编号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_CODE, java.lang.String.class, "设备编号", "设备编号", java.lang.String.class, null);
+	
+	/**
+	 * 设备状态 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_STATUS="equipmentStatus";
+	
+	/**
+	 * 设备状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_STATUS, java.lang.String.class, "设备状态", "设备状态", java.lang.String.class, null);
+	
+	/**
+	 * 设备IP , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_IP="equipmentIp";
+	
+	/**
+	 * 设备IP , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_IP_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_IP, java.lang.String.class, "设备IP", "设备IP", java.lang.String.class, null);
+	
+	/**
+	 * 管理IP , 类型: java.lang.String
+	*/
+	public static final String MANAGE_IP="manageIp";
+	
+	/**
+	 * 管理IP , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MANAGE_IP_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGE_IP, java.lang.String.class, "管理IP", "管理IP", java.lang.String.class, null);
+	
+	/**
+	 * 设备CPU , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_CPU="equipmentCpu";
+	
+	/**
+	 * 设备CPU , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_CPU_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_CPU, java.lang.String.class, "设备CPU", "设备CPU", java.lang.String.class, null);
+	
+	/**
+	 * 设备内存 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_MEMORY="equipmentMemory";
+	
+	/**
+	 * 设备内存 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_MEMORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_MEMORY, java.lang.String.class, "设备内存", "设备内存", java.lang.String.class, null);
+	
+	/**
+	 * 设备机柜 , 类型: java.lang.String
+	*/
+	public static final String RACK_ID="rackId";
+	
+	/**
+	 * 设备机柜 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> RACK_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RACK_ID, java.lang.String.class, "设备机柜", "设备机柜", java.lang.String.class, null);
+	
+	/**
+	 * 设备机柜上位置 , 类型: java.lang.Integer
+	*/
+	public static final String RACK_UP_NUMBER="rackUpNumber";
+	
+	/**
+	 * 设备机柜上位置 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> RACK_UP_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RACK_UP_NUMBER, java.lang.Integer.class, "设备机柜上位置", "设备机柜上位置", java.lang.Integer.class, null);
+	
+	/**
+	 * 设备机柜下位置 , 类型: java.lang.Integer
+	*/
+	public static final String RACK_DOWN_NUMBER="rackDownNumber";
+	
+	/**
+	 * 设备机柜下位置 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> RACK_DOWN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,RACK_DOWN_NUMBER, java.lang.Integer.class, "设备机柜下位置", "设备机柜下位置", java.lang.Integer.class, null);
+	
+	/**
 	 * 标签 , 类型: java.lang.String
 	*/
 	public static final String LABEL="label";
@@ -758,7 +848,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER };
 	
 	/**
 	 * 代理类
@@ -1348,6 +1438,105 @@ public class AssetMeta {
 		public Asset setFinancialNotes(String financialNotes) {
 			super.change(FINANCIAL_NOTES,super.getFinancialNotes(),financialNotes);
 			super.setFinancialNotes(financialNotes);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备编号
+		 * @param equipmentCode 设备编号
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentCode(String equipmentCode) {
+			super.change(EQUIPMENT_CODE,super.getEquipmentCode(),equipmentCode);
+			super.setEquipmentCode(equipmentCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备状态
+		 * @param equipmentStatus 设备状态
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentStatus(String equipmentStatus) {
+			super.change(EQUIPMENT_STATUS,super.getEquipmentStatus(),equipmentStatus);
+			super.setEquipmentStatus(equipmentStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备IP
+		 * @param equipmentIp 设备IP
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentIp(String equipmentIp) {
+			super.change(EQUIPMENT_IP,super.getEquipmentIp(),equipmentIp);
+			super.setEquipmentIp(equipmentIp);
+			return this;
+		}
+		
+		/**
+		 * 设置 管理IP
+		 * @param manageIp 管理IP
+		 * @return 当前对象
+		*/
+		public Asset setManageIp(String manageIp) {
+			super.change(MANAGE_IP,super.getManageIp(),manageIp);
+			super.setManageIp(manageIp);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备CPU
+		 * @param equipmentCpu 设备CPU
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentCpu(String equipmentCpu) {
+			super.change(EQUIPMENT_CPU,super.getEquipmentCpu(),equipmentCpu);
+			super.setEquipmentCpu(equipmentCpu);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备内存
+		 * @param equipmentMemory 设备内存
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentMemory(String equipmentMemory) {
+			super.change(EQUIPMENT_MEMORY,super.getEquipmentMemory(),equipmentMemory);
+			super.setEquipmentMemory(equipmentMemory);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备机柜
+		 * @param rackId 设备机柜
+		 * @return 当前对象
+		*/
+		public Asset setRackId(String rackId) {
+			super.change(RACK_ID,super.getRackId(),rackId);
+			super.setRackId(rackId);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备机柜上位置
+		 * @param rackUpNumber 设备机柜上位置
+		 * @return 当前对象
+		*/
+		public Asset setRackUpNumber(Integer rackUpNumber) {
+			super.change(RACK_UP_NUMBER,super.getRackUpNumber(),rackUpNumber);
+			super.setRackUpNumber(rackUpNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备机柜下位置
+		 * @param rackDownNumber 设备机柜下位置
+		 * @return 当前对象
+		*/
+		public Asset setRackDownNumber(Integer rackDownNumber) {
+			super.change(RACK_DOWN_NUMBER,super.getRackDownNumber(),rackDownNumber);
+			super.setRackDownNumber(rackDownNumber);
 			return this;
 		}
 		

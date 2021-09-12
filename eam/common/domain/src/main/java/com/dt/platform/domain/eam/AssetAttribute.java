@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:40
- * @sign 7726884A39F5776FBDE282769C247863
+ * @since 2021-09-12 13:04:10
+ * @sign F4169DE229D9D9C1132B75D3054C70F2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -148,6 +148,12 @@ public class AssetAttribute extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 归属：归属
+	*/
+	@ApiModelProperty(required = false,value="归属" , notes = "归属")
+	private String owner;
 	
 	/**
 	 * 获得 主键<br>
@@ -526,6 +532,25 @@ public class AssetAttribute extends Entity {
 	*/
 	public AssetAttribute setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 归属<br>
+	 * 归属
+	 * @return 归属
+	*/
+	public String getOwner() {
+		return owner;
+	}
+	
+	/**
+	 * 设置 归属
+	 * @param owner 归属
+	 * @return 当前对象
+	*/
+	public AssetAttribute setOwner(String owner) {
+		this.owner=owner;
 		return this;
 	}
 

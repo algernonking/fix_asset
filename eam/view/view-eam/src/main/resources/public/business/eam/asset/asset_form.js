@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 17:13:53
+ * @since 2021-09-12 15:27:35
  */
 
 function FormPage() {
@@ -199,6 +199,8 @@ function FormPage() {
 			el: "positionId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
 			searchField: "name", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数

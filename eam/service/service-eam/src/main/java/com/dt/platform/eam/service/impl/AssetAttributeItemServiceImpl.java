@@ -3,12 +3,14 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.eam.AssetAttributeListStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
 import com.dt.platform.eam.service.IAssetAttributeService;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.github.foxnic.sql.expr.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -295,11 +297,19 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		attributeitem.setLayoutType(1);
 		attributeitem.setFormShow(1);
 		attributeitem.setLayoutColumn(1);
-		//AssetAttributeItem.create().setOwnerCode(AssetAttributeOwnerEnum.BASE.code()).setLayoutType(1).setFormShow(1);
 		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem);
 		join(attributeItemsData1ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeData1Column1",attributeItemsData1ColumnOneList);
 		printList(attributeItemsData1ColumnOneList,"one-1");
+
+		//所有列表数据
+		AssetAttributeItemVO attributeitemList=new AssetAttributeItemVO();
+		attributeitemList.setOwnerCode(module);
+		attributeitemList.setListShow(1);
+		List<AssetAttributeItem> attributeItemsListData= queryList(attributeitemList,OrderBy.byAsc("list_sort"));
+		join(attributeItemsListData,AssetAttributeItemMeta.ATTRIBUTE);
+		result.put("attributeListData",attributeItemsListData);
+
 
 		return result;
 	}

@@ -14,9 +14,8 @@ app_dir=/tmp/eam
 app_log=$app_dir/log
 app_log_file=$app_log/app.log
 
-
 ####################### Parameter ####################################
-app_process_mark="welcome_com_to_use_it"
+app_process_mark="welcome_come_to_use_it"
 action=start
 if [[ -n $1 ]];then
   action=$1

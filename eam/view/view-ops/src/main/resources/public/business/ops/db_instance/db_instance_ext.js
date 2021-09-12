@@ -106,10 +106,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 },500);
             }else{
                 //enableHoverFirst
-                var databaseSelect= xmSelect.get('#databaseId',true);
-                databaseSelect.update({disabled:true})
-                var hostSelect= xmSelect.get('#hostId',true);
-                hostSelect.update({disabled:true})
+                setTimeout(function(){
+                    var databaseSelect= xmSelect.get('#databaseId',true);
+                    databaseSelect.update({disabled:true})
+                    var hostSelect= xmSelect.get('#hostId',true);
+                    hostSelect.update({disabled:true})
+                },100)
+
             }
 
 

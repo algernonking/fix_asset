@@ -2,6 +2,7 @@ package com.dt.platform.eam.page;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
@@ -70,6 +71,14 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_info_list.html")
 	public String infoList(Model model,HttpServletRequest request) {
 
+		//设置字段布局
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
 		System.out.println(model);
 		return prefix+"/asset_info_list";
 	}
@@ -89,7 +98,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_info_form.html")
 	public String infoForm(Model model,HttpServletRequest request , String id) {
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
@@ -100,7 +109,7 @@ public class AssetPageController extends ViewController {
 
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
-		attributeItem.setOwnerCode(AssetAttributeOwnerEnum.BASE.code());
+		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.BASE.code());
 		attributeItem.setRequired(1);
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();

@@ -3,10 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusShowHideEnum;
 import com.dt.platform.constants.enums.common.StatusYNEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeLayoutTypeEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.domain.eam.AssetAttribute;
@@ -57,7 +54,7 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.OWNER_CODE).form().validate().required()
-                .form().radioBox().enumType(AssetAttributeOwnerEnum.class);
+                .form().selectBox().enumType(AssetAttributeItemOwnerEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.FORM_SHOW).form().validate().required()
                 .form().radioBox().enumType(StatusShowHideEnum.class);

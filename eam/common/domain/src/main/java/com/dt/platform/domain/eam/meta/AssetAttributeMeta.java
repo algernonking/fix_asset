@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:40
- * @sign 7726884A39F5776FBDE282769C247863
+ * @since 2021-09-12 13:04:10
+ * @sign F4169DE229D9D9C1132B75D3054C70F2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -216,9 +216,19 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 归属 , 类型: java.lang.String
+	*/
+	public static final String OWNER="owner";
+	
+	/**
+	 * 归属 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> OWNER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,OWNER, java.lang.String.class, "归属", "归属", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER };
 	
 	/**
 	 * 代理类
@@ -445,6 +455,17 @@ public class AssetAttributeMeta {
 		public AssetAttribute setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 归属
+		 * @param owner 归属
+		 * @return 当前对象
+		*/
+		public AssetAttribute setOwner(String owner) {
+			super.change(OWNER,super.getOwner(),owner);
+			super.setOwner(owner);
 			return this;
 		}
 	}

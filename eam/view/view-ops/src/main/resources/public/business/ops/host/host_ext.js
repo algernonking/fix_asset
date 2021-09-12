@@ -48,7 +48,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             });
         }
     }
-
+    var action=admin.getTempData('ops-host-form-data-form-action')
     //表单页的扩展
     var form={
 
@@ -56,68 +56,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 表单数据填充后
          * */
-        afterDataFill:function (data) {
-            var action=admin.getTempData('ops-host-form-data-form-action')
-
-
+        beforeDataFill:function (data) {
 
             if(action=="create"){
                 //上线日期处理
-                var now = new Date();
-                var day = ("0" + now.getDate()).slice(-2);
-                var month = ("0" + (now.getMonth() + 1)).slice(-2);
-                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-                $('#onlineTime').val(today);
+                setTimeout(function(){
+                    var now = new Date();
+                    var day = ("0" + now.getDate()).slice(-2);
+                    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                    $('#onlineTime').val(today);
+                },100)
 
 
 
-                //渲染 environment 下拉字段
-                fox.renderSelectBox({
-                    el: "environment",
-                    radio: true,
-                    filterable: false,
-                    //转换数据
-                    transform: function(data) {
-                        //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-                        var opts=[];
-                        for (var i = 0; i < data.length; i++) {
-                            if(!data[i]) continue;
-                            if(i==0){
-                                opts.push({name:data[i].text,value:data[i].code,selected: true});
-                            }else{
-                                opts.push({name:data[i].text,value:data[i].code});
-                            }
-                        }
-                        return opts;
-                    }
-                });
-                $('input[name=status]:first').prop("checked","true")
-
-                $('input[name=monitorStatus]:first').prop("checked","true")
-
-                fox.renderSelectBox({
-                    el: "hostType",
-                    radio: true,
-                    filterable: true,
-                    //转换数据
-                    transform: function(data) {
-                        //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-                        var opts=[];
-                        for (var i = 0; i < data.length; i++) {
-                            if(!data[i]) continue;
-                            if(i==0){
-                                opts.push({name:data[i].text,value:data[i].code,selected: true});
-                            }else{
-                                opts.push({name:data[i].text,value:data[i].code});
-                            }
-                        }
-                        return opts;
-                    }
-                });
             }
-
-
-            console.log('afterDataFill',data);
+            console.log('beforeDataFill',data);
         }
     }
     //

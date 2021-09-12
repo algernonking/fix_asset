@@ -1,7 +1,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 09:05:21
+ * @since 2021-09-12 09:37:37
  */
 
 layui.config({
@@ -109,6 +109,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
+            if(data.id){
+                setTimeout(function(){
+                    var codeSelect=xmSelect.get('#code', true);
+                    codeSelect.update({disabled: true})
+                },100);
+            }
             console.log('beforeDataFill',data);
         },
         /**

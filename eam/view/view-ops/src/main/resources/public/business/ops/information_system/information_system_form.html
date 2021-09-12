@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 21:30:04
+ * @since 2021-09-12 13:05:09
  */
  -->
  <!DOCTYPE html>
@@ -28,6 +28,8 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
+        <input name="id" id="id"  type="hidden"/>
+
          <!--开始：group 循环-->
 
 
@@ -44,7 +46,7 @@
                 <div class="layui-form-item" >
                     <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${dict.toArray('ops_system_status')}" th:value="${e.code}" th:title="${e.text}"  th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${dict.toArray('ops_system_status')}" th:value="${e.code}" th:title="${e.text}"  th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
                     </div>
                 </div>
 
@@ -248,7 +250,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 50px"></div>
+        <div style="height: 80px"></div>
 
 
     </form>

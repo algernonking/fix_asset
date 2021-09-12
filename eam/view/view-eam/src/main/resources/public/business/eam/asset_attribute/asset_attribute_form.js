@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:41
+ * @since 2021-09-12 13:04:10
  */
 
 function FormPage() {
@@ -77,6 +77,24 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 owner 下拉字段
+		fox.renderSelectBox({
+			el: "owner",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -102,6 +120,8 @@ function FormPage() {
 
 
 
+			//设置  归属 设置下拉框勾选
+			fox.setSelectValue4Enum("#owner",formData.owner,SELECT_OWNER_DATA);
 
 			//处理fillBy
 
@@ -148,6 +168,8 @@ function FormPage() {
 
 
 
+		//获取 归属 下拉框的值
+		data["owner"]=fox.getSelectedValue("owner",false);
 
 		return data;
 	}

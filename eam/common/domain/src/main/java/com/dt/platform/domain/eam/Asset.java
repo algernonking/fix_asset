@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 17:13:45
- * @sign 65FCC161D85A813F7DE7E01622C7C7D7
+ * @since 2021-09-12 15:27:26
+ * @sign 39F242FD655652CDAA3B72AAAF0682C9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -351,6 +351,60 @@ public class Asset extends Entity {
 	private String financialNotes;
 	
 	/**
+	 * 设备编号：设备编号
+	*/
+	@ApiModelProperty(required = false,value="设备编号" , notes = "设备编号")
+	private String equipmentCode;
+	
+	/**
+	 * 设备状态：设备状态
+	*/
+	@ApiModelProperty(required = false,value="设备状态" , notes = "设备状态")
+	private String equipmentStatus;
+	
+	/**
+	 * 设备IP：设备IP
+	*/
+	@ApiModelProperty(required = false,value="设备IP" , notes = "设备IP")
+	private String equipmentIp;
+	
+	/**
+	 * 管理IP：管理IP
+	*/
+	@ApiModelProperty(required = false,value="管理IP" , notes = "管理IP")
+	private String manageIp;
+	
+	/**
+	 * 设备CPU：设备CPU
+	*/
+	@ApiModelProperty(required = false,value="设备CPU" , notes = "设备CPU")
+	private String equipmentCpu;
+	
+	/**
+	 * 设备内存：设备内存
+	*/
+	@ApiModelProperty(required = false,value="设备内存" , notes = "设备内存")
+	private String equipmentMemory;
+	
+	/**
+	 * 设备机柜：设备机柜
+	*/
+	@ApiModelProperty(required = false,value="设备机柜" , notes = "设备机柜")
+	private String rackId;
+	
+	/**
+	 * 设备机柜上位置：设备机柜上位置
+	*/
+	@ApiModelProperty(required = false,value="设备机柜上位置" , notes = "设备机柜上位置")
+	private Integer rackUpNumber;
+	
+	/**
+	 * 设备机柜下位置：设备机柜下位置
+	*/
+	@ApiModelProperty(required = false,value="设备机柜下位置" , notes = "设备机柜下位置")
+	private Integer rackDownNumber;
+	
+	/**
 	 * 标签：标签
 	*/
 	@ApiModelProperty(required = false,value="标签" , notes = "标签")
@@ -383,7 +437,7 @@ public class Asset extends Entity {
 	/**
 	 * 是否已删除：是否已删除
 	*/
-	@ApiModelProperty(required = true,value="是否已删除" , notes = "是否已删除")
+	@ApiModelProperty(required = false,value="是否已删除" , notes = "是否已删除")
 	private Integer deleted;
 	
 	/**
@@ -395,7 +449,7 @@ public class Asset extends Entity {
 	/**
 	 * 删除时间：删除时间
 	*/
-	@ApiModelProperty(required = true,value="删除时间" , notes = "删除时间")
+	@ApiModelProperty(required = false,value="删除时间" , notes = "删除时间")
 	private Date deleteTime;
 	
 	/**
@@ -1474,6 +1528,177 @@ public class Asset extends Entity {
 	*/
 	public Asset setFinancialNotes(String financialNotes) {
 		this.financialNotes=financialNotes;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备编号<br>
+	 * 设备编号
+	 * @return 设备编号
+	*/
+	public String getEquipmentCode() {
+		return equipmentCode;
+	}
+	
+	/**
+	 * 设置 设备编号
+	 * @param equipmentCode 设备编号
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentCode(String equipmentCode) {
+		this.equipmentCode=equipmentCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备状态<br>
+	 * 设备状态
+	 * @return 设备状态
+	*/
+	public String getEquipmentStatus() {
+		return equipmentStatus;
+	}
+	
+	/**
+	 * 设置 设备状态
+	 * @param equipmentStatus 设备状态
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentStatus(String equipmentStatus) {
+		this.equipmentStatus=equipmentStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备IP<br>
+	 * 设备IP
+	 * @return 设备IP
+	*/
+	public String getEquipmentIp() {
+		return equipmentIp;
+	}
+	
+	/**
+	 * 设置 设备IP
+	 * @param equipmentIp 设备IP
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentIp(String equipmentIp) {
+		this.equipmentIp=equipmentIp;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理IP<br>
+	 * 管理IP
+	 * @return 管理IP
+	*/
+	public String getManageIp() {
+		return manageIp;
+	}
+	
+	/**
+	 * 设置 管理IP
+	 * @param manageIp 管理IP
+	 * @return 当前对象
+	*/
+	public Asset setManageIp(String manageIp) {
+		this.manageIp=manageIp;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备CPU<br>
+	 * 设备CPU
+	 * @return 设备CPU
+	*/
+	public String getEquipmentCpu() {
+		return equipmentCpu;
+	}
+	
+	/**
+	 * 设置 设备CPU
+	 * @param equipmentCpu 设备CPU
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentCpu(String equipmentCpu) {
+		this.equipmentCpu=equipmentCpu;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备内存<br>
+	 * 设备内存
+	 * @return 设备内存
+	*/
+	public String getEquipmentMemory() {
+		return equipmentMemory;
+	}
+	
+	/**
+	 * 设置 设备内存
+	 * @param equipmentMemory 设备内存
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentMemory(String equipmentMemory) {
+		this.equipmentMemory=equipmentMemory;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备机柜<br>
+	 * 设备机柜
+	 * @return 设备机柜
+	*/
+	public String getRackId() {
+		return rackId;
+	}
+	
+	/**
+	 * 设置 设备机柜
+	 * @param rackId 设备机柜
+	 * @return 当前对象
+	*/
+	public Asset setRackId(String rackId) {
+		this.rackId=rackId;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备机柜上位置<br>
+	 * 设备机柜上位置
+	 * @return 设备机柜上位置
+	*/
+	public Integer getRackUpNumber() {
+		return rackUpNumber;
+	}
+	
+	/**
+	 * 设置 设备机柜上位置
+	 * @param rackUpNumber 设备机柜上位置
+	 * @return 当前对象
+	*/
+	public Asset setRackUpNumber(Integer rackUpNumber) {
+		this.rackUpNumber=rackUpNumber;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备机柜下位置<br>
+	 * 设备机柜下位置
+	 * @return 设备机柜下位置
+	*/
+	public Integer getRackDownNumber() {
+		return rackDownNumber;
+	}
+	
+	/**
+	 * 设置 设备机柜下位置
+	 * @param rackDownNumber 设备机柜下位置
+	 * @return 当前对象
+	*/
+	public Asset setRackDownNumber(Integer rackDownNumber) {
+		this.rackDownNumber=rackDownNumber;
 		return this;
 	}
 	

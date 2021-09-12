@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 17:13:53
+ * @since 2021-09-12 15:27:35
  */
 
 function FormPage() {
@@ -49,7 +49,6 @@ function FormPage() {
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
-
 		adjustPopupTask=setTimeout(function () {
 			var body=$("body");
 			var bodyHeight=body.height();
@@ -69,6 +68,7 @@ function FormPage() {
 			}
 		},250);
 	}
+
 	/**
 	 * 渲染表单组件
 	 */
@@ -94,26 +94,8 @@ function FormPage() {
 			//选中关闭
 			clickClose: true,
 			height: 'auto',
-			data:CATEGORY_TREE_DATA
+			data:ASSET_CATEGORY_DATA
 		})
-		// fox.renderSelectBox({
-		// 	el: "categoryId",
-		// 	radio: true,
-		// 	filterable: false,
-		// 	//转换数据
-		// 	transform: function(data) {
-		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-		// 		var defaultValues="".split(",");
-		// 		var defaultIndexs="".split(",");
-		// 		var opts=[];
-		// 		if(!data) return opts;
-		// 		for (var i = 0; i < data.length; i++) {
-		// 			if(!data[i]) continue;
-		// 			opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-		// 		}
-		// 		return opts;
-		// 	}
-		// });
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -219,6 +201,8 @@ function FormPage() {
 			el: "positionId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
 			searchField: "name", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -574,4 +558,4 @@ layui.use(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSe
 		clearInterval(task);
 		(new FormPage()).init(layui);
 	},1);
-});
+});CATEGORY_TREE_DATA

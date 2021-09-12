@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 09:04:26
+ * @since 2021-09-12 13:06:53
  */
  -->
  <!DOCTYPE html>
@@ -27,6 +27,8 @@
 <div class="form-container" >
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
+
+        <input name="id" id="id"  type="hidden"/>
 
          <!--开始：group 循环-->
 
@@ -208,7 +210,7 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('操作系统')}">操作系统</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('操作系统')}">操作系统</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}"></div>
                         </div>
@@ -408,7 +410,7 @@
     var SELECT_ENVIRONMENT_DATA = [[${dict.toArray('ops_environment')}]];
     var RADIO_MONITORSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.HostMonitorStatusEnum')}]];
     var SELECT_PASSWORDSTRATEGYID_DATA = [[${dict.toArray('ops_host_password_strategy')}]];
-    var VALIDATE_CONFIG={"hostName":{"labelInForm":"名称","inputType":"text_input","required":true},"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
+    var VALIDATE_CONFIG={"hostOsIds":{"labelInForm":"操作系统","inputType":"select_box","required":true},"hostName":{"labelInForm":"名称","inputType":"text_input","required":true},"hostType":{"labelInForm":"主机类型","inputType":"select_box","required":true},"onlineTime":{"date":true,"labelInForm":"上线时间","inputType":"date_input"},"offlineTime":{"date":true,"labelInForm":"下线时间","inputType":"date_input"},"status":{"labelInForm":"主机状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="ops_host";
 
 

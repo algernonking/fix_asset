@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧策略 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:44:11
+ * @since 2021-09-12 13:04:59
 */
 
 @Api(tags = "折旧策略")
@@ -68,7 +68,7 @@ public class ResidualStrategyController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "477868649709830144"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "平均折旧"),
-		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
+		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.STRATEGY_DESCRIBE , value = "策略描述" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.RESIDUALVALUE_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.DEPRECIATION_RATE , value = "折旧率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
@@ -126,7 +126,7 @@ public class ResidualStrategyController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "477868649709830144"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "平均折旧"),
-		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
+		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.STRATEGY_DESCRIBE , value = "策略描述" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.RESIDUALVALUE_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.DEPRECIATION_RATE , value = "折旧率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
@@ -150,7 +150,7 @@ public class ResidualStrategyController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "477868649709830144"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "平均折旧"),
-		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
+		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.STRATEGY_DESCRIBE , value = "策略描述" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.RESIDUALVALUE_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.DEPRECIATION_RATE , value = "折旧率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
@@ -213,7 +213,7 @@ public class ResidualStrategyController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "477868649709830144"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "平均折旧"),
-		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
+		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.STRATEGY_DESCRIBE , value = "策略描述" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.RESIDUALVALUE_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.DEPRECIATION_RATE , value = "折旧率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
@@ -238,7 +238,7 @@ public class ResidualStrategyController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "477868649709830144"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "平均折旧"),
-		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
+		@ApiImplicitParam(name = ResidualStrategyVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.STRATEGY_DESCRIBE , value = "策略描述" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.RESIDUALVALUE_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.DEPRECIATION_RATE , value = "折旧率" , required = false , dataTypeClass=BigDecimal.class , example = "2.00"),

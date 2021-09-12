@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 17:13:49
+ * @since 2021-09-12 15:27:30
  */
 
 layui.config({
@@ -24,6 +24,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             console.log("list:beforeInit");
+
         },
         afterSearchInputReady: function() {
             console.log("list:afterSearchInputReady");
@@ -45,6 +46,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
+            if(value==null) return "";
             return value;
         },
         /**
@@ -93,12 +95,14 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         }
     }
 
+
     //表单页的扩展
     var form={
         /**
          * 表单初始化前调用
          * */
         beforeInit:function () {
+
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
