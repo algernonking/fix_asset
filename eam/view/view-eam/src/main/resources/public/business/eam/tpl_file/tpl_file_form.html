@@ -2,7 +2,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:49
+ * @since 2021-09-12 09:05:24
  */
  -->
  <!DOCTYPE html>
@@ -33,13 +33,6 @@
 
 
         <div class="layui-row form-row">
-
-            <div class="layui-form-item" style="display: none">
-                <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
-                <div class="layui-input-block layui-input-block-c1">
-                    <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"  />
-                </div>
-            </div>
 
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">

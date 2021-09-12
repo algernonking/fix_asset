@@ -1,7 +1,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-10 16:42:49
+ * @since 2021-09-12 09:05:25
  */
 
 function FormPage() {
@@ -203,7 +203,6 @@ function FormPage() {
 	}
 
 	function saveForm(data) {
-
 		var api=moduleURL+"/"+(data.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
 		admin.request(api, data, function (data) {
@@ -234,10 +233,7 @@ function FormPage() {
 			}
 			//校验表单
 			if(!verifyForm(data.field)) return;
-;
-			console.log("#####",data.field);
-			console.log("#####",data.id);
-			console.log("#####",data.id);
+
 			saveForm(data.field);
 	        return false;
 	    });

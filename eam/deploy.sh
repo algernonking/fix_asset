@@ -52,11 +52,10 @@ echo "tar zcvf $app_tar $content"
 tar zcvf $app_tar $content
 mv $app_tar $tmp_dir
 ####################### Create Remote Runnning Script ###############
-appdeployfile="/Users/lank/IdeaProjectsnew/eam/eam/deploy_app.sh"
 if [[ $ops_remotefile_recreate -eq 1 ]];then
 	echo "">$ops_remotefile_recreate_file
-	echo "UPLOAD sf=$tmp_dir/$app_tar  @@ dd=/tmp @@ df=app.tar"  >>$ops_remotefile_recreate_file
-	echo "UPLOAD sf=$appdeployfile     @@ dd=/tmp @@ df=deploy_app.sh"  >>$ops_remotefile_recreate_file
+	echo "UPLOAD sf=$tmp_dir/$app_tar         @@ dd=/tmp @@ df=app.tar"        >>$ops_remotefile_recreate_file
+	echo "UPLOAD sf=$tmp_dir/deploy_eam.sh    @@ dd=/tmp @@ df=deploy_app.sh"  >>$ops_remotefile_recreate_file
 	echo "sh deploy_app.sh "                  >>$ops_remotefile_recreate_file
 	echo "exit 0"												      >>$ops_remotefile_recreate_file
 fi
