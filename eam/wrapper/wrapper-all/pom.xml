@@ -48,6 +48,26 @@
 
 		<dependency>
 			<groupId>com.dt.platform</groupId>
+			<artifactId>domain</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>framework</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>proxy</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
 			<artifactId>service-eam</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
@@ -155,6 +175,9 @@
 			<artifactId>view-console</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
+
+
+
 
 
 

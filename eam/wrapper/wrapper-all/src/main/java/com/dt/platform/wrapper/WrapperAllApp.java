@@ -1,12 +1,11 @@
 package com.dt.platform.wrapper;
 
+import com.dt.platform.framework.PlatformMeta;
 import org.github.foxnic.web.framework.FoxnicWebMeta;
 import org.github.foxnic.web.framework.starter.BootApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-
-import com.dt.platform.framework.PlatformMeta;
 
 @ComponentScan(basePackages = {
 		FoxnicWebMeta.SERVICE_STORAGE_PACKAGE ,
@@ -22,7 +21,6 @@ import com.dt.platform.framework.PlatformMeta;
 		PlatformMeta.COMMON_PACKAGE,
 		PlatformMeta.KNOWLEDGEBASE_PACKAGE,
 		PlatformMeta.CONTRACT_PACKAGE
-
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})
 public class WrapperAllApp {
