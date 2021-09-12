@@ -2,6 +2,7 @@ package com.dt.platform.generator.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.dt.platform.framework.datasource.DAOConfig;
+import com.dt.platform.framework.datasource.DatasourceConfig;
 import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.cache.Variable;
 import com.github.foxnic.commons.io.FileUtil;
@@ -12,6 +13,7 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
 import com.github.foxnic.generator.config.GlobalSettings;
 import com.github.foxnic.sql.treaty.DBTreaty;
+import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.framework.nacos.NacosConfig;
 
 import java.io.File;
@@ -162,6 +164,9 @@ public class PlatformConfigs {
 		ds.setDriverClassName(driver);
 		ds.setUsername(username);
 		ds.setPassword(password);
+
+		DBConfigs.reset(ds, DatasourceConfig.PRIMARY_DATASOURCE_CONFIG_KEY,applicationConfigs);
+
 		dao = (new DAOBuilder()).datasource(ds).build();
 		
 		// 设置数据库规约
