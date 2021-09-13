@@ -13,7 +13,7 @@ public class EncryptUtil {
         String user="root";
         String pwd="11111";
         String url="jdbc:mysql://39.105.191.22:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false";
-        String url2="jdbc:mysql://39.105.191.22:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false";
+        String url2="jdbc:mysql://39.105.191.22:3306/eam_demo?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false";
         user=aes.encryptData(user);
         pwd=aes.encryptData(pwd);
         url=aes.encryptData(url);

@@ -10,14 +10,10 @@ import com.github.foxnic.api.constant.CodeTextEnum;
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
  */
 
-
-
-
 public enum KnowledgebaseDisplayEnum implements CodeTextEnum {
 
     SHOW("1" , "显示"),
-    HIDE("0" , "隐藏"),
-    ;
+    HIDE("0" , "隐藏");
 
     private String code;
     private String text;

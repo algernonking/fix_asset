@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.common.StatusYNEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
+import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.eam.page.AssetAttributePageController;
 import com.dt.platform.proxy.eam.AssetAttributeServiceProxy;
@@ -36,7 +37,7 @@ public class EAMAssetAttributeGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.OWNER).form().validate().required()
-                .form().selectBox().enumType(AssetAttributeItemOwnerEnum.class);
+                .form().selectBox().enumType(AssetAttributeOwnerEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.REQUIRED_MODIFY).form().validate().required()
                 .form().radioBox().enumType(StatusYNEnum.class);
@@ -72,8 +73,8 @@ public class EAMAssetAttributeGtr extends BaseCodeGenerator{
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页

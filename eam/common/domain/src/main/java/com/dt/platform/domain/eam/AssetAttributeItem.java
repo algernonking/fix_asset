@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:01
- * @sign A9D7A8D31DABDEA846E2EF109D4CB614
+ * @since 2021-09-13 05:51:57
+ * @sign C90E2F387CF2195CF6D186C7490DBA1D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,16 +36,16 @@ public class AssetAttributeItem extends Entity {
 	private String id;
 	
 	/**
-	 * 属性：属性
-	*/
-	@ApiModelProperty(required = false,value="属性" , notes = "属性")
-	private String attributeId;
-	
-	/**
 	 * 所属模块：所属模块
 	*/
 	@ApiModelProperty(required = false,value="所属模块" , notes = "所属模块")
 	private String ownerCode;
+	
+	/**
+	 * 属性：属性
+	*/
+	@ApiModelProperty(required = false,value="属性" , notes = "属性")
+	private String attributeId;
 	
 	/**
 	 * 所属维度：所属维度
@@ -187,25 +187,6 @@ public class AssetAttributeItem extends Entity {
 	}
 	
 	/**
-	 * 获得 属性<br>
-	 * 属性
-	 * @return 属性
-	*/
-	public String getAttributeId() {
-		return attributeId;
-	}
-	
-	/**
-	 * 设置 属性
-	 * @param attributeId 属性
-	 * @return 当前对象
-	*/
-	public AssetAttributeItem setAttributeId(String attributeId) {
-		this.attributeId=attributeId;
-		return this;
-	}
-	
-	/**
 	 * 获得 所属模块<br>
 	 * 所属模块
 	 * @return 所属模块
@@ -221,6 +202,25 @@ public class AssetAttributeItem extends Entity {
 	*/
 	public AssetAttributeItem setOwnerCode(String ownerCode) {
 		this.ownerCode=ownerCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 属性<br>
+	 * 属性
+	 * @return 属性
+	*/
+	public String getAttributeId() {
+		return attributeId;
+	}
+	
+	/**
+	 * 设置 属性
+	 * @param attributeId 属性
+	 * @return 当前对象
+	*/
+	public AssetAttributeItem setAttributeId(String attributeId) {
+		this.attributeId=attributeId;
 		return this;
 	}
 	

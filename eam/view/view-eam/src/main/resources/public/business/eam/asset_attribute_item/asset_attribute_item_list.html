@@ -2,7 +2,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:12
+ * @since 2021-09-13 05:52:00
  */
  -->
  <!DOCTYPE html>
@@ -35,18 +35,19 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 属性 , attributeId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 所属模块 , ownerCode ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('所属模块')}" class="search-label ownerCode-label">所属模块</span><span class="search-colon">:</span></div>
                         <div id="ownerCode" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum')}" style="width:140px"></div>
                     </div>
+                    <!-- 属性 , attributeId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 必选 , required ,typeName=radio_box, isHideInSearch=true -->
                     <!-- 列表内容 , listContent ,typeName=text_area, isHideInSearch=true -->
                     <!-- 列表排序 , listSort ,typeName=number_input, isHideInSearch=true -->
                     <!-- 行布局位置 , layoutRow ,typeName=number_input, isHideInSearch=true -->
                     <!-- 列布局位置 , layoutColumn ,typeName=number_input, isHideInSearch=true -->
                     <!-- 属性备注 , resNotes ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 属性字段 , resCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 布局类型 , layoutType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('布局类型')}" class="search-label layoutType-label">布局类型</span><span class="search-colon">:</span></div>

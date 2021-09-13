@@ -73,7 +73,8 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
 	/**
 	 * 插入实体
 	 * @param assetAttributeItem 实体数据
@@ -259,15 +260,15 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		attributeitem.setLayoutType(3);
 		attributeitem.setFormShow(1);
 		attributeitem.setLayoutColumn(1);
-		List<AssetAttributeItem> attributeItemsData3ColumnOneList=queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData3ColumnOneList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData3ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 
 		attributeitem.setLayoutColumn(2);
-		List<AssetAttributeItem> attributeItemsData3ColumnTwoList=queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData3ColumnTwoList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData3ColumnTwoList,AssetAttributeItemMeta.ATTRIBUTE);
 
 		attributeitem.setLayoutColumn(3);
-		List<AssetAttributeItem> attributeItemsData3ColumnThreeList= queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData3ColumnThreeList= queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData3ColumnThreeList,AssetAttributeItemMeta.ATTRIBUTE);
 
 		result.put("attributeData3Column1",attributeItemsData3ColumnOneList);
@@ -281,23 +282,23 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		attributeitem.setLayoutType(2);
 		attributeitem.setFormShow(1);
 		attributeitem.setLayoutColumn(1);
-		List<AssetAttributeItem> attributeItemsData2ColumnOneList=queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData2ColumnOneList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData2ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 
 		attributeitem.setLayoutColumn(2);
-		List<AssetAttributeItem> attributeItemsData2ColumnTwoList=queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData2ColumnTwoList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData2ColumnTwoList,AssetAttributeItemMeta.ATTRIBUTE);
 
 		result.put("attributeData2Column1",attributeItemsData2ColumnOneList);
 		result.put("attributeData2Column2",attributeItemsData2ColumnTwoList);
 		printList(attributeItemsData2ColumnOneList,"two-1");
-		printList(attributeItemsData2ColumnOneList,"two-1");
+		printList(attributeItemsData2ColumnTwoList,"two-2");
 
 		//单栏数据
 		attributeitem.setLayoutType(1);
 		attributeitem.setFormShow(1);
 		attributeitem.setLayoutColumn(1);
-		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem);
+		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData1ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeData1Column1",attributeItemsData1ColumnOneList);
 		printList(attributeItemsData1ColumnOneList,"one-1");

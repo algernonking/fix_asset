@@ -68,8 +68,8 @@ public class AssetAttributeItemController extends SuperController {
 	@ApiOperation(value = "添加资产字段配置项")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.OWNER_CODE , value = "所属模块" , required = false , dataTypeClass=String.class , example = "base"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
@@ -132,8 +132,8 @@ public class AssetAttributeItemController extends SuperController {
 	@ApiOperation(value = "更新资产字段配置项")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.OWNER_CODE , value = "所属模块" , required = false , dataTypeClass=String.class , example = "base"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
@@ -161,8 +161,8 @@ public class AssetAttributeItemController extends SuperController {
 	@ApiOperation(value = "保存资产字段配置项")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.OWNER_CODE , value = "所属模块" , required = false , dataTypeClass=String.class , example = "base"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
@@ -224,15 +224,19 @@ public class AssetAttributeItemController extends SuperController {
 		return result;
 	}
 
-	
+
+
+
+
+
 	/**
 	 * 查询资产字段配置项
 	*/
 	@ApiOperation(value = "查询资产字段配置项")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.OWNER_CODE , value = "所属模块" , required = false , dataTypeClass=String.class , example = "base"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),
@@ -262,8 +266,8 @@ public class AssetAttributeItemController extends SuperController {
 	@ApiOperation(value = "分页查询资产字段配置项")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
-		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.OWNER_CODE , value = "所属模块" , required = false , dataTypeClass=String.class , example = "base"),
+		@ApiImplicitParam(name = AssetAttributeItemVOMeta.ATTRIBUTE_ID , value = "属性" , required = false , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.REQUIRED , value = "必选" , required = false , dataTypeClass=Integer.class , example = "0"),
 		@ApiImplicitParam(name = AssetAttributeItemVOMeta.LAYOUT_TYPE , value = "布局类型" , required = false , dataTypeClass=Integer.class , example = "3"),

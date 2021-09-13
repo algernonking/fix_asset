@@ -180,7 +180,11 @@ public interface IAssetAttributeItemService extends ISuperService<AssetAttribute
 	 * @return 查询结果
 	 * */
 	List<AssetAttributeItem> queryList(AssetAttributeItem sample);
- 
+
+
+
+
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
