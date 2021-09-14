@@ -1,7 +1,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:16
+ * @since 2021-09-13 21:18:12
  */
 
 function FormPage() {
@@ -75,20 +75,43 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 type 下拉字段
+		fox.renderSelectBox({
+			el: "type",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="0".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 code 下拉字段
 		fox.renderSelectBox({
 			el: "code",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
-			transform:function(data) {
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -144,8 +167,10 @@ function FormPage() {
 
 
 
+			//设置  模板类型 设置下拉框勾选
+			fox.setSelectValue4Enum("#type",formData.type,SELECT_TYPE_DATA);
 			//设置  业务编码 设置下拉框勾选
-			fox.setSelectValue4Enum("#code",formData.code,SELECT_CODE_DATA);
+			fox.setSelectValue4QueryApi("#code",formData.businessCode);
 
 			//处理fillBy
 
@@ -192,6 +217,8 @@ function FormPage() {
 
 
 
+		//获取 模板类型 下拉框的值
+		data["type"]=fox.getSelectedValue("type",false);
 		//获取 业务编码 下拉框的值
 		data["code"]=fox.getSelectedValue("code",false);
 

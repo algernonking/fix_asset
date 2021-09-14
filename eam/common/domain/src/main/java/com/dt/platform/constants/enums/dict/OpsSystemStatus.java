@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-09-02 20:56:02
+ * @since 2021-09-13 21:20:09
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -20,6 +20,11 @@ public enum OpsSystemStatus {
 	 * 下线
 	*/
 	OFFLINE("offline" , "下线"),
+	
+	/**
+	 * unknown
+	*/
+	UNKNOWN("unknown" , "unknown"),
 	;
 	
 	private String code;

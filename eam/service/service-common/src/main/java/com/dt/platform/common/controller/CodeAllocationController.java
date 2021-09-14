@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.common.CodeRule;
+import com.dt.platform.domain.common.CodeRegister;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:03:52
+ * @since 2021-09-13 21:07:51
 */
 
 @Api(tags = "编码分配")
@@ -169,6 +170,8 @@ public class CodeAllocationController extends SuperController {
 	public Result<CodeAllocation> getById(String id) {
 		Result<CodeAllocation> result=new Result<>();
 		CodeAllocation codeAllocation=codeAllocationService.getById(id);
+		// 关联出 业务编码 数据
+		codeAllocationService.join(codeAllocation,CodeAllocationMeta.BUSINESS_CODE);
 		// 关联出 编码规则 数据
 		codeAllocationService.join(codeAllocation,CodeAllocationMeta.RULE);
 		result.success(true).data(codeAllocation);
@@ -233,6 +236,8 @@ public class CodeAllocationController extends SuperController {
 	public Result<PagedList<CodeAllocation>> queryPagedList(CodeAllocationVO sample) {
 		Result<PagedList<CodeAllocation>> result=new Result<>();
 		PagedList<CodeAllocation> list=codeAllocationService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 业务编码 数据
+		codeAllocationService.join(list,CodeAllocationMeta.BUSINESS_CODE);
 		// 关联出 编码规则 数据
 		codeAllocationService.join(list,CodeAllocationMeta.RULE);
 		result.success(true).data(list);

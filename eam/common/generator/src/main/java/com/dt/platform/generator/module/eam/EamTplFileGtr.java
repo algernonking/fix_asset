@@ -2,12 +2,16 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetTplFileTypeEnum;
+import com.dt.platform.domain.common.CodeRegister;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
+import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.TplFile;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.eam.page.TplFilePageController;
+import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.eam.TplFileServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.storage.File;
@@ -21,6 +25,7 @@ public class EamTplFileGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
+        cfg.getPoClassFile().addSimpleProperty(CodeRegister.class,"businessCode","业务编码","业务编码");
 
         cfg.view().field(EAMTables.EAM_TPL_FILE.ID).basic().hidden(true);
 
@@ -30,22 +35,32 @@ public class EamTplFileGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
+                        EAMTables.EAM_TPL_FILE.TYPE,
                         EAMTables.EAM_TPL_FILE.NAME,
                         EAMTables.EAM_TPL_FILE.NOTES,
                 }
         );
 
 
+
+
         cfg.view().field(EAMTables.EAM_TPL_FILE.NAME).form().validate().required();
 
         cfg.view().field(EAMTables.EAM_TPL_FILE.FILE_ID).form().validate().required().form().upload().maxFileCount(1);
 
+        cfg.view().field(EAMTables.EAM_TPL_FILE.TYPE).form().validate().required().form()
+                .selectBox().enumType(AssetTplFileTypeEnum.class).defaultIndex(0);
 
         cfg.view().field(EAMTables.EAM_TPL_FILE.NOTES).form().textArea().height(30);
 
 
-        cfg.view().field(EAMTables.EAM_TPL_FILE.CODE).form().validate().required().
-                form().selectBox().enumType(CodeModuleEnum.class).muliti(false).filter(true).toolbar(false).paging(false);
+        cfg.view().field(EAMTables.EAM_TPL_FILE.CODE)
+                .form().validate().required().form().selectBox().paging(true).filter(true).toolbar(false).muliti(false)
+                .queryApi(CodeRegisterServiceProxy.QUERY_PAGED_LIST)
+                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE ).fillBy(TplFileMeta.BUSINESS_CODE);
+
+
+
 
         //分成分组布局
         cfg.view().formWindow().width("80%");
@@ -53,6 +68,7 @@ public class EamTplFileGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_TPL_FILE.NAME,
+                        EAMTables.EAM_TPL_FILE.TYPE,
                 }, new Object[] {
                         EAMTables.EAM_TPL_FILE.CODE
                 }, new Object[] {

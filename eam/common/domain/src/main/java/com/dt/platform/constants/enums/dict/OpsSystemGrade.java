@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-09-02 20:56:02
+ * @since 2021-09-13 21:20:09
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -14,17 +14,17 @@ public enum OpsSystemGrade {
 	/**
 	 * 一级
 	*/
-	G1("G1" , "一级"),
+	LEVEL1("level1" , "一级"),
 	
 	/**
 	 * 三级
 	*/
-	G3("G3" , "三级"),
+	LEVEL3("level3" , "三级"),
 	
 	/**
 	 * 二级
 	*/
-	G2("G2" , "二级"),
+	LEVEL2("level2" , "二级"),
 	;
 	
 	private String code;

@@ -2,7 +2,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:16
+ * @since 2021-09-13 21:18:10
  */
  -->
  <!DOCTYPE html>
@@ -46,6 +46,15 @@
                         </div>
                     </div>
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('模板类型')}">模板类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="type" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetTplFileTypeEnum')}"></div>
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
@@ -55,7 +64,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('业务编码')}">业务编码</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="code" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}"></div>
+                            <div id="code" input-type="select" th:data="${'/service-common/sys-code-register/query-paged-list'}"></div>
                         </div>
                     </div>
 
@@ -125,8 +134,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_CODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
-    var VALIDATE_CONFIG={"code":{"labelInForm":"业务编码","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"fileId":{"labelInForm":"文件","inputType":"upload","required":true}};
+    var SELECT_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetTplFileTypeEnum')}]];
+    var VALIDATE_CONFIG={"code":{"labelInForm":"业务编码","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"type":{"labelInForm":"模板类型","inputType":"select_box","required":true},"fileId":{"labelInForm":"文件","inputType":"upload","required":true}};
     var AUTH_PREFIX="eam_tpl_file";
 
 

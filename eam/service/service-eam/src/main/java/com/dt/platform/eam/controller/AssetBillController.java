@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;

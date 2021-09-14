@@ -3,9 +3,12 @@ package com.dt.platform.generator.module.common;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.domain.common.CodeRegister;
 import com.dt.platform.domain.common.CodeRule;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
+import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
+import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.common.CodeRuleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -20,6 +23,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addSimpleProperty(CodeRule.class,"rule","编码规则","编码规则");
 
+        cfg.getPoClassFile().addSimpleProperty(CodeRegister.class,"businessCode","业务编码","业务编码");
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.ID).basic().hidden();
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.NOTES).search().fuzzySearch();
@@ -34,8 +38,10 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.CODE).basic().label("业务编码")
-                .form().validate().required().form().selectBox().paging(false).filter(true).toolbar(false).muliti(false)
-                .enumType(CodeModuleEnum.class);
+                .form().validate().required().form().selectBox().paging(true).filter(true).toolbar(false).muliti(false)
+                .queryApi(CodeRegisterServiceProxy.QUERY_PAGED_LIST)
+                .textField(CodeRegisterMeta.CODE).valueField(CodeRegisterMeta.NAME).fillBy(CodeAllocationMeta.BUSINESS_CODE);
+
 
 
 
@@ -43,7 +49,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.RULE_ID)
                 .basic().label("编码规则")
                 .form().validate().required()
-                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
 
 

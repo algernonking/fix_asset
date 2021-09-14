@@ -2,7 +2,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:03:57
+ * @since 2021-09-13 21:08:02
  */
  -->
  <!DOCTYPE html>
@@ -43,7 +43,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务编码')}">业务编码</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="code" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}"></div>
+                            <div id="code" input-type="select" th:data="${'/service-common/sys-code-register/query-paged-list'}"></div>
                         </div>
                     </div>
 
@@ -90,7 +90,6 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_CODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
     var VALIDATE_CONFIG={"code":{"labelInForm":"业务编码","inputType":"select_box","required":true},"ruleId":{"labelInForm":"编码规则","inputType":"select_box","required":true}};
     var AUTH_PREFIX="sys_code_allocation";
 
