@@ -54,7 +54,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -199,10 +199,11 @@ function ListPage() {
 		#end
 		#end
 		#end
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;

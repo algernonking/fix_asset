@@ -26,9 +26,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         /**
          * 查询前调用
+         * @param conditions 复合查询条件
+         * @param param 请求参数
+         * @param location 调用的代码位置
          * */
-        beforeQuery:function (conditions,location) {
-            console.log('beforeQuery',conditions);
+        beforeQuery:function (conditions,param,location) {
+            console.log('beforeQuery',conditions,param,location);
             return true;
         },
         /**
@@ -143,6 +146,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             return true;
+        },
+        /**
+         * 数据提交后执行
+         * */
+        afterSubmitt:function (param,result) {
+            console.log("afterSubmitt",param,result);
         },
         #for(g:iframes)
         /**
