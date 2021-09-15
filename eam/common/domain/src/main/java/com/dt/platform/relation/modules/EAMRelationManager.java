@@ -272,7 +272,9 @@ public class EAMRelationManager extends RelationManager {
         this.property(AssetMeta.MAINTNAINER_PROP)
                 .using(EAMTables.EAM_ASSET.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
 
-
+        // 关联来源
+        this.property(AssetMeta.SOURCE_PROP)
+                .using(EAMTables.EAM_ASSET.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE);
 
 
         // 关联使用人

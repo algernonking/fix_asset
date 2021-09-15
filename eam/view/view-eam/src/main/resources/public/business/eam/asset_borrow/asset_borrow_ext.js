@@ -91,8 +91,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
         downloadBill:function (data){
             console.log('downloadBill',data);
-            var downloadUrl="/service-eam/eam-asset-bill/query-borrow-bill";
-            fox.submit(downloadUrl,{id:"486541465942495232"});
+            // var downloadUrl="/service-eam/eam-asset-bill/query-borrow-bill";
+            // fox.submit(downloadUrl,{id:"486541465942495232"});
+
+            var downloadUrl="/service-eam/eam-asset-data/export-asset";
+            //{id:"486541465942495232"}
+            fox.submit(downloadUrl);
         },
         /**
          * 末尾执行

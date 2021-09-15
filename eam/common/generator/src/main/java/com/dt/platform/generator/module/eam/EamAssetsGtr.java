@@ -13,7 +13,10 @@ import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 
 
 public class EamAssetsGtr extends BaseCodeGenerator {
@@ -44,6 +47,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 
 
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).search().fuzzySearch();
@@ -130,8 +134,17 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 textField(MaintainerMeta.MAINTAINER_NAME).
                 fillBy(AssetMeta.MAINTNAINER).muliti(false);
 
-        cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID).form()
-                .form().selectBox().dict(DictEnum.EAM_SOURCE);
+        cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID)
+                .basic().label("来源")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_source")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(AssetMeta.SOURCE).muliti(false);
+
+//
+//        cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID).form()
+//                .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
                 label("资产状态").selectBox().enumType(AssetStatusEnum.class);

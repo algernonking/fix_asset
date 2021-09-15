@@ -1,38 +1,51 @@
 package com.dt.platform.eam.controller;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.deepoove.poi.util.PoitlIOUtils;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetRepair;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.eam.meta.AssetVOMeta;
 import com.dt.platform.eam.service.IAssetDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.ITplFileService;
+import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.dt.platform.proxy.eam.AssetDataServiceProxy;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.api.web.MimeUtil;
+import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.springboot.web.DownloadUtil;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.github.xiaoymin.knife4j.annotations.ApiSort;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.github.foxnic.web.framework.web.SuperController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
+import java.io.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.net.URLEncoder;
+import java.util.*;
 
+@Api(tags = "资产数据库服务")
+@ApiSort(0)
+@RestController("EAMAssetDataController")
 public class AssetDataController extends SuperController {
 
 
-    @Autowired
-    private ITplFileService tplFileService;
 
     @Autowired
     private IAssetDataService assetDataService;
@@ -45,8 +58,8 @@ public class AssetDataController extends SuperController {
      */
     @ApiOperation(value = "导出资产")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-            @ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class),
+            @ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = false , dataTypeClass=String.class),
+            @ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
@@ -112,31 +125,25 @@ public class AssetDataController extends SuperController {
     @ApiOperationSupport(order=1)
     @SentinelResource(value = AssetDataServiceProxy.EXPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET)
-    public Result exportAsset(AssetVO sample, HttpServletResponse response) {
+    public Result exportAsset(AssetVO sample,HttpServletResponse response) throws Exception {
 
-        InputStream inputstream=tplFileService.getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
-
-        List<Asset> list= assetDataService.queryAssetData(null,sample);
-        // 关联出 资产分类 数据
-        assetService.join(list, AssetMeta.CATEGORY);
-        // 关联出 物品档案 数据
-        assetService.join(list,AssetMeta.GOODS);
-        // 关联出 厂商 数据
-        assetService.join(list,AssetMeta.MANUFACTURER);
-        // 关联出 位置 数据
-        assetService.join(list,AssetMeta.POSITION);
-        // 关联出 仓库 数据
-        assetService.join(list,AssetMeta.WAREHOUSE);
-        // 关联出 维保商 数据
-        assetService.join(list,AssetMeta.MAINTNAINER);
-        // 关联出 财务分类 数据
-        assetService.join(list,AssetMeta.CATEGORY_FINANCE);
-        // 关联出 供应商 数据
-        assetService.join(list,AssetMeta.SUPPLIER);
-
+        File f=assetDataService.saveTempFile(inputstream,"TMP_"+CodeModuleEnum.EAM_DOWNLOAD_ASSET.code()+".xls");
+        Map<String,Object> map= assetDataService.queryAssetMap(null,sample);
+        TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
+        response.setContentType("application/vnd.ms-excel");
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        workbook.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
         return ErrorDesc.success();
 
     }
@@ -149,33 +156,23 @@ public class AssetDataController extends SuperController {
     @ApiOperationSupport(order=2)
     @SentinelResource(value = AssetDataServiceProxy.EXPORT_ASSET_BY_IDS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET_BY_IDS)
-    public Result exportAssetByIds(List<String> ids, HttpServletResponse response) {
+    public Result exportAssetByIds(List<String> ids, HttpServletResponse response) throws Exception {
 
-        InputStream inputstream=tplFileService.getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
-
-
-        List<Asset> list=assetDataService.queryAssetData(ids,null);
-        // 关联出 资产分类 数据
-        assetService.join(list, AssetMeta.CATEGORY);
-        // 关联出 物品档案 数据
-        assetService.join(list,AssetMeta.GOODS);
-        // 关联出 厂商 数据
-        assetService.join(list,AssetMeta.MANUFACTURER);
-        // 关联出 位置 数据
-        assetService.join(list,AssetMeta.POSITION);
-        // 关联出 仓库 数据
-        assetService.join(list,AssetMeta.WAREHOUSE);
-        // 关联出 维保商 数据
-        assetService.join(list,AssetMeta.MAINTNAINER);
-        // 关联出 财务分类 数据
-        assetService.join(list,AssetMeta.CATEGORY_FINANCE);
-        // 关联出 供应商 数据
-        assetService.join(list,AssetMeta.SUPPLIER);
-
-
+        Map<String,Object> map= assetDataService.queryAssetMap(ids,null);
+        TemplateExportParams templateExportParams = new TemplateExportParams("/opt/upload/tpl/T001/eam_download_asset.xls");
+        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        workbook.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
 
         return ErrorDesc.success();
 

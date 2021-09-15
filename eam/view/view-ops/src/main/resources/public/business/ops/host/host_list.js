@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:06:52
+ * @since 2021-09-15 14:21:42
  */
 
 
@@ -361,6 +361,9 @@ function ListPage() {
 					break;
 				case 'batch-del':
 					batchDelete(selected);
+					break;
+				case 'tool-export-host':
+					window.pageExt.list.exportHost && window.pageExt.list.exportHost(selected,obj);
 					break;
 				case 'refresh-data':
 					refreshTableData();

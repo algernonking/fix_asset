@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.system.DictItem;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 15:27:26
- * @sign 39F242FD655652CDAA3B72AAAF0682C9
+ * @since 2021-09-14 15:27:48
+ * @sign 966FA1D3746707E9AD410D5AB63662F2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -523,6 +524,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="维保商" , notes = "维保商")
 	private Maintainer maintnainer;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private DictItem source;
 	
 	/**
 	 * 获得 主键<br>
@@ -2079,6 +2086,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setMaintnainer(Maintainer maintnainer) {
 		this.maintnainer=maintnainer;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public DictItem getSource() {
+		return source;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param source 来源
+	 * @return 当前对象
+	*/
+	public Asset setSource(DictItem source) {
+		this.source=source;
 		return this;
 	}
 

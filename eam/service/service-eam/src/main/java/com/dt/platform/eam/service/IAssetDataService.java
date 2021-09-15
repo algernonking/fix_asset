@@ -16,8 +16,10 @@ import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -32,10 +34,27 @@ public interface IAssetDataService extends ISuperService<Asset> {
 	/**
 	 * 插入实体
 	 * @param ids 资产数据
-	 * @return 插入是否成功
+	 * @param asset 资产实体
+	 * @return 结果
 	 * */
-	List<Asset> queryAssetData(List<String> ids,AssetVO asset);
+	List<Asset> queryAssetList(List<String> ids,AssetVO asset);
 
 
+
+	/**
+	 * 插入实体
+	 * @param ids 资产数据
+	 * @param asset 资产实体
+	 * @return 结果
+	 * */
+	Map<String, Object> queryAssetMap(List<String> ids,AssetVO asset);
+
+	/**
+	 * 插入实体
+	 * @param is 输入文件流
+	 * @param fileName 输出文件名
+	 * @return 结果
+	 * */
+	File saveTempFile(InputStream is, String fileName);
 
 }

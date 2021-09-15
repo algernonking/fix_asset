@@ -33,9 +33,6 @@ public class OpsServiceCategoryGtr extends BaseCodeGenerator{
 
 
 
-
-
-
         cfg.view().field(EAMTables.OPS_SERVICE_CATEGORY.GROUP_ID)
                 .basic().label("服务分组")
                 .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_LIST)

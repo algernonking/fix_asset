@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 15:27:35
+ * @since 2021-09-14 15:28:05
  */
 
 function FormPage() {
@@ -249,9 +249,10 @@ function FormPage() {
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -414,7 +415,7 @@ function FormPage() {
 			//设置  仓库 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 			//设置  来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
+			fox.setSelectValue4QueryApi("#sourceId",formData.source);
 			//设置  维保商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
 			//设置  财务分类 设置下拉框勾选

@@ -246,13 +246,19 @@
 
 
 
-<div  th:fragment="source_id" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+<!--<div  th:fragment="source_id" class="layui-form-item" >-->
+<!--    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>-->
+<!--    <div class="layui-input-block layui-input-block-c1">-->
+<!--        <div id="sourceId" input-type="select" th:data="${dict.toArray('eam_source')}"></div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div  th:fragment="source_id"  class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('来源')}">来源</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="sourceId" input-type="select" th:data="${dict.toArray('eam_source')}"></div>
+        <div id="sourceId" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_source'}"></div>
     </div>
 </div>
-
 
 
 <div  th:fragment="asset_number" class="layui-form-item" >
