@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:03:58
+ * @since 2021-09-13 21:08:04
  */
 
 function FormPage() {
@@ -81,16 +81,21 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "code",
 			radio: true,
-			filterable: false,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
-			transform:function(data) {
+			searchField: "code", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					if(!data[i]) continue;
+					opts.push({name:data[i].code,value:data[i].name,selected:(defaultValues.indexOf(data[i].name)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -142,7 +147,7 @@ function FormPage() {
 
 
 			//设置  业务编码 设置下拉框勾选
-			fox.setSelectValue4Enum("#code",formData.code,SELECT_CODE_DATA);
+			fox.setSelectValue4QueryApi("#code",formData.businessCode);
 			//设置  编码规则 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#ruleId",formData.rule);
 

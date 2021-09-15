@@ -2,7 +2,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:15
+ * @since 2021-09-13 05:52:02
  */
  -->
  <!DOCTYPE html>
@@ -47,15 +47,6 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性')}">属性</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="attributeId" input-type="select" th:data="${'/service-eam/eam-asset-attribute/query-list'}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属模块')}">所属模块</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <div id="ownerCode" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum')}"></div>
@@ -64,8 +55,17 @@
 
 
                 
-                <div class="layui-form-item" style="display: none">
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属维度')}">所属维度</div></div>
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性')}">属性</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="attributeId" input-type="select" th:data="${'/service-eam/eam-asset-attribute/query-attribute-owner-list?owner=asset&itemOwner=-1'}"></div>
+                        </div>
+                    </div>
+
+
+                
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('所属维度')}">所属维度</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
                         <input input-type="radio" type="radio" name="dimension" lay-filter="dimension" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
@@ -157,6 +157,13 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性备注')}">属性备注</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="resNotes" id="resNotes" name="resNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性备注') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性字段')}">属性字段</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="resCode" id="resCode" name="resCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性字段') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 

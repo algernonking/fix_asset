@@ -88,11 +88,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+
         downloadBill:function (data){
             console.log('downloadBill',data);
-            var downloadUrl="/service-eam/eam-asset-bill/query-borrow-bills";
-            fox.submit(downloadUrl);
-
+            var downloadUrl="/service-eam/eam-asset-bill/query-borrow-bill";
+            fox.submit(downloadUrl,{id:"486541465942495232"});
         },
         /**
          * 末尾执行

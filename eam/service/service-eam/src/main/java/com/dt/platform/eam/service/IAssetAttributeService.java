@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetAttribute;
@@ -39,8 +40,14 @@ public interface IAssetAttributeService extends ISuperService<AssetAttribute> {
 	 * @return 插入是否成功
 	 * */
 	Result insertList(List<AssetAttribute> assetAttributeList);
-	
-	
+
+
+	/**
+	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
+	 * @param owner  查询条件
+	 * @return 查询结果
+	 * */
+	List<AssetAttribute> queryAttributeOwnerList(String owner,String itemOwner);
 		
 	/**
 	 * 按主键删除 资产字段配置

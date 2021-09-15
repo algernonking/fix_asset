@@ -3,6 +3,7 @@ package com.dt.platform.relation.modules;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.domain.ops.Voucher;
@@ -37,11 +38,20 @@ public class EAMRelationManager extends RelationManager {
         this.setupInventory();
         this.setupAssetAttributeItem();
 
+        this.setupTplFile();
+
     }
     public void setupProperties() {
 
 
     }
+
+    private void setupTplFile() {
+        this.property(TplFileMeta.BUSINESS_CODE_PROP)
+                .using(EAMTables.EAM_TPL_FILE.CODE).join(EAMTables.SYS_CODE_REGISTER.CODE);
+
+    }
+
 
     public void setupAssetAttributeItem() {
         // 关联字段

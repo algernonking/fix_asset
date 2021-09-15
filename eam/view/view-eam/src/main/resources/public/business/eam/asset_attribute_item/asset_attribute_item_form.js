@@ -1,7 +1,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:17
+ * @since 2021-09-13 05:52:03
  */
 
 function FormPage() {
@@ -77,6 +77,24 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 ownerCode 下拉字段
+		fox.renderSelectBox({
+			el: "ownerCode",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 attributeId 下拉字段
 		fox.renderSelectBox({
 			el: "attributeId",
@@ -94,24 +112,6 @@ function FormPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({name:data[i].label,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
-		//渲染 ownerCode 下拉字段
-		fox.renderSelectBox({
-			el: "ownerCode",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -141,10 +141,10 @@ function FormPage() {
 
 
 
-			//设置  属性 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#attributeId",formData.attribute);
 			//设置  所属模块 设置下拉框勾选
 			fox.setSelectValue4Enum("#ownerCode",formData.ownerCode,SELECT_OWNERCODE_DATA);
+			//设置  属性 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#attributeId",formData.attribute);
 
 			//处理fillBy
 
@@ -191,10 +191,10 @@ function FormPage() {
 
 
 
-		//获取 属性 下拉框的值
-		data["attributeId"]=fox.getSelectedValue("attributeId",false);
 		//获取 所属模块 下拉框的值
 		data["ownerCode"]=fox.getSelectedValue("ownerCode",false);
+		//获取 属性 下拉框的值
+		data["attributeId"]=fox.getSelectedValue("attributeId",false);
 
 		return data;
 	}

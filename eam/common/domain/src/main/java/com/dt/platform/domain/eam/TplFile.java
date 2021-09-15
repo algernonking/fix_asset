@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.EAM_TPL_FILE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import com.dt.platform.domain.common.CodeRegister;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:14
- * @sign 9CDFADA9D4A8D0B41FA953305B821C0E
+ * @since 2021-09-13 21:17:58
+ * @sign 03521F46814F188EB8CEC6C092DE3EAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -40,6 +41,12 @@ public class TplFile extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String name;
+	
+	/**
+	 * 模板类型：模板类型
+	*/
+	@ApiModelProperty(required = false,value="模板类型" , notes = "模板类型")
+	private String type;
 	
 	/**
 	 * 业务编码：业务编码
@@ -114,6 +121,12 @@ public class TplFile extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 业务编码：业务编码
+	*/
+	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
+	private CodeRegister businessCode;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -148,6 +161,25 @@ public class TplFile extends Entity {
 	*/
 	public TplFile setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 模板类型<br>
+	 * 模板类型
+	 * @return 模板类型
+	*/
+	public String getType() {
+		return type;
+	}
+	
+	/**
+	 * 设置 模板类型
+	 * @param type 模板类型
+	 * @return 当前对象
+	*/
+	public TplFile setType(String type) {
+		this.type=type;
 		return this;
 	}
 	
@@ -376,6 +408,25 @@ public class TplFile extends Entity {
 	*/
 	public TplFile setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编码<br>
+	 * 业务编码
+	 * @return 业务编码
+	*/
+	public CodeRegister getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编码
+	 * @param businessCode 业务编码
+	 * @return 当前对象
+	*/
+	public TplFile setBusinessCode(CodeRegister businessCode) {
+		this.businessCode=businessCode;
 		return this;
 	}
 

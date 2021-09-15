@@ -9,10 +9,12 @@ import com.github.foxnic.dao.spec.DAO;
 import org.apache.poi.ss.formula.functions.T;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Field;
 
+@Service("EAMAssetReportService")
 public class AssetReportServiceImpl  extends SuperService<Asset> implements IAssetReportService {
 
 

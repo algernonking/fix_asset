@@ -1,7 +1,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:11
+ * @since 2021-09-13 04:57:59
  */
 
 layui.config({
@@ -110,6 +110,92 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            if(data.id){
+                setTimeout(function (){
+                    var ownerCodeSelect= xmSelect.get('#ownerCode',true);
+                    ownerCodeSelect.update({disabled:true})
+                    var attributeIdSelect= xmSelect.get('#attributeId',true);
+                    attributeIdSelect.update({disabled:true})
+                },100);
+            }else{
+
+                setTimeout(function (){
+                    //渲染 ownerCode 下拉字段
+                    fox.renderSelectBox({
+                        el: "ownerCode",
+                        radio: true,
+                        filterable: false,
+                        //转换数据
+                        on:function(data){
+                            //change, 此次选择变化的数据,数组
+                            var change = data.change;
+                            //isAdd, 此次操作是新增还是删除
+                            var isAdd = data.isAdd;
+                            var attributeIdSelect= xmSelect.get('#attributeId',true);
+                            if(isAdd){
+                                var item=change[0];
+                                var ps={owner:"asset",itemOwner:item.value};
+                                $("#attributeId").attr("data","/service-eam/eam-asset-attribute/query-attribute-owner-list?owner=asset&itemOwner="+item.value);
+                                admin.request("/service-eam/eam-asset-attribute/query-attribute-owner-list", ps, function (data) {
+                                    if (data.success) {
+                                        var attributeData=[];
+                                        for(var i=0;i<data.data.length;i++){
+                                            attributeData.push({name:data.data[i].label,value:data.data[i].code,link:true})
+                                        }
+                                        setTimeout(function (){
+                                            attributeIdSelect.update({data:attributeData});
+                                        },500);
+                                    } else {
+                                    }
+                                }, "POST");
+                            }else{
+                                attributeIdSelect.update({data:[]});
+                            }
+                        },
+                        //转换数据
+                        transform:function(data) {
+                            //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                            var defaultValues="".split(",");
+                            var defaultIndexs="".split(",");
+                            var opts=[];
+                            if(!data) return opts;
+                            for (var i = 0; i < data.length; i++) {
+                                opts.push({name:data[i].text,value:data[i].code});
+                            }
+                            return opts;
+                        }
+                    });
+
+
+                    //渲染 attributeId 下拉字段
+                    fox.renderSelectBox({
+                        el: "attributeId",
+                        radio: true,
+                        filterable: true,
+                        //转换数据
+                        searchField: "label", //请自行调整用于搜索的字段名称
+                        extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+
+                        transform: function(data) {
+                            //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                            var defaultValues="".split(",");
+                            var defaultIndexs="".split(",");
+                            var opts=[];
+                            if(!data) return opts;
+                            for (var i = 0; i < data.length; i++) {
+                                if(!data[i]) continue;
+                                opts.push({name:data[i].label,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+                            }
+                            return opts;
+                        }
+                    });
+
+
+                },100);
+
+
+
+            }
         },
         /**
          * 表单数据填充后

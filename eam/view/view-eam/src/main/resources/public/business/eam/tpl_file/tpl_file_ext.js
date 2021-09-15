@@ -113,6 +113,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 setTimeout(function(){
                     var codeSelect=xmSelect.get('#code', true);
                     codeSelect.update({disabled: true})
+
+                    var typeSelect=xmSelect.get('#type', true);
+                    typeSelect.update({disabled: true})
                 },100);
             }
             console.log('beforeDataFill',data);

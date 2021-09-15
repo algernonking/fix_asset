@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:03:52
- * @sign 9087B481048D4C7B9839630956E16DBC
+ * @since 2021-09-13 21:07:47
+ * @sign 37AD3DD592751F577ED9164B6614F90D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,6 +106,12 @@ public class CodeAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="编码规则" , notes = "编码规则")
 	private CodeRule rule;
+	
+	/**
+	 * 业务编码：业务编码
+	*/
+	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
+	private CodeRegister businessCode;
 	
 	/**
 	 * 获得 主键<br>
@@ -351,6 +357,25 @@ public class CodeAllocation extends Entity {
 	*/
 	public CodeAllocation setRule(CodeRule rule) {
 		this.rule=rule;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务编码<br>
+	 * 业务编码
+	 * @return 业务编码
+	*/
+	public CodeRegister getBusinessCode() {
+		return businessCode;
+	}
+	
+	/**
+	 * 设置 业务编码
+	 * @param businessCode 业务编码
+	 * @return 当前对象
+	*/
+	public CodeAllocation setBusinessCode(CodeRegister businessCode) {
+		this.businessCode=businessCode;
 		return this;
 	}
 

@@ -1,5 +1,20 @@
 
+
+/opt/upload/tpl
+
+
+delete from sys_file where id like 'T001_%';
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_1','eam_asset_borrow.docx','tpl/T001/eam_asset_borrow.docx',10000,'application/doc','docx')
+
+
+
+
 Mapping List:
+delete from sys_user_file where tenant_id='T001'
+
+
+/tpl/asset_doc.docx
+/tpl/asset_down.xlsx
 
 
 

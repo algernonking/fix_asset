@@ -1,5 +1,6 @@
 package com.dt.platform.proxy.eam;
 
+import com.dt.platform.domain.eam.AssetAttributeItem;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
@@ -19,7 +20,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产字段配置  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:10
+ * @since 2021-09-12 21:51:25
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetAttributeServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -101,7 +102,21 @@ public interface AssetAttributeServiceProxy {
 	 * 导入资产字段配置数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
+	/**
+	 * 查询属性归属
+	 */
+	public static final String QUERY_ATTRIBUTE_OWNER_LIST = API_PREFIX + "query-attribute-owner-list";
+
+
+	/**
+	 * 查询属性归属
+	 */
+	@RequestMapping(AssetAttributeServiceProxy.QUERY_ATTRIBUTE_OWNER_LIST)
+	Result<List<AssetAttribute>> queryAttributeOwnerList(String owner,String itemOwner);
+
+
+
 	/**
 	 * 添加资产字段配置
 	*/

@@ -3,6 +3,7 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,6 +69,7 @@ public class TplFileController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -124,6 +126,7 @@ public class TplFileController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -146,6 +149,7 @@ public class TplFileController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -177,6 +181,7 @@ public class TplFileController extends SuperController {
 		TplFile tplFile=tplFileService.getById(id);
 		// 关联出 存放位置 数据
 	//	tplFileService.join(tplFile,TplFileMeta.FILE);
+		tplFileService.join(tplFile, TplFileMeta.BUSINESS_CODE);
 		result.success(true).data(tplFile);
 		return result;
 	}
@@ -209,6 +214,7 @@ public class TplFileController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -232,6 +238,7 @@ public class TplFileController extends SuperController {
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = TplFileVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "484692356059111424"),
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
+		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -245,6 +252,8 @@ public class TplFileController extends SuperController {
 		PagedList<TplFile> list=tplFileService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// 关联出 存放位置 数据
 	//	tplFileService.join(list,TplFileMeta.FILE);
+		// 关联出 编码规则 数据
+		tplFileService.join(list, TplFileMeta.BUSINESS_CODE);
 		result.success(true).data(list);
 		return result;
 	}

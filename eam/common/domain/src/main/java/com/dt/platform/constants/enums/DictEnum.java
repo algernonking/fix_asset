@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-09-02 20:55:57
+ * @since 2021-09-13 21:20:07
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -69,6 +69,11 @@ public enum DictEnum implements CodeTextEnum {
 	OPS_VOUCHER_TYPE("ops_voucher_type" , "凭证类型"),
 	
 	/**
+	 * 凭证分类
+	*/
+	OPS_VOUCHER_CATEGORY("ops_voucher_category" , "凭证分类"),
+	
+	/**
 	 * 数据库日志模式
 	*/
 	OPS_DB_LOG_METHOD("ops_db_log_method" , "数据库日志模式"),
@@ -107,6 +112,11 @@ public enum DictEnum implements CodeTextEnum {
 	 * 信息系统分级
 	*/
 	OPS_SYSTEM_GRADE("ops_system_grade" , "信息系统分级"),
+	
+	/**
+	 * 组织节点类型
+	*/
+	ORG_NODE_TYPE("org_node_type" , "组织节点类型"),
 	
 	/**
 	 * 资产来源

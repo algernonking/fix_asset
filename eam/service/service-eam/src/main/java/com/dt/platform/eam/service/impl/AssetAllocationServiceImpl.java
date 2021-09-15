@@ -4,6 +4,8 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.domain.eam.AssetAttribute;
+import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +69,8 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
 	/**
 	 * 插入实体
 	 * @param assetAllocation 实体数据

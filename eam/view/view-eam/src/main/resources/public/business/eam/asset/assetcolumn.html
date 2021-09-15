@@ -301,11 +301,11 @@
 
 
 
-
 <div  th:fragment="asset_notes" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产备注')}">资产备注</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="assetNotes" id="assetNotes" name="assetNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产备注') }" type="text" class="layui-input"   />
+        <textarea lay-filter="assetNotes" id="assetNotes" name="assetNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产备注') }" class="layui-textarea" style="height: 30px" ></textarea>
+
     </div>
 </div>
 
@@ -382,7 +382,10 @@
 
 
 <div th:fragment="financial_category_id" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-form-label layui-form-label-c1">
+        <div th:text="${item.attribute.label}"></div>
+        <div th:if="${item.required} == 1" class="layui-required">*</div>
+    </div>
     <div class="layui-input-block layui-input-block-c1">
         <div id="financialCategoryId" input-type="select" th:data="${'/service-eam/eam-category-finance/query-paged-list'}"></div>
     </div>

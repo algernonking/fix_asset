@@ -47,8 +47,8 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
         );
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.ATTRIBUTE_ID).form().validate().required()
-                .form().selectBox().queryApi(AssetAttributeServiceProxy.QUERY_LIST).valueField(AssetAttributeMeta.ID).textField(AssetAttributeMeta.LABEL)
-        .filter(true).toolbar(false).muliti(false).fillBy(AssetAttributeItemMeta.ATTRIBUTE);
+                .form().selectBox().queryApi(AssetAttributeServiceProxy.QUERY_ATTRIBUTE_OWNER_LIST+"?owner=asset&itemOwner=-1").valueField(AssetAttributeMeta.ID).textField(AssetAttributeMeta.LABEL)
+        .filter(true).toolbar(false).paging(false).muliti(false).fillBy(AssetAttributeItemMeta.ATTRIBUTE);
 
 
 
@@ -74,7 +74,7 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.NOTES).form().textArea().height(30);
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.DIMENSION).form().hidden(true);
+
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.DIMENSION).form().validate().required()
                 .form().radioBox().enumType(AssetAttributeDimensionEnum.class);
@@ -88,7 +88,10 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
                 .basic().label("属性备注")
                 .table().fillBy(AssetAttributeItemMeta.ATTRIBUTE, AssetAttributeMeta.NOTES);
 
-
+        String resourceNameField2="res_"+EAMTables.EAM_ASSET_ATTRIBUTE.CODE;
+        cfg.view().field(resourceNameField2)
+                .basic().label("属性字段")
+                .table().fillBy(AssetAttributeItemMeta.ATTRIBUTE, AssetAttributeMeta.CODE);
 
         cfg.view().formWindow().width("85%");
 
@@ -99,7 +102,7 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
 

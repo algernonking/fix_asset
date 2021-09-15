@@ -15,9 +15,11 @@ public enum AssetAttributeItemOwnerEnum implements CodeTextEnum {
 
 	BASE("base" , "基本模块"),
 	EQUIPMENT("equipment" , "设备模块"),
+	PUBLIC_SHOE("public_show" , "公共显示"),
+	FINIANCE_CHANGE("finiance_change" , "财务变更"),
+	MAINTAINER_CHANGE("maintainer_change" , "维保变更"),
+	BASEINFO_CHANGE("baseinfo_change" , "基本信息变更"),
 	;
-
-
 	private String code;
 	private String text;
 	private AssetAttributeItemOwnerEnum(String code, String text)  {

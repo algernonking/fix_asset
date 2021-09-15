@@ -113,7 +113,8 @@ public interface AssetAttributeItemServiceProxy {
 	 * 导入资产字段配置项数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
+
 	/**
 	 * 添加资产字段配置项
 	*/

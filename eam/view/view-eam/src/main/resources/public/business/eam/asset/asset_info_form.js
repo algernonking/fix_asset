@@ -84,8 +84,16 @@ function FormPage() {
 			},
 			filterable: true,
 			tree: {
+				// showFolderIcon: true,
 				show: true,
-				expandedKeys: [ -1 ],
+				strict: true,
+				expandedKeys: [ -1],
+			},
+			//处理方式
+			on: function(data){
+				if(data.isAdd){
+					return data.change.slice(0, 1)
+				}
 			},
 			//显示为text模式
 			model: { label: { type: 'text' } },

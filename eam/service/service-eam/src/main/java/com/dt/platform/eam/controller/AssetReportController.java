@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AssetReportController extends SuperController {
 
 
-//    @Autowired
-//    private IAssetReportService assetReportService;
+    @Autowired
+    private IAssetReportService assetReportService;
 
 
   //  private IAssetRepairService assetRepairService;

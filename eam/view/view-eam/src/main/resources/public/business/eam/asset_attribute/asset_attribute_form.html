@@ -2,7 +2,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:10
+ * @since 2021-09-12 21:51:30
  */
  -->
  <!DOCTYPE html>
@@ -133,7 +133,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('归属')}">归属</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="owner" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum')}"></div>
+                            <div id="owner" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum')}"></div>
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@
     var RADIO_REQUIRED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
     var RADIO_REQUIREDMODIFY_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
     var RADIO_COMPONENTTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum')}]];
-    var SELECT_OWNER_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum')}]];
+    var SELECT_OWNER_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum')}]];
     var VALIDATE_CONFIG={"owner":{"labelInForm":"归属","inputType":"select_box","required":true},"componentType":{"labelInForm":"组件类型","inputType":"radio_box","required":true},"code":{"labelInForm":"字段编码","inputType":"text_input","required":true},"label":{"labelInForm":"字段名称","inputType":"text_input","required":true},"dimension":{"labelInForm":"所属维度","inputType":"radio_box","required":true},"requiredModify":{"labelInForm":"是否修改","inputType":"radio_box","required":true},"required":{"labelInForm":"是否必选","inputType":"radio_box","required":true},"status":{"labelInForm":"状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="eam_asset_attribute";
 

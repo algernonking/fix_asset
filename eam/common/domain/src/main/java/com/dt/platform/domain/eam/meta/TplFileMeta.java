@@ -3,13 +3,14 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.TplFile;
 import java.util.Date;
+import com.dt.platform.domain.common.CodeRegister;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:14
- * @sign 9CDFADA9D4A8D0B41FA953305B821C0E
+ * @since 2021-09-13 21:17:58
+ * @sign 03521F46814F188EB8CEC6C092DE3EAF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +35,16 @@ public class TplFileMeta {
 	 * 名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 模板类型 , 类型: java.lang.String
+	*/
+	public static final String TYPE="type";
+	
+	/**
+	 * 模板类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,TYPE, java.lang.String.class, "模板类型", "模板类型", java.lang.String.class, null);
 	
 	/**
 	 * 业务编码 , 类型: java.lang.String
@@ -156,9 +167,19 @@ public class TplFileMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 业务编码 , 类型: com.dt.platform.domain.common.CodeRegister
+	*/
+	public static final String BUSINESS_CODE="businessCode";
+	
+	/**
+	 * 业务编码 , 类型: com.dt.platform.domain.common.CodeRegister
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,com.dt.platform.domain.common.CodeRegister> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,BUSINESS_CODE, com.dt.platform.domain.common.CodeRegister.class, "业务编码", "业务编码", com.dt.platform.domain.common.CodeRegister.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , NAME , TYPE , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , BUSINESS_CODE };
 	
 	/**
 	 * 代理类
@@ -187,6 +208,17 @@ public class TplFileMeta {
 		public TplFile setName(String name) {
 			super.change(NAME,super.getName(),name);
 			super.setName(name);
+			return this;
+		}
+		
+		/**
+		 * 设置 模板类型
+		 * @param type 模板类型
+		 * @return 当前对象
+		*/
+		public TplFile setType(String type) {
+			super.change(TYPE,super.getType(),type);
+			super.setType(type);
 			return this;
 		}
 		
@@ -319,6 +351,17 @@ public class TplFileMeta {
 		public TplFile setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务编码
+		 * @param businessCode 业务编码
+		 * @return 当前对象
+		*/
+		public TplFile setBusinessCode(CodeRegister businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
 			return this;
 		}
 	}

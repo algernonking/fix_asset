@@ -20,6 +20,9 @@
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
+        .layui-required{
+            margin-right: 0px;
+        }
     </style>
 </head>
 
@@ -28,17 +31,15 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none;height:800px">
         <input name="id" id="id"  type="hidden"/>
-
-
         <div style="display: inline-block;" class="layui-col-xs12">
             <div class="layui-tab" style="padding-right: 8px;padding-left: 8px;">
                 <ul class="layui-tab-title">
-                    <li   class="layui-this" >基本信息</li>
+                    <li  class="layui-this" >基本信息</li>
                     <li  >维保信息</li>
                     <li  >财务信息</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show  layui-form model-form">
+                    <div class="layui-tab-item layui-show">
                         <!--开始：3栏模式 循环-->
                         <div class="layui-row form-row" >
                             <div class="layui-col-xs4 form-column">

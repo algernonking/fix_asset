@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.common.CodeAllocation;
 import java.util.Date;
 import com.dt.platform.domain.common.CodeRule;
+import com.dt.platform.domain.common.CodeRegister;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:03:52
- * @sign 9087B481048D4C7B9839630956E16DBC
+ * @since 2021-09-13 21:07:48
+ * @sign 37AD3DD592751F577ED9164B6614F90D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -147,9 +148,19 @@ public class CodeAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,com.dt.platform.domain.common.CodeRule> RULE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,RULE, com.dt.platform.domain.common.CodeRule.class, "编码规则", "编码规则", com.dt.platform.domain.common.CodeRule.class, null);
 	
 	/**
+	 * 业务编码 , 类型: com.dt.platform.domain.common.CodeRegister
+	*/
+	public static final String BUSINESS_CODE="businessCode";
+	
+	/**
+	 * 业务编码 , 类型: com.dt.platform.domain.common.CodeRegister
+	*/
+	public static final BeanProperty<com.dt.platform.domain.common.CodeAllocation,com.dt.platform.domain.common.CodeRegister> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.common.CodeAllocation.class ,BUSINESS_CODE, com.dt.platform.domain.common.CodeRegister.class, "业务编码", "业务编码", com.dt.platform.domain.common.CodeRegister.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , RULE };
+	public static final String[] $PROPS={ ID , CODE , RULE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , RULE , BUSINESS_CODE };
 	
 	/**
 	 * 代理类
@@ -299,6 +310,17 @@ public class CodeAllocationMeta {
 		public CodeAllocation setRule(CodeRule rule) {
 			super.change(RULE,super.getRule(),rule);
 			super.setRule(rule);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务编码
+		 * @param businessCode 业务编码
+		 * @return 当前对象
+		*/
+		public CodeAllocation setBusinessCode(CodeRegister businessCode) {
+			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
+			super.setBusinessCode(businessCode);
 			return this;
 		}
 	}

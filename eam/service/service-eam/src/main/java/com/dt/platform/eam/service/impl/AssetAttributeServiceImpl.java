@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.github.foxnic.dao.data.RcdSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +65,23 @@ public class AssetAttributeServiceImpl extends SuperService<AssetAttribute> impl
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
+	@Override
+	public List<AssetAttribute> queryAttributeOwnerList(String owner,String itemOwner){
+		String tenantId=dao.getDBTreaty().getActivedTenantId().toString();
+		String sql="select * from eam_asset_attribute where\n" +
+				"tenant_id='"+tenantId+"' and deleted=0 and owner= ? and id not in (\n" +
+				"select a.attribute_id from eam_asset_attribute_item a,eam_asset_attribute b \n" +
+				"where a.owner_code=? and a.deleted=0 and a.deleted=0 and b.owner= ? and a.tenant_id='"+tenantId+"' and b.tenant_id='"+tenantId+"'\n" +
+				"and a.attribute_id=b.id\n" +
+				")";
+		RcdSet idsRs=dao.query(sql,owner,itemOwner,owner);
+		List<AssetAttribute> list=idsRs.toEntityList(AssetAttribute.class);
+		return list;
+	}
+
+
 	/**
 	 * 插入实体
 	 * @param assetAttribute 实体数据

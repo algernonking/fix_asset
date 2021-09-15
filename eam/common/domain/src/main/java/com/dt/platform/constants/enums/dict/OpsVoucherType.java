@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-09-02 20:56:02
+ * @since 2021-09-13 21:20:09
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -12,14 +12,44 @@ package com.dt.platform.constants.enums.dict;
 public enum OpsVoucherType {
 	
 	/**
+	 * 操作系统
+	*/
+	OS("os" , "操作系统"),
+	
+	/**
 	 * 数据库
 	*/
 	DB("db" , "数据库"),
 	
 	/**
-	 * 操作系统
+	 * 存储系统
 	*/
-	OS("os" , "操作系统"),
+	STORAGE("storage" , "存储系统"),
+	
+	/**
+	 * 网络
+	*/
+	NETWORK("network" , "网络"),
+	
+	/**
+	 * 安全
+	*/
+	SECURITY("security" , "安全"),
+	
+	/**
+	 * 中间件
+	*/
+	MIDDLEWARE("middleware" , "中间件"),
+	
+	/**
+	 * 应用系统
+	*/
+	APP("app" , "应用系统"),
+	
+	/**
+	 * Vmware
+	*/
+	VMWARE("vmware" , "Vmware"),
 	;
 	
 	private String code;

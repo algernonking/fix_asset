@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.AssetAttribute;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 18:10:02
- * @sign A9D7A8D31DABDEA846E2EF109D4CB614
+ * @since 2021-09-13 05:51:57
+ * @sign C90E2F387CF2195CF6D186C7490DBA1D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,16 +27,6 @@ public class AssetAttributeItemMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 属性 , 类型: java.lang.String
-	*/
-	public static final String ATTRIBUTE_ID="attributeId";
-	
-	/**
-	 * 属性 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> ATTRIBUTE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,ATTRIBUTE_ID, java.lang.String.class, "属性", "属性", java.lang.String.class, null);
-	
-	/**
 	 * 所属模块 , 类型: java.lang.String
 	*/
 	public static final String OWNER_CODE="ownerCode";
@@ -45,6 +35,16 @@ public class AssetAttributeItemMeta {
 	 * 所属模块 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> OWNER_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,OWNER_CODE, java.lang.String.class, "所属模块", "所属模块", java.lang.String.class, null);
+	
+	/**
+	 * 属性 , 类型: java.lang.String
+	*/
+	public static final String ATTRIBUTE_ID="attributeId";
+	
+	/**
+	 * 属性 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> ATTRIBUTE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,ATTRIBUTE_ID, java.lang.String.class, "属性", "属性", java.lang.String.class, null);
 	
 	/**
 	 * 所属维度 , 类型: java.lang.String
@@ -249,7 +249,7 @@ public class AssetAttributeItemMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ATTRIBUTE_ID , OWNER_CODE , DIMENSION , REQUIRED , LAYOUT_TYPE , LIST_SHOW , LIST_CONTENT , LIST_SORT , FORM_SHOW , LAYOUT_ROW , LAYOUT_COLUMN , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTRIBUTE };
+	public static final String[] $PROPS={ ID , OWNER_CODE , ATTRIBUTE_ID , DIMENSION , REQUIRED , LAYOUT_TYPE , LIST_SHOW , LIST_CONTENT , LIST_SORT , FORM_SHOW , LAYOUT_ROW , LAYOUT_COLUMN , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTRIBUTE };
 	
 	/**
 	 * 代理类
@@ -271,17 +271,6 @@ public class AssetAttributeItemMeta {
 		}
 		
 		/**
-		 * 设置 属性
-		 * @param attributeId 属性
-		 * @return 当前对象
-		*/
-		public AssetAttributeItem setAttributeId(String attributeId) {
-			super.change(ATTRIBUTE_ID,super.getAttributeId(),attributeId);
-			super.setAttributeId(attributeId);
-			return this;
-		}
-		
-		/**
 		 * 设置 所属模块
 		 * @param ownerCode 所属模块
 		 * @return 当前对象
@@ -289,6 +278,17 @@ public class AssetAttributeItemMeta {
 		public AssetAttributeItem setOwnerCode(String ownerCode) {
 			super.change(OWNER_CODE,super.getOwnerCode(),ownerCode);
 			super.setOwnerCode(ownerCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 属性
+		 * @param attributeId 属性
+		 * @return 当前对象
+		*/
+		public AssetAttributeItem setAttributeId(String attributeId) {
+			super.change(ATTRIBUTE_ID,super.getAttributeId(),attributeId);
+			super.setAttributeId(attributeId);
 			return this;
 		}
 		

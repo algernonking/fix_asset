@@ -3,6 +3,9 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.domain.eam.meta.AssetAttributeItemVOMeta;
+import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产字段配置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:10
+ * @since 2021-09-12 21:51:26
 */
 
 @Api(tags = "资产字段配置")
@@ -103,8 +106,28 @@ public class AssetAttributeController extends SuperController {
 		Result result=assetAttributeService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
+	/**
+	 * 查询资产字段配置项
+	 */
+	@ApiOperation(value = "查询资产字段配置项")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "owner" , value = "归属" , required = true , dataTypeClass=String.class , example = "asset"),
+			@ApiImplicitParam(name = "itemOwner" , value = "归属" , required = true , dataTypeClass=String.class , example = "asset")
+
+	})
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeItemVOMeta.PAGE_INDEX , AssetAttributeItemVOMeta.PAGE_SIZE } )
+	@SentinelResource(value = AssetAttributeServiceProxy.QUERY_ATTRIBUTE_OWNER_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetAttributeServiceProxy.QUERY_ATTRIBUTE_OWNER_LIST)
+	public Result<List<AssetAttribute>> queryAttributeOwnerList(String owner,String itemOwner) {
+		Result<List<AssetAttribute>> result=new Result<>();
+		List<AssetAttribute> list=assetAttributeService.queryAttributeOwnerList(owner,itemOwner);
+		result.success(true).data(list);
+		return result;
+	}
+
+
 	/**
 	 * 批量删除资产字段配置 <br>
 	 * 联合主键时，请自行调整实现
