@@ -31,7 +31,7 @@ public interface AssetReportServiceProxy {
 	/**
 	 * API 上下文路径 , eam-asset
 	*/
-	public static final String API_CONTEXT_PATH = "eam-asset";
+	public static final String API_CONTEXT_PATH = "eam-asset-report";
 	
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
@@ -39,13 +39,17 @@ public interface AssetReportServiceProxy {
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 	
 	/**
-	 * 添加资产
+	 * 查询分类数据
 	 */
-	public static final String INSERT = API_PREFIX + "insert";
-	
+	public static final String QUERY_CATEGORY_DATA = API_PREFIX + "query-category-data";
+
+	/**
+	 * 查询组织数据
+	 */
+	public static final String QUERY_ORGANIZATION_DATA = API_PREFIX + "query-organization-data";
 
 
-	
+
 	/**
 	 * 控制器类名
 	 * */

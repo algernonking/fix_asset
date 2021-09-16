@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html style="background-color: #FFFFFF">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+    <title th:text="${lang.translate('分类查询资产')}">分类查询资产</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <style>
+        .top-container {
+            display: -webkit-flex; /* Safari */
+            display: flex;
+            width: 100%;
+            align-items:top;
+        }
+        .left-tree {
+            width: 260px;
+            background-color: #ffffff;
+            border-right: 1px #e6e6e6 solid;
+        }
+        .right-tab {
+            flex:1;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="top-container">
+    <div class="left-tree">
+        <div class="layui-form toolbar" style="padding:6px; border-bottom:1px #e6e6e6 solid; " id="toolbar">
+            <table style="width: 100%"><tr>
+                <td>
+                    <input id="search-input" class="layui-input search-input" type="text" placeholder="请输入关键字" style="width: 100%"/>
+                </td>
+
+            </tr></table>
+        </div>
+        <div id="tree-container" style="overflow:auto;height:800px">
+            <ul id="menu-tree" class="ztree"></ul>
+        </div>
+    </div>
+    <div class="right-tab" style="margin-left: 8px;margin-right: 8px">
+        <div style="margin-top:6px;">
+            <iframe id="form-view" src="/business/eam/asset/asset_info_list.html" frameborder=0 width="100%"  height="800px"></iframe>
+        </div>
+    </div>
+</div>
+
+
+
+<script th:inline="javascript">
+
+    var CATEGORY_PARENT_ID =  [[${categoryParentId}]];
+
+</script>
+
+
+
+
+
+<script type="text/javascript" src="/module/global.js"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/assets/libs/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="/business/eam/asset/asset_search/category_list.js"></script>
+
+</body>
+</html>

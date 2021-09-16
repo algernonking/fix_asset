@@ -27,17 +27,32 @@ public interface AssetAlarmServiceProxy {
 	/**
 	 * API 上下文路径 , eam-asset
 	*/
-	public static final String API_CONTEXT_PATH = "eam-asset";
+	public static final String API_CONTEXT_PATH = "eam-asset-alarm";
 	
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
 
 
+	/**
+	 * 查询维保过期数据
+	 */
+	public static final String QUERY_MAINTENANCE_EXPIRATION_DATA = API_PREFIX + "query-maintenance-expiration-data";
 
-	
+
+	/**
+	 * 查询领用过期数据
+	 */
+	public static final String QUERY_COLLECTION_EXPIRATION_DATA = API_PREFIX + "query-collection-expiration-data";
+
+
+	/**
+	 * 查询借用过期数据
+	 */
+	public static final String QUERY_BORROW_EXPIRATION_DATA = API_PREFIX + "query-borrow-expiration-data";
+
+
 	/**
 	 * 控制器类名
 	 * */

@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
+import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import org.github.foxnic.web.domain.pcm.Catalog;
@@ -56,12 +58,23 @@ public class AssetPageController extends ViewController {
 		}
 		return proxy;
 	}
-	
+
+	/**
+	 * 资产 分类搜索
+	 */
+	@RequestMapping("/asset_search/category_list.html")
+	public String categoryList(Model model,HttpServletRequest request) {
+		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
+		model.addAttribute("categoryParentId",idResult.getData());
+		return prefix+"/asset_search/category_list";
+	}
+
 	/**
 	 * 资产 功能主页面
 	 */
 	@RequestMapping("/asset_list.html")
 	public String list(Model model,HttpServletRequest request) {
+
 		return prefix+"/asset_list";
 	}
 
@@ -78,8 +91,6 @@ public class AssetPageController extends ViewController {
 			List<AssetAttributeItem> list=data.get("attributeListData");
 			model.addAttribute("attributeListData",list);
 		}
-
-		System.out.println(model);
 		return prefix+"/asset_info_list";
 	}
 

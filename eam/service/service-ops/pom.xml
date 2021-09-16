@@ -36,13 +36,6 @@
             <artifactId>proxy</artifactId>  
             <version>${platform.version}</version> 
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
-            <scope>compile</scope>
-        </dependency>
-
 
 
         <!-- -引入模板引擎 https://mvnrepository.com/artifact/com.deepoove/poi-tl -->

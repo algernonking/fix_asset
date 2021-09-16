@@ -2,6 +2,7 @@ package com.dt.platform.proxy.eam;
 
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.api.transter.Result;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.FeignConfiguration;
 import org.github.foxnic.web.proxy.api.APIProxy;
@@ -37,8 +38,19 @@ public interface AssetCategoryServiceProxy {
     /**
      * 查询资产
      */
+    public static final String QUERY_NODE_ID_BY_CODE = API_PREFIX + "query-node-id-by-code";
+
+    /**
+     * 查询资产
+     */
     @RequestMapping(AssetCategoryServiceProxy.QUERY_NODES)
-    Result<List<ZTreeNode>> queryNodes();
+    Result<List<ZTreeNode>> queryNodes(CatalogVO categoryV0);
+
+    /**
+     * 根据code查询ID
+     */
+    @RequestMapping(AssetCategoryServiceProxy.QUERY_NODE_ID_BY_CODE)
+    Result<String> queryNodeIdByCode(String code);
 
     /**
      * 控制器类名
