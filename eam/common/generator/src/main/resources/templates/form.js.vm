@@ -257,7 +257,9 @@ function FormPage() {
 			#end
 			#end
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -371,8 +373,19 @@ function FormPage() {
 
 		#for(f : fields)
 		#if(f.typeName.equals("button"))
+		// #(f.buttonField.action.label)对话框
 		$("##(f.varName)-button").click(function(){
+			#if(f.buttonField.action.isFunctionInExt)
 			window.pageExt.form.#(f.buttonField.action.functionName) && window.pageExt.form.#(f.buttonField.action.functionName)(getFormData(),$("##(f.varName)"),$(this));
+			#else
+			#(f.buttonField.action.functionName) && #(f.buttonField.action.functionName)(getFormData(),$("##(f.varName)"),$(this),{
+				single:#(f.buttonField.action.single),
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "#(f.buttonField.action.rootId)",
+				targetType:"#(f.buttonField.action.targetType)",
+				callback:function(ids,nodes,fromData,inputEl,buttonEl){}
+			});
+			#end
 		});
 		#end
 		#end

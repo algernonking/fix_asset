@@ -95,20 +95,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('#(b.functionName)',data);
         },
         #end
-        #for(f : fields)
-        #if(f.typeName.equals("button"))
-        #(f.buttonField.action.functionName):function (data,input,button) {
-            console.log("#(f.buttonField.action.functionName)",data,input,button);
-            top.layer.prompt(function(value, index, elem){
-                //设置隐藏域
-                input.val(value);
-                //设置按钮
-                button.text(value);
-                top.layer.close(index);
-            });
-        },
-        #end
-        #end
         /**
          * 末尾执行
          */
@@ -150,9 +136,24 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 数据提交后执行
          * */
-        afterSubmitt:function (param,result) {
+        afterSubmit:function (param,result) {
             console.log("afterSubmitt",param,result);
         },
+        #for(f : fields)
+        #if(f.typeName.equals("button") && f.buttonField.action.isFunctionInExt)
+        #(f.buttonField.action.functionName):function (data,input,button) {
+            console.log("#(f.buttonField.action.functionName)",data,input,button);
+            top.layer.prompt(function(value, index, elem){
+                //设置隐藏域
+                input.val(value);
+                //设置按钮
+                button.text(value);
+                top.layer.close(index);
+            });
+        },
+        #end
+        #end
+
         #for(g:iframes)
         /**
          *  加载 #(g.title)
