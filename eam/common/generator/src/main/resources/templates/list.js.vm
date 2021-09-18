@@ -194,6 +194,8 @@ function ListPage() {
 		#else
 		value.#(f.varName)={ value: $("##(f.varName)").val()};
 		#end
+		#else if(f.typeName.equals("button"))
+		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text()};
 		#else
 		value.#(f.varName)={ value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end};
 		#end
@@ -441,6 +443,30 @@ function ListPage() {
 				}
 			});
 		});
+
+		#for(f : fields)
+		#if(!f.isHideInSearch)
+		#if(f.typeName.equals("button"))
+		// #(f.buttonField.action.label)对话框
+		$("##(f.varName)-button").click(function(){
+			#if(f.buttonField.action.actionType=="org-dialog" || f.buttonField.action.actionType=="pos-dialog")
+			var #(f.varName)DialogOptions={
+				field:"#(f.varName)",
+				inputEl:$("##(f.varName)"),
+				buttonEl:$(this),
+				single:#(f.buttonField.action.single),
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "#(f.buttonField.action.rootId)",
+				targetType:"#(f.buttonField.action.targetType)",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
+			#end
+		});
+		#end
+		#end
+		#end
 	}
 	
 	/**
