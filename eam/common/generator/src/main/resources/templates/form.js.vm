@@ -393,6 +393,21 @@ function FormPage() {
 			};
 			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end
+			#if(f.buttonField.action.actionType=="emp-dialog")
+				var #(f.varName)DialogOptions={
+				field:"#(f.varName)",
+				formData:getFormData(),
+				inputEl:$("##(f.varName)"),
+				buttonEl:$(this),
+				single:#(f.buttonField.action.single),
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "#(f.buttonField.action.rootId)",
+				targetType:"#(f.buttonField.action.targetType)",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+				#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
+			#end
 			#end
 		});
 		#end
