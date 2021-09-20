@@ -224,7 +224,9 @@ public class #(simpleName) extends SuperController {
 	/**
 	 * 导出 Excel
 	 * */
+	#if(isEnableMicroService)
 	@SentinelResource(value = #(agentSimpleName).EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	#end
 	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL)
 	public void exportExcel(#(voSimpleName)  sample,HttpServletResponse response) throws Exception {
 			//生成 Excel 数据
@@ -237,7 +239,9 @@ public class #(simpleName) extends SuperController {
 	/**
 	 * 导出 Excel 模板
 	 * */
+	#if(isEnableMicroService)
 	@SentinelResource(value = #(agentSimpleName).EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	#end
 	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
 			//生成 Excel 模版
@@ -248,8 +252,9 @@ public class #(simpleName) extends SuperController {
 
 
 
-
+	#if(isEnableMicroService)
 	@SentinelResource(value = #(agentSimpleName).IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	#end
 	@RequestMapping(#(agentSimpleName).IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 

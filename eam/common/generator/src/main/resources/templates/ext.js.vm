@@ -166,7 +166,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
-        }
+        },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
