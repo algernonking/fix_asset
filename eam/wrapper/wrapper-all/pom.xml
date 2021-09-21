@@ -237,8 +237,12 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<fork>true</fork>
-					<mainClass>com.dt.platform.wrapper.WrapperAllApp</mainClass>
-					<layout>ZIP</layout>
+					<includes>
+						<include>
+							<groupId>nothing</groupId>
+							<artifactId>nothing</artifactId>
+						</include>
+					</includes>
 				</configuration>
 				<executions>
 					<execution>
