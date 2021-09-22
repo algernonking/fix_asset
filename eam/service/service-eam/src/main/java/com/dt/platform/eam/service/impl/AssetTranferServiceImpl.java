@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,12 +79,13 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	public Result insert(AssetTranfer assetTranfer) {
 
 		//资产数量
-		if(assetTranfer.getAssetIds()==null||assetTranfer.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
+//		if(assetTranfer.getAssetIds()==null||assetTranfer.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
+
 		//制单人
 		if(assetTranfer.getOriginatorId()==null||"".equals(assetTranfer.getOriginatorId())){
-			assetTranfer.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetTranfer.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetTranfer.getBusinessDate()==null){

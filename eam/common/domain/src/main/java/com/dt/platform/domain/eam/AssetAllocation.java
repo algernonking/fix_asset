@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:27
- * @sign 5402C0A413C039A76BD4276415F9CC39
+ * @since 2021-09-20 16:58:07
+ * @sign FEDCA1A66AE87C16E7CD06EB799EE7F4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,7 +60,7 @@ public class AssetAllocation extends Entity {
 	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -78,7 +79,7 @@ public class AssetAllocation extends Entity {
 	 * 调入管理员：调入管理员
 	*/
 	@ApiModelProperty(required = false,value="调入管理员" , notes = "调入管理员")
-	private String inManagerId;
+	private String managerId;
 	
 	/**
 	 * 调拨说明：调拨说明
@@ -169,6 +170,24 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Employee originator;
+	
+	/**
+	 * 管理人：管理人
+	*/
+	@ApiModelProperty(required = false,value="管理人" , notes = "管理人")
+	private Employee manager;
+	
+	/**
+	 * 调出公司：调出公司
+	*/
+	@ApiModelProperty(required = false,value="调出公司" , notes = "调出公司")
+	private Organization outOwnerCompany;
+	
+	/**
+	 * 调入公司：调入公司
+	*/
+	@ApiModelProperty(required = false,value="调入公司" , notes = "调入公司")
+	private Organization inOwnerCompany;
 	
 	/**
 	 * 获得 主键<br>
@@ -308,17 +327,17 @@ public class AssetAllocation extends Entity {
 	 * 调入管理员
 	 * @return 调入管理员
 	*/
-	public String getInManagerId() {
-		return inManagerId;
+	public String getManagerId() {
+		return managerId;
 	}
 	
 	/**
 	 * 设置 调入管理员
-	 * @param inManagerId 调入管理员
+	 * @param managerId 调入管理员
 	 * @return 当前对象
 	*/
-	public AssetAllocation setInManagerId(String inManagerId) {
-		this.inManagerId=inManagerId;
+	public AssetAllocation setManagerId(String managerId) {
+		this.managerId=managerId;
 		return this;
 	}
 	
@@ -626,6 +645,63 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setOriginator(Employee originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人<br>
+	 * 管理人
+	 * @return 管理人
+	*/
+	public Employee getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 管理人
+	 * @param manager 管理人
+	 * @return 当前对象
+	*/
+	public AssetAllocation setManager(Employee manager) {
+		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 调出公司<br>
+	 * 调出公司
+	 * @return 调出公司
+	*/
+	public Organization getOutOwnerCompany() {
+		return outOwnerCompany;
+	}
+	
+	/**
+	 * 设置 调出公司
+	 * @param outOwnerCompany 调出公司
+	 * @return 当前对象
+	*/
+	public AssetAllocation setOutOwnerCompany(Organization outOwnerCompany) {
+		this.outOwnerCompany=outOwnerCompany;
+		return this;
+	}
+	
+	/**
+	 * 获得 调入公司<br>
+	 * 调入公司
+	 * @return 调入公司
+	*/
+	public Organization getInOwnerCompany() {
+		return inOwnerCompany;
+	}
+	
+	/**
+	 * 设置 调入公司
+	 * @param inOwnerCompany 调入公司
+	 * @return 当前对象
+	*/
+	public AssetAllocation setInOwnerCompany(Organization inOwnerCompany) {
+		this.inOwnerCompany=inOwnerCompany;
 		return this;
 	}
 

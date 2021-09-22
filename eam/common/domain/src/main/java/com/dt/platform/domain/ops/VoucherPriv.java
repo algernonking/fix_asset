@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.OPS_VOUCHER_PRIV;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:06
- * @sign 53CF13196157A60D0994DA06B98C26D9
+ * @since 2021-09-20 16:34:14
+ * @sign 40AF353C1203C6AE22BAFBD3CBB7BE35
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,19 +39,19 @@ public class VoucherPriv extends Entity {
 	/**
 	 * 凭证类别：凭证类别
 	*/
-	@ApiModelProperty(required = true,value="凭证类别" , notes = "凭证类别")
+	@ApiModelProperty(required = false,value="凭证类别" , notes = "凭证类别")
 	private String type;
 	
 	/**
 	 * 用户：用户
 	*/
-	@ApiModelProperty(required = true,value="用户" , notes = "用户")
+	@ApiModelProperty(required = false,value="用户" , notes = "用户")
 	private String emplId;
 	
 	/**
 	 * 状态：状态
 	*/
-	@ApiModelProperty(required = true,value="状态" , notes = "状态")
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
 	private String status;
 	
 	/**
@@ -106,6 +107,12 @@ public class VoucherPriv extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 人员：人员
+	*/
+	@ApiModelProperty(required = false,value="人员" , notes = "人员")
+	private Employee employee;
 	
 	/**
 	 * 获得 主键<br>
@@ -351,6 +358,25 @@ public class VoucherPriv extends Entity {
 	*/
 	public VoucherPriv setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 人员<br>
+	 * 人员
+	 * @return 人员
+	*/
+	public Employee getEmployee() {
+		return employee;
+	}
+	
+	/**
+	 * 设置 人员
+	 * @param employee 人员
+	 * @return 当前对象
+	*/
+	public VoucherPriv setEmployee(Employee employee) {
+		this.employee=employee;
 		return this;
 	}
 

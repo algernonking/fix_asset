@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-06 11:16:27
- * @sign 931952ECC483B4F758C8319A99B7B61B
+ * @since 2021-09-18 12:22:14
+ * @sign D3F1D53C055204833009FEC0E22450D8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -43,6 +43,12 @@ public class VoucherOwner extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="类别" , notes = "类别")
 	private String categoryCode;
+	
+	/**
+	 * 标签：标签
+	*/
+	@ApiModelProperty(required = false,value="标签" , notes = "标签")
+	private String label;
 	
 	/**
 	 * 名称：名称
@@ -111,6 +117,12 @@ public class VoucherOwner extends Entity {
 	private Integer version;
 	
 	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
 	 * 凭证类型：凭证类型
 	*/
 	@ApiModelProperty(required = false,value="凭证类型" , notes = "凭证类型")
@@ -163,6 +175,25 @@ public class VoucherOwner extends Entity {
 	*/
 	public VoucherOwner setCategoryCode(String categoryCode) {
 		this.categoryCode=categoryCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签<br>
+	 * 标签
+	 * @return 标签
+	*/
+	public String getLabel() {
+		return label;
+	}
+	
+	/**
+	 * 设置 标签
+	 * @param label 标签
+	 * @return 当前对象
+	*/
+	public VoucherOwner setLabel(String label) {
+		this.label=label;
 		return this;
 	}
 	
@@ -372,6 +403,25 @@ public class VoucherOwner extends Entity {
 	*/
 	public VoucherOwner setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public VoucherOwner setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	

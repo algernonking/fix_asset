@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:28
- * @sign 59B0D3148F2FEA0CC0053E0F44873402
+ * @since 2021-09-20 18:09:26
+ * @sign 21EFF193781AE943431AD737B18EC4FF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,7 +42,7 @@ public class AssetTranfer extends Entity {
 	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -193,7 +193,7 @@ public class AssetTranfer extends Entity {
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Person originator;
+	private Employee originator;
 	
 	/**
 	 * 调入管理员：调入管理员
@@ -206,6 +206,18 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
 	private Employee useUser;
+	
+	/**
+	 * 调出公司/部门：调出公司/部门
+	*/
+	@ApiModelProperty(required = false,value="调出公司/部门" , notes = "调出公司/部门")
+	private Organization outUseOrganization;
+	
+	/**
+	 * 调入公司/部门：调入公司/部门
+	*/
+	@ApiModelProperty(required = false,value="调入公司/部门" , notes = "调入公司/部门")
+	private Organization inUseOrganization;
 	
 	/**
 	 * 获得 主键<br>
@@ -728,7 +740,7 @@ public class AssetTranfer extends Entity {
 	 * 制单人
 	 * @return 制单人
 	*/
-	public Person getOriginator() {
+	public Employee getOriginator() {
 		return originator;
 	}
 	
@@ -737,7 +749,7 @@ public class AssetTranfer extends Entity {
 	 * @param originator 制单人
 	 * @return 当前对象
 	*/
-	public AssetTranfer setOriginator(Person originator) {
+	public AssetTranfer setOriginator(Employee originator) {
 		this.originator=originator;
 		return this;
 	}
@@ -777,6 +789,44 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setUseUser(Employee useUser) {
 		this.useUser=useUser;
+		return this;
+	}
+	
+	/**
+	 * 获得 调出公司/部门<br>
+	 * 调出公司/部门
+	 * @return 调出公司/部门
+	*/
+	public Organization getOutUseOrganization() {
+		return outUseOrganization;
+	}
+	
+	/**
+	 * 设置 调出公司/部门
+	 * @param outUseOrganization 调出公司/部门
+	 * @return 当前对象
+	*/
+	public AssetTranfer setOutUseOrganization(Organization outUseOrganization) {
+		this.outUseOrganization=outUseOrganization;
+		return this;
+	}
+	
+	/**
+	 * 获得 调入公司/部门<br>
+	 * 调入公司/部门
+	 * @return 调入公司/部门
+	*/
+	public Organization getInUseOrganization() {
+		return inUseOrganization;
+	}
+	
+	/**
+	 * 设置 调入公司/部门
+	 * @param inUseOrganization 调入公司/部门
+	 * @return 当前对象
+	*/
+	public AssetTranfer setInUseOrganization(Organization inUseOrganization) {
+		this.inUseOrganization=inUseOrganization;
 		return this;
 	}
 

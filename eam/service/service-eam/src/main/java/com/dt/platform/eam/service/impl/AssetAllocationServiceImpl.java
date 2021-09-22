@@ -8,6 +8,7 @@ import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,12 +83,12 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 
 		//资产数量
-		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
+//		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
 		//制单人
 		if(assetAllocation.getOriginatorId()==null||"".equals(assetAllocation.getOriginatorId())){
-			assetAllocation.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetAllocation.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetAllocation.getBusinessDate()==null){

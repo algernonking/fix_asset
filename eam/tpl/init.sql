@@ -26,16 +26,21 @@ insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_9'
 
 
 
+
+
+
 /* OPS */
 delete from sys_file where id like 'T001_ops_%';
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_ops_1','ops_download_host.xls','/tpl/T001/ops_download_host.xls',10000,'application/octet-stream','xls');
-insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_ops_2','ops_download_db.xls','/tpl/T001/ops_download_db.xls',10000,'application/octet-stream','xls');
-insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_ops_3','ops_download_system.xls','/tpl/T001/ops_download_system.xls',10000,'application/octet-stream','xls');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_ops_2','ops_download_database_inst.xls','/tpl/T001/ops_download_database_inst.xls',10000,'application/octet-stream','xls');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_ops_3','ops_download_information_system.xls','/tpl/T001/ops_download_information_system.xls',10000,'application/octet-stream','xls');
 
-delete from sys_tpl_file where tenant_id='T001' and code in ('ops_download_host','ops_download_db','ops_download_system');
+delete from sys_tpl_file where tenant_id='T001' and code in ('ops_download_host','ops_download_database_inst','ops_download_information_system');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_ops_1','ops','主机数据下载','ops_download_host','T001_ops_1','T001');
-insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_ops_2','ops','数据库数据下载','ops_download_db','T001_ops_2','T001');
-insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_ops_3','ops','信息系统数据下载','ops_download_system','T001_ops_3','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_ops_2','ops','数据库数据下载','ops_download_database_inst','T001_ops_2','T001');
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_ops_3','ops','信息系统数据下载','ops_download_information_system','T001_ops_3','T001');
+
+
 
 
 /* CONT */

@@ -41,6 +41,7 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
+                        EAMTables.OPS_VOUCHER_OWNER.LABEL,
                         EAMTables.OPS_VOUCHER_OWNER.NAME,
                         EAMTables.OPS_VOUCHER_OWNER.POSITION,
                         EAMTables.OPS_VOUCHER_OWNER.NOTES
@@ -49,6 +50,9 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         );
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
+
+        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.LABEL).form().selectBox().dict(DictEnum.OPS_VOUCHER_LABEL);
+
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.NAME).form().validate().required();
 
@@ -71,12 +75,12 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.OPS_VOUCHER_OWNER.NAME,
-                        EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
-
-                },new Object[] {
-
                         EAMTables.OPS_VOUCHER_OWNER.POSITION,
 
+
+                },new Object[] {
+                        EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE,
+                        EAMTables.OPS_VOUCHER_OWNER.LABEL,
 
         }
         );

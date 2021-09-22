@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-15 14:21:42
+ * @since 2021-09-18 21:30:36
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -146,10 +146,11 @@ function ListPage() {
 		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
 		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"hostMiddlewareList",field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
 		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"hostOsList",field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -344,6 +345,7 @@ function ListPage() {
 				}
 			});
 		});
+
 	}
 	
 	/**

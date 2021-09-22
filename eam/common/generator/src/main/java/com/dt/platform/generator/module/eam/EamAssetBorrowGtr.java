@@ -50,40 +50,61 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CREATE_TIME).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ATTACH).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required();
+
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().validate().required().search().range();
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required().form().button().chooseEmployee(true);
+
+
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+      //  cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd").search().range();
+
+
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).table().fillBy("borrower","name");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form()
+                .button().chooseEmployee(true);
 
 
         cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,
+                        EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
-                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME
+
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_BORROW.BORROW_TIME,
                         EAMTables.EAM_ASSET_BORROW.CONTENT
                 }
         );
         //分成分组布局
-        cfg.view().formWindow().width("85%");
+
+
+        cfg.view().formWindow().width("95%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
+                }, new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME
                 }, new Object[] {
                         EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE
-                }, new Object[] {
-                        EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID
                 }
         );
 
@@ -93,22 +114,18 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_BORROW.CONTENT,
                 }
         );
+        cfg.view().form().addPage("资产列表","assetSelectList");
 
-        //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
-        String resourceNameField="res_"+EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID;
-        cfg.view().field(resourceNameField)
-                .basic().label("制单人")
-                .table().fillBy(AssetBorrowMeta.ORIGINATOR, PersonMeta.NAME);
-
-        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
-        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
+        cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
+//        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+//        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
 
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
+                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)
                 .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页

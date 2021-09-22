@@ -4,7 +4,9 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.deepoove.poi.util.PoitlIOUtils;
+import com.dt.platform.domain.ops.DbInstanceVO;
 import com.dt.platform.domain.ops.HostVO;
+import com.dt.platform.domain.ops.InformationSystemVO;
 import com.dt.platform.domain.ops.meta.HostVOMeta;
 import com.dt.platform.ops.service.IOpsDataService;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
@@ -80,7 +82,7 @@ public class OpsDataController extends SuperController {
             @ApiImplicitParam(name = HostVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = HostVOMeta.HOST_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
     })
-    @ApiOperationSupport(order=1)
+    @ApiOperationSupport(order=2)
     @SentinelResource(value = OpsDataServiceProxy.EXPORT_HOST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(OpsDataServiceProxy.EXPORT_HOST)
     public Result exportHost(HostVO sample, HttpServletResponse response) throws Exception {
@@ -97,6 +99,69 @@ public class OpsDataController extends SuperController {
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setCharacterEncoding("UTF-8");
         response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("主机列表.xls", "UTF-8"))));
+        response.setContentType("application/vnd.ms-excel");
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        workbook.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+        return ErrorDesc.success();
+
+    }
+
+
+    /**
+     * 信息系统导出
+     */
+    @ApiOperation(value = "信息系统导出")
+    @ApiOperationSupport(order=1)
+    @SentinelResource(value = OpsDataServiceProxy.EXPORT_INFORMATION_SYSTEM , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(OpsDataServiceProxy.EXPORT_INFORMATION_SYSTEM)
+    public Result exportInformationSystem(InformationSystemVO sample, HttpServletResponse response) throws Exception {
+        String code="ops_download_information_system";
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+        if(inputstream==null){
+            return  ErrorDesc.failure().message("获取模板文件失败");
+        }
+        File f=opsDatService.saveTempFile(inputstream,"TMP_"+code+".xls");
+        System.out.println(f.getPath());
+        Map<String,Object> map= opsDatService.queryInformationSystemMap(sample);
+        TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("信息系统.xls", "UTF-8"))));
+        response.setContentType("application/vnd.ms-excel");
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        workbook.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+        return ErrorDesc.success();
+
+    }
+
+    /**
+     * 数据库实例
+     */
+    @ApiOperation(value = "数据库实例")
+    @ApiOperationSupport(order=3)
+    @SentinelResource(value = OpsDataServiceProxy.EXPORT_DATABASE_INSTANCE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(OpsDataServiceProxy.EXPORT_DATABASE_INSTANCE)
+    public Result exportDatabaseInstance(DbInstanceVO sample, HttpServletResponse response) throws Exception {
+        String code="ops_download_database_inst";
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+        if(inputstream==null){
+            return  ErrorDesc.failure().message("获取模板文件失败");
+        }
+        File f=opsDatService.saveTempFile(inputstream,"TMP_"+code+".xls");
+        System.out.println(f.getPath());
+        Map<String,Object> map= opsDatService.queryDatabaseInstanceMap(sample);
+        TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("数据库实例.xls", "UTF-8"))));
         response.setContentType("application/vnd.ms-excel");
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);

@@ -7,6 +7,8 @@
 
 function ListPage() {
 
+
+
     var settings,admin,form,table,layer,util,fox,upload,xmSelect,dropdown,element;
     //模块基础路径
     const moduleURL="/service-hrm/hrm-organization";
@@ -21,6 +23,7 @@ function ListPage() {
         admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
         dropdown=layui.dropdown,element=layui.element;
+        admin.putTempData('eam-asset-list-data-btn-controller', {addButton:"hide",deleteButton:"hide",opsEditButton:"hide",opsDeleteButton:"hide"},true);
         var cfgs = {
             edit: {
                 drag:{

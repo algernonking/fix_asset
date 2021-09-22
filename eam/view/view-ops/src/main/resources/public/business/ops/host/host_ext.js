@@ -56,13 +56,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var action=admin.getTempData('ops-host-form-data-form-action')
     //表单页的扩展
     var form={
-
-
         /**
          * 表单数据填充后
          * */
         beforeDataFill:function (data) {
-
+            //时间
+            if(data.offlineTime&&data.offlineTime.length>10){
+                data.offlineTime= data.offlineTime.substr(0,10);
+            }
+            if(data.onlineTime&&data.onlineTime.length>10){
+                data.onlineTime= data.onlineTime.substr(0,10);
+            }
             if(action=="create"){
                 //上线日期处理
                 setTimeout(function(){
@@ -72,13 +76,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
                     $('#onlineTime').val(today);
                 },100)
-
-
-
             }
             console.log('beforeDataFill',data);
         }
     }
-    //
     window.pageExt={form:form,list:list};
 });

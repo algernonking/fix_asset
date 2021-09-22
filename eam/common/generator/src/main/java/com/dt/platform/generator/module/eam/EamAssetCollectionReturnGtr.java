@@ -17,6 +17,7 @@ import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
@@ -33,18 +34,30 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionReturnVOMeta.ASSET_IDS);
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","退库公司","退库公司");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID).table().fillBy("originator","name");
+
+
 
 
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
+
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT
                 }
         );
@@ -54,11 +67,11 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.PROC_ID).table().disable();
-
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.NAME).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
-
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ATTACH).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).form().textArea().height(30).search().fuzzySearch();
@@ -78,21 +91,17 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
+
+                }
+                , new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
+
+                }
+                , new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID
-
-                }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID
-                }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID
-
                 }
 
-        );
-        cfg.view().form().addGroup(null,
-                new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_DETAIL
-                }
         );
 
         cfg.view().form().addGroup(null,
@@ -117,7 +126,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

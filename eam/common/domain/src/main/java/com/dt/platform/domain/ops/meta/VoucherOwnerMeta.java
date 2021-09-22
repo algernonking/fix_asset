@@ -11,8 +11,8 @@ import com.dt.platform.domain.ops.Voucher;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-06 11:16:27
- * @sign 931952ECC483B4F758C8319A99B7B61B
+ * @since 2021-09-18 12:22:14
+ * @sign D3F1D53C055204833009FEC0E22450D8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,6 +37,16 @@ public class VoucherOwnerMeta {
 	 * 类别 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,java.lang.String> CATEGORY_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,CATEGORY_CODE, java.lang.String.class, "类别", "类别", java.lang.String.class, null);
+	
+	/**
+	 * 标签 , 类型: java.lang.String
+	*/
+	public static final String LABEL="label";
+	
+	/**
+	 * 标签 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,java.lang.String> LABEL_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,LABEL, java.lang.String.class, "标签", "标签", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -149,6 +159,16 @@ public class VoucherOwnerMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.VoucherOwner,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherOwner.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
 	 * 凭证类型 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.system.DictItem
 	*/
 	public static final String VOUCHER_CATEGORY="voucherCategory";
@@ -181,7 +201,7 @@ public class VoucherOwnerMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_CODE , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , VOUCHER_CATEGORY , VOUCHER_LIST , VOUCHER_IDS };
+	public static final String[] $PROPS={ ID , CATEGORY_CODE , LABEL , NAME , POSITION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_CATEGORY , VOUCHER_LIST , VOUCHER_IDS };
 	
 	/**
 	 * 代理类
@@ -210,6 +230,17 @@ public class VoucherOwnerMeta {
 		public VoucherOwner setCategoryCode(String categoryCode) {
 			super.change(CATEGORY_CODE,super.getCategoryCode(),categoryCode);
 			super.setCategoryCode(categoryCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签
+		 * @param label 标签
+		 * @return 当前对象
+		*/
+		public VoucherOwner setLabel(String label) {
+			super.change(LABEL,super.getLabel(),label);
+			super.setLabel(label);
 			return this;
 		}
 		
@@ -331,6 +362,17 @@ public class VoucherOwnerMeta {
 		public VoucherOwner setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public VoucherOwner setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		

@@ -15,6 +15,7 @@ import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetCollectionGtr extends BaseCodeGenerator {
@@ -31,10 +32,23 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
 
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","领用公司/部门","领用公司/部门");
 
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).table().fillBy("useUser","name");
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).form().validate().required().form()
+                .button().chooseEmployee(true);
 
         cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionVOMeta.ASSET_IDS);
 
@@ -42,14 +56,12 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.STATUS,
+                        EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
-
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
                         EAMTables.EAM_ASSET_COLLECTION.CONTENT
 
                 }
@@ -66,12 +78,12 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).form().validate().required();
 
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CREATE_TIME).table().disable();
-
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ID).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CREATE_TIME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH).table().hidden();
 
@@ -93,23 +105,21 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID
-
-
                 }, new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL,
+
+                },
+                new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION.POSITION_ID
-
-
-                }, new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID
                 }
         );
 
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL,
+
                 }
         );
         cfg.view().form().addGroup(null,

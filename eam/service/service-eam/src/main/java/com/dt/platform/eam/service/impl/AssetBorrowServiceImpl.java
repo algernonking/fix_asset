@@ -13,6 +13,7 @@ import com.dt.platform.eam.service.IApproveConfigureService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,35 +86,33 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result insert(AssetBorrow assetBorrow) {
 
-		//资产数量
-//		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
-//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-//		}
-		//制单人
-		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
-
-			assetBorrow.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
-		}
-		//业务时间
-		if(assetBorrow.getBusinessDate()==null){
-			assetBorrow.setBusinessDate(new Date());
-		}
-
 		//编码
 		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
-		assetBorrow.setBusinessCode(codeResult.getData().toString());
 
+		//资产数量
+//		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
+
+		//填充制单人
+		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
+			assetBorrow.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//业务时间
+		if(assetBorrow.getBusinessDate()==null){
+			assetBorrow.setBusinessDate(new Date());
+		}
+
+		assetBorrow.setBusinessCode(codeResult.getData().toString());
 
 		//审批
 		ApproveConfigure approveConfigure=new ApproveConfigure();
 		approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code());
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-
-
-
 
 		Result r=super.insert(assetBorrow);
 		//保存关系

@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,19 +80,18 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 
 		//资产数量
-		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
+//		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
 
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
 		//制单人
 		if(assetRepair.getOriginatorId()==null||"".equals(assetRepair.getOriginatorId())){
-			assetRepair.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetRepair.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetRepair.getBusinessDate()==null){
 			assetRepair.setBusinessDate(new Date());
 		}
-
 
 
 		//编码

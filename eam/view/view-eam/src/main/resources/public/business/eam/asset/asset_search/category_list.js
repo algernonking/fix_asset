@@ -23,6 +23,7 @@ function ListPage() {
         admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
+        admin.putTempData('eam-asset-list-data-btn-controller', {addButton:"hide",deleteButton:"hide",opsEditButton:"hide",opsDeleteButton:"hide"},true);
         var cfgs = {
             edit: {
                 drag:{

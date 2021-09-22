@@ -1,7 +1,7 @@
 /**
  * 所属凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-06 11:16:35
+ * @since 2021-09-18 12:22:21
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -57,6 +57,7 @@ function ListPage() {
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
+					if(value==null) return "";
 					return value;
 				}
 			}
@@ -73,6 +74,7 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'categoryCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类别'), templet: function (d) { return templet('categoryCode',fox.joinLabel(d.voucherCategory,"label"),d);}}
+					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签'), templet:function (d){ return templet('label',fox.getDictText(SELECT_LABEL_DATA,d.label),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'position', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置') , templet: function (d) { return templet('position',d.position,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
@@ -109,13 +111,15 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.categoryCode={ value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory",field:"code", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
+		value.label={ value: xmSelect.get("#label",true).getValue("value"), label:xmSelect.get("#label",true).getValue("nameStr")};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.position={ value: $("#position").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -162,6 +166,23 @@ function ListPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({name:data[i].label,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 label 下拉字段
+		fox.renderSelectBox({
+			el: "label",
+			radio: false,
+			size: "small",
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
@@ -287,7 +308,7 @@ function ListPage() {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
-			} else if (layEvent === 'view') { // 修改
+			} else if (layEvent === 'view') { // 查看
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
@@ -344,13 +365,18 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
+		var action=admin.getTempData('ops-voucher-owner-form-data-form-action');
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
 		admin.putTempData('ops-voucher-owner-form-data', data);
 		var area=admin.getTempData('ops-voucher-owner-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = (data && data.id) ? (fox.translate('修改')+fox.translate('所属凭证')) : (fox.translate('添加')+fox.translate('所属凭证'));
+		var title = fox.translate('所属凭证');
+		if(action=="create") title=fox.translate('添加')+title;
+		else if(action=="edit") title=fox.translate('修改')+title;
+		else if(action=="view") title=fox.translate('查看')+title;
+
 		var index=admin.popupCenter({
 			title: title,
 			resize: false,

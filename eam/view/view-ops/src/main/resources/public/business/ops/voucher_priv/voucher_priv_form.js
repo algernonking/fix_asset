@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:06
+ * @since 2021-09-20 16:34:26
  */
 
 function FormPage() {
@@ -87,7 +87,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
@@ -101,8 +101,10 @@ function FormPage() {
 	/**
       * 填充表单数据
       */
-	function fillFormData() {
-		var formData = admin.getTempData('ops-voucher-priv-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('ops-voucher-priv-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -126,7 +128,9 @@ function FormPage() {
 
 			//处理fillBy
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -179,10 +183,10 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(data) {
-		var api=moduleURL+"/"+(data.id?"update":"insert");
+	function saveForm(param) {
+		var api=moduleURL+"/"+(param.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
+		admin.request(api, param, function (data) {
 			clearTimeout(task);
 			layer.closeAll('loading');
 			if (data.success) {
@@ -192,6 +196,7 @@ function FormPage() {
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
 			}
+			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, "POST");
 	}
 
@@ -215,6 +220,22 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择人员对话框
+		$("#emplId-button").click(function(){
+				var emplIdDialogOptions={
+				field:"emplId",
+				formData:getFormData(),
+				inputEl:$("#emplId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+				fox.chooseEmployee(emplIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
@@ -225,6 +246,7 @@ function FormPage() {
 		getFormData: getFormData,
 		verifyForm: verifyForm,
 		saveForm: saveForm,
+		fillFormData: fillFormData,
 		adjustPopup: adjustPopup
 	};
 

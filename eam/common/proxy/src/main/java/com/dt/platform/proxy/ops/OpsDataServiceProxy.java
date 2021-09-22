@@ -34,9 +34,20 @@ public interface OpsDataServiceProxy {
 
 
 	/**
-	 * 添加品牌
+	 * 导出主机
 	 */
 	public static final String EXPORT_HOST = API_PREFIX + "export-host";
+
+	/**
+	 * 导出信息系统
+	 */
+	public static final String EXPORT_INFORMATION_SYSTEM = API_PREFIX + "export-information-system";
+
+	/**
+	 * 导出数据库实例
+	 */
+	public static final String EXPORT_DATABASE_INSTANCE = API_PREFIX + "export-database-instance";
+
 
 	/**
 	 * 控制器类名

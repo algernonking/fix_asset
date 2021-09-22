@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:35
- * @sign 1857B88B63123E1E0B68D7F03213D4F2
+ * @since 2021-09-20 16:59:56
+ * @sign B67C0E239271D54DD785AF8C8E1122C5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,7 +60,7 @@ public class AssetCollection extends Entity {
 	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -81,16 +82,16 @@ public class AssetCollection extends Entity {
 	private String positionId;
 	
 	/**
-	 * 领用日期：领用日期
-	*/
-	@ApiModelProperty(required = false,value="领用日期" , notes = "领用日期")
-	private Date collectionDate;
-	
-	/**
 	 * 详细位置：详细位置
 	*/
 	@ApiModelProperty(required = false,value="详细位置" , notes = "详细位置")
 	private String positionDetail;
+	
+	/**
+	 * 领用日期：领用日期
+	*/
+	@ApiModelProperty(required = false,value="领用日期" , notes = "领用日期")
+	private Date collectionDate;
 	
 	/**
 	 * 领用说明：领用说明
@@ -199,6 +200,12 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
 	private Employee useUser;
+	
+	/**
+	 * 领用公司/部门：领用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="领用公司/部门" , notes = "领用公司/部门")
+	private Organization useOrganization;
 	
 	/**
 	 * 获得 主键<br>
@@ -353,25 +360,6 @@ public class AssetCollection extends Entity {
 	}
 	
 	/**
-	 * 获得 领用日期<br>
-	 * 领用日期
-	 * @return 领用日期
-	*/
-	public Date getCollectionDate() {
-		return collectionDate;
-	}
-	
-	/**
-	 * 设置 领用日期
-	 * @param collectionDate 领用日期
-	 * @return 当前对象
-	*/
-	public AssetCollection setCollectionDate(Date collectionDate) {
-		this.collectionDate=collectionDate;
-		return this;
-	}
-	
-	/**
 	 * 获得 详细位置<br>
 	 * 详细位置
 	 * @return 详细位置
@@ -387,6 +375,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setPositionDetail(String positionDetail) {
 		this.positionDetail=positionDetail;
+		return this;
+	}
+	
+	/**
+	 * 获得 领用日期<br>
+	 * 领用日期
+	 * @return 领用日期
+	*/
+	public Date getCollectionDate() {
+		return collectionDate;
+	}
+	
+	/**
+	 * 设置 领用日期
+	 * @param collectionDate 领用日期
+	 * @return 当前对象
+	*/
+	public AssetCollection setCollectionDate(Date collectionDate) {
+		this.collectionDate=collectionDate;
 		return this;
 	}
 	
@@ -751,6 +758,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setUseUser(Employee useUser) {
 		this.useUser=useUser;
+		return this;
+	}
+	
+	/**
+	 * 获得 领用公司/部门<br>
+	 * 领用公司/部门
+	 * @return 领用公司/部门
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 领用公司/部门
+	 * @param useOrganization 领用公司/部门
+	 * @return 当前对象
+	*/
+	public AssetCollection setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
 		return this;
 	}
 

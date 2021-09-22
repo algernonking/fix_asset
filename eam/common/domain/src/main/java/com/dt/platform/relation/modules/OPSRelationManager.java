@@ -4,8 +4,10 @@ package com.dt.platform.relation.modules;
 import com.dt.platform.constants.db.EAMTables;
 
 
+import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.VoucherPriv;
 import com.dt.platform.domain.ops.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
@@ -28,6 +30,7 @@ public class OPSRelationManager extends RelationManager {
         this.setupVoucherOwner();
 
         this.setupVoucher();
+        this.setupVoucherPriv();
 
         this.setupInfoSystem();
 
@@ -93,10 +96,13 @@ public class OPSRelationManager extends RelationManager {
 
     private void setupInfoSystem() {
 
+        this.property(InformationSystemMeta.BELONG_ORGANIZATION_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
         //用户凭证
         this.property(InformationSystemMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_INFORMATION_SYSTEM.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher)->{
+                .after((voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -117,7 +123,7 @@ public class OPSRelationManager extends RelationManager {
         //用户凭证
         this.property(VoucherOwnerMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_VOUCHER_OWNER.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher)->{
+                .after((voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -147,13 +153,25 @@ public class OPSRelationManager extends RelationManager {
     }
 
 
+    public void setupVoucherPriv() {
+
+        // 关联制单人
+        this.property(VoucherPrivMeta.EMPLOYEE_PROP)
+                .using(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+
+    }
+
+
+
 
     private void setupOpsHost() {
 
         //用户凭证
         this.property(HostMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher)->{
+                .after((voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -171,7 +189,7 @@ public class OPSRelationManager extends RelationManager {
         this.property(HostMeta.HOST_DB_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID)
                 .using(EAMTables.OPS_HOST_DB.SERVICE_INFO_ID).join(EAMTables.OPS_SERVICE_INFO.ID)
-        .after((host,dbs)->{
+        .after((host,dbs,m)->{
             return dbs;
         });
 

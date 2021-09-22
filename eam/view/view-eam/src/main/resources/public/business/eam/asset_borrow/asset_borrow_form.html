@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:30
+ * @since 2021-09-22 12:30:47
  */
  -->
  <!DOCTYPE html>
@@ -42,11 +42,17 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('借用人')}">借用人</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="borrowerId" id="borrowerId" name="borrowerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('借用人') }" type="text" class="layui-input"    lay-verify="|required"  />
+                            <input lay-filter="borrowerId" id="borrowerId" name="borrowerId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                            <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}">按钮文本</span></button>
                         </div>
                     </div>
 
-                
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column">
+
+
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('借出时间')}">借出时间</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
@@ -61,21 +67,9 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('预计归还时间')}">预计归还时间</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('预计归还时间')}">预计归还时间</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="planReturnDate" id="planReturnDate" name="planReturnDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('预计归还时间') }" type="text" class="layui-input"    lay-verify=""   />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('制单人')}">制单人</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"  />
+                            <input input-type="date" lay-filter="planReturnDate" id="planReturnDate" name="planReturnDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('预计归还时间') }" type="text" class="layui-input"    lay-verify="|required"   />
                         </div>
                     </div>
 
@@ -105,6 +99,16 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>资产列表</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
+        </div>
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
@@ -128,13 +132,10 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"text_input","required":true},"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"borrowTime":{"date":true,"labelInForm":"借出时间","inputType":"date_input","required":true},"planReturnDate":{"date":true,"labelInForm":"预计归还时间","inputType":"date_input"},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"button","required":true},"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"borrowTime":{"date":true,"labelInForm":"借出时间","inputType":"date_input","required":true},"planReturnDate":{"date":true,"labelInForm":"预计归还时间","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_borrow";
 
-    // 用户ID
-    var EMPLOYEE_ID = [[${user.getUser().getActivatedEmployeeId()}]] ;
-    // 用户姓名
-    var EMPLOYEE_NAME = [[${user.getUser().getActivatedEmployeeName()}]] ;
+    var BILL_ID=[[${billId}]]
 
 </script>
 

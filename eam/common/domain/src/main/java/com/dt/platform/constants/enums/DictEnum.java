@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-09-13 21:20:07
+ * @since 2021-09-18 12:20:08
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -117,6 +117,21 @@ public enum DictEnum implements CodeTextEnum {
 	 * 组织节点类型
 	*/
 	ORG_NODE_TYPE("org_node_type" , "组织节点类型"),
+	
+	/**
+	 * 在职状态
+	*/
+	EMPLOYEE_STATUS("employee_status" , "在职状态"),
+	
+	/**
+	 * 测试
+	*/
+	TEST("test" , "测试"),
+	
+	/**
+	 * 凭证标签
+	*/
+	OPS_VOUCHER_LABEL("ops_voucher_label" , "凭证标签"),
 	
 	/**
 	 * 资产来源

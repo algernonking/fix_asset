@@ -8,6 +8,7 @@ import com.dt.platform.domain.ops.meta.InformationSystemVOMeta;
 import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
@@ -20,15 +21,15 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
 
 //        cfg.getPoClassFile().addListProperty(Host.class,"hostList","主机信息","主机信息");
-//
 //        cfg.getPoClassFile().addListProperty(String.class,"hostIds","主机信息","主机信息");
 
 
         cfg.getPoClassFile().addListProperty(Voucher.class,"voucherList","凭证","凭证");
         cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
 
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"belongOrganization","所属公司/部门","所属公司/部门");
 
-        // System.out.println(11111);
+
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PID).basic().hidden(true);
 
@@ -37,8 +38,6 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BUSINESS_CONTACT).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.TECHNICAL_CONTACT).search().fuzzySearch();
-
-
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.CREATE_TIME).table().disable(true);
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE).table().hidden(true);
@@ -54,8 +53,13 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.APP_INFO).table().hidden(true);
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.LASTDRILL_DATE).table().hidden(true);
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO).table().hidden(true);
+
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.PROFILE).table().hidden(true);
+
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID).table().fillBy("belongOrganization","fullName");
 
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS).basic().label("状态")
@@ -81,7 +85,6 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
 
-
         ;
 
 
@@ -97,11 +100,10 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
-
+                        EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
                         EAMTables.OPS_INFORMATION_SYSTEM.STATUS,
                         EAMTables.OPS_INFORMATION_SYSTEM.GRADE,
                         EAMTables.OPS_INFORMATION_SYSTEM.NAME,
-                        EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
 
                 },
                 new Object[]{
@@ -124,7 +126,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                         EAMTables.OPS_INFORMATION_SYSTEM.PROFILE,
 
                 }, new Object[] {
-                        EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_INFO,
+                        EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID,
                         EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE,
                         EAMTables.OPS_INFORMATION_SYSTEM.OFFLINE_DATE,
                         EAMTables.OPS_INFORMATION_SYSTEM.NOTES,
@@ -167,7 +169,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         //生成代码
 
         cfg.buildAll();

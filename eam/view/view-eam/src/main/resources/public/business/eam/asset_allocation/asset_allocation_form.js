@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:27
+ * @since 2021-09-20 16:58:22
  */
 
 function FormPage() {
@@ -105,8 +105,10 @@ function FormPage() {
 	/**
       * 填充表单数据
       */
-	function fillFormData() {
-		var formData = admin.getTempData('eam-asset-allocation-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('eam-asset-allocation-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -128,7 +130,9 @@ function FormPage() {
 
 			//处理fillBy
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -179,10 +183,10 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(data) {
-		var api=moduleURL+"/"+(data.id?"update":"insert");
+	function saveForm(param) {
+		var api=moduleURL+"/"+(param.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
+		admin.request(api, param, function (data) {
 			clearTimeout(task);
 			layer.closeAll('loading');
 			if (data.success) {
@@ -192,6 +196,7 @@ function FormPage() {
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
 			}
+			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, "POST");
 	}
 
@@ -215,6 +220,54 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择公司对话框
+		$("#outOwnCompanyId-button").click(function(){
+			var outOwnCompanyIdDialogOptions={
+				field:"outOwnCompanyId",
+				formData:getFormData(),
+				inputEl:$("#outOwnCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseOrgNode(outOwnCompanyIdDialogOptions);
+		});
+		// 请选择公司对话框
+		$("#inOwnCompanyId-button").click(function(){
+			var inOwnCompanyIdDialogOptions={
+				field:"inOwnCompanyId",
+				formData:getFormData(),
+				inputEl:$("#inOwnCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseOrgNode(inOwnCompanyIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#managerId-button").click(function(){
+				var managerIdDialogOptions={
+				field:"managerId",
+				formData:getFormData(),
+				inputEl:$("#managerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+				fox.chooseEmployee(managerIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});
@@ -225,6 +278,7 @@ function FormPage() {
 		getFormData: getFormData,
 		verifyForm: verifyForm,
 		saveForm: saveForm,
+		fillFormData: fillFormData,
 		adjustPopup: adjustPopup
 	};
 

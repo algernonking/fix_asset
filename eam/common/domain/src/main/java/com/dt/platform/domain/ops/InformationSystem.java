@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Organization;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -18,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:09
- * @sign 121CCF7F64909814E6682E7A4E4EE94A
+ * @since 2021-09-19 08:22:49
+ * @sign 26CF9B46544F22C835F94ACBB99D83B5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -89,7 +90,7 @@ public class InformationSystem extends Entity {
 	 * 所属公司/部门：所属公司/部门
 	*/
 	@ApiModelProperty(required = false,value="所属公司/部门" , notes = "所属公司/部门")
-	private String belongOrgInfo;
+	private String belongOrgId;
 	
 	/**
 	 * 最后一次演练：最后一次演练
@@ -252,6 +253,12 @@ public class InformationSystem extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="凭证" , notes = "凭证")
 	private List<String> voucherIds;
+	
+	/**
+	 * 所属公司/部门：所属公司/部门
+	*/
+	@ApiModelProperty(required = false,value="所属公司/部门" , notes = "所属公司/部门")
+	private Organization belongOrganization;
 	
 	/**
 	 * 获得 主键<br>
@@ -429,17 +436,17 @@ public class InformationSystem extends Entity {
 	 * 所属公司/部门
 	 * @return 所属公司/部门
 	*/
-	public String getBelongOrgInfo() {
-		return belongOrgInfo;
+	public String getBelongOrgId() {
+		return belongOrgId;
 	}
 	
 	/**
 	 * 设置 所属公司/部门
-	 * @param belongOrgInfo 所属公司/部门
+	 * @param belongOrgId 所属公司/部门
 	 * @return 当前对象
 	*/
-	public InformationSystem setBelongOrgInfo(String belongOrgInfo) {
-		this.belongOrgInfo=belongOrgInfo;
+	public InformationSystem setBelongOrgId(String belongOrgId) {
+		this.belongOrgId=belongOrgId;
 		return this;
 	}
 	
@@ -975,6 +982,25 @@ public class InformationSystem extends Entity {
 	public InformationSystem addVoucherId(String voucherId) {
 		if(this.voucherIds==null) voucherIds=new ArrayList<>();
 		this.voucherIds.add(voucherId);
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司/部门<br>
+	 * 所属公司/部门
+	 * @return 所属公司/部门
+	*/
+	public Organization getBelongOrganization() {
+		return belongOrganization;
+	}
+	
+	/**
+	 * 设置 所属公司/部门
+	 * @param belongOrganization 所属公司/部门
+	 * @return 当前对象
+	*/
+	public InformationSystem setBelongOrganization(Organization belongOrganization) {
+		this.belongOrganization=belongOrganization;
 		return this;
 	}
 

@@ -7,13 +7,14 @@ import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:37
- * @sign D5CDFAE3A9C738795ED93E73D1309B2D
+ * @since 2021-09-20 17:01:50
+ * @sign 9E007F5E2C9B323A7B138C77B9C455EF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -70,16 +71,6 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
-	 * 退库日期 , 类型: java.util.Date
-	*/
-	public static final String RETURN_DATE="returnDate";
-	
-	/**
-	 * 退库日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,RETURN_DATE, java.util.Date.class, "退库日期", "退库日期", java.util.Date.class, null);
-	
-	/**
 	 * 退库后公司/部门 , 类型: java.lang.String
 	*/
 	public static final String USE_ORGANIZATION_ID="useOrganizationId";
@@ -118,6 +109,16 @@ public class AssetCollectionReturnMeta {
 	 * 退库说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,CONTENT, java.lang.String.class, "退库说明", "退库说明", java.lang.String.class, null);
+	
+	/**
+	 * 退库日期 , 类型: java.util.Date
+	*/
+	public static final String RETURN_DATE="returnDate";
+	
+	/**
+	 * 退库日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.util.Date> RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,RETURN_DATE, java.util.Date.class, "退库日期", "退库日期", java.util.Date.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -280,9 +281,19 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 退库公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String USE_ORGANIZATION="useOrganization";
+	
+	/**
+	 * 退库公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "退库公司", "退库公司", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , RETURN_DATE , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , RETURN_DATE , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR , USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -348,17 +359,6 @@ public class AssetCollectionReturnMeta {
 		}
 		
 		/**
-		 * 设置 退库日期
-		 * @param returnDate 退库日期
-		 * @return 当前对象
-		*/
-		public AssetCollectionReturn setReturnDate(Date returnDate) {
-			super.change(RETURN_DATE,super.getReturnDate(),returnDate);
-			super.setReturnDate(returnDate);
-			return this;
-		}
-		
-		/**
 		 * 设置 退库后公司/部门
 		 * @param useOrganizationId 退库后公司/部门
 		 * @return 当前对象
@@ -399,6 +399,17 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 退库日期
+		 * @param returnDate 退库日期
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setReturnDate(Date returnDate) {
+			super.change(RETURN_DATE,super.getReturnDate(),returnDate);
+			super.setReturnDate(returnDate);
 			return this;
 		}
 		
@@ -575,6 +586,17 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 退库公司
+		 * @param useOrganization 退库公司
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setUseOrganization(Organization useOrganization) {
+			super.change(USE_ORGANIZATION,super.getUseOrganization(),useOrganization);
+			super.setUseOrganization(useOrganization);
 			return this;
 		}
 	}

@@ -3,13 +3,14 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.VoucherPriv;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:06
- * @sign 53CF13196157A60D0994DA06B98C26D9
+ * @since 2021-09-20 16:34:14
+ * @sign 40AF353C1203C6AE22BAFBD3CBB7BE35
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -146,9 +147,19 @@ public class VoucherPrivMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.VoucherPriv,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherPriv.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String EMPLOYEE="employee";
+	
+	/**
+	 * 人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.VoucherPriv,org.github.foxnic.web.domain.hrm.Employee> EMPLOYEE_PROP = new BeanProperty(com.dt.platform.domain.ops.VoucherPriv.class ,EMPLOYEE, org.github.foxnic.web.domain.hrm.Employee.class, "人员", "人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , EMPL_ID , STATUS , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , TYPE , EMPL_ID , STATUS , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , EMPLOYEE };
 	
 	/**
 	 * 代理类
@@ -298,6 +309,17 @@ public class VoucherPrivMeta {
 		public VoucherPriv setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 人员
+		 * @param employee 人员
+		 * @return 当前对象
+		*/
+		public VoucherPriv setEmployee(Employee employee) {
+			super.change(EMPLOYEE,super.getEmployee(),employee);
+			super.setEmployee(employee);
 			return this;
 		}
 	}

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:37
- * @sign D5CDFAE3A9C738795ED93E73D1309B2D
+ * @since 2021-09-20 17:01:50
+ * @sign 9E007F5E2C9B323A7B138C77B9C455EF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -53,7 +54,7 @@ public class AssetCollectionReturn extends Entity {
 	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -61,12 +62,6 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
-	
-	/**
-	 * 退库日期：退库日期
-	*/
-	@ApiModelProperty(required = false,value="退库日期" , notes = "退库日期")
-	private Date returnDate;
 	
 	/**
 	 * 退库后公司/部门：退库后公司/部门
@@ -91,6 +86,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="退库说明" , notes = "退库说明")
 	private String content;
+	
+	/**
+	 * 退库日期：退库日期
+	*/
+	@ApiModelProperty(required = false,value="退库日期" , notes = "退库日期")
+	private Date returnDate;
 	
 	/**
 	 * 制单人：制单人
@@ -189,6 +190,12 @@ public class AssetCollectionReturn extends Entity {
 	private Employee originator;
 	
 	/**
+	 * 退库公司：退库公司
+	*/
+	@ApiModelProperty(required = false,value="退库公司" , notes = "退库公司")
+	private Organization useOrganization;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -284,25 +291,6 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 退库日期<br>
-	 * 退库日期
-	 * @return 退库日期
-	*/
-	public Date getReturnDate() {
-		return returnDate;
-	}
-	
-	/**
-	 * 设置 退库日期
-	 * @param returnDate 退库日期
-	 * @return 当前对象
-	*/
-	public AssetCollectionReturn setReturnDate(Date returnDate) {
-		this.returnDate=returnDate;
-		return this;
-	}
-	
-	/**
 	 * 获得 退库后公司/部门<br>
 	 * 退库后公司/部门
 	 * @return 退库后公司/部门
@@ -375,6 +363,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 退库日期<br>
+	 * 退库日期
+	 * @return 退库日期
+	*/
+	public Date getReturnDate() {
+		return returnDate;
+	}
+	
+	/**
+	 * 设置 退库日期
+	 * @param returnDate 退库日期
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setReturnDate(Date returnDate) {
+		this.returnDate=returnDate;
 		return this;
 	}
 	
@@ -701,6 +708,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setOriginator(Employee originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 退库公司<br>
+	 * 退库公司
+	 * @return 退库公司
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 退库公司
+	 * @param useOrganization 退库公司
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
 		return this;
 	}
 

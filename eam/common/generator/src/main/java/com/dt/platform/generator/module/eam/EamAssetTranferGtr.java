@@ -15,6 +15,7 @@ import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetTranferGtr extends BaseCodeGenerator {
@@ -29,19 +30,20 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
 
-        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
+
 
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","位置","位置");
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"originator","制单人","制单人");
-
-
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","调入管理员","调入管理员");
-
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人","使用人");
 
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"outUseOrganization","调出公司/部门","调出公司/部门");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"inUseOrganization","调入公司/部门","调入公司/部门");
+       // cfg.getPoClassFile().joinSimpleProperty(Organization.class,true);
 
 
 
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
@@ -52,9 +54,8 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.NAME).table().disable();
-
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID).form().validate().required();
@@ -62,16 +63,34 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).form().form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID).table().fillBy("outUseOrganization","fullName");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID).table().fillBy("inUseOrganization","fullName");
+
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).table().fillBy("manager","name");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).table().fillBy("useUser","name");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).form()
+                .button().chooseEmployee(true);
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).form()
+                .button().chooseEmployee(true);
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_TRANFER.STATUS,
-                        EAMTables.EAM_ASSET_TRANFER.MANAGER_ID,
-                        EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE
-                },
-                new Object[]{
                         EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
+                },
+                new Object[]{
+                        EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE,
                         EAMTables.EAM_ASSET_TRANFER.CONTENT,
 
                 }
@@ -92,11 +111,11 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_TRANFER.USE_USER_ID,
+                        EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
 
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_TRANFER.MANAGER_ID,
+                        EAMTables.EAM_ASSET_TRANFER.USE_USER_ID,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_TRANFER.POSITION_ID,
                         EAMTables.EAM_ASSET_TRANFER.POSITION_DETAIL,
@@ -116,11 +135,11 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

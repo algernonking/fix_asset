@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-03 21:40:01
+ * @since 2021-09-18 21:31:40
  */
 
 layui.config({
@@ -29,22 +29,56 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("list:afterSearchInputReady");
         },
         /**
-         * 查询前调用
+         * 对话框之前调用，如果返回 null 则不打开对话框
          * */
-        beforeQuery:function (conditions,location) {
-            console.log('beforeQuery',conditions);
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+            // debugger;
+            window.module.refreshTableData();
+        },
+        /**
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+        },
+        /**
+         * 查询前调用
+         * @param conditions 复合查询条件
+         * @param param 请求参数
+         * @param location 调用的代码位置
+         * */
+        beforeQuery:function (conditions,param,location) {
+            console.log('beforeQuery',conditions,param,location);
             return true;
         },
         /**
          * 查询结果渲染后调用
          * */
-        afterQuery : function () {
+        afterQuery : function (data) {
 
         },
         /**
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
+            console.log(field,value,r);
+
+            if(value==null) return "";
             return value;
         },
         /**
@@ -115,14 +149,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
         }
     }
-
     var action=admin.getTempData('ops-information-system-form-data-form-action');
+
     //表单页的扩展
     var form={
         /**
          * 表单初始化前调用
          * */
         beforeInit:function () {
+            //获取参数，并调整下拉框查询用的URL
+            //var companyId=admin.getTempData("companyId");
+            $("#belongOrgId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
+            //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
+            console.log("form:beforeInit")
+
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
@@ -133,6 +173,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            if(data.onlineDate&&data.onlineDate.length>10){
+                data.onlineDate= data.onlineDate.substr(0,10);
+            }
+            if(data.lastdrillDate&&data.lastdrillDate.length>10){
+                data.lastdrillDate= data.lastdrillDate.substr(0,10);
+            }
             if(action=="create"){
                 setTimeout(function(){
                     var now = new Date();
@@ -149,8 +195,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
-
             console.log('afterDataFill',data);
+        },
+        /**
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="选择组织节点";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
@@ -159,6 +217,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("beforeSubmit",data);
             return true;
         },
+        /**
+         * 数据提交后执行
+         * */
+        afterSubmit:function (param,result) {
+            console.log("afterSubmitt",param,result);
+        },
+
         /**
          * 末尾执行
          */

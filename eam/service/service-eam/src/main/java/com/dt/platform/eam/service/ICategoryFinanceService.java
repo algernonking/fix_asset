@@ -275,7 +275,7 @@ public interface ICategoryFinanceService extends ISuperService<CategoryFinance> 
 	/**
 	 * 导出用于数据导入的 Excel 模版
 	 * */
-	ExcelWriter  exportExcelTemplate();
+	ExcelWriter exportExcelTemplate();
 
 	/**
 	 * 构建 Excel 结构

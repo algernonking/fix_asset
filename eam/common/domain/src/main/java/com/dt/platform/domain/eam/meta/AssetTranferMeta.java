@@ -6,15 +6,15 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import com.dt.platform.domain.eam.Position;
-import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:28
- * @sign 59B0D3148F2FEA0CC0053E0F44873402
+ * @since 2021-09-20 18:09:26
+ * @sign 21EFF193781AE943431AD737B18EC4FF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -281,14 +281,14 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,POSITION, com.dt.platform.domain.eam.Position.class, "位置", "位置", com.dt.platform.domain.eam.Position.class, null);
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
 	
 	/**
-	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Person> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Person.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 调入管理员 , 类型: org.github.foxnic.web.domain.hrm.Employee
@@ -311,9 +311,29 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Employee> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,USE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "使用人", "使用人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 调出公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String OUT_USE_ORGANIZATION="outUseOrganization";
+	
+	/**
+	 * 调出公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Organization> OUT_USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,OUT_USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "调出公司/部门", "调出公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
+	 * 调入公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String IN_USE_ORGANIZATION="inUseOrganization";
+	
+	/**
+	 * 调入公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,org.github.foxnic.web.domain.hrm.Organization> IN_USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,IN_USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "调入公司/部门", "调入公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER , OUT_USE_ORGANIZATION , IN_USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -614,7 +634,7 @@ public class AssetTranferMeta {
 		 * @param originator 制单人
 		 * @return 当前对象
 		*/
-		public AssetTranfer setOriginator(Person originator) {
+		public AssetTranfer setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
 			return this;
@@ -639,6 +659,28 @@ public class AssetTranferMeta {
 		public AssetTranfer setUseUser(Employee useUser) {
 			super.change(USE_USER,super.getUseUser(),useUser);
 			super.setUseUser(useUser);
+			return this;
+		}
+		
+		/**
+		 * 设置 调出公司/部门
+		 * @param outUseOrganization 调出公司/部门
+		 * @return 当前对象
+		*/
+		public AssetTranfer setOutUseOrganization(Organization outUseOrganization) {
+			super.change(OUT_USE_ORGANIZATION,super.getOutUseOrganization(),outUseOrganization);
+			super.setOutUseOrganization(outUseOrganization);
+			return this;
+		}
+		
+		/**
+		 * 设置 调入公司/部门
+		 * @param inUseOrganization 调入公司/部门
+		 * @return 当前对象
+		*/
+		public AssetTranfer setInUseOrganization(Organization inUseOrganization) {
+			super.change(IN_USE_ORGANIZATION,super.getInUseOrganization(),inUseOrganization);
+			super.setInUseOrganization(inUseOrganization);
 			return this;
 		}
 	}

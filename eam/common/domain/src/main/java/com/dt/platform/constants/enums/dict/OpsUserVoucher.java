@@ -4,7 +4,7 @@ package com.dt.platform.constants.enums.dict;
 
 
 /**
- * @since 2021-09-13 21:20:09
+ * @since 2021-09-18 12:20:10
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -39,7 +39,8 @@ public enum OpsUserVoucher {
 	/**
 	 * administrator@vsphere.local
 	*/
-
+	//ADMINISTRATOR@VSPHERE_LOCAL("administrator@vsphere_local" , "administrator@vsphere.local"),
+	
 	/**
 	 * oracle
 	*/

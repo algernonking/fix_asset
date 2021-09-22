@@ -36,6 +36,7 @@ import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产领用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:35
+ * @since 2021-09-20 17:00:01
 */
 
 @Api(tags = "资产领用")
@@ -72,20 +73,18 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class , example = "asdf"),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = AssetCollectionVOMeta.ID)
-	@NotNull(name = AssetCollectionVOMeta.NAME)
 	@SentinelResource(value = AssetCollectionServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.INSERT)
 	public Result insert(AssetCollectionVO assetCollectionVO) {
@@ -137,12 +136,12 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class , example = "asdf"),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -150,7 +149,6 @@ public class AssetCollectionController extends SuperController {
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetCollectionVOMeta.PAGE_INDEX , AssetCollectionVOMeta.PAGE_SIZE , AssetCollectionVOMeta.SEARCH_FIELD , AssetCollectionVOMeta.FUZZY_FIELD , AssetCollectionVOMeta.SEARCH_VALUE , AssetCollectionVOMeta.SORT_FIELD , AssetCollectionVOMeta.SORT_TYPE , AssetCollectionVOMeta.IDS } ) 
 	@NotNull(name = AssetCollectionVOMeta.ID)
-	@NotNull(name = AssetCollectionVOMeta.NAME)
 	@SentinelResource(value = AssetCollectionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.UPDATE)
 	public Result update(AssetCollectionVO assetCollectionVO) {
@@ -168,12 +166,12 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class , example = "asdf"),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -181,7 +179,6 @@ public class AssetCollectionController extends SuperController {
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionVOMeta.PAGE_INDEX , AssetCollectionVOMeta.PAGE_SIZE , AssetCollectionVOMeta.SEARCH_FIELD , AssetCollectionVOMeta.FUZZY_FIELD , AssetCollectionVOMeta.SEARCH_VALUE , AssetCollectionVOMeta.SORT_FIELD , AssetCollectionVOMeta.SORT_TYPE , AssetCollectionVOMeta.IDS } )
 	@NotNull(name = AssetCollectionVOMeta.ID)
-	@NotNull(name = AssetCollectionVOMeta.NAME)
 	@SentinelResource(value = AssetCollectionServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.SAVE)
 	public Result save(AssetCollectionVO assetCollectionVO) {
@@ -204,8 +201,14 @@ public class AssetCollectionController extends SuperController {
 	public Result<AssetCollection> getById(String id) {
 		Result<AssetCollection> result=new Result<>();
 		AssetCollection assetCollection=assetCollectionService.getById(id);
+		// 关联出 领用后公司/部门 数据
+		assetCollectionService.join(assetCollection,AssetCollectionMeta.USE_ORGANIZATION);
+		// 关联出 使用人员 数据
+		assetCollectionService.join(assetCollection,AssetCollectionMeta.USE_USER);
 		// 关联出 存放位置 数据
 		assetCollectionService.join(assetCollection,AssetCollectionMeta.POSITION);
+		// 关联出 制单人 数据
+		assetCollectionService.join(assetCollection,AssetCollectionMeta.ORIGINATOR);
 		result.success(true).data(assetCollection);
 		return result;
 	}
@@ -240,12 +243,12 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class , example = "asdf"),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -271,12 +274,12 @@ public class AssetCollectionController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_ORGANIZATION_ID , value = "领用后公司/部门" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.USE_USER_ID , value = "使用人员" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_ID , value = "领用后位置" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.POSITION_DETAIL , value = "详细位置" , required = false , dataTypeClass=String.class , example = "asdf"),
+		@ApiImplicitParam(name = AssetCollectionVOMeta.COLLECTION_DATE , value = "领用日期" , required = false , dataTypeClass=Date.class , example = "2021-08-09 12:00:00"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.CONTENT , value = "领用说明" , required = false , dataTypeClass=String.class , example = "asf"),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetCollectionVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
@@ -288,8 +291,14 @@ public class AssetCollectionController extends SuperController {
 	public Result<PagedList<AssetCollection>> queryPagedList(AssetCollectionVO sample) {
 		Result<PagedList<AssetCollection>> result=new Result<>();
 		PagedList<AssetCollection> list=assetCollectionService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 领用后公司/部门 数据
+		assetCollectionService.join(list,AssetCollectionMeta.USE_ORGANIZATION);
+		// 关联出 使用人员 数据
+		assetCollectionService.join(list,AssetCollectionMeta.USE_USER);
 		// 关联出 存放位置 数据
 		assetCollectionService.join(list,AssetCollectionMeta.POSITION);
+		// 关联出 制单人 数据
+		assetCollectionService.join(list,AssetCollectionMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
 	}

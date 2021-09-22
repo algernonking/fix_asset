@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:35
+ * @since 2021-09-20 17:00:05
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -75,15 +75,15 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后公司/部门') , templet: function (d) { return templet('useOrganizationId',d.useOrganizationId,d);}  }
-					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') , templet: function (d) { return templet('useUserId',d.useUserId,d);}  }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用后公司/部门') , templet: function (d) { return templet('useOrganizationId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
+					,{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') , templet: function (d) { return templet('useUserId',fox.getProperty(d,["useUser","name"]),d);} }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
-					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('领用日期'), templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate),d); }}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('领用说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('领用日期'), templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate),d); }}
+					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('领用说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'attach', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('附件') , templet: function (d) { return templet('attach',d.attach,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -117,15 +117,15 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.useOrganizationId={ value: $("#useOrganizationId").val()};
-		value.useUserId={ value: $("#useUserId").val()};
+		value.useUserId={ value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.collectionDate={ begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -231,6 +231,10 @@ function ListPage() {
 					$('#search-button-advance span').text("更多");
 				}
 			});
+		});
+
+		// 请选择人员对话框
+		$("#useUserId-button").click(function(){
 		});
 	}
 	

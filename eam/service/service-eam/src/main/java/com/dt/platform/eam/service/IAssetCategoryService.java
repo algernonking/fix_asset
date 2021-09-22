@@ -24,4 +24,10 @@ public interface IAssetCategoryService  extends ISuperService<Catalog> {
      * @return 节点ID
      */
      String queryNodeIdByCode(String code);
+
+    /**
+     * @param id 节点
+     * @return 节点ID
+     */
+    String queryCatalogAttributeIdByCode(String id);
 }

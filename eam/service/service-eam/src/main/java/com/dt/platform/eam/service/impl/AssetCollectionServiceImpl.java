@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +85,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 
 		//制单人
 		if(assetCollection.getOriginatorId()==null||"".equals(assetCollection.getOriginatorId())){
-			//assetCollection.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetCollection.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetCollection.getBusinessDate()==null){

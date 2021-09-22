@@ -5,13 +5,14 @@ import com.dt.platform.domain.ops.InformationSystem;
 import java.util.Date;
 import com.dt.platform.domain.ops.Voucher;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:09
- * @sign 121CCF7F64909814E6682E7A4E4EE94A
+ * @since 2021-09-19 08:22:49
+ * @sign 26CF9B46544F22C835F94ACBB99D83B5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -110,12 +111,12 @@ public class InformationSystemMeta {
 	/**
 	 * 所属公司/部门 , 类型: java.lang.String
 	*/
-	public static final String BELONG_ORG_INFO="belongOrgInfo";
+	public static final String BELONG_ORG_ID="belongOrgId";
 	
 	/**
 	 * 所属公司/部门 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> BELONG_ORG_INFO_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORG_INFO, java.lang.String.class, "所属公司/部门", "所属公司/部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> BELONG_ORG_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORG_ID, java.lang.String.class, "所属公司/部门", "所属公司/部门", java.lang.String.class, null);
 	
 	/**
 	 * 最后一次演练 , 类型: java.util.Date
@@ -388,9 +389,19 @@ public class InformationSystemMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,java.lang.String> VOUCHER_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,VOUCHER_IDS, java.util.List.class, "凭证", "凭证", java.lang.String.class, null);
 	
 	/**
+	 * 所属公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String BELONG_ORGANIZATION="belongOrganization";
+	
+	/**
+	 * 所属公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.hrm.Organization> BELONG_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "所属公司/部门", "所属公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PID , NAME , PROFILE , STATUS , OPS_METHOD , DEV_METHOD , TECHNICAL_CONTACT , BUSINESS_CONTACT , BELONG_ORG_INFO , LASTDRILL_DATE , ONLINE_DATE , OFFLINE_DATE , OS_INFO , DB_INFO , APP_INFO , GRADE , RTO , RPO , HARDWARE_INFO , BACKUP_INFO , SAMEPLACE_BACUP_INFO , DIFFPLACE_BACKUP_INFO , ARCH_METHOD , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS };
+	public static final String[] $PROPS={ ID , PID , NAME , PROFILE , STATUS , OPS_METHOD , DEV_METHOD , TECHNICAL_CONTACT , BUSINESS_CONTACT , BELONG_ORG_ID , LASTDRILL_DATE , ONLINE_DATE , OFFLINE_DATE , OS_INFO , DB_INFO , APP_INFO , GRADE , RTO , RPO , HARDWARE_INFO , BACKUP_INFO , SAMEPLACE_BACUP_INFO , DIFFPLACE_BACKUP_INFO , ARCH_METHOD , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS , BELONG_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -501,12 +512,12 @@ public class InformationSystemMeta {
 		
 		/**
 		 * 设置 所属公司/部门
-		 * @param belongOrgInfo 所属公司/部门
+		 * @param belongOrgId 所属公司/部门
 		 * @return 当前对象
 		*/
-		public InformationSystem setBelongOrgInfo(String belongOrgInfo) {
-			super.change(BELONG_ORG_INFO,super.getBelongOrgInfo(),belongOrgInfo);
-			super.setBelongOrgInfo(belongOrgInfo);
+		public InformationSystem setBelongOrgId(String belongOrgId) {
+			super.change(BELONG_ORG_ID,super.getBelongOrgId(),belongOrgId);
+			super.setBelongOrgId(belongOrgId);
 			return this;
 		}
 		
@@ -804,6 +815,17 @@ public class InformationSystemMeta {
 		public InformationSystem setVoucherIds(List<String> voucherIds) {
 			super.change(VOUCHER_IDS,super.getVoucherIds(),voucherIds);
 			super.setVoucherIds(voucherIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属公司/部门
+		 * @param belongOrganization 所属公司/部门
+		 * @return 当前对象
+		*/
+		public InformationSystem setBelongOrganization(Organization belongOrganization) {
+			super.change(BELONG_ORGANIZATION,super.getBelongOrganization(),belongOrganization);
+			super.setBelongOrganization(belongOrganization);
 			return this;
 		}
 	}

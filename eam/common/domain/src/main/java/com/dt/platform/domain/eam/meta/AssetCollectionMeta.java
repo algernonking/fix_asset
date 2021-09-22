@@ -7,13 +7,14 @@ import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:35
- * @sign 1857B88B63123E1E0B68D7F03213D4F2
+ * @since 2021-09-20 16:59:56
+ * @sign B67C0E239271D54DD785AF8C8E1122C5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -100,16 +101,6 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,POSITION_ID, java.lang.String.class, "领用后位置", "领用后位置", java.lang.String.class, null);
 	
 	/**
-	 * 领用日期 , 类型: java.util.Date
-	*/
-	public static final String COLLECTION_DATE="collectionDate";
-	
-	/**
-	 * 领用日期 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,COLLECTION_DATE, java.util.Date.class, "领用日期", "领用日期", java.util.Date.class, null);
-	
-	/**
 	 * 详细位置 , 类型: java.lang.String
 	*/
 	public static final String POSITION_DETAIL="positionDetail";
@@ -118,6 +109,16 @@ public class AssetCollectionMeta {
 	 * 详细位置 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.lang.String> POSITION_DETAIL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,POSITION_DETAIL, java.lang.String.class, "详细位置", "详细位置", java.lang.String.class, null);
+	
+	/**
+	 * 领用日期 , 类型: java.util.Date
+	*/
+	public static final String COLLECTION_DATE="collectionDate";
+	
+	/**
+	 * 领用日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,java.util.Date> COLLECTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,COLLECTION_DATE, java.util.Date.class, "领用日期", "领用日期", java.util.Date.class, null);
 	
 	/**
 	 * 领用说明 , 类型: java.lang.String
@@ -300,9 +301,19 @@ public class AssetCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Employee> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 领用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String USE_ORGANIZATION="useOrganization";
+	
+	/**
+	 * 领用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollection,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollection.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "领用公司/部门", "领用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , COLLECTION_DATE , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR , USE_USER };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , COLLECTION_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR , USE_USER , USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -401,17 +412,6 @@ public class AssetCollectionMeta {
 		}
 		
 		/**
-		 * 设置 领用日期
-		 * @param collectionDate 领用日期
-		 * @return 当前对象
-		*/
-		public AssetCollection setCollectionDate(Date collectionDate) {
-			super.change(COLLECTION_DATE,super.getCollectionDate(),collectionDate);
-			super.setCollectionDate(collectionDate);
-			return this;
-		}
-		
-		/**
 		 * 设置 详细位置
 		 * @param positionDetail 详细位置
 		 * @return 当前对象
@@ -419,6 +419,17 @@ public class AssetCollectionMeta {
 		public AssetCollection setPositionDetail(String positionDetail) {
 			super.change(POSITION_DETAIL,super.getPositionDetail(),positionDetail);
 			super.setPositionDetail(positionDetail);
+			return this;
+		}
+		
+		/**
+		 * 设置 领用日期
+		 * @param collectionDate 领用日期
+		 * @return 当前对象
+		*/
+		public AssetCollection setCollectionDate(Date collectionDate) {
+			super.change(COLLECTION_DATE,super.getCollectionDate(),collectionDate);
+			super.setCollectionDate(collectionDate);
 			return this;
 		}
 		
@@ -617,6 +628,17 @@ public class AssetCollectionMeta {
 		public AssetCollection setUseUser(Employee useUser) {
 			super.change(USE_USER,super.getUseUser(),useUser);
 			super.setUseUser(useUser);
+			return this;
+		}
+		
+		/**
+		 * 设置 领用公司/部门
+		 * @param useOrganization 领用公司/部门
+		 * @return 当前对象
+		*/
+		public AssetCollection setUseOrganization(Organization useOrganization) {
+			super.change(USE_ORGANIZATION,super.getUseOrganization(),useOrganization);
+			super.setUseOrganization(useOrganization);
 			return this;
 		}
 	}

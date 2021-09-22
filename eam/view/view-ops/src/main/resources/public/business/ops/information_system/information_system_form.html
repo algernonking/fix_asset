@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:09
+ * @since 2021-09-19 08:23:03
  */
  -->
  <!DOCTYPE html>
@@ -82,7 +82,8 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('所属公司/部门')}">所属公司/部门</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="belongOrgInfo" id="belongOrgInfo" name="belongOrgInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属公司/部门') }" type="text" class="layui-input"  />
+                            <input lay-filter="belongOrgId" id="belongOrgId" name="belongOrgId"  type="hidden" class="layui-input"   />
+                            <button id="belongOrgId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                         </div>
                     </div>
 

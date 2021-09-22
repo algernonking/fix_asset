@@ -4,11 +4,11 @@ package com.dt.platform.ops.service.impl;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.meta.AssetMeta;
-import com.dt.platform.domain.ops.Host;
-import com.dt.platform.domain.ops.HostVO;
-import com.dt.platform.domain.ops.ServiceInfo;
+import com.dt.platform.domain.ops.*;
 import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.ops.service.IDbInstanceService;
 import com.dt.platform.ops.service.IHostService;
+import com.dt.platform.ops.service.IInformationSystemService;
 import com.dt.platform.ops.service.IOpsDataService;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
@@ -27,6 +27,7 @@ import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import oshi.software.os.windows.WindowsOSSystemInfo;
 
 import javax.annotation.Resource;
 import java.io.*;
@@ -59,6 +60,12 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	@Autowired
 	IHostService hostService;
 
+	@Autowired
+	IInformationSystemService informationSystemService;
+
+	@Autowired
+	IDbInstanceService dbinstanceService;
+
 	@Override
 	public List<Host> queryHostList(HostVO host) {
 		return hostService.queryList(host);
@@ -79,7 +86,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		hostService.join(list,HostMeta.HOST_MIDDLEWARE_LIST);
 		// 关联出 操作系统 数据
 		hostService.join(list,HostMeta.HOST_OS_LIST);
-
 
 
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
@@ -129,8 +135,56 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	}
 
 
-	public File saveTempFile(InputStream is, String fileName){
 
+	@Override
+	public List<InformationSystem> queryInformationSystemList(InformationSystemVO sample) {
+		return informationSystemService.queryList(sample);
+	}
+
+	@Override
+	public Map<String, Object> queryInformationSystemMap(InformationSystemVO sample) {
+		Map<String,Object> map=new HashMap<>();
+		List<InformationSystem> list= queryInformationSystemList(sample);
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		for(int i=0;i<list.size();i++) {
+			InformationSystem item = list.get(i);
+			Map<String, Object> hostMap= BeanUtil.toMap(item);
+
+
+
+			listMap.add(hostMap);
+		}
+		map.put("hostList", listMap);
+		return map;
+	}
+
+	@Override
+	public List<DbInstance> queryDatabaseInstanceList(DbInstanceVO sample) {
+		return dbinstanceService.queryList(sample);
+	}
+
+	@Override
+	public Map<String, Object> queryDatabaseInstanceMap(DbInstanceVO sample){
+		Map<String,Object> map=new HashMap<>();
+		List<DbInstance> list= queryDatabaseInstanceList(sample);
+		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
+		for(int i=0;i<list.size();i++) {
+			DbInstance item = list.get(i);
+			Map<String, Object> hostMap= BeanUtil.toMap(item);
+
+
+
+			listMap.add(hostMap);
+
+		}
+		map.put("hostList", listMap);
+		return map;
+
+	}
+
+
+
+	public File saveTempFile(InputStream is, String fileName){
 
 		int BYTESIZE=1024;
 		String path = System.getProperty("java.io.tmpdir");

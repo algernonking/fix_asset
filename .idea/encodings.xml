@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/eam/common/proxy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/service/service-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/service/service-contract/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eam/service/service-customer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/service/service-datacenter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/service/service-eam/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/service/service-knowledgebase/src/main/java" charset="UTF-8" />
@@ -16,6 +17,7 @@
     <file url="file://$PROJECT_DIR$/eam/view/view-console/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/view/view-contract/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/view/view-contract/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eam/view/view-customer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/view/view-datacenter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/view/view-datacenter/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/eam/view/view-eam/src/main/java" charset="UTF-8" />

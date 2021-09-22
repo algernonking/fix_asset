@@ -117,6 +117,16 @@ public interface AssetBillServiceProxy {
 
 
     /**
+     * 查询转移单据
+     */
+    public static final String QUERY_ASSET_TRANSFER_BILL = API_PREFIX + "query-asset-transfer-bill";
+
+    /**
+     * 查询转移单据
+     */
+    public static final String QUERY_ASSET_TRANSFER_BILLS = API_PREFIX + "query-asset-transfer-bills";
+
+    /**
      * 控制器类名
      * */
     public static final String CONTROLLER_CLASS_NAME="com.dt.platform.eam.controller.AssetBillController";

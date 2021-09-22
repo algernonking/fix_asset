@@ -13,6 +13,7 @@ import com.dt.platform.proxy.ops.HostPositionServiceProxy;
 import com.dt.platform.proxy.ops.InformationSystemServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 public class OpsHostGtr extends BaseCodeGenerator{
 
@@ -43,6 +44,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addListProperty(ServiceInfo.class,"hostOsList","操作系统","操作系统");
         cfg.getPoClassFile().addListProperty(String.class,"hostOsIds","操作系统列表","操作系统");
+
 
         cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.ARCH).table().disable(true);
@@ -82,6 +84,10 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.service().addRelationSaveAction(HostMidServiceImpl.class,HostVOMeta.HOST_MIDDLEWARE_IDS);
         cfg.service().addRelationSaveAction(HostOsServiceImpl.class,HostVOMeta.HOST_OS_IDS);
         cfg.service().addRelationSaveAction(HostDbServiceImpl.class,HostVOMeta.HOST_DB_IDS);
+
+
+
+        //单选组织，包括公司和部门，并指定根节点
 
 
         cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME)
@@ -173,6 +179,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).form().validate().required();
 
         cfg.view().list().addToolButton("导出","exportHost",null);
+
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -275,8 +282,6 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 }
 
         );
-
-
 
 
 

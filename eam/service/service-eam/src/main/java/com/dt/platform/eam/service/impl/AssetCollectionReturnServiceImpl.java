@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.eam.common.AssetCommonError;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,18 +78,18 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 
 		//资产数量
-		if(assetCollectionReturn.getAssetIds()==null||assetCollectionReturn.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
+//		if(assetCollectionReturn.getAssetIds()==null||assetCollectionReturn.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
+
 		//制单人
 		if(assetCollectionReturn.getOriginatorId()==null||"".equals(assetCollectionReturn.getOriginatorId())){
-			assetCollectionReturn.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetCollectionReturn.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetCollectionReturn.getBusinessDate()==null){
 			assetCollectionReturn.setBusinessDate(new Date());
 		}
-
 
 
 		Result r=super.insert(assetCollectionReturn);

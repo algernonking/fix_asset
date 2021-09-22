@@ -5,14 +5,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:41
- * @sign 2649DD6B034B21D559B2CB9A05BDCB32
+ * @since 2021-09-12 13:04:40
+ * @sign FF03A498C8F5AF3F9CEB5DA566200EBF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
-*/
+ */
 
 public class AssetItemVO extends AssetItem {
 

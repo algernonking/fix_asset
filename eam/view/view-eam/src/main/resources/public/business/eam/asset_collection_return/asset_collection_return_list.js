@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:37
+ * @since 2021-09-20 17:01:56
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -75,14 +75,14 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return templet('returnDate',fox.dateFormat(d.returnDate),d); }}
-					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库后公司/部门') , templet: function (d) { return templet('useOrganizationId',d.useOrganizationId,d);}  }
+					,{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库后公司/部门') , templet: function (d) { return templet('useOrganizationId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('退库说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('退库说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return templet('returnDate',fox.dateFormat(d.returnDate),d); }}
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') , templet: function (d) { return templet('attach',d.attach,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -116,14 +116,15 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.returnDate={ begin: $("#returnDate-begin").val(), end: $("#returnDate-end").val() };
-		value.useOrganizationId={ value: $("#useOrganizationId").val()};
+		value.useOrganizationId={ value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text()};
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.returnDate={ begin: $("#returnDate-begin").val(), end: $("#returnDate-end").val() };
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -173,14 +174,6 @@ function ListPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#returnDate-begin',
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#returnDate-end',
-			trigger:"click"
-		});
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
@@ -200,6 +193,14 @@ function ListPage() {
 				}
 				return opts;
 			}
+		});
+		laydate.render({
+			elem: '#returnDate-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#returnDate-end',
+			trigger:"click"
 		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
@@ -229,6 +230,22 @@ function ListPage() {
 					$('#search-button-advance span').text("更多");
 				}
 			});
+		});
+
+		// 请选择组织节点对话框
+		$("#useOrganizationId-button").click(function(){
+			var useOrganizationIdDialogOptions={
+				field:"useOrganizationId",
+				inputEl:$("#useOrganizationId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseOrgNode(useOrganizationIdDialogOptions);
 		});
 	}
 	

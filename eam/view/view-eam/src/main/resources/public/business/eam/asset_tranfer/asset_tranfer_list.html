@@ -2,7 +2,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:28
+ * @since 2021-09-20 18:09:35
  */
  -->
  <!DOCTYPE html>
@@ -42,41 +42,39 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 使用人员 , useUserId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 调入管理员 , managerId ,typeName=button, isHideInSearch=true -->
+                    <!-- 使用人员 , useUserId ,typeName=button, isHideInSearch=true -->
                     <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 位置详情 , positionDetail ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 调入管理员 , managerId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入管理员')}" class="search-label managerId-label">调入管理员</span><span class="search-colon">:</span></div>
-                        <input id="managerId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 调出使用公司/部门 , outUseOrganizationId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="businessDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
-                            <span class="search-dash">-</span>
-                            <input type="text" id="businessDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUseOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
+                            <input lay-filter="outUseOrganizationId" id="outUseOrganizationId" name="outUseOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                            <button id="outUseOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                    </div>
+                    <!-- 调入使用公司/部门 , inUseOrganizationId ,typeName=button, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUseOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
+                            <input lay-filter="inUseOrganizationId" id="inUseOrganizationId" name="inUseOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                            <button id="inUseOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 调出使用公司/部门 , outUseOrganizationId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUseOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="outUseOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 调入使用公司/部门 , inUseOrganizationId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUseOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="inUseOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="businessDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="businessDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
                     <!-- 转移说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

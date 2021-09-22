@@ -2,6 +2,7 @@ package com.dt.platform.eam.page;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
@@ -58,6 +59,37 @@ public class AssetPageController extends ViewController {
 		}
 		return proxy;
 	}
+
+	/**
+	 * 资产
+	 */
+	@RequestMapping("/asset_select_basic_list.html")
+	public String basicLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		return prefix+"/asset_select_basic_list";
+	}
+
+
+	/**
+	 * 资产
+	 */
+	@RequestMapping("/asset_selected_list.html")
+	public String selectedLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		return prefix+"/asset_selected_list";
+	}
+
+	/**
+	 * 资产
+	 */
+	@RequestMapping("/asset_select_list.html")
+	public String selectLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
+		model.addAttribute("categoryParentId",idResult.getData());
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		return prefix+"/asset_select_list";
+	}
+
 
 	/**
 	 * 资产 分类搜索
@@ -129,9 +161,13 @@ public class AssetPageController extends ViewController {
 			if(attributeItemRequiredList.size()>0){
 				for(int i=0;i<attributeItemRequiredList.size();i++){
 					JSONObject obj=new JSONObject();
-					obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
-					obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
-					obj.put("required",true);
+					if(AssetAttributeDimensionEnum.ATTRIBUTION.code().equals(attributeItemRequiredList.get(i).getDimension())
+					||AssetAttributeDimensionEnum.FINANCIAL.code().equals(attributeItemRequiredList.get(i).getDimension())
+					||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())){
+						obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
+						obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
+						obj.put("required",true);
+					}
 					attributeItemRequiredObject.put(BeanNameUtil.instance().getPropertyName(attributeItemRequiredList.get(i).getAttribute().getCode()),obj);
 				}
 			}

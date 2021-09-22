@@ -1,7 +1,7 @@
 /**
  * 所属凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-06 11:16:37
+ * @since 2021-09-18 12:22:23
  */
 
 function FormPage() {
@@ -85,11 +85,31 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].label,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 label 下拉字段
+		fox.renderSelectBox({
+			el: "label",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -104,11 +124,13 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].voucher,value:data[i].user_code});
+					opts.push({name:data[i].voucher,value:data[i].user_code,selected:(defaultValues.indexOf(data[i].user_code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -118,17 +140,21 @@ function FormPage() {
 	/**
       * 填充表单数据
       */
-	function fillFormData() {
-		var formData = admin.getTempData('ops-voucher-owner-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('ops-voucher-owner-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
+		var hasData=true;
 		//如果是新建
-		if(!formData.id) {
+		if(!formData || !formData.id) {
 			adjustPopup();
+			hasData=false;
 		}
 		var fm=$('#data-form');
-		if (formData) {
+		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
 
@@ -138,10 +164,14 @@ function FormPage() {
 
 			//设置  类别 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryCode",formData.voucherCategory);
+			//设置  标签 设置下拉框勾选
+			fox.setSelectValue4Dict("#label",formData.label,SELECT_LABEL_DATA);
 
 			//处理fillBy
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -158,7 +188,7 @@ function FormPage() {
         },1);
 
         //禁用编辑
-		if(disableModify || disableCreateNew) {
+		if((hasData && disableModify) || (!hasData &&disableCreateNew)) {
 			fox.lockForm($("#data-form"),true);
 			$("#submit-button").hide();
 			$("#cancel-button").css("margin-right","15px")
@@ -186,6 +216,8 @@ function FormPage() {
 
 		//获取 类别 下拉框的值
 		data["categoryCode"]=fox.getSelectedValue("categoryCode",false);
+		//获取 标签 下拉框的值
+		data["label"]=fox.getSelectedValue("label",false);
 
 		return data;
 	}
@@ -194,10 +226,10 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(data) {
-		var api=moduleURL+"/"+(data.id?"update":"insert");
+	function saveForm(param) {
+		var api=moduleURL+"/"+(param.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
+		admin.request(api, param, function (data) {
 			clearTimeout(task);
 			layer.closeAll('loading');
 			if (data.success) {
@@ -207,6 +239,7 @@ function FormPage() {
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
 			}
+			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, "POST");
 	}
 
@@ -240,6 +273,7 @@ function FormPage() {
 		getFormData: getFormData,
 		verifyForm: verifyForm,
 		saveForm: saveForm,
+		fillFormData: fillFormData,
 		adjustPopup: adjustPopup
 	};
 

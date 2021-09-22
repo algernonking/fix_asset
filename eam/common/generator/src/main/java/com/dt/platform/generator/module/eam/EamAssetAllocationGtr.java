@@ -14,6 +14,7 @@ import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 
 public class EamAssetAllocationGtr extends BaseCodeGenerator {
@@ -27,9 +28,15 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","管理人","管理人");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"outOwnerCompany","调出公司","调出公司");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"inOwnerCompany","调入公司","调入公司");
+
+
+        cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).search().fuzzySearch();
@@ -39,9 +46,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.NAME).table().disable();
-
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID).form().validate().required();
@@ -50,16 +56,35 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+
         cfg.view().list().operationColumn().width(250);
+
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID)
+                .form().button().chooseCompany(true);
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID).table().fillBy("outOwnerCompany","fullName");
+
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID)
+                .form().button().chooseCompany(true);
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID).table().fillBy("inOwnerCompany","fullName");
+
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).table().fillBy("manager","name");
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).form()
+                .button().chooseEmployee(true);
+
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_ALLOCATION.STATUS,
-                        EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE
-                },
-                new Object[]{
                         EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID,
+
+                },
+                new Object[]{
+                        EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE,
                         EAMTables.EAM_ASSET_ALLOCATION.CONTENT,
                 }
         );
@@ -68,13 +93,12 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");
         cfg.view().form().addGroup(null,
-                new Object[] {
-
-                        EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID,
-                }, new Object[] {
+                 new Object[] {
                         EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID
                 }, new Object[] {
                         EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID
+                }, new Object[] {
+                        EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID
                 }
         );
 
@@ -99,7 +123,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE) //列表HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

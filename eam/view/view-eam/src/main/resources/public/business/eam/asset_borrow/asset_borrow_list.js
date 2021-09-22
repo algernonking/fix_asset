@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:30
+ * @since 2021-09-22 12:30:45
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -75,13 +75,12 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') , templet: function (d) { return templet('borrowerId',d.borrowerId,d);}  }
+					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') , templet: function (d) { return templet('borrowerId',fox.getProperty(d,["borrower","name"]),d);} }
 					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return templet('borrowTime',fox.dateFormat(d.borrowTime),d); }}
 					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate),d); }}
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借出说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('借出说明') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
-					,{ field: 'resOriginatorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('resOriginatorId',fox.getProperty(d,["originator","name"]),d);} }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -115,13 +114,14 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.borrowerId={ value: $("#borrowerId").val()};
+		value.borrowerId={ value: $("#borrowerId").val(),fillBy:["borrower","name"] ,label:$("#borrowerId-button").text()};
 		value.borrowTime={ begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -207,6 +207,10 @@ function ListPage() {
 					$('#search-button-advance span').text("更多");
 				}
 			});
+		});
+
+		// 请选择人员对话框
+		$("#borrowerId-button").click(function(){
 		});
 	}
 	
@@ -373,7 +377,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["85%",height+"px"],
+			area: ["95%",height+"px"],
 			type: 2,
 			id:"eam-asset-borrow-form-data-win",
 			content: '/business/eam/asset_borrow/asset_borrow_form.html' + queryString,

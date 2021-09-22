@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资产 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-14 15:27:48
+ * @since 2021-09-20 21:49:26
 */
 
 public interface IAssetService extends ISuperService<Asset> {
@@ -239,8 +239,13 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * @return 查询结果
 	 * */
 	PagedList<Asset> queryPagedList(Asset sample,OrderBy orderBy,int pageSize,int pageIndex);
- 
- 	/**
+
+
+	PagedList<Asset> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType);
+
+	PagedList<Asset> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent);
+
+	/**
 	 * 查询指定字段的数据清单
 	 * @param <T> 元素类型
 	 * @param field 字段

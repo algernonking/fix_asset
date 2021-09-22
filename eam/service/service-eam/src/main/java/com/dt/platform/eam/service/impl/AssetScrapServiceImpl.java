@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,12 +78,13 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Transactional
 	public Result insert(AssetScrap assetScrap) {
 		//资产数量
-		if(assetScrap.getAssetIds()==null||assetScrap.getAssetIds().size()==0){
-			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-		}
+//		if(assetScrap.getAssetIds()==null||assetScrap.getAssetIds().size()==0){
+//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
+//		}
+
 		//制单人
 		if(assetScrap.getOriginatorId()==null||"".equals(assetScrap.getOriginatorId())){
-			assetScrap.setOriginatorId((String)dao.getDBTreaty().getLoginUserId());
+			assetScrap.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 		//业务时间
 		if(assetScrap.getBusinessDate()==null){

@@ -6,13 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:27
- * @sign 5402C0A413C039A76BD4276415F9CC39
+ * @since 2021-09-20 16:58:07
+ * @sign FEDCA1A66AE87C16E7CD06EB799EE7F4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -91,12 +92,12 @@ public class AssetAllocationMeta {
 	/**
 	 * 调入管理员 , 类型: java.lang.String
 	*/
-	public static final String IN_MANAGER_ID="inManagerId";
+	public static final String MANAGER_ID="managerId";
 	
 	/**
 	 * 调入管理员 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> IN_MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,IN_MANAGER_ID, java.lang.String.class, "调入管理员", "调入管理员", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> MANAGER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,MANAGER_ID, java.lang.String.class, "调入管理员", "调入管理员", java.lang.String.class, null);
 	
 	/**
 	 * 调拨说明 , 类型: java.lang.String
@@ -249,9 +250,39 @@ public class AssetAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 管理人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String MANAGER="manager";
+	
+	/**
+	 * 管理人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,org.github.foxnic.web.domain.hrm.Employee> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,MANAGER, org.github.foxnic.web.domain.hrm.Employee.class, "管理人", "管理人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
+	 * 调出公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String OUT_OWNER_COMPANY="outOwnerCompany";
+	
+	/**
+	 * 调出公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,org.github.foxnic.web.domain.hrm.Organization> OUT_OWNER_COMPANY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,OUT_OWNER_COMPANY, org.github.foxnic.web.domain.hrm.Organization.class, "调出公司", "调出公司", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
+	 * 调入公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String IN_OWNER_COMPANY="inOwnerCompany";
+	
+	/**
+	 * 调入公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,org.github.foxnic.web.domain.hrm.Organization> IN_OWNER_COMPANY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,IN_OWNER_COMPANY, org.github.foxnic.web.domain.hrm.Organization.class, "调入公司", "调入公司", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , IN_MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR , MANAGER , OUT_OWNER_COMPANY , IN_OWNER_COMPANY };
 	
 	/**
 	 * 代理类
@@ -340,12 +371,12 @@ public class AssetAllocationMeta {
 		
 		/**
 		 * 设置 调入管理员
-		 * @param inManagerId 调入管理员
+		 * @param managerId 调入管理员
 		 * @return 当前对象
 		*/
-		public AssetAllocation setInManagerId(String inManagerId) {
-			super.change(IN_MANAGER_ID,super.getInManagerId(),inManagerId);
-			super.setInManagerId(inManagerId);
+		public AssetAllocation setManagerId(String managerId) {
+			super.change(MANAGER_ID,super.getManagerId(),managerId);
+			super.setManagerId(managerId);
 			return this;
 		}
 		
@@ -511,6 +542,39 @@ public class AssetAllocationMeta {
 		public AssetAllocation setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 管理人
+		 * @param manager 管理人
+		 * @return 当前对象
+		*/
+		public AssetAllocation setManager(Employee manager) {
+			super.change(MANAGER,super.getManager(),manager);
+			super.setManager(manager);
+			return this;
+		}
+		
+		/**
+		 * 设置 调出公司
+		 * @param outOwnerCompany 调出公司
+		 * @return 当前对象
+		*/
+		public AssetAllocation setOutOwnerCompany(Organization outOwnerCompany) {
+			super.change(OUT_OWNER_COMPANY,super.getOutOwnerCompany(),outOwnerCompany);
+			super.setOutOwnerCompany(outOwnerCompany);
+			return this;
+		}
+		
+		/**
+		 * 设置 调入公司
+		 * @param inOwnerCompany 调入公司
+		 * @return 当前对象
+		*/
+		public AssetAllocation setInOwnerCompany(Organization inOwnerCompany) {
+			super.change(IN_OWNER_COMPANY,super.getInOwnerCompany(),inOwnerCompany);
+			super.setInOwnerCompany(inOwnerCompany);
 			return this;
 		}
 	}

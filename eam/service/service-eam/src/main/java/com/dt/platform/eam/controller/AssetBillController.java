@@ -60,6 +60,43 @@ public class AssetBillController extends SuperController {
     @Autowired
     private IAssetScrapService assetScrapService;
 
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL)
+    public void queryTransferBill(List<String> ids,HttpServletResponse response) throws Exception {
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
+        HashMap<String, Object> map=new HashMap<String, Object>();
+        map.put("name","121212");
+        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-disposition","attachment;filename=\""+"asset.docx"+"\"");
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS)
+    public void queryTransferBills(String id,HttpServletResponse response) throws Exception {
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
+        Map<String, Object> data=new HashMap<String, Object>();
+        AssetBorrow billdata=assetBorrowService.getById(id);
+        data=BeanUtil.toMap(billdata);
+        System.out.println(data.toString());
+        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        template.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    }
+
+
     @SentinelResource(value = AssetBillServiceProxy.QUERY_BORROW_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_BORROW_BILLS)
     public void queryBorrowBills(List<String> ids,HttpServletResponse response) throws Exception {

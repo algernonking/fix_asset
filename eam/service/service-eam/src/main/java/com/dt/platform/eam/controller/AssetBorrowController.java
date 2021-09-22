@@ -1,8 +1,13 @@
 package com.dt.platform.eam.controller;
 
  
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.eam.service.IAssetHandleService;
+import com.dt.platform.eam.service.IAssetItemService;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +23,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
-import com.dt.platform.domain.eam.AssetBorrow;
-import com.dt.platform.domain.eam.AssetBorrowVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,7 +36,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -50,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:30
+ * @since 2021-09-20 21:29:18
 */
 
 @Api(tags = "资产借用")
@@ -61,19 +63,24 @@ public class AssetBorrowController extends SuperController {
 	@Autowired
 	private IAssetBorrowService assetBorrowService;
 
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
+	@Autowired
+	private IAssetItemService assetItemService;
 	
 	/**
 	 * 添加资产借用
 	*/
 	@ApiOperation(value = "添加资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
@@ -81,12 +88,23 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = AssetBorrowVOMeta.ID)
-	@NotNull(name = AssetBorrowVOMeta.NAME)
 	@SentinelResource(value = AssetBorrowServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.INSERT)
-	public Result insert(AssetBorrowVO assetBorrowVO) {
+	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
 		Result result=assetBorrowService.insert(assetBorrowVO);
+
+		//保存表单数据
+		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+			List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<list.size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setHandleId(assetBorrowVO.getId());
+				asset.setAssetId(list.get(i).getAssetId());
+				saveList.add(asset);
+			}
+			assetItemService.insertList(saveList);
+		}
 		return result;
 	}
 
@@ -96,7 +114,7 @@ public class AssetBorrowController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296")
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -130,13 +148,13 @@ public class AssetBorrowController extends SuperController {
 	*/
 	@ApiOperation(value = "更新资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
@@ -145,11 +163,27 @@ public class AssetBorrowController extends SuperController {
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } ) 
 	@NotNull(name = AssetBorrowVOMeta.ID)
-	@NotNull(name = AssetBorrowVOMeta.NAME)
 	@SentinelResource(value = AssetBorrowServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.UPDATE)
 	public Result update(AssetBorrowVO assetBorrowVO) {
 		Result result=assetBorrowService.update(assetBorrowVO,SaveMode.NOT_NULL_FIELDS);
+
+		//保存表单数据
+		List<AssetItem> list=assetItemService.queryList(AssetItem.create().setHandleId(assetBorrowVO.getId()));
+		List<String> deleteList=new ArrayList<String>();
+		List<AssetItem> updateList=new ArrayList<AssetItem>();
+		for(int i=0;i<list.size();i++){
+			AssetItem asset=new AssetItem();
+			String crd=asset.getCrd();
+			if("c".equals(crd)){
+				asset.setCrd("r");
+				updateList.add(asset);
+			}else if("d".equals(crd)||"cd".equals(crd)){
+				deleteList.add(asset.getId());
+			}
+		}
+		assetItemService.updateList(updateList,SaveMode.NOT_NULL_FIELDS);
+		assetItemService.deleteByIdsPhysical(deleteList);
 		return result;
 	}
 	
@@ -159,13 +193,13 @@ public class AssetBorrowController extends SuperController {
 	*/
 	@ApiOperation(value = "保存资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
@@ -174,7 +208,6 @@ public class AssetBorrowController extends SuperController {
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } )
 	@NotNull(name = AssetBorrowVOMeta.ID)
-	@NotNull(name = AssetBorrowVOMeta.NAME)
 	@SentinelResource(value = AssetBorrowServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.SAVE)
 	public Result save(AssetBorrowVO assetBorrowVO) {
@@ -197,6 +230,8 @@ public class AssetBorrowController extends SuperController {
 	public Result<AssetBorrow> getById(String id) {
 		Result<AssetBorrow> result=new Result<>();
 		AssetBorrow assetBorrow=assetBorrowService.getById(id);
+		// 关联出 借用人 数据
+		assetBorrowService.join(assetBorrow,AssetBorrowMeta.BORROWER);
 		// 关联出 制单人 数据
 		assetBorrowService.join(assetBorrow,AssetBorrowMeta.ORIGINATOR);
 		result.success(true).data(assetBorrow);
@@ -229,13 +264,13 @@ public class AssetBorrowController extends SuperController {
 	*/
 	@ApiOperation(value = "查询资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
@@ -258,13 +293,13 @@ public class AssetBorrowController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询资产借用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667504641847296"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class , example = "12"),
-		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class , example = "2021-08-14 12:00:00"),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROWER_ID , value = "借用人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.BORROW_TIME , value = "借出时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.PLAN_RETURN_DATE , value = "预计归还时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.CONTENT , value = "借出说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
@@ -277,6 +312,8 @@ public class AssetBorrowController extends SuperController {
 	public Result<PagedList<AssetBorrow>> queryPagedList(AssetBorrowVO sample) {
 		Result<PagedList<AssetBorrow>> result=new Result<>();
 		PagedList<AssetBorrow> list=assetBorrowService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+		// 关联出 借用人 数据
+		assetBorrowService.join(list,AssetBorrowMeta.BORROWER);
 		// 关联出 制单人 数据
 		assetBorrowService.join(list,AssetBorrowMeta.ORIGINATOR);
 		result.success(true).data(list);

@@ -104,5 +104,15 @@ applications:
     viewProjectPath: /view/view-contract
     viewPrefixPath: public/business/contract
     wrapperProjectPath: /wrapper/wrapper-all
- 
+  #客户模块
+  service-customer:
+    nacosGroup: service
+    nacosDataId: service-customer.yml
+    serviceProjectPath: /service/service-customer
+    packageName: com.dt.platform.customer
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: CUSTOMER
+    viewProjectPath: /view/view-customer
+    viewPrefixPath: public/business/customer
+    wrapperProjectPath: /wrapper/wrapper-all
     

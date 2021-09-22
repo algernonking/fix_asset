@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:06
+ * @since 2021-09-20 16:34:26
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -75,7 +75,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证类别'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
-					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',d.emplId,d);}  }
+					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',fox.getProperty(d,["employee","name"]),d);} }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -110,12 +110,13 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
-		value.emplId={ value: $("#emplId").val()};
+		value.emplId={ value: $("#emplId").val(),fillBy:["employee","name"] ,label:$("#emplId-button").text()};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -210,6 +211,10 @@ function ListPage() {
 					$('#search-button-advance span').text("更多");
 				}
 			});
+		});
+
+		// 请选择人员对话框
+		$("#emplId-button").click(function(){
 		});
 	}
 	

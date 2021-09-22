@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:22
+ * @since 2021-09-20 16:36:33
  */
 
 layui.config({
@@ -29,10 +29,41 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("list:afterSearchInputReady");
         },
         /**
-         * 查询前调用
+         * 对话框之前调用，如果返回 null 则不打开对话框
          * */
-        beforeQuery:function (conditions,location) {
-            console.log('beforeQuery',conditions);
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+            // debugger;
+            window.module.refreshTableData();
+        },
+        /**
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+        },
+        /**
+         * 查询前调用
+         * @param conditions 复合查询条件
+         * @param param 请求参数
+         * @param location 调用的代码位置
+         * */
+        beforeQuery:function (conditions,param,location) {
+            console.log('beforeQuery',conditions,param,location);
             return true;
         },
         /**
@@ -118,12 +149,32 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('afterDataFill',data);
         },
         /**
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+        }
+        /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             return true;
         },
+        /**
+         * 数据提交后执行
+         * */
+        afterSubmit:function (param,result) {
+            console.log("afterSubmitt",param,result);
+        },
+
         /**
          * 末尾执行
          */

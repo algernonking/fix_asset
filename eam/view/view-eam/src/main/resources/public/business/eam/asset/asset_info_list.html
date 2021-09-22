@@ -185,6 +185,7 @@
     </div>
 </div>
 
+
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
@@ -204,8 +205,6 @@
 
     <button th:if="${perm.checkAuth('eam_asset:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
     <button th:if="${perm.checkAnyAuth('eam_asset:update','eam_asset:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
-
-
     <button th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
@@ -223,10 +222,8 @@
     var COL_DATA = [];
 
 
-
-
 </script>
-
+<script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_info_list.js?'+${cacheKey}"></script>
 

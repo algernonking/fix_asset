@@ -7,6 +7,7 @@ import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
@@ -24,10 +25,10 @@ public class EAMRelationManager extends RelationManager {
 
         this.setupAssetFinancial();
         this.setupAssetMaintainer();
-
         this.setupAssetEaintainer();
 
 
+        this.setupAlloction();
         this.setupAssetBorrow();
         this.setupAssetCollection();
         this.setupAssetCollectionReturn();
@@ -45,6 +46,30 @@ public class EAMRelationManager extends RelationManager {
 
 
     }
+
+    public void setupAlloction() {
+
+        // 关联借用人
+        this.property(AssetAllocationMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        this.property(AssetAllocationMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+
+        this.property(AssetAllocationMeta.IN_OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(AssetAllocationMeta.OUT_OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+    }
+
+
+
+
 
     private void setupTplFile() {
         this.property(TplFileMeta.BUSINESS_CODE_PROP)
@@ -89,7 +114,7 @@ public class EAMRelationManager extends RelationManager {
 
         // 关联借用人
         this.property(AssetBorrowMeta.BORROWER_PROP)
-                .using(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
     }
@@ -115,8 +140,11 @@ public class EAMRelationManager extends RelationManager {
 
         // 关联使用人
         this.property(AssetCollectionMeta.USE_USER_PROP)
-                .using(EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        this.property(AssetCollectionMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
 
     }
 
@@ -140,6 +168,8 @@ public class EAMRelationManager extends RelationManager {
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 
+        this.property(AssetCollectionReturnMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
 
     }
 
@@ -170,6 +200,13 @@ public class EAMRelationManager extends RelationManager {
 
     public void setupAssetTranfer() {
 
+        this.property(AssetTranferMeta.IN_USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        this.property(AssetTranferMeta.OUT_USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
         // 关联位置
         this.property(AssetTranferMeta.POSITION_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
@@ -188,14 +225,14 @@ public class EAMRelationManager extends RelationManager {
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 
-        // 关联管理人员
+        // 关联人员
         this.property(AssetTranferMeta.MANAGER_PROP)
-                .using(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
         // 关联使用人员
         this.property(AssetTranferMeta.USE_USER_PROP)
-                .using(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
                 .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
     }
@@ -206,12 +243,6 @@ public class EAMRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET_HANDLE.ID).join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
 
-
-//        this.property(AssetHandleMeta.ASSET_LIST_PROP)
-//                .join(
-//                        with(EAMTables.EAM_ASSET_HANDLE.ID),
-//                        with(EAMTables.EAM_ASSET_ITEM.HANDLE_ID).contition().addorderby()
-//                );
 
 
         // 关联制单人

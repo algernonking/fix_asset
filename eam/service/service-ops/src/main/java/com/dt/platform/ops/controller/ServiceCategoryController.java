@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:22
+ * @since 2021-09-20 16:36:28
 */
 
 @Api(tags = "服务类型")
@@ -72,7 +72,6 @@ public class ServiceCategoryController extends SuperController {
 		@ApiImplicitParam(name = ServiceCategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = ServiceCategoryVOMeta.ID)
 	@SentinelResource(value = ServiceCategoryServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ServiceCategoryServiceProxy.INSERT)
 	public Result insert(ServiceCategoryVO serviceCategoryVO) {

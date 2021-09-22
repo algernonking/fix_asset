@@ -3,8 +3,7 @@ package com.dt.platform.ops.service;
 
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
-import com.dt.platform.domain.ops.Host;
-import com.dt.platform.domain.ops.HostVO;
+import com.dt.platform.domain.ops.*;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.SaveMode;
@@ -32,13 +31,26 @@ import java.util.Map;
 public interface IOpsDataService extends ISuperService<Host> {
 
 
+	List<Host> queryHostList(HostVO sample);
 
-	List<Host> queryHostList(HostVO host);
+	Map<String, Object> queryHostMap(HostVO sample);
 
+	List<InformationSystem> queryInformationSystemList(InformationSystemVO sample);
 
-	Map<String, Object> queryHostMap(HostVO asset);
+	Map<String, Object> queryInformationSystemMap(InformationSystemVO sample);
 
+	List<DbInstance> queryDatabaseInstanceList(DbInstanceVO sample);
+
+	Map<String, Object> queryDatabaseInstanceMap(DbInstanceVO sample);
 
 	File saveTempFile(InputStream is, String fileName);
+
+
+
+
+
+
+
+
 
 }

@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:09
+ * @since 2021-09-19 08:22:59
  */
  -->
  <!DOCTYPE html>
@@ -36,17 +36,15 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 父节点 , pid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
-
-                        <div id="status" th:data="${dict.toArray('ops_system_status')}" style="width:140px"></div>
-
-
-                    </div>
+                    <!-- 介绍 , profile ,typeName=text_input, isHideInSearch=true -->
                     <!-- 运维模式 , opsMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 开发模式 , devMethod ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 所属公司/部门 , belongOrgInfo ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 所属公司/部门 , belongOrgId ,typeName=button, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属公司/部门')}" class="search-label belongOrgId-label">所属公司/部门</span><span class="search-colon">:</span></div>
+                            <input lay-filter="belongOrgId" id="belongOrgId" name="belongOrgId"  type="hidden" class="layui-input"   />
+                            <button id="belongOrgId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                    </div>
                     <!-- 演练时间 , lastdrillDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 上线时间 , onlineDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 下线时间 , offlineDate ,typeName=date_input, isHideInSearch=true -->
@@ -61,6 +59,14 @@
                     <!-- 异地备份 , diffplaceBackupInfo ,typeName=text_input, isHideInSearch=true -->
                     <!-- 归档模式 , archMethod ,typeName=text_input, isHideInSearch=true -->
                     <!-- 用户凭证 , voucherIds ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+
+                        <div id="status" th:data="${dict.toArray('ops_system_status')}" style="width:140px"></div>
+
+
+                    </div>
                     <!-- 系统分级 , grade ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('系统分级')}" class="search-label grade-label">系统分级</span><span class="search-colon">:</span></div>
@@ -70,11 +76,6 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 介绍 , profile ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('介绍')}" class="search-label profile-label">介绍</span><span class="search-colon">:</span></div>
-                        <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 

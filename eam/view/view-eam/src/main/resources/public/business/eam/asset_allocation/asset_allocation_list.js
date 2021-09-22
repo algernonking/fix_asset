@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:27
+ * @since 2021-09-20 16:58:21
  */
 
 
@@ -49,7 +49,7 @@ function ListPage() {
 			var ps={};
 			var contitions={};
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
@@ -75,12 +75,13 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'outOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出所属公司') , templet: function (d) { return templet('outOwnCompanyId',d.outOwnCompanyId,d);}  }
-					,{ field: 'inOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入所属公司') , templet: function (d) { return templet('inOwnCompanyId',d.inOwnCompanyId,d);}  }
-					,{ field: 'inManagerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') , templet: function (d) { return templet('inManagerId',d.inManagerId,d);}  }
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调拨说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'outOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出所属公司') , templet: function (d) { return templet('outOwnCompanyId',fox.getProperty(d,["outOwnerCompany","fullName"]),d);} }
+					,{ field: 'inOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入所属公司') , templet: function (d) { return templet('inOwnCompanyId',fox.getProperty(d,["inOwnerCompany","fullName"]),d);} }
+					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') , templet: function (d) { return templet('managerId',fox.getProperty(d,["manager","name"]),d);} }
+					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('调拨说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -114,14 +115,15 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outOwnCompanyId={ value: $("#outOwnCompanyId").val()};
-		value.inOwnCompanyId={ value: $("#inOwnCompanyId").val()};
+		value.outOwnCompanyId={ value: $("#outOwnCompanyId").val(),fillBy:["outOwnerCompany","fullName"] ,label:$("#outOwnCompanyId-button").text()};
+		value.inOwnCompanyId={ value: $("#inOwnCompanyId").val(),fillBy:["inOwnerCompany","fullName"] ,label:$("#inOwnCompanyId-button").text()};
 		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -207,6 +209,37 @@ function ListPage() {
 					$('#search-button-advance span').text("更多");
 				}
 			});
+		});
+
+		// 请选择公司对话框
+		$("#outOwnCompanyId-button").click(function(){
+			var outOwnCompanyIdDialogOptions={
+				field:"outOwnCompanyId",
+				inputEl:$("#outOwnCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseOrgNode(outOwnCompanyIdDialogOptions);
+		});
+		// 请选择公司对话框
+		$("#inOwnCompanyId-button").click(function(){
+			var inOwnCompanyIdDialogOptions={
+				field:"inOwnCompanyId",
+				inputEl:$("#inOwnCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseOrgNode(inOwnCompanyIdDialogOptions);
 		});
 	}
 	

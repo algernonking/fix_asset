@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-14 15:27:50
+ * @since 2021-09-20 21:49:26
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -86,6 +86,16 @@ public interface AssetServiceProxy {
 	 * 分页查询资产
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
+
+	/**
+	 * 分页查询资产
+	 */
+	public static final String QUERY_PAGED_LIST_BY_SELECT= API_PREFIX + "query-paged-list-by-select";
+
+	/**
+	 * 分页查询资产
+	 */
+	public static final String QUERY_PAGED_LIST_BY_SELECTED= API_PREFIX + "query-paged-list-by-selected";
 	
 	/**
 	 * 导出资产数据(Excel)
@@ -154,8 +164,20 @@ public interface AssetServiceProxy {
 	*/
 	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Asset>> queryPagedList(AssetVO sample);
-	
-	
+
+	/**
+	 * 分页查询资产
+	 */
+	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECT)
+	Result<PagedList<Asset>> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetSelectedCode,String assetSearchContent);
+
+	/**
+	 * 分页查询资产
+	 */
+	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
+	Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetBussinessType,String assetSelectedCode,String assetSearchContent);
+
+
 	/**
 	 * 控制器类名
 	 * */

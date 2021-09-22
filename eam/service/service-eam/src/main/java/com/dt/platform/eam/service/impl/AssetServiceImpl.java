@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +39,7 @@ import java.util.Date;
  * 资产 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-14 15:27:50
+ * @since 2021-09-20 21:49:26
 */
 
 
@@ -223,7 +227,59 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
+
+	@Override
+	public PagedList<Asset> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
+
+		ConditionExpr queryCondition=new ConditionExpr();
+
+		//过滤资产已选数据
+		if(assetOwnerId!=null&&assetOwnerId.length()>0){
+			queryCondition.andIf("id not in (select asset_id from eam_asset_item where deleted=0 and handle_id=?)" ,assetOwnerId);
+		}else{
+			if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+				queryCondition.andIf("id not in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectedCode);
+			}
+		}
+
+		//过滤资产办理状态
+		sample.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+
+		//过滤资产状态
+		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(assetBussinessType)){
+			 //借用
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(assetBussinessType)){
+			//领用
+			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+		}
+
+		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
+	}
+
+
+
+	@Override
+	public PagedList<Asset> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType){
+
+		ConditionExpr queryCondition=new ConditionExpr();
+		if(assetOwnerId!=null&&assetOwnerId.length()>0){
+			if("refresh".equals(dataType)){
+				dao.execute("delete from eam_asset_item where crd in ('cd','c') and handle_id=?",assetOwnerId);
+				dao.execute("update eam_asset_item set crd='r' where crd='d' and handle_id=?",assetOwnerId);
+			}
+			queryCondition.andIf("id in (select asset_id from eam_asset_item where crd in ('c','r') and deleted=0 and handle_id=?)" ,assetOwnerId);
+		}else{
+			if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+				queryCondition.andIf("id  in (select asset_id from eam_asset_selected_data where deleted=0 and asset_selected_code=?)" ,assetSelectedCode);
+			}
+		}
+		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
+		return list;
+	}
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *

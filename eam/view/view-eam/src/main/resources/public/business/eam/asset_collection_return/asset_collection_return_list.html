@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:37
+ * @since 2021-09-20 17:01:55
  */
  -->
  <!DOCTYPE html>
@@ -46,32 +46,33 @@
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 退库后公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 退库后公司/部门 , useOrganizationId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('退库后公司/部门')}" class="search-label useOrganizationId-label">退库后公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="useOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
+                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
+                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
-                    <!-- 退库日期 , returnDate ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('退库日期')}" class="search-label returnDate-label">退库日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="returnDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
-                            <span class="search-dash">-</span>
-                            <input type="text" id="returnDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
+                        <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
                     </div>
 
 
                 </div>
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 退库日期 , returnDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('存放位置')}" class="search-label positionId-label">存放位置</span><span class="search-colon">:</span></div>
-                        <div id="positionId" th:data="${'/service-eam/eam-position/query-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('退库日期')}" class="search-label returnDate-label">退库日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="returnDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="returnDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
                     <!-- 退库说明 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">

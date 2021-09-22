@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/eam/common/proxy/proxy.iml" filepath="$PROJECT_DIR$/eam/common/proxy/proxy.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-common/service-common.iml" filepath="$PROJECT_DIR$/eam/service/service-common/service-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-contract/service-contract.iml" filepath="$PROJECT_DIR$/eam/service/service-contract/service-contract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eam/service/service-customer/service-customer.iml" filepath="$PROJECT_DIR$/eam/service/service-customer/service-customer.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" filepath="$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" filepath="$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" filepath="$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" />
@@ -17,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-common/view-common.iml" filepath="$PROJECT_DIR$/eam/view/view-common/view-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-console/view-console.iml" filepath="$PROJECT_DIR$/eam/view/view-console/view-console.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-contract/view-contract.iml" filepath="$PROJECT_DIR$/eam/view/view-contract/view-contract.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eam/view/view-customer/view-customer.iml" filepath="$PROJECT_DIR$/eam/view/view-customer/view-customer.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-datacenter/view-datacenter.iml" filepath="$PROJECT_DIR$/eam/view/view-datacenter/view-datacenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-eam/view-eam.iml" filepath="$PROJECT_DIR$/eam/view/view-eam/view-eam.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-hrm/view-hrm.iml" filepath="$PROJECT_DIR$/eam/view/view-hrm/view-hrm.iml" />

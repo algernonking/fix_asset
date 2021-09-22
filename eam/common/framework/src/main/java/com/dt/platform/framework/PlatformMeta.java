@@ -61,6 +61,10 @@ public class PlatformMeta {
 	 * */
 	public static final String CONTRACT_PACKAGE=BASE_PACKAGE+".contract";
 
+	/**
+	 * 客户服务
+	 * */
+	public static final String CUSTOMER_PACKAGE=BASE_PACKAGE+".customer";
 
 
 
