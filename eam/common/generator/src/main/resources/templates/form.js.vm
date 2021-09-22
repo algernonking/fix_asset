@@ -406,7 +406,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
 			};
-				#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
+			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end
 			#end
 		});
