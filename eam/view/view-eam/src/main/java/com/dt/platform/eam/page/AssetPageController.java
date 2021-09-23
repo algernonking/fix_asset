@@ -44,9 +44,6 @@ public class AssetPageController extends ViewController {
 
 	private AssetServiceProxy proxy;
 
-
-	private AssetAttributeItemServiceProxy assetAttributeItemServiceProxy;
-	
 	/**
 	 * 获得代理对象<br> 
 	 * 1、单体应用时，在应用内部调用；<br> 
@@ -65,6 +62,13 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_select_basic_list.html")
 	public String basicLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+		//设置字段布局
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_SELECT.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
 		return prefix+"/asset_select_basic_list";
 	}
@@ -75,6 +79,12 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_selected_list.html")
 	public String selectedLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BILL.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
 		return prefix+"/asset_selected_list";
 	}
@@ -84,6 +94,7 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_select_list.html")
 	public String selectLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+
 		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
@@ -91,15 +102,115 @@ public class AssetPageController extends ViewController {
 	}
 
 
+
+
 	/**
-	 * 资产 分类搜索
+	 * 资产 人员资产信息
 	 */
-	@RequestMapping("/asset_search/category_list.html")
-	public String categoryList(Model model,HttpServletRequest request) {
+	@RequestMapping("/asset_search/employee_assetInfo_list.html")
+	public String employeeAssetInfoList(Model model,HttpServletRequest request,String employeeId) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.PUBLIC_SHOW.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
+		model.addAttribute("employeeId",employeeId);
+		return prefix+"/asset_search/employee_assetInfo_list";
+	}
+
+
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/employee_list.html")
+	public String employeeList(Model model,HttpServletRequest request) {
+
+		return prefix+"/asset_search/employee_list";
+	}
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/employee_tree.html")
+	public String employeeTree(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/employee_tree";
+	}
+
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/category_tree.html")
+	public String categoryTree(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
 		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
-		return prefix+"/asset_search/category_list";
+		return prefix+"/asset_search/category_tree";
 	}
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/org_tree.html")
+	public String orgTree(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/org_tree";
+	}
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/position_tree.html")
+	public String positionTree(Model model,HttpServletRequest request) {
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/position_tree";
+	}
+
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/asset_search.html")
+	public String searchList(Model model,HttpServletRequest request) {
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/asset_search";
+	}
+
+
 
 	/**
 	 * 资产 功能主页面

@@ -7,6 +7,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,9 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Autowired 
 	private AssetItemServiceImpl assetItemServiceImpl;
 
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -108,10 +112,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 		Result r=super.insert(assetAllocation);
 
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetAllocation.getId(), assetAllocation.getAssetIds());
-		}
+
 		return r;
 	}
 	
@@ -181,10 +182,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Transactional
 	public Result update(AssetAllocation assetAllocation , SaveMode mode) {
 		Result r=super.update(assetAllocation , mode);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetAllocation.getId(), assetAllocation.getAssetIds());
-		}
+
 		return r;
 	}
 	

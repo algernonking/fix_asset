@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-22 12:30:47
+ * @since 2021-09-23 06:22:05
  */
  -->
  <!DOCTYPE html>
@@ -43,7 +43,7 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('借用人')}">借用人</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="borrowerId" id="borrowerId" name="borrowerId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}">按钮文本</span></button>
+                            <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                         </div>
                     </div>
 
@@ -135,7 +135,8 @@
     var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"button","required":true},"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"borrowTime":{"date":true,"labelInForm":"借出时间","inputType":"date_input","required":true},"planReturnDate":{"date":true,"labelInForm":"预计归还时间","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_borrow";
 
-    var BILL_ID=[[${billId}]]
+    // 单据ID
+    var BILL_ID = [[${billId}]] ;
 
 </script>
 

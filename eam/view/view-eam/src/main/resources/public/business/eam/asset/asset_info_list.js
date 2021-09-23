@@ -21,8 +21,7 @@ function ListPage() {
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;
 		assetListColumn=layui.assetListColumn;
 
-		console.log(33333333);
-		console.log(12);
+
 
 		if(window.pageExt.list.beforeInit) {
 			window.pageExt.list.beforeInit();

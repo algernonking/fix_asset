@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:58:07
- * @sign FEDCA1A66AE87C16E7CD06EB799EE7F4
+ * @since 2021-09-22 16:52:20
+ * @sign 77A02E4B874579C5AB501E045DB38BA6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -158,12 +158,6 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private List<Asset> assetList;
-	
-	/**
-	 * 资产列表：资产列表
-	*/
-	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
-	private List<String> assetIds;
 	
 	/**
 	 * 制单人：制单人
@@ -596,36 +590,6 @@ public class AssetAllocation extends Entity {
 	public AssetAllocation addAsset(Asset asset) {
 		if(this.assetList==null) assetList=new ArrayList<>();
 		this.assetList.add(asset);
-		return this;
-	}
-	
-	/**
-	 * 获得 资产列表<br>
-	 * 资产列表
-	 * @return 资产列表
-	*/
-	public List<String> getAssetIds() {
-		return assetIds;
-	}
-	
-	/**
-	 * 设置 资产列表
-	 * @param assetIds 资产列表
-	 * @return 当前对象
-	*/
-	public AssetAllocation setAssetIds(List<String> assetIds) {
-		this.assetIds=assetIds;
-		return this;
-	}
-	
-	/**
-	 * 添加 资产列表
-	 * @param assetId 资产列表
-	 * @return 当前对象
-	*/
-	public AssetAllocation addAssetId(String assetId) {
-		if(this.assetIds==null) assetIds=new ArrayList<>();
-		this.assetIds.add(assetId);
 		return this;
 	}
 	

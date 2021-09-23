@@ -171,10 +171,15 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+
     var AUTH_PREFIX="eam_asset";
+
+    var ATTRIBUTE_LIST_DATA =  [[${attributeListData}]];
+
     var ASSET_SELECTED_CODE =  [[${assetSelectedCode}]];
 </script>
 
+<script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_select_basic_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_select_basic_list.js?'+${cacheKey}"></script>
 

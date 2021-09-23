@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,8 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Autowired 
 	private AssetItemServiceImpl assetItemServiceImpl;
 
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
 	
 	@Override
 	public Object generateId(Field field) {

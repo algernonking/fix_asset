@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-22 12:30:38
+ * @since 2021-09-23 06:22:03
  */
  -->
  <!DOCTYPE html>
@@ -55,7 +55,7 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('借用人')}" class="search-label borrowerId-label">借用人</span><span class="search-colon">:</span></div>
                             <input lay-filter="borrowerId" id="borrowerId" name="borrowerId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}">按钮文本</span></button>
+                            <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                     </div>
 
 

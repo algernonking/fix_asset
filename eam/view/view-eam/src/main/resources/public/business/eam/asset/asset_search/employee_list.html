@@ -1,17 +1,11 @@
-<!-- 
-/**
- * 存放位置 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:53
- */
- -->
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
-    <title th:text="${lang.translate('存放位置')}">存放位置</title>
+    <title th:text="${lang.translate('员工')}">员工</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
@@ -26,7 +20,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -34,22 +28,35 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <!-- ID , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 工号 , badge ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('工号')}" class="search-label badge-label">工号</span><span class="search-colon">:</span></div>
+                        <input id="badge" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 手机号 , phone ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('手机号')}" class="search-label phone-label">手机号</span><span class="search-colon">:</span></div>
+                        <input id="phone" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 人员ID , personId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 公司ID , companyId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+
+                        <div id="status" th:data="${dict.toArray('employee_status')}" style="width:140px"></div>
+
+
+                    </div>
+                    <!-- 姓名 , name ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('姓名')}" class="search-label name-label">姓名</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-
-
+                    <!-- 身份证 , identity ,typeName=text_input, isHideInSearch=true -->
                 </div>
             </div>
-
 
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
@@ -73,33 +80,26 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_position:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_position:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
-
-    <button th:if="${perm.checkAuth('eam_position:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_position:update','eam_position:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
-
-
-    <button th:if="${perm.checkAuth('eam_position:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
-
-
+    <button th:if="${perm.checkAuth('hrm_employee:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="viewAssetInfo" th:text="${lang.translate('资产')}" data-id="{{d.id}}">资产</button>
 </script>
-
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var AUTH_PREFIX="eam_position";
+    var RADIO_STATUS_DATA = [[${dict.toArray('employee_status')}]];
+    var AUTH_PREFIX="hrm_employee";
 
 
 </script>
 
-<script th:src="'/business/eam/position/position_ext.js?'+${cacheKey}"></script>
-<script th:src="'/business/eam/position/position_tree.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset/asset_search/employee_list.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset/asset_search/employee_ext.js?'+${cacheKey}"></script>
+
 
 </body>
 </html>

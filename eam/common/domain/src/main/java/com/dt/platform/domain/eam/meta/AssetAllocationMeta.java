@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:58:07
- * @sign FEDCA1A66AE87C16E7CD06EB799EE7F4
+ * @since 2021-09-22 16:52:20
+ * @sign 77A02E4B874579C5AB501E045DB38BA6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -230,16 +230,6 @@ public class AssetAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,com.dt.platform.domain.eam.Asset> ASSET_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,ASSET_LIST, java.util.List.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
 	
 	/**
-	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
-	*/
-	public static final String ASSET_IDS="assetIds";
-	
-	/**
-	 * 资产列表 , 集合类型: LIST , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
-	
-	/**
 	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
@@ -282,7 +272,7 @@ public class AssetAllocationMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR , MANAGER , OUT_OWNER_COMPANY , IN_OWNER_COMPANY };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ORIGINATOR , MANAGER , OUT_OWNER_COMPANY , IN_OWNER_COMPANY };
 	
 	/**
 	 * 代理类
@@ -520,17 +510,6 @@ public class AssetAllocationMeta {
 		public AssetAllocation setAssetList(List<Asset> assetList) {
 			super.change(ASSET_LIST,super.getAssetList(),assetList);
 			super.setAssetList(assetList);
-			return this;
-		}
-		
-		/**
-		 * 设置 资产列表
-		 * @param assetIds 资产列表
-		 * @return 当前对象
-		*/
-		public AssetAllocation setAssetIds(List<String> assetIds) {
-			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
-			super.setAssetIds(assetIds);
 			return this;
 		}
 		

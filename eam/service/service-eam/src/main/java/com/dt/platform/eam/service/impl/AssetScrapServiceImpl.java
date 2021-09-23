@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Autowired 
 	private AssetItemServiceImpl assetItemServiceImpl;
 
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
 	
 	@Override
 	public Object generateId(Field field) {
@@ -102,10 +105,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 
 		Result r=super.insert(assetScrap);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetScrap.getId(), assetScrap.getAssetIds());
-		}
+
 		return r;
 	}
 	
@@ -175,10 +175,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Transactional
 	public Result update(AssetScrap assetScrap , SaveMode mode) {
 		Result r=super.update(assetScrap , mode);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetScrap.getId(), assetScrap.getAssetIds());
-		}
+
 		return r;
 	}
 	

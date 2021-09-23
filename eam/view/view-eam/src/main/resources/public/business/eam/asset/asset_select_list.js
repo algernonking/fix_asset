@@ -13,10 +13,8 @@ function ListPage() {
 
 	var menuTree;
 	var parentId=CATEGORY_PARENT_ID;
-
-
-	var selectedListAction;
 	var billdata;
+
 	/**
 	 * 入口函数，初始化
 	 */

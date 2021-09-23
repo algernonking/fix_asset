@@ -244,20 +244,37 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 
 		//过滤资产办理状态
-		sample.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		//sample.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 
 		//过滤资产状态
 		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(assetBussinessType)){
-			 //借用
+			//借用
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
 		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(assetBussinessType)){
 			//领用
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.equals(assetBussinessType)){
+			//退库
+			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.equals(assetBussinessType)){
+			//报修
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.equals(assetBussinessType)){
+			//报废
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(assetBussinessType)){
+			//调拨
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
 		}
 
 		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
 		return list;
 	}
+
+
+
+
+
 
 
 

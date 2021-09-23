@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-22 12:30:45
+ * @since 2021-09-23 06:22:05
  */
 
 
@@ -112,11 +112,11 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.borrowerId={ value: $("#borrowerId").val(),fillBy:["borrower","name"] ,label:$("#borrowerId-button").text()};
-		value.borrowTime={ begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
-		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.status={ inputType:"button",value: $("#status").val()};
+		value.borrowerId={ inputType:"button",value: $("#borrowerId").val(),fillBy:["borrower","name"] ,label:$("#borrowerId-button").text()};
+		value.borrowTime={ inputType:"date_input", begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -211,6 +211,18 @@ function ListPage() {
 
 		// 请选择人员对话框
 		$("#borrowerId-button").click(function(){
+				var borrowerIdDialogOptions={
+				field:"borrowerId",
+				inputEl:$("#borrowerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseEmployee(borrowerIdDialogOptions);
 		});
 	}
 	

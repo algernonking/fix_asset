@@ -4,6 +4,7 @@ package com.dt.platform.eam.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.IAssetItemService;
@@ -91,20 +92,7 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.INSERT)
 	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
-		Result result=assetBorrowService.insert(assetBorrowVO);
-
-		//保存表单数据
-		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
-			List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
-			List<AssetItem> saveList=new ArrayList<AssetItem>();
-			for(int i=0;i<list.size();i++){
-				AssetItem asset=new AssetItem();
-				asset.setHandleId(assetBorrowVO.getId());
-				asset.setAssetId(list.get(i).getAssetId());
-				saveList.add(asset);
-			}
-			assetItemService.insertList(saveList);
-		}
+		Result result=assetBorrowService.insert(assetBorrowVO,assetSelectedCode);
 		return result;
 	}
 
@@ -166,24 +154,11 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.UPDATE)
 	public Result update(AssetBorrowVO assetBorrowVO) {
-		Result result=assetBorrowService.update(assetBorrowVO,SaveMode.NOT_NULL_FIELDS);
-
-		//保存表单数据
-		List<AssetItem> list=assetItemService.queryList(AssetItem.create().setHandleId(assetBorrowVO.getId()));
-		List<String> deleteList=new ArrayList<String>();
-		List<AssetItem> updateList=new ArrayList<AssetItem>();
-		for(int i=0;i<list.size();i++){
-			AssetItem asset=new AssetItem();
-			String crd=asset.getCrd();
-			if("c".equals(crd)){
-				asset.setCrd("r");
-				updateList.add(asset);
-			}else if("d".equals(crd)||"cd".equals(crd)){
-				deleteList.add(asset.getId());
-			}
+		AssetBorrow assetBorrow=assetBorrowService.queryEntity(assetBorrowVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
 		}
-		assetItemService.updateList(updateList,SaveMode.NOT_NULL_FIELDS);
-		assetItemService.deleteByIdsPhysical(deleteList);
+		Result result=assetBorrowService.update(assetBorrowVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
 	

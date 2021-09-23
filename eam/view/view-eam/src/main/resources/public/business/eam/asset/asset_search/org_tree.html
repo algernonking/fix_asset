@@ -66,8 +66,8 @@
 
 
     <div class="right-tab" style="margin-left: 8px;margin-right: 8px">
-        <div style="margin-top:6px;">
-            <iframe id="form-view" src="/business/eam/asset/asset_info_list.html" frameborder=0 width="100%"  height="800px"></iframe>
+        <div class="layui-tab-item layui-show" type="emp">
+             <iframe id="asset-list-ifr" src="/business/eam/asset/asset_search/asset_search.html" frameborder=0 width="100%" ></iframe>
         </div>
     </div>
 </div>
@@ -80,7 +80,7 @@
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/zTree/js/jquery.ztree.all-3.5.min.js" th:src="'/assets/libs/zTree/js/jquery.ztree.all-3.5.min.js?'+${cacheKey}"></script>
 
-<script src="/business/eam/asset/asset_search/org_list.js" th:src="'/business/eam/asset/asset_search/org_list.js?'+${cacheKey}"></script>
+<script src="/business/eam/asset/asset_search/org_tree.js" th:src="'/business/eam/asset/asset_search/org_tree.js?'+${cacheKey}"></script>
 
 </body>
 </html>

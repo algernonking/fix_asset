@@ -7,9 +7,10 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.domain.eam.ApproveConfigure;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IApproveConfigureService;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
@@ -18,8 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetBorrow;
-import com.dt.platform.domain.eam.AssetBorrowVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -68,16 +67,45 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	public DAO dao() { return dao; }
 
 	@Autowired
-	private AssetItemServiceImpl assetItemServiceImpl;
+	private AssetItemServiceImpl assetItemService;
 
 	@Autowired
-	IApproveConfigureService approveConfigureService;
+	private IAssetSelectedDataService assetSelectedDataService;
+
+	@Autowired
+	private IApproveConfigureService approveConfigureService;
 
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+	/**
+	 * 插入实体
+	 * @param assetBorrowVO 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
+
+		Result reuslt=insert(assetBorrowVO);
+
+		//保存表单数据
+		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+			List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<list.size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setHandleId(assetBorrowVO.getId());
+				asset.setAssetId(list.get(i).getAssetId());
+				saveList.add(asset);
+			}
+			assetItemService.insertList(saveList);
+		}
+		return reuslt;
+	}
+
 	/**
 	 * 插入实体
 	 * @param assetBorrow 实体数据
@@ -91,11 +119,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		if(!codeResult.isSuccess()){
 			return codeResult;
 		}
-
-		//资产数量
-//		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
-//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-//		}
+		assetBorrow.setBusinessCode(codeResult.getData().toString());
 
 		//填充制单人
 		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
@@ -107,7 +131,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			assetBorrow.setBusinessDate(new Date());
 		}
 
-		assetBorrow.setBusinessCode(codeResult.getData().toString());
 
 		//审批
 		ApproveConfigure approveConfigure=new ApproveConfigure();
@@ -115,10 +138,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 
 		Result r=super.insert(assetBorrow);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetBorrow.getId(), assetBorrow.getAssetIds());
-		}
 
 		return r;
 	}
@@ -187,7 +206,23 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	@Override
 	public Result update(AssetBorrow assetBorrow , SaveMode mode) {
-		Result r=super.update(assetBorrow , mode);
+		Result r=super.update(assetBorrow,mode);
+		//保存表单数据
+		List<AssetItem> list=assetItemService.queryList(AssetItem.create().setHandleId(assetBorrow.getId()));
+		List<String> deleteList=new ArrayList<String>();
+		List<AssetItem> updateList=new ArrayList<AssetItem>();
+		for(int i=0;i<list.size();i++){
+			AssetItem asset=new AssetItem();
+			String crd=asset.getCrd();
+			if("c".equals(crd)){
+				asset.setCrd("r");
+				updateList.add(asset);
+			}else if("d".equals(crd)||"cd".equals(crd)){
+				deleteList.add(asset.getId());
+			}
+		}
+		assetItemService.updateList(updateList,SaveMode.NOT_NULL_FIELDS);
+		assetItemService.deleteByIdsPhysical(deleteList);
 		return r;
 	}
 	

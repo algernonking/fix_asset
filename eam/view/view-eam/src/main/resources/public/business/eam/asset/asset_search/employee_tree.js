@@ -1,10 +1,3 @@
-/**
- * 菜单 列表页 JS 脚本
- * @author 李方捷 , leefangjie@qq.com
- * @since 2021-06-08 10:22:55
- */
-
-
 function ListPage() {
 
     var settings,admin,form,table,layer,util,fox,upload,xmSelect,dropdown,element;
@@ -56,7 +49,6 @@ function ListPage() {
             var treeHeight=fullHeight-toolbarHeight-1;
             $("#tree-container").height(treeHeight);
             // $("#form-view").height(fullHeight-6);
-
             $("#org-basic-info-ifr").height(fullHeight-70);
             $("#org-basic-info-ifr").show();
 
@@ -65,7 +57,6 @@ function ListPage() {
 
             $("#employee-list-ifr").height(fullHeight-70);
             $("#employee-list-ifr").show();
-            //
             // $(".layui-col-md4").width("200px");
             // $(".layui-col-md8").width((fullWidth-200)+"px");
 
@@ -74,6 +65,7 @@ function ListPage() {
         //
         bindSearchEvent();
 
+        renderMenu();
 
         element.on('tab(rightTab)', function(data) {
             var el=$(data.elem).find(".layui-show");
@@ -83,52 +75,29 @@ function ListPage() {
     }
 
     function renderMenu() {
+        //初演示
+        dropdown.render({
+            elem: '#btn-add'
+            ,data: [{
+                title: '添加组织'
+                ,id: "org"
+            },{
+                title: '添加岗位'
+                ,id: "pos"
+            }]
+            ,click: function(obj){
 
+            }
+        });
     }
 
     var editingNode=null;
     function onNodeClick(event, treeId, treeNode) {
         if(treeNode==null) return;
         editingNode=treeNode;
-        if(editingNode.type=="pos") {
-            // $("#org-li").hide();
-            // $("#pos-li").show();
-            // if(activedTab!="emp") {
-            //     element.tabChange("rightTab", "pos-li");
-            // }
-            // $("#pos-basic-info-ifr")[0].contentWindow.module.loadFormData(treeNode.id);
-        } else {
-            // $("#org-li").show();
-            // $("#pos-li").hide();
-            // if(activedTab!="emp") {
-            //     element.tabChange("rightTab", "org-li");
-            // }
-            // if(editingNode.type=="com") {
-            //     $("#org-li").text("公司信息");
-            // }
-            // if(editingNode.type=="dept") {
-            //     $("#org-li").text("部门信息");
-            // }
-            // $("#org-basic-info-ifr")[0].contentWindow.module.loadFormData(treeNode.id);
-        }
-        //
-        // $("#employee-list-ifr")[0].contentWindow.module.lockRange(editingNode.type,treeNode.id);
-
-
+        $("#employee-list-ifr")[0].contentWindow.module.lockRange(editingNode.type,treeNode.id);
     }
 
-
-
-    function saveHierarchy(ids,parentId,parentNode) {
-        admin.request(moduleURL+"/save-hierarchy",{"ids":ids,parentId:parentId},function(r) {
-            if(r.success) {
-                admin.toast().success("已调整",{time:1000,position:"right-bottom"});
-            } else {
-                admin.toast().error("调整失败",{time:1000,position:"right-bottom"});
-            }
-            //menuTree.reAsyncChildNodes(parentNode,"refresh",true);
-        });
-    }
 
 
     function nodeDatafilter(treeId, parentNode, childNodes) {
@@ -168,6 +137,13 @@ function ListPage() {
 
     }
 
+    function changeNodeName(id,name) {
+        if(editingNode==null) return;
+        if(editingNode.id!=id) return;
+        editingNode.name=name;
+        menuTree.updateNode(editingNode);
+    }
+    window.changeNodeName=changeNodeName;
 
     function removeHoverDom(treeId, treeNode) {
         $("#diyBtn_"+treeNode.id).unbind().remove();
@@ -261,12 +237,6 @@ function ListPage() {
         }
 
     }
-
-
-
-
-
-
 };
 
 

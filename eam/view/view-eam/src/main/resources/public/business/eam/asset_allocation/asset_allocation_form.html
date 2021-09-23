@@ -2,7 +2,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:58:21
+ * @since 2021-09-22 16:52:27
  */
  -->
  <!DOCTYPE html>
@@ -99,6 +99,16 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>资产列表</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
+        </div>
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
@@ -107,9 +117,6 @@
 
     </form>
 
-    <div>
-
-    </div>
 </div>
 <div class="model-form-footer">
     <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
@@ -128,10 +135,8 @@
     var VALIDATE_CONFIG={"inOwnCompanyId":{"labelInForm":"调入所属公司","inputType":"button","required":true},"outOwnCompanyId":{"labelInForm":"调出所属公司","inputType":"button","required":true}};
     var AUTH_PREFIX="eam_asset_allocation";
 
-    // 用户ID
-    var EMPLOYEE_ID = [[${user.getUser().getActivatedEmployeeId()}]] ;
-    // 用户姓名
-    var EMPLOYEE_NAME = [[${user.getUser().getActivatedEmployeeName()}]] ;
+    // 单据ID
+    var BILL_ID = [[${billId}]] ;
 
 </script>
 

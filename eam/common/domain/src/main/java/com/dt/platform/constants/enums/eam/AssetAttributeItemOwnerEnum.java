@@ -15,11 +15,19 @@ public enum AssetAttributeItemOwnerEnum implements CodeTextEnum {
 
 	BASE("base" , "基本模块"),
 	EQUIPMENT("equipment" , "设备模块"),
-	PUBLIC_SHOE("public_show" , "公共显示"),
-	FINIANCE_CHANGE("finiance_change" , "财务变更"),
-	MAINTAINER_CHANGE("maintainer_change" , "维保变更"),
-	BASEINFO_CHANGE("baseinfo_change" , "基本信息变更"),
+	FINIANCE_CHANGE("finiance_change" , "财务变更模块"),
+	MAINTAINER_CHANGE("maintainer_change" , "维保变更模块"),
+	BASEINFO_CHANGE("baseinfo_change" , "信息变更模块"),
+
+	ASSET_SELECT("asset_select" , "资产选择列表"),
+	ASSET_BOOK("asset_book" , "资产公共台账列表"),
+	ASSET_BILL("asset_bill" , "资产单据列表"),
+	PUBLIC_SHOW("public_show" , "公共显示列表"),
 	;
+
+
+
+
 	private String code;
 	private String text;
 	private AssetAttributeItemOwnerEnum(String code, String text)  {
