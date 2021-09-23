@@ -93,6 +93,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
+         * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeToolBarButtonEvent:function (selected,obj) {
+            console.log('beforeToolBarButtonEvent',selected,obj);
+            return true;
+        },
+        /**
+         * 列表操作栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeRowOperationEvent:function (data,obj) {
+
+        },
+        /**
          * 表格右侧操作列更多按钮事件
          * */
         moreAction:function (menu,data, it){

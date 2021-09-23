@@ -1,15 +1,10 @@
 package com.dt.platform.generator.constants;
 
-import java.util.List;
-import java.util.Map;
-
-import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT;
-import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT_ITEM;
-
 import com.dt.platform.generator.config.PlatformConfigs;
 import com.github.foxnic.commons.code.JavaClassFile;
 import com.github.foxnic.commons.lang.DateUtil;
 import com.github.foxnic.commons.project.maven.MavenProject;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.spec.DAO;
@@ -18,6 +13,11 @@ import com.github.foxnic.generator.config.EnumConfig;
 import com.github.foxnic.generator.config.GlobalSettings;
 import com.github.foxnic.sql.entity.naming.DefaultNameConvertor;
 import com.github.foxnic.sql.expr.ConditionExpr;
+import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT;
+import org.github.foxnic.web.constants.db.FoxnicWeb.SYS_DICT_ITEM;
+
+import java.util.List;
+import java.util.Map;
 
 public class EamEnumGenerator  {
 	
@@ -117,14 +117,12 @@ class DictItemBuilder extends JavaClassFile {
 		code.ln(1,"public String text() {");
 		code.ln(2,"return text;");
 		code.ln(1,"}");
-		
-		addJavaDoc(1,"从字符串转换成当前枚举类型，使用 valueOf 方法可能导致偏差，建议不要使用");
-		code.ln(1,"public static "+this.getSimpleName()+" parse(String code) {");
-		code.ln(2,"for ("+this.getSimpleName()+" dn : "+this.getSimpleName()+".values()) {");
-		code.ln(3,"if(code.equals(dn.code())) return dn;");
-		code.ln(2,"}");
-		code.ln(2,"return null;");
+
+		addJavaDoc(1,"从字符串转换成当前枚举类型");
+		code.ln(1,"public static "+this.getSimpleName()+" parseByCode(String code) {");
+		code.ln(2,"return ("+this.getSimpleName()+") EnumUtil.parseByCode("+this.getSimpleName()+".values(),code);");
 		code.ln(1,"}");
+		this.addImport(EnumUtil.class);
 		
 		code.ln("}");
  
