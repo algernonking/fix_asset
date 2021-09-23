@@ -25,7 +25,16 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetService extends ISuperService<Asset> {
-	
+
+
+	/**
+	 * 插入实体
+	 * @param businessType 业务类型
+	 * @param assetIds 资产
+	 * @return 插入是否成功
+	 * */
+	Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds);
+
 	/**
 	 * 插入实体
 	 * @param asset 实体数据

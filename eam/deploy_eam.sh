@@ -6,7 +6,7 @@ cd /tmp
 mysql_pwd=`cat /opt/password.txt|tail -1`
 /usr/bin/mysqldump -uroot -p$mysql_pwd -h127.0.0.1 eam  > $demo_sql
 /usr/bin/mysql -uroot -p$mysql_pwd -h127.0.0.1 eam_demo < $demo_sql
-app_dir=/tmp/eam
+app_dir=/opt/eam
 if [[ ! -d $app_dir ]];then
   mkdir -p $app_dir
   mkdir $app_dir/log

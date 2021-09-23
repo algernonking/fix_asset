@@ -62,12 +62,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
 	/**
 	 * 插入实体
 	 * @param asset 实体数据
@@ -87,7 +87,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		Result r=super.insert(asset);
 		return r;
 	}
-	
+
+
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param assetList 实体数据清单
@@ -243,7 +245,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 	@Override
-	public PagedList<Asset> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
+	public PagedList<Asset> queryPagedListBySelect(AssetVO sample,String businessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
 
 		ConditionExpr queryCondition=new ConditionExpr();
 
@@ -260,34 +262,73 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		//sample.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 
 		//过滤资产状态
-		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(assetBussinessType)){
+		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(businessType)){
 			//借用
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(assetBussinessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(businessType)){
 			//领用
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.equals(assetBussinessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.equals(businessType)){
 			//退库
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.equals(assetBussinessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.equals(businessType)){
 			//报修
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.equals(assetBussinessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.equals(businessType)){
 			//报废
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(assetBussinessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(businessType)){
 			//调拨
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
 		}
-
 		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
 		return list;
 	}
 
 
+	/**
+	 * 插入实体
+	 * @param businessType 业务类型
+	 * @param assetIds 资产
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds) {
 
+		Result result=new Result();
+		ConditionExpr queryCondition=new ConditionExpr();
 
+		queryCondition.andIn("id",assetIds);
+		//过滤资产状态
+		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(businessType)){
+			//借用
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(businessType)){
+			//领用
+			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.equals(businessType)){
+			//退库
+			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.equals(businessType)){
+			//报修
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.equals(businessType)){
+			//报废
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(businessType)){
+			//调拨
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else{
+			return ErrorDesc.failure().message("不支持当前业务类型操作");
+		}
 
+		List<Asset> list=queryList(queryCondition);
+
+		if(list.size()!=assetIds.size()){
+			return ErrorDesc.failure().message("当前选择的资产中部分状态异常,请重新选择");
+		}
+		return result;
+	}
 
 
 
