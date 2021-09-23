@@ -2,11 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetExtAttribution;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.eam.service.IAssetDataService;
-import com.dt.platform.eam.service.IAssetExtAttributionService;
+
 import com.dt.platform.eam.service.IAssetService;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanUtil;

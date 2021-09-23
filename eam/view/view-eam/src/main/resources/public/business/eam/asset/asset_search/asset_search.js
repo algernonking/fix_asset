@@ -11,6 +11,10 @@ function ListPage() {
     //模块基础路径
     const moduleURL="/service-eam/eam-asset";
     var dataTable=null;
+
+    var searchContent_useOrganizationId;
+    var searchContent_categoryId;
+    var searchContent_positionId;
     /**
      * 入口函数，初始化
      */
@@ -63,7 +67,7 @@ function ListPage() {
             }
             var h=$(".search-bar").height();
             var COL_ALL_DATA= assetListColumn.getColumnList(templet);
-            var COL_DATA=[{ fixed: 'left',type: 'numbers' , fixed: 'left',type:'checkbox'}]
+            var COL_DATA=[{ fixed: 'left',type: 'numbers' },{ fixed: 'left',type:'checkbox'}];
             for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
                 COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
             }
@@ -89,10 +93,8 @@ function ListPage() {
         setTimeout(renderTableInternal,1);
     };
 
-    /**
-     * 刷新表格数据
-     */
-    function refreshTableData(sortField,sortType) {
+
+    function getSearchCondition(){
         var value = {};
         value.businessCode={ value: $("#businessCode").val()};
         value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
@@ -109,10 +111,30 @@ function ListPage() {
         value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
         value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
         value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+        return value;
+    }
+    /**
+     * 刷新表格数据
+     */
+    function refreshTableData(sortField,sortType) {
+
+        var value=getSearchCondition();
         var ps={searchField:"$composite"};
         if(window.pageExt.list.beforeQuery){
             if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
         }
+        if(searchContent_useOrganizationId){
+            value.useOrganizationId={ value: searchContent_useOrganizationId};
+        }
+
+        if(searchContent_categoryId){
+            value.categoryId={ value: searchContent_categoryId};
+        }
+
+        if(searchContent_positionId){
+            value.positionId={value:searchContent_positionId, fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+        }
+
         ps.searchValue=JSON.stringify(value);
         if(sortField) {
             ps.sortField=sortField;
@@ -121,6 +143,21 @@ function ListPage() {
         table.reload('data-table', { where : ps });
     }
 
+
+    function searchUseOrganization(useOrganizationId){
+        searchContent_useOrganizationId=useOrganizationId;
+        refreshTableData()
+    }
+
+    function searchCategory(categoryId){
+        searchContent_categoryId=categoryId;
+        refreshTableData()
+    }
+
+    function searchPosition(positionId){
+        searchContent_positionId=positionId;
+        refreshTableData()
+    }
 
     /**
      * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
@@ -277,7 +314,6 @@ function ListPage() {
                 }
             });
         });
-
     }
 
     /**
@@ -452,6 +488,9 @@ function ListPage() {
     };
 
     window.module={
+        searchUseOrganization:searchUseOrganization,
+        searchCategory:searchCategory,
+        searchPosition:searchPosition,
         refreshTableData: refreshTableData,
         getCheckedList: getCheckedList
     };

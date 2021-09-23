@@ -23,9 +23,9 @@ public class EAMRelationManager extends RelationManager {
 
         this.setupAsset();
 
-        this.setupAssetFinancial();
-        this.setupAssetMaintainer();
-        this.setupAssetEaintainer();
+//        this.setupAssetFinancial();
+//        this.setupAssetMaintainer();
+//        this.setupAssetEaintainer();
 
 
         this.setupAlloction();
@@ -266,36 +266,36 @@ public class EAMRelationManager extends RelationManager {
 //
 //
 //    }
-        public void setupAssetEaintainer() {
-
-//        // 关联区域
-//        this.property(AssetExtEquipmentMeta.AREA_PROP)
-//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(EAMTables.DC_AREA.ID);
+//        public void setupAssetEaintainer() {
 //
-//        // 关联层级
-//        this.property(AssetExtEquipmentMeta.LAYER_PROP)
-//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+////        // 关联区域
+////        this.property(AssetExtEquipmentMeta.AREA_PROP)
+////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.AREA_ID).join(EAMTables.DC_AREA.ID);
+////
+////        // 关联层级
+////        this.property(AssetExtEquipmentMeta.LAYER_PROP)
+////                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+//
+//        // 关联机柜
+//        this.property(AssetExtEquipmentMeta.RACK_PROP)
+//                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID).join(EAMTables.DC_RACK.ID);
+//
+//    }
 
-        // 关联机柜
-        this.property(AssetExtEquipmentMeta.RACK_PROP)
-                .using(EAMTables.EAM_ASSET_EXT_EQUIPMENT.RACK_ID).join(EAMTables.DC_RACK.ID);
-
-    }
-
-    public void setupAssetMaintainer() {
-
-        // 关联维保商
-        this.property(AssetExtMaintainerMeta.MAINTNAINER_PROP)
-                .using(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
-    }
-
-    public void setupAssetFinancial() {
-
-        // 关联供应商
-        this.property(AssetExtFinancialMeta.SUPPLIER_PROP)
-                .using(EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
-
-    }
+//    public void setupAssetMaintainer() {
+//
+//        // 关联维保商
+//        this.property(AssetExtMaintainerMeta.MAINTNAINER_PROP)
+//                .using(EAMTables.EAM_ASSET_EXT_MAINTAINER.MAINTAINER_ID).join(EAMTables.EAM_MAINTAINER.ID);
+//    }
+//
+//    public void setupAssetFinancial() {
+//
+//        // 关联供应商
+//        this.property(AssetExtFinancialMeta.SUPPLIER_PROP)
+//                .using(EAMTables.EAM_ASSET_EXT_FINANCIAL.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+//
+//    }
 
     public void setupAsset() {
 

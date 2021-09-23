@@ -34,60 +34,12 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 资产分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 分类编码 , categoryCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
+
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 批次编码 , batchCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 是否显示 , display ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 是否报废 , scrap ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 物品档案 , goodsId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=true -->
-                    <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 使用期限 , serviceLife ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 管理人员 , managerId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 剩余数量 , remainNumber ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 资产RFID , rfid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
-                    <!-- 维保商 , maintainerId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 维保厂商 , maintainerName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 联系人 , contacts ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 联系方式 , contactInformation ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 负责人 , director ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 维保开始时间 , maintenanceStartDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 维保到期时间 , maintenanceEndDate ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 维保备注 , maintenanceNotes ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 财务分类 , financialCategoryId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 财务编号 , financialCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 税额 , taxamountRate ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 含税金额 , taxamountPrice ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 资产原值(单价) , originalUnitPrice ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 累计折旧 , accumulatedDepreciation ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 残值率 , residualsRate ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 资产净值 , navPrice ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 采购单价 , purchaseUnitPrice ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 财务备注 , financialNotes ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 设备编号 , equipmentCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备状态 , equipmentStatus ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备IP , equipmentIp ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 管理IP , manageIp ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备CPU , equipmentCpu ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备内存 , equipmentMemory ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备机柜 , rackId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备机柜上位置 , rackUpNumber ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 设备机柜下位置 , rackDownNumber ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
+
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
@@ -226,6 +178,5 @@
 <script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_search/asset_search_ext.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset/asset_search/asset_search.js?'+${cacheKey}"></script>
-
 </body>
 </html>

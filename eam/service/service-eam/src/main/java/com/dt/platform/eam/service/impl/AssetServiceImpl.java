@@ -4,8 +4,12 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.domain.eam.ApproveConfigure;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +75,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public Result insert(Asset asset) {
+
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		asset.setAssetCode(codeResult.getData().toString());
+
+
 		Result r=super.insert(asset);
 		return r;
 	}

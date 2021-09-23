@@ -46,28 +46,23 @@
 
 <body>
 
-
 <div class="top-container">
-
     <div class="left-tree">
         <div class="layui-form toolbar" style="padding:6px; border-bottom:1px #e6e6e6 solid; " id="toolbar">
-            <table style="width: 100%">
-                <tr>
-                    <td>
-                        <input id="search-input" class="layui-input search-input" type="text" placeholder="请输入关键字" style="width: 100%"/>
-                    </td>
-              </tr>
-            </table>
+            <table style="width: 100%"><tr>
+                <td>
+                    <input id="search-input" class="layui-input search-input" type="text" th:placeholder="${lang.translate('请输入关键字')}" style="width: 100%"/>
+                </td>
+
+            </tr></table>
         </div>
         <div id="tree-container" style="overflow:auto;height:800px">
             <ul id="menu-tree" class="ztree"></ul>
         </div>
     </div>
-
-
     <div class="right-tab" style="margin-left: 8px;margin-right: 8px">
         <div class="layui-tab-item layui-show" type="emp">
-             <iframe id="asset-list-ifr" src="/business/eam/asset/asset_search/asset_search.html" frameborder=0 width="100%" ></iframe>
+            <iframe id="asset-list-ifr" src="/business/eam/asset/asset_search/asset_search.html" frameborder=0 width="100%"  ></iframe>
         </div>
     </div>
 </div>

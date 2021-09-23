@@ -23,7 +23,10 @@ function ListPage() {
         admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
         dropdown=layui.dropdown,element=layui.element;
-        admin.putTempData('eam-asset-list-data-btn-controller', {addButton:"hide",deleteButton:"hide",opsEditButton:"hide",opsDeleteButton:"hide"},true);
+
+
+      //  admin.putTempData('eam-asset-list-data-btn-controller', {addButton:"hide",deleteButton:"hide",opsEditButton:"hide",opsDeleteButton:"hide"},true);
+
         var cfgs = {
             edit: {
                 drag:{
@@ -58,19 +61,8 @@ function ListPage() {
             var fullWidth=$(window).width();
             var treeHeight=fullHeight-toolbarHeight-1;
             $("#tree-container").height(treeHeight);
-            // $("#form-view").height(fullHeight-6);
-
-            $("#org-basic-info-ifr").height(fullHeight-70);
-            $("#org-basic-info-ifr").show();
-
-            $("#pos-basic-info-ifr").height(fullHeight-70);
-            $("#pos-basic-info-ifr").show();
-
-            $("#employee-list-ifr").height(fullHeight-70);
-            $("#employee-list-ifr").show();
-            //
-            // $(".layui-col-md4").width("200px");
-            // $(".layui-col-md8").width((fullWidth-200)+"px");
+            $("#asset-list-ifr").height(fullHeight-70);
+            $("#asset-list-ifr").show();
 
         },10);
 
@@ -93,45 +85,18 @@ function ListPage() {
     function onNodeClick(event, treeId, treeNode) {
         if(treeNode==null) return;
         editingNode=treeNode;
-        if(editingNode.type=="pos") {
-            // $("#org-li").hide();
-            // $("#pos-li").show();
-            // if(activedTab!="emp") {
-            //     element.tabChange("rightTab", "pos-li");
-            // }
-            // $("#pos-basic-info-ifr")[0].contentWindow.module.loadFormData(treeNode.id);
-        } else {
-            // $("#org-li").show();
-            // $("#pos-li").hide();
-            // if(activedTab!="emp") {
-            //     element.tabChange("rightTab", "org-li");
-            // }
-            // if(editingNode.type=="com") {
-            //     $("#org-li").text("公司信息");
-            // }
-            // if(editingNode.type=="dept") {
-            //     $("#org-li").text("部门信息");
-            // }
-            // $("#org-basic-info-ifr")[0].contentWindow.module.loadFormData(treeNode.id);
-        }
-        //
-        // $("#employee-list-ifr")[0].contentWindow.module.lockRange(editingNode.type,treeNode.id);
-
-
-    }
-
-
-
-    function saveHierarchy(ids,parentId,parentNode) {
-        admin.request(moduleURL+"/save-hierarchy",{"ids":ids,parentId:parentId},function(r) {
-            if(r.success) {
-                admin.toast().success("已调整",{time:1000,position:"right-bottom"});
-            } else {
-                admin.toast().error("调整失败",{time:1000,position:"right-bottom"});
+        if(treeNode.type){
+            if(treeNode.type=="dept"||treeNode.type=="com"){
+                $("#asset-list-ifr")[0].contentWindow.module.searchUseOrganization(treeNode.id);
             }
-            //menuTree.reAsyncChildNodes(parentNode,"refresh",true);
-        });
+        }
+
+
     }
+
+
+
+
 
 
     function nodeDatafilter(treeId, parentNode, childNodes) {

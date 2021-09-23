@@ -66,15 +66,16 @@ function ListPage() {
         }
 
         setTimeout(function(){
+
             var toolbarHeight=$("#toolbar")[0].clientHeight;
             var fullHeight=$(window).height();
             var fullWidth=$(window).width();
             var treeHeight=fullHeight-toolbarHeight-1;
             $("#tree-container").height(treeHeight);
-            // $("#form-view").height(fullHeight-6);
-            $("#basic-info-ifr").height(fullHeight-70);
-            // $(".layui-col-md4").width("200px");
-            // $(".layui-col-md8").width((fullWidth-200)+"px");
+            $("#asset-list-ifr").height(fullHeight-70);
+            $("#asset-list-ifr").show();
+
+
         },10);
 
         //
@@ -86,6 +87,8 @@ function ListPage() {
         console.log("click")
         if(treeNode==null) return;
         editingNode=treeNode;
+
+        $("#asset-list-ifr")[0].contentWindow.module.searchCategory(treeNode.id);
     }
 
 

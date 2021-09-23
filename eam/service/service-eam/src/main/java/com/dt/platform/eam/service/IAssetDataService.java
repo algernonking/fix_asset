@@ -2,7 +2,6 @@ package com.dt.platform.eam.service;
 
 
 import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetExtAttribution;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.Goods;
 import com.github.foxnic.api.transter.Result;

@@ -1,7 +1,7 @@
 package com.dt.platform.proxy.eam;
 
 
-import com.dt.platform.domain.eam.AssetExtAttributionVO;
+
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.api.transter.Result;
