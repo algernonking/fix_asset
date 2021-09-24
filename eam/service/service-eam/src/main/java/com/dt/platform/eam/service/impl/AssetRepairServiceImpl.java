@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -82,6 +83,14 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	public Result insert(AssetRepair assetRepair) {
 
 
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_REPAIR.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}else{
+			assetRepair.setBusinessCode(codeResult.getData().toString());
+		}
+
 		//资产数量
 //		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
 //			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
@@ -97,18 +106,17 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		}
 
 
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_REPAIR.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
+		//办理状态
+		if(assetRepair.getStatus()==null||"".equals(assetRepair.getStatus())){
+			assetRepair.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		}
-		assetRepair.setBusinessCode(codeResult.getData().toString());
+
+
+
+
 		Result r=super.insert(assetRepair);
 
 		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetRepair.getId(), assetRepair.getAssetIds());
-		}
 		return r;
 	}
 	

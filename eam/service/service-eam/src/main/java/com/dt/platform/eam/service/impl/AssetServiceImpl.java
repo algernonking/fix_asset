@@ -80,8 +80,16 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
+		}else{
+			asset.setAssetCode(codeResult.getData().toString());
 		}
-		asset.setAssetCode(codeResult.getData().toString());
+
+
+		//办理状态
+		if(asset.getStatus()==null||"".equals(asset.getStatus())){
+			asset.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
+
 
 
 		Result r=super.insert(asset);
@@ -318,6 +326,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(businessType)){
 			//调拨
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+		}else if(CodeModuleEnum.EAM_ASSET_TRANFER.equals(businessType)){
+			//转移
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
 		}else{
 			return ErrorDesc.failure().message("不支持当前业务类型操作");
 		}
@@ -337,6 +348,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		ConditionExpr queryCondition=new ConditionExpr();
 		if(assetOwnerId!=null&&assetOwnerId.length()>0){
+		    //实现临时快照
 			if("refresh".equals(dataType)){
 				dao.execute("delete from eam_asset_item where crd in ('cd','c') and handle_id=?",assetOwnerId);
 				dao.execute("update eam_asset_item set crd='r' where crd='d' and handle_id=?",assetOwnerId);

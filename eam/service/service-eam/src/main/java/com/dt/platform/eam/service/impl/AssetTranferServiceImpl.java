@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -99,16 +100,18 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_TRANFER.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
+		}else{
+			assetTranfer.setBusinessCode(codeResult.getData().toString());
 		}
-		assetTranfer.setBusinessCode(codeResult.getData().toString());
 
+		//办理状态
+		if(assetTranfer.getStatus()==null||"".equals(assetTranfer.getStatus())){
+			assetTranfer.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
 
 
 		Result r=super.insert(assetTranfer);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetTranfer.getId(), assetTranfer.getAssetIds());
-		}
+
 		return r;
 	}
 	

@@ -8,9 +8,11 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetSelectedDataMeta;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IApproveConfigureService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
@@ -75,6 +77,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Autowired
 	private IApproveConfigureService approveConfigureService;
 
+	@Autowired
+	private IAssetService assetService;
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -89,21 +94,50 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
 
-		Result reuslt=insert(assetBorrowVO);
-
-		//保存表单数据
 		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
-			List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
+
+			//List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(AssetSelectedData.TABLE.getField("asset_id"),null,condition);
+			if(list.size()==0){
+				return ErrorDesc.failure().message("请选择资产");
+			}
+
+			//保存资产列表
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<list.size();i++){
 				AssetItem asset=new AssetItem();
 				asset.setHandleId(assetBorrowVO.getId());
-				asset.setAssetId(list.get(i).getAssetId());
+				//asset.setAssetId(list.get(i).getAssetId());
 				saveList.add(asset);
 			}
-			assetItemService.insertList(saveList);
+
+
+			//数据校验
+			Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_BORROW.code(),list);
+			if(!ckResult.isSuccess()){
+				return ckResult;
+			}
+
+			//保存单据数据
+			Result insertReuslt=insert(assetBorrowVO);
+			if(!insertReuslt.isSuccess()){
+				return insertReuslt;
+			}
+
+			//保存资产数据
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}else{
+			return ErrorDesc.failure().message("请选择资产");
 		}
-		return reuslt;
+
+
+		return ErrorDesc.success();
+
 	}
 
 	/**
@@ -118,8 +152,10 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
 		if(!codeResult.isSuccess()){
 			return codeResult;
+		}else{
+			assetBorrow.setBusinessCode(codeResult.getData().toString());
 		}
-		assetBorrow.setBusinessCode(codeResult.getData().toString());
+
 
 		//填充制单人
 		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
@@ -136,6 +172,11 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		ApproveConfigure approveConfigure=new ApproveConfigure();
 		approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code());
 		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+
+		//办理状态
+		if(assetBorrow.getStatus()==null||"".equals(assetBorrow.getStatus())){
+			assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
 
 		Result r=super.insert(assetBorrow);
 

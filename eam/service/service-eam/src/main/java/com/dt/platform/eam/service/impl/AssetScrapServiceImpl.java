@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -85,6 +86,14 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 //			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 //		}
 
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_SCRAP.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+		assetScrap.setBusinessCode(codeResult.getData().toString());
+
+
 		//制单人
 		if(assetScrap.getOriginatorId()==null||"".equals(assetScrap.getOriginatorId())){
 			assetScrap.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -94,13 +103,12 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 			assetScrap.setBusinessDate(new Date());
 		}
 
-
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_SCRAP.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
+		//办理状态
+		if(assetScrap.getStatus()==null||"".equals(assetScrap.getStatus())){
+			assetScrap.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		}
-		assetScrap.setBusinessCode(codeResult.getData().toString());
+
+
 
 
 

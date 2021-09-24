@@ -106,11 +106,11 @@ public class OPSRelationManager extends RelationManager {
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
-                        String pwd="";
-                        String voucherStr=obj.getVoucher();
-                        if(voucherStr!=null&&voucherStr.length()>5){
-                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
-                        }
+                        String pwd=",******";
+//                        String voucherStr=obj.getVoucher();
+//                        if(voucherStr!=null&&voucherStr.length()>5){
+//                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
+//                        }
                         obj.setVoucher("("+obj.getUserCode()+pwd+")");
                     }
                     return voucher;
@@ -127,11 +127,11 @@ public class OPSRelationManager extends RelationManager {
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
-                        String pwd="";
-                        String voucherStr=obj.getVoucher();
-                         if(voucherStr!=null&&voucherStr.length()>5){
-                             pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
-                         }
+                        String pwd=",******";
+//                        String voucherStr=obj.getVoucher();
+//                         if(voucherStr!=null&&voucherStr.length()>5){
+//                             pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
+//                         }
                         obj.setVoucher("("+obj.getUserCode()+pwd+")");
                     }
                     return voucher;
@@ -175,11 +175,11 @@ public class OPSRelationManager extends RelationManager {
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
-                        String pwd="";
+                        String pwd=",******";
                         String voucherStr=obj.getVoucher();
-                        if(voucherStr!=null&&voucherStr.length()>5){
-                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
-                        }
+//                        if(voucherStr!=null&&voucherStr.length()>5){
+//                            pwd=","+voucherStr.replaceFirst(voucherStr.substring(0,4),"***" )+"***";
+//                        }
                         obj.setVoucher("("+obj.getUserCode()+pwd+")");
                     }
                     return voucher;

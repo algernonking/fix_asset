@@ -3,8 +3,11 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -85,6 +88,15 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 //			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 //		}
 
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}else{
+			assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
+		}
+
+
 		//制单人
 		if(assetCollectionReturn.getOriginatorId()==null||"".equals(assetCollectionReturn.getOriginatorId())){
 			assetCollectionReturn.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -94,12 +106,14 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 			assetCollectionReturn.setBusinessDate(new Date());
 		}
 
+		//办理状态
+		if(assetCollectionReturn.getStatus()==null||"".equals(assetCollectionReturn.getStatus())){
+			assetCollectionReturn.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
+
 
 		Result r=super.insert(assetCollectionReturn);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetCollectionReturn.getId(), assetCollectionReturn.getAssetIds());
-		}
+
 		return r;
 	}
 	

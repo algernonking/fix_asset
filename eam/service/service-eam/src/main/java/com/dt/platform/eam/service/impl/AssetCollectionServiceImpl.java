@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -85,6 +86,13 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 //		if(assetCollection.getAssetIds()==null||assetCollection.getAssetIds().size()==0){
 //			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
 //		}
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}else{
+			assetCollection.setBusinessCode(codeResult.getData().toString());
+		}
 
 		//制单人
 		if(assetCollection.getOriginatorId()==null||"".equals(assetCollection.getOriginatorId())){
@@ -95,12 +103,13 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 			assetCollection.setBusinessDate(new Date());
 		}
 
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
+		//办理状态
+		if(assetCollection.getStatus()==null||"".equals(assetCollection.getStatus())){
+			assetCollection.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		}
-		assetCollection.setBusinessCode(codeResult.getData().toString());
+
+
+
 
 		Result r=super.insert(assetCollection);
 		//保存关系

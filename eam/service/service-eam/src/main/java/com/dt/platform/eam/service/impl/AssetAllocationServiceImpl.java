@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.eam.common.AssetCommonError;
@@ -86,6 +87,15 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	public Result insert(AssetAllocation assetAllocation) {
 
 
+		//编码
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}else{
+			assetAllocation.setBusinessCode(codeResult.getData().toString());
+		}
+
+
 		//资产数量
 //		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
 //			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
@@ -99,14 +109,13 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 			assetAllocation.setBusinessDate(new Date());
 		}
 
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
+
+
+
+		//办理状态
+		if(assetAllocation.getStatus()==null||"".equals(assetAllocation.getStatus())){
+			assetAllocation.setStatus(AssetHandleStatusEnum.COMPLETE.code());
 		}
-		assetAllocation.setBusinessCode(codeResult.getData().toString());
-
-
 
 
 
