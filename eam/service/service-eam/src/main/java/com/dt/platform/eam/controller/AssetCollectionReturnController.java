@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
-import com.dt.platform.domain.eam.AssetCollectionReturn;
-import com.dt.platform.domain.eam.AssetCollectionReturnVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,8 +33,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
-import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
@@ -86,9 +84,12 @@ public class AssetCollectionReturnController extends SuperController {
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionReturnServiceProxy.INSERT)
-	public Result insert(AssetCollectionReturnVO assetCollectionReturnVO) {
-		Result result=assetCollectionReturnService.insert(assetCollectionReturnVO);
-		return result;
+	public Result insert(AssetCollectionReturnVO assetCollectionReturnVO,String assetSelectedCode) {
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetCollectionReturnService.insert(assetCollectionReturnVO,assetSelectedCode);
+		}else{
+			return assetCollectionReturnService.insert(assetCollectionReturnVO);
+		}
 	}
 
 	
@@ -97,13 +98,20 @@ public class AssetCollectionReturnController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产退库")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667671264768000")
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667671264768000"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionReturnServiceProxy.DELETE)
 	public Result deleteById(String id) {
+
+		AssetCollectionReturn assetCollectionReturn=assetCollectionReturnService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollectionReturn.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollectionReturn.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
+
 		Result result=assetCollectionReturnService.deleteByIdLogical(id);
 		return result;
 	}
@@ -150,6 +158,13 @@ public class AssetCollectionReturnController extends SuperController {
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionReturnServiceProxy.UPDATE)
 	public Result update(AssetCollectionReturnVO assetCollectionReturnVO) {
+
+		AssetCollectionReturn assetCollectionReturn=assetCollectionReturnService.queryEntity(assetCollectionReturnVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollectionReturn.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollectionReturn.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
+
 		Result result=assetCollectionReturnService.update(assetCollectionReturnVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}

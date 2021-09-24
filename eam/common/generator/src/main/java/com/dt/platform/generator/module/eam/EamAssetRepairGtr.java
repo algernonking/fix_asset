@@ -76,8 +76,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
 
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-        cfg.view().list().operationColumn().width(250);
-
+        cfg.view().list().operationColumn().width(20);
+        cfg.view().formWindow().width("98%");
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.STATUS,
@@ -93,9 +93,10 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         );
 
-
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
 //        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 

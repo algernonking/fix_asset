@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.AssetBorrow;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -83,9 +85,12 @@ public class AssetAllocationController extends SuperController {
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetAllocationServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.INSERT)
-	public Result insert(AssetAllocationVO assetAllocationVO) {
-		Result result=assetAllocationService.insert(assetAllocationVO);
-		return result;
+	public Result insert(AssetAllocationVO assetAllocationVO,String assetSelectedCode) {
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetAllocationService.insert(assetAllocationVO,assetSelectedCode);
+		}else{
+			return assetAllocationService.insert(assetAllocationVO);
+		}
 	}
 
 	
@@ -94,13 +99,18 @@ public class AssetAllocationController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产调拨")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667967441350656")
+		@ApiImplicitParam(name = AssetAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480667967441350656"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetAllocationVOMeta.ID)
 	@SentinelResource(value = AssetAllocationServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.DELETE)
 	public Result deleteById(String id) {
+		AssetAllocation assetAllocation=assetAllocationService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetAllocation.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetAllocation.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
 		Result result=assetAllocationService.deleteByIdLogical(id);
 		return result;
 	}
@@ -145,6 +155,11 @@ public class AssetAllocationController extends SuperController {
 	@SentinelResource(value = AssetAllocationServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.UPDATE)
 	public Result update(AssetAllocationVO assetAllocationVO) {
+		AssetAllocation assetAllocation=assetAllocationService.queryEntity(assetAllocationVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetAllocation.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetAllocation.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
 		Result result=assetAllocationService.update(assetAllocationVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}

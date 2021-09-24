@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:38
+ * @since 2021-09-24 16:42:44
  */
 
 function FormPage() {
@@ -169,8 +169,10 @@ function FormPage() {
 	/**
       * 填充表单数据
       */
-	function fillFormData() {
-		var formData = admin.getTempData('eam-asset-repair-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('eam-asset-repair-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -202,7 +204,9 @@ function FormPage() {
 
 			//处理fillBy
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -257,10 +261,10 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(data) {
-		var api=moduleURL+"/"+(data.id?"update":"insert");
+	function saveForm(param) {
+		var api=moduleURL+"/"+(param.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
+		admin.request(api, param, function (data) {
 			clearTimeout(task);
 			layer.closeAll('loading');
 			if (data.success) {
@@ -270,6 +274,7 @@ function FormPage() {
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
 			}
+			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, "POST");
 	}
 
@@ -303,6 +308,7 @@ function FormPage() {
 		getFormData: getFormData,
 		verifyForm: verifyForm,
 		saveForm: saveForm,
+		fillFormData: fillFormData,
 		adjustPopup: adjustPopup
 	};
 

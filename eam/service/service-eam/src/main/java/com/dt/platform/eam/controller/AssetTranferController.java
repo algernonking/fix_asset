@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetTranferVOMeta;
-import com.dt.platform.domain.eam.AssetTranfer;
-import com.dt.platform.domain.eam.AssetTranferVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -34,8 +34,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetTranferMeta;
-import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.Position;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
@@ -89,9 +87,12 @@ public class AssetTranferController extends SuperController {
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetTranferServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetTranferServiceProxy.INSERT)
-	public Result insert(AssetTranferVO assetTranferVO) {
-		Result result=assetTranferService.insert(assetTranferVO);
-		return result;
+	public Result insert(AssetTranferVO assetTranferVO,String assetSelectedCode) {
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetTranferService.insert(assetTranferVO,assetSelectedCode);
+		}else{
+			return assetTranferService.insert(assetTranferVO);
+		}
 	}
 
 	
@@ -107,6 +108,12 @@ public class AssetTranferController extends SuperController {
 	@SentinelResource(value = AssetTranferServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetTranferServiceProxy.DELETE)
 	public Result deleteById(String id) {
+		AssetTranfer assetTranfer=assetTranferService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetTranfer.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetTranfer.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
+
 		Result result=assetTranferService.deleteByIdLogical(id);
 		return result;
 	}
@@ -154,6 +161,11 @@ public class AssetTranferController extends SuperController {
 	@SentinelResource(value = AssetTranferServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetTranferServiceProxy.UPDATE)
 	public Result update(AssetTranferVO assetTranferVO) {
+		AssetTranfer assetTranfer=assetTranferService.queryEntity(assetTranferVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetTranfer.getStatus())
+		||AssetHandleStatusEnum.APPROVAL.code().equals(assetTranfer.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
 		Result result=assetTranferService.update(assetTranferVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}

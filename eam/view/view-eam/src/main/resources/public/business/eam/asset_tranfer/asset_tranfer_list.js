@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 18:09:35
+ * @since 2021-09-24 16:42:30
  */
 
 
@@ -116,12 +116,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outUseOrganizationId={ value: $("#outUseOrganizationId").val(),fillBy:["outUseOrganization","fullName"] ,label:$("#outUseOrganizationId-button").text()};
-		value.inUseOrganizationId={ value: $("#inUseOrganizationId").val(),fillBy:["inUseOrganization","fullName"] ,label:$("#inUseOrganizationId-button").text()};
-		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.status={ inputType:"button",value: $("#status").val()};
+		value.outUseOrganizationId={ inputType:"button",value: $("#outUseOrganizationId").val(),fillBy:["outUseOrganization","fullName"] ,label:$("#outUseOrganizationId-button").text()};
+		value.inUseOrganizationId={ inputType:"button",value: $("#inUseOrganizationId").val(),fillBy:["inUseOrganization","fullName"] ,label:$("#inUseOrganizationId-button").text()};
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -255,6 +255,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -322,6 +326,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('eam-asset-tranfer-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
@@ -409,7 +419,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["85%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-tranfer-form-data-win",
 			content: '/business/eam/asset_tranfer/asset_tranfer_form.html' + queryString,

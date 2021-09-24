@@ -51,10 +51,13 @@ function ListPage() {
         function renderTableInternal() {
 
             var ps={};
+
             var contitions={};
+            contitions.status={ value: "complete", label:"完成"};
             if(window.pageExt.list.beforeQuery){
                 window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
             }
+
             if(Object.keys(contitions).length>0) {
                 ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
             }
@@ -65,6 +68,7 @@ function ListPage() {
                     return value;
                 }
             }
+            console.log("ps",ps);
             var h=$(".search-bar").height();
             var COL_ALL_DATA= assetListColumn.getColumnList(templet);
             var COL_DATA=[{ fixed: 'left',type: 'numbers' },{ fixed: 'left',type:'checkbox'}];
@@ -97,7 +101,7 @@ function ListPage() {
     function getSearchCondition(){
         var value = {};
         value.businessCode={ value: $("#businessCode").val()};
-        value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+        value.status={ value: "complete", label:"完成"};
         value.assetCode={ value: $("#assetCode").val()};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};

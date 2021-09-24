@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 17:01:55
+ * @since 2021-09-24 16:42:39
  */
  -->
  <!DOCTYPE html>
@@ -55,7 +55,7 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('退库后公司/部门')}" class="search-label useOrganizationId-label">退库后公司/部门</span><span class="search-colon">:</span></div>
                             <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
-                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
                     <!-- 存放位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -108,7 +108,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_asset_collection_return:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_asset_collection_return:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

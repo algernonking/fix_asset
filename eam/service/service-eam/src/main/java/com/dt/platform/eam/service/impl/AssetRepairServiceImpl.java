@@ -3,10 +3,14 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.AssetCollection;
+import com.dt.platform.domain.eam.AssetItem;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +66,11 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * */
 	public DAO dao() { return dao; }
 
-	@Autowired 
-	private AssetItemServiceImpl assetItemServiceImpl;
+	@Autowired
+	private IAssetService assetService;
+
+	@Autowired
+	private AssetItemServiceImpl assetItemService;
 
 	@Autowired
 	private IAssetSelectedDataService assetSelectedDataService;
@@ -72,7 +79,37 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
+	/**
+	 * 插入实体
+	 * @param assetRepair 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result insert(AssetRepair assetRepair, String assetSelectedCode) {
+
+		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+			//获取资产列表
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
+			assetRepair.setAssetIds(list);
+			//保存单据数据
+			Result insertReuslt=insert(assetRepair);
+			if(!insertReuslt.isSuccess()){
+				return insertReuslt;
+			}
+		}else{
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		return ErrorDesc.success();
+	}
+
+
+
+
 	/**
 	 * 插入实体
 	 * @param assetRepair 实体数据
@@ -82,24 +119,31 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Transactional
 	public Result insert(AssetRepair assetRepair) {
 
-
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_REPAIR.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}else{
-			assetRepair.setBusinessCode(codeResult.getData().toString());
+		//校验数据资产
+		if(assetRepair.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_REPAIR.code(),assetRepair.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
 		}
 
-		//资产数量
-//		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
-//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-//		}
+		//生成编码规则
+		if(assetRepair.getBusinessCode()==null||"".equals(assetRepair.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_REPAIR.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetRepair.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 
 		//制单人
 		if(assetRepair.getOriginatorId()==null||"".equals(assetRepair.getOriginatorId())){
 			assetRepair.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
+
 		//业务时间
 		if(assetRepair.getBusinessDate()==null){
 			assetRepair.setBusinessDate(new Date());
@@ -108,14 +152,26 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 		//办理状态
 		if(assetRepair.getStatus()==null||"".equals(assetRepair.getStatus())){
-			assetRepair.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			assetRepair.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
 
 
-
 		Result r=super.insert(assetRepair);
-
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<assetRepair.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setHandleId(assetRepair.getId());
+				asset.setAssetId(assetRepair.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}
 		//保存关系
 		return r;
 	}
@@ -185,10 +241,26 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Override
 	@Transactional
 	public Result update(AssetRepair assetRepair , SaveMode mode) {
-		Result r=super.update(assetRepair , mode);
-		//保存关系
-		if(r.success()) {
-			assetItemServiceImpl.saveRelation(assetRepair.getId(), assetRepair.getAssetIds());
+		//c  新建,r  原纪录,d  删除,cd 新建删除
+		//验证数据
+		String handleId=assetRepair.getId();
+		ConditionExpr itemRecordCondition=new ConditionExpr();
+		itemRecordCondition.andIn("handle_id",handleId);
+		itemRecordCondition.andIn("crd","c","r");
+		List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
+		assetRepair.setAssetIds(ckDatalist);
+		if(assetRepair.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_REPAIR.code(),assetRepair.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
+		}
+		Result r=super.update(assetRepair,mode);
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",handleId);
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",handleId);
 		}
 		return r;
 	}

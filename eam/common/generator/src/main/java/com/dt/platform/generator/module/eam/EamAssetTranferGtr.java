@@ -98,16 +98,17 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.POSITION_ID)
                 .basic().label("存放位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
         cfg.view().list().operationColumn().width(250);
 
         //分成分组布局
-        cfg.view().formWindow().width("85%");
-        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("98%");
+        cfg.view().formWindow().bottomSpace(20);
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID,
@@ -127,9 +128,11 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_TRANFER.CONTENT,
                 }
         );
+
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
-
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
 //        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 //

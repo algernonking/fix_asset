@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:17
- * @sign 2663DFBEDFF2AF6D68D6E8CC5939776A
+ * @since 2021-09-24 15:31:14
+ * @sign 5E482041A504F8A473BEFC445AD1AE29
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,9 +57,15 @@ public class AssetScrap extends Entity {
 	private String status;
 	
 	/**
+	 * 清理状态：清理状态
+	*/
+	@ApiModelProperty(required = false,value="清理状态" , notes = "清理状态")
+	private String cleanStatus;
+	
+	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**
@@ -73,12 +79,6 @@ public class AssetScrap extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="报废说明" , notes = "报废说明")
 	private String content;
-	
-	/**
-	 * 是否清理：是否清理
-	*/
-	@ApiModelProperty(required = false,value="是否清理" , notes = "是否清理")
-	private String cleanStatus;
 	
 	/**
 	 * 制单人：制单人
@@ -247,6 +247,25 @@ public class AssetScrap extends Entity {
 	}
 	
 	/**
+	 * 获得 清理状态<br>
+	 * 清理状态
+	 * @return 清理状态
+	*/
+	public String getCleanStatus() {
+		return cleanStatus;
+	}
+	
+	/**
+	 * 设置 清理状态
+	 * @param cleanStatus 清理状态
+	 * @return 当前对象
+	*/
+	public AssetScrap setCleanStatus(String cleanStatus) {
+		this.cleanStatus=cleanStatus;
+		return this;
+	}
+	
+	/**
 	 * 获得 业务名称<br>
 	 * 业务名称
 	 * @return 业务名称
@@ -300,25 +319,6 @@ public class AssetScrap extends Entity {
 	*/
 	public AssetScrap setContent(String content) {
 		this.content=content;
-		return this;
-	}
-	
-	/**
-	 * 获得 是否清理<br>
-	 * 是否清理
-	 * @return 是否清理
-	*/
-	public String getCleanStatus() {
-		return cleanStatus;
-	}
-	
-	/**
-	 * 设置 是否清理
-	 * @param cleanStatus 是否清理
-	 * @return 当前对象
-	*/
-	public AssetScrap setCleanStatus(String cleanStatus) {
-		this.cleanStatus=cleanStatus;
 		return this;
 	}
 	

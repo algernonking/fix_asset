@@ -90,8 +90,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         );
 
         //分成分组布局
-        cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("85%");
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                  new Object[] {
                         EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID
@@ -108,9 +108,11 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                 }
         );
 
-
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
+
 
 
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
@@ -125,7 +127,6 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE) //列表HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
                 .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }

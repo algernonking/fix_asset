@@ -78,7 +78,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().validate().required().search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
                 .basic().label("存放位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
 
@@ -87,8 +87,8 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
         //分成分组布局
-        cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("85%");
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
@@ -110,9 +110,10 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 }
         );
 
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
-
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 
 
 

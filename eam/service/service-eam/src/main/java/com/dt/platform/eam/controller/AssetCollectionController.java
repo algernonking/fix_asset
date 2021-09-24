@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
-import com.dt.platform.domain.eam.AssetCollection;
-import com.dt.platform.domain.eam.AssetCollectionVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,8 +33,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
-import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
@@ -87,9 +85,12 @@ public class AssetCollectionController extends SuperController {
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetCollectionServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.INSERT)
-	public Result insert(AssetCollectionVO assetCollectionVO) {
-		Result result=assetCollectionService.insert(assetCollectionVO);
-		return result;
+	public Result insert(AssetCollectionVO assetCollectionVO,String assetSelectedCode) {
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetCollectionService.insert(assetCollectionVO,assetSelectedCode);
+		}else{
+			return assetCollectionService.insert(assetCollectionVO);
+		}
 	}
 
 	
@@ -98,13 +99,21 @@ public class AssetCollectionController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产领用")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetCollectionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480482454377865216")
+		@ApiImplicitParam(name = AssetCollectionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480482454377865216"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetCollectionVOMeta.ID)
 	@SentinelResource(value = AssetCollectionServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.DELETE)
 	public Result deleteById(String id) {
+
+		AssetCollection assetCollection=assetCollectionService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollection.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollection.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
+
+
 		Result result=assetCollectionService.deleteByIdLogical(id);
 		return result;
 	}
@@ -152,6 +161,11 @@ public class AssetCollectionController extends SuperController {
 	@SentinelResource(value = AssetCollectionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.UPDATE)
 	public Result update(AssetCollectionVO assetCollectionVO) {
+		AssetCollection assetCollection=assetCollectionService.queryEntity(assetCollectionVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollection.getStatus())
+		 ||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollection.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
 		Result result=assetCollectionService.update(assetCollectionVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}

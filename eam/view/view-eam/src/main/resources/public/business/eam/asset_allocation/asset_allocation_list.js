@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-22 16:52:27
+ * @since 2021-09-24 16:42:25
  */
 
 
@@ -113,12 +113,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.outOwnCompanyId={ value: $("#outOwnCompanyId").val(),fillBy:["outOwnerCompany","fullName"] ,label:$("#outOwnCompanyId-button").text()};
-		value.inOwnCompanyId={ value: $("#inOwnCompanyId").val(),fillBy:["inOwnerCompany","fullName"] ,label:$("#inOwnCompanyId-button").text()};
-		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.status={ inputType:"button",value: $("#status").val()};
+		value.outOwnCompanyId={ inputType:"button",value: $("#outOwnCompanyId").val(),fillBy:["outOwnerCompany","fullName"] ,label:$("#outOwnCompanyId-button").text()};
+		value.inOwnCompanyId={ inputType:"button",value: $("#inOwnCompanyId").val(),fillBy:["inOwnerCompany","fullName"] ,label:$("#inOwnCompanyId-button").text()};
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -252,6 +252,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -319,6 +323,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('eam-asset-allocation-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
@@ -406,7 +416,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["85%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-allocation-form-data-win",
 			content: '/business/eam/asset_allocation/asset_allocation_form.html' + queryString,

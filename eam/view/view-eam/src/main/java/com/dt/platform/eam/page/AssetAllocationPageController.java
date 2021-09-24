@@ -1,5 +1,6 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,8 @@ public class AssetAllocationPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_allocation_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+		model.addAttribute("billId",id);
+		model.addAttribute("billType", CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
 		return prefix+"/asset_allocation_form";
 	}
 }

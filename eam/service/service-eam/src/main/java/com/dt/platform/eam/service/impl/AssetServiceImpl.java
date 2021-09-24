@@ -308,25 +308,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		queryCondition.andIn("id",assetIds);
 		//过滤资产状态
-		if(CodeModuleEnum.EAM_ASSET_BORROW.equals(businessType)){
+		if(CodeModuleEnum.EAM_ASSET_BORROW.code().equals(businessType)){
 			//借用
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.code().equals(businessType)){
 			//领用
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code().equals(businessType)){
 			//退库
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.code().equals(businessType)){
 			//报修
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.code().equals(businessType)){
 			//报废
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.code().equals(businessType)){
 			//调拨
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
-		}else if(CodeModuleEnum.EAM_ASSET_TRANFER.equals(businessType)){
+		}else if(CodeModuleEnum.EAM_ASSET_TRANFER.code().equals(businessType)){
 			//转移
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
 		}else{

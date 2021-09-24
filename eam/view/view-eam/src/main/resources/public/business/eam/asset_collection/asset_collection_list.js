@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 17:00:05
+ * @since 2021-09-24 16:42:37
  */
 
 
@@ -115,12 +115,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.useUserId={ value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
-		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
-		value.collectionDate={ begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
-		value.content={ value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.status={ inputType:"button",value: $("#status").val()};
+		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
+		value.positionId={ inputType:"button",value: $("#positionId").val()};
+		value.collectionDate={ inputType:"date_input", begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
+		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -235,6 +235,18 @@ function ListPage() {
 
 		// 请选择人员对话框
 		$("#useUserId-button").click(function(){
+				var useUserIdDialogOptions={
+				field:"useUserId",
+				inputEl:$("#useUserId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseEmployee(useUserIdDialogOptions);
 		});
 	}
 	
@@ -247,6 +259,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -314,6 +330,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('eam-asset-collection-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
@@ -401,7 +423,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["85%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-collection-form-data-win",
 			content: '/business/eam/asset_collection/asset_collection_form.html' + queryString,

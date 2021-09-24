@@ -70,6 +70,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	public DAO dao() { return dao; }
 
 	@Autowired
+	private IAssetService assetService;
+
+	@Autowired
 	private AssetItemServiceImpl assetItemService;
 
 	@Autowired
@@ -78,8 +81,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Autowired
 	private IApproveConfigureService approveConfigureService;
 
-	@Autowired
-	private IAssetService assetService;
 
 	@Override
 	public Object generateId(Field field) {
@@ -88,55 +89,28 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 
 	/**
 	 * 插入实体
-	 * @param assetBorrowVO 实体数据
+	 * @param assetBorrow 实体数据
 	 * @param assetSelectedCode 数据标记
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
+	public Result insert(AssetBorrow assetBorrow,String assetSelectedCode) {
 
 		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
-
+			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
 			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
-			if(list.size()==0){
-				return ErrorDesc.failure().message("请选择资产");
-			}
-
-			//保存资产列表
-			List<AssetItem> saveList=new ArrayList<AssetItem>();
-			for(int i=0;i<list.size();i++){
-				AssetItem asset=new AssetItem();
-				asset.setHandleId(assetBorrowVO.getId());
-				asset.setAssetId(list.get(i));
-				saveList.add(asset);
-			}
-
-			//数据校验
-			Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_BORROW.code(),list);
-			if(!ckResult.isSuccess()){
-				return ckResult;
-			}
-
+			assetBorrow.setAssetIds(list);
 			//保存单据数据
-			Result insertReuslt=insert(assetBorrowVO);
+			Result insertReuslt=insert(assetBorrow);
 			if(!insertReuslt.isSuccess()){
 				return insertReuslt;
-			}
-
-			//保存资产数据
-			Result batchInsertReuslt= assetItemService.insertList(saveList);
-			if(!batchInsertReuslt.isSuccess()){
-				return batchInsertReuslt;
 			}
 		}else{
 			return ErrorDesc.failure().message("请选择资产");
 		}
-
-
 		return ErrorDesc.success();
-
 	}
 
 	/**
@@ -147,14 +121,24 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result insert(AssetBorrow assetBorrow) {
 
-		//编码
-		Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}else{
-			assetBorrow.setBusinessCode(codeResult.getData().toString());
+		//校验数据资产
+		if(assetBorrow.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_BORROW.code(),assetBorrow.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
 		}
 
+		//生成编码规则
+		if(assetBorrow.getBusinessCode()==null||"".equals(assetBorrow.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetBorrow.setBusinessCode(codeResult.getData().toString());
+			}
+		}
 
 		//填充制单人
 		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
@@ -166,19 +150,26 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			assetBorrow.setBusinessDate(new Date());
 		}
 
-
-		//审批
-		ApproveConfigure approveConfigure=new ApproveConfigure();
-		approveConfigure.setApprovalType(AssetApprovalTypeEnum.BORROW.code());
-		assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-
 		//办理状态
 		if(assetBorrow.getStatus()==null||"".equals(assetBorrow.getStatus())){
-			assetBorrow.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			assetBorrow.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
 		Result r=super.insert(assetBorrow);
-
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<assetBorrow.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setHandleId(assetBorrow.getId());
+				asset.setAssetId(assetBorrow.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}
 		return r;
 	}
 	
@@ -246,23 +237,27 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	@Override
 	public Result update(AssetBorrow assetBorrow , SaveMode mode) {
-		Result r=super.update(assetBorrow,mode);
-		//保存表单数据
-		List<AssetItem> list=assetItemService.queryList(AssetItem.create().setHandleId(assetBorrow.getId()));
-		List<String> deleteList=new ArrayList<String>();
-		List<AssetItem> updateList=new ArrayList<AssetItem>();
-		for(int i=0;i<list.size();i++){
-			AssetItem asset=new AssetItem();
-			String crd=asset.getCrd();
-			if("c".equals(crd)){
-				asset.setCrd("r");
-				updateList.add(asset);
-			}else if("d".equals(crd)||"cd".equals(crd)){
-				deleteList.add(asset.getId());
-			}
+		//c  新建,r  原纪录,d  删除,cd 新建删除
+		//验证数据
+		String handleId=assetBorrow.getId();
+		ConditionExpr itemRecordCondition=new ConditionExpr();
+		itemRecordCondition.andIn("handle_id",handleId);
+		itemRecordCondition.andIn("crd","c","r");
+		List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
+		assetBorrow.setAssetIds(ckDatalist);
+		if(assetBorrow.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
 		}
-		assetItemService.updateList(updateList,SaveMode.NOT_NULL_FIELDS);
-		assetItemService.deleteByIdsPhysical(deleteList);
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_BORROW.code(),assetBorrow.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
+		}
+		Result r=super.update(assetBorrow,mode);
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",handleId);
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",handleId);
+		}
 		return r;
 	}
 	

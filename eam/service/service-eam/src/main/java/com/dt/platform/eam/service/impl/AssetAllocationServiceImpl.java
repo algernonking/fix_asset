@@ -3,20 +3,20 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.domain.eam.AssetAttribute;
-import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.AssetCommonError;
+import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetAllocation;
-import com.dt.platform.domain.eam.AssetAllocationVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -65,17 +65,44 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	public DAO dao() { return dao; }
 
 	@Autowired 
-	private AssetItemServiceImpl assetItemServiceImpl;
+	private IAssetItemService assetItemService;
 
 	@Autowired
 	private IAssetSelectedDataService assetSelectedDataService;
 
-	
+	@Autowired
+	private IAssetService assetService;
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
 
+	/**
+	 * 插入实体
+	 * @param assetAllocation 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result insert(AssetAllocation assetAllocation, String assetSelectedCode) {
+
+		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+			//获取资产列表
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
+			assetAllocation.setAssetIds(list);
+			//保存单据数据
+			Result insertReuslt=insert(assetAllocation);
+			if(!insertReuslt.isSuccess()){
+				return insertReuslt;
+			}
+		}else{
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		return ErrorDesc.success();
+	}
 
 	/**
 	 * 插入实体
@@ -87,41 +114,58 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	public Result insert(AssetAllocation assetAllocation) {
 
 
-		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}else{
-			assetAllocation.setBusinessCode(codeResult.getData().toString());
+		//校验数据资产
+		if(assetAllocation.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_ALLOCATE.code(),assetAllocation.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
 		}
 
 
-		//资产数量
-//		if(assetAllocation.getAssetIds()==null||assetAllocation.getAssetIds().size()==0){
-//			return ErrorDesc.failureMessage(AssetCommonError.ASSET_DATA_NOT_SELECT_TXT);
-//		}
+		//生成编码规则
+		if(assetAllocation.getBusinessCode()==null||"".equals(assetAllocation.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetAllocation.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
+
 		//制单人
 		if(assetAllocation.getOriginatorId()==null||"".equals(assetAllocation.getOriginatorId())){
 			assetAllocation.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
+
 		//业务时间
 		if(assetAllocation.getBusinessDate()==null){
 			assetAllocation.setBusinessDate(new Date());
 		}
 
 
-
-
 		//办理状态
 		if(assetAllocation.getStatus()==null||"".equals(assetAllocation.getStatus())){
-			assetAllocation.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			assetAllocation.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
-
-
 		Result r=super.insert(assetAllocation);
-
-
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<assetAllocation.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setHandleId(assetAllocation.getId());
+				asset.setAssetId(assetAllocation.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}
 		return r;
 	}
 	
@@ -190,9 +234,31 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Override
 	@Transactional
 	public Result update(AssetAllocation assetAllocation , SaveMode mode) {
-		Result r=super.update(assetAllocation , mode);
 
+		//c  新建,r  原纪录,d  删除,cd 新建删除
+		//验证数据
+		String handleId=assetAllocation.getId();
+		ConditionExpr itemRecordCondition=new ConditionExpr();
+		itemRecordCondition.andIn("handle_id",handleId);
+		itemRecordCondition.andIn("crd","c","r");
+		List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
+		assetAllocation.setAssetIds(ckDatalist);
+		if(assetAllocation.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_ALLOCATE.code(),assetAllocation.getAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
+		}
+		Result r=super.update(assetAllocation,mode);
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",handleId);
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",handleId);
+		}
 		return r;
+
+
 	}
 	
 	/**

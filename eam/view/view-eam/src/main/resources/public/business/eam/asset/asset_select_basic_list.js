@@ -14,9 +14,7 @@ function ListPage() {
 	var dataTable=null;
 
 	var assetListColumn;
-
-
-
+	var searchContent_categoryId;
 	var selectedListAction;
 	var billdata;
 	/**
@@ -59,6 +57,7 @@ function ListPage() {
 
 			var ps={};
 			var contitions={};
+			contitions.status={ value: "complete", label:"完成"};
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
@@ -108,7 +107,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val()};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+		value.status={ value:"complete", label:"完成"};
 		value.assetCode={ value: $("#assetCode").val()};
 		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -126,6 +125,11 @@ function ListPage() {
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
+
+		if(searchContent_categoryId){
+			value.categoryId={ value: searchContent_categoryId};
+		}
+
 		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
@@ -151,6 +155,12 @@ function ListPage() {
 		return data;
 	}
 
+
+
+	function searchCategory(categoryId){
+		searchContent_categoryId=categoryId;
+		refreshTableData()
+	}
 
 	/**
 	 * 重置搜索框
@@ -428,6 +438,7 @@ function ListPage() {
 	};
 
 	window.module={
+		searchCategory:searchCategory,
 		refreshTableData: refreshTableData,
 		getCheckedList: getCheckedList,
 		saveSelectData:saveSelectData

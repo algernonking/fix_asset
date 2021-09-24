@@ -64,11 +64,6 @@ public class AssetBorrowController extends SuperController {
 	@Autowired
 	private IAssetBorrowService assetBorrowService;
 
-	@Autowired
-	private IAssetSelectedDataService assetSelectedDataService;
-
-	@Autowired
-	private IAssetItemService assetItemService;
 	
 	/**
 	 * 添加资产借用
@@ -92,8 +87,12 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.INSERT)
 	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
-		Result result=assetBorrowService.insert(assetBorrowVO,assetSelectedCode);
-		return result;
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetBorrowService.insert(assetBorrowVO,assetSelectedCode);
+		}else{
+			return assetBorrowService.insert(assetBorrowVO);
+		}
+
 	}
 
 	
@@ -109,6 +108,11 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.DELETE)
 	public Result deleteById(String id) {
+		AssetBorrow assetBorrow=assetBorrowService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetBorrow.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
 		Result result=assetBorrowService.deleteByIdLogical(id);
 		return result;
 	}
@@ -155,7 +159,8 @@ public class AssetBorrowController extends SuperController {
 	@PostMapping(AssetBorrowServiceProxy.UPDATE)
 	public Result update(AssetBorrowVO assetBorrowVO) {
 		AssetBorrow assetBorrow=assetBorrowService.queryEntity(assetBorrowVO);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())){
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())
+		 	|| AssetHandleStatusEnum.APPROVAL.code().equals(assetBorrow.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
 		}
 		Result result=assetBorrowService.update(assetBorrowVO,SaveMode.NOT_NULL_FIELDS);

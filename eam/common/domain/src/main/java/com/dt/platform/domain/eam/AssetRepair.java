@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:38
- * @sign 470290621AACC2B12DFD84F7D5922497
+ * @since 2021-09-24 16:42:42
+ * @sign 4DA972892048EC08E439AC788D195E26
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,7 +59,7 @@ public class AssetRepair extends Entity {
 	/**
 	 * 业务名称：业务名称
 	*/
-	@ApiModelProperty(required = true,value="业务名称" , notes = "业务名称")
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
 	private String name;
 	
 	/**

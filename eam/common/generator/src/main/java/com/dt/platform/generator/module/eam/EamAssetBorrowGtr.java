@@ -42,7 +42,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"borrower","借用人","借用人");
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
        // cfg.view().list().disableSpaceColumn();
-        cfg.view().formWindow().bottomSpace(250);
+
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).table().disable().search().fuzzySearch();
@@ -97,8 +97,8 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         );
         //分成分组布局
 
-
-        cfg.view().formWindow().width("95%");
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
@@ -116,10 +116,10 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 }
         );
 
-
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
-
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 
 
         //文件生成覆盖模式

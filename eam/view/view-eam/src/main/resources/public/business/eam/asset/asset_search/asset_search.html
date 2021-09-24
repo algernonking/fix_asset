@@ -35,10 +35,17 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
 
+                    <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
+                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+
+
+<!--                    <div class="search-unit">-->
+<!--                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>-->
+<!--                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>-->
+<!--                    </div>-->
 
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
@@ -64,11 +71,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
-                    <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
-                        <input id="assetCode" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
+
                     <!-- 规格型号 , model ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('规格型号')}" class="search-label model-label">规格型号</span><span class="search-colon">:</span></div>
@@ -78,6 +81,11 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('序列号')}" class="search-label serialNumber-label">序列号</span><span class="search-colon">:</span></div>
                         <input id="serialNumber" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 资产备注 , assetNotes ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产备注')}" class="search-label assetNotes-label">资产备注</span><span class="search-colon">:</span></div>
+                        <input id="assetNotes" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
 
 
@@ -114,11 +122,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
                         <div id="manufacturerId" th:data="${'/service-eam/eam-manufacturer/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 资产备注 , assetNotes ,typeName=text_area, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产备注')}" class="search-label assetNotes-label">资产备注</span><span class="search-colon">:</span></div>
-                        <input id="assetNotes" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
+
                     <!-- 采购日期 , purchaseDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('采购日期')}" class="search-label purchaseDate-label">采购日期</span><span class="search-colon">:</span></div>

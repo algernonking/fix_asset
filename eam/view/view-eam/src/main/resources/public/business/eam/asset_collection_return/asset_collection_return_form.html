@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 17:01:56
+ * @since 2021-09-24 16:42:39
  */
  -->
  <!DOCTYPE html>
@@ -43,7 +43,7 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('退库后公司/部门')}">退库后公司/部门</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
-                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                         </div>
                     </div>
 
@@ -54,7 +54,7 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
                         </div>
@@ -100,10 +100,20 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>资产列表</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
+        </div>
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 250px"></div>
+        <div style="height: 20px"></div>
 
 
     </form>
@@ -123,13 +133,13 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"returnDate":{"date":true,"labelInForm":"退库日期","inputType":"date_input","required":true}};
+    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"returnDate":{"date":true,"labelInForm":"退库日期","inputType":"date_input","required":true},"positionId":{"labelInForm":"存放位置","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_asset_collection_return";
 
-    // 用户ID
-    var EMPLOYEE_ID = [[${user.getUser().getActivatedEmployeeId()}]] ;
-    // 用户姓名
-    var EMPLOYEE_NAME = [[${user.getUser().getActivatedEmployeeName()}]] ;
+    // 单据ID
+    var BILL_ID = [[${billId}]] ;
+    // 单据类型
+    var BILL_TYPE = [[${billType}]] ;
 
 </script>
 

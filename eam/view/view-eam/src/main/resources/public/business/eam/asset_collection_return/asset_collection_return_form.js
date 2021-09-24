@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 17:01:57
+ * @since 2021-09-24 16:42:39
  */
 
 function FormPage() {
@@ -106,7 +106,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {

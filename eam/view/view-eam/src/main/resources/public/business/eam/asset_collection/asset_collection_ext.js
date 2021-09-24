@@ -125,8 +125,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          */
         ending:function() {
 
+        },
+        beforeRowOperationEvent:function (data,obj){
+            console.log('beforeRowOperationEvent',data,obj);
+            if(obj.event=="edit") {
+                if(data.status=="complete"||data.status=="approval"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
+            return true;
         }
     }
+
+
+    var timestamp = Date.parse(new Date());
+    var formAction=admin.getTempData('eam-asset-borrow-form-data-form-action');
 
     //表单页的扩展
     var form={
@@ -180,7 +194,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
-            console.log("beforeSubmit",data);
+            var dataListSize=$(".form-iframe")[0].contentWindow.module.getDataListSize();
+            if(dataListSize==0){
+                layer.msg("请选择资产数据", {icon: 2, time: 1000});
+                return false;
+            }
+            data.assetSelectedCode=timestamp;
             return true;
         },
         /**
@@ -194,6 +213,29 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 末尾执行
          */
         ending:function() {
+
+        }
+        ,
+        /**
+         *  加载 资产列表
+         */
+        assetSelectList:function (ifr,win,data) {
+
+
+            console.log("assetSelectList",ifr,data);
+            //设置 iframe 高度
+            ifr.height("450px");
+            //设置地址
+            var data={};
+            data.searchContent={};
+            data.assetSelectedCode=timestamp;
+            data.assetBusinessType=BILL_TYPE
+            data.action=formAction;
+            if(BILL_ID==null)BILL_ID="";
+            data.assetOwnerId=BILL_ID;
+            admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
+            admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
+            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
 
         }
     }

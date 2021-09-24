@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-22 16:52:28
+ * @since 2021-09-24 16:42:27
  */
 
 function FormPage() {
@@ -266,7 +266,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
 			};
-				fox.chooseEmployee(managerIdDialogOptions);
+			fox.chooseEmployee(managerIdDialogOptions);
 		});
 
 	    //关闭窗口

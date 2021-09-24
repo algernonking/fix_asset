@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:17
- * @sign 2663DFBEDFF2AF6D68D6E8CC5939776A
+ * @since 2021-09-24 15:31:14
+ * @sign 5E482041A504F8A473BEFC445AD1AE29
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,6 +59,16 @@ public class AssetScrapMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
+	 * 清理状态 , 类型: java.lang.String
+	*/
+	public static final String CLEAN_STATUS="cleanStatus";
+	
+	/**
+	 * 清理状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CLEAN_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CLEAN_STATUS, java.lang.String.class, "清理状态", "清理状态", java.lang.String.class, null);
+	
+	/**
 	 * 业务名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
@@ -87,16 +97,6 @@ public class AssetScrapMeta {
 	 * 报废说明 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CONTENT, java.lang.String.class, "报废说明", "报废说明", java.lang.String.class, null);
-	
-	/**
-	 * 是否清理 , 类型: java.lang.String
-	*/
-	public static final String CLEAN_STATUS="cleanStatus";
-	
-	/**
-	 * 是否清理 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CLEAN_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CLEAN_STATUS, java.lang.String.class, "是否清理", "是否清理", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -251,7 +251,7 @@ public class AssetScrapMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SCRAP_DATE , CONTENT , CLEAN_STATUS , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CLEAN_STATUS , NAME , SCRAP_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -306,6 +306,17 @@ public class AssetScrapMeta {
 		}
 		
 		/**
+		 * 设置 清理状态
+		 * @param cleanStatus 清理状态
+		 * @return 当前对象
+		*/
+		public AssetScrap setCleanStatus(String cleanStatus) {
+			super.change(CLEAN_STATUS,super.getCleanStatus(),cleanStatus);
+			super.setCleanStatus(cleanStatus);
+			return this;
+		}
+		
+		/**
 		 * 设置 业务名称
 		 * @param name 业务名称
 		 * @return 当前对象
@@ -335,17 +346,6 @@ public class AssetScrapMeta {
 		public AssetScrap setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
-			return this;
-		}
-		
-		/**
-		 * 设置 是否清理
-		 * @param cleanStatus 是否清理
-		 * @return 当前对象
-		*/
-		public AssetScrap setCleanStatus(String cleanStatus) {
-			super.change(CLEAN_STATUS,super.getCleanStatus(),cleanStatus);
-			super.setCleanStatus(cleanStatus);
 			return this;
 		}
 		

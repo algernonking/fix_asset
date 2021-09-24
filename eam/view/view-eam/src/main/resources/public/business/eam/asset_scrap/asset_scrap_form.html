@@ -2,7 +2,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:21
+ * @since 2021-09-24 15:31:20
  */
  -->
  <!DOCTYPE html>
@@ -96,10 +96,20 @@
             </div>
             <!--结束：栏次输入框循环-->
         </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>资产列表</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
+        </div>
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 250px"></div>
+        <div style="height: 20px"></div>
 
 
     </form>
@@ -122,10 +132,8 @@
     var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"scrapDate":{"labelInForm":"报废时间","inputType":"text_input","required":true},"name":{"labelInForm":"业务名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_asset_scrap";
 
-    // 用户ID
-    var EMPLOYEE_ID = [[${user.getUser().getActivatedEmployeeId()}]] ;
-    // 用户姓名
-    var EMPLOYEE_NAME = [[${user.getUser().getActivatedEmployeeName()}]] ;
+    // 单据ID
+    var BILL_ID = [[${billId}]] ;
 
 </script>
 

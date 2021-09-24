@@ -65,8 +65,8 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
         cfg.view().list().operationColumn().width(250);
         //分成分组布局
-        cfg.view().formWindow().bottomSpace(250);
-        cfg.view().formWindow().width("85%");
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[]
                         {
@@ -86,9 +86,10 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
                 }
         );
 
+        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
-
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
 //        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");

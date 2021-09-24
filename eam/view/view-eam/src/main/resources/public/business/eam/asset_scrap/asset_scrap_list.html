@@ -2,7 +2,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:21
+ * @since 2021-09-24 15:31:16
  */
  -->
  <!DOCTYPE html>
@@ -41,7 +41,7 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <!-- 是否清理 , cleanStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 清理状态 , cleanStatus ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=text_input, isHideInSearch=true -->

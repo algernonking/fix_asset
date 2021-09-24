@@ -29,11 +29,11 @@ public interface IAssetBorrowService extends ISuperService<AssetBorrow> {
 
 	/**
 	 * 插入实体
-	 * @param assetBorrowVO 实体数据
+	 * @param assetBorrow 实体数据
 	 * @param assetSelectedCode 数据标记
 	 * @return 插入是否成功
 	 * */
-	 Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode);
+	 Result insert(AssetBorrow assetBorrow,String assetSelectedCode);
 
 	/**
 	 * 插入实体

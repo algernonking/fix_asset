@@ -125,8 +125,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          */
         ending:function() {
 
+        },
+        beforeRowOperationEvent:function (data,obj){
+            console.log('beforeRowOperationEvent',data,obj);
+            if(data.status=="complete"){
+                if(obj.event=="edit"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
+            return true;
         }
     }
+
+    var timestamp = Date.parse(new Date());
+    var formAction=admin.getTempData('eam-asset-allocation-form-data-form-action');
 
     //表单页的扩展
     var form={
@@ -137,7 +150,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             $("#inOwnCompanyId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
             $("#outOwnCompanyId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
             $("#managerId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
-
 
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
@@ -187,6 +199,26 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 末尾执行
          */
         ending:function() {
+
+        },
+        /**
+         *  加载 资产列表
+         */
+        assetSelectList:function (ifr,win,data) {
+
+            //设置 iframe 高度
+            ifr.height("450px");
+            //设置地址
+            var data={};
+            data.searchContent={};
+            data.assetSelectedCode=timestamp;
+            data.assetBusinessType="eam_asset_allocate"
+            data.action=formAction;
+            if(BILL_ID==null)BILL_ID="";
+            data.assetOwnerId=BILL_ID;
+            admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
+            admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
+            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
 
         }
     }

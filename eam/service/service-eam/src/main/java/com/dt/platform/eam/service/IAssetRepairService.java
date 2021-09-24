@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetScrap;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetRepair;
@@ -25,7 +26,18 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetRepairService extends ISuperService<AssetRepair> {
-	
+
+
+
+	/**
+	 * 插入实体
+	 * @param assetRepair 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	Result insert(AssetRepair assetRepair, String assetSelectedCode);
+
+
 	/**
 	 * 插入实体
 	 * @param assetRepair 实体数据

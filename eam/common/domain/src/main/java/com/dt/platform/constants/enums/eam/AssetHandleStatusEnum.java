@@ -16,7 +16,7 @@ public enum AssetHandleStatusEnum implements CodeTextEnum {
 	COMPLETE("complete" , "已完成"),
 	INCOMPLETE("incomplete" , "未完成"),
 	DENY("deny" , "拒绝"),
-	APPROVE("approve" , "审批中"),
+	APPROVAL("approval" , "审批中"),
 	CANCEL("cancel" , "取消")
 	;
 	private String code;

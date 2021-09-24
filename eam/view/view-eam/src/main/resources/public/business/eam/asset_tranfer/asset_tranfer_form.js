@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 18:09:37
+ * @since 2021-09-24 16:42:30
  */
 
 function FormPage() {
@@ -106,7 +106,7 @@ function FormPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -291,7 +291,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
 			};
-				fox.chooseEmployee(managerIdDialogOptions);
+			fox.chooseEmployee(managerIdDialogOptions);
 		});
 		// 请选择人员对话框
 		$("#useUserId-button").click(function(){
@@ -307,7 +307,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
 			};
-				fox.chooseEmployee(useUserIdDialogOptions);
+			fox.chooseEmployee(useUserIdDialogOptions);
 		});
 
 	    //关闭窗口

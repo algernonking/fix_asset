@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetAllocation;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetCollection;
@@ -25,7 +26,17 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetCollectionService extends ISuperService<AssetCollection> {
-	
+
+
+	/**
+	 * 插入实体
+	 * @param assetCollection 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	Result insert(AssetCollection assetCollection, String assetSelectedCode);
+
+
 	/**
 	 * 插入实体
 	 * @param assetCollection 实体数据

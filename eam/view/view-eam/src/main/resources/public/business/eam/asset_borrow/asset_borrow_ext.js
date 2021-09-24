@@ -122,6 +122,33 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('downloadBill',data);
         },
         /**
+         * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeToolBarButtonEvent:function (selected,obj) {
+            console.log('beforeToolBarButtonEvent',selected,obj);
+            return true;
+        },
+
+        beforeRowOperationEvent:function (data,obj){
+            console.log('beforeRowOperationEvent',data,obj);
+            if(obj.event=="edit") {
+                if(data.status=="complete"||data.status=="approval"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
+
+            if(obj.event=="del") {
+                if(data.status=="complete"||data.status=="approval"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        /**
          * 末尾执行
          */
         ending:function() {
@@ -130,8 +157,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     }
 
     var timestamp = Date.parse(new Date());
-
-    var formAction=admin.getTempData('eam-asset-borrow-form-data-form-action');
+    var formAction=admin.getTempData('eam-asset-collection-form-data-form-action');
 
     //表单页的扩展
     var form={
@@ -158,12 +184,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     var day = ("0" + now.getDate()).slice(-2);
                     var month = ("0" + (now.getMonth() + 1)).slice(-2);
                     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
-
-
                     $('#borrowTime').val(today);
 
-
-
+                    var endnow = new Date(now.getTime()+31*24*3600*1000);
+                    var day2 = ("0" + endnow.getDate()).slice(-2);
+                    var month2 = ("0" + (endnow.getMonth() + 1)).slice(-2);
+                    var today2 = endnow.getFullYear()+"-"+(month2)+"-"+(day2) ;
+                    $('#planReturnDate').val(today2);
                 },100)
             }
 
@@ -193,7 +220,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
-
             var dataListSize=$(".form-iframe")[0].contentWindow.module.getDataListSize();
             if(dataListSize==0){
                 layer.msg("请选择资产数据", {icon: 2, time: 1000});
@@ -221,7 +247,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var data={};
             data.searchContent={};
             data.assetSelectedCode=timestamp;
-            data.assetBusinessType="eam_asset_borrow"
+            data.assetBusinessType=BILL_TYPE
             data.action=formAction;
             if(BILL_ID==null)BILL_ID="";
             data.assetOwnerId=BILL_ID;

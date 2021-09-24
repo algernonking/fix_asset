@@ -3,6 +3,8 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +20,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
-import com.dt.platform.domain.eam.AssetRepair;
-import com.dt.platform.domain.eam.AssetRepairVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -33,7 +33,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -87,9 +86,12 @@ public class AssetRepairController extends SuperController {
 	@NotNull(name = AssetRepairVOMeta.NAME)
 	@SentinelResource(value = AssetRepairServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetRepairServiceProxy.INSERT)
-	public Result insert(AssetRepairVO assetRepairVO) {
-		Result result=assetRepairService.insert(assetRepairVO);
-		return result;
+	public Result insert(AssetRepairVO assetRepairVO,String assetSelectedCode) {
+		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+			return assetRepairService.insert(assetRepairVO,assetSelectedCode);
+		}else{
+			return assetRepairService.insert(assetRepairVO);
+		}
 	}
 
 	
@@ -98,13 +100,18 @@ public class AssetRepairController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产报修")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480483006776090624")
+		@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "480483006776090624"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetRepairVOMeta.ID)
 	@SentinelResource(value = AssetRepairServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetRepairServiceProxy.DELETE)
 	public Result deleteById(String id) {
+		AssetRepair assetRepair=assetRepairService.getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetRepair.getStatus())
+				||AssetHandleStatusEnum.APPROVAL.code().equals(assetRepair.getStatus()) ){
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
 		Result result=assetRepairService.deleteByIdLogical(id);
 		return result;
 	}
@@ -153,6 +160,13 @@ public class AssetRepairController extends SuperController {
 	@SentinelResource(value = AssetRepairServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetRepairServiceProxy.UPDATE)
 	public Result update(AssetRepairVO assetRepairVO) {
+
+		AssetRepair assetRepair=assetRepairService.queryEntity(assetRepairVO);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetRepair.getStatus())
+			||AssetHandleStatusEnum.APPROVAL.code().equals(assetRepair.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
+
 		Result result=assetRepairService.update(assetRepairVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
