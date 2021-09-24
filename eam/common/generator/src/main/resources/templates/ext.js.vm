@@ -103,7 +103,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表操作栏按钮事件前调用，如果返回 false 则不执行后续代码
          * */
         beforeRowOperationEvent:function (data,obj) {
-
+            console.log('beforeRowOperationEvent',data,obj);
+            return true;
         },
         /**
          * 表格右侧操作列更多按钮事件
