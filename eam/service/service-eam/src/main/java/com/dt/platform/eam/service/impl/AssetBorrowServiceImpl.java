@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
@@ -96,10 +97,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 
 		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
 
-			//List<AssetSelectedData> list=assetSelectedDataService.queryList(AssetSelectedData.create().setAssetSelectedCode(assetSelectedCode));
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(AssetSelectedData.TABLE.getField("asset_id"),null,condition);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
 			if(list.size()==0){
 				return ErrorDesc.failure().message("请选择资产");
 			}
@@ -109,10 +109,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			for(int i=0;i<list.size();i++){
 				AssetItem asset=new AssetItem();
 				asset.setHandleId(assetBorrowVO.getId());
-				//asset.setAssetId(list.get(i).getAssetId());
+				asset.setAssetId(list.get(i));
 				saveList.add(asset);
 			}
-
 
 			//数据校验
 			Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_BORROW.code(),list);

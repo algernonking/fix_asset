@@ -7,7 +7,6 @@ import com.dt.platform.domain.common.CodeRegister;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
-import com.dt.platform.domain.eam.AssetExtFinancial;
 import com.dt.platform.domain.eam.TplFile;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.eam.page.TplFilePageController;
