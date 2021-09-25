@@ -21,6 +21,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeInit:function () {
             console.log("list:beforeInit");
         },
+        /**
+         * 表格渲染前调用
+         * @param cfg 表格配置参数
+         * */
+        beforeTableRender:function (cfg){
+            console.log("list:beforeTableRender",cfg);
+        },
+        /**
+         * 表格渲染后调用
+         * */
+        afterTableRender :function (){
+
+        },
         afterSearchInputReady: function() {
             console.log("list:afterSearchInputReady");
         },

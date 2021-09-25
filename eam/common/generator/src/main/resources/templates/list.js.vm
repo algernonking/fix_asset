@@ -51,14 +51,14 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 
-			var ps={};
+			var ps={searchField: "$composite"};
 			var contitions={};
+
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
-			if(Object.keys(contitions).length>0) {
-				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
-			}
+			ps.searchValue=JSON.stringify(contitions);
+
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -67,7 +67,7 @@ function ListPage() {
 				}
 			}
 			var h=#if(searchDisabled)-28; #else $(".search-bar").height();#end
-			dataTable=fox.renderTable({
+			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
@@ -140,7 +140,9 @@ function ListPage() {
 						}
 					}:false
 				}
-			});
+			};
+			window.pageExt.list.beforeTableRender && window.pageExt.list.beforeTableRender(tableConfig);
+			dataTable=fox.renderTable(tableConfig);
 			#if(hasLogicField)
 			//绑定 Switch 切换事件
 			#for(f : fields)
@@ -155,6 +157,7 @@ function ListPage() {
 			table.on('sort(data-table)', function(obj){
 			  refreshTableData(obj.field,obj.type);
 			});
+			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
 		setTimeout(renderTableInternal,1);
     };
