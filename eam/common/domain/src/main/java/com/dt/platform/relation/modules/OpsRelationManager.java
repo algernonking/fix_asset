@@ -15,7 +15,7 @@ import org.github.foxnic.web.domain.system.UserTenant;
 
 import java.util.Iterator;
 
-public class OPSRelationManager extends RelationManager {
+public class OpsRelationManager extends RelationManager {
     @Override
     protected void config() {
         this.setupRelations();
