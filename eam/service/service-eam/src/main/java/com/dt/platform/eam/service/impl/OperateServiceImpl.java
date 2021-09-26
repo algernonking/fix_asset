@@ -70,7 +70,6 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	@Override
 	public boolean approvalRequired(String businessType){
 		Operate operate=queryEntity(Operate.create().setOperateCode(businessType));
-		System.out.println("####"+operate);
 		if(operate!=null&&operate.getApproval()!=null && operate.getApproval().equals("0")){
 			return false;
 		}

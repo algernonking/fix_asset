@@ -7,14 +7,13 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetSelectedDataMeta;
 import com.dt.platform.eam.common.AssetCommonError;
-import com.dt.platform.eam.service.IApproveConfigureService;
-import com.dt.platform.eam.service.IAssetSelectedDataService;
-import com.dt.platform.eam.service.IAssetService;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
@@ -42,7 +41,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetBorrowService;
+
 import org.github.foxnic.web.framework.dao.DBConfigs;
 
 import java.util.Date;
@@ -80,8 +79,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Autowired
 	private IAssetSelectedDataService assetSelectedDataService;
 
+
 	@Autowired
-	private IApproveConfigureService approveConfigureService;
+	private IOperateService operateService;
 
 
 	@Override
@@ -117,9 +117,9 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	public Result operateResult(String id,String result) {
 
-		if("success".equals(result)){
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			return operateSuccess(id);
-		}else if("failed".equals(result)){
+		}else if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			return operateFailed(id);
 		}else{
 			return ErrorDesc.failureMessage("返回未知结果");
@@ -127,6 +127,27 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	}
 
 
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result confirmOperation(String id) {
+		AssetBorrow billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
+				//发起审批
+			}else{
+				//确认单据
+
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行过该操作");
+		}
+		return ErrorDesc.success();
+	}
 	/**
 	 * 插入实体
 	 * @param assetBorrow 实体数据

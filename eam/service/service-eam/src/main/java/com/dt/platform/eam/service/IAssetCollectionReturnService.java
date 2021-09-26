@@ -27,6 +27,9 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IAssetCollectionReturnService extends ISuperService<AssetCollectionReturn> {
 
+
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param assetCollectionReturn 实体数据

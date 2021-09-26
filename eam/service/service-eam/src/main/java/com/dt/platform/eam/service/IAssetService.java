@@ -27,6 +27,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetService extends ISuperService<Asset> {
 
 
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param businessType 业务类型

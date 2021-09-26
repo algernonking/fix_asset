@@ -28,6 +28,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetCollectionService extends ISuperService<AssetCollection> {
 
 
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param assetCollection 实体数据

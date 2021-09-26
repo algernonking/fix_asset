@@ -28,6 +28,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetRepairService extends ISuperService<AssetRepair> {
 
 
+	Result confirmOperation(String id);
+
 
 	/**
 	 * 插入实体

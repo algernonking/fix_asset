@@ -28,6 +28,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetAllocationService extends ISuperService<AssetAllocation> {
 
 
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param assetAllocation 实体数据

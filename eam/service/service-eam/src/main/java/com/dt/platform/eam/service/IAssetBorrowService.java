@@ -27,6 +27,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetBorrowService extends ISuperService<AssetBorrow> {
 
 
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param assetBorrow 实体数据

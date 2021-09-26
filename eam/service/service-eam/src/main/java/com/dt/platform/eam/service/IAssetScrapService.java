@@ -28,6 +28,8 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetScrapService extends ISuperService<AssetScrap> {
 
 
+	Result confirmOperation(String id);
+
 	/**
 	 * 插入实体
 	 * @param assetScrap 实体数据

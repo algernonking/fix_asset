@@ -5,13 +5,12 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.AssetCommonError;
-import com.dt.platform.eam.service.IAssetItemService;
-import com.dt.platform.eam.service.IAssetSelectedDataService;
-import com.dt.platform.eam.service.IAssetService;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
@@ -39,7 +38,6 @@ import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import com.dt.platform.eam.service.IAssetAllocationService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
@@ -75,6 +73,9 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Autowired
 	private IAssetService assetService;
 
+	@Autowired
+	private IOperateService operateService;
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -100,6 +101,8 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		return ErrorDesc.success();
 	}
 
+
+
 	/**
 	 * 操作
 	 * @param id  ID
@@ -108,15 +111,36 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	 * */
 	public Result operateResult(String id,String result) {
 
-		if("success".equals(result)){
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			return operateSuccess(id);
-		}else if("failed".equals(result)){
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return operateFailed(id);
 		}else{
 			return ErrorDesc.failureMessage("返回未知结果");
 		}
 	}
 
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result confirmOperation(String id) {
+		AssetAllocation billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
+				//发起审批
+			}else{
+				//确认单据
+
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行过该操作");
+		}
+		return ErrorDesc.success();
+	}
 
 	/**
 	 * 插入实体

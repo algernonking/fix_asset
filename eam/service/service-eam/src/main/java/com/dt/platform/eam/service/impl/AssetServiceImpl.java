@@ -3,11 +3,13 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.ApproveConfigure;
+import com.dt.platform.domain.eam.AssetAllocation;
+import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.Expr;
@@ -54,7 +56,10 @@ import java.util.Date;
 
 @Service("EamAssetService")
 public class AssetServiceImpl extends SuperService<Asset> implements IAssetService {
-	
+
+
+	@Autowired
+	private IOperateService operateService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -72,6 +77,71 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
+
+
+
+
+	/**
+	 * 操作成功
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateSuccess(String id) {
+
+		return ErrorDesc.success();
+	}
+
+	/**
+	 * 操作失败
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateFailed(String id) {
+		return ErrorDesc.success();
+	}
+
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	public Result operateResult(String id,String result) {
+
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			return operateSuccess(id);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return operateFailed(id);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+
+
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result confirmOperation(String id) {
+		Asset assetData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.equals(assetData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
+				//发起审批
+			}else{
+				//确认单据
+				if(update(EAMTables.EAM_ASSET.STATUS,AssetHandleStatusEnum.COMPLETE,id)){
+					return operateResult(AssetHandleConfirmOperationEnum.SUCCESS.code(),id);
+				}
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+assetData.getStatus()+",不能进行过该操作");
+		}
+		return ErrorDesc.success();
+	}
+
 
 	/**
 	 * 插入实体

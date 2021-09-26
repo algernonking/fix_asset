@@ -156,12 +156,10 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.INSERT)
 	public Result insert(AssetVO assetVO) {
-		System.out.println("11111"+operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()));
-		if(!operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code())){
-			System.out.println("123456789");
-			assetVO.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-		}
 		Result result=assetService.insert(assetVO);
+		if(result.isSuccess()){
+			 assetService.confirmOperation(assetVO.getId());
+		}
 		return result;
 	}
 
