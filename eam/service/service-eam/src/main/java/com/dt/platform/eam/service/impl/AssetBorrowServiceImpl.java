@@ -97,7 +97,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result insert(AssetBorrow assetBorrow,String assetSelectedCode) {
 
-		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);

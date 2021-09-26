@@ -82,19 +82,30 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result insert(Asset asset) {
 
 		//编码
-		Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
-		if(!codeResult.isSuccess()){
-			return codeResult;
-		}else{
-			asset.setAssetCode(codeResult.getData().toString());
+		if(StringUtil.isBlank(asset.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				asset.setAssetCode(codeResult.getData().toString());
+			}
 		}
 
+		//制单人
+		if(StringUtil.isBlank(asset.getOriginatorId())){
+			asset.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
 
 		//办理状态
-		if( StringUtil.isBlank(asset.getStatus())){
+		if(StringUtil.isBlank(asset.getStatus())){
 			asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+
+		//资产状态
+		if(StringUtil.isBlank(asset.getAssetStatus())){
+			asset.setAssetStatus(AssetStatusEnum.IDLE.code());
+		}
 
 
 		Result r=super.insert(asset);

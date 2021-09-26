@@ -13,6 +13,7 @@ import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.proxy.utils.SessionUserProxyUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -90,7 +91,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	@Override
 	public Result insert(AssetTranfer assetTranfer, String assetSelectedCode) {
 
-		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);

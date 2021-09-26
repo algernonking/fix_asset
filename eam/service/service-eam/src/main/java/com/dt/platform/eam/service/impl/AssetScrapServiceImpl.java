@@ -91,7 +91,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Override
 	public Result insert(AssetScrap assetScrap, String assetSelectedCode) {
 
-		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);

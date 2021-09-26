@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:36
+ * @since 2021-09-26 12:15:14
  */
 
 
@@ -248,7 +248,7 @@ function ListPage() {
 				field:"belongOrgId",
 				inputEl:$("#belongOrgId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"org",

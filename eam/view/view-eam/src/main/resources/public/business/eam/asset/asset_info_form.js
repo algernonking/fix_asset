@@ -355,7 +355,7 @@ function FormPage() {
 		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
-			el: "supplierId",
+			el: "#supplierId",
 			radio: true,
 			filterable: false,
 			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
@@ -383,8 +383,10 @@ function FormPage() {
 	/**
 	 * 填充表单数据
 	 */
-	function fillFormData() {
-		var formData = admin.getTempData('eam-asset-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('eam-asset-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -413,10 +415,10 @@ function FormPage() {
 			}
 
 
-
+			console.log(formData);
 
 			//设置  资产分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
 			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  资产状态 设置下拉框勾选
@@ -430,7 +432,7 @@ function FormPage() {
 			//设置  仓库 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 			//设置  来源 设置下拉框勾选
-			fox.setSelectValue4Dict("#sourceId",formData.sourceId,SELECT_SOURCEID_DATA);
+			fox.setSelectValue4QueryApi("#sourceId",formData.source);
 			//设置  维保商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
 			//设置  财务分类 设置下拉框勾选
@@ -440,7 +442,9 @@ function FormPage() {
 
 			//处理fillBy
 
+			//
 			fm.attr('method', 'POST');
+			fox.fillDialogButtons();
 			renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);

@@ -315,8 +315,6 @@ function ListPage() {
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
 
-
-
 	/**
 	 * 绑定搜索框事件
 	 */
@@ -406,6 +404,7 @@ function ListPage() {
 		});
 
 	}
+
 
 
 	/**
@@ -573,7 +572,7 @@ function ListPage() {
 			id:"eam-asset-form-data-win",
 			content: '/business/eam/asset/asset_info_form.html' + queryString,
 			finish: function () {
-				refreshTableData();templet
+				refreshTableData();
 			}
 		});
 		admin.putTempData('eam-asset-form-data-popup-index', index);

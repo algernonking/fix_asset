@@ -88,7 +88,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	@Override
 	public Result insert(AssetAllocation assetAllocation, String assetSelectedCode) {
 
-		if(assetSelectedCode!=null&&assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
@@ -138,6 +138,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 		//制单人
 		if(StringUtil.isBlank(assetAllocation.getOriginatorId())){
+
 			assetAllocation.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 

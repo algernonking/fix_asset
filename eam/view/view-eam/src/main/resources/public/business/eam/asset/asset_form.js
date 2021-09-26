@@ -399,11 +399,10 @@ function FormPage() {
 				adjustPopup();
 			}
 
-
-
-
 			//设置  资产分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
+
+
 			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  资产状态 设置下拉框勾选
