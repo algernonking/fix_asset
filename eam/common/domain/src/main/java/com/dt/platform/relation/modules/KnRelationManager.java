@@ -7,7 +7,7 @@ import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 
-public class KnRelationManager extends RelationManager {
+public class KNRelationManager extends RelationManager {
     @Override
     protected void config() {
         this.setupRelations();
