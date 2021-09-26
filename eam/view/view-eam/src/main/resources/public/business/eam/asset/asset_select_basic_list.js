@@ -57,13 +57,19 @@ function ListPage() {
 
 			var ps={};
 			var contitions={};
+			console.log("billdata",billdata);
 			contitions.status={ value: "complete", label:"完成"};
+
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
+
 			}
+			ps.assetSelectedCode=ASSET_SELECTED_CODE;
+			ps.assetBussinessType=billdata.assetBusinessType;
+			ps.assetOwnerId=billdata.assetOwnerId;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -72,7 +78,7 @@ function ListPage() {
 				}
 			}
 			var h=$(".search-bar").height();
-			console.log("full-",h+50)
+			console.log("full-",h+50,ps)
 
 			var COL_ALL_DATA= assetListColumn.getColumnList(templet);
 			var COL_DATA=[{ fixed: 'left',type: 'numbers' },{ fixed: 'left',type:'checkbox' }]
@@ -83,7 +89,7 @@ function ListPage() {
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
-				url: moduleURL +'/query-paged-list-by-select?assetSelectedCode='+ASSET_SELECTED_CODE+"&assetOwnerId="+billdata.assetOwnerId,
+				url: moduleURL +'/query-paged-list-by-select',
 				height: 'full-'+(h+120),
 				limit: 50,
 				limits:['50','100','500','1000','5000'],
@@ -107,7 +113,6 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val()};
-		value.status={ value:"complete", label:"完成"};
 		value.assetCode={ value: $("#assetCode").val()};
 		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -121,15 +126,24 @@ function ListPage() {
 		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
 		value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+
+
+		value.status={ value:"complete", label:"完成"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
 
-		if(searchContent_categoryId){
-			value.categoryId={ value: searchContent_categoryId};
-		}
 
+		if(searchContent_categoryId){
+			if(value.categoryId){
+				delete value.categoryId ;
+			}
+			ps.categoryId=searchContent_categoryId;
+		}
+		ps.assetSelectedCode=ASSET_SELECTED_CODE;
+		ps.assetBussinessType=billdata.assetBusinessType;
+		ps.assetOwnerId=billdata.assetOwnerId;
 		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;

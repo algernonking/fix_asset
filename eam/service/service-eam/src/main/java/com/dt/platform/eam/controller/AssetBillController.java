@@ -179,6 +179,7 @@ public class AssetBillController extends SuperController {
     public void queryCollectionBill(String id,HttpServletResponse response) throws Exception {
         InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_ASSET_COLLECTION.code());
         AssetCollection billdata=assetCollectionService.getById(id);
+        System.out.println(billdata);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
         System.out.println(data.toString());

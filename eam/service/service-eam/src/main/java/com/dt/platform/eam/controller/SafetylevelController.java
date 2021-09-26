@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 风险等级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:02
+ * @since 2021-09-26 11:16:24
 */
 
 @Api(tags = "风险等级")
@@ -70,7 +70,6 @@ public class SafetylevelController extends SuperController {
 		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = SafetylevelVOMeta.ID)
 	@SentinelResource(value = SafetylevelServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SafetylevelServiceProxy.INSERT)
 	public Result insert(SafetylevelVO safetylevelVO) {
@@ -258,30 +257,29 @@ public class SafetylevelController extends SuperController {
 
 
 
-
 	@SentinelResource(value = SafetylevelServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(SafetylevelServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=safetylevelService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=safetylevelService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

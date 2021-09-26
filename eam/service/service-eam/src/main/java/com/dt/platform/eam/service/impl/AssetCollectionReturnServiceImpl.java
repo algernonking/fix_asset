@@ -12,6 +12,7 @@ import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -127,7 +128,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		}
 
 		//生成编码规则
-		if(assetCollectionReturn.getBusinessCode()==null||"".equals(assetCollectionReturn.getBusinessCode())){
+		if(StringUtil.isBlank(assetCollectionReturn.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
@@ -138,16 +139,17 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 
 		//制单人
-		if(assetCollectionReturn.getOriginatorId()==null||"".equals(assetCollectionReturn.getOriginatorId())){
+		if(StringUtil.isBlank(assetCollectionReturn.getOriginatorId())){
 			assetCollectionReturn.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
+
 		//业务时间
-		if(assetCollectionReturn.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetCollectionReturn.getBusinessDate())){
 			assetCollectionReturn.setBusinessDate(new Date());
 		}
 
 		//办理状态
-		if(assetCollectionReturn.getStatus()==null||"".equals(assetCollectionReturn.getStatus())){
+		if(StringUtil.isBlank(assetCollectionReturn.getStatus())){
 			assetCollectionReturn.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 

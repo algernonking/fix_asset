@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:40
+ * @since 2021-09-26 11:15:57
  */
 
 
@@ -46,14 +46,14 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 
-			var ps={};
+			var ps={searchField: "$composite"};
 			var contitions={};
+
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
-			if(Object.keys(contitions).length>0) {
-				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
-			}
+			ps.searchValue=JSON.stringify(contitions);
+
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -62,7 +62,7 @@ function ListPage() {
 				}
 			}
 			var h=$(".search-bar").height();
-			dataTable=fox.renderTable({
+			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
@@ -86,6 +86,7 @@ function ListPage() {
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成时间'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate),d); }}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
 					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') , templet: function (d) { return templet('pictureId',d.pictureId,d);}  }
+					,{ field: 'crdAction', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('修改标记') , templet: function (d) { return templet('crdAction',d.crdAction,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -105,11 +106,14 @@ function ListPage() {
 						}
 					}:false
 				}
-			});
+			};
+			window.pageExt.list.beforeTableRender && window.pageExt.list.beforeTableRender(tableConfig);
+			dataTable=fox.renderTable(tableConfig);
 			//绑定排序事件
 			table.on('sort(data-table)', function(obj){
 			  refreshTableData(obj.field,obj.type);
 			});
+			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
 		setTimeout(renderTableInternal,1);
     };
@@ -119,16 +123,17 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.businessCode={ value: $("#businessCode").val()};
-		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.type={ value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
-		value.content={ value: $("#content").val()};
-		value.handleDate={ begin: $("#handleDate-begin").val(), end: $("#handleDate-end").val() };
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
+		value.content={ inputType:"button",value: $("#content").val()};
+		value.handleDate={ inputType:"date_input", begin: $("#handleDate-begin").val(), end: $("#handleDate-end").val() };
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -215,6 +220,7 @@ function ListPage() {
 				}
 			});
 		});
+
 	}
 	
 	/**
@@ -226,6 +232,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -293,6 +303,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('eam-asset-handle-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动

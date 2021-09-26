@@ -90,7 +90,7 @@ public class AssetSelectedDataController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产选择")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetSelectedDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = AssetSelectedDataVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetSelectedDataVOMeta.ID)

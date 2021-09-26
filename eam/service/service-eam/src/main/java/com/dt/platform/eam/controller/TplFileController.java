@@ -71,6 +71,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
 		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.TPL_FILE_TYPE , value = "模板文件类型" , required = false , dataTypeClass=String.class , example = "word"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	//	@ApiImplicitParam(name = TplFileVOMeta.TENANT_ID , value = "null" , required = null , dataTypeClass=null),
@@ -128,6 +129,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
 		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.TPL_FILE_TYPE , value = "模板文件类型" , required = false , dataTypeClass=String.class , example = "word"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 
@@ -151,6 +153,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
 		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.TPL_FILE_TYPE , value = "模板文件类型" , required = false , dataTypeClass=String.class , example = "word"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 
@@ -216,6 +219,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
 		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.TPL_FILE_TYPE , value = "模板文件类型" , required = false , dataTypeClass=String.class , example = "word"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 
@@ -240,6 +244,7 @@ public class TplFileController extends SuperController {
 		@ApiImplicitParam(name = TplFileVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "资产领用"),
 		@ApiImplicitParam(name = TplFileVOMeta.TYPE , value = "模板类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = TplFileVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_collection"),
+		@ApiImplicitParam(name = TplFileVOMeta.TPL_FILE_TYPE , value = "模板文件类型" , required = false , dataTypeClass=String.class , example = "word"),
 		@ApiImplicitParam(name = TplFileVOMeta.FILE_ID , value = "文件" , required = false , dataTypeClass=String.class , example = "484692349394362368"),
 		@ApiImplicitParam(name = TplFileVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 

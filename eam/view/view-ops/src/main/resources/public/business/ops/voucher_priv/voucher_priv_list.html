@@ -2,7 +2,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:34:23
+ * @since 2021-09-26 11:16:30
  */
  -->
  <!DOCTYPE html>
@@ -52,7 +52,7 @@
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('用户')}" class="search-label emplId-label">用户</span><span class="search-colon">:</span></div>
                             <input lay-filter="emplId" id="emplId" name="emplId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="emplId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}">按钮文本</span></button>
+                            <button id="emplId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
                     </div>
 
 

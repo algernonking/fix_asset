@@ -96,7 +96,7 @@ public class AssetAttributeController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产字段配置")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetAttributeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36")
+		@ApiImplicitParam(name = AssetAttributeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "000b5919-0f8b-11ec-ab08-00163e2e6a36"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetAttributeVOMeta.ID)

@@ -9,8 +9,8 @@ import com.dt.platform.domain.common.CodeRegister;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:17:58
- * @sign 03521F46814F188EB8CEC6C092DE3EAF
+ * @since 2021-09-26 11:15:12
+ * @sign A543A8213084B1109E74989D49338054
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -55,6 +55,16 @@ public class TplFileMeta {
 	 * 业务编码 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,CODE, java.lang.String.class, "业务编码", "业务编码", java.lang.String.class, null);
+	
+	/**
+	 * 模板文件类型 , 类型: java.lang.String
+	*/
+	public static final String TPL_FILE_TYPE="tplFileType";
+	
+	/**
+	 * 模板文件类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.TplFile,java.lang.String> TPL_FILE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.TplFile.class ,TPL_FILE_TYPE, java.lang.String.class, "模板文件类型", "模板文件类型", java.lang.String.class, null);
 	
 	/**
 	 * 文件 , 类型: java.lang.String
@@ -179,7 +189,7 @@ public class TplFileMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , TYPE , CODE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , BUSINESS_CODE };
+	public static final String[] $PROPS={ ID , NAME , TYPE , CODE , TPL_FILE_TYPE , FILE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , BUSINESS_CODE };
 	
 	/**
 	 * 代理类
@@ -230,6 +240,17 @@ public class TplFileMeta {
 		public TplFile setCode(String code) {
 			super.change(CODE,super.getCode(),code);
 			super.setCode(code);
+			return this;
+		}
+		
+		/**
+		 * 设置 模板文件类型
+		 * @param tplFileType 模板文件类型
+		 * @return 当前对象
+		*/
+		public TplFile setTplFileType(String tplFileType) {
+			super.change(TPL_FILE_TYPE,super.getTplFileType(),tplFileType);
+			super.setTplFileType(tplFileType);
 			return this;
 		}
 		

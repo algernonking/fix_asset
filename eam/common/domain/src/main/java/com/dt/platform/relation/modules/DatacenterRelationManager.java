@@ -6,7 +6,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 
-public class DCRelationManager  extends RelationManager {
+public class DatacenterRelationManager extends RelationManager {
     @Override
     protected void config() {
         this.setupRelations();

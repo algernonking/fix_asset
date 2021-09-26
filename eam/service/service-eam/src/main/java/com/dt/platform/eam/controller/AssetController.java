@@ -142,6 +142,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetVOMeta.CATEGORY_ID)
@@ -159,7 +160,7 @@ public class AssetController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "489517168661102592")
+		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "489517168661102592"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetVOMeta.ID)
@@ -256,6 +257,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } ) 
 	@NotNull(name = AssetVOMeta.ID)
@@ -336,6 +338,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
 	@NotNull(name = AssetVOMeta.ID)
@@ -380,6 +383,13 @@ public class AssetController extends SuperController {
 		assetService.join(asset,AssetMeta.CATEGORY_FINANCE);
 		// 关联出 供应商 数据
 		assetService.join(asset,AssetMeta.SUPPLIER);
+
+
+		assetService.join(asset,AssetMeta.OWNER_COMPANY);
+		assetService.join(asset,AssetMeta.USE_ORGANIZATION);
+		assetService.join(asset,AssetMeta.MANAGER);
+		assetService.join(asset,AssetMeta.USE_USER);
+		assetService.join(asset,AssetMeta.ORIGINATOR);
 		result.success(true).data(asset);
 		return result;
 	}
@@ -473,6 +483,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -553,6 +564,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -578,6 +590,12 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.CATEGORY_FINANCE);
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
+
+		assetService.join(list,AssetMeta.OWNER_COMPANY);
+		assetService.join(list,AssetMeta.USE_ORGANIZATION);
+		assetService.join(list,AssetMeta.MANAGER);
+		assetService.join(list,AssetMeta.USE_USER);
+		assetService.join(list,AssetMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
 	}
@@ -674,6 +692,15 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.MAINTNAINER);
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
+
+
+		assetService.join(list,AssetMeta.OWNER_COMPANY);
+		assetService.join(list,AssetMeta.USE_ORGANIZATION);
+		assetService.join(list,AssetMeta.MANAGER);
+		assetService.join(list,AssetMeta.USE_USER);
+		assetService.join(list,AssetMeta.ORIGINATOR);
+
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -770,6 +797,12 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.MAINTNAINER);
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
+
+		assetService.join(list,AssetMeta.OWNER_COMPANY);
+		assetService.join(list,AssetMeta.USE_ORGANIZATION);
+		assetService.join(list,AssetMeta.MANAGER);
+		assetService.join(list,AssetMeta.USE_USER);
+		assetService.join(list,AssetMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
 	}

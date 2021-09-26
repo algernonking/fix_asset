@@ -10,17 +10,18 @@ import org.github.foxnic.web.domain.pcm.Catalog;
 import com.dt.platform.domain.eam.Goods;
 import com.dt.platform.domain.eam.Manufacturer;
 import com.dt.platform.domain.eam.Warehouse;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.Maintainer;
 import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 21:49:25
- * @sign 966FA1D3746707E9AD410D5AB63662F2
+ * @since 2021-09-26 10:52:42
+ * @sign 5F5AC7429BBFEF82306A9F63E159B427
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -747,6 +748,16 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final String ORIGINATOR_ID="originatorId";
+	
+	/**
+	 * 制单人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
+	
+	/**
 	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
 	*/
 	public static final String POSITION="position";
@@ -807,24 +818,34 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,WAREHOUSE, com.dt.platform.domain.eam.Warehouse.class, "仓库", "仓库", com.dt.platform.domain.eam.Warehouse.class, null);
 	
 	/**
-	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String USE_USER="useUser";
 	
 	/**
-	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 使用人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Person> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_USER, org.github.foxnic.web.domain.hrm.Person.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Employee> USE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "使用人员", "使用人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
-	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String MANAGER="manager";
 	
 	/**
-	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Person
+	 * 管理人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Person> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER, org.github.foxnic.web.domain.hrm.Person.class, "管理人员", "管理人员", org.github.foxnic.web.domain.hrm.Person.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Employee> MANAGER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MANAGER, org.github.foxnic.web.domain.hrm.Employee.class, "管理人员", "管理人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String ORIGINATOR="originator";
+	
+	/**
+	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 供应商 , 类型: com.dt.platform.domain.eam.Supplier
@@ -857,9 +878,29 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.system.DictItem> SOURCE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SOURCE, org.github.foxnic.web.domain.system.DictItem.class, "来源", "来源", org.github.foxnic.web.domain.system.DictItem.class, null);
 	
 	/**
+	 * 所属公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String OWNER_COMPANY="ownerCompany";
+	
+	/**
+	 * 所属公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Organization> OWNER_COMPANY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,OWNER_COMPANY, org.github.foxnic.web.domain.hrm.Organization.class, "所属公司", "所属公司", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
+	 * 使用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String USE_ORGANIZATION="useOrganization";
+	
+	/**
+	 * 使用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "使用公司/部门", "使用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , SUPPLIER , MAINTNAINER , SOURCE };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , SOURCE , OWNER_COMPANY , USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -1662,6 +1703,17 @@ public class AssetMeta {
 		}
 		
 		/**
+		 * 设置 制单人
+		 * @param originatorId 制单人
+		 * @return 当前对象
+		*/
+		public Asset setOriginatorId(String originatorId) {
+			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
+			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
 		 * 设置 存放位置
 		 * @param position 存放位置
 		 * @return 当前对象
@@ -1732,7 +1784,7 @@ public class AssetMeta {
 		 * @param useUser 使用人员
 		 * @return 当前对象
 		*/
-		public Asset setUseUser(Person useUser) {
+		public Asset setUseUser(Employee useUser) {
 			super.change(USE_USER,super.getUseUser(),useUser);
 			super.setUseUser(useUser);
 			return this;
@@ -1743,9 +1795,20 @@ public class AssetMeta {
 		 * @param manager 管理人员
 		 * @return 当前对象
 		*/
-		public Asset setManager(Person manager) {
+		public Asset setManager(Employee manager) {
 			super.change(MANAGER,super.getManager(),manager);
 			super.setManager(manager);
+			return this;
+		}
+		
+		/**
+		 * 设置 制单人
+		 * @param originator 制单人
+		 * @return 当前对象
+		*/
+		public Asset setOriginator(Employee originator) {
+			super.change(ORIGINATOR,super.getOriginator(),originator);
+			super.setOriginator(originator);
 			return this;
 		}
 		
@@ -1779,6 +1842,28 @@ public class AssetMeta {
 		public Asset setSource(DictItem source) {
 			super.change(SOURCE,super.getSource(),source);
 			super.setSource(source);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属公司
+		 * @param ownerCompany 所属公司
+		 * @return 当前对象
+		*/
+		public Asset setOwnerCompany(Organization ownerCompany) {
+			super.change(OWNER_COMPANY,super.getOwnerCompany(),ownerCompany);
+			super.setOwnerCompany(ownerCompany);
+			return this;
+		}
+		
+		/**
+		 * 设置 使用公司/部门
+		 * @param useOrganization 使用公司/部门
+		 * @return 当前对象
+		*/
+		public Asset setUseOrganization(Organization useOrganization) {
+			super.change(USE_ORGANIZATION,super.getUseOrganization(),useOrganization);
+			super.setUseOrganization(useOrganization);
 			return this;
 		}
 	}

@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务分组 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:24
+ * @since 2021-09-26 11:17:05
 */
 
 @Api(tags = "服务分组")
@@ -70,7 +70,6 @@ public class ServiceGroupController extends SuperController {
 		@ApiImplicitParam(name = ServiceGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据库"),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = ServiceGroupVOMeta.ID)
 	@SentinelResource(value = ServiceGroupServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ServiceGroupServiceProxy.INSERT)
 	public Result insert(ServiceGroupVO serviceGroupVO) {
@@ -258,30 +257,29 @@ public class ServiceGroupController extends SuperController {
 
 
 
-
 	@SentinelResource(value = ServiceGroupServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(ServiceGroupServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=serviceGroupService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=serviceGroupService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

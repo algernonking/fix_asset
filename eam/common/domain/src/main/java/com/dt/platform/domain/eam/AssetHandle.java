@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:40
- * @sign FF03A498C8F5AF3F9CEB5DA566200EBF
+ * @since 2021-09-26 11:15:52
+ * @sign DACA68F22DD42C92F28D75FD6EC56689
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -110,6 +110,12 @@ public class AssetHandle extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="图片" , notes = "图片")
 	private String pictureId;
+	
+	/**
+	 * 修改标记：修改标记
+	*/
+	@ApiModelProperty(required = false,value="修改标记" , notes = "修改标记")
+	private String crdAction;
 	
 	/**
 	 * 备注：备注
@@ -433,6 +439,25 @@ public class AssetHandle extends Entity {
 	*/
 	public AssetHandle setPictureId(String pictureId) {
 		this.pictureId=pictureId;
+		return this;
+	}
+	
+	/**
+	 * 获得 修改标记<br>
+	 * 修改标记
+	 * @return 修改标记
+	*/
+	public String getCrdAction() {
+		return crdAction;
+	}
+	
+	/**
+	 * 设置 修改标记
+	 * @param crdAction 修改标记
+	 * @return 当前对象
+	*/
+	public AssetHandle setCrdAction(String crdAction) {
+		this.crdAction=crdAction;
 		return this;
 	}
 	

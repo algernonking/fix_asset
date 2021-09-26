@@ -10,6 +10,8 @@ import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
@@ -33,6 +35,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 //        cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
 //        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
 
+
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
         cfg.getPoClassFile().addSimpleProperty(CategoryFinance.class,"categoryFinance","财务分类","财务分类");
         cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");
@@ -40,14 +43,22 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
 
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"useUser","使用人员","使用人员");
-        cfg.getPoClassFile().addSimpleProperty(Person.class,"manager","管理人员","管理人员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","管理人员","管理人员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
 
-
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
+
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
+        cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
+
+
+
+
+
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).search().fuzzySearch();
@@ -94,26 +105,29 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET.STATUS,
-                        EAMTables.EAM_ASSET.BUSINESS_CODE,
                         EAMTables.EAM_ASSET.ASSET_STATUS,
+                        EAMTables.EAM_ASSET.ASSET_CODE,
                         EAMTables.EAM_ASSET.SOURCE_ID,
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET.NAME,
-                        EAMTables.EAM_ASSET.ASSET_CODE,
                         EAMTables.EAM_ASSET.MODEL,
                         EAMTables.EAM_ASSET.SERIAL_NUMBER,
+                        EAMTables.EAM_ASSET.ASSET_NOTES,
                 },
 
                 new Object[]{
                         EAMTables.EAM_ASSET.OWN_COMPANY_ID,
                         EAMTables.EAM_ASSET.USE_ORGANIZATION_ID,
+                        EAMTables.EAM_ASSET.MANAGER_ID,
                         EAMTables.EAM_ASSET.USE_USER_ID,
-                        EAMTables.EAM_ASSET.POSITION_ID,
+
                 },
                 new Object[]{
+                        EAMTables.EAM_ASSET.POSITION_ID,
+                        EAMTables.EAM_ASSET.BUSINESS_CODE,
                         EAMTables.EAM_ASSET.MANUFACTURER_ID,
-                        EAMTables.EAM_ASSET.ASSET_NOTES,
+                        EAMTables.EAM_ASSET.MAINTAINER_ID,
                         EAMTables.EAM_ASSET.PURCHASE_DATE,
                 }
 
@@ -134,20 +148,18 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 textField(MaintainerMeta.MAINTAINER_NAME).
                 fillBy(AssetMeta.MAINTNAINER).muliti(false);
 
+
         cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID)
                 .basic().label("来源")
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_source")
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(AssetMeta.SOURCE).muliti(false);
+                fillBy(AssetMeta.SOURCE).muliti(false).defaultValue("purchase");
 
-//
-//        cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID).form()
-//                .form().selectBox().dict(DictEnum.EAM_SOURCE);
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
-                label("资产状态").selectBox().enumType(AssetStatusEnum.class);
+                label("资产状态").selectBox().enumType(AssetStatusEnum.class).defaultValue("idle");
 
         cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
@@ -213,10 +225,23 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_NOTES).form().textArea().height(30);
 
 
+        cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID)
+                .form().button().chooseCompany(true);
+        cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).table().fillBy("ownerCompany","fullName");
 
-//        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).form();
-//        cfg.view().field(EAMTables.EAM_ASSET.OWN_COMPANY_ID).form();
+        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID)
+                .form().button().chooseOrganization(true);
+        cfg.view().field(EAMTables.EAM_ASSET.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
 
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).table().fillBy("manager","name");
+        cfg.view().field(EAMTables.EAM_ASSET.MANAGER_ID).form()
+                .button().chooseEmployee(true);
+
+        cfg.view().field(EAMTables.EAM_ASSET.USE_USER_ID).table().fillBy("useUser","name");
+        cfg.view().field(EAMTables.EAM_ASSET.USE_USER_ID).form()
+                .button().chooseEmployee(true);
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME)
                 .basic().label("名称");
@@ -280,10 +305,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 //                }
 //
 //        );
-
-
-
-
 
 //        cfg.view().form().addTab(
 //                new Tab("基本信息","loadBaseInfoIframe"),

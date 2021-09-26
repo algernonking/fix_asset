@@ -183,10 +183,11 @@
 
 
 
-<div  th:fragment="own_company_id" class="layui-form-item" >
+<div th:fragment="own_company_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('所属公司') }" type="text" class="layui-input"    lay-verify="|required"   />
+        <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId"  type="hidden" class="layui-input"   />
+        <button id="ownCompanyId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择所属公司')}" th:default-label="${lang.translate('请选择所属公司')}">请选择所属公司</span></button>
     </div>
 </div>
 
@@ -195,16 +196,19 @@
 <div  th:fragment="manager_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="managerId" id="managerId" name="managerId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理人员') }" type="text" class="layui-input"   />
+        <input lay-filter="managerId" id="managerId" name="managerId"  type="hidden" class="layui-input"   />
+        <button id="managerId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择管理人员')}" th:default-label="${lang.translate('请选择管理人员')}">请选择管理人员</span></button>
     </div>
 </div>
+
 
 
 
 <div  th:fragment="use_organization_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用公司/部门') }" type="text" class="layui-input"    lay-verify="|required"   />
+        <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
+        <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择使用公司/部门')}" th:default-label="${lang.translate('请选择使用公司/部门')}">请选择使用公司/部门</span></button>
     </div>
 </div>
 
@@ -213,23 +217,25 @@
 <div  th:fragment="use_user_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="useUserId" id="useUserId" name="useUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('使用人员') }" type="text" class="layui-input"   />
+        <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"   />
+        <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择使用人员')}" th:default-label="${lang.translate('请选择使用人员')}">请选择使用人员</span></button>
     </div>
 </div>
+
 
 
 
 <div  th:fragment="position_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-list'}"></div>
+        <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-paged-list'}"></div>
     </div>
 </div>
 
 
 
 <div  th:fragment="position_detail" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('详细位置')}">详细位置</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="positionDetail" id="positionDetail" name="positionDetail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('详细位置') }" type="text" class="layui-input"   />
     </div>
@@ -245,13 +251,6 @@
 </div>
 
 
-
-<!--<div  th:fragment="source_id" class="layui-form-item" >-->
-<!--    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>-->
-<!--    <div class="layui-input-block layui-input-block-c1">-->
-<!--        <div id="sourceId" input-type="select" th:data="${dict.toArray('eam_source')}"></div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <div  th:fragment="source_id"  class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('来源')}">来源</div></div>

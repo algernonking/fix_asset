@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:40
- * @sign FF03A498C8F5AF3F9CEB5DA566200EBF
+ * @since 2021-09-26 11:15:52
+ * @sign DACA68F22DD42C92F28D75FD6EC56689
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -150,6 +150,16 @@ public class AssetHandleMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> PICTURE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,PICTURE_ID, java.lang.String.class, "图片", "图片", java.lang.String.class, null);
 	
 	/**
+	 * 修改标记 , 类型: java.lang.String
+	*/
+	public static final String CRD_ACTION="crdAction";
+	
+	/**
+	 * 修改标记 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetHandle,java.lang.String> CRD_ACTION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetHandle.class ,CRD_ACTION, java.lang.String.class, "修改标记", "修改标记", java.lang.String.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -282,7 +292,7 @@ public class AssetHandleMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , CRD_ACTION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -432,6 +442,17 @@ public class AssetHandleMeta {
 		public AssetHandle setPictureId(String pictureId) {
 			super.change(PICTURE_ID,super.getPictureId(),pictureId);
 			super.setPictureId(pictureId);
+			return this;
+		}
+		
+		/**
+		 * 设置 修改标记
+		 * @param crdAction 修改标记
+		 * @return 当前对象
+		*/
+		public AssetHandle setCrdAction(String crdAction) {
+			super.change(CRD_ACTION,super.getCrdAction(),crdAction);
+			super.setCrdAction(crdAction);
 			return this;
 		}
 		

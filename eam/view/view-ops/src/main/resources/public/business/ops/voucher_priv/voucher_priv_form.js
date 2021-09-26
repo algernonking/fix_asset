@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:34:26
+ * @since 2021-09-26 11:16:30
  */
 
 function FormPage() {
@@ -234,7 +234,7 @@ function FormPage() {
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
 			};
-				fox.chooseEmployee(emplIdDialogOptions);
+			fox.chooseEmployee(emplIdDialogOptions);
 		});
 
 	    //关闭窗口

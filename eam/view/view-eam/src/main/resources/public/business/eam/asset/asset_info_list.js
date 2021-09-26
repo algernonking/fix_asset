@@ -38,6 +38,8 @@ function ListPage() {
 		bindButtonEvent();
 		//绑定行操作按钮事件
 		bindRowOperationEvent();
+
+
 	}
 
 
@@ -124,23 +126,31 @@ function ListPage() {
 	 * 刷新表格数据
 	 */
 	function refreshTableData(sortField,sortType) {
-		console.log(1)
+
 		var value = {};
+
+
 		value.businessCode={ value: $("#businessCode").val()};
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.assetCode={ value: $("#assetCode").val()};
+		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.manufacturerId={ value: xmSelect.get("#manufacturerId",true).getValue("value"), fillBy:"manufacturer",field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
 		value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.ownCompanyId={ value: $("#ownCompanyId").val()};
-		value.useOrganizationId={ value: $("#useOrganizationId").val()};
-		value.useUserId={ value: $("#useUserId").val()};
+
+		value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text()};
+		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text()};
+
+		value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text()};
+		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
+
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
 		value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+
+
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}
@@ -172,6 +182,8 @@ function ListPage() {
 		$('#search-input').val("");
 		layui.form.render();
 	}
+
+
 
 	function initSearchFields() {
 
@@ -253,7 +265,6 @@ function ListPage() {
 				return opts;
 			}
 		});
-
 		//渲染 sourceId 下拉字段
 		fox.renderSelectBox({
 			el: "sourceId",
@@ -280,9 +291,31 @@ function ListPage() {
 			elem: '#purchaseDate-end',
 			trigger:"click"
 		});
+		//渲染 maintainerId 下拉字段
+		fox.renderSelectBox({
+			el: "maintainerId",
+			radio: false,
+			size: "small",
+			filterable: true,
+			//转换数据
+			searchField: "maintainerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].maintainerName,value:data[i].id});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
+
+
 
 	/**
 	 * 绑定搜索框事件
@@ -309,7 +342,71 @@ function ListPage() {
 				}
 			});
 		});
+
+		// 请选择公司对话框
+		$("#ownCompanyId-button").click(function(){
+			var ownCompanyIdDialogOptions={
+				field:"ownCompanyId",
+				inputEl:$("#ownCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseOrgNode(ownCompanyIdDialogOptions);
+		});
+		// 请选择组织节点对话框
+		$("#useOrganizationId-button").click(function(){
+			var useOrganizationIdDialogOptions={
+				field:"useOrganizationId",
+				inputEl:$("#useOrganizationId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseOrgNode(useOrganizationIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#useUserId-button").click(function(){
+			var useUserIdDialogOptions={
+				field:"useUserId",
+				inputEl:$("#useUserId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseEmployee(useUserIdDialogOptions);
+		});
+
+		// 请选择人员对话框
+		$("#managerId-button").click(function(){
+			var managerIdDialogOptions={
+				field:"managerId",
+				inputEl:$("#managerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+			};
+			fox.chooseEmployee(managerIdDialogOptions);
+		});
+
 	}
+
 
 	/**
 	 * 绑定按钮事件

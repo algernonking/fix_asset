@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 业务编码 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 20:53:36
+ * @since 2021-09-26 11:14:37
 */
 
 @Api(tags = "业务编码")
@@ -65,14 +65,13 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "添加业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class , example = "eam"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产编码"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = CodeRegisterVOMeta.ID)
 	@SentinelResource(value = CodeRegisterServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeRegisterServiceProxy.INSERT)
 	public Result insert(CodeRegisterVO codeRegisterVO) {
@@ -86,7 +85,7 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "删除业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = CodeRegisterVOMeta.ID)
@@ -120,10 +119,10 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "更新业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class , example = "eam"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产编码"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRegisterVOMeta.PAGE_INDEX , CodeRegisterVOMeta.PAGE_SIZE , CodeRegisterVOMeta.SEARCH_FIELD , CodeRegisterVOMeta.FUZZY_FIELD , CodeRegisterVOMeta.SEARCH_VALUE , CodeRegisterVOMeta.SORT_FIELD , CodeRegisterVOMeta.SORT_TYPE , CodeRegisterVOMeta.IDS } ) 
@@ -141,10 +140,10 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "保存业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class , example = "eam"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产编码"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRegisterVOMeta.PAGE_INDEX , CodeRegisterVOMeta.PAGE_SIZE , CodeRegisterVOMeta.SEARCH_FIELD , CodeRegisterVOMeta.FUZZY_FIELD , CodeRegisterVOMeta.SEARCH_VALUE , CodeRegisterVOMeta.SORT_FIELD , CodeRegisterVOMeta.SORT_TYPE , CodeRegisterVOMeta.IDS } )
@@ -201,10 +200,10 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "查询业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class , example = "eam"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产编码"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { CodeRegisterVOMeta.PAGE_INDEX , CodeRegisterVOMeta.PAGE_SIZE } )
@@ -223,10 +222,10 @@ public class CodeRegisterController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询业务编码")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "71d442ed-1492-11ec-ab08-00163e2e6a36"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.CODE , value = "业务编码" , required = false , dataTypeClass=String.class , example = "eam_asset_code"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.TYPE , value = "编码类型" , required = false , dataTypeClass=String.class , example = "eam"),
+		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产编码"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -268,30 +267,29 @@ public class CodeRegisterController extends SuperController {
 
 
 
-
 	@SentinelResource(value = CodeRegisterServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(CodeRegisterServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=codeRegisterService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=codeRegisterService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

@@ -1,7 +1,7 @@
 /**
  * 主机位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:19
+ * @since 2021-09-26 11:16:56
  */
 
 layui.config({
@@ -25,14 +25,43 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeInit:function () {
             console.log("list:beforeInit");
         },
+        /**
+         * 表格渲染前调用
+         * @param cfg 表格配置参数
+         * */
+        beforeTableRender:function (cfg){
+            console.log("list:beforeTableRender",cfg);
+        },
+        /**
+         * 表格渲染后调用
+         * */
+        afterTableRender :function (){
+
+        },
         afterSearchInputReady: function() {
             console.log("list:afterSearchInputReady");
         },
         /**
-         * 查询前调用
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
-        beforeQuery:function (conditions,location) {
-            console.log('beforeQuery',conditions);
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+        },
+        /**
+         * 查询前调用
+         * @param conditions 复合查询条件
+         * @param param 请求参数
+         * @param location 调用的代码位置
+         * */
+        beforeQuery:function (conditions,param,location) {
+            console.log('beforeQuery',conditions,param,location);
             return true;
         },
         /**
@@ -81,6 +110,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
+         * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeToolBarButtonEvent:function (selected,obj) {
+            console.log('beforeToolBarButtonEvent',selected,obj);
+            return true;
+        },
+        /**
+         * 列表操作栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeRowOperationEvent:function (data,obj) {
+            console.log('beforeRowOperationEvent',data,obj);
+            return true;
+        },
+        /**
          * 表格右侧操作列更多按钮事件
          * */
         moreAction:function (menu,data, it){
@@ -118,12 +161,32 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('afterDataFill',data);
         },
         /**
+         * 对话框打开之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="覆盖对话框标题";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+        },
+        /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             return true;
         },
+        /**
+         * 数据提交后执行
+         * */
+        afterSubmit:function (param,result) {
+            console.log("afterSubmitt",param,result);
+        },
+
         /**
          * 末尾执行
          */

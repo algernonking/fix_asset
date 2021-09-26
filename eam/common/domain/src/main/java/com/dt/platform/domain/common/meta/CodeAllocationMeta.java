@@ -10,7 +10,7 @@ import com.dt.platform.domain.common.CodeRegister;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:07:48
+ * @since 2021-09-26 11:14:40
  * @sign 37AD3DD592751F577ED9164B6614F90D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

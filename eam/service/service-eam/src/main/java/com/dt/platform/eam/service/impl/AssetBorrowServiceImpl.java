@@ -17,6 +17,7 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,7 +132,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		}
 
 		//生成编码规则
-		if(assetBorrow.getBusinessCode()==null||"".equals(assetBorrow.getBusinessCode())){
+		if(StringUtil.isBlank(assetBorrow.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
@@ -141,17 +142,17 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		}
 
 		//填充制单人
-		if(assetBorrow.getOriginatorId()==null||"".equals(assetBorrow.getOriginatorId())){
+		if( StringUtil.isBlank(assetBorrow.getOriginatorId())){
 			assetBorrow.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
 		//业务时间
-		if(assetBorrow.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetBorrow.getBusinessDate())){
 			assetBorrow.setBusinessDate(new Date());
 		}
 
 		//办理状态
-		if(assetBorrow.getStatus()==null||"".equals(assetBorrow.getStatus())){
+		if(StringUtil.isBlank( assetBorrow.getStatus())){
 			assetBorrow.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 

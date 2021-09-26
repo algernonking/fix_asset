@@ -2,7 +2,7 @@
 /**
  * 业务编码 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 20:53:39
+ * @since 2021-09-26 11:14:37
  */
  -->
  <!DOCTYPE html>
@@ -41,16 +41,16 @@
 
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('编码类型')}">编码类型</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('编码类型')}">编码类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
                             <div id="type" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeTypeEnum')}"></div>
                         </div>
                     </div>
 
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务编码')}">业务编码</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务编码')}">业务编码</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务编码') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
@@ -61,15 +61,28 @@
             <div class="layui-col-xs6 form-column">
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
@@ -81,7 +94,7 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 250px"></div>
+        <div style="height: 80px"></div>
 
 
     </form>

@@ -12,6 +12,7 @@ import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -126,7 +127,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 		}
 
 		//生成编码规则
-		if(assetTranfer.getBusinessCode()==null||"".equals(assetTranfer.getBusinessCode())){
+		if(StringUtil.isBlank(assetTranfer.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_BORROW.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
@@ -136,17 +137,17 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 		}
 
 		//制单人
-		if(assetTranfer.getOriginatorId()==null||"".equals(assetTranfer.getOriginatorId())){
+		if(StringUtil.isBlank(assetTranfer.getOriginatorId())){
 			assetTranfer.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
 		//业务时间
-		if(assetTranfer.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetTranfer.getBusinessDate())){
 			assetTranfer.setBusinessDate(new Date());
 		}
 
 		//办理状态
-		if(assetTranfer.getStatus()==null||"".equals(assetTranfer.getStatus())){
+		if(StringUtil.isBlank(assetTranfer.getStatus())){
 			assetTranfer.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 

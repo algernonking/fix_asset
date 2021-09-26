@@ -12,6 +12,7 @@ import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,7 +126,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 
 		//生成编码规则
-		if(assetAllocation.getBusinessCode()==null||"".equals(assetAllocation.getBusinessCode())){
+		if(StringUtil.isBlank(assetAllocation.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_ALLOCATE.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
@@ -136,18 +137,18 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 
 		//制单人
-		if(assetAllocation.getOriginatorId()==null||"".equals(assetAllocation.getOriginatorId())){
+		if(StringUtil.isBlank(assetAllocation.getOriginatorId())){
 			assetAllocation.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
 		//业务时间
-		if(assetAllocation.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetAllocation.getBusinessDate())){
 			assetAllocation.setBusinessDate(new Date());
 		}
 
 
 		//办理状态
-		if(assetAllocation.getStatus()==null||"".equals(assetAllocation.getStatus())){
+		if(StringUtil.isBlank(assetAllocation.getStatus())){
 			assetAllocation.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 

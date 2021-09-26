@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:07
+ * @since 2021-09-26 11:14:57
  */
 
 
@@ -46,14 +46,14 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 
-			var ps={};
+			var ps={searchField: "$composite"};
 			var contitions={};
+
 			if(window.pageExt.list.beforeQuery){
-				window.pageExt.list.beforeQuery(contitions);
+				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
-			if(Object.keys(contitions).length>0) {
-				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
-			}
+			ps.searchValue=JSON.stringify(contitions);
+
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -62,7 +62,7 @@ function ListPage() {
 				}
 			}
 			var h=$(".search-bar").height();
-			dataTable=fox.renderTable({
+			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
@@ -100,11 +100,14 @@ function ListPage() {
 						}
 					}:false
 				}
-			});
+			};
+			window.pageExt.list.beforeTableRender && window.pageExt.list.beforeTableRender(tableConfig);
+			dataTable=fox.renderTable(tableConfig);
 			//绑定排序事件
 			table.on('sort(data-table)', function(obj){
 			  refreshTableData(obj.field,obj.type);
 			});
+			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
 		setTimeout(renderTableInternal,1);
     };
@@ -114,17 +117,18 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.areaId={ value: xmSelect.get("#areaId",true).getValue("value"), fillBy:"area",field:"id", label:xmSelect.get("#areaId",true).getValue("nameStr") };
-		value.layerId={ value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id", label:xmSelect.get("#layerId",true).getValue("nameStr") };
-		value.rackCode={ value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.rackName={ value: $("#rackName").val()};
-		value.pduNumber={ value: $("#pduNumber").val()};
-		value.rackLabels={ value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.rackNotes={ value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.areaId={ inputType:"select_box", value: xmSelect.get("#areaId",true).getValue("value"), fillBy:"area",field:"id", label:xmSelect.get("#areaId",true).getValue("nameStr") };
+		value.layerId={ inputType:"select_box", value: xmSelect.get("#layerId",true).getValue("value"), fillBy:"layer",field:"id", label:xmSelect.get("#layerId",true).getValue("nameStr") };
+		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.rackName={ inputType:"button",value: $("#rackName").val()};
+		value.pduNumber={ inputType:"number_input", value: $("#pduNumber").val()};
+		value.rackLabels={ inputType:"button",value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
-			if(!window.pageExt.list.beforeQuery(value)) return;
+			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
-		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -226,6 +230,7 @@ function ListPage() {
 				}
 			});
 		});
+
 	}
 	
 	/**
@@ -237,6 +242,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -304,6 +313,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('dc-rack-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动

@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:41
+ * @since 2021-09-26 11:16:00
  */
  -->
  <!DOCTYPE html>
@@ -46,16 +46,23 @@
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('处理')}">处理</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('处理')}">处理</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="handleId" id="handleId" name="handleId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('处理') }" type="text" class="layui-input"    lay-verify="|required"  />
+                            <input lay-filter="handleId" id="handleId" name="handleId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('处理') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产')}">资产</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产')}">资产</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"    lay-verify="|required"  />
+                            <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('修改标记')}">修改标记</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="crd" id="crd" name="crd" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('修改标记') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -84,7 +91,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"assetId":{"labelInForm":"资产","inputType":"text_input","required":true},"handleId":{"labelInForm":"处理","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={};
     var AUTH_PREFIX="eam_asset_item";
 
 

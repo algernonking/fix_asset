@@ -12,6 +12,7 @@ import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -129,7 +130,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 
 		//生成编码规则
-		if(assetScrap.getBusinessCode()==null||"".equals(assetScrap.getBusinessCode())){
+		if(StringUtil.isBlank(assetScrap.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_SCRAP.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
@@ -140,16 +141,17 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 
 		//制单人
-		if(assetScrap.getOriginatorId()==null||"".equals(assetScrap.getOriginatorId())){
+		if(StringUtil.isBlank(assetScrap.getOriginatorId())){
 			assetScrap.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
+
 		//业务时间
-		if(assetScrap.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetScrap.getBusinessDate())){
 			assetScrap.setBusinessDate(new Date());
 		}
 
 		//办理状态
-		if(assetScrap.getStatus()==null||"".equals(assetScrap.getStatus())){
+		if(StringUtil.isBlank(assetScrap.getStatus())){
 			assetScrap.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 

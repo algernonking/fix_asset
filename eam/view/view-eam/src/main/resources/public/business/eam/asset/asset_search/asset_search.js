@@ -128,11 +128,17 @@ function ListPage() {
             if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
         }
         if(searchContent_useOrganizationId){
-            value.useOrganizationId={ value: searchContent_useOrganizationId};
+            if(value.useOrganizationId){
+                delete value.useOrganizationId ;
+            }
+            ps.useOrganizationId=searchContent_useOrganizationId;
         }
 
         if(searchContent_categoryId){
-            value.categoryId={ value: searchContent_categoryId};
+            if(value.categoryId){
+                delete value.categoryId ;
+            }
+            ps.categoryId=searchContent_categoryId;
         }
 
         if(searchContent_positionId){

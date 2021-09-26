@@ -43,7 +43,6 @@
 <!--                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>-->
 <!--                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>-->
 <!--                    </div>-->
-
                     <!-- 资产编号 , assetCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产编号')}" class="search-label assetCode-label">资产编号</span><span class="search-colon">:</span></div>
@@ -134,7 +133,6 @@
                             <input type="text" id="purchaseDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
-
                 </div>
             </div>
 
@@ -174,11 +172,8 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
-
     var AUTH_PREFIX="eam_asset";
-
     var ATTRIBUTE_LIST_DATA =  [[${attributeListData}]];
-
     var ASSET_SELECTED_CODE =  [[${assetSelectedCode}]];
 </script>
 

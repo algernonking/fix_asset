@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:41
- * @sign 9617089DA53ADEE2DF10CEE1AABA1631
+ * @since 2021-09-26 11:16:00
+ * @sign EC66E193A7F5534AA5A14A160B967F07
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -44,6 +44,16 @@ public class AssetItemMeta {
 	 * 资产 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	
+	/**
+	 * 修改标记 , 类型: java.lang.String
+	*/
+	public static final String CRD="crd";
+	
+	/**
+	 * 修改标记 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> CRD_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,CRD, java.lang.String.class, "修改标记", "修改标记", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -128,7 +138,7 @@ public class AssetItemMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HANDLE_ID , ASSET_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , HANDLE_ID , ASSET_ID , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -168,6 +178,17 @@ public class AssetItemMeta {
 		public AssetItem setAssetId(String assetId) {
 			super.change(ASSET_ID,super.getAssetId(),assetId);
 			super.setAssetId(assetId);
+			return this;
+		}
+		
+		/**
+		 * 设置 修改标记
+		 * @param crd 修改标记
+		 * @return 当前对象
+		*/
+		public AssetItem setCrd(String crd) {
+			super.change(CRD,super.getCrd(),crd);
+			super.setCrd(crd);
 			return this;
 		}
 		

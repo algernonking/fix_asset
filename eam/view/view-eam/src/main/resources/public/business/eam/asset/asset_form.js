@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 21:49:31
+ * @since 2021-09-26 10:52:49
  */
 
 function FormPage() {
@@ -120,7 +120,7 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
+				var defaultValues="idle".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
@@ -246,7 +246,7 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
+				var defaultValues="purchase".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
@@ -539,6 +539,70 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择公司对话框
+		$("#ownCompanyId-button").click(function(){
+			var ownCompanyIdDialogOptions={
+				field:"ownCompanyId",
+				formData:getFormData(),
+				inputEl:$("#ownCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseOrgNode(ownCompanyIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#managerId-button").click(function(){
+				var managerIdDialogOptions={
+				field:"managerId",
+				formData:getFormData(),
+				inputEl:$("#managerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseEmployee(managerIdDialogOptions);
+		});
+		// 请选择组织节点对话框
+		$("#useOrganizationId-button").click(function(){
+			var useOrganizationIdDialogOptions={
+				field:"useOrganizationId",
+				formData:getFormData(),
+				inputEl:$("#useOrganizationId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseOrgNode(useOrganizationIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#useUserId-button").click(function(){
+				var useUserIdDialogOptions={
+				field:"useUserId",
+				formData:getFormData(),
+				inputEl:$("#useUserId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseEmployee(useUserIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

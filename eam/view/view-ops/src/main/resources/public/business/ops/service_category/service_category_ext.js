@@ -1,7 +1,7 @@
 /**
  * 服务类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 16:36:33
+ * @since 2021-09-26 11:17:02
  */
 
 layui.config({
@@ -25,23 +25,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeInit:function () {
             console.log("list:beforeInit");
         },
+        /**
+         * 表格渲染前调用
+         * @param cfg 表格配置参数
+         * */
+        beforeTableRender:function (cfg){
+            console.log("list:beforeTableRender",cfg);
+        },
+        /**
+         * 表格渲染后调用
+         * */
+        afterTableRender :function (){
+
+        },
         afterSearchInputReady: function() {
             console.log("list:afterSearchInputReady");
-        },
-        /**
-         * 对话框之前调用，如果返回 null 则不打开对话框
-         * */
-        beforeDialog:function (param){
-            param.title="覆盖对话框标题";
-            return param;
-        },
-        /**
-         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
-         * */
-        afterDialog:function (param,result) {
-            console.log('dialog',param,result);
-            // debugger;
-            window.module.refreshTableData();
         },
         /**
          * 对话框打开之前调用，如果返回 null 则不打开对话框
@@ -112,6 +110,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
+         * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeToolBarButtonEvent:function (selected,obj) {
+            console.log('beforeToolBarButtonEvent',selected,obj);
+            return true;
+        },
+        /**
+         * 列表操作栏按钮事件前调用，如果返回 false 则不执行后续代码
+         * */
+        beforeRowOperationEvent:function (data,obj) {
+            console.log('beforeRowOperationEvent',data,obj);
+            return true;
+        },
+        /**
          * 表格右侧操作列更多按钮事件
          * */
         moreAction:function (menu,data, it){
@@ -160,7 +172,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
-        }
+        },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */

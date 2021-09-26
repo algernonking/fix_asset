@@ -2,7 +2,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:08:02
+ * @since 2021-09-26 11:14:40
  */
  -->
  <!DOCTYPE html>
@@ -52,7 +52,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('编码规则')}">编码规则</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="ruleId" input-type="select" th:data="${'/service-common/sys-code-rule/query-list'}"></div>
+                            <div id="ruleId" input-type="select" th:data="${'/service-common/sys-code-rule/query-paged-list'}"></div>
                         </div>
                     </div>
 

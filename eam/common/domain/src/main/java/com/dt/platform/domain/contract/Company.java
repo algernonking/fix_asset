@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:05:29
- * @sign 371C48EEE11F76AB45B87B6B7F0BEACE
+ * @since 2021-09-26 11:17:15
+ * @sign 234D730645DCFD8289E4BA03AEAA1E3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,37 +38,37 @@ public class Company extends Entity {
 	/**
 	 * 单位：单位
 	*/
-	@ApiModelProperty(required = true,value="单位" , notes = "单位")
+	@ApiModelProperty(required = false,value="单位" , notes = "单位")
 	private String name;
 	
 	/**
 	 * 地址：地址
 	*/
-	@ApiModelProperty(required = true,value="地址" , notes = "地址")
+	@ApiModelProperty(required = false,value="地址" , notes = "地址")
 	private String address;
 	
 	/**
 	 * 联系人：联系人
 	*/
-	@ApiModelProperty(required = true,value="联系人" , notes = "联系人")
+	@ApiModelProperty(required = false,value="联系人" , notes = "联系人")
 	private String contacts;
 	
 	/**
 	 * 联系方式：联系方式
 	*/
-	@ApiModelProperty(required = true,value="联系方式" , notes = "联系方式")
+	@ApiModelProperty(required = false,value="联系方式" , notes = "联系方式")
 	private String contactInformation;
 	
 	/**
 	 * 信用代码：信用代码
 	*/
-	@ApiModelProperty(required = true,value="信用代码" , notes = "信用代码")
+	@ApiModelProperty(required = false,value="信用代码" , notes = "信用代码")
 	private String creditCode;
 	
 	/**
 	 * 介绍：介绍
 	*/
-	@ApiModelProperty(required = true,value="介绍" , notes = "介绍")
+	@ApiModelProperty(required = false,value="介绍" , notes = "介绍")
 	private String profile;
 	
 	/**

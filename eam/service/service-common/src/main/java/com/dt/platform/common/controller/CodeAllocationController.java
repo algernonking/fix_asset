@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:07:51
+ * @since 2021-09-26 11:14:40
 */
 
 @Api(tags = "编码分配")
@@ -73,7 +73,6 @@ public class CodeAllocationController extends SuperController {
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产调拨编码生成规则"),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = CodeAllocationVOMeta.ID)
 	@SentinelResource(value = CodeAllocationServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeAllocationServiceProxy.INSERT)
 	public Result insert(CodeAllocationVO codeAllocationVO) {
@@ -273,30 +272,29 @@ public class CodeAllocationController extends SuperController {
 
 
 
-
 	@SentinelResource(value = CodeAllocationServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(CodeAllocationServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=codeAllocationService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=codeAllocationService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-18 21:30:36
+ * @since 2021-09-26 11:16:53
  */
 
 
@@ -46,14 +46,14 @@ function ListPage() {
 		//
 		function renderTableInternal() {
 
-			var ps={};
+			var ps={searchField: "$composite"};
 			var contitions={};
+
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
-			if(Object.keys(contitions).length>0) {
-				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
-			}
+			ps.searchValue=JSON.stringify(contitions);
+
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -62,7 +62,7 @@ function ListPage() {
 				}
 			}
 			var h=$(".search-bar").height();
-			dataTable=fox.renderTable({
+			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
@@ -120,11 +120,14 @@ function ListPage() {
 						}
 					}:false
 				}
-			});
+			};
+			window.pageExt.list.beforeTableRender && window.pageExt.list.beforeTableRender(tableConfig);
+			dataTable=fox.renderTable(tableConfig);
 			//绑定排序事件
 			table.on('sort(data-table)', function(obj){
 			  refreshTableData(obj.field,obj.type);
 			});
+			window.pageExt.list.afterTableRender && window.pageExt.list.afterTableRender();
 		}
 		setTimeout(renderTableInternal,1);
     };
@@ -134,18 +137,18 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.systemId={ value: xmSelect.get("#systemId",true).getValue("value"), fillBy:"infoSystem",field:"id", label:xmSelect.get("#systemId",true).getValue("nameStr") };
-		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.hostName={ value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.hostIp={ value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.hostVip={ value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.environment={ value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr")};
-		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
-		value.labels={ value: $("#labels").val()};
-		value.hostNotes={ value: $("#hostNotes").val()};
-		value.hostDbIds={ value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
-		value.hostMiddlewareIds={ value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"hostMiddlewareList",field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
-		value.hostOsIds={ value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"hostOsList",field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
+		value.systemId={ inputType:"select_box", value: xmSelect.get("#systemId",true).getValue("value"), fillBy:"infoSystem",field:"id", label:xmSelect.get("#systemId",true).getValue("nameStr") };
+		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+		value.hostName={ inputType:"button",value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.hostIp={ inputType:"button",value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.hostVip={ inputType:"button",value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.environment={ inputType:"select_box", value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr")};
+		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+		value.labels={ inputType:"button",value: $("#labels").val()};
+		value.hostNotes={ inputType:"button",value: $("#hostNotes").val()};
+		value.hostDbIds={ inputType:"select_box", value: xmSelect.get("#hostDbIds",true).getValue("value"), fillBy:"hostDbList",field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
+		value.hostMiddlewareIds={ inputType:"select_box", value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillBy:"hostMiddlewareList",field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
+		value.hostOsIds={ inputType:"select_box", value: xmSelect.get("#hostOsIds",true).getValue("value"), fillBy:"hostOsList",field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -357,6 +360,10 @@ function ListPage() {
 		table.on('toolbar(data-table)', function(obj){
 			var checkStatus = table.checkStatus(obj.config.id);
 			var selected=getCheckedList("id");
+			if(window.pageExt.list.beforeToolBarButtonEvent) {
+				var doNext=window.pageExt.list.beforeToolBarButtonEvent(selected,obj);
+				if(!doNext) return;
+			}
 			switch(obj.event){
 				case 'create':
 					openCreateFrom();
@@ -427,6 +434,12 @@ function ListPage() {
 		table.on('tool(data-table)', function (obj) {
 			var data = obj.data;
 			var layEvent = obj.event;
+
+			if(window.pageExt.list.beforeRowOperationEvent) {
+				var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+				if(!doNext) return;
+			}
+
 			admin.putTempData('ops-host-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动

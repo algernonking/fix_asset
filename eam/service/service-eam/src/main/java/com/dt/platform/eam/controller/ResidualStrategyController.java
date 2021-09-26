@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧策略 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:59
+ * @since 2021-09-26 11:16:18
 */
 
 @Api(tags = "折旧策略")
@@ -76,7 +76,6 @@ public class ResidualStrategyController extends SuperController {
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = ResidualStrategyVOMeta.ID)
 	@SentinelResource(value = ResidualStrategyServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ResidualStrategyServiceProxy.INSERT)
 	public Result insert(ResidualStrategyVO residualStrategyVO) {
@@ -284,30 +283,29 @@ public class ResidualStrategyController extends SuperController {
 
 
 
-
 	@SentinelResource(value = ResidualStrategyServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(ResidualStrategyServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=residualStrategyService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=residualStrategyService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

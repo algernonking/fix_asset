@@ -9,8 +9,9 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.github.foxnic.web.domain.pcm.Catalog;
-import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.hrm.Organization;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -20,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 21:49:25
- * @sign 966FA1D3746707E9AD410D5AB63662F2
+ * @since 2021-09-26 10:52:42
+ * @sign 5F5AC7429BBFEF82306A9F63E159B427
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -466,6 +467,12 @@ public class Asset extends Entity {
 	private String tenantId;
 	
 	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
+	
+	/**
 	 * 存放位置：存放位置
 	*/
 	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
@@ -505,13 +512,19 @@ public class Asset extends Entity {
 	 * 使用人员：使用人员
 	*/
 	@ApiModelProperty(required = false,value="使用人员" , notes = "使用人员")
-	private Person useUser;
+	private Employee useUser;
 	
 	/**
 	 * 管理人员：管理人员
 	*/
 	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
-	private Person manager;
+	private Employee manager;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
 	
 	/**
 	 * 供应商：供应商
@@ -530,6 +543,18 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="来源" , notes = "来源")
 	private DictItem source;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private Organization ownerCompany;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private Organization useOrganization;
 	
 	/**
 	 * 获得 主键<br>
@@ -1900,6 +1925,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public Asset setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
 	 * 获得 存放位置<br>
 	 * 存放位置
 	 * @return 存放位置
@@ -2018,7 +2062,7 @@ public class Asset extends Entity {
 	 * 使用人员
 	 * @return 使用人员
 	*/
-	public Person getUseUser() {
+	public Employee getUseUser() {
 		return useUser;
 	}
 	
@@ -2027,7 +2071,7 @@ public class Asset extends Entity {
 	 * @param useUser 使用人员
 	 * @return 当前对象
 	*/
-	public Asset setUseUser(Person useUser) {
+	public Asset setUseUser(Employee useUser) {
 		this.useUser=useUser;
 		return this;
 	}
@@ -2037,7 +2081,7 @@ public class Asset extends Entity {
 	 * 管理人员
 	 * @return 管理人员
 	*/
-	public Person getManager() {
+	public Employee getManager() {
 		return manager;
 	}
 	
@@ -2046,8 +2090,27 @@ public class Asset extends Entity {
 	 * @param manager 管理人员
 	 * @return 当前对象
 	*/
-	public Asset setManager(Person manager) {
+	public Asset setManager(Employee manager) {
 		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Asset setOriginator(Employee originator) {
+		this.originator=originator;
 		return this;
 	}
 	
@@ -2105,6 +2168,44 @@ public class Asset extends Entity {
 	*/
 	public Asset setSource(DictItem source) {
 		this.source=source;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public Organization getOwnerCompany() {
+		return ownerCompany;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
+	 * @return 当前对象
+	*/
+	public Asset setOwnerCompany(Organization ownerCompany) {
+		this.ownerCompany=ownerCompany;
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public Organization getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Asset setUseOrganization(Organization useOrganization) {
+		this.useOrganization=useOrganization;
 		return this;
 	}
 

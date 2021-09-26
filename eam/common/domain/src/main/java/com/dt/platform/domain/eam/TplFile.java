@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:17:58
- * @sign 03521F46814F188EB8CEC6C092DE3EAF
+ * @since 2021-09-26 11:15:12
+ * @sign A543A8213084B1109E74989D49338054
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -53,6 +53,12 @@ public class TplFile extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
 	private String code;
+	
+	/**
+	 * 模板文件类型：模板文件类型
+	*/
+	@ApiModelProperty(required = false,value="模板文件类型" , notes = "模板文件类型")
+	private String tplFileType;
 	
 	/**
 	 * 文件：文件
@@ -199,6 +205,25 @@ public class TplFile extends Entity {
 	*/
 	public TplFile setCode(String code) {
 		this.code=code;
+		return this;
+	}
+	
+	/**
+	 * 获得 模板文件类型<br>
+	 * 模板文件类型
+	 * @return 模板文件类型
+	*/
+	public String getTplFileType() {
+		return tplFileType;
+	}
+	
+	/**
+	 * 设置 模板文件类型
+	 * @param tplFileType 模板文件类型
+	 * @return 当前对象
+	*/
+	public TplFile setTplFileType(String tplFileType) {
+		this.tplFileType=tplFileType;
 		return this;
 	}
 	

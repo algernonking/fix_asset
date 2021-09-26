@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-13 21:08:04
+ * @since 2021-09-26 11:14:40
  */
 
 function FormPage() {
@@ -105,6 +105,8 @@ function FormPage() {
 			el: "ruleId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
 			searchField: "name", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -126,8 +128,10 @@ function FormPage() {
 	/**
       * 填充表单数据
       */
-	function fillFormData() {
-		var formData = admin.getTempData('sys-code-allocation-form-data');
+	function fillFormData(formData) {
+		if(!formData) {
+			formData = admin.getTempData('sys-code-allocation-form-data');
+		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
 
@@ -153,7 +157,9 @@ function FormPage() {
 
 			//处理fillBy
 
+			//
 	     	fm.attr('method', 'POST');
+	     	fox.fillDialogButtons();
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
@@ -208,10 +214,10 @@ function FormPage() {
 		return fox.formVerify("data-form",data,VALIDATE_CONFIG)
 	}
 
-	function saveForm(data) {
-		var api=moduleURL+"/"+(data.id?"update":"insert");
+	function saveForm(param) {
+		var api=moduleURL+"/"+(param.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
+		admin.request(api, param, function (data) {
 			clearTimeout(task);
 			layer.closeAll('loading');
 			if (data.success) {
@@ -221,6 +227,7 @@ function FormPage() {
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
 			}
+			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, "POST");
 	}
 
@@ -254,6 +261,7 @@ function FormPage() {
 		getFormData: getFormData,
 		verifyForm: verifyForm,
 		saveForm: saveForm,
+		fillFormData: fillFormData,
 		adjustPopup: adjustPopup
 	};
 

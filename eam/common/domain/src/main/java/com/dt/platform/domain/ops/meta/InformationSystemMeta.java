@@ -11,7 +11,7 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-19 08:22:49
+ * @since 2021-09-26 11:16:36
  * @sign 26CF9B46544F22C835F94ACBB99D83B5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

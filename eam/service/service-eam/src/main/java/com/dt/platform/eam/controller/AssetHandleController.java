@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产处置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:40
+ * @since 2021-09-26 11:15:57
 */
 
 @Api(tags = "资产处置")
@@ -81,10 +81,10 @@ public class AssetHandleController extends SuperController {
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.CRD_ACTION , value = "修改标记" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = AssetHandleVOMeta.ID)
 	@SentinelResource(value = AssetHandleServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetHandleServiceProxy.INSERT)
 	public Result insert(AssetHandleVO assetHandleVO) {
@@ -145,6 +145,7 @@ public class AssetHandleController extends SuperController {
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.CRD_ACTION , value = "修改标记" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetHandleVOMeta.PAGE_INDEX , AssetHandleVOMeta.PAGE_SIZE , AssetHandleVOMeta.SEARCH_FIELD , AssetHandleVOMeta.FUZZY_FIELD , AssetHandleVOMeta.SEARCH_VALUE , AssetHandleVOMeta.SORT_FIELD , AssetHandleVOMeta.SORT_TYPE , AssetHandleVOMeta.IDS } ) 
@@ -175,6 +176,7 @@ public class AssetHandleController extends SuperController {
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.CRD_ACTION , value = "修改标记" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetHandleVOMeta.PAGE_INDEX , AssetHandleVOMeta.PAGE_SIZE , AssetHandleVOMeta.SEARCH_FIELD , AssetHandleVOMeta.FUZZY_FIELD , AssetHandleVOMeta.SEARCH_VALUE , AssetHandleVOMeta.SORT_FIELD , AssetHandleVOMeta.SORT_TYPE , AssetHandleVOMeta.IDS } )
@@ -244,6 +246,7 @@ public class AssetHandleController extends SuperController {
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.CRD_ACTION , value = "修改标记" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetHandleVOMeta.PAGE_INDEX , AssetHandleVOMeta.PAGE_SIZE } )
@@ -275,6 +278,7 @@ public class AssetHandleController extends SuperController {
 		@ApiImplicitParam(name = AssetHandleVOMeta.ACTUAL_FINISH_DATE , value = "实际完成时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetHandleVOMeta.CRD_ACTION , value = "修改标记" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetHandleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
@@ -316,30 +320,29 @@ public class AssetHandleController extends SuperController {
 
 
 
-
 	@SentinelResource(value = AssetHandleServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetHandleServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=assetHandleService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=assetHandleService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

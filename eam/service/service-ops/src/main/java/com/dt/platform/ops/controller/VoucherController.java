@@ -79,7 +79,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=1)
@@ -147,7 +147,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE , VoucherVOMeta.SEARCH_FIELD , VoucherVOMeta.FUZZY_FIELD , VoucherVOMeta.SEARCH_VALUE , VoucherVOMeta.SORT_FIELD , VoucherVOMeta.SORT_TYPE , VoucherVOMeta.IDS } ) 
@@ -169,7 +169,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE , VoucherVOMeta.SEARCH_FIELD , VoucherVOMeta.FUZZY_FIELD , VoucherVOMeta.SEARCH_VALUE , VoucherVOMeta.SORT_FIELD , VoucherVOMeta.SORT_TYPE , VoucherVOMeta.IDS } )
@@ -237,7 +237,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { VoucherVOMeta.PAGE_INDEX , VoucherVOMeta.PAGE_SIZE } )
@@ -260,7 +260,7 @@ public class VoucherController extends SuperController {
 		@ApiImplicitParam(name = VoucherVOMeta.TYPE , value = "类别" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = VoucherVOMeta.OWNER_ID , value = "所属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = VoucherVOMeta.USER_CODE , value = "用户" , required = false , dataTypeClass=String.class , example = "voucher_root"),
-		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = true , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = VoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = VoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "1212"),
 	})
 	@ApiOperationSupport(order=8)

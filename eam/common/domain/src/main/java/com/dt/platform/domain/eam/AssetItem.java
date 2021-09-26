@@ -11,14 +11,15 @@ import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
+
+
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-12 13:04:40
- * @sign FF03A498C8F5AF3F9CEB5DA566200EBF
+ * @since 2021-09-26 11:16:00
+ * @sign EC66E193A7F5534AA5A14A160B967F07
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
- */
-
+*/
 
 @Table(name = "eam_asset_item")
 public class AssetItem extends Entity {
@@ -37,20 +38,20 @@ public class AssetItem extends Entity {
 	/**
 	 * 处理：处理
 	*/
-	@ApiModelProperty(required = true,value="处理" , notes = "处理")
-	private String handleId;
-
-	/**
-	 * 处理：处理
-	 */
 	@ApiModelProperty(required = false,value="处理" , notes = "处理")
-	private String crd;
+	private String handleId;
 	
 	/**
 	 * 资产：资产
 	*/
-	@ApiModelProperty(required = true,value="资产" , notes = "资产")
+	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
+	
+	/**
+	 * 修改标记：修改标记
+	*/
+	@ApiModelProperty(required = false,value="修改标记" , notes = "修改标记")
+	private String crd;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -137,26 +138,7 @@ public class AssetItem extends Entity {
 		this.handleId=handleId;
 		return this;
 	}
-
-
-	/**
-	 * 获得 处理<br>
-	 * 处理
-	 * @return 处理
-	 */
-	public String getCrd() {
-		return crd;
-	}
-
-	/**
-	 * 设置 处理
-	 * @param crd 处理
-	 * @return 当前对象
-	 */
-	public AssetItem setCrd(String crd) {
-		this.crd=crd;
-		return this;
-	}
+	
 	/**
 	 * 获得 资产<br>
 	 * 资产
@@ -173,6 +155,25 @@ public class AssetItem extends Entity {
 	*/
 	public AssetItem setAssetId(String assetId) {
 		this.assetId=assetId;
+		return this;
+	}
+	
+	/**
+	 * 获得 修改标记<br>
+	 * 修改标记
+	 * @return 修改标记
+	*/
+	public String getCrd() {
+		return crd;
+	}
+	
+	/**
+	 * 设置 修改标记
+	 * @param crd 修改标记
+	 * @return 当前对象
+	*/
+	public AssetItem setCrd(String crd) {
+		this.crd=crd;
 		return this;
 	}
 	
