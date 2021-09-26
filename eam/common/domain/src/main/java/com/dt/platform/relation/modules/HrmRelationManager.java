@@ -10,7 +10,7 @@ import org.github.foxnic.web.domain.oauth.Role;
 import org.github.foxnic.web.domain.oauth.RoleMenu;
 import org.github.foxnic.web.domain.oauth.User;
 
-public class HRMRelationManager extends RelationManager {
+public class HrmRelationManager extends RelationManager {
 
 	@Override
 	protected void config() {
