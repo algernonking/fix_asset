@@ -173,7 +173,7 @@ function ListPage() {
 		value.#(f.varName)={ inputType:"logic_switch",value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#else if(f.typeName.equals("radio_box"))
 		value.#(f.varName)={ inputType:"radio_box", value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
-		#else if(f.typeName.equals("logic_switch"))
+		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
 		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.textField)" };
