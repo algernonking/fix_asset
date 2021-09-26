@@ -1,6 +1,7 @@
 package com.dt.platform.eam.page;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -53,7 +54,7 @@ public class AssetRepairPageController extends ViewController {
 	public String form(Model model,HttpServletRequest request , String id) {
 
 		model.addAttribute("billId",id);
-		model.addAttribute("billType", CodeModuleEnum.EAM_ASSET_REPAIR.code());
+		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_REPAIR.code());
 
 		return prefix+"/asset_repair_form";
 	}

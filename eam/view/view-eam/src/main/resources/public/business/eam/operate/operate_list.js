@@ -1,7 +1,7 @@
 /**
- * 变更明细 列表页 JS 脚本
+ * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:23
+ * @since 2021-09-26 20:02:19
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
         
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-asset-data-change";
+	const moduleURL="/service-eam/eam-operate";
 	var dataTable=null;
 	/**
       * 入口函数，初始化
@@ -73,14 +73,14 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'businessType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更类型'), templet:function (d){ return templet('businessType',fox.getEnumText(SELECT_BUSINESSTYPE_DATA,d.businessType),d);}}
-					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
-					,{ field: 'changeUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更人') , templet: function (d) { return templet('changeUserId',fox.getProperty(d,["changeUser","name"]),d);} }
-					,{ field: 'changeTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('变更时间'), templet: function (d) { return templet('changeTime',fox.dateFormat(d.changeTime),d); }}
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更内容') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'allocateCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分配编号') , templet: function (d) { return templet('allocateCode',d.allocateCode,d);}  }
+					,{ field: 'operateCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作编码'), templet:function (d){ return templet('operateCode',fox.getEnumText(SELECT_OPERATECODE_DATA,d.operateCode),d);}}
+					,{ field: 'approval', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批'), templet:function (d){ return templet('approval',fox.getEnumText(SELECT_APPROVAL_DATA,d.approval),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
@@ -114,7 +114,8 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
-		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -217,7 +218,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
-			admin.putTempData('eam-asset-data-change-form-data-form-action', "create",true);
+			admin.putTempData('eam-operate-form-data-form-action', "create",true);
             showEditForm(data);
         };
 		
@@ -231,11 +232,11 @@ function ListPage() {
 
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('变更明细')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产操作')+"!");
             	return;
             }
             //调用批量删除接口
-			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('变更明细')+fox.translate('吗？'), function (i) {
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产操作')+fox.translate('吗？'), function (i) {
 				top.layer.close(i);
 				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -270,7 +271,7 @@ function ListPage() {
 				if(!doNext) return;
 			}
 
-			admin.putTempData('eam-asset-data-change-form-data-form-action', "",true);
+			admin.putTempData('eam-operate-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -278,7 +279,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-asset-data-change-form-data-form-action', "edit",true);
+						admin.putTempData('eam-operate-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
@@ -291,7 +292,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-asset-data-change-form-data-form-action', "view",true);
+						admin.putTempData('eam-operate-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
@@ -305,7 +306,7 @@ function ListPage() {
 					if(!doNext) return;
 				}
 
-				top.layer.confirm(fox.translate('确定删除此')+fox.translate('变更明细')+fox.translate('吗？'), function (i) {
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产操作')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
 					top.layer.load(2);
@@ -338,14 +339,14 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
-		var action=admin.getTempData('eam-asset-data-change-form-data-form-action');
+		var action=admin.getTempData('eam-operate-form-data-form-action');
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-asset-data-change-form-data', data);
-		var area=admin.getTempData('eam-asset-data-change-form-area');
+		admin.putTempData('eam-operate-form-data', data);
+		var area=admin.getTempData('eam-operate-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = fox.translate('变更明细');
+		var title = fox.translate('资产操作');
 		if(action=="create") title=fox.translate('添加')+title;
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
@@ -354,15 +355,15 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["80%",height+"px"],
 			type: 2,
-			id:"eam-asset-data-change-form-data-win",
-			content: '/business/eam/asset_data_change/asset_data_change_form.html' + queryString,
+			id:"eam-operate-form-data-win",
+			content: '/business/eam/operate/operate_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
+		admin.putTempData('eam-operate-form-data-popup-index', index);
 	};
 
 	window.module={

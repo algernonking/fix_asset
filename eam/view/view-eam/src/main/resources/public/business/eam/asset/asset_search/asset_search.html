@@ -183,6 +183,7 @@
 <script type="text/html" id="tableOperationTemplate">
 
     <button th:if="${perm.checkAuth('eam_asset:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button class="layui-btn layui-btn-xs " lay-event="asset-data-change" th:text="${lang.translate('变更')}" data-id="{{d.id}}">变更</button>
 
 </script>
 

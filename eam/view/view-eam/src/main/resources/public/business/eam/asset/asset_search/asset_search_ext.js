@@ -19,6 +19,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //列表页的扩展
     var list={
+        assetDataChange:function (data){
+            console.log('assetDataChange',data);
+        },
         /**
          * 列表页初始化前调用
          * */

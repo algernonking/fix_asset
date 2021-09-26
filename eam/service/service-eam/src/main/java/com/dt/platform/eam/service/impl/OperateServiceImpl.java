@@ -2,12 +2,14 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetDataChange;
-import com.dt.platform.domain.eam.AssetDataChangeVO;
+import com.dt.platform.domain.eam.Operate;
+import com.dt.platform.domain.eam.OperateVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +28,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetDataChangeService;
+import com.dt.platform.eam.service.IOperateService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 变更明细 服务实现
+ * 资产操作 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:16
+ * @since 2021-09-26 20:02:16
 */
 
 
-@Service("EamAssetDataChangeService")
-public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> implements IAssetDataChangeService {
+@Service("EamOperateService")
+public class OperateServiceImpl extends SuperService<Operate> implements IOperateService {
 	
 	/**
 	 * 注入DAO对象
@@ -59,41 +61,56 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+	/**
+	 * 判断是否需要审批
+	 * @param businessType 业务类型
+	 * @return 返回是否需要审批
+	 * */
+	@Override
+	public boolean approvalRequired(String businessType){
+		Operate operate=queryEntity(Operate.create().setOperateCode(businessType));
+		System.out.println("####"+operate);
+		if(operate!=null&&operate.getApproval()!=null && operate.getApproval().equals("0")){
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * 插入实体
-	 * @param assetDataChange 实体数据
+	 * @param operate 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(AssetDataChange assetDataChange) {
-		Result r=super.insert(assetDataChange);
+	public Result insert(Operate operate) {
+		Result r=super.insert(operate);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetDataChangeList 实体数据清单
+	 * @param operateList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<AssetDataChange> assetDataChangeList) {
-		return super.insertList(assetDataChangeList);
+	public Result insertList(List<Operate> operateList) {
+		return super.insertList(operateList);
 	}
 	
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 资产操作
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		AssetDataChange assetDataChange = new AssetDataChange();
+		Operate operate = new Operate();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetDataChange.setId(id);
+		operate.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(assetDataChange);
+			boolean suc = dao.deleteEntity(operate);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -104,20 +121,20 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	}
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 资产操作
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		AssetDataChange assetDataChange = new AssetDataChange();
+		Operate operate = new Operate();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		assetDataChange.setId(id);
-		assetDataChange.setDeleted(dao.getDBTreaty().getTrueValue());
-		assetDataChange.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		assetDataChange.setDeleteTime(new Date());
+		operate.setId(id);
+		operate.setDeleted(dao.getDBTreaty().getTrueValue());
+		operate.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		operate.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(assetDataChange,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(operate,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -129,30 +146,30 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	
 	/**
 	 * 更新实体
-	 * @param assetDataChange 数据对象
+	 * @param operate 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(AssetDataChange assetDataChange , SaveMode mode) {
-		Result r=super.update(assetDataChange , mode);
+	public Result update(Operate operate , SaveMode mode) {
+		Result r=super.update(operate , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetDataChangeList 数据对象列表
+	 * @param operateList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<AssetDataChange> assetDataChangeList , SaveMode mode) {
-		return super.updateList(assetDataChangeList , mode);
+	public Result updateList(List<Operate> operateList , SaveMode mode) {
+		return super.updateList(operateList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 变更明细
+	 * 按主键更新字段 资产操作
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,20 +183,20 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	
 	
 	/**
-	 * 按主键获取 变更明细
+	 * 按主键获取 资产操作
 	 *
 	 * @param id 主键
-	 * @return AssetDataChange 数据对象
+	 * @return Operate 数据对象
 	 */
-	public AssetDataChange getById(String id) {
-		AssetDataChange sample = new AssetDataChange();
+	public Operate getById(String id) {
+		Operate sample = new Operate();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<AssetDataChange> getByIds(List<String> ids) {
+	public List<Operate> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -192,7 +209,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<AssetDataChange> queryList(AssetDataChange sample) {
+	public List<Operate> queryList(Operate sample) {
 		return super.queryList(sample);
 	}
 	
@@ -206,7 +223,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, int pageSize, int pageIndex) {
+	public PagedList<Operate> queryPagedList(Operate sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -220,25 +237,25 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<Operate> queryPagedList(Operate sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetDataChange 数据对象
+	 * @param operate 数据对象
 	 * @return 判断结果
 	 */
-	public Result<AssetDataChange> checkExists(AssetDataChange assetDataChange) {
+	public Result<Operate> checkExists(Operate operate) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(assetDataChange, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(operate, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(AssetDataChange sample) {
+	public ExcelWriter exportExcel(Operate sample) {
 		return super.exportExcel(sample);
 	}
 

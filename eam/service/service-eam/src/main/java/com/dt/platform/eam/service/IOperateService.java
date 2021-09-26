@@ -3,8 +3,8 @@ package com.dt.platform.eam.service;
 
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.AssetDataChange;
-import com.dt.platform.domain.eam.AssetDataChangeVO;
+import com.dt.platform.domain.eam.Operate;
+import com.dt.platform.domain.eam.OperateVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -18,32 +18,40 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 变更明细 服务接口
+ * 资产操作 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:16
+ * @since 2021-09-26 20:02:15
 */
 
-public interface IAssetDataChangeService extends ISuperService<AssetDataChange> {
-	
+public interface IOperateService extends ISuperService<Operate> {
+
+
+	/**
+	 * 判断是否需要审批
+	 * @param businessType 业务类型
+	 * @return 返回是否需要审批
+	 * */
+	boolean approvalRequired(String businessType);
+
 	/**
 	 * 插入实体
-	 * @param assetDataChange 实体数据
+	 * @param operate 实体数据
 	 * @return 插入是否成功
 	 * */
-	Result insert(AssetDataChange assetDataChange);
+	Result insert(Operate operate);
  
 	/**
 	 * 批量插入实体，事务内
-	 * @param assetDataChangeList 实体数据清单
+	 * @param operateList 实体数据清单
 	 * @return 插入是否成功
 	 * */
-	Result insertList(List<AssetDataChange> assetDataChangeList);
+	Result insertList(List<Operate> operateList);
 	
 	
 		
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 资产操作
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +59,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 资产操作
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +82,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	
 		
 	/**
-	 * 按主键更新字段 变更明细
+	 * 按主键更新字段 资产操作
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -83,75 +91,75 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	
 	/**
 	 * 更新实体
-	 * @param assetDataChange 数据对象
+	 * @param operate 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result update(AssetDataChange assetDataChange , SaveMode mode);
+	Result update(Operate operate , SaveMode mode);
 	
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param assetDataChangeList 数据对象列表
+	 * @param operateList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result updateList(List<AssetDataChange> assetDataChangeList, SaveMode mode);
+	Result updateList(List<Operate> operateList, SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
-	 * @param assetDataChange 实体数据
+	 * @param operate 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result save(AssetDataChange assetDataChange , SaveMode mode);
+	Result save(Operate operate , SaveMode mode);
 	
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
-	 * @param assetDataChangeList 实体数据清单
+	 * @param operateList 实体数据清单
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
-	Result saveList(List<AssetDataChange> assetDataChangeList , SaveMode mode);
+	Result saveList(List<Operate> operateList , SaveMode mode);
 	
 	/**
 	 * 检查实体中的数据字段是否已经存在
-	 * @param assetDataChange  实体对象
+	 * @param operate  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
 	 * */
-	boolean checkExists(AssetDataChange assetDataChange,DBField... field);
+	boolean checkExists(Operate operate,DBField... field);
  
 		
 	/**
-	 * 按主键获取 变更明细
+	 * 按主键获取 资产操作
 	 *
 	 * @param id 主键
-	 * @return AssetDataChange 数据对象
+	 * @return Operate 数据对象
 	 */
-	AssetDataChange getById(String id);
+	Operate getById(String id);
 		
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
-	List<AssetDataChange> getByIds(List<String> ids);
+	List<Operate> getByIds(List<String> ids);
 
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param assetDataChange 数据对象
+	 * @param operate 数据对象
 	 * @return 判断结果
 	 */
-	Result<AssetDataChange> checkExists(AssetDataChange assetDataChange);
+	Result<Operate> checkExists(Operate operate);
 
 	/**
 	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(AssetDataChange sample);
+	ConditionExpr buildQueryCondition(Operate sample);
 	
 	/**
 	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
@@ -159,14 +167,14 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
 	 * */
-	ConditionExpr buildQueryCondition(AssetDataChange sample,String tableAliase);
+	ConditionExpr buildQueryCondition(Operate sample,String tableAliase);
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	List<AssetDataChange> queryList(AssetDataChange sample);
+	List<Operate> queryList(Operate sample);
  
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -175,7 +183,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<AssetDataChange> queryList(AssetDataChange sample,ConditionExpr condition,OrderBy orderBy);
+	List<Operate> queryList(Operate sample,ConditionExpr condition,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -183,7 +191,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	List<AssetDataChange> queryList(AssetDataChange sample,OrderBy orderBy);
+	List<Operate> queryList(Operate sample,OrderBy orderBy);
 	
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
@@ -191,14 +199,14 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	List<AssetDataChange> queryList(AssetDataChange sample,ConditionExpr condition);
+	List<Operate> queryList(Operate sample,ConditionExpr condition);
 	
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
-	AssetDataChange queryEntity(AssetDataChange sample);
+	Operate queryEntity(Operate sample);
 	
 	/**
 	 * 分页查询实体集
@@ -207,7 +215,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,int pageSize,int pageIndex);
+	PagedList<Operate> queryPagedList(Operate sample,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -218,7 +226,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Operate> queryPagedList(Operate sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -228,7 +236,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param condition  其它条件
 	 * @return 查询结果
 	 * */
-	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,ConditionExpr condition,int pageSize,int pageIndex);
+	PagedList<Operate> queryPagedList(Operate sample,ConditionExpr condition,int pageSize,int pageIndex);
 	
 	/**
 	 * 分页查询实体集
@@ -238,7 +246,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param orderBy  排序
 	 * @return 查询结果
 	 * */
-	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,OrderBy orderBy,int pageSize,int pageIndex);
+	PagedList<Operate> queryPagedList(Operate sample,OrderBy orderBy,int pageSize,int pageIndex);
  
  	/**
 	 * 查询指定字段的数据清单
@@ -264,7 +272,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	/**
 	 * 导出 Excel
 	 * */
-	ExcelWriter exportExcel(AssetDataChange sample);
+	ExcelWriter exportExcel(Operate sample);
 
 	/**
 	 * 导出用于数据导入的 Excel 模版

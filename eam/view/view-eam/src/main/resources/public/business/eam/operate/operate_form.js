@@ -1,16 +1,16 @@
 /**
- * 变更明细 列表页 JS 脚本
+ * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:26
+ * @since 2021-09-26 20:02:20
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-asset-data-change";
+	const moduleURL="/service-eam/eam-operate";
 
-	var disableCreateNew=true;
-	var disableModify=true;
+	var disableCreateNew=false;
+	var disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -22,7 +22,7 @@ function FormPage() {
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-asset-data-change-form-data-form-action')=="view") {
+		if(admin.getTempData('eam-operate-form-data-form-action')=="view") {
 			disableModify=true;
 		}
 
@@ -57,7 +57,7 @@ function FormPage() {
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			if(area==null) return;
-			admin.putTempData('eam-asset-data-change-form-area', area);
+			admin.putTempData('eam-operate-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -77,9 +77,9 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 businessType 下拉字段
+		//渲染 operateCode 下拉字段
 		fox.renderSelectBox({
-			el: "businessType",
+			el: "operateCode",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -95,10 +95,23 @@ function FormPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#changeTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+		//渲染 approval 下拉字段
+		fox.renderSelectBox({
+			el: "approval",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
 		});
 	}
 
@@ -107,7 +120,7 @@ function FormPage() {
       */
 	function fillFormData(formData) {
 		if(!formData) {
-			formData = admin.getTempData('eam-asset-data-change-form-data');
+			formData = admin.getTempData('eam-operate-form-data');
 		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
@@ -127,8 +140,10 @@ function FormPage() {
 
 
 
-			//设置  业务类型 设置下拉框勾选
-			fox.setSelectValue4Enum("#businessType",formData.businessType,SELECT_BUSINESSTYPE_DATA);
+			//设置  操作编码 设置下拉框勾选
+			fox.setSelectValue4Enum("#operateCode",formData.operateCode,SELECT_OPERATECODE_DATA);
+			//设置  审批 设置下拉框勾选
+			fox.setSelectValue4Enum("#approval",formData.approval,SELECT_APPROVAL_DATA);
 
 			//处理fillBy
 
@@ -177,8 +192,10 @@ function FormPage() {
 
 
 
-		//获取 业务类型 下拉框的值
-		data["businessType"]=fox.getSelectedValue("businessType",false);
+		//获取 操作编码 下拉框的值
+		data["operateCode"]=fox.getSelectedValue("operateCode",false);
+		//获取 审批 下拉框的值
+		data["approval"]=fox.getSelectedValue("approval",false);
 
 		return data;
 	}
@@ -195,7 +212,7 @@ function FormPage() {
 			layer.closeAll('loading');
 			if (data.success) {
 				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-asset-data-change-form-data-popup-index');
+				var index=admin.getTempData('eam-operate-form-data-popup-index');
 				admin.finishPopupCenter(index);
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});

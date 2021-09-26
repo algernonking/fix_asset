@@ -1,7 +1,7 @@
 /**
- * 资产 列表页 JS 脚本
+ * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:26:51
+ * @since 2021-09-26 20:02:16
  */
 
 layui.config({
@@ -128,9 +128,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
-        },
-        assetDataChange:function (data){
-            console.log('assetDataChange',data);
         },
         /**
          * 末尾执行

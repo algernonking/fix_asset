@@ -73,14 +73,14 @@ function ListPage() {
 			var COL_ALL_DATA= assetListColumn.getColumnList(templet);
 			console.log(COL_ALL_DATA);
 
-			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 };
-			COL_DATA=[
+			var COL_DATA=[
 				{ fixed: 'left',type: 'numbers' },
 				{ fixed: 'left',type:'checkbox' }
 			]
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
 				COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
+			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 };
 			COL_DATA.push(oper)
 
 			dataTable=fox.renderTable({
@@ -420,6 +420,9 @@ function ListPage() {
 				case 'create':
 					openCreateFrom();
 					break;
+				case 'tool-asset-data-change':
+					window.pageExt.list.assetDataChange && window.pageExt.list.assetDataChange(selected,obj);
+					break;
 				case 'batch-del':
 					batchDelete(selected);
 					break;
@@ -537,6 +540,10 @@ function ListPage() {
 					});
 				});
 
+			}
+
+			else if (layEvent === 'asset-data-change') { // 变更
+				window.pageExt.list.assetDataChange(data);
 			}
 
 		});

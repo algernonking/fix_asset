@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 10:52:46
+ * @since 2021-09-26 17:26:52
  */
  -->
  <!DOCTYPE html>
@@ -230,6 +230,7 @@
 
     <button th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
+    <button class="layui-btn layui-btn-xs " lay-event="asset-data-change" th:text="${lang.translate('变更')}" data-id="{{d.id}}">变更</button>
 
 </script>
 

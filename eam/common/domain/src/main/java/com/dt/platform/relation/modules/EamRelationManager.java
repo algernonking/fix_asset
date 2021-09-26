@@ -41,11 +41,26 @@ public class EamRelationManager extends RelationManager {
 
         this.setupTplFile();
 
+
+        this.setupAssetDataChange();
+
     }
     public void setupProperties() {
 
 
     }
+
+    public void setupAssetDataChange(){
+        // 关联变更人
+        this.property(AssetDataChangeMeta.CHANGE_USER_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+
+    }
+
+
+
 
     public void setupAlloction() {
 
@@ -86,7 +101,6 @@ public class EamRelationManager extends RelationManager {
     }
 
 
-    //select * from attrubte_item where id in (select * from attrube)
 
     public void setupInventory() {
 

@@ -369,9 +369,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		Result result=new Result();
 		ConditionExpr queryCondition=new ConditionExpr();
-
 		queryCondition.andIn("id",assetIds);
-
 		Result r=conditionAssetBusinessType(businessType,queryCondition);
 		if(!r.isSuccess()){
 			return r;

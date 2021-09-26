@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 10:52:47
+ * @since 2021-09-26 17:26:53
  */
 
 
@@ -378,7 +378,7 @@ function ListPage() {
 				field:"ownCompanyId",
 				inputEl:$("#ownCompanyId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"com",
@@ -393,7 +393,7 @@ function ListPage() {
 				field:"managerId",
 				inputEl:$("#managerId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"emp",
@@ -408,7 +408,7 @@ function ListPage() {
 				field:"useOrganizationId",
 				inputEl:$("#useOrganizationId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"org",
@@ -423,7 +423,7 @@ function ListPage() {
 				field:"useUserId",
 				inputEl:$("#useUserId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"emp",
@@ -575,6 +575,9 @@ function ListPage() {
 				});
 				
 			}
+			else if (layEvent === 'asset-data-change') { // 变更
+				window.pageExt.list.assetDataChange(data);
+			}
 			
 		});
  
@@ -604,7 +607,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["95%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-form-data-win",
 			content: '/business/eam/asset/asset_form.html' + queryString,

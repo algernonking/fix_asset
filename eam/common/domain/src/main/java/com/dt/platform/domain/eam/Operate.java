@@ -3,11 +3,10 @@ package com.dt.platform.domain.eam;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_ASSET_DATA_CHANGE;
+import com.dt.platform.constants.db.EAMTables.EAM_OPERATE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
-import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -17,17 +16,17 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:15
- * @sign 8F29A09B1195523765D1678D706F3F63
+ * @since 2021-09-26 20:02:15
+ * @sign 658CDD5DC8438707B3F5C1D2A2EB1C42
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "eam_asset_data_change")
-public class AssetDataChange extends Entity {
+@Table(name = "eam_operate")
+public class Operate extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_ASSET_DATA_CHANGE.$TABLE;
+	public static final DBTable TABLE =EAM_OPERATE.$TABLE;
 	
 	/**
 	 * 主键：主键
@@ -37,40 +36,28 @@ public class AssetDataChange extends Entity {
 	private String id;
 	
 	/**
-	 * 变更类型：变更类型
+	 * 名称：名称
 	*/
-	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
-	private String businessType;
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String name;
 	
 	/**
-	 * 变更号：变更号
+	 * 分配编号：分配编号
 	*/
-	@ApiModelProperty(required = false,value="变更号" , notes = "变更号")
-	private String businessCode;
+	@ApiModelProperty(required = false,value="分配编号" , notes = "分配编号")
+	private String allocateCode;
 	
 	/**
-	 * 资产：资产
+	 * 操作编码：操作编码
 	*/
-	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private String assetId;
+	@ApiModelProperty(required = false,value="操作编码" , notes = "操作编码")
+	private String operateCode;
 	
 	/**
-	 * 变更人：变更人
+	 * 审批：审批
 	*/
-	@ApiModelProperty(required = false,value="变更人" , notes = "变更人")
-	private String changeUserId;
-	
-	/**
-	 * 变更时间：变更时间
-	*/
-	@ApiModelProperty(required = false,value="变更时间" , notes = "变更时间")
-	private Date changeTime;
-	
-	/**
-	 * 变更内容：变更内容
-	*/
-	@ApiModelProperty(required = false,value="变更内容" , notes = "变更内容")
-	private String content;
+	@ApiModelProperty(required = false,value="审批" , notes = "审批")
+	private String approval;
 	
 	/**
 	 * 备注：备注
@@ -127,16 +114,10 @@ public class AssetDataChange extends Entity {
 	private Integer version;
 	
 	/**
-	 * 资产：资产
+	 * 租户：租户
 	*/
-	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
-	
-	/**
-	 * 变更人：变更人
-	*/
-	@ApiModelProperty(required = false,value="变更人" , notes = "变更人")
-	private Employee changeUser;
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -152,122 +133,84 @@ public class AssetDataChange extends Entity {
 	 * @param id 主键
 	 * @return 当前对象
 	*/
-	public AssetDataChange setId(String id) {
+	public Operate setId(String id) {
 		this.id=id;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更类型<br>
-	 * 变更类型
-	 * @return 变更类型
+	 * 获得 名称<br>
+	 * 名称
+	 * @return 名称
 	*/
-	public String getBusinessType() {
-		return businessType;
+	public String getName() {
+		return name;
 	}
 	
 	/**
-	 * 设置 变更类型
-	 * @param businessType 变更类型
+	 * 设置 名称
+	 * @param name 名称
 	 * @return 当前对象
 	*/
-	public AssetDataChange setBusinessType(String businessType) {
-		this.businessType=businessType;
+	public Operate setName(String name) {
+		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更号<br>
-	 * 变更号
-	 * @return 变更号
+	 * 获得 分配编号<br>
+	 * 分配编号
+	 * @return 分配编号
 	*/
-	public String getBusinessCode() {
-		return businessCode;
+	public String getAllocateCode() {
+		return allocateCode;
 	}
 	
 	/**
-	 * 设置 变更号
-	 * @param businessCode 变更号
+	 * 设置 分配编号
+	 * @param allocateCode 分配编号
 	 * @return 当前对象
 	*/
-	public AssetDataChange setBusinessCode(String businessCode) {
-		this.businessCode=businessCode;
+	public Operate setAllocateCode(String allocateCode) {
+		this.allocateCode=allocateCode;
 		return this;
 	}
 	
 	/**
-	 * 获得 资产<br>
-	 * 资产
-	 * @return 资产
+	 * 获得 操作编码<br>
+	 * 操作编码
+	 * @return 操作编码
 	*/
-	public String getAssetId() {
-		return assetId;
+	public String getOperateCode() {
+		return operateCode;
 	}
 	
 	/**
-	 * 设置 资产
-	 * @param assetId 资产
+	 * 设置 操作编码
+	 * @param operateCode 操作编码
 	 * @return 当前对象
 	*/
-	public AssetDataChange setAssetId(String assetId) {
-		this.assetId=assetId;
+	public Operate setOperateCode(String operateCode) {
+		this.operateCode=operateCode;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更人<br>
-	 * 变更人
-	 * @return 变更人
+	 * 获得 审批<br>
+	 * 审批
+	 * @return 审批
 	*/
-	public String getChangeUserId() {
-		return changeUserId;
+	public String getApproval() {
+		return approval;
 	}
 	
 	/**
-	 * 设置 变更人
-	 * @param changeUserId 变更人
+	 * 设置 审批
+	 * @param approval 审批
 	 * @return 当前对象
 	*/
-	public AssetDataChange setChangeUserId(String changeUserId) {
-		this.changeUserId=changeUserId;
-		return this;
-	}
-	
-	/**
-	 * 获得 变更时间<br>
-	 * 变更时间
-	 * @return 变更时间
-	*/
-	public Date getChangeTime() {
-		return changeTime;
-	}
-	
-	/**
-	 * 设置 变更时间
-	 * @param changeTime 变更时间
-	 * @return 当前对象
-	*/
-	public AssetDataChange setChangeTime(Date changeTime) {
-		this.changeTime=changeTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 变更内容<br>
-	 * 变更内容
-	 * @return 变更内容
-	*/
-	public String getContent() {
-		return content;
-	}
-	
-	/**
-	 * 设置 变更内容
-	 * @param content 变更内容
-	 * @return 当前对象
-	*/
-	public AssetDataChange setContent(String content) {
-		this.content=content;
+	public Operate setApproval(String approval) {
+		this.approval=approval;
 		return this;
 	}
 	
@@ -285,7 +228,7 @@ public class AssetDataChange extends Entity {
 	 * @param notes 备注
 	 * @return 当前对象
 	*/
-	public AssetDataChange setNotes(String notes) {
+	public Operate setNotes(String notes) {
 		this.notes=notes;
 		return this;
 	}
@@ -304,7 +247,7 @@ public class AssetDataChange extends Entity {
 	 * @param createBy 创建人ID
 	 * @return 当前对象
 	*/
-	public AssetDataChange setCreateBy(String createBy) {
+	public Operate setCreateBy(String createBy) {
 		this.createBy=createBy;
 		return this;
 	}
@@ -323,7 +266,7 @@ public class AssetDataChange extends Entity {
 	 * @param createTime 创建时间
 	 * @return 当前对象
 	*/
-	public AssetDataChange setCreateTime(Date createTime) {
+	public Operate setCreateTime(Date createTime) {
 		this.createTime=createTime;
 		return this;
 	}
@@ -342,7 +285,7 @@ public class AssetDataChange extends Entity {
 	 * @param updateBy 修改人ID
 	 * @return 当前对象
 	*/
-	public AssetDataChange setUpdateBy(String updateBy) {
+	public Operate setUpdateBy(String updateBy) {
 		this.updateBy=updateBy;
 		return this;
 	}
@@ -361,7 +304,7 @@ public class AssetDataChange extends Entity {
 	 * @param updateTime 修改时间
 	 * @return 当前对象
 	*/
-	public AssetDataChange setUpdateTime(Date updateTime) {
+	public Operate setUpdateTime(Date updateTime) {
 		this.updateTime=updateTime;
 		return this;
 	}
@@ -380,7 +323,7 @@ public class AssetDataChange extends Entity {
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
-	public AssetDataChange setDeleted(Integer deleted) {
+	public Operate setDeleted(Integer deleted) {
 		this.deleted=deleted;
 		return this;
 	}
@@ -399,7 +342,7 @@ public class AssetDataChange extends Entity {
 	 * @param deleteBy 删除人ID
 	 * @return 当前对象
 	*/
-	public AssetDataChange setDeleteBy(String deleteBy) {
+	public Operate setDeleteBy(String deleteBy) {
 		this.deleteBy=deleteBy;
 		return this;
 	}
@@ -418,7 +361,7 @@ public class AssetDataChange extends Entity {
 	 * @param deleteTime 删除时间
 	 * @return 当前对象
 	*/
-	public AssetDataChange setDeleteTime(Date deleteTime) {
+	public Operate setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
 		return this;
 	}
@@ -437,53 +380,34 @@ public class AssetDataChange extends Entity {
 	 * @param version version
 	 * @return 当前对象
 	*/
-	public AssetDataChange setVersion(Integer version) {
+	public Operate setVersion(Integer version) {
 		this.version=version;
 		return this;
 	}
 	
 	/**
-	 * 获得 资产<br>
-	 * 资产
-	 * @return 资产
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
 	*/
-	public Asset getAsset() {
-		return asset;
+	public String getTenantId() {
+		return tenantId;
 	}
 	
 	/**
-	 * 设置 资产
-	 * @param asset 资产
+	 * 设置 租户
+	 * @param tenantId 租户
 	 * @return 当前对象
 	*/
-	public AssetDataChange setAsset(Asset asset) {
-		this.asset=asset;
-		return this;
-	}
-	
-	/**
-	 * 获得 变更人<br>
-	 * 变更人
-	 * @return 变更人
-	*/
-	public Employee getChangeUser() {
-		return changeUser;
-	}
-	
-	/**
-	 * 设置 变更人
-	 * @param changeUser 变更人
-	 * @return 当前对象
-	*/
-	public AssetDataChange setChangeUser(Employee changeUser) {
-		this.changeUser=changeUser;
+	public Operate setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 
 	/**
 	 * 将自己转换成指定类型的PO
 	 * @param poType  PO类型
-	 * @return AssetDataChange , 转换好的 AssetDataChange 对象
+	 * @return Operate , 转换好的 Operate 对象
 	*/
 	@Transient
 	public <T extends Entity> T toPO(Class<T> poType) {
@@ -493,7 +417,7 @@ public class AssetDataChange extends Entity {
 	/**
 	 * 将自己转换成任意指定类型
 	 * @param pojoType  Pojo类型
-	 * @return AssetDataChange , 转换好的 PoJo 对象
+	 * @return Operate , 转换好的 PoJo 对象
 	*/
 	@Transient
 	public <T> T toPojo(Class<T> pojoType) {
@@ -510,35 +434,35 @@ public class AssetDataChange extends Entity {
 	}
 
 	/**
-	 * 将 Map 转换成 AssetDataChange
-	 * @param assetDataChangeMap 包含实体信息的 Map 对象
-	 * @return AssetDataChange , 转换好的的 AssetDataChange 对象
+	 * 将 Map 转换成 Operate
+	 * @param operateMap 包含实体信息的 Map 对象
+	 * @return Operate , 转换好的的 Operate 对象
 	*/
 	@Transient
-	public static AssetDataChange createFrom(Map<String,Object> assetDataChangeMap) {
-		if(assetDataChangeMap==null) return null;
-		AssetDataChange po = EntityContext.create(AssetDataChange.class, assetDataChangeMap);
+	public static Operate createFrom(Map<String,Object> operateMap) {
+		if(operateMap==null) return null;
+		Operate po = EntityContext.create(Operate.class, operateMap);
 		return po;
 	}
 
 	/**
-	 * 将 Pojo 转换成 AssetDataChange
+	 * 将 Pojo 转换成 Operate
 	 * @param pojo 包含实体信息的 Pojo 对象
-	 * @return AssetDataChange , 转换好的的 AssetDataChange 对象
+	 * @return Operate , 转换好的的 Operate 对象
 	*/
 	@Transient
-	public static AssetDataChange createFrom(Object pojo) {
+	public static Operate createFrom(Object pojo) {
 		if(pojo==null) return null;
-		AssetDataChange po = EntityContext.create(AssetDataChange.class,pojo);
+		Operate po = EntityContext.create(Operate.class,pojo);
 		return po;
 	}
 
 	/**
-	 * 创建一个 AssetDataChange，等同于 new
-	 * @return AssetDataChange 对象
+	 * 创建一个 Operate，等同于 new
+	 * @return Operate 对象
 	*/
 	@Transient
-	public static AssetDataChange create() {
-		return EntityContext.create(AssetDataChange.class);
+	public static Operate create() {
+		return EntityContext.create(Operate.class);
 	}
 }

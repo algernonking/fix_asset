@@ -1,7 +1,7 @@
 /**
  * 变更明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:23
+ * @since 2021-09-26 17:10:20
  */
 
 layui.config({

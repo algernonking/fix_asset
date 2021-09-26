@@ -261,9 +261,10 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.ATTACH)
                 .form().label("附件").upload().buttonLabel("选择附件").acceptSingleImage().maxFileCount(3).displayFileName(false);
 
+        cfg.view().list().operationColumn().addActionButton("变更","assetDataChange");
 
         //分成分组布局
-        cfg.view().formWindow().width("95%");
+        cfg.view().formWindow().width("98%");
 //        cfg.view().form().addGroup(null,
 //                new Object[] {
 //                        EAMTables.EAM_ASSET.CATEGORY_ID,

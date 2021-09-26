@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.AssetAllocation;
 import com.dt.platform.domain.eam.AssetItem;
 import com.dt.platform.eam.common.AssetCommonError;
@@ -82,6 +83,46 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		return IDGenerator.getSnowflakeIdString();
 	}
 
+
+
+	/**
+	 * 操作成功
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateSuccess(String id) {
+
+		return ErrorDesc.success();
+	}
+
+	/**
+	 * 操作失败
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateFailed(String id) {
+		return ErrorDesc.success();
+	}
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	public Result operateResult(String id,String result) {
+
+		if("success".equals(result)){
+			return operateSuccess(id);
+		}else if("failed".equals(result)){
+			return operateFailed(id);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+
+
+
 	/**
 	 * 插入实体
 	 * @param assetCollectionReturn 实体数据
@@ -122,14 +163,14 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		if(assetCollectionReturn.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
-		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code(),assetCollectionReturn.getAssetIds());
+		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code(),assetCollectionReturn.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}
 
 		//生成编码规则
 		if(StringUtil.isBlank(assetCollectionReturn.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code());
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
 			}else{

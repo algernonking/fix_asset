@@ -2,7 +2,7 @@
 /**
  * 变更明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:23
+ * @since 2021-09-26 17:10:25
  */
  -->
  <!DOCTYPE html>
@@ -45,12 +45,14 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产')}">资产</div></div>
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务类型')}">业务类型</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"  />
+                            <div id="businessType" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}"></div>
                         </div>
                     </div>
+
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更号')}">变更号</div></div>
@@ -60,9 +62,24 @@
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更类型')}">变更类型</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产')}">资产</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="type" id="type" name="type" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更类型') }" type="text" class="layui-input"  />
+                            <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更人')}">变更人</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="changeUserId" id="changeUserId" name="changeUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更时间')}">变更时间</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="changeTime" id="changeTime" name="changeTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('变更时间') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
 
@@ -73,19 +90,10 @@
                         </div>
                     </div>
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更人')}">变更人</div></div>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="changeUserId" id="changeUserId" name="changeUserId"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('变更人') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更时间')}">变更时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="changeTime" id="changeTime" name="changeTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('变更时间') }" type="text" class="layui-input"   />
+                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -102,8 +110,7 @@
 
 </div>
 <div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_data_change:create','eam_asset_data_change:update','eam_asset_data_change:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}"  style="margin-right: 15px" >取消</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
@@ -114,7 +121,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={};
+    var SELECT_BUSINESSTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
+    var VALIDATE_CONFIG={"changeTime":{"date":true,"labelInForm":"变更时间","inputType":"date_input"}};
     var AUTH_PREFIX="eam_asset_data_change";
 
 

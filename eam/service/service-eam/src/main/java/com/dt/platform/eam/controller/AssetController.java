@@ -3,7 +3,11 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.eam.service.IAssetItemService;
+import com.dt.platform.eam.service.IOperateService;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +78,9 @@ public class AssetController extends SuperController {
 
 	@Autowired
 	private IAssetItemService assetItemService;
+
+	@Autowired
+	private IOperateService operateService;
 	/**
 	 * 添加资产
 	*/
@@ -149,7 +156,11 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.INSERT)
 	public Result insert(AssetVO assetVO) {
-
+		System.out.println("11111"+operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()));
+		if(!operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code())){
+			System.out.println("123456789");
+			assetVO.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
 		Result result=assetService.insert(assetVO);
 		return result;
 	}

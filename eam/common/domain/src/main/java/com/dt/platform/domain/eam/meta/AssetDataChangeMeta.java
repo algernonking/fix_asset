@@ -3,13 +3,15 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.AssetDataChange;
 import java.util.Date;
+import com.dt.platform.domain.eam.Asset;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:23
- * @sign 55C08C77A4D906C58EF5F9E6FBC72902
+ * @since 2021-09-26 17:10:15
+ * @sign 8F29A09B1195523765D1678D706F3F63
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,14 +28,14 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 资产 , 类型: java.lang.String
+	 * 变更类型 , 类型: java.lang.String
 	*/
-	public static final String ASSET_ID="assetId";
+	public static final String BUSINESS_TYPE="businessType";
 	
 	/**
-	 * 资产 , 类型: java.lang.String
+	 * 变更类型 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> BUSINESS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,BUSINESS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
 	
 	/**
 	 * 变更号 , 类型: java.lang.String
@@ -46,14 +48,34 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,BUSINESS_CODE, java.lang.String.class, "变更号", "变更号", java.lang.String.class, null);
 	
 	/**
-	 * 变更类型 , 类型: java.lang.String
+	 * 资产 , 类型: java.lang.String
 	*/
-	public static final String TYPE="type";
+	public static final String ASSET_ID="assetId";
 	
 	/**
-	 * 变更类型 , 类型: java.lang.String
+	 * 资产 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	
+	/**
+	 * 变更人 , 类型: java.lang.String
+	*/
+	public static final String CHANGE_USER_ID="changeUserId";
+	
+	/**
+	 * 变更人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHANGE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_USER_ID, java.lang.String.class, "变更人", "变更人", java.lang.String.class, null);
+	
+	/**
+	 * 变更时间 , 类型: java.util.Date
+	*/
+	public static final String CHANGE_TIME="changeTime";
+	
+	/**
+	 * 变更时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.util.Date> CHANGE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_TIME, java.util.Date.class, "变更时间", "变更时间", java.util.Date.class, null);
 	
 	/**
 	 * 变更内容 , 类型: java.lang.String
@@ -66,24 +88,14 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CONTENT, java.lang.String.class, "变更内容", "变更内容", java.lang.String.class, null);
 	
 	/**
-	 * 变更人 , 类型: java.util.Date
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final String CHANGE_USER_ID="changeUserId";
+	public static final String NOTES="notes";
 	
 	/**
-	 * 变更人 , 类型: java.util.Date
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.util.Date> CHANGE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_USER_ID, java.util.Date.class, "变更人", "变更人", java.util.Date.class, null);
-	
-	/**
-	 * 变更时间 , 类型: java.util.Date
-	*/
-	public static final String CHANGE_TIME="changeTime";
-	
-	/**
-	 * 变更时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.util.Date> CHANGE_TIME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_TIME, java.util.Date.class, "变更时间", "变更时间", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -166,9 +178,29 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
 	
 	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET="asset";
+	
+	/**
+	 * 资产 , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
+	 * 变更人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String CHANGE_USER="changeUser";
+	
+	/**
+	 * 变更人 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,org.github.foxnic.web.domain.hrm.Employee> CHANGE_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_USER, org.github.foxnic.web.domain.hrm.Employee.class, "变更人", "变更人", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , BUSINESS_CODE , TYPE , CONTENT , CHANGE_USER_ID , CHANGE_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , BUSINESS_TYPE , BUSINESS_CODE , ASSET_ID , CHANGE_USER_ID , CHANGE_TIME , CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET , CHANGE_USER };
 	
 	/**
 	 * 代理类
@@ -190,13 +222,13 @@ public class AssetDataChangeMeta {
 		}
 		
 		/**
-		 * 设置 资产
-		 * @param assetId 资产
+		 * 设置 变更类型
+		 * @param businessType 变更类型
 		 * @return 当前对象
 		*/
-		public AssetDataChange setAssetId(String assetId) {
-			super.change(ASSET_ID,super.getAssetId(),assetId);
-			super.setAssetId(assetId);
+		public AssetDataChange setBusinessType(String businessType) {
+			super.change(BUSINESS_TYPE,super.getBusinessType(),businessType);
+			super.setBusinessType(businessType);
 			return this;
 		}
 		
@@ -212,13 +244,35 @@ public class AssetDataChangeMeta {
 		}
 		
 		/**
-		 * 设置 变更类型
-		 * @param type 变更类型
+		 * 设置 资产
+		 * @param assetId 资产
 		 * @return 当前对象
 		*/
-		public AssetDataChange setType(String type) {
-			super.change(TYPE,super.getType(),type);
-			super.setType(type);
+		public AssetDataChange setAssetId(String assetId) {
+			super.change(ASSET_ID,super.getAssetId(),assetId);
+			super.setAssetId(assetId);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更人
+		 * @param changeUserId 变更人
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChangeUserId(String changeUserId) {
+			super.change(CHANGE_USER_ID,super.getChangeUserId(),changeUserId);
+			super.setChangeUserId(changeUserId);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更时间
+		 * @param changeTime 变更时间
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChangeTime(Date changeTime) {
+			super.change(CHANGE_TIME,super.getChangeTime(),changeTime);
+			super.setChangeTime(changeTime);
 			return this;
 		}
 		
@@ -234,24 +288,13 @@ public class AssetDataChangeMeta {
 		}
 		
 		/**
-		 * 设置 变更人
-		 * @param changeUserId 变更人
+		 * 设置 备注
+		 * @param notes 备注
 		 * @return 当前对象
 		*/
-		public AssetDataChange setChangeUserId(Date changeUserId) {
-			super.change(CHANGE_USER_ID,super.getChangeUserId(),changeUserId);
-			super.setChangeUserId(changeUserId);
-			return this;
-		}
-		
-		/**
-		 * 设置 变更时间
-		 * @param changeTime 变更时间
-		 * @return 当前对象
-		*/
-		public AssetDataChange setChangeTime(Date changeTime) {
-			super.change(CHANGE_TIME,super.getChangeTime(),changeTime);
-			super.setChangeTime(changeTime);
+		public AssetDataChange setNotes(String notes) {
+			super.change(NOTES,super.getNotes(),notes);
+			super.setNotes(notes);
 			return this;
 		}
 		
@@ -340,6 +383,28 @@ public class AssetDataChangeMeta {
 		public AssetDataChange setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产
+		 * @param asset 资产
+		 * @return 当前对象
+		*/
+		public AssetDataChange setAsset(Asset asset) {
+			super.change(ASSET,super.getAsset(),asset);
+			super.setAsset(asset);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更人
+		 * @param changeUser 变更人
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChangeUser(Employee changeUser) {
+			super.change(CHANGE_USER,super.getChangeUser(),changeUser);
+			super.setChangeUser(changeUser);
 			return this;
 		}
 	}

@@ -9,12 +9,12 @@ import java.util.ArrayList;
 /**
  * null
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:15
- * @sign 7D9B2F9DF4432238A59C4720A2605B52
+ * @since 2021-09-26 20:02:15
+ * @sign 1EBE925276EA64CEF0A6C628E664B722
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class AssetDataChangeVO extends AssetDataChange {
+public class OperateVO extends Operate {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -79,7 +79,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setPageIndex(Integer pageIndex) {
+	public OperateVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -97,7 +97,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setPageSize(Integer pageSize) {
+	public OperateVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setSearchField(String searchField) {
+	public OperateVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -133,7 +133,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setFuzzyField(String fuzzyField) {
+	public OperateVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -151,7 +151,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setSearchValue(String searchValue) {
+	public OperateVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -169,7 +169,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setSortField(String sortField) {
+	public OperateVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -187,7 +187,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setSortType(String sortType) {
+	public OperateVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -206,7 +206,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO setIds(List<String> ids) {
+	public OperateVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -216,7 +216,7 @@ public class AssetDataChangeVO extends AssetDataChange {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public AssetDataChangeVO addId(String id) {
+	public OperateVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;
