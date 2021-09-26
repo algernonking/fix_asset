@@ -180,7 +180,7 @@ function FormPage() {
 			elem: '##(f.varName)',
 			format:"#(f.dateField.format)",
 			#if(f.dateField.defaultValue=="now")
-			value:new Date(),
+			value:$('##(f.varName)').val()?$('##(f.varName)').val():new Date(),
 			#end
 			trigger:"click"
 		});
@@ -233,6 +233,17 @@ function FormPage() {
 		    #end
 			#end
 		    #end
+
+			#for(f : fields)
+			#if(f.isFormElem)
+			#if(f.typeName.equals("date_input"))
+			//设置 #(f.labelInForm) 显示复选框勾选
+			if(formData["#(f.varName)"]) {
+				$("##(f.varName)").val(fox.dateFormat(formData["#(f.varName)"],"#(f.dateField.format)"));
+			}
+			#end
+			#end
+			#end
 
 
 			#for(f : fields)
