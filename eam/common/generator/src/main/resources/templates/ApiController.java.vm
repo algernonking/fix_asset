@@ -155,11 +155,11 @@ public class #(simpleName) extends SuperController {
 
 	#if(isSimplePk)
 	/**
-	 * 批量删除#(topic) <br>
+	 * 批量获取#(topic) <br>
 	 * 联合主键时，请自行调整实现
 	*/
 		#if(isEnableSwagger)
-		@ApiOperation(value = "批量删除#(topic)")
+		@ApiOperation(value = "批量获取#(topic)")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = #(voMetaSimpleName).#(idsPropertyConst) , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
