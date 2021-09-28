@@ -196,15 +196,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 			return ckResult;
 		}
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetCollectionReturn.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
-			}
-		}
+
 
 
 		//制单人
@@ -220,6 +212,16 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		//办理状态
 		if(StringUtil.isBlank(assetCollectionReturn.getStatus())){
 			assetCollectionReturn.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetCollectionReturn.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetCollectionReturn.setBusinessCode(codeResult.getData().toString());
+			}
 		}
 
 

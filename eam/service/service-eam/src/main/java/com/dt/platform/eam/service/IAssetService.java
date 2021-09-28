@@ -285,20 +285,21 @@ public interface IAssetService extends ISuperService<Asset> {
 	/**
 	 * 导出用于数据导入的 Excel 模版
 	 * */
-	ExcelWriter  exportExcelTemplate();
+	ExcelWriter  exportExcelTemplate(String categoryId);
 
 	/**
 	 * 构建 Excel 结构
-	 * @param  isForExport 是否用于数据导出
+	 * @param  categoryId 是否用于数据导出
 	 * @return   ExcelStructure
 	 * */
-	ExcelStructure buildExcelStructure(boolean isForExport);
+	ExcelStructure buildExcelStructure(String categoryId);
+
 
 	/**
 	 * 导入 Excel 数据
 	 * @return  错误信息，成功时返回 null
 	 * */
-	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType,String categoryId);
 
  
 }

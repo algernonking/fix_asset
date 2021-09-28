@@ -69,6 +69,7 @@ function FormPage() {
 		},250);
 	}
 
+	var categorySelect;
 	/**
 	 * 渲染表单组件
 	 */
@@ -76,13 +77,14 @@ function FormPage() {
 		fox.renderFormInputs(form);
 
 		//渲染 categoryId 下拉字段
-		var categorySelect = xmSelect.render({
+		categorySelect = xmSelect.render({
 			el: '#categoryId',
 			prop: {
 				name: 'name',
 				value: 'id',
 			},
 			filterable: true,
+			strict: false,
 			tree: {
 				// showFolderIcon: true,
 				show: true,
@@ -301,7 +303,7 @@ function FormPage() {
 		});
 		//渲染 maintainerId 下拉字段
 		fox.renderSelectBox({
-			el: "maintainerId",
+			el: "#maintainerId",
 			radio: true,
 			filterable: true,
 			//转换数据
@@ -414,11 +416,12 @@ function FormPage() {
 				adjustPopup();
 			}
 
-
-			console.log(formData);
-
 			//设置  资产分类 设置下拉框勾选
 			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
+			if(categorySelect){
+				categorySelect.setValue(formData.category.id.split(","));
+			}
+
 			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  资产状态 设置下拉框勾选

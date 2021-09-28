@@ -191,15 +191,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			return ckResult;
 		}
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetBorrow.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetBorrow.setBusinessCode(codeResult.getData().toString());
-			}
-		}
 
 		//填充制单人
 		if( StringUtil.isBlank(assetBorrow.getOriginatorId())){
@@ -214,6 +205,16 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		//办理状态
 		if(StringUtil.isBlank( assetBorrow.getStatus())){
 			assetBorrow.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetBorrow.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetBorrow.setBusinessCode(codeResult.getData().toString());
+			}
 		}
 
 		Result r=super.insert(assetBorrow);

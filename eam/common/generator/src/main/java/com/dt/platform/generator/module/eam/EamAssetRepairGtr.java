@@ -94,7 +94,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         );
 
         cfg.view().list().disableBatchDelete();
-        cfg.view().form().addPage("资产列表","assetSelectList");
+
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
@@ -123,7 +123,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         );
 
-
+        cfg.view().form().addPage("资产列表","assetSelectList");
 
 
         //文件生成覆盖模式

@@ -6,6 +6,7 @@ import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.Goods;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.github.foxnic.dao.excel.ExcelStructure;
@@ -17,6 +18,7 @@ import com.github.foxnic.sql.meta.DBField;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +32,15 @@ import java.util.Map;
 
 public interface IAssetDataService extends ISuperService<Asset> {
 
+	String getMapKey(HashMap<String,String> map,String value);
+
+	Result verifyAssetRecord(Rcd rcd,HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
+
+	HashMap<String,String> queryAssetCategoryNodes();
+
+	HashMap<String,String> queryUseOrganizationNodes();
+
+
 	/**
 	 * 插入实体
 	 * @param ids 资产数据
@@ -42,11 +53,10 @@ public interface IAssetDataService extends ISuperService<Asset> {
 
 	/**
 	 * 插入实体
-	 * @param ids 资产数据
-	 * @param asset 资产实体
+	 * @param list 资产数据
 	 * @return 结果
 	 * */
-	Map<String, Object> queryAssetMap(List<String> ids,AssetVO asset);
+	Map<String, Object> queryAssetMap(List<Asset>list);
 
 	/**
 	 * 插入实体

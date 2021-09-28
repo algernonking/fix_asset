@@ -61,6 +61,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * @param location 调用的代码位置
          * */
         beforeQuery:function (conditions,param,location) {
+            conditions.assetId={ value:ASSET_ID};
             console.log('beforeQuery',conditions,param,location);
             return true;
         },

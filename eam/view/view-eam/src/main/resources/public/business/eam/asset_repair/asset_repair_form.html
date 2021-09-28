@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:49
+ * @since 2021-09-27 13:02:35
  */
  -->
  <!DOCTYPE html>
@@ -30,16 +30,6 @@
 
         <input name="id" id="id"  type="hidden"/>
 
-         <!--开始：group 循环-->
-
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
-        <legend>资产列表</legend>
-        </fieldset>
-        <div class="layui-row form-row" style="text-align: center;">
-            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
-            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
-            </div>
-        </div>
          <!--开始：group 循环-->
 
 
@@ -136,6 +126,16 @@
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <legend>资产列表</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
         </div>
         <!--结束：group循环-->
 

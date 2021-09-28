@@ -33,15 +33,19 @@ public interface IOpsDataService extends ISuperService<Host> {
 
 	List<Host> queryHostList(HostVO sample);
 
-	Map<String, Object> queryHostMap(HostVO sample);
+	Map<String, Object> queryHostMap(List<Host> list);
+
+
 
 	List<InformationSystem> queryInformationSystemList(InformationSystemVO sample);
 
-	Map<String, Object> queryInformationSystemMap(InformationSystemVO sample);
+	Map<String, Object> queryInformationSystemMap(List<InformationSystem> list);
+
+
 
 	List<DbInstance> queryDatabaseInstanceList(DbInstanceVO sample);
 
-	Map<String, Object> queryDatabaseInstanceMap(DbInstanceVO sample);
+	Map<String, Object> queryDatabaseInstanceMap(List<DbInstance>  list);
 
 	File saveTempFile(InputStream is, String fileName);
 

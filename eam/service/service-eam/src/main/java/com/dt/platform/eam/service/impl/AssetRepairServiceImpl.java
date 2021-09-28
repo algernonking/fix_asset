@@ -199,15 +199,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			return ckResult;
 		}
 
-		//生成编码规则
-		if(assetRepair.getBusinessCode()==null||"".equals(assetRepair.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_REPAIR.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetRepair.setBusinessCode(codeResult.getData().toString());
-			}
-		}
 
 
 		//制单人
@@ -226,6 +217,16 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			assetRepair.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+
+		//生成编码规则
+		if(assetRepair.getBusinessCode()==null||"".equals(assetRepair.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_REPAIR.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetRepair.setBusinessCode(codeResult.getData().toString());
+			}
+		}
 
 
 		Result r=super.insert(assetRepair);

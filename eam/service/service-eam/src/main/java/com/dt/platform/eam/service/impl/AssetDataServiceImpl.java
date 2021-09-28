@@ -1,27 +1,45 @@
 package com.dt.platform.eam.service.impl;
 
 
-import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.AssetVO;
+import com.dt.platform.constants.enums.eam.AssetDataExportColumnEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
-import com.dt.platform.eam.service.IAssetDataService;
+import com.dt.platform.eam.service.*;
 
-import com.dt.platform.eam.service.IAssetService;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.io.FileUtil;
+import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.OrganizationVO;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.DictItemVO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
+import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.io.*;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service("EamAssetDataService")
 public class AssetDataServiceImpl  extends SuperService<Asset> implements IAssetDataService {
@@ -30,6 +48,27 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Autowired
     private IAssetService assetService;
 
+
+    @Autowired
+    private IAssetDataService assetDataService;
+
+    @Autowired
+    private IPositionService positionService;
+
+    @Autowired
+    private IWarehouseService warehouseService;
+
+    @Autowired
+    private IMaintainerService maintainerService;
+
+    @Autowired
+    private IManufacturerService manufacturerService;
+
+    @Autowired
+    private IGoodsService goodsService;
+
+    @Autowired
+    private ICategoryFinanceService categoryFinanceService;
 
 
     /**
@@ -46,17 +85,329 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
     @Override
     public List<Asset> queryAssetList(List<String> ids, AssetVO asset) {
-
         return assetService.queryList(asset);
     }
 
 
     @Override
-    public Map<String, Object> queryAssetMap(List<String> ids, AssetVO asset) {
+    public String getMapKey(HashMap<String,String> map,String value){
+        String key = null;
+        //Map,HashMap并没有实现Iteratable接口.不能用于增强for循环.
+        for(String getKey: map.keySet()){
+            if(map.get(getKey).equals(value)){
+                key = getKey;
+                return key;
+            }
+        }
+        return key;
+        //这个key肯定是最后一个满足该条件的key.
+    }
+
+
+    @Override
+    public HashMap<String,String> queryUseOrganizationNodes(){
+        //id name
+        HashMap<String,String> map=new HashMap<String,String>();
+        OrganizationVO vo=new OrganizationVO();
+        vo.setIsLoadAllDescendants(1);
+        vo.setTenantId("T001");
+        Result r= OrganizationServiceProxy.api().queryNodesFlatten(vo);
+        if(r.isSuccess()){
+            List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
+            for(int i=0;i<list.size();i++){
+                ZTreeNode node= list.get(i);
+                String path="";
+                for(int j=0;j<node.getNamePathArray().size();j++){
+                    if(j==0){
+                        path=node.getNamePathArray().get(j);
+                    }else{
+                        path=path+"/"+node.getNamePathArray().get(j);
+                    }
+                }
+                System.out.println(node.getId()+","+path);
+                map.put(node.getId(),path);
+            }
+        }
+        return map;
+    }
+
+    @Override
+    public HashMap<String,String> queryAssetCategoryNodes(){
+        //所有分类转换成  id + 全路径名称
+        HashMap<String,String> map=new HashMap<String,String>();
+        CatalogVO vo=new CatalogVO();
+        vo.setTenantId("T001");
+//        vo.setCode("asset");
+//        vo.setIsLoadAllDescendants(1);
+//        Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
+//        if(r.isSuccess()){
+//            List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
+//            for(int i=0;i<list.size();i++){
+//                ZTreeNode node= list.get(i);
+//                String path="";
+//                for(int j=0;j<node.getNamePathArray().size();j++){
+//                    if(j==0){
+//                        path=node.getNamePathArray().get(j);
+//                    }else{
+//                        path=path+"/"+node.getNamePathArray().get(j);
+//                    }
+//                }
+//                map.put(node.getId(),path);
+//            }
+//        }
+        return map;
+    }
+
+
+
+
+    @Override
+    public Result verifyAssetRecord(Rcd rcd,HashMap<String,HashMap<String,String>> matchMap, boolean filldata){
+
+        HashMap<String,String> orgMap=matchMap.get("organizationMap");
+        HashMap<String,String> categoryMap=matchMap.get("categoryMap");
+
+        //字符串类型
+        String[] stringColumns = {AssetMeta.ASSET_CODE,AssetMeta.NAME,AssetMeta.SERIAL_NUMBER,AssetMeta.BATCH_CODE,
+                AssetMeta.MODEL,AssetMeta.UNIT,AssetMeta.POSITION_DETAIL,AssetMeta.RFID,
+                AssetMeta.ASSET_NOTES,AssetMeta.MAINTAINER_NAME,AssetMeta.CONTACTS,AssetMeta.CONTACT_INFORMATION,
+                AssetMeta.DIRECTOR,AssetMeta.MAINTENANCE_NOTES,AssetMeta.FINANCIAL_CODE};
+        for(int j=0;j<stringColumns.length;j++){
+            String stringColumn=stringColumns[j];
+            String value=rcd.getString(BeanNameUtil.instance().depart(stringColumn));
+            if(value!=null){
+                rcd.set(stringColumn,value);
+            }
+        }
+
+
+        //Number类型
+
+
+
+        //日期类型
+        String[] dateColumns = {AssetMeta.MAINTENANCE_START_DATE,AssetMeta.MAINTENANCE_END_DATE,AssetMeta.PURCHASE_DATE};
+        for(int j=0;j<dateColumns.length;j++){
+            String dateColumn=dateColumns[j];
+            String value=rcd.getString(BeanNameUtil.instance().depart(dateColumn));
+            if(value!=null){
+                int valueLen=value.trim().length();
+                try {
+                    DateFormat format1=null;
+                    if(valueLen==10){
+                        format1 = new SimpleDateFormat("yyyy-MM-dd");
+                    }else if(valueLen==19){
+                        format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    }else{
+                        return ErrorDesc.failureMessage("时间转换失败,字段:"+dateColumn+",时间:"+value);
+                    }
+                    Date date = format1.parse(value);
+                    rcd.set(dateColumn,date);
+                } catch (ParseException e) {
+                    return ErrorDesc.failureMessage("时间转换失败,字段:"+dateColumn+",时间:"+value);
+                }
+            }
+        }
+
+
+        //枚举类型资产状态
+        String valueAssetStatus=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.ASSET_STATUS));
+        if(!StringUtil.isBlank(valueAssetStatus)){
+            String value=EnumUtil.parseByText(AssetStatusEnum.class,valueAssetStatus)==null
+                    ?AssetStatusEnum.IDLE.code()
+                    :EnumUtil.parseByText(AssetStatusEnum.class,valueAssetStatus).code();
+            rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.ASSET_STATUS),value);
+        } else{
+            rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.ASSET_STATUS),AssetStatusEnum.IDLE.code());
+        }
+
+
+        //下拉框类型
+        String valueUseOrganization=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.USE_ORGANIZATION_ID));
+        if(!StringUtil.isBlank(valueUseOrganization)){
+            if(orgMap.containsValue(valueUseOrganization.trim())){
+                String key=assetDataService.getMapKey(orgMap,valueUseOrganization);
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.USE_ORGANIZATION_ID),key);
+            }else{
+                //返回报错
+                return ErrorDesc.failureMessage("组织节点不存在:"+valueUseOrganization);
+            }
+        }
+
+
+        String valueOwnerCompany=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.OWN_COMPANY_ID));
+        if(!StringUtil.isBlank(valueOwnerCompany)){
+            if(orgMap.containsValue(valueOwnerCompany.trim())){
+                String key=assetDataService.getMapKey(orgMap,valueOwnerCompany);
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.OWN_COMPANY_ID),key);
+            }else{
+                //返回报错
+                return ErrorDesc.failureMessage("组织节点不存在:"+valueOwnerCompany);
+            }
+
+        }
+
+
+        String valueCategory=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID));
+        if(!StringUtil.isBlank(valueCategory)){
+            if(orgMap.containsValue(valueCategory.trim())){
+                String key=assetDataService.getMapKey(categoryMap,valueCategory);
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID),key);
+            }else{
+                //返回报错
+                return ErrorDesc.failureMessage("资产分类不存在:"+valueCategory);
+            }
+        }
+
+
+        String valueManager=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.MANAGER_ID));
+        if(!StringUtil.isBlank(valueManager)){
+            Employee emp= EmployeeServiceProxy.api().getByBadge(valueManager).data();
+            if(emp==null){
+                //报错
+                return ErrorDesc.failureMessage("管理人员不存在:"+valueManager);
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.MANAGER_ID),emp.getId());
+            }
+        }
+
+        String valueUseUser=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.USE_USER_ID));
+        if(!StringUtil.isBlank(valueUseUser)){
+            Employee emp= EmployeeServiceProxy.api().getByBadge(valueUseUser).data();
+            if(emp==null){
+                //报错
+                return ErrorDesc.failureMessage("使用人员不存在:"+valueUseUser);
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.USE_USER_ID),emp.getId());
+            }
+        }
+
+
+        //下拉框
+        String valueFinancialCategory=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.FINANCIAL_CATEGORY_ID));
+        if(valueFinancialCategory!=null){
+            CategoryFinance categoryFinance = categoryFinanceService.queryEntity(CategoryFinance.create().setHierarchyName(valueFinancialCategory));
+            if(categoryFinance==null){
+                return ErrorDesc.failureMessage("财务分类不存在:"+valueFinancialCategory);
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.FINANCIAL_CATEGORY_ID),categoryFinance.getId());
+            }
+        }
+
+
+
+        //物品档案
+        String valueGoods=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.GOODS_ID));
+        if(!StringUtil.isBlank(valueGoods)){
+            Goods goods = goodsService.queryEntity(Goods.create().setName(valueGoods));
+            if(goods==null){
+                if(filldata){
+                    goods=new Goods();
+                    goods.setName(valueGoods);
+                    goodsService.insert(goods);
+                    rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.GOODS_ID),goods.getId());
+                }else{
+                    return ErrorDesc.failureMessage("物品档案不存在:"+valueGoods);
+                }
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.GOODS_ID),goods.getId());
+            }
+        }
+
+
+
+        //位置
+        String valuePosition=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.POSITION_ID));
+        if(!StringUtil.isBlank(valuePosition)){
+            Position position = positionService.queryEntity(Position.create().setName(valuePosition));
+            if(position==null){
+                if(filldata){
+                    position=new Position();
+                    position.setName(valuePosition);
+                    positionService.insert(position);
+                    rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.POSITION_ID),position.getId());
+                }else{
+                    return ErrorDesc.failureMessage("资产位置不存在:"+valuePosition);
+                }
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.POSITION_ID),position.getId());
+            }
+        }
+
+
+
+        //仓库
+        String valueWarehouse=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.WAREHOUSE_ID));
+        if(!StringUtil.isBlank(valueWarehouse)){
+            Warehouse warehouse = warehouseService.queryEntity(Warehouse.create().setWarehouseName(valueWarehouse));
+            if(warehouse==null){
+                if(filldata){
+                    warehouse=new Warehouse();
+                    warehouse.setWarehouseName(valueWarehouse);
+                    warehouseService.insert(warehouse);
+                    rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.WAREHOUSE_ID),warehouse.getId());
+                }else{
+                    return ErrorDesc.failureMessage("资产仓库不存在:"+valueWarehouse);
+                }
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.WAREHOUSE_ID),warehouse.getId());
+            }
+        }
+
+
+
+
+        String valueManufacturer=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.MANUFACTURER_ID));
+        if(!StringUtil.isBlank(valueManufacturer)){
+            Manufacturer manufacturer = manufacturerService.queryEntity(Manufacturer.create().setManufacturerName(valueWarehouse));
+            if(manufacturer==null){
+                if(filldata){
+                    manufacturer=new Manufacturer();
+                    manufacturer.setManufacturerName(valueManufacturer);
+                    manufacturerService.insert(manufacturer);
+                    rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.MANUFACTURER_ID),manufacturer.getId());
+                }else{
+                    //返回报错
+                    return ErrorDesc.failureMessage("厂商不存在:"+valueManufacturer);
+                }
+            }else{
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.MANUFACTURER_ID),manufacturer.getId());
+            }
+        }
+
+
+
+        String valueSource=rcd.getString(BeanNameUtil.instance().depart(AssetMeta.SOURCE_ID));
+        if(!StringUtil.isBlank(valueSource)){
+            DictItemVO dictVo=new DictItemVO();
+            dictVo.setLabel(valueSource);
+            dictVo.setDictCode("eam_source");
+            Result<List<DictItem> >dictItemResult= DictItemServiceProxy.api().queryList(dictVo);
+            if(dictItemResult.isSuccess()&&dictItemResult.getData().size()>0){
+                rcd.setValue(BeanNameUtil.instance().depart(AssetMeta.SOURCE_ID),dictItemResult.getData().get(0).getCode());
+            }else{
+                //返回报错
+                return ErrorDesc.failureMessage("资产来源不存在:"+valueSource);
+            }
+        }
+
+
+        //其他
+        return ErrorDesc.success();
+    }
+
+
+
+
+    @Override
+    public Map<String, Object> queryAssetMap(List<Asset>list) {
+        HashMap<String,String> orgMap=queryUseOrganizationNodes();
+
+
+        HashMap<String,String> categoryMap=queryAssetCategoryNodes();
+
         Map<String,Object> map=new HashMap<>();
-        List<Asset> list= queryAssetList(null,asset);
-        // 关联出 资产分类 数据
-        assetService.join(list, AssetMeta.CATEGORY);
+
         // 关联出 物品档案 数据
         assetService.join(list,AssetMeta.GOODS);
         // 关联出 厂商 数据
@@ -74,51 +425,89 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         // 关联出 来源 数据
         assetService.join(list,AssetMeta.SOURCE);
 
+        assetService.join(list,AssetMeta.MANAGER);
+
+        assetService.join(list,AssetMeta.USE_USER);
+
+
+        assetService.join(list,AssetMeta.ORIGINATOR);
+
+
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);
             Map<String, Object> assetMap= BeanUtil.toMap(assetItem);
+            System.out.println(assetItem);
+            //资产状态
+            CodeTextEnum vAssetStatus=EnumUtil.parseByCode(AssetStatusEnum.class,assetItem.getAssetStatus()) ;
+            assetMap.put(AssetDataExportColumnEnum.ASSET_STATUS_NAME.code(), vAssetStatus==null?"":vAssetStatus.text());
+
+            //办理状态
+            CodeTextEnum vStatus= EnumUtil.parseByCode(AssetHandleStatusEnum.class,assetItem.getStatus());
+            assetMap.put(AssetDataExportColumnEnum.ASSET_STATUS.code(),vStatus==null?"":vStatus.text());
+
+
             if(assetItem.getPosition()!=null){
                 // 关联出 存放位置 数据
-                assetMap.put("assetPositionName",assetItem.getPosition().getName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_POSITION_NAME.code(),assetItem.getPosition().getName());
             }
             if(assetItem.getCategory()!=null){
                 //关联出 分类 数据
-                assetMap.put("assetCategoryName",assetItem.getCategory().getName());
+                String name=categoryMap.get(assetItem.getCategoryId());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.code(),name);
             }
             if(assetItem.getGoods()!=null){
                 //关联出 物品档案 数据
-                assetMap.put("assetGoodName",assetItem.getGoods().getName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_GOOD_NAME.code(),assetItem.getGoods().getName());
             }
             if(assetItem.getManufacturer()!=null){
                 //关联出 厂商 数据
-                assetMap.put("assetManufacturerName",assetItem.getManufacturer().getManufacturerName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_MANUFACTURER_NAME.code(),assetItem.getManufacturer().getManufacturerName());
             }
             if(assetItem.getWarehouse()!=null){
                 //关联出 仓库 数据
-                assetMap.put("assetWarehouseName",assetItem.getWarehouse().getWarehouseName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_WAREHOUSE_NAME.code(),assetItem.getWarehouse().getWarehouseName());
             }
             if(assetItem.getMaintnainer()!=null){
                 //关联出 维保商 数据
-                assetMap.put("assetMaintainerName",assetItem.getMaintnainer().getMaintainerName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_MAINTAINER_NAME.code(),assetItem.getMaintnainer().getMaintainerName());
             }
             if(assetItem.getCategoryFinance()!=null){
                 // 关联出 财务分类数据
-                assetMap.put("assetCategoryFinanceName",assetItem.getCategoryFinance().getCategoryName());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_FINANCE_NAME.code(),assetItem.getCategoryFinance().getHierarchyName());
             }
             if(assetItem.getSupplier()!=null){
                 // 关联出 供应商 数据
-                assetMap.put("assetSupplierName",assetItem.getSupplier().getSupplierName());
-            }
-            if(assetItem.getSource()!=null){
-                // 关联出 来源 数据
-                assetMap.put("assetSourceName",assetItem.getSource().getLabel());
+                assetMap.put(AssetDataExportColumnEnum.ASSET_SUPPLIER_NAME.code(),assetItem.getSupplier().getSupplierName());
             }
 
-          //  System.out.println(assetMap);
+            if(assetItem.getSource()!=null){
+                // 关联出 来源 数据
+                assetMap.put(AssetDataExportColumnEnum.ASSET_SOURCE_NAME.code(),assetItem.getSource().getLabel());
+            }
+
+            String companyName=orgMap.get(assetItem.getOwnCompanyId());
+            assetMap.put(AssetDataExportColumnEnum.OWNER_COMPANY_NAME.code(),companyName);
+
+            String orgName=orgMap.get(assetItem.getUseOrganizationId());
+            assetMap.put(AssetDataExportColumnEnum.USE_ORGANIZATION_NAME.code(),orgName);
+
+
+            if(assetItem.getManager()!=null){
+                System.out.println("manan"+assetItem.getManager().getBadge());
+                assetMap.put(AssetDataExportColumnEnum.MANAGER_NAME.code(),assetItem.getManager().getName());
+                assetMap.put(AssetDataExportColumnEnum.MANAGER_BADGE.code(),assetItem.getManager().getBadge());
+            }
+
+            if(assetItem.getUseUser()!=null){
+                System.out.println("suer"+assetItem.getUseUser().getBadge());
+                assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME.code(),assetItem.getUseUser().getName());
+                assetMap.put(AssetDataExportColumnEnum.USE_USER_BADGE.code(),assetItem.getUseUser().getBadge());
+            }
+
             listMap.add(assetMap);
         }
-        map.put("assetList", listMap);
+        map.put("dataList", listMap);
         return map;
     }
 

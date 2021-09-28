@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:49
+ * @since 2021-09-27 13:02:32
  */
 
 
@@ -79,12 +79,12 @@ function ListPage() {
 					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态'), templet:function (d){ return templet('repairStatus',fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus),d);}}
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修类型'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
-					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate),d); }}
-					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate),d); }}
+					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'reportUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') , templet: function (d) { return templet('reportUserId',d.reportUserId,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 20 }
 				]],

@@ -4,6 +4,7 @@ import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.deepoove.poi.util.PoitlIOUtils;
+import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.ops.DbInstanceVO;
 import com.dt.platform.domain.ops.HostVO;
 import com.dt.platform.domain.ops.InformationSystemVO;
@@ -86,7 +87,7 @@ public class OpsDataController extends SuperController {
     @SentinelResource(value = OpsDataServiceProxy.EXPORT_HOST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(OpsDataServiceProxy.EXPORT_HOST)
     public Result exportHost(HostVO sample, HttpServletResponse response) throws Exception {
-        String code="ops_download_host";
+        String code=OpsOperateEnum.OPS_DOWNLOAD_HOST.code();
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
@@ -94,7 +95,7 @@ public class OpsDataController extends SuperController {
 
         File f=opsDatService.saveTempFile(inputstream,"TMP_"+code+".xls");
         System.out.println(f.getPath());
-        Map<String,Object> map= opsDatService.queryHostMap(sample);
+        Map<String,Object> map= opsDatService.queryHostMap(opsDatService.queryHostList(sample));
         TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setCharacterEncoding("UTF-8");
@@ -119,14 +120,14 @@ public class OpsDataController extends SuperController {
     @SentinelResource(value = OpsDataServiceProxy.EXPORT_INFORMATION_SYSTEM , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(OpsDataServiceProxy.EXPORT_INFORMATION_SYSTEM)
     public Result exportInformationSystem(InformationSystemVO sample, HttpServletResponse response) throws Exception {
-        String code="ops_download_information_system";
+        String code=OpsOperateEnum.OPS_DOWNLOAD_INFORMATION_SYSTEM.code();
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
         File f=opsDatService.saveTempFile(inputstream,"TMP_"+code+".xls");
         System.out.println(f.getPath());
-        Map<String,Object> map= opsDatService.queryInformationSystemMap(sample);
+        Map<String,Object> map= opsDatService.queryInformationSystemMap(opsDatService.queryInformationSystemList(sample));
         TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setCharacterEncoding("UTF-8");
@@ -150,14 +151,14 @@ public class OpsDataController extends SuperController {
     @SentinelResource(value = OpsDataServiceProxy.EXPORT_DATABASE_INSTANCE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(OpsDataServiceProxy.EXPORT_DATABASE_INSTANCE)
     public Result exportDatabaseInstance(DbInstanceVO sample, HttpServletResponse response) throws Exception {
-        String code="ops_download_database_inst";
+        String code= OpsOperateEnum.OPS_DOWNLOAD_DATABASE_INST.code();
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
         File f=opsDatService.saveTempFile(inputstream,"TMP_"+code+".xls");
         System.out.println(f.getPath());
-        Map<String,Object> map= opsDatService.queryDatabaseInstanceMap(sample);
+        Map<String,Object> map= opsDatService.queryDatabaseInstanceMap(opsDatService.queryDatabaseInstanceList(sample));
         TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setCharacterEncoding("UTF-8");

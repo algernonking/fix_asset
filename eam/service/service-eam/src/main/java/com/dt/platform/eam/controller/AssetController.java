@@ -1,14 +1,26 @@
 package com.dt.platform.eam.controller;
 
  
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import com.deepoove.poi.util.PoitlIOUtils;
+import com.dt.platform.constants.enums.eam.AssetDataImportProcessTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.eam.service.IAssetDataService;
 import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.proxy.common.TplFileServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.ConditionExpr;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,6 +93,9 @@ public class AssetController extends SuperController {
 
 	@Autowired
 	private IOperateService operateService;
+
+	@Autowired
+	private IAssetDataService assetDataService;
 	/**
 	 * 添加资产
 	*/
@@ -821,11 +836,30 @@ public class AssetController extends SuperController {
 	 * */
 	@SentinelResource(value = AssetServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.EXPORT_EXCEL)
-	public void exportExcel(AssetVO  sample,HttpServletResponse response) throws Exception {
+	public Result exportExcel(AssetVO  sample,HttpServletResponse response) throws Exception {
 			//生成 Excel 数据
-			ExcelWriter ew=assetService.exportExcel(sample);
-			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	 	String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
+		InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		if(inputstream==null){
+			return ErrorDesc.failure().message("获取模板文件失败");
+		}
+		File f=assetDataService.saveTempFile(inputstream,"TMP_"+code+".xls");
+		System.out.println(f.getPath());
+		Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,sample));
+		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
+		response.setContentType("application/vnd.ms-excel");
+		OutputStream out = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(out);
+		workbook.write(bos);
+		bos.flush();
+		out.flush();
+		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+		return ErrorDesc.success();
+
+
 	}
 
 
@@ -834,9 +868,9 @@ public class AssetController extends SuperController {
 	 * */
 	@SentinelResource(value = AssetServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.EXPORT_EXCEL_TEMPLATE)
-	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+	public void exportExcelTemplate(HttpServletResponse response,String categoryId) throws Exception {
 			//生成 Excel 模版
-			ExcelWriter ew=assetService.exportExcelTemplate();
+			ExcelWriter ew=assetService.exportExcelTemplate(categoryId);
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
 		}
@@ -846,7 +880,7 @@ public class AssetController extends SuperController {
 
 	@SentinelResource(value = AssetServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.IMPORT_EXCEL)
-	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response,String dataType,String categoryId) throws Exception {
 
 			//获得上传的文件
 			Map<String, MultipartFile> map = request.getFileMap();
@@ -860,10 +894,19 @@ public class AssetController extends SuperController {
 				return ErrorDesc.failure().message("缺少上传的文件");
 			}
 
-			List<ValidateResult> errors=assetService.importExcel(input,0,true);
+			boolean dataFill=false;
+			if( (!StringUtil.isBlank(dataType))
+					&& AssetDataImportProcessTypeEnum.DATA_FILL.code().equals(dataType) ){
+					dataFill=true;
+			}
+			List<ValidateResult> errors=assetService.importExcel(input,0,true,AssetOperateEnum.EAM_ASSET_INSERT.code(),dataFill,categoryId);
 			if(errors==null || errors.isEmpty()) {
 				return ErrorDesc.success();
 			} else {
+				System.out.println("import Result:");
+				for(int i=0;i<errors.size();i++){
+					System.out.println(i+":"+errors.get(i).message);
+				}
 				return ErrorDesc.failure().message("导入失败").data(errors);
 			}
 		}

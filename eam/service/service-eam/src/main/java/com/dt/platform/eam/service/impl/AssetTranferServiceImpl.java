@@ -196,15 +196,6 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 			return ckResult;
 		}
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetTranfer.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetTranfer.setBusinessCode(codeResult.getData().toString());
-			}
-		}
 
 		//制单人
 		if(StringUtil.isBlank(assetTranfer.getOriginatorId())){
@@ -219,6 +210,17 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 		//办理状态
 		if(StringUtil.isBlank(assetTranfer.getStatus())){
 			assetTranfer.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetTranfer.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetTranfer.setBusinessCode(codeResult.getData().toString());
+			}
 		}
 
 		Result r=super.insert(assetTranfer);

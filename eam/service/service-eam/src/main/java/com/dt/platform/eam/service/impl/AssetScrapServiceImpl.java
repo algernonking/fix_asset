@@ -195,16 +195,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		}
 
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetScrap.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_SCRAP.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetScrap.setBusinessCode(codeResult.getData().toString());
-			}
-		}
-
 
 		//制单人
 		if(StringUtil.isBlank(assetScrap.getOriginatorId())){
@@ -220,6 +210,17 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		if(StringUtil.isBlank(assetScrap.getStatus())){
 			assetScrap.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetScrap.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_SCRAP.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetScrap.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 
 
 

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-09-26 19:47:04
+ * @since 2021-09-28 18:40:00
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1145,7 +1145,7 @@ public class EAMTables {
 		/**
 		 * 资产编号
 		*/
-		public static final DBField ASSET_CODE = new DBField(DBDataType.STRING , "asset_code","assetCode","资产编号","资产编号",false,false,true);
+		public static final DBField ASSET_CODE = new DBField(DBDataType.STRING , "asset_code","assetCode","资产编号","资产编号",false,false,false);
 		
 		/**
 		 * 资产状态
@@ -1250,7 +1250,7 @@ public class EAMTables {
 		/**
 		 * 剩余数量
 		*/
-		public static final DBField REMAIN_NUMBER = new DBField(DBDataType.INTEGER , "remain_number","remainNumber","剩余数量","剩余数量",false,false,true);
+		public static final DBField REMAIN_NUMBER = new DBField(DBDataType.INTEGER , "remain_number","remainNumber","剩余数量","剩余数量",false,false,false);
 		
 		/**
 		 * 采购日期

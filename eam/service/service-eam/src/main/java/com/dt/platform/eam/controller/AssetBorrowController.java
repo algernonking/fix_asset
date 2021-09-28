@@ -9,6 +9,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,7 +88,7 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.INSERT)
 	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
-		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			return assetBorrowService.insert(assetBorrowVO,assetSelectedCode);
 		}else{
 			return assetBorrowService.insert(assetBorrowVO);

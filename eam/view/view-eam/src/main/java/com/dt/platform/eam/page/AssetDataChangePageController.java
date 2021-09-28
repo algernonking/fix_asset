@@ -41,7 +41,8 @@ public class AssetDataChangePageController extends ViewController {
 	 * 变更明细 功能主页面
 	 */
 	@RequestMapping("/asset_data_change_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String assetId) {
+		model.addAttribute("assetId",assetId);
 		return prefix+"/asset_data_change_list";
 	}
 

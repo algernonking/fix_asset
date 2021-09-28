@@ -39,15 +39,20 @@ public interface AssetDataServiceProxy {
 
 
     /**
-     * 添加品牌
+     * 导出资产
      */
     public static final String EXPORT_ASSET = API_PREFIX + "export-asset";
 
 
     /**
-     * 添加品牌
+     * 导出资产
      */
     public static final String EXPORT_ASSET_BY_IDS = API_PREFIX + "export-asset-by-ids";
+
+    /**
+     * 导入资产
+     */
+    public static final String IMPORT_ASSET= API_PREFIX + "import_asset";
 
     /**
      * 导出资产

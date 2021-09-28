@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:49
+ * @since 2021-09-27 13:02:41
  */
 
 function FormPage() {
@@ -195,6 +195,11 @@ function FormPage() {
 			}
 
 
+
+			//设置 计划完成日期 显示复选框勾选
+			if(formData["planFinishDate"]) {
+				$("#planFinishDate").val(fox.dateFormat(formData["planFinishDate"],"yyyy-MM-dd"));
+			}
 
 
 			//设置  维修状态 设置下拉框勾选

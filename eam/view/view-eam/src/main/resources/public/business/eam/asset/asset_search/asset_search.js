@@ -591,7 +591,7 @@ function ListPage() {
             area: ["95%",height+"px"],
             type: 2,
             id:"eam-asset-form-data-win",
-            content: '/business/eam/asset/asset_form.html' + queryString,
+            content: '/business/eam/asset/asset_info_form.html' + queryString,
             finish: function () {
                 refreshTableData();
             }

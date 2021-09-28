@@ -64,7 +64,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL)
     public void queryTransferBill(List<String> ids,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_TRANFER_BILL.code());
         HashMap<String, Object> map=new HashMap<String, Object>();
         map.put("name","121212");
         XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
@@ -81,7 +81,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS)
     public void queryTransferBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_TRANFER_BILL.code());
         Map<String, Object> data=new HashMap<String, Object>();
         AssetBorrow billdata=assetBorrowService.getById(id);
         data=BeanUtil.toMap(billdata);
@@ -101,7 +101,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_BORROW_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_BORROW_BILLS)
     public void queryBorrowBills(List<String> ids,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_BORROW_BILL.code());
         HashMap<String, Object> map=new HashMap<String, Object>();
         map.put("name","121212");
         XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
@@ -118,7 +118,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_BORROW_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_BORROW_BILL)
     public void queryBorrowBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_BORROW.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_BORROW_BILL.code());
         Map<String, Object> data=new HashMap<String, Object>();
         AssetBorrow billdata=assetBorrowService.getById(id);
         data=BeanUtil.toMap(billdata);
@@ -139,7 +139,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ALLOCATION_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ALLOCATION_BILL)
     public void queryAllocationBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_ALLOCATE_BILL.code());
         Map<String, Object> data=new HashMap<String, Object>();
         AssetAllocation billdata=assetAllocationService.getById(id);
         data=BeanUtil.toMap(billdata);
@@ -158,7 +158,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ALLOCATION_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ALLOCATION_BILLS)
     public void queryAllocationBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_ALLOCATE_BILL.code());
         Map<String, Object> data=new HashMap<String, Object>();
         AssetAllocation billdata=assetAllocationService.getById(id);
         data=BeanUtil.toMap(billdata);
@@ -178,7 +178,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_BILL)
     public void queryCollectionBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_COLLECTION.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_BILL.code());
         AssetCollection billdata=assetCollectionService.getById(id);
         System.out.println(billdata);
         Map<String,Object> data=new HashMap<String,Object>();
@@ -198,7 +198,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_BILLS)
     public void queryCollectionBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_COLLECTION.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_BILL.code());
         AssetCollection billdata=assetCollectionService.getById(id);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
@@ -217,7 +217,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILL)
     public void queryCollectionReturnBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL.code());
         AssetCollectionReturn billdata=assetCollectionReturnService.getById(id);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
@@ -236,7 +236,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILLS)
     public void queryCollectionReturnBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL.code());
         HashMap<String, Object> map=new HashMap<String, Object>();
         map.put("name","121212");
         XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
@@ -255,7 +255,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_REAPIR_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_REAPIR_BILL)
     public void queryRepairBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REPAIR_BILL.code());
         AssetRepair billdata=assetRepairService.getById(id);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
@@ -274,7 +274,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_REAPIR_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_REAPIR_BILLS)
     public void queryRepairBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REPAIR_BILL.code());
         AssetRepair billdata=assetRepairService.getById(id);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
@@ -293,7 +293,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_SCRAP_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_SCRAP_BILL)
     public void queryScrapBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_SCRAP.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SCRAP_BILL.code());
         AssetScrap billdata=assetScrapService.getById(id);
         Map<String,Object> data=new HashMap<String,Object>();
         data=BeanUtil.toMap(billdata);
@@ -312,7 +312,7 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_SCRAP_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_SCRAP_BILLS)
     public void queryScrapBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_ASSET_SCRAP.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SCRAP_BILL.code());
         HashMap<String, Object> map=new HashMap<String, Object>();
         map.put("name","121212");
         XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);

@@ -34,7 +34,7 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_STOCK_IN("eam_stock_in" , "EAM_资产库存-入库"),
 
 
-	EAM_DOWNLOAD_ASSET("eam_download_asset" , "EAM_资产数据下载"),
+
 	;
 
 	private String code;

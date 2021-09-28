@@ -20,7 +20,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     //列表页的扩展
     var list={
         assetDataChange:function (data){
-            console.log('assetDataChange',data);
+            var queryString="?assetId="+data.id;
+            var index=admin.popupCenter({
+                title: "变更明细",
+                resize: false,
+                offset: [15,null],
+                area: ["95%","80%"],
+                type: 2,
+                id:"eam-asset-data-change-form-data-win",
+                content: '/business/eam/asset_data_change/asset_data_change_list.html' + queryString,
+                finish: function () {
+                    refreshTableData();
+                }
+            });
+            admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
         },
         /**
          * 列表页初始化前调用
@@ -333,6 +346,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     if($("#purchaseUnitPrice")){
                         $("#purchaseUnitPrice").attr("disabled","disabled").css("background-color","#e6e6e6");
                     }
+
+
 
 
                 },320)

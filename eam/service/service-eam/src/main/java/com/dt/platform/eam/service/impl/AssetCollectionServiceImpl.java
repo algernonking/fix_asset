@@ -193,15 +193,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 		}
 
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetCollection.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_COLLECTION.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetCollection.setBusinessCode(codeResult.getData().toString());
-			}
-		}
 
 		//制单人
 		if(StringUtil.isBlank(assetCollection.getOriginatorId())){
@@ -218,6 +209,15 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 			assetCollection.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+		//生成编码规则
+		if(StringUtil.isBlank(assetCollection.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_COLLECTION.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetCollection.setBusinessCode(codeResult.getData().toString());
+			}
+		}
 
 
 

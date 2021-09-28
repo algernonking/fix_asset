@@ -5,6 +5,7 @@ import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.meta.AssetMeta;
@@ -53,6 +54,35 @@ public class AssetDataController extends SuperController {
     @Autowired
     private IAssetService assetService;
 
+    /**
+     * 导入资产数据
+     */
+    @ApiOperation(value = "导入资产数据")
+
+    @ApiOperationSupport(order=2)
+    @SentinelResource(value = AssetDataServiceProxy.IMPORT_ASSET , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetDataServiceProxy.IMPORT_ASSET)
+    public Result importAsset( HttpServletResponse response) throws Exception {
+
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
+        if(inputstream==null){
+            return  ErrorDesc.failure().message("获取模板文件失败");
+        }
+        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,null));
+        TemplateExportParams templateExportParams = new TemplateExportParams("/opt/upload/tpl/T001/eam_download_asset.xls");
+        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
+        OutputStream out = response.getOutputStream();
+        BufferedOutputStream bos = new BufferedOutputStream(out);
+        workbook.write(bos);
+        bos.flush();
+        out.flush();
+        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+
+        return ErrorDesc.success();
+
+    }
     /**
      * 导出资产
      */
@@ -127,12 +157,12 @@ public class AssetDataController extends SuperController {
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET)
     public Result exportAsset(AssetVO sample,HttpServletResponse response) throws Exception {
 
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
-        File f=assetDataService.saveTempFile(inputstream,"TMP_"+CodeModuleEnum.EAM_DOWNLOAD_ASSET.code()+".xls");
-        Map<String,Object> map= assetDataService.queryAssetMap(null,sample);
+        File f=assetDataService.saveTempFile(inputstream,"TMP_"+AssetOperateEnum.EAM_DOWNLOAD_ASSET.code()+".xls");
+        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,sample));
         TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setCharacterEncoding("UTF-8");
@@ -158,11 +188,11 @@ public class AssetDataController extends SuperController {
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET_BY_IDS)
     public Result exportAssetByIds(List<String> ids, HttpServletResponse response) throws Exception {
 
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(CodeModuleEnum.EAM_DOWNLOAD_ASSET.code());
+        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
         if(inputstream==null){
             return  ErrorDesc.failure().message("获取模板文件失败");
         }
-        Map<String,Object> map= assetDataService.queryAssetMap(ids,null);
+        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(ids,null));
         TemplateExportParams templateExportParams = new TemplateExportParams("/opt/upload/tpl/T001/eam_download_asset.xls");
         Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
         response.setContentType("application/octet-stream");

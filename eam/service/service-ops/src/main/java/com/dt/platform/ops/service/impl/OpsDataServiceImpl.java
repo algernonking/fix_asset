@@ -72,10 +72,8 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	}
 
 	@Override
-	public Map<String, Object> queryHostMap(HostVO host) {
+	public Map<String, Object> queryHostMap(List<Host> list) {
 		Map<String,Object> map=new HashMap<>();
-		List<Host> list= queryHostList(host);
-
 		// 关联出 信息系统 数据
 		hostService.join(list, HostMeta.INFO_SYSTEM);
 		// 关联出 所在位置 数据
@@ -142,9 +140,9 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	}
 
 	@Override
-	public Map<String, Object> queryInformationSystemMap(InformationSystemVO sample) {
+	public Map<String, Object> queryInformationSystemMap(List<InformationSystem> list) {
 		Map<String,Object> map=new HashMap<>();
-		List<InformationSystem> list= queryInformationSystemList(sample);
+
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		for(int i=0;i<list.size();i++) {
 			InformationSystem item = list.get(i);
@@ -164,15 +162,12 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	}
 
 	@Override
-	public Map<String, Object> queryDatabaseInstanceMap(DbInstanceVO sample){
+	public Map<String, Object> queryDatabaseInstanceMap(List<DbInstance> list){
 		Map<String,Object> map=new HashMap<>();
-		List<DbInstance> list= queryDatabaseInstanceList(sample);
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		for(int i=0;i<list.size();i++) {
 			DbInstance item = list.get(i);
 			Map<String, Object> hostMap= BeanUtil.toMap(item);
-
-
 
 			listMap.add(hostMap);
 
@@ -181,8 +176,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		return map;
 
 	}
-
-
 
 	public File saveTempFile(InputStream is, String fileName){
 

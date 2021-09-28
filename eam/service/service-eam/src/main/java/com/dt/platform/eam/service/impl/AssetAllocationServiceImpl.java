@@ -132,6 +132,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
 			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
 				//发起审批
+
 			}else{
 				//确认单据
 
@@ -150,7 +151,6 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	 * */
 	@Override
 	public Result insert(AssetAllocation assetAllocation, String assetSelectedCode) {
-
 		if(!StringUtil.isBlank(assetSelectedCode)){
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
@@ -188,17 +188,6 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		}
 
 
-		//生成编码规则
-		if(StringUtil.isBlank(assetAllocation.getBusinessCode())){
-			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				assetAllocation.setBusinessCode(codeResult.getData().toString());
-			}
-		}
-
-
 		//制单人
 		if(StringUtil.isBlank(assetAllocation.getOriginatorId())){
 
@@ -214,6 +203,16 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		//办理状态
 		if(StringUtil.isBlank(assetAllocation.getStatus())){
 			assetAllocation.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetAllocation.getBusinessCode())){
+			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetAllocation.setBusinessCode(codeResult.getData().toString());
+			}
 		}
 
 		Result r=super.insert(assetAllocation);

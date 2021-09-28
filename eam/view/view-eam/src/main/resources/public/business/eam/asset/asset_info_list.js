@@ -585,6 +585,8 @@ function ListPage() {
 		admin.putTempData('eam-asset-form-data-popup-index', index);
 	};
 
+
+
 	window.module={
 		refreshTableData: refreshTableData,
 		getCheckedList: getCheckedList

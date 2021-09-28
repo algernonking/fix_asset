@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,7 +87,7 @@ public class AssetAllocationController extends SuperController {
 	@SentinelResource(value = AssetAllocationServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.INSERT)
 	public Result insert(AssetAllocationVO assetAllocationVO,String assetSelectedCode) {
-		if(assetSelectedCode!=null||assetSelectedCode.length()>0){
+		if(!StringUtil.isBlank(assetSelectedCode)){
 			return assetAllocationService.insert(assetAllocationVO,assetSelectedCode);
 		}else{
 			return assetAllocationService.insert(assetAllocationVO);

@@ -335,7 +335,7 @@ public class EamRelationManager extends RelationManager {
 
         // 关联生产厂商
         this.property(AssetMeta.MANUFACTURER_PROP)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_MANUFACTURER.ID);
+                .using(EAMTables.EAM_ASSET.MANUFACTURER_ID).join(EAMTables.EAM_MANUFACTURER.ID);
 
 
         // 关联位置
