@@ -1,5 +1,6 @@
 package com.dt.platform.constants.enums.dict;
 
+import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.reflect.EnumUtil;
 
 
@@ -10,7 +11,7 @@ import com.github.foxnic.commons.reflect.EnumUtil;
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
 
-public enum OpsSystemOpsMethod {
+public enum OpsSystemOpsMethod implements CodeTextEnum {
 	
 	/**
 	 * 运维
