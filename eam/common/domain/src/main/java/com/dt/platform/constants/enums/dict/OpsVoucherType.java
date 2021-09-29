@@ -1,10 +1,11 @@
 package com.dt.platform.constants.enums.dict;
 
+import com.github.foxnic.commons.reflect.EnumUtil;
 
 
 
 /**
- * @since 2021-09-18 12:20:10
+ * @since 2021-09-29 11:26:59
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -20,16 +21,6 @@ public enum OpsVoucherType {
 	 * 数据库
 	*/
 	DB("db" , "数据库"),
-	
-	/**
-	 * 安全
-	*/
-	SECURITY("security" , "安全"),
-	
-	/**
-	 * 中间件
-	*/
-	MIDDLEWARE("middleware" , "中间件"),
 	
 	/**
 	 * 应用系统
@@ -50,6 +41,16 @@ public enum OpsVoucherType {
 	 * 网络
 	*/
 	NETWORK("network" , "网络"),
+	
+	/**
+	 * 安全
+	*/
+	SECURITY("security" , "安全"),
+	
+	/**
+	 * 中间件
+	*/
+	MIDDLEWARE("middleware" , "中间件"),
 	;
 	
 	private String code;
@@ -68,12 +69,9 @@ public enum OpsVoucherType {
 	}
 	
 	/**
-	 * 从字符串转换成当前枚举类型，使用 valueOf 方法可能导致偏差，建议不要使用
+	 * 从字符串转换成当前枚举类型
 	*/
-	public static OpsVoucherType parse(String code) {
-		for (OpsVoucherType dn : OpsVoucherType.values()) {
-			if(code.equals(dn.code())) return dn;
-		}
-		return null;
+	public static OpsVoucherType parseByCode(String code) {
+		return (OpsVoucherType) EnumUtil.parseByCode(OpsVoucherType.values(),code);
 	}
 }

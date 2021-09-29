@@ -1,11 +1,12 @@
 package com.dt.platform.constants.enums;
 
 import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.reflect.EnumUtil;
 
 
 
 /**
- * @since 2021-09-18 12:20:08
+ * @since 2021-09-29 11:26:57
  * @author 金杰 , maillank@qq.com
  * 从 select code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -17,6 +18,11 @@ public enum DictEnum implements CodeTextEnum {
 	 * 资产安全等级
 	*/
 	EAM_SECURITY_LEVEL("eam_security_level" , "资产安全等级"),
+	
+	/**
+	 * 节点备份
+	*/
+	OPS_HOST_BACKUP_METHOD("ops_host_backup_method" , "节点备份"),
 	
 	/**
 	 * 节点改密策略
@@ -152,5 +158,12 @@ public enum DictEnum implements CodeTextEnum {
 	
 	public String text() {
 		return text;
+	}
+	
+	/**
+	 * 从字符串转换成当前枚举类型
+	*/
+	public static DictEnum parseByCode(String code) {
+		return (DictEnum) EnumUtil.parseByCode(DictEnum.values(),code);
 	}
 }

@@ -157,6 +157,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().validate().required()
                 .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
+        cfg.view().field(EAMTables.OPS_HOST.HOST_BACKUP_METHOD)
+                .form().selectBox().dict(DictEnum.OPS_HOST_BACKUP_METHOD).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)
                 .form().selectBox().dict(DictEnum.OPS_HOST_PASSWORD_STRATEGY);
@@ -177,6 +179,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).form().validate().required();
+
+        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).form().textArea().height(30);
 
         cfg.view().list().addToolButton("导出","exportHost",null);
 
@@ -258,9 +262,29 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
                 },
                 new Object[] {
-                        EAMTables.OPS_HOST.USER_OTHER,
+                        EAMTables.OPS_HOST.USER_OS_ADMIN,
 
                 }
+        );
+            cfg.view().form().addGroup(null,
+
+                    new Object[] {
+                            EAMTables.OPS_HOST.USER_OTHER,
+
+                    }
+            );
+
+        cfg.view().form().addGroup("备份情况",
+                new Object[] {
+                        EAMTables.OPS_HOST.HOST_BACKUP_METHOD,
+                },
+                new Object[] {
+                        EAMTables.OPS_HOST.HOST_BACKUP_INFO
+                },
+                new Object[] {
+
+                }
+
         );
 
 

@@ -1,10 +1,11 @@
 package com.dt.platform.constants.enums.dict;
 
+import com.github.foxnic.commons.reflect.EnumUtil;
 
 
 
 /**
- * @since 2021-09-18 12:20:10
+ * @since 2021-09-29 11:26:59
  * @author 金杰 , maillank@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -43,12 +44,9 @@ public enum OpsSystemGrade {
 	}
 	
 	/**
-	 * 从字符串转换成当前枚举类型，使用 valueOf 方法可能导致偏差，建议不要使用
+	 * 从字符串转换成当前枚举类型
 	*/
-	public static OpsSystemGrade parse(String code) {
-		for (OpsSystemGrade dn : OpsSystemGrade.values()) {
-			if(code.equals(dn.code())) return dn;
-		}
-		return null;
+	public static OpsSystemGrade parseByCode(String code) {
+		return (OpsSystemGrade) EnumUtil.parseByCode(OpsSystemGrade.values(),code);
 	}
 }

@@ -398,7 +398,7 @@ public class InformationSystemController extends SuperController {
 			return ErrorDesc.failure().message("缺少上传的文件");
 		}
 
-		List<ValidateResult> errors=informationSystemService.importExcel(input,0,true);
+		List<ValidateResult> errors=informationSystemService.importExcel(input,0,true,true);
 		if(errors==null || errors.isEmpty()) {
 			return ErrorDesc.success();
 		} else {

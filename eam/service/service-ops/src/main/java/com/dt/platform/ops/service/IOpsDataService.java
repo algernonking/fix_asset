@@ -6,6 +6,7 @@ import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.ops.*;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.github.foxnic.dao.excel.ExcelStructure;
@@ -14,9 +15,13 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
+import org.github.foxnic.web.domain.hrm.OrganizationVO;
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +34,18 @@ import java.util.Map;
 */
 
 public interface IOpsDataService extends ISuperService<Host> {
+
+
+
+	Result verifyISRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
+
+
+	Result verifyHostRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
+
+
+	String getMapKey(HashMap<String,String> map, String value);
+
+	HashMap<String,String> queryUseOrganizationNodes();
 
 
 	List<Host> queryHostList(HostVO sample);

@@ -429,7 +429,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         assetService.join(list,AssetMeta.USE_USER);
 
-
         assetService.join(list,AssetMeta.ORIGINATOR);
 
 

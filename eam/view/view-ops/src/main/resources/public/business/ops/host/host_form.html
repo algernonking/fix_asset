@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:53
+ * @since 2021-09-29 11:01:57
  */
  -->
  <!DOCTYPE html>
@@ -300,11 +300,33 @@
             <div class="layui-col-xs4 form-column">
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('系统管理员')}">系统管理员</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" type="text" class="layui-input"  />
+                            <input lay-filter="userOsAdmin" id="userOsAdmin" name="userOsAdmin" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('系统管理员') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column">
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('其他用户')}">其他用户</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="userOther" id="userOther" name="userOther" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('其他用户') }" class="layui-textarea" style="height: 30px" ></textarea>
+                    </div>
+                </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>

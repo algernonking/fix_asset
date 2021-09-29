@@ -282,7 +282,7 @@ public interface IHostService extends ISuperService<Host> {
 	 * 导入 Excel 数据
 	 * @return  错误信息，成功时返回 null
 	 * */
-	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,boolean fill);
 
  
 }

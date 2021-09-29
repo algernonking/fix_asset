@@ -538,29 +538,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 
-	@Override
-	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType,String categoryId) {
+	public List<ValidateResult> importData(RcdSet rs,boolean batch,String businessType,boolean dataType,String categoryId) {
 
 		List<ValidateResult> errors=new ArrayList<>();
-		ExcelReader er=null;
-		try {
-			er=new ExcelReader(input);
-		} catch (Exception e) {
-			errors.add(new ValidateResult(null,-1,"缺少文件"));
-			return errors;
-		}
-		//构建 Excel 结构
-		ExcelStructure es=buildExcelStructure(categoryId);
-		//装换成记录集
-		RcdSet rs=null;
-		try {
-			rs=er.read(sheetIndex,es);
-
-		} catch (Exception e) {
-			Logger.error("Excel 导入错误",e);
-			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
-			return errors;
-		}
 
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
@@ -620,16 +600,16 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				} else {
 					this.dao().execute(insert);
 				}
-				 sql=insert.getSQL();
+				sql=insert.getSQL();
 
 			}else{
-
-
-//				r.set(AssetDataExportColumnEnum.ASSET_CODE.text(),null);
-//				r.set("status",null);
+				if(r.getOwnerSet().hasColumn("status")){
+					r.getOwnerSet().removeColumn("status");
+				}
+				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
+					r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
+				}
 				Update update=SQLBuilder.buildUpdate(r,SaveMode.ALL_FIELDS,this.table(),this.dao());
-
-
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
 					update.set(dbTreaty.getUpdateTimeField(),new Date());
@@ -664,6 +644,33 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType,String categoryId) {
+
+		List<ValidateResult> errors=new ArrayList<>();
+		ExcelReader er=null;
+		try {
+			er=new ExcelReader(input);
+		} catch (Exception e) {
+			errors.add(new ValidateResult(null,-1,"缺少文件"));
+			return errors;
+		}
+		//构建 Excel 结构
+		ExcelStructure es=buildExcelStructure(categoryId);
+		//装换成记录集
+		RcdSet rs=null;
+		try {
+			rs=er.read(sheetIndex,es);
+
+		} catch (Exception e) {
+			Logger.error("Excel 导入错误",e);
+			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
+			return errors;
+		}
+		return importData(rs, batch, businessType, dataType, categoryId);
+
+	}
+
+	@Override
 	public ExcelStructure buildExcelStructure(String categoryId) {
 		ExcelStructure es=new ExcelStructure();
 		es.setDataColumnBegin(0);
@@ -694,7 +701,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 							BeanNameUtil.instance().depart(asset_column):
 							EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column).text();
 
-					System.out.println(row.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+rAssetColumn);
+					System.out.println(row.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+","+rAssetColumn);
 					charIndex=ExcelStructure.toExcel26(i);
 					es.addColumn(charIndex,rAssetColumn,firstRow.getCell(i).toString(), ExcelColumn.STRING_CELL_READER);
 				}

@@ -10,32 +10,17 @@ import com.github.foxnic.commons.reflect.EnumUtil;
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
 
-public enum EamSource {
+public enum OpsHostBackupMethod {
 	
 	/**
-	 * 采购
+	 * 方式一
 	*/
-	PURCHASE("purchase" , "采购"),
-	
-	/**
-	 * 自建
-	*/
-	SELFBUILD("selfbuild" , "自建"),
-	
-	/**
-	 * 捐赠
-	*/
-	DONATION("donation" , "捐赠"),
-	
-	/**
-	 * 其他
-	*/
-	OTHER("other" , "其他"),
+	CODE("code" , "方式一"),
 	;
 	
 	private String code;
 	private String text;
-	private EamSource(String code,String text)  {
+	private OpsHostBackupMethod(String code,String text)  {
 		this.code=code;
 		this.text=text;
 	}
@@ -51,7 +36,7 @@ public enum EamSource {
 	/**
 	 * 从字符串转换成当前枚举类型
 	*/
-	public static EamSource parseByCode(String code) {
-		return (EamSource) EnumUtil.parseByCode(EamSource.values(),code);
+	public static OpsHostBackupMethod parseByCode(String code) {
+		return null;
 	}
 }

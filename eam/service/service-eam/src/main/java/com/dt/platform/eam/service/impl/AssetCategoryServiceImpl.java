@@ -41,8 +41,6 @@ public class AssetCategoryServiceImpl  extends SuperService<Catalog> implements 
     @Override
     public List<ZTreeNode> queryNodes(CatalogVO categoryV0) {
         DataQueryVo d=new DataQueryVo();
-     //   EnumUtil.parseByCode(AssetStatusEnum.class,"as").name();
-      //  CatalogServiceProxy.api().queryData();
         return CatalogServiceProxy.api().queryNodes(categoryV0).getData();
     }
 

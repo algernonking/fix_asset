@@ -1,8 +1,20 @@
 package com.dt.platform.ops.controller;
 
  
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import com.deepoove.poi.util.PoitlIOUtils;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.ops.OpsOperateEnum;
+import com.dt.platform.ops.service.IOpsDataService;
+import com.dt.platform.proxy.common.TplFileServiceProxy;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,6 +76,9 @@ public class HostController extends SuperController {
 	@Autowired
 	private IHostService hostService;
 
+	@Autowired
+	private IOpsDataService opsDataService;
+
 	
 	/**
 	 * 添加主机
@@ -111,7 +126,7 @@ public class HostController extends SuperController {
 	*/
 	@ApiOperation(value = "删除主机")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "491382383862353920")
+		@ApiImplicitParam(name = HostVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "491382383862353920"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = HostVOMeta.ID)
@@ -379,24 +394,60 @@ public class HostController extends SuperController {
 	 * */
 	@SentinelResource(value = HostServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(HostServiceProxy.EXPORT_EXCEL)
-	public void exportExcel(HostVO  sample,HttpServletResponse response) throws Exception {
-			//生成 Excel 数据
-			ExcelWriter ew=hostService.exportExcel(sample);
-			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	public Result exportExcel(HostVO  sample,HttpServletResponse response) throws Exception {
+		//生成 Excel 数据
+		String code = OpsOperateEnum.OPS_DOWNLOAD_HOST.code();
+		InputStream inputstream = TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		if (inputstream == null) {
+			return ErrorDesc.failure().message("获取模板文件失败");
+		}
+		File f = opsDataService.saveTempFile(inputstream, "TMP_" + code + ".xls");
+		Map<String, Object> map = opsDataService.queryHostMap(opsDataService.queryHostList(sample));
+		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("主机数据.xls", "UTF-8"))));
+		response.setContentType("application/vnd.ms-excel");
+		OutputStream out = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(out);
+		workbook.write(bos);
+		bos.flush();
+		out.flush();
+		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+		return ErrorDesc.success();
+
 	}
 
-
-	/**
-	 * 导出 Excel 模板
-	 * */
+		/**
+         * 导出 Excel 模板
+         * */
 	@SentinelResource(value = HostServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(HostServiceProxy.EXPORT_EXCEL_TEMPLATE)
-	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
-			//生成 Excel 模版
-			ExcelWriter ew=hostService.exportExcelTemplate();
-			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	public Result exportExcelTemplate(HttpServletResponse response,HostVO sample) throws Exception {
+
+		//生成 Excel 数据
+		String code= OpsOperateEnum.OPS_DOWNLOAD_HOST.code();
+		InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		if(inputstream==null){
+			return ErrorDesc.failure().message("获取模板文件失败");
+		}
+		File f=opsDataService.saveTempFile(inputstream,"TMP_"+code+".xls");
+		System.out.println(f.getPath());
+		Map<String,Object> map= opsDataService.queryHostMap(opsDataService.queryHostList(sample));
+		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("主机数据.xls", "UTF-8"))));
+		response.setContentType("application/vnd.ms-excel");
+		OutputStream out = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(out);
+		workbook.write(bos);
+		bos.flush();
+		out.flush();
+		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+		return ErrorDesc.success();
+
+
 		}
 
 
@@ -417,10 +468,14 @@ public class HostController extends SuperController {
 			return ErrorDesc.failure().message("缺少上传的文件");
 		}
 
-		List<ValidateResult> errors=hostService.importExcel(input,0,true);
+		List<ValidateResult> errors=hostService.importExcel(input,0,true,true);
 		if(errors==null || errors.isEmpty()) {
 			return ErrorDesc.success();
 		} else {
+			System.out.println("import Result:");
+			for(int i=0;i<errors.size();i++){
+				System.out.println(i+":"+errors.get(i).message);
+			}
 			return ErrorDesc.failure().message("导入失败").data(errors);
 		}
 	}

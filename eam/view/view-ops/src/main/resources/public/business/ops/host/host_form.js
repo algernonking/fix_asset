@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:53
+ * @since 2021-09-29 11:01:58
  */
 
 function FormPage() {
@@ -292,6 +292,15 @@ function FormPage() {
 
 
 
+
+			//设置 下线时间 显示复选框勾选
+			if(formData["offlineTime"]) {
+				$("#offlineTime").val(fox.dateFormat(formData["offlineTime"],"yyyy-MM-dd"));
+			}
+			//设置 上线时间 显示复选框勾选
+			if(formData["onlineTime"]) {
+				$("#onlineTime").val(fox.dateFormat(formData["onlineTime"],"yyyy-MM-dd"));
+			}
 
 
 			//设置  信息系统 设置下拉框勾选
