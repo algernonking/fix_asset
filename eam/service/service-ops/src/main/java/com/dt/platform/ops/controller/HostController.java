@@ -106,6 +106,8 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.USER_OPS_OPER , value = "运维操作用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.USER_OTHER , value = "其他用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "unchange"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_INFO , value = "备份情况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-04 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-11 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档" , required = false , dataTypeClass=String.class),
@@ -181,6 +183,8 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.USER_OPS_OPER , value = "运维操作用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.USER_OTHER , value = "其他用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "unchange"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_INFO , value = "备份情况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-04 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-11 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档" , required = false , dataTypeClass=String.class),
@@ -223,6 +227,8 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.USER_OPS_OPER , value = "运维操作用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.USER_OTHER , value = "其他用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "unchange"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_INFO , value = "备份情况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-04 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-11 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档" , required = false , dataTypeClass=String.class),
@@ -265,6 +271,7 @@ public class HostController extends SuperController {
 		hostService.join(host,HostMeta.HOST_OS_LIST);
 		// 关联出 用户凭证 数据
 		hostService.join(host,HostMeta.VOUCHER_LIST);
+		hostService.join(host,HostMeta.BACKUP_METHOD);
 		result.success(true).data(host);
 		return result;
 	}
@@ -316,6 +323,8 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.USER_OPS_OPER , value = "运维操作用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.USER_OTHER , value = "其他用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "unchange"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_INFO , value = "备份情况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-04 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-11 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档" , required = false , dataTypeClass=String.class),
@@ -359,6 +368,8 @@ public class HostController extends SuperController {
 		@ApiImplicitParam(name = HostVOMeta.USER_OPS_OPER , value = "运维操作用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.USER_OTHER , value = "其他用户" , required = false , dataTypeClass=String.class , example = "测试"),
 		@ApiImplicitParam(name = HostVOMeta.PASSWORD_STRATEGY_ID , value = "改密策略" , required = false , dataTypeClass=String.class , example = "unchange"),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_METHOD , value = "备份方式" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostVOMeta.HOST_BACKUP_INFO , value = "备份情况" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = HostVOMeta.OFFLINE_TIME , value = "下线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-04 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ONLINE_TIME , value = "上线时间" , required = false , dataTypeClass=Date.class , example = "2021-09-11 12:00:00"),
 		@ApiImplicitParam(name = HostVOMeta.ARCH , value = "是否归档" , required = false , dataTypeClass=String.class),
@@ -383,6 +394,8 @@ public class HostController extends SuperController {
 		hostService.join(list,HostMeta.HOST_OS_LIST);
 		// 关联出 用户凭证 数据
 		hostService.join(list,HostMeta.VOUCHER_LIST);
+
+		hostService.join(list,HostMeta.BACKUP_METHOD);
 		result.success(true).data(list);
 		return result;
 	}

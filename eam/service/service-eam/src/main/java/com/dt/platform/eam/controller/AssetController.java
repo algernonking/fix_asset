@@ -119,6 +119,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = AssetVOMeta.SAFETY_LEVEL_CODE , value = "安全等级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
@@ -136,6 +137,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MAINTENANCE_STATUS , value = "维保状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.DIRECTOR , value = "负责人" , required = false , dataTypeClass=String.class),
@@ -160,6 +162,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -236,6 +241,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = AssetVOMeta.SAFETY_LEVEL_CODE , value = "安全等级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
@@ -253,6 +259,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MAINTENANCE_STATUS , value = "维保状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.DIRECTOR , value = "负责人" , required = false , dataTypeClass=String.class),
@@ -277,6 +284,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -317,6 +327,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = AssetVOMeta.SAFETY_LEVEL_CODE , value = "安全等级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
@@ -334,6 +345,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MAINTENANCE_STATUS , value = "维保状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.DIRECTOR , value = "负责人" , required = false , dataTypeClass=String.class),
@@ -358,6 +370,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -407,6 +422,9 @@ public class AssetController extends SuperController {
 		assetService.join(asset,AssetMeta.CATEGORY_FINANCE);
 		// 关联出 供应商 数据
 		assetService.join(asset,AssetMeta.SUPPLIER);
+
+		assetService.join(asset,AssetMeta.SAFETY_LEVEL);
+		assetService.join(asset,AssetMeta.EQUIPMENT_ENVIRONMENT);
 
 
 		assetService.join(asset,AssetMeta.OWNER_COMPANY);
@@ -462,6 +480,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = AssetVOMeta.SAFETY_LEVEL_CODE , value = "安全等级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
@@ -479,6 +498,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MAINTENANCE_STATUS , value = "维保状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.DIRECTOR , value = "负责人" , required = false , dataTypeClass=String.class),
@@ -503,6 +523,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -543,6 +566,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PICTURE_ID , value = "标准型号物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.UNIT , value = "标准型号计量单位" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERVICE_LIFE , value = "使用期限" , required = false , dataTypeClass=BigDecimal.class , example = "1212.00"),
+		@ApiImplicitParam(name = AssetVOMeta.SAFETY_LEVEL_CODE , value = "安全等级" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SERIAL_NUMBER , value = "序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.OWN_COMPANY_ID , value = "所属公司" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetVOMeta.MANAGER_ID , value = "管理人员" , required = false , dataTypeClass=String.class),
@@ -560,6 +584,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
+		@ApiImplicitParam(name = AssetVOMeta.MAINTENANCE_STATUS , value = "维保状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACTS , value = "联系人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.CONTACT_INFORMATION , value = "联系方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.DIRECTOR , value = "负责人" , required = false , dataTypeClass=String.class),
@@ -584,6 +609,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.MANAGE_IP , value = "管理IP" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CPU , value = "设备CPU" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_MEMORY , value = "设备内存" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -614,6 +642,9 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.CATEGORY_FINANCE);
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
+
+		assetService.join(list,AssetMeta.SAFETY_LEVEL);
+		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
 
 		assetService.join(list,AssetMeta.OWNER_COMPANY);
 		assetService.join(list,AssetMeta.USE_ORGANIZATION);
@@ -717,6 +748,8 @@ public class AssetController extends SuperController {
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
 
+		assetService.join(list,AssetMeta.SAFETY_LEVEL);
+		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
 
 		assetService.join(list,AssetMeta.OWNER_COMPANY);
 		assetService.join(list,AssetMeta.USE_ORGANIZATION);
@@ -815,12 +848,16 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.MANUFACTURER);
 		// 关联出 位置 数据
 		assetService.join(list,AssetMeta.POSITION);
-		// 关联出 来源 数据
-		assetService.join(list,AssetMeta.SOURCE);
+
 		// 关联出 维保商 数据
 		assetService.join(list,AssetMeta.MAINTNAINER);
 		// 关联出 供应商 数据
 		assetService.join(list,AssetMeta.SUPPLIER);
+
+		// 关联出 来源 数据
+		assetService.join(list,AssetMeta.SOURCE);
+		assetService.join(list,AssetMeta.SAFETY_LEVEL);
+		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
 
 		assetService.join(list,AssetMeta.OWNER_COMPANY);
 		assetService.join(list,AssetMeta.USE_ORGANIZATION);

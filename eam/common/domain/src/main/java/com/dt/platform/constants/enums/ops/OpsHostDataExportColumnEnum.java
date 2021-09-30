@@ -17,6 +17,7 @@ public enum OpsHostDataExportColumnEnum implements CodeTextEnum {
     HOST_MID("hostMid","host_mid" ),
 
     HOST_TYPE("hostTypeName","host_type" ),
+    HOST_BACKUP_METHOD("hostBackupMethod","host_backup_method" ),
 
     HOST_ENVIRONMENT("hostEnvironmentName","environment" ),
     HOST_PASSWORD_STRATEGY("hostPasswordStrategy","password_strategy_id" ),

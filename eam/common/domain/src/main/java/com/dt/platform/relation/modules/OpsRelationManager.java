@@ -157,8 +157,8 @@ public class OpsRelationManager extends RelationManager {
 
         // 关联制单人
         this.property(VoucherPrivMeta.EMPLOYEE_PROP)
-                .using(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+                .using(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 
     }
@@ -212,6 +212,11 @@ public class OpsRelationManager extends RelationManager {
         //信息系统
         this.property(HostMeta.INFO_SYSTEM_PROP)
                 .using(EAMTables.OPS_HOST.SYSTEM_ID).join(EAMTables.OPS_INFORMATION_SYSTEM.ID);
+
+        //备份
+        this.property(HostMeta.BACKUP_METHOD_PROP)
+                .using(EAMTables.OPS_HOST.HOST_BACKUP_METHOD).join(FoxnicWeb.SYS_DICT_ITEM.ID);
+
 
     }
 

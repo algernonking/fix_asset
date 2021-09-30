@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 11:01:58
+ * @since 2021-09-29 17:48:55
  */
 
 function FormPage() {
@@ -173,6 +173,27 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 hostBackupMethod 下拉字段
+		fox.renderSelectBox({
+			el: "hostBackupMethod",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "label", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#offlineTime',
 			format:"yyyy-MM-dd",
@@ -313,6 +334,8 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#positionId",formData.position);
 			//设置  改密策略 设置下拉框勾选
 			fox.setSelectValue4Dict("#passwordStrategyId",formData.passwordStrategyId,SELECT_PASSWORDSTRATEGYID_DATA);
+			//设置  备份方式 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#hostBackupMethod",formData.backupMethod);
 			//设置  数据库 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#hostDbIds",formData.hostDbList);
 			//设置  中间件 设置下拉框勾选
@@ -377,6 +400,8 @@ function FormPage() {
 		data["positionId"]=fox.getSelectedValue("positionId",false);
 		//获取 改密策略 下拉框的值
 		data["passwordStrategyId"]=fox.getSelectedValue("passwordStrategyId",false);
+		//获取 备份方式 下拉框的值
+		data["hostBackupMethod"]=fox.getSelectedValue("hostBackupMethod",false);
 		//获取 数据库 下拉框的值
 		data["hostDbIds"]=fox.getSelectedValue("hostDbIds",true);
 		//获取 中间件 下拉框的值

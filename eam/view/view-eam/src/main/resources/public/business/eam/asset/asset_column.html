@@ -60,6 +60,13 @@
 </div>
 
 
+<div  th:fragment="safety_level_code"  class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('安全等级')}">安全等级</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <div id="safetyLevelCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_safety_level'}"></div>
+    </div>
+</div>
+
 
 <div  th:fragment="batch_code" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
@@ -325,6 +332,13 @@
 </div>
 
 
+<div  th:fragment="maintenance_status"  class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('维保状态')}">维保状态</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <div id="maintenanceStatus" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}"></div>
+    </div>
+</div>
+
 
 <div  th:fragment="maintainer_name" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
@@ -572,6 +586,22 @@
         <input lay-filter="rackDownNumber" id="rackDownNumber" name="rackDownNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜下位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="false" step="1.0"   scale="0" />
     </div>
 </div>
+
+<div  th:fragment="equipment_environment_code" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('运行环境')}">运行环境</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <div id="equipmentEnvironmentCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_equipment_environment'}"></div>
+    </div>
+</div>
+
+
+<div  th:fragment="equipment_conf" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备配置')}">设备配置</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <textarea lay-filter="equipmentConf" id="equipmentConf" name="equipmentConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备配置') }" class="layui-textarea" style="height: 120px" ></textarea>
+    </div>
+</div>
+
 
 
 

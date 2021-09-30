@@ -9,13 +9,14 @@ import java.util.List;
 import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.HostPosition;
 import com.dt.platform.domain.ops.ServiceInfo;
+import org.github.foxnic.web.domain.system.DictItem;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 11:01:50
- * @sign 721243B3CB84355C2C260399EBBE6907
+ * @since 2021-09-29 17:48:39
+ * @sign FBC43798A92959AD7C39379BB9155DD2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -230,6 +231,26 @@ public class HostMeta {
 	 * 改密策略 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> PASSWORD_STRATEGY_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,PASSWORD_STRATEGY_ID, java.lang.String.class, "改密策略", "改密策略", java.lang.String.class, null);
+	
+	/**
+	 * 备份方式 , 类型: java.lang.String
+	*/
+	public static final String HOST_BACKUP_METHOD="hostBackupMethod";
+	
+	/**
+	 * 备份方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_BACKUP_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_BACKUP_METHOD, java.lang.String.class, "备份方式", "备份方式", java.lang.String.class, null);
+	
+	/**
+	 * 备份情况 , 类型: java.lang.String
+	*/
+	public static final String HOST_BACKUP_INFO="hostBackupInfo";
+	
+	/**
+	 * 备份情况 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_BACKUP_INFO_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_BACKUP_INFO, java.lang.String.class, "备份情况", "备份情况", java.lang.String.class, null);
 	
 	/**
 	 * 下线时间 , 类型: java.util.Date
@@ -472,9 +493,19 @@ public class HostMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.Host,java.lang.String> HOST_OS_IDS_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,HOST_OS_IDS, java.util.List.class, "操作系统列表", "操作系统", java.lang.String.class, null);
 	
 	/**
+	 * 备份情况 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String BACKUP_METHOD="backupMethod";
+	
+	/**
+	 * 备份情况 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.Host,org.github.foxnic.web.domain.system.DictItem> BACKUP_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.Host.class ,BACKUP_METHOD, org.github.foxnic.web.domain.system.DictItem.class, "备份情况", "备份情况", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , SYSTEM_ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_USERNAME , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS , INFO_SYSTEM , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MIDDLEWARE_LIST , HOST_MIDDLEWARE_IDS , HOST_OS_LIST , HOST_OS_IDS };
+	public static final String[] $PROPS={ ID , SYSTEM_ID , HOST_TYPE , STATUS , HOST_NAME , HOST_IP , HOST_VIP , ENVIRONMENT , POSITION_ID , MONITOR_STATUS , DIRECTOR_USERNAME , HOST_MEMORY , HOST_CPU , HOST_CONF , USER_OS_ADMIN , USER_DB_ADMIN , USER_DB_USED , USER_APP_USED , USER_OPS_OPER , USER_OTHER , PASSWORD_STRATEGY_ID , HOST_BACKUP_METHOD , HOST_BACKUP_INFO , OFFLINE_TIME , ONLINE_TIME , ARCH , LABELS , HOST_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS , INFO_SYSTEM , POSITION , HOST_DB_LIST , HOST_DB_IDS , HOST_MIDDLEWARE_LIST , HOST_MIDDLEWARE_IDS , HOST_OS_LIST , HOST_OS_IDS , BACKUP_METHOD };
 	
 	/**
 	 * 代理类
@@ -712,6 +743,28 @@ public class HostMeta {
 		public Host setPasswordStrategyId(String passwordStrategyId) {
 			super.change(PASSWORD_STRATEGY_ID,super.getPasswordStrategyId(),passwordStrategyId);
 			super.setPasswordStrategyId(passwordStrategyId);
+			return this;
+		}
+		
+		/**
+		 * 设置 备份方式
+		 * @param hostBackupMethod 备份方式
+		 * @return 当前对象
+		*/
+		public Host setHostBackupMethod(String hostBackupMethod) {
+			super.change(HOST_BACKUP_METHOD,super.getHostBackupMethod(),hostBackupMethod);
+			super.setHostBackupMethod(hostBackupMethod);
+			return this;
+		}
+		
+		/**
+		 * 设置 备份情况
+		 * @param hostBackupInfo 备份情况
+		 * @return 当前对象
+		*/
+		public Host setHostBackupInfo(String hostBackupInfo) {
+			super.change(HOST_BACKUP_INFO,super.getHostBackupInfo(),hostBackupInfo);
+			super.setHostBackupInfo(hostBackupInfo);
 			return this;
 		}
 		
@@ -976,6 +1029,17 @@ public class HostMeta {
 		public Host setHostOsIds(List<String> hostOsIds) {
 			super.change(HOST_OS_IDS,super.getHostOsIds(),hostOsIds);
 			super.setHostOsIds(hostOsIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 备份情况
+		 * @param backupMethod 备份情况
+		 * @return 当前对象
+		*/
+		public Host setBackupMethod(DictItem backupMethod) {
+			super.change(BACKUP_METHOD,super.getBackupMethod(),backupMethod);
+			super.setBackupMethod(backupMethod);
 			return this;
 		}
 	}

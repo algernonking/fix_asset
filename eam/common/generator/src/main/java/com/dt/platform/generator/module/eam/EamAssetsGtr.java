@@ -2,7 +2,9 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.*;
@@ -42,22 +44,18 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Goods.class,"goods","物品档案","物品档案");
         cfg.getPoClassFile().addSimpleProperty(Manufacturer.class,"manufacturer","生产厂商","生产厂商");
         cfg.getPoClassFile().addSimpleProperty(Warehouse.class,"warehouse","仓库","仓库");
-
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"manager","管理人员","管理人员");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
-
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
-
-        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
 
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
 
-
-
-
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"equipmentEnvironment","设备运行环境","设备运行环境");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"safetyLevel","安全等级","安全等级");
 
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
@@ -157,11 +155,37 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 textField(DictItemMeta.LABEL).
                 fillBy(AssetMeta.SOURCE).muliti(false).defaultValue("purchase");
 
+        cfg.view().field(EAMTables.EAM_ASSET.SAFETY_LEVEL_CODE)
+                .basic().label("安全等级")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_safety_level")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(AssetMeta.SAFETY_LEVEL).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_ENVIRONMENT_CODE)
+                .basic().label("运行环境")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_equipment_environment")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(AssetMeta.EQUIPMENT_ENVIRONMENT).muliti(false);
+
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form()
+                .label("办理状态").selectBox().enumType(AssetHandleStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_STATUS).form().
+                label("设备状态").selectBox().enumType(AssetEquipmentStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
                 label("资产状态").selectBox().enumType(AssetStatusEnum.class).defaultValue("idle");
 
-        cfg.view().field(EAMTables.EAM_ASSET.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_STATUS).form().
+                label("维保状态").selectBox().enumType(AssetMaintenanceStatusEnum.class);
+
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)
                 .basic().label("资产分类")

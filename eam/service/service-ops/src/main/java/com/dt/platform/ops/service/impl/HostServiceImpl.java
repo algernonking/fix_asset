@@ -303,9 +303,13 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 	}
 
 
-	public Result<List<SQL>> verifyHostOsDbMid(Rcd r) {
+	public Result<List<SQL>> verifyHostOsDbMid(Rcd r,HashMap<String,HashMap<String,String>> matchMap) {
+
+			HashMap<String,String> dbMap=matchMap.get("db");
+			HashMap<String,String> osMap=matchMap.get("os");
+			HashMap<String,String> midMap=matchMap.get("mid");
+
 			Result<List<SQL>> result=new  Result<List<SQL>>();
-			result.success();
 			List<SQL> list=new ArrayList<SQL>();
 			String id=r.getString("id");
 			String os=r.getString("host_os");
@@ -315,15 +319,13 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 				String[] itemArr=os.split(",");
 				for(int i=0;i<itemArr.length;i++){
 					String item=itemArr[i].trim();
-					ServiceInfo vo=serviceInfoService.queryEntity(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_OS.code()).setName(item));
-					if(vo==null){
-						result.failure();
-						return result.message("操作系统列表不存在:"+item);
+					if(!osMap.containsKey(item)){
+						return result.success(false).message("操作系统列表不存在:"+item);
 					}else{
 						Insert s=new Insert("ops_host_os");
 						s.set("id",IDGenerator.getSnowflakeIdString());
 						s.set("host_id",id);
-						s.set("service_info_id",vo.getId());
+						s.set("service_info_id",osMap.get(item));
 						list.add(s);
 					}
 				}
@@ -332,15 +334,13 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 				String[] itemArr=db.split(",");
 				for(int i=0;i<itemArr.length;i++){
 					String item=itemArr[i].trim();
-					ServiceInfo vo=serviceInfoService.queryEntity(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_DB.code()).setName(item));
-					if(vo==null){
-						result.failure();
-						return result.message("数据库列表不存在:"+item);
+					if(!dbMap.containsKey(item)){
+						return result.success(false).message("中间件列表不存在:"+item);
 					}else{
 						Insert s=new Insert("ops_host_db");
 						s.set("id",IDGenerator.getSnowflakeIdString());
 						s.set("host_id",id);
-						s.set("service_info_id",vo.getId());
+						s.set("service_info_id",dbMap.get(item));
 						list.add(s);
 					}
 				}
@@ -350,21 +350,19 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 			String[] itemArr=mid.split(",");
 			for(int i=0;i<itemArr.length;i++){
 				String item=itemArr[i].trim();
-				ServiceInfo vo=serviceInfoService.queryEntity(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_MID.code()).setName(item));
-				if(vo==null){
-					result.failure();
-					return result.message("中间件列表不存在:"+item);
+				if(!midMap.containsKey(item)){
+					return result.success(false).message("中间件列表不存在:"+item);
 				}else{
 					Insert s=new Insert("ops_host_mid");
 					s.set("id",IDGenerator.getSnowflakeIdString());
 					s.set("host_id",id);
-					s.set("service_info_id",vo.getId());
+					s.set("service_info_id",midMap.get(item));
 					list.add(s);
 				}
 			}
 		}
 
-		return result.data(list);
+		return result.success(true).data(list);
 	}
 
 		@Override
@@ -394,32 +392,63 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
 
-		List<SQL> sqls=new ArrayList<>();
-		List<SQL> deleteSqls=new ArrayList<>();
-		List<SQL> addSqls=new ArrayList<>();
-		for (Rcd r : rs) {
 
+		List<SQL> sqls=new ArrayList<>();
+
+
+		List<SQL> deleteSqls=new ArrayList<>();
+		List<SQL> insertSqls=new ArrayList<>();
+
+		HashMap<String,HashMap<String,String>> matchMap=new HashMap<String,HashMap<String,String>>();
+		matchMap.put("backupMethodMap",opsDataService.queryDictItemData("ops_host_backup_method"));
+		HashMap<String,HashMap<String,String>> matchMap2=new HashMap<String,HashMap<String,String>>();
+		List<ServiceInfo> dbList=serviceInfoService.queryList(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_DB.code()));
+		List<ServiceInfo> osList=serviceInfoService.queryList(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_OS.code()));
+		List<ServiceInfo> midList=serviceInfoService.queryList(ServiceInfo.create().setGroupId(ServiceTypeEnum.SERVICE_MID.code()));
+		HashMap<String,String> dbMap=new HashMap<String,String>();
+		HashMap<String,String> osMap=new HashMap<String,String>();
+		HashMap<String,String> midMap=new HashMap<String,String>();
+
+		for(ServiceInfo db :dbList){
+			dbMap.put(db.getName(),db.getId());
+		}
+		for(ServiceInfo os :osList){
+			osMap.put(os.getName(),os.getId());
+		}
+		for(ServiceInfo mid :midList){
+			midMap.put(mid.getName(),mid.getId());
+		}
+			matchMap2.put("db",dbMap);
+			matchMap2.put("os",osMap);
+			matchMap2.put("mid",midMap);
+
+			for (Rcd r : rs) {
+
+
+			List<SQL> addSqls=new ArrayList<>();
 			//可在此处校验数据
-			System.out.println("before:"+r);
-			Result verifyResult=opsDataService.verifyHostRecord(r,null,fill);
+			//System.out.println("before:"+r);
+			Result verifyResult=opsDataService.verifyHostRecord(r,matchMap,fill);
 			if(!verifyResult.isSuccess()){
 				errors.add(new ValidateResult(null,1,verifyResult.getMessage()));
-				continue;
+				break;
 			}
 
 			String sql="";
 
 			if(StringUtil.isBlank(r.getString(OpsHostDataExportColumnEnum.HOST_ID.text()))){
 				r.set("id",IDGenerator.getSnowflakeIdString());
-				Result<List<SQL>> resultHost=verifyHostOsDbMid(r);
-				if(!resultHost.isSuccess()){
-					errors.add(new ValidateResult(null,1,verifyResult.getMessage()));
-					continue;
+				Result<List<SQL>> resultHost=verifyHostOsDbMid(r,matchMap2);
+				if(resultHost.isSuccess()){
+					if(resultHost.getData().size()>0){
+						insertSqls.addAll(resultHost.getData());
+					}
+				}else{
+					errors.add(new ValidateResult(null,1,resultHost.getMessage()));
+					break;
 				}
-				addSqls=resultHost.getData();
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 				insert.set("tenant_id","T001");
-
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
 					insert.set(dbTreaty.getCreateTimeField(),new Date());
@@ -438,12 +467,15 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 				sql=insert.getSQL();
 
 			}else{
-				Result<List<SQL>> resultHost=verifyHostOsDbMid(r);
-				if(!resultHost.isSuccess()){
-					errors.add(new ValidateResult(null,1,verifyResult.getMessage()));
-					continue;
+				Result<List<SQL>> resultHost=verifyHostOsDbMid(r,matchMap2);
+				if(resultHost.isSuccess()){
+					if(resultHost.getData().size()>0){
+						insertSqls.addAll(resultHost.getData());
+					}
+				}else{
+					errors.add(new ValidateResult(null,1,resultHost.getMessage()));
+					break;
 				}
-				addSqls=resultHost.getData();
 				Delete del1=new Delete("ops_host_os");
 				del1.where().and("host_id=?",r.getString("id"));
 				Delete del2=new Delete("ops_host_db");
@@ -470,8 +502,9 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 				sql=update.getSQL();
 
 			}
-			System.out.println("after:"+r);
-			System.out.println(sql);
+		//	System.out.println("after:"+r);
+			//System.out.println("####################ENDSQL:"+sql);
+
 		}
 
 		if(batch) {
@@ -481,11 +514,8 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 					if(deleteSqls.size()>0){
 						dao().batchExecute(deleteSqls);
 					}
-					if(addSqls.size()>0){
-						for(int i=0;i<addSqls.size();i++){
-							System.out.println(addSqls.get(i).getSQL());
-						}
-						dao().batchExecute(addSqls);
+					if(insertSqls.size()>0){
+						dao().batchExecute(insertSqls);
 					}
 				}
 

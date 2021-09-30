@@ -13,15 +13,15 @@ import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.hrm.Employee;
 import com.dt.platform.domain.eam.Supplier;
 import com.dt.platform.domain.eam.Maintainer;
-import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:26:49
- * @sign 5F5AC7429BBFEF82306A9F63E159B427
+ * @since 2021-09-30 10:14:22
+ * @sign 6B8ED7B1D6559FF6E3AA769F14FF04DF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -208,6 +208,16 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> SERVICE_LIFE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SERVICE_LIFE, java.math.BigDecimal.class, "使用期限", "使用期限", java.math.BigDecimal.class, null);
 	
 	/**
+	 * 安全等级 , 类型: java.lang.String
+	*/
+	public static final String SAFETY_LEVEL_CODE="safetyLevelCode";
+	
+	/**
+	 * 安全等级 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SAFETY_LEVEL_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SAFETY_LEVEL_CODE, java.lang.String.class, "安全等级", "安全等级", java.lang.String.class, null);
+	
+	/**
 	 * 序列号 , 类型: java.lang.String
 	*/
 	public static final String SERIAL_NUMBER="serialNumber";
@@ -376,6 +386,16 @@ public class AssetMeta {
 	 * 维保厂商 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MAINTAINER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTAINER_NAME, java.lang.String.class, "维保厂商", "维保厂商", java.lang.String.class, null);
+	
+	/**
+	 * 维保状态 , 类型: java.lang.String
+	*/
+	public static final String MAINTENANCE_STATUS="maintenanceStatus";
+	
+	/**
+	 * 维保状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> MAINTENANCE_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTENANCE_STATUS, java.lang.String.class, "维保状态", "维保状态", java.lang.String.class, null);
 	
 	/**
 	 * 联系人 , 类型: java.lang.String
@@ -616,6 +636,36 @@ public class AssetMeta {
 	 * 设备内存 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_MEMORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_MEMORY, java.lang.String.class, "设备内存", "设备内存", java.lang.String.class, null);
+	
+	/**
+	 * 设备标签 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_LABEL="equipmentLabel";
+	
+	/**
+	 * 设备标签 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_LABEL_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_LABEL, java.lang.String.class, "设备标签", "设备标签", java.lang.String.class, null);
+	
+	/**
+	 * 设备配置 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_CONF="equipmentConf";
+	
+	/**
+	 * 设备配置 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_CONF_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_CONF, java.lang.String.class, "设备配置", "设备配置", java.lang.String.class, null);
+	
+	/**
+	 * 设备运行环境 , 类型: java.lang.String
+	*/
+	public static final String EQUIPMENT_ENVIRONMENT_CODE="equipmentEnvironmentCode";
+	
+	/**
+	 * 设备运行环境 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> EQUIPMENT_ENVIRONMENT_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_ENVIRONMENT_CODE, java.lang.String.class, "设备运行环境", "设备运行环境", java.lang.String.class, null);
 	
 	/**
 	 * 设备机柜 , 类型: java.lang.String
@@ -868,16 +918,6 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.Maintainer> MAINTNAINER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,MAINTNAINER, com.dt.platform.domain.eam.Maintainer.class, "维保商", "维保商", com.dt.platform.domain.eam.Maintainer.class, null);
 	
 	/**
-	 * 来源 , 类型: org.github.foxnic.web.domain.system.DictItem
-	*/
-	public static final String SOURCE="source";
-	
-	/**
-	 * 来源 , 类型: org.github.foxnic.web.domain.system.DictItem
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.system.DictItem> SOURCE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SOURCE, org.github.foxnic.web.domain.system.DictItem.class, "来源", "来源", org.github.foxnic.web.domain.system.DictItem.class, null);
-	
-	/**
 	 * 所属公司 , 类型: org.github.foxnic.web.domain.hrm.Organization
 	*/
 	public static final String OWNER_COMPANY="ownerCompany";
@@ -898,9 +938,39 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,USE_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "使用公司/部门", "使用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
 	
 	/**
+	 * 来源 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String SOURCE="source";
+	
+	/**
+	 * 来源 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.system.DictItem> SOURCE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SOURCE, org.github.foxnic.web.domain.system.DictItem.class, "来源", "来源", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 设备运行环境 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String EQUIPMENT_ENVIRONMENT="equipmentEnvironment";
+	
+	/**
+	 * 设备运行环境 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.system.DictItem> EQUIPMENT_ENVIRONMENT_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EQUIPMENT_ENVIRONMENT, org.github.foxnic.web.domain.system.DictItem.class, "设备运行环境", "设备运行环境", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 安全等级 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String SAFETY_LEVEL="safetyLevel";
+	
+	/**
+	 * 安全等级 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.system.DictItem> SAFETY_LEVEL_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SAFETY_LEVEL, org.github.foxnic.web.domain.system.DictItem.class, "安全等级", "安全等级", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , SOURCE , OWNER_COMPANY , USE_ORGANIZATION };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL };
 	
 	/**
 	 * 代理类
@@ -1109,6 +1179,17 @@ public class AssetMeta {
 		}
 		
 		/**
+		 * 设置 安全等级
+		 * @param safetyLevelCode 安全等级
+		 * @return 当前对象
+		*/
+		public Asset setSafetyLevelCode(String safetyLevelCode) {
+			super.change(SAFETY_LEVEL_CODE,super.getSafetyLevelCode(),safetyLevelCode);
+			super.setSafetyLevelCode(safetyLevelCode);
+			return this;
+		}
+		
+		/**
 		 * 设置 序列号
 		 * @param serialNumber 序列号
 		 * @return 当前对象
@@ -1292,6 +1373,17 @@ public class AssetMeta {
 		public Asset setMaintainerName(String maintainerName) {
 			super.change(MAINTAINER_NAME,super.getMaintainerName(),maintainerName);
 			super.setMaintainerName(maintainerName);
+			return this;
+		}
+		
+		/**
+		 * 设置 维保状态
+		 * @param maintenanceStatus 维保状态
+		 * @return 当前对象
+		*/
+		public Asset setMaintenanceStatus(String maintenanceStatus) {
+			super.change(MAINTENANCE_STATUS,super.getMaintenanceStatus(),maintenanceStatus);
+			super.setMaintenanceStatus(maintenanceStatus);
 			return this;
 		}
 		
@@ -1556,6 +1648,39 @@ public class AssetMeta {
 		public Asset setEquipmentMemory(String equipmentMemory) {
 			super.change(EQUIPMENT_MEMORY,super.getEquipmentMemory(),equipmentMemory);
 			super.setEquipmentMemory(equipmentMemory);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备标签
+		 * @param equipmentLabel 设备标签
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentLabel(String equipmentLabel) {
+			super.change(EQUIPMENT_LABEL,super.getEquipmentLabel(),equipmentLabel);
+			super.setEquipmentLabel(equipmentLabel);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备配置
+		 * @param equipmentConf 设备配置
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentConf(String equipmentConf) {
+			super.change(EQUIPMENT_CONF,super.getEquipmentConf(),equipmentConf);
+			super.setEquipmentConf(equipmentConf);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备运行环境
+		 * @param equipmentEnvironmentCode 设备运行环境
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentEnvironmentCode(String equipmentEnvironmentCode) {
+			super.change(EQUIPMENT_ENVIRONMENT_CODE,super.getEquipmentEnvironmentCode(),equipmentEnvironmentCode);
+			super.setEquipmentEnvironmentCode(equipmentEnvironmentCode);
 			return this;
 		}
 		
@@ -1835,17 +1960,6 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 来源
-		 * @param source 来源
-		 * @return 当前对象
-		*/
-		public Asset setSource(DictItem source) {
-			super.change(SOURCE,super.getSource(),source);
-			super.setSource(source);
-			return this;
-		}
-		
-		/**
 		 * 设置 所属公司
 		 * @param ownerCompany 所属公司
 		 * @return 当前对象
@@ -1864,6 +1978,39 @@ public class AssetMeta {
 		public Asset setUseOrganization(Organization useOrganization) {
 			super.change(USE_ORGANIZATION,super.getUseOrganization(),useOrganization);
 			super.setUseOrganization(useOrganization);
+			return this;
+		}
+		
+		/**
+		 * 设置 来源
+		 * @param source 来源
+		 * @return 当前对象
+		*/
+		public Asset setSource(DictItem source) {
+			super.change(SOURCE,super.getSource(),source);
+			super.setSource(source);
+			return this;
+		}
+		
+		/**
+		 * 设置 设备运行环境
+		 * @param equipmentEnvironment 设备运行环境
+		 * @return 当前对象
+		*/
+		public Asset setEquipmentEnvironment(DictItem equipmentEnvironment) {
+			super.change(EQUIPMENT_ENVIRONMENT,super.getEquipmentEnvironment(),equipmentEnvironment);
+			super.setEquipmentEnvironment(equipmentEnvironment);
+			return this;
+		}
+		
+		/**
+		 * 设置 安全等级
+		 * @param safetyLevel 安全等级
+		 * @return 当前对象
+		*/
+		public Asset setSafetyLevel(DictItem safetyLevel) {
+			super.change(SAFETY_LEVEL,super.getSafetyLevel(),safetyLevel);
+			super.setSafetyLevel(safetyLevel);
 			return this;
 		}
 	}

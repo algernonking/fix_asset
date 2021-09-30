@@ -33,6 +33,7 @@ layui.define([],
                 ,asset_notes:{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.assetNotes,d);}  }
                 ,maintainer_id:{ field: 'maintainerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保商'), templet: function (d) { return templet('maintainerId',fox.joinLabel(d.maintnainer,"maintainerName"),d);}}
                 ,maintainer_name:{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保厂商') , templet: function (d) { return templet('maintainerName',d.maintainerName,d);}  }
+                ,maintenance_status:{ field: 'maintenanceStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保状态'), templet:function (d){ return templet('maintenanceStatus',fox.getEnumText(SELECT_MAINTENANCESTATUS_DATA,d.maintenanceStatus),d);}}
                 ,contacts:{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') , templet: function (d) { return templet('contacts',d.contacts,d);}  }
                 ,contact_information: { field: 'contactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系方式') , templet: function (d) { return templet('contactInformation',d.contactInformation,d);}  }
                 ,director: { field: 'director', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') , templet: function (d) { return templet('director',d.director,d);}  }
@@ -52,6 +53,18 @@ layui.define([],
                 ,entryTime:{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间'), templet: function (d) { return templet('entryTime',fox.dateFormat(d.entryTime),d); }}
                 ,financial_notes:{ field: 'financialNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') , templet: function (d) { return templet('financialNotes',d.financialNotes,d);}  }
                 ,label:{ field: 'label', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
+                ,safety_level_code:{ field: 'safetyLevelCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('安全等级'), templet: function (d) { return templet('safetyLevelCode',fox.joinLabel(d.safetyLevel,"label"),d);}}
+                ,equipment_code:{ field: 'equipmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备编号') , templet: function (d) { return templet('equipmentCode',d.equipmentCode,d);}  }
+                ,equipment_status:{ field: 'equipmentStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备状态'), templet:function (d){ return templet('equipmentStatus',fox.getEnumText(SELECT_EQUIPMENTSTATUS_DATA,d.equipmentStatus),d);}}
+                ,equipment_ip:{ field: 'equipmentIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备IP') , templet: function (d) { return templet('equipmentIp',d.equipmentIp,d);}  }
+                ,equipment_cpu:{ field: 'equipmentCpu', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备CPU') , templet: function (d) { return templet('equipmentCpu',d.equipmentCpu,d);}  }
+                ,equipment_memory:{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备内存') , templet: function (d) { return templet('equipmentMemory',d.equipmentMemory,d);}  }
+                ,equipment_label:{ field: 'equipmentLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备标签') , templet: function (d) { return templet('equipmentLabel',d.equipmentLabel,d);}  }
+                ,equipment_conf:{ field: 'equipmentConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备配置') , templet: function (d) { return templet('equipmentConf',d.equipmentConf,d);}  }
+                ,rack_id:{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜') , templet: function (d) { return templet('rackId',d.rackId,d);}  }
+                ,rack_up_number:{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
+                ,rack_down_number:{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
+
             }
             return COL_ALL_DATA;
         }

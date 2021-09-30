@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:26:52
+ * @since 2021-09-30 10:14:25
  */
  -->
  <!DOCTYPE html>
@@ -50,6 +50,7 @@
                     <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=true -->
                     <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
                     <!-- 使用期限 , serviceLife ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 安全等级 , safetyLevelCode ,typeName=select_box, isHideInSearch=true -->
                     <!-- 详细位置 , positionDetail ,typeName=text_input, isHideInSearch=true -->
                     <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
@@ -57,6 +58,7 @@
                     <!-- 资产RFID , rfid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
                     <!-- 维保厂商 , maintainerName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 维保状态 , maintenanceStatus ,typeName=select_box, isHideInSearch=true -->
                     <!-- 联系人 , contacts ,typeName=text_input, isHideInSearch=true -->
                     <!-- 联系方式 , contactInformation ,typeName=text_input, isHideInSearch=true -->
                     <!-- 负责人 , director ,typeName=text_input, isHideInSearch=true -->
@@ -76,11 +78,14 @@
                     <!-- 入账时间 , entryTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 财务备注 , financialNotes ,typeName=text_area, isHideInSearch=true -->
                     <!-- 设备编号 , equipmentCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 设备状态 , equipmentStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备状态 , equipmentStatus ,typeName=select_box, isHideInSearch=true -->
                     <!-- 设备IP , equipmentIp ,typeName=text_input, isHideInSearch=true -->
                     <!-- 管理IP , manageIp ,typeName=text_input, isHideInSearch=true -->
                     <!-- 设备CPU , equipmentCpu ,typeName=text_input, isHideInSearch=true -->
                     <!-- 设备内存 , equipmentMemory ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备标签 , equipmentLabel ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 设备配置 , equipmentConf ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 运行环境 , equipmentEnvironmentCode ,typeName=select_box, isHideInSearch=true -->
                     <!-- 设备机柜 , rackId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 设备机柜上位置 , rackUpNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 设备机柜下位置 , rackDownNumber ,typeName=number_input, isHideInSearch=true -->
@@ -239,6 +244,8 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
+    var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];
+    var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
     var AUTH_PREFIX="eam_asset";
 
 

@@ -14,6 +14,8 @@ import com.dt.platform.proxy.ops.InformationSystemServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 
 public class OpsHostGtr extends BaseCodeGenerator{
 
@@ -45,20 +47,27 @@ public class OpsHostGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(ServiceInfo.class,"hostOsList","操作系统","操作系统");
         cfg.getPoClassFile().addListProperty(String.class,"hostOsIds","操作系统列表","操作系统");
 
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"backupMethod","备份情况","备份情况");
+
+
 
         cfg.view().field(EAMTables.OPS_HOST.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.ARCH).table().disable(true);
+        cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_MEMORY).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.HOST_CPU).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.DIRECTOR_USERNAME).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_APP_USED).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_DB_ADMIN).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_DB_USED).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OPS_OPER).search().hidden(true);
-        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).search().hidden(true);
+
+        cfg.view().field(EAMTables.OPS_HOST.DIRECTOR_USERNAME).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_APP_USED).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_DB_ADMIN).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_DB_USED).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_OS_ADMIN).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_OPS_OPER).search().fuzzySearch().hidden(true);
+        cfg.view().field(EAMTables.OPS_HOST.USER_OTHER).search().fuzzySearch().hidden(true);
+
         cfg.view().field(EAMTables.OPS_HOST.OFFLINE_TIME).search().hidden(true);
         cfg.view().field(EAMTables.OPS_HOST.ONLINE_TIME).search().hidden(true);
+
         cfg.view().field(EAMTables.OPS_HOST.HOST_NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_IP).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_HOST.HOST_VIP).search().fuzzySearch();
@@ -152,13 +161,21 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .fillBy(HostMeta.VOUCHER_LIST).muliti(true);
 
 
+        cfg.view().field(HostVOMeta.HOST_BACKUP_METHOD)
+                .basic().label("备份方式")
+                .table().sort(false)
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_host_backup_method")
+                .valueField("id").textField("label")
+                .toolbar(false).paging(false)
+                .fillBy(HostMeta.BACKUP_METHOD).muliti(false);
+
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)
                 .form().validate().required()
                 .form().selectBox().dict(DictEnum.OPS_HOST_TYPE).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
-        cfg.view().field(EAMTables.OPS_HOST.HOST_BACKUP_METHOD)
-                .form().selectBox().dict(DictEnum.OPS_HOST_BACKUP_METHOD).filter(true).toolbar(false).muliti(false).defaultIndex(0);
+//        cfg.view().field(EAMTables.OPS_HOST.HOST_BACKUP_METHOD)
+//                .form().selectBox().dict(DictEnum.OPS_HOST_BACKUP_METHOD).filter(true).toolbar(false).muliti(false).defaultIndex(0);
 
         cfg.view().field(EAMTables.OPS_HOST.PASSWORD_STRATEGY_ID)
                 .form().selectBox().dict(DictEnum.OPS_HOST_PASSWORD_STRATEGY);
@@ -194,7 +211,6 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 },
                 new Object[]{
                         EAMTables.OPS_HOST.HOST_NAME,
-
                         HostMeta.HOST_OS_IDS,
                         HostMeta.HOST_DB_IDS,
                         HostMeta.HOST_MIDDLEWARE_IDS
@@ -280,10 +296,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 },
                 new Object[] {
                         EAMTables.OPS_HOST.HOST_BACKUP_INFO
-                },
-                new Object[] {
-
                 }
+
 
         );
 

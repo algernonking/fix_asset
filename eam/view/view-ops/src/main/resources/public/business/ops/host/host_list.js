@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 11:01:57
+ * @since 2021-09-29 17:48:53
  */
 
 
@@ -94,6 +94,8 @@ function ListPage() {
 					,{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户') , templet: function (d) { return templet('userOpsOper',d.userOpsOper,d);}  }
 					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') , templet: function (d) { return templet('userOther',d.userOther,d);}  }
 					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return templet('passwordStrategyId',fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId),d);}}
+					,{ field: 'hostBackupMethod', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('备份方式'), templet: function (d) { return templet('hostBackupMethod',fox.joinLabel(d.backupMethod,"label"),d);}}
+					,{ field: 'hostBackupInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份情况') , templet: function (d) { return templet('hostBackupInfo',d.hostBackupInfo,d);}  }
 					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineTime',fox.dateFormat(d.offlineTime,"yyyy-MM-dd"),d); }}
 					,{ field: 'onlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineTime',fox.dateFormat(d.onlineTime,"yyyy-MM-dd"),d); }}
 					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('labels',d.labels,d);}  }

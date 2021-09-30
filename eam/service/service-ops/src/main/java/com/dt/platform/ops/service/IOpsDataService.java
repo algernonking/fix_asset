@@ -36,6 +36,7 @@ import java.util.Map;
 public interface IOpsDataService extends ISuperService<Host> {
 
 
+	HashMap<String,String> queryDictItemData(String code);
 
 	Result verifyISRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
 

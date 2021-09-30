@@ -18,14 +18,20 @@ public enum AssetDataExportColumnEnum implements CodeTextEnum {
     ASSET_CATEGORY_FINANCE_NAME("assetCategoryFinanceName","financial_category_id" ),
     ASSET_SUPPLIER_NAME( "assetSupplierName","supplier_id" ),
     ASSET_SOURCE_NAME("assetSourceName","source_id" ),
+    SAFETY_LEVEL_NAME( "safetyLevelName","safety_level_code" ),
+    MAINTENANCE_STATUS( "maintenanceStatus","maintenance_status" ),
     OWNER_COMPANY_NAME("ownerCompanyName","owner_company_id" ),
     USE_ORGANIZATION_NAME("useOrganizationName","use_organization_id"),
-
-
     MANAGER_NAME( "managerName","manager_id" ),
-    USE_USER_NAME("useUserName","use_user_id"  ),
     MANAGER_BADGE( "managerBadge","manager_id" ),
-    USE_USER_BADGE( "useUserNameBadge","manager_id" ),
+    USE_USER_NAME("useUserName","use_user_id"  ),
+    USE_USER_BADGE( "useUserBadge","use_user_id" ),
+
+    EQUIPMENT_STATUS_NAME( "equipmentStatusName","equipment_status" ),
+    EQUIPMENT_ENVIRONMENT_NAME( "equipmentEnvironmentName","equipment_environment_code" ),
+
+    RACK_NAME( "rackName","rack_id" ),
+
     ;
 
     private String code;

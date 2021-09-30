@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 11:01:57
+ * @since 2021-09-29 17:48:54
  */
  -->
  <!DOCTYPE html>
@@ -327,6 +327,43 @@
                     </div>
                 </div>
 
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title">
+            <legend>备份情况</legend>
+        </fieldset>
+
+        <div class="layui-row form-row">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备份方式')}">备份方式</div></div>
+                        <div class="layui-input-block ">
+                            <div id="hostBackupMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_host_backup_method'}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column">
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备份情况')}">备份情况</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="hostBackupInfo" id="hostBackupInfo" name="hostBackupInfo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备份情况') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                 <!--结束：栏次内字段循环-->
             </div>

@@ -14,8 +14,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum HostMonitorStatusEnum implements CodeTextEnum {
 
     MONITOR("1" , "监控中"),
-    UN_MONITOR ("0" , "未监控"),
-    UNKNOW("0" , "未知")
+    NOT_DEPLOY ("2" , "未部署"),
+    NOT_MONITOR ("3" , "未监控"),
+    NOT_NEED("4" , "不需要")
     ;
 
     private String code;

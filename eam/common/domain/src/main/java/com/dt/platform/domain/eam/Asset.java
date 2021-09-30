@@ -10,8 +10,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Employee;
-import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -19,10 +19,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:26:49
- * @sign 5F5AC7429BBFEF82306A9F63E159B427
+ * @since 2021-09-30 10:14:22
+ * @sign 6B8ED7B1D6559FF6E3AA769F14FF04DF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -143,6 +143,12 @@ public class Asset extends Entity {
 	private BigDecimal serviceLife;
 	
 	/**
+	 * 安全等级：安全等级
+	*/
+	@ApiModelProperty(required = false,value="安全等级" , notes = "安全等级")
+	private String safetyLevelCode;
+	
+	/**
 	 * 序列号：序列号
 	*/
 	@ApiModelProperty(required = false,value="序列号" , notes = "序列号")
@@ -205,7 +211,7 @@ public class Asset extends Entity {
 	/**
 	 * 剩余数量：剩余数量
 	*/
-	@ApiModelProperty(required = false,value="剩余数量" , notes = "剩余数量")
+	@ApiModelProperty(required = true,value="剩余数量" , notes = "剩余数量")
 	private Integer remainNumber;
 	
 	/**
@@ -243,6 +249,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="维保厂商" , notes = "维保厂商")
 	private String maintainerName;
+	
+	/**
+	 * 维保状态：维保状态
+	*/
+	@ApiModelProperty(required = false,value="维保状态" , notes = "维保状态")
+	private String maintenanceStatus;
 	
 	/**
 	 * 联系人：联系人
@@ -387,6 +399,24 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="设备内存" , notes = "设备内存")
 	private String equipmentMemory;
+	
+	/**
+	 * 设备标签：设备标签
+	*/
+	@ApiModelProperty(required = false,value="设备标签" , notes = "设备标签")
+	private String equipmentLabel;
+	
+	/**
+	 * 设备配置：设备配置
+	*/
+	@ApiModelProperty(required = false,value="设备配置" , notes = "设备配置")
+	private String equipmentConf;
+	
+	/**
+	 * 设备运行环境：设备运行环境
+	*/
+	@ApiModelProperty(required = false,value="设备运行环境" , notes = "设备运行环境")
+	private String equipmentEnvironmentCode;
 	
 	/**
 	 * 设备机柜：设备机柜
@@ -539,12 +569,6 @@ public class Asset extends Entity {
 	private Maintainer maintnainer;
 	
 	/**
-	 * 来源：来源
-	*/
-	@ApiModelProperty(required = false,value="来源" , notes = "来源")
-	private DictItem source;
-	
-	/**
 	 * 所属公司：所属公司
 	*/
 	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
@@ -555,6 +579,24 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
 	private Organization useOrganization;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private DictItem source;
+	
+	/**
+	 * 设备运行环境：设备运行环境
+	*/
+	@ApiModelProperty(required = false,value="设备运行环境" , notes = "设备运行环境")
+	private DictItem equipmentEnvironment;
+	
+	/**
+	 * 安全等级：安全等级
+	*/
+	@ApiModelProperty(required = false,value="安全等级" , notes = "安全等级")
+	private DictItem safetyLevel;
 	
 	/**
 	 * 获得 主键<br>
@@ -899,6 +941,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 安全等级<br>
+	 * 安全等级
+	 * @return 安全等级
+	*/
+	public String getSafetyLevelCode() {
+		return safetyLevelCode;
+	}
+	
+	/**
+	 * 设置 安全等级
+	 * @param safetyLevelCode 安全等级
+	 * @return 当前对象
+	*/
+	public Asset setSafetyLevelCode(String safetyLevelCode) {
+		this.safetyLevelCode=safetyLevelCode;
+		return this;
+	}
+	
+	/**
 	 * 获得 序列号<br>
 	 * 序列号
 	 * @return 序列号
@@ -1218,6 +1279,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setMaintainerName(String maintainerName) {
 		this.maintainerName=maintainerName;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保状态<br>
+	 * 维保状态
+	 * @return 维保状态
+	*/
+	public String getMaintenanceStatus() {
+		return maintenanceStatus;
+	}
+	
+	/**
+	 * 设置 维保状态
+	 * @param maintenanceStatus 维保状态
+	 * @return 当前对象
+	*/
+	public Asset setMaintenanceStatus(String maintenanceStatus) {
+		this.maintenanceStatus=maintenanceStatus;
 		return this;
 	}
 	
@@ -1674,6 +1754,63 @@ public class Asset extends Entity {
 	*/
 	public Asset setEquipmentMemory(String equipmentMemory) {
 		this.equipmentMemory=equipmentMemory;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备标签<br>
+	 * 设备标签
+	 * @return 设备标签
+	*/
+	public String getEquipmentLabel() {
+		return equipmentLabel;
+	}
+	
+	/**
+	 * 设置 设备标签
+	 * @param equipmentLabel 设备标签
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentLabel(String equipmentLabel) {
+		this.equipmentLabel=equipmentLabel;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备配置<br>
+	 * 设备配置
+	 * @return 设备配置
+	*/
+	public String getEquipmentConf() {
+		return equipmentConf;
+	}
+	
+	/**
+	 * 设置 设备配置
+	 * @param equipmentConf 设备配置
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentConf(String equipmentConf) {
+		this.equipmentConf=equipmentConf;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备运行环境<br>
+	 * 设备运行环境
+	 * @return 设备运行环境
+	*/
+	public String getEquipmentEnvironmentCode() {
+		return equipmentEnvironmentCode;
+	}
+	
+	/**
+	 * 设置 设备运行环境
+	 * @param equipmentEnvironmentCode 设备运行环境
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentEnvironmentCode(String equipmentEnvironmentCode) {
+		this.equipmentEnvironmentCode=equipmentEnvironmentCode;
 		return this;
 	}
 	
@@ -2153,25 +2290,6 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 来源<br>
-	 * 来源
-	 * @return 来源
-	*/
-	public DictItem getSource() {
-		return source;
-	}
-	
-	/**
-	 * 设置 来源
-	 * @param source 来源
-	 * @return 当前对象
-	*/
-	public Asset setSource(DictItem source) {
-		this.source=source;
-		return this;
-	}
-	
-	/**
 	 * 获得 所属公司<br>
 	 * 所属公司
 	 * @return 所属公司
@@ -2206,6 +2324,63 @@ public class Asset extends Entity {
 	*/
 	public Asset setUseOrganization(Organization useOrganization) {
 		this.useOrganization=useOrganization;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public DictItem getSource() {
+		return source;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param source 来源
+	 * @return 当前对象
+	*/
+	public Asset setSource(DictItem source) {
+		this.source=source;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备运行环境<br>
+	 * 设备运行环境
+	 * @return 设备运行环境
+	*/
+	public DictItem getEquipmentEnvironment() {
+		return equipmentEnvironment;
+	}
+	
+	/**
+	 * 设置 设备运行环境
+	 * @param equipmentEnvironment 设备运行环境
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentEnvironment(DictItem equipmentEnvironment) {
+		this.equipmentEnvironment=equipmentEnvironment;
+		return this;
+	}
+	
+	/**
+	 * 获得 安全等级<br>
+	 * 安全等级
+	 * @return 安全等级
+	*/
+	public DictItem getSafetyLevel() {
+		return safetyLevel;
+	}
+	
+	/**
+	 * 设置 安全等级
+	 * @param safetyLevel 安全等级
+	 * @return 当前对象
+	*/
+	public Asset setSafetyLevel(DictItem safetyLevel) {
+		this.safetyLevel=safetyLevel;
 		return this;
 	}
 

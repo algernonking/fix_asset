@@ -32,8 +32,8 @@ public class KnRelationManager extends RelationManager {
                 .using(EAMTables.KN_CONTENT.CATEGORY_ID).join(EAMTables.KN_CATEGORY.ID);
 
         this.property(ContentMeta.EDITOR_PROP)
-                .using(EAMTables.KN_CONTENT.EDITOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+                .using(EAMTables.KN_CONTENT.EDITOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
 
     }

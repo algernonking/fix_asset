@@ -21,6 +21,7 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.PagedList;
@@ -34,12 +35,15 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.meta.DBField;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
+import org.github.foxnic.web.domain.system.Dict;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
+import org.github.foxnic.web.domain.system.DictVO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
+import org.github.foxnic.web.proxy.system.DictServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,19 +99,7 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		return hostService.queryList(host);
 	}
 
-	@Override
-	public String getMapKey(HashMap<String,String> map,String value){
-		String key = null;
-		//Map,HashMap并没有实现Iteratable接口.不能用于增强for循环.
-		for(String getKey: map.keySet()){
-			if(map.get(getKey).equals(value)){
-				key = getKey;
-				return key;
-			}
-		}
-		return key;
-		//这个key肯定是最后一个满足该条件的key.
-	}
+
 
 
 	@Override
@@ -154,6 +146,8 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		// 关联出 操作系统 数据
 		hostService.join(list,HostMeta.HOST_OS_LIST);
 
+		// 关联出 操作系统 数据
+		hostService.join(list,HostMeta.BACKUP_METHOD);
 
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		for(int i=0;i<list.size();i++){
@@ -165,6 +159,11 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 
 			if(item.getInfoSystem()!=null){
 				hostMap.put(OpsHostDataExportColumnEnum.HOST_INFO_SYSTEM_NAME.code(),item.getInfoSystem().getName());
+			}
+
+
+			if(item.getBackupMethod()!=null){
+				hostMap.put(OpsHostDataExportColumnEnum.HOST_BACKUP_METHOD.code(),item.getBackupMethod().getLabel());
 			}
 
 
@@ -180,7 +179,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 			//HOST_TYPE
 			String hostType=item.getHostType();
 			if(StringUtil.isBlank(hostType)){
-
 				hostMap.put(OpsHostDataExportColumnEnum.HOST_TYPE.code(),"");
 			}else{
 				DictItemVO vo=new DictItemVO();
@@ -226,6 +224,7 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 					hostMap.put(OpsHostDataExportColumnEnum.HOST_ENVIRONMENT.code(),"");
 				}
 			}
+
 
 
 			if(item.getHostOsList()!=null){
@@ -291,19 +290,49 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	}
 
 
+
+	@Override
+	public String getMapKey(HashMap<String,String> map,String value){
+		String key = null;
+		//Map,HashMap并没有实现Iteratable接口.不能用于增强for循环.
+		for(String getKey: map.keySet()){
+			if(map.get(getKey).equals(value)){
+				key = getKey;
+				return key;
+			}
+		}
+		return key;
+		//这个key肯定是最后一个满足该条件的key.
+	}
+
+
+	@Override
+	public HashMap<String,String> queryDictItemData(String code){
+		HashMap<String,String> map=new HashMap<>();
+		DictItemVO vo=new DictItemVO();
+		vo.setCode(code);
+		Result<List<DictItem>> result=DictItemServiceProxy.api().queryList(vo);
+		if(result.isSuccess()){
+			List<DictItem> list=result.getData();
+			for(int i=0;i<list.size();i++){
+				map.put(list.get(i).getId(),list.get(i).getLabel());
+			}
+		}
+		return map;
+	}
+
 	@Override
 	public Result verifyHostRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata){
 
-
-
-
+		HashMap<String,String> backupMethodMap=matchMap.get("backupMethodMap");
 
 		//日期类型
 		String[] dateColumns = {HostMeta.OFFLINE_TIME,HostMeta.ONLINE_TIME};
 		for(int j=0;j<dateColumns.length;j++){
 			String dateColumn=dateColumns[j];
 			String value=rcd.getString(BeanNameUtil.instance().depart(dateColumn));
-			if(value!=null){
+
+			if(!StringUtil.isBlank(value)){
 				int valueLen=value.trim().length();
 				try {
 					DateFormat format1=null;
@@ -321,7 +350,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 				}
 			}
 		}
-
 
 		//下拉框
 		//位置
@@ -380,6 +408,37 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 			}else{
 				//返回报错
 				return ErrorDesc.failureMessage("密码策略不存在:"+valuePwdStragety);
+			}
+		}
+
+
+		String valueBackupMethod=rcd.getString(BeanNameUtil.instance().depart(HostMeta.HOST_BACKUP_METHOD));
+		String dictCode="ops_host_backup_method";
+		if(!StringUtil.isBlank(valueBackupMethod) &&backupMethodMap.containsValue(valueBackupMethod)){
+			String key=getMapKey(backupMethodMap,valueBackupMethod);
+			rcd.setValue(BeanNameUtil.instance().depart(HostMeta.HOST_BACKUP_METHOD),key);
+		}else{
+			if(filldata){
+				//返回报错
+				DictVO dictVO=new DictVO();
+				dictVO.setCode(dictCode);
+				Result<List<Dict>> dictResult=DictServiceProxy.api().queryList(dictVO);
+				if(dictResult.isSuccess()&&dictResult.getData().size()>0){
+					Dict dict=dictResult.getData().get(0);
+				 	String id=IDGenerator.getSnowflakeIdString();
+					DictItemVO dictItemVO=new DictItemVO();
+					dictItemVO.setDictCode(dict.getCode());
+					dictItemVO.setId(id);
+					dictItemVO.setDictId(dict.getId());
+					dictItemVO.setLabel(valueBackupMethod);
+					DictItemServiceProxy.api().insert(dictItemVO);
+					backupMethodMap.put(id,valueBackupMethod);
+					rcd.setValue(BeanNameUtil.instance().depart(HostMeta.HOST_BACKUP_METHOD),dictItemVO.getId());
+				}else{
+					return ErrorDesc.failureMessage("备份情况数据字典存在:"+valueBackupMethod);
+				}
+			}else{
+				return ErrorDesc.failureMessage("备份情况数据字典存在:"+valueBackupMethod);
 			}
 		}
 

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 主机
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 11:01:50
- * @sign 721243B3CB84355C2C260399EBBE6907
+ * @since 2021-09-29 17:48:39
+ * @sign FBC43798A92959AD7C39379BB9155DD2
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -157,6 +158,18 @@ public class Host extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="改密策略" , notes = "改密策略")
 	private String passwordStrategyId;
+	
+	/**
+	 * 备份方式：备份方式
+	*/
+	@ApiModelProperty(required = false,value="备份方式" , notes = "备份方式")
+	private String hostBackupMethod;
+	
+	/**
+	 * 备份情况：备份情况
+	*/
+	@ApiModelProperty(required = false,value="备份情况" , notes = "备份情况")
+	private String hostBackupInfo;
 	
 	/**
 	 * 下线时间：下线时间
@@ -301,6 +314,12 @@ public class Host extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="操作系统列表" , notes = "操作系统")
 	private List<String> hostOsIds;
+	
+	/**
+	 * 备份情况：备份情况
+	*/
+	@ApiModelProperty(required = false,value="备份情况" , notes = "备份情况")
+	private DictItem backupMethod;
 	
 	/**
 	 * 获得 主键<br>
@@ -698,6 +717,44 @@ public class Host extends Entity {
 	*/
 	public Host setPasswordStrategyId(String passwordStrategyId) {
 		this.passwordStrategyId=passwordStrategyId;
+		return this;
+	}
+	
+	/**
+	 * 获得 备份方式<br>
+	 * 备份方式
+	 * @return 备份方式
+	*/
+	public String getHostBackupMethod() {
+		return hostBackupMethod;
+	}
+	
+	/**
+	 * 设置 备份方式
+	 * @param hostBackupMethod 备份方式
+	 * @return 当前对象
+	*/
+	public Host setHostBackupMethod(String hostBackupMethod) {
+		this.hostBackupMethod=hostBackupMethod;
+		return this;
+	}
+	
+	/**
+	 * 获得 备份情况<br>
+	 * 备份情况
+	 * @return 备份情况
+	*/
+	public String getHostBackupInfo() {
+		return hostBackupInfo;
+	}
+	
+	/**
+	 * 设置 备份情况
+	 * @param hostBackupInfo 备份情况
+	 * @return 当前对象
+	*/
+	public Host setHostBackupInfo(String hostBackupInfo) {
+		this.hostBackupInfo=hostBackupInfo;
 		return this;
 	}
 	
@@ -1242,6 +1299,25 @@ public class Host extends Entity {
 	public Host addHostOsId(String hostOsId) {
 		if(this.hostOsIds==null) hostOsIds=new ArrayList<>();
 		this.hostOsIds.add(hostOsId);
+		return this;
+	}
+	
+	/**
+	 * 获得 备份情况<br>
+	 * 备份情况
+	 * @return 备份情况
+	*/
+	public DictItem getBackupMethod() {
+		return backupMethod;
+	}
+	
+	/**
+	 * 设置 备份情况
+	 * @param backupMethod 备份情况
+	 * @return 当前对象
+	*/
+	public Host setBackupMethod(DictItem backupMethod) {
+		this.backupMethod=backupMethod;
 		return this;
 	}
 

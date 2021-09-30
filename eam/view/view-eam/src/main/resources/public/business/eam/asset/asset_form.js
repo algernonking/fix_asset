@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:26:55
+ * @since 2021-09-30 10:14:28
  */
 
 function FormPage() {
@@ -194,6 +194,25 @@ function FormPage() {
 				adjustPopup();
 			}
 	    });
+		//渲染 safetyLevelCode 下拉字段
+		fox.renderSelectBox({
+			el: "safetyLevelCode",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
@@ -305,6 +324,24 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 maintenanceStatus 下拉字段
+		fox.renderSelectBox({
+			el: "maintenanceStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#maintenanceStartDate',
 			format:"yyyy-MM-dd",
@@ -363,6 +400,43 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+		//渲染 equipmentStatus 下拉字段
+		fox.renderSelectBox({
+			el: "equipmentStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 equipmentEnvironmentCode 下拉字段
+		fox.renderSelectBox({
+			el: "equipmentEnvironmentCode",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -401,6 +475,23 @@ function FormPage() {
 
 
 
+			//设置 采购日期 显示复选框勾选
+			if(formData["purchaseDate"]) {
+				$("#purchaseDate").val(fox.dateFormat(formData["purchaseDate"],"yyyy-MM-dd"));
+			}
+			//设置 开始时间 显示复选框勾选
+			if(formData["maintenanceStartDate"]) {
+				$("#maintenanceStartDate").val(fox.dateFormat(formData["maintenanceStartDate"],"yyyy-MM-dd"));
+			}
+			//设置 结束时间 显示复选框勾选
+			if(formData["maintenanceEndDate"]) {
+				$("#maintenanceEndDate").val(fox.dateFormat(formData["maintenanceEndDate"],"yyyy-MM-dd"));
+			}
+			//设置 入账时间 显示复选框勾选
+			if(formData["entryTime"]) {
+				$("#entryTime").val(fox.dateFormat(formData["entryTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+
 
 			//设置  资产分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#categoryId",formData.category);
@@ -412,6 +503,8 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#manufacturerId",formData.manufacturer);
+			//设置  安全等级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#safetyLevelCode",formData.safetyLevel);
 			//设置  位置 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#positionId",formData.position);
 			//设置  仓库 设置下拉框勾选
@@ -420,10 +513,16 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#sourceId",formData.source);
 			//设置  维保商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
+			//设置  维保状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#maintenanceStatus",formData.maintenanceStatus,SELECT_MAINTENANCESTATUS_DATA);
 			//设置  财务分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#financialCategoryId",formData.categoryFinance);
 			//设置  供应商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
+			//设置  设备状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#equipmentStatus",formData.equipmentStatus,SELECT_EQUIPMENTSTATUS_DATA);
+			//设置  运行环境 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#equipmentEnvironmentCode",formData.equipmentEnvironment);
 
 			//处理fillBy
 
@@ -482,6 +581,8 @@ function FormPage() {
 		data["goodsId"]=fox.getSelectedValue("goodsId",false);
 		//获取 厂商 下拉框的值
 		data["manufacturerId"]=fox.getSelectedValue("manufacturerId",false);
+		//获取 安全等级 下拉框的值
+		data["safetyLevelCode"]=fox.getSelectedValue("safetyLevelCode",false);
 		//获取 位置 下拉框的值
 		data["positionId"]=fox.getSelectedValue("positionId",false);
 		//获取 仓库 下拉框的值
@@ -490,10 +591,16 @@ function FormPage() {
 		data["sourceId"]=fox.getSelectedValue("sourceId",false);
 		//获取 维保商 下拉框的值
 		data["maintainerId"]=fox.getSelectedValue("maintainerId",false);
+		//获取 维保状态 下拉框的值
+		data["maintenanceStatus"]=fox.getSelectedValue("maintenanceStatus",false);
 		//获取 财务分类 下拉框的值
 		data["financialCategoryId"]=fox.getSelectedValue("financialCategoryId",false);
 		//获取 供应商 下拉框的值
 		data["supplierId"]=fox.getSelectedValue("supplierId",false);
+		//获取 设备状态 下拉框的值
+		data["equipmentStatus"]=fox.getSelectedValue("equipmentStatus",false);
+		//获取 运行环境 下拉框的值
+		data["equipmentEnvironmentCode"]=fox.getSelectedValue("equipmentEnvironmentCode",false);
 
 		return data;
 	}
