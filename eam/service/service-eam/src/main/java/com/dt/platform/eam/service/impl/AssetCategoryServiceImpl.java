@@ -70,7 +70,7 @@ public class AssetCategoryServiceImpl  extends SuperService<Catalog> implements 
             for(CatalogAttribute e:result.getData()){
                 if(DataType.STRING.code().equals(e.getDataType())
                         ||DataType.DATE_TIME.code().equals(e.getDataType())
-                      //  ||DataType.DECIMAL.equals(e.getDataType())
+                        ||DataType.DECIMAL.code().equals(e.getDataType())
                         ||DataType.INTEGER.code().equals(e.getDataType())){
                     list.add(e);
                 }

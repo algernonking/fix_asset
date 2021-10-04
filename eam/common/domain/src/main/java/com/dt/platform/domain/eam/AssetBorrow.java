@@ -17,10 +17,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产借用
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:33
- * @sign 29F1608F5BA2668C7B2C34B76738C1E8
+ * @since 2021-10-04 23:17:05
+ * @sign D3EE43845E359FB40C7F85C0EC87050C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

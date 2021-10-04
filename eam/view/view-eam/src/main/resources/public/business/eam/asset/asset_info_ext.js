@@ -35,6 +35,44 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             });
             admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
         },
+        highExportData:function(data,item){
+            var categoryId;
+            var assetCategorySelect= xmSelect.get('#categoryId',true);
+            if(assetCategorySelect){
+               categoryValue= assetCategorySelect.getValue();
+               console.log("categoryValue:"+categoryValue);
+               if(categoryValue&&categoryValue.length>0){
+                    categoryId=categoryValue[0].id;
+               }
+            }
+
+            var value = {};
+            value.businessCode={ value: $("#businessCode").val()};
+            value.assetCode={ value: $("#assetCode").val()};
+            value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+            value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
+            value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+            value.manufacturerId={ value: xmSelect.get("#manufacturerId",true).getValue("value"), fillBy:"manufacturer",field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
+            value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+            value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+            value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text()};
+            value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text()};
+            value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text()};
+            value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
+            value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+            value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
+            value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
+            value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+            var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+            var downloadUrl="/service-eam/eam-asset/export-excel";
+            if(categoryId){
+                ps.categoryId=categoryId;
+            }
+            fox.submit(downloadUrl,ps);
+        },
+        forBatchApproval:function(data,item){
+
+        },
         /**
          * 列表页初始化前调用
          * */
@@ -220,13 +258,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
                     var financialCategoryIdSelect= xmSelect.get('#financialCategoryId',true);
                     if(financialCategoryIdSelect){
-                        console.log(89898989,financialCategoryIdSelect)
                         financialCategoryIdSelect.update({disabled:true})
                     }
+                    
+                    var maintainerIdSelect= xmSelect.get('#maintainerId',true);
+                    if(maintainerIdSelect){
+                        maintainerIdSelect.update({disabled:true})
+                    }
+                    
 
                     var supplierSelect= xmSelect.get('#supplierId',true);
                     if(supplierSelect){
-                        console.log(89898989,supplierSelect)
                         supplierSelect.update({disabled:true})
                     }
 

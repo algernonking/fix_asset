@@ -74,7 +74,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
-
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
         cfg.view().list().operationColumn().width(20);
         cfg.view().formWindow().width("98%");

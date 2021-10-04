@@ -18,10 +18,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产调拨
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:26
- * @sign FEDCA1A66AE87C16E7CD06EB799EE7F4
+ * @since 2021-10-04 23:16:09
+ * @sign FD5D6A9CD60E2502747529B0F166B2F4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

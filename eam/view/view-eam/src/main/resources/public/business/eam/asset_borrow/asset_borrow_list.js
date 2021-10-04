@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:33
+ * @since 2021-10-04 23:17:16
  */
 
 
@@ -76,11 +76,11 @@ function ListPage() {
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') , templet: function (d) { return templet('borrowerId',fox.getProperty(d,["borrower","name"]),d);} }
-					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return templet('borrowTime',fox.dateFormat(d.borrowTime),d); }}
-					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate),d); }}
+					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return templet('borrowTime',fox.dateFormat(d.borrowTime,"yyyy-MM-dd"),d); }}
+					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('借出说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -218,7 +218,7 @@ function ListPage() {
 				field:"borrowerId",
 				inputEl:$("#borrowerId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"emp",
@@ -369,6 +369,9 @@ function ListPage() {
 					});
 				});
 				
+			}
+			else if (layEvent === 'for-approval') { // 送审
+				window.pageExt.list.forApproval(data);
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);

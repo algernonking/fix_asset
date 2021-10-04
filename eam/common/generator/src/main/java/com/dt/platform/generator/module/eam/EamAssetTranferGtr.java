@@ -101,7 +101,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
-
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
         cfg.view().list().operationColumn().width(250);

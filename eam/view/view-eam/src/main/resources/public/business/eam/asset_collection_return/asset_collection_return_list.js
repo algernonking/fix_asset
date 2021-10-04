@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:46
+ * @since 2021-10-04 23:18:48
  */
 
 
@@ -79,10 +79,10 @@ function ListPage() {
 					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('存放位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
 					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('退库说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return templet('returnDate',fox.dateFormat(d.returnDate),d); }}
+					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('退库日期'), templet: function (d) { return templet('returnDate',fox.dateFormat(d.returnDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -241,7 +241,7 @@ function ListPage() {
 				field:"useOrganizationId",
 				inputEl:$("#useOrganizationId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"org",
@@ -392,6 +392,9 @@ function ListPage() {
 					});
 				});
 				
+			}
+			else if (layEvent === 'for-approval') { // 送审
+				window.pageExt.list.forApproval(data);
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);

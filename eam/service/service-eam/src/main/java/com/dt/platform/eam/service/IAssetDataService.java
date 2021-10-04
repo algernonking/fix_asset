@@ -56,7 +56,7 @@ public interface IAssetDataService extends ISuperService<Asset> {
 	 * @param asset 资产实体
 	 * @return 结果
 	 * */
-	List<Asset> queryAssetList(List<String> ids,AssetVO asset);
+	PagedList<Asset> queryAssetPagedList(List<String> ids,AssetVO asset);
 
 
 
@@ -65,7 +65,7 @@ public interface IAssetDataService extends ISuperService<Asset> {
 	 * @param list 资产数据
 	 * @return 结果
 	 * */
-	Map<String, Object> queryAssetMap(List<Asset>list);
+	Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId);
 
 	/**
 	 * 插入实体

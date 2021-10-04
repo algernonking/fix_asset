@@ -4,7 +4,10 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.Asset;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.dt.platform.domain.eam.AssetPcmData;
+import com.dt.platform.domain.eam.AssetExtData;
+import java.util.Map;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
+import java.util.List;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.CategoryFinance;
 import org.github.foxnic.web.domain.pcm.Catalog;
@@ -21,8 +24,8 @@ import org.github.foxnic.web.domain.system.DictItem;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 08:31:13
- * @sign E9B65B2106608664CA78E7D422D10880
+ * @since 2021-10-04 11:03:47
+ * @sign 963089DC5021E13F9BE71ECC2FAAE457
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -809,14 +812,34 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
-	 * 自定义数据 , 类型: com.dt.platform.domain.eam.AssetPcmData
+	 * 扩展数据 , 类型: com.dt.platform.domain.eam.AssetExtData
+	*/
+	public static final String EXT_DATA="extData";
+	
+	/**
+	 * 扩展数据 , 类型: com.dt.platform.domain.eam.AssetExtData
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetExtData> EXT_DATA_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,EXT_DATA, com.dt.platform.domain.eam.AssetExtData.class, "扩展数据", "扩展数据", com.dt.platform.domain.eam.AssetExtData.class, null);
+	
+	/**
+	 * PCM数据 , 集合类型: MAP , 类型: java.lang.Object
 	*/
 	public static final String PCM_DATA="pcmData";
 	
 	/**
-	 * 自定义数据 , 类型: com.dt.platform.domain.eam.AssetPcmData
+	 * PCM数据 , 集合类型: MAP , 类型: java.lang.Object
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,com.dt.platform.domain.eam.AssetPcmData> PCM_DATA_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PCM_DATA, com.dt.platform.domain.eam.AssetPcmData.class, "自定义数据", "自定义数据", com.dt.platform.domain.eam.AssetPcmData.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Object> PCM_DATA_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PCM_DATA, java.util.Map.class, "PCM数据", "PCM数据", java.lang.Object.class, java.lang.String.class);
+	
+	/**
+	 * 自定义数据属性字段 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.CatalogAttribute
+	*/
+	public static final String CATALOG_ATTRIBUTE="catalogAttribute";
+	
+	/**
+	 * 自定义数据属性字段 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.CatalogAttribute
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,org.github.foxnic.web.domain.pcm.CatalogAttribute> CATALOG_ATTRIBUTE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CATALOG_ATTRIBUTE, java.util.List.class, "自定义数据属性字段", "自定义数据属性字段", org.github.foxnic.web.domain.pcm.CatalogAttribute.class, null);
 	
 	/**
 	 * 存放位置 , 类型: com.dt.platform.domain.eam.Position
@@ -981,7 +1004,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , PCM_DATA , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL };
 	
 	/**
 	 * 代理类
@@ -1850,13 +1873,35 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 自定义数据
-		 * @param pcmData 自定义数据
+		 * 设置 扩展数据
+		 * @param extData 扩展数据
 		 * @return 当前对象
 		*/
-		public Asset setPcmData(AssetPcmData pcmData) {
+		public Asset setExtData(AssetExtData extData) {
+			super.change(EXT_DATA,super.getExtData(),extData);
+			super.setExtData(extData);
+			return this;
+		}
+		
+		/**
+		 * 设置 PCM数据
+		 * @param pcmData PCM数据
+		 * @return 当前对象
+		*/
+		public Asset setPcmData(Map<String,Object> pcmData) {
 			super.change(PCM_DATA,super.getPcmData(),pcmData);
 			super.setPcmData(pcmData);
+			return this;
+		}
+		
+		/**
+		 * 设置 自定义数据属性字段
+		 * @param catalogAttribute 自定义数据属性字段
+		 * @return 当前对象
+		*/
+		public Asset setCatalogAttribute(List<CatalogAttribute> catalogAttribute) {
+			super.change(CATALOG_ATTRIBUTE,super.getCatalogAttribute(),catalogAttribute);
+			super.setCatalogAttribute(catalogAttribute);
 			return this;
 		}
 		

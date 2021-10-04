@@ -64,22 +64,6 @@ public class AssetDataController extends SuperController {
     @PostMapping(AssetDataServiceProxy.IMPORT_ASSET)
     public Result importAsset( HttpServletResponse response) throws Exception {
 
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
-        if(inputstream==null){
-            return  ErrorDesc.failure().message("获取模板文件失败");
-        }
-        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,null));
-        TemplateExportParams templateExportParams = new TemplateExportParams("/opt/upload/tpl/T001/eam_download_asset.xls");
-        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        workbook.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
-
         return ErrorDesc.success();
 
     }
@@ -157,23 +141,7 @@ public class AssetDataController extends SuperController {
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET)
     public Result exportAsset(AssetVO sample,HttpServletResponse response) throws Exception {
 
-        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
-        if(inputstream==null){
-            return  ErrorDesc.failure().message("获取模板文件失败");
-        }
-        File f=assetDataService.saveTempFile(inputstream,"TMP_"+AssetOperateEnum.EAM_DOWNLOAD_ASSET.code()+".xls");
-        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,sample));
-        TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
-        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
-        response.setContentType("application/vnd.ms-excel");
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        workbook.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+
         return ErrorDesc.success();
 
     }
@@ -188,21 +156,7 @@ public class AssetDataController extends SuperController {
     @PostMapping(AssetDataServiceProxy.EXPORT_ASSET_BY_IDS)
     public Result exportAssetByIds(List<String> ids, HttpServletResponse response) throws Exception {
 
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET.code());
-        if(inputstream==null){
-            return  ErrorDesc.failure().message("获取模板文件失败");
-        }
-        Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(ids,null));
-        TemplateExportParams templateExportParams = new TemplateExportParams("/opt/upload/tpl/T001/eam_download_asset.xls");
-        Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        workbook.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+
 
         return ErrorDesc.success();
 

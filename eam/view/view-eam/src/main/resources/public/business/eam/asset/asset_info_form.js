@@ -12,6 +12,7 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	var pcmColumns=[];
+	var extDataId;
 	/**
 	 * 入口函数，初始化
 	 */
@@ -74,6 +75,10 @@ function FormPage() {
 
 
 	function renderPcmColumnnHtml(cols){
+
+		if(cols){
+			pcmColumns=cols;
+		}
 		var html="<fieldset class=\"layui-elem-field layui-field-title form-group-title\">\n" +
 			"<legend>自定义属性</legend>\n" +
 			" </fieldset>"
@@ -92,15 +97,29 @@ function FormPage() {
 			var notNull="";
 			if(col.notNull==1){
 				notNull="<div class=\"layui-required\">*</div>";
+				var compTxt;
+				if(col.dataType=="STRING"){
+					compTxt="text_input";
+				}else if(col.dataType=="DATE_TIME"){
+					compTxt="date_input";
+				}else if(col.dataType=="INTEGER"){
+					compTxt="number_input";
+				}else if(col.dataType=="DECIMAL"){
+					compTxt="number_input";
+				}
+				if(compTxt){
+					VALIDATE_CONFIG[col.field]={"labelInForm":col.shortName,"inputType":compTxt,"required":true};
+				}
 			}
+			console.log(VALIDATE_CONFIG);
 			if(col.dataType=="STRING"){
 				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
 					"           <div class=\"layui-form-item\" >\n" +
-					"              <div class=\"layui-form-label \">" +
+					"              <div class=\"layui-form-label layui-form-label-c1\">" +
 					"					 <div>"+col.shortName+"</div>\n" +
 												notNull +
 					"              </div>"+
-					"              <div class=\"layui-input-block \">\n" +
+					"              <div class=\"layui-input-block layui-input-block-c1\">\n" +
 					"                 <input lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\" placeholder=\"请输入内容\" type=\"text\" class=\"layui-input layui-input-number\"  />\n" +
 					"             </div>\n" +
 					" 		   </div>\n" +
@@ -120,44 +139,48 @@ function FormPage() {
 			}else if(col.dataType=="INTEGER"){
 				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
 								"<div class=\"layui-form-item\" >\n" +
-								"  	 <div class=\"layui-form-label\">" +
+								"  	 <div class=\"layui-form-label layui-form-label-c1\">" +
 								"		<div>"+col.shortName+"</div>" +
 											notNull +
 								"    </div>\n" +
-								"    <div class=\"layui-input-block\">\n" +
+								"    <div class=\"layui-input-block layui-input-block-c1\">\n" +
 								"        <input lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\" placeholder=\"请输入内容\" type=\"text\" class=\"layui-input\"\n" +
 								"         autocomplete=\"off\" input-type=\"number_input\" integer=\"false\" decimal=\"true\" allow-negative=\"true\" step=\"1.0\" scale=\"0\"/>\n" +
 								"    </div>\n" +
 								"</div>\n"+
 							"</div>\n"
-			}else if(col.dataType=="INTEGER_2"){
-
-
+			}else if(col.dataType=="DECIMAL"){
+				var scale=2;
+				if(col.scale)scale=col.scale;
+				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
+					"<div class=\"layui-form-item\" >\n" +
+					"  	 <div class=\"layui-form-label layui-form-label-c1\">" +
+					"		<div>"+col.shortName+"</div>" +
+					notNull +
+					"    </div>\n" +
+					"    <div class=\"layui-input-block layui-input-block-c1\">\n" +
+					"        <input lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\" placeholder=\"请输入内容\" type=\"text\" class=\"layui-input\"\n" +
+					"         autocomplete=\"off\" input-type=\"number_input\" integer=\"false\" decimal=\"true\" allow-negative=\"true\" step=\"1.0\" scale=\""+scale+"\"/>\n" +
+					"    </div>\n" +
+					"</div>\n"+
+					"</div>\n"
 			}
-
 		}
-
 		html=html+"<div style=\"height:80px\"></div>";
-		console.log(html)
 		if(cols.length==0){
 			$("#pcmExtColumn").hide();
 		}else{
 			$("#pcmExtColumn").show();
 			$("#pcmExtColumn").html(html);
 		}
-
-
 		for(var i=0;i<cols.length;i++){
-			var col=cols[i];
-		   if(col.dataType=="DATE_TIME"){
+		   if(cols[i].dataType=="DATE_TIME"){
 			   laydate.render({
-			   	elem: '#id_'+col.id,
+			   	elem: '#id_'+cols[i].id,
 			   	format:"yyyy-MM-dd",
 			   	trigger:"click"
 			   });
-
 		   }
-
 		}
 
 	}
@@ -187,31 +210,25 @@ function FormPage() {
 			on: function(data){
 				if(data.isAdd){
 					console.log(data);
-
 					var result=data.change.slice(0, 1);
-
-					console.log(result);
 					var task=setTimeout(function(){layer.load(2);},1000);
 					var ps={}
 					if(result.length==1){
 						ps={categoryId:result[0].id}
 					}
 					admin.request("/service-eam/eam-asset-category/query-catalog-attribute-by-asset-category", ps, function (attributeData) {
-						console.log(attributeData)
 						clearTimeout(task);
 						layer.closeAll('loading');
 						if (attributeData.success) {
-							pcmColumns=attributeData.data;
+
 							renderPcmColumnnHtml(attributeData.data);
 						} else {
 							layer.msg(data.message, {icon: 2, time: 1000});
 						}
 					}, "POST");
 
-
 					return result;
 				}
-
 
 			},
 			//显示为text模式
@@ -421,7 +438,7 @@ function FormPage() {
 		});
 		//渲染 maintainerId 下拉字段
 		fox.renderSelectBox({
-			el: "#maintainerId",
+			el: "maintainerId",
 			radio: true,
 			filterable: true,
 			//转换数据
@@ -552,7 +569,7 @@ function FormPage() {
 		});
 		//渲染 supplierId 下拉字段
 		fox.renderSelectBox({
-			el: "#supplierId",
+			el: "supplierId",
 			radio: true,
 			filterable: false,
 			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
@@ -596,7 +613,34 @@ function FormPage() {
 		var fm=$('#data-form');
 		if (hasData) {
 			fm[0].reset();
+			//加载自定义数据
+			if(formData&&formData.catalogAttribute){
+				renderPcmColumnnHtml(formData.catalogAttribute);
+				if(formData.extData&&formData.extData.data){
+					var extDataData=formData.extData.data;
+					extDataId=formData.extData.id;
+					console.log("render extData",extDataData)
+					for(var i=0;i<formData.catalogAttribute.length;i++){
+						var col=formData.catalogAttribute[i];
+						if(extDataData[col.field]) {
+							if (col.dataType == "STRING" || col.dataType == "INTEGER"||col.dataType == "DECIMAL") {
+								formData[col.field] = extDataData[col.field];
+							} else if (col.dataType == "DATE_TIME") {
+								var v= extDataData[col.field];
+								var vv="";
+								if(v.length>10){
+									vv= v.substr(0,10);
+								}
+								formData[col.field] =vv;
+							}
+						}
+					}
+				}
+			}
+
+
 			form.val('data-form', formData);
+
 
 			//设置 图片 显示附件
 			if($("#pictureId").val()) {
@@ -653,6 +697,8 @@ function FormPage() {
 			fm.attr('method', 'POST');
 			fox.fillDialogButtons();
 			renderFormFields();
+
+
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
 
@@ -730,21 +776,25 @@ function FormPage() {
 	}
 
 	function saveForm(data) {
-		var pcmData={
-			pcmData:{}
-			// "EP01": "华为2w",
-			// "EP02": 192,
-			// "EP03":"13.8"
-		}
+
+		
+		//自定义数据
 		if(pcmColumns.length>0){
+			var pcmData={};
 			for(var i=0;i<pcmColumns.length;i++){
 				var col=pcmColumns[i];
-				if(col.dataType=="STRING"||col.dataType=="INTEGER"||col.dataType=="DATE_TIME"){
-					pcmData.pcmData[col.field]=data[col.field];
+				if(col.dataType=="STRING"||col.dataType=="INTEGER"||col.dataType=="DECIMAL"||col.dataType=="DATE_TIME"){
+					if(data[col.field]){
+						pcmData[col.field]=data[col.field];
+					}
 				}
 			}
+			if(data.id&&extDataId){
+				pcmData.id=extDataId;
+			}
+			data.pcmData=pcmData;
 		}
-		data.pcmData=pcmData;
+		
 		var api=moduleURL+"/"+(data.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
 		admin.request(api, data, function (data) {

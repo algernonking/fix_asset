@@ -1,6 +1,8 @@
 package com.dt.platform.eam.service.impl;
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
@@ -16,15 +18,13 @@ import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
-import org.github.foxnic.web.domain.pcm.Catalog;
-import org.github.foxnic.web.domain.pcm.CatalogAttribute;
-import org.github.foxnic.web.domain.pcm.CatalogData;
-import org.github.foxnic.web.domain.pcm.CatalogVO;
+import org.github.foxnic.web.domain.pcm.*;
 import org.github.foxnic.web.domain.system.Dict;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
@@ -87,8 +87,9 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
     @Override
-    public List<Asset> queryAssetList(List<String> ids, AssetVO asset) {
-        return assetService.queryList(asset);
+    public PagedList<Asset> queryAssetPagedList(List<String> ids, AssetVO asset) {
+        return assetService.queryPagedList(asset,10000,1);
+
     }
 
 
@@ -103,7 +104,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
         }
         return key;
-        //这个key肯定是最后一个满足该条件的key.
     }
 
 
@@ -200,7 +200,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         HashMap<String,String> orgMap=matchMap.get("organizationMap");
         HashMap<String,String> categoryMap=matchMap.get("categoryMap");
-
         //id ,label
         HashMap<String,String> safetyLevelMap=matchMap.get("safetyLevelMap");
         HashMap<String,String> equipEnvMap=matchMap.get("equipEnvMap");
@@ -495,7 +494,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
     @Override
-    public Map<String, Object> queryAssetMap(List<Asset>list) {
+    public Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId) {
         HashMap<String,String> orgMap=queryUseOrganizationNodes();
 
         HashMap<String,String> categoryMap=queryAssetCategoryNodes();
@@ -528,12 +527,35 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         assetService.join(list,AssetMeta.USE_USER);
 
         assetService.join(list,AssetMeta.ORIGINATOR);
-
+        String tenantId=SessionUser.getCurrent().getActivatedTenantId();
 
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);
+            if(!StringUtil.isBlank(categoryId)){
+                if(!categoryId.equals(assetItem.getCategoryId())){
+                    continue;
+                }
+            }
+
             Map<String, Object> assetMap= BeanUtil.toMap(assetItem);
+            //获取自定义属性
+            DataQueryVo vo=new DataQueryVo();
+            vo.setCatalogId(categoryId);
+            vo.setTenantId(tenantId);
+            List<String> ids=new ArrayList<>();
+            ids.add(assetItem.getId());
+            vo.setOwnerIds(ids);
+            Result itemResult=CatalogServiceProxy.api().queryData(vo);
+            if(itemResult.isSuccess()){
+                JSONArray dataArr=(JSONArray)itemResult.getData();
+                if(dataArr.size()>0){
+                    JSONObject dataObj=dataArr.getJSONObject(0);
+                    for(String key:dataObj.keySet()){
+                        assetMap.put("PCM_EXT_"+key,dataObj.get(key));
+                    }
+                }
+            }
 
             //资产状态
             CodeTextEnum vAssetStatus=EnumUtil.parseByCode(AssetStatusEnum.class,assetItem.getAssetStatus()) ;

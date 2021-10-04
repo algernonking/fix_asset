@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:26
+ * @since 2021-10-04 23:16:20
  */
 
 
@@ -80,8 +80,8 @@ function ListPage() {
 					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') , templet: function (d) { return templet('managerId',fox.getProperty(d,["manager","name"]),d);} }
 					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('调拨说明') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","name"]),d);} }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate),d); }}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -220,7 +220,7 @@ function ListPage() {
 				field:"outOwnCompanyId",
 				inputEl:$("#outOwnCompanyId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"com",
@@ -235,7 +235,7 @@ function ListPage() {
 				field:"inOwnCompanyId",
 				inputEl:$("#inOwnCompanyId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"com",
@@ -386,6 +386,9 @@ function ListPage() {
 					});
 				});
 				
+			}
+			else if (layEvent === 'for-approval') { // 送审
+				window.pageExt.list.forApproval(data);
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);

@@ -16,17 +16,18 @@ import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.eam.service.IAssetDataService;
-import com.dt.platform.eam.service.IAssetItemService;
-import com.dt.platform.eam.service.IOperateService;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
+import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
+import org.springframework.util.IdGenerator;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,7 +68,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiImplicitParam;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.dt.platform.eam.service.IAssetService;
 import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
@@ -94,6 +94,9 @@ public class AssetController extends SuperController {
 
 	@Autowired
 	private IAssetDataService assetDataService;
+
+	@Autowired
+	private IAssetCategoryService assetCategoryService;
 	/**
 	 * 添加资产
 	*/
@@ -174,21 +177,22 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.INSERT)
 	public Result insert(Asset assetVO) {
-		System.out.println("##########"+assetVO.getPcmData());
+		String id= IDGenerator.getSnowflakeIdString();
+		assetVO.setId(id);
+		//先保存自定义属性
+		if(assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
+			CatalogData pcmData=new CatalogData();
+			pcmData.setData(assetVO.getPcmData());
+			pcmData.setOwnerId(id);
+			pcmData.setCatalogId(assetVO.getCategoryId());
+			pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+			Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
+			if(!pcmResult.isSuccess()){
+				return pcmResult;
+			}
+		}
 		Result result=assetService.insert(assetVO);
 		if(result.isSuccess()){
-//			//保存自定义属性
-//			if(assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
-//				CatalogData pcmData=new CatalogData();
-//				pcmData.setData(assetVO.getPcmData());
-//				pcmData.setOwnerId(assetVO.getId().toString());
-//				pcmData.setCatalogId(assetVO.getCategoryId());
-//				pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
-//				Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
-//				if(!pcmResult.isSuccess()){
-//					return pcmResult;
-//				}
-//			}
 			 assetService.confirmOperation(assetVO.getId());
 		}
 		return result;
@@ -310,20 +314,23 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.UPDATE)
 	public Result update(Asset assetVO) {
-		System.out.println(assetVO.getPcmData());
-		Result result=assetService.update(assetVO,SaveMode.NOT_NULL_FIELDS);
 		//保存自定义属性
-		//if(result.isSuccess()&&assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
-//			CatalogData pcmData=new CatalogData();
-//			pcmData.setData(assetVO.getPcmData());
-//			pcmData.setOwnerId(assetVO.getId().toString());
-//			pcmData.setCatalogId(assetVO.getCategoryId());
-//			pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
-//			Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
-//			if(!pcmResult.isSuccess()){
-//				return pcmResult;
-//			}
-	//	}
+		if(assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
+			//删除原来
+			String idValue=assetVO.getPcmData().get("id").toString();
+			System.out.println("idValue:"+idValue);
+			CatalogData pcmData=new CatalogData();
+			pcmData.setId(idValue);
+			pcmData.setData(assetVO.getPcmData());
+			pcmData.setOwnerId(assetVO.getId());
+			pcmData.setCatalogId(assetVO.getCategoryId());
+			pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+			Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
+			if(!pcmResult.isSuccess()){
+				return pcmResult;
+			}
+		}
+		Result result=assetService.update(assetVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
 	
@@ -453,7 +460,10 @@ public class AssetController extends SuperController {
 		assetService.join(asset,AssetMeta.MANAGER);
 		assetService.join(asset,AssetMeta.USE_USER);
 		assetService.join(asset,AssetMeta.ORIGINATOR);
-		asset.setPcmData(assetService.getPcmDataById(id,asset.getCategoryId()));
+
+		//加载自定义数据
+		asset.setCatalogAttribute(assetCategoryService.queryCatalogAttributeByAssetCategory(asset.getCategoryId()));
+		asset.setExtData(assetService.getExtDataById(asset.getId(),asset.getCategoryId()));
 		result.success(true).data(asset);
 		return result;
 	}
@@ -900,20 +910,19 @@ public class AssetController extends SuperController {
 		//生成 Excel 数据
 		InputStream inputstream= assetService.buildExcelTemplate(categoryId);
 		if(inputstream==null){
-			return ;
+			return;
 		}
 
 		File f=assetDataService.saveTempFile(inputstream,"TMP_download_asset_data.xls");
+		Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetPagedList(null,sample),categoryId);
 
-		Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetList(null,sample));
 		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+		templateExportParams.setScanAllsheet(true);
 		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
-
 		response.setCharacterEncoding("UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
 		response.setContentType("application/vnd.ms-excel");
 		OutputStream out = response.getOutputStream();
-
 		BufferedOutputStream bos = new BufferedOutputStream(out);
 		workbook.write(bos);
 		bos.flush();
@@ -931,6 +940,7 @@ public class AssetController extends SuperController {
 	@RequestMapping(AssetServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public Result exportExcelTemplate(HttpServletResponse response,String categoryId) throws Exception {
 		//生成 Excel 模版
+		//categoryId="497488128370540545";
 		InputStream inputstream=assetService.buildExcelTemplate(categoryId);
 		if(inputstream==null){
 			return ErrorDesc.failure().message("获取模板文件失败");

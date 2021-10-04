@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 08:31:15
+ * @since 2021-10-04 11:03:50
  */
 
 layui.config({

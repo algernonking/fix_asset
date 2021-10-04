@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-27 13:02:32
+ * @since 2021-10-04 23:19:26
  */
 
 
@@ -394,6 +394,9 @@ function ListPage() {
 					});
 				});
 				
+			}
+			else if (layEvent === 'for-approval') { // 送审
+				window.pageExt.list.forApproval(data);
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);

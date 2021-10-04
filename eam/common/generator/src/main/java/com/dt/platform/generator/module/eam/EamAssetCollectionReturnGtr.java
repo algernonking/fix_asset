@@ -116,7 +116,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
 
 
-
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
         cfg.view().list().operationColumn().width(250);
 

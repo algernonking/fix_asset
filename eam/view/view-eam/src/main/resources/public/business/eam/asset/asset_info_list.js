@@ -12,6 +12,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset";
 	var dataTable=null;
+	var categorySelect;
 	/**
 	 * 入口函数，初始化
 	 */
@@ -140,13 +141,10 @@ function ListPage() {
 		value.manufacturerId={ value: xmSelect.get("#manufacturerId",true).getValue("value"), fillBy:"manufacturer",field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
 		value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-
 		value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text()};
 		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text()};
-
 		value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text()};
 		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text()};
-
 		value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
@@ -156,7 +154,12 @@ function ListPage() {
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}
+
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+		var categoryValue=categorySelect.getValue();
+		if(categoryValue&&categoryValue.length>0){
+			ps.categoryId=categoryValue[0].id;
+		}
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -208,6 +211,39 @@ function ListPage() {
 				return opts;
 			}
 		});
+
+
+		//渲染 categoryId 下拉字段
+		categorySelect = xmSelect.render({
+			el: '#categoryId',
+			prop: {
+				name: 'name',
+				value: 'id',
+			},
+			filterable: true,
+			strict: false,
+			tree: {
+				// showFolderIcon: true,
+				show: true,
+				strict: true,
+				expandedKeys: [ -1],
+			},
+			//处理方式
+			on: function(data){
+				if(data.isAdd){
+					var result=data.change.slice(0, 1);
+					return result;
+				}
+			},
+			//显示为text模式
+			model: { label: { type: 'text' } },
+			//单选模式
+			radio: true,
+			//选中关闭
+			clickClose: true,
+			height: 'auto',
+			data:ASSET_CATEGORY_DATA
+		})
 		//渲染 assetStatus 下拉字段
 		fox.renderSelectBox({
 			el: "assetStatus",
@@ -430,6 +466,12 @@ function ListPage() {
 					break;
 				case 'refresh-data':
 					refreshTableData();
+					break;
+				case 'forBatchApproval':
+					window.pageExt.list.forBatchApproval && window.pageExt.list.forBatchApproval(selected,obj);
+					break;
+				case 'highExportData':
+					window.pageExt.list.highExportData && window.pageExt.list.highExportData(selected,obj);
 					break;
 				case 'other':
 					break;

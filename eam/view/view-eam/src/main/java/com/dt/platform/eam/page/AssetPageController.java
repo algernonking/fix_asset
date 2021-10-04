@@ -95,7 +95,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_select_list.html")
 	public String selectLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
 
-		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
+		Result idResult=AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
 		return prefix+"/asset_select_list";
@@ -161,7 +161,8 @@ public class AssetPageController extends ViewController {
 			model.addAttribute("attributeListData",list);
 		}
 
-		Result idResult=AssetCategoryServiceProxy.api().queryNodeIdByCode(AssetCategoryCodeEnum.ASSET.code());
+
+		Result idResult=AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
 		return prefix+"/asset_search/category_tree";
 	}
@@ -244,6 +245,20 @@ public class AssetPageController extends ViewController {
 			List<AssetAttributeItem> list=data.get("attributeListData");
 			model.addAttribute("attributeListData",list);
 		}
+
+		CatalogVO catalog=new CatalogVO();
+		catalog.setCode("asset");
+		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(catalogList.get(0).getId());
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
 		return prefix+"/asset_info_list";
 	}
 
@@ -293,8 +308,9 @@ public class AssetPageController extends ViewController {
 				}
 			}
 		}
-
 		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
+
+
 		CatalogVO catalog=new CatalogVO();
 		catalog.setCode("asset");
 		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);

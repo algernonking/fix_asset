@@ -3,14 +3,17 @@ package com.dt.platform.domain.eam;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.ArrayList;
+import com.github.foxnic.api.model.CompositeParameter;
+import javax.persistence.Transient;
+import com.github.foxnic.commons.bean.BeanUtil;
 
 
 
 /**
- * null
+ * 资产报废
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:16
- * @sign B281E34080B23EDDC396E3A44AECE425
+ * @since 2021-10-04 23:20:00
+ * @sign B34E37F4D7919FFE2AE406FAFB41D75F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -220,5 +223,17 @@ public class AssetScrapVO extends AssetScrap {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;
+	}
+	@Transient
+	private CompositeParameter $compositeParameter;
+	/**
+	 * 获得解析后的复合查询参数
+	 */
+	@Transient
+	public CompositeParameter getCompositeParameter() {
+		if($compositeParameter!=null) return  $compositeParameter;
+		if(!"$composite".equals(this.getSearchField())) return null;
+		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
+		return  $compositeParameter;
 	}
 }

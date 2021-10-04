@@ -3,11 +3,12 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.eam.common.ResetOnCloseInputStream;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -22,20 +23,11 @@ import com.github.foxnic.dao.meta.DBTableMeta;
 import com.github.foxnic.dao.sql.SQLBuilder;
 import com.github.foxnic.sql.expr.*;
 import com.github.foxnic.sql.treaty.DBTreaty;
-import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
 import org.apache.poi.ss.usermodel.*;
-import org.github.foxnic.web.domain.hrm.Employee;
-import org.github.foxnic.web.domain.hrm.EmployeeVO;
-import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
-import org.github.foxnic.web.domain.system.DictItem;
-import org.github.foxnic.web.domain.system.DictItemVO;
-import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
-import org.github.foxnic.web.proxy.pcm.CatalogAttributeServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
-import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,7 +44,6 @@ import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.api.error.ErrorDesc;
 
 import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.meta.DBColumnMeta;
 
 import org.github.foxnic.web.framework.dao.DBConfigs;
 
@@ -165,23 +156,33 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
-	public AssetPcmData getPcmDataById(String id,String categoryId){
-		AssetPcmData pcmData=new AssetPcmData();
+	public AssetExtData getExtDataById(String ownerId, String categoryId){
+		HashMap<String,Object> map=new HashMap<>();
+		AssetExtData extData=new AssetExtData();
+		extData.setOwnerId(ownerId);
+		extData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
 		List<String> ids=new ArrayList<String>();
-		ids.add(id);
+		ids.add(ownerId);
 		DataQueryVo vo=new DataQueryVo();
 		vo.setCatalogId(categoryId);
 		vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
 		vo.setOwnerIds(ids);
 		Result categoryResult=CatalogServiceProxy.api().queryData(vo);
 		if(categoryResult.isSuccess()){
-			pcmData.setPcmData(new HashMap<String,Object>());
+			JSONArray dataArr=(JSONArray)categoryResult.getData();
+			if(dataArr!=null&&dataArr.size()>0){
+				JSONObject dataObj=dataArr.getJSONObject(0);
+				for(String key:dataObj.keySet()){
+					if("id".equals(key)) extData.setId(dataObj.getString(key));
+					map.put(key, dataObj.get(key));
+				}
+			}
+			extData.setData(map);
 		}else{
-			pcmData.setPcmData(new HashMap<String,Object>());
+			return null;
 		}
-		List<CatalogAttribute> attributeList=assetCategoryService.queryCatalogAttributeByAssetCategory(categoryId);
-		pcmData.setAttribute(attributeList);
-		return pcmData;
+
+		return extData;
 
 	}
 
@@ -463,6 +464,16 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			sample.setCategoryId(null);
 		}
 
+		if(!StringUtil.isBlank(sample.getUseOrganizationId())) {
+			queryCondition.and("use_organization_id in (select id from hrm_organization where deleted=0 and type in ('com','dept') and (concat('/',hierarchy) like '%/"+sample.getUseOrganizationId()+"/%' or id=?))",sample.getUseOrganizationId());
+			sample.setUseOrganizationId(null);
+		}
+
+
+		if(!StringUtil.isBlank(sample.getOwnCompanyId())) {
+			queryCondition.and("own_company_id in (select id from hrm_organization where deleted=0 and type in ('com','dept') and (concat('/',hierarchy) like '%/"+sample.getOwnCompanyId()+"/%' or id=?))",sample.getOwnCompanyId());
+			sample.setOwnCompanyId(null);
+		}
 
 		Result r=conditionAssetBusinessType(businessType,queryCondition);
 		if(r.isSuccess()){
@@ -780,26 +791,37 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 						fcCategoryBase.setCellStyle(cs);
 						int i=0;
 						for(i=0;i<catalogAttributeList.size();i++){
+
 							CatalogAttribute attribute=catalogAttributeList.get(i);
-
-							Cell fc=firstRow.createCell(lastNum+i, CellType.STRING);
-							fc.setCellValue(attribute.getShortName());
-							fc.setCellStyle(cs);
-
 							//sheet2上在category上添加标记
 							Cell fcCategory=categoryFirstRow.createCell(i+1, CellType.STRING);
 							fcCategory.setCellValue("PCM_EXT_"+attribute.getField()+"");
 							fcCategory.setCellStyle(cs);
 
+							//sheet1 上
+							Cell fc=firstRow.createCell(lastNum+i, CellType.STRING);
+							fc.setCellValue(attribute.getShortName());
+							fc.setCellStyle(cs);
 
 							Cell sc=secondRow.createCell(lastNum+i, CellType.STRING);
 							sc.setCellStyle(cs);
-							if(i==catalogAttributeList.size()-1){
-								sc.setCellValue("t.PCM_EXT_"+attribute.getField()+"}}");
-							}else{
-								sc.setCellValue("t.PCM_EXT_"+attribute.getField());
-							}
+							sc.setCellValue("t.PCM_EXT_"+attribute.getField());
+//							if(i==catalogAttributeList.size()-1){
+//								sc.setCellValue("t.PCM_EXT_"+attribute.getField()+"}}");
+//							}else{
+//
+//							}
 						}
+						Cell fcCategory=categoryFirstRow.createCell(i+1, CellType.STRING);
+						fcCategory.setCellValue("PCM_EXT_ID");
+						fcCategory.setCellStyle(cs);
+						Cell fc=firstRow.createCell(lastNum+i, CellType.STRING);
+						fc.setCellValue("自定义属性主键");
+						fc.setCellStyle(cs);
+						Cell sc=secondRow.createCell(lastNum+i, CellType.STRING);
+						sc.setCellStyle(cs);
+						sc.setCellValue("t.PCM_EXT_ID}}");
+
 
 						//修改原标记
 						Cell sourceEndColumnCell=secondRow.getCell(lastNum-1);

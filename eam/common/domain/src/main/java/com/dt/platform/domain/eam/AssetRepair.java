@@ -17,10 +17,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产报修
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-27 13:02:23
- * @sign 4DA972892048EC08E439AC788D195E26
+ * @since 2021-10-04 23:19:20
+ * @sign CDDD5211A44DB3C44DAECE662B1EAE5D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

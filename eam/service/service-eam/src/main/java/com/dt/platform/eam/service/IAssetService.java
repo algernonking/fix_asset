@@ -1,7 +1,7 @@
 package com.dt.platform.eam.service;
 
 
-import com.dt.platform.domain.eam.AssetPcmData;
+import com.dt.platform.domain.eam.AssetExtData;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Asset;
@@ -34,7 +34,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * @param categoryId 资产分类
 	 * @return Asset 数据对象
 	 */
-	AssetPcmData getPcmDataById(String id,String categoryId);
+	AssetExtData getExtDataById(String id, String categoryId);
 
 
 	Result confirmOperation(String id);

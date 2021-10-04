@@ -58,7 +58,7 @@ public interface AssetCategoryServiceProxy {
      * 根据code查询ID
      */
     @RequestMapping(AssetCategoryServiceProxy.QUERY_NODES_BY_CODE)
-    Result<String> queryNodeIdByCode(String code);
+    Result<String> queryNodesByCode(String code);
 
 
     @RequestMapping(AssetCategoryServiceProxy.QUERY_CATALOG_ATTRIBUTE_BY_ASSET_CATEGORY)

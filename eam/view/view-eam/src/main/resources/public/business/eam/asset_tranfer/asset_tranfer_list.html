@@ -2,7 +2,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:30
+ * @since 2021-10-04 23:20:46
  */
  -->
  <!DOCTYPE html>
@@ -122,6 +122,7 @@
 
     <button th:if="${perm.checkAuth('eam_asset_tranfer:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
+    <button class="layui-btn layui-btn-xs " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
     <button class="layui-btn layui-btn-xs " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>
 
 </script>

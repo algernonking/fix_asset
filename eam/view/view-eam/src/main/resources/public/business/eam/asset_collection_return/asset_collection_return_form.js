@@ -1,7 +1,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:46
+ * @since 2021-10-04 23:18:52
  */
 
 function FormPage() {
@@ -151,6 +151,11 @@ function FormPage() {
 
 
 
+
+			//设置 退库日期 显示复选框勾选
+			if(formData["returnDate"]) {
+				$("#returnDate").val(fox.dateFormat(formData["returnDate"],"yyyy-MM-dd"));
+			}
 
 
 			//设置  存放位置 设置下拉框勾选

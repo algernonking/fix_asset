@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-27 13:02:25
+ * @since 2021-10-04 23:19:21
  */
 
 layui.config({
@@ -128,6 +128,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
+        },
+        forApproval:function (data){
+            console.log('forApproval',data);
         },
         downloadBill:function (data){
             console.log('downloadBill',data);

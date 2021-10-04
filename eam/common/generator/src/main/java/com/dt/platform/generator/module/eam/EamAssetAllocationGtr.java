@@ -55,6 +55,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
+
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
 
         cfg.view().list().operationColumn().width(250);

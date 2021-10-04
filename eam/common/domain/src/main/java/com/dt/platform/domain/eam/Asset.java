@@ -8,12 +8,16 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
+import java.util.List;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
+import java.util.HashMap;
+import java.util.ArrayList;
 import javax.persistence.Transient;
-import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
 
@@ -21,8 +25,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 08:31:13
- * @sign E9B65B2106608664CA78E7D422D10880
+ * @since 2021-10-04 11:03:47
+ * @sign 963089DC5021E13F9BE71ECC2FAAE457
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -503,10 +507,22 @@ public class Asset extends Entity {
 	private String originatorId;
 	
 	/**
-	 * 自定义数据：自定义数据
+	 * 扩展数据：扩展数据
 	*/
-	@ApiModelProperty(required = false,value="自定义数据" , notes = "自定义数据")
-	private AssetPcmData pcmData;
+	@ApiModelProperty(required = false,value="扩展数据" , notes = "扩展数据")
+	private AssetExtData extData;
+	
+	/**
+	 * PCM数据：PCM数据
+	*/
+	@ApiModelProperty(required = false,value="PCM数据" , notes = "PCM数据")
+	private Map<String,Object> pcmData;
+	
+	/**
+	 * 自定义数据属性字段：自定义数据属性字段
+	*/
+	@ApiModelProperty(required = false,value="自定义数据属性字段" , notes = "自定义数据属性字段")
+	private List<CatalogAttribute> catalogAttribute;
 	
 	/**
 	 * 存放位置：存放位置
@@ -2087,21 +2103,82 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 自定义数据<br>
-	 * 自定义数据
-	 * @return 自定义数据
+	 * 获得 扩展数据<br>
+	 * 扩展数据
+	 * @return 扩展数据
 	*/
-	public AssetPcmData getPcmData() {
+	public AssetExtData getExtData() {
+		return extData;
+	}
+	
+	/**
+	 * 设置 扩展数据
+	 * @param extData 扩展数据
+	 * @return 当前对象
+	*/
+	public Asset setExtData(AssetExtData extData) {
+		this.extData=extData;
+		return this;
+	}
+	
+	/**
+	 * 获得 PCM数据<br>
+	 * PCM数据
+	 * @return PCM数据
+	*/
+	public Map<String,Object> getPcmData() {
 		return pcmData;
 	}
 	
 	/**
-	 * 设置 自定义数据
-	 * @param pcmData 自定义数据
+	 * 设置 PCM数据
+	 * @param pcmData PCM数据
 	 * @return 当前对象
 	*/
-	public Asset setPcmData(AssetPcmData pcmData) {
+	public Asset setPcmData(Map<String,Object> pcmData) {
 		this.pcmData=pcmData;
+		return this;
+	}
+	
+	/**
+	 * 添加 PCM数据
+	 * @param key 键
+	 * @param pn PCM数据
+	 * @return 当前对象
+	*/
+	public Asset putPcmData(String key,Object pcmData) {
+		if(this.pcmData==null) this.pcmData=new HashMap<>();
+		this.pcmData.put(key ,pcmData);
+		return this;
+	}
+	
+	/**
+	 * 获得 自定义数据属性字段<br>
+	 * 自定义数据属性字段
+	 * @return 自定义数据属性字段
+	*/
+	public List<CatalogAttribute> getCatalogAttribute() {
+		return catalogAttribute;
+	}
+	
+	/**
+	 * 设置 自定义数据属性字段
+	 * @param catalogAttribute 自定义数据属性字段
+	 * @return 当前对象
+	*/
+	public Asset setCatalogAttribute(List<CatalogAttribute> catalogAttribute) {
+		this.catalogAttribute=catalogAttribute;
+		return this;
+	}
+	
+	/**
+	 * 添加 自定义数据属性字段
+	 * @param entity 自定义数据属性字段
+	 * @return 当前对象
+	*/
+	public Asset addCatalogAttribute(CatalogAttribute entity) {
+		if(this.catalogAttribute==null) catalogAttribute=new ArrayList<>();
+		this.catalogAttribute.add(entity);
 		return this;
 	}
 	

@@ -18,10 +18,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产转移
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:30
- * @sign 21EFF193781AE943431AD737B18EC4FF
+ * @since 2021-10-04 23:20:42
+ * @sign 3066578D276906B773B2AD9F4580FCC8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

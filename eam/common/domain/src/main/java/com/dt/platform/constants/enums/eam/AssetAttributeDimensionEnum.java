@@ -14,7 +14,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetAttributeDimensionEnum implements CodeTextEnum {
 
 	ATTRIBUTION("attribution" , "基本信息"),
-	MAINTAINER("maintainer" , "维保商信息"),
+	MAINTAINER("maintainer" , "维保信息"),
 	FINANCIAL("financial" , "财务信息"),
 	EQUIPMENT("equipment" , "设备信息")
 	;
