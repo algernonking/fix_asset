@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 12:15:14
+ * @since 2021-10-01 07:37:20
  */
 
 
@@ -77,19 +77,19 @@ function ListPage() {
 					,{ field: 'pid', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('父节点') , templet: function (d) { return templet('pid',d.pid,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'profile', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('介绍') , templet: function (d) { return templet('profile',d.profile,d);}  }
-					,{ field: 'status', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getDictText(RADIO_STATUS_DATA,d.status),d);}}
-					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet:function (d){ return templet('opsMethod',fox.getDictText(SELECT_OPSMETHOD_DATA,d.opsMethod),d);}}
-					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet:function (d){ return templet('devMethod',fox.getDictText(SELECT_DEVMETHOD_DATA,d.devMethod),d);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet: function (d) { return templet('status',fox.joinLabel(d.infoSystemStatus,"label"),d);}}
+					,{ field: 'opsMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维模式'), templet: function (d) { return templet('opsMethod',fox.joinLabel(d.infoSystemOpsMethod,"label"),d);}}
+					,{ field: 'devMethod', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('开发模式'), templet: function (d) { return templet('devMethod',fox.joinLabel(d.infoSystemDevMethod,"label"),d);}}
 					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') , templet: function (d) { return templet('technicalContact',d.technicalContact,d);}  }
 					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') , templet: function (d) { return templet('businessContact',d.businessContact,d);}  }
 					,{ field: 'belongOrgId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司/部门') , templet: function (d) { return templet('belongOrgId',fox.getProperty(d,["belongOrganization","fullName"]),d);} }
-					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return templet('lastdrillDate',fox.dateFormat(d.lastdrillDate),d); }}
-					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineDate',fox.dateFormat(d.onlineDate),d); }}
-					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineDate',fox.dateFormat(d.offlineDate),d); }}
+					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return templet('lastdrillDate',fox.dateFormat(d.lastdrillDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineDate',fox.dateFormat(d.onlineDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineDate',fox.dateFormat(d.offlineDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'osInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('操作系统') , templet: function (d) { return templet('osInfo',d.osInfo,d);}  }
 					,{ field: 'dbInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('数据库') , templet: function (d) { return templet('dbInfo',d.dbInfo,d);}  }
 					,{ field: 'appInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('应用') , templet: function (d) { return templet('appInfo',d.appInfo,d);}  }
-					,{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统分级'), templet:function (d){ return templet('grade',fox.getDictText(SELECT_GRADE_DATA,d.grade),d);}}
+					,{ field: 'grade', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('系统分级'), templet: function (d) { return templet('grade',fox.joinLabel(d.infoSystemGrade,"label"),d);}}
 					,{ field: 'rto', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RTO') , templet: function (d) { return templet('rto',d.rto,d);}  }
 					,{ field: 'rpo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('RPO') , templet: function (d) { return templet('rpo',d.rpo,d);}  }
 					,{ field: 'hardwareInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('硬件信息') , templet: function (d) { return templet('hardwareInfo',d.hardwareInfo,d);}  }
@@ -135,11 +135,11 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), fillBy:"infoSystemStatus",field:"code", label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.technicalContact={ inputType:"button",value: $("#technicalContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.businessContact={ inputType:"button",value: $("#businessContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.belongOrgId={ inputType:"button",value: $("#belongOrgId").val(),fillBy:["belongOrganization","fullName"] ,label:$("#belongOrgId-button").text()};
-		value.grade={ inputType:"select_box", value: xmSelect.get("#grade",true).getValue("value"), label:xmSelect.get("#grade",true).getValue("nameStr")};
+		value.grade={ inputType:"select_box", value: xmSelect.get("#grade",true).getValue("value"), fillBy:"infoSystemGrade",field:"code", label:xmSelect.get("#grade",true).getValue("nameStr") };
 		value.labels={ inputType:"button",value: $("#labels").val()};
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
@@ -179,18 +179,20 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
-		//渲染 status 搜索框
+		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
-			size: "small",
 			radio: false,
-			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			size: "small",
+			filterable: false,
+			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}
@@ -205,9 +207,10 @@ function ListPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}

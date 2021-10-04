@@ -98,9 +98,11 @@ function ListPage() {
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
 						params : {} ,
 						callback : function(r) {
+							console.log(111111111111,r)
 							if(r.success) {
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
+								console.log("#####",r);
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
 						}

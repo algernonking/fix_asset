@@ -448,7 +448,7 @@ public class HostServiceImpl extends SuperService<Host> implements IHostService 
 					break;
 				}
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
-				insert.set("tenant_id","T001");
+				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
 					insert.set(dbTreaty.getCreateTimeField(),new Date());

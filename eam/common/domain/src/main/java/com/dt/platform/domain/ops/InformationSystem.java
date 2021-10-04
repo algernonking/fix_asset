@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -17,10 +18,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 信息系统
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 12:15:01
- * @sign 26CF9B46544F22C835F94ACBB99D83B5
+ * @since 2021-10-01 07:37:08
+ * @sign C789E92C0477A0AB6EC7881B9348278A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -259,6 +260,30 @@ public class InformationSystem extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="所属公司/部门" , notes = "所属公司/部门")
 	private Organization belongOrganization;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private DictItem infoSystemStatus;
+	
+	/**
+	 * 运维模式：运维模式
+	*/
+	@ApiModelProperty(required = false,value="运维模式" , notes = "运维模式")
+	private DictItem infoSystemOpsMethod;
+	
+	/**
+	 * 开发模式：开发模式
+	*/
+	@ApiModelProperty(required = false,value="开发模式" , notes = "开发模式")
+	private DictItem infoSystemDevMethod;
+	
+	/**
+	 * 系统分级：系统分级
+	*/
+	@ApiModelProperty(required = false,value="系统分级" , notes = "系统分级")
+	private DictItem infoSystemGrade;
 	
 	/**
 	 * 获得 主键<br>
@@ -1001,6 +1026,82 @@ public class InformationSystem extends Entity {
 	*/
 	public InformationSystem setBelongOrganization(Organization belongOrganization) {
 		this.belongOrganization=belongOrganization;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public DictItem getInfoSystemStatus() {
+		return infoSystemStatus;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param infoSystemStatus 状态
+	 * @return 当前对象
+	*/
+	public InformationSystem setInfoSystemStatus(DictItem infoSystemStatus) {
+		this.infoSystemStatus=infoSystemStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 运维模式<br>
+	 * 运维模式
+	 * @return 运维模式
+	*/
+	public DictItem getInfoSystemOpsMethod() {
+		return infoSystemOpsMethod;
+	}
+	
+	/**
+	 * 设置 运维模式
+	 * @param infoSystemOpsMethod 运维模式
+	 * @return 当前对象
+	*/
+	public InformationSystem setInfoSystemOpsMethod(DictItem infoSystemOpsMethod) {
+		this.infoSystemOpsMethod=infoSystemOpsMethod;
+		return this;
+	}
+	
+	/**
+	 * 获得 开发模式<br>
+	 * 开发模式
+	 * @return 开发模式
+	*/
+	public DictItem getInfoSystemDevMethod() {
+		return infoSystemDevMethod;
+	}
+	
+	/**
+	 * 设置 开发模式
+	 * @param infoSystemDevMethod 开发模式
+	 * @return 当前对象
+	*/
+	public InformationSystem setInfoSystemDevMethod(DictItem infoSystemDevMethod) {
+		this.infoSystemDevMethod=infoSystemDevMethod;
+		return this;
+	}
+	
+	/**
+	 * 获得 系统分级<br>
+	 * 系统分级
+	 * @return 系统分级
+	*/
+	public DictItem getInfoSystemGrade() {
+		return infoSystemGrade;
+	}
+	
+	/**
+	 * 设置 系统分级
+	 * @param infoSystemGrade 系统分级
+	 * @return 当前对象
+	*/
+	public InformationSystem setInfoSystemGrade(DictItem infoSystemGrade) {
+		this.infoSystemGrade=infoSystemGrade;
 		return this;
 	}
 

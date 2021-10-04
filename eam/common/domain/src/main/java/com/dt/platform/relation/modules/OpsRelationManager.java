@@ -5,6 +5,7 @@ import com.dt.platform.constants.db.EAMTables;
 
 
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
+import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.VoucherPriv;
@@ -115,6 +116,28 @@ public class OpsRelationManager extends RelationManager {
                     }
                     return voucher;
                 });
+
+        // 关联来源
+        this.property(InformationSystemMeta.INFO_SYSTEM_STATUS_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.STATUS).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_system_status'");
+
+
+        // 关联来源
+        this.property(InformationSystemMeta.INFO_SYSTEM_GRADE_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.GRADE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_system_grade'");
+
+        // 关联来源
+        this.property(InformationSystemMeta.INFO_SYSTEM_OPS_METHOD_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_system_ops_method'");
+
+        // 关联来源
+        this.property(InformationSystemMeta.INFO_SYSTEM_DEV_METHOD_PROP)
+                .using(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='ops_system_dev_method'");
+
 
     }
 

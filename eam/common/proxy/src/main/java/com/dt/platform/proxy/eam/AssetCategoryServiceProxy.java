@@ -2,6 +2,7 @@ package com.dt.platform.proxy.eam;
 
 import com.dt.platform.proxy.ServiceNames;
 import com.github.foxnic.api.transter.Result;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.FeignConfiguration;
@@ -22,7 +23,7 @@ public interface AssetCategoryServiceProxy {
     /**
      * API 上下文路径 , eam-asset-borrow
      */
-    public static final String API_CONTEXT_PATH = "eam-asset-borrow";
+    public static final String API_CONTEXT_PATH = "eam-asset-category";
 
     /**
      * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
@@ -38,7 +39,14 @@ public interface AssetCategoryServiceProxy {
     /**
      * 查询资产
      */
-    public static final String QUERY_NODE_ID_BY_CODE = API_PREFIX + "query-node-id-by-code";
+    public static final String QUERY_NODES_BY_CODE = API_PREFIX + "query-nodes-by-code";
+
+
+
+    /**
+     * 查询资产
+     */
+    public static final String QUERY_CATALOG_ATTRIBUTE_BY_ASSET_CATEGORY = API_PREFIX + "query-catalog-attribute-by-asset-category";
 
     /**
      * 查询资产
@@ -49,8 +57,13 @@ public interface AssetCategoryServiceProxy {
     /**
      * 根据code查询ID
      */
-    @RequestMapping(AssetCategoryServiceProxy.QUERY_NODE_ID_BY_CODE)
+    @RequestMapping(AssetCategoryServiceProxy.QUERY_NODES_BY_CODE)
     Result<String> queryNodeIdByCode(String code);
+
+
+    @RequestMapping(AssetCategoryServiceProxy.QUERY_CATALOG_ATTRIBUTE_BY_ASSET_CATEGORY)
+    Result<List<CatalogAttribute>> queryCatalogAttributeByAssetCategory(String categoryId);
+
 
     /**
      * 控制器类名

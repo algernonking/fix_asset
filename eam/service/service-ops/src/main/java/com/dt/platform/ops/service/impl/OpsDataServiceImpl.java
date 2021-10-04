@@ -7,6 +7,7 @@ import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
 import com.dt.platform.constants.enums.ops.OpsHostDataExportColumnEnum;
+import com.dt.platform.constants.enums.ops.OpsISDataExportColumnEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.domain.eam.Position;
@@ -44,6 +45,7 @@ import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 import org.github.foxnic.web.proxy.system.DictServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,12 +96,28 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 
 
 
+
+
 	@Override
 	public List<Host> queryHostList(HostVO host) {
 		return hostService.queryList(host);
 	}
 
-
+	@Override
+	public HashMap<String,String> queryDictItemDataByDictCode(String dictCode){
+		HashMap<String,String> map=new HashMap<>();
+		DictItemVO vo=new DictItemVO();
+		vo.setDictCode(dictCode);
+		Result<List<DictItem>> result=DictItemServiceProxy.api().queryList(vo);
+		if(result.isSuccess()){
+			List<DictItem> list=result.getData();
+			for(int i=0;i<list.size();i++){
+				map.put(list.get(i).getCode(),list.get(i).getLabel());
+			}
+		}else{
+		}
+		return map;
+	}
 
 
 	@Override
@@ -108,12 +126,11 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		HashMap<String,String> map=new HashMap<String,String>();
 		OrganizationVO vo=new OrganizationVO();
 		vo.setIsLoadAllDescendants(1);
-		vo.setTenantId("T001");
+		vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
 		Result r= OrganizationServiceProxy.api().queryNodesFlatten(vo);
 		if(r.isSuccess()){
 			List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
-			for(int i=0;i<list.size();i++){
-				ZTreeNode node= list.get(i);
+			for(ZTreeNode node:list){
 				String path="";
 				for(int j=0;j<node.getNamePathArray().size();j++){
 					if(j==0){
@@ -122,7 +139,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 						path=path+"/"+node.getNamePathArray().get(j);
 					}
 				}
-				System.out.println(node.getId()+","+path);
 				map.put(node.getId(),path);
 			}
 		}
@@ -263,12 +279,105 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	@Override
 	public Result verifyISRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata){
 
+		HashMap<String,String> organizationMap=matchMap.get("organizationMap");
+		HashMap<String,String> opsMethodMap=matchMap.get("opsMethodMap");
+		HashMap<String,String> devMethodMap=matchMap.get("devMethodMap");
+		HashMap<String,String> gradeMap=matchMap.get("gradeMap");
+		HashMap<String,String> statusMap=matchMap.get("statusMap");
+
+
+		String belongOrg=BeanNameUtil.instance().depart(InformationSystemMeta.BELONG_ORG_ID);
+		String valueBelongOrg=rcd.getString(belongOrg);
+		if(!StringUtil.isBlank(valueBelongOrg)){
+			if(organizationMap.containsValue(valueBelongOrg.trim())){
+				String key=getMapKey(organizationMap,valueBelongOrg);
+				rcd.setValue(belongOrg,key);
+			}else{
+				//返回报错
+				return ErrorDesc.failureMessage("组织节点不存在:"+valueBelongOrg);
+			}
+
+		}
+
+
+
+		//下拉框类型
+		String belongOrganization=BeanNameUtil.instance().depart(InformationSystemMeta.BELONG_ORGANIZATION);
+		String valueBelongOrganization=rcd.getString(belongOrganization);
+		if(!StringUtil.isBlank(valueBelongOrganization)){
+			if(organizationMap.containsValue(valueBelongOrganization.trim())){
+				String key=getMapKey(organizationMap,valueBelongOrganization);
+				rcd.setValue(belongOrganization,key);
+			}else{
+				//返回报错
+				return ErrorDesc.failureMessage("组织节点不存在:"+valueBelongOrganization);
+			}
+		}
+
+
+		//运行状态
+		String status=BeanNameUtil.instance().depart(InformationSystemMeta.STATUS);
+		String valueStatus=rcd.getString(status);
+		if(!StringUtil.isBlank(valueStatus)){
+			if(statusMap.containsValue(valueStatus)){
+				String key=getMapKey(statusMap,valueStatus);
+				rcd.setValue(status,key);
+			}else{
+				return ErrorDesc.failureMessage("运行状态不存在:"+valueStatus);
+			}
+		}
+
+
+
+		//分级
+		String grade=BeanNameUtil.instance().depart(InformationSystemMeta.GRADE);
+		String valueGrade=rcd.getString(grade);
+
+		if(!StringUtil.isBlank(valueGrade)){
+			if(gradeMap.containsValue(valueGrade)){
+				String key=getMapKey(gradeMap,valueGrade);
+				rcd.setValue(grade,key);
+			}else{
+				return ErrorDesc.failureMessage("分级不存在:"+valueGrade);
+			}
+		}
+
+
+		//开发模式
+		String devMethod=BeanNameUtil.instance().depart(InformationSystemMeta.DEV_METHOD);
+		String valueDevMethod=rcd.getString(devMethod);
+		if(!StringUtil.isBlank(valueDevMethod)){
+			if(devMethodMap.containsValue(valueDevMethod)){
+				String key=getMapKey(devMethodMap,valueDevMethod);
+				rcd.setValue(devMethod,key);
+			}else{
+				return ErrorDesc.failureMessage("开发模式不存在:"+valueDevMethod);
+			}
+		}
+
+
+		//运维模式
+		String opsMethod=BeanNameUtil.instance().depart(InformationSystemMeta.OPS_METHOD);
+		String valueOpsMethod=rcd.getString(opsMethod);
+		if(!StringUtil.isBlank(valueOpsMethod)){
+			if(opsMethodMap.containsValue(valueOpsMethod)){
+				String key=getMapKey(opsMethodMap,valueOpsMethod);
+				rcd.setValue(opsMethod,key);
+			}else{
+				return ErrorDesc.failureMessage("运维模式不存在:"+valueOpsMethod);
+			}
+		}
+
+
+
+
+
 		//日期类型
 		String[] dateColumns = {InformationSystemMeta.LASTDRILL_DATE,InformationSystemMeta.OFFLINE_DATE,InformationSystemMeta.OFFLINE_DATE,};
 		for(int j=0;j<dateColumns.length;j++){
 			String dateColumn=dateColumns[j];
 			String value=rcd.getString(BeanNameUtil.instance().depart(dateColumn));
-			if(value!=null){
+			if(!StringUtil.isBlank(value)){
 				int valueLen=value.trim().length();
 				try {
 					DateFormat format1=null;
@@ -285,6 +394,8 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 					return ErrorDesc.failureMessage("时间转换失败,字段:"+dateColumn+",时间:"+value);
 				}
 			}
+
+
 		}
 		return ErrorDesc.success();
 	}
@@ -331,7 +442,6 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 		for(int j=0;j<dateColumns.length;j++){
 			String dateColumn=dateColumns[j];
 			String value=rcd.getString(BeanNameUtil.instance().depart(dateColumn));
-
 			if(!StringUtil.isBlank(value)){
 				int valueLen=value.trim().length();
 				try {
@@ -495,15 +605,43 @@ public class OpsDataServiceImpl extends SuperService<Host> implements IOpsDataSe
 	@Override
 	public Map<String, Object> queryInformationSystemMap(List<InformationSystem> list) {
 		Map<String,Object> map=new HashMap<>();
+		HashMap<String,String> orgMap=queryUseOrganizationNodes();
+
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_GRADE);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_STATUS);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_DEV_METHOD);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_OPS_METHOD);
 
 		List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
 		for(int i=0;i<list.size();i++) {
 			InformationSystem item = list.get(i);
-			Map<String, Object> hostMap= BeanUtil.toMap(item);
+			Map<String, Object> dataMap= BeanUtil.toMap(item);
 
-			listMap.add(hostMap);
+			String orgName=orgMap.get(item.getBelongOrgId());
+			dataMap.put(OpsISDataExportColumnEnum.BELONG_ORG_NAME.code(),orgName);
+
+
+
+			if(item.getInfoSystemStatus()!=null){
+				dataMap.put(OpsISDataExportColumnEnum.STATUS_NAME.code(),item.getInfoSystemStatus().getLabel());
+			}
+
+			if(item.getInfoSystemOpsMethod()!=null){
+				dataMap.put(OpsISDataExportColumnEnum.OPS_METHOD_NAME.code(),item.getInfoSystemOpsMethod().getLabel());
+			}
+
+			if(item.getInfoSystemDevMethod()!=null){
+				dataMap.put(OpsISDataExportColumnEnum.DEV_METHOD_NAME.code(),item.getInfoSystemDevMethod().getLabel());
+			}
+
+			if(item.getInfoSystemGrade()!=null){
+				dataMap.put(OpsISDataExportColumnEnum.GRADE_NAME.code(),item.getInfoSystemGrade().getLabel());
+			}
+
+			listMap.add(dataMap);
 		}
-		map.put("hostList", listMap);
+
+		map.put("dataList", listMap);
 		return map;
 	}
 

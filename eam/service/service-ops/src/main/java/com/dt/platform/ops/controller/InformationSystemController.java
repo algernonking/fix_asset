@@ -1,8 +1,20 @@
 package com.dt.platform.ops.controller;
 
  
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import com.deepoove.poi.util.PoitlIOUtils;
+import com.dt.platform.constants.enums.ops.OpsOperateEnum;
+import com.dt.platform.ops.service.IOpsDataService;
+import com.dt.platform.proxy.common.TplFileServiceProxy;
+import org.apache.commons.io.IOUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,6 +73,8 @@ public class InformationSystemController extends SuperController {
 	@Autowired
 	private IInformationSystemService informationSystemService;
 
+	@Autowired
+	IOpsDataService opsDataService;
 	
 	/**
 	 * 添加信息系统
@@ -108,7 +122,7 @@ public class InformationSystemController extends SuperController {
 	*/
 	@ApiOperation(value = "删除信息系统")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "491353803505799168")
+		@ApiImplicitParam(name = InformationSystemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "491353803505799168"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = InformationSystemVOMeta.ID)
@@ -239,6 +253,12 @@ public class InformationSystemController extends SuperController {
 		informationSystemService.join(informationSystem,InformationSystemMeta.BELONG_ORGANIZATION);
 		// 关联出 用户凭证 数据
 		informationSystemService.join(informationSystem,InformationSystemMeta.VOUCHER_LIST);
+
+		informationSystemService.join(informationSystem,InformationSystemMeta.INFO_SYSTEM_GRADE);
+		informationSystemService.join(informationSystem,InformationSystemMeta.INFO_SYSTEM_STATUS);
+		informationSystemService.join(informationSystem,InformationSystemMeta.INFO_SYSTEM_DEV_METHOD);
+		informationSystemService.join(informationSystem,InformationSystemMeta.INFO_SYSTEM_OPS_METHOD);
+
 		result.success(true).data(informationSystem);
 		return result;
 	}
@@ -349,6 +369,12 @@ public class InformationSystemController extends SuperController {
 		informationSystemService.join(list,InformationSystemMeta.BELONG_ORGANIZATION);
 		// 关联出 用户凭证 数据
 		informationSystemService.join(list,InformationSystemMeta.VOUCHER_LIST);
+
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_GRADE);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_STATUS);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_DEV_METHOD);
+		informationSystemService.join(list,InformationSystemMeta.INFO_SYSTEM_OPS_METHOD);
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -360,11 +386,29 @@ public class InformationSystemController extends SuperController {
 	 * */
 	@SentinelResource(value = InformationSystemServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(InformationSystemServiceProxy.EXPORT_EXCEL)
-	public void exportExcel(InformationSystemVO  sample,HttpServletResponse response) throws Exception {
-			//生成 Excel 数据
-			ExcelWriter ew=informationSystemService.exportExcel(sample);
-			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	public Result exportExcel(InformationSystemVO sample,HttpServletResponse response) throws Exception {
+		//生成 Excel 数据
+		String code = OpsOperateEnum.OPS_DOWNLOAD_INFORMATION_SYSTEM.code();
+		InputStream inputstream = TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		if (inputstream == null) {
+			return ErrorDesc.failure().message("获取模板文件失败");
+		}
+		File f = opsDataService.saveTempFile(inputstream, "TMP_" + code + ".xls");
+		Map<String, Object> map = opsDataService.queryInformationSystemMap(opsDataService.queryInformationSystemList(sample));
+		System.out.println(map);
+		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("信息系统数据.xls", "UTF-8"))));
+		response.setContentType("application/vnd.ms-excel");
+		OutputStream out = response.getOutputStream();
+		BufferedOutputStream bos = new BufferedOutputStream(out);
+		workbook.write(bos);
+		bos.flush();
+		out.flush();
+		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+		return ErrorDesc.success();
+
 	}
 
 
@@ -373,14 +417,23 @@ public class InformationSystemController extends SuperController {
 	 * */
 	@SentinelResource(value = InformationSystemServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(InformationSystemServiceProxy.EXPORT_EXCEL_TEMPLATE)
-	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
-			//生成 Excel 模版
-			ExcelWriter ew=informationSystemService.exportExcelTemplate();
-			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+	public Result exportExcelTemplate(HttpServletResponse response) throws Exception {
+		//生成 Excel 数据
+		String code = OpsOperateEnum.OPS_DOWNLOAD_INFORMATION_SYSTEM.code();
+		InputStream inputstream = TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		if (inputstream == null) {
+			return ErrorDesc.failure().message("获取模板文件失败");
 		}
 
+		response.setCharacterEncoding("UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("信息系统模板.xls", "UTF-8"))));
+		response.setContentType("application/vnd.ms-excel");
+		OutputStream out = response.getOutputStream();
+		IOUtils.copy(inputstream, out);
+		out.flush();
+		return ErrorDesc.success();
 
+	}
 
 	@SentinelResource(value = InformationSystemServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(InformationSystemServiceProxy.IMPORT_EXCEL)
@@ -402,6 +455,10 @@ public class InformationSystemController extends SuperController {
 		if(errors==null || errors.isEmpty()) {
 			return ErrorDesc.success();
 		} else {
+			System.out.println("import Result:");
+			for(int i=0;i<errors.size();i++){
+				System.out.println(i+":"+errors.get(i).message);
+			}
 			return ErrorDesc.failure().message("导入失败").data(errors);
 		}
 	}

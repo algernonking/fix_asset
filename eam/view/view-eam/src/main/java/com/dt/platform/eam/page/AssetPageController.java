@@ -224,6 +224,16 @@ public class AssetPageController extends ViewController {
 	/**
 	 * 资产 功能主页面
 	 */
+	@RequestMapping("/asset_data_export_list.html")
+	public String dataExportList(Model model,HttpServletRequest request) {
+
+		return prefix+"/asset_data_export_list";
+	}
+
+
+	/**
+	 * 资产 功能主页面
+	 */
 	@RequestMapping("/asset_info_list.html")
 	public String infoList(Model model,HttpServletRequest request) {
 

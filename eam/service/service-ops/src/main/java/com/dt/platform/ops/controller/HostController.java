@@ -14,6 +14,7 @@ import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.ops.service.IOpsDataService;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -444,20 +445,13 @@ public class HostController extends SuperController {
 		if(inputstream==null){
 			return ErrorDesc.failure().message("获取模板文件失败");
 		}
-		File f=opsDataService.saveTempFile(inputstream,"TMP_"+code+".xls");
-		System.out.println(f.getPath());
-		Map<String,Object> map= opsDataService.queryHostMap(opsDataService.queryHostList(sample));
-		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
-		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+
 		response.setCharacterEncoding("UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("主机数据.xls", "UTF-8"))));
+		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("主机模板.xls", "UTF-8"))));
 		response.setContentType("application/vnd.ms-excel");
 		OutputStream out = response.getOutputStream();
-		BufferedOutputStream bos = new BufferedOutputStream(out);
-		workbook.write(bos);
-		bos.flush();
+		IOUtils.copy(inputstream,out);
 		out.flush();
-		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
 		return ErrorDesc.success();
 
 

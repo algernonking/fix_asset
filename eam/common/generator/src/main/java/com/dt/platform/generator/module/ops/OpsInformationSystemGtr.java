@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.ops.*;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.dt.platform.domain.ops.meta.InformationSystemVOMeta;
@@ -9,6 +10,9 @@ import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 
 public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
@@ -28,6 +32,11 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(String.class,"voucherIds","凭证","凭证");
 
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"belongOrganization","所属公司/部门","所属公司/部门");
+
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"infoSystemStatus","状态","状态");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"infoSystemOpsMethod","运维模式","运维模式");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"infoSystemDevMethod","开发模式","开发模式");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"infoSystemGrade","系统分级","系统分级");
 
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ID).basic().hidden(true);
@@ -62,19 +71,42 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.BELONG_ORG_ID).table().fillBy("belongOrganization","fullName");
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS).basic().label("状态")
-                .form().validate().required()
-                .form().radioBox().dict(DictEnum.OPS_SYSTEM_STATUS).defaultIndex(0);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.STATUS)
+                .basic().label("状态")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_status")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(InformationSystemMeta.INFO_SYSTEM_STATUS).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD).basic().label("运维模式")
-                .form().selectBox().dict(DictEnum.OPS_SYSTEM_OPS_METHOD).paging(false);
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.GRADE)
+                .basic().label("系统分级")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_grade")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(InformationSystemMeta.INFO_SYSTEM_GRADE).muliti(false);
 
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD).basic().label("开发模式")
-                .form().selectBox().dict(DictEnum.OPS_SYSTEM_DEV_METHOD).paging(false);
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD)
+                .basic().label("运维模式")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_ops_method")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(InformationSystemMeta.INFO_SYSTEM_OPS_METHOD).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.GRADE).basic().label("系统分级")
-                .form().selectBox().dict(DictEnum.OPS_SYSTEM_GRADE).paging(false);
+
+        cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD)
+                .basic().label("开发模式")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_system_dev_method")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillBy(InformationSystemMeta.INFO_SYSTEM_DEV_METHOD).muliti(false);
+
+
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.ONLINE_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
@@ -86,8 +118,6 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.NAME).form().validate().required();
 
         ;
-
-
         cfg.view().field(InformationSystemVOMeta.VOUCHER_IDS)
                 .basic().label("用户凭证")
                 .table().sort(false)

@@ -1,8 +1,11 @@
 package com.dt.platform.common.service.impl;
 
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import com.dt.platform.domain.common.meta.TplFileMeta;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 import org.github.foxnic.web.proxy.utils.StorageProxyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +58,6 @@ public class TplFileServiceImpl extends SuperService<TplFile> implements ITplFil
 	 * */
 	public DAO dao() { return dao; }
 
-
-	
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();

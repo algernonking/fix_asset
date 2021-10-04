@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 12:15:15
+ * @since 2021-10-01 07:37:23
  */
 
 function FormPage() {
@@ -77,6 +77,25 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 opsMethod 下拉字段
 		fox.renderSelectBox({
 			el: "opsMethod",
@@ -88,9 +107,10 @@ function FormPage() {
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -106,9 +126,10 @@ function FormPage() {
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -139,9 +160,10 @@ function FormPage() {
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -193,13 +215,28 @@ function FormPage() {
 
 
 
+			//设置 演练时间 显示复选框勾选
+			if(formData["lastdrillDate"]) {
+				$("#lastdrillDate").val(fox.dateFormat(formData["lastdrillDate"],"yyyy-MM-dd"));
+			}
+			//设置 上线时间 显示复选框勾选
+			if(formData["onlineDate"]) {
+				$("#onlineDate").val(fox.dateFormat(formData["onlineDate"],"yyyy-MM-dd"));
+			}
+			//设置 下线时间 显示复选框勾选
+			if(formData["offlineDate"]) {
+				$("#offlineDate").val(fox.dateFormat(formData["offlineDate"],"yyyy-MM-dd"));
+			}
 
+
+			//设置  状态 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#status",formData.infoSystemStatus);
 			//设置  运维模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#opsMethod",formData.opsMethod,SELECT_OPSMETHOD_DATA);
+			fox.setSelectValue4QueryApi("#opsMethod",formData.infoSystemOpsMethod);
 			//设置  开发模式 设置下拉框勾选
-			fox.setSelectValue4Dict("#devMethod",formData.devMethod,SELECT_DEVMETHOD_DATA);
+			fox.setSelectValue4QueryApi("#devMethod",formData.infoSystemDevMethod);
 			//设置  系统分级 设置下拉框勾选
-			fox.setSelectValue4Dict("#grade",formData.grade,SELECT_GRADE_DATA);
+			fox.setSelectValue4QueryApi("#grade",formData.infoSystemGrade);
 
 			//处理fillBy
 
@@ -248,6 +285,8 @@ function FormPage() {
 
 
 
+		//获取 状态 下拉框的值
+		data["status"]=fox.getSelectedValue("status",false);
 		//获取 运维模式 下拉框的值
 		data["opsMethod"]=fox.getSelectedValue("opsMethod",false);
 		//获取 开发模式 下拉框的值

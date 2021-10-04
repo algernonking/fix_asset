@@ -6,13 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.ops.Voucher;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 12:15:01
- * @sign 26CF9B46544F22C835F94ACBB99D83B5
+ * @since 2021-10-01 07:37:08
+ * @sign C789E92C0477A0AB6EC7881B9348278A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -399,9 +400,49 @@ public class InformationSystemMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.hrm.Organization> BELONG_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,BELONG_ORGANIZATION, org.github.foxnic.web.domain.hrm.Organization.class, "所属公司/部门", "所属公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
 	
 	/**
+	 * 状态 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String INFO_SYSTEM_STATUS="infoSystemStatus";
+	
+	/**
+	 * 状态 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.system.DictItem> INFO_SYSTEM_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,INFO_SYSTEM_STATUS, org.github.foxnic.web.domain.system.DictItem.class, "状态", "状态", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 运维模式 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String INFO_SYSTEM_OPS_METHOD="infoSystemOpsMethod";
+	
+	/**
+	 * 运维模式 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.system.DictItem> INFO_SYSTEM_OPS_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,INFO_SYSTEM_OPS_METHOD, org.github.foxnic.web.domain.system.DictItem.class, "运维模式", "运维模式", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 开发模式 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String INFO_SYSTEM_DEV_METHOD="infoSystemDevMethod";
+	
+	/**
+	 * 开发模式 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.system.DictItem> INFO_SYSTEM_DEV_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,INFO_SYSTEM_DEV_METHOD, org.github.foxnic.web.domain.system.DictItem.class, "开发模式", "开发模式", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
+	 * 系统分级 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String INFO_SYSTEM_GRADE="infoSystemGrade";
+	
+	/**
+	 * 系统分级 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.InformationSystem,org.github.foxnic.web.domain.system.DictItem> INFO_SYSTEM_GRADE_PROP = new BeanProperty(com.dt.platform.domain.ops.InformationSystem.class ,INFO_SYSTEM_GRADE, org.github.foxnic.web.domain.system.DictItem.class, "系统分级", "系统分级", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , PID , NAME , PROFILE , STATUS , OPS_METHOD , DEV_METHOD , TECHNICAL_CONTACT , BUSINESS_CONTACT , BELONG_ORG_ID , LASTDRILL_DATE , ONLINE_DATE , OFFLINE_DATE , OS_INFO , DB_INFO , APP_INFO , GRADE , RTO , RPO , HARDWARE_INFO , BACKUP_INFO , SAMEPLACE_BACUP_INFO , DIFFPLACE_BACKUP_INFO , ARCH_METHOD , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS , BELONG_ORGANIZATION };
+	public static final String[] $PROPS={ ID , PID , NAME , PROFILE , STATUS , OPS_METHOD , DEV_METHOD , TECHNICAL_CONTACT , BUSINESS_CONTACT , BELONG_ORG_ID , LASTDRILL_DATE , ONLINE_DATE , OFFLINE_DATE , OS_INFO , DB_INFO , APP_INFO , GRADE , RTO , RPO , HARDWARE_INFO , BACKUP_INFO , SAMEPLACE_BACUP_INFO , DIFFPLACE_BACKUP_INFO , ARCH_METHOD , LABELS , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , VOUCHER_LIST , VOUCHER_IDS , BELONG_ORGANIZATION , INFO_SYSTEM_STATUS , INFO_SYSTEM_OPS_METHOD , INFO_SYSTEM_DEV_METHOD , INFO_SYSTEM_GRADE };
 	
 	/**
 	 * 代理类
@@ -826,6 +867,50 @@ public class InformationSystemMeta {
 		public InformationSystem setBelongOrganization(Organization belongOrganization) {
 			super.change(BELONG_ORGANIZATION,super.getBelongOrganization(),belongOrganization);
 			super.setBelongOrganization(belongOrganization);
+			return this;
+		}
+		
+		/**
+		 * 设置 状态
+		 * @param infoSystemStatus 状态
+		 * @return 当前对象
+		*/
+		public InformationSystem setInfoSystemStatus(DictItem infoSystemStatus) {
+			super.change(INFO_SYSTEM_STATUS,super.getInfoSystemStatus(),infoSystemStatus);
+			super.setInfoSystemStatus(infoSystemStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 运维模式
+		 * @param infoSystemOpsMethod 运维模式
+		 * @return 当前对象
+		*/
+		public InformationSystem setInfoSystemOpsMethod(DictItem infoSystemOpsMethod) {
+			super.change(INFO_SYSTEM_OPS_METHOD,super.getInfoSystemOpsMethod(),infoSystemOpsMethod);
+			super.setInfoSystemOpsMethod(infoSystemOpsMethod);
+			return this;
+		}
+		
+		/**
+		 * 设置 开发模式
+		 * @param infoSystemDevMethod 开发模式
+		 * @return 当前对象
+		*/
+		public InformationSystem setInfoSystemDevMethod(DictItem infoSystemDevMethod) {
+			super.change(INFO_SYSTEM_DEV_METHOD,super.getInfoSystemDevMethod(),infoSystemDevMethod);
+			super.setInfoSystemDevMethod(infoSystemDevMethod);
+			return this;
+		}
+		
+		/**
+		 * 设置 系统分级
+		 * @param infoSystemGrade 系统分级
+		 * @return 当前对象
+		*/
+		public InformationSystem setInfoSystemGrade(DictItem infoSystemGrade) {
+			super.change(INFO_SYSTEM_GRADE,super.getInfoSystemGrade(),infoSystemGrade);
+			super.setInfoSystemGrade(infoSystemGrade);
 			return this;
 		}
 	}

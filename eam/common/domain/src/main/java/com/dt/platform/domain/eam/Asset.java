@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-30 10:14:22
- * @sign 6B8ED7B1D6559FF6E3AA769F14FF04DF
+ * @since 2021-10-04 08:31:13
+ * @sign E9B65B2106608664CA78E7D422D10880
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -501,6 +501,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private String originatorId;
+	
+	/**
+	 * 自定义数据：自定义数据
+	*/
+	@ApiModelProperty(required = false,value="自定义数据" , notes = "自定义数据")
+	private AssetPcmData pcmData;
 	
 	/**
 	 * 存放位置：存放位置
@@ -2077,6 +2083,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setOriginatorId(String originatorId) {
 		this.originatorId=originatorId;
+		return this;
+	}
+	
+	/**
+	 * 获得 自定义数据<br>
+	 * 自定义数据
+	 * @return 自定义数据
+	*/
+	public AssetPcmData getPcmData() {
+		return pcmData;
+	}
+	
+	/**
+	 * 设置 自定义数据
+	 * @param pcmData 自定义数据
+	 * @return 当前对象
+	*/
+	public Asset setPcmData(AssetPcmData pcmData) {
+		this.pcmData=pcmData;
 		return this;
 	}
 	

@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetPcmData;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Asset;
@@ -25,6 +26,15 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetService extends ISuperService<Asset> {
+
+
+	/**
+	 * 按主键获取 资产
+	 * @param id 主键
+	 * @param categoryId 资产分类
+	 * @return Asset 数据对象
+	 */
+	AssetPcmData getPcmDataById(String id,String categoryId);
 
 
 	Result confirmOperation(String id);
@@ -285,21 +295,21 @@ public interface IAssetService extends ISuperService<Asset> {
 	/**
 	 * 导出用于数据导入的 Excel 模版
 	 * */
-	ExcelWriter  exportExcelTemplate(String categoryId);
+	ExcelWriter  exportExcelTemplate();
 
 	/**
-	 * 构建 Excel 结构
-	 * @param  categoryId 是否用于数据导出
 	 * @return   ExcelStructure
 	 * */
-	ExcelStructure buildExcelStructure(String categoryId);
+	ExcelStructure buildExcelStructure(InputStream inputStream);
 
+
+	InputStream buildExcelTemplate(String categoryId);
 
 	/**
 	 * 导入 Excel 数据
 	 * @return  错误信息，成功时返回 null
 	 * */
-	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType,String categoryId);
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType);
 
  
 }

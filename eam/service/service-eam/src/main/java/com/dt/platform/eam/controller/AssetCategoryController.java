@@ -9,6 +9,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.github.foxnic.web.framework.web.SuperController;
@@ -39,15 +40,24 @@ public class AssetCategoryController  extends SuperController{
 
     @ApiOperation(value = "根据ID查询分类CODE")
     @ApiOperationSupport(order=2)
-    @SentinelResource(value = AssetCategoryServiceProxy.QUERY_NODE_ID_BY_CODE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-    @PostMapping(AssetCategoryServiceProxy.QUERY_NODE_ID_BY_CODE)
-    public Result<String> queryNodeIdByCode(String code) {
+    @SentinelResource(value = AssetCategoryServiceProxy.QUERY_NODES_BY_CODE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetCategoryServiceProxy.QUERY_NODES_BY_CODE)
+    public Result<String> queryNodesByCode(String code) {
         Result result=new Result<String>();
-        result.success(true).data(assetCategoryService.queryNodeIdByCode(code));
+        result.success(true).data(assetCategoryService.queryNodesByCode(code));
         return result;
     }
 
 
+    @ApiOperation(value = "根据查询分类属性")
+    @ApiOperationSupport(order=3)
+    @SentinelResource(value = AssetCategoryServiceProxy.QUERY_CATALOG_ATTRIBUTE_BY_ASSET_CATEGORY , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetCategoryServiceProxy.QUERY_CATALOG_ATTRIBUTE_BY_ASSET_CATEGORY)
+    public Result<List<CatalogAttribute>> queryCatalogAttributeByAssetCategory(String categoryId) {
+        Result result=new Result<List<CatalogAttribute>>();
+        result.success(true).data(assetCategoryService.queryCatalogAttributeByAssetCategory(categoryId));
+        return result;
+    }
 
 
 }

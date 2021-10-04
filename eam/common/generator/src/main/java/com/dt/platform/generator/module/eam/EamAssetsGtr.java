@@ -16,11 +16,14 @@ import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.meta.DictItemMeta;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
+
+import java.util.HashMap;
 
 
 public class EamAssetsGtr extends BaseCodeGenerator {
@@ -38,6 +41,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 //        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
 
 
+        cfg.getPoClassFile().addSimpleProperty(CatalogAttribute.class,"catalogAttribute","自定义数据字段","自定义数据字段");
+        cfg.getPoClassFile().addSimpleProperty(AssetPcmData.class,"pcmData","自定义数据","自定义数据");
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
         cfg.getPoClassFile().addSimpleProperty(CategoryFinance.class,"categoryFinance","财务分类","财务分类");
         cfg.getPoClassFile().addSimpleProperty(Catalog.class,"category","资产分类","资产分类");

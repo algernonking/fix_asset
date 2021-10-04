@@ -4,6 +4,7 @@ package com.dt.platform.eam.service.impl;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.eam.service.*;
 
 import com.github.foxnic.api.constant.CodeTextEnum;
@@ -11,6 +12,7 @@ import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
@@ -20,15 +22,21 @@ import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
 import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
+import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.CatalogVO;
+import org.github.foxnic.web.domain.system.Dict;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
+import org.github.foxnic.web.domain.system.DictVO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
 import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
+import org.github.foxnic.web.proxy.system.DictServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -46,9 +54,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Autowired
     private IAssetService assetService;
 
-
-    @Autowired
-    private IAssetDataService assetDataService;
 
     @Autowired
     private IPositionService positionService;
@@ -108,7 +113,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         HashMap<String,String> map=new HashMap<String,String>();
         OrganizationVO vo=new OrganizationVO();
         vo.setIsLoadAllDescendants(1);
-        vo.setTenantId("T001");
+        vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
         Result r= OrganizationServiceProxy.api().queryNodesFlatten(vo);
         if(r.isSuccess()){
             List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
@@ -131,12 +136,12 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Override
     public HashMap<String,String> queryAssetCategoryNodes(){
         //所有分类转换成  id + 全路径名称
-        HashMap<String,String> map=new HashMap<String,String>();
+        HashMap<String,String> map=new HashMap<>();
         CatalogVO vo=new CatalogVO();
-        vo.setTenantId("T001");
-     //   vo.setCode("asset");
-      //  vo.setIsLoadAllDescendants(1);
-        Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
+        vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+//        vo.setCode("asset");
+        vo.setIsLoadAllDescendants(1);
+       Result r= CatalogServiceProxy.api().queryNodesFlatten(vo);
         if(r.isSuccess()){
             List<ZTreeNode> list= (List<ZTreeNode> )r.getData();
             for( ZTreeNode node:list){
@@ -148,6 +153,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                         path=path+"/"+node.getNamePathArray().get(j);
                     }
                 }
+                System.out.println(node.getId()+","+path);
                 map.put(node.getId(),path);
             }
         }
@@ -156,12 +162,49 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
+    @Override
+    public HashMap<String,String> queryDictItemDataByDictCode(String dictCode){
+        HashMap<String,String> map=new HashMap<>();
+        DictItemVO vo=new DictItemVO();
+        vo.setDictCode(dictCode);
+        Result<List<DictItem>> result=DictItemServiceProxy.api().queryList(vo);
+        if(result.isSuccess()){
+            List<DictItem> list=result.getData();
+            for(int i=0;i<list.size();i++){
+                map.put(list.get(i).getCode(),list.get(i).getLabel());
+            }
+        }else{
+        }
+        return map;
+    }
+
+    @Override
+    public Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean filldata){
+        Result r=new Result();
+        CatalogData data=new CatalogData();
+        data.setCatalogId(rcd.getString("category_id"));
+        data.setOwnerId(rcd.getString("id"));
+        data.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+        Map<String,Object> dataMap=new HashMap<>();
+        for(CatalogAttribute attribute:attributeList){
+            String col=attribute.getField();
+            String value= rcd.getString(col);
+            dataMap.put(col.replaceFirst("PCM_EXT_",""),value==null?"":value);
+        }
+        data.setData(dataMap);
+        return r.success(true).data(data);
+    }
 
     @Override
     public Result verifyAssetRecord(Rcd rcd,HashMap<String,HashMap<String,String>> matchMap, boolean filldata){
 
         HashMap<String,String> orgMap=matchMap.get("organizationMap");
         HashMap<String,String> categoryMap=matchMap.get("categoryMap");
+
+        //id ,label
+        HashMap<String,String> safetyLevelMap=matchMap.get("safetyLevelMap");
+        HashMap<String,String> equipEnvMap=matchMap.get("equipEnvMap");
+        HashMap<String,String> sourceMap=matchMap.get("sourceMap");
 
         //字符串类型
         String[] stringColumns = {AssetMeta.ASSET_CODE,AssetMeta.NAME,AssetMeta.SERIAL_NUMBER,AssetMeta.BATCH_CODE,
@@ -177,8 +220,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         }
 
         //Number类型
-
-
 
         //日期类型
         String[] dateColumns = {AssetMeta.MAINTENANCE_START_DATE,AssetMeta.MAINTENANCE_END_DATE,AssetMeta.PURCHASE_DATE};
@@ -251,7 +292,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String valueUseOrganization=rcd.getString(useOrganization);
         if(!StringUtil.isBlank(valueUseOrganization)){
             if(orgMap.containsValue(valueUseOrganization.trim())){
-                String key=assetDataService.getMapKey(orgMap,valueUseOrganization);
+                String key=getMapKey(orgMap,valueUseOrganization);
                 rcd.setValue(useOrganization,key);
             }else{
                 //返回报错
@@ -264,7 +305,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String valueOwnerCompany=rcd.getString(companyId);
         if(!StringUtil.isBlank(valueOwnerCompany)){
             if(orgMap.containsValue(valueOwnerCompany.trim())){
-                String key=assetDataService.getMapKey(orgMap,valueOwnerCompany);
+                String key=getMapKey(orgMap,valueOwnerCompany);
                 rcd.setValue(companyId,key);
             }else{
                 //返回报错
@@ -277,8 +318,8 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String category=BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID);
         String valueCategory=rcd.getString(category);
         if(!StringUtil.isBlank(valueCategory)){
-            if(orgMap.containsValue(valueCategory.trim())){
-                String key=assetDataService.getMapKey(categoryMap,valueCategory);
+            if(categoryMap.containsValue(valueCategory.trim())){
+                String key=getMapKey(categoryMap,valueCategory);
                 rcd.setValue(category,key);
             }else{
                 //返回报错
@@ -315,7 +356,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         //下拉框
         String financialCategory=BeanNameUtil.instance().depart(AssetMeta.FINANCIAL_CATEGORY_ID);
         String valueFinancialCategory=rcd.getString(financialCategory);
-        if(valueFinancialCategory!=null){
+        if(!StringUtil.isBlank(valueFinancialCategory)){
             CategoryFinance categoryFinance = categoryFinanceService.queryEntity(CategoryFinance.create().setHierarchyName(valueFinancialCategory));
             if(categoryFinance==null){
                 return ErrorDesc.failureMessage("财务分类不存在:"+valueFinancialCategory);
@@ -326,7 +367,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
-        //物品档案
+        //物品档案fill
         String goodsId=BeanNameUtil.instance().depart(AssetMeta.GOODS_ID);
         String valueGoods=rcd.getString(goodsId);
         if(!StringUtil.isBlank(valueGoods)){
@@ -347,7 +388,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
-        //位置
+        //位置 fill
         String positionId=BeanNameUtil.instance().depart(AssetMeta.POSITION_ID);
         String valuePosition=rcd.getString(positionId);
         if(!StringUtil.isBlank(valuePosition)){
@@ -368,7 +409,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
-        //仓库
+        //仓库 fill
         String wareHouseId=BeanNameUtil.instance().depart(AssetMeta.WAREHOUSE_ID);
         String valueWarehouse=rcd.getString(wareHouseId);
         if(!StringUtil.isBlank(valueWarehouse)){
@@ -387,7 +428,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
         }
 
-        //厂商
+        //厂商 fill
         String manufacturerId=BeanNameUtil.instance().depart(AssetMeta.MANUFACTURER_ID);
         String valueManufacturer=rcd.getString(manufacturerId);
         if(!StringUtil.isBlank(valueManufacturer)){
@@ -410,18 +451,15 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
         //数据字典
+
         //来源
         String sourceId=BeanNameUtil.instance().depart(AssetMeta.SOURCE_ID);
         String valueSource=rcd.getString(sourceId);
         if(!StringUtil.isBlank(valueSource)){
-            DictItemVO dictVo=new DictItemVO();
-            dictVo.setLabel(valueSource);
-            dictVo.setDictCode("eam_source");
-            Result<List<DictItem> >dictItemResult= DictItemServiceProxy.api().queryList(dictVo);
-            if(dictItemResult.isSuccess()&&dictItemResult.getData().size()>0){
-                rcd.setValue(sourceId,dictItemResult.getData().get(0).getCode());
+            if(sourceMap.containsValue(valueSource)){
+                String key=getMapKey(sourceMap,valueSource);
+                rcd.setValue(sourceId,key);
             }else{
-                //返回报错
                 return ErrorDesc.failureMessage("资产来源不存在:"+valueSource);
             }
         }
@@ -430,35 +468,25 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String safetyLevel=BeanNameUtil.instance().depart(AssetMeta.SAFETY_LEVEL_CODE);
         String valueSafetyLevel=rcd.getString(safetyLevel);
         if(!StringUtil.isBlank(valueSafetyLevel)){
-            DictItemVO dictVo=new DictItemVO();
-            dictVo.setLabel(valueSafetyLevel);
-            dictVo.setDictCode("eam_safety_level");
-            Result<List<DictItem> >dictItemResult= DictItemServiceProxy.api().queryList(dictVo);
-            if(dictItemResult.isSuccess()&&dictItemResult.getData().size()>0){
-                rcd.setValue(safetyLevel,dictItemResult.getData().get(0).getCode());
+            if(safetyLevelMap.containsValue(valueSafetyLevel)){
+                String key=getMapKey(safetyLevelMap,valueSafetyLevel);
+                rcd.setValue(safetyLevel,key);
             }else{
-                //返回报错
                 return ErrorDesc.failureMessage("安全等级不存在:"+valueSafetyLevel);
             }
         }
 
-
-
+        //运行环境
         String equipEnv=BeanNameUtil.instance().depart(AssetMeta.EQUIPMENT_ENVIRONMENT_CODE);
         String valueEquipEnv=rcd.getString(equipEnv);
         if(!StringUtil.isBlank(valueEquipEnv)){
-            DictItemVO dictVo=new DictItemVO();
-            dictVo.setLabel(valueEquipEnv);
-            dictVo.setDictCode("eam_equipment_environment");
-            Result<List<DictItem> >dictItemResult= DictItemServiceProxy.api().queryList(dictVo);
-            if(dictItemResult.isSuccess()&&dictItemResult.getData().size()>0){
-                rcd.setValue(equipEnv,dictItemResult.getData().get(0).getCode());
+            if(equipEnvMap.containsValue(valueEquipEnv)){
+                String key=getMapKey(equipEnvMap,valueEquipEnv);
+                rcd.setValue(equipEnv,key);
             }else{
-                //返回报错
                 return ErrorDesc.failureMessage("设备运行状态不存在:"+valueEquipEnv);
             }
         }
-
         //其他
         return ErrorDesc.success();
     }
@@ -469,7 +497,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Override
     public Map<String, Object> queryAssetMap(List<Asset>list) {
         HashMap<String,String> orgMap=queryUseOrganizationNodes();
-
 
         HashMap<String,String> categoryMap=queryAssetCategoryNodes();
 
@@ -507,7 +534,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);
             Map<String, Object> assetMap= BeanUtil.toMap(assetItem);
-            System.out.println(assetItem);
 
             //资产状态
             CodeTextEnum vAssetStatus=EnumUtil.parseByCode(AssetStatusEnum.class,assetItem.getAssetStatus()) ;
@@ -515,7 +541,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
             //办理状态
             CodeTextEnum vStatus= EnumUtil.parseByCode(AssetHandleStatusEnum.class,assetItem.getStatus());
-            assetMap.put(AssetDataExportColumnEnum.ASSET_STATUS.code(),vStatus==null?"":vStatus.text());
+            assetMap.put(AssetDataExportColumnEnum.STATUS_NAME.code(),vStatus==null?"":vStatus.text());
 
             //设备状态
             CodeTextEnum vEquipStatus= EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetItem.getEquipmentStatus());
@@ -530,11 +556,11 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 // 关联出 存放位置 数据
                 assetMap.put(AssetDataExportColumnEnum.ASSET_POSITION_NAME.code(),assetItem.getPosition().getName());
             }
-            if(assetItem.getCategory()!=null){
-                //关联出 分类 数据
-                String name=categoryMap.get(assetItem.getCategoryId());
-                assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.code(),name);
-            }
+//            if(assetItem.getCategory()!=null){
+//                //关联出 分类 数据
+//                String name=categoryMap.get(assetItem.getCategoryId());
+//                assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.code(),name);
+//            }
             if(assetItem.getGoods()!=null){
                 //关联出 物品档案 数据
                 assetMap.put(AssetDataExportColumnEnum.ASSET_GOOD_NAME.code(),assetItem.getGoods().getName());
@@ -575,11 +601,13 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
             String companyName=orgMap.get(assetItem.getOwnCompanyId());
-            assetMap.put(AssetDataExportColumnEnum.OWNER_COMPANY_NAME.code(),companyName);
+            assetMap.put(AssetDataExportColumnEnum.OWN_COMPANY_NAME.code(),companyName);
 
             String orgName=orgMap.get(assetItem.getUseOrganizationId());
             assetMap.put(AssetDataExportColumnEnum.USE_ORGANIZATION_NAME.code(),orgName);
 
+            String categoryName=categoryMap.get(assetItem.getCategoryId());
+            assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.code(),categoryName);
 
             if(assetItem.getManager()!=null){
                 System.out.println("manan"+assetItem.getManager().getBadge());
@@ -592,10 +620,12 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME.code(),assetItem.getUseUser().getName());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_BADGE.code(),assetItem.getUseUser().getBadge());
             }
-
+     //     if(i<5)
             listMap.add(assetMap);
         }
+        System.out.println("#########"+listMap.size());
         map.put("dataList", listMap);
+   //     System.out.println(map);
         return map;
     }
 

@@ -43,6 +43,8 @@ public interface IOpsDataService extends ISuperService<Host> {
 
 	Result verifyHostRecord(Rcd rcd, HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
 
+	
+	HashMap<String,String> queryDictItemDataByDictCode(String dictCode);
 
 	String getMapKey(HashMap<String,String> map, String value);
 

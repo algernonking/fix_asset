@@ -202,24 +202,25 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 
 		//制单人
-		if(assetRepair.getOriginatorId()==null||"".equals(assetRepair.getOriginatorId())){
+		if(StringUtil.isBlank(assetRepair.getOriginatorId())){
 			assetRepair.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
 		//业务时间
-		if(assetRepair.getBusinessDate()==null){
+		if(StringUtil.isBlank(assetRepair.getBusinessDate())){
 			assetRepair.setBusinessDate(new Date());
 		}
 
 
 		//办理状态
-		if(assetRepair.getStatus()==null||"".equals(assetRepair.getStatus())){
+		if(StringUtil.isBlank(assetRepair.getStatus())){
 			assetRepair.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
 
 		//生成编码规则
-		if(assetRepair.getBusinessCode()==null||"".equals(assetRepair.getBusinessCode())){
+		//编码
+		if(StringUtil.isBlank(assetRepair.getBusinessCode())){
 			Result codeResult=CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_REPAIR.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;

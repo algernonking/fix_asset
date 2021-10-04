@@ -11,6 +11,7 @@ function FormPage() {
 
 	var disableCreateNew=false;
 	var disableModify=false;
+	var pcmColumns=[];
 	/**
 	 * 入口函数，初始化
 	 */
@@ -70,6 +71,97 @@ function FormPage() {
 	}
 
 	var categorySelect;
+
+
+	function renderPcmColumnnHtml(cols){
+		var html="<fieldset class=\"layui-elem-field layui-field-title form-group-title\">\n" +
+			"<legend>自定义属性</legend>\n" +
+			" </fieldset>"
+		var colNumber=3;
+		var xs=12/colNumber;
+		for(var i=0;i<cols.length;i++){
+			var col=cols[i];
+			var s=i%colNumber;
+			if(s==0){
+				if(i==0){
+					html=html+"</div><div class=\"layui-row form-row\" >";
+				}else{
+					html=html+"<div class=\"layui-row form-row\" >";
+				}
+			}
+			var notNull="";
+			if(col.notNull==1){
+				notNull="<div class=\"layui-required\">*</div>";
+			}
+			if(col.dataType=="STRING"){
+				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
+					"           <div class=\"layui-form-item\" >\n" +
+					"              <div class=\"layui-form-label \">" +
+					"					 <div>"+col.shortName+"</div>\n" +
+												notNull +
+					"              </div>"+
+					"              <div class=\"layui-input-block \">\n" +
+					"                 <input lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\" placeholder=\"请输入内容\" type=\"text\" class=\"layui-input layui-input-number\"  />\n" +
+					"             </div>\n" +
+					" 		   </div>\n" +
+					"       </div>"
+			}else if(col.dataType=="DATE_TIME"){
+				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
+								"<div class=\"layui-form-item\" >\n" +
+								"    <div class=\"layui-form-label layui-form-label-c1\">" +
+								"		<div>"+col.shortName+"</div>" +
+											notNull +
+								"	 </div>\n" +
+								"    <div class=\"layui-input-block layui-input-block-c1\">\n" +
+								"        <input input-type=\"date\" lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\"  autocomplete=\"off\"  readonly  placeholder=\"\" type=\"text\" class=\"layui-input\"   />\n" +
+								"    </div>\n" +
+								"</div>"+
+						   "</div>"
+			}else if(col.dataType=="INTEGER"){
+				html=html+" <div class=\"layui-col-xs"+xs+" form-column\">\n" +
+								"<div class=\"layui-form-item\" >\n" +
+								"  	 <div class=\"layui-form-label\">" +
+								"		<div>"+col.shortName+"</div>" +
+											notNull +
+								"    </div>\n" +
+								"    <div class=\"layui-input-block\">\n" +
+								"        <input lay-filter=\""+col.field+"\" id=\"id_"+col.id+"\" name=\""+col.field+"\" placeholder=\"请输入内容\" type=\"text\" class=\"layui-input\"\n" +
+								"         autocomplete=\"off\" input-type=\"number_input\" integer=\"false\" decimal=\"true\" allow-negative=\"true\" step=\"1.0\" scale=\"0\"/>\n" +
+								"    </div>\n" +
+								"</div>\n"+
+							"</div>\n"
+			}else if(col.dataType=="INTEGER_2"){
+
+
+			}
+
+		}
+
+		html=html+"<div style=\"height:80px\"></div>";
+		console.log(html)
+		if(cols.length==0){
+			$("#pcmExtColumn").hide();
+		}else{
+			$("#pcmExtColumn").show();
+			$("#pcmExtColumn").html(html);
+		}
+
+
+		for(var i=0;i<cols.length;i++){
+			var col=cols[i];
+		   if(col.dataType=="DATE_TIME"){
+			   laydate.render({
+			   	elem: '#id_'+col.id,
+			   	format:"yyyy-MM-dd",
+			   	trigger:"click"
+			   });
+
+		   }
+
+		}
+
+	}
+
 	/**
 	 * 渲染表单组件
 	 */
@@ -94,8 +186,33 @@ function FormPage() {
 			//处理方式
 			on: function(data){
 				if(data.isAdd){
-					return data.change.slice(0, 1)
+					console.log(data);
+
+					var result=data.change.slice(0, 1);
+
+					console.log(result);
+					var task=setTimeout(function(){layer.load(2);},1000);
+					var ps={}
+					if(result.length==1){
+						ps={categoryId:result[0].id}
+					}
+					admin.request("/service-eam/eam-asset-category/query-catalog-attribute-by-asset-category", ps, function (attributeData) {
+						console.log(attributeData)
+						clearTimeout(task);
+						layer.closeAll('loading');
+						if (attributeData.success) {
+							pcmColumns=attributeData.data;
+							renderPcmColumnnHtml(attributeData.data);
+						} else {
+							layer.msg(data.message, {icon: 2, time: 1000});
+						}
+					}, "POST");
+
+
+					return result;
 				}
+
+
 			},
 			//显示为text模式
 			model: { label: { type: 'text' } },
@@ -279,6 +396,7 @@ function FormPage() {
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
+
 		//渲染图片字段
 		foxup.render({
 			el:"attach",
@@ -318,6 +436,83 @@ function FormPage() {
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
 					opts.push({name:data[i].maintainerName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+
+		//渲染 safetyLevelCode 下拉字段
+		fox.renderSelectBox({
+			el: "safetyLevelCode",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 maintenanceStatus 下拉字段
+		fox.renderSelectBox({
+			el: "maintenanceStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+
+		//渲染 equipmentStatus 下拉字段
+		fox.renderSelectBox({
+			el: "equipmentStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+
+		//渲染 equipmentEnvironmentCode 下拉字段
+		fox.renderSelectBox({
+			el: "equipmentEnvironmentCode",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -419,13 +614,20 @@ function FormPage() {
 			//设置  资产分类 设置下拉框勾选
 			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
 			if(categorySelect){
-				categorySelect.setValue(formData.category.id.split(","));
+				if(formData.category&&formData.category.id)
+					categorySelect.setValue(formData.category.id.split(","));
 			}
 
 			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  资产状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
+
+			fox.setSelectValue4Enum("#maintenanceStatus",formData.maintenanceStatus,SELECT_MAINTENANCESTATUS_DATA);
+
+			//设置  设备状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#equipmentStatus",formData.equipmentStatus,SELECT_EQUIPMENTSTATUS_DATA);
+
 			//设置  物品档案 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
 			//设置  厂商 设置下拉框勾选
@@ -443,6 +645,8 @@ function FormPage() {
 			//设置  供应商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
 
+			//设置  安全等级 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#safetyLevelCode",formData.safetyLevel);
 			//处理fillBy
 
 			//
@@ -513,6 +717,11 @@ function FormPage() {
 		//获取 供应商 下拉框的值
 		data["supplierId"]=fox.getSelectedValue("supplierId",false);
 
+
+		data["equipmentStatus"]=fox.getSelectedValue("equipmentStatus",false);
+		data["maintenanceStatus"]=fox.getSelectedValue("maintenanceStatus",false);
+		//获取 安全等级 下拉框的值
+		data["safetyLevelCode"]=fox.getSelectedValue("safetyLevelCode",false);
 		return data;
 	}
 
@@ -521,6 +730,21 @@ function FormPage() {
 	}
 
 	function saveForm(data) {
+		var pcmData={
+			pcmData:{}
+			// "EP01": "华为2w",
+			// "EP02": 192,
+			// "EP03":"13.8"
+		}
+		if(pcmColumns.length>0){
+			for(var i=0;i<pcmColumns.length;i++){
+				var col=pcmColumns[i];
+				if(col.dataType=="STRING"||col.dataType=="INTEGER"||col.dataType=="DATE_TIME"){
+					pcmData.pcmData[col.field]=data[col.field];
+				}
+			}
+		}
+		data.pcmData=pcmData;
 		var api=moduleURL+"/"+(data.id?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
 		admin.request(api, data, function (data) {

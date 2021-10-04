@@ -23,12 +23,15 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import com.dt.platform.domain.ops.InformationSystem;
 import com.dt.platform.domain.ops.InformationSystemVO;
+
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -294,14 +297,22 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
 
+		HashMap<String, HashMap<String,String>> matchMap=new HashMap<String,HashMap<String,String>>();
+		matchMap.put("organizationMap",opsDataService.queryUseOrganizationNodes());
+		matchMap.put("opsMethodMap",opsDataService.queryDictItemDataByDictCode("ops_system_ops_method"));
+		matchMap.put("devMethodMap", opsDataService.queryDictItemDataByDictCode("ops_system_dev_method"));
+		matchMap.put("gradeMap",opsDataService.queryDictItemDataByDictCode("ops_system_grade"));
+		matchMap.put("statusMap",opsDataService.queryDictItemDataByDictCode("ops_system_status"));
+
 		List<SQL> sqls=new ArrayList<>();
 		for (Rcd r : rs) {
 			//可在此处校验数据
 			System.out.println("before:"+r);
 
-			Result verifyResult=opsDataService.verifyISRecord(r,null,fill);
+			Result verifyResult=opsDataService.verifyISRecord(r,matchMap,fill);
 			if(!verifyResult.isSuccess()){
 				errors.add(new ValidateResult(null,1,verifyResult.getMessage()));
+				break;
 			}
 
 			String sql="";
@@ -310,7 +321,7 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 
 				insert.set("id",IDGenerator.getSnowflakeIdString());
-				insert.set("tenant_id","T001");
+				insert.set("tenant_id", SessionUser.getCurrent().getActivatedTenantId());
 
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
@@ -391,9 +402,9 @@ public class InformationSystemServiceImpl extends SuperService<InformationSystem
 //							||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)){
 //						continue;
 //					}
-					String rColumn= EnumUtil.parseByCode(OpsHostDataExportColumnEnum.class,column)==null?
+					String rColumn= EnumUtil.parseByCode(OpsISDataExportColumnEnum.class,column)==null?
 							BeanNameUtil.instance().depart(column):
-							EnumUtil.parseByCode(OpsHostDataExportColumnEnum.class,column).text();
+							EnumUtil.parseByCode(OpsISDataExportColumnEnum.class,column).text();
 
 					System.out.println(row.getCell(i)  +","+ firstRow.getCell(i)+","+column+rColumn);
 					charIndex=ExcelStructure.toExcel26(i);

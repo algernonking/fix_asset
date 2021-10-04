@@ -2,7 +2,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 12:15:10
+ * @since 2021-10-01 07:37:17
  */
  -->
  <!DOCTYPE html>
@@ -59,18 +59,15 @@
                     <!-- 异地备份 , diffplaceBackupInfo ,typeName=text_input, isHideInSearch=true -->
                     <!-- 归档模式 , archMethod ,typeName=text_input, isHideInSearch=true -->
                     <!-- 用户凭证 , voucherIds ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
+                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
-
-                        <div id="status" th:data="${dict.toArray('ops_system_status')}" style="width:140px"></div>
-
-
+                        <div id="status" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_status'}" style="width:140px"></div>
                     </div>
                     <!-- 系统分级 , grade ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('系统分级')}" class="search-label grade-label">系统分级</span><span class="search-colon">:</span></div>
-                        <div id="grade" th:data="${dict.toArray('ops_system_grade')}" style="width:140px"></div>
+                        <div id="grade" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_grade'}" style="width:140px"></div>
                     </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -152,10 +149,6 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var RADIO_STATUS_DATA = [[${dict.toArray('ops_system_status')}]];
-    var SELECT_OPSMETHOD_DATA = [[${dict.toArray('ops_system_ops_method')}]];
-    var SELECT_DEVMETHOD_DATA = [[${dict.toArray('ops_system_dev_method')}]];
-    var SELECT_GRADE_DATA = [[${dict.toArray('ops_system_grade')}]];
     var AUTH_PREFIX="ops_information_system";
 
 

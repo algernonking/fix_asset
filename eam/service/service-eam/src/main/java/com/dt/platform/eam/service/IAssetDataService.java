@@ -15,6 +15,8 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
+import org.github.foxnic.web.domain.pcm.CatalogData;
 
 import java.io.File;
 import java.io.InputStream;
@@ -32,11 +34,18 @@ import java.util.Map;
 
 public interface IAssetDataService extends ISuperService<Asset> {
 
+
+	HashMap<String,String> queryDictItemDataByDictCode(String dictCode);
+
 	String getMapKey(HashMap<String,String> map,String value);
 
 	Result verifyAssetRecord(Rcd rcd,HashMap<String,HashMap<String,String>> matchMap, boolean filldata);
 
+
+	Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean filldata);
+
 	HashMap<String,String> queryAssetCategoryNodes();
+
 
 	HashMap<String,String> queryUseOrganizationNodes();
 

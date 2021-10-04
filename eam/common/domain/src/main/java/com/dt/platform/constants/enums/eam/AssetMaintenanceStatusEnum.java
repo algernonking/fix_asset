@@ -13,11 +13,13 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetMaintenanceStatusEnum implements CodeTextEnum {
 
-	IN_PROGRESS("inProgress" , "维保中"),
-	OUT_PROGRESS("outProgress" , "过保"),
-	NOT_NEED("notNeed" , "不维保"),
+	IN_PROGRESS("inProgress" , "在保"),
+	OUT_PROGRESS("outProgress" , "脱保"),
+	NOUT_IN_PROGRESS("notInProgress" , "不保"),
+	UNKNOW("unknow" , "未知"),
 
 	;
+
 	private String code;
 	private String text;
 	private AssetMaintenanceStatusEnum(String code, String text)  {

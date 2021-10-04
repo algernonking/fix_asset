@@ -115,6 +115,7 @@ function ListPage() {
 						params : {} ,
 						callback : function(r) {
 							if(r.success) {
+								console.log("1111111111");
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");

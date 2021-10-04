@@ -8,6 +8,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.eam.common.ResetOnCloseInputStream;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
@@ -15,42 +16,42 @@ import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
-import com.github.foxnic.dao.data.Rcd;
-import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.dao.data.*;
 import com.github.foxnic.dao.excel.*;
 import com.github.foxnic.dao.meta.DBTableMeta;
 import com.github.foxnic.dao.sql.SQLBuilder;
 import com.github.foxnic.sql.expr.*;
 import com.github.foxnic.sql.treaty.DBTreaty;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import com.sun.xml.internal.messaging.saaj.util.ByteInputStream;
+import org.apache.poi.ss.usermodel.*;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.EmployeeVO;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.pcm.CatalogAttribute;
+import org.github.foxnic.web.domain.pcm.CatalogData;
+import org.github.foxnic.web.domain.pcm.DataQueryVo;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
 import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
+import org.github.foxnic.web.proxy.pcm.CatalogAttributeServiceProxy;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.io.*;
 import java.util.*;
 
 import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import java.lang.reflect.Field;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.api.error.ErrorDesc;
 
-import java.io.InputStream;
 import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 
 import org.github.foxnic.web.framework.dao.DBConfigs;
@@ -74,23 +75,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Autowired
 	private IAssetDataService assetDataService;
 
-	@Autowired
-	private IPositionService positionService;
 
 	@Autowired
-	private IWarehouseService warehouseService;
+	private IAssetCategoryService assetCategoryService;
 
-	@Autowired
-	private IMaintainerService maintainerService;
-
-	@Autowired
-	private IManufacturerService manufacturerService;
-
-	@Autowired
-	private IGoodsService goodsService;
-
-	@Autowired
-	private ICategoryFinanceService categoryFinanceService;
 
 
 
@@ -176,6 +164,26 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return ErrorDesc.success();
 	}
 
+	@Override
+	public AssetPcmData getPcmDataById(String id,String categoryId){
+		AssetPcmData pcmData=new AssetPcmData();
+		List<String> ids=new ArrayList<String>();
+		ids.add(id);
+		DataQueryVo vo=new DataQueryVo();
+		vo.setCatalogId(categoryId);
+		vo.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+		vo.setOwnerIds(ids);
+		Result categoryResult=CatalogServiceProxy.api().queryData(vo);
+		if(categoryResult.isSuccess()){
+			pcmData.setPcmData(new HashMap<String,Object>());
+		}else{
+			pcmData.setPcmData(new HashMap<String,Object>());
+		}
+		List<CatalogAttribute> attributeList=assetCategoryService.queryCatalogAttributeByAssetCategory(categoryId);
+		pcmData.setAttribute(attributeList);
+		return pcmData;
+
+	}
 
 	/**
 	 * 插入实体
@@ -203,13 +211,14 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 
 		//编码
-		if(!StringUtil.isBlank(asset.getAssetCode())){
+		if(StringUtil.isBlank(asset.getAssetCode())){
 			Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
 			if(!codeResult.isSuccess()){
 				return codeResult;
 			}else{
 				asset.setAssetCode(codeResult.getData().toString());
 			}
+		}else{
 		}
 
 		Result r=super.insert(asset);
@@ -474,6 +483,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds) {
 
+
 		Result result=new Result();
 		ConditionExpr queryCondition=new ConditionExpr();
 		queryCondition.andIn("id",assetIds);
@@ -517,9 +527,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 判断结果
 	 */
 	public Result<Asset> checkExists(Asset asset) {
-		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(asset, SYS_ROLE.NAME);
-		//return exists;
 		return ErrorDesc.success();
 	}
 
@@ -529,44 +536,87 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
-	public ExcelWriter exportExcelTemplate(String categoryId) {
-		ExcelWriter ew = new ExcelWriter();
-		ExcelStructure es = buildExcelStructure(categoryId);
-		ew.setWorkBookName("资产导入模板.xlsx");
-		return ew;
-
+	public ExcelWriter exportExcelTemplate() {
+		return null;
 	}
 
 
-	public List<ValidateResult> importData(RcdSet rs,boolean batch,String businessType,boolean dataType,String categoryId) {
 
+	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String businessType,boolean dataType) {
 		List<ValidateResult> errors=new ArrayList<>();
-
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
-
-
-		HashMap<String,HashMap<String,String>> matchMap=new HashMap<String,HashMap<String,String>>();
+		HashMap<String,List<String>> categoryDataMap=new HashMap<>();
+		List<CatalogAttribute> catalogAttribteList=new ArrayList<>();
+		List<CatalogData> catalogDataList=new ArrayList<>();
+		HashMap<String,HashMap<String,String>> matchMap=new HashMap<>();
 		matchMap.put("organizationMap",assetDataService.queryUseOrganizationNodes());
 		matchMap.put("categoryMap",assetDataService.queryAssetCategoryNodes());
+		matchMap.put("safetyLevelMap", assetDataService.queryDictItemDataByDictCode("eam_safety_level"));
+		matchMap.put("equipEnvMap",assetDataService.queryDictItemDataByDictCode("eam_equipment_environment"));
+		matchMap.put("sourceMap",assetDataService.queryDictItemDataByDictCode("eam_source"));
 
+		String pcmCategoryId=null;
+		if(attributeMap.size()>0){
+			Logger.info("本次资产导入为自定义模式");
+			for(String key:attributeMap.keySet()){
+				pcmCategoryId=key;
+			}
+			catalogAttribteList=attributeMap.get(pcmCategoryId);
+		}else{
+			Logger.info("本次资产导入为通用式");
+		}
+
+		String actionType="update";
+		String assetId="";
 		List<SQL> sqls=new ArrayList<>();
-		for (Rcd r : rs) {
-			//可在此处校验数据
+		for (int i=0;i<rs.size();i++ ) {
+			Rcd r=rs.getRcd(i);
 			System.out.println("before:"+r);
-
+			String uid=r.getString(AssetDataExportColumnEnum.ASSET_ID.text());
+			if(StringUtil.isBlank(uid)){
+				actionType="insert";
+				assetId=IDGenerator.getSnowflakeIdString();
+				r.set("id",assetId);
+			}else{
+				assetId=r.getString(AssetDataExportColumnEnum.ASSET_ID.text());
+			}
+			//可在此处校验数据
 			Result verifyResult=assetDataService.verifyAssetRecord(r,matchMap,dataType);
 			if(!verifyResult.isSuccess()){
-				errors.add(new ValidateResult(null,1,verifyResult.getMessage()));
+				errors.add(new ValidateResult(null,(i+1),verifyResult.getMessage()));
+				break;
 			}
 
+			String categoryId=r.getString(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.text());
+			if(StringUtil.isBlank(categoryId)){
+				errors.add(new ValidateResult(null,(i+1),"当前资产分类不存在"));
+				break;
+			}
+			if(pcmCategoryId!=null){
+				if(categoryId.equals(pcmCategoryId)){
+					Result<CatalogData> resultExtColumn=assetDataService.verifyAssetExtColumnRecord(r,catalogAttribteList,false);
+					if(resultExtColumn.isSuccess()){
+						catalogDataList.add(resultExtColumn.getData());
+					}else{
+						errors.add(new ValidateResult(null,(i+1),resultExtColumn.getMessage()));
+						break;
+					}
+				}else{
+					errors.add(new ValidateResult(null,(i+1),"当前资产分类不匹配,categoryId:"+categoryId+",pcmCategoryId:"+pcmCategoryId));
+					break;
+				}
+			}
+
+
 			String sql="";
-			if(StringUtil.isBlank(r.getString(AssetDataExportColumnEnum.ASSET_ID.text()))){
+			if("insert".equals(actionType)){
 
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 				//办理情况
 				if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ){
 					insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
+					//提交审批
 				}else{
 					insert.set("status",AssetHandleStatusEnum.COMPLETE.code());
 				}
@@ -575,13 +625,14 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
 				if(!codeResult.isSuccess()){
 					//返回报错
-					errors.add(new ValidateResult(null,2,codeResult.getMessage()));
+					errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
+					break;
 				}else{
-					insert.set(AssetDataExportColumnEnum.ASSET_CODE.text(),codeResult.getData().toString());
+					r.set("asset_code",codeResult.getData().toString());
 				}
 
-				insert.set("id",IDGenerator.getSnowflakeIdString());
-				insert.set("tenant_id","T001");
+				insert.set(AssetDataExportColumnEnum.ASSET_ID.text(),assetId);
+				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
 				//制单人
 				insert.set("originator_id",SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 
@@ -603,12 +654,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				sql=insert.getSQL();
 
 			}else{
-				if(r.getOwnerSet().hasColumn("status")){
-					r.getOwnerSet().removeColumn("status");
+				//办理情况
+				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
+					r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
 				}
+
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
 					r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
 				}
+
 				Update update=SQLBuilder.buildUpdate(r,SaveMode.ALL_FIELDS,this.table(),this.dao());
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
@@ -633,7 +687,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			try {
 				if(errors.size()==0){
 					dao().batchExecute(sqls);
+					if(catalogDataList.size()>0){
+						//保存自定义数据
+						System.out.println("catalogDataList:"+catalogDataList);
+						CatalogServiceProxy.api().saveDataList(catalogDataList);
+						for(CatalogData data:catalogDataList){
+							System.out.println("getOwnerId"+data.getOwnerId());
+							System.out.println("getTenantId"+data.getTenantId());
+							System.out.println("getCatalogId"+data.getCatalogId());
+							System.out.println("getData"+data.getData());
+
+						}
+					}
 				}
+
 			} catch (Exception e) {
 				errors.add(new ValidateResult(null,3,"批量导入失败"));
 				throw  e;
@@ -644,7 +711,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
-	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType,String categoryId) {
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType) {
 
 		List<ValidateResult> errors=new ArrayList<>();
 		ExcelReader er=null;
@@ -655,7 +722,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return errors;
 		}
 		//构建 Excel 结构
-		ExcelStructure es=buildExcelStructure(categoryId);
+		ExcelStructure es=buildExcelStructure(input);
+		HashMap<String,List<CatalogAttribute>> attributeMap=this.getPmcExtAttribute(input);
 		//装换成记录集
 		RcdSet rs=null;
 		try {
@@ -666,49 +734,191 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
 			return errors;
 		}
-		return importData(rs, batch, businessType, dataType, categoryId);
+		return importData(rs, attributeMap,batch, businessType, dataType);
 
 	}
 
+
+
+	public InputStream buildExcelTemplate(String categoryId){
+
+		//categoryId="12";
+
+		String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
+		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+		Workbook workbook;
+
+		if(inputStream!=null){
+			try {
+				BufferedInputStream bufferInput = new ResetOnCloseInputStream(inputStream);
+				workbook = WorkbookFactory.create(bufferInput);
+				CellStyle cs=workbook.createCellStyle();
+				cs.setAlignment(HorizontalAlignment.CENTER);
+				cs.setVerticalAlignment(VerticalAlignment.CENTER);
+				Sheet sheet=workbook.getSheetAt(0);
+//				if("data".equals(sheet.getSheetName())){
+//				}
+				Row firstRow=sheet.getRow(0);
+				Row secondRow=sheet.getRow(1);
+				System.out.println("SheetName:"+sheet.getSheetName());
+				System.out.println("firstRow lastCellNum:"+firstRow.getLastCellNum());
+				System.out.println("lastSecondRow lastCellNum:"+secondRow.getLastCellNum());
+				System.out.println("lastSecondRow lastCellNum Value:"+secondRow.getCell(secondRow.getLastCellNum()-1));
+				if(firstRow.getLastCellNum()!=secondRow.getLastCellNum()){
+					return null;
+				}
+				Short lastNum=firstRow.getLastCellNum();
+				if(!StringUtil.isBlank(categoryId)){
+					List<CatalogAttribute> catalogAttributeList = assetCategoryService.queryCatalogAttributeByAssetCategory(categoryId);
+					if(catalogAttributeList.size()>0){
+						//修改SheetName
+						Sheet categorySheet=workbook.createSheet("attribute");
+						Row categoryFirstRow=categorySheet.createRow(0);
+
+						Cell fcCategoryBase=categoryFirstRow.createCell(0, CellType.STRING);
+						fcCategoryBase.setCellValue(categoryId);
+						fcCategoryBase.setCellStyle(cs);
+						int i=0;
+						for(i=0;i<catalogAttributeList.size();i++){
+							CatalogAttribute attribute=catalogAttributeList.get(i);
+
+							Cell fc=firstRow.createCell(lastNum+i, CellType.STRING);
+							fc.setCellValue(attribute.getShortName());
+							fc.setCellStyle(cs);
+
+							//sheet2上在category上添加标记
+							Cell fcCategory=categoryFirstRow.createCell(i+1, CellType.STRING);
+							fcCategory.setCellValue("PCM_EXT_"+attribute.getField()+"");
+							fcCategory.setCellStyle(cs);
+
+
+							Cell sc=secondRow.createCell(lastNum+i, CellType.STRING);
+							sc.setCellStyle(cs);
+							if(i==catalogAttributeList.size()-1){
+								sc.setCellValue("t.PCM_EXT_"+attribute.getField()+"}}");
+							}else{
+								sc.setCellValue("t.PCM_EXT_"+attribute.getField());
+							}
+						}
+
+						//修改原标记
+						Cell sourceEndColumnCell=secondRow.getCell(lastNum-1);
+						sourceEndColumnCell.setCellValue(sourceEndColumnCell.getStringCellValue().replaceFirst("}}",""));
+
+						ByteArrayOutputStream out = new ByteArrayOutputStream();
+						workbook.write(out);
+						return new ByteArrayInputStream(out.toByteArray());
+
+					}
+				}
+
+			} catch (Exception e) {
+				Logger.debug("Excel 读取错误", e);
+			}
+		}
+		return inputStream;
+
+	}
+
+	public HashMap<String,List<CatalogAttribute>> getPmcExtAttribute(InputStream dataInputStream){
+		HashMap<String,List<CatalogAttribute>> map=new HashMap<>();
+		//获取自定义属性
+		if(dataInputStream!=null){
+			Workbook dataWorkbook;
+			Sheet sheetCategory = null;
+			try {
+				BufferedInputStream bufferInput = new ResetOnCloseInputStream(dataInputStream);
+				dataWorkbook = WorkbookFactory.create(bufferInput);
+				int sheetIndex=dataWorkbook.getSheetIndex("attribute");
+				if(sheetIndex<=0) {
+					Logger.info("当前分类数据中未找到自定义属性数据");
+				}else{
+					sheetCategory=dataWorkbook.getSheetAt(sheetIndex);
+					Row firstRow=sheetCategory.getRow(0);
+					String categoryId=firstRow.getCell(0).getStringCellValue();
+					List<CatalogAttribute> catalogAttributeList = assetCategoryService.queryCatalogAttributeByAssetCategory(categoryId);
+					Logger.info("当前分类数据中自定义属性字段数量为:"+catalogAttributeList.size());
+					int i=0;
+					List<CatalogAttribute> list=new ArrayList<>();
+					//为了保持顺序
+					for(i=1;i<firstRow.getLastCellNum();i++){
+						String asset_column=firstRow.getCell(i).toString();
+						CatalogAttribute attri=new CatalogAttribute();
+						attri.setField(asset_column);
+						attri.setShortName(asset_column);
+						list.add(attri);
+					}
+					map.put(categoryId,list);
+				}
+			}catch (Exception e) {
+				Logger.debug("Excel 读取错误", e);
+			}
+		}
+		return map;
+	}
+
+
 	@Override
-	public ExcelStructure buildExcelStructure(String categoryId) {
+	public ExcelStructure buildExcelStructure(InputStream dataInputStream) {
+
+		String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
+		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+
 		ExcelStructure es=new ExcelStructure();
 		es.setDataColumnBegin(0);
 		es.setDataRowBegin(2);
-		String code=AssetOperateEnum.EAM_DOWNLOAD_ASSET.code();
-		InputStream inputStream= TplFileServiceProxy.api().getTplFileStreamByCode(code);
+
+		Short lastNum=0;
+		//从模板获取属性
 		Workbook workbook;
 		if ( inputStream != null) {
 			try {
 				workbook = WorkbookFactory.create(inputStream);
 				Sheet sheet=workbook.getSheetAt(0);
-				//int rownum=sheet.getPhysicalNumberOfRows();
 				Row firstRow=sheet.getRow(0);
-				Row row=sheet.getRow(1);
-
+				Row secondRow=sheet.getRow(1);
+				lastNum=firstRow.getLastCellNum();
 				String charIndex="";
-				for(int i=0;i<row.getLastCellNum();i++){
-					String asset_column=row.getCell(i).toString().replaceFirst("\\{\\{\\$fe:","")
+				for(int i=0;i<secondRow.getLastCellNum();i++){
+					String asset_column=secondRow.getCell(i).toString().replaceFirst("\\{\\{\\$fe:","")
 							.replaceFirst("dataList","")
 							.replaceFirst("}}","")
 							.replaceFirst("t.","").trim();
 					//filter
+					String rAssetColumn="";
 					if(AssetDataExportColumnEnum.USE_USER_NAME.code().equals(asset_column)
 						||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)){
 						continue;
 					}
-					String rAssetColumn=EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column)==null?
+					rAssetColumn=EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column)==null?
 							BeanNameUtil.instance().depart(asset_column):
 							EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column).text();
 
-					System.out.println(row.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+","+rAssetColumn);
 					charIndex=ExcelStructure.toExcel26(i);
+					System.out.println(charIndex+","+secondRow.getCell(i)  +","+ firstRow.getCell(i)+","+asset_column+","+rAssetColumn);
 					es.addColumn(charIndex,rAssetColumn,firstRow.getCell(i).toString(), ExcelColumn.STRING_CELL_READER);
 				}
 				//追加自定义属性部分
 			} catch (Exception e) {
 				Logger.debug("Excel 读取错误", e);
+				return es;
 			}
+		}
+
+		HashMap<String,List<CatalogAttribute>> map=getPmcExtAttribute(dataInputStream);
+		System.out.println("PCM_EXT_MAP:"+map);
+		List<CatalogAttribute> list=new ArrayList<>();
+		for(String key:map.keySet()){
+			list=map.get(key);
+			break;
+		}
+		String charIndex="";
+		for(int i=0;i<list.size();i++){
+			CatalogAttribute attribute=list.get(i);
+			charIndex=ExcelStructure.toExcel26(lastNum+i);
+			System.out.println(charIndex+",自定义属性:"+attribute.getShortName()+","+ attribute.getField());
+			es.addColumn(charIndex,attribute.getField(),attribute.getShortName(), ExcelColumn.STRING_CELL_READER);
+
 		}
 
 		return es;
