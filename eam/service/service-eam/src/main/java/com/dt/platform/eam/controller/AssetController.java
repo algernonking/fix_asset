@@ -318,13 +318,18 @@ public class AssetController extends SuperController {
 		if(assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
 			//删除原来
 			String idValue=assetVO.getPcmData().get("id").toString();
-			System.out.println("idValue:"+idValue);
 			CatalogData pcmData=new CatalogData();
 			pcmData.setId(idValue);
 			pcmData.setData(assetVO.getPcmData());
 			pcmData.setOwnerId(assetVO.getId());
 			pcmData.setCatalogId(assetVO.getCategoryId());
 			pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+			System.out.println("update pcm data:");
+			System.out.println("getId:"+pcmData.getId());
+			System.out.println("getOwnerId:"+pcmData.getOwnerId());
+			System.out.println("getTenantId:"+pcmData.getTenantId());
+			System.out.println("getCatalogId:"+pcmData.getCatalogId());
+			System.out.println("getData:"+pcmData.getData());
 			Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
 			if(!pcmResult.isSuccess()){
 				return pcmResult;
@@ -901,6 +906,34 @@ public class AssetController extends SuperController {
 	}
 
 	/**
+	 * 批量送审
+	 * */
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@NotNull(name = AssetVOMeta.IDS)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetServiceProxy.FOR_BATCH_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.FOR_BATCH_APPROVAL)
+	public Result forBatchApproval(List<String> ids)  {
+		return assetService.forBatchApproval(ids);
+	}
+
+	/**
+	 * 批量确认
+	 * */
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@NotNull(name = AssetVOMeta.IDS)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetServiceProxy.BATCH_CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.BATCH_CONFIRM_OPERATION)
+	public Result batchConfirmOperation(List<String> ids)  {
+		return assetService.batchConfirmOperation(ids);
+	}
+
+	/**
 	 * 导出 Excel
 	 * */
 	@SentinelResource(value = AssetServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -928,7 +961,7 @@ public class AssetController extends SuperController {
 		bos.flush();
 		out.flush();
 		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
-		System.out.println(f.getPath());
+
 
 	}
 

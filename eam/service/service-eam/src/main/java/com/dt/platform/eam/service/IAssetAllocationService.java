@@ -28,6 +28,18 @@ import com.github.foxnic.dao.data.SaveMode;
 public interface IAssetAllocationService extends ISuperService<AssetAllocation> {
 
 
+	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result forApproval(String id);
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
 	Result confirmOperation(String id);
 
 	/**

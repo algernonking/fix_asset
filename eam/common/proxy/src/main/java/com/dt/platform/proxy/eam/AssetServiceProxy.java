@@ -111,7 +111,18 @@ public interface AssetServiceProxy {
 	 * 导入资产数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
+	/**
+	 * 批量送审
+	 */
+	public static final String FOR_BATCH_APPROVAL = API_PREFIX + "for-batch-approval";
+
+	/**
+	 * 确认操作
+	 */
+	public static final String BATCH_CONFIRM_OPERATION= API_PREFIX + "batch-confirm-operation";
+
+
 	/**
 	 * 添加资产
 	*/

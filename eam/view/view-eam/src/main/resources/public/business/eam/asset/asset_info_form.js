@@ -12,7 +12,10 @@ function FormPage() {
 	var disableCreateNew=false;
 	var disableModify=false;
 	var pcmColumns=[];
+	//必选字段
+	var pcmColumnsNeed=[];
 	var extDataId;
+	var categorySelect;
 	/**
 	 * 入口函数，初始化
 	 */
@@ -71,19 +74,24 @@ function FormPage() {
 		},250);
 	}
 
-	var categorySelect;
+
 
 
 	function renderPcmColumnnHtml(cols){
-
 		if(cols){
 			pcmColumns=cols;
+		}else{
+			return;
 		}
 		var html="<fieldset class=\"layui-elem-field layui-field-title form-group-title\">\n" +
 			"<legend>自定义属性</legend>\n" +
 			" </fieldset>"
 		var colNumber=3;
 		var xs=12/colNumber;
+		//删除原有的必选字段
+		for(var i=0;i<pcmColumnsNeed.length;i++){
+			VALIDATE_CONFIG[pcmColumnsNeed[i]].required=false;
+		}
 		for(var i=0;i<cols.length;i++){
 			var col=cols[i];
 			var s=i%colNumber;
@@ -108,6 +116,7 @@ function FormPage() {
 					compTxt="number_input";
 				}
 				if(compTxt){
+					pcmColumnsNeed.push(col.field);
 					VALIDATE_CONFIG[col.field]={"labelInForm":col.shortName,"inputType":compTxt,"required":true};
 				}
 			}
@@ -199,12 +208,12 @@ function FormPage() {
 				value: 'id',
 			},
 			filterable: true,
-			strict: false,
 			tree: {
-				// showFolderIcon: true,
+				showFolderIcon: true,
 				show: true,
-				strict: true,
-				expandedKeys: [ -1],
+				strict: false,
+				expandedKeys: true,
+			//	expandedKeys: [ -1],
 			},
 			//处理方式
 			on: function(data){
@@ -220,7 +229,6 @@ function FormPage() {
 						clearTimeout(task);
 						layer.closeAll('loading');
 						if (attributeData.success) {
-
 							renderPcmColumnnHtml(attributeData.data);
 						} else {
 							layer.msg(data.message, {icon: 2, time: 1000});
@@ -237,7 +245,7 @@ function FormPage() {
 			radio: true,
 			//选中关闭
 			clickClose: true,
-			height: 'auto',
+			height: '450px',
 			data:ASSET_CATEGORY_DATA
 		})
 		//渲染 status 下拉字段

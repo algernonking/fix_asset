@@ -220,12 +220,10 @@ function ListPage() {
 				name: 'name',
 				value: 'id',
 			},
-			filterable: true,
-			strict: false,
 			tree: {
 				// showFolderIcon: true,
 				show: true,
-				strict: true,
+				strict: false,
 				expandedKeys: [ -1],
 			},
 			//处理方式
@@ -241,7 +239,7 @@ function ListPage() {
 			radio: true,
 			//选中关闭
 			clickClose: true,
-			height: 'auto',
+			height: '450px',
 			data:ASSET_CATEGORY_DATA
 		})
 		//渲染 assetStatus 下拉字段

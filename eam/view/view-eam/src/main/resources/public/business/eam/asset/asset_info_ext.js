@@ -45,7 +45,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     categoryId=categoryValue[0].id;
                }
             }
-
             var value = {};
             value.businessCode={ value: $("#businessCode").val()};
             value.assetCode={ value: $("#assetCode").val()};
@@ -68,7 +67,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             if(categoryId){
                 ps.categoryId=categoryId;
             }
-            fox.submit(downloadUrl,ps);
+            var task=setTimeout(function(){layer.load(2);},10);
+            fox.submit(downloadUrl,ps,"post",function(){
+                clearTimeout(task);
+                layer.closeAll('loading');
+                console.log("execute finish");
+            });
         },
         forBatchApproval:function(data,item){
 

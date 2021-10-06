@@ -46,6 +46,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Service("EamAssetDataService")
 public class AssetDataServiceImpl  extends SuperService<Asset> implements IAssetDataService {
@@ -179,17 +180,24 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     }
 
     @Override
-    public Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean filldata){
+    public Result<CatalogData> verifyAssetExtColumnRecord(Rcd rcd, List<CatalogAttribute> attributeList, boolean fill){
         Result r=new Result();
         CatalogData data=new CatalogData();
         data.setCatalogId(rcd.getString("category_id"));
         data.setOwnerId(rcd.getString("id"));
         data.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
         Map<String,Object> dataMap=new HashMap<>();
+        String id=rcd.getString("pcm_ext_id");
+        if(!StringUtil.isBlank(id)){
+            data.setId(id);
+        }
         for(CatalogAttribute attribute:attributeList){
             String col=attribute.getField();
             String value= rcd.getString(col);
-            dataMap.put(col.replaceFirst("PCM_EXT_",""),value==null?"":value);
+            if("pcm_ext_id".equals(col))continue;
+            if(!StringUtil.isBlank(value)){
+                dataMap.put(col.replaceFirst("pcm_ext_",""),value==null?"":value);
+            }
         }
         data.setData(dataMap);
         return r.success(true).data(data);
@@ -200,10 +208,27 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         HashMap<String,String> orgMap=matchMap.get("organizationMap");
         HashMap<String,String> categoryMap=matchMap.get("categoryMap");
-        //id ,label
         HashMap<String,String> safetyLevelMap=matchMap.get("safetyLevelMap");
         HashMap<String,String> equipEnvMap=matchMap.get("equipEnvMap");
         HashMap<String,String> sourceMap=matchMap.get("sourceMap");
+        String category=BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID);
+        String valueCategory=rcd.getString(category);
+//        System.out.println("Rcd:"+rcd.toString());
+//        for (String f:rcd.getFields()){
+//            System.out.println(f+","+rcd.getString(f));
+//        }
+        if(!StringUtil.isBlank(valueCategory)){
+            if(categoryMap.containsValue(valueCategory.trim())){
+                String key=getMapKey(categoryMap,valueCategory);
+                rcd.setValue(category,key);
+            }else{
+                //返回报错
+                return ErrorDesc.failureMessage("资产分类未匹配到:"+valueCategory);
+            }
+        }else{
+            return ErrorDesc.failureMessage("资产分类不存在:"+valueCategory);
+        }
+
 
         //字符串类型
         String[] stringColumns = {AssetMeta.ASSET_CODE,AssetMeta.NAME,AssetMeta.SERIAL_NUMBER,AssetMeta.BATCH_CODE,
@@ -295,7 +320,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 rcd.setValue(useOrganization,key);
             }else{
                 //返回报错
-                return ErrorDesc.failureMessage("组织节点不存在:"+valueUseOrganization);
+                return ErrorDesc.failureMessage("组织节点未匹配到:"+valueUseOrganization);
             }
         }
 
@@ -308,23 +333,12 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 rcd.setValue(companyId,key);
             }else{
                 //返回报错
-                return ErrorDesc.failureMessage("组织节点不存在:"+valueOwnerCompany);
+                return ErrorDesc.failureMessage("组织节点未匹配到:"+valueOwnerCompany);
             }
 
         }
 
 
-        String category=BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID);
-        String valueCategory=rcd.getString(category);
-        if(!StringUtil.isBlank(valueCategory)){
-            if(categoryMap.containsValue(valueCategory.trim())){
-                String key=getMapKey(categoryMap,valueCategory);
-                rcd.setValue(category,key);
-            }else{
-                //返回报错
-                return ErrorDesc.failureMessage("资产分类不存在:"+valueCategory);
-            }
-        }
 
 
         String manager=BeanNameUtil.instance().depart(AssetMeta.MANAGER_ID);
@@ -552,7 +566,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 if(dataArr.size()>0){
                     JSONObject dataObj=dataArr.getJSONObject(0);
                     for(String key:dataObj.keySet()){
-                        assetMap.put("PCM_EXT_"+key,dataObj.get(key));
+                        assetMap.put("pcm_ext_"+key,dataObj.get(key));
                     }
                 }
             }

@@ -101,7 +101,20 @@ public interface AssetCollectionServiceProxy {
 	 * 导入资产领用数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
+
+	/**
+	 * 提交审批
+	 */
+	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
+
+	/**
+	 * 确认操作
+	 */
+	public static final String CONFIRM_OPERATION= API_PREFIX + "confirm-operation";
+
+
+
 	/**
 	 * 添加资产领用
 	*/

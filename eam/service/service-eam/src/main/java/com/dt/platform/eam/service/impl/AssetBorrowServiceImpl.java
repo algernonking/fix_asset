@@ -91,6 +91,17 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 
 
 	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result forApproval(String id){
+
+		return ErrorDesc.success();
+	}
+
+	/**
 	 * 操作成功
 	 * @param id ID
 	 * @return 是否成功

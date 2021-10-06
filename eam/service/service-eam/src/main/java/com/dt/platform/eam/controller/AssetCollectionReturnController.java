@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
+import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -311,6 +313,37 @@ public class AssetCollectionReturnController extends SuperController {
 	}
 
 
+	/**
+	 * 领用归还送审
+	 * */
+	@ApiOperation(value = "领用归还送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetCollectionReturnVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetCollectionReturnServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetCollectionReturnServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetCollectionReturnService.forApproval(id);
+	}
+
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "领用归还确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetCollectionReturnVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetCollectionReturnServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetCollectionReturnServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetCollectionReturnService.confirmOperation(id);
+	}
 
 	/**
 	 * 导出 Excel

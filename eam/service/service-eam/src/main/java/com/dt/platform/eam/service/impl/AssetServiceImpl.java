@@ -93,6 +93,24 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
+	/**
+	 * 批量送审
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	public Result forBatchApproval(List<String> ids){
+		return ErrorDesc.success();
+	}
+
+
+	/**
+	 * 批量确认
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	public Result batchConfirmOperation(List<String> ids ){
+		return  ErrorDesc.success();
+	}
 
 	/**
 	 * 操作成功
@@ -560,9 +578,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		HashMap<String,List<String>> categoryDataMap=new HashMap<>();
 		List<CatalogAttribute> catalogAttribteList=new ArrayList<>();
 		List<CatalogData> catalogDataList=new ArrayList<>();
+
 		HashMap<String,HashMap<String,String>> matchMap=new HashMap<>();
 		matchMap.put("organizationMap",assetDataService.queryUseOrganizationNodes());
 		matchMap.put("categoryMap",assetDataService.queryAssetCategoryNodes());
+
+
 		matchMap.put("safetyLevelMap", assetDataService.queryDictItemDataByDictCode("eam_safety_level"));
 		matchMap.put("equipEnvMap",assetDataService.queryDictItemDataByDictCode("eam_equipment_environment"));
 		matchMap.put("sourceMap",assetDataService.queryDictItemDataByDictCode("eam_source"));
@@ -575,14 +596,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 			catalogAttribteList=attributeMap.get(pcmCategoryId);
 		}else{
-			Logger.info("本次资产导入为通用式");
+			Logger.info("本次资产导入为通用模式");
 		}
 
 		String actionType="update";
 		String assetId="";
 		List<SQL> sqls=new ArrayList<>();
-		for (int i=0;i<rs.size();i++ ) {
-			Rcd r=rs.getRcd(i);
+		int i=0;
+		for (Rcd r:rs.getRcdList()) {
+			i++;
 			System.out.println("before:"+r);
 			String uid=r.getString(AssetDataExportColumnEnum.ASSET_ID.text());
 			if(StringUtil.isBlank(uid)){
@@ -598,12 +620,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				errors.add(new ValidateResult(null,(i+1),verifyResult.getMessage()));
 				break;
 			}
-
 			String categoryId=r.getString(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.text());
 			if(StringUtil.isBlank(categoryId)){
-				errors.add(new ValidateResult(null,(i+1),"当前资产分类不存在"));
+				errors.add(new ValidateResult(null,(i+1),"当前资产分类不存在"+r.toString()));
 				break;
 			}
+
+			//处理自定义属性
 			if(pcmCategoryId!=null){
 				if(categoryId.equals(pcmCategoryId)){
 					Result<CatalogData> resultExtColumn=assetDataService.verifyAssetExtColumnRecord(r,catalogAttribteList,false);
@@ -666,14 +689,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 			}else{
 				//办理情况
-				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
-					r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
-				}
+//				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
+//					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
+//				}
 
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
-					r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
+					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
 				}
-
 				Update update=SQLBuilder.buildUpdate(r,SaveMode.ALL_FIELDS,this.table(),this.dao());
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
@@ -703,11 +725,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 						System.out.println("catalogDataList:"+catalogDataList);
 						CatalogServiceProxy.api().saveDataList(catalogDataList);
 						for(CatalogData data:catalogDataList){
+							System.out.println("getId"+data.getId());
 							System.out.println("getOwnerId"+data.getOwnerId());
 							System.out.println("getTenantId"+data.getTenantId());
 							System.out.println("getCatalogId"+data.getCatalogId());
 							System.out.println("getData"+data.getData());
-
 						}
 					}
 				}
@@ -795,7 +817,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 							CatalogAttribute attribute=catalogAttributeList.get(i);
 							//sheet2上在category上添加标记
 							Cell fcCategory=categoryFirstRow.createCell(i+1, CellType.STRING);
-							fcCategory.setCellValue("PCM_EXT_"+attribute.getField()+"");
+							fcCategory.setCellValue("pcm_ext_"+attribute.getField()+"");
 							fcCategory.setCellStyle(cs);
 
 							//sheet1 上
@@ -805,22 +827,18 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 							Cell sc=secondRow.createCell(lastNum+i, CellType.STRING);
 							sc.setCellStyle(cs);
-							sc.setCellValue("t.PCM_EXT_"+attribute.getField());
-//							if(i==catalogAttributeList.size()-1){
-//								sc.setCellValue("t.PCM_EXT_"+attribute.getField()+"}}");
-//							}else{
-//
-//							}
+							sc.setCellValue("t.pcm_ext_"+attribute.getField());
+
 						}
 						Cell fcCategory=categoryFirstRow.createCell(i+1, CellType.STRING);
-						fcCategory.setCellValue("PCM_EXT_ID");
+						fcCategory.setCellValue("pcm_ext_id");
 						fcCategory.setCellStyle(cs);
 						Cell fc=firstRow.createCell(lastNum+i, CellType.STRING);
 						fc.setCellValue("自定义属性主键");
 						fc.setCellStyle(cs);
 						Cell sc=secondRow.createCell(lastNum+i, CellType.STRING);
 						sc.setCellStyle(cs);
-						sc.setCellValue("t.PCM_EXT_ID}}");
+						sc.setCellValue("t.pcm_ext_id}}");
 
 
 						//修改原标记
@@ -906,10 +924,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 							.replaceFirst("dataList","")
 							.replaceFirst("}}","")
 							.replaceFirst("t.","").trim();
-					//filter
+
 					String rAssetColumn="";
+					//filter
 					if(AssetDataExportColumnEnum.USE_USER_NAME.code().equals(asset_column)
-						||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)){
+						||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)
+							||AssetDataExportColumnEnum.STATUS_NAME.code().equals(asset_column)){
 						continue;
 					}
 					rAssetColumn=EnumUtil.parseByCode(AssetDataExportColumnEnum.class,asset_column)==null?
@@ -928,7 +948,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 
 		HashMap<String,List<CatalogAttribute>> map=getPmcExtAttribute(dataInputStream);
-		System.out.println("PCM_EXT_MAP:"+map);
+		System.out.println("pcm_ext_map:"+map);
 		List<CatalogAttribute> list=new ArrayList<>();
 		for(String key:map.keySet()){
 			list=map.get(key);

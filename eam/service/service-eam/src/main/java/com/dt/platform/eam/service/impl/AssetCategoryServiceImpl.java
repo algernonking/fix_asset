@@ -46,8 +46,7 @@ public class AssetCategoryServiceImpl  extends SuperService<Catalog> implements 
 
 
     @Override
-    public String queryNodesByCode(String code)
-    {
+    public String queryNodesByCode(String code) {
         CatalogVO categoryV0=new CatalogVO();
         categoryV0.setCode(code);
         Result<List<Catalog>> result=CatalogServiceProxy.api().queryList(categoryV0);

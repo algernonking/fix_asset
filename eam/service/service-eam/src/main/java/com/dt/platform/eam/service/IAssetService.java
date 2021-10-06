@@ -36,8 +36,23 @@ public interface IAssetService extends ISuperService<Asset> {
 	 */
 	AssetExtData getExtDataById(String id, String categoryId);
 
+	/**
+	 * 批量送审
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	Result forBatchApproval(List<String> ids);
+
 
 	Result confirmOperation(String id);
+
+
+	/**
+	 * 批量确认
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	Result batchConfirmOperation(List<String> ids );
 
 	/**
 	 * 插入实体

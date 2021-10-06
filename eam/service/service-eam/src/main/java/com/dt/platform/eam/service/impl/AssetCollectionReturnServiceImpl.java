@@ -85,6 +85,17 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 
 	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result forApproval(String id){
+
+		return ErrorDesc.success();
+	}
+
+	/**
 	 * 确认操作
 	 * @param id ID
 	 * @return 是否成功

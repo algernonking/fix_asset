@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
+import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -303,6 +305,39 @@ public class AssetRepairController extends SuperController {
 		result.success(true).data(list);
 		return result;
 	}
+
+
+	/**
+	 * 报修送审
+	 * */
+	@ApiOperation(value = "报修送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetRepairVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetRepairServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetRepairServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetRepairService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "报修确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetRepairVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetRepairServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetRepairServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetRepairService.confirmOperation(id);
+	}
+
 
 
 

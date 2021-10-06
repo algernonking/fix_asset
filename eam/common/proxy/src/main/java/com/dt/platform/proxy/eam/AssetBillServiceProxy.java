@@ -126,6 +126,7 @@ public interface AssetBillServiceProxy {
      */
     public static final String QUERY_ASSET_TRANSFER_BILLS = API_PREFIX + "query-asset-transfer-bills";
 
+
     /**
      * 控制器类名
      * */

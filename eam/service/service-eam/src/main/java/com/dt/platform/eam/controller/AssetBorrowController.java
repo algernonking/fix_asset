@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetAllocationVOMeta;
 import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -299,6 +301,37 @@ public class AssetBorrowController extends SuperController {
 		assetBorrowService.join(list,AssetBorrowMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
+	}
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "借用送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetBorrowVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetBorrowServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetBorrowServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetBorrowService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "借用确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetBorrowVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetBorrowServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetBorrowServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetBorrowService.confirmOperation(id);
 	}
 
 

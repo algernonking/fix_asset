@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.meta.AssetVOMeta;
+import com.dt.platform.proxy.eam.AssetServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -303,6 +305,37 @@ public class AssetAllocationController extends SuperController {
 		return result;
 	}
 
+
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "调拨送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetAllocationVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetAllocationServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetAllocationServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetAllocationService.forApproval(id);
+	}
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "调拨确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetAllocationVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetAllocationServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetAllocationServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetAllocationService.confirmOperation(id);
+	}
 
 
 	/**
