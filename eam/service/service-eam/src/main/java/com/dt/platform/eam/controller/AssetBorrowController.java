@@ -111,13 +111,16 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.DELETE)
 	public Result deleteById(String id) {
+
 		AssetBorrow assetBorrow=assetBorrowService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetBorrow.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetBorrow.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetBorrow.getStatus()) ){
+			Result result=assetBorrowService.deleteByIdLogical(id);
+			return result;
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
-		Result result=assetBorrowService.deleteByIdLogical(id);
-		return result;
+
 	}
 	
 	
@@ -161,7 +164,7 @@ public class AssetBorrowController extends SuperController {
 	@SentinelResource(value = AssetBorrowServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.UPDATE)
 	public Result update(AssetBorrowVO assetBorrowVO) {
-		AssetBorrow assetBorrow=assetBorrowService.queryEntity(assetBorrowVO);
+		AssetBorrow assetBorrow=assetBorrowService.getById(assetBorrowVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetBorrow.getStatus())
 		 	|| AssetHandleStatusEnum.APPROVAL.code().equals(assetBorrow.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -334,6 +337,21 @@ public class AssetBorrowController extends SuperController {
 		return assetBorrowService.confirmOperation(id);
 	}
 
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetBorrowVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetBorrowVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetBorrowServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetBorrowServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetBorrowService.revokeOperation(id);
+	}
 
 
 	/**

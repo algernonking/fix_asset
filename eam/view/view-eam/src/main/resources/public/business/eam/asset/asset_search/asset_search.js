@@ -13,6 +13,7 @@ function ListPage() {
     var dataTable=null;
 
     var searchContent_useOrganizationId;
+    var searchContent_belongOrganizationId;
     var searchContent_categoryId;
     var searchContent_positionId;
     /**
@@ -147,6 +148,14 @@ function ListPage() {
             ps.useOrganizationId=searchContent_useOrganizationId;
         }
 
+        if(searchContent_belongOrganizationId){
+            if(value.ownCompanyId){
+                delete value.ownCompanyId ;
+            }
+            ps.ownCompanyId=searchContent_belongOrganizationId;
+        }
+
+
         if(searchContent_categoryId){
             if(value.categoryId){
                 delete value.categoryId ;
@@ -171,6 +180,11 @@ function ListPage() {
         searchContent_useOrganizationId=useOrganizationId;
         refreshTableData()
     }
+    function searchBelongOrganization(belongOrganizationId){
+        searchContent_belongOrganizationId=belongOrganizationId;
+        refreshTableData()
+    }
+
 
     function searchCategory(categoryId){
         searchContent_categoryId=categoryId;
@@ -601,6 +615,7 @@ function ListPage() {
 
     window.module={
         searchUseOrganization:searchUseOrganization,
+        searchBelongOrganization:searchBelongOrganization,
         searchCategory:searchCategory,
         searchPosition:searchPosition,
         refreshTableData: refreshTableData,

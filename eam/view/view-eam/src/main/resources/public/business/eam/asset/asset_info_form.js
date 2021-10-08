@@ -212,14 +212,14 @@ function FormPage() {
 				showFolderIcon: true,
 				show: true,
 				strict: false,
-				expandedKeys: true,
-			//	expandedKeys: [ -1],
+				expandedKeys: [ -1],
 			},
 			//处理方式
 			on: function(data){
 				if(data.isAdd){
 					console.log(data);
 					var result=data.change.slice(0, 1);
+					console.log("result",result);
 					var task=setTimeout(function(){layer.load(2);},1000);
 					var ps={}
 					if(result.length==1){
@@ -234,7 +234,6 @@ function FormPage() {
 							layer.msg(data.message, {icon: 2, time: 1000});
 						}
 					}, "POST");
-
 					return result;
 				}
 
@@ -665,11 +664,8 @@ function FormPage() {
 
 			//设置  资产分类 设置下拉框勾选
 			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
-			if(categorySelect){
-				if(formData.category&&formData.category.id)
-					categorySelect.setValue(formData.category.id.split(","));
-			}
 
+			// fox.setSelectValue4QueryApi("#categoryId",formData.categoryId);
 			//设置  办理状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  资产状态 设置下拉框勾选
@@ -700,6 +696,16 @@ function FormPage() {
 			//设置  安全等级 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#safetyLevelCode",formData.safetyLevel);
 			//处理fillBy
+
+			setTimeout(function(){
+				if(categorySelect){
+					if(formData.category&&formData.category.id){
+						categorySelect.setValue(formData.category.id.split(","));
+					}
+					categorySelect.update({disabled:true})
+				}
+			},150)
+
 
 			//
 			fm.attr('method', 'POST');
@@ -802,20 +808,18 @@ function FormPage() {
 			}
 			data.pcmData=pcmData;
 		}
-		
-		var api=moduleURL+"/"+(data.id?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, data, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
-			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
+
+		admin.post(api,data,function (r){
+			if (r.success) {
+				layer.msg(r.message, {icon: 1, time: 500});
 				var index=admin.getTempData('eam-asset-form-data-popup-index');
 				admin.finishPopupCenter(index);
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				layer.msg(r.message, {icon: 2, time: 1000});
 			}
-		}, "POST");
+		},{delayLoading:2000,elms:[$('submit-button')]});
+
+
 	}
 
 	/**

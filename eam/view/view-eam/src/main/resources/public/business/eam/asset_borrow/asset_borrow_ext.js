@@ -17,13 +17,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
-
+    const moduleURL="/service-eam/eam-asset-borrow";
     //列表页的扩展
     var list={
         /**
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            if(!APPROVAL_REQUIRED){
+                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }
             console.log("list:beforeInit");
         },
         afterSearchInputReady: function() {
@@ -150,7 +156,37 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
             return true;
         },
+        confirmData:function (item){
+            var api=moduleURL+"/confirm-operation";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
 
+        },
+        forApproval:function (item){
+            var api=moduleURL+"/for-approval";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
+        },
+        revokeData:function (item){
+            var api= moduleURL + "/revoke-operation";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
+        },
         /**
          * 末尾执行
          */

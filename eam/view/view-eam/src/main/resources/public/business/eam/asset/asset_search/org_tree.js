@@ -41,7 +41,7 @@ function ListPage() {
                 contentType:"application/json",
                 url:moduleURL+"/query-nodes",
                 autoParam:["id=parentId"],
-                otherParam:{isLoadAllDescendants:0},
+                otherParam:{isLoadAllDescendants:0,targetType:"org"},
                 dataFilter: nodeDatafilter
             },
             callback: {
@@ -90,12 +90,7 @@ function ListPage() {
                 $("#asset-list-ifr")[0].contentWindow.module.searchUseOrganization(treeNode.id);
             }
         }
-
-
     }
-
-
-
 
 
 

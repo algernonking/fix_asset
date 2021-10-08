@@ -111,14 +111,15 @@ public class AssetCollectionController extends SuperController {
 	public Result deleteById(String id) {
 
 		AssetCollection assetCollection=assetCollectionService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollection.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollection.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetCollection.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetCollection.getStatus()) ){
+
+			Result result=assetCollectionService.deleteByIdLogical(id);return result;
+
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
 
-
-		Result result=assetCollectionService.deleteByIdLogical(id);
-		return result;
 	}
 	
 	
@@ -164,7 +165,7 @@ public class AssetCollectionController extends SuperController {
 	@SentinelResource(value = AssetCollectionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionServiceProxy.UPDATE)
 	public Result update(AssetCollectionVO assetCollectionVO) {
-		AssetCollection assetCollection=assetCollectionService.queryEntity(assetCollectionVO);
+		AssetCollection assetCollection=assetCollectionService.getById(assetCollectionVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollection.getStatus())
 		 ||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollection.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -350,6 +351,23 @@ public class AssetCollectionController extends SuperController {
 	public Result confirmOperation(String id)  {
 		return assetCollectionService.confirmOperation(id);
 	}
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetCollectionVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetCollectionVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetCollectionServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetCollectionServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetCollectionService.revokeOperation(id);
+	}
+
 
 	/**
 	 * 导出 Excel

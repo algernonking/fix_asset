@@ -110,13 +110,16 @@ public class AssetRepairController extends SuperController {
 	@SentinelResource(value = AssetRepairServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetRepairServiceProxy.DELETE)
 	public Result deleteById(String id) {
+
 		AssetRepair assetRepair=assetRepairService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetRepair.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetRepair.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetRepair.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetRepair.getStatus()) ){
+			Result result=assetRepairService.deleteByIdLogical(id);
+			return result;
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
-		Result result=assetRepairService.deleteByIdLogical(id);
-		return result;
+
 	}
 	
 	
@@ -164,7 +167,7 @@ public class AssetRepairController extends SuperController {
 	@PostMapping(AssetRepairServiceProxy.UPDATE)
 	public Result update(AssetRepairVO assetRepairVO) {
 
-		AssetRepair assetRepair=assetRepairService.queryEntity(assetRepairVO);
+		AssetRepair assetRepair=assetRepairService.getById(assetRepairVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetRepair.getStatus())
 			||AssetHandleStatusEnum.APPROVAL.code().equals(assetRepair.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -337,6 +340,24 @@ public class AssetRepairController extends SuperController {
 	public Result confirmOperation(String id)  {
 		return assetRepairService.confirmOperation(id);
 	}
+
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetRepairVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetRepairServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetRepairServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetRepairService.revokeOperation(id);
+	}
+
 
 
 

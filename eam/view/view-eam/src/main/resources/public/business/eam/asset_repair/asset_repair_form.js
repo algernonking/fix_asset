@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 23:19:29
+ * @since 2021-10-08 13:06:02
  */
 
 function FormPage() {
@@ -119,7 +119,7 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
+				var defaultValues="repairing".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {

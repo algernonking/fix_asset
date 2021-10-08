@@ -90,6 +90,23 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 
 
 	/**
+	 * 撤销
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result revokeOperation(String id) {
+		AssetTranfer billData=getById(id);
+		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
+		}
+		return ErrorDesc.success();
+	}
+
+
+	/**
 	 * 送审
 	 * @param id ID
 	 * @return 是否成功
@@ -97,6 +114,17 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	@Override
 	public Result forApproval(String id){
 
+		AssetTranfer billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_TRANFER.code()) ) {
+				//审批操作
+
+			}else{
+				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 		return ErrorDesc.success();
 	}
 
@@ -137,6 +165,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	}
 
 
+
 	/**
 	 * 确认操作
 	 * @param id ID
@@ -145,20 +174,16 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	@Override
 	public Result confirmOperation(String id) {
 		AssetTranfer billData=getById(id);
-		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
-			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
-				//发起审批
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_TRANFER.code()) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
-				//确认单据
-
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
 			}
 		}else{
-			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行过该操作");
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
 		}
-		return ErrorDesc.success();
 	}
-
-
 
 
 	/**

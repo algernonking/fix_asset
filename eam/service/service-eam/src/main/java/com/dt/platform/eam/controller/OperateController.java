@@ -3,6 +3,7 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,7 +87,7 @@ public class OperateController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产操作")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = OperateVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = OperateVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = OperateVOMeta.ID)
@@ -240,6 +241,27 @@ public class OperateController extends SuperController {
 		Result<PagedList<Operate>> result=new Result<>();
 		PagedList<Operate> list=operateService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		result.success(true).data(list);
+		return result;
+	}
+
+
+
+	/**
+	 * 是否需要审批
+	 */
+	@ApiOperation(value = "获取资产操作")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "businessType" , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@ApiOperationSupport(order=8)
+	@SentinelResource(value = OperateServiceProxy.APPROVAL_REQUIRED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(OperateServiceProxy.APPROVAL_REQUIRED)
+	public Result approvalRequired(String businessType) {
+		if(StringUtil.isBlank(businessType)){
+			return ErrorDesc.failureMessage("不存在businessType");
+		}
+		Result result=new Result();
+		result.success(true).data(operateService.approvalRequired(businessType));
 		return result;
 	}
 

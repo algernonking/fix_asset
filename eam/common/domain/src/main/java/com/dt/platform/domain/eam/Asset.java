@@ -25,8 +25,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 11:03:47
- * @sign 963089DC5021E13F9BE71ECC2FAAE457
+ * @since 2021-10-08 06:05:59
+ * @sign 032BE1C870412AFF2705402BB7633285
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -79,6 +79,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="批次编码" , notes = "批次编码")
 	private String batchCode;
+	
+	/**
+	 * 归属：归属
+	*/
+	@ApiModelProperty(required = false,value="归属" , notes = "归属")
+	private String ownerCode;
 	
 	/**
 	 * 资产编号：资产编号
@@ -750,6 +756,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setBatchCode(String batchCode) {
 		this.batchCode=batchCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 归属<br>
+	 * 归属
+	 * @return 归属
+	*/
+	public String getOwnerCode() {
+		return ownerCode;
+	}
+	
+	/**
+	 * 设置 归属
+	 * @param ownerCode 归属
+	 * @return 当前对象
+	*/
+	public Asset setOwnerCode(String ownerCode) {
+		this.ownerCode=ownerCode;
 		return this;
 	}
 	

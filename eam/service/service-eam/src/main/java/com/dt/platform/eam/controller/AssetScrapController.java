@@ -114,12 +114,14 @@ public class AssetScrapController extends SuperController {
 	@PostMapping(AssetScrapServiceProxy.DELETE)
 	public Result deleteById(String id) {
 		AssetScrap ssetScrap=assetScrapService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(ssetScrap.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(ssetScrap.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(ssetScrap.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(ssetScrap.getStatus()) ){
+			Result result=assetScrapService.deleteByIdLogical(id);
+			return result;
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
-		Result result=assetScrapService.deleteByIdLogical(id);
-		return result;
+
 	}
 	
 	
@@ -164,7 +166,7 @@ public class AssetScrapController extends SuperController {
 	@PostMapping(AssetScrapServiceProxy.UPDATE)
 	public Result update(AssetScrapVO assetScrapVO) {
 
-		AssetScrap assetScrap=assetScrapService.queryEntity(assetScrapVO);
+		AssetScrap assetScrap=assetScrapService.getById(assetScrapVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetScrap.getStatus())
 			||AssetHandleStatusEnum.APPROVAL.code().equals(assetScrap.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -330,6 +332,25 @@ public class AssetScrapController extends SuperController {
 	public Result confirmOperation(String id)  {
 		return assetScrapService.confirmOperation(id);
 	}
+
+
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetScrapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetScrapVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetScrapServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetScrapServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetScrapService.revokeOperation(id);
+	}
+
 
 
 

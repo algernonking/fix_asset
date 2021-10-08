@@ -29,9 +29,9 @@ echo "delete from ops_voucher_owner where 1=1 $tenant_sql; "          >>$clear_s
 echo "delete from ops_voucher_priv where 1=1 $tenant_sql; "           >>$clear_sql
 
 echo "-- eam"                                                         >>$clear_sql
+echo "delete from eam_warehouse where 1=1 $tenant_sql; "              >>$clear_sql
 echo "delete from eam_asset where 1=1 $tenant_sql; "                  >>$clear_sql
 echo "delete from eam_asset_item where 1=1 $tenant_sql; "             >>$clear_sql
-echo "delete from eam_warehouse where 1=1 $tenant_sql; "              >>$clear_sql
 echo "delete from eam_asset_repair where 1=1 $tenant_sql; "           >>$clear_sql
 echo "delete from eam_asset_scrap where 1=1 $tenant_sql; "            >>$clear_sql
 echo "delete from eam_asset_allocation where 1=1 $tenant_sql; "       >>$clear_sql
@@ -53,6 +53,17 @@ echo "delete from cont_contract_invoice where 1=1 $tenant_sql; "      >>$clear_s
 
 echo "-- end"                                                         >>$clear_sql
 
+exit 0
 
+delete from eam_asset where 1=1      ;
+delete from eam_asset_item where 1=1 ;
+delete from eam_asset_repair where 1=1  ;
+delete from eam_asset_scrap where 1=1      ;
+delete from eam_asset_allocation where 1=1;
+delete from eam_asset_borrow where 1=1 ;
+delete from eam_asset_borrow_data  ;
+delete from eam_asset_collection  ;
+delete from eam_asset_collection_return ;
+delete from eam_asset_handle where 1=1  ;
 
 

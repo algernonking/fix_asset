@@ -101,6 +101,20 @@ public interface OperateServiceProxy {
 	 * 导入资产操作数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+
+	/**
+	 * 是否需要审批
+	 */
+	public static final String APPROVAL_REQUIRED = API_PREFIX + "approval-required";
+
+
+	/**
+	 * 是否需要审批
+	 */
+	@RequestMapping(OperateServiceProxy.APPROVAL_REQUIRED)
+	public Result approvalRequired(String businessType);
+
 	
 	/**
 	 * 添加资产操作

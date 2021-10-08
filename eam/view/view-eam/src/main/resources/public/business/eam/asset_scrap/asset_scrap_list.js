@@ -1,7 +1,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 23:20:06
+ * @since 2021-10-07 10:56:26
  */
 
 
@@ -351,6 +351,9 @@ function ListPage() {
 			}
 			else if (layEvent === 'for-approval') { // 送审
 				window.pageExt.list.forApproval(data);
+			}
+			else if (layEvent === 'confirm-data') { // 确认
+				window.pageExt.list.confirmData(data);
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);

@@ -112,13 +112,16 @@ public class AssetTranferController extends SuperController {
 	@PostMapping(AssetTranferServiceProxy.DELETE)
 	public Result deleteById(String id) {
 		AssetTranfer assetTranfer=assetTranferService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetTranfer.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetTranfer.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetTranfer.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetTranfer.getStatus()) ){
+			Result result=assetTranferService.deleteByIdLogical(id);
+			return result;
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
 
-		Result result=assetTranferService.deleteByIdLogical(id);
-		return result;
+
+
 	}
 	
 	
@@ -164,7 +167,7 @@ public class AssetTranferController extends SuperController {
 	@SentinelResource(value = AssetTranferServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetTranferServiceProxy.UPDATE)
 	public Result update(AssetTranferVO assetTranferVO) {
-		AssetTranfer assetTranfer=assetTranferService.queryEntity(assetTranferVO);
+		AssetTranfer assetTranfer=assetTranferService.getById(assetTranferVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetTranfer.getStatus())
 		||AssetHandleStatusEnum.APPROVAL.code().equals(assetTranfer.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -365,6 +368,24 @@ public class AssetTranferController extends SuperController {
 	public Result confirmOperation(String id)  {
 		return assetTranferService.confirmOperation(id);
 	}
+
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetTranferVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetTranferVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetTranferServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetTranferServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetTranferService.revokeOperation(id);
+	}
+
 
 
 	/**

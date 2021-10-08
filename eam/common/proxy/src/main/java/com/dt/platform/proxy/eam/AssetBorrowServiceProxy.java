@@ -114,6 +114,11 @@ public interface AssetBorrowServiceProxy {
 	public static final String CONFIRM_OPERATION= API_PREFIX + "confirm-operation";
 
 	/**
+	 * 撤销操作
+	 */
+	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
+
+	/**
 	 * 添加资产借用
 	*/
 	@RequestMapping(AssetBorrowServiceProxy.INSERT)

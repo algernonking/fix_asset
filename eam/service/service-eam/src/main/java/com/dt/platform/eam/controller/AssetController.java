@@ -211,8 +211,16 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.DELETE)
 	public Result deleteById(String id) {
-		Result result=assetService.deleteByIdLogical(id);
-		return result;
+
+		Asset data=assetService.getById(id);
+		if(AssetHandleStatusEnum.CANCEL.code().equals(data.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(data.getStatus()) ){
+			Result result=assetService.deleteByIdLogical(id);
+			return result;
+		}else{
+			return ErrorDesc.failureMessage("当前状态无法进行删除操作");
+		}
+
 	}
 	
 	
@@ -352,6 +360,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWNER_CODE , value = "归属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
@@ -506,6 +515,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWNER_CODE , value = "归属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
@@ -592,6 +602,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BATCH_CODE , value = "批次编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.OWNER_CODE , value = "归属" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),

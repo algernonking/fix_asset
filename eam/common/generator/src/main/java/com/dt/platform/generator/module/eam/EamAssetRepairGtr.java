@@ -69,14 +69,16 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
-                .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE);
+                .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
         cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-        cfg.view().list().operationColumn().width(20);
+        cfg.view().list().operationColumn().width(350);
         cfg.view().formWindow().width("98%");
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -97,6 +99,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
 //        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
 
@@ -133,7 +136,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
 

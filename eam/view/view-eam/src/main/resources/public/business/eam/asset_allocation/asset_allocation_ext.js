@@ -14,8 +14,11 @@ layui.config({
 //
 layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','foxnicUpload','dropdown'],function () {
 
+
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
+
+    const moduleURL="/service-eam/eam-asset-allocation";
 
     //列表页的扩展
     var list={
@@ -23,6 +26,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+
+            if(!APPROVAL_REQUIRED){
+                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }
             console.log("list:beforeInit");
         },
         afterSearchInputReady: function() {
@@ -122,6 +132,37 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var downloadUrl="/service-eam/eam-asset-bill/query-allocation-bill";
             fox.submit(downloadUrl,{id:data.id});
         },
+        confirmData:function (item){
+            var api=moduleURL+"/confirm-operation";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
+
+        },
+        forApproval:function (item){
+            var api=moduleURL+"/for-approval";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
+        },
+        revokeData:function (item){
+            var api= moduleURL + "/revoke-operation";
+            admin.post(api,{id:item.id},function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[]});
+        },
         /**
          * 末尾执行
          */
@@ -187,7 +228,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
-            console.log("beforeSubmit",data);
+            var dataListSize=$(".form-iframe")[0].contentWindow.module.getDataListSize();
+            if(dataListSize==0){
+                layer.msg("请选择资产数据", {icon: 2, time: 1000});
+                return false;
+            }
+            data.assetSelectedCode=timestamp;
             return true;
         },
         /**

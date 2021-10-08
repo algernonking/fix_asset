@@ -89,8 +89,19 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	 * */
 	@Override
 	public Result forApproval(String id){
+		AssetAllocation billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
+				 //审批操作
 
+			}else{
+				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 		return ErrorDesc.success();
+
 	}
 
 	/**
@@ -133,25 +144,39 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 
 	/**
-	 * 确认操作
+	 * 撤销
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result revokeOperation(String id) {
+		AssetAllocation billData=getById(id);
+		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
+		}
+		return ErrorDesc.success();
+	}
+
+	//顺序:新建(未完成)  -- 送审核 --- 确认
+	/**
+	 * 确认操作,
 	 * @param id ID
 	 * @return 是否成功
 	 * */
 	@Override
 	public Result confirmOperation(String id) {
 		AssetAllocation billData=getById(id);
-		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
 			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
-				//发起审批
-
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
-				//确认单据
-
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
 			}
 		}else{
-			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行过该操作");
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
 		}
-		return ErrorDesc.success();
 	}
 
 	/**
@@ -166,7 +191,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
 			assetAllocation.setAssetIds(list);
 			//保存单据数据
 			Result insertReuslt=insert(assetAllocation);
@@ -193,6 +218,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		if(assetAllocation.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
+
 		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_ALLOCATE.code(),assetAllocation.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;

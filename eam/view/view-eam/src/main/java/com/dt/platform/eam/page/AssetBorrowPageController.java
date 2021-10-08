@@ -2,6 +2,8 @@ package com.dt.platform.eam.page;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,13 @@ public class AssetBorrowPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_borrow_list.html")
 	public String list(Model model,HttpServletRequest request) {
+
+		boolean approvalRequired=true;
+		Result approvalResult=OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_BORROW.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
 		return prefix+"/asset_borrow_list";
 	}
 

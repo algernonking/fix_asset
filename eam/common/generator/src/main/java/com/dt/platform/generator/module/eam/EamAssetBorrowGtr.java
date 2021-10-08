@@ -37,7 +37,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
-
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"borrower","借用人","借用人");
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
@@ -66,8 +65,11 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
         cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
       //  cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+        cfg.view().list().operationColumn().width(350);
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd").search().range();
 
@@ -84,7 +86,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                 .button().chooseEmployee(true);
 
 
-        cfg.view().list().operationColumn().width(250);
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.STATUS,
@@ -122,6 +124,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 
 
         //文件生成覆盖模式

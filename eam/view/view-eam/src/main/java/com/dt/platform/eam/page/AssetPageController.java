@@ -2,15 +2,13 @@ package com.dt.platform.eam.page;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
-import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import org.github.foxnic.web.domain.pcm.Catalog;
@@ -182,6 +180,23 @@ public class AssetPageController extends ViewController {
 		return prefix+"/asset_search/org_tree";
 	}
 
+
+	/**
+	 * 资产 台账
+	 */
+	@RequestMapping("/asset_search/belong_org_tree.html")
+	public String belongOrgTree(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/belong_org_tree";
+	}
+
+
 	/**
 	 * 资产 台账
 	 */
@@ -237,6 +252,14 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_info_list.html")
 	public String infoList(Model model,HttpServletRequest request) {
+
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
+
 
 		//设置字段布局
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());

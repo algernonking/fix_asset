@@ -93,24 +93,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
-	/**
-	 * 批量送审
-	 * @param ids 主键清单
-	 * @return 是否成功
-	 * */
-	public Result forBatchApproval(List<String> ids){
-		return ErrorDesc.success();
-	}
-
-
-	/**
-	 * 批量确认
-	 * @param ids 主键清单
-	 * @return 是否成功
-	 * */
-	public Result batchConfirmOperation(List<String> ids ){
-		return  ErrorDesc.success();
-	}
 
 	/**
 	 * 操作成功
@@ -150,6 +132,45 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 
+	/**
+	 * 批量送审batchConfirmOperation
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	public Result forBatchApproval(List<String> ids){
+
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",ids);
+		expr.and("status=?",AssetHandleStatusEnum.INCOMPLETE.code());
+		List<Asset> list=this.queryList(expr);
+		if(ids.size()!=list.size()){
+			return ErrorDesc.failureMessage("当前选择的资产中部分资产不满足状态要求");
+		}
+		return ErrorDesc.success();
+	}
+
+
+	/**
+	 * 批量确认
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	public Result batchConfirmOperation(List<String> ids ){
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",ids);
+		expr.and("status=?",AssetHandleStatusEnum.INCOMPLETE.code());
+		List<Asset> list=this.queryList(expr);
+		if(ids.size()!=list.size()){
+			return ErrorDesc.failureMessage("当前选择的资产中部分资产不满足状态要求");
+		}
+
+		if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ) {
+			return ErrorDesc.failureMessage("当前操作选用审核,请先送审");
+		}
+
+		return  ErrorDesc.success();
+	}
+
 
 	/**
 	 * 确认操作
@@ -157,20 +178,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 是否成功
 	 * */
 	public Result confirmOperation(String id) {
-		Asset assetData=getById(id);
-		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(assetData.getStatus())){
-			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ) {
-				//发起审批
-			}else{
-				//确认单据
-				if(update(EAMTables.EAM_ASSET.STATUS,AssetHandleStatusEnum.COMPLETE.code(),id)){
-					return operateResult(AssetHandleConfirmOperationEnum.SUCCESS.code(),id);
-				}
-			}
-		}else{
-			return ErrorDesc.failureMessage("当前状态为:"+assetData.getStatus()+",不能进行过该操作");
-		}
-		return ErrorDesc.success();
+
+		return ErrorDesc.failureMessage("开发中");
 	}
 
 	@Override
@@ -220,13 +229,23 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		//办理状态
 		if(StringUtil.isBlank(asset.getStatus())){
-			asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+			//办理情况
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ){
+				asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+				//提交审批
+			}else{
+				asset.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			}
 		}
-
 
 		//资产状态
 		if(StringUtil.isBlank(asset.getAssetStatus())){
 			asset.setAssetStatus(AssetStatusEnum.IDLE.code());
+		}
+
+		//所属
+		if(StringUtil.isBlank(asset.getOwnerCode())){
+			asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
 		}
 
 		//编码
@@ -421,25 +440,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		//过滤资产状态
 		if(CodeModuleEnum.EAM_ASSET_BORROW.code().equals(businessType)){
 			//借用
-			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.code().equals(businessType)){
 			//领用
-			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE.code());
 		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code().equals(businessType)){
 			//退库
-			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code());
 		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.code().equals(businessType)){
 			//报修
-			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.code().equals(businessType)){
 			//报废
-			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.code().equals(businessType)){
 			//调拨
-			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(CodeModuleEnum.EAM_ASSET_TRANFER.code().equals(businessType)){
 			//转移
-			queryCondition.andIn("asset_status",AssetStatusEnum.USING,AssetStatusEnum.IDLE);
+			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else{
 			return ErrorDesc.failure().message("不支持当前业务类型操作");
 		}
@@ -662,11 +681,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
 					break;
 				}else{
-					r.set("asset_code",codeResult.getData().toString());
+					insert.set("asset_code",codeResult.getData().toString());
 				}
 
 				insert.set(AssetDataExportColumnEnum.ASSET_ID.text(),assetId);
 				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
+				insert.set("owner_code",AssetOwnerCodeEnum.ASSET.code());
 				//制单人
 				insert.set("originator_id",SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 

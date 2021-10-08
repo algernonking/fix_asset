@@ -57,11 +57,10 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
 
         cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-
-        cfg.view().list().operationColumn().width(250);
-
-
+        cfg.view().list().operationColumn().width(350);
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID)
                 .form().button().chooseCompany(true);
@@ -114,13 +113,9 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().form().addPage("资产列表","assetSelectList");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
-
-
-
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
 //        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
-
-
 
         //文件生成覆盖模式
         cfg.overrides()

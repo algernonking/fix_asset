@@ -3,6 +3,7 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.common.StatusYNEnum;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	@Override
 	public boolean approvalRequired(String businessType){
 		Operate operate=queryEntity(Operate.create().setOperateCode(businessType));
-		if(operate!=null&&operate.getApproval()!=null && operate.getApproval().equals("0")){
+		if(operate!=null&&operate.getApproval()!=null && operate.getApproval().equals(StatusYNEnum.NO.code())){
 			return false;
 		}
 		return true;

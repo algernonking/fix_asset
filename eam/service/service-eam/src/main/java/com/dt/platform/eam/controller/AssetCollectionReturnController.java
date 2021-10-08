@@ -110,13 +110,16 @@ public class AssetCollectionReturnController extends SuperController {
 	public Result deleteById(String id) {
 
 		AssetCollectionReturn assetCollectionReturn=assetCollectionReturnService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollectionReturn.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollectionReturn.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetCollectionReturn.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetCollectionReturn.getStatus()) ){
+			Result result=assetCollectionReturnService.deleteByIdLogical(id);
+			return result;
+
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
 
-		Result result=assetCollectionReturnService.deleteByIdLogical(id);
-		return result;
+
 	}
 	
 	
@@ -162,7 +165,7 @@ public class AssetCollectionReturnController extends SuperController {
 	@PostMapping(AssetCollectionReturnServiceProxy.UPDATE)
 	public Result update(AssetCollectionReturnVO assetCollectionReturnVO) {
 
-		AssetCollectionReturn assetCollectionReturn=assetCollectionReturnService.queryEntity(assetCollectionReturnVO);
+		AssetCollectionReturn assetCollectionReturn=assetCollectionReturnService.getById(assetCollectionReturnVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetCollectionReturn.getStatus())
 				||AssetHandleStatusEnum.APPROVAL.code().equals(assetCollectionReturn.getStatus())){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -330,6 +333,8 @@ public class AssetCollectionReturnController extends SuperController {
 
 
 
+
+
 	/**
 	 * 确认
 	 * */
@@ -344,6 +349,25 @@ public class AssetCollectionReturnController extends SuperController {
 	public Result confirmOperation(String id)  {
 		return assetCollectionReturnService.confirmOperation(id);
 	}
+
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetCollectionReturnVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetCollectionReturnServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetCollectionReturnServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetCollectionReturnService.revokeOperation(id);
+	}
+
+
 
 	/**
 	 * 导出 Excel

@@ -13,8 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum StatusEnableEnum implements CodeTextEnum {
 
-	ENABLE("1" , "启用"),
-	DISABLE("0" , "禁用")
+	ENABLE("enable" , "启用"),
+	DISABLE("disable" , "禁用")
 	;
 	private String code;
 	private String text;

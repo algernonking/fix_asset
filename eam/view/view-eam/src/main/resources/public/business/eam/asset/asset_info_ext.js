@@ -17,6 +17,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    const moduleURL="/service-eam/eam-asset";
+    var formAction=admin.getTempData('eam-asset-form-data-form-action');
     //列表页的扩展
     var list={
         assetDataChange:function (data){
@@ -74,13 +76,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 console.log("execute finish");
             });
         },
-        forBatchApproval:function(data,item){
 
-        },
         /**
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            if(!APPROVAL_REQUIRED){
+                var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
+                toolHtml=toolHtml.replace(/lay-event="batchRevoke"/i, "style=\"display:none\"")
+                toolHtml=toolHtml.replace(/lay-event="forBatchApproval"/i, "style=\"display:none\"")
+                document.getElementById("toolbarTemplate").innerHTML=toolHtml;
+            }
             console.log("list:beforeInit");
         },
         /**
@@ -187,6 +193,28 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+
+        forBatchApproval:function(data,item){
+            console.log("####",data,item)
+            var api=moduleURL+"/for-batch-approval";
+            admin.post(api,data,function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[$("#forBatchApproval-button")]});
+        },
+        batchRevokeOperation:function(data,item){
+            var api=moduleURL+"/batch-revoke-operation";
+            admin.post(api,data,function (r){
+                if (r.success) {
+                    layer.msg(r.message, {icon: 1, time: 500});
+                } else {
+                    layer.msg(r.message, {icon: 2, time: 1000});
+                }
+            },{delayLoading:2000,elms:[$("#batchRevoke-button")]});
+        },
         /**
          * 末尾执行
          */
@@ -216,187 +244,183 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
-
-
             if($("#assetCode")){
                 $("#assetCode").attr("disabled","disabled").css("background-color","#e6e6e6");
             }
-
             if(data.id){
+                fox.lockForm($("#data-form"),true);
+                if("view"==formAction){
+                    $('#data-form').find("input").attr('placeholder','');
+                }
                 setTimeout(function(){
-                    var assetCategorySelect= xmSelect.get('#categoryId',true);
-                    if(assetCategorySelect){
-                        assetCategorySelect.update({disabled:true})
-                    }
-
-                    var goodsSelect= xmSelect.get('#goodsId',true);
-                    if(goodsSelect){
-                        goodsSelect.update({disabled:true})
-                    }
-
-                    var manufacturerIdSelect= xmSelect.get('#manufacturerId',true);
-                    if(manufacturerIdSelect){
-                        manufacturerIdSelect.update({disabled:true})
-                    }
-
-                    var maintainerIdSelect= xmSelect.get('#maintainerId',true);
-                    if(maintainerIdSelect){
-                        maintainerIdSelect.update({disabled:true})
-                    }
-
-
-                    var warehouseIdSelect= xmSelect.get('#warehouseId',true);
-                    if(warehouseIdSelect){
-                        warehouseIdSelect.update({disabled:true})
-                    }
-
-                    var positionIdSelect= xmSelect.get('#positionId',true);
-                    if(positionIdSelect){
-                        positionIdSelect.update({disabled:true})
-                    }
-
-                    var sourceIdSelect= xmSelect.get('#sourceId',true);
-                    if(sourceIdSelect){
-                        sourceIdSelect.update({disabled:true})
-                    }
-
-                    var financialCategoryIdSelect= xmSelect.get('#financialCategoryId',true);
-                    if(financialCategoryIdSelect){
-                        financialCategoryIdSelect.update({disabled:true})
-                    }
-                    
-                    var maintainerIdSelect= xmSelect.get('#maintainerId',true);
-                    if(maintainerIdSelect){
-                        maintainerIdSelect.update({disabled:true})
-                    }
-                    
-
-                    var supplierSelect= xmSelect.get('#supplierId',true);
-                    if(supplierSelect){
-                        supplierSelect.update({disabled:true})
-                    }
-
-
-
-                    //列出下面不能编辑的清单
-                    if($("#businessCode")){
-                        $("#businessCode").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#batchCode")){
-                        $("#businessCode").attr("batchCode","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#name")){
-                        $("#name").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#model")){
-                        $("#model").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#unit")){
-                        $("#unit").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#serviceLife")){
-                        $("#serviceLife").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#serialNumber")){
-                        $("#serialNumber").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#positionDetail")){
-                        $("#positionDetail").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-                    if($("#purchaseDate")){
-                        $("#purchaseDate").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#assetNotes")){
-                        $("#assetNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#contacts")){
-                        $("#contacts").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#director")){
-                        $("#director").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#label")){
-                        $("#label").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#financialNotes")){
-                        $("#financialNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#maintenanceNotes")){
-                        $("#maintenanceNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#maintenanceStartDate")){
-                        $("#maintenanceStartDate").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#maintenanceEndDate")){
-                        $("#maintenanceEndDate").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#contactInformation")){
-                        $("#contactInformation").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#maintainerName")){
-                        $("#maintainerName").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#ownCompanyId-button")){
-
-                        $("#ownCompanyId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#managerId-button")){
-                        $("#managerId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#useOrganizationId-button")){
-                        $("#useOrganizationId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#useUserId-button")){
-                        $("#useUserId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#pictureId-button")){
-                        $("#pictureId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#attach-button")){
-                        $("#attach-button").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-                    if($("#financialCode")){
-                        $("#financialCode").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#originalUnitPrice")){
-                        $("#originalUnitPrice").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-                    if($("#purchaseUnitPrice")){
-                        $("#purchaseUnitPrice").attr("disabled","disabled").css("background-color","#e6e6e6");
-                    }
-
-
-
-
-                },320)
+                },500)
+                // setTimeout(function(){
+                //     // var assetCategorySelect= xmSelect.get('#categoryId',true);
+                //     // if(assetCategorySelect){
+                //     //     assetCategorySelect.update({disabled:true})
+                //     // }
+                //
+                //     var goodsSelect= xmSelect.get('#goodsId',true);
+                //     if(goodsSelect){
+                //         goodsSelect.update({disabled:true})
+                //     }
+                //
+                //     var manufacturerIdSelect= xmSelect.get('#manufacturerId',true);
+                //     if(manufacturerIdSelect){
+                //         manufacturerIdSelect.update({disabled:true})
+                //     }
+                //
+                //     var maintainerIdSelect= xmSelect.get('#maintainerId',true);
+                //     if(maintainerIdSelect){
+                //         maintainerIdSelect.update({disabled:true})
+                //     }
+                //
+                //
+                //     var warehouseIdSelect= xmSelect.get('#warehouseId',true);
+                //     if(warehouseIdSelect){
+                //         warehouseIdSelect.update({disabled:true})
+                //     }
+                //
+                //     var positionIdSelect= xmSelect.get('#positionId',true);
+                //     if(positionIdSelect){
+                //         positionIdSelect.update({disabled:true})
+                //     }
+                //
+                //     var sourceIdSelect= xmSelect.get('#sourceId',true);
+                //     if(sourceIdSelect){
+                //         sourceIdSelect.update({disabled:true})
+                //     }
+                //
+                //     var financialCategoryIdSelect= xmSelect.get('#financialCategoryId',true);
+                //     if(financialCategoryIdSelect){
+                //         financialCategoryIdSelect.update({disabled:true})
+                //     }
+                //
+                //     var maintainerIdSelect= xmSelect.get('#maintainerId',true);
+                //     if(maintainerIdSelect){
+                //         maintainerIdSelect.update({disabled:true})
+                //     }
+                //
+                //
+                //     var supplierSelect= xmSelect.get('#supplierId',true);
+                //     if(supplierSelect){
+                //         supplierSelect.update({disabled:true})
+                //     }
+                //     //列出下面不能编辑的清单
+                //     if($("#businessCode")){
+                //         $("#businessCode").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#batchCode")){
+                //         $("#businessCode").attr("batchCode","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#name")){
+                //         $("#name").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#model")){
+                //         $("#model").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#unit")){
+                //         $("#unit").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#serviceLife")){
+                //         $("#serviceLife").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#serialNumber")){
+                //         $("#serialNumber").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#positionDetail")){
+                //         $("#positionDetail").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //     if($("#purchaseDate")){
+                //         $("#purchaseDate").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#assetNotes")){
+                //         $("#assetNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#contacts")){
+                //         $("#contacts").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#director")){
+                //         $("#director").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#label")){
+                //         $("#label").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#financialNotes")){
+                //         $("#financialNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#maintenanceNotes")){
+                //         $("#maintenanceNotes").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#maintenanceStartDate")){
+                //         $("#maintenanceStartDate").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#maintenanceEndDate")){
+                //         $("#maintenanceEndDate").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#contactInformation")){
+                //         $("#contactInformation").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#maintainerName")){
+                //         $("#maintainerName").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#ownCompanyId-button")){
+                //
+                //         $("#ownCompanyId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#managerId-button")){
+                //         $("#managerId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#useOrganizationId-button")){
+                //         $("#useOrganizationId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#useUserId-button")){
+                //         $("#useUserId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#pictureId-button")){
+                //         $("#pictureId-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#attach-button")){
+                //         $("#attach-button").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //
+                //     if($("#financialCode")){
+                //         $("#financialCode").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#originalUnitPrice")){
+                //         $("#originalUnitPrice").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                //
+                //     if($("#purchaseUnitPrice")){
+                //         $("#purchaseUnitPrice").attr("disabled","disabled").css("background-color","#e6e6e6");
+                //     }
+                // },320)
 
 
             }

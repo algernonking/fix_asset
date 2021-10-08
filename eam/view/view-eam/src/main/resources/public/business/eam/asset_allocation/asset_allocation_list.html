@@ -2,7 +2,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-04 23:16:17
+ * @since 2021-10-08 12:08:54
  */
  -->
  <!DOCTYPE html>
@@ -116,10 +116,11 @@
     <button th:if="${perm.checkAuth('eam_asset_allocation:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
     <button th:if="${perm.checkAnyAuth('eam_asset_allocation:update','eam_asset_allocation:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
-
     <button th:if="${perm.checkAuth('eam_asset_allocation:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
     <button class="layui-btn layui-btn-xs " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
+    <button class="layui-btn layui-btn-xs " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
+    <button class="layui-btn layui-btn-xs " lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
     <button class="layui-btn layui-btn-xs " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>
 
 </script>
@@ -130,6 +131,8 @@
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var AUTH_PREFIX="eam_asset_allocation";
 
+    // 是否需要审批
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 
 </script>
 

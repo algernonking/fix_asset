@@ -176,15 +176,17 @@
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
-<!-- 表格工具栏 -->
+<!-- 表格工具栏    -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('eam_asset:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
         <button th:if="${perm.checkAuth('eam_asset:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-        <button th:if="${perm.checkAuth('eam_asset:for-batch-approval')}"  id="forBatchApproval-button" class="layui-btn icon-btn  layui-btn-sm " lay-event="forBatchApproval"> <span th:text="${lang.translate('送审')}">送审</span></button>
+        <button th:if="${perm.checkAuth('eam_asset:for-batch-approval')}"  id="forBatchApproval-button" class="layui-btn icon-btn  layui-btn-sm " lay-event="forBatchApproval"> <span th:text="${lang.translate('批量送审')}">批量送审</span></button>
+        <button th:if="${perm.checkAuth('eam_asset:batch-revoke')}" id="batchRevoke-button" class="layui-btn icon-btn  layui-btn-sm " lay-event="batchRevoke"> <span th:text="${lang.translate('批量撤销')}">批量撤销</span></button>
         <button th:if="${perm.checkAuth('eam_asset:high-export-data')}"  id="highExportData-button" class="layui-btn icon-btn layui-btn-sm" lay-event="highExportData"><span th:text="${lang.translate('数据导出')}">数据导出</span></button>
     </div>
 </script>
+
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
@@ -209,6 +211,8 @@
     var AUTH_PREFIX="eam_asset";
     var ATTRIBUTE_LIST_DATA =  [[${attributeListData}]];
 
+    // 是否需要审批
+    var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
 
 </script>
 <script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>

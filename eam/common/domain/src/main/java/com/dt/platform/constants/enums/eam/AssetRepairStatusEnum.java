@@ -13,9 +13,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetRepairStatusEnum implements CodeTextEnum {
 
-	FINISH("1" , "已完成"),
-	REPAIRING("0" , "维修中")
+	REPAIRING("repairing" , "维修中"),
 
+	FINISH("finish" , "维修结束")
 	;
 	private String code;
 	private String text;

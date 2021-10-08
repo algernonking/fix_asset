@@ -12,8 +12,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum StatusShowHideEnum implements CodeTextEnum {
 
-	SHOW("1" , " 显示"),
-	HIDE("0" , "隐藏")
+	SHOW("show" , " 显示"),
+	HIDE("hide" , "隐藏")
 	;
 	private String code;
 	private String text;

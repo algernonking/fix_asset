@@ -110,12 +110,14 @@ public class AssetAllocationController extends SuperController {
 	@PostMapping(AssetAllocationServiceProxy.DELETE)
 	public Result deleteById(String id) {
 		AssetAllocation assetAllocation=assetAllocationService.getById(id);
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetAllocation.getStatus())
-				||AssetHandleStatusEnum.APPROVAL.code().equals(assetAllocation.getStatus()) ){
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetAllocation.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetAllocation.getStatus()) ){
+			Result result=assetAllocationService.deleteByIdLogical(id);
+			return result;
+		}else{
 			return ErrorDesc.failure().message("当前状态不允许删除");
 		}
-		Result result=assetAllocationService.deleteByIdLogical(id);
-		return result;
+
 	}
 	
 	
@@ -158,7 +160,7 @@ public class AssetAllocationController extends SuperController {
 	@SentinelResource(value = AssetAllocationServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.UPDATE)
 	public Result update(AssetAllocationVO assetAllocationVO) {
-		AssetAllocation assetAllocation=assetAllocationService.queryEntity(assetAllocationVO);
+		AssetAllocation assetAllocation=assetAllocationService.getById(assetAllocationVO.getId());
 		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetAllocation.getStatus())
 				||AssetHandleStatusEnum.APPROVAL.code().equals(assetAllocation.getStatus()) ){
 			return ErrorDesc.failure().message("当前状态不允许修改");
@@ -337,6 +339,21 @@ public class AssetAllocationController extends SuperController {
 		return assetAllocationService.confirmOperation(id);
 	}
 
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetAllocationVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetAllocationVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetAllocationServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetAllocationServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetAllocationService.revokeOperation(id);
+	}
 
 	/**
 	 * 导出 Excel

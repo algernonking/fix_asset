@@ -20,6 +20,13 @@ action=start
 if [[ -n $1 ]];then
   action=$1
 fi
+###########
+which $JAVA
+javaChk=$?
+if [[ $javaChk -ne 0 ]];then
+  echo "Java not found!"
+  exit 1
+fi
 #######################Function start stop ... #######################
 env(){
   if [[ ! -d $app_dir ]];then

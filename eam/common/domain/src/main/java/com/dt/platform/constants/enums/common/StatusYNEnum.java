@@ -12,8 +12,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum StatusYNEnum implements CodeTextEnum {
 
-	YES("1" , " 是"),
-	NO("0" , "否")
+	YES("yes" , " 是"),
+	NO("no" , "否")
 	;
 	private String code;
 	private String text;

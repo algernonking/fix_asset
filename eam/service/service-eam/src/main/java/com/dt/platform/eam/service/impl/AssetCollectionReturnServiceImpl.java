@@ -8,8 +8,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.domain.eam.AssetAllocation;
-import com.dt.platform.domain.eam.AssetItem;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
@@ -21,8 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetCollectionReturn;
-import com.dt.platform.domain.eam.AssetCollectionReturnVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -83,6 +80,22 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Autowired
 	private IOperateService operateService;
 
+	/**
+	 * 撤销
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result revokeOperation(String id) {
+		AssetCollectionReturn billData=getById(id);
+		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
+		}
+		return ErrorDesc.success();
+	}
+
 
 	/**
 	 * 送审
@@ -92,6 +105,17 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Override
 	public Result forApproval(String id){
 
+		AssetCollectionReturn billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code()) ) {
+				//审批操作
+
+			}else{
+				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
 		return ErrorDesc.success();
 	}
 
@@ -103,17 +127,15 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Override
 	public Result confirmOperation(String id) {
 		AssetCollectionReturn billData=getById(id);
-		if(AssetHandleStatusEnum.INCOMPLETE.equals(billData.getStatus())){
-			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code()) ) {
-				//发起审批
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code()) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
-				//确认单据
-
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
 			}
 		}else{
-			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行过该操作");
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
 		}
-		return ErrorDesc.success();
 	}
 
 
@@ -175,7 +197,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 			//获取资产列表
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_SELECTED_CODE,String.class,condition);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
 			assetCollectionReturn.setAssetIds(list);
 			//保存单据数据
 			Result insertReuslt=insert(assetCollectionReturn);

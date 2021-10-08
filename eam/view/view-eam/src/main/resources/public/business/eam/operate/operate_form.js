@@ -1,7 +1,7 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 20:02:20
+ * @since 2021-10-08 12:47:45
  */
 
 function FormPage() {
@@ -135,6 +135,7 @@ function FormPage() {
 		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
+
 
 
 

@@ -27,6 +27,12 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IAssetAllocationService extends ISuperService<AssetAllocation> {
 
+	/**
+	 * 撤销流程
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result revokeOperation(String id);
 
 	/**
 	 * 送审

@@ -468,6 +468,9 @@ function ListPage() {
 				case 'forBatchApproval':
 					window.pageExt.list.forBatchApproval && window.pageExt.list.forBatchApproval(selected,obj);
 					break;
+				case 'batchRevokeOperation':
+					window.pageExt.list.batchRevokeOperation && window.pageExt.list.batchRevokeOperation(selected,obj);
+					break;
 				case 'highExportData':
 					window.pageExt.list.highExportData && window.pageExt.list.highExportData(selected,obj);
 					break;

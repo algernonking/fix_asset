@@ -115,6 +115,12 @@ public interface AssetTranferServiceProxy {
 
 
 	/**
+	 * 撤销操作
+	 */
+	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
+
+
+	/**
 	 * 添加资产转移
 	*/
 	@RequestMapping(AssetTranferServiceProxy.INSERT)

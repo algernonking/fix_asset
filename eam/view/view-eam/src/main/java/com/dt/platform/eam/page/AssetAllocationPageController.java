@@ -2,6 +2,8 @@ package com.dt.platform.eam.page;
 
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,10 @@ public class AssetAllocationPageController extends ViewController {
 	
 	public static final String prefix="business/eam/asset_allocation";
 
+
 	private AssetAllocationServiceProxy proxy;
+
+
 	
 	/**
 	 * 获得代理对象<br> 
@@ -44,6 +49,13 @@ public class AssetAllocationPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_allocation_list.html")
 	public String list(Model model,HttpServletRequest request) {
+
+		boolean approvalRequired=true;
+		Result approvalResult=OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
 		return prefix+"/asset_allocation_list";
 	}
 
@@ -52,8 +64,11 @@ public class AssetAllocationPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_allocation_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
+
+
 		model.addAttribute("billId",id);
 		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_ALLOCATE.code());
+
 		return prefix+"/asset_allocation_form";
 	}
 }
