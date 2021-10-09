@@ -97,7 +97,13 @@ public interface AssetAttributeItemServiceProxy {
 	/**
 	 * 分页查询资产字段配置项
 	 */
-	public static final String QUERY_LIST_BY_MODULE = API_PREFIX + "query-list-by-mbdule";
+	public static final String QUERY_FORM_COLUMN_BY_MODULE = API_PREFIX + "query-form-column-by-module";
+
+	/**
+	 * 分页查询资产字段配置项
+	 */
+	public static final String QUERY_LIST_COLUMN_BY_MODULE = API_PREFIX + "query-list-column-by-module";
+
 	
 	/**
 	 * 导出资产字段配置项数据(Excel)
@@ -173,8 +179,13 @@ public interface AssetAttributeItemServiceProxy {
 	/**
 	 * 分页查询资产字段配置项
 	 */
-	@RequestMapping(AssetAttributeItemServiceProxy.QUERY_LIST_BY_MODULE)
-	Result<HashMap<String,List<AssetAttributeItem>>> queryListByModule(String module);
+	@RequestMapping(AssetAttributeItemServiceProxy.QUERY_FORM_COLUMN_BY_MODULE)
+	Result<HashMap<String,List<AssetAttributeItem>>> queryFormColumnByModule(String module,String dim);
+
+
+	@RequestMapping(AssetAttributeItemServiceProxy.QUERY_LIST_COLUMN_BY_MODULE)
+	Result<HashMap<String,List<AssetAttributeItem>>> queryListColumnByModule(String module,String dim);
+
 	/**
 	 * 控制器类名
 	 * */

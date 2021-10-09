@@ -426,6 +426,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				vo.setOwnCompanyId(null);
 			}
 		}
+
+		if(StringUtil.isBlank(sample.getOwnerCode())){
+			expr.and("owner_code=?",AssetOwnerCodeEnum.ASSET.code());
+		}
+
 		ConditionExpr base=this.buildQueryCondition(sample,"t");
 		expr.and(base);
 		select.append(expr.startWithWhere()+" order by create_time desc");

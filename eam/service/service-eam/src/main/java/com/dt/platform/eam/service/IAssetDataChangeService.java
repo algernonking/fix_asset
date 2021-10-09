@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetBorrow;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetDataChange;
@@ -18,14 +19,45 @@ import com.github.foxnic.dao.data.SaveMode;
 
 /**
  * <p>
- * 变更明细 服务接口
+ * 数据变更 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:16
+ * @since 2021-10-08 16:01:25
 */
 
 public interface IAssetDataChangeService extends ISuperService<AssetDataChange> {
-	
+
+
+	/**
+	 * 撤销流程
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result revokeOperation(String id);
+
+	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result forApproval(String id);
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result confirmOperation(String id);
+
+	/**
+	 * 插入实体
+	 * @param assetDataChange 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	Result insert(AssetDataChange assetDataChange, String assetSelectedCode);
+
+
 	/**
 	 * 插入实体
 	 * @param assetDataChange 实体数据
@@ -43,7 +75,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	
 		
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 数据变更
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -51,7 +83,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	Result deleteByIdPhysical(String id);
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 数据变更
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -74,7 +106,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	
 		
 	/**
-	 * 按主键更新字段 变更明细
+	 * 按主键更新字段 数据变更
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -124,7 +156,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
  
 		
 	/**
-	 * 按主键获取 变更明细
+	 * 按主键获取 数据变更
 	 *
 	 * @param id 主键
 	 * @return AssetDataChange 数据对象

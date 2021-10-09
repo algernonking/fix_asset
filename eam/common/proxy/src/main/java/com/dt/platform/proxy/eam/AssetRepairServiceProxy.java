@@ -123,7 +123,7 @@ public interface AssetRepairServiceProxy {
 	 * 添加资产报修
 	*/
 	@RequestMapping(AssetRepairServiceProxy.INSERT)
-	Result insert(AssetRepairVO assetRepairVO);
+	Result insert(AssetRepairVO assetRepairVO, String assetSelectedCode);
 	
 	/**
 	 * 删除资产报修

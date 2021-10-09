@@ -7,7 +7,9 @@ import com.dt.platform.constants.db.EAMTables.EAM_ASSET_DATA_CHANGE;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -15,10 +17,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 数据变更
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:15
- * @sign 8F29A09B1195523765D1678D706F3F63
+ * @since 2021-10-09 14:13:32
+ * @sign E12763BEF8BF253D7735C330850D100D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,46 +39,52 @@ public class AssetDataChange extends Entity {
 	private String id;
 	
 	/**
-	 * 变更类型：变更类型
+	 * 业务编号：业务编号
 	*/
-	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
-	private String businessType;
-	
-	/**
-	 * 变更号：变更号
-	*/
-	@ApiModelProperty(required = false,value="变更号" , notes = "变更号")
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
 	
 	/**
-	 * 资产：资产
+	 * 流程：流程
 	*/
-	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private String assetId;
+	@ApiModelProperty(required = false,value="流程" , notes = "流程")
+	private String procId;
 	
 	/**
-	 * 变更人：变更人
+	 * 办理状态：办理状态
 	*/
-	@ApiModelProperty(required = false,value="变更人" , notes = "变更人")
-	private String changeUserId;
+	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
+	private String status;
 	
 	/**
-	 * 变更时间：变更时间
+	 * 变更类型：变更类型
 	*/
-	@ApiModelProperty(required = false,value="变更时间" , notes = "变更时间")
-	private Date changeTime;
+	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
+	private String changeType;
 	
 	/**
-	 * 变更内容：变更内容
+	 * 资产变更：资产变更
 	*/
-	@ApiModelProperty(required = false,value="变更内容" , notes = "变更内容")
-	private String content;
+	@ApiModelProperty(required = false,value="资产变更" , notes = "资产变更")
+	private String assetChangeId;
+	
+	/**
+	 * 变更日期：变更日期
+	*/
+	@ApiModelProperty(required = false,value="变更日期" , notes = "变更日期")
+	private Date changeDate;
 	
 	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private String originatorId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -127,16 +135,34 @@ public class AssetDataChange extends Entity {
 	private Integer version;
 	
 	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
 	 * 资产：资产
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
-	private Asset asset;
+	private List<Asset> assetList;
 	
 	/**
-	 * 变更人：变更人
+	 * 资产列表：资产列表
 	*/
-	@ApiModelProperty(required = false,value="变更人" , notes = "变更人")
-	private Employee changeUser;
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<String> assetIds;
+	
+	/**
+	 * 变更数据：变更数据
+	*/
+	@ApiModelProperty(required = false,value="变更数据" , notes = "变更数据")
+	private Asset changeData;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -158,36 +184,17 @@ public class AssetDataChange extends Entity {
 	}
 	
 	/**
-	 * 获得 变更类型<br>
-	 * 变更类型
-	 * @return 变更类型
-	*/
-	public String getBusinessType() {
-		return businessType;
-	}
-	
-	/**
-	 * 设置 变更类型
-	 * @param businessType 变更类型
-	 * @return 当前对象
-	*/
-	public AssetDataChange setBusinessType(String businessType) {
-		this.businessType=businessType;
-		return this;
-	}
-	
-	/**
-	 * 获得 变更号<br>
-	 * 变更号
-	 * @return 变更号
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
 	*/
 	public String getBusinessCode() {
 		return businessCode;
 	}
 	
 	/**
-	 * 设置 变更号
-	 * @param businessCode 变更号
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
 	public AssetDataChange setBusinessCode(String businessCode) {
@@ -196,78 +203,97 @@ public class AssetDataChange extends Entity {
 	}
 	
 	/**
-	 * 获得 资产<br>
-	 * 资产
-	 * @return 资产
+	 * 获得 流程<br>
+	 * 流程
+	 * @return 流程
 	*/
-	public String getAssetId() {
-		return assetId;
+	public String getProcId() {
+		return procId;
 	}
 	
 	/**
-	 * 设置 资产
-	 * @param assetId 资产
+	 * 设置 流程
+	 * @param procId 流程
 	 * @return 当前对象
 	*/
-	public AssetDataChange setAssetId(String assetId) {
-		this.assetId=assetId;
+	public AssetDataChange setProcId(String procId) {
+		this.procId=procId;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更人<br>
-	 * 变更人
-	 * @return 变更人
+	 * 获得 办理状态<br>
+	 * 办理状态
+	 * @return 办理状态
 	*/
-	public String getChangeUserId() {
-		return changeUserId;
+	public String getStatus() {
+		return status;
 	}
 	
 	/**
-	 * 设置 变更人
-	 * @param changeUserId 变更人
+	 * 设置 办理状态
+	 * @param status 办理状态
 	 * @return 当前对象
 	*/
-	public AssetDataChange setChangeUserId(String changeUserId) {
-		this.changeUserId=changeUserId;
+	public AssetDataChange setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更时间<br>
-	 * 变更时间
-	 * @return 变更时间
+	 * 获得 变更类型<br>
+	 * 变更类型
+	 * @return 变更类型
 	*/
-	public Date getChangeTime() {
-		return changeTime;
+	public String getChangeType() {
+		return changeType;
 	}
 	
 	/**
-	 * 设置 变更时间
-	 * @param changeTime 变更时间
+	 * 设置 变更类型
+	 * @param changeType 变更类型
 	 * @return 当前对象
 	*/
-	public AssetDataChange setChangeTime(Date changeTime) {
-		this.changeTime=changeTime;
+	public AssetDataChange setChangeType(String changeType) {
+		this.changeType=changeType;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更内容<br>
-	 * 变更内容
-	 * @return 变更内容
+	 * 获得 资产变更<br>
+	 * 资产变更
+	 * @return 资产变更
 	*/
-	public String getContent() {
-		return content;
+	public String getAssetChangeId() {
+		return assetChangeId;
 	}
 	
 	/**
-	 * 设置 变更内容
-	 * @param content 变更内容
+	 * 设置 资产变更
+	 * @param assetChangeId 资产变更
 	 * @return 当前对象
 	*/
-	public AssetDataChange setContent(String content) {
-		this.content=content;
+	public AssetDataChange setAssetChangeId(String assetChangeId) {
+		this.assetChangeId=assetChangeId;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更日期<br>
+	 * 变更日期
+	 * @return 变更日期
+	*/
+	public Date getChangeDate() {
+		return changeDate;
+	}
+	
+	/**
+	 * 设置 变更日期
+	 * @param changeDate 变更日期
+	 * @return 当前对象
+	*/
+	public AssetDataChange setChangeDate(Date changeDate) {
+		this.changeDate=changeDate;
 		return this;
 	}
 	
@@ -287,6 +313,25 @@ public class AssetDataChange extends Entity {
 	*/
 	public AssetDataChange setNotes(String notes) {
 		this.notes=notes;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public String getOriginatorId() {
+		return originatorId;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originatorId 制单人
+	 * @return 当前对象
+	*/
+	public AssetDataChange setOriginatorId(String originatorId) {
+		this.originatorId=originatorId;
 		return this;
 	}
 	
@@ -443,40 +488,119 @@ public class AssetDataChange extends Entity {
 	}
 	
 	/**
-	 * 获得 资产<br>
-	 * 资产
-	 * @return 资产
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
 	*/
-	public Asset getAsset() {
-		return asset;
+	public String getTenantId() {
+		return tenantId;
 	}
 	
 	/**
-	 * 设置 资产
-	 * @param asset 资产
+	 * 设置 租户
+	 * @param tenantId 租户
 	 * @return 当前对象
 	*/
-	public AssetDataChange setAsset(Asset asset) {
-		this.asset=asset;
+	public AssetDataChange setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	
 	/**
-	 * 获得 变更人<br>
-	 * 变更人
-	 * @return 变更人
+	 * 获得 资产<br>
+	 * 资产
+	 * @return 资产
 	*/
-	public Employee getChangeUser() {
-		return changeUser;
+	public List<Asset> getAssetList() {
+		return assetList;
 	}
 	
 	/**
-	 * 设置 变更人
-	 * @param changeUser 变更人
+	 * 设置 资产
+	 * @param assetList 资产
 	 * @return 当前对象
 	*/
-	public AssetDataChange setChangeUser(Employee changeUser) {
-		this.changeUser=changeUser;
+	public AssetDataChange setAssetList(List<Asset> assetList) {
+		this.assetList=assetList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产
+	 * @param asset 资产
+	 * @return 当前对象
+	*/
+	public AssetDataChange addAsset(Asset asset) {
+		if(this.assetList==null) assetList=new ArrayList<>();
+		this.assetList.add(asset);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<String> getAssetIds() {
+		return assetIds;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetIds 资产列表
+	 * @return 当前对象
+	*/
+	public AssetDataChange setAssetIds(List<String> assetIds) {
+		this.assetIds=assetIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetId 资产列表
+	 * @return 当前对象
+	*/
+	public AssetDataChange addAssetId(String assetId) {
+		if(this.assetIds==null) assetIds=new ArrayList<>();
+		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 变更数据<br>
+	 * 变更数据
+	 * @return 变更数据
+	*/
+	public Asset getChangeData() {
+		return changeData;
+	}
+	
+	/**
+	 * 设置 变更数据
+	 * @param changeData 变更数据
+	 * @return 当前对象
+	*/
+	public AssetDataChange setChangeData(Asset changeData) {
+		this.changeData=changeData;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public AssetDataChange setOriginator(Employee originator) {
+		this.originator=originator;
 		return this;
 	}
 

@@ -11,26 +11,15 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 */
 
 
-public enum AssetAttributeItemOwnerEnum implements CodeTextEnum {
+public enum AssetChangeTypeEnum implements CodeTextEnum {
 
-	BASE("base" , "基本模块"),
-	EQUIPMENT("equipment" , "设备模块"),
-
-	ASSET_CHANGE("asset_change" , "变更模块"),
-
-	ASSET_SELECT("asset_select" , "资产选择列表"),
-
-	ASSET_BOOK("asset_book" , "资产公共台账列表"),
-	ASSET_BILL("asset_bill" , "资产单据列表"),
-	PUBLIC_SHOW("public_show" , "公共显示列表"),
+	EAM_ASSET_CHANGE_BASE_INFO("eam_asset_change_base_info" , "EAM_资产变更-基本"),
+	EAM_ASSET_CHANGE_MAINTENANCE("eam_asset_change_maintenance" , "EAM_资产变更-维保"),
+	EAM_ASSET_CHANGE_FINANCIAL("eam_asset_change_financial" , "EAM_资产变更-财务"),
 	;
-
-
-
-
 	private String code;
 	private String text;
-	private AssetAttributeItemOwnerEnum(String code, String text)  {
+	private AssetChangeTypeEnum(String code, String text)  {
 		this.code=code;
 		this.text=text;
 	}

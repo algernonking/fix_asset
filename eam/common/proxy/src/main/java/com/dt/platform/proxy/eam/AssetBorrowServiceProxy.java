@@ -122,7 +122,7 @@ public interface AssetBorrowServiceProxy {
 	 * 添加资产借用
 	*/
 	@RequestMapping(AssetBorrowServiceProxy.INSERT)
-	Result insert(AssetBorrowVO assetBorrowVO);
+	Result insert(AssetBorrowVO assetBorrowVO, String assetSelectedCode);
 	
 	/**
 	 * 删除资产借用

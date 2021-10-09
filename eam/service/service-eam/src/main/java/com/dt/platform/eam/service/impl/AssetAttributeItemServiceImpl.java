@@ -10,6 +10,7 @@ import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
 import com.dt.platform.eam.service.IAssetAttributeService;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -243,6 +244,22 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	}
 
 
+	@Override
+	public HashMap<String, List<AssetAttributeItem>> queryListColumnByModule(String module,String dim) {
+
+		HashMap<String, List<AssetAttributeItem>> result=new HashMap<String, List<AssetAttributeItem>>();
+		AssetAttributeItemVO attributeitemList=new AssetAttributeItemVO();
+		String key="attributeListData";
+		attributeitemList.setOwnerCode(module);
+		attributeitemList.setListShow(1);
+		if(!StringUtil.isBlank(dim)){
+			attributeitemList.setDimension(dim);
+		}
+		List<AssetAttributeItem> attributeItemsListData= queryList(attributeitemList,OrderBy.byAsc("list_sort"));
+		join(attributeItemsListData,AssetAttributeItemMeta.ATTRIBUTE);
+		result.put(key,attributeItemsListData);
+		return result;
+	}
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 *
@@ -250,12 +267,15 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	 * @return 查询结果
 	 * */
 	@Override
-	public HashMap<String, List<AssetAttributeItem>> queryListByModule(String module) {
+	public HashMap<String, List<AssetAttributeItem>> queryFormColumnByModule(String module,String dim) {
 
-
+		System.out.println("######"+module+dim);
 		HashMap<String, List<AssetAttributeItem>> result=new HashMap<String, List<AssetAttributeItem>>();
 		AssetAttributeItemVO attributeitem=new AssetAttributeItemVO();
 		attributeitem.setOwnerCode(module);
+		if(!StringUtil.isBlank(dim)){
+			attributeitem.setDimension(dim);
+		}
 		//三栏数据
 		attributeitem.setLayoutType(3);
 		attributeitem.setFormShow(1);
@@ -303,6 +323,7 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		result.put("attributeData1Column1",attributeItemsData1ColumnOneList);
 		printList(attributeItemsData1ColumnOneList,"one-1");
 
+
 		//所有列表数据
 		AssetAttributeItemVO attributeitemList=new AssetAttributeItemVO();
 		attributeitemList.setOwnerCode(module);
@@ -310,7 +331,6 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		List<AssetAttributeItem> attributeItemsListData= queryList(attributeitemList,OrderBy.byAsc("list_sort"));
 		join(attributeItemsListData,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeListData",attributeItemsListData);
-
 
 		return result;
 	}

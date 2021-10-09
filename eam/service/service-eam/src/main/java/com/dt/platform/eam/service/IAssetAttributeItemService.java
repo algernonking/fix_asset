@@ -199,7 +199,15 @@ public interface IAssetAttributeItemService extends ISuperService<AssetAttribute
 	 * @param module  查询条件
 	 * @return 查询结果
 	 * */
-	 HashMap <String,List<AssetAttributeItem>> queryListByModule(String module);
+	 HashMap <String,List<AssetAttributeItem>> queryFormColumnByModule(String module,String dim);
+
+	/**
+	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
+	 * @param module  查询条件
+	 * @param dim  查询条件
+	 * @return 查询结果
+	 * */
+	HashMap <String,List<AssetAttributeItem>> queryListColumnByModule(String module,String dim);
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配

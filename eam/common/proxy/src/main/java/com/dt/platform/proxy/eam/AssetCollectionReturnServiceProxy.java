@@ -125,7 +125,7 @@ public interface AssetCollectionReturnServiceProxy {
 	 * 添加资产退库
 	*/
 	@RequestMapping(AssetCollectionReturnServiceProxy.INSERT)
-	Result insert(AssetCollectionReturnVO assetCollectionReturnVO);
+	Result insert(AssetCollectionReturnVO assetCollectionReturnVO, String assetSelectedCode);
 	
 	/**
 	 * 删除资产退库

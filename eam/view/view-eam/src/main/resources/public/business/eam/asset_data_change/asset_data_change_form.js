@@ -1,7 +1,7 @@
 /**
- * 变更明细 列表页 JS 脚本
+ * 数据变更 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:26
+ * @since 2021-10-08 16:01:33
  */
 
 function FormPage() {
@@ -9,8 +9,8 @@ function FormPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-data-change";
 
-	var disableCreateNew=true;
-	var disableModify=true;
+	var disableCreateNew=false;
+	var disableModify=false;
 	/**
       * 入口函数，初始化
       */
@@ -77,9 +77,9 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 businessType 下拉字段
+		//渲染 status 下拉字段
 		fox.renderSelectBox({
-			el: "businessType",
+			el: "status",
 			radio: true,
 			filterable: false,
 			//转换数据
@@ -96,8 +96,8 @@ function FormPage() {
 			}
 		});
 		laydate.render({
-			elem: '#changeTime',
-			format:"yyyy-MM-dd HH:mm:ss",
+			elem: '#changeDate',
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 	}
@@ -126,9 +126,12 @@ function FormPage() {
 
 
 
+			//设置 变更日期 显示复选框勾选
+			if(formData["changeDate"]) {
+				$("#changeDate").val(fox.dateFormat(formData["changeDate"],"yyyy-MM-dd"));
+			}
 
-			//设置  业务类型 设置下拉框勾选
-			fox.setSelectValue4Enum("#businessType",formData.businessType,SELECT_BUSINESSTYPE_DATA);
+
 
 			//处理fillBy
 
@@ -177,8 +180,6 @@ function FormPage() {
 
 
 
-		//获取 业务类型 下拉框的值
-		data["businessType"]=fox.getSelectedValue("businessType",false);
 
 		return data;
 	}

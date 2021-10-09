@@ -59,7 +59,7 @@ public class AssetAlarmPageController extends ViewController {
 	 */
 	@RequestMapping("/allocation_list.html")
 	public String allocationList(Model model,HttpServletRequest request , String id) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -75,7 +75,7 @@ public class AssetAlarmPageController extends ViewController {
 	 */
 	@RequestMapping("/borrow_list.html")
 	public String borrowList(Model model,HttpServletRequest request , String id) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -93,7 +93,7 @@ public class AssetAlarmPageController extends ViewController {
 	public String maintenanceList(Model model,HttpServletRequest request , String id) {
 		System.out.println("111111");
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");

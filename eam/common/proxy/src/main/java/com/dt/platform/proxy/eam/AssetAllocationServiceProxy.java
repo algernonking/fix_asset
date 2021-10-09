@@ -124,7 +124,7 @@ public interface AssetAllocationServiceProxy {
 	 * 添加资产调拨
 	*/
 	@RequestMapping(AssetAllocationServiceProxy.INSERT)
-	Result insert(AssetAllocationVO assetAllocationVO);
+	Result insert(AssetAllocationVO assetAllocationVO,String assetSelectedCode);
 	
 	/**
 	 * 删除资产调拨

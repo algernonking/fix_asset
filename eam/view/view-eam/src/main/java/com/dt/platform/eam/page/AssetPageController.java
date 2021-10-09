@@ -61,7 +61,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_select_basic_list.html")
 	public String basicLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_SELECT.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_SELECT.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -77,7 +77,7 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_selected_list.html")
 	public String selectedLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BILL.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BILL.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -108,7 +108,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_search/employee_assetInfo_list.html")
 	public String employeeAssetInfoList(Model model,HttpServletRequest request,String employeeId) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.PUBLIC_SHOW.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.PUBLIC_SHOW.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -136,7 +136,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_search/employee_tree.html")
 	public String employeeTree(Model model,HttpServletRequest request) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -152,7 +152,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_search/category_tree.html")
 	public String categoryTree(Model model,HttpServletRequest request) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -171,7 +171,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_search/org_tree.html")
 	public String orgTree(Model model,HttpServletRequest request) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -187,7 +187,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_search/belong_org_tree.html")
 	public String belongOrgTree(Model model,HttpServletRequest request) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -202,7 +202,7 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_search/position_tree.html")
 	public String positionTree(Model model,HttpServletRequest request) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -217,7 +217,7 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_search/asset_search.html")
 	public String searchList(Model model,HttpServletRequest request) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -262,7 +262,7 @@ public class AssetPageController extends ViewController {
 
 
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -300,7 +300,7 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_info_form.html")
 	public String infoForm(Model model,HttpServletRequest request , String id) {
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListByModule(AssetAttributeItemOwnerEnum.BASE.code());
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));

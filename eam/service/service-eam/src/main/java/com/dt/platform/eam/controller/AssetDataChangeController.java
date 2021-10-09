@@ -3,6 +3,11 @@ package com.dt.platform.eam.controller;
  
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
+import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,13 +52,13 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 变更明细 接口控制器
+ * 数据变更 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:17
+ * @since 2021-10-08 16:01:26
 */
 
-@Api(tags = "变更明细")
+@Api(tags = "数据变更")
 @ApiSort(0)
 @RestController("EamAssetDataChangeController")
 public class AssetDataChangeController extends SuperController {
@@ -63,50 +68,62 @@ public class AssetDataChangeController extends SuperController {
 
 	
 	/**
-	 * 添加变更明细
+	 * 添加数据变更
 	*/
-	@ApiOperation(value = "添加变更明细")
+	@ApiOperation(value = "添加数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "变更号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_USER_ID , value = "变更人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CONTENT , value = "变更内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetDataChangeServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.INSERT)
-	public Result insert(AssetDataChangeVO assetDataChangeVO) {
-		Result result=assetDataChangeService.insert(assetDataChangeVO);
-		return result;
+	public Result insert(AssetDataChangeVO assetDataChangeVO,String assetSelectedCode) {
+		if(!StringUtil.isBlank(assetSelectedCode)){
+			return assetDataChangeService.insert(assetDataChangeVO,assetSelectedCode);
+		}else{
+			return assetDataChangeService.insert(assetDataChangeVO);
+		}
+
 	}
 
 	
 	/**
-	 * 删除变更明细
+	 * 删除数据变更
 	*/
-	@ApiOperation(value = "删除变更明细")
+	@ApiOperation(value = "删除数据变更")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetDataChangeVOMeta.ID)
 	@SentinelResource(value = AssetDataChangeServiceProxy.DELETE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.DELETE)
 	public Result deleteById(String id) {
-		Result result=assetDataChangeService.deleteByIdLogical(id);
-		return result;
+
+		AssetDataChange assetDataChange=assetDataChangeService.getById(id);
+		if(AssetHandleStatusEnum.CANCEL.code().equals(assetDataChange.getStatus())
+				||AssetHandleStatusEnum.INCOMPLETE.code().equals(assetDataChange.getStatus()) ){
+			Result result=assetDataChangeService.deleteByIdLogical(id);
+			return result;
+		}else{
+			return ErrorDesc.failure().message("当前状态不允许删除");
+		}
+
 	}
 	
 	
 	/**
-	 * 批量删除变更明细 <br>
+	 * 批量删除数据变更 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-	@ApiOperation(value = "批量删除变更明细")
+	@ApiOperation(value = "批量删除数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 	})
@@ -120,42 +137,52 @@ public class AssetDataChangeController extends SuperController {
 	}
 	
 	/**
-	 * 更新变更明细
+	 * 更新数据变更
 	*/
-	@ApiOperation(value = "更新变更明细")
+	@ApiOperation(value = "更新数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "变更号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_USER_ID , value = "变更人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CONTENT , value = "变更内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } ) 
 	@NotNull(name = AssetDataChangeVOMeta.ID)
 	@SentinelResource(value = AssetDataChangeServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.UPDATE)
 	public Result update(AssetDataChangeVO assetDataChangeVO) {
+
+		AssetDataChange assetDataChange=assetDataChangeService.getById(assetDataChangeVO.getId());
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetDataChange.getStatus())
+				|| AssetHandleStatusEnum.APPROVAL.code().equals(assetDataChange.getStatus())){
+			return ErrorDesc.failure().message("当前状态不允许修改");
+		}
 		Result result=assetDataChangeService.update(assetDataChangeVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
+
+
 	}
 	
 	
 	/**
-	 * 保存变更明细
+	 * 保存数据变更
 	*/
-	@ApiOperation(value = "保存变更明细")
+	@ApiOperation(value = "保存数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "变更号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_USER_ID , value = "变更人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CONTENT , value = "变更内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } )
 	@NotNull(name = AssetDataChangeVOMeta.ID)
@@ -168,9 +195,9 @@ public class AssetDataChangeController extends SuperController {
 
 	
 	/**
-	 * 获取变更明细
+	 * 获取数据变更
 	*/
-	@ApiOperation(value = "获取变更明细")
+	@ApiOperation(value = "获取数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})
@@ -181,18 +208,18 @@ public class AssetDataChangeController extends SuperController {
 	public Result<AssetDataChange> getById(String id) {
 		Result<AssetDataChange> result=new Result<>();
 		AssetDataChange assetDataChange=assetDataChangeService.getById(id);
-		// 关联出 变更人 数据
-		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.CHANGE_USER);
+		// 关联出 制单人 数据
+		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.ORIGINATOR);
 		result.success(true).data(assetDataChange);
 		return result;
 	}
 
 
 	/**
-	 * 批量删除变更明细 <br>
+	 * 批量获取数据变更 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除变更明细")
+		@ApiOperation(value = "批量获取数据变更")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = AssetDataChangeVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
@@ -209,18 +236,19 @@ public class AssetDataChangeController extends SuperController {
 
 	
 	/**
-	 * 查询变更明细
+	 * 查询数据变更
 	*/
-	@ApiOperation(value = "查询变更明细")
+	@ApiOperation(value = "查询数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "变更号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_USER_ID , value = "变更人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CONTENT , value = "变更内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -234,18 +262,19 @@ public class AssetDataChangeController extends SuperController {
 
 	
 	/**
-	 * 分页查询变更明细
+	 * 分页查询数据变更
 	*/
-	@ApiOperation(value = "分页查询变更明细")
+	@ApiOperation(value = "分页查询数据变更")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "变更号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_USER_ID , value = "变更人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CONTENT , value = "变更内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -253,10 +282,58 @@ public class AssetDataChangeController extends SuperController {
 	public Result<PagedList<AssetDataChange>> queryPagedList(AssetDataChangeVO sample) {
 		Result<PagedList<AssetDataChange>> result=new Result<>();
 		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 变更人 数据
-		assetDataChangeService.join(list,AssetDataChangeMeta.CHANGE_USER);
+		// 关联出 制单人 数据
+		assetDataChangeService.join(list,AssetDataChangeMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
+	}
+
+
+	/**
+	 * 送审
+	 * */
+	@ApiOperation(value = "变更送审")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetDataChangeVOMeta.ID)
+	@ApiOperationSupport(order=12)
+	@SentinelResource(value = AssetDataChangeServiceProxy.FOR_APPROVAL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetDataChangeServiceProxy.FOR_APPROVAL)
+	public Result forApproval(String id)  {
+		return assetDataChangeService.forApproval(id);
+	}
+
+
+	/**
+	 * 确认
+	 * */
+	@ApiOperation(value = "变更确认")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetDataChangeVOMeta.ID)
+	@ApiOperationSupport(order=13)
+	@SentinelResource(value = AssetDataChangeServiceProxy.CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetDataChangeServiceProxy.CONFIRM_OPERATION)
+	public Result confirmOperation(String id)  {
+		return assetDataChangeService.confirmOperation(id);
+	}
+
+
+	/**
+	 * 撤销
+	 * */
+	@ApiOperation(value = "变更撤销")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetDataChangeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetDataChangeVOMeta.ID)
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetDataChangeServiceProxy.REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetDataChangeServiceProxy.REVOKE_OPERATION)
+	public Result revokeOperation(String id)  {
+		return assetDataChangeService.revokeOperation(id);
 	}
 
 

@@ -123,7 +123,7 @@ public interface AssetCollectionServiceProxy {
 	 * 添加资产领用
 	*/
 	@RequestMapping(AssetCollectionServiceProxy.INSERT)
-	Result insert(AssetCollectionVO assetCollectionVO);
+	Result insert(AssetCollectionVO assetCollectionVO, String assetSelectedCode);
 	
 	/**
 	 * 删除资产领用

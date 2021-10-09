@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetDataChange;
@@ -19,38 +20,79 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
-        cfg.getPoClassFile().addSimpleProperty(Employee.class,"changeUser","变更人","变更人");
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CONTENT).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_TIME).search().range();
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
+        cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
+        cfg.getPoClassFile().addSimpleProperty(Asset.class,"changeData","变更数据","变更数据");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+
 
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ID).basic().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ID).table().disable(true);
 
-        //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
+
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.PROC_ID).table().disable(true);
+
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE).search().range();
+
+
+
         cfg.view().search().inputLayout(
                 new Object[]{
-                       // EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_TYPE,
-                        EAMTables.EAM_ASSET_DATA_CHANGE.CONTENT
+                        EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,
+                        EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE,
+                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+                        EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE
                 }
         );
 
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE).form().validate().required().form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_TYPE).form().
-                label("业务类型").selectBox().enumType(CodeModuleEnum.class);
 
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).table().fillBy("changeUser","name");
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).form();
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
-
-        cfg.view().list().disableMargin();
-        cfg.view().list().disableSpaceColumn();
         cfg.view().list().disableBatchDelete();
-        cfg.view().list().disableSingleDelete();
-        cfg.view().list().disableModify();
-        cfg.view().list().disableCreateNew();
+        cfg.view().form().addJsVariable("CHANGE_TYPE","[[${changeType}]]","变更类型");
+        cfg.view().list().addJsVariable("CHANGE_TYPE","[[${changeType}]]","变更类型");
 
+        cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+        cfg.view().list().operationColumn().width(350);
 
+        cfg.view().formWindow().bottomSpace(20);
+        cfg.view().formWindow().width("98%");
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE,
+                }
+                , new Object[] {
+                        EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE,
+
+                }
+                , new Object[] {
+                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+                }
+        );
+
+        cfg.view().form().addPage("资产列表","assetSelectList");
+//        cfg.view().form().addGroup("变更内容",
+//                new Object[] {
+//                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+//                }
+//                , new Object[] {
+//                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+//
+//                }
+//                , new Object[] {
+//                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+//                }
+//        );
 
 
         //文件生成覆盖模式
@@ -69,6 +111,6 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
         EamAssetDataChangeGtr g=new EamAssetDataChangeGtr();
         g.generateCode();
         //生成菜单
-        // g.generateMenu(AssetDataChangeServiceProxy.class, AssetDataChangePageController.class);
+//         g.generateMenu(AssetDataChangeServiceProxy.class, AssetDataChangePageController.class);
     }
 }

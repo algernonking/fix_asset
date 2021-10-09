@@ -299,15 +299,32 @@ public class AssetAttributeItemController extends SuperController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
 	})
-	@ApiOperationSupport(order=8)
-	@SentinelResource(value = AssetAttributeItemServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
-	@PostMapping(AssetAttributeItemServiceProxy.QUERY_LIST_BY_MODULE)
-	public Result< HashMap <String,List<AssetAttributeItem>>> queryListByModule(String module) {
+	@ApiOperationSupport(order=9)
+	@SentinelResource(value = AssetAttributeItemServiceProxy.QUERY_FORM_COLUMN_BY_MODULE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetAttributeItemServiceProxy.QUERY_FORM_COLUMN_BY_MODULE)
+	public Result< HashMap <String,List<AssetAttributeItem>>> queryFormColumnByModule(String module,String dim) {
 		Result< HashMap <String,List<AssetAttributeItem>>> result=new Result<>();
-		result.success(true).data(assetAttributeItemService.queryListByModule(module));
+		result.success(true).data(assetAttributeItemService.queryFormColumnByModule(module,dim));
 		return result;
 	}
 
+
+
+	/**
+	 * 分页查询资产字段配置项
+	 */
+	@ApiOperation(value = "分页查询资产字段配置项")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetAttributeItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "527a4336-0f92-11ec-ab08-00163e2e6a36"),
+	})
+	@ApiOperationSupport(order=10)
+	@SentinelResource(value = AssetAttributeItemServiceProxy.QUERY_LIST_COLUMN_BY_MODULE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetAttributeItemServiceProxy.QUERY_LIST_COLUMN_BY_MODULE)
+	public Result< HashMap <String,List<AssetAttributeItem>>> queryListColumnByModule(String module,String dim) {
+		Result< HashMap <String,List<AssetAttributeItem>>> result=new Result<>();
+		result.success(true).data(assetAttributeItemService.queryListColumnByModule(module,dim));
+		return result;
+	}
 
 
 

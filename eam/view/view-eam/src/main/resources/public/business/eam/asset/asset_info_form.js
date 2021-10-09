@@ -809,6 +809,7 @@ function FormPage() {
 			data.pcmData=pcmData;
 		}
 
+		var api=moduleURL+"/"+(data.id?"update":"insert");
 		admin.post(api,data,function (r){
 			if (r.success) {
 				layer.msg(r.message, {icon: 1, time: 500});

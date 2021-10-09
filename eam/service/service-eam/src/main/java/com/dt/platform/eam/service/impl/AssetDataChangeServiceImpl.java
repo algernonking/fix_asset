@@ -2,6 +2,16 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.eam.service.IAssetService;
+import com.dt.platform.eam.service.IOperateService;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,16 +42,28 @@ import java.util.Date;
 
 /**
  * <p>
- * 变更明细 服务实现
+ * 数据变更 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 17:10:16
+ * @since 2021-10-08 16:01:26
 */
 
 
 @Service("EamAssetDataChangeService")
 public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> implements IAssetDataChangeService {
-	
+
+	@Autowired
+	private IAssetService assetService;
+
+	@Autowired
+	private AssetItemServiceImpl assetItemService;
+
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
+	@Autowired
+	private IOperateService operateService;
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -70,7 +92,130 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		Result r=super.insert(assetDataChange);
 		return r;
 	}
-	
+
+	/**
+	 * 撤销
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result revokeOperation(String id) {
+		AssetDataChange billData=getById(id);
+		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+
+		}else{
+			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
+		}
+		return ErrorDesc.success();
+	}
+
+
+
+	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result forApproval(String id){
+
+		AssetDataChange billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(billData.getChangeType()) ) {
+				//审批操作
+			}else{
+				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
+		return ErrorDesc.success();
+
+	}
+
+	/**
+	 * 操作成功
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateSuccess(String id) {
+
+		return ErrorDesc.success();
+	}
+
+	/**
+	 * 操作失败
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	public Result operateFailed(String id) {
+		return ErrorDesc.success();
+	}
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	public Result operateResult(String id,String result) {
+
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			return operateSuccess(id);
+		}else if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			return operateFailed(id);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
+	}
+
+
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	@Override
+	public Result confirmOperation(String id) {
+		AssetDataChange billData=getById(id);
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(billData.getChangeType()) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
+	}
+
+
+	/**
+	 * 插入实体
+	 * @param assetDataChange 实体数据
+	 * @param assetSelectedCode 数据标记
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result insert(AssetDataChange assetDataChange,String assetSelectedCode) {
+
+		if(!StringUtil.isBlank(assetSelectedCode)){
+			//获取资产列表
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			assetDataChange.setAssetIds(list);
+			//保存单据数据
+			Result insertReuslt=insert(assetDataChange);
+			if(!insertReuslt.isSuccess()){
+				return insertReuslt;
+			}
+		}else{
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		return ErrorDesc.success();
+	}
 	/**
 	 * 批量插入实体，事务内
 	 * @param assetDataChangeList 实体数据清单
@@ -83,7 +228,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 数据变更
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -104,7 +249,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	}
 	
 	/**
-	 * 按主键删除 变更明细
+	 * 按主键删除 数据变更
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
@@ -152,7 +297,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	
 	
 	/**
-	 * 按主键更新字段 变更明细
+	 * 按主键更新字段 数据变更
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,7 +311,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	
 	
 	/**
-	 * 按主键获取 变更明细
+	 * 按主键获取 数据变更
 	 *
 	 * @param id 主键
 	 * @return AssetDataChange 数据对象

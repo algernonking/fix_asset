@@ -52,10 +52,23 @@ public class EamRelationManager extends RelationManager {
 
     public void setupAssetDataChange(){
         // 关联变更人
-        this.property(AssetDataChangeMeta.CHANGE_USER_PROP)
-                .using(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+//        this.property(AssetDataChangeMeta.CHANGE_USER_PROP)
+//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
+//
+//                this.property(AssetDataChangeMeta.CHANGE_DATA_PROP)
+//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.).join(FoxnicWeb.HRM_EMPLOYEE.ID)
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        // 关联
+        this.property(AssetDataChangeMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+//        this.property(AssetDataChangeMeta)
+//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
     }
 
@@ -64,7 +77,7 @@ public class EamRelationManager extends RelationManager {
 
     public void setupAlloction() {
 
-        // 关联借用人
+        // 关联
         this.property(AssetAllocationMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);

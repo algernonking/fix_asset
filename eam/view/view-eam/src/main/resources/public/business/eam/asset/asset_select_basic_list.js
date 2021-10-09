@@ -496,17 +496,25 @@ function ListPage() {
 		}
 
 		var api=selectmoduleURL+"/save-by-ids";
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, postData, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
-			if (data.success) {
+		admin.post(api,postData,function (r){
+			if (r.success) {
 				callback(postData.ids);
-				layer.msg(data.message, {icon: 1, time: 500});
+				layer.msg(r.message, {icon: 1, time: 500});
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				layer.msg(r.message, {icon: 2, time: 1000});
 			}
-		}, "POST");
+		},{delayLoading:2000,elms:[]});
+		// var task=setTimeout(function(){layer.load(2);},1000);
+		// admin.request(api, postData, function (data) {
+		// 	clearTimeout(task);
+		// 	layer.closeAll('loading');
+		// 	if (data.success) {
+		// 		callback(postData.ids);
+		// 		layer.msg(data.message, {icon: 1, time: 500});
+		// 	} else {
+		// 		layer.msg(data.message, {icon: 2, time: 1000});
+		// 	}
+		// }, "POST");
 
 	}
     /**
