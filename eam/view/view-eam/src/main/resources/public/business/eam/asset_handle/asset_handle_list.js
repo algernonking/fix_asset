@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:57
+ * @since 2021-10-11 22:37:44
  */
 
 
@@ -81,14 +81,14 @@ function ListPage() {
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('处置类型'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'handleNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('处置数量') , templet: function (d) { return templet('handleNumber',d.handleNumber,d);}  }
-					,{ field: 'handleDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('处理日期'), templet: function (d) { return templet('handleDate',fox.dateFormat(d.handleDate),d); }}
-					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成时间'), templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate),d); }}
-					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成时间'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate),d); }}
+					,{ field: 'handleDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('处理日期'), templet: function (d) { return templet('handleDate',fox.dateFormat(d.handleDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成时间'), templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成时间'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
 					,{ field: 'pictureId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('图片') , templet: function (d) { return templet('pictureId',d.pictureId,d);}  }
 					,{ field: 'crdAction', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('修改标记') , templet: function (d) { return templet('crdAction',d.crdAction,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

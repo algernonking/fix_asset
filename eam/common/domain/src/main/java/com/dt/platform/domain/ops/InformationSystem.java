@@ -20,7 +20,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 信息系统
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-01 07:37:08
+ * @since 2021-10-11 22:38:24
  * @sign C789E92C0477A0AB6EC7881B9348278A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

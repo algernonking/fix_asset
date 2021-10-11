@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:57
+ * @since 2021-10-11 22:37:44
  */
 
 function FormPage() {
@@ -159,6 +159,11 @@ function FormPage() {
 			}
 
 
+
+			//设置 处理日期 显示复选框勾选
+			if(formData["handleDate"]) {
+				$("#handleDate").val(fox.dateFormat(formData["handleDate"],"yyyy-MM-dd"));
+			}
 
 
 			//设置  处置类型 设置下拉框勾选

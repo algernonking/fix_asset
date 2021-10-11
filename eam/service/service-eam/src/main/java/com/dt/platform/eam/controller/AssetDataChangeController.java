@@ -176,6 +176,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } )
@@ -279,6 +280,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -305,6 +307,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=8)

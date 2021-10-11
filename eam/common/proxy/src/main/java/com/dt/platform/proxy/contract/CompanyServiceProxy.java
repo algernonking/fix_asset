@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 单位  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:15
+ * @since 2021-10-11 22:39:00
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = CompanyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface CompanyServiceProxy {
 	 * 获取多个单位
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询单位

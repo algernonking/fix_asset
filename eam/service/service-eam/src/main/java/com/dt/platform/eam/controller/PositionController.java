@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 存放位置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:06
+ * @since 2021-10-11 22:37:53
 */
 
 @Api(tags = "存放位置")
@@ -170,10 +170,10 @@ public class PositionController extends SuperController {
 
 
 	/**
-	 * 批量删除存放位置 <br>
+	 * 批量获取存放位置 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除存放位置")
+		@ApiOperation(value = "批量获取存放位置")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = PositionVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

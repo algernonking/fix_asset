@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 操作系统 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:43
+ * @since 2021-10-11 22:38:30
 */
 
 @Api(tags = "操作系统")
@@ -170,10 +170,10 @@ public class HostOsController extends SuperController {
 
 
 	/**
-	 * 批量删除操作系统 <br>
+	 * 批量获取操作系统 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除操作系统")
+		@ApiOperation(value = "批量获取操作系统")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = HostOsVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

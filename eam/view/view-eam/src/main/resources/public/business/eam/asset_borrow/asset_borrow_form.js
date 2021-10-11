@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:06:48
+ * @since 2021-10-11 22:37:24
  */
 
 function FormPage() {
@@ -269,7 +269,7 @@ function FormPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(borrowerIdDialogOptions);
 		});

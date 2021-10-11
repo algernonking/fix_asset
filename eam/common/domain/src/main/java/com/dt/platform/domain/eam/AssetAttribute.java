@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产字段配置
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 15:03:49
- * @sign C8271F349212ED4790A0CA62C1213D40
+ * @since 2021-10-11 22:36:57
+ * @sign 4BFD039AE1190078B5DEC1CA80645A9D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -154,6 +154,12 @@ public class AssetAttribute extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="归属" , notes = "归属")
 	private String owner;
+	
+	/**
+	 * 选择数据：选择数据
+	*/
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 获得 主键<br>
@@ -551,6 +557,25 @@ public class AssetAttribute extends Entity {
 	*/
 	public AssetAttribute setOwner(String owner) {
 		this.owner=owner;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
+	 * @return 当前对象
+	*/
+	public AssetAttribute setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 

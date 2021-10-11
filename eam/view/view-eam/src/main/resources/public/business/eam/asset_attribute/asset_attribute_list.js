@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 15:03:57
+ * @since 2021-10-11 22:36:57
  */
 
 
@@ -85,6 +85,7 @@ function ListPage() {
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'owner', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属'), templet:function (d){ return templet('owner',fox.getEnumText(SELECT_OWNER_DATA,d.owner),d);}}
+					,{ field: 'selectedCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

@@ -14,10 +14,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 合同分类
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:12
- * @sign 75C8608B9A0AA080C5F93C48A050C2E1
+ * @since 2021-10-11 22:38:57
+ * @sign 30377EE0F5494B40A40C8EB00C36BF90
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

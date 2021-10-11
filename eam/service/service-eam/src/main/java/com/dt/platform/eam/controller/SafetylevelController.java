@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 风险等级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:24
+ * @since 2021-10-11 22:38:12
 */
 
 @Api(tags = "风险等级")
@@ -170,10 +170,10 @@ public class SafetylevelController extends SuperController {
 
 
 	/**
-	 * 批量删除风险等级 <br>
+	 * 批量获取风险等级 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除风险等级")
+		@ApiOperation(value = "批量获取风险等级")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = SafetylevelVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

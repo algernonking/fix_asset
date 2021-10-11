@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 15:03:49
- * @sign C8271F349212ED4790A0CA62C1213D40
+ * @since 2021-10-11 22:36:57
+ * @sign 4BFD039AE1190078B5DEC1CA80645A9D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -226,9 +226,19 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> OWNER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,OWNER, java.lang.String.class, "归属", "归属", java.lang.String.class, null);
 	
 	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER };
+	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER , SELECTED_CODE };
 	
 	/**
 	 * 代理类
@@ -466,6 +476,17 @@ public class AssetAttributeMeta {
 		public AssetAttribute setOwner(String owner) {
 			super.change(OWNER,super.getOwner(),owner);
 			super.setOwner(owner);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择数据
+		 * @param selectedCode 选择数据
+		 * @return 当前对象
+		*/
+		public AssetAttribute setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 	}

@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 17:48:53
+ * @since 2021-10-11 22:38:39
  */
 
 
@@ -115,7 +115,6 @@ function ListPage() {
 						params : {} ,
 						callback : function(r) {
 							if(r.success) {
-								console.log("1111111111");
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");

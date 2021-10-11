@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 单位 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:15
+ * @since 2021-10-11 22:39:00
 */
 
 @Api(tags = "单位")
@@ -185,10 +185,10 @@ public class CompanyController extends SuperController {
 
 
 	/**
-	 * 批量删除单位 <br>
+	 * 批量获取单位 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除单位")
+		@ApiOperation(value = "批量获取单位")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = CompanyVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

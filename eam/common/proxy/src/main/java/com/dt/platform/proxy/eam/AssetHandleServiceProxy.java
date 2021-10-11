@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产处置  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:57
+ * @since 2021-10-11 22:37:44
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetHandleServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface AssetHandleServiceProxy {
 	 * 获取多个资产处置
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询资产处置

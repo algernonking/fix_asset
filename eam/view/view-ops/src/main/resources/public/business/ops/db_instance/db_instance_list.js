@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:40
+ * @since 2021-10-11 22:38:27
  */
 
 
@@ -80,7 +80,7 @@ function ListPage() {
 					,{ field: 'logMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('日志模式'), templet:function (d){ return templet('logMethod',fox.getDictText(SELECT_LOGMETHOD_DATA,d.logMethod),d);}}
 					,{ field: 'backupType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return templet('backupType',fox.getDictText(SELECT_BACKUPTYPE_DATA,d.backupType),d);}}
 					,{ field: 'databaseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库'), templet: function (d) { return templet('databaseId',fox.joinLabel(d.database,"name"),d);}}
-					,{ field: 'backupTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上次备份'), templet: function (d) { return templet('backupTime',fox.dateFormat(d.backupTime),d); }}
+					,{ field: 'backupTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上次备份'), templet: function (d) { return templet('backupTime',fox.dateFormat(d.backupTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'backupStrategy', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份策略') , templet: function (d) { return templet('backupStrategy',d.backupStrategy,d);}  }
 					,{ field: 'backupMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份方式'), templet:function (d){ return templet('backupMethod',fox.getDictText(SELECT_BACKUPMETHOD_DATA,d.backupMethod),d);}}
 					,{ field: 'backupSize', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('备份大小') , templet: function (d) { return templet('backupSize',d.backupSize,d);}  }

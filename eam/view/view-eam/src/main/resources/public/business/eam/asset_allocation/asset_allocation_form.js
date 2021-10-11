@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:06:42
+ * @since 2021-10-11 22:37:16
  */
 
 function FormPage() {
@@ -60,8 +60,7 @@ function FormPage() {
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
 				var finalHeight=windowHeight-footerHeight-16;
-
-				console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+				//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
 				$(".form-container").css("display","");
 				$(".form-container").css("overflow-y","scroll");
 				$(".form-container").css("height",finalHeight+"px");
@@ -187,7 +186,6 @@ function FormPage() {
 				jsFn && jsFn($(formIfrs[i]),$(formIfrs[i])[0].contentWindow,formData);
 			}
 		}
-		adjustPopup()
 
 	}
 
@@ -253,7 +251,7 @@ function FormPage() {
 				root: "",
 				targetType:"com",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(outOwnCompanyIdDialogOptions);
 		});
@@ -269,7 +267,7 @@ function FormPage() {
 				root: "",
 				targetType:"com",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(inOwnCompanyIdDialogOptions);
 		});
@@ -285,7 +283,7 @@ function FormPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(managerIdDialogOptions);
 		});

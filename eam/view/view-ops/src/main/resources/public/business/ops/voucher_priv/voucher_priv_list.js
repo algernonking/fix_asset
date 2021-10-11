@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:30
+ * @since 2021-10-11 22:38:18
  */
 
 
@@ -77,7 +77,7 @@ function ListPage() {
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证类别'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
 					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',fox.getProperty(d,["employee","name"]),d);} }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -222,12 +222,12 @@ function ListPage() {
 				field:"emplId",
 				inputEl:$("#emplId"),
 				buttonEl:$(this),
-				single:true,
+				single:false,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(emplIdDialogOptions);
 		});

@@ -15,10 +15,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 模板文件
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:12
- * @sign A543A8213084B1109E74989D49338054
+ * @since 2021-10-11 22:37:03
+ * @sign 8A922350B82A40F391F2AC491DD3133A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

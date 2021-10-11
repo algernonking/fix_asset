@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 资金明细 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:18
+ * @since 2021-10-11 22:39:03
 */
 
 public interface IContractFundService extends ISuperService<ContractFund> {

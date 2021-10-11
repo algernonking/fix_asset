@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资金明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:18
+ * @since 2021-10-11 22:39:03
 */
 
 @Api(tags = "资金明细")
@@ -180,10 +180,10 @@ public class ContractFundController extends SuperController {
 
 
 	/**
-	 * 批量删除资金明细 <br>
+	 * 批量获取资金明细 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除资金明细")
+		@ApiOperation(value = "批量获取资金明细")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = ContractFundVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

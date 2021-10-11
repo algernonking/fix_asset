@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 存放位置  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:06
+ * @since 2021-10-11 22:37:53
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = PositionServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface PositionServiceProxy {
 	 * 获取多个存放位置
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询存放位置

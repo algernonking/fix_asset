@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 区域  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:50
+ * @since 2021-10-11 22:36:38
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = AreaServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface AreaServiceProxy {
 	 * 获取多个区域
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询区域

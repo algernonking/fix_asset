@@ -10,8 +10,8 @@ import com.dt.platform.domain.ops.ServiceGroup;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:59
- * @sign 1D5898252C7CEB211F3444861BD03769
+ * @since 2021-10-11 22:38:45
+ * @sign ED095F3CFE67154DEF3F2633E3B05A4E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

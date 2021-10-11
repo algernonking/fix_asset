@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:21
+ * @since 2021-10-11 22:39:06
  */
 
 function FormPage() {
@@ -122,6 +122,23 @@ function FormPage() {
 
 
 
+
+			//设置 生效时间 显示复选框勾选
+			if(formData["effectTime"]) {
+				$("#effectTime").val(fox.dateFormat(formData["effectTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 失效时间 显示复选框勾选
+			if(formData["lostEffectTime"]) {
+				$("#lostEffectTime").val(fox.dateFormat(formData["lostEffectTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 结束时间 显示复选框勾选
+			if(formData["endTime"]) {
+				$("#endTime").val(fox.dateFormat(formData["endTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 签订时间 显示复选框勾选
+			if(formData["auditTime"]) {
+				$("#auditTime").val(fox.dateFormat(formData["auditTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
 

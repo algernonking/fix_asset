@@ -3,14 +3,17 @@ package com.dt.platform.domain.eam;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.ArrayList;
+import com.github.foxnic.api.model.CompositeParameter;
+import javax.persistence.Transient;
+import com.github.foxnic.commons.bean.BeanUtil;
 
 
 
 /**
- * null
+ * 资产借用数据
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:39
- * @sign EA08AD591B115BA2E418CD6606688632
+ * @since 2021-10-11 22:37:30
+ * @sign 3E8DF32A0540FF90128894A409E24856
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -220,5 +223,17 @@ public class AssetBorrowDataVO extends AssetBorrowData {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;
+	}
+	@Transient
+	private CompositeParameter $compositeParameter;
+	/**
+	 * 获得解析后的复合查询参数
+	 */
+	@Transient
+	public CompositeParameter getCompositeParameter() {
+		if($compositeParameter!=null) return  $compositeParameter;
+		if(!"$composite".equals(this.getSearchField())) return null;
+		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
+		return  $compositeParameter;
 	}
 }

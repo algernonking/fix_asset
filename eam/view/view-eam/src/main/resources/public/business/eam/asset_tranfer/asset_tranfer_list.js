@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:06:45
+ * @since 2021-10-11 22:37:21
  */
 
 
@@ -230,7 +230,7 @@ function ListPage() {
 				root: "",
 				targetType:"org",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(outUseOrganizationIdDialogOptions);
 		});
@@ -245,7 +245,7 @@ function ListPage() {
 				root: "",
 				targetType:"org",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(inUseOrganizationIdDialogOptions);
 		});

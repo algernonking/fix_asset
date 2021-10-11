@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同分类 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:12
+ * @since 2021-10-11 22:38:57
 */
 
 @Api(tags = "合同分类")
@@ -188,10 +188,10 @@ public class ContractCategoryController extends SuperController {
 
 
 	/**
-	 * 批量删除合同分类 <br>
+	 * 批量获取合同分类 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除合同分类")
+		@ApiOperation(value = "批量获取合同分类")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = ContractCategoryVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

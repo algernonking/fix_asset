@@ -1,7 +1,7 @@
 /**
  * 资产借用归还 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:36
+ * @since 2021-10-11 22:37:27
  */
 
 function FormPage() {
@@ -107,6 +107,11 @@ function FormPage() {
 
 
 
+
+			//设置 归还时间 显示复选框勾选
+			if(formData["returnDate"]) {
+				$("#returnDate").val(fox.dateFormat(formData["returnDate"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
 

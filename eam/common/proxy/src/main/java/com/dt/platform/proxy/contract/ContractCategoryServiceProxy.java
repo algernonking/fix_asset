@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 合同分类  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:12
+ * @since 2021-10-11 22:38:57
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = ContractCategoryServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface ContractCategoryServiceProxy {
 	 * 获取多个合同分类
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询合同分类

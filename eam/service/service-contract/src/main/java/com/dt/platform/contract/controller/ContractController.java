@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:21
+ * @since 2021-10-11 22:39:06
 */
 
 @Api(tags = "合同")
@@ -249,10 +249,10 @@ public class ContractController extends SuperController {
 
 
 	/**
-	 * 批量删除合同 <br>
+	 * 批量获取合同 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除合同")
+		@ApiOperation(value = "批量获取合同")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = ContractVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

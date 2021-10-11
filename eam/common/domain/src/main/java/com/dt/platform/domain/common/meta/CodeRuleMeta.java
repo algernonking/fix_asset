@@ -9,8 +9,8 @@ import org.github.foxnic.web.domain.oauth.Menu;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:47
- * @sign D720B313194939748B92CB787611DCBC
+ * @since 2021-10-11 22:36:35
+ * @sign 3ACB95CCA363D232BA4D4CFF02D26E7E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

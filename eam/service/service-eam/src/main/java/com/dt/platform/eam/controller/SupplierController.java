@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:21
+ * @since 2021-10-11 22:38:09
 */
 
 @Api(tags = "供应商")
@@ -170,10 +170,10 @@ public class SupplierController extends SuperController {
 
 
 	/**
-	 * 批量删除供应商 <br>
+	 * 批量获取供应商 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除供应商")
+		@ApiOperation(value = "批量获取供应商")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = SupplierVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

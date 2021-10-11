@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 生产厂商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:15
+ * @since 2021-10-11 22:38:03
 */
 
 @Api(tags = "生产厂商")
@@ -173,10 +173,10 @@ public class ManufacturerController extends SuperController {
 
 
 	/**
-	 * 批量删除生产厂商 <br>
+	 * 批量获取生产厂商 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除生产厂商")
+		@ApiOperation(value = "批量获取生产厂商")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = ManufacturerVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

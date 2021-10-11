@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:59
+ * @since 2021-10-11 22:38:45
 */
 
 @Api(tags = "服务")
@@ -188,10 +188,10 @@ public class ServiceInfoController extends SuperController {
 
 
 	/**
-	 * 批量删除服务 <br>
+	 * 批量获取服务 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除服务")
+		@ApiOperation(value = "批量获取服务")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = ServiceInfoVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

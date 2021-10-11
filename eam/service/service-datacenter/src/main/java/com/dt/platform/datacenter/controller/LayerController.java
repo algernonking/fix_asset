@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 层级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:53
+ * @since 2021-10-11 22:36:41
 */
 
 @Api(tags = "层级")
@@ -170,10 +170,10 @@ public class LayerController extends SuperController {
 
 
 	/**
-	 * 批量删除层级 <br>
+	 * 批量获取层级 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除层级")
+		@ApiOperation(value = "批量获取层级")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = LayerVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

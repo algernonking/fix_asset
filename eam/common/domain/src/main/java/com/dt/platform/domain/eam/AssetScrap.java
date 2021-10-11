@@ -19,7 +19,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产报废
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:10:36
+ * @since 2021-10-11 22:37:06
  * @sign 4F4061D4C34EBEE916ED5ED21D969206
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

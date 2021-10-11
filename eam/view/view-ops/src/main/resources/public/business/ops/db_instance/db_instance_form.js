@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:40
+ * @since 2021-10-11 22:38:27
  */
 
 function FormPage() {
@@ -223,6 +223,11 @@ function FormPage() {
 
 
 
+
+			//设置 备份时间 显示复选框勾选
+			if(formData["backupTime"]) {
+				$("#backupTime").val(fox.dateFormat(formData["backupTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
 
 
 			//设置  主机 设置下拉框勾选

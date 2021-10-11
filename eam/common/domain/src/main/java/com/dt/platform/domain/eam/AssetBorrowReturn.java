@@ -16,10 +16,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产借用归还
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:36
- * @sign 6A8A10243BB7E5E2D5D57680CBA079B6
+ * @since 2021-10-11 22:37:27
+ * @sign A342C3BF617402F2F311A36602BE171F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

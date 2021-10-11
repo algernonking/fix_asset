@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 服务分组  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:05
+ * @since 2021-10-11 22:38:51
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = ServiceGroupServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface ServiceGroupServiceProxy {
 	 * 获取多个服务分组
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询服务分组

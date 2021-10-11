@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 数据库实例  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:40
+ * @since 2021-10-11 22:38:27
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = DbInstanceServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface DbInstanceServiceProxy {
 	 * 获取多个数据库实例
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询数据库实例

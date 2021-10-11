@@ -1,7 +1,7 @@
 /**
  * 资金明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:18
+ * @since 2021-10-11 22:39:03
  */
 
 
@@ -76,10 +76,10 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'money', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('总金额') , templet: function (d) { return templet('money',d.money,d);}  }
 					,{ field: 'fundDirect', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资金流向') , templet: function (d) { return templet('fundDirect',d.fundDirect,d);}  }
-					,{ field: 'receiptPaymentTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('收付时间'), templet: function (d) { return templet('receiptPaymentTime',fox.dateFormat(d.receiptPaymentTime),d); }}
+					,{ field: 'receiptPaymentTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('收付时间'), templet: function (d) { return templet('receiptPaymentTime',fox.dateFormat(d.receiptPaymentTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'invoiceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('发票') , templet: function (d) { return templet('invoiceId',d.invoiceId,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

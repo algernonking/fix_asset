@@ -1,7 +1,7 @@
 /**
  * 业务编码 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:37
+ * @since 2021-10-11 22:36:25
  */
 
 
@@ -78,7 +78,7 @@ function ListPage() {
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码类型'), templet:function (d){ return templet('type',fox.getEnumText(SELECT_TYPE_DATA,d.type),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

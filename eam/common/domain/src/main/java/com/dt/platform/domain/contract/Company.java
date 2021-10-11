@@ -14,10 +14,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 单位
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:15
- * @sign 234D730645DCFD8289E4BA03AEAA1E3E
+ * @since 2021-10-11 22:39:00
+ * @sign 05A630297FF0EFF5510E23A8D6B76E0A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

@@ -1,7 +1,7 @@
 /**
  * 资产借用数据 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:39
+ * @since 2021-10-11 22:37:30
  */
 
 
@@ -77,7 +77,7 @@ function ListPage() {
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
 					,{ field: 'assetStatusBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前资产状态') , templet: function (d) { return templet('assetStatusBefore',d.assetStatusBefore,d);}  }
 					,{ field: 'userIdBefore', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借前使用人') , templet: function (d) { return templet('userIdBefore',d.userIdBefore,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

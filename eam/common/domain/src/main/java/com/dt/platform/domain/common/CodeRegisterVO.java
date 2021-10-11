@@ -3,14 +3,17 @@ package com.dt.platform.domain.common;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import java.util.ArrayList;
+import com.github.foxnic.api.model.CompositeParameter;
+import javax.persistence.Transient;
+import com.github.foxnic.commons.bean.BeanUtil;
 
 
 
 /**
- * null
+ * 业务编码
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:37
- * @sign 901628DC62FCAD0D610E263D23AC11ED
+ * @since 2021-10-11 22:36:24
+ * @sign 602CDE9CE8F524CF6AA5B5C699AA20D8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -220,5 +223,17 @@ public class CodeRegisterVO extends CodeRegister {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;
+	}
+	@Transient
+	private CompositeParameter $compositeParameter;
+	/**
+	 * 获得解析后的复合查询参数
+	 */
+	@Transient
+	public CompositeParameter getCompositeParameter() {
+		if($compositeParameter!=null) return  $compositeParameter;
+		if(!"$composite".equals(this.getSearchField())) return null;
+		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
+		return  $compositeParameter;
 	}
 }

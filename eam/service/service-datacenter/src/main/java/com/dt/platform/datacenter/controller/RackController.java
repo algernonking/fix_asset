@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:57
+ * @since 2021-10-11 22:36:44
 */
 
 @Api(tags = "机柜")
@@ -195,10 +195,10 @@ public class RackController extends SuperController {
 
 
 	/**
-	 * 批量删除机柜 <br>
+	 * 批量获取机柜 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除机柜")
+		@ApiOperation(value = "批量获取机柜")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = RackVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

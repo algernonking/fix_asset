@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:50
+ * @since 2021-10-11 22:36:38
 */
 
 @Api(tags = "区域")
@@ -176,10 +176,10 @@ public class AreaController extends SuperController {
 
 
 	/**
-	 * 批量删除区域 <br>
+	 * 批量获取区域 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除区域")
+		@ApiOperation(value = "批量获取区域")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = AreaVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 编码属性  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:44
+ * @since 2021-10-11 22:36:31
 */
 
 @FeignClient(value = ServiceNames.COMMON, contextId = CodeAttrServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface CodeAttrServiceProxy {
 	 * 获取多个编码属性
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询编码属性

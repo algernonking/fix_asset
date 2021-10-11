@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:21
+ * @since 2021-10-11 22:39:06
  */
 
 
@@ -96,10 +96,10 @@ function ListPage() {
 					,{ field: 'supervisionUnit', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理单位') , templet: function (d) { return templet('supervisionUnit',d.supervisionUnit,d);}  }
 					,{ field: 'supervisionContacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理人') , templet: function (d) { return templet('supervisionContacts',d.supervisionContacts,d);}  }
 					,{ field: 'supervisionContactInformation', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监理联系方式') , templet: function (d) { return templet('supervisionContactInformation',d.supervisionContactInformation,d);}  }
-					,{ field: 'effectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生效时间'), templet: function (d) { return templet('effectTime',fox.dateFormat(d.effectTime),d); }}
-					,{ field: 'lostEffectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('失效时间'), templet: function (d) { return templet('lostEffectTime',fox.dateFormat(d.lostEffectTime),d); }}
-					,{ field: 'endTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('结束时间'), templet: function (d) { return templet('endTime',fox.dateFormat(d.endTime),d); }}
-					,{ field: 'auditTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('签订时间'), templet: function (d) { return templet('auditTime',fox.dateFormat(d.auditTime),d); }}
+					,{ field: 'effectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生效时间'), templet: function (d) { return templet('effectTime',fox.dateFormat(d.effectTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'lostEffectTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('失效时间'), templet: function (d) { return templet('lostEffectTime',fox.dateFormat(d.lostEffectTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'endTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('结束时间'), templet: function (d) { return templet('endTime',fox.dateFormat(d.endTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'auditTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('签订时间'), templet: function (d) { return templet('auditTime',fox.dateFormat(d.auditTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'notes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }

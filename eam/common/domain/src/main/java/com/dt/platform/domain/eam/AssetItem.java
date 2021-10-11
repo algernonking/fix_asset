@@ -14,10 +14,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:00
- * @sign EC66E193A7F5534AA5A14A160B967F07
+ * @since 2021-10-11 22:37:47
+ * @sign 5236FB6E86EEB1CAEE495B65073FF975
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

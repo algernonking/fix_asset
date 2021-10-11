@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-01 07:37:20
+ * @since 2021-10-11 22:38:24
  */
 
 
@@ -256,7 +256,7 @@ function ListPage() {
 				root: "",
 				targetType:"org",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(belongOrgIdDialogOptions);
 		});

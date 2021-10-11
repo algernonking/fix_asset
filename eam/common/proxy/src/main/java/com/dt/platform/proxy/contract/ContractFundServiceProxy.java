@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资金明细  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:17:18
+ * @since 2021-10-11 22:39:03
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = ContractFundServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -75,7 +75,6 @@ public interface ContractFundServiceProxy {
 	 * 获取多个资金明细
 	 */
 	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
-	;
 
 	/**
 	 * 查询资金明细

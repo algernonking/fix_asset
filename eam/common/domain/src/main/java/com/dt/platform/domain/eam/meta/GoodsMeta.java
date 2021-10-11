@@ -11,8 +11,8 @@ import com.dt.platform.domain.eam.Manufacturer;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:16:09
- * @sign 7A60B53304CFC6EEBBB64605B4F496DC
+ * @since 2021-10-11 22:37:56
+ * @sign 45C36921CF68A52ECD35380147FEFF32
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 

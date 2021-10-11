@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产处置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:57
+ * @since 2021-10-11 22:37:44
 */
 
 @Api(tags = "资产处置")
@@ -209,10 +209,10 @@ public class AssetHandleController extends SuperController {
 
 
 	/**
-	 * 批量删除资产处置 <br>
+	 * 批量获取资产处置 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除资产处置")
+		@ApiOperation(value = "批量获取资产处置")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = AssetHandleVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

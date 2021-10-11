@@ -80,6 +80,7 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -162,6 +163,7 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE , AssetAttributeVOMeta.SEARCH_FIELD , AssetAttributeVOMeta.FUZZY_FIELD , AssetAttributeVOMeta.SEARCH_VALUE , AssetAttributeVOMeta.SORT_FIELD , AssetAttributeVOMeta.SORT_TYPE , AssetAttributeVOMeta.IDS } ) 
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -190,6 +192,7 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE , AssetAttributeVOMeta.SEARCH_FIELD , AssetAttributeVOMeta.FUZZY_FIELD , AssetAttributeVOMeta.SEARCH_VALUE , AssetAttributeVOMeta.SORT_FIELD , AssetAttributeVOMeta.SORT_TYPE , AssetAttributeVOMeta.IDS } )
 	@NotNull(name = AssetAttributeVOMeta.ID)
@@ -257,6 +260,7 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAttributeVOMeta.PAGE_INDEX , AssetAttributeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetAttributeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -286,6 +290,7 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetAttributeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

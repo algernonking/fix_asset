@@ -2,7 +2,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-29 17:48:51
+ * @since 2021-10-11 22:38:39
  */
  -->
  <!DOCTYPE html>
@@ -158,7 +158,7 @@
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('ops_host:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
         <button th:if="${perm.checkAuth('ops_host:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-<!--        <button id="export-host" class="layui-btn icon-btn layui-btn-sm " lay-event="tool-export-host"><span th:text="${lang.translate('导出')}">导出</span></button>-->
+        <button id="export-host" class="layui-btn icon-btn layui-btn-sm " lay-event="tool-export-host"><span th:text="${lang.translate('导出')}">导出</span></button>
     </div>
 </script>
 
