@@ -16,6 +16,8 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
@@ -26,6 +28,13 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetService extends ISuperService<Asset> {
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result draft(ProcessStartVO startVO);
 
 
 	/**

@@ -79,27 +79,22 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.SCRAP_DATE , value = "报废时间" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.CONTENT , value = "报废说明" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetScrapVOMeta.ID)
 	@NotNull(name = AssetScrapVOMeta.NAME)
 	@SentinelResource(value = AssetScrapServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetScrapServiceProxy.INSERT)
-	public Result insert(AssetScrapVO assetScrapVO,String assetSelectedCode) {
-
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetScrapService.insert(assetScrapVO,assetSelectedCode);
-		}else{
-			return assetScrapService.insert(assetScrapVO);
-		}
-
+	public Result insert(AssetScrapVO assetScrapVO) {
+		return assetScrapService.insert(assetScrapVO);
 
 	}
 
@@ -161,6 +156,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE , AssetScrapVOMeta.SEARCH_FIELD , AssetScrapVOMeta.FUZZY_FIELD , AssetScrapVOMeta.SEARCH_VALUE , AssetScrapVOMeta.SORT_FIELD , AssetScrapVOMeta.SORT_TYPE , AssetScrapVOMeta.IDS } ) 
 	@NotNull(name = AssetScrapVOMeta.ID)
@@ -197,6 +193,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE , AssetScrapVOMeta.SEARCH_FIELD , AssetScrapVOMeta.FUZZY_FIELD , AssetScrapVOMeta.SEARCH_VALUE , AssetScrapVOMeta.SORT_FIELD , AssetScrapVOMeta.SORT_TYPE , AssetScrapVOMeta.IDS } )
 	@NotNull(name = AssetScrapVOMeta.ID)
@@ -264,6 +261,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetScrapVOMeta.PAGE_INDEX , AssetScrapVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetScrapServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -292,6 +290,7 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetScrapServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

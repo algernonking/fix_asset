@@ -86,18 +86,15 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@NotNull(name = AssetRepairVOMeta.ID)
 	@NotNull(name = AssetRepairVOMeta.NAME)
 	@SentinelResource(value = AssetRepairServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetRepairServiceProxy.INSERT)
-	public Result insert(AssetRepairVO assetRepairVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetRepairService.insert(assetRepairVO,assetSelectedCode);
-		}else{
+	public Result insert(AssetRepairVO assetRepairVO){
 			return assetRepairService.insert(assetRepairVO);
-		}
 	}
 
 	
@@ -162,6 +159,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetRepairVOMeta.PAGE_INDEX , AssetRepairVOMeta.PAGE_SIZE , AssetRepairVOMeta.SEARCH_FIELD , AssetRepairVOMeta.FUZZY_FIELD , AssetRepairVOMeta.SEARCH_VALUE , AssetRepairVOMeta.SORT_FIELD , AssetRepairVOMeta.SORT_TYPE , AssetRepairVOMeta.IDS } ) 
 	@NotNull(name = AssetRepairVOMeta.ID)
@@ -200,6 +198,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetRepairVOMeta.PAGE_INDEX , AssetRepairVOMeta.PAGE_SIZE , AssetRepairVOMeta.SEARCH_FIELD , AssetRepairVOMeta.FUZZY_FIELD , AssetRepairVOMeta.SEARCH_VALUE , AssetRepairVOMeta.SORT_FIELD , AssetRepairVOMeta.SORT_TYPE , AssetRepairVOMeta.IDS } )
 	@NotNull(name = AssetRepairVOMeta.ID)
@@ -270,6 +269,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetRepairVOMeta.PAGE_INDEX , AssetRepairVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetRepairServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -301,6 +301,7 @@ public class AssetRepairController extends SuperController {
 		@ApiImplicitParam(name = AssetRepairVOMeta.PICTURE_ID , value = "图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetRepairVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetRepairVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetRepairVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetRepairServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

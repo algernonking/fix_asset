@@ -15,6 +15,8 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +81,24 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 	@Autowired
 	private IOperateService operateService;
+
+
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result draft(ProcessStartVO startVO) {
+		return null;
+	}
+
 
 	/**
 	 * 撤销
@@ -184,32 +204,6 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 
 
-	/**
-	 * 插入实体
-	 * @param assetCollectionReturn 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result insert(AssetCollectionReturn assetCollectionReturn, String assetSelectedCode) {
-
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			//获取资产列表
-			ConditionExpr condition=new ConditionExpr();
-			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
-			assetCollectionReturn.setAssetIds(list);
-			//保存单据数据
-			Result insertReuslt=insert(assetCollectionReturn);
-			if(!insertReuslt.isSuccess()){
-				return insertReuslt;
-			}
-		}else{
-			return ErrorDesc.failure().message("请选择资产");
-		}
-		return ErrorDesc.success();
-	}
-
 
 	/**
 	 * 插入实体
@@ -219,6 +213,15 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Override
 	@Transactional
 	public Result insert(AssetCollectionReturn assetCollectionReturn) {
+
+		if(assetCollectionReturn.getAssetIds()==null||assetCollectionReturn.getAssetIds().size()==0){
+			String assetSelectedCode=assetCollectionReturn.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			assetCollectionReturn.setAssetIds(list);
+		}
+
 
 		//校验数据资产
 		if(assetCollectionReturn.getAssetIds().size()==0){

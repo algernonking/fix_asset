@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产转移
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:00
- * @sign 0528AA279ACEC990A14932C767114633
+ * @since 2021-10-11 22:06:45
+ * @sign 7D53A92590B74F591F83142AE45E7FE7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -118,6 +118,12 @@ public class AssetTranfer extends Entity {
 	private Date businessDate;
 	
 	/**
+	 * 附件：附件
+	*/
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attach;
+	
+	/**
 	 * 创建人ID：创建人ID
 	*/
 	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
@@ -172,10 +178,10 @@ public class AssetTranfer extends Entity {
 	private String tenantId;
 	
 	/**
-	 * 附件：附件
+	 * 选择数据：选择数据
 	*/
-	@ApiModelProperty(required = false,value="附件" , notes = "附件")
-	private String attach;
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 资产：资产
@@ -492,6 +498,25 @@ public class AssetTranfer extends Entity {
 	}
 	
 	/**
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
+	*/
+	public String getAttach() {
+		return attach;
+	}
+	
+	/**
+	 * 设置 附件
+	 * @param attach 附件
+	 * @return 当前对象
+	*/
+	public AssetTranfer setAttach(String attach) {
+		this.attach=attach;
+		return this;
+	}
+	
+	/**
 	 * 获得 创建人ID<br>
 	 * 创建人ID
 	 * @return 创建人ID
@@ -663,21 +688,21 @@ public class AssetTranfer extends Entity {
 	}
 	
 	/**
-	 * 获得 附件<br>
-	 * 附件
-	 * @return 附件
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
 	*/
-	public String getAttach() {
-		return attach;
+	public String getSelectedCode() {
+		return selectedCode;
 	}
 	
 	/**
-	 * 设置 附件
-	 * @param attach 附件
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
 	 * @return 当前对象
 	*/
-	public AssetTranfer setAttach(String attach) {
-		this.attach=attach;
+	public AssetTranfer setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

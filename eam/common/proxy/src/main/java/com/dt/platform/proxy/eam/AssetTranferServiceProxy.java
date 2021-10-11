@@ -124,7 +124,7 @@ public interface AssetTranferServiceProxy {
 	 * 添加资产转移
 	*/
 	@RequestMapping(AssetTranferServiceProxy.INSERT)
-	Result insert(AssetTranferVO assetTranferVO, String assetSelectedCode);
+	Result insert(AssetTranferVO assetTranferVO);
 	
 	/**
 	 * 删除资产转移

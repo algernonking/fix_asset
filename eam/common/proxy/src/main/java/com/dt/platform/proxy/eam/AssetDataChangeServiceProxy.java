@@ -135,7 +135,7 @@ public interface AssetDataChangeServiceProxy {
 	 * 添加数据变更
 	*/
 	@RequestMapping(AssetDataChangeServiceProxy.INSERT)
-	Result insert(AssetDataChangeRecordVO assetDataChangeVO, String assetSelectedCode);
+	Result insert(AssetDataChangeRecordVO assetDataChangeVO);
 	
 	/**
 	 * 删除数据变更

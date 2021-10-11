@@ -38,6 +38,8 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
 
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetAllocationVOMeta.ASSET_IDS);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.SELECTED_CODE).basic().hidden(true);
+
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).search().range();

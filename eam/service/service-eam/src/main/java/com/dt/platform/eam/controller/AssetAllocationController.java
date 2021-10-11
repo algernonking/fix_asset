@@ -86,16 +86,14 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.CONTENT , value = "调拨说明" , required = false , dataTypeClass=String.class , example = "1212121212"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetAllocationServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetAllocationServiceProxy.INSERT)
-	public Result insert(AssetAllocationVO assetAllocationVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetAllocationService.insert(assetAllocationVO,assetSelectedCode);
-		}else{
-			return assetAllocationService.insert(assetAllocationVO);
-		}
+	public Result insert(AssetAllocationVO assetAllocationVO) {
+		return assetAllocationService.insert(assetAllocationVO);
 	}
 
 	
@@ -157,6 +155,7 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetAllocationVOMeta.PAGE_INDEX , AssetAllocationVOMeta.PAGE_SIZE , AssetAllocationVOMeta.SEARCH_FIELD , AssetAllocationVOMeta.FUZZY_FIELD , AssetAllocationVOMeta.SEARCH_VALUE , AssetAllocationVOMeta.SORT_FIELD , AssetAllocationVOMeta.SORT_TYPE , AssetAllocationVOMeta.IDS } ) 
 	@NotNull(name = AssetAllocationVOMeta.ID)
@@ -190,6 +189,7 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAllocationVOMeta.PAGE_INDEX , AssetAllocationVOMeta.PAGE_SIZE , AssetAllocationVOMeta.SEARCH_FIELD , AssetAllocationVOMeta.FUZZY_FIELD , AssetAllocationVOMeta.SEARCH_VALUE , AssetAllocationVOMeta.SORT_FIELD , AssetAllocationVOMeta.SORT_TYPE , AssetAllocationVOMeta.IDS } )
 	@NotNull(name = AssetAllocationVOMeta.ID)
@@ -265,6 +265,7 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetAllocationVOMeta.PAGE_INDEX , AssetAllocationVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetAllocationServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -294,6 +295,7 @@ public class AssetAllocationController extends SuperController {
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetAllocationVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetAllocationVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetAllocationServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

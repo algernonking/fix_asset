@@ -15,6 +15,8 @@ import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,6 +88,22 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
+	}
+
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result draft(ProcessStartVO startVO) {
+		return null;
 	}
 
 
@@ -325,13 +343,13 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	/**
 	 * 插入实体
 	 * @param assetDataChangeRecord 实体数据
-	 * @param assetSelectedCode 数据标记
 	 * @return 插入是否成功
 	 * */
 	@Override
 	@Transactional
-	public Result insertRecord(AssetDataChangeRecord assetDataChangeRecord,String assetSelectedCode) {
+	public Result insertRecord(AssetDataChangeRecord assetDataChangeRecord) {
 
+		String assetSelectedCode=assetDataChangeRecord.getSelectedCode();
 		if(!StringUtil.isBlank(assetSelectedCode)){
 
 			//获取AssetDataChange

@@ -39,6 +39,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"reportUser","报修人","报修人");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).search().fuzzySearch();
 

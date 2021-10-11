@@ -16,6 +16,8 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
@@ -27,7 +29,14 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IAssetScrapService extends ISuperService<AssetScrap> {
 
-    /**
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result draft(ProcessStartVO startVO);
+
+	/**
      * 撤销流程
      * @param id ID
      * @return 是否成功
@@ -47,14 +56,6 @@ public interface IAssetScrapService extends ISuperService<AssetScrap> {
 	 * @return 是否成功
 	 * */
 	Result confirmOperation(String id);
-
-	/**
-	 * 插入实体
-	 * @param assetScrap 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	Result insert(AssetScrap assetScrap, String assetSelectedCode);
 
 
 	/**

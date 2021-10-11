@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产领用
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:05
- * @sign 2DF542DD9E8ACAB917A45D123FD26A0B
+ * @since 2021-10-11 22:06:52
+ * @sign 2EA45C20964C140B8A4AFCB710A85433
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -170,6 +170,12 @@ public class AssetCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 选择数据：选择数据
+	*/
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 存放位置：存放位置
@@ -641,6 +647,25 @@ public class AssetCollection extends Entity {
 	*/
 	public AssetCollection setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
+	 * @return 当前对象
+	*/
+	public AssetCollection setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

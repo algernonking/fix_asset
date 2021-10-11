@@ -27,6 +27,7 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ID).basic().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ID).table().disable(true);
 

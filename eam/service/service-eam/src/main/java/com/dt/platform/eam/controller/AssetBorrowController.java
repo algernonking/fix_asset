@@ -92,16 +92,13 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetBorrowServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowServiceProxy.INSERT)
-	public Result insert(AssetBorrowVO assetBorrowVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetBorrowService.insert(assetBorrowVO,assetSelectedCode);
-		}else{
-			return assetBorrowService.insert(assetBorrowVO);
-		}
+	public Result insert(AssetBorrowVO assetBorrowVO) {
+		return assetBorrowService.insert(assetBorrowVO);
 
 	}
 
@@ -165,6 +162,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } ) 
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -198,6 +196,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE , AssetBorrowVOMeta.SEARCH_FIELD , AssetBorrowVOMeta.FUZZY_FIELD , AssetBorrowVOMeta.SEARCH_VALUE , AssetBorrowVOMeta.SORT_FIELD , AssetBorrowVOMeta.SORT_TYPE , AssetBorrowVOMeta.IDS } )
 	@NotNull(name = AssetBorrowVOMeta.ID)
@@ -269,6 +268,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetBorrowVOMeta.PAGE_INDEX , AssetBorrowVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetBorrowServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -298,6 +298,7 @@ public class AssetBorrowController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetBorrowVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetBorrowVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetBorrowServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

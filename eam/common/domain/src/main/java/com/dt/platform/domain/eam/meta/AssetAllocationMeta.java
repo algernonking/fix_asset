@@ -12,8 +12,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:05:36
- * @sign 7228BCF136C8AB9CD92203C8E8BC288C
+ * @since 2021-10-11 22:06:36
+ * @sign E8FF191E7DD41BC06268B67E3526B04E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -230,6 +230,16 @@ public class AssetAllocationMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAllocation,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAllocation.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -292,7 +302,7 @@ public class AssetAllocationMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR , MANAGER , OUT_OWNER_COMPANY , IN_OWNER_COMPANY };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , OUT_OWN_COMPANY_ID , IN_OWN_COMPANY_ID , MANAGER_ID , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , MANAGER , OUT_OWNER_COMPANY , IN_OWNER_COMPANY };
 	
 	/**
 	 * 代理类
@@ -530,6 +540,17 @@ public class AssetAllocationMeta {
 		public AssetAllocation setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择数据
+		 * @param selectedCode 选择数据
+		 * @return 当前对象
+		*/
+		public AssetAllocation setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 		

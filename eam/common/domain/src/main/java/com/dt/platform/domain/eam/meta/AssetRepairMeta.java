@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:10
- * @sign CDDD5211A44DB3C44DAECE662B1EAE5D
+ * @since 2021-10-11 22:06:58
+ * @sign 589E1015C17A455F8501ED446204E5AE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -249,6 +249,16 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final String SELECTED_CODE="selectedCode";
+	
+	/**
+	 * 选择数据 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -291,7 +301,7 @@ public class AssetRepairMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER };
 	
 	/**
 	 * 代理类
@@ -551,6 +561,17 @@ public class AssetRepairMeta {
 		public AssetRepair setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 选择数据
+		 * @param selectedCode 选择数据
+		 * @return 当前对象
+		*/
+		public AssetRepair setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 		

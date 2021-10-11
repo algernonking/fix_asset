@@ -25,6 +25,8 @@ import com.github.foxnic.dao.sql.SQLBuilder;
 import com.github.foxnic.sql.expr.*;
 import com.github.foxnic.sql.treaty.DBTreaty;
 import org.apache.poi.ss.usermodel.*;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
@@ -91,6 +93,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
+
+
+
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result draft(ProcessStartVO startVO) {
+		return null;
+	}
+
 
 
 

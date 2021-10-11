@@ -16,6 +16,8 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,10 +88,30 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 
 
+
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
+
+
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result draft(ProcessStartVO startVO) {
+		return null;
+	}
+
 
 
 	/**
@@ -189,32 +211,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 
 
-	/**
-	 * 插入实体
-	 * @param assetRepair 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result insert(AssetRepair assetRepair, String assetSelectedCode) {
-
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			//获取资产列表
-			ConditionExpr condition=new ConditionExpr();
-			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
-			assetRepair.setAssetIds(list);
-			//保存单据数据
-			Result insertReuslt=insert(assetRepair);
-			if(!insertReuslt.isSuccess()){
-				return insertReuslt;
-			}
-		}else{
-			return ErrorDesc.failure().message("请选择资产");
-		}
-		return ErrorDesc.success();
-	}
-
 
 
 
@@ -226,6 +222,16 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Override
 	@Transactional
 	public Result insert(AssetRepair assetRepair) {
+
+		if(assetRepair.getAssetIds()==null||assetRepair.getAssetIds().size()==0){
+			String assetSelectedCode=assetRepair.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			assetRepair.setAssetIds(list);
+		}
+
+
 
 		//校验数据资产
 		if(assetRepair.getAssetIds().size()==0){
@@ -285,17 +291,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		//保存关系
 		return r;
 	}
-	
-	/**
-	 * 批量插入实体，事务内
-	 * @param assetRepairList 实体数据清单
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result insertList(List<AssetRepair> assetRepairList) {
-		return super.insertList(assetRepairList);
-	}
-	
+
 	
 	/**
 	 * 按主键删除 资产报修

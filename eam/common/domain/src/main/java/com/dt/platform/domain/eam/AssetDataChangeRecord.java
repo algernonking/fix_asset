@@ -33,6 +33,12 @@ public class AssetDataChangeRecord extends Asset {
 
 
 	/**
+	 * 选择数据：选择数据
+	 */
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
+
+	/**
 	 * 变更实体：变更实体
 	 */
 	@ApiModelProperty(required = false,value="变更实体" , notes = "变更实体")
@@ -79,6 +85,14 @@ public class AssetDataChangeRecord extends Asset {
 
 	public void setChangeNotes(String changeNotes) {
 		this.changeNotes = changeNotes;
+	}
+
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+
+	public void setSelectedCode(String selectedCode) {
+		this.selectedCode = selectedCode;
 	}
 
 }

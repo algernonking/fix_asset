@@ -13,8 +13,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:00
- * @sign 0528AA279ACEC990A14932C767114633
+ * @since 2021-10-11 22:06:45
+ * @sign 7D53A92590B74F591F83142AE45E7FE7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -161,6 +161,16 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
 	
 	/**
+	 * 附件 , 类型: java.lang.String
+	*/
+	public static final String ATTACH="attach";
+	
+	/**
+	 * 附件 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
+	
+	/**
 	 * 创建人ID , 类型: java.lang.String
 	*/
 	public static final String CREATE_BY="createBy";
@@ -251,14 +261,14 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
-	 * 附件 , 类型: java.lang.String
+	 * 选择数据 , 类型: java.lang.String
 	*/
-	public static final String ATTACH="attach";
+	public static final String SELECTED_CODE="selectedCode";
 	
 	/**
-	 * 附件 , 类型: java.lang.String
+	 * 选择数据 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
 	
 	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
@@ -343,7 +353,7 @@ public class AssetTranferMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTACH , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER , OUT_USE_ORGANIZATION , IN_USE_ORGANIZATION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER , OUT_USE_ORGANIZATION , IN_USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -508,6 +518,17 @@ public class AssetTranferMeta {
 		}
 		
 		/**
+		 * 设置 附件
+		 * @param attach 附件
+		 * @return 当前对象
+		*/
+		public AssetTranfer setAttach(String attach) {
+			super.change(ATTACH,super.getAttach(),attach);
+			super.setAttach(attach);
+			return this;
+		}
+		
+		/**
 		 * 设置 创建人ID
 		 * @param createBy 创建人ID
 		 * @return 当前对象
@@ -607,13 +628,13 @@ public class AssetTranferMeta {
 		}
 		
 		/**
-		 * 设置 附件
-		 * @param attach 附件
+		 * 设置 选择数据
+		 * @param selectedCode 选择数据
 		 * @return 当前对象
 		*/
-		public AssetTranfer setAttach(String attach) {
-			super.change(ATTACH,super.getAttach(),attach);
-			super.setAttach(attach);
+		public AssetTranfer setSelectedCode(String selectedCode) {
+			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
+			super.setSelectedCode(selectedCode);
 			return this;
 		}
 		

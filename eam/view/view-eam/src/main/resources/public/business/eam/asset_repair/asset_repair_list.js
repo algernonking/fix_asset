@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:10
+ * @since 2021-10-11 22:06:58
  */
 
 
@@ -85,6 +85,7 @@ function ListPage() {
 					,{ field: 'reportUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') , templet: function (d) { return templet('reportUserId',fox.getProperty(d,["reportUser","nameAndBadge"]),d);} }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'selectedCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 350 }
 				]],

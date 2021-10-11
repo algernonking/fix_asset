@@ -15,6 +15,8 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
@@ -25,6 +27,13 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IOperateService extends ISuperService<Operate> {
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result draft(ProcessStartVO startVO);
 
 	/**
 	 * 判断前端资产是否能更新

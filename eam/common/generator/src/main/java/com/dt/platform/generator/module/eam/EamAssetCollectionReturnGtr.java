@@ -39,6 +39,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","退库公司","退库公司");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID)
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");

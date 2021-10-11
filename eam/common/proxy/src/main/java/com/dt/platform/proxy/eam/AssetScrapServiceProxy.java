@@ -122,7 +122,7 @@ public interface AssetScrapServiceProxy {
 	 * 添加资产报废
 	*/
 	@RequestMapping(AssetScrapServiceProxy.INSERT)
-	Result insert(AssetScrapVO assetScrapVO, String assetSelectedCode);
+	Result insert(AssetScrapVO assetScrapVO);
 	
 	/**
 	 * 删除资产报废

@@ -279,7 +279,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 layer.msg("请选择资产数据", {icon: 2, time: 1000});
                 return false;
             }
-            data.assetSelectedCode=timestamp;
+            data.selectedCode=timestamp;
             return true;
         },
         /**

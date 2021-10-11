@@ -18,6 +18,8 @@ import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +89,23 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
+	}
+
+
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result draft(ProcessStartVO startVO) {
+		return null;
 	}
 
 
@@ -189,31 +208,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	}
 
 
-	/**
-	 * 插入实体
-	 * @param assetBorrow 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	@Override
-	public Result insert(AssetBorrow assetBorrow,String assetSelectedCode) {
-
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			//获取资产列表
-			ConditionExpr condition=new ConditionExpr();
-			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
-			assetBorrow.setAssetIds(list);
-			//保存单据数据
-			Result insertReuslt=insert(assetBorrow);
-			if(!insertReuslt.isSuccess()){
-				return insertReuslt;
-			}
-		}else{
-			return ErrorDesc.failure().message("请选择资产");
-		}
-		return ErrorDesc.success();
-	}
 
 	/**
 	 * 插入实体
@@ -222,6 +216,14 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	 * */
 	@Override
 	public Result insert(AssetBorrow assetBorrow) {
+
+		if(assetBorrow.getAssetIds()==null||assetBorrow.getAssetIds().size()==0){
+			String assetSelectedCode=assetBorrow.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			assetBorrow.setAssetIds(list);
+		}
 
 		//校验数据资产
 		if(assetBorrow.getAssetIds().size()==0){

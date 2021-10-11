@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产报废
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-07 10:56:23
- * @sign 3D9FF54FBE80DDEFA82CF20B59A6C49C
+ * @since 2021-10-11 22:10:36
+ * @sign 4F4061D4C34EBEE916ED5ED21D969206
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -151,6 +151,12 @@ public class AssetScrap extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 选择数据：选择数据
+	*/
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 资产：资产
@@ -547,6 +553,25 @@ public class AssetScrap extends Entity {
 	*/
 	public AssetScrap setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
+	 * @return 当前对象
+	*/
+	public AssetScrap setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

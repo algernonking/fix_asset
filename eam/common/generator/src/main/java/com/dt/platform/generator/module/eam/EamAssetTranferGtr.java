@@ -44,7 +44,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
 
 
       //  cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetTranferVOMeta.ASSET_IDS);
-
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).search().fuzzySearch();

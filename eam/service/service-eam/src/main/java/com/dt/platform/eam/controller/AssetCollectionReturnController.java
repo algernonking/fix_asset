@@ -85,16 +85,13 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetCollectionReturnServiceProxy.INSERT)
-	public Result insert(AssetCollectionReturnVO assetCollectionReturnVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetCollectionReturnService.insert(assetCollectionReturnVO,assetSelectedCode);
-		}else{
-			return assetCollectionReturnService.insert(assetCollectionReturnVO);
-		}
+	public Result insert(AssetCollectionReturnVO assetCollectionReturnVO) {
+		return assetCollectionReturnService.insert(assetCollectionReturnVO);
 	}
 
 	
@@ -160,6 +157,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE , AssetCollectionReturnVOMeta.SEARCH_FIELD , AssetCollectionReturnVOMeta.FUZZY_FIELD , AssetCollectionReturnVOMeta.SEARCH_VALUE , AssetCollectionReturnVOMeta.SORT_FIELD , AssetCollectionReturnVOMeta.SORT_TYPE , AssetCollectionReturnVOMeta.IDS } ) 
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
@@ -196,6 +194,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE , AssetCollectionReturnVOMeta.SEARCH_FIELD , AssetCollectionReturnVOMeta.FUZZY_FIELD , AssetCollectionReturnVOMeta.SEARCH_VALUE , AssetCollectionReturnVOMeta.SORT_FIELD , AssetCollectionReturnVOMeta.SORT_TYPE , AssetCollectionReturnVOMeta.IDS } )
 	@NotNull(name = AssetCollectionReturnVOMeta.ID)
@@ -270,6 +269,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetCollectionReturnVOMeta.PAGE_INDEX , AssetCollectionReturnVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -300,6 +300,7 @@ public class AssetCollectionReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetCollectionReturnVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetCollectionReturnServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

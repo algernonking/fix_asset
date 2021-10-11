@@ -87,16 +87,14 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetTranferServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetTranferServiceProxy.INSERT)
-	public Result insert(AssetTranferVO assetTranferVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetTranferService.insert(assetTranferVO,assetSelectedCode);
-		}else{
-			return assetTranferService.insert(assetTranferVO);
-		}
+	public Result insert(AssetTranferVO assetTranferVO) {
+		return assetTranferService.insert(assetTranferVO);
 	}
 
 	
@@ -163,6 +161,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } ) 
 	@NotNull(name = AssetTranferVOMeta.ID)
@@ -199,6 +198,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } )
 	@NotNull(name = AssetTranferVOMeta.ID)
@@ -282,6 +282,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetTranferServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -314,6 +315,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetTranferServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

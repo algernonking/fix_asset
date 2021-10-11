@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产调拨
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:05:36
- * @sign 7228BCF136C8AB9CD92203C8E8BC288C
+ * @since 2021-10-11 22:06:36
+ * @sign E8FF191E7DD41BC06268B67E3526B04E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -158,6 +158,12 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 选择数据：选择数据
+	*/
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 资产：资产
@@ -591,6 +597,25 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
+	 * @return 当前对象
+	*/
+	public AssetAllocation setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

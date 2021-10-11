@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:05
+ * @since 2021-10-11 22:06:52
  */
 
 function FormPage() {
@@ -60,7 +60,7 @@ function FormPage() {
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
 				var finalHeight=windowHeight-footerHeight-16;
-				//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+				console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
 				$(".form-container").css("display","");
 				$(".form-container").css("overflow-y","scroll");
 				$(".form-container").css("height",finalHeight+"px");

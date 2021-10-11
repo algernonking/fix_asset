@@ -16,6 +16,8 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
@@ -26,6 +28,13 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetCollectionReturnService extends ISuperService<AssetCollectionReturn> {
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result draft(ProcessStartVO startVO);
 
 	/**
 	 * 撤销流程
@@ -47,14 +56,6 @@ public interface IAssetCollectionReturnService extends ISuperService<AssetCollec
 	 * @return 是否成功
 	 * */
 	Result confirmOperation(String id);
-
-	/**
-	 * 插入实体
-	 * @param assetCollectionReturn 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	Result insert(AssetCollectionReturn assetCollectionReturn, String assetSelectedCode);
 
 
 

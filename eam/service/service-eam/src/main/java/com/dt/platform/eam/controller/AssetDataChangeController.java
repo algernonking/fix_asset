@@ -89,8 +89,8 @@ public class AssetDataChangeController extends SuperController {
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetDataChangeServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.INSERT)
-	public Result insert(AssetDataChangeRecordVO assetDataChangeVO, String assetSelectedCode) {
-		return assetDataChangeService.insertRecord(assetDataChangeVO,assetSelectedCode);
+	public Result insert(AssetDataChangeRecordVO assetDataChangeVO) {
+		return assetDataChangeService.insertRecord(assetDataChangeVO);
 	}
 
 

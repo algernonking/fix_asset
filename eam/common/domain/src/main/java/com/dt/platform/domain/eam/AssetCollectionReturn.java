@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产退库
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:08
- * @sign 00E19A691310762A3FECB14F91B720FB
+ * @since 2021-10-11 22:06:55
+ * @sign 6ADDB9B2B846850267A16F3CDDDEEEBF
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -164,6 +164,12 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 选择数据：选择数据
+	*/
+	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
+	private String selectedCode;
 	
 	/**
 	 * 存放位置：存放位置
@@ -610,6 +616,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 选择数据<br>
+	 * 选择数据
+	 * @return 选择数据
+	*/
+	public String getSelectedCode() {
+		return selectedCode;
+	}
+	
+	/**
+	 * 设置 选择数据
+	 * @param selectedCode 选择数据
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setSelectedCode(String selectedCode) {
+		this.selectedCode=selectedCode;
 		return this;
 	}
 	

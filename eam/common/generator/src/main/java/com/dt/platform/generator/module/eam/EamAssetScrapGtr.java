@@ -28,8 +28,9 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetScrapVOMeta.ASSET_IDS);
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SELECTED_CODE).basic().hidden(true);
 
-        cfg.view().field(EAMTables.EAM_MAINTAINER.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.ID).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).search().fuzzySearch();

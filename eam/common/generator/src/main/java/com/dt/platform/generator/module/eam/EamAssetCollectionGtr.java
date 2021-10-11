@@ -39,6 +39,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","领用公司/部门","领用公司/部门");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.SELECTED_CODE).basic().hidden(true);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID)
                 .form().button().chooseOrganization(true);

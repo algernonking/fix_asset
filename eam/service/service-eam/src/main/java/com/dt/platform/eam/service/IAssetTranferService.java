@@ -16,6 +16,8 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
@@ -26,6 +28,14 @@ import com.github.foxnic.dao.data.SaveMode;
 */
 
 public interface IAssetTranferService extends ISuperService<AssetTranfer> {
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	Result draft(ProcessStartVO startVO);
+
 
 	/**
 	 * 撤销流程
@@ -47,13 +57,6 @@ public interface IAssetTranferService extends ISuperService<AssetTranfer> {
 	 * */
 	Result confirmOperation(String id);
 
-	/**
-	 * 插入实体
-	 * @param assetTranfer 实体数据
-	 * @param assetSelectedCode 数据标记
-	 * @return 插入是否成功
-	 * */
-	Result insert(AssetTranfer assetTranfer, String assetSelectedCode);
 
 
 	/**
