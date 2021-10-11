@@ -1,7 +1,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:07
+ * @since 2021-10-12 02:46:34
  */
 
 function FormPage() {
@@ -94,6 +94,11 @@ function FormPage() {
 			}
 		});
 		laydate.render({
+			elem: '#scrapDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+		laydate.render({
 			elem: '#businessDate',
 			format:"yyyy-MM-dd",
 			trigger:"click"
@@ -144,6 +149,10 @@ function FormPage() {
 
 
 
+			//设置 报废时间 显示复选框勾选
+			if(formData["scrapDate"]) {
+				$("#scrapDate").val(fox.dateFormat(formData["scrapDate"],"yyyy-MM-dd"));
+			}
 
 
 

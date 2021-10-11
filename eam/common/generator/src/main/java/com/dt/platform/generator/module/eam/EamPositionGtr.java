@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.eam.page.PositionPageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -27,6 +28,10 @@ public class EamPositionGtr extends BaseCodeGenerator{
                 }
         );
 
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
         cfg.view().field(EAMTables.EAM_POSITION.NAME).form().validate().required();
 
 

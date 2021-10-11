@@ -10,6 +10,7 @@ import com.dt.platform.domain.eam.meta.BrandMeta;
 import com.dt.platform.domain.eam.meta.CategoryMeta;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
 import com.dt.platform.domain.eam.meta.ManufacturerMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.BrandServiceProxy;
 import com.dt.platform.proxy.eam.CategoryServiceProxy;
 import com.dt.platform.proxy.eam.ManufacturerServiceProxy;
@@ -80,6 +81,12 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 }
         );
 
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+30);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+30);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
         cfg.view().formWindow().bottomSpace(250);

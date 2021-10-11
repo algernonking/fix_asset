@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.OutputStream;
@@ -16,10 +16,12 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
@@ -697,9 +699,24 @@ public class AssetController extends SuperController {
 
 		assetService.join(list,AssetMeta.OWNER_COMPANY);
 		assetService.join(list,AssetMeta.USE_ORGANIZATION);
+
 		assetService.join(list,AssetMeta.MANAGER);
 		assetService.join(list,AssetMeta.USE_USER);
 		assetService.join(list,AssetMeta.ORIGINATOR);
+
+
+//		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+//		assetService.dao().join(originators, Person.class);
+//
+//		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+//		System.out.println("useUser:"+useUser);
+//		assetService.dao().join(useUser, Person.class);
+//
+//		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+//		System.out.println("managers:"+managers);
+//		assetService.dao().join(managers, Person.class);
+
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -806,6 +823,15 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.USE_USER);
 		assetService.join(list,AssetMeta.ORIGINATOR);
 
+		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+		assetService.dao().join(originators, Person.class);
+
+
+		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+		assetService.dao().join(managers, Person.class);
+
+		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+		assetService.dao().join(useUser, Person.class);
 
 		result.success(true).data(list);
 		return result;
@@ -913,6 +939,17 @@ public class AssetController extends SuperController {
 		assetService.join(list,AssetMeta.MANAGER);
 		assetService.join(list,AssetMeta.USE_USER);
 		assetService.join(list,AssetMeta.ORIGINATOR);
+
+		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+		assetService.dao().join(originators, Person.class);
+
+
+		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+		assetService.dao().join(managers, Person.class);
+
+		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+		assetService.dao().join(useUser, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}

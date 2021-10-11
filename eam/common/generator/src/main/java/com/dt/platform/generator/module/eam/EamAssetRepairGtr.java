@@ -15,6 +15,7 @@ import com.dt.platform.eam.page.PositionPageController;
 import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetHandleServiceProxy;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.proxy.eam.CategoryServiceProxy;
@@ -95,16 +96,23 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.STATUS,
                         EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
-                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE
-                },
-                new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_REPAIR.TYPE,
+                },
+                new Object[]{
                         EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID,
-                        EAMTables.EAM_ASSET_REPAIR.CONTENT
+                        EAMTables.EAM_ASSET_REPAIR.CONTENT,
+                        EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE
                 }
 
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().list().disableBatchDelete();
 

@@ -253,6 +253,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+            if(data&&data.id){
+                window.module.adjustPopup();
+            }
             console.log('afterDataFill',data);
         },
         /**

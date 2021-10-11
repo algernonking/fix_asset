@@ -68,7 +68,8 @@ public class AssetDataChangePageController extends ViewController {
 		model.addAttribute("approvalRequired",approvalRequired);
 		model.addAttribute("changeType",changeType);
 		model.addAttribute("pageType",pageType);
-		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getCode();
+		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getData().toString();
+
 		//设置字段布局
 		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code(), assetAttributeDimension);
 		if(result.isSuccess()){

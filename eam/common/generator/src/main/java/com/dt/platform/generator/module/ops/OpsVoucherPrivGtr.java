@@ -31,7 +31,7 @@ public class OpsVoucherPrivGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).form().validate().required().form().button().chooseEmployee(true);
-        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).table().fillBy("employee","name");
+        cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.EMPL_ID).table().fillBy("employee","nameAndBadge");
 
         cfg.view().field(EAMTables.OPS_VOUCHER_PRIV.TYPE).form().validate().required().form()
                 .selectBox().dict(DictEnum.OPS_VOUCHER_TYPE)

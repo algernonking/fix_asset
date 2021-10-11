@@ -134,8 +134,9 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET.PURCHASE_DATE,
                 }
 
-
         );
+
+
 
         cfg.view().field(EAMTables.EAM_ASSET.SUPPLIER_ID)
                 .basic().label("供应商")

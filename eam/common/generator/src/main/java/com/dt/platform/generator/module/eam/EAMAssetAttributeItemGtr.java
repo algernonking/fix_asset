@@ -10,6 +10,7 @@ import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
 import com.dt.platform.domain.eam.meta.AssetAttributeMeta;
 import com.dt.platform.eam.page.AssetAttributeItemPageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.dt.platform.proxy.eam.AssetAttributeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -45,6 +46,14 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
 
         }
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.ATTRIBUTE_ID).form().validate().required()

@@ -7,6 +7,7 @@ import com.dt.platform.domain.ops.*;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.dt.platform.domain.ops.meta.InformationSystemVOMeta;
 import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Organization;
@@ -145,8 +146,14 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
 
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth+20);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth+20);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+20);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+20);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
         //分成分组布局
-        cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().width("98%");
         cfg.view().formWindow().bottomSpace(80);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {

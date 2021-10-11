@@ -2,7 +2,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:57
+ * @since 2021-10-12 02:47:17
  */
  -->
  <!DOCTYPE html>
@@ -37,8 +37,8 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 物品名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('物品名称')}" class="search-label name-label">物品名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('物品名称')}" class="search-label name-label">物品名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 规格型号 , model ,typeName=text_input, isHideInSearch=true -->
                     <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
@@ -47,21 +47,21 @@
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
 
 
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:140px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" style="width:150px"></div>
 
                     </div>
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-eam/eam-category/query-paged-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
+                        <div id="categoryId" th:data="${'/service-eam/eam-category/query-paged-list'}" style="width:150px"></div>
                     </div>
                     <!-- 厂商 , manufacturerId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
-                        <div id="manufacturerId" th:data="${'/service-eam/eam-manufacturer/query-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('厂商')}" class="search-label manufacturerId-label">厂商</span><span class="search-colon">:</span></div>
+                        <div id="manufacturerId" th:data="${'/service-eam/eam-manufacturer/query-list'}" style="width:150px"></div>
                     </div>
 
 

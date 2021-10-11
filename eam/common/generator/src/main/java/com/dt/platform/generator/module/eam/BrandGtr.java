@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class BrandGtr extends BaseCodeGenerator {
@@ -22,6 +23,10 @@ public class BrandGtr extends BaseCodeGenerator {
                         EAMTables.EAM_BRAND.BRAND_NAME
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式
         cfg.overrides()

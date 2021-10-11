@@ -231,12 +231,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
-            console.log('beforeDataFill',data);
+            if(data&&data.id){
+                console.log(1);
+            }else{
+                setTimeout(function(){
+                    var now = new Date();
+                    var day = ("0" + now.getDate()).slice(-2);
+                    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                    $('#scrapDate').val(today);
+
+                },100)
+            }
+
         },
         /**
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+            if(data&&data.id){
+                window.module.adjustPopup();
+            }
             console.log('afterDataFill',data);
         },
         /**

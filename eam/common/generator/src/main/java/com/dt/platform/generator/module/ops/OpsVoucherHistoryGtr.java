@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.VoucherHistoryPageController;
 import com.dt.platform.proxy.ops.VoucherHistoryServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -46,6 +47,8 @@ public class OpsVoucherHistoryGtr extends BaseCodeGenerator{
 
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式
         cfg.overrides()

@@ -10,6 +10,7 @@ import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.domain.eam.TplFile;
 import com.dt.platform.domain.eam.meta.TplFileMeta;
 import com.dt.platform.eam.page.TplFilePageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.eam.TplFileServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -39,7 +40,10 @@ public class EamTplFileGtr extends BaseCodeGenerator{
                         EAMTables.EAM_TPL_FILE.NOTES,
                 }
         );
-
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
 

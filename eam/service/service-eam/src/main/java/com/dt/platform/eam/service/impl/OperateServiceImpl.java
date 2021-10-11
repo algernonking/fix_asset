@@ -8,6 +8,9 @@ import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.system.Config;
+import org.github.foxnic.web.domain.system.ConfigVO;
+import org.github.foxnic.web.proxy.system.ConfigServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -112,6 +115,15 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	@Override
 	public boolean queryAssetDirectUpdateMode(){
 		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode("eam.asset.directUpdateMode");
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
 		return r;
 	}
 
@@ -138,6 +150,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	@Override
 	public Result insert(Operate operate) {
 		Result r=super.insert(operate);
+
 		return r;
 	}
 	

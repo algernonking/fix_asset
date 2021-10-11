@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:24
+ * @since 2021-10-12 02:46:48
  */
  -->
  <!DOCTYPE html>
@@ -38,8 +38,8 @@
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px"></div>
                     </div>
                     <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
                     <!-- 预计归还时间 , planReturnDate ,typeName=date_input, isHideInSearch=true -->
@@ -49,14 +49,19 @@
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 借用人 , borrowerId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('借用人')}" class="search-label borrowerId-label">借用人</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('借用人')}" class="search-label borrowerId-label">借用人</span><span class="search-colon">:</span></div>
                             <input lay-filter="borrowerId" id="borrowerId" name="borrowerId"  type="hidden" class="layui-input"    lay-verify="|required"   />
                             <button id="borrowerId-button" type="button" action-type="emp-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                    </div>
+                    <!-- 借出说明 , content ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('借出说明')}" class="search-label content-label">借出说明</span><span class="search-colon">:</span></div>
+                        <input id="content" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -65,15 +70,10 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 借出时间 , borrowTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('借出时间')}" class="search-label borrowTime-label">借出时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="borrowTime-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('借出时间')}" class="search-label borrowTime-label">借出时间</span><span class="search-colon">:</span></div>
+                            <input type="text" id="borrowTime-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                             <span class="search-dash">-</span>
-                            <input type="text" id="borrowTime-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
-                    <!-- 借出说明 , content ,typeName=text_area, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('借出说明')}" class="search-label content-label">借出说明</span><span class="search-colon">:</span></div>
-                        <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
+                            <input type="text" id="borrowTime-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 

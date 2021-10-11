@@ -5,6 +5,7 @@ import com.dt.platform.constants.db.EAMTables;
 
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.eam.page.ResidualStrategyPageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.ResidualStrategyServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -38,6 +39,11 @@ public class EamResidualStrategyGtr extends BaseCodeGenerator {
 
                 }
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式
         cfg.overrides()

@@ -234,7 +234,6 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 
 
 
-
 		//制单人
 		if(StringUtil.isBlank(assetCollectionReturn.getOriginatorId())){
 			assetCollectionReturn.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());

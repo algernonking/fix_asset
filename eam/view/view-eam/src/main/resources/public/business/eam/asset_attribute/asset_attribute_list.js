@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:36:57
+ * @since 2021-10-12 02:46:26
  */
 
 
@@ -160,7 +160,7 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
 		//渲染 dimension 搜索框
 		fox.renderSelectBox({
@@ -231,7 +231,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {

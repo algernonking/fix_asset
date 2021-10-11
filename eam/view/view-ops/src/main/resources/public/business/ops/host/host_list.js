@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:38:39
+ * @since 2021-10-12 02:47:54
  */
 
 
@@ -529,7 +529,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["90%",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"ops-host-form-data-win",
 			content: '/business/ops/host/host_form.html' + queryString,

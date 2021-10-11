@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
 import com.dt.platform.domain.ops.*;
 import com.dt.platform.domain.ops.meta.*;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.service.impl.HostDbServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.ops.service.impl.HostOsServiceImpl;
@@ -222,9 +223,14 @@ public class OpsHostGtr extends BaseCodeGenerator{
                         EAMTables.OPS_HOST.HOST_NOTES,
                 }
         );
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //分成分组布局
-        cfg.view().formWindow().width("90%");
+        cfg.view().formWindow().width("98%");
         cfg.view().formWindow().bottomSpace(50);
         cfg.view().form().addGroup("基本信息",
                 new Object[] {

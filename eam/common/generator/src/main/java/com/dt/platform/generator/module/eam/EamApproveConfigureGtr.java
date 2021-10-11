@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.constants.enums.eam.AssetApprovalTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.eam.page.ApproveConfigurePageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.ApproveConfigureServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -38,6 +39,11 @@ public class EamApproveConfigureGtr extends BaseCodeGenerator{
 
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_APPROVE_CONFIGURE.APPROVAL_STATUS)
                 .form().validate().required().form().radioBox().enumType(StatusEnableEnum.class);

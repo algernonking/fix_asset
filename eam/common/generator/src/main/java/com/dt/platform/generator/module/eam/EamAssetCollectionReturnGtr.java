@@ -13,6 +13,7 @@ import com.dt.platform.domain.eam.meta.PositionMeta;
 import com.dt.platform.eam.page.AssetCollectionReturnPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -55,16 +56,22 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
+
                 },
                 new Object[]{
-
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT
+
                 }
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE).search().fuzzySearch();
 

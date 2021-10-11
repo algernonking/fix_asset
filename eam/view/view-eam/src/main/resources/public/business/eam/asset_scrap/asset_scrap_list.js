@@ -1,7 +1,7 @@
 /**
  * 资产报废 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:07
+ * @since 2021-10-12 02:46:34
  */
 
 
@@ -75,14 +75,11 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'procId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程') , templet: function (d) { return templet('procId',d.procId,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'scrapDate', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报废时间') , templet: function (d) { return templet('scrapDate',d.scrapDate,d);}  }
+					,{ field: 'scrapDate', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('报废时间'), templet: function (d) { return templet('scrapDate',fox.dateFormat(d.scrapDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报废说明') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
-					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }}
-					,{ field: 'attach', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件') , templet: function (d) { return templet('attach',d.attach,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'selectedCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 350 }
@@ -121,7 +118,7 @@ function ListPage() {
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.scrapDate={ inputType:"button",value: $("#scrapDate").val()};
+		value.scrapDate={ inputType:"date_input", begin: $("#scrapDate-begin").val(), end: $("#scrapDate-end").val() };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -176,6 +173,14 @@ function ListPage() {
 				}
 				return opts;
 			}
+		});
+		laydate.render({
+			elem: '#scrapDate-begin',
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#scrapDate-end',
+			trigger:"click"
 		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();

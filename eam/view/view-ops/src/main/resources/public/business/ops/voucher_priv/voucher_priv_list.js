@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:38:18
+ * @since 2021-10-12 02:47:36
  */
 
 
@@ -75,7 +75,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证类别'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
-					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',fox.getProperty(d,["employee","name"]),d);} }
+					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',fox.getProperty(d,["employee","nameAndBadge"]),d);} }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -113,7 +113,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr")};
-		value.emplId={ inputType:"button",value: $("#emplId").val(),fillBy:["employee","name"] ,label:$("#emplId-button").text()};
+		value.emplId={ inputType:"button",value: $("#emplId").val(),fillBy:["employee","nameAndBadge"] ,label:$("#emplId-button").text()};
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){

@@ -11,6 +11,7 @@ import com.dt.platform.domain.eam.meta.PositionMeta;
 import com.dt.platform.eam.page.AssetTranferPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetTranferServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -93,11 +94,19 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID,
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE,
                         EAMTables.EAM_ASSET_TRANFER.CONTENT,
+                        EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE,
+
 
                 }
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+30);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+30);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.POSITION_ID)
                 .basic().label("存放位置")

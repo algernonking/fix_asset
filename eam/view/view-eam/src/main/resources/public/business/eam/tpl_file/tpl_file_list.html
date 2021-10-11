@@ -2,7 +2,7 @@
 /**
  * 模板文件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:03
+ * @since 2021-10-12 02:46:31
  */
  -->
  <!DOCTYPE html>
@@ -37,21 +37,21 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 模板类型 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('模板类型')}" class="search-label type-label">模板类型</span><span class="search-colon">:</span></div>
-                        <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetTplFileTypeEnum')}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('模板类型')}" class="search-label type-label">模板类型</span><span class="search-colon">:</span></div>
+                        <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetTplFileTypeEnum')}" style="width:150px"></div>
                     </div>
                     <!-- 业务编码 , code ,typeName=select_box, isHideInSearch=true -->
                     <!-- 模板文件类型 , tplFileType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 文件 , fileId ,typeName=upload, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 

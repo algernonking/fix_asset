@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.common;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
+import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.oauth.Menu;
 import org.github.foxnic.web.domain.oauth.meta.MenuMeta;
@@ -49,6 +50,11 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
                         EAMTables.SYS_CODE_RULE.NOTES,
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");

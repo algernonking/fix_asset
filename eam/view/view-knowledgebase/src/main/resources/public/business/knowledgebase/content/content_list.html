@@ -2,7 +2,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:38:53
+ * @since 2021-10-12 02:48:08
  */
  -->
  <!DOCTYPE html>
@@ -37,8 +37,8 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
+                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:150px"></div>
                     </div>
                     <!-- 关键字 , keyWords ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
@@ -51,23 +51,23 @@
                     <!-- 编辑人 , resEditorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 等级 , gradeId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('等级')}" class="search-label gradeId-label">等级</span><span class="search-colon">:</span></div>
-                        <div id="gradeId" th:data="${dict.toArray('kn_grade')}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('等级')}" class="search-label gradeId-label">等级</span><span class="search-colon">:</span></div>
+                        <div id="gradeId" th:data="${dict.toArray('kn_grade')}" style="width:150px"></div>
                     </div>
                     <!-- 是否显示 , display ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('是否显示')}" class="search-label display-label">是否显示</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('是否显示')}" class="search-label display-label">是否显示</span><span class="search-colon">:</span></div>
 
 
-                        <div id="display" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" style="width:140px"></div>
+                        <div id="display" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseDisplayEnum')}" style="width:150px"></div>
 
                     </div>
                     <!-- 内容类型 , contentType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('内容类型')}" class="search-label contentType-label">内容类型</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('内容类型')}" class="search-label contentType-label">内容类型</span><span class="search-colon">:</span></div>
 
 
-                        <div id="contentType" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" style="width:140px"></div>
+                        <div id="contentType" th:data="${enum.toArray('com.dt.platform.constants.enums.knowledgebase.KnowledgebaseContentTypeEnum')}" style="width:150px"></div>
 
                     </div>
 
@@ -77,13 +77,13 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 标题 , title ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
-                        <input id="title" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('标题')}" class="search-label title-label">标题</span><span class="search-colon">:</span></div>
+                        <input id="title" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 简介 , profile ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('简介')}" class="search-label profile-label">简介</span><span class="search-colon">:</span></div>
-                        <input id="profile" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('简介')}" class="search-label profile-label">简介</span><span class="search-colon">:</span></div>
+                        <input id="profile" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 

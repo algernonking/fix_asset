@@ -7,6 +7,7 @@ import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetDataChange;
 import com.dt.platform.eam.page.AssetDataChangePageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -45,9 +46,19 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
                         EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,
                         EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_NOTES,
-                        EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE
-                }
+                },
+        new Object[]{
+
+                EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE
+        }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
 
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE).form().validate().required().form().dateInput().format("yyyy-MM-dd").search().range();

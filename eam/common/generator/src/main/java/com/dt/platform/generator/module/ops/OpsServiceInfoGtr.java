@@ -8,6 +8,7 @@ import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
 
 import com.dt.platform.domain.ops.meta.ServiceGroupMeta;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.ServiceInfoPageController;
 import com.dt.platform.proxy.ops.ServiceCategoryServiceProxy;
 import com.dt.platform.proxy.ops.ServiceGroupServiceProxy;
@@ -70,6 +71,11 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
 
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().formWindow().bottomSpace(80);
         cfg.view().formWindow().width("800px");

@@ -2,7 +2,7 @@
 /**
  * 所属凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-18 12:22:19
+ * @since 2021-10-12 02:31:43
  */
  -->
  <!DOCTYPE html>
@@ -37,29 +37,34 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 类别 , categoryCode ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('类别')}" class="search-label categoryCode-label">类别</span><span class="search-colon">:</span></div>
-                        <div id="categoryCode" th:data="${'/service-ops/ops-voucher-priv/query-type-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('类别')}" class="search-label categoryCode-label">类别</span><span class="search-colon">:</span></div>
+                        <div id="categoryCode" th:data="${'/service-ops/ops-voucher-priv/query-type-list'}" style="width:150px"></div>
                     </div>
                     <!-- 用户凭证 , voucherIds ,typeName=select_box, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('标签')}" class="search-label label-label">标签</span><span class="search-colon">:</span></div>
-                        <div id="label" th:data="${dict.toArray('ops_voucher_label')}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('标签')}" class="search-label label-label">标签</span><span class="search-colon">:</span></div>
+                        <div id="label" th:data="${dict.toArray('ops_voucher_label')}" style="width:150px"></div>
                     </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 位置 , position ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('位置')}" class="search-label position-label">位置</span><span class="search-colon">:</span></div>
-                        <input id="position" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('位置')}" class="search-label position-label">位置</span><span class="search-colon">:</span></div>
+                        <input id="position" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -73,7 +78,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

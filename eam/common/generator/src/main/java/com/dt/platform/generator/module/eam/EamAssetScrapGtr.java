@@ -8,6 +8,7 @@ import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
 import com.dt.platform.domain.eam.meta.AssetScrapVOMeta;
 import com.dt.platform.eam.page.AssetScrapPageController;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -38,7 +39,15 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE).search().range();
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.PROC_ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CREATE_TIME).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.ATTACH).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.BUSINESS_DATE).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().hidden();
+
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CONTENT).form().textArea().height(30);
 
@@ -48,14 +57,23 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_ASSET_SCRAP.STATUS,
+                        EAMTables.EAM_ASSET_SCRAP.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_SCRAP.NAME,
-                        EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE
+                        EAMTables.EAM_ASSET_SCRAP.CONTENT
                 },
                 new Object[]{
-                        EAMTables.EAM_ASSET_SCRAP.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_SCRAP.CONTENT
+                        EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE
+
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
+       // cfg.view().search().
 
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CLEAN_STATUS).table().disable();
@@ -65,11 +83,13 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 //        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
 //        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
 //        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
 //        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+
 
         cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
         cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
@@ -90,7 +110,7 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
                       {
                         EAMTables.EAM_ASSET_SCRAP.SCRAP_DATE
                 }, new Object[] {
-                        EAMTables.EAM_ASSET_SCRAP.ORIGINATOR_ID
+
                 }
         );
 

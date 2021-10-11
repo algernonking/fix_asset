@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.common;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeAttrTypeEnum;
+import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class SysCodeAttrGtr extends BaseCodeGenerator {
@@ -35,6 +36,11 @@ public class SysCodeAttrGtr extends BaseCodeGenerator {
                         EAMTables.SYS_CODE_ATTR.NOTES,
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");

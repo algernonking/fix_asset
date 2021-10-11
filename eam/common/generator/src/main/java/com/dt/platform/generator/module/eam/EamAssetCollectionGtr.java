@@ -9,6 +9,7 @@ import com.dt.platform.eam.page.AssetBorrowPageController;
 import com.dt.platform.eam.page.AssetCollectionPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
@@ -61,15 +62,24 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
                 new Object[]{
                         EAMTables.EAM_ASSET_COLLECTION.STATUS,
                         EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
+                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
+
                 },
                 new Object[]{
+                        EAMTables.EAM_ASSET_COLLECTION.CONTENT,
                         EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
-                        EAMTables.EAM_ASSET_COLLECTION.CONTENT
+
 
                 }
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_CODE).search().fuzzySearch();

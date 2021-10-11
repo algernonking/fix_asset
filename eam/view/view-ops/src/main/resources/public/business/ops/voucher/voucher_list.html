@@ -2,7 +2,7 @@
 /**
  * 凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:38:21
+ * @since 2021-10-12 02:47:38
  */
  -->
  <!DOCTYPE html>
@@ -37,16 +37,16 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 类别 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('类别')}" class="search-label type-label">类别</span><span class="search-colon">:</span></div>
-                        <div id="type" th:data="${'/service-ops/ops-voucher-priv/query-type-list'}" style="width:140px"></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('类别')}" class="search-label type-label">类别</span><span class="search-colon">:</span></div>
+                        <div id="type" th:data="${'/service-ops/ops-voucher-priv/query-type-list'}" style="width:150px"></div>
                     </div>
                     <!-- 所属 , ownerId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 用户 , userCode ,typeName=select_box, isHideInSearch=true -->
                     <!-- 凭证 , voucher ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 

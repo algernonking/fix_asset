@@ -5,6 +5,7 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.ops.HostMonitorStatusEnum;
 import com.dt.platform.constants.enums.ops.HostStatusEnum;
 
+import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostPositionGtr extends BaseCodeGenerator{
@@ -33,6 +34,10 @@ public class OpsHostPositionGtr extends BaseCodeGenerator{
                 }
         );
 
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //文件生成覆盖模式
         cfg.overrides()

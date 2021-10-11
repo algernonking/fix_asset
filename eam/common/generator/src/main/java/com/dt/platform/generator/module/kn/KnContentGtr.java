@@ -14,6 +14,7 @@ import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
 
 
 import com.dt.platform.domain.ops.meta.HostMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.knowledgebase.page.ContentPageController;
 import com.dt.platform.proxy.knowledgebase.CategoryServiceProxy;
 import com.dt.platform.proxy.knowledgebase.ContentServiceProxy;
@@ -129,6 +130,13 @@ public class KnContentGtr extends BaseCodeGenerator {
                 }
 
         );
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //分成分组布局
         cfg.view().formWindow().width("95%");

@@ -294,9 +294,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
+
+
+
             console.log('afterDataFill',data,",",formAction);
             if(data&&data.id) {
-                console.log(7777, $('#data-form').find(".xm-tips"))
+
                 if (formAction == "view") {
                     setTimeout(function () {
                         $('#extData').find("input").attr('placeholder', '未变更');

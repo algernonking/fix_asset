@@ -1,7 +1,7 @@
 /**
  * 资产审批配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:37:10
+ * @since 2021-10-12 02:46:37
  */
 
 layui.config({

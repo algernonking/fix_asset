@@ -13,6 +13,7 @@ import com.dt.platform.domain.ops.ServiceInfo;
 import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.HostServiceProxy;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -107,6 +108,11 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                         EAMTables.OPS_DB_INSTANCE.NOTES
                 }
         );
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
         cfg.view().list().columnLayout(

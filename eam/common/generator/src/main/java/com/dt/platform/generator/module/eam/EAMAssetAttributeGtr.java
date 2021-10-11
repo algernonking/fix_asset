@@ -9,6 +9,7 @@ import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.eam.page.AssetAttributePageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetAttributeServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.generator.builder.view.field.InputType;
@@ -31,9 +32,19 @@ public class EAMAssetAttributeGtr extends BaseCodeGenerator{
                         EAMTables.EAM_ASSET_ATTRIBUTE.STATUS,
                         EAMTables.EAM_ASSET_ATTRIBUTE.COMPONENT_TYPE,
                         EAMTables.EAM_ASSET_ATTRIBUTE.LABEL,
-                        EAMTables.EAM_ASSET_ATTRIBUTE.NOTES
-                }
+
+                },
+        new Object[]{
+
+                EAMTables.EAM_ASSET_ATTRIBUTE.NOTES
+        }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.OWNER).form().validate().required()

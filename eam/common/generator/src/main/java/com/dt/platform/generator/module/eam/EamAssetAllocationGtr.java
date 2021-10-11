@@ -10,6 +10,7 @@ import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
 import com.dt.platform.eam.page.AssetAllocationPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -97,6 +98,12 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_ALLOCATION.CONTENT,
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth+30);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+30);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //分成分组布局
         cfg.view().formWindow().bottomSpace(20);

@@ -9,6 +9,7 @@ import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.domain.ops.meta.VoucherMeta;
 import com.dt.platform.domain.ops.meta.VoucherOwnerMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.dt.platform.proxy.ops.VoucherPrivServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -36,6 +37,10 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
                 }
 
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.OPS_VOUCHER.NOTES).search().fuzzySearch();
 

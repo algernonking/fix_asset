@@ -766,32 +766,60 @@ function FormPage() {
 
 
 		//获取 资产分类 下拉框的值
+
+		if(xmSelect.get('#categoryId', true))
 		data["categoryId"]=fox.getSelectedValue("categoryId",false);
+
+
+
 		//获取 办理状态 下拉框的值
+		if(xmSelect.get('#status', true))
 		data["status"]=fox.getSelectedValue("status",false);
+
 		//获取 资产状态 下拉框的值
+		if(xmSelect.get('#assetStatus', true))
 		data["assetStatus"]=fox.getSelectedValue("assetStatus",false);
+
 		//获取 物品档案 下拉框的值
+		if(xmSelect.get('#goodsId', true))
 		data["goodsId"]=fox.getSelectedValue("goodsId",false);
+
 		//获取 厂商 下拉框的值
+		if(xmSelect.get('#manufacturerId', true))
 		data["manufacturerId"]=fox.getSelectedValue("manufacturerId",false);
+
 		//获取 位置 下拉框的值
+		if(xmSelect.get('#positionId', true))
 		data["positionId"]=fox.getSelectedValue("positionId",false);
+
 		//获取 仓库 下拉框的值
+		if(xmSelect.get('#warehouseId', true))
 		data["warehouseId"]=fox.getSelectedValue("warehouseId",false);
+
 		//获取 来源 下拉框的值
+		if(xmSelect.get('#sourceId', true))
 		data["sourceId"]=fox.getSelectedValue("sourceId",false);
+
 		//获取 维保商 下拉框的值
+		if(xmSelect.get('#maintainerId', true))
 		data["maintainerId"]=fox.getSelectedValue("maintainerId",false);
+
 		//获取 财务分类 下拉框的值
+		if(xmSelect.get('#financialCategoryId', true))
 		data["financialCategoryId"]=fox.getSelectedValue("financialCategoryId",false);
+
 		//获取 供应商 下拉框的值
+		if(xmSelect.get('#supplierId', true))
 		data["supplierId"]=fox.getSelectedValue("supplierId",false);
 
-
+		if(xmSelect.get('#equipmentStatus', true))
 		data["equipmentStatus"]=fox.getSelectedValue("equipmentStatus",false);
+
+		if(xmSelect.get('#maintenanceStatus', true))
 		data["maintenanceStatus"]=fox.getSelectedValue("maintenanceStatus",false);
+
 		//获取 安全等级 下拉框的值
+		if(xmSelect.get('#safetyLevelCode', true))
 		data["safetyLevelCode"]=fox.getSelectedValue("safetyLevelCode",false);
 		return data;
 	}

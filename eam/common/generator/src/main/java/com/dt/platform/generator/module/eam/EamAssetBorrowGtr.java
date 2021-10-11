@@ -13,6 +13,7 @@ import com.dt.platform.domain.ops.meta.HostVOMeta;
 import com.dt.platform.eam.page.AssetBorrowPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.github.foxnic.generator.builder.view.config.Tab;
@@ -99,14 +100,22 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
                         EAMTables.EAM_ASSET_BORROW.STATUS,
                         EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE,
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
-
+                        EAMTables.EAM_ASSET_BORROW.CONTENT
                 },
                 new Object[]{
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME,
-                        EAMTables.EAM_ASSET_BORROW.CONTENT
+
                 }
         );
         //分成分组布局
+
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
 
         cfg.view().formWindow().bottomSpace(20);
         cfg.view().formWindow().width("98%");

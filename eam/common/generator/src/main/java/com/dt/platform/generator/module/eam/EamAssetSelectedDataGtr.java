@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.eam.page.AssetSelectedDataPageController;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetSelectedDataServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -30,6 +31,10 @@ public class EamAssetSelectedDataGtr extends BaseCodeGenerator{
                 }
         );
 
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().list().addToolButton("选择资产","selectAsset",null);
         cfg.view().list().disableFormView();

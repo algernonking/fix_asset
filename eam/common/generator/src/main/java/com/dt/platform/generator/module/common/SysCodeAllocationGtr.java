@@ -8,6 +8,7 @@ import com.dt.platform.domain.common.CodeRule;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.common.CodeRuleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -74,6 +75,11 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                         EAMTables.SYS_CODE_ALLOCATION.NOTES,
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().formWindow().bottomSpace(250);
         cfg.view().formWindow().width("85%");

@@ -6,6 +6,7 @@ import com.dt.platform.domain.ops.ServiceCategory;
 import com.dt.platform.domain.ops.ServiceGroup;
 import com.dt.platform.domain.ops.Voucher;
 import com.dt.platform.domain.ops.meta.*;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.VoucherOwnerPageController;
 import com.dt.platform.proxy.ops.*;
 import com.github.foxnic.generator.config.WriteMode;
@@ -44,10 +45,20 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
                         EAMTables.OPS_VOUCHER_OWNER.LABEL,
                         EAMTables.OPS_VOUCHER_OWNER.NAME,
                         EAMTables.OPS_VOUCHER_OWNER.POSITION,
-                        EAMTables.OPS_VOUCHER_OWNER.NOTES
-                }
+                },
+                    new Object[]{
+
+                            EAMTables.OPS_VOUCHER_OWNER.NOTES
+                    }
 
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
+
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
 

@@ -11,6 +11,7 @@ import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import com.dt.platform.domain.eam.Category;
 import com.dt.platform.domain.eam.meta.GoodsMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.common.CodeRuleServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -57,6 +58,12 @@ public class SysCodeRegisterGtr extends BaseCodeGenerator {
                         EAMTables.SYS_CODE_REGISTER.NOTES,
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().formWindow().bottomSpace(80);
         cfg.view().formWindow().width("85%");

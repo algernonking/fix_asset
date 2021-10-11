@@ -2,7 +2,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:36:57
+ * @since 2021-10-12 02:46:26
  */
  -->
  <!DOCTYPE html>
@@ -39,10 +39,10 @@
                     <!-- 标签备注 , labelNotes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 所属维度 , dimension ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属维度')}" class="search-label dimension-label">所属维度</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('所属维度')}" class="search-label dimension-label">所属维度</span><span class="search-colon">:</span></div>
 
 
-                        <div id="dimension" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" style="width:140px"></div>
+                        <div id="dimension" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum')}" style="width:150px"></div>
 
                     </div>
                     <!-- 是否必选 , required ,typeName=radio_box, isHideInSearch=true -->
@@ -52,29 +52,34 @@
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
 
 
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" style="width:140px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusValidEnum')}" style="width:150px"></div>
 
                     </div>
                     <!-- 组件类型 , componentType ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('组件类型')}" class="search-label componentType-label">组件类型</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('组件类型')}" class="search-label componentType-label">组件类型</span><span class="search-colon">:</span></div>
 
 
-                        <div id="componentType" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum')}" style="width:140px"></div>
+                        <div id="componentType" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum')}" style="width:150px"></div>
 
                     </div>
                     <!-- 字段名称 , label ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('字段名称')}" class="search-label label-label">字段名称</span><span class="search-colon">:</span></div>
-                        <input id="label" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('字段名称')}" class="search-label label-label">字段名称</span><span class="search-colon">:</span></div>
+                        <input id="label" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -88,7 +93,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

@@ -1,5 +1,7 @@
 package com.dt.platform.eam.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSONArray;
+import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.service.IAssetRepairService;
 import com.dt.platform.eam.service.IAssetReportService;
 import com.dt.platform.proxy.eam.AssetReportServiceProxy;
@@ -20,16 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class AssetReportController extends SuperController {
 
 
+
     @Autowired
     private IAssetReportService assetReportService;
-
 
     @ApiOperation(value = "组织资产数据")
     @ApiOperationSupport(order=1)
     @SentinelResource(value = AssetReportServiceProxy.QUERY_ORGANIZATION_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetReportServiceProxy.QUERY_ORGANIZATION_DATA)
-    public Result queryOrganizationData() {
-        Result result=new Result();
+    public Result<JSONArray> queryOrganizationData(Asset sample) {
+        Result<JSONArray> result=new Result<>();
+        result.success(true).data(assetReportService.queryOrganizationData(sample));
         return result;
     }
 
@@ -39,8 +42,9 @@ public class AssetReportController extends SuperController {
     @ApiOperationSupport(order=1)
     @SentinelResource(value = AssetReportServiceProxy.QUERY_CATEGORY_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetReportServiceProxy.QUERY_CATEGORY_DATA)
-    public Result queryCategoryData() {
+    public Result queryCategoryData(Asset sample) {
         Result result=new Result();
+        result.success(true).data(assetReportService.queryCategoryData(sample));
         return result;
     }
 

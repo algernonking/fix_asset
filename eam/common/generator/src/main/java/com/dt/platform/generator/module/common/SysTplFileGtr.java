@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.common.TplFileTypeEnum;
 import com.dt.platform.domain.common.CodeRegister;
 import com.dt.platform.domain.common.meta.CodeRegisterMeta;
 import com.dt.platform.domain.common.meta.TplFileMeta;
+import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.common.CodeRegisterServiceProxy;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
@@ -34,6 +35,10 @@ public class SysTplFileGtr extends BaseCodeGenerator{
                 }
         );
 
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(3,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
 

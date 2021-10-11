@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 财务分类
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:36:54
+ * @since 2021-10-12 02:46:23
  * @sign 8D380E3BB5E543F6C697B30B8DEB3F35
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

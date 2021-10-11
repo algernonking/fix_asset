@@ -6,7 +6,11 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.common.StatusValidEnum;
+import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.system.DictItem;
 import org.github.foxnic.web.domain.system.DictItemVO;
 import org.github.foxnic.web.domain.system.meta.DictItemVOMeta;
@@ -300,6 +304,9 @@ public class VoucherPrivController extends SuperController {
 		Result<PagedList<VoucherPriv>> result=new Result<>();
 		PagedList<VoucherPriv> list=voucherPrivService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		voucherPrivService.join(list,VoucherPrivMeta.EMPLOYEE);
+
+		List<Employee> employees= CollectorUtil.collectList(list, VoucherPriv::getEmployee);
+		voucherPrivService.dao().join(employees, Person.class);
 		result.success(true).data(list);
 		return result;
 	}

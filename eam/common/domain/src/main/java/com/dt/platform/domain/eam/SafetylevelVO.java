@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 风险等级
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-11 22:38:12
+ * @since 2021-10-12 02:47:30
  * @sign D5794AC057FF733E807DA4C29ABC7339
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

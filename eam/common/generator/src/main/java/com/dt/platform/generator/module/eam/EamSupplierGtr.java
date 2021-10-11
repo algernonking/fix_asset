@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class EamSupplierGtr extends BaseCodeGenerator{
@@ -22,6 +23,10 @@ public class EamSupplierGtr extends BaseCodeGenerator{
 
                 }
         );
+
+        cfg.view().search().labelWidth(1, Config.searchLabelWidth);
+        cfg.view().search().labelWidth(2,Config.searchLabelWidth);
+        cfg.view().search().inputWidth(Config.searchInputWidth);
 
         //eam_tpl_file
 
