@@ -46,6 +46,7 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
         }
         );
 
+
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE_ITEM.ATTRIBUTE_ID).form().validate().required()
                 .form().selectBox().queryApi(AssetAttributeServiceProxy.QUERY_ATTRIBUTE_OWNER_LIST+"?owner=asset&itemOwner=-1").valueField(AssetAttributeMeta.ID).textField(AssetAttributeMeta.LABEL)
         .filter(true).toolbar(false).paging(false).muliti(false).fillBy(AssetAttributeItemMeta.ATTRIBUTE);
@@ -85,12 +86,12 @@ public class EAMAssetAttributeItemGtr extends BaseCodeGenerator{
         //改变前端,EAMTables.SYS_CODE_RULE.RULE 在前端显示
         String resourceNameField="res_"+EAMTables.EAM_ASSET_ATTRIBUTE.NOTES;
         cfg.view().field(resourceNameField)
-                .basic().label("属性备注")
+                .basic().form().hidden(true).label("属性备注")
                 .table().fillBy(AssetAttributeItemMeta.ATTRIBUTE, AssetAttributeMeta.NOTES);
 
         String resourceNameField2="res_"+EAMTables.EAM_ASSET_ATTRIBUTE.CODE;
         cfg.view().field(resourceNameField2)
-                .basic().label("属性字段")
+                .basic().form().hidden(true).label("属性字段")
                 .table().fillBy(AssetAttributeItemMeta.ATTRIBUTE, AssetAttributeMeta.CODE);
 
         cfg.view().formWindow().width("85%");

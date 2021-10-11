@@ -348,28 +348,7 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染图片字段
-		foxup.render({
-			el:"pictureId",
-			maxFileCount: 1,
-			displayFileName: false,
-			accept: "image",
-			acceptMime:'image/*',
-			exts:'png|jpg|bmp|gif|jpeg',
-			afterPreview:function(elId,index,fileId,upload){
-				adjustPopup();
-			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
-			},
-			beforeRemove:function (elId,fileId,index,upload) {
-				console.log("文件删除前回调");
-				return true;
-			},
-			afterRemove:function (elId,fileId,index,upload) {
-				adjustPopup();
-			}
-		});
+
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",
@@ -415,16 +394,32 @@ function FormPage() {
 			}
 		});
 
-		laydate.render({
-			elem: '#purchaseDate',
-			format:"yyyy-MM-dd",
-			trigger:"click"
-		});
 
 		//渲染图片字段
 		foxup.render({
 			el:"attach",
-			maxFileCount: 3,
+			maxFileCount: 1,
+			displayFileName: true,
+			accept: "file",
+			afterPreview:function(elId,index,fileId,upload){
+				adjustPopup();
+			},
+			afterUpload:function (result,index,upload) {
+				console.log("文件上传后回调")
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+			}
+		});
+
+		//渲染图片字段
+		foxup.render({
+			el:"pictureId",
+			maxFileCount: 1,
 			displayFileName: false,
 			accept: "image",
 			acceptMime:'image/*',
@@ -541,16 +536,7 @@ function FormPage() {
 				return opts;
 			}
 		});
-		laydate.render({
-			elem: '#maintenanceStartDate',
-			format:"yyyy-MM-dd",
-			trigger:"click"
-		});
-		laydate.render({
-			elem: '#maintenanceEndDate',
-			format:"yyyy-MM-dd",
-			trigger:"click"
-		});
+
 		//渲染 financialCategoryId 下拉字段
 		fox.renderSelectBox({
 			el: "financialCategoryId",
@@ -599,6 +585,31 @@ function FormPage() {
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
+
+		laydate.render({
+			elem: '#productionDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+
+		laydate.render({
+			elem: '#purchaseDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+
+		laydate.render({
+			elem: '#maintenanceStartDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#maintenanceEndDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+
+
 	}
 
 	/**

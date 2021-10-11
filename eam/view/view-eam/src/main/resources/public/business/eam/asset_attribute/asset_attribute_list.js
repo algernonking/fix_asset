@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:06
+ * @since 2021-10-09 15:03:57
  */
 
 
@@ -79,11 +79,11 @@ function ListPage() {
 					,{ field: 'labelNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签备注') , templet: function (d) { return templet('labelNotes',d.labelNotes,d);}  }
 					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.dimension),d);}}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
-					,{ field: 'required', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否必选'), templet:function (d){ return templet('required',fox.getEnumText(RADIO_REQUIRED_DATA,d.required),d);}}
-					,{ field: 'requiredModify', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否修改'), templet:function (d){ return templet('requiredModify',fox.getEnumText(RADIO_REQUIREDMODIFY_DATA,d.requiredModify),d);}}
+					,{ field: 'required', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('是否必选'), templet:function (d){ return templet('required',fox.getEnumText(RADIO_REQUIRED_DATA,d.required),d);}}
+					,{ field: 'requiredModify', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('是否修改'), templet:function (d){ return templet('requiredModify',fox.getEnumText(RADIO_REQUIREDMODIFY_DATA,d.requiredModify),d);}}
 					,{ field: 'componentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('组件类型'), templet:function (d){ return templet('componentType',fox.getEnumText(RADIO_COMPONENTTYPE_DATA,d.componentType),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'owner', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属'), templet:function (d){ return templet('owner',fox.getEnumText(SELECT_OWNER_DATA,d.owner),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }

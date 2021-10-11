@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.ResetOnCloseInputStream;
 import com.dt.platform.eam.service.*;
@@ -227,37 +228,31 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			asset.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
-		//办理状态
+		//办理情况
 		if(StringUtil.isBlank(asset.getStatus())){
-			//办理情况
-			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ){
-				asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
-				//提交审批
-			}else{
-				asset.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+
+		//编码
+		if(StringUtil.isBlank(asset.getAssetCode())&&!StringUtil.isBlank(asset.getOwnerCode())){
+			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+				Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+				if(!codeResult.isSuccess()){
+					return codeResult;
+				}else{
+					asset.setAssetCode(codeResult.getData().toString());
+				}
 			}
 		}
 
 		//资产状态
 		if(StringUtil.isBlank(asset.getAssetStatus())){
-			asset.setAssetStatus(AssetStatusEnum.IDLE.code());
-		}
-
-		//所属
-		if(StringUtil.isBlank(asset.getOwnerCode())){
-			asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
-		}
-
-		//编码
-		if(StringUtil.isBlank(asset.getAssetCode())){
-			Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
-			if(!codeResult.isSuccess()){
-				return codeResult;
-			}else{
-				asset.setAssetCode(codeResult.getData().toString());
+			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+				asset.setAssetStatus(AssetStatusEnum.IDLE.code());
 			}
-		}else{
 		}
+
 
 		Result r=super.insert(asset);
 		return r;
@@ -443,28 +438,33 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result conditionAssetBusinessType(String businessType,ConditionExpr queryCondition){
 
 		//过滤资产状态
-		if(CodeModuleEnum.EAM_ASSET_BORROW.code().equals(businessType)){
+		if(AssetOperateEnum.EAM_ASSET_BORROW.code().equals(businessType)){
 			//借用
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_COLLECTION.code().equals(businessType)){
 			//领用
 			queryCondition.andIn("asset_status",AssetStatusEnum.IDLE.code());
-		}else if(CodeModuleEnum.EAM_ASSET_COLLECTION_RETURN.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code().equals(businessType)){
 			//退库
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code());
-		}else if(CodeModuleEnum.EAM_ASSET_REPAIR.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_REPAIR.code().equals(businessType)){
 			//报修
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
-		}else if(CodeModuleEnum.EAM_ASSET_SCRAP.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_SCRAP.code().equals(businessType)){
 			//报废
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
-		}else if(CodeModuleEnum.EAM_ASSET_ALLOCATE.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_ALLOCATE.code().equals(businessType)){
 			//调拨
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
-		}else if(CodeModuleEnum.EAM_ASSET_TRANFER.code().equals(businessType)){
+		}else if(AssetOperateEnum.EAM_ASSET_TRANFER.code().equals(businessType)){
 			//转移
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(businessType)
+			||AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(businessType)
+			||AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(businessType)){
+			//转移
 		}else{
+			queryCondition.andIn("asset_status","unknow");
 			return ErrorDesc.failure().message("不支持当前业务类型操作");
 		}
 		return ErrorDesc.success().data(queryCondition);
@@ -515,6 +515,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(!StringUtil.isBlank(sample.getOwnCompanyId())) {
 			queryCondition.and("own_company_id in (select id from hrm_organization where deleted=0 and type in ('com','dept') and (concat('/',hierarchy) like '%/"+sample.getOwnCompanyId()+"/%' or id=?))",sample.getOwnCompanyId());
 			sample.setOwnCompanyId(null);
+		}
+
+
+		if(StringUtil.isBlank(sample.getOwnerCode())){
+			queryCondition.and("owner_code=?",AssetOwnerCodeEnum.ASSET.code());
 		}
 
 		Result r=conditionAssetBusinessType(businessType,queryCondition);

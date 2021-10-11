@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 13:06:02
+ * @since 2021-10-10 21:06:10
  */
 
 function FormPage() {
@@ -144,7 +144,7 @@ function FormPage() {
 			el:"pictureId",
 			maxFileCount: 6,
 			displayFileName: true,
-			accept: "file",
+			accept: "image",
 			afterPreview:function(elId,index,fileId,upload){
 				adjustPopup();
 			},

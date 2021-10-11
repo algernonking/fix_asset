@@ -1,11 +1,12 @@
 package com.dt.platform.eam.service;
 
 
-import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.*;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.AssetDataChange;
-import com.dt.platform.domain.eam.AssetDataChangeVO;
+
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -27,6 +28,37 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IAssetDataChangeService extends ISuperService<AssetDataChange> {
 
+
+
+	/**
+	 * 提取获取变更的字段和值
+	 * @param changeType 变更类型
+	 * @return 维度
+	 * */
+	String queryDataChangeDimensionByChangeType(String changeType);
+
+
+	/**
+	 * 提取获取变更的字段和值
+	 * @param rcd
+	 * @return Rcd
+	 * */
+	HashMap<String,Object> extractDataChangeValue(Rcd rcd);
+
+	/**
+	 * 提取获取变更的字段
+	 * @param changeType
+	 * @return Rcd
+	 * */
+	Rcd queryDataChange(String id,String changeType);
+
+	/**
+	 * 提取AssetDatachange
+	 * @param vo AssetDataChangeRecordVO实体数据
+	 * @return 提取AssetDatachange
+	 * */
+
+	AssetDataChange extractAssetDataChange(AssetDataChangeRecord vo,String assetSelectedCode);
 
 	/**
 	 * 撤销流程
@@ -51,12 +83,18 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 
 	/**
 	 * 插入实体
-	 * @param assetDataChange 实体数据
+	 * @param assetDataChangeRecord 实体数据
 	 * @param assetSelectedCode 数据标记
 	 * @return 插入是否成功
 	 * */
-	Result insert(AssetDataChange assetDataChange, String assetSelectedCode);
+	Result insertRecord(AssetDataChangeRecord assetDataChangeRecord, String assetSelectedCode);
 
+	/**
+	 * 更实体
+	 * @param assetDataChangeRecord 实体数据
+	 * @return 更新是否成功
+	 * */
+	 Result updateRecord(AssetDataChangeRecord assetDataChangeRecord);
 
 	/**
 	 * 插入实体

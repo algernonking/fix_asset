@@ -15,6 +15,7 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
@@ -24,6 +25,7 @@ import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.*;
 import org.github.foxnic.web.domain.system.Dict;
 import org.github.foxnic.web.domain.system.DictItem;
@@ -55,7 +57,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Autowired
     private IAssetService assetService;
 
-
     @Autowired
     private IPositionService positionService;
 
@@ -75,6 +76,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     private ICategoryFinanceService categoryFinanceService;
 
 
+
     /**
      * 注入DAO对象
      * */
@@ -89,6 +91,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
     @Override
     public PagedList<Asset> queryAssetPagedList(List<String> ids, AssetVO asset) {
+        asset.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
         return assetService.queryPagedList(asset,10000,1);
 
     }
@@ -536,11 +539,24 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
 
+
         assetService.join(list,AssetMeta.MANAGER);
 
         assetService.join(list,AssetMeta.USE_USER);
 
         assetService.join(list,AssetMeta.ORIGINATOR);
+
+        List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+        assetService.dao().join(originators, Person.class);
+
+
+        List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+        assetService.dao().join(managers, Person.class);
+
+        List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+        assetService.dao().join(useUser, Person.class);
+
+
         String tenantId=SessionUser.getCurrent().getActivatedTenantId();
 
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
@@ -647,12 +663,14 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
             if(assetItem.getManager()!=null){
                 System.out.println("manan"+assetItem.getManager().getBadge());
+                assetMap.put(AssetDataExportColumnEnum.MANAGER_NAME_BADGE.code(),assetItem.getManager().getNameAndBadge());
                 assetMap.put(AssetDataExportColumnEnum.MANAGER_NAME.code(),assetItem.getManager().getName());
                 assetMap.put(AssetDataExportColumnEnum.MANAGER_BADGE.code(),assetItem.getManager().getBadge());
             }
 
             if(assetItem.getUseUser()!=null){
                 System.out.println("suer"+assetItem.getUseUser().getBadge());
+                assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME_BADGE.code(),assetItem.getUseUser().getNameAndBadge());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME.code(),assetItem.getUseUser().getName());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_BADGE.code(),assetItem.getUseUser().getBadge());
             }

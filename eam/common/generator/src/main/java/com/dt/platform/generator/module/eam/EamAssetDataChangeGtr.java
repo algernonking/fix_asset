@@ -33,7 +33,7 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.PROC_ID).table().disable(true);
 
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE).search().range();
 
@@ -43,19 +43,20 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
                 new Object[]{
                         EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,
                         EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE,
-                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+                        EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_NOTES,
                         EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE
                 }
         );
 
-        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_DATE).form().validate().required().form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
 
         cfg.view().list().disableBatchDelete();
         cfg.view().form().addJsVariable("CHANGE_TYPE","[[${changeType}]]","变更类型");
-        cfg.view().list().addJsVariable("CHANGE_TYPE","[[${changeType}]]","变更类型");
+        cfg.view().list().addJsVariable("PAGE_TYPE","[[${pageType}]]","页面类型");
+
 
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
@@ -76,7 +77,7 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
 
                 }
                 , new Object[] {
-                        EAMTables.EAM_ASSET_DATA_CHANGE.NOTES,
+                        EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_NOTES,
                 }
         );
 

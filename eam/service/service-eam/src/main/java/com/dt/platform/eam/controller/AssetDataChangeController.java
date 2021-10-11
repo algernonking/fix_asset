@@ -1,13 +1,19 @@
 package com.dt.platform.eam.controller;
 
  
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
+import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +29,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetDataChangeVOMeta;
-import com.dt.platform.domain.eam.AssetDataChange;
-import com.dt.platform.domain.eam.AssetDataChangeVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -38,7 +42,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetDataChangeMeta;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
@@ -66,7 +69,9 @@ public class AssetDataChangeController extends SuperController {
 	@Autowired
 	private IAssetDataChangeService assetDataChangeService;
 
-	
+
+	@Autowired
+	private IAssetService assetService;
 	/**
 	 * 添加数据变更
 	*/
@@ -78,22 +83,18 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = AssetDataChangeServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.INSERT)
-	public Result insert(AssetDataChangeVO assetDataChangeVO,String assetSelectedCode) {
-		if(!StringUtil.isBlank(assetSelectedCode)){
-			return assetDataChangeService.insert(assetDataChangeVO,assetSelectedCode);
-		}else{
-			return assetDataChangeService.insert(assetDataChangeVO);
-		}
-
+	public Result insert(AssetDataChangeRecordVO assetDataChangeVO, String assetSelectedCode) {
+		return assetDataChangeService.insertRecord(assetDataChangeVO,assetSelectedCode);
 	}
 
-	
+
+
 	/**
 	 * 删除数据变更
 	*/
@@ -148,24 +149,16 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } ) 
 	@NotNull(name = AssetDataChangeVOMeta.ID)
 	@SentinelResource(value = AssetDataChangeServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.UPDATE)
-	public Result update(AssetDataChangeVO assetDataChangeVO) {
-
-		AssetDataChange assetDataChange=assetDataChangeService.getById(assetDataChangeVO.getId());
-		if(AssetHandleStatusEnum.COMPLETE.code().equals(assetDataChange.getStatus())
-				|| AssetHandleStatusEnum.APPROVAL.code().equals(assetDataChange.getStatus())){
-			return ErrorDesc.failure().message("当前状态不允许修改");
-		}
-		Result result=assetDataChangeService.update(assetDataChangeVO,SaveMode.NOT_NULL_FIELDS);
-		return result;
-
-
+	public Result update(AssetDataChangeRecordVO assetDataChangeVO) {
+		return assetDataChangeService.updateRecord(assetDataChangeVO);
 	}
 	
 	
@@ -181,8 +174,9 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } )
 	@NotNull(name = AssetDataChangeVOMeta.ID)
@@ -206,10 +200,45 @@ public class AssetDataChangeController extends SuperController {
 	@SentinelResource(value = AssetDataChangeServiceProxy.GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.GET_BY_ID)
 	public Result<AssetDataChange> getById(String id) {
+
+		assetDataChangeService.queryDataChange(id,AssetAttributeDimensionEnum.MAINTAINER.code());
+
+
 		Result<AssetDataChange> result=new Result<>();
 		AssetDataChange assetDataChange=assetDataChangeService.getById(id);
 		// 关联出 制单人 数据
 		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.ORIGINATOR);
+
+		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.CHANGE_DATA);
+
+
+		// 关联出 资产分类 数据
+		assetService.join(assetDataChange.getChangeData(), AssetMeta.CATEGORY);
+		// 关联出 物品档案 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.GOODS);
+		// 关联出 厂商 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.MANUFACTURER);
+		// 关联出 位置 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.POSITION);
+		// 关联出 仓库 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.WAREHOUSE);
+		// 关联出 来源 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.SOURCE);
+		// 关联出 维保商 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.MAINTNAINER);
+		// 关联出 财务分类 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.CATEGORY_FINANCE);
+		// 关联出 供应商 数据
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.SUPPLIER);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.SAFETY_LEVEL);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.EQUIPMENT_ENVIRONMENT);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.OWNER_COMPANY);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.USE_ORGANIZATION);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.MANAGER);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.USE_USER);
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.ORIGINATOR);
+
+
 		result.success(true).data(assetDataChange);
 		return result;
 	}
@@ -230,6 +259,7 @@ public class AssetDataChangeController extends SuperController {
 	public Result<List<AssetDataChange>> getByIds(List<String> ids) {
 		Result<List<AssetDataChange>> result=new Result<>();
 		List<AssetDataChange> list=assetDataChangeService.getByIds(ids);
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -247,7 +277,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE } )
@@ -273,8 +303,9 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -282,12 +313,58 @@ public class AssetDataChangeController extends SuperController {
 	public Result<PagedList<AssetDataChange>> queryPagedList(AssetDataChangeVO sample) {
 		Result<PagedList<AssetDataChange>> result=new Result<>();
 		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 制单人 数据
 		assetDataChangeService.join(list,AssetDataChangeMeta.ORIGINATOR);
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetDataChange::getOriginator);
+		assetDataChangeService.dao().join(employees, Person.class);
+
+
+		assetDataChangeService.join(list,AssetDataChangeMeta.CHANGE_DATA);
+		List<Asset> assetData= CollectorUtil.collectList(list,AssetDataChange::getChangeData);
+
+		// 关联出 资产分类 数据
+		assetService.join(assetData, AssetMeta.CATEGORY);
+		// 关联出 物品档案 数据
+		assetService.join(assetData,AssetMeta.GOODS);
+		// 关联出 厂商 数据
+		assetService.join(assetData,AssetMeta.MANUFACTURER);
+		// 关联出 位置 数据
+		assetService.join(assetData,AssetMeta.POSITION);
+		// 关联出 仓库 数据
+		assetService.join(assetData,AssetMeta.WAREHOUSE);
+		// 关联出 来源 数据
+		assetService.join(assetData,AssetMeta.SOURCE);
+		// 关联出 维保商 数据
+		assetService.join(assetData,AssetMeta.MAINTNAINER);
+		// 关联出 财务分类 数据
+		assetService.join(assetData,AssetMeta.CATEGORY_FINANCE);
+		// 关联出 供应商 数据
+		assetService.join(assetData,AssetMeta.SUPPLIER);
+		assetService.join(assetData,AssetMeta.SAFETY_LEVEL);
+		assetService.join(assetData,AssetMeta.EQUIPMENT_ENVIRONMENT);
+		assetService.join(assetData,AssetMeta.OWNER_COMPANY);
+		assetService.join(assetData,AssetMeta.USE_ORGANIZATION);
+		assetService.join(assetData,AssetMeta.MANAGER);
+		assetService.join(assetData,AssetMeta.USE_USER);
+		assetService.join(assetData,AssetMeta.ORIGINATOR);
 		result.success(true).data(list);
 		return result;
+
 	}
 
+	/**
+	 * 维度查询
+	 */
+	@ApiOperation(value = "维度查询")
+
+	@ApiOperationSupport(order=9)
+	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_DATA_CHANGE_DIMENSION_BY_CHANGE_TYPE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(AssetDataChangeServiceProxy.QUERY_DATA_CHANGE_DIMENSION_BY_CHANGE_TYPE)
+	public Result queryDataChangeDimensionByChangeType(String changeType) {
+		Result result=new Result();
+		result.success(true).data(assetDataChangeService.queryDataChangeDimensionByChangeType(changeType));
+		return result;
+	}
 
 	/**
 	 * 送审

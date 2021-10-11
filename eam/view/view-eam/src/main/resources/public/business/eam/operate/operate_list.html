@@ -2,7 +2,7 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 12:47:42
+ * @since 2021-10-10 21:44:09
  */
  -->
  <!DOCTYPE html>
@@ -42,7 +42,7 @@
                     </div>
                     <!-- 分配编号 , allocateCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 操作编码 , operateCode ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 审批 , approval ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 审批 , approval ,typeName=radio_box, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
@@ -97,7 +97,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_OPERATECODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
-    var SELECT_APPROVAL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
+    var RADIO_APPROVAL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
     var AUTH_PREFIX="eam_operate";
 
 

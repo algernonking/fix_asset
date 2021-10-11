@@ -299,6 +299,8 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_info_form.html")
 	public String infoForm(Model model,HttpServletRequest request , String id) {
+
+
 		//设置字段布局
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
@@ -312,7 +314,7 @@ public class AssetPageController extends ViewController {
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
 		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.BASE.code());
-		attributeItem.setRequired(1);
+		attributeItem.setRequired("1");
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();
 		if(attributeItemRequiredListResult.isSuccess()){
@@ -348,6 +350,14 @@ public class AssetPageController extends ViewController {
 			}
 		}
 
+
+
+		Result updateModeResult=OperateServiceProxy.api().queryAssetDirectUpdateMode();
+		boolean updateMode=false;
+		if(updateModeResult.isSuccess()){
+			updateMode=(boolean)updateModeResult.getData();
+		}
+		model.addAttribute("assetDirectUpdateMode",updateMode);
 		return prefix+"/asset_info_form";
 	}
 

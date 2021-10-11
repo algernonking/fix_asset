@@ -8,6 +8,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetScrapVOMeta;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,6 +162,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } ) 
 	@NotNull(name = AssetTranferVOMeta.ID)
@@ -196,6 +198,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE , AssetTranferVOMeta.SEARCH_FIELD , AssetTranferVOMeta.FUZZY_FIELD , AssetTranferVOMeta.SEARCH_VALUE , AssetTranferVOMeta.SORT_FIELD , AssetTranferVOMeta.SORT_TYPE , AssetTranferVOMeta.IDS } )
 	@NotNull(name = AssetTranferVOMeta.ID)
@@ -278,6 +281,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetTranferVOMeta.PAGE_INDEX , AssetTranferVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetTranferServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -309,6 +313,7 @@ public class AssetTranferController extends SuperController {
 		@ApiImplicitParam(name = AssetTranferVOMeta.CONTENT , value = "转移说明" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = AssetTranferVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetTranferVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetTranferVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetTranferServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -329,6 +334,17 @@ public class AssetTranferController extends SuperController {
 		assetTranferService.join(list,AssetTranferMeta.MANAGER);
 
 		assetTranferService.join(list,AssetTranferMeta.USE_USER);
+
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetTranfer::getOriginator);
+		assetTranferService.dao().join(employees, Person.class);
+
+		List<Employee> useusers= CollectorUtil.collectList(list,AssetTranfer::getUseUser);
+		assetTranferService.dao().join(useusers, Person.class);
+
+		List<Employee> managers= CollectorUtil.collectList(list,AssetTranfer::getManager);
+		assetTranferService.dao().join(managers, Person.class);
+
 
 		result.success(true).data(list);
 		return result;

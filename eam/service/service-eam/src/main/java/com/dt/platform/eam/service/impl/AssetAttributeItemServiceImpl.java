@@ -3,6 +3,8 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.enums.common.StatusShowHideEnum;
+import com.dt.platform.constants.enums.eam.AssetAttributeLayoutTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeListStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
 import com.dt.platform.domain.eam.Asset;
@@ -84,10 +86,10 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	@Override
 	public Result insert(AssetAttributeItem assetAttributeItem) {
 		AssetAttribute assetAttribute =  assetAttributeService.getById(assetAttributeItem.getAttributeId());
-		if(assetAttribute.getRequiredModify().toString().equals("0")){
-			if(!assetAttribute.getRequired().toString().equals(assetAttributeItem.getRequired().toString())){
+		if(assetAttribute.getRequiredModify().equals("0")){
+			if(!assetAttribute.getRequired().equals(assetAttributeItem.getRequired())){
 				String requiredStr="可选";
-				if(assetAttribute.getRequired().toString().equals("1")) {
+				if(assetAttribute.getRequired().equals("1")) {
 					requiredStr="必选";
 				}
 				return ErrorDesc.failure().message("当前属性字段必选属性不允许修改,设置为:" +requiredStr);
@@ -162,10 +164,10 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	@Override
 	public Result update(AssetAttributeItem assetAttributeItem , SaveMode mode) {
 		AssetAttribute assetAttribute =  assetAttributeService.getById(assetAttributeItem.getAttributeId());
-		if(assetAttribute.getRequiredModify().toString().equals("0")){
-			if(!assetAttribute.getRequired().toString().equals(assetAttributeItem.getRequired().toString())){
+		if(assetAttribute.getRequiredModify().equals("0")){
+			if(!assetAttribute.getRequired().equals(assetAttributeItem.getRequired())){
 				String requiredStr="可选";
-				if(assetAttribute.getRequired().toString().equals("1")) {
+				if(assetAttribute.getRequired().equals("1")) {
 					requiredStr="必选";
 				}
 				return ErrorDesc.failure().message("当前属性字段必选属性不允许修改,设置为:" +requiredStr);
@@ -251,7 +253,7 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		AssetAttributeItemVO attributeitemList=new AssetAttributeItemVO();
 		String key="attributeListData";
 		attributeitemList.setOwnerCode(module);
-		attributeitemList.setListShow(1);
+		attributeitemList.setListShow(StatusShowHideEnum.SHOW.code());
 		if(!StringUtil.isBlank(dim)){
 			attributeitemList.setDimension(dim);
 		}
@@ -269,7 +271,6 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 	@Override
 	public HashMap<String, List<AssetAttributeItem>> queryFormColumnByModule(String module,String dim) {
 
-		System.out.println("######"+module+dim);
 		HashMap<String, List<AssetAttributeItem>> result=new HashMap<String, List<AssetAttributeItem>>();
 		AssetAttributeItemVO attributeitem=new AssetAttributeItemVO();
 		attributeitem.setOwnerCode(module);
@@ -277,8 +278,8 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 			attributeitem.setDimension(dim);
 		}
 		//三栏数据
-		attributeitem.setLayoutType(3);
-		attributeitem.setFormShow(1);
+		attributeitem.setLayoutType(AssetAttributeLayoutTypeEnum.THREE.code());
+		attributeitem.setFormShow(StatusShowHideEnum.SHOW.code());
 		attributeitem.setLayoutColumn(1);
 		List<AssetAttributeItem> attributeItemsData3ColumnOneList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData3ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
@@ -299,8 +300,8 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		printList(attributeItemsData3ColumnThreeList,"three-3");
 
 		//二栏数据
-		attributeitem.setLayoutType(2);
-		attributeitem.setFormShow(1);
+		attributeitem.setLayoutType(AssetAttributeLayoutTypeEnum.TWO.code());
+		attributeitem.setFormShow(StatusShowHideEnum.SHOW.code());
 		attributeitem.setLayoutColumn(1);
 		List<AssetAttributeItem> attributeItemsData2ColumnOneList=queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData2ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
@@ -315,8 +316,8 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		printList(attributeItemsData2ColumnTwoList,"two-2");
 
 		//单栏数据
-		attributeitem.setLayoutType(1);
-		attributeitem.setFormShow(1);
+		attributeitem.setLayoutType(AssetAttributeLayoutTypeEnum.ONE.code());
+		attributeitem.setFormShow(StatusShowHideEnum.SHOW.code());
 		attributeitem.setLayoutColumn(1);
 		List<AssetAttributeItem> attributeItemsData1ColumnOneList= queryList(attributeitem,OrderBy.byAsc("layout_row"));
 		join(attributeItemsData1ColumnOneList,AssetAttributeItemMeta.ATTRIBUTE);
@@ -327,7 +328,7 @@ public class AssetAttributeItemServiceImpl extends SuperService<AssetAttributeIt
 		//所有列表数据
 		AssetAttributeItemVO attributeitemList=new AssetAttributeItemVO();
 		attributeitemList.setOwnerCode(module);
-		attributeitemList.setListShow(1);
+		attributeitemList.setListShow(StatusShowHideEnum.SHOW.code());
 		List<AssetAttributeItem> attributeItemsListData= queryList(attributeitemList,OrderBy.byAsc("list_sort"));
 		join(attributeItemsListData,AssetAttributeItemMeta.ATTRIBUTE);
 		result.put("attributeListData",attributeItemsListData);

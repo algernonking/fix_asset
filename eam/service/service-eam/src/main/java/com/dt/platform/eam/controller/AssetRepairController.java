@@ -5,9 +5,12 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
 import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -305,6 +308,18 @@ public class AssetRepairController extends SuperController {
 	public Result<PagedList<AssetRepair>> queryPagedList(AssetRepairVO sample) {
 		Result<PagedList<AssetRepair>> result=new Result<>();
 		PagedList<AssetRepair> list=assetRepairService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// 关联出 制单人 数据
+		assetRepairService.join(list, AssetRepairMeta.ORIGINATOR);
+		assetRepairService.join(list, AssetRepairMeta.REPORT_USER);
+
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetRepair::getOriginator);
+		assetRepairService.dao().join(employees, Person.class);
+
+		List<Employee> reportUser= CollectorUtil.collectList(list,AssetRepair::getReportUser);
+		assetRepairService.dao().join(reportUser, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}

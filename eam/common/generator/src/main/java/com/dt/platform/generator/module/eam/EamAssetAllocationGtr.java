@@ -48,6 +48,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ATTACH).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID).form().validate().required();
@@ -56,10 +57,11 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
         cfg.view().list().operationColumn().width(350);
 
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID)
@@ -70,10 +72,14 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
                 .form().button().chooseCompany(true);
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID).table().fillBy("inOwnerCompany","fullName");
 
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).table().fillBy("originator","name");
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).table().fillBy("manager","name");
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).table().fillBy("manager","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).form()
                 .button().chooseEmployee(true);
+
+        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ATTACH)
+                .form().label("附件").upload().buttonLabel("选择附件").acceptSingleFile().displayFileName(false);
+
 
 
         cfg.view().search().inputLayout(

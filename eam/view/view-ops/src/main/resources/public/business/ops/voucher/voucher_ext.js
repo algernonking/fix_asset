@@ -59,7 +59,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
             console.log('afterDataFill',data);
-            if(data.id){
+            if(data&&data.id){
                 var select_userCode= xmSelect.get('#userCode', true);
                 var select_type= xmSelect.get('#type', true);
                 select_userCode.update({ disabled: true });

@@ -48,7 +48,6 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ATTACH).table().disable(true);
@@ -64,11 +63,16 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-      //  cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+//        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+//        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+//        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+//        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
+        //  cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
         cfg.view().list().operationColumn().width(350);
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().dateInput().format("yyyy-MM-dd").search().range();
@@ -78,9 +82,12 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().fillBy("originator","name");
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).table().fillBy("borrower","name");
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).table().fillBy("borrower","nameAndBadge");
 
+
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.ATTACH)
+                .form().label("附件").upload().buttonLabel("选择附件").acceptSingleFile().displayFileName(false);
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form()
                 .button().chooseEmployee(true);

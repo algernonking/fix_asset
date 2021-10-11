@@ -13,8 +13,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 13:06:37
- * @sign 3066578D276906B773B2AD9F4580FCC8
+ * @since 2021-10-10 21:06:00
+ * @sign 0528AA279ACEC990A14932C767114633
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -251,6 +251,16 @@ public class AssetTranferMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
+	 * 附件 , 类型: java.lang.String
+	*/
+	public static final String ATTACH="attach";
+	
+	/**
+	 * 附件 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetTranfer,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetTranfer.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -333,7 +343,7 @@ public class AssetTranferMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER , OUT_USE_ORGANIZATION , IN_USE_ORGANIZATION };
+	public static final String[] $PROPS={ ID , NAME , BUSINESS_CODE , PROC_ID , STATUS , OUT_USE_ORGANIZATION_ID , IN_USE_ORGANIZATION_ID , MANAGER_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ATTACH , ASSET_LIST , ASSET_IDS , POSITION , ORIGINATOR , MANAGER , USE_USER , OUT_USE_ORGANIZATION , IN_USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -593,6 +603,17 @@ public class AssetTranferMeta {
 		public AssetTranfer setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
+			return this;
+		}
+		
+		/**
+		 * 设置 附件
+		 * @param attach 附件
+		 * @return 当前对象
+		*/
+		public AssetTranfer setAttach(String attach) {
+			super.change(ATTACH,super.getAttach(),attach);
+			super.setAttach(attach);
 			return this;
 		}
 		

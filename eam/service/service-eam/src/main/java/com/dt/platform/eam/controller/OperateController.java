@@ -253,7 +253,7 @@ public class OperateController extends SuperController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "businessType" , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})
-	@ApiOperationSupport(order=8)
+	@ApiOperationSupport(order=9)
 	@SentinelResource(value = OperateServiceProxy.APPROVAL_REQUIRED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(OperateServiceProxy.APPROVAL_REQUIRED)
 	public Result approvalRequired(String businessType) {
@@ -265,6 +265,19 @@ public class OperateController extends SuperController {
 		return result;
 	}
 
+
+	/**
+	 *  资产更新判断
+	 */
+	@ApiOperation(value = "资产更新判断")
+	@ApiOperationSupport(order=19)
+	@SentinelResource(value = OperateServiceProxy.QUERY_ASSET_DIRECT_UPDATE_MODE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(OperateServiceProxy.QUERY_ASSET_DIRECT_UPDATE_MODE)
+	public Result queryAssetDirectUpdateMode() {
+		Result result=new Result();
+		result.success(true).data(operateService.queryAssetDirectUpdateMode());
+		return result;
+	}
 
 
 	/**

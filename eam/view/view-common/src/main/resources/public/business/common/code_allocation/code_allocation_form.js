@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:40
+ * @since 2021-10-09 20:44:47
  */
 
 function FormPage() {
@@ -85,7 +85,7 @@ function FormPage() {
 			paging: true,
 			pageRemote: true,
 			//转换数据
-			searchField: "code", //请自行调整用于搜索的字段名称
+			searchField: "name", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -95,7 +95,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].code,value:data[i].name,selected:(defaultValues.indexOf(data[i].name)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].name,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -145,6 +145,7 @@ function FormPage() {
 		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
+
 
 
 

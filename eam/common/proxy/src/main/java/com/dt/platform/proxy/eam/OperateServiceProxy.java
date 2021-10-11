@@ -110,6 +110,19 @@ public interface OperateServiceProxy {
 
 
 	/**
+	 * 资产更新判断
+	 */
+	public static final String QUERY_ASSET_DIRECT_UPDATE_MODE = API_PREFIX + "query-asset-direct-update-mode";
+
+
+	/**
+	 * 资产更新判断
+	 */
+	@RequestMapping(OperateServiceProxy.QUERY_ASSET_DIRECT_UPDATE_MODE)
+	public Result queryAssetDirectUpdateMode();
+
+
+	/**
 	 * 是否需要审批
 	 */
 	@RequestMapping(OperateServiceProxy.APPROVAL_REQUIRED)

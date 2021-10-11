@@ -2,7 +2,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:09
+ * @since 2021-10-10 09:53:53
  */
  -->
  <!DOCTYPE html>
@@ -153,14 +153,14 @@
                 </div>
 
 
-                                    <div class="layui-form-item" >
+                                    <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性备注')}">属性备注</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="resNotes" id="resNotes" name="resNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
+                                    <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('属性字段')}">属性字段</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="resCode" id="resCode" name="resCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('属性字段') }" type="text" class="layui-input"  />

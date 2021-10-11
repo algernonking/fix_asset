@@ -47,7 +47,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
 
-            if(data.id){
+            if(data&&data.id){
                 var select_categoryCode= xmSelect.get('#categoryCode', true);
                 select_categoryCode.update({ disabled: true });
             }else{

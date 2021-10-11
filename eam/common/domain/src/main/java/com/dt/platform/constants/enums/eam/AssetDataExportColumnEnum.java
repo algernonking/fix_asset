@@ -20,14 +20,20 @@ public enum AssetDataExportColumnEnum implements CodeTextEnum {
     SAFETY_LEVEL_NAME( "safetyLevelName","safety_level_code" ),
     MAINTENANCE_STATUS( "maintenanceStatusName","maintenance_status" ),
 
+
     STATUS_NAME("statusName","status" ),
     OWN_COMPANY_NAME("ownCompanyName","own_company_id" ),
 
     USE_ORGANIZATION_NAME("useOrganizationName","use_organization_id"),
-    MANAGER_NAME( "managerName","manager_id" ),
+    MANAGER_NAME( "managerName","manager_name" ),
     MANAGER_BADGE( "managerBadge","manager_id" ),
+    MANAGER_NAME_BADGE( "managerNameBadge","manager_name_badge" ),
+
+
+
     USE_USER_NAME("useUserName","use_user_id"  ),
     USE_USER_BADGE( "useUserBadge","use_user_id" ),
+    USE_USER_NAME_BADGE( "useUserNameBadge","use_user_name_badge" ),
 
     EQUIPMENT_STATUS_NAME( "equipmentStatusName","equipment_status" ),
     EQUIPMENT_ENVIRONMENT_NAME( "equipmentEnvironmentName","equipment_environment_code" ),

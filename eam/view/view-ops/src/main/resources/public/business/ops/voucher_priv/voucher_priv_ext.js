@@ -145,7 +145,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
-            if(data.id){
+            if(data&&data.id){
                 console.log(1);
             }else{
 

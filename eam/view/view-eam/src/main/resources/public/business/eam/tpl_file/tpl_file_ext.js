@@ -109,7 +109,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
-            if(data.id){
+            if(data&&data.id){
                 setTimeout(function(){
                     var codeSelect=xmSelect.get('#code', true);
                     codeSelect.update({disabled: true})

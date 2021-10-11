@@ -64,6 +64,17 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	}
 
 	/**
+	 * 判断前端资产是否能更新
+	 * @return 返回
+	 * */
+	@Override
+	public boolean queryAssetDirectUpdateMode(){
+		boolean r=false;
+		return r;
+	}
+
+
+	/**
 	 * 判断是否需要审批
 	 * @param businessType 业务类型
 	 * @return 返回是否需要审批

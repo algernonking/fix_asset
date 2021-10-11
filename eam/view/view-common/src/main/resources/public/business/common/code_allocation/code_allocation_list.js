@@ -1,7 +1,7 @@
 /**
  * 编码分配 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:40
+ * @since 2021-10-09 20:44:45
  */
 
 
@@ -74,7 +74,7 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编码'), templet: function (d) { return templet('code',fox.joinLabel(d.businessCode,"code"),d);}}
+					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编码'), templet: function (d) { return templet('code',fox.joinLabel(d.businessCode,"name"),d);}}
 					,{ field: 'ruleId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码规则'), templet: function (d) { return templet('ruleId',fox.joinLabel(d.rule,"name"),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'resRule', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('规则详情') , templet: function (d) { return templet('resRule',fox.getProperty(d,["rule","rule"]),d);} }

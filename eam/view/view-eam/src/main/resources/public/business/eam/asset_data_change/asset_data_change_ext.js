@@ -18,13 +18,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
     const moduleURL="/service-eam/eam-asset-data-change";
+    var formAction=admin.getTempData('eam-asset-data-change-form-data-form-action');
+
     //列表页的扩展
     var list={
         /**
          * 列表页初始化前调用
          * */
         beforeInit:function () {
-            if(!APPROVAL_REQUIRED){
+            if(APPROVAL_REQUIRED){
+                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+                operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }else{
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
@@ -75,14 +81,62 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 查询结果渲染后调用
          * */
         afterQuery : function (data) {
+            for (var i = 0; i < data.length; i++) {
+                //如果审批中或审批通过的不允许编辑
+                if(data[i].status=="complete") {
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="incomplete"){
+                   // fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="deny"){
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="approval"){
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                   // fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }else if(data[i].status=="cancel"){
+                    fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+            }
+
+
 
         },
         /**
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
-            if(value==null) return "";
-            return value;
+            if(field=="maintenanceNotes"
+                ||field=="status"
+                ||field=="businessCode"
+                ||field=="changeDate"
+                ||field=="originatorId"){
+                if(value==null) return "";
+                return value;
+            }
+            if(value&&value.length>0){
+                if(value==null) return "";
+                return value;
+            }else{
+                return "未变更";
+            }
         },
         /**
          * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
@@ -119,8 +173,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
          * */
-        beforeToolBarButtonEvent:function (selected,obj) {
-            console.log('beforeToolBarButtonEvent',selected,obj);
+        beforeToolBarButtonEvent:function (data,obj) {
+            console.log('beforeRowOperationEvent',data,obj);
+            if(obj.event=="edit") {
+                if(data.status=="complete"||data.status=="approval"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
+
+            if(obj.event=="del") {
+                if(data.status=="complete"||data.status=="approval"){
+                    layer.msg("当前状态不允许修改", {icon: 2, time: 1000});
+                    return false;
+                }
+            }
             return true;
         },
         /**
@@ -176,7 +243,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     }
 
     var timestamp = Date.parse(new Date());
-    var formAction=admin.getTempData('eam-asset-data-change-form-data-form-action');
 
 
     //表单页的扩展
@@ -185,25 +251,41 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单初始化前调用
          * */
         beforeInit:function () {
+            $("#ownCompanyId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
+            $("#useOrganizationId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
+            $("#managerId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
+            $("#useUserId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
             //获取参数，并调整下拉框查询用的URL
             $("#businessCode").attr("disabled","disabled").css("background-color","#e6e6e6");
-            $("#businessCode").attr('placeholder','系统自动生成');
             console.log("form:beforeInit")
         },
         /**
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
-            if(data.id){
-                console.log(1);
+            if(data&&data.id){
+                $("#assetCode").attr('placeholder','请输入资产编码');
+                if(data.purchaseDate&&data.purchaseDate.length>10){
+                    data.purchaseDate= data.purchaseDate.substr(0,10);
+                }
+                if(data.productionDate&&data.productionDate.length>10){
+                    data.productionDate= data.productionDate.substr(0,10);
+                }
+                if(data.maintenanceStartDate&&data.maintenanceStartDate.length>10){
+                    data.maintenanceStartDate= data.maintenanceStartDate.substr(0,10);
+                }
+                if(data.maintenanceEndDate&&data.maintenanceEndDate.length>10){
+                    data.maintenanceEndDate= data.maintenanceEndDate.substr(0,10);
+                }
+
             }else{
+                $("#businessCode").attr('placeholder','系统自动生成');
                 setTimeout(function(){
                     var now = new Date();
                     var day = ("0" + now.getDate()).slice(-2);
                     var month = ("0" + (now.getMonth() + 1)).slice(-2);
                     var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
                     $('#changeDate').val(today);
-
                 },100)
             }
             console.log('beforeDataFill',data);
@@ -212,7 +294,30 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充后
          * */
         afterDataFill:function (data) {
-            console.log('afterDataFill',data);
+            console.log('afterDataFill',data,",",formAction);
+            if(data&&data.id) {
+                console.log(7777, $('#data-form').find(".xm-tips"))
+                if (formAction == "view") {
+                    setTimeout(function () {
+                        $('#extData').find("input").attr('placeholder', '未变更');
+                        $('#extData').find("textarea").attr('placeholder', '未变更');
+                        $('#extData').find("button").each(function (index, e) {
+                            var not_Btn=$(e).find("i");
+                            if(not_Btn.length>0){
+                                var txt = $(e).text();
+                                if (txt && txt.length > 0 && txt.includes("选择")) {
+                                    $(e).html("未变更");
+                                }
+                            }
+                        })
+                        //html("未变更")
+                        $('#extData').find(".xm-tips").each(function(index,e){
+                            console.log($(e).html());
+                            $(e).html("未变更");
+                        });
+                    }, 500);
+                }
+            }
         },
         /**
          * 对话框打开之前调用，如果返回 null 则不打开对话框

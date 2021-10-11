@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产转移
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 13:06:37
- * @sign 3066578D276906B773B2AD9F4580FCC8
+ * @since 2021-10-10 21:06:00
+ * @sign 0528AA279ACEC990A14932C767114633
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -170,6 +170,12 @@ public class AssetTranfer extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
+	
+	/**
+	 * 附件：附件
+	*/
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attach;
 	
 	/**
 	 * 资产：资产
@@ -653,6 +659,25 @@ public class AssetTranfer extends Entity {
 	*/
 	public AssetTranfer setTenantId(String tenantId) {
 		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
+	*/
+	public String getAttach() {
+		return attach;
+	}
+	
+	/**
+	 * 设置 附件
+	 * @param attach 附件
+	 * @return 当前对象
+	*/
+	public AssetTranfer setAttach(String attach) {
+		this.attach=attach;
 		return this;
 	}
 	

@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产调拨
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 12:08:48
- * @sign FD5D6A9CD60E2502747529B0F166B2F4
+ * @since 2021-10-10 21:05:36
+ * @sign 7228BCF136C8AB9CD92203C8E8BC288C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -98,6 +98,12 @@ public class AssetAllocation extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
 	private Date businessDate;
+	
+	/**
+	 * 附件：附件
+	*/
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attach;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -395,6 +401,25 @@ public class AssetAllocation extends Entity {
 	*/
 	public AssetAllocation setBusinessDate(Date businessDate) {
 		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
+	*/
+	public String getAttach() {
+		return attach;
+	}
+	
+	/**
+	 * 设置 附件
+	 * @param attach 附件
+	 * @return 当前对象
+	*/
+	public AssetAllocation setAttach(String attach) {
+		this.attach=attach;
 		return this;
 	}
 	

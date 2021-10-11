@@ -1,23 +1,23 @@
 package com.dt.platform.domain.eam;
 
-import io.swagger.annotations.ApiModelProperty;
-import java.util.List;
-import java.util.ArrayList;
 import com.github.foxnic.api.model.CompositeParameter;
-import javax.persistence.Transient;
 import com.github.foxnic.commons.bean.BeanUtil;
+import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Transient;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
- * 资产报修
+ * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-10 21:06:10
- * @sign A6FD7A097B70D038C66A47962DD5C130
+ * @since 2021-10-08 06:06:00
+ * @sign 01491B7F8B85B7973681B2842B42AB33
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class AssetRepairVO extends AssetRepair {
+public class AssetDataChangeRecordVO extends AssetDataChangeRecord {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -82,7 +82,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setPageIndex(Integer pageIndex) {
+	public AssetDataChangeRecordVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -100,7 +100,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setPageSize(Integer pageSize) {
+	public AssetDataChangeRecordVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -118,7 +118,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setSearchField(String searchField) {
+	public AssetDataChangeRecordVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -136,7 +136,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setFuzzyField(String fuzzyField) {
+	public AssetDataChangeRecordVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -154,7 +154,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setSearchValue(String searchValue) {
+	public AssetDataChangeRecordVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -172,7 +172,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setSortField(String sortField) {
+	public AssetDataChangeRecordVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -190,7 +190,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setSortType(String sortType) {
+	public AssetDataChangeRecordVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -209,7 +209,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public AssetRepairVO setIds(List<String> ids) {
+	public AssetDataChangeRecordVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -219,7 +219,7 @@ public class AssetRepairVO extends AssetRepair {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public AssetRepairVO addId(String id) {
+	public AssetDataChangeRecordVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

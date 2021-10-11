@@ -1,5 +1,6 @@
 package com.dt.platform.proxy.eam;
 
+import com.dt.platform.domain.eam.AssetDataChangeRecordVO;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
@@ -118,10 +119,23 @@ public interface AssetDataChangeServiceProxy {
 	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 	/**
+	 * 查询维度
+	 */
+	public static final String QUERY_DATA_CHANGE_DIMENSION_BY_CHANGE_TYPE= API_PREFIX + "query-data-change-dimension-by-change-type";
+
+
+	/**
+	 * 查询维度
+	 */
+	@RequestMapping(AssetDataChangeServiceProxy.QUERY_DATA_CHANGE_DIMENSION_BY_CHANGE_TYPE)
+	Result queryDataChangeDimensionByChangeType(String changeType);
+
+
+	/**
 	 * 添加数据变更
 	*/
 	@RequestMapping(AssetDataChangeServiceProxy.INSERT)
-	Result insert(AssetDataChangeVO assetDataChangeVO, String assetSelectedCode);
+	Result insert(AssetDataChangeRecordVO assetDataChangeVO, String assetSelectedCode);
 	
 	/**
 	 * 删除数据变更
@@ -139,7 +153,7 @@ public interface AssetDataChangeServiceProxy {
 	 * 更新数据变更
 	*/
 	@RequestMapping(AssetDataChangeServiceProxy.UPDATE)
-	Result update(AssetDataChangeVO assetDataChangeVO);
+	Result update(AssetDataChangeRecordVO assetDataChangeVO);
 	
 	/**
 	 * 更新数据变更

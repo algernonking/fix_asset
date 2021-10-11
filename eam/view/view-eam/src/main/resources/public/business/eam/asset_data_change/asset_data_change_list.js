@@ -54,7 +54,7 @@ function ListPage() {
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			ps.searchValue=JSON.stringify(contitions);
-
+			ps.changeType=CHANGE_TYPE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -70,14 +70,21 @@ function ListPage() {
 				{ fixed: 'left',type: 'numbers' },
 				{ fixed: 'left',type:'checkbox'},
 				{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  },
-				{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+				{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}},
+				{ field: 'changeDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('变更日期'), templet: function (d) { return templet('changeDate',fox.dateFormat(d.changeDate,"yyyy-MM-dd"),d); }},
+				{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);}}
+
 			];
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
-				COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
+				var code=ATTRIBUTE_LIST_DATA[i].attribute.code;
+				var e=COL_ALL_DATA[code];
+				LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
+				COL_DATA.push(e);
 			}
+			console.log(LAYUI_TABLE_WIDTH_CONFIG);
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
 			COL_DATA.push(oper)
-
+			var responseData=[];
 			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
@@ -87,7 +94,31 @@ function ListPage() {
 				limit: 50,
 				where: ps,
 				cols: [COL_DATA],
-				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
+				done: function (data) {window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(responseData); },
+				parseData:function(res){
+					if (!res.success) {
+						alert(res.message);
+						return null;
+					}
+					var data=[];
+					for(var i=0;i<res.data.list.length;i++){
+					//	console.log(res.data.list[i])
+						if(res.data.list[i].changeData){
+							var d=res.data.list[i].changeData;
+							d.status=res.data.list[i].status;
+							d.changeDate=res.data.list[i].changeDate;
+							d.originator=res.data.list[i].originator;
+							data.push(d);
+						}
+					}
+					responseData=data;
+					return {
+						"code": res.code == "00" ? 0 : -1, //解析接口状态
+						"msg": res.message, //解析提示文本
+						"count": res.data.totalRowCount, //解析数据长度
+						"data": data //解析数据列表
+					};
+				},
 				footer : {
 
 				}
@@ -108,6 +139,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType) {
 		var value = {};
+
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.changeDate={ inputType:"date_input", begin: $("#changeDate-begin").val(), end: $("#changeDate-end").val() };
@@ -116,6 +148,7 @@ function ListPage() {
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
+		ps.changeType=CHANGE_TYPE;
 		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
@@ -301,7 +334,16 @@ function ListPage() {
 					layer.closeAll('loading');
 					if(data.success) {
 						admin.putTempData('eam-asset-data-change-form-data-form-action', "edit",true);
-						showEditForm(data.data);
+
+
+						data.data.changeData.status=data.data.status;
+						data.data.changeData.businessCode=data.data.businessCode;
+						if(data.data.changeDate)
+						data.data.changeData.changeDate=data.data.changeDate;
+						if(data.data.changeNotes)
+						data.data.changeData.changeNotes=data.data.changeNotes;
+
+						showEditForm(data.data.changeData);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
@@ -314,7 +356,13 @@ function ListPage() {
 					layer.closeAll('loading');
 					if(data.success) {
 						admin.putTempData('eam-asset-data-change-form-data-form-action', "view",true);
-						showEditForm(data.data);
+						data.data.changeData.status=data.data.status;
+						data.data.changeData.businessCode=data.data.businessCode;
+						if(data.data.changeDate)
+							data.data.changeData.changeDate=data.data.changeDate;
+						if(data.data.changeNotes)
+							data.data.changeData.changeNotes=data.data.changeNotes;
+						showEditForm(data.data.changeData);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
 					}
@@ -371,7 +419,13 @@ function ListPage() {
 		}
 		var action=admin.getTempData('eam-asset-data-change-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+
+		if(data && data.id) {
+			queryString="?" + 'id=' + data.id+"&changeType="+CHANGE_TYPE;
+		}else{
+			queryString="?changeType="+CHANGE_TYPE;
+		}
+
 		admin.putTempData('eam-asset-data-change-form-data', data);
 		var area=admin.getTempData('eam-asset-data-change-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);

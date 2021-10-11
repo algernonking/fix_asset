@@ -45,10 +45,13 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
 
 
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID).table().fillBy("originator","name");
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).table().fillBy("useUser","name");
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).table().fillBy("useUser","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).form().validate().required().form()
                 .button().chooseEmployee(true);
+
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH)
+                .form().label("附件").upload().buttonLabel("选择附件").acceptSingleFile().displayFileName(false);
 
       //  cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionVOMeta.ASSET_IDS);
 
@@ -72,6 +75,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE).search().range();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).form().validate().required();
 
@@ -97,10 +101,15 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
                 .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+//        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+//        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+//        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+//        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
         cfg.view().list().operationColumn().width(350);
 
         //分成分组布局

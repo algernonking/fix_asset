@@ -25,8 +25,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 06:05:59
- * @sign 032BE1C870412AFF2705402BB7633285
+ * @since 2021-10-09 16:37:38
+ * @sign 5676F57E782A3D658FBD2A810596706A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -221,7 +221,7 @@ public class Asset extends Entity {
 	/**
 	 * 剩余数量：剩余数量
 	*/
-	@ApiModelProperty(required = true,value="剩余数量" , notes = "剩余数量")
+	@ApiModelProperty(required = false,value="剩余数量" , notes = "剩余数量")
 	private Integer remainNumber;
 	
 	/**
@@ -451,6 +451,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="标签" , notes = "标签")
 	private String label;
+	
+	/**
+	 * 内部控制标签：内部控制标签
+	*/
+	@ApiModelProperty(required = false,value="内部控制标签" , notes = "内部控制标签")
+	private String internalControlLabel;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -1934,6 +1940,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setLabel(String label) {
 		this.label=label;
+		return this;
+	}
+	
+	/**
+	 * 获得 内部控制标签<br>
+	 * 内部控制标签
+	 * @return 内部控制标签
+	*/
+	public String getInternalControlLabel() {
+		return internalControlLabel;
+	}
+	
+	/**
+	 * 设置 内部控制标签
+	 * @param internalControlLabel 内部控制标签
+	 * @return 当前对象
+	*/
+	public Asset setInternalControlLabel(String internalControlLabel) {
+		this.internalControlLabel=internalControlLabel;
 		return this;
 	}
 	

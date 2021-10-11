@@ -14,10 +14,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产字段配置项
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:09
- * @sign C90E2F387CF2195CF6D186C7490DBA1D
+ * @since 2021-10-10 09:53:47
+ * @sign B8559719E6FA753A6D1633A459D5B084
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,19 +57,19 @@ public class AssetAttributeItem extends Entity {
 	 * 必选：必选
 	*/
 	@ApiModelProperty(required = false,value="必选" , notes = "必选")
-	private Integer required;
+	private String required;
 	
 	/**
 	 * 布局类型：布局类型
 	*/
 	@ApiModelProperty(required = false,value="布局类型" , notes = "布局类型")
-	private Integer layoutType;
+	private String layoutType;
 	
 	/**
 	 * 列表显示：列表显示
 	*/
 	@ApiModelProperty(required = false,value="列表显示" , notes = "列表显示")
-	private Integer listShow;
+	private String listShow;
 	
 	/**
 	 * 列表内容：列表内容
@@ -87,7 +87,7 @@ public class AssetAttributeItem extends Entity {
 	 * 表单显示：表单显示
 	*/
 	@ApiModelProperty(required = false,value="表单显示" , notes = "表单显示")
-	private Integer formShow;
+	private String formShow;
 	
 	/**
 	 * 行布局位置：行布局位置
@@ -248,7 +248,7 @@ public class AssetAttributeItem extends Entity {
 	 * 必选
 	 * @return 必选
 	*/
-	public Integer getRequired() {
+	public String getRequired() {
 		return required;
 	}
 	
@@ -257,7 +257,7 @@ public class AssetAttributeItem extends Entity {
 	 * @param required 必选
 	 * @return 当前对象
 	*/
-	public AssetAttributeItem setRequired(Integer required) {
+	public AssetAttributeItem setRequired(String required) {
 		this.required=required;
 		return this;
 	}
@@ -267,7 +267,7 @@ public class AssetAttributeItem extends Entity {
 	 * 布局类型
 	 * @return 布局类型
 	*/
-	public Integer getLayoutType() {
+	public String getLayoutType() {
 		return layoutType;
 	}
 	
@@ -276,7 +276,7 @@ public class AssetAttributeItem extends Entity {
 	 * @param layoutType 布局类型
 	 * @return 当前对象
 	*/
-	public AssetAttributeItem setLayoutType(Integer layoutType) {
+	public AssetAttributeItem setLayoutType(String layoutType) {
 		this.layoutType=layoutType;
 		return this;
 	}
@@ -286,7 +286,7 @@ public class AssetAttributeItem extends Entity {
 	 * 列表显示
 	 * @return 列表显示
 	*/
-	public Integer getListShow() {
+	public String getListShow() {
 		return listShow;
 	}
 	
@@ -295,7 +295,7 @@ public class AssetAttributeItem extends Entity {
 	 * @param listShow 列表显示
 	 * @return 当前对象
 	*/
-	public AssetAttributeItem setListShow(Integer listShow) {
+	public AssetAttributeItem setListShow(String listShow) {
 		this.listShow=listShow;
 		return this;
 	}
@@ -343,7 +343,7 @@ public class AssetAttributeItem extends Entity {
 	 * 表单显示
 	 * @return 表单显示
 	*/
-	public Integer getFormShow() {
+	public String getFormShow() {
 		return formShow;
 	}
 	
@@ -352,7 +352,7 @@ public class AssetAttributeItem extends Entity {
 	 * @param formShow 表单显示
 	 * @return 当前对象
 	*/
-	public AssetAttributeItem setFormShow(Integer formShow) {
+	public AssetAttributeItem setFormShow(String formShow) {
 		this.formShow=formShow;
 		return this;
 	}

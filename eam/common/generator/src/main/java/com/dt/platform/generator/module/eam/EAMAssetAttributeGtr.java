@@ -71,6 +71,7 @@ public class EAMAssetAttributeGtr extends BaseCodeGenerator{
 
         cfg.view().formWindow().width("85%");
 
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口

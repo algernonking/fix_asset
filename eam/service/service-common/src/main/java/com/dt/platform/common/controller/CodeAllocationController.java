@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:40
+ * @since 2021-10-09 20:44:39
 */
 
 @Api(tags = "编码分配")
@@ -179,10 +179,10 @@ public class CodeAllocationController extends SuperController {
 
 
 	/**
-	 * 批量删除编码分配 <br>
+	 * 批量获取编码分配 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除编码分配")
+		@ApiOperation(value = "批量获取编码分配")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = CodeAllocationVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})

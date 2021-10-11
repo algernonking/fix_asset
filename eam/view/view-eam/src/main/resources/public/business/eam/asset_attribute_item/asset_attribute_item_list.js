@@ -1,7 +1,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:09
+ * @since 2021-10-10 09:53:52
  */
 
 
@@ -77,18 +77,18 @@ function ListPage() {
 					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属模块'), templet:function (d){ return templet('ownerCode',fox.getEnumText(SELECT_OWNERCODE_DATA,d.ownerCode),d);}}
 					,{ field: 'attributeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('属性'), templet: function (d) { return templet('attributeId',fox.joinLabel(d.attribute,"label"),d);}}
 					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.dimension),d);}}
-					,{ field: 'required', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('必选'), templet:function (d){ return templet('required',fox.getEnumText(RADIO_REQUIRED_DATA,d.required),d);}}
-					,{ field: 'layoutType', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('布局类型'), templet:function (d){ return templet('layoutType',fox.getEnumText(RADIO_LAYOUTTYPE_DATA,d.layoutType),d);}}
-					,{ field: 'listShow', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('列表显示'), templet:function (d){ return templet('listShow',fox.getEnumText(RADIO_LISTSHOW_DATA,d.listShow),d);}}
+					,{ field: 'required', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('必选'), templet:function (d){ return templet('required',fox.getEnumText(RADIO_REQUIRED_DATA,d.required),d);}}
+					,{ field: 'layoutType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('布局类型'), templet:function (d){ return templet('layoutType',fox.getEnumText(RADIO_LAYOUTTYPE_DATA,d.layoutType),d);}}
+					,{ field: 'listShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('列表显示'), templet:function (d){ return templet('listShow',fox.getEnumText(RADIO_LISTSHOW_DATA,d.listShow),d);}}
 					,{ field: 'listContent', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('列表内容') , templet: function (d) { return templet('listContent',d.listContent,d);}  }
 					,{ field: 'listSort', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('列表排序') , templet: function (d) { return templet('listSort',d.listSort,d);}  }
-					,{ field: 'formShow', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('表单显示'), templet:function (d){ return templet('formShow',fox.getEnumText(RADIO_FORMSHOW_DATA,d.formShow),d);}}
+					,{ field: 'formShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('表单显示'), templet:function (d){ return templet('formShow',fox.getEnumText(RADIO_FORMSHOW_DATA,d.formShow),d);}}
 					,{ field: 'layoutRow', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('行布局位置') , templet: function (d) { return templet('layoutRow',d.layoutRow,d);}  }
 					,{ field: 'layoutColumn', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('列布局位置') , templet: function (d) { return templet('layoutColumn',d.layoutColumn,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime),d); }}
-					,{ field: 'resNotes', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('属性备注') , templet: function (d) { return templet('resNotes',fox.getProperty(d,["attribute","notes"]),d);} }
-					,{ field: 'resCode', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('属性字段') , templet: function (d) { return templet('resCode',fox.getProperty(d,["attribute","code"]),d);} }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'resNotes', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('res_notes') , templet: function (d) { return templet('resNotes',fox.getProperty(d,["attribute","notes"]),d);} }
+					,{ field: 'resCode', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('res_code') , templet: function (d) { return templet('resCode',fox.getProperty(d,["attribute","code"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

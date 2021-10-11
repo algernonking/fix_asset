@@ -43,9 +43,11 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
 
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID).table().fillBy("originator","name");
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
 
 
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ATTACH)
+                .form().label("附件").upload().buttonLabel("选择附件").acceptSingleFile().displayFileName(false);
 
 
         cfg.view().search().inputLayout(
@@ -116,11 +118,15 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+//        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+//        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+//        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+//        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
 
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
 
         cfg.view().list().operationColumn().width(350);
 

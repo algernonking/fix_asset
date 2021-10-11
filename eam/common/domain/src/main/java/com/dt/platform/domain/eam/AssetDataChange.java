@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 数据变更
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 14:13:32
- * @sign E12763BEF8BF253D7735C330850D100D
+ * @since 2021-10-09 16:04:47
+ * @sign 40057272D86C46429EC37FE774F3FF3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -78,7 +78,7 @@ public class AssetDataChange extends Entity {
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	private String changeNotes;
 	
 	/**
 	 * 制单人：制单人
@@ -302,17 +302,17 @@ public class AssetDataChange extends Entity {
 	 * 备注
 	 * @return 备注
 	*/
-	public String getNotes() {
-		return notes;
+	public String getChangeNotes() {
+		return changeNotes;
 	}
 	
 	/**
 	 * 设置 备注
-	 * @param notes 备注
+	 * @param changeNotes 备注
 	 * @return 当前对象
 	*/
-	public AssetDataChange setNotes(String notes) {
-		this.notes=notes;
+	public AssetDataChange setChangeNotes(String changeNotes) {
+		this.changeNotes=changeNotes;
 		return this;
 	}
 	

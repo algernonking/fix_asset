@@ -7,7 +7,9 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -317,6 +319,13 @@ public class AssetCollectionController extends SuperController {
 		assetCollectionService.join(list,AssetCollectionMeta.POSITION);
 		// 关联出 制单人 数据
 		assetCollectionService.join(list,AssetCollectionMeta.ORIGINATOR);
+
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetCollection::getOriginator);
+		List<Employee> useUsers= CollectorUtil.collectList(list,AssetCollection::getUseUser);
+		assetCollectionService.dao().join(employees, Person.class);
+		assetCollectionService.dao().join(useUsers, Person.class);
+
 		result.success(true).data(list);
 		return result;
 	}

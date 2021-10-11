@@ -14,10 +14,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产字段配置
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:06
- * @sign F4169DE229D9D9C1132B75D3054C70F2
+ * @since 2021-10-09 15:03:49
+ * @sign C8271F349212ED4790A0CA62C1213D40
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -69,13 +69,13 @@ public class AssetAttribute extends Entity {
 	 * 是否必选：是否必选
 	*/
 	@ApiModelProperty(required = false,value="是否必选" , notes = "是否必选")
-	private Integer required;
+	private String required;
 	
 	/**
 	 * 是否修改：是否修改
 	*/
 	@ApiModelProperty(required = false,value="是否修改" , notes = "是否修改")
-	private Integer requiredModify;
+	private String requiredModify;
 	
 	/**
 	 * 组件类型：组件类型
@@ -274,7 +274,7 @@ public class AssetAttribute extends Entity {
 	 * 是否必选
 	 * @return 是否必选
 	*/
-	public Integer getRequired() {
+	public String getRequired() {
 		return required;
 	}
 	
@@ -283,7 +283,7 @@ public class AssetAttribute extends Entity {
 	 * @param required 是否必选
 	 * @return 当前对象
 	*/
-	public AssetAttribute setRequired(Integer required) {
+	public AssetAttribute setRequired(String required) {
 		this.required=required;
 		return this;
 	}
@@ -293,7 +293,7 @@ public class AssetAttribute extends Entity {
 	 * 是否修改
 	 * @return 是否修改
 	*/
-	public Integer getRequiredModify() {
+	public String getRequiredModify() {
 		return requiredModify;
 	}
 	
@@ -302,7 +302,7 @@ public class AssetAttribute extends Entity {
 	 * @param requiredModify 是否修改
 	 * @return 当前对象
 	*/
-	public AssetAttribute setRequiredModify(Integer requiredModify) {
+	public AssetAttribute setRequiredModify(String requiredModify) {
 		this.requiredModify=requiredModify;
 		return this;
 	}

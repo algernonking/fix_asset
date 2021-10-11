@@ -71,13 +71,23 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
                 .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID).table().fillBy("reportUser","nameAndBadge");
+
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).form().validate().required();
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().maxFileCount(6);
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).form().upload().acceptImageType().maxFileCount(6);
+//        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+//        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+//        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+//        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
+
         cfg.view().list().operationColumn().width(350);
         cfg.view().formWindow().width("98%");
         cfg.view().search().inputLayout(

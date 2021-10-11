@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 编码分配 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:14:40
+ * @since 2021-10-09 20:44:38
 */
 
 public interface ICodeAllocationService extends ISuperService<CodeAllocation> {

@@ -5,9 +5,12 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetRepair;
+import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -296,6 +299,11 @@ public class AssetScrapController extends SuperController {
 	public Result<PagedList<AssetScrap>> queryPagedList(AssetScrapVO sample) {
 		Result<PagedList<AssetScrap>> result=new Result<>();
 		PagedList<AssetScrap> list=assetScrapService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		assetScrapService.join(list, AssetScrapMeta.ORIGINATOR);
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetScrap::getOriginator);
+		assetScrapService.dao().join(employees, Person.class);
 		result.success(true).data(list);
 		return result;
 	}

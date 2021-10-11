@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:06
+ * @since 2021-10-09 15:04:00
  */
 
 function FormPage() {
@@ -117,6 +117,7 @@ function FormPage() {
 		if (hasData) {
 			fm[0].reset();
 			form.val('data-form', formData);
+
 
 
 

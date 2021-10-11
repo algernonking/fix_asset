@@ -1,7 +1,7 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 12:47:45
+ * @since 2021-10-10 21:44:13
  */
 
 function FormPage() {
@@ -95,24 +95,6 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染 approval 下拉字段
-		fox.renderSelectBox({
-			el: "approval",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
 	}
 
 	/**
@@ -143,8 +125,6 @@ function FormPage() {
 
 			//设置  操作编码 设置下拉框勾选
 			fox.setSelectValue4Enum("#operateCode",formData.operateCode,SELECT_OPERATECODE_DATA);
-			//设置  审批 设置下拉框勾选
-			fox.setSelectValue4Enum("#approval",formData.approval,SELECT_APPROVAL_DATA);
 
 			//处理fillBy
 
@@ -195,8 +175,6 @@ function FormPage() {
 
 		//获取 操作编码 下拉框的值
 		data["operateCode"]=fox.getSelectedValue("operateCode",false);
-		//获取 审批 下拉框的值
-		data["approval"]=fox.getSelectedValue("approval",false);
 
 		return data;
 	}

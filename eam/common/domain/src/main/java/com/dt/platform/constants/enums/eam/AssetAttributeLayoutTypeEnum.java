@@ -13,7 +13,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetAttributeLayoutTypeEnum implements CodeTextEnum {
 	THREE("3" , "三栏"),
-//	TWO("2" , "双栏"),
+	TWO("2" , "双栏"),
 	ONE("1" , "单栏")
 	;
 	private String code;

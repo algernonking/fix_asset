@@ -26,6 +26,11 @@ import com.github.foxnic.dao.data.SaveMode;
 
 public interface IOperateService extends ISuperService<Operate> {
 
+	/**
+	 * 判断前端资产是否能更新
+	 * @return 返回
+	 * */
+	boolean queryAssetDirectUpdateMode();
 
 	/**
 	 * 判断是否需要审批

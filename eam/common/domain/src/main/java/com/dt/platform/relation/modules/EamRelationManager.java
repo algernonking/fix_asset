@@ -51,24 +51,22 @@ public class EamRelationManager extends RelationManager {
     }
 
     public void setupAssetDataChange(){
-        // 关联变更人
-//        this.property(AssetDataChangeMeta.CHANGE_USER_PROP)
-//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
-//
-//                this.property(AssetDataChangeMeta.CHANGE_DATA_PROP)
-//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+        // 关联资产
+        this.property(AssetDataChangeMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_CHANGE.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET.ID)
+                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
 
-        // 关联
+        //变更数据
+        this.property(AssetDataChangeMeta.CHANGE_DATA_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_CHANGE.ASSET_CHANGE_ID).join(EAMTables.EAM_ASSET.ID);
+
+
+        // 制单人
         this.property(AssetDataChangeMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
-//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
-
-//        this.property(AssetDataChangeMeta)
-//                .using(EAMTables.EAM_ASSET_DATA_CHANGE.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
-//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
     }
 
@@ -85,7 +83,6 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetAllocationMeta.MANAGER_PROP)
                 .using(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
-
 
         this.property(AssetAllocationMeta.IN_OWNER_COMPANY_PROP)
                 .using(EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);

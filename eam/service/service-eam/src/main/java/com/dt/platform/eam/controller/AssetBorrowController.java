@@ -11,7 +11,14 @@ import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.spec.DAO;
+import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.meta.EmployeeMeta;
+import org.github.foxnic.web.domain.system.UserTenant;
+import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.github.foxnic.web.proxy.hrm.EmployeeServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -302,7 +309,15 @@ public class AssetBorrowController extends SuperController {
 		assetBorrowService.join(list,AssetBorrowMeta.BORROWER);
 		// 关联出 制单人 数据
 		assetBorrowService.join(list,AssetBorrowMeta.ORIGINATOR);
+
+		List<Employee> employees= CollectorUtil.collectList(list,AssetBorrow::getOriginator);
+		assetBorrowService.dao().join(employees, Person.class);
+
+		List<Employee> borrowers= CollectorUtil.collectList(list,AssetBorrow::getBorrower);
+		assetBorrowService.dao().join(borrowers, Person.class);
 		result.success(true).data(list);
+
+
 		return result;
 	}
 

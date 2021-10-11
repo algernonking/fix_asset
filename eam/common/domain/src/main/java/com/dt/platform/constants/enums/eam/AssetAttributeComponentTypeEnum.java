@@ -16,7 +16,7 @@ public enum AssetAttributeComponentTypeEnum implements CodeTextEnum {
 
 	TEXT_INPUT("text_input" , "单行文本"),
 	TEXT_AREA("text_area" , "多行文本"),
-	UPLOAD("upload" , "附件"),
+	UPLOAD("upload" , "上传组件"),
 	RADIO_BOX("raido_box" , "单选框"),
 	SELECT_BOX("select_box","下拉框"),
 	DATE_INPUT("date_input","日期选择框"),

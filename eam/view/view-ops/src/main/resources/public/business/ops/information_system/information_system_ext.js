@@ -173,11 +173,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
-            if(data.onlineDate&&data.onlineDate.length>10){
-                data.onlineDate= data.onlineDate.substr(0,10);
-            }
-            if(data.lastdrillDate&&data.lastdrillDate.length>10){
-                data.lastdrillDate= data.lastdrillDate.substr(0,10);
+            if(data){
+                if(data.onlineDate&&data.onlineDate.length>10){
+                    data.onlineDate= data.onlineDate.substr(0,10);
+                }
+                if(data.lastdrillDate&&data.lastdrillDate.length>10){
+                    data.lastdrillDate= data.lastdrillDate.substr(0,10);
+                }
             }
             if(action=="create"){
                 setTimeout(function(){

@@ -40,7 +40,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.CODE).basic().label("业务编码")
                 .form().validate().required().form().selectBox().paging(true).filter(true).toolbar(false).muliti(false)
                 .queryApi(CodeRegisterServiceProxy.QUERY_PAGED_LIST)
-                .textField(CodeRegisterMeta.CODE).valueField(CodeRegisterMeta.NAME).fillBy(CodeAllocationMeta.BUSINESS_CODE);
+                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE).fillBy(CodeAllocationMeta.BUSINESS_CODE);
 
 
 

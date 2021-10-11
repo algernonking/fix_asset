@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:06
- * @sign F4169DE229D9D9C1132B75D3054C70F2
+ * @since 2021-10-09 15:03:49
+ * @sign C8271F349212ED4790A0CA62C1213D40
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -76,24 +76,24 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
-	 * 是否必选 , 类型: java.lang.Integer
+	 * 是否必选 , 类型: java.lang.String
 	*/
 	public static final String REQUIRED="required";
 	
 	/**
-	 * 是否必选 , 类型: java.lang.Integer
+	 * 是否必选 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.Integer> REQUIRED_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED, java.lang.Integer.class, "是否必选", "是否必选", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> REQUIRED_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED, java.lang.String.class, "是否必选", "是否必选", java.lang.String.class, null);
 	
 	/**
-	 * 是否修改 , 类型: java.lang.Integer
+	 * 是否修改 , 类型: java.lang.String
 	*/
 	public static final String REQUIRED_MODIFY="requiredModify";
 	
 	/**
-	 * 是否修改 , 类型: java.lang.Integer
+	 * 是否修改 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.Integer> REQUIRED_MODIFY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED_MODIFY, java.lang.Integer.class, "是否修改", "是否修改", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> REQUIRED_MODIFY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,REQUIRED_MODIFY, java.lang.String.class, "是否修改", "是否修改", java.lang.String.class, null);
 	
 	/**
 	 * 组件类型 , 类型: java.lang.String
@@ -309,7 +309,7 @@ public class AssetAttributeMeta {
 		 * @param required 是否必选
 		 * @return 当前对象
 		*/
-		public AssetAttribute setRequired(Integer required) {
+		public AssetAttribute setRequired(String required) {
 			super.change(REQUIRED,super.getRequired(),required);
 			super.setRequired(required);
 			return this;
@@ -320,7 +320,7 @@ public class AssetAttributeMeta {
 		 * @param requiredModify 是否修改
 		 * @return 当前对象
 		*/
-		public AssetAttribute setRequiredModify(Integer requiredModify) {
+		public AssetAttribute setRequiredModify(String requiredModify) {
 			super.change(REQUIRED_MODIFY,super.getRequiredModify(),requiredModify);
 			super.setRequiredModify(requiredModify);
 			return this;

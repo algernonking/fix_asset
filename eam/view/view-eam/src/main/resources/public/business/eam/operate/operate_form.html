@@ -2,7 +2,7 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-08 12:47:44
+ * @since 2021-10-10 21:44:12
  */
  -->
  <!DOCTYPE html>
@@ -47,12 +47,12 @@
                     </div>
 
                 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('审批')}">审批</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="approval" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}"></div>
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('审批')}">审批</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <input input-type="radio" type="radio" name="approval" lay-filter="approval" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
+                </div>
 
 
                                     <div class="layui-form-item" >
@@ -110,8 +110,8 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_OPERATECODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.CodeModuleEnum')}]];
-    var SELECT_APPROVAL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
-    var VALIDATE_CONFIG={"approval":{"labelInForm":"审批","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"allocateCode":{"labelInForm":"分配编号","inputType":"text_input","required":true},"operateCode":{"labelInForm":"操作编码","inputType":"select_box","required":true}};
+    var RADIO_APPROVAL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusYNEnum')}]];
+    var VALIDATE_CONFIG={"approval":{"labelInForm":"审批","inputType":"radio_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"allocateCode":{"labelInForm":"分配编号","inputType":"text_input","required":true},"operateCode":{"labelInForm":"操作编码","inputType":"select_box","required":true}};
     var AUTH_PREFIX="eam_operate";
 
 

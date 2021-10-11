@@ -74,8 +74,8 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.LABEL_NOTES , value = "标签备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -156,8 +156,8 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.LABEL_NOTES , value = "标签备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -184,8 +184,8 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.LABEL_NOTES , value = "标签备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -251,8 +251,8 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.LABEL_NOTES , value = "标签备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -280,8 +280,8 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.LABEL_NOTES , value = "标签备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.DIMENSION , value = "所属维度" , required = false , dataTypeClass=String.class , example = "maintainer"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "valid"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=Integer.class , example = "0"),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=Integer.class , example = "1"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED , value = "是否必选" , required = false , dataTypeClass=String.class , example = "0"),
+		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -293,6 +293,7 @@ public class AssetAttributeController extends SuperController {
 	public Result<PagedList<AssetAttribute>> queryPagedList(AssetAttributeVO sample) {
 		Result<PagedList<AssetAttribute>> result=new Result<>();
 		PagedList<AssetAttribute> list=assetAttributeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
 		result.success(true).data(list);
 		return result;
 	}

@@ -67,7 +67,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                            <input lay-filter="changeNotes" id="changeNotes" name="changeNotes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -91,6 +91,7 @@
         </fieldset>
 
 
+        <div id="extData">
         <!--开始：3栏模式 循环-->
         <div class="layui-row form-row" >
             <div class="layui-col-xs4 form-column">
@@ -118,7 +119,7 @@
             </div>
         </div>
 
-
+        </div>
 
 
 
@@ -145,8 +146,9 @@
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
 
     var VALIDATE_CONFIG={"changeDate":{"date":true,"labelInForm":"变更日期","inputType":"date_input","required":true}};
-    var AUTH_PREFIX="eam_asset_data_change";
 
+
+    var AUTH_PREFIX="eam_asset_data_change";
     // 变更类型
     var CHANGE_TYPE = [[${changeType}]] ;
     // 单据ID
@@ -159,10 +161,6 @@
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
     var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];
-
-
-
-
 
 
 

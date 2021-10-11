@@ -9,8 +9,8 @@ import com.dt.platform.domain.eam.AssetAttribute;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-26 11:15:09
- * @sign C90E2F387CF2195CF6D186C7490DBA1D
+ * @since 2021-10-10 09:53:47
+ * @sign B8559719E6FA753A6D1633A459D5B084
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,34 +57,34 @@ public class AssetAttributeItemMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> DIMENSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,DIMENSION, java.lang.String.class, "所属维度", "所属维度", java.lang.String.class, null);
 	
 	/**
-	 * 必选 , 类型: java.lang.Integer
+	 * 必选 , 类型: java.lang.String
 	*/
 	public static final String REQUIRED="required";
 	
 	/**
-	 * 必选 , 类型: java.lang.Integer
+	 * 必选 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> REQUIRED_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,REQUIRED, java.lang.Integer.class, "必选", "必选", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> REQUIRED_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,REQUIRED, java.lang.String.class, "必选", "必选", java.lang.String.class, null);
 	
 	/**
-	 * 布局类型 , 类型: java.lang.Integer
+	 * 布局类型 , 类型: java.lang.String
 	*/
 	public static final String LAYOUT_TYPE="layoutType";
 	
 	/**
-	 * 布局类型 , 类型: java.lang.Integer
+	 * 布局类型 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LAYOUT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LAYOUT_TYPE, java.lang.Integer.class, "布局类型", "布局类型", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> LAYOUT_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LAYOUT_TYPE, java.lang.String.class, "布局类型", "布局类型", java.lang.String.class, null);
 	
 	/**
-	 * 列表显示 , 类型: java.lang.Integer
+	 * 列表显示 , 类型: java.lang.String
 	*/
 	public static final String LIST_SHOW="listShow";
 	
 	/**
-	 * 列表显示 , 类型: java.lang.Integer
+	 * 列表显示 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LIST_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SHOW, java.lang.Integer.class, "列表显示", "列表显示", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> LIST_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SHOW, java.lang.String.class, "列表显示", "列表显示", java.lang.String.class, null);
 	
 	/**
 	 * 列表内容 , 类型: java.lang.String
@@ -107,14 +107,14 @@ public class AssetAttributeItemMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> LIST_SORT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,LIST_SORT, java.lang.Integer.class, "列表排序", "列表排序", java.lang.Integer.class, null);
 	
 	/**
-	 * 表单显示 , 类型: java.lang.Integer
+	 * 表单显示 , 类型: java.lang.String
 	*/
 	public static final String FORM_SHOW="formShow";
 	
 	/**
-	 * 表单显示 , 类型: java.lang.Integer
+	 * 表单显示 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.Integer> FORM_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,FORM_SHOW, java.lang.Integer.class, "表单显示", "表单显示", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttributeItem,java.lang.String> FORM_SHOW_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttributeItem.class ,FORM_SHOW, java.lang.String.class, "表单显示", "表单显示", java.lang.String.class, null);
 	
 	/**
 	 * 行布局位置 , 类型: java.lang.Integer
@@ -308,7 +308,7 @@ public class AssetAttributeItemMeta {
 		 * @param required 必选
 		 * @return 当前对象
 		*/
-		public AssetAttributeItem setRequired(Integer required) {
+		public AssetAttributeItem setRequired(String required) {
 			super.change(REQUIRED,super.getRequired(),required);
 			super.setRequired(required);
 			return this;
@@ -319,7 +319,7 @@ public class AssetAttributeItemMeta {
 		 * @param layoutType 布局类型
 		 * @return 当前对象
 		*/
-		public AssetAttributeItem setLayoutType(Integer layoutType) {
+		public AssetAttributeItem setLayoutType(String layoutType) {
 			super.change(LAYOUT_TYPE,super.getLayoutType(),layoutType);
 			super.setLayoutType(layoutType);
 			return this;
@@ -330,7 +330,7 @@ public class AssetAttributeItemMeta {
 		 * @param listShow 列表显示
 		 * @return 当前对象
 		*/
-		public AssetAttributeItem setListShow(Integer listShow) {
+		public AssetAttributeItem setListShow(String listShow) {
 			super.change(LIST_SHOW,super.getListShow(),listShow);
 			super.setListShow(listShow);
 			return this;
@@ -363,7 +363,7 @@ public class AssetAttributeItemMeta {
 		 * @param formShow 表单显示
 		 * @return 当前对象
 		*/
-		public AssetAttributeItem setFormShow(Integer formShow) {
+		public AssetAttributeItem setFormShow(String formShow) {
 			super.change(FORM_SHOW,super.getFormShow(),formShow);
 			super.setFormShow(formShow);
 			return this;

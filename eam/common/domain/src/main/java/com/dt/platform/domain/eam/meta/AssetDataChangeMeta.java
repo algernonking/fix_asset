@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 14:13:32
- * @sign E12763BEF8BF253D7735C330850D100D
+ * @since 2021-10-09 16:04:47
+ * @sign 40057272D86C46429EC37FE774F3FF3E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -91,12 +91,12 @@ public class AssetDataChangeMeta {
 	/**
 	 * 备注 , 类型: java.lang.String
 	*/
-	public static final String NOTES="notes";
+	public static final String CHANGE_NOTES="changeNotes";
 	
 	/**
 	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHANGE_NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
 	 * 制单人 , 类型: java.lang.String
@@ -241,7 +241,7 @@ public class AssetDataChangeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -330,12 +330,12 @@ public class AssetDataChangeMeta {
 		
 		/**
 		 * 设置 备注
-		 * @param notes 备注
+		 * @param changeNotes 备注
 		 * @return 当前对象
 		*/
-		public AssetDataChange setNotes(String notes) {
-			super.change(NOTES,super.getNotes(),notes);
-			super.setNotes(notes);
+		public AssetDataChange setChangeNotes(String changeNotes) {
+			super.change(CHANGE_NOTES,super.getChangeNotes(),changeNotes);
+			super.setChangeNotes(changeNotes);
 			return this;
 		}
 		

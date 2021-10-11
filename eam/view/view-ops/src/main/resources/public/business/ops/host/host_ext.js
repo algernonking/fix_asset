@@ -61,11 +61,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             //时间
-            if(data.offlineTime&&data.offlineTime.length>10){
-                data.offlineTime= data.offlineTime.substr(0,10);
-            }
-            if(data.onlineTime&&data.onlineTime.length>10){
-                data.onlineTime= data.onlineTime.substr(0,10);
+            if(data){
+                if(data.offlineTime&&data.offlineTime.length>10){
+                    data.offlineTime= data.offlineTime.substr(0,10);
+                }
+                if(data.onlineTime&&data.onlineTime.length>10){
+                    data.onlineTime= data.onlineTime.substr(0,10);
+                }
             }
             if(action=="create"){
                 //上线日期处理

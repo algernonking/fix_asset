@@ -79,6 +79,7 @@ public class CodeModuleServiceImpl implements ICodeModuleService {
 			return ErrorDesc.failure().message("资产编号不允许为 null 。");
 		}
 		String code=parseCode(rs.getString("rule"));
+		System.out.println("code:"+code);
 		result.success(true);
 		result.data(code);
 		return result;

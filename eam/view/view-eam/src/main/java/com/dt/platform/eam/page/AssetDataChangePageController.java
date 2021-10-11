@@ -59,7 +59,7 @@ public class AssetDataChangePageController extends ViewController {
 	 * 数据变更 功能主页面
 	 */
 	@RequestMapping("/asset_data_change_list.html")
-	public String list(Model model,HttpServletRequest request,String changeType) {
+	public String list(Model model,HttpServletRequest request,String changeType,String pageType) {
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(changeType);
 		if(approvalResult.isSuccess()){
@@ -67,17 +67,8 @@ public class AssetDataChangePageController extends ViewController {
 		}
 		model.addAttribute("approvalRequired",approvalRequired);
 		model.addAttribute("changeType",changeType);
-
-
-		String assetAttributeDimension="";
-		if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(changeType)){
-			assetAttributeDimension=AssetAttributeDimensionEnum.ATTRIBUTION.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(changeType)){
-			assetAttributeDimension=AssetAttributeDimensionEnum.FINANCIAL.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
-			assetAttributeDimension=AssetAttributeDimensionEnum.MAINTAINER.code();
-		}
-
+		model.addAttribute("pageType",pageType);
+		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getCode();
 		//设置字段布局
 		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code(), assetAttributeDimension);
 		if(result.isSuccess()){
@@ -101,7 +92,6 @@ public class AssetDataChangePageController extends ViewController {
 		}
 
 
-
 		return prefix+"/asset_data_change_list";
 	}
 
@@ -121,7 +111,7 @@ public class AssetDataChangePageController extends ViewController {
 			assetAttributeDimension=AssetAttributeDimensionEnum.MAINTAINER.code();
 		}
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),assetAttributeDimension);
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code(),assetAttributeDimension);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
@@ -133,8 +123,8 @@ public class AssetDataChangePageController extends ViewController {
 
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
-		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.BASE.code());
-		attributeItem.setRequired(1);
+		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code());
+		attributeItem.setRequired("1");
 		attributeItem.setDimension(changeType);
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();

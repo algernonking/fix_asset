@@ -56,6 +56,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.CONTENT).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ATTACH).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.OUT_USE_ORGANIZATION_ID).form().validate().required();
@@ -74,13 +75,15 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID).table().fillBy("inUseOrganization","fullName");
 
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).table().fillBy("manager","name");
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).table().fillBy("originator","name");
-        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).table().fillBy("useUser","name");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).table().fillBy("manager","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).table().fillBy("useUser","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.MANAGER_ID).form()
                 .button().chooseEmployee(true);
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.USE_USER_ID).form()
                 .button().chooseEmployee(true);
+
+
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -101,12 +104,31 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
+//        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
+//        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
+//        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+//        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
 
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_TRANFER.ATTACH)
+                .form().label("附件").upload().buttonLabel("选择附件").acceptSingleFile().displayFileName(false);
         cfg.view().list().operationColumn().width(350);
+
+
+        cfg.view().list().disableBatchDelete();
+
+        cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
+        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
+        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
+//        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
+//        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
+//
+
 
         //分成分组布局
         cfg.view().formWindow().width("98%");
@@ -131,15 +153,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
                 }
         );
 
-        cfg.view().list().disableBatchDelete();
         cfg.view().form().addPage("资产列表","assetSelectList");
-        cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
-        cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
-        cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");
-//        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");
-//        cfg.view().form().addJsVariable("EMPLOYEE_NAME", "[[${user.getUser().getActivatedEmployeeName()}]]","用户姓名");
-//
-
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
