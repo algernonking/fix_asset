@@ -76,7 +76,7 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
                 rs.getRcd(i).setValue("name",org.get(key));
             }
         }
-        data = rs.toJSONArrayWithJSONArray();
+        data = rs.toJSONArrayWithJSONObject();
         return data;
     }
 
@@ -110,7 +110,8 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
                 rs.getRcd(i).setValue("name",org.get(key));
             }
         }
-        data = rs.toJSONArrayWithJSONArray();
+        data = rs.toJSONArrayWithJSONObject();
+        System.out.println(data);
         return data;
     }
 

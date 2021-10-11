@@ -39,7 +39,7 @@ public class AssetReportController extends SuperController {
 
 
     @ApiOperation(value = "分类资产数据")
-    @ApiOperationSupport(order=1)
+    @ApiOperationSupport(order=2)
     @SentinelResource(value = AssetReportServiceProxy.QUERY_CATEGORY_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetReportServiceProxy.QUERY_CATEGORY_DATA)
     public Result queryCategoryData(Asset sample) {
