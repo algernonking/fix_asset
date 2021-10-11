@@ -462,7 +462,7 @@ function ListPage() {
 				root: "#(f.buttonField.action.rootId)",
 				targetType:"#(f.buttonField.action.targetType)",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end
@@ -476,7 +476,7 @@ function ListPage() {
 				root: "#(f.buttonField.action.rootId)",
 				targetType:"#(f.buttonField.action.targetType)",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end

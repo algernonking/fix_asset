@@ -400,7 +400,7 @@ function FormPage() {
 				root: "#(f.buttonField.action.rootId)",
 				targetType:"#(f.buttonField.action.targetType)",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end
@@ -415,7 +415,7 @@ function FormPage() {
 				root: "#(f.buttonField.action.rootId)",
 				targetType:"#(f.buttonField.action.targetType)",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			#(f.buttonField.action.functionName)(#(f.varName)DialogOptions);
 			#end
