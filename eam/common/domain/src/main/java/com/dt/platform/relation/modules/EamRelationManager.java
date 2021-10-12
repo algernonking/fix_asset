@@ -36,6 +36,8 @@ public class EamRelationManager extends RelationManager {
         this.setupAssetRepair();
         this.setupAssetTranfer();
 
+
+        this.setupScrap();
         this.setupInventory();
         this.setupAssetAttributeItem();
 
@@ -48,6 +50,11 @@ public class EamRelationManager extends RelationManager {
     public void setupProperties() {
 
 
+    }
+
+    public void setupScrap(){
+        this.property(AssetScrapMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_SCRAP.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
     }
 
     public void setupAssetDataChange(){

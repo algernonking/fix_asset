@@ -513,52 +513,10 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
     @Override
     public Map<String, Object> queryAssetMap(PagedList<Asset> list,String categoryId) {
         HashMap<String,String> orgMap=queryUseOrganizationNodes();
-
         HashMap<String,String> categoryMap=queryAssetCategoryNodes();
-
         Map<String,Object> map=new HashMap<>();
-
-        // 关联出 物品档案 数据
-        assetService.join(list,AssetMeta.GOODS);
-        // 关联出 厂商 数据
-        assetService.join(list,AssetMeta.MANUFACTURER);
-        // 关联出 位置 数据
-        assetService.join(list,AssetMeta.POSITION);
-        // 关联出 仓库 数据
-        assetService.join(list,AssetMeta.WAREHOUSE);
-        // 关联出 维保商 数据
-        assetService.join(list,AssetMeta.MAINTNAINER);
-        // 关联出 财务分类 数据
-        assetService.join(list,AssetMeta.CATEGORY_FINANCE);
-        // 关联出 供应商 数据
-        assetService.join(list,AssetMeta.SUPPLIER);
-        // 关联出 来源 数据
-        assetService.join(list,AssetMeta.SOURCE);
-        //
-        assetService.join(list,AssetMeta.SAFETY_LEVEL);
-
-        assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-
-
-        assetService.join(list,AssetMeta.MANAGER);
-
-        assetService.join(list,AssetMeta.USE_USER);
-
-        assetService.join(list,AssetMeta.ORIGINATOR);
-
-        List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-        assetService.dao().join(originators, Person.class);
-
-
-        List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-        assetService.dao().join(managers, Person.class);
-
-        List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-        assetService.dao().join(useUser, Person.class);
-
-
+        assetService.joinData(list);
         String tenantId=SessionUser.getCurrent().getActivatedTenantId();
-
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);

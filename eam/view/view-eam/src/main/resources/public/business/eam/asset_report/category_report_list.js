@@ -59,21 +59,33 @@ function ListPage() {
             var tableConfig={
                 elem: '#data-table',
                 toolbar: '#toolbarTemplate',
-                defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
+                defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
                 url: moduleURL +'/query-category-data',
                 height: 'full-'+(h+28),
                 limit: 50,
+                page:false,
                 where: ps,
                 cols: [[
                     { fixed: 'left',type: 'numbers' },
                     { fixed: 'left',type:'checkbox' }
-                    ,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-                    ,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-                    ,{ field: 'cnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数量') , templet: function (d) { return templet('cnt',d.name,d);}  }
+                    ,{ field: 'categoryId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('分类ID') , templet: function (d) { return templet('categoryId',d.categoryId,d);}  }
+                    ,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类名称') , templet: function (d) { return templet('name',d.name,d);}  }
+                    ,{ field: 'cnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') , templet: function (d) { return templet('cnt',d.cnt,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-                    ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+                        //   ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
-                done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
+                parseData:function(res){
+                    console.log("parese res:",res);
+                    return {
+                        "code": res.code == "00" ? 0 : -1, //解析接口状态
+                        "msg": res.message, //解析提示文本
+                        "count": res.data.length, //解析数据长度
+                        "data": res.data //解析数据列表
+                    };
+                },
+                done: function (data) {
+                    console.log("done data",data)
+                    window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
                 footer : {
 
                 }

@@ -10,11 +10,13 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.eam.common.ResetOnCloseInputStream;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.github.foxnic.commons.bean.BeanNameUtil;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
@@ -27,6 +29,10 @@ import com.github.foxnic.sql.treaty.DBTreaty;
 import org.apache.poi.ss.usermodel.*;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.changes.meta.ExampleOrderMeta;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.hrm.meta.EmployeeMeta;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
@@ -97,6 +103,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
+
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {
 		return null;
@@ -153,6 +160,47 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 	}
 
+
+	@Override
+	public Result joinData(PagedList<Asset> list) {
+		// 关联出 资产分类 数据
+
+		//exampleOrderService.dao().fill(list).with(ExampleOrderMeta.BUYER_EMPLOYEE, EmployeeMeta.PERSON).execute();
+		join(list, AssetMeta.CATEGORY);
+		// 关联出 物品档案 数据
+		join(list,AssetMeta.GOODS);
+		// 关联出 厂商 数据
+		join(list,AssetMeta.MANUFACTURER);
+		// 关联出 位置 数据
+		join(list,AssetMeta.POSITION);
+
+		// 关联出 维保商 数据
+		join(list,AssetMeta.MAINTNAINER);
+		// 关联出 供应商 数据
+		join(list,AssetMeta.SUPPLIER);
+
+		// 关联出 来源 数据
+		join(list,AssetMeta.SOURCE);
+		join(list,AssetMeta.SAFETY_LEVEL);
+		join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
+
+		join(list,AssetMeta.OWNER_COMPANY);
+		join(list,AssetMeta.USE_ORGANIZATION);
+		join(list,AssetMeta.MANAGER);
+		join(list,AssetMeta.USE_USER);
+		join(list,AssetMeta.ORIGINATOR);
+
+		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+		dao().join(originators, Person.class);
+
+		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+		dao().join(managers, Person.class);
+
+		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+		dao().join(useUser, Person.class);
+
+		return  ErrorDesc.success();
+	}
 
 	/**
 	 * 批量送审batchConfirmOperation

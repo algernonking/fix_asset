@@ -59,11 +59,11 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
                 " ) AS hierarchy\n" +
                 "FROM (\n" +
                 " SELECT use_organization_id, COUNT(1) AS cnt\n" +
-                " FROM eam_asset s\n" +
+                " FROM  (select ifnull(use_organization_id,'') use_organization_id ,i.id,i.status,i.owner_code ,i.tenant_id,i.deleted from eam_asset i) s\n" +
                 " WHERE s.deleted = '0'\n" +
                 "    AND s.tenant_id=?\n" +
                 "  AND s.owner_code = 'asset'\n" +
-                "  AND s.status NOT IN ('incomplete')\n" +
+                "  AND s.status  IN ('complete')\n" +
                 " GROUP BY s.use_organization_id\n" +
                 ") t order by hierarchy";
         RcdSet rs=dao.query(sql,tenantId);
@@ -71,7 +71,7 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         for(int i=0;i<rs.size();i++){
             String key=rs.getRcd(i).getString("use_organization_id");
             if(StringUtil.isBlank(key))
-                rs.getRcd(i).setValue("name","使用公司或部门未设置");
+                rs.getRcd(i).setValue("name","资产未分配有使用组织结构");
             if(org.containsKey(key)){
                 rs.getRcd(i).setValue("name",org.get(key));
             }
@@ -93,11 +93,11 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
                 " ) AS hierarchy\n" +
                 "FROM (\n" +
                 " SELECT category_id, COUNT(1) AS cnt\n" +
-                " FROM eam_asset s\n" +
+                " FROM  (select ifnull(category_id,'') category_id ,i.id,i.status,i.owner_code ,i.tenant_id,i.deleted from eam_asset i) s\n" +
                 " WHERE s.deleted = '0'\n" +
                 "    AND s.tenant_id=?\n" +
                 "  AND s.owner_code = 'asset'\n" +
-                "  AND s.status NOT IN ('incomplete')\n" +
+                "  AND s.status  IN ('complete')\n" +
                 " GROUP BY s.category_id\n" +
                 ") t order by hierarchy";
         RcdSet rs=dao.query(sql,tenantId);
@@ -105,7 +105,7 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         for(int i=0;i<rs.size();i++){
             String key=rs.getRcd(i).getString("category_id");
             if(StringUtil.isBlank(key))
-                rs.getRcd(i).setValue("name","分类未设置");
+                rs.getRcd(i).setValue("name","资产未分配分类");
             if(org.containsKey(key)){
                 rs.getRcd(i).setValue("name",org.get(key));
             }

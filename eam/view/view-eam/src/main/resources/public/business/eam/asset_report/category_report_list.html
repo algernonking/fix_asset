@@ -33,17 +33,19 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+
+                    <div style="height: 50px"></div>
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
+<!--                    <div class="search-unit">-->
+<!--                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>-->
+<!--                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; 备注 , notes ,typeName=text_input, isHideInSearch=false &ndash;&gt;-->
+<!--                    <div class="search-unit">-->
+<!--                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>-->
+<!--                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />-->
+<!--                    </div>-->
 
 
                 </div>
@@ -83,7 +85,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var AUTH_PREFIX="eam_report";
+    var AUTH_PREFIX="eam_report_cat";
+
 </script>
 <script th:src="'/business/eam/asset_report/category_report_list.js?'+${cacheKey}"></script>
 <script th:src="'/business/eam/asset_report/category_report_ext.js?'+${cacheKey}"></script>

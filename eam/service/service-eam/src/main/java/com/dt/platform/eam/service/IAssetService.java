@@ -30,6 +30,8 @@ import org.github.foxnic.web.domain.changes.ProcessStartVO;
 public interface IAssetService extends ISuperService<Asset> {
 
 
+	Result joinData(PagedList<Asset> list);
+
 	Result startProcess(ProcessStartVO startVO);
 
 	Result approve(ProcessApproveVO approveVO);

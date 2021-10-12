@@ -673,50 +673,10 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<Asset>> queryPagedList(AssetVO sample) {
+
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 资产分类 数据
-		assetService.join(list,AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		assetService.join(list,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		assetService.join(list,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		assetService.join(list,AssetMeta.POSITION);
-		// 关联出 仓库 数据
-		assetService.join(list,AssetMeta.WAREHOUSE);
-		// 关联出 来源 数据
-		assetService.join(list,AssetMeta.SOURCE);
-		// 关联出 维保商 数据
-		assetService.join(list,AssetMeta.MAINTNAINER);
-		// 关联出 财务分类 数据
-		assetService.join(list,AssetMeta.CATEGORY_FINANCE);
-		// 关联出 供应商 数据
-		assetService.join(list,AssetMeta.SUPPLIER);
-
-		assetService.join(list,AssetMeta.SAFETY_LEVEL);
-		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-
-		assetService.join(list,AssetMeta.OWNER_COMPANY);
-		assetService.join(list,AssetMeta.USE_ORGANIZATION);
-
-		assetService.join(list,AssetMeta.MANAGER);
-		assetService.join(list,AssetMeta.USE_USER);
-		assetService.join(list,AssetMeta.ORIGINATOR);
-
-
-//		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-//		assetService.dao().join(originators, Person.class);
-//
-//		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-//		System.out.println("useUser:"+useUser);
-//		assetService.dao().join(useUser, Person.class);
-//
-//		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-//		System.out.println("managers:"+managers);
-//		assetService.dao().join(managers, Person.class);
-
-
+		assetService.joinData(list);
 		result.success(true).data(list);
 		return result;
 	}
@@ -799,39 +759,7 @@ public class AssetController extends SuperController {
 
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedListBySelect(sample,assetBussinessType,assetOwnerId,assetSelectedCode,assetSearchContent);
-		// 关联出 资产分类 数据
-		assetService.join(list,AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		assetService.join(list,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		assetService.join(list,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		assetService.join(list,AssetMeta.POSITION);
-		// 关联出 来源 数据
-		assetService.join(list,AssetMeta.SOURCE);
-		// 关联出 维保商 数据
-		assetService.join(list,AssetMeta.MAINTNAINER);
-		// 关联出 供应商 数据
-		assetService.join(list,AssetMeta.SUPPLIER);
-
-		assetService.join(list,AssetMeta.SAFETY_LEVEL);
-		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-
-		assetService.join(list,AssetMeta.OWNER_COMPANY);
-		assetService.join(list,AssetMeta.USE_ORGANIZATION);
-		assetService.join(list,AssetMeta.MANAGER);
-		assetService.join(list,AssetMeta.USE_USER);
-		assetService.join(list,AssetMeta.ORIGINATOR);
-
-		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-		assetService.dao().join(originators, Person.class);
-
-
-		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-		assetService.dao().join(managers, Person.class);
-
-		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-		assetService.dao().join(useUser, Person.class);
+		assetService.joinData(list);
 
 		result.success(true).data(list);
 		return result;
@@ -912,44 +840,9 @@ public class AssetController extends SuperController {
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECTED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
 	public Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType) {
-
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedListBySelected(sample,assetSelectedCode,assetOwnerId,dataType);
-		// 关联出 资产分类 数据
-		assetService.join(list,AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		assetService.join(list,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		assetService.join(list,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		assetService.join(list,AssetMeta.POSITION);
-
-		// 关联出 维保商 数据
-		assetService.join(list,AssetMeta.MAINTNAINER);
-		// 关联出 供应商 数据
-		assetService.join(list,AssetMeta.SUPPLIER);
-
-		// 关联出 来源 数据
-		assetService.join(list,AssetMeta.SOURCE);
-		assetService.join(list,AssetMeta.SAFETY_LEVEL);
-		assetService.join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-
-		assetService.join(list,AssetMeta.OWNER_COMPANY);
-		assetService.join(list,AssetMeta.USE_ORGANIZATION);
-		assetService.join(list,AssetMeta.MANAGER);
-		assetService.join(list,AssetMeta.USE_USER);
-		assetService.join(list,AssetMeta.ORIGINATOR);
-
-		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-		assetService.dao().join(originators, Person.class);
-
-
-		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-		assetService.dao().join(managers, Person.class);
-
-		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-		assetService.dao().join(useUser, Person.class);
-
+		assetService.joinData(list);
 		result.success(true).data(list);
 		return result;
 	}
