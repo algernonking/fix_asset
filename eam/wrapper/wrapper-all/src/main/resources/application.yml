@@ -1,23 +1,31 @@
 server:
-  session: 
+  session:
     timeout: 1200s
   servlet:
     session:
       # 会话超时时间，如 30s , 20m 等
-      timeout: 1200s 
+      timeout: 1200s
   port: 8089
- 
+
 spring:
   main:
     allow-bean-definition-overriding: true
   application:
     name: service-all
     description: Foxnic Web Service All
-  servlet: 
-    multipart: 
+  servlet:
+    multipart:
       max-file-size: 100MB
       max-request-size: 100MB
   datasource:
+    # Druid 监控 , 访问 ${url-prefix}/login.html
+    monitor:
+      url-prefix: druid
+      username: root
+      password: root
+      allow: 192.168.33.108,127.0.0.1
+      deny: 192.168.1.73
+      resetEnable: true
     druid:
       primary:
         encrypt:
@@ -60,9 +68,9 @@ springfox:
 
 security:
   # 模式：session / jwt
-  mode: both 
+  mode: both
   # 配置无需鉴权可以访问的地址
-  ignored-urls: /assets/** , /pages/** , /favicon.ico , /module/** ,  /**/*.css , /**/*.js , /error
+  ignored-urls: /assets/** , /pages/** , /favicon.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
   # mode=session 时配置的登录页面
   login-page: /login.html
   jwt:
@@ -78,23 +86,23 @@ security:
 
 
 logging:
-  config: classpath:logback-config.xml  
+  config: classpath:logback-config.xml
 
-snowflake: 
-  datacenterId: 1  
+snowflake:
+  datacenterId: 1
   workerId: 1
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"  
+        include: "*"
 
-knife4j: 
+knife4j:
   enable: true
   title: ${spring.application.name}
   description: ${spring.application.description}
-  version: 1.0        
+  version: 1.0
 
 storage:
   mode: disk
