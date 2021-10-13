@@ -358,6 +358,14 @@ public class AssetPageController extends ViewController {
 			updateMode=(boolean)updateModeResult.getData();
 		}
 		model.addAttribute("assetDirectUpdateMode",updateMode);
+
+
+		Result assetStatusColumnDisableResult=OperateServiceProxy.api().queryAssetStatusColumnDisable();
+		boolean assetStatusDisable=false;
+		if(assetStatusColumnDisableResult.isSuccess()){
+			assetStatusDisable=(boolean)assetStatusColumnDisableResult.getData();
+		}
+		model.addAttribute("assetStatusColumnDisable",assetStatusDisable);
 		return prefix+"/asset_info_form";
 	}
 

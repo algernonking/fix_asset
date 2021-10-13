@@ -114,6 +114,17 @@ public interface OperateServiceProxy {
 	 */
 	public static final String QUERY_ASSET_DIRECT_UPDATE_MODE = API_PREFIX + "query-asset-direct-update-mode";
 
+	/**
+	 * 资产更新判断
+	 */
+	public static final String QUERY_ASSET_STATUS_COLUMN_DISABLE = API_PREFIX + "query-asset-status-column-disable";
+
+
+	/**
+	 * 资产更新判断
+	 */
+	@RequestMapping(OperateServiceProxy.QUERY_ASSET_STATUS_COLUMN_DISABLE)
+	public Result queryAssetStatusColumnDisable();
 
 	/**
 	 * 资产更新判断

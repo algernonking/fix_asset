@@ -280,13 +280,15 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
             }
 
+            if(ASSET_STATUS_COLUMN_DISABLE){
+                setTimeout(function(){
+                    var assetStatusSelect= xmSelect.get('#assetStatus',true);
+                    if(assetStatusSelect){
+                        assetStatusSelect.update({disabled:true})
+                    }
+                },500)
+            }
 
-            setTimeout(function(){
-                var assetStatusSelect= xmSelect.get('#assetStatus',true);
-                if(assetStatusSelect){
-                    assetStatusSelect.update({disabled:true})
-                }
-            },500)
 
 
         },

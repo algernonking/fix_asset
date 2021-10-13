@@ -63,6 +63,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	public DAO dao() { return dao; }
 
 
+
 	
 	@Override
 	public Object generateId(Field field) {
@@ -127,7 +128,21 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 		return r;
 	}
 
+	@Override
+	public boolean queryAssetStatusColumnDisable(){
+		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode("eam.assetStatusColumnDisable");
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
+		return r;
 
+	}
 	/**
 	 * 判断是否需要审批
 	 * @param businessType 业务类型

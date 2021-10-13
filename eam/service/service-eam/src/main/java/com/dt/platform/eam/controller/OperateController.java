@@ -270,7 +270,7 @@ public class OperateController extends SuperController {
 	 *  资产更新判断
 	 */
 	@ApiOperation(value = "资产更新判断")
-	@ApiOperationSupport(order=19)
+	@ApiOperationSupport(order=10)
 	@SentinelResource(value = OperateServiceProxy.QUERY_ASSET_DIRECT_UPDATE_MODE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(OperateServiceProxy.QUERY_ASSET_DIRECT_UPDATE_MODE)
 	public Result queryAssetDirectUpdateMode() {
@@ -278,6 +278,20 @@ public class OperateController extends SuperController {
 		result.success(true).data(operateService.queryAssetDirectUpdateMode());
 		return result;
 	}
+
+	/**
+	 *  资产更新判断
+	 */
+	@ApiOperation(value = "资产更新判断")
+	@ApiOperationSupport(order=11)
+	@SentinelResource(value = OperateServiceProxy.QUERY_ASSET_STATUS_COLUMN_DISABLE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@PostMapping(OperateServiceProxy.QUERY_ASSET_STATUS_COLUMN_DISABLE)
+	public Result queryAssetStatusColumnDisable() {
+		Result result=new Result();
+		result.success(true).data(operateService.queryAssetStatusColumnDisable());
+		return result;
+	}
+
 
 
 	/**

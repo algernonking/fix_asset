@@ -35,7 +35,7 @@ import java.util.List;
 @RequestMapping(AssetReportPageController.prefix)
 public class AssetReportPageController extends ViewController {
 	
-	public static final String prefix="business/eam/asset_report/";
+	public static final String prefix="business/eam/asset_report";
 
 	private AssetServiceProxy proxy;
 

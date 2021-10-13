@@ -42,6 +42,12 @@ public interface IOperateService extends ISuperService<Operate> {
 	boolean queryAssetDirectUpdateMode();
 
 	/**
+	 * 判断前端资产状态是否可以更新
+	 * @return 返回
+	 * */
+	boolean queryAssetStatusColumnDisable();
+
+	/**
 	 * 判断是否需要审批
 	 * @param businessType 业务类型
 	 * @return 返回是否需要审批
