@@ -250,8 +250,8 @@ function FormPage() {
 			#if(f.isFormElem)
 			#if(f.typeName.equals("select_box"))
 			//设置  #(f.labelInForm) 设置下拉框勾选
-			#if(f.selectField.queryApi!=null && f.selectField.fillBy!=null)
-			fox.setSelectValue4QueryApi("##(f.varName)",formData.#(f.selectField.fillBy));
+			#if(f.selectField.queryApi!=null && f.selectField.fillWith!=null)
+			fox.setSelectValue4QueryApi("##(f.varName)",formData.#(f.selectField.fillWith));
 			#elseif(f.selectField.dictCode!=null)
 			fox.setSelectValue4Dict("##(f.varName)",formData.#(f.varName),SELECT_#(f.varName.toUpperCase())_DATA);
 			#elseif(f.selectField.enumTypeName!=null)

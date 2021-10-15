@@ -2,7 +2,7 @@
 
 
 function ListPage() {
-        
+
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	#if(isTree)
 	// 树形结构记录当前上级节点ID
@@ -16,7 +16,7 @@ function ListPage() {
       * 入口函数，初始化
       */
 	this.init=function(layui) {
-     	
+
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 
@@ -38,8 +38,8 @@ function ListPage() {
 		//绑定行操作按钮事件
     	bindRowOperationEvent();
      }
-     
-     
+
+
      /**
       * 渲染表格
       */
@@ -112,7 +112,7 @@ function ListPage() {
 					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
 					#end
 					#if(f.selectField.queryApi!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)',fox.joinLabel(#if(f.selectField.fillBy!=null)d.#(f.selectField.fillBy)#else null #end,"#(f.selectField.textField)"),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)',fox.joinLabel(#if(f.selectField.fillWith!=null)d.#(f.selectField.fillWith)#else null #end,"#(f.selectField.textField)"),d);}}
 					#end
 					#else
 					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null), templet: function (d) { return templet('#(f.varName)',fox.getProperty(d,#(f.listFillByPropertyNames)),d);} #else , templet: function (d) { return templet('#(f.varName)',d.#(f.varName),d);}  #end}
@@ -176,9 +176,9 @@ function ListPage() {
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
-		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.textField)" };
+		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)",field:"#(f.selectField.textField)" };
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillBy:"#(f.selectField.fillBy)",field:"#(f.selectField.valueField)", label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
+		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)",field:"#(f.selectField.valueField)", label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#end
 		#else
 		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
@@ -219,8 +219,8 @@ function ListPage() {
 		#end
 		table.reload('data-table', { where : ps });
 	}
-    
-    #if(isTree) 
+
+    #if(isTree)
 	//导航刷新函数
 	function refreshNav() {
 		$("#tree-nav").empty();
@@ -249,8 +249,8 @@ function ListPage() {
 			refreshNav();
 		});
 	};
-	#end 
-	
+	#end
+
 	/**
 	  * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	  */
@@ -261,7 +261,7 @@ function ListPage() {
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];
 		return data;
 	}
-	
+
 	/**
 	 * 重置搜索框
 	 */
@@ -420,7 +420,7 @@ function ListPage() {
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
-	
+
 	/**
 	 * 绑定搜索框事件
 	 */
@@ -485,7 +485,7 @@ function ListPage() {
 		#end
 		#end
 	}
-	
+
 	/**
 	 * 绑定按钮事件
 	  */
@@ -526,13 +526,13 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
-        	#if(isTree) 
+        	#if(isTree)
         	data.#(parentIdVar)=#(parentIdVar);
         	#end
 			admin.putTempData('#(formDataKey)-form-action', "create",true);
             showEditForm(data);
         };
-		
+
 		#if(isSimplePK)
         //批量删除按钮点击事件
         function batchDelete(selected) {
@@ -569,7 +569,7 @@ function ListPage() {
         }
         #end
 	}
-     
+
     /**
      * 绑定行操作按钮事件
      */
@@ -637,7 +637,7 @@ function ListPage() {
 						}
 					});
 				});
-				
+
 			}
 			#for(b:opColumnButtons)
 			else if (layEvent === '#(b.id)') { // #(b.label)
@@ -660,18 +660,18 @@ function ListPage() {
 			}
 			#end
 			#if(isTree)else if (layEvent === 'drill') {
-			
+
 				#(parentIdVar) = data.#(idPropertyName);
 				navStack.push([data.id,data.label]);
 				resetSearchFields();
 				refreshTableData();
 				refreshNav();
-				
+
 			} #end
 		});
- 
+
     };
-    
+
     /**
      * 打开编辑窗口
      */

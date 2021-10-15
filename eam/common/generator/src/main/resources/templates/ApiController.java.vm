@@ -162,10 +162,18 @@ public class #(simpleName) extends SuperController {
 	public Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById)) {
 		Result<#(poSimpleName)> result=new Result<>();
 		#(poSimpleName) #(poVarName)=#(serviceVarName).getById(#(controllerMethodParameterPassIn4GetById));
-		#for(f : joinPropertyConsts)
-		// 关联出 #(f.label) 数据
-		#(serviceVarName).join(#(poVarName),#(poMetaClassName).#(f.constName));
+
+		// join 关联的对象
+		#(serviceVarName).dao().fill(#(poVarName))
+		#if(fillWithUnits.fillGetById==null)
+		#for(f : joinPropertyUnits)
+			.with(#(f.args))
 		#end
+		#else
+			#(fillWithUnits.fillGetById.code)
+		#end
+			.execute();
+
 		result.success(true).data(#(poVarName));
 		return result;
 	}
@@ -190,6 +198,14 @@ public class #(simpleName) extends SuperController {
 	public Result<List<#(poSimpleName)>> getByIds(List<#(idsPropertyType)> #(idsPropertyName)) {
 		Result<List<#(poSimpleName)>> result=new Result<>();
 		List<#(poSimpleName)> list=#(serviceVarName).getByIds(#(idsPropertyName));
+
+		#if(fillWithUnits.fillGetByIds!=null)
+		// join 关联的对象
+		#(serviceVarName).dao().fill(list)
+			#(fillWithUnits.fillGetByIds.code)
+			.execute();
+		#end
+
 		result.success(true).data(list);
 		return result;
 	}
@@ -211,6 +227,14 @@ public class #(simpleName) extends SuperController {
 		Result<List<#(poSimpleName)>> result=new Result<>();
 		List<#(poSimpleName)> list=#(serviceVarName).queryList(sample);
 		result.success(true).data(list);
+
+		#if(fillWithUnits.fillQueryList!=null)
+		// join 关联的对象
+		#(serviceVarName).dao().fill(list)
+			#(fillWithUnits.fillQueryList.code)
+			.execute();
+		#end
+
 		return result;
 	}
 
@@ -229,10 +253,18 @@ public class #(simpleName) extends SuperController {
 	public Result<PagedList<#(poSimpleName)>> queryPagedList(#(voSimpleName) sample) {
 		Result<PagedList<#(poSimpleName)>> result=new Result<>();
 		PagedList<#(poSimpleName)> list=#(serviceVarName).queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		#for(f : joinPropertyConsts)
-		// 关联出 #(f.label) 数据
-		#(serviceVarName).join(list,#(poMetaClassName).#(f.constName));
+
+		// join 关联的对象
+		#(serviceVarName).dao().fill(list)
+		#if(fillWithUnits.fillQueryPagedList==null)
+		#for(f : joinPropertyUnits)
+			.with(#(f.args))
 		#end
+		#else
+			#(fillWithUnits.fillQueryPagedList.code)
+		#end
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}
