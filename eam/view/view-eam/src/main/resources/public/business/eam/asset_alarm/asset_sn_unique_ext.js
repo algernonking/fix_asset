@@ -1,7 +1,7 @@
 /**
- * 资产 列表页 JS 脚本
+ * 存放位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-15 08:51:40
+ * @since 2021-10-12 02:47:14
  */
 
 layui.config({
@@ -129,9 +129,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
-        assetDataChange:function (data){
-            console.log('assetDataChange',data);
-        },
         /**
          * 末尾执行
          */
@@ -146,9 +143,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单初始化前调用
          * */
         beforeInit:function () {
-            //获取参数，并调整下拉框查询用的URL
-            //var companyId=admin.getTempData("companyId");
-            //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
+
             console.log("form:beforeInit")
         },
         /**

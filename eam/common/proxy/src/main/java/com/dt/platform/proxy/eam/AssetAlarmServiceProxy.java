@@ -52,6 +52,10 @@ public interface AssetAlarmServiceProxy {
 	 */
 	public static final String QUERY_BORROW_EXPIRATION_DATA = API_PREFIX + "query-borrow-expiration-data";
 
+	/**
+	 * 资产序列唯一
+	 */
+	public static final String QUERY_ASSET_SERIAL_NUMBER_UNIQUE = API_PREFIX + "query-asset-serial-number-unique";
 
 	/**
 	 * 控制器类名

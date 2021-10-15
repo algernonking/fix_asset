@@ -42,8 +42,8 @@ public class AssetReportController extends SuperController {
     @ApiOperationSupport(order=2)
     @SentinelResource(value = AssetReportServiceProxy.QUERY_CATEGORY_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetReportServiceProxy.QUERY_CATEGORY_DATA)
-    public Result queryCategoryData(Asset sample) {
-        Result result=new Result();
+    public  Result<JSONArray> queryCategoryData(Asset sample) {
+        Result<JSONArray> result=new Result<>();
         result.success(true).data(assetReportService.queryCategoryData(sample));
         return result;
     }

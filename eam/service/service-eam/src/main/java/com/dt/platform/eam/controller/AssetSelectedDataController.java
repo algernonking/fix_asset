@@ -7,6 +7,7 @@ import java.util.List;
 import com.dt.platform.domain.eam.AssetItem;
 import com.dt.platform.domain.eam.AssetItemVO;
 import com.dt.platform.eam.service.IAssetItemService;
+import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -274,6 +275,7 @@ public class AssetSelectedDataController extends SuperController {
 			List<AssetSelectedData> list =new ArrayList<>();
 			for(int i=0;i<ids.size();i++){
 				AssetSelectedData obj=new AssetSelectedData();
+				obj.setId(IDGenerator.getSnowflakeIdString());
 				obj.setAssetSelectedCode(assetSelectedCode);
 				obj.setAssetId(ids.get(i));
 				list.add(obj);

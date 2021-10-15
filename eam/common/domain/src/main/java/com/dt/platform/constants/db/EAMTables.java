@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-11 21:58:42
+ * @since 2021-10-15 08:50:32
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1283,6 +1283,16 @@ public class EAMTables {
 		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
 		
 		/**
+		 * 最近核对日期
+		*/
+		public static final DBField LAST_VERIFICATION_DATE = new DBField(DBDataType.DATE , "last_verification_date","lastVerificationDate","最近核对日期","最近核对日期",false,false,true);
+		
+		/**
+		 * 用途
+		*/
+		public static final DBField PURPOSE = new DBField(DBDataType.STRING , "purpose","purpose","用途","用途",false,false,true);
+		
+		/**
 		 * 资产备注
 		*/
 		public static final DBField ASSET_NOTES = new DBField(DBDataType.STRING , "asset_notes","assetNotes","资产备注","资产备注",false,false,true);
@@ -1438,6 +1448,11 @@ public class EAMTables {
 		public static final DBField EQUIPMENT_ENVIRONMENT_CODE = new DBField(DBDataType.STRING , "equipment_environment_code","equipmentEnvironmentCode","设备运行环境","设备运行环境",false,false,true);
 		
 		/**
+		 * 设备序列号
+		*/
+		public static final DBField EQUIPMENT_SERIAL_NUMBER = new DBField(DBDataType.STRING , "equipment_serial_number","equipmentSerialNumber","设备序列号","设备序列号",false,false,true);
+		
+		/**
 		 * 设备机柜
 		*/
 		public static final DBField RACK_ID = new DBField(DBDataType.STRING , "rack_id","rackId","设备机柜","设备机柜",false,false,true);
@@ -1512,7 +1527,7 @@ public class EAMTables {
 		public static final DBField ORIGINATOR_ID = new DBField(DBDataType.STRING , "originator_id","originatorId","制单人","制单人",false,false,true);
 		
 		public EAM_ASSET() {
-			this.init($NAME,"资产" , ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , RFID , ATTACH , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID);
+			this.init($NAME,"资产" , ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , SCRAP , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID);
 		}
 		public static final EAM_ASSET $TABLE=new EAM_ASSET();
 	}
@@ -1756,13 +1771,8 @@ public class EAMTables {
 		*/
 		public static final DBField OWNER = new DBField(DBDataType.STRING , "owner","owner","归属","归属",false,false,true);
 		
-		/**
-		 * 选择数据
-		*/
-		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
-		
 		public EAM_ASSET_ATTRIBUTE() {
-			this.init($NAME,"资产字段配置" , ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER , SELECTED_CODE);
+			this.init($NAME,"资产字段配置" , ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER);
 		}
 		public static final EAM_ASSET_ATTRIBUTE $TABLE=new EAM_ASSET_ATTRIBUTE();
 	}
@@ -6046,8 +6056,13 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
 		
+		/**
+		 * 岗位类型，关联字典 position_type
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","岗位类型","关联字典 position_type",false,false,true);
+		
 		public HRM_POSITION() {
-			this.init($NAME,"岗位表" , ID , ORG_ID , CODE , FULL_NAME , SHORT_NAME , VALID , SORT , COMPANY_ID , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"岗位表" , ID , ORG_ID , CODE , FULL_NAME , SHORT_NAME , VALID , SORT , COMPANY_ID , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TYPE);
 		}
 		public static final HRM_POSITION $TABLE=new HRM_POSITION();
 	}

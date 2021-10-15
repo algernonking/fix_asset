@@ -35,6 +35,21 @@ public interface IOperateService extends ISuperService<Operate> {
 
 	Result draft(ProcessStartVO startVO);
 
+
+	/**
+	 * 判断资产序列是否唯一
+	 * @return 返回
+	 */
+	boolean queryAssetSerialNumberIsUnique(String sn,String id);
+
+
+	/**
+	 * 判断资产序列是否唯一
+	 * @return 返回
+	 */
+	boolean queryAssetSerialNumberNeedUnique();
+
+
 	/**
 	 * 判断前端资产是否能更新
 	 * @return 返回

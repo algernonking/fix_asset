@@ -311,22 +311,21 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	@Override
 	public AssetDataChange extractAssetDataChange(AssetDataChangeRecord vo,String assetSelectedCode) {
 		AssetDataChange data=new AssetDataChange();
+		List<String> list=new ArrayList<>();
 		//获取资产列表
 		if(!StringUtil.isBlank(assetSelectedCode)){
 			ConditionExpr condition=new ConditionExpr();
 			condition.andIn("asset_selected_code",assetSelectedCode);
-			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
-			data.setAssetIds(list);
+			list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
 		}else{
 			String handleId=vo.getId();
 			ConditionExpr itemRecordCondition=new ConditionExpr();
 			itemRecordCondition.andIn("handle_id",handleId);
 			itemRecordCondition.andIn("crd","c","r");
-			List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
-			data.setAssetIds(ckDatalist);
+			list=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
 			data.setId(vo.getId());
 		}
-
+		data.setAssetIds(list);
 		Asset asset=(Asset)vo;
 		asset.setOwnerCode(vo.getChangeType());
 		if(StringUtil.isBlank(asset.getId()) && StringUtil.isBlank(asset.getStatus())){
@@ -377,16 +376,34 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			//直接使用assetId作为基本数据
 			assetDataChange.setId(assetData.getId());
 
+
+			//判断是否唯一
+			if(operateService.queryAssetSerialNumberNeedUnique()){
+				if(!StringUtil.isBlank(assetDataChangeRecord.getSerialNumber())){
+					if(assetDataChange.getAssetIds().size()>1){
+						return  ErrorDesc.failure().message("当前要变更的资产请保持序列唯一,当前序列为:"+assetDataChangeRecord.getSerialNumber());
+					}else if(assetDataChange.getAssetIds().size()==1){
+						String assetId=assetDataChange.getAssetIds().get(0);
+						if(!operateService.queryAssetSerialNumberIsUnique(assetDataChangeRecord.getSerialNumber(),assetId)){
+							return ErrorDesc.failure().message("当前资产序列号不唯一:"+assetDataChangeRecord.getSerialNumber());
+						}
+					}
+				}
+			}
+
+
 			//保存单据数据
 			Result insertReuslt=insert(assetDataChange);
 			if(!insertReuslt.isSuccess()){
 				return insertReuslt;
 			}
+
 			//保存要修改的资产列表
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetDataChange.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
 				asset.setHandleId(assetDataChange.getId());
+				asset.setId(IDGenerator.getSnowflakeIdString());
 				asset.setAssetId(assetDataChange.getAssetIds().get(i));
 				saveList.add(asset);
 			}
@@ -423,10 +440,19 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			return ErrorDesc.failure().message("请选择资产");
 		}
 
-//		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),assetDataChange.getAssetIds());
-//		if(!ckResult.isSuccess()){
-//			return ckResult;
-//		}
+		//判断是否唯一
+		if(operateService.queryAssetSerialNumberNeedUnique()){
+			if(!StringUtil.isBlank(assetDataChangeRecord.getSerialNumber())){
+				if(assetDataChange.getAssetIds().size()>1){
+					return  ErrorDesc.failure().message("当前要变更的资产请保持序列唯一,当前序列为:"+assetDataChangeRecord.getSerialNumber());
+				}else if(assetDataChange.getAssetIds().size()==1){
+					String assetId=assetDataChange.getAssetIds().get(0);
+					if(!operateService.queryAssetSerialNumberIsUnique(assetDataChangeRecord.getSerialNumber(),assetId)){
+						return ErrorDesc.failure().message("当前资产序列号不唯一:"+assetDataChangeRecord.getSerialNumber());
+					}
+				}
+			}
+		}
 
 		Result updateAssetResult=assetService.update(assetDataChange.getChangeData(),SaveMode.NOT_NULL_FIELDS);
 		if(!updateAssetResult.isSuccess())return updateAssetResult;
@@ -435,7 +461,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		if(r.success()){
 			//保存表单数据
 			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",handleId);
-			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",handleId);
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and handle_id=?",handleId);
 		}
 		return r;
 	}
@@ -504,6 +530,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * */
 	@Override
 	public Result update(AssetDataChange assetDataChange , SaveMode mode) {
+
 		Result r=super.update(assetDataChange , mode);
 		return r;
 	}

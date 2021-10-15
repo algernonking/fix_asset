@@ -3,14 +3,20 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.constants.enums.common.StatusYNEnum;
+import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.Rcd;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.Config;
 import org.github.foxnic.web.domain.system.ConfigVO;
 import org.github.foxnic.web.proxy.system.ConfigServiceProxy;
+import org.github.foxnic.web.proxy.utils.SessionUserProxyUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,6 +115,65 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 		return null;
 	}
 
+
+
+	/*
+	当前的SN是否是唯一的。判断是否序列号要唯一,满足非空唯一即可
+	 */
+	@Override
+	public boolean queryAssetSerialNumberIsUnique(String sn,String id){
+		if(StringUtil.isBlank(sn)){
+			return true;
+		}
+		String sql="select 1 from eam_asset where serial_number=? and tenant_id=? and owner_code=? and deleted='0'";
+		if(!StringUtil.isBlank(id)){
+			sql=sql+" and id<>'"+id+"'";
+		}
+		if(dao.queryRecord(sql,sn, SessionUser.getCurrent().getActivatedTenantId(),AssetOwnerCodeEnum.ASSET.code())==null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+
+	/**
+	 * 判断前端资产是否能更新
+	 * @return 返回
+	 * */
+	@Override
+	public boolean queryAssetSerialNumberNeedUnique(){
+		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode("eam.assetSerialNumberIsUnique");
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
+		return r;
+	}
+
+
+
+	private boolean queryAssetControllerParameter(String par){
+		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode(par);
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
+		return r;
+	}
+
+
+
 	/**
 	 * 判断前端资产是否能更新
 	 * @return 返回
@@ -117,7 +182,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	public boolean queryAssetDirectUpdateMode(){
 		boolean r=false;
 		ConfigVO vo=new ConfigVO();
-		vo.setCode("eam.asset.directUpdateMode");
+		vo.setCode("eam.assetDirectUpdateMode");
 		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
 		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
 			Config conf=dataRs.getData().get(0);

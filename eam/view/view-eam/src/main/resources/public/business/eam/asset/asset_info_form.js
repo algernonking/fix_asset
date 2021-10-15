@@ -609,6 +609,12 @@ function FormPage() {
 			trigger:"click"
 		});
 
+		laydate.render({
+			elem: '#lastVerificationDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+
 
 	}
 
@@ -672,6 +678,29 @@ function FormPage() {
 			} else {
 				adjustPopup();
 			}
+
+			//设置 采购日期 显示复选框勾选
+			if(formData["purchaseDate"]) {
+				$("#purchaseDate").val(fox.dateFormat(formData["purchaseDate"],"yyyy-MM-dd"));
+			}
+			//设置 开始时间 显示复选框勾选
+			if(formData["maintenanceStartDate"]) {
+				$("#maintenanceStartDate").val(fox.dateFormat(formData["maintenanceStartDate"],"yyyy-MM-dd"));
+			}
+			//设置 结束时间 显示复选框勾选
+			if(formData["maintenanceEndDate"]) {
+				$("#maintenanceEndDate").val(fox.dateFormat(formData["maintenanceEndDate"],"yyyy-MM-dd"));
+			}
+			//设置 入账时间 显示复选框勾选
+			if(formData["entryTime"]) {
+				$("#entryTime").val(fox.dateFormat(formData["entryTime"],"yyyy-MM-dd HH:mm:ss"));
+			}
+
+			//设置 结束时间 显示复选框勾选
+			if(formData["lastVerificationDate"]) {
+				$("#lastVerificationDate").val(fox.dateFormat(formData["lastVerificationDate"],"yyyy-MM-dd"));
+			}
+
 
 			//设置  资产分类 设置下拉框勾选
 			//fox.setSelectValue4QueryApi("#categoryId",formData.category);

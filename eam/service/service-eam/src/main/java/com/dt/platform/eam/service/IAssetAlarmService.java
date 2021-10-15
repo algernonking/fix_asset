@@ -1,5 +1,6 @@
 package com.dt.platform.eam.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetScrap;
 import com.github.foxnic.api.transter.Result;
@@ -19,6 +20,6 @@ public interface IAssetAlarmService extends ISuperService<Asset> {
 
     PagedList<Asset> queryCollectionAlarmData(Asset sample,int pageSize,int pageIndex);
 
-
+    public JSONArray queryAssetSerialNumberUnique();
 
 }

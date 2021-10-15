@@ -91,7 +91,6 @@ public class AssetAlarmPageController extends ViewController {
 	 */
 	@RequestMapping("/maintenance_list.html")
 	public String maintenanceList(Model model,HttpServletRequest request , String id) {
-		System.out.println("111111");
 		//设置字段布局
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
 		if(result.isSuccess()){
@@ -100,6 +99,15 @@ public class AssetAlarmPageController extends ViewController {
 			model.addAttribute("attributeListData",list);
 		}
 		return prefix+"/maintenance_list";
+	}
+
+
+	/**
+	 * 资产维保
+	 */
+	@RequestMapping("/asset_sn_unique_list.html")
+	public String assetSnUniqueList(Model model,HttpServletRequest request , String id) {
+		return prefix+"/asset_sn_unique_list";
 	}
 
 

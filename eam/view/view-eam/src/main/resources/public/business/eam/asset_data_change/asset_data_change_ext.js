@@ -303,7 +303,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 if (formAction == "view") {
                     setTimeout(function () {
                         $('#extData').find("input").attr('placeholder', '未变更');
+
                         $('#extData').find("textarea").attr('placeholder', '未变更');
+
                         $('#extData').find("button").each(function (index, e) {
                             var not_Btn=$(e).find("i");
                             if(not_Btn.length>0){
@@ -314,7 +316,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                             }
                         })
                         //html("未变更")
-                        $('#extData').find(".xm-tips").each(function(index,e){
+                        $('#data-form').find(".xm-tips").each(function(index,e){
                             console.log($(e).html());
                             $(e).html("未变更");
                         });

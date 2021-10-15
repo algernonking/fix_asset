@@ -1,5 +1,6 @@
 package com.dt.platform.eam.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 import com.dt.platform.eam.service.IAssetAlarmService;
@@ -39,7 +40,7 @@ public class AssetAlarmController extends SuperController {
 
 
     @ApiOperation(value = "资产领用过期数据")
-    @ApiOperationSupport(order=1)
+    @ApiOperationSupport(order=2)
     @SentinelResource(value = AssetAlarmServiceProxy.QUERY_COLLECTION_EXPIRATION_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetAlarmServiceProxy.QUERY_COLLECTION_EXPIRATION_DATA)
     public Result queryCollectionExpirationData(AssetVO sample) {
@@ -51,7 +52,7 @@ public class AssetAlarmController extends SuperController {
 
 
     @ApiOperation(value = "资产维保过期数据")
-    @ApiOperationSupport(order=1)
+    @ApiOperationSupport(order=3)
     @SentinelResource(value = AssetAlarmServiceProxy.QUERY_MAINTENANCE_EXPIRATION_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetAlarmServiceProxy.QUERY_MAINTENANCE_EXPIRATION_DATA)
     public Result queryMaintenanceExpirationData(AssetVO sample) {
@@ -62,6 +63,16 @@ public class AssetAlarmController extends SuperController {
     }
 
 
+
+    @ApiOperation(value = "资产序列唯一")
+    @ApiOperationSupport(order=4)
+    @SentinelResource(value = AssetAlarmServiceProxy.QUERY_ASSET_SERIAL_NUMBER_UNIQUE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetAlarmServiceProxy.QUERY_ASSET_SERIAL_NUMBER_UNIQUE)
+    public  Result<JSONArray> queryAssetSerialNumberUnique(Asset sample) {
+        Result<JSONArray> result=new Result<>();
+        result.success(true).data(assetAlarmService.queryAssetSerialNumberUnique());
+        return result;
+    }
 
 
 }

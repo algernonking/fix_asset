@@ -25,8 +25,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 16:37:38
- * @sign 5676F57E782A3D658FBD2A810596706A
+ * @since 2021-10-15 08:51:38
+ * @sign 1C53E28CA1B380F310EBF843A26DFBA9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -47,7 +47,7 @@ public class Asset extends Entity {
 	/**
 	 * 资产分类：资产分类
 	*/
-	@ApiModelProperty(required = true,value="资产分类" , notes = "资产分类")
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
 	private String categoryId;
 	
 	/**
@@ -231,6 +231,12 @@ public class Asset extends Entity {
 	private Date purchaseDate;
 	
 	/**
+	 * 生产日期：生产日期
+	*/
+	@ApiModelProperty(required = false,value="生产日期" , notes = "生产日期")
+	private Date productionDate;
+	
+	/**
 	 * 资产RFID：资产RFID
 	*/
 	@ApiModelProperty(required = false,value="资产RFID" , notes = "资产RFID")
@@ -241,6 +247,18 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="附件" , notes = "附件")
 	private String attach;
+	
+	/**
+	 * 最近核对日期：最近核对日期
+	*/
+	@ApiModelProperty(required = false,value="最近核对日期" , notes = "最近核对日期")
+	private Date lastVerificationDate;
+	
+	/**
+	 * 用途：用途
+	*/
+	@ApiModelProperty(required = false,value="用途" , notes = "用途")
+	private String purpose;
 	
 	/**
 	 * 资产备注：资产备注
@@ -427,6 +445,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="设备运行环境" , notes = "设备运行环境")
 	private String equipmentEnvironmentCode;
+	
+	/**
+	 * 设备序列号：设备序列号
+	*/
+	@ApiModelProperty(required = false,value="设备序列号" , notes = "设备序列号")
+	private String equipmentSerialNumber;
 	
 	/**
 	 * 设备机柜：设备机柜
@@ -1241,6 +1265,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 生产日期<br>
+	 * 生产日期
+	 * @return 生产日期
+	*/
+	public Date getProductionDate() {
+		return productionDate;
+	}
+	
+	/**
+	 * 设置 生产日期
+	 * @param productionDate 生产日期
+	 * @return 当前对象
+	*/
+	public Asset setProductionDate(Date productionDate) {
+		this.productionDate=productionDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 资产RFID<br>
 	 * 资产RFID
 	 * @return 资产RFID
@@ -1275,6 +1318,44 @@ public class Asset extends Entity {
 	*/
 	public Asset setAttach(String attach) {
 		this.attach=attach;
+		return this;
+	}
+	
+	/**
+	 * 获得 最近核对日期<br>
+	 * 最近核对日期
+	 * @return 最近核对日期
+	*/
+	public Date getLastVerificationDate() {
+		return lastVerificationDate;
+	}
+	
+	/**
+	 * 设置 最近核对日期
+	 * @param lastVerificationDate 最近核对日期
+	 * @return 当前对象
+	*/
+	public Asset setLastVerificationDate(Date lastVerificationDate) {
+		this.lastVerificationDate=lastVerificationDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 用途<br>
+	 * 用途
+	 * @return 用途
+	*/
+	public String getPurpose() {
+		return purpose;
+	}
+	
+	/**
+	 * 设置 用途
+	 * @param purpose 用途
+	 * @return 当前对象
+	*/
+	public Asset setPurpose(String purpose) {
+		this.purpose=purpose;
 		return this;
 	}
 	
@@ -1864,6 +1945,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setEquipmentEnvironmentCode(String equipmentEnvironmentCode) {
 		this.equipmentEnvironmentCode=equipmentEnvironmentCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备序列号<br>
+	 * 设备序列号
+	 * @return 设备序列号
+	*/
+	public String getEquipmentSerialNumber() {
+		return equipmentSerialNumber;
+	}
+	
+	/**
+	 * 设置 设备序列号
+	 * @param equipmentSerialNumber 设备序列号
+	 * @return 当前对象
+	*/
+	public Asset setEquipmentSerialNumber(String equipmentSerialNumber) {
+		this.equipmentSerialNumber=equipmentSerialNumber;
 		return this;
 	}
 	

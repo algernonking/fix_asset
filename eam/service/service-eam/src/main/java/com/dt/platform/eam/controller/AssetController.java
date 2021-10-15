@@ -354,7 +354,7 @@ public class AssetController extends SuperController {
 	@ApiOperation(value = "保存资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "489517168661102592"),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "486917781384597505"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486917781384597505"),
 		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
@@ -385,8 +385,11 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURPOSE , value = "用途" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
@@ -418,6 +421,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_SERIAL_NUMBER , value = "设备序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -510,7 +514,7 @@ public class AssetController extends SuperController {
 	@ApiOperation(value = "查询资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "489517168661102592"),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "486917781384597505"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486917781384597505"),
 		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
@@ -541,8 +545,11 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURPOSE , value = "用途" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
@@ -574,6 +581,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_SERIAL_NUMBER , value = "设备序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -598,7 +606,7 @@ public class AssetController extends SuperController {
 	@ApiOperation(value = "分页查询资产")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = AssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "489517168661102592"),
-		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = true , dataTypeClass=String.class , example = "486917781384597505"),
+		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_ID , value = "资产分类" , required = false , dataTypeClass=String.class , example = "486917781384597505"),
 		@ApiImplicitParam(name = AssetVOMeta.CATEGORY_CODE , value = "分类编码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BUSINESS_CODE , value = "业务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
@@ -629,8 +637,11 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURPOSE , value = "用途" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NOTES , value = "资产备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_ID , value = "维保厂商" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.MAINTAINER_NAME , value = "维保厂商" , required = false , dataTypeClass=String.class , example = "12"),
@@ -662,6 +673,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_LABEL , value = "设备标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_CONF , value = "设备配置" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_ENVIRONMENT_CODE , value = "设备运行环境" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.EQUIPMENT_SERIAL_NUMBER , value = "设备序列号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_ID , value = "设备机柜" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_UP_NUMBER , value = "设备机柜上位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
@@ -955,7 +967,7 @@ public class AssetController extends SuperController {
 					dataFill=true;
 			}
 			dataFill=true;
-			List<ValidateResult> errors=assetService.importExcel(input,0,true,AssetOperateEnum.EAM_ASSET_INSERT.code(),dataFill);
+			List<ValidateResult> errors=assetService.importExcel(input,0,true,AssetOwnerCodeEnum.ASSET.code(),AssetOperateEnum.EAM_ASSET_INSERT.code(),dataFill);
 			if(errors==null || errors.isEmpty()) {
 				return ErrorDesc.success();
 			} else {

@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 16:37:44
+ * @since 2021-10-15 08:51:44
  */
 
 function FormPage() {
@@ -281,10 +281,15 @@ function FormPage() {
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
+		laydate.render({
+			elem: '#productionDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 	    //渲染图片字段
 		foxup.render({
 			el:"attach",
-			maxFileCount: 3,
+			maxFileCount: 1,
 			displayFileName: false,
 			accept: "image",
 			acceptMime:'image/*',
@@ -303,6 +308,11 @@ function FormPage() {
 				adjustPopup();
 			}
 	    });
+		laydate.render({
+			elem: '#lastVerificationDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 		//渲染 maintainerId 下拉字段
 		fox.renderSelectBox({
 			el: "maintainerId",
@@ -478,6 +488,14 @@ function FormPage() {
 			//设置 采购日期 显示复选框勾选
 			if(formData["purchaseDate"]) {
 				$("#purchaseDate").val(fox.dateFormat(formData["purchaseDate"],"yyyy-MM-dd"));
+			}
+			//设置 生产日期 显示复选框勾选
+			if(formData["productionDate"]) {
+				$("#productionDate").val(fox.dateFormat(formData["productionDate"],"yyyy-MM-dd HH:mm:ss"));
+			}
+			//设置 最近核对日期 显示复选框勾选
+			if(formData["lastVerificationDate"]) {
+				$("#lastVerificationDate").val(fox.dateFormat(formData["lastVerificationDate"],"yyyy-MM-dd HH:mm:ss"));
 			}
 			//设置 开始时间 显示复选框勾选
 			if(formData["maintenanceStartDate"]) {
@@ -658,7 +676,7 @@ function FormPage() {
 				root: "",
 				targetType:"com",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(ownCompanyIdDialogOptions);
 		});
@@ -674,7 +692,7 @@ function FormPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(managerIdDialogOptions);
 		});
@@ -690,7 +708,7 @@ function FormPage() {
 				root: "",
 				targetType:"org",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(useOrganizationIdDialogOptions);
 		});
@@ -706,7 +724,7 @@ function FormPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
-				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(useUserIdDialogOptions);
 		});

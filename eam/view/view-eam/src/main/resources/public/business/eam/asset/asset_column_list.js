@@ -22,7 +22,6 @@ layui.define([],
                 ,use_organization_id:{ field: 'useOrganizationId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用公司/部门') , templet: function (d) { return templet('useOrganizationId',fox.getProperty(d,["useOrganization","fullName"]),d);} }
                 ,use_user_id:{ field: 'useUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('使用人员') , templet: function (d) { return templet('useUserId',fox.getProperty(d,["useUser","nameAndBadge"]),d);} }
                 ,originator_id:{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
-
                 ,position_id:{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
                 ,position_detail:{ field: 'positionDetail', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
                 ,warehouse_id:{ field: 'warehouseId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId',fox.joinLabel(d.warehouse,"warehouseName"),d);}}
@@ -66,6 +65,9 @@ layui.define([],
                 ,rack_id:{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜') , templet: function (d) { return templet('rackId',d.rackId,d);}  }
                 ,rack_up_number:{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
                 ,rack_down_number:{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
+                ,purpose:{ field: 'purpose', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
+                ,equipment_serial_number:{ field: 'equipmentSerialNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
+                ,last_verification_date:{ field: 'lastVerificationDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('核对日期') , templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd"),d); }}
 
             }
             return COL_ALL_DATA;

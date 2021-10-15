@@ -291,6 +291,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result insert(Asset asset) {
 
+		//判断是否序列号要唯一,满足非空唯一即可
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())&& !StringUtil.isBlank(asset.getSerialNumber()) && operateService.queryAssetSerialNumberNeedUnique() ){
+			if(!operateService.queryAssetSerialNumberIsUnique(asset.getSerialNumber(),null)){
+				return ErrorDesc.failure().message("当前资产序列号不唯一:"+asset.getSerialNumber());
+			}
+		}
+
 
 		//制单人
 		if(StringUtil.isBlank(asset.getOriginatorId())){
@@ -396,6 +403,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(!StringUtil.isBlank(asset.getAssetCode())){
 			asset.setAssetCode(null);
 		}
+
+		//判断是否序列号要唯一,满足非空唯一即可
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())&& !StringUtil.isBlank(asset.getSerialNumber()) && operateService.queryAssetSerialNumberNeedUnique() ){
+			if(!operateService.queryAssetSerialNumberIsUnique(asset.getSerialNumber(),asset.getId())){
+				return ErrorDesc.failure().message("当前资产序列号不唯一:"+asset.getSerialNumber());
+			}
+		}
+
+
 		Result r=super.update(asset , mode);
 		return r;
 	}
@@ -669,22 +685,22 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
-	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String businessType,boolean dataType) {
+	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String assetOwner,String bussinessType,boolean dataType) {
 		List<ValidateResult> errors=new ArrayList<>();
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
-		HashMap<String,List<String>> categoryDataMap=new HashMap<>();
+
 		List<CatalogAttribute> catalogAttribteList=new ArrayList<>();
 		List<CatalogData> catalogDataList=new ArrayList<>();
+		List<String> assetSerialNumberList=new ArrayList<>();
 
 		HashMap<String,HashMap<String,String>> matchMap=new HashMap<>();
 		matchMap.put("organizationMap",assetDataService.queryUseOrganizationNodes());
 		matchMap.put("categoryMap",assetDataService.queryAssetCategoryNodes());
-
-
 		matchMap.put("safetyLevelMap", assetDataService.queryDictItemDataByDictCode("eam_safety_level"));
 		matchMap.put("equipEnvMap",assetDataService.queryDictItemDataByDictCode("eam_equipment_environment"));
 		matchMap.put("sourceMap",assetDataService.queryDictItemDataByDictCode("eam_source"));
+
 
 		String pcmCategoryId=null;
 		if(attributeMap.size()>0){
@@ -704,24 +720,45 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		for (Rcd r:rs.getRcdList()) {
 			i++;
 			System.out.println("before:"+r);
-			String uid=r.getString(AssetDataExportColumnEnum.ASSET_ID.text());
-			if(StringUtil.isBlank(uid)){
+
+			//判断数据是插入或更新
+			if(StringUtil.isBlank(r.getString(AssetDataExportColumnEnum.ASSET_ID.text()))){
 				actionType="insert";
 				assetId=IDGenerator.getSnowflakeIdString();
 				r.set("id",assetId);
 			}else{
+				actionType="update";
 				assetId=r.getString(AssetDataExportColumnEnum.ASSET_ID.text());
 			}
-			//可在此处校验数据
+
+
+			//校验数据
 			Result verifyResult=assetDataService.verifyAssetRecord(r,matchMap,dataType);
 			if(!verifyResult.isSuccess()){
 				errors.add(new ValidateResult(null,(i+1),verifyResult.getMessage()));
 				break;
 			}
+
+			//判断资产分类是否存在
 			String categoryId=r.getString(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.text());
 			if(StringUtil.isBlank(categoryId)){
 				errors.add(new ValidateResult(null,(i+1),"当前资产分类不存在"+r.toString()));
 				break;
+			}
+
+			//判断是否序列号要唯一,满足非空唯一即可
+			if(AssetOwnerCodeEnum.ASSET.code().equals(assetOwner)&& !StringUtil.isBlank(r.getString("serial_number")) && operateService.queryAssetSerialNumberNeedUnique() ){
+				String sn=r.getString("serial_number");
+				if(!operateService.queryAssetSerialNumberIsUnique(sn,r.getString("id"))){
+					errors.add(new ValidateResult(null,(i+1),"当前资产序列号不唯一:"+sn));
+					break;
+				}
+				if(assetSerialNumberList.contains(sn)){
+					errors.add(new ValidateResult(null,(i+1),"当前资产序列号不唯一:"+sn));
+					break;
+				}else{
+					assetSerialNumberList.add(sn);
+				}
 			}
 
 			//处理自定义属性
@@ -740,10 +777,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}
 			}
 
-
+			//汇总更新数据
 			String sql="";
 			if("insert".equals(actionType)){
-
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 				//办理情况
 				if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ){
@@ -754,7 +790,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}
 
 				//资产编号
-				Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+				Result codeResult= CodeModuleServiceProxy.api().generateCode(bussinessType);
 				if(!codeResult.isSuccess()){
 					//返回报错
 					errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
@@ -765,9 +801,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 				insert.set(AssetDataExportColumnEnum.ASSET_ID.text(),assetId);
 				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
-				insert.set("owner_code",AssetOwnerCodeEnum.ASSET.code());
+				insert.set("owner_code",assetOwner);
 				//制单人
 				insert.set("originator_id",SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+
 
 				//设置创建时间
 				if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
@@ -785,12 +822,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					this.dao().execute(insert);
 				}
 				sql=insert.getSQL();
-
 			}else{
 				//办理情况
-//				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
+				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
 //					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
-//				}
+				}
 
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
 					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.ASSET_CODE.text());
@@ -843,7 +879,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
-	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType) {
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,String bussinessType,boolean dataType) {
 
 		List<ValidateResult> errors=new ArrayList<>();
 		ExcelReader er=null;
@@ -866,7 +902,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
 			return errors;
 		}
-		return importData(rs, attributeMap,batch, businessType, dataType);
+		return importData(rs, attributeMap,batch, assetOwner,bussinessType, dataType);
 
 	}
 

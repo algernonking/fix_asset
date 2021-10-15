@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 16:37:42
+ * @since 2021-10-15 08:51:42
  */
 
 
@@ -101,7 +101,10 @@ function ListPage() {
 					,{ field: 'assetNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产数量') , templet: function (d) { return templet('assetNumber',d.assetNumber,d);}  }
 					,{ field: 'remainNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('剩余数量') , templet: function (d) { return templet('remainNumber',d.remainNumber,d);}  }
 					,{ field: 'purchaseDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('采购日期'), templet: function (d) { return templet('purchaseDate',fox.dateFormat(d.purchaseDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'productionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生产日期'), templet: function (d) { return templet('productionDate',fox.dateFormat(d.productionDate,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'rfid', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产RFID') , templet: function (d) { return templet('rfid',d.rfid,d);}  }
+					,{ field: 'lastVerificationDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('最近核对日期'), templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'purpose', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
 					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.assetNotes,d);}  }
 					,{ field: 'maintainerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保商'), templet: function (d) { return templet('maintainerId',fox.joinLabel(d.maintnainer,"maintainerName"),d);}}
 					,{ field: 'maintainerName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维保厂商') , templet: function (d) { return templet('maintainerName',d.maintainerName,d);}  }
@@ -133,6 +136,7 @@ function ListPage() {
 					,{ field: 'equipmentLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备标签') , templet: function (d) { return templet('equipmentLabel',d.equipmentLabel,d);}  }
 					,{ field: 'equipmentConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备配置') , templet: function (d) { return templet('equipmentConf',d.equipmentConf,d);}  }
 					,{ field: 'equipmentEnvironmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('运行环境'), templet: function (d) { return templet('equipmentEnvironmentCode',fox.joinLabel(d.equipmentEnvironment,"label"),d);}}
+					,{ field: 'equipmentSerialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列号') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
 					,{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜') , templet: function (d) { return templet('rackId',d.rackId,d);}  }
 					,{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
 					,{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }
@@ -390,7 +394,7 @@ function ListPage() {
 				root: "",
 				targetType:"com",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(ownCompanyIdDialogOptions);
 		});
@@ -405,7 +409,7 @@ function ListPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(managerIdDialogOptions);
 		});
@@ -420,7 +424,7 @@ function ListPage() {
 				root: "",
 				targetType:"org",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseOrgNode(useOrganizationIdDialogOptions);
 		});
@@ -435,7 +439,7 @@ function ListPage() {
 				root: "",
 				targetType:"emp",
 				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-				callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
 			};
 			fox.chooseEmployee(useUserIdDialogOptions);
 		});

@@ -529,49 +529,49 @@
 <!--设备字段-->
 
 <div  th:fragment="equipment_code" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备编号')}">设备编号</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="equipmentCode" id="equipmentCode" name="equipmentCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备编号') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div  th:fragment="equipment_status"  class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备状态')}">设备状态</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="equipmentStatus" id="equipmentStatus" name="equipmentStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备状态') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div  th:fragment="equipment_ip"  class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备IP')}">设备IP</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="equipmentIp" id="equipmentIp" name="equipmentIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备IP') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div  th:fragment="manage_ip" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('管理IP')}">管理IP</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="manageIp" id="manageIp" name="manageIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('管理IP') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div  th:fragment="equipment_cpu" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备CPU')}">设备CPU</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="equipmentCpu" id="equipmentCpu" name="equipmentCpu" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备CPU') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div th:fragment="equipment_memory" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备内存')}">设备内存</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="equipmentMemory" id="equipmentMemory" name="equipmentMemory" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备内存') }" type="text" class="layui-input"  />
     </div>
 </div>
 
 <div  th:fragment="rack_id" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备机柜')}">设备机柜</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="rackId" id="rackId" name="rackId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜') }" type="text" class="layui-input"  />
     </div>
@@ -579,7 +579,7 @@
 
 
 <div th:fragment="rack_up_number" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备机柜上位置')}">设备机柜上位置</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="rackUpNumber" id="rackUpNumber" name="rackUpNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜上位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="false" step="1.0"   scale="0" />
     </div>
@@ -588,14 +588,14 @@
 
 
 <div  th:fragment="rack_down_number" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备机柜下位置')}">设备机柜下位置</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="rackDownNumber" id="rackDownNumber" name="rackDownNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜下位置') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="false" step="1.0"   scale="0" />
     </div>
 </div>
 
 <div  th:fragment="equipment_environment_code" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('运行环境')}">运行环境</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <div id="equipmentEnvironmentCode" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_equipment_environment'}"></div>
     </div>
@@ -603,12 +603,33 @@
 
 
 <div  th:fragment="equipment_conf" class="layui-form-item" >
-    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备配置')}">设备配置</div></div>
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <textarea lay-filter="equipmentConf" id="equipmentConf" name="equipmentConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备配置') }" class="layui-textarea" style="height: 120px" ></textarea>
     </div>
 </div>
 
+
+<div  th:fragment="purpose" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <input lay-filter="contacts" id="purpose" name="purpose" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('用途') }" type="text" class="layui-input"   />
+    </div>
+</div>
+
+<div  th:fragment="equipment_serial_number" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <input lay-filter="equipmentSerialNumber" id="equipmentSerialNumber" name="equipmentSerialNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备序列') }" type="text" class="layui-input"   />
+    </div>
+</div>
+
+<div  th:fragment="last_verification_date" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <input input-type="date" lay-filter="lastVerificationDate" id="lastVerificationDate" name="lastVerificationDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('采购日期') }" type="text" class="layui-input"   />
+    </div>
+</div>
 
 
 

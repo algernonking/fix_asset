@@ -335,7 +335,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * 导入 Excel 数据
 	 * @return  错误信息，成功时返回 null
 	 * */
-	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String businessType,boolean dataType);
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String owner,String businessType,boolean dataType);
 
  
 }

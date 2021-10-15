@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-09 16:37:43
+ * @since 2021-10-15 08:51:42
  */
  -->
  <!DOCTYPE html>
@@ -47,7 +47,7 @@
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产分类')}">资产分类</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产分类')}">资产分类</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <div id="categoryId" input-type="select" th:data="${'/service-pcm/pcm-catalog/query-nodes'}"></div>
                         </div>
@@ -296,6 +296,14 @@
                         </div>
                     </div>
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('生产日期')}">生产日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="productionDate" id="productionDate" name="productionDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('生产日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
                                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产RFID')}">资产RFID</div></div>
                         <div class="layui-input-block layui-input-block-c1">
@@ -314,6 +322,21 @@
                 </div>
 
 
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('最近核对日期')}">最近核对日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="lastVerificationDate" id="lastVerificationDate" name="lastVerificationDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('最近核对日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('用途')}">用途</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="purpose" id="purpose" name="purpose" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('用途') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                 
                     <div class="layui-form-item" >
@@ -570,6 +593,13 @@
 
 
                                     <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备序列号')}">设备序列号</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="equipmentSerialNumber" id="equipmentSerialNumber" name="equipmentSerialNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备序列号') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备机柜')}">设备机柜</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="rackId" id="rackId" name="rackId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜') }" type="text" class="layui-input"  />
@@ -644,7 +674,7 @@
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
-    var VALIDATE_CONFIG={"purchaseDate":{"date":true,"labelInForm":"采购日期","inputType":"date_input"},"maintenanceEndDate":{"date":true,"labelInForm":"结束时间","inputType":"date_input"},"entryTime":{"date":true,"labelInForm":"入账时间","inputType":"date_input"},"maintenanceStartDate":{"date":true,"labelInForm":"开始时间","inputType":"date_input"},"categoryId":{"labelInForm":"资产分类","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"purchaseDate":{"date":true,"labelInForm":"采购日期","inputType":"date_input"},"maintenanceEndDate":{"date":true,"labelInForm":"结束时间","inputType":"date_input"},"entryTime":{"date":true,"labelInForm":"入账时间","inputType":"date_input"},"maintenanceStartDate":{"date":true,"labelInForm":"开始时间","inputType":"date_input"}};
     var AUTH_PREFIX="eam_asset";
 
 
