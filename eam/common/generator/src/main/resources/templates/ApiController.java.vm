@@ -198,14 +198,14 @@ public class #(simpleName) extends SuperController {
 	public Result<List<#(poSimpleName)>> getByIds(List<#(idsPropertyType)> #(idsPropertyName)) {
 		Result<List<#(poSimpleName)>> result=new Result<>();
 		List<#(poSimpleName)> list=#(serviceVarName).getByIds(#(idsPropertyName));
-
 		#if(fillWithUnits.fillGetByIds!=null)
+
 		// join 关联的对象
 		#(serviceVarName).dao().fill(list)
 			#(fillWithUnits.fillGetByIds.code)
 			.execute();
-		#end
 
+		#end
 		result.success(true).data(list);
 		return result;
 	}
@@ -227,14 +227,14 @@ public class #(simpleName) extends SuperController {
 		Result<List<#(poSimpleName)>> result=new Result<>();
 		List<#(poSimpleName)> list=#(serviceVarName).queryList(sample);
 		result.success(true).data(list);
-
 		#if(fillWithUnits.fillQueryList!=null)
+
 		// join 关联的对象
 		#(serviceVarName).dao().fill(list)
 			#(fillWithUnits.fillQueryList.code)
 			.execute();
-		#end
 
+		#end
 		return result;
 	}
 

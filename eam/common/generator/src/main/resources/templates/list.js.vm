@@ -165,42 +165,42 @@ function ListPage() {
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
+	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		#for(f : searchFields)
 		#if(!f.isHideInSearch)
 		#if(f.typeName.equals("logic_switch"))
-		value.#(f.varName)={ inputType:"logic_switch",value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
+		value.#(f.varName)={ inputType:"logic_switch",value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else if(f.typeName.equals("radio_box"))
-		value.#(f.varName)={ inputType:"radio_box", value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
+		value.#(f.varName)={ inputType:"radio_box", value: xmSelect.get("##(f.varName)",true).getValue("value"), label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
-		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)",field:"#(f.selectField.textField)" };
+		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)"#if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)",field:"#(f.selectField.valueField)", label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
+		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)"#if(f.searchField!=null),field:"#(f.searchField)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#end
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
+		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#else if(f.typeName.equals("check_box"))
-		value.#(f.varName)={ inputType:"check_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr")};
+		value.#(f.varName)={ inputType:"check_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#else if(f.typeName.equals("date_input"))
 		#if(f.search.searchInRange)
-		value.#(f.varName)={ inputType:"date_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
+		value.#(f.varName)={ inputType:"date_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"date_input", value: $("##(f.varName)").val()};
+		value.#(f.varName)={ inputType:"date_input", value: $("##(f.varName)").val() #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#else if(f.typeName.equals("number_input"))
 		#if(f.search.searchInRange)
-		value.#(f.varName)={ inputType:"number_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() };
+		value.#(f.varName)={ inputType:"number_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"number_input", value: $("##(f.varName)").val()};
+		value.#(f.varName)={ inputType:"number_input", value: $("##(f.varName)").val() #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#else if(f.typeName.equals("button"))
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text()};
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end};
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#end
 		#end
@@ -217,7 +217,11 @@ function ListPage() {
 		// 树形结构锁定上级ID
 		ps.#(parentIdVar)=#(parentIdVar);
 		#end
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
 	}
 
     #if(isTree)
@@ -364,7 +368,7 @@ function ListPage() {
 		//渲染 #(f.varName) 下拉字段
 		fox.renderSelectBox({
 			el: "#(f.varName)",
-			radio: false,
+			radio: #(!f.selectField.searchMuliti),
 			size: "small",
 			filterable: #(f.selectField.filter),
 			#if(f.selectField.paging)
@@ -428,12 +432,12 @@ function ListPage() {
 		//回车键查询
         $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
-		  	refreshTableData();
+		  	refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-           refreshTableData();
+			refreshTableData(null,null,true);
         });
 
 		// 搜索按钮点击事件
