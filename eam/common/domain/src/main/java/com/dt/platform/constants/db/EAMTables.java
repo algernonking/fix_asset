@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-15 08:50:32
+ * @since 2021-10-15 15:21:02
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2878,6 +2878,11 @@ public class EAMTables {
 		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","变更内容","变更内容",false,false,true);
 		
 		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
 		 * 变更人
 		*/
 		public static final DBField PROCESS_USER_ID = new DBField(DBDataType.DATE , "process_user_id","processUserId","变更人","变更人",false,false,true);
@@ -2927,7 +2932,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_PROCESS_RECORD() {
-			this.init($NAME,"资产处理记录" , ID , ASSET_ID , BUSINESS_CODE , PROCESS_TYPE , CONTENT , PROCESS_USER_ID , PROCESSD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产处理记录" , ID , ASSET_ID , BUSINESS_CODE , PROCESS_TYPE , CONTENT , NOTES , PROCESS_USER_ID , PROCESSD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_PROCESS_RECORD $TABLE=new EAM_ASSET_PROCESS_RECORD();
 	}

@@ -127,7 +127,7 @@
 <div  th:fragment="name" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"   />
+        <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    />
     </div>
 </div>
 
@@ -576,6 +576,14 @@
         <input lay-filter="rackId" id="rackId" name="rackId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜') }" type="text" class="layui-input"  />
     </div>
 </div>
+
+<div  th:fragment="equipment_label" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <input lay-filter="equipmentLabel" id="equipmentLabel" name="equipmentLabel" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备标签') }" type="text" class="layui-input"  />
+    </div>
+</div>
+
 
 
 <div th:fragment="rack_up_number" class="layui-form-item" >

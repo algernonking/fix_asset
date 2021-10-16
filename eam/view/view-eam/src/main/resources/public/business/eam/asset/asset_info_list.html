@@ -151,7 +151,7 @@
         </div>
 
         <div style="margin-top: 84px ">
-            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+            <table class="layui-table" th:id="data-table-+(${pageType})" lay-filter="data-table"></table>
         </div>
 
     </div>
@@ -181,26 +181,30 @@
     <button th:if="${perm.checkAuth('eam_asset:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
     <button th:if="${perm.checkAnyAuth('eam_asset:update','eam_asset:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
     <button th:if="${perm.checkAuth('eam_asset:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
-    <button class="layui-btn layui-btn-xs " lay-event="asset-data-change" th:text="${lang.translate('变更')}" data-id="{{d.id}}">变更明细</button>
+    <button th:if="${perm.checkAuth('eam_asset:change-query')}" class="layui-btn layui-btn-xs " lay-event="asset-data-change" th:text="${lang.translate('变更')}" data-id="{{d.id}}">变更明细</button>
 </script>
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+
+    var PAGE_TYPE =  [[${pageType}]];
+    var TABLE_ID =  [[${tableId}]];
+    var CATEGORY_CODE = [[${categoryCode}]] ;
+    var CATEGORY_ID = [[${categoryId}]] ;
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
 
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
     var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];
-
-
     var ASSET_CATEGORY_DATA =  [[${assetCategoryData}]];
-
     var AUTH_PREFIX="eam_asset";
     var ATTRIBUTE_LIST_DATA =  [[${attributeListData}]];
 
     // 是否需要审批
     var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
+
+
 
 </script>
 <script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>

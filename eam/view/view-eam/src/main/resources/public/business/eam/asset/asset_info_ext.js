@@ -29,8 +29,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 offset: [15,null],
                 area: ["95%","80%"],
                 type: 2,
-                id:"eam-asset-data-change-form-data-win",
-                content: '/business/eam/asset_data_change/asset_data_change_list.html' + queryString,
+                id:"eam-asset-data-change-detail-form-data-win",
+                content: '/business/eam/asset_process_record/asset_process_record_list.html' + queryString,
                 finish: function () {
                     refreshTableData();
                 }
@@ -235,6 +235,22 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             $("#useUserId-button").css({"border-color":"#eee","height": "38px","color": "rgba(0,0,0,.85)","border-style": "solid","background-color":"white","border-radius": "2px","border-width": "1px"});
 
 
+            if( $("#attribution-tab-ct").find(".layui-form-item").length==0 ){
+                $("#attribution-tab-ct").hide();
+                $("#attribution-tab").hide();
+            }
+            if( $("#maintainer-tab-ct").find(".layui-form-item").length==0 ){
+                $("#maintainer-tab-ct").hide();
+                $("#maintainer-tab").hide();
+            }
+            if( $("#financial-tab-ct").find(".layui-form-item").length==0 ){
+                $("#financial-tab-ct").hide();
+                $("#financial-tab").hide();
+            }
+            if( $("#equipment-tab-ct").find(".layui-form-item").length==0 ){
+                $("#equipment-tab-ct").hide();
+                $("#equipment-tab").hide();
+            }
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);

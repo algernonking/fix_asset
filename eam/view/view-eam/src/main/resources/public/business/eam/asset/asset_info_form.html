@@ -34,12 +34,15 @@
         <div style="display: inline-block;" class="layui-col-xs12">
             <div class="layui-tab" style="padding-right: 8px;padding-left: 8px;">
                 <ul class="layui-tab-title">
-                    <li  class="layui-this" >基本信息</li>
-                    <li  >维保信息</li>
-                    <li  >财务信息</li>
+                    <li  id="attribution-tab" class="layui-this">基本信息</li>
+                    <li id="maintainer-tab">维保信息</li>
+                    <li id="financial-tab">财务信息</li>
+                    <li id="equipment-tab">设备信息</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
+
+
+                    <div class="layui-tab-item layui-show" id="attribution-tab-ct">
                         <!--开始：3栏模式 循环-->
                         <div class="layui-row form-row" >
                             <div class="layui-col-xs4 form-column">
@@ -66,20 +69,13 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <div id="pcmExtColumn">
-
                         </div>
-
-
 
                     </div>
 
 
-
-                    <div class="layui-tab-item ">
+                    <div class="layui-tab-item" id="maintainer-tab-ct">
                         <!--开始：3栏模式 循环-->
                         <div class="layui-row form-row" >
                             <div class="layui-col-xs4 form-column">
@@ -106,9 +102,10 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="layui-tab-item ">
+
+
+                    <div class="layui-tab-item " id="financial-tab-ct">
                         <!--开始：3栏模式 循环-->
                         <div class="layui-row form-row" >
                             <div class="layui-col-xs4 form-column">
@@ -135,9 +132,37 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
+
+                    <div class="layui-tab-item " id="equipment-tab-ct">
+                        <!--开始：3栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData3Column1.?[dimension == 'equipment']}">
+                                    <div th:replace="business/eam/asset/asset_column :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column2.?[dimension == 'equipment']}">
+                                    <div th:replace="business/eam/asset/asset_column :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 form-column">
+                                <div class="layui-form-item"  th:each="item:${attributeData3Column3.?[dimension == 'equipment']}">
+                                    <div th:replace="business/eam/asset/asset_column :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--开始：单栏模式 循环-->
+                        <div class="layui-row form-row" >
+                            <div class="layui-col-xs12 form-column">
+                                <div class="layui-form-item" th:each="item:${attributeData1Column1.?[dimension == 'equipment']}">
+                                    <div th:replace="business/eam/asset/asset_column :: (${item.attribute.code})"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -169,6 +194,8 @@
 <script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <script th:inline="javascript">
+
+    var PAGE_TYPE =  [[${pageType}]];
 
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];

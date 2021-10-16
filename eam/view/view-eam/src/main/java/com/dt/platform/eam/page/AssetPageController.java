@@ -3,6 +3,7 @@ package com.dt.platform.eam.page;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
 import com.dt.platform.domain.eam.meta.AssetAttributeItemMeta;
@@ -11,15 +12,18 @@ import com.dt.platform.proxy.eam.AssetCategoryServiceProxy;
 import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.OrganizationVO;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.CatalogVO;
+import org.github.foxnic.web.framework.view.aspect.PageHelper;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -250,43 +254,6 @@ public class AssetPageController extends ViewController {
 	}
 
 
-	/**
-	 * 资产 功能主页面
-	 */
-	@RequestMapping("/asset_info_list.html")
-	public String infoList(Model model,HttpServletRequest request) {
-
-		boolean approvalRequired=true;
-		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code());
-		if(approvalResult.isSuccess()){
-			approvalRequired= (boolean) approvalResult.getData();
-		}
-		model.addAttribute("approvalRequired",approvalRequired);
-
-
-		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
-		if(result.isSuccess()){
-			HashMap<String,List<AssetAttributeItem>> data = result.getData();
-			List<AssetAttributeItem> list=data.get("attributeListData");
-			model.addAttribute("attributeListData",list);
-		}
-
-		CatalogVO catalog=new CatalogVO();
-		catalog.setCode("asset");
-		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
-		if(catalogListResult.isSuccess()){
-			List<Catalog> catalogList=catalogListResult.getData();
-			if(catalogList.size()>0){
-				CatalogVO catalog2=new CatalogVO();
-				catalog2.setParentId(catalogList.get(0).getId());
-				catalog2.setIsLoadAllDescendants(1);
-				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
-				model.addAttribute("assetCategoryData",treeResult.getData());
-			}
-		}
-		return prefix+"/asset_info_list";
-	}
 
 	/**
 	 * 资产 表单页面
@@ -297,26 +264,95 @@ public class AssetPageController extends ViewController {
 		return prefix+"/asset_form";
 	}
 
+
+
+
+	/**
+	 * 资产 功能主页面
+	 */
+	@RequestMapping("/asset_info_list.html")
+	public String infoList(Model model,HttpServletRequest request,String pageType,String categoryCode) {
+
+
+		//页面类型，pageType=AssetAttributeItemOwnerEnum.BASE.code();
+		model.addAttribute("pageType",pageType);
+
+		//table宽度
+		PageHelper p=new PageHelper(request,SessionUser.getCurrent());
+		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("data-table-"+pageType));
+		model.addAttribute("tableId","data-table-"+pageType);
+
+
+		//是否需要审批设置
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
+
+
+		//设置字段布局
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(pageType,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
+		//设置资产分类
+		CatalogVO catalog=new CatalogVO();
+		if(StringUtil.isBlank(categoryCode)){
+			catalog.setCode("asset");
+		}else{
+			catalog.setCode(categoryCode);
+		}
+		model.addAttribute("categoryCode",categoryCode);
+		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(categoryId);
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
+		model.addAttribute("categoryId",categoryId);
+		return prefix+"/asset_info_list";
+	}
 	/**
 	 * 资产 表单页面
 	 */
 	@RequestMapping("/asset_info_form.html")
-	public String infoForm(Model model,HttpServletRequest request , String id) {
+	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode) {
 
+		//页面类型
+		model.addAttribute("pageType",pageType);
 
 		//设置字段布局
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.BASE.code(),null);
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			System.out.println(data.get("attributeData3Column1"));
+			System.out.println(data.get("attributeData3Column2"));
+			System.out.println(data.get("attributeData3Column3"));
+			System.out.println(data.get("attributeData1Column1"));
+
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
 			model.addAttribute("attributeData3Column2",data.get("attributeData3Column2") );
 			model.addAttribute("attributeData3Column3",data.get("attributeData3Column3") );
 			model.addAttribute("attributeData1Column1",data.get("attributeData1Column1") );
+
 		}
+
 
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
-		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.BASE.code());
+		attributeItem.setOwnerCode(pageType);
 		attributeItem.setRequired("1");
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();
@@ -327,7 +363,9 @@ public class AssetPageController extends ViewController {
 					JSONObject obj=new JSONObject();
 					if(AssetAttributeDimensionEnum.ATTRIBUTION.code().equals(attributeItemRequiredList.get(i).getDimension())
 					||AssetAttributeDimensionEnum.FINANCIAL.code().equals(attributeItemRequiredList.get(i).getDimension())
-					||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())){
+					||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())
+					||AssetAttributeDimensionEnum.EQUIPMENT.code().equals(attributeItemRequiredList.get(i).getDimension())
+					){
 						obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
 						obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
 						obj.put("required",true);
@@ -339,14 +377,21 @@ public class AssetPageController extends ViewController {
 		model.addAttribute("attributeRequiredData",attributeItemRequiredObject);
 
 
+		//设置资产分类
 		CatalogVO catalog=new CatalogVO();
-		catalog.setCode("asset");
+		if(StringUtil.isBlank(categoryCode)){
+			catalog.setCode("asset");
+		}else{
+			catalog.setCode(categoryCode);
+		}
 		Result<List<Catalog>> catalogListResult=CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
 		if(catalogListResult.isSuccess()){
 			List<Catalog> catalogList=catalogListResult.getData();
 			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
 				CatalogVO catalog2=new CatalogVO();
-				catalog2.setParentId(catalogList.get(0).getId());
+				catalog2.setParentId(categoryId);
 				catalog2.setIsLoadAllDescendants(1);
 				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
 				model.addAttribute("assetCategoryData",treeResult.getData());
@@ -354,7 +399,7 @@ public class AssetPageController extends ViewController {
 		}
 
 
-
+		//
 		Result updateModeResult=OperateServiceProxy.api().queryAssetDirectUpdateMode();
 		boolean updateMode=false;
 		if(updateModeResult.isSuccess()){
@@ -370,20 +415,15 @@ public class AssetPageController extends ViewController {
 		}
 		model.addAttribute("assetStatusColumnDisable",assetStatusDisable);
 
-
-
 		//默认公司
 		OrganizationVO vo=new OrganizationVO();
 		vo.setSearchField("sort");
 		vo.setValid(1);
 		vo.setType("com");
 		Result<List<Organization>> orgResult=OrganizationServiceProxy.api().queryList(vo);
-		System.out.println("####"+orgResult);
 		if(orgResult.isSuccess()&&orgResult.getData().size()>0){
 			model.addAttribute("assetDefaultOwnCompany",orgResult.getData().get(0));
 		}
-
-
 
 		return prefix+"/asset_info_form";
 	}

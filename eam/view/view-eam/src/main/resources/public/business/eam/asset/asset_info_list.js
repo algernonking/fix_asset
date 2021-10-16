@@ -63,6 +63,11 @@ function ListPage() {
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
+			if(CATEGORY_ID&&CATEGORY_ID.length>0){
+				ps.categoryId=CATEGORY_ID;
+			}
+
+
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -85,7 +90,7 @@ function ListPage() {
 			COL_DATA.push(oper)
 
 			dataTable=fox.renderTable({
-				elem: '#data-table',
+				elem: '#'+TABLE_ID,
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
@@ -111,7 +116,7 @@ function ListPage() {
 				}
 			});
 			//绑定排序事件
-			table.on('sort(data-table)', function(obj){
+			table.on('sort('+TABLE_ID+')', function(obj){
 				refreshTableData(obj.field,obj.type);
 			});
 
@@ -151,11 +156,18 @@ function ListPage() {
 		value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 
 
+
+
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}
 
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+
+		if(CATEGORY_ID&&CATEGORY_ID.length>0){
+			ps.categoryId=CATEGORY_ID;
+		}
+
 		var categoryValue=categorySelect.getValue();
 		if(categoryValue&&categoryValue.length>0){
 			ps.categoryId=categoryValue[0].id;
@@ -164,7 +176,7 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		table.reload(TABLE_ID, { where : ps });
 	}
 
 
@@ -172,7 +184,7 @@ function ListPage() {
 	 * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	 */
 	function getCheckedList(field) {
-		var checkStatus = table.checkStatus('data-table');
+		var checkStatus = table.checkStatus(TABLE_ID);
 		var data = checkStatus.data;
 		if(!field) return data;
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];
@@ -604,8 +616,10 @@ function ListPage() {
 			if(!doNext) return;
 		}
 		var action=admin.getTempData('eam-asset-form-data-form-action');
-		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		var queryString="?pageType="+PAGE_TYPE+"&categoryCode="+CATEGORY_CODE;
+		if(data && data.id){
+			queryString=queryString+"&" + 'id=' + data.id;
+		}
 		admin.putTempData('eam-asset-form-data', data);
 		var area=admin.getTempData('eam-asset-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
