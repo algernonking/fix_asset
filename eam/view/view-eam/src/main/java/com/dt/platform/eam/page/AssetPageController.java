@@ -271,11 +271,13 @@ public class AssetPageController extends ViewController {
 	 * 资产 功能主页面
 	 */
 	@RequestMapping("/asset_info_list.html")
-	public String infoList(Model model,HttpServletRequest request,String pageType,String categoryCode) {
+	public String infoList(Model model,HttpServletRequest request,String pageType,String pageFunc,String categoryCode) {
 
 
 		//页面类型，pageType=AssetAttributeItemOwnerEnum.BASE.code();
 		model.addAttribute("pageType",pageType);
+		model.addAttribute("pageFunc",pageFunc);
+
 
 		//table宽度
 		PageHelper p=new PageHelper(request,SessionUser.getCurrent());

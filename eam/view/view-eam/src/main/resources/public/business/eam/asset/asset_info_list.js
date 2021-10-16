@@ -608,6 +608,9 @@ function ListPage() {
 			else if (layEvent === 'asset-data-change') { // 变更
 				window.pageExt.list.assetDataChange(data);
 			}
+			else if (layEvent === 'asset-voucher') { // 变更
+				window.pageExt.list.assetVoucher(data);
+			}
 
 		});
 

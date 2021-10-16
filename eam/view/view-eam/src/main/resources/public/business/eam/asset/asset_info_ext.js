@@ -21,6 +21,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var formAction=admin.getTempData('eam-asset-form-data-form-action');
     //列表页的扩展
     var list={
+
+        assetVoucher:function (data){
+            admin.putTempData("ownerId",data.id,true);
+            var index = admin.popupCenter({
+                title: "凭证条目",
+                resize: false,
+                id: 'hostVoucherWindow',
+                area: ["80%", "600px"],
+                type: 2,
+                content: "/business/ops/voucher/voucher_list.html"
+            });
+        },
         assetDataChange:function (data){
             var queryString="?assetId="+data.id;
             var index=admin.popupCenter({

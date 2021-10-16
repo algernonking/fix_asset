@@ -35,23 +35,16 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('所属公司')}" class="search-label ownCompanyId-label">所属公司</span><span class="search-colon">:</span></div>
-                        <input id="ownCompanyId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 使用公司/部门 , useOrganizationId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('使用公司/部门')}" class="search-label useOrganizationId-label">使用公司/部门</span><span class="search-colon">:</span></div>
-                        <input id="useOrganizationId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>
                         <div id="assetStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}" style="width:140px"></div>
                     </div>
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
 
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('维保到期')}" class="search-label maintenanceEndDate-label">维保到期</span><span class="search-colon">:</span></div>
+                        <input type="text" id="maintenanceEndDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <span class="search-dash">-</span>
+                        <input type="text" id="maintenanceEndDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
                 </div>
             </div>
 
@@ -61,7 +54,7 @@
              </div>
         </div>
 
-        <div style="margin-top: 84px ">
+        <div style="margin-top: 45px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -97,7 +90,7 @@
 </script>
 
 <script th:src="'/business/eam/asset/asset_column_list.js?'+${cacheKey}"></script>
-<script th:src="'/business/eam/asset_alarm/maintenance_ext.js?'+${cacheKey}"></script>
+<!--<script th:src="'/business/eam/asset_alarm/maintenance_ext.js?'+${cacheKey}"></script>-->
 <script th:src="'/business/eam/asset_alarm/maintenance_list.js?'+${cacheKey}"></script>
 </body>
 </html>
