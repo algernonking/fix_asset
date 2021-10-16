@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 物品档案 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:17
+ * @since 2021-10-16 15:30:46
 */
 
 @Api(tags = "物品档案")
@@ -62,7 +62,7 @@ public class GoodsController extends SuperController {
 	@Autowired
 	private IGoodsService goodsService;
 
-	
+
 	/**
 	 * 添加物品档案
 	*/
@@ -87,7 +87,8 @@ public class GoodsController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除物品档案
 	*/
@@ -103,8 +104,8 @@ public class GoodsController extends SuperController {
 		Result result=goodsService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除物品档案 <br>
 	 * 联合主键时，请自行调整实现
@@ -121,7 +122,7 @@ public class GoodsController extends SuperController {
 		Result result=goodsService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新物品档案
 	*/
@@ -138,7 +139,7 @@ public class GoodsController extends SuperController {
 		@ApiImplicitParam(name = GoodsVOMeta.PICTURE_ID , value = "物品图片" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = GoodsVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { GoodsVOMeta.PAGE_INDEX , GoodsVOMeta.PAGE_SIZE , GoodsVOMeta.SEARCH_FIELD , GoodsVOMeta.FUZZY_FIELD , GoodsVOMeta.SEARCH_VALUE , GoodsVOMeta.SORT_FIELD , GoodsVOMeta.SORT_TYPE , GoodsVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { GoodsVOMeta.PAGE_INDEX , GoodsVOMeta.PAGE_SIZE , GoodsVOMeta.SEARCH_FIELD , GoodsVOMeta.FUZZY_FIELD , GoodsVOMeta.SEARCH_VALUE , GoodsVOMeta.SORT_FIELD , GoodsVOMeta.SORT_TYPE , GoodsVOMeta.IDS } )
 	@NotNull(name = GoodsVOMeta.ID)
 	@SentinelResource(value = GoodsServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(GoodsServiceProxy.UPDATE)
@@ -146,8 +147,8 @@ public class GoodsController extends SuperController {
 		Result result=goodsService.update(goodsVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存物品档案
 	*/
@@ -173,7 +174,7 @@ public class GoodsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取物品档案
 	*/
@@ -188,10 +189,13 @@ public class GoodsController extends SuperController {
 	public Result<Goods> getById(String id) {
 		Result<Goods> result=new Result<>();
 		Goods goods=goodsService.getById(id);
-		// 关联出 分类 数据
-		goodsService.join(goods,GoodsMeta.CATEGORY);
-		// 关联出 厂商 数据
-		goodsService.join(goods,GoodsMeta.MANUFACTURER);
+
+		// join 关联的对象
+		goodsService.dao().fill(goods)
+			.with(GoodsMeta.CATEGORY)
+			.with(GoodsMeta.MANUFACTURER)
+			.execute();
+
 		result.success(true).data(goods);
 		return result;
 	}
@@ -216,7 +220,7 @@ public class GoodsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询物品档案
 	*/
@@ -243,7 +247,7 @@ public class GoodsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询物品档案
 	*/
@@ -266,10 +270,13 @@ public class GoodsController extends SuperController {
 	public Result<PagedList<Goods>> queryPagedList(GoodsVO sample) {
 		Result<PagedList<Goods>> result=new Result<>();
 		PagedList<Goods> list=goodsService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 分类 数据
-		goodsService.join(list,GoodsMeta.CATEGORY);
-		// 关联出 厂商 数据
-		goodsService.join(list,GoodsMeta.MANUFACTURER);
+
+		// join 关联的对象
+		goodsService.dao().fill(list)
+			.with(GoodsMeta.CATEGORY)
+			.with(GoodsMeta.MANUFACTURER)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

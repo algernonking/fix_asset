@@ -78,7 +78,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(InformationSystemMeta.INFO_SYSTEM_STATUS).muliti(false);
+                fillWith(InformationSystemMeta.INFO_SYSTEM_STATUS).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.GRADE)
@@ -87,7 +87,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(InformationSystemMeta.INFO_SYSTEM_GRADE).muliti(false);
+                fillWith(InformationSystemMeta.INFO_SYSTEM_GRADE).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.OPS_METHOD)
@@ -96,7 +96,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(InformationSystemMeta.INFO_SYSTEM_OPS_METHOD).muliti(false);
+                fillWith(InformationSystemMeta.INFO_SYSTEM_OPS_METHOD).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_INFORMATION_SYSTEM.DEV_METHOD)
@@ -105,7 +105,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(InformationSystemMeta.INFO_SYSTEM_DEV_METHOD).muliti(false);
+                fillWith(InformationSystemMeta.INFO_SYSTEM_DEV_METHOD).muliti(false);
 
 
 
@@ -125,7 +125,7 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField("user_code").textField("voucher")
                 .toolbar(false).paging(false)
-                .fillBy(InformationSystemMeta.VOUCHER_LIST).muliti(true);
+                .fillWith(InformationSystemMeta.VOUCHER_LIST).muliti(true);
 
 
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素

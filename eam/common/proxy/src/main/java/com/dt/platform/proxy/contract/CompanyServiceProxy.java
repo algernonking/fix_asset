@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 单位  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:13
+ * @since 2021-10-16 15:31:27
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = CompanyServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface CompanyServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-contract
 	*/
 	public static final String API_BASIC_PATH = "service-contract";
-	
+
 	/**
 	 * API 上下文路径 , cont-company
 	*/
 	public static final String API_CONTEXT_PATH = "cont-company";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加单位
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除单位
 	 */
@@ -54,18 +55,18 @@ public interface CompanyServiceProxy {
 	 * 批量删除单位
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新单位
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存单位
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个单位
 	 */
@@ -80,12 +81,12 @@ public interface CompanyServiceProxy {
 	 * 查询单位
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询单位
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出单位数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface CompanyServiceProxy {
 	 * 下载单位导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入单位数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加单位
 	*/
 	@RequestMapping(CompanyServiceProxy.INSERT)
 	Result insert(CompanyVO companyVO);
-	
+
 	/**
 	 * 删除单位
 	*/
@@ -124,13 +125,13 @@ public interface CompanyServiceProxy {
 	*/
 	@RequestMapping(CompanyServiceProxy.UPDATE)
 	Result update(CompanyVO companyVO);
-	
+
 	/**
 	 * 更新单位
 	*/
 	@RequestMapping(CompanyServiceProxy.SAVE)
 	Result save(CompanyVO companyVO);
-	
+
 	/**
 	 * 获取单位
 	*/
@@ -147,14 +148,14 @@ public interface CompanyServiceProxy {
 	*/
 	@RequestMapping(CompanyServiceProxy.QUERY_LIST)
 	Result<List<Company>> queryList(CompanyVO sample);
-	
+
 	/**
 	 * 分页查询单位
 	*/
 	@RequestMapping(CompanyServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Company>> queryPagedList(CompanyVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

@@ -141,7 +141,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.SUPPLIER_ID)
                 .basic().label("供应商")
                 .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
-                .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillBy(AssetMeta.SUPPLIER).muliti(false);
+                .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(AssetMeta.SUPPLIER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.MAINTAINER_ID)
@@ -150,7 +150,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .paging(false).filter(true).toolbar(false)
                 .valueField(MaintainerMeta.ID).
                 textField(MaintainerMeta.MAINTAINER_NAME).
-                fillBy(AssetMeta.MAINTNAINER).muliti(false);
+                fillWith(AssetMeta.MAINTNAINER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.SOURCE_ID)
@@ -159,7 +159,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(AssetMeta.SOURCE).muliti(false).defaultValue("purchase");
+                fillWith(AssetMeta.SOURCE).muliti(false).defaultValue("purchase");
 
         cfg.view().field(EAMTables.EAM_ASSET.SAFETY_LEVEL_CODE)
                 .basic().label("安全等级")
@@ -167,7 +167,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(AssetMeta.SAFETY_LEVEL).muliti(false);
+                fillWith(AssetMeta.SAFETY_LEVEL).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_ENVIRONMENT_CODE)
@@ -176,7 +176,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .paging(false).filter(false).toolbar(false)
                 .valueField(DictItemMeta.CODE).
                 textField(DictItemMeta.LABEL).
-                fillBy(AssetMeta.EQUIPMENT_ENVIRONMENT).muliti(false);
+                fillWith(AssetMeta.EQUIPMENT_ENVIRONMENT).muliti(false);
 
 
 
@@ -198,7 +198,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
                 .paging(false).filter(false).toolbar(false)
                 .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME)
-                .fillBy(AssetMeta.CATEGORY).muliti(false);
+                .fillWith(AssetMeta.CATEGORY).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_CATEGORY_ID)
@@ -206,30 +206,30 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(CategoryFinanceServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
                 .valueField(CategoryFinanceMeta.ID).textField(CategoryFinanceMeta.HIERARCHY_NAME)
-                .fillBy(AssetMeta.CATEGORY_FINANCE).muliti(false);
+                .fillWith(AssetMeta.CATEGORY_FINANCE).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)
                 .basic().label("物品档案")
                 .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(GoodsMeta.ID).textField(GoodsMeta.NAME).fillBy(AssetMeta.GOODS).muliti(false);
+                .valueField(GoodsMeta.ID).textField(GoodsMeta.NAME).fillWith(AssetMeta.GOODS).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.WAREHOUSE_ID)
                 .basic().label("仓库")
                 .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillBy(AssetMeta.WAREHOUSE).muliti(false);
+                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetMeta.WAREHOUSE).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.POSITION_ID)
                 .basic().label("位置")
                 .form().selectBox().queryApi(PositionServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillBy(AssetMeta.POSITION).muliti(false);
+                .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillWith(AssetMeta.POSITION).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.MANUFACTURER_ID)
                 .basic().label("厂商")
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(AssetMeta.MANUFACTURER).muliti(false);
+                .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillWith(AssetMeta.MANUFACTURER).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_END_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_START_DATE).form().dateInput().format("yyyy-MM-dd").search().range();

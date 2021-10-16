@@ -49,14 +49,14 @@ public class OpsServiceInfoGtr extends BaseCodeGenerator{
                 .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_LIST)
                 .valueField(ServiceGroupMeta.CODE).textField(ServiceGroupMeta.NAME)
                 .toolbar(false).filter(true).paging(false)
-                .fillBy(ServiceCategoryMeta.GROUP).muliti(false);
+                .fillWith(ServiceCategoryMeta.GROUP).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.SERVICE_CATEGORY_ID)
                 .basic().label("服务类型")
                 .form().validate().required()
                 .form().selectBox().queryApi(ServiceCategoryServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(ServiceCategoryMeta.ID).textField(ServiceCategoryMeta.NAME).fillBy(ServiceInfoMeta.SERVICE_CATEGORY).muliti(false);
+                .valueField(ServiceCategoryMeta.ID).textField(ServiceCategoryMeta.NAME).fillWith(ServiceInfoMeta.SERVICE_CATEGORY).muliti(false);
 
         cfg.view().field(EAMTables.OPS_SERVICE_INFO.NAME).form().validate().required();
         cfg.view().search().inputLayout(

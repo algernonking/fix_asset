@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +35,7 @@ import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.domain.ops.ServiceCategory;
 import com.dt.platform.domain.ops.ServiceGroup;
+import com.dt.platform.domain.ops.meta.ServiceCategoryMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:00
+ * @since 2021-10-16 15:31:16
 */
 
 @Api(tags = "服务")
@@ -61,7 +62,7 @@ public class ServiceInfoController extends SuperController {
 	@Autowired
 	private IServiceInfoService serviceInfoService;
 
-	
+
 	/**
 	 * 添加服务
 	*/
@@ -83,7 +84,8 @@ public class ServiceInfoController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除服务
 	*/
@@ -99,8 +101,8 @@ public class ServiceInfoController extends SuperController {
 		Result result=serviceInfoService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除服务 <br>
 	 * 联合主键时，请自行调整实现
@@ -117,7 +119,7 @@ public class ServiceInfoController extends SuperController {
 		Result result=serviceInfoService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新服务
 	*/
@@ -131,7 +133,7 @@ public class ServiceInfoController extends SuperController {
 		@ApiImplicitParam(name = ServiceInfoVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ServiceInfoVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceInfoVOMeta.PAGE_INDEX , ServiceInfoVOMeta.PAGE_SIZE , ServiceInfoVOMeta.SEARCH_FIELD , ServiceInfoVOMeta.FUZZY_FIELD , ServiceInfoVOMeta.SEARCH_VALUE , ServiceInfoVOMeta.SORT_FIELD , ServiceInfoVOMeta.SORT_TYPE , ServiceInfoVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceInfoVOMeta.PAGE_INDEX , ServiceInfoVOMeta.PAGE_SIZE , ServiceInfoVOMeta.SEARCH_FIELD , ServiceInfoVOMeta.FUZZY_FIELD , ServiceInfoVOMeta.SEARCH_VALUE , ServiceInfoVOMeta.SORT_FIELD , ServiceInfoVOMeta.SORT_TYPE , ServiceInfoVOMeta.IDS } )
 	@NotNull(name = ServiceInfoVOMeta.ID)
 	@SentinelResource(value = ServiceInfoServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ServiceInfoServiceProxy.UPDATE)
@@ -139,8 +141,8 @@ public class ServiceInfoController extends SuperController {
 		Result result=serviceInfoService.update(serviceInfoVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存服务
 	*/
@@ -163,7 +165,7 @@ public class ServiceInfoController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取服务
 	*/
@@ -178,10 +180,13 @@ public class ServiceInfoController extends SuperController {
 	public Result<ServiceInfo> getById(String id) {
 		Result<ServiceInfo> result=new Result<>();
 		ServiceInfo serviceInfo=serviceInfoService.getById(id);
-		// 关联出 服务分组 数据
-		serviceInfoService.join(serviceInfo,ServiceInfoMeta.GROUP);
-		// 关联出 服务类型 数据
-		serviceInfoService.join(serviceInfo,ServiceInfoMeta.SERVICE_CATEGORY);
+
+		// join 关联的对象
+		serviceInfoService.dao().fill(serviceInfo)
+			.with(ServiceCategoryMeta.GROUP)
+			.with(ServiceInfoMeta.SERVICE_CATEGORY)
+			.execute();
+
 		result.success(true).data(serviceInfo);
 		return result;
 	}
@@ -206,7 +211,7 @@ public class ServiceInfoController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询服务
 	*/
@@ -230,7 +235,7 @@ public class ServiceInfoController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询服务
 	*/
@@ -250,10 +255,13 @@ public class ServiceInfoController extends SuperController {
 	public Result<PagedList<ServiceInfo>> queryPagedList(ServiceInfoVO sample) {
 		Result<PagedList<ServiceInfo>> result=new Result<>();
 		PagedList<ServiceInfo> list=serviceInfoService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 服务分组 数据
-		serviceInfoService.join(list,ServiceInfoMeta.GROUP);
-		// 关联出 服务类型 数据
-		serviceInfoService.join(list,ServiceInfoMeta.SERVICE_CATEGORY);
+
+		// join 关联的对象
+		serviceInfoService.dao().fill(list)
+			.with(ServiceCategoryMeta.GROUP)
+			.with(ServiceInfoMeta.SERVICE_CATEGORY)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

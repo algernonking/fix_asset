@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 合同  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:18
+ * @since 2021-10-16 15:31:31
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = ContractServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface ContractServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-contract
 	*/
 	public static final String API_BASIC_PATH = "service-contract";
-	
+
 	/**
 	 * API 上下文路径 , cont-contract
 	*/
 	public static final String API_CONTEXT_PATH = "cont-contract";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加合同
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除合同
 	 */
@@ -54,18 +55,18 @@ public interface ContractServiceProxy {
 	 * 批量删除合同
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新合同
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存合同
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个合同
 	 */
@@ -80,12 +81,12 @@ public interface ContractServiceProxy {
 	 * 查询合同
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询合同
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出合同数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface ContractServiceProxy {
 	 * 下载合同导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入合同数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加合同
 	*/
 	@RequestMapping(ContractServiceProxy.INSERT)
 	Result insert(ContractVO contractVO);
-	
+
 	/**
 	 * 删除合同
 	*/
@@ -124,13 +125,13 @@ public interface ContractServiceProxy {
 	*/
 	@RequestMapping(ContractServiceProxy.UPDATE)
 	Result update(ContractVO contractVO);
-	
+
 	/**
 	 * 更新合同
 	*/
 	@RequestMapping(ContractServiceProxy.SAVE)
 	Result save(ContractVO contractVO);
-	
+
 	/**
 	 * 获取合同
 	*/
@@ -147,14 +148,14 @@ public interface ContractServiceProxy {
 	*/
 	@RequestMapping(ContractServiceProxy.QUERY_LIST)
 	Result<List<Contract>> queryList(ContractVO sample);
-	
+
 	/**
 	 * 分页查询合同
 	*/
 	@RequestMapping(ContractServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Contract>> queryPagedList(ContractVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

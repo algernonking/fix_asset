@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:02
+ * @since 2021-10-16 15:31:19
 */
 
 @Api(tags = "服务类型")
@@ -60,7 +60,7 @@ public class ServiceCategoryController extends SuperController {
 	@Autowired
 	private IServiceCategoryService serviceCategoryService;
 
-	
+
 	/**
 	 * 添加服务类型
 	*/
@@ -79,7 +79,8 @@ public class ServiceCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除服务类型
 	*/
@@ -95,8 +96,8 @@ public class ServiceCategoryController extends SuperController {
 		Result result=serviceCategoryService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除服务类型 <br>
 	 * 联合主键时，请自行调整实现
@@ -113,7 +114,7 @@ public class ServiceCategoryController extends SuperController {
 		Result result=serviceCategoryService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新服务类型
 	*/
@@ -124,7 +125,7 @@ public class ServiceCategoryController extends SuperController {
 		@ApiImplicitParam(name = ServiceCategoryVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Oracle"),
 		@ApiImplicitParam(name = ServiceCategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceCategoryVOMeta.PAGE_INDEX , ServiceCategoryVOMeta.PAGE_SIZE , ServiceCategoryVOMeta.SEARCH_FIELD , ServiceCategoryVOMeta.FUZZY_FIELD , ServiceCategoryVOMeta.SEARCH_VALUE , ServiceCategoryVOMeta.SORT_FIELD , ServiceCategoryVOMeta.SORT_TYPE , ServiceCategoryVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceCategoryVOMeta.PAGE_INDEX , ServiceCategoryVOMeta.PAGE_SIZE , ServiceCategoryVOMeta.SEARCH_FIELD , ServiceCategoryVOMeta.FUZZY_FIELD , ServiceCategoryVOMeta.SEARCH_VALUE , ServiceCategoryVOMeta.SORT_FIELD , ServiceCategoryVOMeta.SORT_TYPE , ServiceCategoryVOMeta.IDS } )
 	@NotNull(name = ServiceCategoryVOMeta.ID)
 	@SentinelResource(value = ServiceCategoryServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ServiceCategoryServiceProxy.UPDATE)
@@ -132,8 +133,8 @@ public class ServiceCategoryController extends SuperController {
 		Result result=serviceCategoryService.update(serviceCategoryVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存服务类型
 	*/
@@ -153,7 +154,7 @@ public class ServiceCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取服务类型
 	*/
@@ -168,8 +169,12 @@ public class ServiceCategoryController extends SuperController {
 	public Result<ServiceCategory> getById(String id) {
 		Result<ServiceCategory> result=new Result<>();
 		ServiceCategory serviceCategory=serviceCategoryService.getById(id);
-		// 关联出 服务分组 数据
-		serviceCategoryService.join(serviceCategory,ServiceCategoryMeta.GROUP);
+
+		// join 关联的对象
+		serviceCategoryService.dao().fill(serviceCategory)
+			.with(ServiceCategoryMeta.GROUP)
+			.execute();
+
 		result.success(true).data(serviceCategory);
 		return result;
 	}
@@ -194,7 +199,7 @@ public class ServiceCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询服务类型
 	*/
@@ -215,7 +220,7 @@ public class ServiceCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询服务类型
 	*/
@@ -232,8 +237,12 @@ public class ServiceCategoryController extends SuperController {
 	public Result<PagedList<ServiceCategory>> queryPagedList(ServiceCategoryVO sample) {
 		Result<PagedList<ServiceCategory>> result=new Result<>();
 		PagedList<ServiceCategory> list=serviceCategoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 服务分组 数据
-		serviceCategoryService.join(list,ServiceCategoryMeta.GROUP);
+
+		// join 关联的对象
+		serviceCategoryService.dao().fill(list)
+			.with(ServiceCategoryMeta.GROUP)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

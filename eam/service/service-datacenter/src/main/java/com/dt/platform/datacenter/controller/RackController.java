@@ -1,6 +1,6 @@
 package com.dt.platform.datacenter.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 机柜 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:14
+ * @since 2021-10-16 15:29:54
 */
 
 @Api(tags = "机柜")
@@ -62,7 +62,7 @@ public class RackController extends SuperController {
 	@Autowired
 	private IRackService rackService;
 
-	
+
 	/**
 	 * 添加机柜
 	*/
@@ -86,7 +86,8 @@ public class RackController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除机柜
 	*/
@@ -102,8 +103,8 @@ public class RackController extends SuperController {
 		Result result=rackService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除机柜 <br>
 	 * 联合主键时，请自行调整实现
@@ -120,7 +121,7 @@ public class RackController extends SuperController {
 		Result result=rackService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新机柜
 	*/
@@ -136,7 +137,7 @@ public class RackController extends SuperController {
 		@ApiImplicitParam(name = RackVOMeta.RACK_LABELS , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = RackVOMeta.RACK_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { RackVOMeta.PAGE_INDEX , RackVOMeta.PAGE_SIZE , RackVOMeta.SEARCH_FIELD , RackVOMeta.FUZZY_FIELD , RackVOMeta.SEARCH_VALUE , RackVOMeta.SORT_FIELD , RackVOMeta.SORT_TYPE , RackVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { RackVOMeta.PAGE_INDEX , RackVOMeta.PAGE_SIZE , RackVOMeta.SEARCH_FIELD , RackVOMeta.FUZZY_FIELD , RackVOMeta.SEARCH_VALUE , RackVOMeta.SORT_FIELD , RackVOMeta.SORT_TYPE , RackVOMeta.IDS } )
 	@NotNull(name = RackVOMeta.ID)
 	@SentinelResource(value = RackServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(RackServiceProxy.UPDATE)
@@ -144,8 +145,8 @@ public class RackController extends SuperController {
 		Result result=rackService.update(rackVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存机柜
 	*/
@@ -170,7 +171,7 @@ public class RackController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取机柜
 	*/
@@ -185,10 +186,13 @@ public class RackController extends SuperController {
 	public Result<Rack> getById(String id) {
 		Result<Rack> result=new Result<>();
 		Rack rack=rackService.getById(id);
-		// 关联出 区域 数据
-		rackService.join(rack,RackMeta.AREA);
-		// 关联出 层级 数据
-		rackService.join(rack,RackMeta.LAYER);
+
+		// join 关联的对象
+		rackService.dao().fill(rack)
+			.with(RackMeta.AREA)
+			.with(RackMeta.LAYER)
+			.execute();
+
 		result.success(true).data(rack);
 		return result;
 	}
@@ -213,7 +217,7 @@ public class RackController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询机柜
 	*/
@@ -239,7 +243,7 @@ public class RackController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询机柜
 	*/
@@ -261,10 +265,13 @@ public class RackController extends SuperController {
 	public Result<PagedList<Rack>> queryPagedList(RackVO sample) {
 		Result<PagedList<Rack>> result=new Result<>();
 		PagedList<Rack> list=rackService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 区域 数据
-		rackService.join(list,RackMeta.AREA);
-		// 关联出 层级 数据
-		rackService.join(list,RackMeta.LAYER);
+
+		// join 关联的对象
+		rackService.dao().fill(list)
+			.with(RackMeta.AREA)
+			.with(RackMeta.LAYER)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

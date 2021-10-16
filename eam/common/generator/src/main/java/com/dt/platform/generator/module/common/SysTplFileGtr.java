@@ -55,7 +55,7 @@ public class SysTplFileGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.SYS_TPL_FILE.CODE)
                 .form().validate().required().form().selectBox().paging(true).filter(true).toolbar(false).muliti(false)
                 .queryApi(CodeRegisterServiceProxy.QUERY_PAGED_LIST)
-                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE ).fillBy(TplFileMeta.BUSINESS_CODE);
+                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE ).fillWith(TplFileMeta.BUSINESS_CODE);
 
 
 

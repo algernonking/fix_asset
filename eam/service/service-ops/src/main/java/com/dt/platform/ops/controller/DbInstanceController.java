@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +36,7 @@ import com.dt.platform.domain.ops.meta.DbInstanceMeta;
 import java.math.BigDecimal;
 import com.dt.platform.domain.ops.Host;
 import com.dt.platform.domain.ops.ServiceInfo;
+import com.dt.platform.domain.ops.meta.HostMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -51,7 +52,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 数据库实例 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:43
+ * @since 2021-10-16 15:31:05
 */
 
 @Api(tags = "数据库实例")
@@ -62,7 +63,7 @@ public class DbInstanceController extends SuperController {
 	@Autowired
 	private IDbInstanceService dbInstanceService;
 
-	
+
 	/**
 	 * 添加数据库实例
 	*/
@@ -91,7 +92,8 @@ public class DbInstanceController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除数据库实例
 	*/
@@ -107,8 +109,8 @@ public class DbInstanceController extends SuperController {
 		Result result=dbInstanceService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除数据库实例 <br>
 	 * 联合主键时，请自行调整实现
@@ -125,7 +127,7 @@ public class DbInstanceController extends SuperController {
 		Result result=dbInstanceService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新数据库实例
 	*/
@@ -146,7 +148,7 @@ public class DbInstanceController extends SuperController {
 		@ApiImplicitParam(name = DbInstanceVOMeta.LABELS , value = "标签" , required = false , dataTypeClass=String.class , example = "q'w"),
 		@ApiImplicitParam(name = DbInstanceVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "q'w'q'w"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { DbInstanceVOMeta.PAGE_INDEX , DbInstanceVOMeta.PAGE_SIZE , DbInstanceVOMeta.SEARCH_FIELD , DbInstanceVOMeta.FUZZY_FIELD , DbInstanceVOMeta.SEARCH_VALUE , DbInstanceVOMeta.SORT_FIELD , DbInstanceVOMeta.SORT_TYPE , DbInstanceVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { DbInstanceVOMeta.PAGE_INDEX , DbInstanceVOMeta.PAGE_SIZE , DbInstanceVOMeta.SEARCH_FIELD , DbInstanceVOMeta.FUZZY_FIELD , DbInstanceVOMeta.SEARCH_VALUE , DbInstanceVOMeta.SORT_FIELD , DbInstanceVOMeta.SORT_TYPE , DbInstanceVOMeta.IDS } )
 	@NotNull(name = DbInstanceVOMeta.ID)
 	@SentinelResource(value = DbInstanceServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(DbInstanceServiceProxy.UPDATE)
@@ -154,8 +156,8 @@ public class DbInstanceController extends SuperController {
 		Result result=dbInstanceService.update(dbInstanceVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存数据库实例
 	*/
@@ -185,7 +187,7 @@ public class DbInstanceController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取数据库实例
 	*/
@@ -200,10 +202,14 @@ public class DbInstanceController extends SuperController {
 	public Result<DbInstance> getById(String id) {
 		Result<DbInstance> result=new Result<>();
 		DbInstance dbInstance=dbInstanceService.getById(id);
-		// 关联出 主机 数据
-		dbInstanceService.join(dbInstance,DbInstanceMeta.HOST);
-		// 关联出 数据库 数据
-		dbInstanceService.join(dbInstance,DbInstanceMeta.DATABASE);
+
+		// join 关联的对象
+		dbInstanceService.dao().fill(dbInstance)
+			.with(DbInstanceMeta.HOST)
+			.with(DbInstanceMeta.HOST)
+			.with(DbInstanceMeta.DATABASE)
+			.execute();
+
 		result.success(true).data(dbInstance);
 		return result;
 	}
@@ -228,7 +234,7 @@ public class DbInstanceController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询数据库实例
 	*/
@@ -259,7 +265,7 @@ public class DbInstanceController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询数据库实例
 	*/
@@ -286,10 +292,14 @@ public class DbInstanceController extends SuperController {
 	public Result<PagedList<DbInstance>> queryPagedList(DbInstanceVO sample) {
 		Result<PagedList<DbInstance>> result=new Result<>();
 		PagedList<DbInstance> list=dbInstanceService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 主机 数据
-		dbInstanceService.join(list,DbInstanceMeta.HOST);
-		// 关联出 数据库 数据
-		dbInstanceService.join(list,DbInstanceMeta.DATABASE);
+
+		// join 关联的对象
+		dbInstanceService.dao().fill(list)
+			.with(DbInstanceMeta.HOST)
+			.with(DbInstanceMeta.HOST)
+			.with(DbInstanceMeta.DATABASE)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

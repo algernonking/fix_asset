@@ -38,7 +38,7 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
                 .basic().label("模块")
                 .form().validate().required()
                 .form().selectBox().queryApi(MenuServiceProxy.QUERY_LIST+"?parentId=0").paging(false).filter(true).toolbar(false)
-                .valueField(MenuMeta.ID).textField(MenuMeta.LABEL).fillBy(CodeRuleMeta.MODULE).muliti(false);
+                .valueField(MenuMeta.ID).textField(MenuMeta.LABEL).fillWith(CodeRuleMeta.MODULE).muliti(false);
 
 
 
@@ -77,7 +77,8 @@ public class SysCodeRuleGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE).setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

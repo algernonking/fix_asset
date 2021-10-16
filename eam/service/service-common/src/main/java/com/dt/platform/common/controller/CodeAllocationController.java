@@ -1,6 +1,6 @@
 package com.dt.platform.common.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +35,7 @@ import java.io.InputStream;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.common.CodeRule;
 import com.dt.platform.domain.common.CodeRegister;
+import com.dt.platform.domain.common.meta.CodeRuleMeta;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码分配 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:45:59
+ * @since 2021-10-16 15:54:26
 */
 
 @Api(tags = "编码分配")
@@ -61,7 +62,7 @@ public class CodeAllocationController extends SuperController {
 	@Autowired
 	private ICodeAllocationService codeAllocationService;
 
-	
+
 	/**
 	 * 添加编码分配
 	*/
@@ -80,7 +81,8 @@ public class CodeAllocationController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除编码分配
 	*/
@@ -96,8 +98,8 @@ public class CodeAllocationController extends SuperController {
 		Result result=codeAllocationService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除编码分配 <br>
 	 * 联合主键时，请自行调整实现
@@ -114,7 +116,7 @@ public class CodeAllocationController extends SuperController {
 		Result result=codeAllocationService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新编码分配
 	*/
@@ -125,7 +127,7 @@ public class CodeAllocationController extends SuperController {
 		@ApiImplicitParam(name = CodeAllocationVOMeta.RULE_ID , value = "规则ID" , required = false , dataTypeClass=String.class , example = "5"),
 		@ApiImplicitParam(name = CodeAllocationVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "EAM资产调拨编码生成规则"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { CodeAllocationVOMeta.PAGE_INDEX , CodeAllocationVOMeta.PAGE_SIZE , CodeAllocationVOMeta.SEARCH_FIELD , CodeAllocationVOMeta.FUZZY_FIELD , CodeAllocationVOMeta.SEARCH_VALUE , CodeAllocationVOMeta.SORT_FIELD , CodeAllocationVOMeta.SORT_TYPE , CodeAllocationVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { CodeAllocationVOMeta.PAGE_INDEX , CodeAllocationVOMeta.PAGE_SIZE , CodeAllocationVOMeta.SEARCH_FIELD , CodeAllocationVOMeta.FUZZY_FIELD , CodeAllocationVOMeta.SEARCH_VALUE , CodeAllocationVOMeta.SORT_FIELD , CodeAllocationVOMeta.SORT_TYPE , CodeAllocationVOMeta.IDS } )
 	@NotNull(name = CodeAllocationVOMeta.ID)
 	@SentinelResource(value = CodeAllocationServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeAllocationServiceProxy.UPDATE)
@@ -133,8 +135,8 @@ public class CodeAllocationController extends SuperController {
 		Result result=codeAllocationService.update(codeAllocationVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存编码分配
 	*/
@@ -154,7 +156,7 @@ public class CodeAllocationController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取编码分配
 	*/
@@ -169,10 +171,14 @@ public class CodeAllocationController extends SuperController {
 	public Result<CodeAllocation> getById(String id) {
 		Result<CodeAllocation> result=new Result<>();
 		CodeAllocation codeAllocation=codeAllocationService.getById(id);
-		// 关联出 业务编码 数据
-		codeAllocationService.join(codeAllocation,CodeAllocationMeta.BUSINESS_CODE);
-		// 关联出 编码规则 数据
-		codeAllocationService.join(codeAllocation,CodeAllocationMeta.RULE);
+
+		// join 关联的对象
+		codeAllocationService.dao().fill(codeAllocation)
+			.with(CodeAllocationMeta.RULE)
+			.with(CodeAllocationMeta.BUSINESS_CODE)
+			.with(CodeAllocationMeta.RULE)
+			.execute();
+
 		result.success(true).data(codeAllocation);
 		return result;
 	}
@@ -197,7 +203,7 @@ public class CodeAllocationController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询编码分配
 	*/
@@ -218,7 +224,7 @@ public class CodeAllocationController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询编码分配
 	*/
@@ -235,10 +241,14 @@ public class CodeAllocationController extends SuperController {
 	public Result<PagedList<CodeAllocation>> queryPagedList(CodeAllocationVO sample) {
 		Result<PagedList<CodeAllocation>> result=new Result<>();
 		PagedList<CodeAllocation> list=codeAllocationService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 业务编码 数据
-		codeAllocationService.join(list,CodeAllocationMeta.BUSINESS_CODE);
-		// 关联出 编码规则 数据
-		codeAllocationService.join(list,CodeAllocationMeta.RULE);
+
+		// join 关联的对象
+		codeAllocationService.dao().fill(list)
+			.with(CodeAllocationMeta.RULE)
+			.with(CodeAllocationMeta.BUSINESS_CODE)
+			.with(CodeAllocationMeta.RULE)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

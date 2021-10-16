@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 层级  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:12
+ * @since 2021-10-16 15:29:52
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = LayerServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface LayerServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-datacenter
 	*/
 	public static final String API_BASIC_PATH = "service-datacenter";
-	
+
 	/**
 	 * API 上下文路径 , dc-layer
 	*/
 	public static final String API_CONTEXT_PATH = "dc-layer";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加层级
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除层级
 	 */
@@ -54,18 +55,18 @@ public interface LayerServiceProxy {
 	 * 批量删除层级
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新层级
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存层级
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个层级
 	 */
@@ -80,12 +81,12 @@ public interface LayerServiceProxy {
 	 * 查询层级
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询层级
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出层级数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface LayerServiceProxy {
 	 * 下载层级导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入层级数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加层级
 	*/
 	@RequestMapping(LayerServiceProxy.INSERT)
 	Result insert(LayerVO layerVO);
-	
+
 	/**
 	 * 删除层级
 	*/
@@ -124,13 +125,13 @@ public interface LayerServiceProxy {
 	*/
 	@RequestMapping(LayerServiceProxy.UPDATE)
 	Result update(LayerVO layerVO);
-	
+
 	/**
 	 * 更新层级
 	*/
 	@RequestMapping(LayerServiceProxy.SAVE)
 	Result save(LayerVO layerVO);
-	
+
 	/**
 	 * 获取层级
 	*/
@@ -147,14 +148,14 @@ public interface LayerServiceProxy {
 	*/
 	@RequestMapping(LayerServiceProxy.QUERY_LIST)
 	Result<List<Layer>> queryList(LayerVO sample);
-	
+
 	/**
 	 * 分页查询层级
 	*/
 	@RequestMapping(LayerServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Layer>> queryPagedList(LayerVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

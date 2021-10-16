@@ -94,7 +94,7 @@ public class KnContentGtr extends BaseCodeGenerator {
                 .form().validate().required().form()
                 .selectBox().queryApi(CategoryServiceProxy.QUERY_LIST)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).filter(true).defaultIndex(0)
-                .paging(false).toolbar(false).muliti(false).fillBy(ContentMeta.CATEGORY);
+                .paging(false).toolbar(false).muliti(false).fillWith(ContentMeta.CATEGORY);
 
 
 

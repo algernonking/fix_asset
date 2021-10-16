@@ -143,7 +143,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+
 
     var VALIDATE_CONFIG={"changeDate":{"date":true,"labelInForm":"变更日期","inputType":"date_input","required":true}};
 
@@ -157,7 +157,7 @@
     var BILL_TYPE = [[${billType}]] ;
     var ASSET_CATEGORY_DATA =  [[${assetCategoryData}]];
 
-
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
     var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];

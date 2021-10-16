@@ -60,7 +60,7 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
 
-        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillBy(VoucherOwnerMeta.VOUCHER_CATEGORY);
+        cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.CATEGORY_CODE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE).textField(DictItemMeta.LABEL).paging(false).filter(false).muliti(false).toolbar(false).fillWith(VoucherOwnerMeta.VOUCHER_CATEGORY);
 
         cfg.view().field(EAMTables.OPS_VOUCHER_OWNER.LABEL).form().selectBox().dict(DictEnum.OPS_VOUCHER_LABEL);
 
@@ -77,7 +77,7 @@ public class OpsVoucherOwnerGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField("user_code").textField("voucher")
                 .toolbar(false).paging(false)
-                .fillBy(VoucherOwnerMeta.VOUCHER_LIST).muliti(true);
+                .fillWith(VoucherOwnerMeta.VOUCHER_LIST).muliti(true);
 
 
 

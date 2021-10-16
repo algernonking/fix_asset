@@ -52,7 +52,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .basic().label("分类")
                 .form().validate().required()
                 .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillBy(GoodsMeta.CATEGORY).muliti(false);
+                .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillWith(GoodsMeta.CATEGORY).muliti(false);
 
 //
 //        cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
@@ -65,7 +65,7 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .basic().label("厂商")
                 .form().validate().required()
                 .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillBy(GoodsMeta.MANUFACTURER).muliti(false);
+                .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillWith(GoodsMeta.MANUFACTURER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_GOODS.NAME).form().validate().required();

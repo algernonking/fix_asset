@@ -1,6 +1,6 @@
 package com.dt.platform.common.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码规则 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:06
+ * @since 2021-10-16 15:54:37
 */
 
 @Api(tags = "编码规则")
@@ -60,7 +60,7 @@ public class CodeRuleController extends SuperController {
 	@Autowired
 	private ICodeRuleService codeRuleService;
 
-	
+
 	/**
 	 * 添加编码规则
 	*/
@@ -80,7 +80,8 @@ public class CodeRuleController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除编码规则
 	*/
@@ -96,8 +97,8 @@ public class CodeRuleController extends SuperController {
 		Result result=codeRuleService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除编码规则 <br>
 	 * 联合主键时，请自行调整实现
@@ -114,7 +115,7 @@ public class CodeRuleController extends SuperController {
 		Result result=codeRuleService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新编码规则
 	*/
@@ -126,7 +127,7 @@ public class CodeRuleController extends SuperController {
 		@ApiImplicitParam(name = CodeRuleVOMeta.RULE , value = "编码规则" , required = false , dataTypeClass=String.class , example = "${string_fix,AS}${string_fix,-}${number_rand,5}${number_seq,5,asset}"),
 		@ApiImplicitParam(name = CodeRuleVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRuleVOMeta.PAGE_INDEX , CodeRuleVOMeta.PAGE_SIZE , CodeRuleVOMeta.SEARCH_FIELD , CodeRuleVOMeta.FUZZY_FIELD , CodeRuleVOMeta.SEARCH_VALUE , CodeRuleVOMeta.SORT_FIELD , CodeRuleVOMeta.SORT_TYPE , CodeRuleVOMeta.IDS } )
 	@NotNull(name = CodeRuleVOMeta.ID)
 	@SentinelResource(value = CodeRuleServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeRuleServiceProxy.UPDATE)
@@ -134,8 +135,8 @@ public class CodeRuleController extends SuperController {
 		Result result=codeRuleService.update(codeRuleVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存编码规则
 	*/
@@ -156,7 +157,7 @@ public class CodeRuleController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取编码规则
 	*/
@@ -171,8 +172,12 @@ public class CodeRuleController extends SuperController {
 	public Result<CodeRule> getById(String id) {
 		Result<CodeRule> result=new Result<>();
 		CodeRule codeRule=codeRuleService.getById(id);
-		// 关联出 模块 数据
-		codeRuleService.join(codeRule,CodeRuleMeta.MODULE);
+
+		// join 关联的对象
+		codeRuleService.dao().fill(codeRule)
+			.with(CodeRuleMeta.MODULE)
+			.execute();
+
 		result.success(true).data(codeRule);
 		return result;
 	}
@@ -197,7 +202,7 @@ public class CodeRuleController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询编码规则
 	*/
@@ -219,7 +224,7 @@ public class CodeRuleController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询编码规则
 	*/
@@ -237,8 +242,12 @@ public class CodeRuleController extends SuperController {
 	public Result<PagedList<CodeRule>> queryPagedList(CodeRuleVO sample) {
 		Result<PagedList<CodeRule>> result=new Result<>();
 		PagedList<CodeRule> list=codeRuleService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		// 关联出 模块 数据
-		codeRuleService.join(list,CodeRuleMeta.MODULE);
+
+		// join 关联的对象
+		codeRuleService.dao().fill(list)
+			.with(CodeRuleMeta.MODULE)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

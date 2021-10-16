@@ -354,6 +354,7 @@ public class AssetPageController extends ViewController {
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
 		attributeItem.setOwnerCode(pageType);
 		attributeItem.setRequired("1");
+		attributeItem.setFormShow("1");
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();
 		if(attributeItemRequiredListResult.isSuccess()){
@@ -379,7 +380,7 @@ public class AssetPageController extends ViewController {
 
 		//设置资产分类
 		CatalogVO catalog=new CatalogVO();
-		if(StringUtil.isBlank(categoryCode)){
+		if(StringUtil.isBlank(categoryCode)||"null".equals(categoryCode.toLowerCase())){
 			catalog.setCode("asset");
 		}else{
 			catalog.setCode(categoryCode);

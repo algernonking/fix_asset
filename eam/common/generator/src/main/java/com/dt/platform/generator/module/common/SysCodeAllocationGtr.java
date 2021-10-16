@@ -41,7 +41,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.SYS_CODE_ALLOCATION.CODE).basic().label("业务编码")
                 .form().validate().required().form().selectBox().paging(true).filter(true).toolbar(false).muliti(false)
                 .queryApi(CodeRegisterServiceProxy.QUERY_PAGED_LIST)
-                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE).fillBy(CodeAllocationMeta.BUSINESS_CODE);
+                .textField(CodeRegisterMeta.NAME).valueField(CodeRegisterMeta.CODE).fillWith(CodeAllocationMeta.BUSINESS_CODE);
 
 
 
@@ -51,7 +51,7 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                 .basic().label("编码规则")
                 .form().validate().required()
                 .form().selectBox().queryApi(CodeRuleServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillBy(CodeAllocationMeta.RULE).muliti(false);
+                .valueField(CodeRuleMeta.ID).textField(CodeRuleMeta.NAME).fillWith(CodeAllocationMeta.RULE).muliti(false);
 
 
 
@@ -99,7 +99,8 @@ public class SysCodeAllocationGtr extends BaseCodeGenerator {
                 .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE).setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

@@ -111,7 +111,7 @@ public class EamAssetTranferGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_TRANFER.POSITION_ID)
                 .basic().label("存放位置")
                 .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillBy(AssetCollectionMeta.POSITION).muliti(false);
+                .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillWith(AssetCollectionMeta.POSITION).muliti(false);
 
 //        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
 //        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);

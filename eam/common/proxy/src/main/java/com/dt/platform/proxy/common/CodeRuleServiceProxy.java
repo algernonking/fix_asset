@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 编码规则  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:06
+ * @since 2021-10-16 15:54:37
 */
 
 @FeignClient(value = ServiceNames.COMMON, contextId = CodeRuleServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface CodeRuleServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-common
 	*/
 	public static final String API_BASIC_PATH = "service-common";
-	
+
 	/**
 	 * API 上下文路径 , sys-code-rule
 	*/
 	public static final String API_CONTEXT_PATH = "sys-code-rule";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加编码规则
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除编码规则
 	 */
@@ -54,18 +55,18 @@ public interface CodeRuleServiceProxy {
 	 * 批量删除编码规则
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新编码规则
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存编码规则
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个编码规则
 	 */
@@ -80,12 +81,12 @@ public interface CodeRuleServiceProxy {
 	 * 查询编码规则
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询编码规则
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出编码规则数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface CodeRuleServiceProxy {
 	 * 下载编码规则导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入编码规则数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加编码规则
 	*/
 	@RequestMapping(CodeRuleServiceProxy.INSERT)
 	Result insert(CodeRuleVO codeRuleVO);
-	
+
 	/**
 	 * 删除编码规则
 	*/
@@ -124,13 +125,13 @@ public interface CodeRuleServiceProxy {
 	*/
 	@RequestMapping(CodeRuleServiceProxy.UPDATE)
 	Result update(CodeRuleVO codeRuleVO);
-	
+
 	/**
 	 * 更新编码规则
 	*/
 	@RequestMapping(CodeRuleServiceProxy.SAVE)
 	Result save(CodeRuleVO codeRuleVO);
-	
+
 	/**
 	 * 获取编码规则
 	*/
@@ -147,14 +148,14 @@ public interface CodeRuleServiceProxy {
 	*/
 	@RequestMapping(CodeRuleServiceProxy.QUERY_LIST)
 	Result<List<CodeRule>> queryList(CodeRuleVO sample);
-	
+
 	/**
 	 * 分页查询编码规则
 	*/
 	@RequestMapping(CodeRuleServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<CodeRule>> queryPagedList(CodeRuleVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

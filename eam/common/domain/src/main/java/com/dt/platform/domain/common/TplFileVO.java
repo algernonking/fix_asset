@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 模板文件
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:45:47
+ * @since 2021-10-16 15:50:51
  * @sign 179DB2631A4009ECF3D0C18500E81232
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

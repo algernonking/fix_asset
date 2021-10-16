@@ -247,6 +247,7 @@ function FormPage() {
 			height: '450px',
 			data:ASSET_CATEGORY_DATA
 		})
+
 		//渲染 status 下拉字段
 		fox.renderSelectBox({
 			el: "status",
@@ -735,6 +736,9 @@ function FormPage() {
 
 			//设置  安全等级 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#safetyLevelCode",formData.safetyLevel);
+
+			//设置  运行环境 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#equipmentEnvironmentCode",formData.equipmentEnvironment);
 			//处理fillBy
 
 			setTimeout(function(){
@@ -850,6 +854,12 @@ function FormPage() {
 		//获取 安全等级 下拉框的值
 		if(xmSelect.get('#safetyLevelCode', true))
 		data["safetyLevelCode"]=fox.getSelectedValue("safetyLevelCode",false);
+
+		//获取 安全等级 下拉框的值
+		if(xmSelect.get('#equipmentEnvironmentCode', true))
+		data["equipmentEnvironmentCode"]=fox.getSelectedValue("equipmentEnvironmentCode",false);
+
+
 		return data;
 	}
 

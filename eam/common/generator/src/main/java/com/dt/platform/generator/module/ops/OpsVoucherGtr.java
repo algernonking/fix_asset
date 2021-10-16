@@ -54,7 +54,7 @@ public class OpsVoucherGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_VOUCHER.TYPE).form().validate().required().form().selectBox().queryApi(VoucherPrivServiceProxy.QUERY_TYPE_LIST).valueField(DictItemMeta.CODE)
-                .textField(DictItemMeta.LABEL).muliti(false).paging(false).filter(false).toolbar(false).fillBy(VoucherMeta.VOUCHER_TYPE);
+                .textField(DictItemMeta.LABEL).muliti(false).paging(false).filter(false).toolbar(false).fillWith(VoucherMeta.VOUCHER_TYPE);
 
 
 

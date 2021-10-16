@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 服务类型  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:02
+ * @since 2021-10-16 15:31:19
 */
 
 @FeignClient(value = ServiceNames.OPS, contextId = ServiceCategoryServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface ServiceCategoryServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-ops
 	*/
 	public static final String API_BASIC_PATH = "service-ops";
-	
+
 	/**
 	 * API 上下文路径 , ops-service-category
 	*/
 	public static final String API_CONTEXT_PATH = "ops-service-category";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加服务类型
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除服务类型
 	 */
@@ -54,18 +55,18 @@ public interface ServiceCategoryServiceProxy {
 	 * 批量删除服务类型
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新服务类型
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存服务类型
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个服务类型
 	 */
@@ -80,12 +81,12 @@ public interface ServiceCategoryServiceProxy {
 	 * 查询服务类型
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询服务类型
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出服务类型数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface ServiceCategoryServiceProxy {
 	 * 下载服务类型导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入服务类型数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加服务类型
 	*/
 	@RequestMapping(ServiceCategoryServiceProxy.INSERT)
 	Result insert(ServiceCategoryVO serviceCategoryVO);
-	
+
 	/**
 	 * 删除服务类型
 	*/
@@ -124,13 +125,13 @@ public interface ServiceCategoryServiceProxy {
 	*/
 	@RequestMapping(ServiceCategoryServiceProxy.UPDATE)
 	Result update(ServiceCategoryVO serviceCategoryVO);
-	
+
 	/**
 	 * 更新服务类型
 	*/
 	@RequestMapping(ServiceCategoryServiceProxy.SAVE)
 	Result save(ServiceCategoryVO serviceCategoryVO);
-	
+
 	/**
 	 * 获取服务类型
 	*/
@@ -147,14 +148,14 @@ public interface ServiceCategoryServiceProxy {
 	*/
 	@RequestMapping(ServiceCategoryServiceProxy.QUERY_LIST)
 	Result<List<ServiceCategory>> queryList(ServiceCategoryVO sample);
-	
+
 	/**
 	 * 分页查询服务类型
 	*/
 	@RequestMapping(ServiceCategoryServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<ServiceCategory>> queryPagedList(ServiceCategoryVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

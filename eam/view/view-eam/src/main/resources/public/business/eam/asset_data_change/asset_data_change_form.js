@@ -586,6 +586,9 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#safetyLevelCode",formData.safetyLevel);
 			//处理fillBy
 
+			//设置  运行环境 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#equipmentEnvironmentCode",formData.equipmentEnvironment);
+
 			setTimeout(function(){
 				if(categorySelect){
 					if(formData.category&&formData.category.id){
@@ -730,7 +733,10 @@ function FormPage() {
 			data["safetyLevelCode"]="";
 		}
 
-
+		data["equipmentEnvironmentCode"]=fox.getSelectedValue("equipmentEnvironmentCode",false);
+		if(!data["equipmentEnvironmentCode"]){
+			data["equipmentEnvironmentCode"]="";
+		}
 
 
 		return data;

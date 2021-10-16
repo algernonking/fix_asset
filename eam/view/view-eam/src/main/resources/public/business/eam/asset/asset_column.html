@@ -542,6 +542,7 @@
     </div>
 </div>
 
+
 <div  th:fragment="equipment_ip"  class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
@@ -613,8 +614,8 @@
 <div  th:fragment="equipment_conf" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <textarea lay-filter="equipmentConf" id="equipmentConf" name="equipmentConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备配置') }" class="layui-textarea" style="height: 120px" ></textarea>
-    </div>
+        <input lay-filter="equipmentConf" id="equipmentConf" name="equipmentConf" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备配置') }" type="text" class="layui-input"  />
+     </div>
 </div>
 
 

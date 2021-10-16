@@ -19,32 +19,33 @@ import com.dt.platform.proxy.ServiceNames;
  * 区域  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:09
+ * @since 2021-10-16 15:29:50
 */
 
 @FeignClient(value = ServiceNames.DATACENTER, contextId = AreaServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
 public interface AreaServiceProxy {
-	
+
 	/**
 	 * 基础路径 , service-datacenter
 	*/
 	public static final String API_BASIC_PATH = "service-datacenter";
-	
+
 	/**
 	 * API 上下文路径 , dc-area
 	*/
 	public static final String API_CONTEXT_PATH = "dc-area";
-	
+
 	/**
 	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
 	*/
 	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
-	
+
 	/**
 	 * 添加区域
 	 */
 	public static final String INSERT = API_PREFIX + "insert";
-	
+
+;
 	/**
 	 * 删除区域
 	 */
@@ -54,18 +55,18 @@ public interface AreaServiceProxy {
 	 * 批量删除区域
 	 */
 	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
-	
+
 	/**
 	 * 更新区域
 	 */
 	public static final String UPDATE = API_PREFIX + "update";
-	
-	
+
+
 	/**
 	 * 保存区域
 	 */
 	public static final String SAVE = API_PREFIX + "save";
-	
+
 	/**
 	 * 获取单个区域
 	 */
@@ -80,12 +81,12 @@ public interface AreaServiceProxy {
 	 * 查询区域
 	 */
 	public static final String QUERY_LIST = API_PREFIX + "query-list";
-	
+
 	/**
 	 * 分页查询区域
 	 */
 	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
-	
+
 	/**
 	 * 导出区域数据(Excel)
 	 */
@@ -95,18 +96,18 @@ public interface AreaServiceProxy {
 	 * 下载区域导入模版(Excel)
 	 */
 	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
-	
+
 	/**
 	 * 导入区域数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
-	
+
 	/**
 	 * 添加区域
 	*/
 	@RequestMapping(AreaServiceProxy.INSERT)
 	Result insert(AreaVO areaVO);
-	
+
 	/**
 	 * 删除区域
 	*/
@@ -124,13 +125,13 @@ public interface AreaServiceProxy {
 	*/
 	@RequestMapping(AreaServiceProxy.UPDATE)
 	Result update(AreaVO areaVO);
-	
+
 	/**
 	 * 更新区域
 	*/
 	@RequestMapping(AreaServiceProxy.SAVE)
 	Result save(AreaVO areaVO);
-	
+
 	/**
 	 * 获取区域
 	*/
@@ -147,14 +148,14 @@ public interface AreaServiceProxy {
 	*/
 	@RequestMapping(AreaServiceProxy.QUERY_LIST)
 	Result<List<Area>> queryList(AreaVO sample);
-	
+
 	/**
 	 * 分页查询区域
 	*/
 	@RequestMapping(AreaServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<Area>> queryPagedList(AreaVO sample);
-	
-	
+
+
 	/**
 	 * 控制器类名
 	 * */

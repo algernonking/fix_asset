@@ -71,7 +71,7 @@ public class AssetDataChangePageController extends ViewController {
 		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getData().toString();
 
 		//设置字段布局
-		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code(), assetAttributeDimension);
+		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(pageType, assetAttributeDimension);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
@@ -100,7 +100,7 @@ public class AssetDataChangePageController extends ViewController {
 	 * 数据变更 表单页面
 	 */
 	@RequestMapping("/asset_data_change_form.html")
-	public String form(Model model,HttpServletRequest request , String id,String changeType) {
+	public String form(Model model,HttpServletRequest request , String id,String changeType,String pageType) {
 
 
 		String assetAttributeDimension="";
@@ -112,7 +112,7 @@ public class AssetDataChangePageController extends ViewController {
 			assetAttributeDimension=AssetAttributeDimensionEnum.MAINTAINER.code();
 		}
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code(),assetAttributeDimension);
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,assetAttributeDimension);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
@@ -125,6 +125,7 @@ public class AssetDataChangePageController extends ViewController {
 		//设置字段必选
 		AssetAttributeItemVO attributeItem=new AssetAttributeItemVO();
 		attributeItem.setOwnerCode(AssetAttributeItemOwnerEnum.ASSET_CHANGE.code());
+		attributeItem.setFormShow("1");
 		attributeItem.setRequired("1");
 		attributeItem.setDimension(changeType);
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);

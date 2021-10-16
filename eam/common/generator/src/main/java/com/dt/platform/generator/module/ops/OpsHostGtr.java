@@ -113,7 +113,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=db")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.HOST_DB_LIST).muliti(true);
+                .fillWith(HostMeta.HOST_DB_LIST).muliti(true);
 
 
         cfg.view().field(HostMeta.HOST_MIDDLEWARE_IDS)
@@ -122,7 +122,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=mid")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.HOST_MIDDLEWARE_LIST).muliti(true);
+                .fillWith(HostMeta.HOST_MIDDLEWARE_LIST).muliti(true);
 
         cfg.view().field(HostMeta.HOST_OS_IDS)
                 .basic().label("操作系统")
@@ -130,7 +130,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().validate().required().form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false).defaultIndex(0)
-                .fillBy(HostMeta.HOST_OS_LIST).muliti(false);
+                .fillWith(HostMeta.HOST_OS_LIST).muliti(false);
 
 
         cfg.view().field(HostMeta.POSITION_ID)
@@ -139,7 +139,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(HostPositionServiceProxy.QUERY_LIST)
                 .valueField(HostPositionMeta.ID).textField(ServiceInfoMeta.NAME)
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.POSITION).muliti(false);
+                .fillWith(HostMeta.POSITION).muliti(false);
 
         cfg.view().field(HostMeta.SYSTEM_ID)
                 .basic().label("信息系统")
@@ -147,7 +147,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(InformationSystemServiceProxy.QUERY_LIST)
                 .valueField(InformationSystemMeta.ID).textField(InformationSystemMeta.NAME)
                 .toolbar(false).paging(false).defaultIndex(0)
-                .fillBy(HostMeta.INFO_SYSTEM).muliti(false);
+                .fillWith(HostMeta.INFO_SYSTEM).muliti(false);
 
         cfg.view().field(HostMeta.HOST_NOTES).form().textArea().height(30);
 
@@ -159,7 +159,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST+"?groupId=os")
                 .valueField("user_code").textField("voucher")
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.VOUCHER_LIST).muliti(true);
+                .fillWith(HostMeta.VOUCHER_LIST).muliti(true);
 
 
         cfg.view().field(HostVOMeta.HOST_BACKUP_METHOD)
@@ -168,7 +168,7 @@ public class OpsHostGtr extends BaseCodeGenerator{
                 .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=ops_host_backup_method")
                 .valueField("id").textField("label")
                 .toolbar(false).paging(false)
-                .fillBy(HostMeta.BACKUP_METHOD).muliti(false);
+                .fillWith(HostMeta.BACKUP_METHOD).muliti(false);
 
 
         cfg.view().field(EAMTables.OPS_HOST.HOST_TYPE)

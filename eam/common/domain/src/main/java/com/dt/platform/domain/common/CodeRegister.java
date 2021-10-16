@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 业务编码
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:45:56
+ * @since 2021-10-16 15:54:21
  * @sign 4A54E30F5C7CFFF4BDF2AE81E7EAE564
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

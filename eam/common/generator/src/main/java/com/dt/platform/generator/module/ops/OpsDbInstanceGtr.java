@@ -56,7 +56,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                 .form().validate().required()
                 .form().selectBox().queryApi(HostServiceProxy.QUERY_PAGED_LIST)
                 .valueField(HostMeta.ID).textField(HostMeta.HOST_NAME)
-                .toolbar(false).filter(true).paging(true).muliti(false).fillBy(DbInstanceMeta.HOST);
+                .toolbar(false).filter(true).paging(true).muliti(false).fillWith(DbInstanceMeta.HOST);
 
         cfg.view().field(EAMTables.OPS_DB_INSTANCE.NAME).form().validate().required();
 
@@ -66,7 +66,7 @@ public class OpsDbInstanceGtr extends BaseCodeGenerator{
                 .form().validate().required()
                 .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_LIST)
                 .valueField(ServiceInfoMeta.ID).textField(ServiceInfoMeta.NAME)
-                .toolbar(false).paging(false).muliti(false).fillBy(DbInstanceMeta.DATABASE);
+                .toolbar(false).paging(false).muliti(false).fillWith(DbInstanceMeta.DATABASE);
 
 
 
