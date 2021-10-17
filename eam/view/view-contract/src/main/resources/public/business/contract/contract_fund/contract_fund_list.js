@@ -1,12 +1,12 @@
 /**
  * 资金明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:16
+ * @since 2021-10-17 07:48:37
  */
 
 
 function ListPage() {
-        
+
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
 	const moduleURL="/service-contract/cont-contract-fund";
@@ -15,7 +15,7 @@ function ListPage() {
       * 入口函数，初始化
       */
 	this.init=function(layui) {
-     	
+
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 
@@ -33,8 +33,8 @@ function ListPage() {
 		//绑定行操作按钮事件
     	bindRowOperationEvent();
      }
-     
-     
+
+
      /**
       * 渲染表格
       */
@@ -112,12 +112,12 @@ function ListPage() {
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
+	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.money={ inputType:"number_input", value: $("#money").val()};
+		value.money={ inputType:"number_input", value: $("#money").val() };
 		value.fundDirect={ inputType:"button",value: $("#fundDirect").val()};
-		value.receiptPaymentTime={ inputType:"date_input", value: $("#receiptPaymentTime").val()};
+		value.receiptPaymentTime={ inputType:"date_input", value: $("#receiptPaymentTime").val() };
 		value.invoiceId={ inputType:"button",value: $("#invoiceId").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		var ps={searchField:"$composite"};
@@ -129,10 +129,14 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
 	}
-    
-	
+
+
 	/**
 	  * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	  */
@@ -143,7 +147,7 @@ function ListPage() {
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];
 		return data;
 	}
-	
+
 	/**
 	 * 重置搜索框
 	 */
@@ -164,7 +168,7 @@ function ListPage() {
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
-	
+
 	/**
 	 * 绑定搜索框事件
 	 */
@@ -172,12 +176,12 @@ function ListPage() {
 		//回车键查询
         $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
-		  	refreshTableData();
+		  	refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-           refreshTableData();
+			refreshTableData(null,null,true);
         });
 
 		// 搜索按钮点击事件
@@ -192,7 +196,7 @@ function ListPage() {
 		});
 
 	}
-	
+
 	/**
 	 * 绑定按钮事件
 	  */
@@ -229,7 +233,7 @@ function ListPage() {
 			admin.putTempData('cont-contract-fund-form-data-form-action', "create",true);
             showEditForm(data);
         };
-		
+
         //批量删除按钮点击事件
         function batchDelete(selected) {
 
@@ -264,7 +268,7 @@ function ListPage() {
 			});
         }
 	}
-     
+
     /**
      * 绑定行操作按钮事件
      */
@@ -332,13 +336,13 @@ function ListPage() {
 						}
 					});
 				});
-				
+
 			}
 			
 		});
- 
+
     };
-    
+
     /**
      * 打开编辑窗口
      */

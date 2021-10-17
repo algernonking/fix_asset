@@ -86,7 +86,7 @@ function ListPage() {
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
 				COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
-			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 };
+			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
 			COL_DATA.push(oper)
 
 			dataTable=fox.renderTable({

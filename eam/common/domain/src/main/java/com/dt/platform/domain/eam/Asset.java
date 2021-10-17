@@ -15,6 +15,7 @@ import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
+import com.dt.platform.domain.datacenter.Rack;
 import java.util.HashMap;
 import java.util.ArrayList;
 import javax.persistence.Transient;
@@ -25,8 +26,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-15 08:51:38
- * @sign 1C53E28CA1B380F310EBF843A26DFBA9
+ * @since 2021-10-17 13:03:31
+ * @sign C3A12293B96D42E0FFB3F09622B007D7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -483,6 +484,12 @@ public class Asset extends Entity {
 	private String internalControlLabel;
 	
 	/**
+	 * 单据：单据
+	*/
+	@ApiModelProperty(required = false,value="单据" , notes = "单据")
+	private String billId;
+	
+	/**
 	 * 创建人ID：创建人ID
 	*/
 	@ApiModelProperty(required = false,value="创建人ID" , notes = "创建人ID")
@@ -655,6 +662,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="安全等级" , notes = "安全等级")
 	private DictItem safetyLevel;
+	
+	/**
+	 * 机柜：机柜
+	*/
+	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
+	private Rack rack;
 	
 	/**
 	 * 获得 主键<br>
@@ -2063,6 +2076,25 @@ public class Asset extends Entity {
 	}
 	
 	/**
+	 * 获得 单据<br>
+	 * 单据
+	 * @return 单据
+	*/
+	public String getBillId() {
+		return billId;
+	}
+	
+	/**
+	 * 设置 单据
+	 * @param billId 单据
+	 * @return 当前对象
+	*/
+	public Asset setBillId(String billId) {
+		this.billId=billId;
+		return this;
+	}
+	
+	/**
 	 * 获得 创建人ID<br>
 	 * 创建人ID
 	 * @return 创建人ID
@@ -2633,6 +2665,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setSafetyLevel(DictItem safetyLevel) {
 		this.safetyLevel=safetyLevel;
+		return this;
+	}
+	
+	/**
+	 * 获得 机柜<br>
+	 * 机柜
+	 * @return 机柜
+	*/
+	public Rack getRack() {
+		return rack;
+	}
+	
+	/**
+	 * 设置 机柜
+	 * @param rack 机柜
+	 * @return 当前对象
+	*/
+	public Asset setRack(Rack rack) {
+		this.rack=rack;
 		return this;
 	}
 

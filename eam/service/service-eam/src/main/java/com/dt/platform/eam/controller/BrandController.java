@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:11
+ * @since 2021-10-17 07:47:56
 */
 
 @Api(tags = "品牌")
@@ -59,7 +59,7 @@ public class BrandController extends SuperController {
 	@Autowired
 	private IBrandService brandService;
 
-	
+
 	/**
 	 * 添加品牌
 	*/
@@ -76,7 +76,8 @@ public class BrandController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除品牌
 	*/
@@ -92,8 +93,8 @@ public class BrandController extends SuperController {
 		Result result=brandService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除品牌 <br>
 	 * 联合主键时，请自行调整实现
@@ -110,7 +111,7 @@ public class BrandController extends SuperController {
 		Result result=brandService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新品牌
 	*/
@@ -119,7 +120,7 @@ public class BrandController extends SuperController {
 		@ApiImplicitParam(name = BrandVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "471286350721581056"),
 		@ApiImplicitParam(name = BrandVOMeta.BRAND_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "12"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { BrandVOMeta.PAGE_INDEX , BrandVOMeta.PAGE_SIZE , BrandVOMeta.SEARCH_FIELD , BrandVOMeta.FUZZY_FIELD , BrandVOMeta.SEARCH_VALUE , BrandVOMeta.SORT_FIELD , BrandVOMeta.SORT_TYPE , BrandVOMeta.IDS } )
 	@NotNull(name = BrandVOMeta.ID)
 	@SentinelResource(value = BrandServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(BrandServiceProxy.UPDATE)
@@ -127,8 +128,8 @@ public class BrandController extends SuperController {
 		Result result=brandService.update(brandVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存品牌
 	*/
@@ -146,7 +147,7 @@ public class BrandController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取品牌
 	*/
@@ -161,6 +162,11 @@ public class BrandController extends SuperController {
 	public Result<Brand> getById(String id) {
 		Result<Brand> result=new Result<>();
 		Brand brand=brandService.getById(id);
+
+		// join 关联的对象
+		brandService.dao().fill(brand)
+			.execute();
+
 		result.success(true).data(brand);
 		return result;
 	}
@@ -185,7 +191,7 @@ public class BrandController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询品牌
 	*/
@@ -204,7 +210,7 @@ public class BrandController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询品牌
 	*/
@@ -219,6 +225,11 @@ public class BrandController extends SuperController {
 	public Result<PagedList<Brand>> queryPagedList(BrandVO sample) {
 		Result<PagedList<Brand>> result=new Result<>();
 		PagedList<Brand> list=brandService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		brandService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

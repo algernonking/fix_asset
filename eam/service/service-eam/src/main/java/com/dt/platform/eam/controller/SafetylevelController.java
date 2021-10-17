@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 风险等级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:30
+ * @since 2021-10-17 07:48:08
 */
 
 @Api(tags = "风险等级")
@@ -59,7 +59,7 @@ public class SafetylevelController extends SuperController {
 	@Autowired
 	private ISafetylevelService safetylevelService;
 
-	
+
 	/**
 	 * 添加风险等级
 	*/
@@ -77,7 +77,8 @@ public class SafetylevelController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除风险等级
 	*/
@@ -93,8 +94,8 @@ public class SafetylevelController extends SuperController {
 		Result result=safetylevelService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除风险等级 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class SafetylevelController extends SuperController {
 		Result result=safetylevelService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新风险等级
 	*/
@@ -121,7 +122,7 @@ public class SafetylevelController extends SuperController {
 		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_CODE , value = "风险等级编码" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = SafetylevelVOMeta.SAFETY_NAME , value = "风险等级" , required = false , dataTypeClass=String.class , example = "2级"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { SafetylevelVOMeta.PAGE_INDEX , SafetylevelVOMeta.PAGE_SIZE , SafetylevelVOMeta.SEARCH_FIELD , SafetylevelVOMeta.FUZZY_FIELD , SafetylevelVOMeta.SEARCH_VALUE , SafetylevelVOMeta.SORT_FIELD , SafetylevelVOMeta.SORT_TYPE , SafetylevelVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { SafetylevelVOMeta.PAGE_INDEX , SafetylevelVOMeta.PAGE_SIZE , SafetylevelVOMeta.SEARCH_FIELD , SafetylevelVOMeta.FUZZY_FIELD , SafetylevelVOMeta.SEARCH_VALUE , SafetylevelVOMeta.SORT_FIELD , SafetylevelVOMeta.SORT_TYPE , SafetylevelVOMeta.IDS } )
 	@NotNull(name = SafetylevelVOMeta.ID)
 	@SentinelResource(value = SafetylevelServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SafetylevelServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class SafetylevelController extends SuperController {
 		Result result=safetylevelService.update(safetylevelVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存风险等级
 	*/
@@ -149,7 +150,7 @@ public class SafetylevelController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取风险等级
 	*/
@@ -164,6 +165,11 @@ public class SafetylevelController extends SuperController {
 	public Result<Safetylevel> getById(String id) {
 		Result<Safetylevel> result=new Result<>();
 		Safetylevel safetylevel=safetylevelService.getById(id);
+
+		// join 关联的对象
+		safetylevelService.dao().fill(safetylevel)
+			.execute();
+
 		result.success(true).data(safetylevel);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class SafetylevelController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询风险等级
 	*/
@@ -208,7 +214,7 @@ public class SafetylevelController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询风险等级
 	*/
@@ -224,6 +230,11 @@ public class SafetylevelController extends SuperController {
 	public Result<PagedList<Safetylevel>> queryPagedList(SafetylevelVO sample) {
 		Result<PagedList<Safetylevel>> result=new Result<>();
 		PagedList<Safetylevel> list=safetylevelService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		safetylevelService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

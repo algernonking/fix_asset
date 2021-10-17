@@ -1,6 +1,6 @@
 package com.dt.platform.common.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:02
+ * @since 2021-10-17 07:47:13
 */
 
 @Api(tags = "编码属性")
@@ -59,7 +59,7 @@ public class CodeAttrController extends SuperController {
 	@Autowired
 	private ICodeAttrService codeAttrService;
 
-	
+
 	/**
 	 * 添加编码属性
 	*/
@@ -80,7 +80,8 @@ public class CodeAttrController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除编码属性
 	*/
@@ -96,8 +97,8 @@ public class CodeAttrController extends SuperController {
 		Result result=codeAttrService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除编码属性 <br>
 	 * 联合主键时，请自行调整实现
@@ -114,7 +115,7 @@ public class CodeAttrController extends SuperController {
 		Result result=codeAttrService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新编码属性
 	*/
@@ -127,7 +128,7 @@ public class CodeAttrController extends SuperController {
 		@ApiImplicitParam(name = CodeAttrVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "9999"),
 		@ApiImplicitParam(name = CodeAttrVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { CodeAttrVOMeta.PAGE_INDEX , CodeAttrVOMeta.PAGE_SIZE , CodeAttrVOMeta.SEARCH_FIELD , CodeAttrVOMeta.FUZZY_FIELD , CodeAttrVOMeta.SEARCH_VALUE , CodeAttrVOMeta.SORT_FIELD , CodeAttrVOMeta.SORT_TYPE , CodeAttrVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { CodeAttrVOMeta.PAGE_INDEX , CodeAttrVOMeta.PAGE_SIZE , CodeAttrVOMeta.SEARCH_FIELD , CodeAttrVOMeta.FUZZY_FIELD , CodeAttrVOMeta.SEARCH_VALUE , CodeAttrVOMeta.SORT_FIELD , CodeAttrVOMeta.SORT_TYPE , CodeAttrVOMeta.IDS } )
 	@NotNull(name = CodeAttrVOMeta.ID)
 	@SentinelResource(value = CodeAttrServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeAttrServiceProxy.UPDATE)
@@ -135,8 +136,8 @@ public class CodeAttrController extends SuperController {
 		Result result=codeAttrService.update(codeAttrVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存编码属性
 	*/
@@ -158,7 +159,7 @@ public class CodeAttrController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取编码属性
 	*/
@@ -173,6 +174,11 @@ public class CodeAttrController extends SuperController {
 	public Result<CodeAttr> getById(String id) {
 		Result<CodeAttr> result=new Result<>();
 		CodeAttr codeAttr=codeAttrService.getById(id);
+
+		// join 关联的对象
+		codeAttrService.dao().fill(codeAttr)
+			.execute();
+
 		result.success(true).data(codeAttr);
 		return result;
 	}
@@ -197,7 +203,7 @@ public class CodeAttrController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询编码属性
 	*/
@@ -220,7 +226,7 @@ public class CodeAttrController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询编码属性
 	*/
@@ -239,6 +245,11 @@ public class CodeAttrController extends SuperController {
 	public Result<PagedList<CodeAttr>> queryPagedList(CodeAttrVO sample) {
 		Result<PagedList<CodeAttr>> result=new Result<>();
 		PagedList<CodeAttr> list=codeAttrService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		codeAttrService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

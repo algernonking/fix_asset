@@ -1,6 +1,6 @@
 package com.dt.platform.common.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 业务编码 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:45:56
+ * @since 2021-10-17 07:47:03
 */
 
 @Api(tags = "业务编码")
@@ -59,7 +59,7 @@ public class CodeRegisterController extends SuperController {
 	@Autowired
 	private ICodeRegisterService codeRegisterService;
 
-	
+
 	/**
 	 * 添加业务编码
 	*/
@@ -79,7 +79,8 @@ public class CodeRegisterController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除业务编码
 	*/
@@ -95,8 +96,8 @@ public class CodeRegisterController extends SuperController {
 		Result result=codeRegisterService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除业务编码 <br>
 	 * 联合主键时，请自行调整实现
@@ -113,7 +114,7 @@ public class CodeRegisterController extends SuperController {
 		Result result=codeRegisterService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新业务编码
 	*/
@@ -125,7 +126,7 @@ public class CodeRegisterController extends SuperController {
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class , example = "资产基本变更"),
 		@ApiImplicitParam(name = CodeRegisterVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRegisterVOMeta.PAGE_INDEX , CodeRegisterVOMeta.PAGE_SIZE , CodeRegisterVOMeta.SEARCH_FIELD , CodeRegisterVOMeta.FUZZY_FIELD , CodeRegisterVOMeta.SEARCH_VALUE , CodeRegisterVOMeta.SORT_FIELD , CodeRegisterVOMeta.SORT_TYPE , CodeRegisterVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { CodeRegisterVOMeta.PAGE_INDEX , CodeRegisterVOMeta.PAGE_SIZE , CodeRegisterVOMeta.SEARCH_FIELD , CodeRegisterVOMeta.FUZZY_FIELD , CodeRegisterVOMeta.SEARCH_VALUE , CodeRegisterVOMeta.SORT_FIELD , CodeRegisterVOMeta.SORT_TYPE , CodeRegisterVOMeta.IDS } )
 	@NotNull(name = CodeRegisterVOMeta.ID)
 	@SentinelResource(value = CodeRegisterServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CodeRegisterServiceProxy.UPDATE)
@@ -133,8 +134,8 @@ public class CodeRegisterController extends SuperController {
 		Result result=codeRegisterService.update(codeRegisterVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存业务编码
 	*/
@@ -155,7 +156,7 @@ public class CodeRegisterController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取业务编码
 	*/
@@ -170,6 +171,11 @@ public class CodeRegisterController extends SuperController {
 	public Result<CodeRegister> getById(String id) {
 		Result<CodeRegister> result=new Result<>();
 		CodeRegister codeRegister=codeRegisterService.getById(id);
+
+		// join 关联的对象
+		codeRegisterService.dao().fill(codeRegister)
+			.execute();
+
 		result.success(true).data(codeRegister);
 		return result;
 	}
@@ -194,7 +200,7 @@ public class CodeRegisterController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询业务编码
 	*/
@@ -216,7 +222,7 @@ public class CodeRegisterController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询业务编码
 	*/
@@ -234,6 +240,11 @@ public class CodeRegisterController extends SuperController {
 	public Result<PagedList<CodeRegister>> queryPagedList(CodeRegisterVO sample) {
 		Result<PagedList<CodeRegister>> result=new Result<>();
 		PagedList<CodeRegister> list=codeRegisterService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		codeRegisterService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

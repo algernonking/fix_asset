@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 主机位置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:57
+ * @since 2021-10-17 07:48:25
 */
 
 @Api(tags = "主机位置")
@@ -59,7 +59,7 @@ public class HostPositionController extends SuperController {
 	@Autowired
 	private IHostPositionService hostPositionService;
 
-	
+
 	/**
 	 * 添加主机位置
 	*/
@@ -77,7 +77,8 @@ public class HostPositionController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除主机位置
 	*/
@@ -93,8 +94,8 @@ public class HostPositionController extends SuperController {
 		Result result=hostPositionService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除主机位置 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class HostPositionController extends SuperController {
 		Result result=hostPositionService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新主机位置
 	*/
@@ -121,7 +122,7 @@ public class HostPositionController extends SuperController {
 		@ApiImplicitParam(name = HostPositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "位置1"),
 		@ApiImplicitParam(name = HostPositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { HostPositionVOMeta.PAGE_INDEX , HostPositionVOMeta.PAGE_SIZE , HostPositionVOMeta.SEARCH_FIELD , HostPositionVOMeta.FUZZY_FIELD , HostPositionVOMeta.SEARCH_VALUE , HostPositionVOMeta.SORT_FIELD , HostPositionVOMeta.SORT_TYPE , HostPositionVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { HostPositionVOMeta.PAGE_INDEX , HostPositionVOMeta.PAGE_SIZE , HostPositionVOMeta.SEARCH_FIELD , HostPositionVOMeta.FUZZY_FIELD , HostPositionVOMeta.SEARCH_VALUE , HostPositionVOMeta.SORT_FIELD , HostPositionVOMeta.SORT_TYPE , HostPositionVOMeta.IDS } )
 	@NotNull(name = HostPositionVOMeta.ID)
 	@SentinelResource(value = HostPositionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostPositionServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class HostPositionController extends SuperController {
 		Result result=hostPositionService.update(hostPositionVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存主机位置
 	*/
@@ -149,7 +150,7 @@ public class HostPositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取主机位置
 	*/
@@ -164,6 +165,11 @@ public class HostPositionController extends SuperController {
 	public Result<HostPosition> getById(String id) {
 		Result<HostPosition> result=new Result<>();
 		HostPosition hostPosition=hostPositionService.getById(id);
+
+		// join 关联的对象
+		hostPositionService.dao().fill(hostPosition)
+			.execute();
+
 		result.success(true).data(hostPosition);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class HostPositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询主机位置
 	*/
@@ -208,7 +214,7 @@ public class HostPositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询主机位置
 	*/
@@ -224,6 +230,11 @@ public class HostPositionController extends SuperController {
 	public Result<PagedList<HostPosition>> queryPagedList(HostPositionVO sample) {
 		Result<PagedList<HostPosition>> result=new Result<>();
 		PagedList<HostPosition> list=hostPositionService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		hostPositionService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

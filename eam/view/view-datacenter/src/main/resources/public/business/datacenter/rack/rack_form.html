@@ -2,7 +2,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:29:55
+ * @since 2021-10-17 10:57:02
  */
  -->
  <!DOCTYPE html>
@@ -37,30 +37,7 @@
         <div class="layui-row form-row">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
-
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('区域')}">区域</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <div id="areaId" input-type="select" th:data="${'/service-datacenter/dc-area/query-list'}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('层级')}">层级</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <div id="layerId" input-type="select" th:data="${'/service-datacenter/dc-layer/query-list'}"></div>
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs6 form-column">
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
@@ -79,7 +56,7 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs6 form-column">
 
 
                     <div class="layui-form-item" >
@@ -138,7 +115,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"areaId":{"labelInForm":"区域","inputType":"select_box","required":true},"layerId":{"labelInForm":"层级","inputType":"select_box","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"rackCode":{"labelInForm":"编码","inputType":"text_input","required":true},"rackName":{"labelInForm":"名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="dc_rack";
 
 

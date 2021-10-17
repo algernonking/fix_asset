@@ -166,29 +166,45 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		// 关联出 资产分类 数据
 
 		//exampleOrderService.dao().fill(list).with(ExampleOrderMeta.BUYER_EMPLOYEE, EmployeeMeta.PERSON).execute();
-		join(list, AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		join(list,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		join(list,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		join(list,AssetMeta.POSITION);
 
-		// 关联出 维保商 数据
-		join(list,AssetMeta.MAINTNAINER);
-		// 关联出 供应商 数据
-		join(list,AssetMeta.SUPPLIER);
-
-		// 关联出 来源 数据
-		join(list,AssetMeta.SOURCE);
-		join(list,AssetMeta.SAFETY_LEVEL);
-		join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-
-		join(list,AssetMeta.OWNER_COMPANY);
-		join(list,AssetMeta.USE_ORGANIZATION);
-		join(list,AssetMeta.MANAGER);
-		join(list,AssetMeta.USE_USER);
-		join(list,AssetMeta.ORIGINATOR);
+		dao.fill(list).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.execute();
+//		join(list, AssetMeta.CATEGORY);
+//		// 关联出 物品档案 数据
+//		join(list,AssetMeta.GOODS);
+//		// 关联出 厂商 数据
+//		join(list,AssetMeta.MANUFACTURER);
+//		// 关联出 位置 数据
+//		join(list,AssetMeta.POSITION);
+//
+//		// 关联出 维保商 数据
+//		join(list,AssetMeta.MAINTNAINER);
+//		// 关联出 供应商 数据
+//		join(list,AssetMeta.SUPPLIER);
+//
+//		// 关联出 来源 数据
+//		join(list,AssetMeta.SOURCE);
+//		join(list,AssetMeta.SAFETY_LEVEL);
+//		join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
+//
+//		join(list,AssetMeta.OWNER_COMPANY);
+//		join(list,AssetMeta.USE_ORGANIZATION);
+//		join(list,AssetMeta.MANAGER);
+//		join(list,AssetMeta.USE_USER);
+//		join(list,AssetMeta.ORIGINATOR);
 
 		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
 		dao().join(originators, Person.class);

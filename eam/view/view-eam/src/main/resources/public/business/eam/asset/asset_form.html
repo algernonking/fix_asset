@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-15 08:51:42
+ * @since 2021-10-17 13:03:40
  */
  -->
  <!DOCTYPE html>
@@ -599,12 +599,14 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备机柜')}">设备机柜</div></div>
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('机柜')}">机柜</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="rackId" id="rackId" name="rackId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜') }" type="text" class="layui-input"  />
+                            <div id="rackId" input-type="select" th:data="${'/service-datacenter/dc-rack/query-paged-list'}"></div>
                         </div>
                     </div>
+
 
                 
                     <div class="layui-form-item" >
@@ -635,6 +637,13 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('内部控制标签')}">内部控制标签</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="internalControlLabel" id="internalControlLabel" name="internalControlLabel" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('内部控制标签') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('单据')}">单据</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="billId" id="billId" name="billId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('单据') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 

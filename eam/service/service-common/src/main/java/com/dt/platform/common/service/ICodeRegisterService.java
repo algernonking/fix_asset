@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 业务编码 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:54:21
+ * @since 2021-10-17 07:47:03
 */
 
 public interface ICodeRegisterService extends ISuperService<CodeRegister> {

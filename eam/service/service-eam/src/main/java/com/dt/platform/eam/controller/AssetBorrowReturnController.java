@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用归还 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:50
+ * @since 2021-10-17 07:47:44
 */
 
 @Api(tags = "资产借用归还")
@@ -60,7 +60,7 @@ public class AssetBorrowReturnController extends SuperController {
 	@Autowired
 	private IAssetBorrowReturnService assetBorrowReturnService;
 
-	
+
 	/**
 	 * 添加资产借用归还
 	*/
@@ -80,7 +80,8 @@ public class AssetBorrowReturnController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除资产借用归还
 	*/
@@ -96,8 +97,8 @@ public class AssetBorrowReturnController extends SuperController {
 		Result result=assetBorrowReturnService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资产借用归还 <br>
 	 * 联合主键时，请自行调整实现
@@ -114,7 +115,7 @@ public class AssetBorrowReturnController extends SuperController {
 		Result result=assetBorrowReturnService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新资产借用归还
 	*/
@@ -126,7 +127,7 @@ public class AssetBorrowReturnController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowReturnVOMeta.CONTENT , value = "归还说明" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowReturnVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowReturnVOMeta.PAGE_INDEX , AssetBorrowReturnVOMeta.PAGE_SIZE , AssetBorrowReturnVOMeta.SEARCH_FIELD , AssetBorrowReturnVOMeta.FUZZY_FIELD , AssetBorrowReturnVOMeta.SEARCH_VALUE , AssetBorrowReturnVOMeta.SORT_FIELD , AssetBorrowReturnVOMeta.SORT_TYPE , AssetBorrowReturnVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowReturnVOMeta.PAGE_INDEX , AssetBorrowReturnVOMeta.PAGE_SIZE , AssetBorrowReturnVOMeta.SEARCH_FIELD , AssetBorrowReturnVOMeta.FUZZY_FIELD , AssetBorrowReturnVOMeta.SEARCH_VALUE , AssetBorrowReturnVOMeta.SORT_FIELD , AssetBorrowReturnVOMeta.SORT_TYPE , AssetBorrowReturnVOMeta.IDS } )
 	@NotNull(name = AssetBorrowReturnVOMeta.ID)
 	@SentinelResource(value = AssetBorrowReturnServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowReturnServiceProxy.UPDATE)
@@ -134,8 +135,8 @@ public class AssetBorrowReturnController extends SuperController {
 		Result result=assetBorrowReturnService.update(assetBorrowReturnVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存资产借用归还
 	*/
@@ -156,7 +157,7 @@ public class AssetBorrowReturnController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取资产借用归还
 	*/
@@ -171,6 +172,11 @@ public class AssetBorrowReturnController extends SuperController {
 	public Result<AssetBorrowReturn> getById(String id) {
 		Result<AssetBorrowReturn> result=new Result<>();
 		AssetBorrowReturn assetBorrowReturn=assetBorrowReturnService.getById(id);
+
+		// join 关联的对象
+		assetBorrowReturnService.dao().fill(assetBorrowReturn)
+			.execute();
+
 		result.success(true).data(assetBorrowReturn);
 		return result;
 	}
@@ -195,7 +201,7 @@ public class AssetBorrowReturnController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询资产借用归还
 	*/
@@ -217,7 +223,7 @@ public class AssetBorrowReturnController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询资产借用归还
 	*/
@@ -235,6 +241,11 @@ public class AssetBorrowReturnController extends SuperController {
 	public Result<PagedList<AssetBorrowReturn>> queryPagedList(AssetBorrowReturnVO sample) {
 		Result<PagedList<AssetBorrowReturn>> result=new Result<>();
 		PagedList<AssetBorrowReturn> list=assetBorrowReturnService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		assetBorrowReturnService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

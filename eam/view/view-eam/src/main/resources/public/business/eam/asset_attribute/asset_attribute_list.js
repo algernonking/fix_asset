@@ -1,12 +1,12 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:26
+ * @since 2021-10-17 07:47:29
  */
 
 
 function ListPage() {
-        
+
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-attribute";
@@ -15,7 +15,7 @@ function ListPage() {
       * 入口函数，初始化
       */
 	this.init=function(layui) {
-     	
+
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
 
@@ -33,8 +33,8 @@ function ListPage() {
 		//绑定行操作按钮事件
     	bindRowOperationEvent();
      }
-     
-     
+
+
      /**
       * 渲染表格
       */
@@ -85,7 +85,6 @@ function ListPage() {
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'owner', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属'), templet:function (d){ return templet('owner',fox.getEnumText(SELECT_OWNER_DATA,d.owner),d);}}
-					,{ field: 'selectedCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -118,12 +117,12 @@ function ListPage() {
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
+	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.label={ inputType:"button",value: $("#label").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.dimension={ inputType:"radio_box", value: xmSelect.get("#dimension",true).getValue("value"), label:xmSelect.get("#dimension",true).getValue("nameStr")};
-		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-		value.componentType={ inputType:"radio_box", value: xmSelect.get("#componentType",true).getValue("value"), label:xmSelect.get("#componentType",true).getValue("nameStr")};
+		value.dimension={ inputType:"radio_box", value: xmSelect.get("#dimension",true).getValue("value"), label:xmSelect.get("#dimension",true).getValue("nameStr") };
+		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
+		value.componentType={ inputType:"radio_box", value: xmSelect.get("#componentType",true).getValue("value"), label:xmSelect.get("#componentType",true).getValue("nameStr") };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -134,10 +133,14 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
 	}
-    
-	
+
+
 	/**
 	  * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	  */
@@ -148,7 +151,7 @@ function ListPage() {
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];
 		return data;
 	}
-	
+
 	/**
 	 * 重置搜索框
 	 */
@@ -213,7 +216,7 @@ function ListPage() {
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
-	
+
 	/**
 	 * 绑定搜索框事件
 	 */
@@ -221,12 +224,12 @@ function ListPage() {
 		//回车键查询
         $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
-		  	refreshTableData();
+		  	refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-           refreshTableData();
+			refreshTableData(null,null,true);
         });
 
 		// 搜索按钮点击事件
@@ -241,7 +244,7 @@ function ListPage() {
 		});
 
 	}
-	
+
 	/**
 	 * 绑定按钮事件
 	  */
@@ -278,7 +281,7 @@ function ListPage() {
 			admin.putTempData('eam-asset-attribute-form-data-form-action', "create",true);
             showEditForm(data);
         };
-		
+
         //批量删除按钮点击事件
         function batchDelete(selected) {
 
@@ -313,7 +316,7 @@ function ListPage() {
 			});
         }
 	}
-     
+
     /**
      * 绑定行操作按钮事件
      */
@@ -381,13 +384,13 @@ function ListPage() {
 						}
 					});
 				});
-				
+
 			}
 			
 		});
- 
+
     };
-    
+
     /**
      * 打开编辑窗口
      */

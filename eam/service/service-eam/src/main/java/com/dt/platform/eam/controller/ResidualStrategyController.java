@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 折旧策略 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:25
+ * @since 2021-10-17 07:48:05
 */
 
 @Api(tags = "折旧策略")
@@ -60,7 +60,7 @@ public class ResidualStrategyController extends SuperController {
 	@Autowired
 	private IResidualStrategyService residualStrategyService;
 
-	
+
 	/**
 	 * 添加折旧策略
 	*/
@@ -83,7 +83,8 @@ public class ResidualStrategyController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除折旧策略
 	*/
@@ -99,8 +100,8 @@ public class ResidualStrategyController extends SuperController {
 		Result result=residualStrategyService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除折旧策略 <br>
 	 * 联合主键时，请自行调整实现
@@ -117,7 +118,7 @@ public class ResidualStrategyController extends SuperController {
 		Result result=residualStrategyService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新折旧策略
 	*/
@@ -132,7 +133,7 @@ public class ResidualStrategyController extends SuperController {
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.VALUE , value = "设置值" , required = false , dataTypeClass=String.class , example = "4"),
 		@ApiImplicitParam(name = ResidualStrategyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "平均折旧"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ResidualStrategyVOMeta.PAGE_INDEX , ResidualStrategyVOMeta.PAGE_SIZE , ResidualStrategyVOMeta.SEARCH_FIELD , ResidualStrategyVOMeta.FUZZY_FIELD , ResidualStrategyVOMeta.SEARCH_VALUE , ResidualStrategyVOMeta.SORT_FIELD , ResidualStrategyVOMeta.SORT_TYPE , ResidualStrategyVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ResidualStrategyVOMeta.PAGE_INDEX , ResidualStrategyVOMeta.PAGE_SIZE , ResidualStrategyVOMeta.SEARCH_FIELD , ResidualStrategyVOMeta.FUZZY_FIELD , ResidualStrategyVOMeta.SEARCH_VALUE , ResidualStrategyVOMeta.SORT_FIELD , ResidualStrategyVOMeta.SORT_TYPE , ResidualStrategyVOMeta.IDS } )
 	@NotNull(name = ResidualStrategyVOMeta.ID)
 	@SentinelResource(value = ResidualStrategyServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ResidualStrategyServiceProxy.UPDATE)
@@ -140,8 +141,8 @@ public class ResidualStrategyController extends SuperController {
 		Result result=residualStrategyService.update(residualStrategyVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存折旧策略
 	*/
@@ -165,7 +166,7 @@ public class ResidualStrategyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取折旧策略
 	*/
@@ -180,6 +181,11 @@ public class ResidualStrategyController extends SuperController {
 	public Result<ResidualStrategy> getById(String id) {
 		Result<ResidualStrategy> result=new Result<>();
 		ResidualStrategy residualStrategy=residualStrategyService.getById(id);
+
+		// join 关联的对象
+		residualStrategyService.dao().fill(residualStrategy)
+			.execute();
+
 		result.success(true).data(residualStrategy);
 		return result;
 	}
@@ -204,7 +210,7 @@ public class ResidualStrategyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询折旧策略
 	*/
@@ -229,7 +235,7 @@ public class ResidualStrategyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询折旧策略
 	*/
@@ -250,6 +256,11 @@ public class ResidualStrategyController extends SuperController {
 	public Result<PagedList<ResidualStrategy>> queryPagedList(ResidualStrategyVO sample) {
 		Result<PagedList<ResidualStrategy>> result=new Result<>();
 		PagedList<ResidualStrategy> list=residualStrategyService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		residualStrategyService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

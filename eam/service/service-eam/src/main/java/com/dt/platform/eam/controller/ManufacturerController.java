@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 生产厂商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:22
+ * @since 2021-10-17 07:48:03
 */
 
 @Api(tags = "生产厂商")
@@ -59,7 +59,7 @@ public class ManufacturerController extends SuperController {
 	@Autowired
 	private IManufacturerService manufacturerService;
 
-	
+
 	/**
 	 * 添加生产厂商
 	*/
@@ -78,7 +78,8 @@ public class ManufacturerController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除生产厂商
 	*/
@@ -94,8 +95,8 @@ public class ManufacturerController extends SuperController {
 		Result result=manufacturerService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除生产厂商 <br>
 	 * 联合主键时，请自行调整实现
@@ -112,7 +113,7 @@ public class ManufacturerController extends SuperController {
 		Result result=manufacturerService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新生产厂商
 	*/
@@ -123,7 +124,7 @@ public class ManufacturerController extends SuperController {
 		@ApiImplicitParam(name = ManufacturerVOMeta.LOCATION , value = "所在地" , required = false , dataTypeClass=String.class , example = "中国"),
 		@ApiImplicitParam(name = ManufacturerVOMeta.MANUFACTURER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ManufacturerVOMeta.PAGE_INDEX , ManufacturerVOMeta.PAGE_SIZE , ManufacturerVOMeta.SEARCH_FIELD , ManufacturerVOMeta.FUZZY_FIELD , ManufacturerVOMeta.SEARCH_VALUE , ManufacturerVOMeta.SORT_FIELD , ManufacturerVOMeta.SORT_TYPE , ManufacturerVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ManufacturerVOMeta.PAGE_INDEX , ManufacturerVOMeta.PAGE_SIZE , ManufacturerVOMeta.SEARCH_FIELD , ManufacturerVOMeta.FUZZY_FIELD , ManufacturerVOMeta.SEARCH_VALUE , ManufacturerVOMeta.SORT_FIELD , ManufacturerVOMeta.SORT_TYPE , ManufacturerVOMeta.IDS } )
 	@NotNull(name = ManufacturerVOMeta.ID)
 	@SentinelResource(value = ManufacturerServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ManufacturerServiceProxy.UPDATE)
@@ -131,8 +132,8 @@ public class ManufacturerController extends SuperController {
 		Result result=manufacturerService.update(manufacturerVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存生产厂商
 	*/
@@ -152,7 +153,7 @@ public class ManufacturerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取生产厂商
 	*/
@@ -167,6 +168,11 @@ public class ManufacturerController extends SuperController {
 	public Result<Manufacturer> getById(String id) {
 		Result<Manufacturer> result=new Result<>();
 		Manufacturer manufacturer=manufacturerService.getById(id);
+
+		// join 关联的对象
+		manufacturerService.dao().fill(manufacturer)
+			.execute();
+
 		result.success(true).data(manufacturer);
 		return result;
 	}
@@ -191,7 +197,7 @@ public class ManufacturerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询生产厂商
 	*/
@@ -212,7 +218,7 @@ public class ManufacturerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询生产厂商
 	*/
@@ -229,6 +235,11 @@ public class ManufacturerController extends SuperController {
 	public Result<PagedList<Manufacturer>> queryPagedList(ManufacturerVO sample) {
 		Result<PagedList<Manufacturer>> result=new Result<>();
 		PagedList<Manufacturer> list=manufacturerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		manufacturerService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

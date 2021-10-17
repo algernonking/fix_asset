@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 数据库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:49
+ * @since 2021-10-17 07:48:19
 */
 
 @Api(tags = "数据库")
@@ -59,7 +59,7 @@ public class HostDbController extends SuperController {
 	@Autowired
 	private IHostDbService hostDbService;
 
-	
+
 	/**
 	 * 添加数据库
 	*/
@@ -77,7 +77,8 @@ public class HostDbController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除数据库
 	*/
@@ -93,8 +94,8 @@ public class HostDbController extends SuperController {
 		Result result=hostDbService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除数据库 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class HostDbController extends SuperController {
 		Result result=hostDbService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新数据库
 	*/
@@ -121,7 +122,7 @@ public class HostDbController extends SuperController {
 		@ApiImplicitParam(name = HostDbVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314385321984"),
 		@ApiImplicitParam(name = HostDbVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495614616022286336"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { HostDbVOMeta.PAGE_INDEX , HostDbVOMeta.PAGE_SIZE , HostDbVOMeta.SEARCH_FIELD , HostDbVOMeta.FUZZY_FIELD , HostDbVOMeta.SEARCH_VALUE , HostDbVOMeta.SORT_FIELD , HostDbVOMeta.SORT_TYPE , HostDbVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { HostDbVOMeta.PAGE_INDEX , HostDbVOMeta.PAGE_SIZE , HostDbVOMeta.SEARCH_FIELD , HostDbVOMeta.FUZZY_FIELD , HostDbVOMeta.SEARCH_VALUE , HostDbVOMeta.SORT_FIELD , HostDbVOMeta.SORT_TYPE , HostDbVOMeta.IDS } )
 	@NotNull(name = HostDbVOMeta.ID)
 	@SentinelResource(value = HostDbServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostDbServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class HostDbController extends SuperController {
 		Result result=hostDbService.update(hostDbVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存数据库
 	*/
@@ -149,7 +150,7 @@ public class HostDbController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取数据库
 	*/
@@ -164,6 +165,11 @@ public class HostDbController extends SuperController {
 	public Result<HostDb> getById(String id) {
 		Result<HostDb> result=new Result<>();
 		HostDb hostDb=hostDbService.getById(id);
+
+		// join 关联的对象
+		hostDbService.dao().fill(hostDb)
+			.execute();
+
 		result.success(true).data(hostDb);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class HostDbController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询数据库
 	*/
@@ -208,7 +214,7 @@ public class HostDbController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询数据库
 	*/
@@ -224,6 +230,11 @@ public class HostDbController extends SuperController {
 	public Result<PagedList<HostDb>> queryPagedList(HostDbVO sample) {
 		Result<PagedList<HostDb>> result=new Result<>();
 		PagedList<HostDb> list=hostDbService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		hostDbService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 合同 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:31:31
+ * @since 2021-10-17 07:48:39
 */
 
 public interface IContractService extends ISuperService<Contract> {

@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 仓库 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:33
+ * @since 2021-10-17 07:48:09
 */
 
 @Api(tags = "仓库")
@@ -59,7 +59,7 @@ public class WarehouseController extends SuperController {
 	@Autowired
 	private IWarehouseService warehouseService;
 
-	
+
 	/**
 	 * 添加仓库
 	*/
@@ -77,7 +77,8 @@ public class WarehouseController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除仓库
 	*/
@@ -93,8 +94,8 @@ public class WarehouseController extends SuperController {
 		Result result=warehouseService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除仓库 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class WarehouseController extends SuperController {
 		Result result=warehouseService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新仓库
 	*/
@@ -121,7 +122,7 @@ public class WarehouseController extends SuperController {
 		@ApiImplicitParam(name = WarehouseVOMeta.WAREHOUSE_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "仓库1"),
 		@ApiImplicitParam(name = WarehouseVOMeta.WAREHOUSE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { WarehouseVOMeta.PAGE_INDEX , WarehouseVOMeta.PAGE_SIZE , WarehouseVOMeta.SEARCH_FIELD , WarehouseVOMeta.FUZZY_FIELD , WarehouseVOMeta.SEARCH_VALUE , WarehouseVOMeta.SORT_FIELD , WarehouseVOMeta.SORT_TYPE , WarehouseVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { WarehouseVOMeta.PAGE_INDEX , WarehouseVOMeta.PAGE_SIZE , WarehouseVOMeta.SEARCH_FIELD , WarehouseVOMeta.FUZZY_FIELD , WarehouseVOMeta.SEARCH_VALUE , WarehouseVOMeta.SORT_FIELD , WarehouseVOMeta.SORT_TYPE , WarehouseVOMeta.IDS } )
 	@NotNull(name = WarehouseVOMeta.ID)
 	@SentinelResource(value = WarehouseServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(WarehouseServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class WarehouseController extends SuperController {
 		Result result=warehouseService.update(warehouseVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存仓库
 	*/
@@ -149,7 +150,7 @@ public class WarehouseController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取仓库
 	*/
@@ -164,6 +165,11 @@ public class WarehouseController extends SuperController {
 	public Result<Warehouse> getById(String id) {
 		Result<Warehouse> result=new Result<>();
 		Warehouse warehouse=warehouseService.getById(id);
+
+		// join 关联的对象
+		warehouseService.dao().fill(warehouse)
+			.execute();
+
 		result.success(true).data(warehouse);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class WarehouseController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询仓库
 	*/
@@ -208,7 +214,7 @@ public class WarehouseController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询仓库
 	*/
@@ -224,6 +230,11 @@ public class WarehouseController extends SuperController {
 	public Result<PagedList<Warehouse>> queryPagedList(WarehouseVO sample) {
 		Result<PagedList<Warehouse>> result=new Result<>();
 		PagedList<Warehouse> list=warehouseService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		warehouseService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

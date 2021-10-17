@@ -581,6 +581,29 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 rackId 下拉字段
+		fox.renderSelectBox({
+			el: "rackId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "rackName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues="".split(",");
+				var defaultIndexs="".split(",");
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].rackName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#entryTime',
 			format:"yyyy-MM-dd HH:mm:ss",
@@ -741,6 +764,10 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#equipmentEnvironmentCode",formData.equipmentEnvironment);
 			//处理fillBy
 
+			//设置  机柜 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#rackId",formData.rack);
+
+
 			setTimeout(function(){
 				if(categorySelect){
 					if(formData.category&&formData.category.id){
@@ -859,7 +886,9 @@ function FormPage() {
 		if(xmSelect.get('#equipmentEnvironmentCode', true))
 		data["equipmentEnvironmentCode"]=fox.getSelectedValue("equipmentEnvironmentCode",false);
 
-
+		//获取 机柜 下拉框的值
+		if(xmSelect.get('#rackId', true))
+		data["rackId"]=fox.getSelectedValue("rackId",false);
 		return data;
 	}
 

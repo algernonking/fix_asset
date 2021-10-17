@@ -1,6 +1,6 @@
 package com.dt.platform.contract.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同分类 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:10
+ * @since 2021-10-17 07:48:34
 */
 
 @Api(tags = "合同分类")
@@ -59,7 +59,7 @@ public class ContractCategoryController extends SuperController {
 	@Autowired
 	private IContractCategoryService contractCategoryService;
 
-	
+
 	/**
 	 * 添加合同分类
 	*/
@@ -83,7 +83,8 @@ public class ContractCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除合同分类
 	*/
@@ -99,8 +100,8 @@ public class ContractCategoryController extends SuperController {
 		Result result=contractCategoryService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除合同分类 <br>
 	 * 联合主键时，请自行调整实现
@@ -117,7 +118,7 @@ public class ContractCategoryController extends SuperController {
 		Result result=contractCategoryService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新合同分类
 	*/
@@ -133,7 +134,7 @@ public class ContractCategoryController extends SuperController {
 		@ApiImplicitParam(name = ContractCategoryVOMeta.HIERARCHY_NAME , value = "节点路径名称" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractCategoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ContractCategoryVOMeta.PAGE_INDEX , ContractCategoryVOMeta.PAGE_SIZE , ContractCategoryVOMeta.SEARCH_FIELD , ContractCategoryVOMeta.FUZZY_FIELD , ContractCategoryVOMeta.SEARCH_VALUE , ContractCategoryVOMeta.SORT_FIELD , ContractCategoryVOMeta.SORT_TYPE , ContractCategoryVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ContractCategoryVOMeta.PAGE_INDEX , ContractCategoryVOMeta.PAGE_SIZE , ContractCategoryVOMeta.SEARCH_FIELD , ContractCategoryVOMeta.FUZZY_FIELD , ContractCategoryVOMeta.SEARCH_VALUE , ContractCategoryVOMeta.SORT_FIELD , ContractCategoryVOMeta.SORT_TYPE , ContractCategoryVOMeta.IDS } )
 	@NotNull(name = ContractCategoryVOMeta.ID)
 	@SentinelResource(value = ContractCategoryServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractCategoryServiceProxy.UPDATE)
@@ -141,8 +142,8 @@ public class ContractCategoryController extends SuperController {
 		Result result=contractCategoryService.update(contractCategoryVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存合同分类
 	*/
@@ -167,7 +168,7 @@ public class ContractCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取合同分类
 	*/
@@ -182,6 +183,11 @@ public class ContractCategoryController extends SuperController {
 	public Result<ContractCategory> getById(String id) {
 		Result<ContractCategory> result=new Result<>();
 		ContractCategory contractCategory=contractCategoryService.getById(id);
+
+		// join 关联的对象
+		contractCategoryService.dao().fill(contractCategory)
+			.execute();
+
 		result.success(true).data(contractCategory);
 		return result;
 	}
@@ -206,7 +212,7 @@ public class ContractCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询合同分类
 	*/
@@ -232,7 +238,7 @@ public class ContractCategoryController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询合同分类
 	*/
@@ -254,6 +260,11 @@ public class ContractCategoryController extends SuperController {
 	public Result<PagedList<ContractCategory>> queryPagedList(ContractCategoryVO sample) {
 		Result<PagedList<ContractCategory>> result=new Result<>();
 		PagedList<ContractCategory> list=contractCategoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		contractCategoryService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

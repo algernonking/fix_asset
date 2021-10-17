@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 维保厂商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 15:19:17
+ * @since 2021-10-17 07:48:00
 */
 
 @Api(tags = "维保厂商")
@@ -59,7 +59,7 @@ public class MaintainerController extends SuperController {
 	@Autowired
 	private IMaintainerService maintainerService;
 
-	
+
 	/**
 	 * 添加维保厂商
 	*/
@@ -77,7 +77,8 @@ public class MaintainerController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除维保厂商
 	*/
@@ -93,8 +94,8 @@ public class MaintainerController extends SuperController {
 		Result result=maintainerService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除维保厂商 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class MaintainerController extends SuperController {
 		Result result=maintainerService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新维保厂商
 	*/
@@ -121,7 +122,7 @@ public class MaintainerController extends SuperController {
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "华为科技有限公司"),
 		@ApiImplicitParam(name = MaintainerVOMeta.MAINTAINER_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { MaintainerVOMeta.PAGE_INDEX , MaintainerVOMeta.PAGE_SIZE , MaintainerVOMeta.SEARCH_FIELD , MaintainerVOMeta.FUZZY_FIELD , MaintainerVOMeta.SEARCH_VALUE , MaintainerVOMeta.SORT_FIELD , MaintainerVOMeta.SORT_TYPE , MaintainerVOMeta.IDS } )
 	@NotNull(name = MaintainerVOMeta.ID)
 	@SentinelResource(value = MaintainerServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(MaintainerServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class MaintainerController extends SuperController {
 		Result result=maintainerService.update(maintainerVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存维保厂商
 	*/
@@ -149,7 +150,7 @@ public class MaintainerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取维保厂商
 	*/
@@ -164,6 +165,11 @@ public class MaintainerController extends SuperController {
 	public Result<Maintainer> getById(String id) {
 		Result<Maintainer> result=new Result<>();
 		Maintainer maintainer=maintainerService.getById(id);
+
+		// join 关联的对象
+		maintainerService.dao().fill(maintainer)
+			.execute();
+
 		result.success(true).data(maintainer);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class MaintainerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询维保厂商
 	*/
@@ -208,7 +214,7 @@ public class MaintainerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询维保厂商
 	*/
@@ -224,6 +230,11 @@ public class MaintainerController extends SuperController {
 	public Result<PagedList<Maintainer>> queryPagedList(MaintainerVO sample) {
 		Result<PagedList<Maintainer>> result=new Result<>();
 		PagedList<Maintainer> list=maintainerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		maintainerService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

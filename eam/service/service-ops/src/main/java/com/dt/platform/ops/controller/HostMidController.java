@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 中间件 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:51
+ * @since 2021-10-17 07:48:21
 */
 
 @Api(tags = "中间件")
@@ -59,7 +59,7 @@ public class HostMidController extends SuperController {
 	@Autowired
 	private IHostMidService hostMidService;
 
-	
+
 	/**
 	 * 添加中间件
 	*/
@@ -77,7 +77,8 @@ public class HostMidController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除中间件
 	*/
@@ -93,8 +94,8 @@ public class HostMidController extends SuperController {
 		Result result=hostMidService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除中间件 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class HostMidController extends SuperController {
 		Result result=hostMidService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新中间件
 	*/
@@ -121,7 +122,7 @@ public class HostMidController extends SuperController {
 		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
 		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
 	@NotNull(name = HostMidVOMeta.ID)
 	@SentinelResource(value = HostMidServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostMidServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class HostMidController extends SuperController {
 		Result result=hostMidService.update(hostMidVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存中间件
 	*/
@@ -149,7 +150,7 @@ public class HostMidController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取中间件
 	*/
@@ -164,6 +165,11 @@ public class HostMidController extends SuperController {
 	public Result<HostMid> getById(String id) {
 		Result<HostMid> result=new Result<>();
 		HostMid hostMid=hostMidService.getById(id);
+
+		// join 关联的对象
+		hostMidService.dao().fill(hostMid)
+			.execute();
+
 		result.success(true).data(hostMid);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class HostMidController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询中间件
 	*/
@@ -208,7 +214,7 @@ public class HostMidController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询中间件
 	*/
@@ -224,6 +230,11 @@ public class HostMidController extends SuperController {
 	public Result<PagedList<HostMid>> queryPagedList(HostMidVO sample) {
 		Result<PagedList<HostMid>> result=new Result<>();
 		PagedList<HostMid> list=hostMidService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		hostMidService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

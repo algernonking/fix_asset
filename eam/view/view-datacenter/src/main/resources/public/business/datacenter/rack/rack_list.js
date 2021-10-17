@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:29:55
+ * @since 2021-10-17 10:57:01
  */
 
 
@@ -74,8 +74,6 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('区域'), templet: function (d) { return templet('areaId',fox.joinLabel(d.area,"name"),d);}}
-					,{ field: 'layerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('层级'), templet: function (d) { return templet('layerId',fox.joinLabel(d.layer,"name"),d);}}
 					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') , templet: function (d) { return templet('rackCode',d.rackCode,d);}  }
 					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('rackName',d.rackName,d);}  }
 					,{ field: 'rackCaptical', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('容量') , templet: function (d) { return templet('rackCaptical',d.rackCaptical,d);}  }
@@ -117,8 +115,6 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.areaId={ inputType:"select_box", value: xmSelect.get("#areaId",true).getValue("value"), fillWith:"area", label:xmSelect.get("#areaId",true).getValue("nameStr") };
-		value.layerId={ inputType:"select_box", value: xmSelect.get("#layerId",true).getValue("value"), fillWith:"layer", label:xmSelect.get("#layerId",true).getValue("nameStr") };
 		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.rackName={ inputType:"button",value: $("#rackName").val()};
 		value.pduNumber={ inputType:"number_input", value: $("#pduNumber").val() };
@@ -165,46 +161,6 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
-		//渲染 areaId 下拉字段
-		fox.renderSelectBox({
-			el: "areaId",
-			radio: false,
-			size: "small",
-			filterable: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
-		//渲染 layerId 下拉字段
-		fox.renderSelectBox({
-			el: "layerId",
-			radio: false,
-			size: "small",
-			filterable: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id});
-				}
-				return opts;
-			}
-		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}

@@ -33,8 +33,8 @@ public class DcRackGtr extends BaseCodeGenerator {
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 //        //第一步：配置好后，生成代码
-        cfg.getPoClassFile().addSimpleProperty(Area.class,"area","区域","");
-        cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","");
+//        cfg.getPoClassFile().addSimpleProperty(Area.class,"area","区域","");
+//        cfg.getPoClassFile().addSimpleProperty(Layer.class,"layer","层级","");
 
         cfg.view().field(EAMTables.DC_RACK.ID).basic().hidden(true);
         cfg.view().field(EAMTables.DC_RACK.ID).search().hidden();
@@ -51,17 +51,17 @@ public class DcRackGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.DC_RACK.RACK_CODE).form().validate().required();
-        cfg.view().field(EAMTables.DC_RACK.AREA_ID)
-                .basic().label("区域")
-                .form().validate().required()
-                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillWith(RackMeta.AREA).muliti(false);
-
-        cfg.view().field(EAMTables.DC_RACK.LAYER_ID)
-                .basic().label("层级")
-                .form().validate().required()
-                .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillWith(RackMeta.LAYER).muliti(false);
+//        cfg.view().field(EAMTables.DC_RACK.AREA_ID)
+//                .basic().label("区域")
+//                .form().validate().required()
+//                .form().selectBox().queryApi(AreaServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+//                .valueField(AreaMeta.ID).textField(AreaMeta.NAME).fillWith(RackMeta.AREA).muliti(false);
+//
+//        cfg.view().field(EAMTables.DC_RACK.LAYER_ID)
+//                .basic().label("层级")
+//                .form().validate().required()
+//                .form().selectBox().queryApi(LayerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+//                .valueField(LayerMeta.ID).textField(LayerMeta.NAME).fillWith(RackMeta.LAYER).muliti(false);
 
         cfg.view().field(EAMTables.DC_RACK.RACK_CAPTICAL).form().numberInput().range(0.0,100.0).step(1.0);
 
@@ -73,11 +73,13 @@ public class DcRackGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("90%");
         cfg.view().formWindow().bottomSpace(80);
         cfg.view().form().addGroup(null,
-                new Object[] {
-                        EAMTables.DC_RACK.AREA_ID,
-                        EAMTables.DC_RACK.LAYER_ID,
+//                new Object[] {
+//                        EAMTables.DC_RACK.AREA_ID,
+//                        EAMTables.DC_RACK.LAYER_ID,
+//
+//                },
 
-                }, new Object[] {
+                new Object[] {
                         EAMTables.DC_RACK.RACK_CODE,
                         EAMTables.DC_RACK.RACK_NAME,
 

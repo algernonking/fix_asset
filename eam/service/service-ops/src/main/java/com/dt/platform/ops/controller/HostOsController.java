@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 操作系统 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:46
+ * @since 2021-10-17 07:48:18
 */
 
 @Api(tags = "操作系统")
@@ -59,7 +59,7 @@ public class HostOsController extends SuperController {
 	@Autowired
 	private IHostOsService hostOsService;
 
-	
+
 	/**
 	 * 添加操作系统
 	*/
@@ -77,7 +77,8 @@ public class HostOsController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除操作系统
 	*/
@@ -93,8 +94,8 @@ public class HostOsController extends SuperController {
 		Result result=hostOsService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除操作系统 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class HostOsController extends SuperController {
 		Result result=hostOsService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新操作系统
 	*/
@@ -121,7 +122,7 @@ public class HostOsController extends SuperController {
 		@ApiImplicitParam(name = HostOsVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "478957043391135744"),
 		@ApiImplicitParam(name = HostOsVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "473630679364534272"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { HostOsVOMeta.PAGE_INDEX , HostOsVOMeta.PAGE_SIZE , HostOsVOMeta.SEARCH_FIELD , HostOsVOMeta.FUZZY_FIELD , HostOsVOMeta.SEARCH_VALUE , HostOsVOMeta.SORT_FIELD , HostOsVOMeta.SORT_TYPE , HostOsVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { HostOsVOMeta.PAGE_INDEX , HostOsVOMeta.PAGE_SIZE , HostOsVOMeta.SEARCH_FIELD , HostOsVOMeta.FUZZY_FIELD , HostOsVOMeta.SEARCH_VALUE , HostOsVOMeta.SORT_FIELD , HostOsVOMeta.SORT_TYPE , HostOsVOMeta.IDS } )
 	@NotNull(name = HostOsVOMeta.ID)
 	@SentinelResource(value = HostOsServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostOsServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class HostOsController extends SuperController {
 		Result result=hostOsService.update(hostOsVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存操作系统
 	*/
@@ -149,7 +150,7 @@ public class HostOsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取操作系统
 	*/
@@ -164,6 +165,11 @@ public class HostOsController extends SuperController {
 	public Result<HostOs> getById(String id) {
 		Result<HostOs> result=new Result<>();
 		HostOs hostOs=hostOsService.getById(id);
+
+		// join 关联的对象
+		hostOsService.dao().fill(hostOs)
+			.execute();
+
 		result.success(true).data(hostOs);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class HostOsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询操作系统
 	*/
@@ -208,7 +214,7 @@ public class HostOsController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询操作系统
 	*/
@@ -224,6 +230,11 @@ public class HostOsController extends SuperController {
 	public Result<PagedList<HostOs>> queryPagedList(HostOsVO sample) {
 		Result<PagedList<HostOs>> result=new Result<>();
 		PagedList<HostOs> list=hostOsService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		hostOsService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

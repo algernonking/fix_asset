@@ -1,6 +1,6 @@
 package com.dt.platform.contract.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资金明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:16
+ * @since 2021-10-17 07:48:37
 */
 
 @Api(tags = "资金明细")
@@ -60,7 +60,7 @@ public class ContractFundController extends SuperController {
 	@Autowired
 	private IContractFundService contractFundService;
 
-	
+
 	/**
 	 * 添加资金明细
 	*/
@@ -81,7 +81,8 @@ public class ContractFundController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除资金明细
 	*/
@@ -97,8 +98,8 @@ public class ContractFundController extends SuperController {
 		Result result=contractFundService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资金明细 <br>
 	 * 联合主键时，请自行调整实现
@@ -115,7 +116,7 @@ public class ContractFundController extends SuperController {
 		Result result=contractFundService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新资金明细
 	*/
@@ -128,7 +129,7 @@ public class ContractFundController extends SuperController {
 		@ApiImplicitParam(name = ContractFundVOMeta.INVOICE_ID , value = "发票" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractFundVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ContractFundVOMeta.PAGE_INDEX , ContractFundVOMeta.PAGE_SIZE , ContractFundVOMeta.SEARCH_FIELD , ContractFundVOMeta.FUZZY_FIELD , ContractFundVOMeta.SEARCH_VALUE , ContractFundVOMeta.SORT_FIELD , ContractFundVOMeta.SORT_TYPE , ContractFundVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ContractFundVOMeta.PAGE_INDEX , ContractFundVOMeta.PAGE_SIZE , ContractFundVOMeta.SEARCH_FIELD , ContractFundVOMeta.FUZZY_FIELD , ContractFundVOMeta.SEARCH_VALUE , ContractFundVOMeta.SORT_FIELD , ContractFundVOMeta.SORT_TYPE , ContractFundVOMeta.IDS } )
 	@NotNull(name = ContractFundVOMeta.ID)
 	@SentinelResource(value = ContractFundServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractFundServiceProxy.UPDATE)
@@ -136,8 +137,8 @@ public class ContractFundController extends SuperController {
 		Result result=contractFundService.update(contractFundVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存资金明细
 	*/
@@ -159,7 +160,7 @@ public class ContractFundController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取资金明细
 	*/
@@ -174,6 +175,11 @@ public class ContractFundController extends SuperController {
 	public Result<ContractFund> getById(String id) {
 		Result<ContractFund> result=new Result<>();
 		ContractFund contractFund=contractFundService.getById(id);
+
+		// join 关联的对象
+		contractFundService.dao().fill(contractFund)
+			.execute();
+
 		result.success(true).data(contractFund);
 		return result;
 	}
@@ -198,7 +204,7 @@ public class ContractFundController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询资金明细
 	*/
@@ -221,7 +227,7 @@ public class ContractFundController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询资金明细
 	*/
@@ -240,6 +246,11 @@ public class ContractFundController extends SuperController {
 	public Result<PagedList<ContractFund>> queryPagedList(ContractFundVO sample) {
 		Result<PagedList<ContractFund>> result=new Result<>();
 		PagedList<ContractFund> list=contractFundService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		contractFundService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 存放位置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:14
+ * @since 2021-10-17 07:47:57
 */
 
 @Api(tags = "存放位置")
@@ -59,7 +59,7 @@ public class PositionController extends SuperController {
 	@Autowired
 	private IPositionService positionService;
 
-	
+
 	/**
 	 * 添加存放位置
 	*/
@@ -77,7 +77,8 @@ public class PositionController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除存放位置
 	*/
@@ -93,8 +94,8 @@ public class PositionController extends SuperController {
 		Result result=positionService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除存放位置 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class PositionController extends SuperController {
 		Result result=positionService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新存放位置
 	*/
@@ -121,7 +122,7 @@ public class PositionController extends SuperController {
 		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "区域1"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } )
 	@NotNull(name = PositionVOMeta.ID)
 	@SentinelResource(value = PositionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(PositionServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class PositionController extends SuperController {
 		Result result=positionService.update(positionVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存存放位置
 	*/
@@ -149,7 +150,7 @@ public class PositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取存放位置
 	*/
@@ -164,6 +165,11 @@ public class PositionController extends SuperController {
 	public Result<Position> getById(String id) {
 		Result<Position> result=new Result<>();
 		Position position=positionService.getById(id);
+
+		// join 关联的对象
+		positionService.dao().fill(position)
+			.execute();
+
 		result.success(true).data(position);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class PositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询存放位置
 	*/
@@ -208,7 +214,7 @@ public class PositionController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询存放位置
 	*/
@@ -224,6 +230,11 @@ public class PositionController extends SuperController {
 	public Result<PagedList<Position>> queryPagedList(PositionVO sample) {
 		Result<PagedList<Position>> result=new Result<>();
 		PagedList<Position> list=positionService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		positionService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

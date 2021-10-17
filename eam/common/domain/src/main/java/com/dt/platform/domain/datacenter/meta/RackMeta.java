@@ -4,15 +4,13 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.datacenter.Rack;
 import java.math.BigDecimal;
 import java.util.Date;
-import com.dt.platform.domain.datacenter.Area;
-import com.dt.platform.domain.datacenter.Layer;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:29:54
- * @sign FAE4574D2AB95DF81EA6F2D6B0E3475A
+ * @since 2021-10-17 10:56:57
+ * @sign 4C7BDAB4EDC150A967F0AEC8B221515A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,26 +25,6 @@ public class RackMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
-	
-	/**
-	 * 区域 , 类型: java.lang.String
-	*/
-	public static final String AREA_ID="areaId";
-	
-	/**
-	 * 区域 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> AREA_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA_ID, java.lang.String.class, "区域", "区域", java.lang.String.class, null);
-	
-	/**
-	 * 层级 , 类型: java.lang.String
-	*/
-	public static final String LAYER_ID="layerId";
-	
-	/**
-	 * 层级 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> LAYER_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER_ID, java.lang.String.class, "层级", "层级", java.lang.String.class, null);
 	
 	/**
 	 * 编码 , 类型: java.lang.String
@@ -199,29 +177,9 @@ public class RackMeta {
 	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
-	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
-	*/
-	public static final String AREA="area";
-	
-	/**
-	 * 区域 , 类型: com.dt.platform.domain.datacenter.Area
-	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Area> AREA_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,AREA, com.dt.platform.domain.datacenter.Area.class, "区域", "", com.dt.platform.domain.datacenter.Area.class, null);
-	
-	/**
-	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
-	*/
-	public static final String LAYER="layer";
-	
-	/**
-	 * 层级 , 类型: com.dt.platform.domain.datacenter.Layer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.datacenter.Rack,com.dt.platform.domain.datacenter.Layer> LAYER_PROP = new BeanProperty(com.dt.platform.domain.datacenter.Rack.class ,LAYER, com.dt.platform.domain.datacenter.Layer.class, "层级", "", com.dt.platform.domain.datacenter.Layer.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , AREA_ID , LAYER_ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , AREA , LAYER };
+	public static final String[] $PROPS={ ID , RACK_CODE , RACK_NAME , RACK_CAPTICAL , PDU_NUMBER , RACK_LABELS , RACK_NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -239,28 +197,6 @@ public class RackMeta {
 		public Rack setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
-			return this;
-		}
-		
-		/**
-		 * 设置 区域
-		 * @param areaId 区域
-		 * @return 当前对象
-		*/
-		public Rack setAreaId(String areaId) {
-			super.change(AREA_ID,super.getAreaId(),areaId);
-			super.setAreaId(areaId);
-			return this;
-		}
-		
-		/**
-		 * 设置 层级
-		 * @param layerId 层级
-		 * @return 当前对象
-		*/
-		public Rack setLayerId(String layerId) {
-			super.change(LAYER_ID,super.getLayerId(),layerId);
-			super.setLayerId(layerId);
 			return this;
 		}
 		
@@ -426,28 +362,6 @@ public class RackMeta {
 		public Rack setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
-			return this;
-		}
-		
-		/**
-		 * 设置 区域
-		 * @param area 区域
-		 * @return 当前对象
-		*/
-		public Rack setArea(Area area) {
-			super.change(AREA,super.getArea(),area);
-			super.setArea(area);
-			return this;
-		}
-		
-		/**
-		 * 设置 层级
-		 * @param layer 层级
-		 * @return 当前对象
-		*/
-		public Rack setLayer(Layer layer) {
-			super.change(LAYER,super.getLayer(),layer);
-			super.setLayer(layer);
 			return this;
 		}
 	}

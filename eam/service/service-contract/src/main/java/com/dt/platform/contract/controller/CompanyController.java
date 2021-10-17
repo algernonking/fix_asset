@@ -1,6 +1,6 @@
 package com.dt.platform.contract.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 单位 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:13
+ * @since 2021-10-17 07:48:36
 */
 
 @Api(tags = "单位")
@@ -59,7 +59,7 @@ public class CompanyController extends SuperController {
 	@Autowired
 	private ICompanyService companyService;
 
-	
+
 	/**
 	 * 添加单位
 	*/
@@ -82,7 +82,8 @@ public class CompanyController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除单位
 	*/
@@ -98,8 +99,8 @@ public class CompanyController extends SuperController {
 		Result result=companyService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除单位 <br>
 	 * 联合主键时，请自行调整实现
@@ -116,7 +117,7 @@ public class CompanyController extends SuperController {
 		Result result=companyService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新单位
 	*/
@@ -131,7 +132,7 @@ public class CompanyController extends SuperController {
 		@ApiImplicitParam(name = CompanyVOMeta.PROFILE , value = "介绍" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = CompanyVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { CompanyVOMeta.PAGE_INDEX , CompanyVOMeta.PAGE_SIZE , CompanyVOMeta.SEARCH_FIELD , CompanyVOMeta.FUZZY_FIELD , CompanyVOMeta.SEARCH_VALUE , CompanyVOMeta.SORT_FIELD , CompanyVOMeta.SORT_TYPE , CompanyVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { CompanyVOMeta.PAGE_INDEX , CompanyVOMeta.PAGE_SIZE , CompanyVOMeta.SEARCH_FIELD , CompanyVOMeta.FUZZY_FIELD , CompanyVOMeta.SEARCH_VALUE , CompanyVOMeta.SORT_FIELD , CompanyVOMeta.SORT_TYPE , CompanyVOMeta.IDS } )
 	@NotNull(name = CompanyVOMeta.ID)
 	@SentinelResource(value = CompanyServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(CompanyServiceProxy.UPDATE)
@@ -139,8 +140,8 @@ public class CompanyController extends SuperController {
 		Result result=companyService.update(companyVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存单位
 	*/
@@ -164,7 +165,7 @@ public class CompanyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取单位
 	*/
@@ -179,6 +180,11 @@ public class CompanyController extends SuperController {
 	public Result<Company> getById(String id) {
 		Result<Company> result=new Result<>();
 		Company company=companyService.getById(id);
+
+		// join 关联的对象
+		companyService.dao().fill(company)
+			.execute();
+
 		result.success(true).data(company);
 		return result;
 	}
@@ -203,7 +209,7 @@ public class CompanyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询单位
 	*/
@@ -228,7 +234,7 @@ public class CompanyController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询单位
 	*/
@@ -249,6 +255,11 @@ public class CompanyController extends SuperController {
 	public Result<PagedList<Company>> queryPagedList(CompanyVO sample) {
 		Result<PagedList<Company>> result=new Result<>();
 		PagedList<Company> list=companyService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		companyService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

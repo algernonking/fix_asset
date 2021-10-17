@@ -1,6 +1,6 @@
 package com.dt.platform.datacenter.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 区域 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:09
+ * @since 2021-10-17 07:47:17
 */
 
 @Api(tags = "区域")
@@ -59,7 +59,7 @@ public class AreaController extends SuperController {
 	@Autowired
 	private IAreaService areaService;
 
-	
+
 	/**
 	 * 添加区域
 	*/
@@ -79,7 +79,8 @@ public class AreaController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除区域
 	*/
@@ -95,8 +96,8 @@ public class AreaController extends SuperController {
 		Result result=areaService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除区域 <br>
 	 * 联合主键时，请自行调整实现
@@ -113,7 +114,7 @@ public class AreaController extends SuperController {
 		Result result=areaService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新区域
 	*/
@@ -125,7 +126,7 @@ public class AreaController extends SuperController {
 		@ApiImplicitParam(name = AreaVOMeta.POSITION , value = "位置" , required = false , dataTypeClass=String.class , example = "上海南路2好"),
 		@ApiImplicitParam(name = AreaVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "备注2"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { AreaVOMeta.PAGE_INDEX , AreaVOMeta.PAGE_SIZE , AreaVOMeta.SEARCH_FIELD , AreaVOMeta.FUZZY_FIELD , AreaVOMeta.SEARCH_VALUE , AreaVOMeta.SORT_FIELD , AreaVOMeta.SORT_TYPE , AreaVOMeta.IDS } )
 	@NotNull(name = AreaVOMeta.ID)
 	@SentinelResource(value = AreaServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AreaServiceProxy.UPDATE)
@@ -133,8 +134,8 @@ public class AreaController extends SuperController {
 		Result result=areaService.update(areaVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存区域
 	*/
@@ -155,7 +156,7 @@ public class AreaController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取区域
 	*/
@@ -170,6 +171,11 @@ public class AreaController extends SuperController {
 	public Result<Area> getById(String id) {
 		Result<Area> result=new Result<>();
 		Area area=areaService.getById(id);
+
+		// join 关联的对象
+		areaService.dao().fill(area)
+			.execute();
+
 		result.success(true).data(area);
 		return result;
 	}
@@ -194,7 +200,7 @@ public class AreaController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询区域
 	*/
@@ -216,7 +222,7 @@ public class AreaController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询区域
 	*/
@@ -234,6 +240,11 @@ public class AreaController extends SuperController {
 	public Result<PagedList<Area>> queryPagedList(AreaVO sample) {
 		Result<PagedList<Area>> result=new Result<>();
 		PagedList<Area> list=areaService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		areaService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

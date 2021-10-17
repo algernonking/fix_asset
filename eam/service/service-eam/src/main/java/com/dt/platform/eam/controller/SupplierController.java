@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:27
+ * @since 2021-10-17 07:48:06
 */
 
 @Api(tags = "供应商")
@@ -59,7 +59,7 @@ public class SupplierController extends SuperController {
 	@Autowired
 	private ISupplierService supplierService;
 
-	
+
 	/**
 	 * 添加供应商
 	*/
@@ -77,7 +77,8 @@ public class SupplierController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除供应商
 	*/
@@ -93,8 +94,8 @@ public class SupplierController extends SuperController {
 		Result result=supplierService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除供应商 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class SupplierController extends SuperController {
 		Result result=supplierService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新供应商
 	*/
@@ -121,7 +122,7 @@ public class SupplierController extends SuperController {
 		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "科优科技有限公司"),
 		@ApiImplicitParam(name = SupplierVOMeta.SUPPLIER_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "科优科技有限公司"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { SupplierVOMeta.PAGE_INDEX , SupplierVOMeta.PAGE_SIZE , SupplierVOMeta.SEARCH_FIELD , SupplierVOMeta.FUZZY_FIELD , SupplierVOMeta.SEARCH_VALUE , SupplierVOMeta.SORT_FIELD , SupplierVOMeta.SORT_TYPE , SupplierVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { SupplierVOMeta.PAGE_INDEX , SupplierVOMeta.PAGE_SIZE , SupplierVOMeta.SEARCH_FIELD , SupplierVOMeta.FUZZY_FIELD , SupplierVOMeta.SEARCH_VALUE , SupplierVOMeta.SORT_FIELD , SupplierVOMeta.SORT_TYPE , SupplierVOMeta.IDS } )
 	@NotNull(name = SupplierVOMeta.ID)
 	@SentinelResource(value = SupplierServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SupplierServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class SupplierController extends SuperController {
 		Result result=supplierService.update(supplierVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存供应商
 	*/
@@ -149,7 +150,7 @@ public class SupplierController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取供应商
 	*/
@@ -164,6 +165,11 @@ public class SupplierController extends SuperController {
 	public Result<Supplier> getById(String id) {
 		Result<Supplier> result=new Result<>();
 		Supplier supplier=supplierService.getById(id);
+
+		// join 关联的对象
+		supplierService.dao().fill(supplier)
+			.execute();
+
 		result.success(true).data(supplier);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class SupplierController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询供应商
 	*/
@@ -208,7 +214,7 @@ public class SupplierController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询供应商
 	*/
@@ -224,6 +230,11 @@ public class SupplierController extends SuperController {
 	public Result<PagedList<Supplier>> queryPagedList(SupplierVO sample) {
 		Result<PagedList<Supplier>> result=new Result<>();
 		PagedList<Supplier> list=supplierService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		supplierService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

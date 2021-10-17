@@ -1,7 +1,7 @@
 /**
  * 供应商 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:27
+ * @since 2021-10-17 07:48:06
  */
 
 layui.config({

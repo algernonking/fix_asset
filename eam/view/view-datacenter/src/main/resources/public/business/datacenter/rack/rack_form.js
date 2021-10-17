@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:29:55
+ * @since 2021-10-17 10:57:04
  */
 
 function FormPage() {
@@ -77,48 +77,6 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 areaId 下拉字段
-		fox.renderSelectBox({
-			el: "areaId",
-			radio: true,
-			filterable: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
-		//渲染 layerId 下拉字段
-		fox.renderSelectBox({
-			el: "layerId",
-			radio: true,
-			filterable: true,
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
 	}
 
 	/**
@@ -147,10 +105,6 @@ function FormPage() {
 
 
 
-			//设置  区域 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#areaId",formData.area);
-			//设置  层级 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#layerId",formData.layer);
 
 			//处理fillBy
 
@@ -199,10 +153,6 @@ function FormPage() {
 
 
 
-		//获取 区域 下拉框的值
-		data["areaId"]=fox.getSelectedValue("areaId",false);
-		//获取 层级 下拉框的值
-		data["layerId"]=fox.getSelectedValue("layerId",false);
 
 		return data;
 	}

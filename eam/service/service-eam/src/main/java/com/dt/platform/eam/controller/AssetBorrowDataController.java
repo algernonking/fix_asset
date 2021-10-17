@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产借用数据 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:53
+ * @since 2021-10-17 07:47:45
 */
 
 @Api(tags = "资产借用数据")
@@ -59,7 +59,7 @@ public class AssetBorrowDataController extends SuperController {
 	@Autowired
 	private IAssetBorrowDataService assetBorrowDataService;
 
-	
+
 	/**
 	 * 添加资产借用数据
 	*/
@@ -78,7 +78,8 @@ public class AssetBorrowDataController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除资产借用数据
 	*/
@@ -94,8 +95,8 @@ public class AssetBorrowDataController extends SuperController {
 		Result result=assetBorrowDataService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资产借用数据 <br>
 	 * 联合主键时，请自行调整实现
@@ -112,7 +113,7 @@ public class AssetBorrowDataController extends SuperController {
 		Result result=assetBorrowDataService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新资产借用数据
 	*/
@@ -123,7 +124,7 @@ public class AssetBorrowDataController extends SuperController {
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.ASSET_STATUS_BEFORE , value = "借前资产状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetBorrowDataVOMeta.USER_ID_BEFORE , value = "借前使用人" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowDataVOMeta.PAGE_INDEX , AssetBorrowDataVOMeta.PAGE_SIZE , AssetBorrowDataVOMeta.SEARCH_FIELD , AssetBorrowDataVOMeta.FUZZY_FIELD , AssetBorrowDataVOMeta.SEARCH_VALUE , AssetBorrowDataVOMeta.SORT_FIELD , AssetBorrowDataVOMeta.SORT_TYPE , AssetBorrowDataVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { AssetBorrowDataVOMeta.PAGE_INDEX , AssetBorrowDataVOMeta.PAGE_SIZE , AssetBorrowDataVOMeta.SEARCH_FIELD , AssetBorrowDataVOMeta.FUZZY_FIELD , AssetBorrowDataVOMeta.SEARCH_VALUE , AssetBorrowDataVOMeta.SORT_FIELD , AssetBorrowDataVOMeta.SORT_TYPE , AssetBorrowDataVOMeta.IDS } )
 	@NotNull(name = AssetBorrowDataVOMeta.ID)
 	@SentinelResource(value = AssetBorrowDataServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetBorrowDataServiceProxy.UPDATE)
@@ -131,8 +132,8 @@ public class AssetBorrowDataController extends SuperController {
 		Result result=assetBorrowDataService.update(assetBorrowDataVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存资产借用数据
 	*/
@@ -152,7 +153,7 @@ public class AssetBorrowDataController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取资产借用数据
 	*/
@@ -167,6 +168,11 @@ public class AssetBorrowDataController extends SuperController {
 	public Result<AssetBorrowData> getById(String id) {
 		Result<AssetBorrowData> result=new Result<>();
 		AssetBorrowData assetBorrowData=assetBorrowDataService.getById(id);
+
+		// join 关联的对象
+		assetBorrowDataService.dao().fill(assetBorrowData)
+			.execute();
+
 		result.success(true).data(assetBorrowData);
 		return result;
 	}
@@ -191,7 +197,7 @@ public class AssetBorrowDataController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询资产借用数据
 	*/
@@ -212,7 +218,7 @@ public class AssetBorrowDataController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询资产借用数据
 	*/
@@ -229,6 +235,11 @@ public class AssetBorrowDataController extends SuperController {
 	public Result<PagedList<AssetBorrowData>> queryPagedList(AssetBorrowDataVO sample) {
 		Result<PagedList<AssetBorrowData>> result=new Result<>();
 		PagedList<AssetBorrowData> list=assetBorrowDataService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		assetBorrowDataService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

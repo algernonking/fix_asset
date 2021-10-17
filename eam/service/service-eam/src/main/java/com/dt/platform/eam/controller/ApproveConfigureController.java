@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产审批配置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:37
+ * @since 2021-10-17 07:47:36
 */
 
 @Api(tags = "资产审批配置")
@@ -59,7 +59,7 @@ public class ApproveConfigureController extends SuperController {
 	@Autowired
 	private IApproveConfigureService approveConfigureService;
 
-	
+
 	/**
 	 * 添加资产审批配置
 	*/
@@ -79,7 +79,8 @@ public class ApproveConfigureController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除资产审批配置
 	*/
@@ -95,8 +96,8 @@ public class ApproveConfigureController extends SuperController {
 		Result result=approveConfigureService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资产审批配置 <br>
 	 * 联合主键时，请自行调整实现
@@ -113,7 +114,7 @@ public class ApproveConfigureController extends SuperController {
 		Result result=approveConfigureService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新资产审批配置
 	*/
@@ -125,7 +126,7 @@ public class ApproveConfigureController extends SuperController {
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.APPROVAL_STATUS , value = "审批状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = ApproveConfigureVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ApproveConfigureVOMeta.PAGE_INDEX , ApproveConfigureVOMeta.PAGE_SIZE , ApproveConfigureVOMeta.SEARCH_FIELD , ApproveConfigureVOMeta.FUZZY_FIELD , ApproveConfigureVOMeta.SEARCH_VALUE , ApproveConfigureVOMeta.SORT_FIELD , ApproveConfigureVOMeta.SORT_TYPE , ApproveConfigureVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ApproveConfigureVOMeta.PAGE_INDEX , ApproveConfigureVOMeta.PAGE_SIZE , ApproveConfigureVOMeta.SEARCH_FIELD , ApproveConfigureVOMeta.FUZZY_FIELD , ApproveConfigureVOMeta.SEARCH_VALUE , ApproveConfigureVOMeta.SORT_FIELD , ApproveConfigureVOMeta.SORT_TYPE , ApproveConfigureVOMeta.IDS } )
 	@NotNull(name = ApproveConfigureVOMeta.ID)
 	@SentinelResource(value = ApproveConfigureServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ApproveConfigureServiceProxy.UPDATE)
@@ -133,8 +134,8 @@ public class ApproveConfigureController extends SuperController {
 		Result result=approveConfigureService.update(approveConfigureVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存资产审批配置
 	*/
@@ -155,7 +156,7 @@ public class ApproveConfigureController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取资产审批配置
 	*/
@@ -170,6 +171,11 @@ public class ApproveConfigureController extends SuperController {
 	public Result<ApproveConfigure> getById(String id) {
 		Result<ApproveConfigure> result=new Result<>();
 		ApproveConfigure approveConfigure=approveConfigureService.getById(id);
+
+		// join 关联的对象
+		approveConfigureService.dao().fill(approveConfigure)
+			.execute();
+
 		result.success(true).data(approveConfigure);
 		return result;
 	}
@@ -194,7 +200,7 @@ public class ApproveConfigureController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询资产审批配置
 	*/
@@ -216,7 +222,7 @@ public class ApproveConfigureController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询资产审批配置
 	*/
@@ -234,6 +240,11 @@ public class ApproveConfigureController extends SuperController {
 	public Result<PagedList<ApproveConfigure>> queryPagedList(ApproveConfigureVO sample) {
 		Result<PagedList<ApproveConfigure>> result=new Result<>();
 		PagedList<ApproveConfigure> list=approveConfigureService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		approveConfigureService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

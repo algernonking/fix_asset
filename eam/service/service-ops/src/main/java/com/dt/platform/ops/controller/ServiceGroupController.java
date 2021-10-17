@@ -1,6 +1,6 @@
 package com.dt.platform.ops.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 服务分组 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:05
+ * @since 2021-10-17 07:48:31
 */
 
 @Api(tags = "服务分组")
@@ -59,7 +59,7 @@ public class ServiceGroupController extends SuperController {
 	@Autowired
 	private IServiceGroupService serviceGroupService;
 
-	
+
 	/**
 	 * 添加服务分组
 	*/
@@ -77,7 +77,8 @@ public class ServiceGroupController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除服务分组
 	*/
@@ -93,8 +94,8 @@ public class ServiceGroupController extends SuperController {
 		Result result=serviceGroupService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除服务分组 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class ServiceGroupController extends SuperController {
 		Result result=serviceGroupService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新服务分组
 	*/
@@ -121,7 +122,7 @@ public class ServiceGroupController extends SuperController {
 		@ApiImplicitParam(name = ServiceGroupVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "db"),
 		@ApiImplicitParam(name = ServiceGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "数据库"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceGroupVOMeta.PAGE_INDEX , ServiceGroupVOMeta.PAGE_SIZE , ServiceGroupVOMeta.SEARCH_FIELD , ServiceGroupVOMeta.FUZZY_FIELD , ServiceGroupVOMeta.SEARCH_VALUE , ServiceGroupVOMeta.SORT_FIELD , ServiceGroupVOMeta.SORT_TYPE , ServiceGroupVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ServiceGroupVOMeta.PAGE_INDEX , ServiceGroupVOMeta.PAGE_SIZE , ServiceGroupVOMeta.SEARCH_FIELD , ServiceGroupVOMeta.FUZZY_FIELD , ServiceGroupVOMeta.SEARCH_VALUE , ServiceGroupVOMeta.SORT_FIELD , ServiceGroupVOMeta.SORT_TYPE , ServiceGroupVOMeta.IDS } )
 	@NotNull(name = ServiceGroupVOMeta.ID)
 	@SentinelResource(value = ServiceGroupServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ServiceGroupServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class ServiceGroupController extends SuperController {
 		Result result=serviceGroupService.update(serviceGroupVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存服务分组
 	*/
@@ -149,7 +150,7 @@ public class ServiceGroupController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取服务分组
 	*/
@@ -164,6 +165,11 @@ public class ServiceGroupController extends SuperController {
 	public Result<ServiceGroup> getById(String id) {
 		Result<ServiceGroup> result=new Result<>();
 		ServiceGroup serviceGroup=serviceGroupService.getById(id);
+
+		// join 关联的对象
+		serviceGroupService.dao().fill(serviceGroup)
+			.execute();
+
 		result.success(true).data(serviceGroup);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class ServiceGroupController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询服务分组
 	*/
@@ -208,7 +214,7 @@ public class ServiceGroupController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询服务分组
 	*/
@@ -224,6 +230,11 @@ public class ServiceGroupController extends SuperController {
 	public Result<PagedList<ServiceGroup>> queryPagedList(ServiceGroupVO sample) {
 		Result<PagedList<ServiceGroup>> result=new Result<>();
 		PagedList<ServiceGroup> list=serviceGroupService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		serviceGroupService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

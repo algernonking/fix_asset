@@ -1,6 +1,6 @@
 package com.dt.platform.contract.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:48:18
+ * @since 2021-10-17 07:48:39
 */
 
 @Api(tags = "合同")
@@ -60,7 +60,7 @@ public class ContractController extends SuperController {
 	@Autowired
 	private IContractService contractService;
 
-	
+
 	/**
 	 * 添加合同
 	*/
@@ -104,7 +104,8 @@ public class ContractController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除合同
 	*/
@@ -120,8 +121,8 @@ public class ContractController extends SuperController {
 		Result result=contractService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除合同 <br>
 	 * 联合主键时，请自行调整实现
@@ -138,7 +139,7 @@ public class ContractController extends SuperController {
 		Result result=contractService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新合同
 	*/
@@ -174,7 +175,7 @@ public class ContractController extends SuperController {
 		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } )
 	@NotNull(name = ContractVOMeta.ID)
 	@SentinelResource(value = ContractServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractServiceProxy.UPDATE)
@@ -182,8 +183,8 @@ public class ContractController extends SuperController {
 		Result result=contractService.update(contractVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存合同
 	*/
@@ -228,7 +229,7 @@ public class ContractController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取合同
 	*/
@@ -243,6 +244,11 @@ public class ContractController extends SuperController {
 	public Result<Contract> getById(String id) {
 		Result<Contract> result=new Result<>();
 		Contract contract=contractService.getById(id);
+
+		// join 关联的对象
+		contractService.dao().fill(contract)
+			.execute();
+
 		result.success(true).data(contract);
 		return result;
 	}
@@ -267,7 +273,7 @@ public class ContractController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询合同
 	*/
@@ -313,7 +319,7 @@ public class ContractController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询合同
 	*/
@@ -355,6 +361,11 @@ public class ContractController extends SuperController {
 	public Result<PagedList<Contract>> queryPagedList(ContractVO sample) {
 		Result<PagedList<Contract>> result=new Result<>();
 		PagedList<Contract> list=contractService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		contractService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

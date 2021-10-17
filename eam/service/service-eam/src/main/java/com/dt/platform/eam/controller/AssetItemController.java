@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:47:08
+ * @since 2021-10-17 07:47:54
 */
 
 @Api(tags = "资产")
@@ -59,7 +59,7 @@ public class AssetItemController extends SuperController {
 	@Autowired
 	private IAssetItemService assetItemService;
 
-	
+
 	/**
 	 * 添加资产
 	*/
@@ -78,7 +78,8 @@ public class AssetItemController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除资产
 	*/
@@ -94,8 +95,8 @@ public class AssetItemController extends SuperController {
 		Result result=assetItemService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资产 <br>
 	 * 联合主键时，请自行调整实现
@@ -112,7 +113,7 @@ public class AssetItemController extends SuperController {
 		Result result=assetItemService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新资产
 	*/
@@ -123,7 +124,7 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } )
 	@NotNull(name = AssetItemVOMeta.ID)
 	@SentinelResource(value = AssetItemServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetItemServiceProxy.UPDATE)
@@ -131,8 +132,8 @@ public class AssetItemController extends SuperController {
 		Result result=assetItemService.update(assetItemVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存资产
 	*/
@@ -152,7 +153,7 @@ public class AssetItemController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取资产
 	*/
@@ -167,6 +168,11 @@ public class AssetItemController extends SuperController {
 	public Result<AssetItem> getById(String id) {
 		Result<AssetItem> result=new Result<>();
 		AssetItem assetItem=assetItemService.getById(id);
+
+		// join 关联的对象
+		assetItemService.dao().fill(assetItem)
+			.execute();
+
 		result.success(true).data(assetItem);
 		return result;
 	}
@@ -191,7 +197,7 @@ public class AssetItemController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询资产
 	*/
@@ -212,7 +218,7 @@ public class AssetItemController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询资产
 	*/
@@ -229,6 +235,11 @@ public class AssetItemController extends SuperController {
 	public Result<PagedList<AssetItem>> queryPagedList(AssetItemVO sample) {
 		Result<PagedList<AssetItem>> result=new Result<>();
 		PagedList<AssetItem> list=assetItemService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		assetItemService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

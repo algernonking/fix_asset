@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 风险等级  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-16 15:30:55
+ * @since 2021-10-17 07:48:08
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = SafetylevelServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)

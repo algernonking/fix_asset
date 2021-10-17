@@ -427,6 +427,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
@@ -454,31 +455,47 @@ public class AssetController extends SuperController {
 	public Result<Asset> getById(String id) {
 		Result<Asset> result=new Result<>();
 		Asset asset=assetService.getById(id);
+
+		assetService.dao().fill(asset).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.execute();
 		// 关联出 资产分类 数据
-		assetService.join(asset,AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		assetService.join(asset,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		assetService.join(asset,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		assetService.join(asset,AssetMeta.POSITION);
-		// 关联出 仓库 数据
-		assetService.join(asset,AssetMeta.WAREHOUSE);
-		// 关联出 来源 数据
-		assetService.join(asset,AssetMeta.SOURCE);
-		// 关联出 维保商 数据
-		assetService.join(asset,AssetMeta.MAINTNAINER);
-		// 关联出 财务分类 数据
-		assetService.join(asset,AssetMeta.CATEGORY_FINANCE);
-		// 关联出 供应商 数据
-		assetService.join(asset,AssetMeta.SUPPLIER);
-		assetService.join(asset,AssetMeta.SAFETY_LEVEL);
-		assetService.join(asset,AssetMeta.EQUIPMENT_ENVIRONMENT);
-		assetService.join(asset,AssetMeta.OWNER_COMPANY);
-		assetService.join(asset,AssetMeta.USE_ORGANIZATION);
-		assetService.join(asset,AssetMeta.MANAGER);
-		assetService.join(asset,AssetMeta.USE_USER);
-		assetService.join(asset,AssetMeta.ORIGINATOR);
+//		assetService.join(asset,AssetMeta.CATEGORY);
+//		// 关联出 物品档案 数据
+//		assetService.join(asset,AssetMeta.GOODS);
+//		// 关联出 厂商 数据
+//		assetService.join(asset,AssetMeta.MANUFACTURER);
+//		// 关联出 位置 数据
+//		assetService.join(asset,AssetMeta.POSITION);
+//		// 关联出 仓库 数据
+//		assetService.join(asset,AssetMeta.WAREHOUSE);
+//		// 关联出 来源 数据
+//		assetService.join(asset,AssetMeta.SOURCE);
+//		// 关联出 维保商 数据
+//		assetService.join(asset,AssetMeta.MAINTNAINER);
+//		// 关联出 财务分类 数据
+//		assetService.join(asset,AssetMeta.CATEGORY_FINANCE);
+//		// 关联出 供应商 数据
+//		assetService.join(asset,AssetMeta.SUPPLIER);
+//		assetService.join(asset,AssetMeta.SAFETY_LEVEL);
+//		assetService.join(asset,AssetMeta.EQUIPMENT_ENVIRONMENT);
+//		assetService.join(asset,AssetMeta.OWNER_COMPANY);
+//		assetService.join(asset,AssetMeta.USE_ORGANIZATION);
+//		assetService.join(asset,AssetMeta.MANAGER);
+//		assetService.join(asset,AssetMeta.USE_USER);
+//		assetService.join(asset,AssetMeta.ORIGINATOR);
 
 		//加载自定义数据
 		asset.setCatalogAttribute(assetCategoryService.queryCatalogAttributeByAssetCategory(asset.getCategoryId()));
@@ -587,6 +604,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
@@ -679,6 +697,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.RACK_DOWN_NUMBER , value = "设备机柜下位置" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

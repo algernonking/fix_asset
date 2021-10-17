@@ -5,8 +5,11 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum;
+import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.meta.RackMeta;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
+import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import com.dt.platform.proxy.eam.*;
 
 import com.github.foxnic.generator.builder.view.config.Tab;
@@ -61,6 +64,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"equipmentEnvironment","设备运行环境","设备运行环境");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"safetyLevel","安全等级","安全等级");
+
+        cfg.getPoClassFile().addSimpleProperty(Rack.class,"rack","机柜","机柜");
 
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();
@@ -179,6 +184,13 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 fillWith(AssetMeta.EQUIPMENT_ENVIRONMENT).muliti(false);
 
 
+        cfg.view().field(EAMTables.EAM_ASSET.RACK_ID)
+                .basic().label("机柜")
+                .form().selectBox().queryApi(RackServiceProxy.QUERY_PAGED_LIST)
+                .paging(true).filter(true).toolbar(false)
+                .valueField(RackMeta.ID).
+                textField(RackMeta.RACK_NAME).
+                fillWith(AssetMeta.RACK).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.STATUS).form()
                 .label("办理状态").selectBox().enumType(AssetHandleStatusEnum.class);

@@ -1,6 +1,6 @@
 package com.dt.platform.datacenter.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 层级 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 02:46:12
+ * @since 2021-10-17 07:47:19
 */
 
 @Api(tags = "层级")
@@ -59,7 +59,7 @@ public class LayerController extends SuperController {
 	@Autowired
 	private ILayerService layerService;
 
-	
+
 	/**
 	 * 添加层级
 	*/
@@ -77,7 +77,8 @@ public class LayerController extends SuperController {
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除层级
 	*/
@@ -93,8 +94,8 @@ public class LayerController extends SuperController {
 		Result result=layerService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除层级 <br>
 	 * 联合主键时，请自行调整实现
@@ -111,7 +112,7 @@ public class LayerController extends SuperController {
 		Result result=layerService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新层级
 	*/
@@ -121,7 +122,7 @@ public class LayerController extends SuperController {
 		@ApiImplicitParam(name = LayerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "4楼"),
 		@ApiImplicitParam(name = LayerVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { LayerVOMeta.PAGE_INDEX , LayerVOMeta.PAGE_SIZE , LayerVOMeta.SEARCH_FIELD , LayerVOMeta.FUZZY_FIELD , LayerVOMeta.SEARCH_VALUE , LayerVOMeta.SORT_FIELD , LayerVOMeta.SORT_TYPE , LayerVOMeta.IDS } )
 	@NotNull(name = LayerVOMeta.ID)
 	@SentinelResource(value = LayerServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(LayerServiceProxy.UPDATE)
@@ -129,8 +130,8 @@ public class LayerController extends SuperController {
 		Result result=layerService.update(layerVO,SaveMode.NOT_NULL_FIELDS);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存层级
 	*/
@@ -149,7 +150,7 @@ public class LayerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取层级
 	*/
@@ -164,6 +165,11 @@ public class LayerController extends SuperController {
 	public Result<Layer> getById(String id) {
 		Result<Layer> result=new Result<>();
 		Layer layer=layerService.getById(id);
+
+		// join 关联的对象
+		layerService.dao().fill(layer)
+			.execute();
+
 		result.success(true).data(layer);
 		return result;
 	}
@@ -188,7 +194,7 @@ public class LayerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询层级
 	*/
@@ -208,7 +214,7 @@ public class LayerController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询层级
 	*/
@@ -224,6 +230,11 @@ public class LayerController extends SuperController {
 	public Result<PagedList<Layer>> queryPagedList(LayerVO sample) {
 		Result<PagedList<Layer>> result=new Result<>();
 		PagedList<Layer> list=layerService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		layerService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

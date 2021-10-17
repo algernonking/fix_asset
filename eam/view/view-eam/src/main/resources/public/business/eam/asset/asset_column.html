@@ -574,9 +574,10 @@
 <div  th:fragment="rack_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="rackId" id="rackId" name="rackId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('设备机柜') }" type="text" class="layui-input"  />
+        <div id="rackId" input-type="select" th:data="${'/service-datacenter/dc-rack/query-paged-list'}"></div>
     </div>
 </div>
+
 
 <div  th:fragment="equipment_label" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>

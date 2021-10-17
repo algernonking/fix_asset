@@ -1,7 +1,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-15 15:40:40
+ * @since 2021-10-17 07:47:22
  */
 
 layui.config({

@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产处理记录 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-15 15:40:40
+ * @since 2021-10-17 07:47:22
 */
 
 @Api(tags = "资产处理记录")
@@ -180,6 +180,11 @@ public class AssetProcessRecordController extends SuperController {
 	public Result<AssetProcessRecord> getById(String id) {
 		Result<AssetProcessRecord> result=new Result<>();
 		AssetProcessRecord assetProcessRecord=assetProcessRecordService.getById(id);
+
+		// join 关联的对象
+		assetProcessRecordService.dao().fill(assetProcessRecord)
+			.execute();
+
 		result.success(true).data(assetProcessRecord);
 		return result;
 	}
@@ -250,6 +255,11 @@ public class AssetProcessRecordController extends SuperController {
 	public Result<PagedList<AssetProcessRecord>> queryPagedList(AssetProcessRecordVO sample) {
 		Result<PagedList<AssetProcessRecord>> result=new Result<>();
 		PagedList<AssetProcessRecord> list=assetProcessRecordService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		assetProcessRecordService.dao().fill(list)
+			.execute();
+
 		result.success(true).data(list);
 		return result;
 	}

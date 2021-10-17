@@ -24,12 +24,12 @@ public class DatacenterRelationManager extends RelationManager {
     private void setupDcRack() {
 
         // 配置关联关系
-        this.property(RackMeta.AREA_PROP)
-                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_AREA.ID);
-
-        // 配置关联关系
-        this.property(RackMeta.LAYER_PROP)
-                .using(EAMTables.DC_RACK.LAYER_ID).join(EAMTables.DC_LAYER.ID);
+//        this.property(RackMeta.AREA_PROP)
+//                .using(EAMTables.DC_RACK.AREA_ID).join(EAMTables.DC_AREA.ID);
+//
+//        // 配置关联关系
+//        this.property(RackMeta.LAYER_PROP)
+//                .using(EAMTables.DC_RACK.LAYER_ID).join(EAMTables.DC_LAYER.ID);
 //
 
     }
