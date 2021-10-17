@@ -104,7 +104,7 @@ function ListPage() {
     /**
      * 刷新表格数据
      */
-    function refreshTableData(sortField,sortType) {
+    function refreshTableData(sortField,sortType,reset) {
         var value = {};
         value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
         value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -117,7 +117,11 @@ function ListPage() {
             ps.sortField=sortField;
             ps.sortType=sortType;
         }
-        table.reload('data-table', { where : ps });
+        if(reset) {
+            table.reload('data-table', { where : ps , page:{ curr:1 } });
+        } else {
+            table.reload('data-table', { where : ps });
+        }
     }
 
 
@@ -145,12 +149,12 @@ function ListPage() {
         //回车键查询
         $(".search-input").keydown(function(event) {
             if(event.keyCode !=13) return;
-            refreshTableData();
+            refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-            refreshTableData();
+            refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件

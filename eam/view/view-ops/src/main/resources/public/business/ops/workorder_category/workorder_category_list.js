@@ -106,7 +106,7 @@ function ListPage() {
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
+	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.name={ value: $("#name").val()};
 		if(window.pageExt.list.beforeQuery){
@@ -117,7 +117,12 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
+
 	}
     
 	
@@ -156,12 +161,12 @@ function ListPage() {
 		//回车键查询
         $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
-		  	refreshTableData();
+			refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-           refreshTableData();
+			refreshTableData(null,null,true); refreshTableData();
         });
 
 		// 搜索按钮点击事件

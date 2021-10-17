@@ -102,7 +102,6 @@ function ListPage() {
 		//关闭窗口
 		$("#submit-button").click(function(){
 			var selectData=$("#assetList")[0].contentWindow.module.saveSelectData(function(seldata){
-				console.log("#####2222",seldata);
 				var index=admin.getTempData('eam-asset-select-data-popup-index');
 				admin.finishPopupCenter(index);
 			})

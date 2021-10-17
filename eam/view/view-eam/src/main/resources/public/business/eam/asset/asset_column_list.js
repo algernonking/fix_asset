@@ -62,7 +62,6 @@ layui.define([],
                 ,equipment_memory:{ field: 'equipmentMemory', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备内存') , templet: function (d) { return templet('equipmentMemory',d.equipmentMemory,d);}  }
                 ,equipment_label:{ field: 'equipmentLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备标签') , templet: function (d) { return templet('equipmentLabel',d.equipmentLabel,d);}  }
                 ,equipment_conf:{ field: 'equipmentConf', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备配置') , templet: function (d) { return templet('equipmentConf',d.equipmentConf,d);}  }
-             //   ,rack_id:{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜') , templet: function (d) { return templet('rackId',d.rackId,d);}  }
                 ,rack_id:{ field: 'rackId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('机柜'), templet: function (d) { return templet('rackId',fox.joinLabel(d.rack,"rackName"),d);}}
                 ,rack_up_number:{ field: 'rackUpNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜上位置') , templet: function (d) { return templet('rackUpNumber',d.rackUpNumber,d);}  }
                 ,rack_down_number:{ field: 'rackDownNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备机柜下位置') , templet: function (d) { return templet('rackDownNumber',d.rackDownNumber,d);}  }

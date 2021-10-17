@@ -121,7 +121,11 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
 	}
     
 	

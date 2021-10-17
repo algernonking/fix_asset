@@ -34,7 +34,7 @@ function ListPage() {
         //绑定按钮事件
         bindButtonEvent();
         //绑定行操作按钮事件
-       // bindRowOperationEvent();
+        // bindRowOperationEvent();
     }
 
 
@@ -289,10 +289,10 @@ function ListPage() {
             var selected=getCheckedList("id");
             switch(obj.event){
                 case 'create':
-                   // openCreateFrom();
+                    // openCreateFrom();
                     break;
                 case 'batch-del':
-                  //  batchDelete(selected);
+                    //  batchDelete(selected);
                     break;
                 case 'refresh-data':
                     refreshTableData();

@@ -86,7 +86,7 @@ function ListPage() {
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
-				defaultToolbar: ['filter',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
+				defaultToolbar: ['filter','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list-by-selected?assetSelectedCode='+ASSET_SELECTED_CODE+"&assetOwnerId="+billdata.assetOwnerId+"&dataType="+dataType,
 				height: 400,
 				limit: 50,
@@ -247,75 +247,7 @@ function ListPage() {
 			});
         }
 	}
-     
-    // /**
-    //  * 绑定行操作按钮事件
-    //  */
-    // function bindRowOperationEvent() {
-	// 	// 工具条点击事件
-	// 	table.on('tool(data-table)', function (obj) {
-	// 		var data = obj.data;
-	// 		var layEvent = obj.event;
-	// 		admin.putTempData('eam-asset-select-data-list-action', "",true);
-	// 		if (layEvent === 'edit') { // 修改
-	// 			//延迟显示加载动画，避免界面闪动
-	// 			var task=setTimeout(function(){layer.load(2);},1000);
-	// 			admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-	// 				clearTimeout(task);
-	// 				layer.closeAll('loading');
-	// 				if(data.success) {
-	// 					admin.putTempData('eam-asset-select-data-list-action', "edit",true);
-	// 					showEditForm(data.data);
-	// 				} else {
-	// 					 layer.msg(data.message, {icon: 1, time: 1500});
-	// 				}
-	// 			});
-	// 		} else if (layEvent === 'view') { // 查看
-	// 			//延迟显示加载动画，避免界面闪动
-	// 			var task=setTimeout(function(){layer.load(2);},1000);
-	// 			admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-	// 				clearTimeout(task);
-	// 				layer.closeAll('loading');
-	// 				if(data.success) {
-	// 					admin.putTempData('eam-asset-select-data-list-action', "view",true);
-	// 					showEditForm(data.data);
-	// 				} else {
-	// 					layer.msg(data.message, {icon: 1, time: 1500});
-	// 				}
-	// 			});
-	// 		}
-	// 		else if (layEvent === 'del') { // 删除
-	//
-	// 			if(window.pageExt.list.beforeSingleDelete) {
-	// 				var doNext=window.pageExt.list.beforeSingleDelete(data);
-	// 				if(!doNext) return;
-	// 			}
-	//
-	// 			top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产')+fox.translate('吗？'), function (i) {
-	// 				top.layer.close(i);
-	//
-	// 				top.layer.load(2);
-	// 				admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-	// 					top.layer.closeAll('loading');
-	// 					if (data.success) {
-	// 						if(window.pageExt.list.afterSingleDelete) {
-	// 							var doNext=window.pageExt.list.afterSingleDelete(data);
-	// 							if(!doNext) return;
-	// 						}
-	// 						top.layer.msg(data.message, {icon: 1, time: 500});
-	// 						refreshTableData();
-	// 					} else {
-	// 						top.layer.msg(data.message, {icon: 2, time: 1500});
-	// 					}
-	// 				});
-	// 			});
-	//
-	// 		}
-	//
-	// 	});
-	//
-    // };
-    
+
     /**
      * 打开编辑窗口
      */

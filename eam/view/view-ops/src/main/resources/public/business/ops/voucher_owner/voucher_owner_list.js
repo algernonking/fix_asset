@@ -111,7 +111,7 @@ function ListPage() {
 	/**
       * 刷新表格数据
       */
-	function refreshTableData(sortField,sortType) {
+	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.categoryCode={ inputType:"select_box", value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory",field:"code", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
 		value.label={ inputType:"select_box", value: xmSelect.get("#label",true).getValue("value"), label:xmSelect.get("#label",true).getValue("nameStr")};
@@ -127,7 +127,12 @@ function ListPage() {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
 		}
-		table.reload('data-table', { where : ps });
+		if(reset) {
+			table.reload('data-table', { where : ps , page:{ curr:1 } });
+		} else {
+			table.reload('data-table', { where : ps });
+		}
+
 	}
     
 	
@@ -201,12 +206,12 @@ function ListPage() {
 		//回车键查询
         $(".search-input").keydown(function(event) {
 			if(event.keyCode !=13) return;
-		  	refreshTableData();
+			refreshTableData(null,null,true);
         });
 
         // 搜索按钮点击事件
         $('#search-button').click(function () {
-           refreshTableData();
+			refreshTableData(null,null,true);
         });
 
 		// 搜索按钮点击事件

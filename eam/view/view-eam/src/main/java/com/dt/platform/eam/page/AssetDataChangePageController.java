@@ -110,6 +110,8 @@ public class AssetDataChangePageController extends ViewController {
 			assetAttributeDimension=AssetAttributeDimensionEnum.FINANCIAL.code();
 		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
 			assetAttributeDimension=AssetAttributeDimensionEnum.MAINTAINER.code();
+		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_EQUIPMENT.code().equals(changeType)){
+			assetAttributeDimension=AssetAttributeDimensionEnum.EQUIPMENT.code();
 		}
 
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,assetAttributeDimension);
@@ -118,7 +120,6 @@ public class AssetDataChangePageController extends ViewController {
 			model.addAttribute("attributeData3Column1",data.get("attributeData3Column1"));
 			model.addAttribute("attributeData3Column2",data.get("attributeData3Column2") );
 			model.addAttribute("attributeData3Column3",data.get("attributeData3Column3") );
-
 			model.addAttribute("attributeData1Column1",data.get("attributeData1Column1") );
 		}
 
@@ -137,7 +138,9 @@ public class AssetDataChangePageController extends ViewController {
 					JSONObject obj=new JSONObject();
 					if(AssetAttributeDimensionEnum.ATTRIBUTION.code().equals(attributeItemRequiredList.get(i).getDimension())
 							||AssetAttributeDimensionEnum.FINANCIAL.code().equals(attributeItemRequiredList.get(i).getDimension())
-							||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())){
+							||AssetAttributeDimensionEnum.MAINTAINER.code().equals(attributeItemRequiredList.get(i).getDimension())
+							||AssetAttributeDimensionEnum.EQUIPMENT.code().equals(attributeItemRequiredList.get(i).getDimension())
+					){
 						obj.put("labelInForm",attributeItemRequiredList.get(i).getAttribute().getLabel());
 						obj.put("inputType",attributeItemRequiredList.get(i).getAttribute().getComponentType());
 						obj.put("required",true);
