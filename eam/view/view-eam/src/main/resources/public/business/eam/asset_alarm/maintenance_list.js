@@ -81,6 +81,7 @@ function ListPage() {
                 { fixed: 'left',type: 'numbers' },
                 { fixed: 'left',type:'checkbox' }
             ]
+            COL_DATA.push(COL_ALL_DATA["maintenance_end_date"]);
             for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
                 if(ATTRIBUTE_LIST_DATA[i].attribute.code=="status"
                   || ATTRIBUTE_LIST_DATA[i].attribute.code=="maintenance_end_date"  ){
@@ -88,7 +89,7 @@ function ListPage() {
                 }
                 COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
             }
-            COL_DATA.push(COL_ALL_DATA["maintenance_end_date"]);
+
             COL_DATA.push(oper)
             dataTable=fox.renderTable({
                 elem: '#data-table',

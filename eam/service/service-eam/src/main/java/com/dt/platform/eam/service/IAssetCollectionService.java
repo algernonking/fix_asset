@@ -2,6 +2,7 @@ package com.dt.platform.eam.service;
 
 
 import com.dt.platform.domain.eam.AssetAllocation;
+import com.dt.platform.domain.eam.AssetCollectionReturn;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetCollection;
@@ -34,7 +35,9 @@ public interface IAssetCollectionService extends ISuperService<AssetCollection> 
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetCollection> assets, String approveAction, String opinion);
+
+
 
 
 	/**

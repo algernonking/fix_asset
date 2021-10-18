@@ -11,19 +11,27 @@ import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
-import org.github.foxnic.web.domain.changes.ProcessApproveVO;
-import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import com.github.foxnic.sql.expr.In;
+import org.github.foxnic.web.constants.db.FoxnicWeb;
+import org.github.foxnic.web.constants.enums.bpm.ApproverType;
+import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
+import org.github.foxnic.web.constants.enums.changes.ApprovalStatus;
+import org.github.foxnic.web.constants.enums.changes.ChangeType;
+import org.github.foxnic.web.domain.bpm.Appover;
+import org.github.foxnic.web.domain.changes.*;
+import org.github.foxnic.web.framework.change.ChangesAssistant;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -40,12 +48,9 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetDataChangeService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 /**
  * <p>
@@ -84,7 +89,26 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public DAO dao() { return dao; }
 
 
-	
+	private void syncBill(String id,ChangeEvent event) {
+		AssetDataChange asset4Update=AssetDataChange.create();
+		asset4Update.setId(id)
+				//设置变更ID
+				.setChangeInstanceId(event.getInstance().getId())
+				//更新状态
+				.setChsStatus(event.getInstance().getStatusEnum().code())
+				//更新最后审批人
+				.setLatestApproverId(event.getApproverId())
+				.setLatestApproverName(event.getApproverName())
+				//设置下一节点审批人
+				.setNextApproverIds(event.getSimpleNextApproverIds())
+				.setNextApproverNames(event.getSimpleNextApproverNames())
+				//更新流程概要
+				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
+	}
+
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
@@ -93,29 +117,163 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {
-		return null;
+		Result result=new Result();
+		for (String id : startVO.getBillIds()) {
+			Result<ChangeEvent> r=startProcess(id);
+			if(r.failure()) {
+				result.addError(r);
+			} else {
+				// 处理逻辑
+				ChangeEvent event=r.data();
+				syncBill(id,event);
+			}
+		}
+		return result;
+	}
+
+
+	/**
+	 * 启动
+	 * */
+	public Result startProcess(String id) {
+
+		//变更后数据
+		AssetDataChange assetAfter=this.getById(id);
+		String changeType=assetAfter.getChangeType();
+		if(assetAfter==null) {
+			return ErrorDesc.failure().message("单据不存在");
+		}
+		//校验是否勾选的订单都处于待审批状态
+		if(!ApprovalStatus.drafting.code().equals(assetAfter.getChsStatus())) {
+			return ErrorDesc.failure().message("单据状态错误,无法提交审批");
+		}
+
+		//关联订单明细
+		this.join(assetAfter, Asset.class);
+		List<String> billIds=Arrays.asList(assetAfter.getId());
+
+
+		//变更前数据
+		AssetDataChange assetBefore=this.getById(assetAfter.getId());
+		this.join(assetBefore, Asset.class);
+
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		ChangeRequestBody requestBody=new ChangeRequestBody(changeType, ChangeType.create);
+
+		//设置当前提交人
+		requestBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		requestBody.setApproverName(SessionUser.getCurrent().getRealName());
+
+		//可按数据情况，设置不同的审批人；若未设置审批人，则按变更配置中的审批人执行；
+		//后续可按审批人对接待办体系
+		List<Appover> employeeApprovers=assistant.getEmployeeApproversById("E001","488741245229731840");
+		List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById("498946989573017600","498947090244702209");
+		List<Appover> bpmRoleApprovers2=assistant.getBpmRoleApproversByCode("drafter","approver");
+
+		List<Appover> appovers=new ArrayList<>();
+		appovers.addAll(employeeApprovers);
+		appovers.addAll(bpmRoleApprovers1);
+		appovers.addAll(bpmRoleApprovers2);
+
+		requestBody.setNextNodeAppovers(appovers);
+
+		//
+		requestBody.setDataType(AssetDataChange.class);
+
+		//设置变更前数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataBefore(assetAfter);
+		//设置变更后数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataAfter(assetBefore);
+
+		//设置审批单据号
+		requestBody.setBillIds(billIds);
+		//设置审批意见
+		requestBody.setOpinion("启动流程");
+		//发起审批
+
+		Result result=assistant.request(requestBody);
+		System.out.println(1111);
+//		Result<ChangeEvent> result= assistant.request(requestBody);
+//		;
+//		Result rr=new Result();
+// 		rr.data(result.getData());
+// 		rr.success(true);
+//		System.out.println("11111");
+		return result;
 	}
 
 	@Override
 	public Result approve(ProcessApproveVO approveVO) {
-		return null;
+		Result result=new Result();
+		if(approveVO.getInstanceIds()==null || approveVO.getInstanceIds().isEmpty()) {
+			return result.success(false).message("至少指定一个变更ID");
+		}
+		In in=new In(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_INSTANCE_ID,approveVO.getInstanceIds());
+
+		List<AssetDataChange> orders=this.queryList(in.toConditionExpr());
+		Map<String,List<AssetDataChange>> ordersMap= CollectorUtil.groupBy(orders,AssetDataChange::getChangeInstanceId);
+		for (Map.Entry<String,List<AssetDataChange>> e : ordersMap.entrySet()) {
+			Result<ChangeEvent> r=this.approve(e.getKey(),e.getValue(),approveVO.getAction(),approveVO.getOpinion());
+			if(r.failure()){
+				result.addError(r);
+			} else {
+				//同步订状态
+				ChangeEvent event=r.data();
+				for (AssetDataChange asset : e.getValue()) {
+					syncBill(asset.getId(),event);
+				}
+			}
+		}
+		return result;
 	}
 
 	@Override
-	public Result draft(ProcessStartVO startVO) {
-		return null;
+	public Result approve(String instanceId, List<AssetDataChange> assets, String approveAction, String opinion) {
+
+		ApprovalAction action=ApprovalAction.parseByCode(approveAction);
+		//审批数据
+
+		if(assets==null || assets.isEmpty()) {
+			return ErrorDesc.failure().message("订单不存在");
+		}
+
+		AssetDataChange asset=assets.get(0);
+
+		ChangeApproveBody approveBody=new ChangeApproveBody(asset.getChangeType());
+		//设置变更ID
+		approveBody.setChangeInstanceId(asset.getChangeInstanceId());
+
+		//设置当前提交人
+		approveBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		approveBody.setApproverName(SessionUser.getCurrent().getRealName());
+		approveBody.setApprovalAction(action);
+
+		//设置审批意见
+		approveBody.setOpinion(opinion);
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		//发起审批
+		Result result= assistant.approve(approveBody);
+		//
+		return result;
 	}
+
 
 
 	@Override
 	public String queryDataChangeDimensionByChangeType(String changeType) {
 		String dim="";
-		if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(changeType)){
+		if(AssetOperateEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(changeType)){
 			dim=AssetAttributeDimensionEnum.ATTRIBUTION.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(changeType)){
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(changeType)){
 			dim=AssetAttributeDimensionEnum.FINANCIAL.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
 			dim=AssetAttributeDimensionEnum.MAINTAINER.code();
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_EQUIPMENT.code().equals(changeType)){
+			dim=AssetAttributeDimensionEnum.EQUIPMENT.code();
 		}
 		return dim;
 	}
@@ -220,8 +378,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		return ErrorDesc.success();
 	}
 
-
-
+	
 	/**
 	 * 送审
 	 * @param id ID
@@ -229,11 +386,33 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * */
 	@Override
 	public Result forApproval(String id){
-
 		AssetDataChange billData=getById(id);
+
 		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
 				//审批操作
+				//步骤一开始启动流程
+				ProcessStartVO startVO=new ProcessStartVO();
+				startVO.setOpinion("启动流程");
+				List<String> bills=new ArrayList<>();
+				bills.add(id);
+				startVO.setBillIds(bills);
+				Result startReuslt= startProcess(startVO);
+				if(!startReuslt.isSuccess()) return startReuslt;
+
+
+				//步骤二进入提交阶段
+				ProcessApproveVO processApproveVO=new ProcessApproveVO();
+				AssetDataChange bill=getById(id);
+				List<String> instances=new ArrayList<>();
+				instances.add(bill.getChangeInstanceId());
+				processApproveVO.setOpinion("提交流程");
+				processApproveVO.setInstanceIds(instances);
+				processApproveVO.setAction(ApprovalAction.submit.code());
+				Result processApproveResult=approve(processApproveVO);
+				if(!processApproveResult.isSuccess()) return processApproveResult;
+
+
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}
@@ -402,8 +581,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetDataChange.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
-				asset.setHandleId(assetDataChange.getId());
 				asset.setId(IDGenerator.getSnowflakeIdString());
+				asset.setHandleId(assetDataChange.getId());
 				asset.setAssetId(assetDataChange.getAssetIds().get(i));
 				saveList.add(asset);
 			}

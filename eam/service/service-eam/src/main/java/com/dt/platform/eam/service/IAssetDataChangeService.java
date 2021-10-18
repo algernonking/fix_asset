@@ -35,7 +35,8 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId,List<AssetDataChange> assets,String approveAction,String opinion);
+
 
 
 

@@ -3,7 +3,6 @@ package com.dt.platform.eam.page;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
 import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
-import com.dt.platform.constants.enums.eam.AssetChangeTypeEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
@@ -39,7 +38,6 @@ import java.util.List;
 public class AssetDataChangePageController extends ViewController {
 	
 	public static final String prefix="business/eam/asset_data_change";
-
 	private AssetDataChangeServiceProxy proxy;
 	
 	/**
@@ -104,13 +102,13 @@ public class AssetDataChangePageController extends ViewController {
 
 
 		String assetAttributeDimension="";
-		if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(changeType)){
+		if(AssetOperateEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(changeType)){
 			assetAttributeDimension=AssetAttributeDimensionEnum.ATTRIBUTION.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(changeType)){
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(changeType)){
 			assetAttributeDimension=AssetAttributeDimensionEnum.FINANCIAL.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(changeType)){
 			assetAttributeDimension=AssetAttributeDimensionEnum.MAINTAINER.code();
-		}else if(AssetChangeTypeEnum.EAM_ASSET_CHANGE_EQUIPMENT.code().equals(changeType)){
+		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_EQUIPMENT.code().equals(changeType)){
 			assetAttributeDimension=AssetAttributeDimensionEnum.EQUIPMENT.code();
 		}
 
@@ -132,7 +130,7 @@ public class AssetDataChangePageController extends ViewController {
 		Result<List<AssetAttributeItem>> attributeItemRequiredListResult = AssetAttributeItemServiceProxy.api().queryList(attributeItem);
 		JSONObject attributeItemRequiredObject=new JSONObject();
 		if(attributeItemRequiredListResult.isSuccess()){
-			List<AssetAttributeItem>  attributeItemRequiredList = attributeItemRequiredListResult.getData();
+			List<AssetAttributeItem> attributeItemRequiredList = attributeItemRequiredListResult.getData();
 			if(attributeItemRequiredList.size()>0){
 				for(int i=0;i<attributeItemRequiredList.size();i++){
 					JSONObject obj=new JSONObject();

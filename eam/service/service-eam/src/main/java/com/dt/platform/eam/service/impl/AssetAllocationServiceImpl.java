@@ -13,6 +13,7 @@ import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -97,10 +98,37 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	}
 
 	@Override
-	public Result draft(ProcessStartVO startVO) {
+	public Result approve(String instanceId, List<AssetAllocation> assets, String approveAction, String opinion) {
 		return null;
 	}
 
+
+
+	private void syncBill(String id, ChangeEvent event) {
+		AssetAllocation asset4Update=AssetAllocation.create();
+//		asset4Update.setId(id)
+//				//设置变更ID
+//				.setChangeInstanceId(event.getInstance().getId())
+//				//更新状态
+//				.setChsStatus(event.getInstance().getStatusEnum().code())
+//				//更新最后审批人
+//				.setLatestApproverId(event.getApproverId())
+//				.setLatestApproverName(event.getApproverName())
+//				//设置下一节点审批人
+//				.setNextApproverIds(event.getSimpleNextApproverIds())
+//				.setNextApproverNames(event.getSimpleNextApproverNames())
+//				//更新流程概要
+//				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
+	}
+
+	/**
+	 * 启动流程
+	 * */
+	public Result startProcess(String id) {
+		return null;
+	}
 
 	/**
 	 * 送审
@@ -263,6 +291,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetAllocation.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
 				asset.setHandleId(assetAllocation.getId());
 				asset.setAssetId(assetAllocation.getAssetIds().get(i));
 				saveList.add(asset);

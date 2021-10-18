@@ -104,6 +104,11 @@ public interface AssetBorrowServiceProxy {
 
 
 	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
+	/**
 	 * 提交审批
 	 */
 	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";

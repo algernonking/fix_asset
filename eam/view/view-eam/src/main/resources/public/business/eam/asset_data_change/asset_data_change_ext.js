@@ -204,35 +204,60 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('moreAction',menu,data,it);
         },
         confirmData:function (item){
+            var btn=$('.confirm-data-button').filter("[data-id='" + item.id + "']");
             var api=moduleURL+"/confirm-operation";
             admin.post(api,{id:item.id},function (r){
-                if (r.success) {
-                    layer.msg(r.message, {icon: 1, time: 500});
+                if(r.success) {
+                    top.layer.msg("已确认",{time:1000});
+                    window.module.refreshTableData();
                 } else {
-                    layer.msg(r.message, {icon: 2, time: 1000});
+                    var errs=[];
+                    for (var i = 0; i < r.errors.length; i++) {
+                        if(errs.indexOf(r.errors[i].message)==-1) {
+                            errs.push(r.errors[i].message);
+                        }
+                    }
+                    top.layer.msg(errs.join("<br>"),{time:2000});
                 }
-            },{delayLoading:2000,elms:[]});
+            },{delayLoading:2000,elms:[btn]});
 
         },
         forApproval:function (item){
+            var btn=$('.for-approval-button').filter("[data-id='" + item.id + "']");
             var api=moduleURL+"/for-approval";
             admin.post(api,{id:item.id},function (r){
                 if (r.success) {
                     layer.msg(r.message, {icon: 1, time: 500});
+                    window.module.refreshTableData();
                 } else {
-                    layer.msg(r.message, {icon: 2, time: 1000});
+                    var errs=[];
+                    for (var i = 0; i < r.errors.length; i++) {
+                        if(errs.indexOf(r.errors[i].message)==-1) {
+                            errs.push(r.errors[i].message);
+                        }
+                    }
+                    top.layer.msg(errs.join("<br>"),{time:2000});
                 }
-            },{delayLoading:2000,elms:[]});
+            },{delayLoading:2000,elms:[btn]});
         },
         revokeData:function (item){
+
+            var btn=$('.revoke-data-button').filter("[data-id='" + item.id + "']");
             var api= moduleURL + "/revoke-operation";
             admin.post(api,{id:item.id},function (r){
-                if (r.success) {
-                    layer.msg(r.message, {icon: 1, time: 500});
+                if(r.success) {
+                    top.layer.msg("已撤销",{time:1000});
+                    window.module.refreshTableData();
                 } else {
-                    layer.msg(r.message, {icon: 2, time: 1000});
+                    var errs=[];
+                    for (var i = 0; i < r.errors.length; i++) {
+                        if(errs.indexOf(r.errors[i].message)==-1) {
+                            errs.push(r.errors[i].message);
+                        }
+                    }
+                    top.layer.msg(errs.join("<br>"),{time:2000});
                 }
-            },{delayLoading:2000,elms:[]});
+            },{delayLoading:2000,elms:[btn]});
         },
         /**
          * 末尾执行

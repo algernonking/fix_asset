@@ -15,6 +15,7 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -94,10 +95,38 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		return null;
 	}
 
+
 	@Override
-	public Result draft(ProcessStartVO startVO) {
+	public Result approve(String instanceId,List<AssetCollectionReturn> assets, String approveAction, String opinion) {
 		return null;
 	}
+
+	private void syncBill(String id, ChangeEvent event) {
+		AssetCollectionReturn asset4Update=AssetCollectionReturn.create();
+//		asset4Update.setId(id)
+//				//设置变更ID
+//				.setChangeInstanceId(event.getInstance().getId())
+//				//更新状态
+//				.setChsStatus(event.getInstance().getStatusEnum().code())
+//				//更新最后审批人
+//				.setLatestApproverId(event.getApproverId())
+//				.setLatestApproverName(event.getApproverName())
+//				//设置下一节点审批人
+//				.setNextApproverIds(event.getSimpleNextApproverIds())
+//				.setNextApproverNames(event.getSimpleNextApproverNames())
+//				//更新流程概要
+//				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
+	}
+
+	/**
+	 * 启动流程
+	 * */
+	public Result startProcess(String id) {
+		return null;
+	}
+
 
 
 	/**
@@ -266,6 +295,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetCollectionReturn.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
 				asset.setHandleId(assetCollectionReturn.getId());
 				asset.setAssetId(assetCollectionReturn.getAssetIds().get(i));
 				saveList.add(asset);

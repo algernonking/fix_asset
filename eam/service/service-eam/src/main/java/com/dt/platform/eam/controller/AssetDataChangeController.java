@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,10 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.meta.ExampleOrderVOMeta;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.proxy.changes.ExampleOrderServiceProxy;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -160,8 +163,8 @@ public class AssetDataChangeController extends SuperController {
 	public Result update(AssetDataChangeRecordVO assetDataChangeVO) {
 		return assetDataChangeService.updateRecord(assetDataChangeVO);
 	}
-	
-	
+
+
 	/**
 	 * 保存数据变更
 	*/
@@ -177,6 +180,15 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } )
@@ -209,9 +221,7 @@ public class AssetDataChangeController extends SuperController {
 		AssetDataChange assetDataChange=assetDataChangeService.getById(id);
 		// 关联出 制单人 数据
 		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.ORIGINATOR);
-
 		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.CHANGE_DATA);
-
 
 		// 关联出 资产分类 数据
 		assetService.join(assetDataChange.getChangeData(), AssetMeta.CATEGORY);
@@ -229,6 +239,9 @@ public class AssetDataChangeController extends SuperController {
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.MAINTNAINER);
 		// 关联出 财务分类 数据
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.CATEGORY_FINANCE);
+
+		assetService.join(assetDataChange.getChangeData(),AssetMeta.RACK);
+
 		// 关联出 供应商 数据
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.SUPPLIER);
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.SAFETY_LEVEL);
@@ -238,6 +251,7 @@ public class AssetDataChangeController extends SuperController {
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.MANAGER);
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.USE_USER);
 		assetService.join(assetDataChange.getChangeData(),AssetMeta.ORIGINATOR);
+
 
 
 		result.success(true).data(assetDataChange);
@@ -278,9 +292,18 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ASSET_CHANGE_ID , value = "资产变更" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "ces "),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "E001"),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -307,7 +330,6 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=8)
@@ -385,6 +407,9 @@ public class AssetDataChangeController extends SuperController {
 	}
 
 
+
+
+
 	/**
 	 * 确认
 	 * */
@@ -416,6 +441,17 @@ public class AssetDataChangeController extends SuperController {
 		return assetDataChangeService.revokeOperation(id);
 	}
 
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetDataChangeServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetDataChangeServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetDataChangeService.approve(approveVO);
+	}
 
 
 	/**

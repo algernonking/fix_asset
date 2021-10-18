@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetCollectionReturn;
 import com.dt.platform.domain.eam.AssetScrap;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
@@ -34,7 +35,9 @@ public interface IAssetTranferService extends ISuperService<AssetTranfer> {
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetTranfer> assets, String approveAction, String opinion);
+
+
 
 
 	/**

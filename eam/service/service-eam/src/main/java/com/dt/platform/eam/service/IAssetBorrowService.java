@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetAllocation;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetBorrow;
@@ -33,7 +34,9 @@ public interface IAssetBorrowService extends ISuperService<AssetBorrow> {
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetBorrow> assets, String approveAction, String opinion);
+
+
 
 	/**
 	 * 撤销流程

@@ -108,6 +108,12 @@ public interface AssetAllocationServiceProxy {
 	 */
 	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
 
+
+	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
 	/**
 	 * 确认操作
 	 */

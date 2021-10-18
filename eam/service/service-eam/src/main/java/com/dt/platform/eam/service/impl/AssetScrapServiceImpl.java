@@ -8,14 +8,14 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.domain.eam.AssetItem;
-import com.dt.platform.domain.eam.AssetRepair;
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -23,8 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetScrap;
-import com.dt.platform.domain.eam.AssetScrapVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -101,10 +99,40 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		return null;
 	}
 
+
+
 	@Override
-	public Result draft(ProcessStartVO startVO) {
+	public Result approve(String instanceId, List<AssetScrap> assets, String approveAction, String opinion) {
 		return null;
 	}
+
+
+	private void syncBill(String id, ChangeEvent event) {
+		AssetScrap asset4Update=AssetScrap.create();
+//		asset4Update.setId(id)
+//				//设置变更ID
+//				.setChangeInstanceId(event.getInstance().getId())
+//				//更新状态
+//				.setChsStatus(event.getInstance().getStatusEnum().code())
+//				//更新最后审批人
+//				.setLatestApproverId(event.getApproverId())
+//				.setLatestApproverName(event.getApproverName())
+//				//设置下一节点审批人
+//				.setNextApproverIds(event.getSimpleNextApproverIds())
+//				.setNextApproverNames(event.getSimpleNextApproverNames())
+//				//更新流程概要
+//				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
+	}
+
+	/**
+	 * 启动流程
+	 * */
+	public Result startProcess(String id) {
+		return null;
+	}
+
 
 
 	/**
@@ -272,6 +300,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetScrap.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
 				asset.setHandleId(assetScrap.getId());
 				asset.setAssetId(assetScrap.getAssetIds().get(i));
 				saveList.add(asset);

@@ -10,6 +10,7 @@ import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
 import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -376,6 +377,16 @@ public class AssetRepairController extends SuperController {
 
 
 
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetRepairServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetRepairServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetRepairService.approve(approveVO);
+	}
 
 
 	/**

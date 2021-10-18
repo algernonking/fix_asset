@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:37
- * @sign 8159F8820842A38518684E915A3A034B
+ * @since 2021-10-18 10:10:21
+ * @sign AFA28CC6716891E11E839261495D97B5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -209,6 +209,96 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
 	
 	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final String CHS_TYPE="chsType";
+	
+	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final String CHS_STATUS="chsStatus";
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHS_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHS_STATUS, java.lang.String.class, "变更状态", "变更状态", java.lang.String.class, null);
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final String CHS_VERSION="chsVersion";
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHS_VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHS_VERSION, java.lang.String.class, "变更版本号", "变更版本号", java.lang.String.class, null);
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final String CHANGE_INSTANCE_ID="changeInstanceId";
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> CHANGE_INSTANCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_INSTANCE_ID, java.lang.String.class, "变更ID", "变更ID", java.lang.String.class, null);
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final String SUMMARY="summary";
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> SUMMARY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,SUMMARY, java.lang.String.class, "流程概要", "流程概要", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_ID="latestApproverId";
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> LATEST_APPROVER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,LATEST_APPROVER_ID, java.lang.String.class, "最后审批人账户ID", "最后审批人账户ID", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_NAME="latestApproverName";
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> LATEST_APPROVER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,LATEST_APPROVER_NAME, java.lang.String.class, "最后审批人姓名", "最后审批人姓名", java.lang.String.class, null);
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_IDS="nextApproverIds";
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> NEXT_APPROVER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,NEXT_APPROVER_IDS, java.lang.String.class, "下一节点审批人", "下一节点审批人", java.lang.String.class, null);
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_NAMES="nextApproverNames";
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> NEXT_APPROVER_NAMES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,NEXT_APPROVER_NAMES, java.lang.String.class, "下一个审批节点审批人姓名", "用逗号隔开", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -251,7 +341,7 @@ public class AssetDataChangeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -467,6 +557,105 @@ public class AssetDataChangeMeta {
 		public AssetDataChange setSelectedCode(String selectedCode) {
 			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
 			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更类型
+		 * @param chsType 变更类型
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChsType(String chsType) {
+			super.change(CHS_TYPE,super.getChsType(),chsType);
+			super.setChsType(chsType);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更状态
+		 * @param chsStatus 变更状态
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChsStatus(String chsStatus) {
+			super.change(CHS_STATUS,super.getChsStatus(),chsStatus);
+			super.setChsStatus(chsStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更版本号
+		 * @param chsVersion 变更版本号
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChsVersion(String chsVersion) {
+			super.change(CHS_VERSION,super.getChsVersion(),chsVersion);
+			super.setChsVersion(chsVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更ID
+		 * @param changeInstanceId 变更ID
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChangeInstanceId(String changeInstanceId) {
+			super.change(CHANGE_INSTANCE_ID,super.getChangeInstanceId(),changeInstanceId);
+			super.setChangeInstanceId(changeInstanceId);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程概要
+		 * @param summary 流程概要
+		 * @return 当前对象
+		*/
+		public AssetDataChange setSummary(String summary) {
+			super.change(SUMMARY,super.getSummary(),summary);
+			super.setSummary(summary);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人账户ID
+		 * @param latestApproverId 最后审批人账户ID
+		 * @return 当前对象
+		*/
+		public AssetDataChange setLatestApproverId(String latestApproverId) {
+			super.change(LATEST_APPROVER_ID,super.getLatestApproverId(),latestApproverId);
+			super.setLatestApproverId(latestApproverId);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人姓名
+		 * @param latestApproverName 最后审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetDataChange setLatestApproverName(String latestApproverName) {
+			super.change(LATEST_APPROVER_NAME,super.getLatestApproverName(),latestApproverName);
+			super.setLatestApproverName(latestApproverName);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一节点审批人
+		 * @param nextApproverIds 下一节点审批人
+		 * @return 当前对象
+		*/
+		public AssetDataChange setNextApproverIds(String nextApproverIds) {
+			super.change(NEXT_APPROVER_IDS,super.getNextApproverIds(),nextApproverIds);
+			super.setNextApproverIds(nextApproverIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一个审批节点审批人姓名
+		 * @param nextApproverNames 下一个审批节点审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetDataChange setNextApproverNames(String nextApproverNames) {
+			super.change(NEXT_APPROVER_NAMES,super.getNextApproverNames(),nextApproverNames);
+			super.setNextApproverNames(nextApproverNames);
 			return this;
 		}
 		

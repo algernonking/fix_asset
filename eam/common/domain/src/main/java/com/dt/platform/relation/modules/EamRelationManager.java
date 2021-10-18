@@ -63,8 +63,14 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataChangeMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_CHANGE.ID )
                 .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+//                .using(EAMTables.EAM_ASSET.ID)
+//                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+
 
         //变更数据
         this.property(AssetDataChangeMeta.CHANGE_DATA_PROP)

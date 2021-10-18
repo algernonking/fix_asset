@@ -89,7 +89,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET.ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_ASSET.SCRAP).table().disable(true);
+        cfg.view().field(EAMTables.EAM_ASSET.CLEAN_OUT).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.DISPLAY).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.PICTURE_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET.ATTACH).table().disable(true);

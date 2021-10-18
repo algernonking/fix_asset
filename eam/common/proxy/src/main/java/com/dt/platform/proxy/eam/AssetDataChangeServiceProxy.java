@@ -108,6 +108,12 @@ public interface AssetDataChangeServiceProxy {
 	 */
 	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
 
+
+	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
 	/**
 	 * 确认操作
 	 */
@@ -183,7 +189,8 @@ public interface AssetDataChangeServiceProxy {
 	*/
 	@RequestMapping(AssetDataChangeServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<AssetDataChange>> queryPagedList(AssetDataChangeVO sample);
-	
+
+
 	
 	/**
 	 * 控制器类名

@@ -1,11 +1,10 @@
 package com.dt.platform.eam.service;
 
 
-import com.dt.platform.domain.eam.AssetScrap;
+import com.dt.platform.domain.eam.*;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
-import com.dt.platform.domain.eam.AssetRepair;
-import com.dt.platform.domain.eam.AssetRepairVO;
+
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -34,7 +33,9 @@ public interface IAssetRepairService extends ISuperService<AssetRepair> {
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetRepair> assets, String approveAction, String opinion);
+
+
 
 	/**
 	 * 撤销流程

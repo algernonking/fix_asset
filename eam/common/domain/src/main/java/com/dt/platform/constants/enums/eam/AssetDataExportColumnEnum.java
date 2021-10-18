@@ -20,6 +20,7 @@ public enum AssetDataExportColumnEnum implements CodeTextEnum {
     SAFETY_LEVEL_NAME( "safetyLevelName","safety_level_code" ),
     MAINTENANCE_STATUS( "maintenanceStatusName","maintenance_status" ),
 
+    RACK_NAME( "rackName","rack_id" ),
 
     STATUS_NAME("statusName","status" ),
     OWN_COMPANY_NAME("ownCompanyName","own_company_id" ),
@@ -38,7 +39,7 @@ public enum AssetDataExportColumnEnum implements CodeTextEnum {
     EQUIPMENT_STATUS_NAME( "equipmentStatusName","equipment_status" ),
     EQUIPMENT_ENVIRONMENT_NAME( "equipmentEnvironmentName","equipment_environment_code" ),
 
-    RACK_NAME( "rackName","rack_id" ),
+
 
     ;
 

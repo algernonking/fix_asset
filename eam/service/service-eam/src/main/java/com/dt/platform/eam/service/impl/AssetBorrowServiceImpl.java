@@ -18,6 +18,7 @@ import com.dt.platform.proxy.common.CodeAllocationServiceProxy;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.api.error.CommonError;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -103,8 +104,37 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		return null;
 	}
 
+
+
 	@Override
-	public Result draft(ProcessStartVO startVO) {
+	public Result approve(String instanceId, List<AssetBorrow> assets, String approveAction, String opinion) {
+		return null;
+	}
+
+
+	private void syncBill(String id, ChangeEvent event) {
+		AssetBorrow asset4Update=AssetBorrow.create();
+//		asset4Update.setId(id)
+//				//设置变更ID
+//				.setChangeInstanceId(event.getInstance().getId())
+//				//更新状态
+//				.setChsStatus(event.getInstance().getStatusEnum().code())
+//				//更新最后审批人
+//				.setLatestApproverId(event.getApproverId())
+//				.setLatestApproverName(event.getApproverName())
+//				//设置下一节点审批人
+//				.setNextApproverIds(event.getSimpleNextApproverIds())
+//				.setNextApproverNames(event.getSimpleNextApproverNames())
+//				//更新流程概要
+//				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
+	}
+
+	/**
+	 * 启动流程
+	 * */
+	public Result startProcess(String id) {
 		return null;
 	}
 
@@ -266,6 +296,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			List<AssetItem> saveList=new ArrayList<AssetItem>();
 			for(int i=0;i<assetBorrow.getAssetIds().size();i++){
 				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
 				asset.setHandleId(assetBorrow.getId());
 				asset.setAssetId(assetBorrow.getAssetIds().get(i));
 				saveList.add(asset);

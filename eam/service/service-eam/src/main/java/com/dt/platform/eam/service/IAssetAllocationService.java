@@ -2,6 +2,7 @@ package com.dt.platform.eam.service;
 
 
 import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.AssetDataChange;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetAllocation;
@@ -35,7 +36,9 @@ public interface IAssetAllocationService extends ISuperService<AssetAllocation> 
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetAllocation> assets, String approveAction, String opinion);
+
+
 
 
 	/**

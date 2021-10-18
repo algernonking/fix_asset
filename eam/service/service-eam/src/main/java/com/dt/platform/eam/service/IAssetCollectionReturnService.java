@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.domain.eam.AssetAllocation;
 import com.dt.platform.domain.eam.AssetCollection;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
@@ -34,7 +35,9 @@ public interface IAssetCollectionReturnService extends ISuperService<AssetCollec
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+	Result approve(String instanceId, List<AssetCollectionReturn> assets, String approveAction, String opinion);
+
+
 
 	/**
 	 * 撤销流程

@@ -5,10 +5,13 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
+import com.dt.platform.domain.eam.meta.AssetDataChangeVOMeta;
 import com.dt.platform.domain.eam.meta.AssetVOMeta;
+import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.dt.platform.proxy.eam.AssetServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -369,6 +372,17 @@ public class AssetAllocationController extends SuperController {
 	@RequestMapping(AssetAllocationServiceProxy.REVOKE_OPERATION)
 	public Result revokeOperation(String id)  {
 		return assetAllocationService.revokeOperation(id);
+	}
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetAllocationServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetAllocationServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetAllocationService.approve(approveVO);
 	}
 
 	/**

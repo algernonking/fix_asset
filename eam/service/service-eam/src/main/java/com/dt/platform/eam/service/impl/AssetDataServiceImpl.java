@@ -4,11 +4,14 @@ package com.dt.platform.eam.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.datacenter.Rack;
+import com.dt.platform.domain.datacenter.RackVO;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.eam.service.*;
 
+import com.dt.platform.proxy.datacenter.RackServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
@@ -74,6 +77,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
     @Autowired
     private ICategoryFinanceService categoryFinanceService;
+
 
 
 
@@ -448,7 +452,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         String manufacturerId=BeanNameUtil.instance().depart(AssetMeta.MANUFACTURER_ID);
         String valueManufacturer=rcd.getString(manufacturerId);
         if(!StringUtil.isBlank(valueManufacturer)){
-            Manufacturer manufacturer = manufacturerService.queryEntity(Manufacturer.create().setManufacturerName(valueWarehouse));
+            Manufacturer manufacturer = manufacturerService.queryEntity(Manufacturer.create().setManufacturerName(valueManufacturer));
             if(manufacturer==null){
                 if(filldata){
                     manufacturer=new Manufacturer();
@@ -462,6 +466,32 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }else{
                 rcd.setValue(manufacturerId,manufacturer.getId());
             }
+        }
+
+
+        //机柜 fill
+        String rackId=BeanNameUtil.instance().depart(AssetMeta.RACK_ID);
+        String valueRack=rcd.getString(rackId);
+        if(!StringUtil.isBlank(valueRack)){
+            RackVO vo=new RackVO();
+            vo.setRackName(valueRack);
+            Result<List<Rack>> rackResult=RackServiceProxy.api().queryList(vo);
+            if(!rackResult.isSuccess()){
+                return rackResult;
+            }
+            String matchRackId="";
+            if (rackResult.getData().size()==0){
+                if(filldata){
+                    matchRackId=IDGenerator.getSnowflakeIdString();
+                    vo.setId(matchRackId);
+                    RackServiceProxy.api().insert(vo);
+                }else{
+                    return ErrorDesc.failureMessage("机柜不存在:"+valueRack);
+                }
+            }else{
+                matchRackId=rackResult.getData().get(0).getId();
+            }
+            rcd.setValue(rackId,matchRackId);
         }
 
 
@@ -575,6 +605,13 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 //关联出 物品档案 数据
                 assetMap.put(AssetDataExportColumnEnum.ASSET_GOOD_NAME.code(),assetItem.getGoods().getName());
             }
+
+            if(assetItem.getRack()!=null){
+                //关联出 机柜 数据
+                assetMap.put(AssetDataExportColumnEnum.RACK_NAME.code(),assetItem.getRack().getRackName());
+                assetMap.put("rackCode",assetItem.getRack().getRackCode());
+            }
+
             if(assetItem.getManufacturer()!=null){
                 //关联出 厂商 数据
                 assetMap.put(AssetDataExportColumnEnum.ASSET_MANUFACTURER_NAME.code(),assetItem.getManufacturer().getManufacturerName());

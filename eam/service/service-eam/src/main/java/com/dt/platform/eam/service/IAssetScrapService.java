@@ -2,6 +2,7 @@ package com.dt.platform.eam.service;
 
 
 import com.dt.platform.domain.eam.AssetCollectionReturn;
+import com.dt.platform.domain.eam.AssetRepair;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetScrap;
@@ -32,9 +33,13 @@ public interface IAssetScrapService extends ISuperService<AssetScrap> {
 
 	Result startProcess(ProcessStartVO startVO);
 
+
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+
+	Result approve(String instanceId, List<AssetScrap> assets, String approveAction, String opinion);
+
+
 
 	/**
      * 撤销流程
