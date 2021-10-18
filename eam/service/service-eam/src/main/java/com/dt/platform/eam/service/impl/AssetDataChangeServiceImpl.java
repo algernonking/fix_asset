@@ -212,9 +212,9 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		}
 		In in=new In(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_INSTANCE_ID,approveVO.getInstanceIds());
 
-		List<AssetDataChange> orders=this.queryList(in.toConditionExpr());
-		Map<String,List<AssetDataChange>> ordersMap= CollectorUtil.groupBy(orders,AssetDataChange::getChangeInstanceId);
-		for (Map.Entry<String,List<AssetDataChange>> e : ordersMap.entrySet()) {
+		List<AssetDataChange> assets=this.queryList(in.toConditionExpr());
+		Map<String,List<AssetDataChange>> assetsMap= CollectorUtil.groupBy(assets,AssetDataChange::getChangeInstanceId);
+		for (Map.Entry<String,List<AssetDataChange>> e : assetsMap.entrySet()) {
 			Result<ChangeEvent> r=this.approve(e.getKey(),e.getValue(),approveVO.getAction(),approveVO.getOpinion());
 			if(r.failure()){
 				result.addError(r);
