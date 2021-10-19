@@ -81,7 +81,7 @@ function ListPage() {
 				#end
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:#if(mulitiSelect)'checkbox'#else'radio'#end }
 					#for(f : fields)
 					#if(!f.disableInList)
 					#if(f.typeName.equals("date_input"))
@@ -112,7 +112,7 @@ function ListPage() {
 					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
 					#end
 					#if(f.selectField.queryApi!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)',fox.joinLabel(#if(f.selectField.fillWith!=null)d.#(f.selectField.fillWith)#else null #end,"#(f.selectField.textField)"),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)' #if(f.selectField.fillWith!=null),fox.joinLabel(d.#(f.selectField.fillWith),"#(f.selectField.textField)")#end #if(f.listFillByPropertyNames!=null),fox.getProperty(d,#(f.listFillByPropertyNames))#end,d);}}
 					#end
 					#else
 					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null), templet: function (d) { return templet('#(f.varName)',fox.getProperty(d,#(f.listFillByPropertyNames)),d);} #else , templet: function (d) { return templet('#(f.varName)',d.#(f.varName),d);}  #end}
@@ -176,9 +176,9 @@ function ListPage() {
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
-		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)"#if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, fillWith:"#(f.selectField.fillWith)"#if(f.searchField!=null),field:"#(f.searchField)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
+		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end  #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#end
 		#else
 		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end};
@@ -198,9 +198,9 @@ function ListPage() {
 		value.#(f.varName)={ inputType:"number_input", value: $("##(f.varName)").val() #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#else if(f.typeName.equals("button"))
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix) "#end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#end
 		#end
