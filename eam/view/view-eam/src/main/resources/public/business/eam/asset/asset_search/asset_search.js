@@ -106,7 +106,7 @@ function ListPage() {
 
 
         value.businessCode={ value: $("#businessCode").val()};
-        value.assetCode={ value: $("#assetCode").val()};
+        value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
         //value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -591,8 +591,8 @@ function ListPage() {
             if(!doNext) return;
         }
         var action=admin.getTempData('eam-asset-form-data-form-action');
-        var queryString="";
-        if(data && data.id) queryString="?" + 'id=' + data.id;
+        var queryString="?pageType=base";
+        if(data && data.id) queryString=queryString+"&" + 'id=' + data.id;
         admin.putTempData('eam-asset-form-data', data);
         var area=admin.getTempData('eam-asset-form-area');
         var height= (area && area.height) ? area.height : ($(window).height()*0.6);

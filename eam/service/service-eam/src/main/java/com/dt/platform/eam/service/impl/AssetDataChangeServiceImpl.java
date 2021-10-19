@@ -423,7 +423,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @return
 	 * */
 	private Result operateResult(String id,String result,String status,String message) {
-
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			Result applayResult=applyChange(id);
 			if(!applayResult.isSuccess()) return applayResult;
@@ -463,19 +462,9 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	private Result applyChange(String id){
 		AssetDataChange billData=getById(id);
 		join(billData,AssetDataChangeMeta.ASSET_LIST);
-		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"");
+		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"");
 		List<SQL> updateSqls=resultMap.get("update");
 		List<SQL> changeSqls=resultMap.get("change");
-		System.out.println("update change size:"+updateSqls.size());
-		for(SQL s:updateSqls){
-			System.out.println(s.getSQL());
-		}
-		System.out.println("change change size:"+changeSqls.size());
-		for(SQL s:changeSqls){
-			System.out.println(s.getSQL());
-		}
-
-
 		if(updateSqls.size()>0){
 			dao.batchExecute(updateSqls);
 		}

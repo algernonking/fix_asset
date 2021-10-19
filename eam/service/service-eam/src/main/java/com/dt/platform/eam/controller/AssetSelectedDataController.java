@@ -265,6 +265,7 @@ public class AssetSelectedDataController extends SuperController {
 			List<AssetItem> list =new ArrayList<>();
 			for(int i=0;i<ids.size();i++){
 				AssetItem obj=new AssetItem();
+				obj.setId(IDGenerator.getSnowflakeIdString());
 				obj.setAssetId(ids.get(i));
 				obj.setCrd("c");
 				obj.setHandleId(assetOwnerId);

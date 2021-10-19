@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-19 08:25:53
+ * @since 2021-10-19 15:22:34
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2843,6 +2843,16 @@ public class EAMTables {
 		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
 		
 		/**
+		 * 资产使用人
+		*/
+		public static final DBField BEFORE_USE_USER_ID = new DBField(DBDataType.STRING , "before_use_user_id","beforeUseUserId","资产使用人","资产使用人",false,false,true);
+		
+		/**
+		 * 资产状态
+		*/
+		public static final DBField BEFORE_ASSET_STATUS = new DBField(DBDataType.STRING , "before_asset_status","beforeAssetStatus","资产状态","资产状态",false,false,true);
+		
+		/**
 		 * 修改标记
 		*/
 		public static final DBField CRD = new DBField(DBDataType.STRING , "crd","crd","修改标记","修改标记",false,false,true);
@@ -2887,7 +2897,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
 		public EAM_ASSET_ITEM() {
-			this.init($NAME,"资产" , ID , HANDLE_ID , ASSET_ID , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产" , ID , HANDLE_ID , ASSET_ID , BEFORE_USE_USER_ID , BEFORE_ASSET_STATUS , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final EAM_ASSET_ITEM $TABLE=new EAM_ASSET_ITEM();
 	}
@@ -2913,19 +2923,19 @@ public class EAMTables {
 		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
 		
 		/**
-		 * 变更号
+		 * 业务编号
 		*/
-		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","变更号","变更号",false,false,true);
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
 		
 		/**
-		 * 变更类型
+		 * 操作类型
 		*/
-		public static final DBField PROCESS_TYPE = new DBField(DBDataType.STRING , "process_type","processType","变更类型","变更类型",false,false,true);
+		public static final DBField PROCESS_TYPE = new DBField(DBDataType.STRING , "process_type","processType","操作类型","操作类型",false,false,true);
 		
 		/**
-		 * 变更内容
+		 * 操作内容
 		*/
-		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","变更内容","变更内容",false,false,true);
+		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","操作内容","操作内容",false,false,true);
 		
 		/**
 		 * 备注

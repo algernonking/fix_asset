@@ -97,7 +97,7 @@ function ListPage() {
      */
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
-        value.assetCode={ value: $("#assetCode").val()};
+        value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
         value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
@@ -297,7 +297,7 @@ function ListPage() {
             area: ["95%",height+"px"],
             type: 2,
             id:"eam-asset-form-data-win",
-            content: '/business/eam/asset/asset_form.html' + queryString,
+            content: '/business/eam/asset/asset_info_form.html' + queryString,
             finish: function () {
                 refreshTableData();
             }

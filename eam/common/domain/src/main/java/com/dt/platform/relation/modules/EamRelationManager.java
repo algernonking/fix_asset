@@ -23,10 +23,6 @@ public class EamRelationManager extends RelationManager {
 
         this.setupAsset();
 
-//        this.setupAssetFinancial();
-//        this.setupAssetMaintainer();
-//        this.setupAssetEaintainer();
-
 
         this.setupAlloction();
         this.setupAssetBorrow();
@@ -53,6 +49,14 @@ public class EamRelationManager extends RelationManager {
     }
 
     public void setupScrap(){
+
+        this.property(AssetScrapMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_SCRAP.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+
         this.property(AssetScrapMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_SCRAP.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
     }
@@ -63,13 +67,8 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataChangeMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_CHANGE.ID )
                 .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-
-//                .using(EAMTables.EAM_ASSET.ID)
-//                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
-
                 .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
                 .join( EAMTables.EAM_ASSET.ID);
-
 
 
         //变更数据
@@ -87,6 +86,13 @@ public class EamRelationManager extends RelationManager {
 
 
     public void setupAlloction() {
+
+        // 关联资产
+        this.property(AssetAllocationMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_ALLOCATION.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
 
         // 关联
         this.property(AssetAllocationMeta.ORIGINATOR_PROP)
@@ -136,19 +142,20 @@ public class EamRelationManager extends RelationManager {
     }
 
     public void setupAssetBorrow() {
+
+
         // 关联资产
         this.property(AssetBorrowMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_BORROW.ID )
                 .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
 
         // 关联制单人
         this.property(AssetBorrowMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
-
-
 
         // 关联借用人
         this.property(AssetBorrowMeta.BORROWER_PROP)
@@ -159,12 +166,15 @@ public class EamRelationManager extends RelationManager {
 
 
     public void setupAssetCollection() {
+
         // 关联资产
         this.property(AssetCollectionMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_COLLECTION.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_COLLECTION.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+
 
         // 关联位置
         this.property(AssetCollectionMeta.POSITION_PROP)
@@ -188,12 +198,15 @@ public class EamRelationManager extends RelationManager {
 
 
     public void setupAssetCollectionReturn() {
+
         // 关联资产
         this.property(AssetCollectionReturnMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+
 
         // 关联位置
         this.property(AssetCollectionReturnMeta.POSITION_PROP)
@@ -213,12 +226,15 @@ public class EamRelationManager extends RelationManager {
 
 
     public void setupAssetRepair() {
+
+
         // 关联资产
         this.property(AssetRepairMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_REPAIR.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_REPAIR.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
 
 
         // 关联制单人
@@ -238,6 +254,14 @@ public class EamRelationManager extends RelationManager {
 
     public void setupAssetTranfer() {
 
+        // 关联资产
+        this.property(AssetTranferMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_TRANFER.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+
         this.property(AssetTranferMeta.IN_USE_ORGANIZATION_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.IN_USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
 
@@ -249,13 +273,6 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetTranferMeta.POSITION_PROP)
                 .using(EAMTables.EAM_ASSET_TRANFER.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
 
-
-        // 关联资产
-        this.property(AssetTranferMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_TRANFER.ID)
-                .join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID)
-                .join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
 
         // 关联制单人
         this.property(AssetTranferMeta.ORIGINATOR_PROP)

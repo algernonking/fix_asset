@@ -139,9 +139,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				ins.set(key,changeMap.get(key));
 			}
 			ins.set("id",changeId);
-			System.out.println("AssetInsert "+ins.getSQL());
+			//System.out.println("AssetInsert "+ins.getSQL());
 			dao.execute(ins);
 		}
+		Rcd assetAfterRcd=dao.queryRecord("select * from eam_asset where id=?",changeId);
 		Asset assetAfter=getById(changeId);
 		dao.fill(assetAfter).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
@@ -177,9 +178,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				rChangeMap.put(key,changeMap.get(key));
 			}
 		}
-		System.out.println("rChangeMap"+rChangeMap);
-
-		System.out.println("assetBefore"+assetBefore);
+		System.out.println("changeMap"+rChangeMap);
 		//获取before数据
 		dao.fill(assetBefore).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
@@ -203,14 +202,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		dao().join(managers, Person.class);
 		List<Employee> useUser= CollectorUtil.collectList(assetBefore,Asset::getUseUser);
 		dao().join(useUser, Person.class);
-
+	//	System.out.println("assetBefore"+assetBefore);
 		//开始比较
-		System.out.println("assetAfter"+assetJsonAfter);
+	//	System.out.println("assetAfter"+assetJsonAfter);
 		for(Asset asset: assetBefore){
 			JSONObject assetJsonBefore=BeanUtil.toJSONObject(asset);
-			System.out.println(assetJsonBefore.toJSONString());
+		//	System.out.println(assetJsonBefore.toJSONString());
 			Update ups=new Update("eam_asset");
-
 			String ct="";
 			for(String key:rChangeMap.keySet()){
 				Rcd rcd=colsMap.get(key);
@@ -223,27 +221,27 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				System.out.println(rkey+" rcd:"+rcd.toJSONObject().toJSONString());
 				if(AssetAttributeValueTypeEnum.ENUM.code().equals(valueType)){
 					if("asset_status".equals(key)){
-						if(!StringUtil.isBlank(assetJsonBefore.getString(key))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonBefore.getString(key));
+						if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonBefore.getString(rkey));
 							if(v!=null){
 								before=v.text();
 							}
 						}
-						if(!StringUtil.isBlank(assetJsonAfter.getString(key))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonAfter.getString(key));
+						if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonAfter.getString(rkey));
 							if(v!=null){
 								after=v.text();
 							}
 						}
 					}else if("equipment_environment_code".equals(key)){
-						if(!StringUtil.isBlank(assetJsonBefore.getString(key))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonBefore.getString(key));
+						if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonBefore.getString(rkey));
 							if(v!=null){
 								before=v.text();
 							}
 						}
-						if(!StringUtil.isBlank(assetJsonAfter.getString(key))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonAfter.getString(key));
+						if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonAfter.getString(rkey));
 							if(v!=null){
 								after=v.text();
 							}
@@ -271,7 +269,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}else{
 					continue;
 				}
-				ups.setIf(key,assetJsonAfter.getString(key));
+
+			//	System.out.println("tsql"+key+","+assetAfterRcd.getOriginalValue(key));
+				ups.setIf(key,assetAfterRcd.getOriginalValue(key));
 				if( !((before+"").equals(after+"") ) ){
 					ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
 				}
@@ -304,6 +304,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 			updateSqls.add(ups);
 			changeSqls.add(ins);
+		}
+		System.out.println("update change size:"+updateSqls.size());
+		for(SQL s:updateSqls){
+			System.out.println(s.getSQL());
+		}
+
+		System.out.println("change change size:"+changeSqls.size());
+		for(SQL s:changeSqls){
+			System.out.println(s.getSQL());
 		}
 		data.put("change",changeSqls);
 		data.put("update",updateSqls);
@@ -818,8 +827,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public Result checkAssetDataForBusiessAction(String businessType,List<String> assetIds) {
-
-
 		Result result=new Result();
 		ConditionExpr queryCondition=new ConditionExpr();
 		queryCondition.andIn("id",assetIds);
@@ -828,8 +835,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return r;
 		}
 		List<Asset> list=queryList(queryCondition);
+//		System.out.println("parameter asset size:"+assetIds.size());
+//		System.out.println("asset size:"+list.size());
 		if(list.size()!=assetIds.size()){
-			return ErrorDesc.failure().message("当前选择的资产中部分状态异常,请重新选择");
+			return ErrorDesc.failure().message("当前选择的资产中部分状态异常");
 		}
 		return result;
 	}
@@ -914,7 +923,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		for (Rcd r:rs.getRcdList()) {
 			i++;
 			System.out.println("before:"+r);
-
 			//判断数据是插入或更新
 			if(StringUtil.isBlank(r.getString(AssetDataExportColumnEnum.ASSET_ID.text()))){
 				actionType="insert";

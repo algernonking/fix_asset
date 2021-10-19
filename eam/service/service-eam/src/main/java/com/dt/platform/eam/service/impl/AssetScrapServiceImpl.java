@@ -8,13 +8,17 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetRepairMeta;
+import com.dt.platform.domain.eam.meta.AssetScrapMeta;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
@@ -23,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -174,24 +179,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		return ErrorDesc.success();
 	}
 
-	/**
-	 * 操作成功
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result operateSuccess(String id) {
-
-		return ErrorDesc.success();
-	}
-
-	/**
-	 * 操作失败
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result operateFailed(String id) {
-		return ErrorDesc.success();
-	}
 
 	/**
 	 * 操作
@@ -199,12 +186,20 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	 * @param result 结果
 	 * @return
 	 * */
-	public Result operateResult(String id,String result) {
-
+	@Transactional
+	Result operateResult(String id,String result,String status,String message) {
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
-			return operateSuccess(id);
+			Result verifyResult= verifyBillData(id);
+			if(!verifyResult.isSuccess()) return verifyResult;
+
+			Result applayResult=applyChange(id);
+			if(!applayResult.isSuccess()) return applayResult;
+			AssetScrap bill=new AssetScrap();
+			bill.setId(id);
+			bill.setStatus(status);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
-			return operateFailed(id);
+			return ErrorDesc.failureMessage(message);
 		}else{
 			return ErrorDesc.failureMessage("返回未知结果");
 		}
@@ -216,13 +211,14 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	 * @return 是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result confirmOperation(String id) {
 		AssetScrap billData=getById(id);
 		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
 			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_SCRAP.code()) ) {
 				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
-				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
 			}
 		}else{
 			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
@@ -230,7 +226,22 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	}
 
 
-
+	private Result applyChange(String id){
+		AssetScrap billData=getById(id);
+		join(billData, AssetScrapMeta.ASSET_LIST);
+		HashMap<String,Object> map=new HashMap<>();
+		map.put("asset_status", AssetStatusEnum.SCRAP.code());
+		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_SCRAP.code(),"完成报废");
+		List<SQL> updateSqls=resultMap.get("update");
+		List<SQL> changeSqls=resultMap.get("change");
+		if(updateSqls.size()>0){
+			dao.batchExecute(updateSqls);
+		}
+		if(changeSqls.size()>0){
+			dao.batchExecute(changeSqls);
+		}
+		return ErrorDesc.success();
+	}
 
 
 
@@ -243,8 +254,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Transactional
 	public Result insert(AssetScrap assetScrap) {
 
-
-
 		if(assetScrap.getAssetIds()==null||assetScrap.getAssetIds().size()==0){
 			String assetSelectedCode=assetScrap.getSelectedCode();
 			ConditionExpr condition=new ConditionExpr();
@@ -252,8 +261,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
 			assetScrap.setAssetIds(list);
 		}
-
-
 
 		//校验数据资产
 		if(assetScrap.getAssetIds().size()==0){
@@ -290,8 +297,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 				assetScrap.setBusinessCode(codeResult.getData().toString());
 			}
 		}
-
-
 
 
 		Result r=super.insert(assetScrap);
@@ -368,7 +373,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 更新实体
 	 * @param assetScrap 数据对象
@@ -380,26 +385,26 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public Result update(AssetScrap assetScrap , SaveMode mode) {
 		//c  新建,r  原纪录,d  删除,cd 新建删除
 		//验证数据
-		String handleId=assetScrap.getId();
-		ConditionExpr itemRecordCondition=new ConditionExpr();
-		itemRecordCondition.andIn("handle_id",handleId);
-		itemRecordCondition.andIn("crd","c","r");
-		List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
-		assetScrap.setAssetIds(ckDatalist);
-		if(assetScrap.getAssetIds().size()==0){
-			return ErrorDesc.failure().message("请选择资产");
-		}
-		Result ckResult=assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),assetScrap.getAssetIds());
-		if(!ckResult.isSuccess()){
-			return ckResult;
-		}
+		Result verifyResult=verifyBillData(assetScrap.getId());
+		if(!verifyResult.isSuccess())return verifyResult;
 		Result r=super.update(assetScrap,mode);
 		if(r.success()){
 			//保存表单数据
-			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",handleId);
-			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",handleId);
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",assetScrap.getId());
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",assetScrap.getId());
 		}
 		return r;
+	}
+
+	private Result verifyBillData(String id){
+		ConditionExpr itemRecordCondition=new ConditionExpr();
+		itemRecordCondition.andIn("handle_id",id);
+		itemRecordCondition.andIn("crd","c","r");
+		List<String> ckDatalist=assetItemService.queryValues(EAMTables.EAM_ASSET_ITEM.ASSET_ID,String.class,itemRecordCondition);
+		if(ckDatalist.size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+		return assetService.checkAssetDataForBusiessAction(CodeModuleEnum.EAM_ASSET_SCRAP.code(),ckDatalist);
 	}
 	
 	/**

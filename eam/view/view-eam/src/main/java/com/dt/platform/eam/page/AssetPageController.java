@@ -224,6 +224,8 @@ public class AssetPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_search/asset_search.html")
 	public String searchList(Model model,HttpServletRequest request) {
+
+
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
