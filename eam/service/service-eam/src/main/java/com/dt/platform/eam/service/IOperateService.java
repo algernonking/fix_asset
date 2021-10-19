@@ -33,7 +33,7 @@ public interface IOperateService extends ISuperService<Operate> {
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+
 
 
 	/**

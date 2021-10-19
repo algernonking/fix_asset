@@ -111,8 +111,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
+		 @ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
 		@ApiImplicitParam(name = AssetVOMeta.MODEL , value = "标准型号规格型号" , required = false , dataTypeClass=String.class),
@@ -256,7 +255,6 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
@@ -364,7 +362,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CLEAN_OUT , value = "是否清理" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
@@ -429,6 +427,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
 	@NotNull(name = AssetVOMeta.ID)
@@ -455,48 +454,27 @@ public class AssetController extends SuperController {
 	public Result<Asset> getById(String id) {
 		Result<Asset> result=new Result<>();
 		Asset asset=assetService.getById(id);
-
 		assetService.dao().fill(asset).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.CATEGORY_FINANCE)
 				.with(AssetMeta.GOODS)
 				.with(AssetMeta.MANUFACTURER)
 				.with(AssetMeta.POSITION)
 				.with(AssetMeta.MAINTNAINER)
 				.with(AssetMeta.SUPPLIER)
-				.with(AssetMeta.SAFETY_LEVEL)
-				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
 				.with(AssetMeta.OWNER_COMPANY)
 				.with(AssetMeta.USE_ORGANIZATION)
 				.with(AssetMeta.MANAGER)
 				.with(AssetMeta.USE_USER)
 				.with(AssetMeta.ORIGINATOR)
 				.with(AssetMeta.RACK)
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
 				.execute();
-		// 关联出 资产分类 数据
-//		assetService.join(asset,AssetMeta.CATEGORY);
-//		// 关联出 物品档案 数据
-//		assetService.join(asset,AssetMeta.GOODS);
-//		// 关联出 厂商 数据
-//		assetService.join(asset,AssetMeta.MANUFACTURER);
-//		// 关联出 位置 数据
-//		assetService.join(asset,AssetMeta.POSITION);
-//		// 关联出 仓库 数据
-//		assetService.join(asset,AssetMeta.WAREHOUSE);
-//		// 关联出 来源 数据
-//		assetService.join(asset,AssetMeta.SOURCE);
-//		// 关联出 维保商 数据
-//		assetService.join(asset,AssetMeta.MAINTNAINER);
-//		// 关联出 财务分类 数据
-//		assetService.join(asset,AssetMeta.CATEGORY_FINANCE);
-//		// 关联出 供应商 数据
-//		assetService.join(asset,AssetMeta.SUPPLIER);
-//		assetService.join(asset,AssetMeta.SAFETY_LEVEL);
-//		assetService.join(asset,AssetMeta.EQUIPMENT_ENVIRONMENT);
-//		assetService.join(asset,AssetMeta.OWNER_COMPANY);
-//		assetService.join(asset,AssetMeta.USE_ORGANIZATION);
-//		assetService.join(asset,AssetMeta.MANAGER);
-//		assetService.join(asset,AssetMeta.USE_USER);
-//		assetService.join(asset,AssetMeta.ORIGINATOR);
 
+		assetService.dao().join(asset.getManager(), Person.class);
+		assetService.dao().join(asset.getUseUser(), Person.class);
 		//加载自定义数据
 		asset.setCatalogAttribute(assetCategoryService.queryCatalogAttributeByAssetCategory(asset.getCategoryId()));
 		asset.setExtData(assetService.getExtDataById(asset.getId(),asset.getCategoryId()));
@@ -541,7 +519,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CLEAN_OUT , value = "是否清理" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
@@ -606,6 +584,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -634,7 +613,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CLEAN_OUT , value = "是否清理" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 		@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
@@ -728,7 +707,6 @@ public class AssetController extends SuperController {
 			@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-			@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 			@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),
@@ -813,7 +791,6 @@ public class AssetController extends SuperController {
 			@ApiImplicitParam(name = AssetVOMeta.ASSET_CODE , value = "资产编号" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.DISPLAY , value = "是否显示" , required = false , dataTypeClass=String.class),
-			@ApiImplicitParam(name = AssetVOMeta.SCRAP , value = "是否报废" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.GOODS_ID , value = "标准物品档案" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.NAME , value = "标准型号资产名称" , required = false , dataTypeClass=String.class , example = "12"),
 			@ApiImplicitParam(name = AssetVOMeta.MANUFACTURER_ID , value = "标准型号厂商" , required = false , dataTypeClass=String.class , example = "473623897560842240"),

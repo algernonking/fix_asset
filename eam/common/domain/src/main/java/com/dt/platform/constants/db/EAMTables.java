@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-18 10:09:04
+ * @since 2021-10-19 08:25:53
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1678,6 +1678,16 @@ public class EAMTables {
 		public static final DBField LABEL = new DBField(DBDataType.STRING , "label","label","字段名称","字段名称",false,false,true);
 		
 		/**
+		 * 字段值类型
+		*/
+		public static final DBField VALUE_TYPE = new DBField(DBDataType.STRING , "value_type","valueType","字段值类型","字段值类型",false,false,true);
+		
+		/**
+		 * 取值类型
+		*/
+		public static final DBField VALUE_PATH = new DBField(DBDataType.STRING , "value_path","valuePath","取值类型","取值类型",false,false,true);
+		
+		/**
 		 * 标签备注
 		*/
 		public static final DBField LABEL_NOTES = new DBField(DBDataType.STRING , "label_notes","labelNotes","标签备注","标签备注",false,false,true);
@@ -1767,7 +1777,7 @@ public class EAMTables {
 		public static final DBField OWNER = new DBField(DBDataType.STRING , "owner","owner","归属","归属",false,false,true);
 		
 		public EAM_ASSET_ATTRIBUTE() {
-			this.init($NAME,"资产字段配置" , ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER);
+			this.init($NAME,"资产字段配置" , ID , CODE , LABEL , VALUE_TYPE , VALUE_PATH , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER);
 		}
 		public static final EAM_ASSET_ATTRIBUTE $TABLE=new EAM_ASSET_ATTRIBUTE();
 	}

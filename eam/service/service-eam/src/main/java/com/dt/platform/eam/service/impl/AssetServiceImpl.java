@@ -15,7 +15,9 @@ import com.dt.platform.eam.common.ResetOnCloseInputStream;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.bean.BeanNameUtil;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
@@ -49,6 +51,9 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import java.lang.reflect.Field;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.api.error.ErrorDesc;
 
@@ -79,7 +84,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Autowired
 	private IAssetCategoryService assetCategoryService;
 
-
+	@Autowired
+	private IAssetItemService assetItemService;
 
 
 	/**
@@ -100,8 +106,209 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return IDGenerator.getSnowflakeIdString();
 	}
 
+	private String lineToHump(String str) {
+		Pattern linePattern = Pattern.compile("_(\\w)");
+		str = str.toLowerCase();
+		Matcher matcher = linePattern.matcher(str);
+		StringBuffer sb = new StringBuffer();
+		while (matcher.find()) {
+			matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+
+	@Override
+	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
+		DBTableMeta tm=dao().getTableMeta(this.table());
+		DBTreaty dbTreaty= dao().getDBTreaty();
+		HashMap<String,List<SQL>> data=new HashMap<>();
+		List<SQL> changeSqls=new ArrayList<>();
+		List<SQL> updateSqls=new ArrayList<>();
+
+		//获取after数据
+		String changeId="";
+		if(changeMap.containsKey("id")){
+			changeId=changeMap.get("id").toString();
+		}else{
+			changeId=IDGenerator.getSnowflakeIdString();
+			Insert ins=new Insert("eam_asset");
+			ins.set("owner_code",AssetOwnerCodeEnum.ASSET_CHANGE_RECORD.code());
+			ins.setIf("tenant_id",SessionUser.getCurrent().getActivatedCompanyId());
+			for(String key:changeMap.keySet()){
+				ins.set(key,changeMap.get(key));
+			}
+			ins.set("id",changeId);
+			System.out.println("AssetInsert "+ins.getSQL());
+			dao.execute(ins);
+		}
+		Asset assetAfter=getById(changeId);
+		dao.fill(assetAfter).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.CATEGORY_FINANCE)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
+				.execute();
+		dao().join(assetAfter.getManager(), Person.class);
+		dao().join(assetAfter.getUseUser(), Person.class);
+		JSONObject assetJsonAfter=BeanUtil.toJSONObject(assetAfter);
 
 
+		//获取map
+		String sql="select id,code,label,value_type,value_path from eam_asset_attribute where code not in ('status','business_code','batch_code') and deleted='0' and tenant_id=?";
+		RcdSet rs=dao.query(sql,SessionUser.getCurrent().getActivatedTenantId());
+		HashMap<String,Rcd> colsMap=(HashMap<String,Rcd>)rs.getMappedRcds("code",String.class);
+		//删除不存在的
+		HashMap<String, Object> rChangeMap=new HashMap<>();
+		for(String key:changeMap.keySet()){
+			if(colsMap.containsKey(key)){
+				rChangeMap.put(key,changeMap.get(key));
+			}
+		}
+		System.out.println("rChangeMap"+rChangeMap);
+
+		System.out.println("assetBefore"+assetBefore);
+		//获取before数据
+		dao.fill(assetBefore).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.CATEGORY_FINANCE)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
+				.execute();
+		List<Employee> managers= CollectorUtil.collectList(assetBefore,Asset::getManager);
+		dao().join(managers, Person.class);
+		List<Employee> useUser= CollectorUtil.collectList(assetBefore,Asset::getUseUser);
+		dao().join(useUser, Person.class);
+
+		//开始比较
+		System.out.println("assetAfter"+assetJsonAfter);
+		for(Asset asset: assetBefore){
+			JSONObject assetJsonBefore=BeanUtil.toJSONObject(asset);
+			System.out.println(assetJsonBefore.toJSONString());
+			Update ups=new Update("eam_asset");
+
+			String ct="";
+			for(String key:rChangeMap.keySet()){
+				Rcd rcd=colsMap.get(key);
+				String label=rcd.getString("label");
+				String valueType=rcd.getString("value_type");
+				String valuePath=rcd.getString("value_path");
+				String rkey=lineToHump(key);
+				String before="-";
+				String after="-";
+				System.out.println(rkey+" rcd:"+rcd.toJSONObject().toJSONString());
+				if(AssetAttributeValueTypeEnum.ENUM.code().equals(valueType)){
+					if("asset_status".equals(key)){
+						if(!StringUtil.isBlank(assetJsonBefore.getString(key))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonBefore.getString(key));
+							if(v!=null){
+								before=v.text();
+							}
+						}
+						if(!StringUtil.isBlank(assetJsonAfter.getString(key))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonAfter.getString(key));
+							if(v!=null){
+								after=v.text();
+							}
+						}
+					}else if("equipment_environment_code".equals(key)){
+						if(!StringUtil.isBlank(assetJsonBefore.getString(key))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonBefore.getString(key));
+							if(v!=null){
+								before=v.text();
+							}
+						}
+						if(!StringUtil.isBlank(assetJsonAfter.getString(key))){
+							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonAfter.getString(key));
+							if(v!=null){
+								after=v.text();
+							}
+						}
+					}else{
+						continue;
+					}
+				}else if(AssetAttributeValueTypeEnum.ENTITY.code().equals(valueType) || AssetAttributeValueTypeEnum.DICT.code().equals(valueType) ){
+					if(!StringUtil.isBlank(valuePath)){
+						String[] valuePathArr=valuePath.split(",");
+						if(valuePathArr.length==2){
+							String entity=valuePathArr[0];
+							String name=valuePathArr[1];
+							if(assetJsonBefore.getJSONObject(entity)!=null){
+								before=assetJsonBefore.getJSONObject(entity).getString(name);
+							}
+							if(assetJsonAfter.getJSONObject(entity)!=null){
+								after=assetJsonAfter.getJSONObject(entity).getString(name);
+							}
+						}
+					}
+				}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType) ){
+					before=assetJsonBefore.getString(rkey);
+					after=assetJsonAfter.getString(rkey);
+				}else{
+					continue;
+				}
+				ups.setIf(key,assetJsonAfter.getString(key));
+				if( !((before+"").equals(after+"") ) ){
+					ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
+				}
+			}
+
+			//开始填充数据
+			if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
+				ups.set(dbTreaty.getUpdateTimeField(),new Date());
+			}
+			if(tm.getColumn(dbTreaty.getUpdateUserIdField())!=null) {
+				ups.set(dbTreaty.getUpdateUserIdField(), dbTreaty.getLoginUserId());
+			}
+			ups.where().and("id=?",asset.getId());
+			Insert ins=new Insert("eam_asset_process_record");
+			ins.set("id",IDGenerator.getSnowflakeIdString());
+			ins.setIf("asset_id",asset.getId());
+			ins.setIf("business_code",businessCode);
+			ins.setIf("process_type",operType);
+			ins.setIf("notes",notes);
+			ins.setIf("content",ct);
+			ins.set("processd_time",new Date());
+			if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
+				ins.set(dbTreaty.getCreateTimeField(),new Date());
+			}
+			if(tm.getColumn(dbTreaty.getCreateUserIdField())!=null) {
+				ins.set(dbTreaty.getCreateUserIdField(), dbTreaty.getLoginUserId());
+			}
+			if(tm.getColumn(dbTreaty.getDeletedField())!=null) {
+				ins.set(dbTreaty.getDeletedField(), dbTreaty.getFalseValue());
+			}
+			updateSqls.add(ups);
+			changeSqls.add(ins);
+		}
+		data.put("change",changeSqls);
+		data.put("update",updateSqls);
+		return data;
+	}
 
 
 	@Override
@@ -113,14 +320,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result approve(ProcessApproveVO approveVO) {
 		return null;
 	}
-
-	@Override
-	public Result draft(ProcessStartVO startVO) {
-		return null;
-	}
-
-
-
 
 
 	/**
@@ -165,46 +364,24 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result joinData(PagedList<Asset> list) {
 		// 关联出 资产分类 数据
 
-		//exampleOrderService.dao().fill(list).with(ExampleOrderMeta.BUYER_EMPLOYEE, EmployeeMeta.PERSON).execute();
-
 		dao.fill(list).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.GOODS)
 				.with(AssetMeta.MANUFACTURER)
 				.with(AssetMeta.POSITION)
 				.with(AssetMeta.MAINTNAINER)
 				.with(AssetMeta.SUPPLIER)
-				.with(AssetMeta.SAFETY_LEVEL)
-				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
 				.with(AssetMeta.OWNER_COMPANY)
 				.with(AssetMeta.USE_ORGANIZATION)
 				.with(AssetMeta.MANAGER)
 				.with(AssetMeta.USE_USER)
 				.with(AssetMeta.ORIGINATOR)
 				.with(AssetMeta.RACK)
+
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
 				.execute();
-//		join(list, AssetMeta.CATEGORY);
-//		// 关联出 物品档案 数据
-//		join(list,AssetMeta.GOODS);
-//		// 关联出 厂商 数据
-//		join(list,AssetMeta.MANUFACTURER);
-//		// 关联出 位置 数据
-//		join(list,AssetMeta.POSITION);
-//
-//		// 关联出 维保商 数据
-//		join(list,AssetMeta.MAINTNAINER);
-//		// 关联出 供应商 数据
-//		join(list,AssetMeta.SUPPLIER);
-//
-//		// 关联出 来源 数据
-//		join(list,AssetMeta.SOURCE);
-//		join(list,AssetMeta.SAFETY_LEVEL);
-//		join(list,AssetMeta.EQUIPMENT_ENVIRONMENT);
-//
-//		join(list,AssetMeta.OWNER_COMPANY);
-//		join(list,AssetMeta.USE_ORGANIZATION);
-//		join(list,AssetMeta.MANAGER);
-//		join(list,AssetMeta.USE_USER);
-//		join(list,AssetMeta.ORIGINATOR);
 
 		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
 		dao().join(originators, Person.class);
@@ -713,9 +890,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		HashMap<String,HashMap<String,String>> matchMap=new HashMap<>();
 		matchMap.put("organizationMap",assetDataService.queryUseOrganizationNodes());
 		matchMap.put("categoryMap",assetDataService.queryAssetCategoryNodes());
-		matchMap.put("safetyLevelMap", assetDataService.queryDictItemDataByDictCode("eam_safety_level"));
-		matchMap.put("equipEnvMap",assetDataService.queryDictItemDataByDictCode("eam_equipment_environment"));
-		matchMap.put("sourceMap",assetDataService.queryDictItemDataByDictCode("eam_source"));
+		matchMap.put("eam_safety_level", assetDataService.queryDictItemDataByDictCode("eam_safety_level"));
+		matchMap.put("eam_equipment_environment",assetDataService.queryDictItemDataByDictCode("eam_equipment_environment"));
+		matchMap.put("eam_source",assetDataService.queryDictItemDataByDictCode("eam_source"));
+		matchMap.put("eam_maintenance_status",assetDataService.queryDictItemDataByDictCode("eam_maintenance_status"));
 
 
 		String pcmCategoryId=null;
@@ -907,7 +1085,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 		//构建 Excel 结构
 		ExcelStructure es=buildExcelStructure(input);
-		HashMap<String,List<CatalogAttribute>> attributeMap=this.getPmcExtAttribute(input);
+		HashMap<String,List<CatalogAttribute>> attributeMap=this.getPcmExtAttribute(input);
 		//装换成记录集
 		RcdSet rs=null;
 		try {
@@ -1011,7 +1189,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	}
 
-	public HashMap<String,List<CatalogAttribute>> getPmcExtAttribute(InputStream dataInputStream){
+	public HashMap<String,List<CatalogAttribute>> getPcmExtAttribute(InputStream dataInputStream){
 		HashMap<String,List<CatalogAttribute>> map=new HashMap<>();
 		//获取自定义属性
 		if(dataInputStream!=null){
@@ -1098,7 +1276,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 		}
 
-		HashMap<String,List<CatalogAttribute>> map=getPmcExtAttribute(dataInputStream);
+		HashMap<String,List<CatalogAttribute>> map=getPcmExtAttribute(dataInputStream);
 		System.out.println("pcm_ext_map:"+map);
 		List<CatalogAttribute> list=new ArrayList<>();
 		for(String key:map.keySet()){

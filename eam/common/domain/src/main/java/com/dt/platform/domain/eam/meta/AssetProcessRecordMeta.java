@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
- * @sign 342141C0C5C2D3AB2FC28FF1E6750857
+ * @since 2021-10-19 13:51:27
+ * @sign 28AF2B1A86D29DFDC2C6CC1BD535D5BB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,34 +36,34 @@ public class AssetProcessRecordMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
 	
 	/**
-	 * 变更号 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
 	public static final String BUSINESS_CODE="businessCode";
 	
 	/**
-	 * 变更号 , 类型: java.lang.String
+	 * 业务编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,BUSINESS_CODE, java.lang.String.class, "变更号", "变更号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,BUSINESS_CODE, java.lang.String.class, "业务编号", "业务编号", java.lang.String.class, null);
 	
 	/**
-	 * 变更类型 , 类型: java.lang.String
+	 * 操作类型 , 类型: java.lang.String
 	*/
 	public static final String PROCESS_TYPE="processType";
 	
 	/**
-	 * 变更类型 , 类型: java.lang.String
+	 * 操作类型 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> PROCESS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,PROCESS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> PROCESS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,PROCESS_TYPE, java.lang.String.class, "操作类型", "操作类型", java.lang.String.class, null);
 	
 	/**
-	 * 变更内容 , 类型: java.lang.String
+	 * 操作内容 , 类型: java.lang.String
 	*/
 	public static final String CONTENT="content";
 	
 	/**
-	 * 变更内容 , 类型: java.lang.String
+	 * 操作内容 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,CONTENT, java.lang.String.class, "变更内容", "变更内容", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,CONTENT, java.lang.String.class, "操作内容", "操作内容", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -211,8 +211,8 @@ public class AssetProcessRecordMeta {
 		}
 		
 		/**
-		 * 设置 变更号
-		 * @param businessCode 变更号
+		 * 设置 业务编号
+		 * @param businessCode 业务编号
 		 * @return 当前对象
 		*/
 		public AssetProcessRecord setBusinessCode(String businessCode) {
@@ -222,8 +222,8 @@ public class AssetProcessRecordMeta {
 		}
 		
 		/**
-		 * 设置 变更类型
-		 * @param processType 变更类型
+		 * 设置 操作类型
+		 * @param processType 操作类型
 		 * @return 当前对象
 		*/
 		public AssetProcessRecord setProcessType(String processType) {
@@ -233,8 +233,8 @@ public class AssetProcessRecordMeta {
 		}
 		
 		/**
-		 * 设置 变更内容
-		 * @param content 变更内容
+		 * 设置 操作内容
+		 * @param content 操作内容
 		 * @return 当前对象
 		*/
 		public AssetProcessRecord setContent(String content) {

@@ -6,11 +6,14 @@ import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
+
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import java.io.InputStream;
 import com.github.foxnic.sql.expr.OrderBy;
+import com.github.foxnic.sql.expr.SQL;
 import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
@@ -29,6 +32,7 @@ import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 public interface IAssetService extends ISuperService<Asset> {
 
+	HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes);
 
 	Result joinData(PagedList<Asset> list);
 
@@ -36,7 +40,7 @@ public interface IAssetService extends ISuperService<Asset> {
 
 	Result approve(ProcessApproveVO approveVO);
 
-	Result draft(ProcessStartVO startVO);
+
 
 
 	/**

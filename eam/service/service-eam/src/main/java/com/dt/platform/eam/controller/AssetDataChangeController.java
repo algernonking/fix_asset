@@ -214,15 +214,15 @@ public class AssetDataChangeController extends SuperController {
 	@PostMapping(AssetDataChangeServiceProxy.GET_BY_ID)
 	public Result<AssetDataChange> getById(String id) {
 
-		assetDataChangeService.queryDataChange(id,AssetAttributeDimensionEnum.MAINTAINER.code());
+
 
 
 		Result<AssetDataChange> result=new Result<>();
 		AssetDataChange assetDataChange=assetDataChangeService.getById(id);
+
 		// 关联出 制单人 数据
 		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.ORIGINATOR);
 		assetDataChangeService.join(assetDataChange,AssetDataChangeMeta.CHANGE_DATA);
-
 		// 关联出 资产分类 数据
 		assetService.join(assetDataChange.getChangeData(), AssetMeta.CATEGORY);
 		// 关联出 物品档案 数据
@@ -342,7 +342,6 @@ public class AssetDataChangeController extends SuperController {
 
 		List<Employee> employees= CollectorUtil.collectList(list,AssetDataChange::getOriginator);
 		assetDataChangeService.dao().join(employees, Person.class);
-
 
 		assetDataChangeService.join(list,AssetDataChangeMeta.CHANGE_DATA);
 		List<Asset> assetData= CollectorUtil.collectList(list,AssetDataChange::getChangeData);

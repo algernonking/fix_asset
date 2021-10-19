@@ -110,12 +110,6 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 		return null;
 	}
 
-	@Override
-	public Result draft(ProcessStartVO startVO) {
-		return null;
-	}
-
-
 
 	/*
 	当前的SN是否是唯一的。判断是否序列号要唯一,满足非空唯一即可

@@ -48,19 +48,18 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	String queryDataChangeDimensionByChangeType(String changeType);
 
 
-	/**
-	 * 提取获取变更的字段和值
-	 * @param rcd
-	 * @return Rcd
-	 * */
-	HashMap<String,Object> extractDataChangeValue(Rcd rcd);
+//	/**
+//	 * 提取获取变更的字段和值
+//	 * @param rcd
+//	 * @return Rcd
+//	 * */
+//	HashMap<String,Object> extractDataChangeValue(Rcd rcd);
 
 	/**
 	 * 提取获取变更的字段
-	 * @param changeType
 	 * @return Rcd
 	 * */
-	Rcd queryDataChange(String id,String changeType);
+	HashMap<String, Object> queryDataChange(String id);
 
 	/**
 	 * 提取AssetDatachange

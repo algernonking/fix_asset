@@ -143,24 +143,7 @@ function ListPage() {
     function initSearchFields() {
 
         fox.switchSearchRow(2);
-
-        //渲染 status 下拉字段
-        // fox.renderSelectBox({
-        //     el: "status",
-        //     radio: false,
-        //     size: "small",
-        //     filterable: false,
-        //     //转换数据
-        //     transform:function(data) {
-        //         //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-        //         var opts=[];
-        //         if(!data) return opts;
-        //         for (var i = 0; i < data.length; i++) {
-        //             opts.push({name:data[i].text,value:data[i].code});
-        //         }
-        //         return opts;
-        //     }
-        // });
+        
         //渲染 assetStatus 下拉字段
         fox.renderSelectBox({
             el: "assetStatus",
@@ -178,74 +161,7 @@ function ListPage() {
                 return opts;
             }
         });
-        //渲染 manufacturerId 下拉字段
-        // fox.renderSelectBox({
-        //     el: "manufacturerId",
-        //     radio: false,
-        //     size: "small",
-        //     filterable: true,
-        //     //转换数据
-        //     searchField: "manufacturerName", //请自行调整用于搜索的字段名称
-        //     extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-        //     transform: function(data) {
-        //         //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-        //         var opts=[];
-        //         if(!data) return opts;
-        //         for (var i = 0; i < data.length; i++) {
-        //             if(!data[i]) continue;
-        //             opts.push({name:data[i].manufacturerName,value:data[i].id});
-        //         }
-        //         return opts;
-        //     }
-        // });
-        //渲染 positionId 下拉字段
-        // fox.renderSelectBox({
-        //     el: "positionId",
-        //     radio: false,
-        //     size: "small",
-        //     filterable: true,
-        //     paging: true,
-        //     pageRemote: true,
-        //     //转换数据
-        //     searchField: "name", //请自行调整用于搜索的字段名称
-        //     extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-        //     transform: function(data) {
-        //         //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-        //         var opts=[];
-        //         if(!data) return opts;
-        //         for (var i = 0; i < data.length; i++) {
-        //             if(!data[i]) continue;
-        //             opts.push({name:data[i].name,value:data[i].id});
-        //         }
-        //         return opts;
-        //     }
-        // });
-        // //渲染 sourceId 下拉字段
-        // fox.renderSelectBox({
-        //     el: "sourceId",
-        //     radio: false,
-        //     size: "small",
-        //     filterable: false,
-        //     //转换数据
-        //     transform: function(data) {
-        //         //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-        //         var opts=[];
-        //         if(!data) return opts;
-        //         for (var i = 0; i < data.length; i++) {
-        //             if(!data[i]) continue;
-        //             opts.push({name:data[i].label,value:data[i].code});
-        //         }
-        //         return opts;
-        //     }
-        // });
-        // laydate.render({
-        //     elem: '#purchaseDate-begin',
-        //     trigger:"click"
-        // });
-        // laydate.render({
-        //     elem: '#purchaseDate-end',
-        //     trigger:"click"
-        // });
+
         fox.renderSearchInputs();
         window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
     }
@@ -353,70 +269,6 @@ function ListPage() {
     /**
      * 绑定行操作按钮事件
      */
-    // function bindRowOperationEvent() {
-    //     // 工具条点击事件
-    //     table.on('tool(data-table)', function (obj) {
-    //         var data = obj.data;
-    //         var layEvent = obj.event;
-    //         admin.putTempData('eam-asset-form-data-form-action', "",true);
-    //         if (layEvent === 'edit') { // 修改
-    //             // //延迟显示加载动画，避免界面闪动
-    //             // var task=setTimeout(function(){layer.load(2);},1000);
-    //             // admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-    //             //     clearTimeout(task);
-    //             //     layer.closeAll('loading');
-    //             //     if(data.success) {
-    //             //         admin.putTempData('eam-asset-form-data-form-action', "edit",true);
-    //             //         showEditForm(data.data);
-    //             //     } else {
-    //             //         layer.msg(data.message, {icon: 1, time: 1500});
-    //             //     }
-    //             // });
-    //         } else if (layEvent === 'view') { // 查看
-    //             //延迟显示加载动画，避免界面闪动
-    //             var task=setTimeout(function(){layer.load(2);},1000);
-    //             admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-    //                 clearTimeout(task);
-    //                 layer.closeAll('loading');
-    //                 if(data.success) {
-    //                     admin.putTempData('eam-asset-form-data-form-action', "view",true);
-    //                     showEditForm(data.data);
-    //                 } else {
-    //                     layer.msg(data.message, {icon: 1, time: 1500});
-    //                 }
-    //             });
-    //         }
-    //         else if (layEvent === 'del') { // 删除
-    //
-    //             if(window.pageExt.list.beforeSingleDelete) {
-    //                 var doNext=window.pageExt.list.beforeSingleDelete(data);
-    //                 if(!doNext) return;
-    //             }
-    //
-    //             top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产')+fox.translate('吗？'), function (i) {
-    //                 top.layer.close(i);
-    //
-    //                 top.layer.load(2);
-    //                 admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
-    //                     top.layer.closeAll('loading');
-    //                     if (data.success) {
-    //                         if(window.pageExt.list.afterSingleDelete) {
-    //                             var doNext=window.pageExt.list.afterSingleDelete(data);
-    //                             if(!doNext) return;
-    //                         }
-    //                         top.layer.msg(data.message, {icon: 1, time: 500});
-    //                         refreshTableData();
-    //                     } else {
-    //                         top.layer.msg(data.message, {icon: 2, time: 1500});
-    //                     }
-    //                 });
-    //             });
-    //
-    //         }
-    //
-    //     });
-    //
-    // };
 
     /**
      * 打开编辑窗口

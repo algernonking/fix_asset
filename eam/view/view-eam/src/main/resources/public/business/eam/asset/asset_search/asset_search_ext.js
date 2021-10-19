@@ -28,8 +28,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 offset: [15,null],
                 area: ["95%","80%"],
                 type: 2,
-                id:"eam-asset-data-change-form-data-win",
-                content: '/business/eam/asset_data_change/asset_data_change_list.html' + queryString,
+                id:"eam-asset-data-change-detail-form-data-win",
+                content: '/business/eam/asset_process_record/asset_process_record_list.html' + queryString,
                 finish: function () {
                     refreshTableData();
                 }

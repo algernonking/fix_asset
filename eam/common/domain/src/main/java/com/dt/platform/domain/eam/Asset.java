@@ -26,8 +26,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 13:03:31
- * @sign C3A12293B96D42E0FFB3F09622B007D7
+ * @since 2021-10-19 08:56:42
+ * @sign A0AD69BFFCAD6509EEB313B2FBE379B1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,10 +106,10 @@ public class Asset extends Entity {
 	private String display;
 	
 	/**
-	 * 是否报废：是否报废
+	 * 是否清理：是否清理
 	*/
-	@ApiModelProperty(required = false,value="是否报废" , notes = "是否报废")
-	private String scrap;
+	@ApiModelProperty(required = false,value="是否清理" , notes = "是否清理")
+	private String cleanOut;
 	
 	/**
 	 * 标准物品档案：标准物品档案
@@ -664,6 +664,12 @@ public class Asset extends Entity {
 	private DictItem safetyLevel;
 	
 	/**
+	 * 维保状态：维保状态
+	*/
+	@ApiModelProperty(required = false,value="维保状态" , notes = "维保状态")
+	private DictItem assetMaintenanceStatus;
+	
+	/**
 	 * 机柜：机柜
 	*/
 	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
@@ -879,21 +885,21 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 是否报废<br>
-	 * 是否报废
-	 * @return 是否报废
+	 * 获得 是否清理<br>
+	 * 是否清理
+	 * @return 是否清理
 	*/
-	public String getScrap() {
-		return scrap;
+	public String getCleanOut() {
+		return cleanOut;
 	}
 	
 	/**
-	 * 设置 是否报废
-	 * @param scrap 是否报废
+	 * 设置 是否清理
+	 * @param cleanOut 是否清理
 	 * @return 当前对象
 	*/
-	public Asset setScrap(String scrap) {
-		this.scrap=scrap;
+	public Asset setCleanOut(String cleanOut) {
+		this.cleanOut=cleanOut;
 		return this;
 	}
 	
@@ -2665,6 +2671,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setSafetyLevel(DictItem safetyLevel) {
 		this.safetyLevel=safetyLevel;
+		return this;
+	}
+	
+	/**
+	 * 获得 维保状态<br>
+	 * 维保状态
+	 * @return 维保状态
+	*/
+	public DictItem getAssetMaintenanceStatus() {
+		return assetMaintenanceStatus;
+	}
+	
+	/**
+	 * 设置 维保状态
+	 * @param assetMaintenanceStatus 维保状态
+	 * @return 当前对象
+	*/
+	public Asset setAssetMaintenanceStatus(DictItem assetMaintenanceStatus) {
+		this.assetMaintenanceStatus=assetMaintenanceStatus;
 		return this;
 	}
 	

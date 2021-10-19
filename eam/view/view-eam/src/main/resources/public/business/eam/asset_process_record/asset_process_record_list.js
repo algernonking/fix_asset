@@ -1,7 +1,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
+ * @since 2021-10-19 13:51:39
  */
 
 
@@ -73,14 +73,13 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
-					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'processType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更类型'), templet:function (d){ return templet('processType',fox.getEnumText(SELECT_PROCESSTYPE_DATA,d.processType),d);}}
-					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更内容') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'assetId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
+					,{ field: 'processType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作类型'), templet:function (d){ return templet('processType',fox.getEnumText(SELECT_PROCESSTYPE_DATA,d.processType),d);}}
+					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作内容') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'processdTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('变更时间'), templet: function (d) { return templet('processdTime',fox.dateFormat(d.processdTime,"yyyy-MM-dd HH:mm:ss"),d); }}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
-					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
 				done: function (data) { window.pageExt.list.afterQuery && window.pageExt.list.afterQuery(data); },
@@ -377,7 +376,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["80%",height+"px"],
 			type: 2,
 			id:"eam-asset-process-record-form-data-win",
 			content: '/business/eam/asset_process_record/asset_process_record_form.html' + queryString,

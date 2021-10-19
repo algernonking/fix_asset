@@ -4,7 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum;
+
 import com.dt.platform.domain.datacenter.Rack;
 import com.dt.platform.domain.datacenter.meta.RackMeta;
 import com.dt.platform.domain.eam.*;
@@ -64,6 +64,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"equipmentEnvironment","设备运行环境","设备运行环境");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"safetyLevel","安全等级","安全等级");
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"assetMaintenanceStatus","维保状态","维保状态");
+
 
         cfg.getPoClassFile().addSimpleProperty(Rack.class,"rack","机柜","机柜");
 
@@ -183,6 +185,13 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 textField(DictItemMeta.LABEL).
                 fillWith(AssetMeta.EQUIPMENT_ENVIRONMENT).muliti(false);
 
+        cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_STATUS)
+                .basic().label("维保状态")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_maintenance_status")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(AssetMeta.ASSET_MAINTENANCE_STATUS).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.RACK_ID)
                 .basic().label("机柜")
@@ -195,14 +204,11 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.STATUS).form()
                 .label("办理状态").selectBox().enumType(AssetHandleStatusEnum.class);
 
-        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_STATUS).form().
-                label("设备状态").selectBox().enumType(AssetEquipmentStatusEnum.class);
-
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_STATUS).form().
                 label("资产状态").selectBox().enumType(AssetStatusEnum.class).defaultValue("idle");
 
-        cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_STATUS).form().
-                label("维保状态").selectBox().enumType(AssetMaintenanceStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_STATUS).form().
+                label("设备状态").selectBox().enumType(AssetEquipmentStatusEnum.class);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.CATEGORY_ID)

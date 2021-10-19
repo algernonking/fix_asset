@@ -215,7 +215,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 } else {
                     layer.msg(r.message, {icon: 2, time: 1000});
                 }
-            },{delayLoading:2000,elms:[$("#forBatchApproval-button")]});
+            },{delayLoading:1500,elms:[$("#forBatchApproval-button")]});
         },
         batchRevokeOperation:function(data,item){
             var api=moduleURL+"/batch-revoke-operation";
@@ -225,7 +225,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 } else {
                     layer.msg(r.message, {icon: 2, time: 1000});
                 }
-            },{delayLoading:2000,elms:[$("#batchRevoke-button")]});
+            },{delayLoading:1500,elms:[$("#batchRevoke-button")]});
         },
         /**
          * 末尾执行

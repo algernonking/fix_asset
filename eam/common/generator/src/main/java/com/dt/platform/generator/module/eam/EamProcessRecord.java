@@ -31,15 +31,30 @@ public class EamProcessRecord extends BaseCodeGenerator{
                 }
         );
 
+        cfg.view().list().disableBatchDelete();
+        cfg.view().list().disableCreateNew();
+        cfg.view().list().disableModify();
+        cfg.view().list().disableSingleDelete();
+        cfg.view().list().disableSpaceColumn();
+
+
         cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.PROCESS_TYPE).form()
-                .label("业务类型").selectBox().enumType(AssetOperateEnum.class);
+                .label("操作类型").selectBox().enumType(AssetOperateEnum.class);
 
-        cfg.view().form().addJsVariable("ASSET_ID","[[${assetId}]]","资产ID");
-
+        cfg.view().list().addJsVariable("ASSET_ID","[[${assetId}]]","资产ID");
         cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.ID).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.ASSET_ID).table().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.CREATE_TIME).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.PROCESS_USER_ID).table().disable();
-
         cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.PROCESSD_TIME).form().dateInput().format("yyyy-MM-dd HH:mm:ss").search().range();
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.ID).form().hidden();
+        cfg.view().field(EAMTables.EAM_ASSET_PROCESS_RECORD.PROCESS_USER_ID).form().hidden();
+        cfg.view().formWindow().bottomSpace(100);
+        cfg.view().formWindow().width("80%");
+
+
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
@@ -47,7 +62,7 @@ public class EamProcessRecord extends BaseCodeGenerator{
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
     }
 

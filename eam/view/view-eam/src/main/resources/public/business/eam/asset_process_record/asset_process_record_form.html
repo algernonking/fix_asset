@@ -2,7 +2,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
+ * @since 2021-10-19 13:51:42
  */
  -->
  <!DOCTYPE html>
@@ -53,15 +53,15 @@
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更号')}">变更号</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务编号')}">业务编号</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="businessCode" id="businessCode" name="businessCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更号') }" type="text" class="layui-input"  />
+                            <input lay-filter="businessCode" id="businessCode" name="businessCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务编号') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('业务类型')}">业务类型</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('操作类型')}">操作类型</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <div id="processType" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetOperateEnum')}"></div>
                         </div>
@@ -70,9 +70,9 @@
 
                 
                     <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更内容')}">变更内容</div></div>
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('操作内容')}">操作内容</div></div>
                     <div class="layui-input-block layui-input-block-c1">
-                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更内容') }" class="layui-textarea" style="height: 120px" ></textarea>
+                        <textarea lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('操作内容') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                     </div>
 
                 
-                    <div class="layui-form-item" >
+                    <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更人')}">变更人</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input input-type="date" lay-filter="processUserId" id="processUserId" name="processUserId"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('变更人') }" type="text" class="layui-input"   />
@@ -107,14 +107,14 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
+        <div style="height: 100px"></div>
 
 
     </form>
 
 </div>
 <div class="model-form-footer">
-    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_process_record:create','eam_asset_process_record:update','eam_asset_process_record:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}"  style="margin-right: 15px" >取消</button>
 </div>
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
@@ -129,8 +129,6 @@
     var VALIDATE_CONFIG={"processdTime":{"date":true,"labelInForm":"变更时间","inputType":"date_input"}};
     var AUTH_PREFIX="eam_asset_process_record";
 
-    // 资产ID
-    var ASSET_ID = [[${assetId}]] ;
 
 </script>
 

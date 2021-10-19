@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetDataChangeMeta;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
@@ -16,7 +17,7 @@ import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
-import com.github.foxnic.sql.expr.In;
+import com.github.foxnic.sql.expr.*;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.constants.enums.bpm.ApproverType;
 import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
@@ -38,7 +39,6 @@ import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import java.lang.reflect.Field;
 import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ValidateResult;
@@ -47,7 +47,6 @@ import java.io.InputStream;
 import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
-import com.github.foxnic.sql.expr.Select;
 import com.dt.platform.eam.service.IAssetDataChangeService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.transaction.annotation.Transactional;
@@ -144,9 +143,9 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			return ErrorDesc.failure().message("单据不存在");
 		}
 		//校验是否勾选的订单都处于待审批状态
-		if(!ApprovalStatus.drafting.code().equals(assetAfter.getChsStatus())) {
-			return ErrorDesc.failure().message("单据状态错误,无法提交审批");
-		}
+//		if(!ApprovalStatus.drafting.code().equals(assetAfter.getChsStatus())) {
+//			return ErrorDesc.failure().message("单据状态错误,无法提交审批");
+//		}
 
 		//关联订单明细
 		this.join(assetAfter, Asset.class);
@@ -195,12 +194,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 
 		Result result=assistant.request(requestBody);
 		System.out.println(1111);
-//		Result<ChangeEvent> result= assistant.request(requestBody);
-//		;
-//		Result rr=new Result();
-// 		rr.data(result.getData());
-// 		rr.success(true);
-//		System.out.println("11111");
 		return result;
 	}
 
@@ -283,8 +276,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @param rcd
 	 * @return 结果集
 	 * */
-	@Override
-	public HashMap<String, Object> extractDataChangeValue(Rcd rcd) {
+	private HashMap<String, Object> extractDataChangeValue(Rcd rcd) {
 		HashMap<String,Object> map=new HashMap<>();
 		for(String col:rcd.getOwnerSet().getFields()){
 			 Object v=rcd.getValue(col);
@@ -296,11 +288,13 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 
 	/**
 	 * 提取获取变更的字段
-	 * @param dimension
+	 * @param id
 	 * @return Rcd
 	 * */
 	@Override
-	public Rcd queryDataChange(String id, String dimension) {
+	public HashMap<String, Object> queryDataChange(String id) {
+		AssetDataChange datachange=getById(id);
+		String dimension=queryDataChangeDimensionByChangeType(datachange.getChangeType());
 		Rcd dataRcd=dao.queryRecord("select * from eam_asset where id=?",id);
 		String tentantId= SessionUser.getCurrent().getActivatedTenantId();
 		String sql="select b.code from eam_asset_attribute_item a,eam_asset_attribute b where a.attribute_id=b.id and a.deleted=0 and b.deleted=0 and a.owner_code='"+ AssetAttributeItemOwnerEnum.ASSET_CHANGE.code()+"' and a.tenant_id='"+tentantId+"' and form_show='1'";
@@ -312,8 +306,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		System.out.println("colList:"+colsList);
 		for(String col:dataRcd.getOwnerSet().getFields()){
 			System.out.println("\n"+col+"\nrcd column "+col+" before value:"+dataRcd.getString(col));
-			if(col.equals("id")
-					||col.equals("business_code")
+			if(col.equals("business_code")
 					||col.equals("proc_id")
 					||col.equals("status")
 					||col.equals("owner_code")
@@ -346,8 +339,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			}
 			System.out.println(col+"rcd column "+col+" after value:"+dataRcd.getString(col));
 		}
-		System.out.println("结果集\n:"+extractDataChangeValue(dataRcd));
-		return dataRcd;
+		return extractDataChangeValue(dataRcd);
 	}
 
 
@@ -387,7 +379,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	@Override
 	public Result forApproval(String id){
 		AssetDataChange billData=getById(id);
-
+		join(billData, AssetDataChangeMeta.ASSET_LIST);
+		assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"1234");
 		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
 				//审批操作
@@ -412,7 +405,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 				Result processApproveResult=approve(processApproveVO);
 				if(!processApproveResult.isSuccess()) return processApproveResult;
 
-
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}
@@ -423,24 +415,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 
 	}
 
-	/**
-	 * 操作成功
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result operateSuccess(String id) {
-
-		return ErrorDesc.success();
-	}
-
-	/**
-	 * 操作失败
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result operateFailed(String id) {
-		return ErrorDesc.success();
-	}
 
 	/**
 	 * 操作
@@ -448,12 +422,17 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @param result 结果
 	 * @return
 	 * */
-	public Result operateResult(String id,String result) {
+	private Result operateResult(String id,String result,String status,String message) {
 
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
-			return operateSuccess(id);
-		}else if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
-			return operateFailed(id);
+			Result applayResult=applyChange(id);
+			if(!applayResult.isSuccess()) return applayResult;
+			AssetDataChange bill=new AssetDataChange();
+			bill.setId(id);
+			bill.setStatus(status);
+			return update(bill,SaveMode.NOT_NULL_FIELDS);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
 		}else{
 			return ErrorDesc.failureMessage("返回未知结果");
 		}
@@ -473,7 +452,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
 				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
 			}else{
-				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code());
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
 			}
 		}else{
 			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
@@ -481,6 +460,30 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	}
 
 
+	private Result applyChange(String id){
+		AssetDataChange billData=getById(id);
+		join(billData,AssetDataChangeMeta.ASSET_LIST);
+		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"");
+		List<SQL> updateSqls=resultMap.get("update");
+		List<SQL> changeSqls=resultMap.get("change");
+		System.out.println("update change size:"+updateSqls.size());
+		for(SQL s:updateSqls){
+			System.out.println(s.getSQL());
+		}
+		System.out.println("change change size:"+changeSqls.size());
+		for(SQL s:changeSqls){
+			System.out.println(s.getSQL());
+		}
+
+
+		if(updateSqls.size()>0){
+			dao.batchExecute(updateSqls);
+		}
+		if(changeSqls.size()>0){
+			dao.batchExecute(changeSqls);
+		}
+		return ErrorDesc.success();
+	}
 
 	/**
 	 * 提取AssetDatachange

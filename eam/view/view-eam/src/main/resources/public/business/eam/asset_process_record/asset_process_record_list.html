@@ -2,7 +2,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
+ * @since 2021-10-19 13:51:35
  */
  -->
  <!DOCTYPE html>
@@ -36,17 +36,17 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产 , assetId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更号 , businessCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 变更类型 , processType ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 操作类型 , processType ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('变更类型')}" class="search-label processType-label">变更类型</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('操作类型')}" class="search-label processType-label">操作类型</span><span class="search-colon">:</span></div>
                         <div id="processType" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetOperateEnum')}" style="width:140px"></div>
                     </div>
                     <!-- 变更人 , processUserId ,typeName=date_input, isHideInSearch=true -->
                     <!-- 变更时间 , processdTime ,typeName=date_input, isHideInSearch=true -->
-                    <!-- 变更内容 , content ,typeName=text_area, isHideInSearch=false -->
+                    <!-- 操作内容 , content ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('变更内容')}" class="search-label content-label">变更内容</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('操作内容')}" class="search-label content-label">操作内容</span><span class="search-colon">:</span></div>
                         <input id="content" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
@@ -82,8 +82,6 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_asset_process_record:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_asset_process_record:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
@@ -91,10 +89,8 @@
 <script type="text/html" id="tableOperationTemplate">
 
     <button th:if="${perm.checkAuth('eam_asset_process_record:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_asset_process_record:update','eam_asset_process_record:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('eam_asset_process_record:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>
@@ -105,6 +101,8 @@
     var SELECT_PROCESSTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetOperateEnum')}]];
     var AUTH_PREFIX="eam_asset_process_record";
 
+    // 资产ID
+    var ASSET_ID = [[${assetId}]] ;
 
 </script>
 

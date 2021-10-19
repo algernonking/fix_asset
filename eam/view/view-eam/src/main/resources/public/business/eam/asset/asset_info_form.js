@@ -480,20 +480,22 @@ function FormPage() {
 				return opts;
 			}
 		});
+
 		//渲染 maintenanceStatus 下拉字段
 		fox.renderSelectBox({
 			el: "maintenanceStatus",
 			radio: true,
 			filterable: false,
 			//转换数据
-			transform:function(data) {
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -725,6 +727,10 @@ function FormPage() {
 				$("#lastVerificationDate").val(fox.dateFormat(formData["lastVerificationDate"],"yyyy-MM-dd"));
 			}
 
+			//设置 生产日期 显示复选框勾选
+			if(formData["productionDate"]) {
+				$("#productionDate").val(fox.dateFormat(formData["productionDate"],"yyyy-MM-dd"));
+			}
 
 			//设置  资产分类 设置下拉框勾选
 			//fox.setSelectValue4QueryApi("#categoryId",formData.category);
@@ -735,10 +741,11 @@ function FormPage() {
 			//设置  资产状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#assetStatus",formData.assetStatus,SELECT_ASSETSTATUS_DATA);
 
-			fox.setSelectValue4Enum("#maintenanceStatus",formData.maintenanceStatus,SELECT_MAINTENANCESTATUS_DATA);
 
 			//设置  设备状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#equipmentStatus",formData.equipmentStatus,SELECT_EQUIPMENTSTATUS_DATA);
+
+			fox.setSelectValue4QueryApi("#maintenanceStatus",formData.assetMaintenanceStatus);
 
 			//设置  物品档案 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#goodsId",formData.goods);
@@ -925,7 +932,7 @@ function FormPage() {
 			} else {
 				layer.msg(r.message, {icon: 2, time: 1000});
 			}
-		},{delayLoading:2000,elms:[$('submit-button')]});
+		},{delayLoading:1500,elms:[$('submit-button')]});
 
 
 	}

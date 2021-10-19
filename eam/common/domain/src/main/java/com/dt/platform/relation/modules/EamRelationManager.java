@@ -355,6 +355,11 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET.EQUIPMENT_ENVIRONMENT_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_equipment_environment'");
 
+        // 关联运行环境
+        this.property(AssetMeta.ASSET_MAINTENANCE_STATUS_PROP)
+                .using(EAMTables.EAM_ASSET.MAINTENANCE_STATUS).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_maintenance_status'");
+
         // 关联机柜
         this.property(AssetMeta.RACK_PROP)
                 .using(EAMTables.EAM_ASSET.RACK_ID).join(EAMTables.DC_RACK.ID);

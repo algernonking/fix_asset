@@ -1,7 +1,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
+ * @since 2021-10-19 13:51:48
  */
 
 function FormPage() {
@@ -9,8 +9,8 @@ function FormPage() {
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-process-record";
 
-	var disableCreateNew=false;
-	var disableModify=false;
+	var disableCreateNew=true;
+	var disableModify=true;
 	/**
       * 入口函数，初始化
       */
@@ -141,7 +141,7 @@ function FormPage() {
 			}
 
 
-			//设置  业务类型 设置下拉框勾选
+			//设置  操作类型 设置下拉框勾选
 			fox.setSelectValue4Enum("#processType",formData.processType,SELECT_PROCESSTYPE_DATA);
 
 			//处理fillBy
@@ -191,7 +191,7 @@ function FormPage() {
 
 
 
-		//获取 业务类型 下拉框的值
+		//获取 操作类型 下拉框的值
 		data["processType"]=fox.getSelectedValue("processType",false);
 
 		return data;

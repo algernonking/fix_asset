@@ -215,9 +215,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
         HashMap<String,String> orgMap=matchMap.get("organizationMap");
         HashMap<String,String> categoryMap=matchMap.get("categoryMap");
-        HashMap<String,String> safetyLevelMap=matchMap.get("safetyLevelMap");
-        HashMap<String,String> equipEnvMap=matchMap.get("equipEnvMap");
-        HashMap<String,String> sourceMap=matchMap.get("sourceMap");
+
         String category=BeanNameUtil.instance().depart(AssetMeta.CATEGORY_ID);
         String valueCategory=rcd.getString(category);
 //        System.out.println("Rcd:"+rcd.toString());
@@ -237,6 +235,30 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         }
 
 
+        //数据字典
+        HashMap<String,String> dictColumns=new HashMap<>();
+        dictColumns.put(AssetMeta.SOURCE_ID,"eam_source,资产来源");
+        dictColumns.put(AssetMeta.SAFETY_LEVEL_CODE,"eam_safety_level,安全等级");
+        dictColumns.put(AssetMeta.EQUIPMENT_ENVIRONMENT_CODE,"eam_equipment_environment,设备运行状态");
+        dictColumns.put(AssetMeta.ASSET_MAINTENANCE_STATUS,"eam_maintenance_status,维保状态");
+        for(String key:dictColumns.keySet()){
+            //来源
+            String keyValue=dictColumns.get(key);
+            String[] keyValueArr=keyValue.split(",");
+            String dict=keyValueArr[0];
+            String notes=keyValueArr[1];
+            HashMap<String,String> map=matchMap.get(dict);
+            String col=BeanNameUtil.instance().depart(key);
+            String valueCol=rcd.getString(col);
+            if(!StringUtil.isBlank(valueCol)){
+                if(map.containsValue(valueCol)){
+                    rcd.setValue(valueCol,getMapKey(map,valueCol));
+                }else{
+                    return ErrorDesc.failureMessage(notes+":"+valueCol);
+                }
+            }
+        }
+
         //字符串类型
         String[] stringColumns = {AssetMeta.ASSET_CODE,AssetMeta.NAME,AssetMeta.SERIAL_NUMBER,AssetMeta.BATCH_CODE,
                 AssetMeta.MODEL,AssetMeta.UNIT,AssetMeta.POSITION_DETAIL,AssetMeta.RFID,
@@ -250,7 +272,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
         }
 
-        //Number类型
 
         //日期类型
         String[] dateColumns = {AssetMeta.MAINTENANCE_START_DATE,AssetMeta.MAINTENANCE_END_DATE,AssetMeta.PURCHASE_DATE};
@@ -290,7 +311,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             rcd.setValue(assetStatus,AssetStatusEnum.IDLE.code());
         }
 
-        //办理状态删除
 
         //设备状态
         String equipStatus=BeanNameUtil.instance().depart(AssetMeta.EQUIPMENT_STATUS);
@@ -303,20 +323,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 rcd.setValue(equipStatus,value.code());
             }
         }
-
-
-        //设备状态
-        String maintenanceStatus=BeanNameUtil.instance().depart(AssetMeta.MAINTENANCE_STATUS);
-        String valueMaintenanceStatus=rcd.getString(maintenanceStatus);
-        if(!StringUtil.isBlank(valueMaintenanceStatus)){
-            CodeTextEnum value=EnumUtil.parseByText(AssetMaintenanceStatusEnum.class,valueMaintenanceStatus);
-            if(StringUtil.isBlank(value)){
-                return ErrorDesc.failureMessage("维保状态不存在:"+valueMaintenanceStatus);
-            }else{
-                rcd.setValue(maintenanceStatus,value.code());
-            }
-        }
-
 
         //下拉框类型
         String useOrganization=BeanNameUtil.instance().depart(AssetMeta.USE_ORGANIZATION_ID);
@@ -344,8 +350,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
 
         }
-
-
 
 
         String manager=BeanNameUtil.instance().depart(AssetMeta.MANAGER_ID);
@@ -385,8 +389,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
         }
 
-
-
         //物品档案fill
         String goodsId=BeanNameUtil.instance().depart(AssetMeta.GOODS_ID);
         String valueGoods=rcd.getString(goodsId);
@@ -406,8 +408,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
         }
 
-
-
         //位置 fill
         String positionId=BeanNameUtil.instance().depart(AssetMeta.POSITION_ID);
         String valuePosition=rcd.getString(positionId);
@@ -426,8 +426,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 rcd.setValue(positionId,position.getId());
             }
         }
-
-
 
         //仓库 fill
         String wareHouseId=BeanNameUtil.instance().depart(AssetMeta.WAREHOUSE_ID);
@@ -496,44 +494,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
 
 
 
-        //数据字典
-
-        //来源
-        String sourceId=BeanNameUtil.instance().depart(AssetMeta.SOURCE_ID);
-        String valueSource=rcd.getString(sourceId);
-        if(!StringUtil.isBlank(valueSource)){
-            if(sourceMap.containsValue(valueSource)){
-                String key=getMapKey(sourceMap,valueSource);
-                rcd.setValue(sourceId,key);
-            }else{
-                return ErrorDesc.failureMessage("资产来源不存在:"+valueSource);
-            }
-        }
-
-        //安全等级
-        String safetyLevel=BeanNameUtil.instance().depart(AssetMeta.SAFETY_LEVEL_CODE);
-        String valueSafetyLevel=rcd.getString(safetyLevel);
-        if(!StringUtil.isBlank(valueSafetyLevel)){
-            if(safetyLevelMap.containsValue(valueSafetyLevel)){
-                String key=getMapKey(safetyLevelMap,valueSafetyLevel);
-                rcd.setValue(safetyLevel,key);
-            }else{
-                return ErrorDesc.failureMessage("安全等级不存在:"+valueSafetyLevel);
-            }
-        }
-
-        //运行环境
-        String equipEnv=BeanNameUtil.instance().depart(AssetMeta.EQUIPMENT_ENVIRONMENT_CODE);
-        String valueEquipEnv=rcd.getString(equipEnv);
-        if(!StringUtil.isBlank(valueEquipEnv)){
-            if(equipEnvMap.containsValue(valueEquipEnv)){
-                String key=getMapKey(equipEnvMap,valueEquipEnv);
-                rcd.setValue(equipEnv,key);
-            }else{
-                return ErrorDesc.failureMessage("设备运行状态不存在:"+valueEquipEnv);
-            }
-        }
-        //其他
         return ErrorDesc.success();
     }
 
@@ -587,10 +547,21 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             CodeTextEnum vEquipStatus= EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetItem.getEquipmentStatus());
             assetMap.put(AssetDataExportColumnEnum.EQUIPMENT_STATUS_NAME.code(),vEquipStatus==null?"":vEquipStatus.text());
 
-            //维保状态
-            CodeTextEnum vMaintenanceStatus= EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetItem.getMaintenanceStatus());
-            assetMap.put(AssetDataExportColumnEnum.MAINTENANCE_STATUS.code(),vMaintenanceStatus==null?"":vMaintenanceStatus.text());
+            if(assetItem.getSource()!=null){
+                assetMap.put(AssetDataExportColumnEnum.ASSET_SOURCE_NAME.code(),assetItem.getSource().getLabel());
+            }
 
+            if(assetItem.getSafetyLevel()!=null){
+                assetMap.put(AssetDataExportColumnEnum.SAFETY_LEVEL_NAME.code(),assetItem.getSafetyLevel().getLabel());
+            }
+
+            if(assetItem.getEquipmentEnvironment()!=null){
+                assetMap.put(AssetDataExportColumnEnum.EQUIPMENT_ENVIRONMENT_NAME.code(),assetItem.getEquipmentEnvironment().getLabel());
+            }
+
+            if(assetItem.getAssetMaintenanceStatus()!=null){
+                assetMap.put(AssetDataExportColumnEnum.MAINTENANCE_STATUS.code(),assetItem.getAssetMaintenanceStatus().getLabel());
+            }
 
             if(assetItem.getPosition()!=null){
                 // 关联出 存放位置 数据
@@ -633,18 +604,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
                 assetMap.put(AssetDataExportColumnEnum.ASSET_SUPPLIER_NAME.code(),assetItem.getSupplier().getSupplierName());
             }
 
-            if(assetItem.getSource()!=null){
-                // 关联出 来源 数据
-                assetMap.put(AssetDataExportColumnEnum.ASSET_SOURCE_NAME.code(),assetItem.getSource().getLabel());
-            }
-
-            if(assetItem.getSafetyLevel()!=null){
-                assetMap.put(AssetDataExportColumnEnum.SAFETY_LEVEL_NAME.code(),assetItem.getSafetyLevel().getLabel());
-            }
-
-            if(assetItem.getEquipmentEnvironment()!=null){
-                assetMap.put(AssetDataExportColumnEnum.EQUIPMENT_ENVIRONMENT_NAME.code(),assetItem.getEquipmentEnvironment().getLabel());
-            }
 
 
             String companyName=orgMap.get(assetItem.getOwnCompanyId());
@@ -657,14 +616,14 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             assetMap.put(AssetDataExportColumnEnum.ASSET_CATEGORY_NAME.code(),categoryName);
 
             if(assetItem.getManager()!=null){
-                System.out.println("manan"+assetItem.getManager().getBadge());
+                System.out.println("manager:"+assetItem.getManager().getBadge());
                 assetMap.put(AssetDataExportColumnEnum.MANAGER_NAME_BADGE.code(),assetItem.getManager().getNameAndBadge());
                 assetMap.put(AssetDataExportColumnEnum.MANAGER_NAME.code(),assetItem.getManager().getName());
                 assetMap.put(AssetDataExportColumnEnum.MANAGER_BADGE.code(),assetItem.getManager().getBadge());
             }
 
             if(assetItem.getUseUser()!=null){
-                System.out.println("suer"+assetItem.getUseUser().getBadge());
+                System.out.println("user:"+assetItem.getUseUser().getBadge());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME_BADGE.code(),assetItem.getUseUser().getNameAndBadge());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_NAME.code(),assetItem.getUseUser().getName());
                 assetMap.put(AssetDataExportColumnEnum.USE_USER_BADGE.code(),assetItem.getUseUser().getBadge());

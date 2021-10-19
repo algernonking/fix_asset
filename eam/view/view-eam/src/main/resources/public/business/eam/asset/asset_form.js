@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 13:03:44
+ * @since 2021-10-19 08:56:50
  */
 
 function FormPage() {
@@ -340,14 +340,15 @@ function FormPage() {
 			radio: true,
 			filterable: false,
 			//转换数据
-			transform:function(data) {
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var defaultValues="".split(",");
 				var defaultIndexs="".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -555,7 +556,7 @@ function FormPage() {
 			//设置  维保商 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#maintainerId",formData.maintnainer);
 			//设置  维保状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#maintenanceStatus",formData.maintenanceStatus,SELECT_MAINTENANCESTATUS_DATA);
+			fox.setSelectValue4QueryApi("#maintenanceStatus",formData.assetMaintenanceStatus);
 			//设置  财务分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#financialCategoryId",formData.categoryFinance);
 			//设置  供应商 设置下拉框勾选

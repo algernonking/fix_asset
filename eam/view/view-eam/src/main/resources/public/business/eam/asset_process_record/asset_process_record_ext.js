@@ -1,7 +1,7 @@
 /**
  * 资产处理记录 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
+ * @since 2021-10-19 13:30:14
  */
 
 layui.config({
@@ -61,6 +61,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * @param location 调用的代码位置
          * */
         beforeQuery:function (conditions,param,location) {
+            param.assetId=ASSET_ID;
             console.log('beforeQuery',conditions,param,location);
             return true;
         },

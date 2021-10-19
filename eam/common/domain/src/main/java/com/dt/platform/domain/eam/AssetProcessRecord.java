@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产处理记录
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:22
- * @sign 342141C0C5C2D3AB2FC28FF1E6750857
+ * @since 2021-10-19 13:51:27
+ * @sign 28AF2B1A86D29DFDC2C6CC1BD535D5BB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -42,21 +42,21 @@ public class AssetProcessRecord extends Entity {
 	private String assetId;
 	
 	/**
-	 * 变更号：变更号
+	 * 业务编号：业务编号
 	*/
-	@ApiModelProperty(required = false,value="变更号" , notes = "变更号")
+	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
 	private String businessCode;
 	
 	/**
-	 * 变更类型：变更类型
+	 * 操作类型：操作类型
 	*/
-	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
+	@ApiModelProperty(required = false,value="操作类型" , notes = "操作类型")
 	private String processType;
 	
 	/**
-	 * 变更内容：变更内容
+	 * 操作内容：操作内容
 	*/
-	@ApiModelProperty(required = false,value="变更内容" , notes = "变更内容")
+	@ApiModelProperty(required = false,value="操作内容" , notes = "操作内容")
 	private String content;
 	
 	/**
@@ -164,17 +164,17 @@ public class AssetProcessRecord extends Entity {
 	}
 	
 	/**
-	 * 获得 变更号<br>
-	 * 变更号
-	 * @return 变更号
+	 * 获得 业务编号<br>
+	 * 业务编号
+	 * @return 业务编号
 	*/
 	public String getBusinessCode() {
 		return businessCode;
 	}
 	
 	/**
-	 * 设置 变更号
-	 * @param businessCode 变更号
+	 * 设置 业务编号
+	 * @param businessCode 业务编号
 	 * @return 当前对象
 	*/
 	public AssetProcessRecord setBusinessCode(String businessCode) {
@@ -183,17 +183,17 @@ public class AssetProcessRecord extends Entity {
 	}
 	
 	/**
-	 * 获得 变更类型<br>
-	 * 变更类型
-	 * @return 变更类型
+	 * 获得 操作类型<br>
+	 * 操作类型
+	 * @return 操作类型
 	*/
 	public String getProcessType() {
 		return processType;
 	}
 	
 	/**
-	 * 设置 变更类型
-	 * @param processType 变更类型
+	 * 设置 操作类型
+	 * @param processType 操作类型
 	 * @return 当前对象
 	*/
 	public AssetProcessRecord setProcessType(String processType) {
@@ -202,17 +202,17 @@ public class AssetProcessRecord extends Entity {
 	}
 	
 	/**
-	 * 获得 变更内容<br>
-	 * 变更内容
-	 * @return 变更内容
+	 * 获得 操作内容<br>
+	 * 操作内容
+	 * @return 操作内容
 	*/
 	public String getContent() {
 		return content;
 	}
 	
 	/**
-	 * 设置 变更内容
-	 * @param content 变更内容
+	 * 设置 操作内容
+	 * @param content 操作内容
 	 * @return 当前对象
 	*/
 	public AssetProcessRecord setContent(String content) {

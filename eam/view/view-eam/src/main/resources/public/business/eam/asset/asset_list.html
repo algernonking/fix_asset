@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 13:03:38
+ * @since 2021-10-19 08:56:46
  */
  -->
  <!DOCTYPE html>
@@ -46,7 +46,7 @@
                     <!-- 批次编码 , batchCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 归属 , ownerCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 是否显示 , display ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 是否报废 , scrap ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 是否清理 , cleanOut ,typeName=text_input, isHideInSearch=true -->
                     <!-- 物品档案 , goodsId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 标准型号物品图片 , pictureId ,typeName=upload, isHideInSearch=true -->
                     <!-- 计量单位 , unit ,typeName=text_input, isHideInSearch=true -->
@@ -251,7 +251,6 @@
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
-    var SELECT_MAINTENANCESTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetMaintenanceStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
     var AUTH_PREFIX="eam_asset";
 
