@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 资产报修
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:50
+ * @since 2021-10-20 12:19:12
  * @sign A6FD7A097B70D038C66A47962DD5C130
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

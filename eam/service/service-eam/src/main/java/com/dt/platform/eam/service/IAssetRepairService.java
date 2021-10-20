@@ -58,6 +58,12 @@ public interface IAssetRepairService extends ISuperService<AssetRepair> {
 	 * */
 	Result confirmOperation(String id);
 
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result finishRepair(String id);
 
 
 	/**

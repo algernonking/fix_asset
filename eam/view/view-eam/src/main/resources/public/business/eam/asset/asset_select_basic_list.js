@@ -508,7 +508,7 @@ function ListPage() {
 			} else {
 				layer.msg(r.message, {icon: 2, time: 1000});
 			}
-		},{delayLoading:1500,elms:[]});
+		},{delayLoading:1000,elms:[]});
 		// var task=setTimeout(function(){layer.load(2);},1000);
 		// admin.request(api, postData, function (data) {
 		// 	clearTimeout(task);

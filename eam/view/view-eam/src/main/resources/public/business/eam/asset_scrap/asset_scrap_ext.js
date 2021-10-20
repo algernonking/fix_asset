@@ -192,7 +192,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                         top.layer.msg(r.message,{time:2000});
                     }
                 }
-            },{delayLoading:1500,elms:[btn]});
+            },{delayLoading:1000,elms:[btn]});
         },
         confirmData:function (item){
             list.billOper("confirm-operation","confirm-data-button",{id:item.id},"已确认");

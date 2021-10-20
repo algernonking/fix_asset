@@ -8,6 +8,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
@@ -216,7 +217,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 			AssetCollectionReturn bill=new AssetCollectionReturn();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -228,6 +229,7 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 		AssetCollectionReturn billData=getById(id);
 		join(billData, AssetCollectionReturnMeta.ASSET_LIST);
 		HashMap<String,Object> map=new HashMap<>();
+		map.put("asset_status", AssetStatusEnum.IDLE.code());
 		map.put("use_user_id","");
 		map.put("position_id",billData.getPositionId());
 		map.put("position_detail",billData.getPositionDetail());

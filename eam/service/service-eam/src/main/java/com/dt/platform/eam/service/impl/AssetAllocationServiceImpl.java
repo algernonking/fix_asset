@@ -173,7 +173,7 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 			AssetAllocation bill=new AssetAllocation();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{

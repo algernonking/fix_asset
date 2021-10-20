@@ -1,13 +1,13 @@
 /**
- * 资产报修 列表页 JS 脚本
+ * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-20 12:19:18
+ * @since 2021-10-08 13:05:39
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-asset-repair";
+	const moduleURL="/service-eam/eam-asset-collection-return";
 
 	var disableCreateNew=false;
 	var disableModify=false;
@@ -22,7 +22,7 @@ function FormPage() {
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-asset-repair-form-data-form-action')=="view") {
+		if(admin.getTempData('eam-asset-collection-return-form-data-form-action')=="view") {
 			disableModify=true;
 		}
 
@@ -39,6 +39,8 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
+		//调整窗口的高度与位置
+		adjustPopup();
 	}
 
 	/**
@@ -55,7 +57,7 @@ function FormPage() {
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			if(area==null) return;
-			admin.putTempData('eam-asset-repair-form-area', area);
+			admin.putTempData('eam-asset-collection-return-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -93,75 +95,35 @@ function FormPage() {
 				return opts;
 			}
 		});
-		//渲染 repairStatus 下拉字段
+		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
-			el: "repairStatus",
+			el: "positionId",
 			radio: true,
-			filterable: false,
+			filterable: true,
 			//转换数据
-			transform:function(data) {
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="repairing".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues="".split(",");
+				var defaultIndexs="0".split(",");
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
-		//渲染 type 下拉字段
-		fox.renderSelectBox({
-			el: "type",
-			radio: true,
-			filterable: false,
-			//转换数据
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="repairing".split(",");
-				var defaultIndexs="".split(",");
-				var opts=[];
-				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
 		});
 		laydate.render({
-			elem: '#planFinishDate',
+			elem: '#returnDate',
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
-		laydate.render({
-			elem: '#actualFinishDate',
-			format:"yyyy-MM-dd",
-			trigger:"click"
-		});
-	    //渲染图片字段
-		foxup.render({
-			el:"pictureId",
-			maxFileCount: 6,
-			displayFileName: true,
-			accept: "image",
-			afterPreview:function(elId,index,fileId,upload){
-				adjustPopup();
-			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
-			},
-			beforeRemove:function (elId,fileId,index,upload) {
-				console.log("文件删除前回调");
-				return true;
-			},
-			afterRemove:function (elId,fileId,index,upload) {
-				adjustPopup();
-			}
-	    });
 		laydate.render({
 			elem: '#businessDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 	}
@@ -171,7 +133,7 @@ function FormPage() {
       */
 	function fillFormData(formData) {
 		if(!formData) {
-			formData = admin.getTempData('eam-asset-repair-form-data');
+			formData = admin.getTempData('eam-asset-collection-return-form-data');
 		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
@@ -187,25 +149,17 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-			//设置 图片 显示附件
-		    if($("#pictureId").val()) {
-				foxup.fill("pictureId",$("#pictureId").val());
-		    } else {
-				adjustPopup();
+
+
+
+			//设置 退库日期 显示复选框勾选
+			if(formData["returnDate"]) {
+				$("#returnDate").val(fox.dateFormat(formData["returnDate"],"yyyy-MM-dd"));
 			}
 
 
-
-			//设置 计划完成日期 显示复选框勾选
-			if(formData["planFinishDate"]) {
-				$("#planFinishDate").val(fox.dateFormat(formData["planFinishDate"],"yyyy-MM-dd"));
-			}
-
-
-			//设置  维修状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
-			//设置  报修类型 设置下拉框勾选
-			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+			//设置  存放位置 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#positionId",formData.position);
 
 			//处理fillBy
 
@@ -254,10 +208,8 @@ function FormPage() {
 
 
 
-		//获取 维修状态 下拉框的值
-		data["repairStatus"]=fox.getSelectedValue("repairStatus",false);
-		//获取 报修类型 下拉框的值
-		data["type"]=fox.getSelectedValue("type",false);
+		//获取 存放位置 下拉框的值
+		data["positionId"]=fox.getSelectedValue("positionId",false);
 
 		return data;
 	}
@@ -274,7 +226,7 @@ function FormPage() {
 			layer.closeAll('loading');
 			if (data.success) {
 				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-asset-repair-form-data-popup-index');
+				var index=admin.getTempData('eam-asset-collection-return-form-data-popup-index');
 				admin.finishPopupCenter(index);
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});
@@ -303,6 +255,22 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择组织节点对话框
+		$("#useOrganizationId-button").click(function(){
+			var useOrganizationIdDialogOptions={
+				field:"useOrganizationId",
+				formData:getFormData(),
+				inputEl:$("#useOrganizationId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"org",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param);}
+			};
+			fox.chooseOrgNode(useOrganizationIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

@@ -2,7 +2,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:50
+ * @since 2021-10-20 12:19:14
  */
  -->
  <!DOCTYPE html>
@@ -126,7 +126,8 @@
     <button th:if="${perm.checkAuth('eam_asset_repair:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
     <button class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
-    <button class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
+    <button class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" th:text="${lang.translate('确认维修')}" data-id="{{d.id}}">确认维修</button>
+    <button class="layui-btn layui-btn-xs  finish-data-button " lay-event="finish-data" th:text="${lang.translate('维修结束')}" data-id="{{d.id}}">维修结束</button>
     <button class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
     <button class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>
 

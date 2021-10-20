@@ -932,7 +932,7 @@ function FormPage() {
 			} else {
 				layer.msg(r.message, {icon: 2, time: 1000});
 			}
-		},{delayLoading:1500,elms:[$('submit-button')]});
+		},{delayLoading:1000,elms:[$('submit-button')]});
 
 
 	}

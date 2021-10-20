@@ -49,6 +49,35 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             });
             admin.putTempData('eam-asset-data-change-form-data-popup-index', index);
         },
+        batchConfirm:function(data,item){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+            top.layer.confirm('是否对选择的资产进行确认?', function (i) {
+                var api=moduleURL+"/batch-confirm-operation";
+                var ps={ids:data};
+                admin.post(api,ps,function (r){
+                    if(r.success) {
+                        top.layer.msg("操作成功",{time:1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs=[];
+                        if(r.errors){
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if(errs.indexOf(r.errors[i].message)==-1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"),{time:2000});
+                        }else{
+                            top.layer.msg(r.message,{time:2000});
+                        }
+                    }
+                },{delayLoading:1000,elms:[ $('#batchConfirm-button')  ]});
+            });
+
+        },
         highExportData:function(data,item){
             var categoryId;
             var assetCategorySelect= xmSelect.get('#categoryId',true);
@@ -215,7 +244,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 } else {
                     layer.msg(r.message, {icon: 2, time: 1000});
                 }
-            },{delayLoading:1500,elms:[$("#forBatchApproval-button")]});
+            },{delayLoading:1000,elms:[$("#forBatchApproval-button")]});
         },
         batchRevokeOperation:function(data,item){
             var api=moduleURL+"/batch-revoke-operation";
@@ -225,7 +254,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 } else {
                     layer.msg(r.message, {icon: 2, time: 1000});
                 }
-            },{delayLoading:1500,elms:[$("#batchRevoke-button")]});
+            },{delayLoading:1000,elms:[$("#batchRevoke-button")]});
         },
         /**
          * 末尾执行

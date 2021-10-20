@@ -8,6 +8,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetScrapMeta;
 import com.dt.platform.domain.eam.meta.AssetTranferMeta;
@@ -184,7 +185,7 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 			AssetTranfer bill=new AssetTranfer();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -216,12 +217,15 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 		join(billData, AssetTranferMeta.ASSET_LIST);
 		HashMap<String,Object> map=new HashMap<>();
 
-		map.put("use_user_id",billData.getUseUserId());
+		//如果存在user_id则使用状态将修改
+		if(!StringUtil.isBlank(billData.getUseUserId())){
+			map.put("use_user_id",billData.getUseUserId());
+			map.put("asset_status", AssetStatusEnum.USING);
+		}
+		map.put("use_organization_id",billData.getInUseOrganizationId());
 		map.put("position_id",billData.getPositionId());
 		map.put("position_detail",billData.getPositionDetail());
-		map.put("use_organization_id",billData.getInUseOrganizationId());
 		map.put("manager_id",billData.getManagerId());
-
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_TRANFER.code(),"");
 		List<SQL> updateSqls=resultMap.get("update");
 		List<SQL> changeSqls=resultMap.get("change");

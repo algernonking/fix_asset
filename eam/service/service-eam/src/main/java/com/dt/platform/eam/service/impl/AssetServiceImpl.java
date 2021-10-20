@@ -118,6 +118,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return sb.toString();
 	}
 
+	/**
+	 *	changeMap只更新不是null部分
+	 * */
 	@Override
 	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
 		DBTableMeta tm=dao().getTableMeta(this.table());
@@ -269,8 +272,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}else{
 					continue;
 				}
-
-			//	System.out.println("tsql"+key+","+assetAfterRcd.getOriginalValue(key));
+				//只更新不是null部分
 				ups.setIf(key,assetAfterRcd.getOriginalValue(key));
 				if( !((before+"").equals(after+"") ) ){
 					ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
@@ -435,12 +437,17 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(ids.size()!=list.size()){
 			return ErrorDesc.failureMessage("当前选择的资产中部分资产不满足状态要求");
 		}
-
 		if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ) {
 			return ErrorDesc.failureMessage("当前操作选用审核,请先送审");
 		}
-
-		return  ErrorDesc.success();
+		List<Asset> updateAssets=new ArrayList<>();
+		for(String id:ids){
+			Asset e=new Asset();
+			e.setId(id);
+			e.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			updateAssets.add(e);
+		}
+		return updateList(updateAssets,SaveMode.NOT_NULL_FIELDS);
 	}
 
 
@@ -835,8 +842,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return r;
 		}
 		List<Asset> list=queryList(queryCondition);
-//		System.out.println("parameter asset size:"+assetIds.size());
-//		System.out.println("asset size:"+list.size());
+		System.out.println("current selected asset size:"+assetIds.size());
+		System.out.println("match asset size:"+list.size());
 		if(list.size()!=assetIds.size()){
 			return ErrorDesc.failure().message("当前选择的资产中部分状态异常");
 		}

@@ -64,7 +64,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 .search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().validate().required().form().selectBox().enumType(AssetRepairStatusEnum.class);
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().validate().required()
+                .form().selectBox().enumType(AssetRepairStatusEnum.class).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ACTUAL_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
@@ -85,7 +86,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 //        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
 
         cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("确认维修","confirmData","confirm-data-button");
+        cfg.view().list().operationColumn().addActionButton("结束维修","finishData","finish-data-button");
         cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
 

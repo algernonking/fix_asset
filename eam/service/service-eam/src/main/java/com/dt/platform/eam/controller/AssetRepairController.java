@@ -376,7 +376,6 @@ public class AssetRepairController extends SuperController {
 	}
 
 
-
 	/**
 	 * 审批
 	 * */
@@ -388,6 +387,21 @@ public class AssetRepairController extends SuperController {
 		return assetRepairService.approve(approveVO);
 	}
 
+
+	/**
+	 * 结束维修
+	 * */
+	@ApiOperation(value = "结束维修")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetRepairVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+	})
+	@NotNull(name = AssetRepairVOMeta.ID)
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = AssetRepairServiceProxy.FINISH_REPAIR , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetRepairServiceProxy.FINISH_REPAIR)
+	public Result finishRepair(String id)  {
+		return assetRepairService.finishRepair(id);
+	}
 
 	/**
 	 * 导出 Excel

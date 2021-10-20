@@ -185,6 +185,8 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		AssetBorrow billData=getById(id);
 		join(billData, AssetBorrowMeta.ASSET_LIST);
 		HashMap<String,Object> map=new HashMap<>();
+		//保存当前使用人
+		dao.execute("update eam_asset_item a,eam_asset b set a.before_use_user_id=b.use_user_id,a.before_asset_status=b.asset_status where a.asset_id=b.id and a.handle_id=?",id);
 		map.put("use_user_id",billData.getBorrowerId());
 		map.put("asset_status", AssetStatusEnum.BORROW.code());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_BORROW.code(),"");
@@ -212,13 +214,12 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			Result verifyResult= verifyBillData(id);
 			if(!verifyResult.isSuccess()) return verifyResult;
 
-
 			Result applayResult=applyChange(id);
 			if(!applayResult.isSuccess()) return applayResult;
 			AssetBorrow bill=new AssetBorrow();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -245,7 +246,6 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		}
 	}
 
-
 	/**
 	 * 插入实体
 	 * @param assetBorrow 实体数据
@@ -266,6 +266,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		if(assetBorrow.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
+
 		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_BORROW.code(),assetBorrow.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;

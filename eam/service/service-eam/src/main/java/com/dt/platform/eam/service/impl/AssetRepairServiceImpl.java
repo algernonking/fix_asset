@@ -5,10 +5,7 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
@@ -18,6 +15,7 @@ import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -201,7 +199,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			AssetRepair bill=new AssetRepair();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -230,12 +228,15 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 
 
 
+
 	private Result applyChange(String id){
 		AssetRepair billData=getById(id);
 		join(billData, AssetRepairMeta.ASSET_LIST);
+		//维修前状态
+		dao.execute("update eam_asset_item a,eam_asset b set a.before_asset_status=b.asset_status where a.asset_id=b.id and a.handle_id=?",id);
 		HashMap<String,Object> map=new HashMap<>();
 		map.put("asset_status", AssetStatusEnum.REPAIR);
-		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"");
+		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"维修中");
 		List<SQL> updateSqls=resultMap.get("update");
 		List<SQL> changeSqls=resultMap.get("change");
 		if(updateSqls.size()>0){
@@ -248,7 +249,34 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	}
 
 
-
+	@Override
+	public Result finishRepair(String id){
+		AssetRepair billData=getById(id);
+		if(!AssetHandleStatusEnum.COMPLETE.code().equals(  billData.getStatus() )){
+			return ErrorDesc.failureMessage("当前单据状态不能进行结束维修操作");
+		}
+		if(!AssetRepairStatusEnum.REPAIRING.code().equals(  billData.getType() )){
+			return ErrorDesc.failureMessage("当前单据状态不能进行结束维修操作");
+		}
+		join(billData, AssetRepairMeta.ASSET_LIST);
+		HashMap<String,Object> map=new HashMap<>();
+		for(Asset asset:billData.getAssetList()){
+			List<Asset> list=new ArrayList<>();
+			list.add(asset);
+			Rcd rs=dao.queryRecord("select * from eam_asset_item where deleted='0'and crd='r' and handle_id=? and asset_id=?",id,asset.getId());
+			map.put("asset_status",rs.getString("before_asset_status"));
+			HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(list,map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"维修结束");
+			List<SQL> updateSqls=resultMap.get("update");
+			List<SQL> changeSqls=resultMap.get("change");
+			if(updateSqls.size()>0){
+				dao.batchExecute(updateSqls);
+			}
+			if(changeSqls.size()>0){
+				dao.batchExecute(changeSqls);
+			}
+		}
+		return ErrorDesc.success();
+	}
 
 
 	/**

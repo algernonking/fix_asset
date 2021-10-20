@@ -125,6 +125,12 @@ public interface AssetRepairServiceProxy {
 	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 	/**
+	 * 撤销操作
+	 */
+	public static final String FINISH_REPAIR= API_PREFIX + "finish-repair";
+
+
+	/**
 	 * 添加资产报修
 	*/
 	@RequestMapping(AssetRepairServiceProxy.INSERT)

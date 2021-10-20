@@ -137,12 +137,9 @@ function ListPage() {
 
 		var value = {};
 
-
 		value.businessCode={ value: $("#businessCode").val()};
-
 		value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
-
 		value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
 		value.manufacturerId={ value: xmSelect.get("#manufacturerId",true).getValue("value"), fillBy:"manufacturer",field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
@@ -156,9 +153,6 @@ function ListPage() {
 		value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
 		value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-
-
-
 
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
@@ -494,7 +488,8 @@ function ListPage() {
 				case 'highExportData':
 					window.pageExt.list.highExportData && window.pageExt.list.highExportData(selected,obj);
 					break;
-				case 'other':
+				case 'batchConfirm':
+					window.pageExt.list.batchConfirm && window.pageExt.list.batchConfirm(selected,obj);
 					break;
 			};
 		});

@@ -788,7 +788,7 @@ function FormPage() {
 				layer.msg(r.message, {icon: 2, time: 1000});
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,r);
-		},{delayLoading:1500,elms:[$('submit-button')]});
+		},{delayLoading:1000,elms:[$('submit-button')]});
 
 
 	}
