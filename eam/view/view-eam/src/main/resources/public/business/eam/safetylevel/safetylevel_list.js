@@ -1,7 +1,7 @@
 /**
  * 风险等级 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:08
+ * @since 2021-10-21 22:12:34
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-safetylevel";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,7 +73,7 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'safetyCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('风险等级编码') , templet: function (d) { return templet('safetyCode',d.safetyCode,d);}  }
 					,{ field: 'safetyName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('风险等级') , templet: function (d) { return templet('safetyName',d.safetyName,d);}  }
@@ -111,8 +112,8 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.safetyCode={ inputType:"button",value: $("#safetyCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.safetyName={ inputType:"button",value: $("#safetyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.safetyCode={ inputType:"button",value: $("#safetyCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.safetyName={ inputType:"button",value: $("#safetyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -121,6 +122,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

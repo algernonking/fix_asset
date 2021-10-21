@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 物品档案
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:59
+ * @since 2021-10-21 22:12:26
  * @sign 3F8E49E136DA382A2F2206FBA84F0826
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -232,7 +232,6 @@ public class GoodsVO extends Goods {
 	@Transient
 	public CompositeParameter getCompositeParameter() {
 		if($compositeParameter!=null) return  $compositeParameter;
-		if(!"$composite".equals(this.getSearchField())) return null;
 		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
 		return  $compositeParameter;
 	}

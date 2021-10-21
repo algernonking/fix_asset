@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:11
+ * @since 2021-10-21 22:12:37
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-ops/ops-voucher-priv";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,7 +73,7 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证类别'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
 					,{ field: 'emplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户') , templet: function (d) { return templet('emplId',fox.getProperty(d,["employee","nameAndBadge"]),d);} }
@@ -112,7 +113,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") };
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") ,field:"code"};
 		value.emplId={ inputType:"button",value: $("#emplId").val(),fillBy:["employee","nameAndBadge"] ,label:$("#emplId-button").text() };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
@@ -123,6 +124,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

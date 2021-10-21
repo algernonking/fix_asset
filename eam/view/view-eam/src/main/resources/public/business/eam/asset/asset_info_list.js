@@ -12,6 +12,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset";
 	var dataTable=null;
+	var sort=null;
 	var categorySelect;
 	/**
 	 * 入口函数，初始化
@@ -84,7 +85,7 @@ function ListPage() {
 				{ fixed: 'left',type:'checkbox' }
 			]
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
-				console.log(ATTRIBUTE_LIST_DATA[i]);
+				//console.log(ATTRIBUTE_LIST_DATA[i]);
 				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code)
 					COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
@@ -172,6 +173,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 
 		if(reset) {

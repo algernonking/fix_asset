@@ -330,6 +330,16 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_DATE , value = "变更日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class , example = "起草"),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=8)

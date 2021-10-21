@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:54
+ * @since 2021-10-21 22:12:21
  */
  -->
  <!DOCTYPE html>
@@ -56,6 +56,20 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产')}">资产</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="assetId" id="assetId" name="assetId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产使用人')}">资产使用人</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="beforeUseUserId" id="beforeUseUserId" name="beforeUseUserId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产使用人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资产状态')}">资产状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="beforeAssetStatus" id="beforeAssetStatus" name="beforeAssetStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产状态') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 

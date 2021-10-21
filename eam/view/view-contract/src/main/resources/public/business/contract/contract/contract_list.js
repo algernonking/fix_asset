@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:39
+ * @since 2021-10-21 22:13:04
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-contract/cont-contract";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,7 +73,7 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同编号') , templet: function (d) { return templet('code',d.code,d);}  }
@@ -135,13 +136,13 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.state={ inputType:"button",value: $("#state").val()};
 		value.fundStatus={ inputType:"button",value: $("#fundStatus").val()};
-		value.firstCompanyName={ inputType:"button",value: $("#firstCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.firstCompanyName={ inputType:"button",value: $("#firstCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.relatedCompanyId={ inputType:"button",value: $("#relatedCompanyId").val()};
-		value.relatedCompanyName={ inputType:"button",value: $("#relatedCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.relatedCompanyName={ inputType:"button",value: $("#relatedCompanyName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.effectTime={ inputType:"date_input", value: $("#effectTime").val() };
 		value.lostEffectTime={ inputType:"date_input", value: $("#lostEffectTime").val() };
 		var ps={searchField:"$composite"};
@@ -152,6 +153,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

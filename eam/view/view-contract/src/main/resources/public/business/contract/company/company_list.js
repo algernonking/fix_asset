@@ -1,7 +1,7 @@
 /**
  * 单位 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:36
+ * @since 2021-10-21 22:13:01
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-contract/cont-company";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,7 +73,7 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单位') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'address', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('地址') , templet: function (d) { return templet('address',d.address,d);}  }
 					,{ field: 'contacts', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('联系人') , templet: function (d) { return templet('contacts',d.contacts,d);}  }
@@ -114,12 +115,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.address={ inputType:"button",value: $("#address").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.contacts={ inputType:"button",value: $("#contacts").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.contactInformation={ inputType:"button",value: $("#contactInformation").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.address={ inputType:"button",value: $("#address").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.contacts={ inputType:"button",value: $("#contacts").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.contactInformation={ inputType:"button",value: $("#contactInformation").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.creditCode={ inputType:"button",value: $("#creditCode").val()};
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -128,6 +129,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

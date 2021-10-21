@@ -1,7 +1,7 @@
 /**
  * 数据库实例 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:16
+ * @since 2021-10-21 22:12:42
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-ops/ops-db-instance";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,14 +73,14 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'hostId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机'), templet: function (d) { return templet('hostId',fox.joinLabel(d.host,"hostName"),d);}}
+					{ fixed: 'left',type:'checkbox'}
+					,{ field: 'hostId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机'), templet: function (d) { return templet('hostId' ,fox.joinLabel(d.host,"hostName"),d);}}
 					,{ field: 'resHostIp', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('IP') , templet: function (d) { return templet('resHostIp',fox.getProperty(d,["host","hostIp"]),d);} }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('实例名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'backupStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return templet('backupStatus',fox.getDictText(SELECT_BACKUPSTATUS_DATA,d.backupStatus),d);}}
 					,{ field: 'logMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('日志模式'), templet:function (d){ return templet('logMethod',fox.getDictText(SELECT_LOGMETHOD_DATA,d.logMethod),d);}}
 					,{ field: 'backupType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份状态'), templet:function (d){ return templet('backupType',fox.getDictText(SELECT_BACKUPTYPE_DATA,d.backupType),d);}}
-					,{ field: 'databaseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库'), templet: function (d) { return templet('databaseId',fox.joinLabel(d.database,"name"),d);}}
+					,{ field: 'databaseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据库'), templet: function (d) { return templet('databaseId' ,fox.joinLabel(d.database,"name"),d);}}
 					,{ field: 'backupTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上次备份'), templet: function (d) { return templet('backupTime',fox.dateFormat(d.backupTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: 'backupStrategy', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份策略') , templet: function (d) { return templet('backupStrategy',d.backupStrategy,d);}  }
 					,{ field: 'backupMethod', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份方式'), templet:function (d){ return templet('backupMethod',fox.getDictText(SELECT_BACKUPMETHOD_DATA,d.backupMethod),d);}}
@@ -121,12 +122,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.logMethod={ inputType:"select_box", value: xmSelect.get("#logMethod",true).getValue("value"), label:xmSelect.get("#logMethod",true).getValue("nameStr") };
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.logMethod={ inputType:"select_box", value: xmSelect.get("#logMethod",true).getValue("value"), label:xmSelect.get("#logMethod",true).getValue("nameStr") ,field:"code"};
 		value.backupStrategy={ inputType:"button",value: $("#backupStrategy").val()};
-		value.backupStatus={ inputType:"select_box", value: xmSelect.get("#backupStatus",true).getValue("value"), label:xmSelect.get("#backupStatus",true).getValue("nameStr") };
-		value.labels={ inputType:"button",value: $("#labels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.backupStatus={ inputType:"select_box", value: xmSelect.get("#backupStatus",true).getValue("value"), label:xmSelect.get("#backupStatus",true).getValue("nameStr") ,field:"code"};
+		value.labels={ inputType:"button",value: $("#labels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -135,6 +136,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

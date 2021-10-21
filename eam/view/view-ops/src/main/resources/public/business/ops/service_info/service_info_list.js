@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:27
+ * @since 2021-10-21 22:12:52
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-ops/ops-service-info";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,10 +73,10 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('服务分组'), templet: function (d) { return templet('groupId',fox.joinLabel(d.group,"name"),d);}}
-					,{ field: 'serviceCategoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务类型'), templet: function (d) { return templet('serviceCategoryId',fox.joinLabel(d.serviceCategory,"name"),d);}}
+					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('服务分组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.group,"name"),d);}}
+					,{ field: 'serviceCategoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('服务类型'), templet: function (d) { return templet('serviceCategoryId' ,fox.joinLabel(d.serviceCategory,"name"),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'patch', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('补丁') , templet: function (d) { return templet('patch',d.patch,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
@@ -115,10 +116,10 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.groupId={ inputType:"select_box", value: xmSelect.get("#groupId",true).getValue("value"), fillWith:"group", label:xmSelect.get("#groupId",true).getValue("nameStr") };
-		value.serviceCategoryId={ inputType:"select_box", value: xmSelect.get("#serviceCategoryId",true).getValue("value"), fillWith:"serviceCategory", label:xmSelect.get("#serviceCategoryId",true).getValue("nameStr") };
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.groupId={ inputType:"select_box", value: xmSelect.get("#groupId",true).getValue("value") ,fillBy:["group"]  ,field:"code", label:xmSelect.get("#groupId",true).getValue("nameStr") };
+		value.serviceCategoryId={ inputType:"select_box", value: xmSelect.get("#serviceCategoryId",true).getValue("value") ,fillBy:["serviceCategory"]  ,field:"id", label:xmSelect.get("#serviceCategoryId",true).getValue("nameStr") };
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -127,6 +128,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

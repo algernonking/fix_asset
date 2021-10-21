@@ -1,7 +1,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:31
+ * @since 2021-10-21 22:11:56
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-attribute-item";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,10 +73,10 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属模块'), templet:function (d){ return templet('ownerCode',fox.getEnumText(SELECT_OWNERCODE_DATA,d.ownerCode),d);}}
-					,{ field: 'attributeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('属性'), templet: function (d) { return templet('attributeId',fox.joinLabel(d.attribute,"label"),d);}}
+					,{ field: 'attributeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('属性'), templet: function (d) { return templet('attributeId' ,fox.joinLabel(d.attribute,"label"),d);}}
 					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.dimension),d);}}
 					,{ field: 'required', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('必选'), templet:function (d){ return templet('required',fox.getEnumText(RADIO_REQUIRED_DATA,d.required),d);}}
 					,{ field: 'layoutType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('布局类型'), templet:function (d){ return templet('layoutType',fox.getEnumText(RADIO_LAYOUTTYPE_DATA,d.layoutType),d);}}
@@ -123,12 +124,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.ownerCode={ inputType:"select_box", value: xmSelect.get("#ownerCode",true).getValue("value"), label:xmSelect.get("#ownerCode",true).getValue("nameStr") };
+		value.ownerCode={ inputType:"select_box", value: xmSelect.get("#ownerCode",true).getValue("value"), label:xmSelect.get("#ownerCode",true).getValue("nameStr") ,field:"code"};
 		value.dimension={ inputType:"radio_box", value: xmSelect.get("#dimension",true).getValue("value"), label:xmSelect.get("#dimension",true).getValue("nameStr") };
 		value.layoutType={ inputType:"radio_box", value: xmSelect.get("#layoutType",true).getValue("value"), label:xmSelect.get("#layoutType",true).getValue("nameStr") };
 		value.listShow={ inputType:"radio_box", value: xmSelect.get("#listShow",true).getValue("value"), label:xmSelect.get("#listShow",true).getValue("nameStr") };
 		value.formShow={ inputType:"radio_box", value: xmSelect.get("#formShow",true).getValue("value"), label:xmSelect.get("#formShow",true).getValue("nameStr") };
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -137,6 +138,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

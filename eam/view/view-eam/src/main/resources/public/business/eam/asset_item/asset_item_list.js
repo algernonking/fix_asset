@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:54
+ * @since 2021-10-21 22:12:21
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-item";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,10 +73,12 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'handleId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('处理') , templet: function (d) { return templet('handleId',d.handleId,d);}  }
 					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'beforeUseUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产使用人') , templet: function (d) { return templet('beforeUseUserId',d.beforeUseUserId,d);}  }
+					,{ field: 'beforeAssetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态') , templet: function (d) { return templet('beforeAssetStatus',d.beforeAssetStatus,d);}  }
 					,{ field: 'crd', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('修改标记') , templet: function (d) { return templet('crd',d.crd,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -121,6 +124,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });
