@@ -235,7 +235,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		//维修前状态
 		dao.execute("update eam_asset_item a,eam_asset b set a.before_asset_status=b.asset_status where a.asset_id=b.id and a.handle_id=?",id);
 		HashMap<String,Object> map=new HashMap<>();
-		map.put("asset_status", AssetStatusEnum.REPAIR);
+		map.put("asset_status", AssetStatusEnum.REPAIR.code());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"维修中");
 		List<SQL> updateSqls=resultMap.get("update");
 		List<SQL> changeSqls=resultMap.get("change");
@@ -252,11 +252,11 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	@Override
 	public Result finishRepair(String id){
 		AssetRepair billData=getById(id);
-		if(!AssetHandleStatusEnum.COMPLETE.code().equals(  billData.getStatus() )){
-			return ErrorDesc.failureMessage("当前单据状态不能进行结束维修操作");
+		if(!AssetHandleStatusEnum.COMPLETE.code().equals( billData.getStatus() )){
+			return ErrorDesc.failureMessage("当前单据办理状态不能进行结束维修操作");
 		}
-		if(!AssetRepairStatusEnum.REPAIRING.code().equals(  billData.getType() )){
-			return ErrorDesc.failureMessage("当前单据状态不能进行结束维修操作");
+		if(!AssetRepairStatusEnum.REPAIRING.code().equals( billData.getRepairStatus() )){
+			return ErrorDesc.failureMessage("当前单据维修状态不能进行结束维修操作");
 		}
 		join(billData, AssetRepairMeta.ASSET_LIST);
 		HashMap<String,Object> map=new HashMap<>();
@@ -275,6 +275,9 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 				dao.batchExecute(changeSqls);
 			}
 		}
+		billData.setActualFinishDate(new Date());
+		billData.setRepairStatus(AssetRepairStatusEnum.FINISH.code());
+		super.update(billData,SaveMode.NOT_NULL_FIELDS);
 		return ErrorDesc.success();
 	}
 

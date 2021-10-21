@@ -70,7 +70,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().labelWidth(3,Config.searchLabelWidth);
-        cfg.view().search().labelWidth(4,Config.searchLabelWidth);
+        cfg.view().search().labelWidth(4,Config.searchLabelWidth+80);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_CODE).search().fuzzySearch();

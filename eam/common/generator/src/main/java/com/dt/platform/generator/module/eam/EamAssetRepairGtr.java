@@ -36,7 +36,6 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
        // cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
-
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"reportUser","报修人","报修人");
 
 
@@ -90,6 +89,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().list().operationColumn().addActionButton("结束维修","finishData","finish-data-button");
         cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
         cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+
 
 
         cfg.view().list().operationColumn().width(350);
