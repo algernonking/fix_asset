@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产字段配置
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:29
- * @sign C8271F349212ED4790A0CA62C1213D40
+ * @since 2021-10-21 22:11:54
+ * @sign FEC0E6317429F0F9030DA1073CE20B5C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,6 +46,18 @@ public class AssetAttribute extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="字段名称" , notes = "字段名称")
 	private String label;
+	
+	/**
+	 * 字段值类型：字段值类型
+	*/
+	@ApiModelProperty(required = false,value="字段值类型" , notes = "字段值类型")
+	private String valueType;
+	
+	/**
+	 * 取值类型：取值类型
+	*/
+	@ApiModelProperty(required = false,value="取值类型" , notes = "取值类型")
+	private String valuePath;
 	
 	/**
 	 * 标签备注：标签备注
@@ -209,6 +221,44 @@ public class AssetAttribute extends Entity {
 	*/
 	public AssetAttribute setLabel(String label) {
 		this.label=label;
+		return this;
+	}
+	
+	/**
+	 * 获得 字段值类型<br>
+	 * 字段值类型
+	 * @return 字段值类型
+	*/
+	public String getValueType() {
+		return valueType;
+	}
+	
+	/**
+	 * 设置 字段值类型
+	 * @param valueType 字段值类型
+	 * @return 当前对象
+	*/
+	public AssetAttribute setValueType(String valueType) {
+		this.valueType=valueType;
+		return this;
+	}
+	
+	/**
+	 * 获得 取值类型<br>
+	 * 取值类型
+	 * @return 取值类型
+	*/
+	public String getValuePath() {
+		return valuePath;
+	}
+	
+	/**
+	 * 设置 取值类型
+	 * @param valuePath 取值类型
+	 * @return 当前对象
+	*/
+	public AssetAttribute setValuePath(String valuePath) {
+		this.valuePath=valuePath;
 		return this;
 	}
 	

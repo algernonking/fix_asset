@@ -12,7 +12,7 @@ function ListPage() {
 	const moduleURL="/service-eam/eam-asset";
 	const selectmoduleURL="/service-eam/eam-asset-selected-data";
 	var dataTable=null;
-
+	var sort=null;
 	var assetListColumn;
 	var searchContent_categoryId;
 	var selectedListAction;
@@ -151,9 +151,16 @@ function ListPage() {
 		ps.assetBussinessType=billdata.assetBusinessType;
 		ps.assetOwnerId=billdata.assetOwnerId;
 		ps.searchValue=JSON.stringify(value);
+
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

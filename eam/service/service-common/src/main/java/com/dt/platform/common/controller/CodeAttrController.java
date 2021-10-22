@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 编码属性 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:13
+ * @since 2021-10-21 22:11:37
 */
 
 @Api(tags = "编码属性")

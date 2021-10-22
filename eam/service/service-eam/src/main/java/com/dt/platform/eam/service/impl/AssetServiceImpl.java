@@ -19,6 +19,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.collection.CollectorUtil;
+import com.github.foxnic.commons.concurrent.SimpleJoinForkTask;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
@@ -121,14 +122,158 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	/**
 	 *	changeMap只更新不是null部分
 	 * */
-	@Override
-	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
+	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAssetParallel(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
+
+		int cnt=3;
+		if(assetBefore.size()<10){
+			cnt=5;
+		}else if(assetBefore.size()<20){
+			cnt=5;
+		}else if(assetBefore.size()<100){
+			cnt=20;
+		}else if(assetBefore.size()<200){
+			cnt=50;
+		}else{
+			cnt=assetBefore.size()%8;
+		}
+
+		HashMap<String,List<SQL>> result=new HashMap<>();
+		List<SQL> changeSqls=new ArrayList<>();
+		List<SQL> updateSqls=new ArrayList<>();
+		Logger.info("并行运行,并行数:"+cnt);
+		SimpleJoinForkTask<Asset,Integer> task=new SimpleJoinForkTask<>(assetBefore,cnt);
+		List<Integer> rvs=task.execute(els->{
+			System.out.println(Thread.currentThread().getName());
+			HashMap<String,List<SQL>> data=parseAssetChangeRecordWithChangeAsset(els,changeMap,businessCode,operType,notes);
+			List<SQL> sqls1=data.get("change");
+			List<SQL> sqls2=data.get("update");
+			if(sqls1.size()>0){
+				changeSqls.addAll(sqls1);
+			}
+			if(sqls2.size()>0){
+				updateSqls.addAll(sqls1);
+			}
+			return null;
+		});
+		result.put("change",changeSqls);
+		result.put("update",updateSqls);
+		return result;
+	}
+
+
+	private HashMap<String,SQL> parseAssetChange(Asset assetBefore,JSONObject assetJsonAfter,HashMap<String,Rcd> colsMap,HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
+		HashMap<String,SQL> data=new HashMap<>();
+		JSONObject assetJsonBefore=BeanUtil.toJSONObject(assetBefore);
+		Update ups=new Update("eam_asset");
+		String ct="";
+		for(String key:changeMap.keySet()){
+			Rcd rcd=colsMap.get(key);
+			String label=rcd.getString("label");
+			String valueType=rcd.getString("value_type");
+			String valuePath=rcd.getString("value_path");
+			String rkey=lineToHump(key);
+			String before="-";
+			String after="-";
+			if(AssetAttributeValueTypeEnum.ENUM.code().equals(valueType)){
+				if("asset_status".equals(key)){
+					if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
+						CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonBefore.getString(rkey));
+						if(v!=null){
+							before=v.text();
+						}
+					}
+					if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
+						CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonAfter.getString(rkey));
+						if(v!=null){
+							after=v.text();
+						}
+					}
+				}else if("equipment_environment_code".equals(key)){
+					if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
+						CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonBefore.getString(rkey));
+						if(v!=null){
+							before=v.text();
+						}
+					}
+					if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
+						CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonAfter.getString(rkey));
+						if(v!=null){
+							after=v.text();
+						}
+					}
+				}else{
+					continue;
+				}
+			}else if(AssetAttributeValueTypeEnum.ENTITY.code().equals(valueType) || AssetAttributeValueTypeEnum.DICT.code().equals(valueType) ){
+				if(!StringUtil.isBlank(valuePath)){
+					String[] valuePathArr=valuePath.split(",");
+					if(valuePathArr.length==2){
+						String entity=valuePathArr[0];
+						String name=valuePathArr[1];
+						if(assetJsonBefore.getJSONObject(entity)!=null){
+							before=assetJsonBefore.getJSONObject(entity).getString(name);
+						}
+						if(assetJsonAfter.getJSONObject(entity)!=null){
+							after=assetJsonAfter.getJSONObject(entity).getString(name);
+						}
+					}
+				}
+			}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType) ){
+				before=assetJsonBefore.getString(rkey);
+				after=assetJsonAfter.getString(rkey);
+			}else{
+				continue;
+			}
+			//只更新不是null部分
+			ups.setIf(key,assetJsonAfter.get(rkey));
+		//	ups.setIf(key,assetAfterRcd.getOriginalValue(key));
+			if( !((before+"").equals(after+"") ) ){
+				ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
+			}
+
+		}
+		Logger.info("资产编号:"+assetBefore.getAssetCode()+",变更内容:"+ct);
+		//开始填充数据
+		if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
+			ups.set(dbTreaty.getUpdateTimeField(),new Date());
+		}
+		if(tm.getColumn(dbTreaty.getUpdateUserIdField())!=null) {
+			ups.set(dbTreaty.getUpdateUserIdField(), dbTreaty.getLoginUserId());
+		}
+		ups.where().and("id=?",assetBefore.getId());
+		Insert ins=new Insert("eam_asset_process_record");
+		ins.set("id",IDGenerator.getSnowflakeIdString());
+		ins.setIf("asset_id",assetBefore.getId());
+		ins.setIf("business_code",businessCode);
+		ins.setIf("process_type",operType);
+		ins.setIf("notes",notes);
+		ins.setIf("content",ct);
+		ins.set("processd_time",new Date());
+		if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
+			ins.set(dbTreaty.getCreateTimeField(),new Date());
+		}
+		if(tm.getColumn(dbTreaty.getCreateUserIdField())!=null) {
+			ins.set(dbTreaty.getCreateUserIdField(), dbTreaty.getLoginUserId());
+		}
+		if(tm.getColumn(dbTreaty.getDeletedField())!=null) {
+			ins.set(dbTreaty.getDeletedField(), dbTreaty.getFalseValue());
+		}
+
+		data.put("update",ups);
+		data.put("change",ins);
+		return data;
+	}
+		/**
+	 *	changeMap只更新不是null部分
+	 * */
+	@Override
+	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
+
 		HashMap<String,List<SQL>> data=new HashMap<>();
 		List<SQL> changeSqls=new ArrayList<>();
 		List<SQL> updateSqls=new ArrayList<>();
-
 		//获取after数据
 		String changeId="";
 		if(changeMap.containsKey("id")){
@@ -142,10 +287,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				ins.set(key,changeMap.get(key));
 			}
 			ins.set("id",changeId);
-			//System.out.println("AssetInsert "+ins.getSQL());
 			dao.execute(ins);
 		}
-		Rcd assetAfterRcd=dao.queryRecord("select * from eam_asset where id=?",changeId);
 		Asset assetAfter=getById(changeId);
 		dao.fill(assetAfter).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
@@ -169,8 +312,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		dao().join(assetAfter.getUseUser(), Person.class);
 		JSONObject assetJsonAfter=BeanUtil.toJSONObject(assetAfter);
 
-
-		//获取map
+		//获取注册的允许变更记录的字段
 		String sql="select id,code,label,value_type,value_path from eam_asset_attribute where code not in ('status','business_code','batch_code') and deleted='0' and tenant_id=?";
 		RcdSet rs=dao.query(sql,SessionUser.getCurrent().getActivatedTenantId());
 		HashMap<String,Rcd> colsMap=(HashMap<String,Rcd>)rs.getMappedRcds("code",String.class);
@@ -181,7 +323,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				rChangeMap.put(key,changeMap.get(key));
 			}
 		}
-		System.out.println("changeMap"+rChangeMap);
+		Logger.info("需要更新的字段列表:"+rChangeMap);
 		//获取before数据
 		dao.fill(assetBefore).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
@@ -205,116 +347,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		dao().join(managers, Person.class);
 		List<Employee> useUser= CollectorUtil.collectList(assetBefore,Asset::getUseUser);
 		dao().join(useUser, Person.class);
-	//	System.out.println("assetBefore"+assetBefore);
-		//开始比较
-	//	System.out.println("assetAfter"+assetJsonAfter);
+
 		for(Asset asset: assetBefore){
-			JSONObject assetJsonBefore=BeanUtil.toJSONObject(asset);
-		//	System.out.println(assetJsonBefore.toJSONString());
-			Update ups=new Update("eam_asset");
-			String ct="";
-			for(String key:rChangeMap.keySet()){
-				Rcd rcd=colsMap.get(key);
-				String label=rcd.getString("label");
-				String valueType=rcd.getString("value_type");
-				String valuePath=rcd.getString("value_path");
-				String rkey=lineToHump(key);
-				String before="-";
-				String after="-";
-				System.out.println(rkey+" rcd:"+rcd.toJSONObject().toJSONString());
-				if(AssetAttributeValueTypeEnum.ENUM.code().equals(valueType)){
-					if("asset_status".equals(key)){
-						if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonBefore.getString(rkey));
-							if(v!=null){
-								before=v.text();
-							}
-						}
-						if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetStatusEnum.class,assetJsonAfter.getString(rkey));
-							if(v!=null){
-								after=v.text();
-							}
-						}
-					}else if("equipment_environment_code".equals(key)){
-						if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonBefore.getString(rkey));
-							if(v!=null){
-								before=v.text();
-							}
-						}
-						if(!StringUtil.isBlank(assetJsonAfter.getString(rkey))){
-							CodeTextEnum v=EnumUtil.parseByCode(AssetEquipmentStatusEnum.class,assetJsonAfter.getString(rkey));
-							if(v!=null){
-								after=v.text();
-							}
-						}
-					}else{
-						continue;
-					}
-				}else if(AssetAttributeValueTypeEnum.ENTITY.code().equals(valueType) || AssetAttributeValueTypeEnum.DICT.code().equals(valueType) ){
-					if(!StringUtil.isBlank(valuePath)){
-						String[] valuePathArr=valuePath.split(",");
-						if(valuePathArr.length==2){
-							String entity=valuePathArr[0];
-							String name=valuePathArr[1];
-							if(assetJsonBefore.getJSONObject(entity)!=null){
-								before=assetJsonBefore.getJSONObject(entity).getString(name);
-							}
-							if(assetJsonAfter.getJSONObject(entity)!=null){
-								after=assetJsonAfter.getJSONObject(entity).getString(name);
-							}
-						}
-					}
-				}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType) ){
-					before=assetJsonBefore.getString(rkey);
-					after=assetJsonAfter.getString(rkey);
-				}else{
-					continue;
-				}
-				//只更新不是null部分
-				ups.setIf(key,assetAfterRcd.getOriginalValue(key));
-				if( !((before+"").equals(after+"") ) ){
-					ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
-				}
-			}
-
-			//开始填充数据
-			if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
-				ups.set(dbTreaty.getUpdateTimeField(),new Date());
-			}
-			if(tm.getColumn(dbTreaty.getUpdateUserIdField())!=null) {
-				ups.set(dbTreaty.getUpdateUserIdField(), dbTreaty.getLoginUserId());
-			}
-			ups.where().and("id=?",asset.getId());
-			Insert ins=new Insert("eam_asset_process_record");
-			ins.set("id",IDGenerator.getSnowflakeIdString());
-			ins.setIf("asset_id",asset.getId());
-			ins.setIf("business_code",businessCode);
-			ins.setIf("process_type",operType);
-			ins.setIf("notes",notes);
-			ins.setIf("content",ct);
-			ins.set("processd_time",new Date());
-			if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
-				ins.set(dbTreaty.getCreateTimeField(),new Date());
-			}
-			if(tm.getColumn(dbTreaty.getCreateUserIdField())!=null) {
-				ins.set(dbTreaty.getCreateUserIdField(), dbTreaty.getLoginUserId());
-			}
-			if(tm.getColumn(dbTreaty.getDeletedField())!=null) {
-				ins.set(dbTreaty.getDeletedField(), dbTreaty.getFalseValue());
-			}
-			updateSqls.add(ups);
-			changeSqls.add(ins);
+			HashMap<String,SQL> result=parseAssetChange(asset,assetJsonAfter,colsMap,rChangeMap,businessCode,operType,notes);
+			updateSqls.add(result.get("update"));
+			changeSqls.add(result.get("change"));
 		}
-		System.out.println("update change size:"+updateSqls.size());
+		Logger.info("update change size:"+updateSqls.size());
 		for(SQL s:updateSqls){
-			System.out.println(s.getSQL());
+			Logger.info(s.getSQL());
 		}
 
-		System.out.println("change change size:"+changeSqls.size());
+		Logger.info("change change size:"+changeSqls.size());
 		for(SQL s:changeSqls){
-			System.out.println(s.getSQL());
+			Logger.info(s.getSQL());
 		}
 		data.put("change",changeSqls);
 		data.put("update",updateSqls);
@@ -776,7 +822,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
-
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 

@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:29
+ * @since 2021-10-21 22:11:54
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-attribute";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,10 +73,12 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段编码') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段名称') , templet: function (d) { return templet('label',d.label,d);}  }
+					,{ field: 'valueType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段值类型') , templet: function (d) { return templet('valueType',d.valueType,d);}  }
+					,{ field: 'valuePath', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('取值类型') , templet: function (d) { return templet('valuePath',d.valuePath,d);}  }
 					,{ field: 'labelNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签备注') , templet: function (d) { return templet('labelNotes',d.labelNotes,d);}  }
 					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.dimension),d);}}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
@@ -119,11 +122,11 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.label={ inputType:"button",value: $("#label").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.label={ inputType:"button",value: $("#label").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.dimension={ inputType:"radio_box", value: xmSelect.get("#dimension",true).getValue("value"), label:xmSelect.get("#dimension",true).getValue("nameStr") };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.componentType={ inputType:"radio_box", value: xmSelect.get("#componentType",true).getValue("value"), label:xmSelect.get("#componentType",true).getValue("nameStr") };
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -132,6 +135,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

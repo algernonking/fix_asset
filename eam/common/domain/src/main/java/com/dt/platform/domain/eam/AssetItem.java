@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:54
- * @sign 5236FB6E86EEB1CAEE495B65073FF975
+ * @since 2021-10-21 22:12:21
+ * @sign EB76ED3C9AECB9E5FF95CF5CF4875E2D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,6 +46,18 @@ public class AssetItem extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产" , notes = "资产")
 	private String assetId;
+	
+	/**
+	 * 资产使用人：资产使用人
+	*/
+	@ApiModelProperty(required = false,value="资产使用人" , notes = "资产使用人")
+	private String beforeUseUserId;
+	
+	/**
+	 * 资产状态：资产状态
+	*/
+	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态")
+	private String beforeAssetStatus;
 	
 	/**
 	 * 修改标记：修改标记
@@ -155,6 +167,44 @@ public class AssetItem extends Entity {
 	*/
 	public AssetItem setAssetId(String assetId) {
 		this.assetId=assetId;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产使用人<br>
+	 * 资产使用人
+	 * @return 资产使用人
+	*/
+	public String getBeforeUseUserId() {
+		return beforeUseUserId;
+	}
+	
+	/**
+	 * 设置 资产使用人
+	 * @param beforeUseUserId 资产使用人
+	 * @return 当前对象
+	*/
+	public AssetItem setBeforeUseUserId(String beforeUseUserId) {
+		this.beforeUseUserId=beforeUseUserId;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产状态<br>
+	 * 资产状态
+	 * @return 资产状态
+	*/
+	public String getBeforeAssetStatus() {
+		return beforeAssetStatus;
+	}
+	
+	/**
+	 * 设置 资产状态
+	 * @param beforeAssetStatus 资产状态
+	 * @return 当前对象
+	*/
+	public AssetItem setBeforeAssetStatus(String beforeAssetStatus) {
+		this.beforeAssetStatus=beforeAssetStatus;
 		return this;
 	}
 	

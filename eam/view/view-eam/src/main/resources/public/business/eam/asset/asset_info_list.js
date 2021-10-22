@@ -12,6 +12,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset";
 	var dataTable=null;
+	var sort=null;
 	var categorySelect;
 	/**
 	 * 入口函数，初始化
@@ -84,7 +85,9 @@ function ListPage() {
 				{ fixed: 'left',type:'checkbox' }
 			]
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
-				COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
+				//console.log(ATTRIBUTE_LIST_DATA[i]);
+				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code)
+					COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
 			COL_DATA.push(oper)
@@ -104,7 +107,6 @@ function ListPage() {
 					importExcel : admin.checkAuth(AUTH_PREFIX+":import")?{
 						params : {} ,
 						callback : function(r) {
-							console.log(111111111111,r)
 							if(r.success) {
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
@@ -171,6 +173,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 
 		if(reset) {

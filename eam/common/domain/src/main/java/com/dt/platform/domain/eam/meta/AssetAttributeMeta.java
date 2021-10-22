@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:29
- * @sign C8271F349212ED4790A0CA62C1213D40
+ * @since 2021-10-21 22:11:54
+ * @sign FEC0E6317429F0F9030DA1073CE20B5C
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -44,6 +44,26 @@ public class AssetAttributeMeta {
 	 * 字段名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> LABEL_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,LABEL, java.lang.String.class, "字段名称", "字段名称", java.lang.String.class, null);
+	
+	/**
+	 * 字段值类型 , 类型: java.lang.String
+	*/
+	public static final String VALUE_TYPE="valueType";
+	
+	/**
+	 * 字段值类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> VALUE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VALUE_TYPE, java.lang.String.class, "字段值类型", "字段值类型", java.lang.String.class, null);
+	
+	/**
+	 * 取值类型 , 类型: java.lang.String
+	*/
+	public static final String VALUE_PATH="valuePath";
+	
+	/**
+	 * 取值类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> VALUE_PATH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VALUE_PATH, java.lang.String.class, "取值类型", "取值类型", java.lang.String.class, null);
 	
 	/**
 	 * 标签备注 , 类型: java.lang.String
@@ -228,7 +248,7 @@ public class AssetAttributeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CODE , LABEL , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER };
+	public static final String[] $PROPS={ ID , CODE , LABEL , VALUE_TYPE , VALUE_PATH , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER };
 	
 	/**
 	 * 代理类
@@ -268,6 +288,28 @@ public class AssetAttributeMeta {
 		public AssetAttribute setLabel(String label) {
 			super.change(LABEL,super.getLabel(),label);
 			super.setLabel(label);
+			return this;
+		}
+		
+		/**
+		 * 设置 字段值类型
+		 * @param valueType 字段值类型
+		 * @return 当前对象
+		*/
+		public AssetAttribute setValueType(String valueType) {
+			super.change(VALUE_TYPE,super.getValueType(),valueType);
+			super.setValueType(valueType);
+			return this;
+		}
+		
+		/**
+		 * 设置 取值类型
+		 * @param valuePath 取值类型
+		 * @return 当前对象
+		*/
+		public AssetAttribute setValuePath(String valuePath) {
+			super.change(VALUE_PATH,super.getValuePath(),valuePath);
+			super.setValuePath(valuePath);
 			return this;
 		}
 		

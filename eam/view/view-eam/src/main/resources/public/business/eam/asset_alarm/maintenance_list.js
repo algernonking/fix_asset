@@ -20,7 +20,7 @@ function ListPage() {
     //模块基础路径
     const moduleURL="/service-eam/eam-asset";
     var dataTable=null;
-
+    var sort=null;
     var now = new Date();
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -124,9 +124,16 @@ function ListPage() {
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.maintenanceEndDate={ begin: $("#maintenanceEndDate-begin").val(), end: $("#maintenanceEndDate-end").val() };
         var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
+
         if(sortField) {
             ps.sortField=sortField;
             ps.sortType=sortType;
+            sort={ field : sortField,type : sortType} ;
+        } else {
+            if(sort) {
+                ps.sortField=sort.field;
+                ps.sortType=sort.type;
+            }
         }
         if(reset) {
             table.reload('data-table', { where : ps , page:{ curr:1 } });

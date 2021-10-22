@@ -11,6 +11,7 @@ function ListPage() {
     //模块基础路径
     const moduleURL="/service-eam/eam-asset";
     var dataTable=null;
+    var sort=null;
     var assetListColumn;
     /**
      * 入口函数，初始化
@@ -110,6 +111,12 @@ function ListPage() {
         if(sortField) {
             ps.sortField=sortField;
             ps.sortType=sortType;
+            sort={ field : sortField,type : sortType} ;
+        } else {
+            if(sort) {
+                ps.sortField=sort.field;
+                ps.sortType=sort.type;
+            }
         }
         ps.useUserId=EMPLOYEE_ID;
         if(reset) {

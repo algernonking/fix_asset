@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 服务类型
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:29
+ * @since 2021-10-21 22:12:53
  * @sign E44A3BE299877F464BA4A5D9AF0E486F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -232,7 +232,6 @@ public class ServiceCategoryVO extends ServiceCategory {
 	@Transient
 	public CompositeParameter getCompositeParameter() {
 		if($compositeParameter!=null) return  $compositeParameter;
-		if(!"$composite".equals(this.getSearchField())) return null;
 		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
 		return  $compositeParameter;
 	}

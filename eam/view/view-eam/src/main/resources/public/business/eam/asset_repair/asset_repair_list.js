@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-20 12:19:15
+ * @since 2021-10-21 22:12:17
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-repair";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -135,6 +136,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });
@@ -406,7 +413,7 @@ function ListPage() {
 			else if (layEvent === 'confirm-data') { // 确认维修
 				window.pageExt.list.confirmData(data);
 			}
-			else if (layEvent === 'finish-data') { // 维修结束
+			else if (layEvent === 'finish-data') { // 结束维修
 				window.pageExt.list.finishData(data);
 			}
 			else if (layEvent === 'revoke-data') { // 撤销

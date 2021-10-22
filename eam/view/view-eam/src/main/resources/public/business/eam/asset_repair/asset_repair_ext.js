@@ -90,7 +90,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    if(data[i].type=="repair"){
+                    if(data[i].repairStatus=="repairing"){
                     }else{
                        fox.disableButton($('.finish-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     }
@@ -224,6 +224,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
         },
         finishData:function (item){
+            console.log('fnish');
             list.billOper("finish-repair","finish-data-button",{id:item.id},"维修结束");
         },
 

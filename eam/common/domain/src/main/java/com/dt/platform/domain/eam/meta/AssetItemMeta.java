@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:54
- * @sign 5236FB6E86EEB1CAEE495B65073FF975
+ * @since 2021-10-21 22:12:21
+ * @sign EB76ED3C9AECB9E5FF95CF5CF4875E2D
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -44,6 +44,26 @@ public class AssetItemMeta {
 	 * 资产 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> ASSET_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,ASSET_ID, java.lang.String.class, "资产", "资产", java.lang.String.class, null);
+	
+	/**
+	 * 资产使用人 , 类型: java.lang.String
+	*/
+	public static final String BEFORE_USE_USER_ID="beforeUseUserId";
+	
+	/**
+	 * 资产使用人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> BEFORE_USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,BEFORE_USE_USER_ID, java.lang.String.class, "资产使用人", "资产使用人", java.lang.String.class, null);
+	
+	/**
+	 * 资产状态 , 类型: java.lang.String
+	*/
+	public static final String BEFORE_ASSET_STATUS="beforeAssetStatus";
+	
+	/**
+	 * 资产状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetItem,java.lang.String> BEFORE_ASSET_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetItem.class ,BEFORE_ASSET_STATUS, java.lang.String.class, "资产状态", "资产状态", java.lang.String.class, null);
 	
 	/**
 	 * 修改标记 , 类型: java.lang.String
@@ -138,7 +158,7 @@ public class AssetItemMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , HANDLE_ID , ASSET_ID , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , HANDLE_ID , ASSET_ID , BEFORE_USE_USER_ID , BEFORE_ASSET_STATUS , CRD , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -178,6 +198,28 @@ public class AssetItemMeta {
 		public AssetItem setAssetId(String assetId) {
 			super.change(ASSET_ID,super.getAssetId(),assetId);
 			super.setAssetId(assetId);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产使用人
+		 * @param beforeUseUserId 资产使用人
+		 * @return 当前对象
+		*/
+		public AssetItem setBeforeUseUserId(String beforeUseUserId) {
+			super.change(BEFORE_USE_USER_ID,super.getBeforeUseUserId(),beforeUseUserId);
+			super.setBeforeUseUserId(beforeUseUserId);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产状态
+		 * @param beforeAssetStatus 资产状态
+		 * @return 当前对象
+		*/
+		public AssetItem setBeforeAssetStatus(String beforeAssetStatus) {
+			super.change(BEFORE_ASSET_STATUS,super.getBeforeAssetStatus(),beforeAssetStatus);
+			super.setBeforeAssetStatus(beforeAssetStatus);
 			return this;
 		}
 		

@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 仓库
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:09
+ * @since 2021-10-21 22:12:36
  * @sign 981C898C4F4ACD5CA975D154CE31EDC6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -232,7 +232,6 @@ public class WarehouseVO extends Warehouse {
 	@Transient
 	public CompositeParameter getCompositeParameter() {
 		if($compositeParameter!=null) return  $compositeParameter;
-		if(!"$composite".equals(this.getSearchField())) return null;
 		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
 		return  $compositeParameter;
 	}

@@ -1,7 +1,7 @@
 /**
  * 凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:12
+ * @since 2021-10-21 22:12:39
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-ops/ops-voucher";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,8 +73,8 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类别'), templet: function (d) { return templet('type',fox.joinLabel(d.voucherType,"label"),d);}}
+					{ fixed: 'left',type:'checkbox'}
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('类别'), templet: function (d) { return templet('type' ,fox.joinLabel(d.voucherType,"label"),d);}}
 					,{ field: 'ownerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所属') , templet: function (d) { return templet('ownerId',d.ownerId,d);}  }
 					,{ field: 'userCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('用户'), templet:function (d){ return templet('userCode',fox.getDictText(SELECT_USERCODE_DATA,d.userCode),d);}}
 					,{ field: 'voucher', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('凭证') , templet: function (d) { return templet('voucher',d.voucher,d);}  }
@@ -112,8 +113,8 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), fillWith:"voucherType", label:xmSelect.get("#type",true).getValue("nameStr") };
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value") ,fillBy:["voucherType"]  ,field:"code", label:xmSelect.get("#type",true).getValue("nameStr") };
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -122,6 +123,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

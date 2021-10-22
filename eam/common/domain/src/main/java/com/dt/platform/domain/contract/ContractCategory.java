@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 合同分类
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:34
+ * @since 2021-10-21 22:12:58
  * @sign 30377EE0F5494B40A40C8EB00C36BF90
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

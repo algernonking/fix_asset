@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资金明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:37
+ * @since 2021-10-21 22:13:02
 */
 
 @Api(tags = "资金明细")

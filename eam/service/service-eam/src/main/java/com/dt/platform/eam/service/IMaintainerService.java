@@ -21,26 +21,26 @@ import com.github.foxnic.dao.data.SaveMode;
  * 维保厂商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:00
+ * @since 2021-10-21 22:12:28
 */
 
 public interface IMaintainerService extends ISuperService<Maintainer> {
-	
+
 	/**
 	 * 插入实体
 	 * @param maintainer 实体数据
 	 * @return 插入是否成功
 	 * */
 	Result insert(Maintainer maintainer);
- 
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param maintainerList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	Result insertList(List<Maintainer> maintainerList);
-	
-	
+
+
 		
 	/**
 	 * 按主键删除 维保厂商
@@ -57,21 +57,21 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 删除是否成功
 	 */
 	Result deleteByIdLogical(String id);
-	
+
 	/**
 	 * 批量物理删除，仅支持单字段主键表
 	 * @param ids 主键清单
 	 * @return 是否删除成功
 	 * */
 	<T> Result deleteByIdsPhysical(List<T> ids);
-	
+
 	/**
 	 * 批量逻辑删除，仅支持单字段主键表
 	 * @param ids 主键清单
 	 * @return 是否删除成功
 	 * */
 	<T> Result deleteByIdsLogical(List<T> ids);
-	
+
 		
 	/**
 	 * 按主键更新字段 维保厂商
@@ -80,7 +80,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 是否更新成功
 	 */
 	boolean update(DBField field,Object value , String id);
-	
+
 	/**
 	 * 更新实体
 	 * @param maintainer 数据对象
@@ -88,8 +88,8 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 保存是否成功
 	 * */
 	Result update(Maintainer maintainer , SaveMode mode);
-	
-	
+
+
 	/**
 	 * 更新实体集，事务内
 	 * @param maintainerList 数据对象列表
@@ -97,7 +97,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 保存是否成功
 	 * */
 	Result updateList(List<Maintainer> maintainerList, SaveMode mode);
-	
+
 	/**
 	 * 保存实体，如果主键值不为 null，则更新，否则插入
 	 * @param maintainer 实体数据
@@ -105,7 +105,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 保存是否成功
 	 * */
 	Result save(Maintainer maintainer , SaveMode mode);
-	
+
 	/**
 	 * 保存实体，如果主键值不为null，则更新，否则插入
 	 * @param maintainerList 实体数据清单
@@ -113,7 +113,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 保存是否成功
 	 * */
 	Result saveList(List<Maintainer> maintainerList , SaveMode mode);
-	
+
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param maintainer  实体对象
@@ -121,7 +121,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 是否已经存在
 	 * */
 	boolean checkExists(Maintainer maintainer,DBField... field);
- 
+
 		
 	/**
 	 * 按主键获取 维保厂商
@@ -130,7 +130,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return Maintainer 数据对象
 	 */
 	Maintainer getById(String id);
-		
+
 	/**
 	 * 检查实体中的数据字段是否已经存在
 	 * @param ids  主键清单
@@ -147,14 +147,14 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	Result<Maintainer> checkExists(Maintainer maintainer);
 
 	/**
-	 * 根据实体数构建默认的条件表达式，字符串使用模糊匹配
+	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表
 	 * @param sample 数据样例
 	 * @return ConditionExpr 条件表达式
 	 * */
 	ConditionExpr buildQueryCondition(Maintainer sample);
-	
+
 	/**
-	 * 根据实体数构建默认的条件表达式, 字符串是否使用模糊匹配
+	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表
 	 * @param sample 数据样例
 	 * @param tableAliase 数据表别名
 	 * 	@return ConditionExpr 条件表达式
@@ -167,7 +167,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	List<Maintainer> queryList(Maintainer sample);
- 
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
@@ -176,7 +176,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	List<Maintainer> queryList(Maintainer sample,ConditionExpr condition,OrderBy orderBy);
-	
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
@@ -184,7 +184,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	List<Maintainer> queryList(Maintainer sample,OrderBy orderBy);
-	
+
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
 	 * @param sample  查询条件
@@ -192,14 +192,14 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	List<Maintainer> queryList(Maintainer sample,ConditionExpr condition);
-	
+
 	/**
 	 * 查询单个实体
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
 	Maintainer queryEntity(Maintainer sample);
-	
+
 	/**
 	 * 分页查询实体集
 	 * @param sample  查询条件
@@ -208,7 +208,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	PagedList<Maintainer> queryPagedList(Maintainer sample,int pageSize,int pageIndex);
-	
+
 	/**
 	 * 分页查询实体集
 	 * @param sample  查询条件
@@ -219,7 +219,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	PagedList<Maintainer> queryPagedList(Maintainer sample,ConditionExpr condition,OrderBy orderBy,int pageSize,int pageIndex);
-	
+
 	/**
 	 * 分页查询实体集
 	 * @param sample  查询条件
@@ -229,7 +229,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	PagedList<Maintainer> queryPagedList(Maintainer sample,ConditionExpr condition,int pageSize,int pageIndex);
-	
+
 	/**
 	 * 分页查询实体集
 	 * @param sample  查询条件
@@ -239,7 +239,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 查询结果
 	 * */
 	PagedList<Maintainer> queryPagedList(Maintainer sample,OrderBy orderBy,int pageSize,int pageIndex);
- 
+
  	/**
 	 * 查询指定字段的数据清单
 	 * @param <T> 元素类型
@@ -249,7 +249,7 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * @return 列数据
 	 * */
 	<T> List<T> queryValues(DBField field,Class<T> type, ConditionExpr condition);
- 
+
 	/**
 	 * 查询指定字段的数据清单
 	 * @param <T> 元素类型
@@ -284,5 +284,5 @@ public interface IMaintainerService extends ISuperService<Maintainer> {
 	 * */
 	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch);
 
- 
+
 }

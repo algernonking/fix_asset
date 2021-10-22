@@ -11,6 +11,7 @@ function ListPage() {
     //模块基础路径
     const moduleURL="/service-eam/eam-asset-report";
     var dataTable=null;
+    var sort=null;
     /**
      * 入口函数，初始化
      */
@@ -113,9 +114,16 @@ function ListPage() {
             if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
         }
         ps.searchValue=JSON.stringify(value);
+
         if(sortField) {
             ps.sortField=sortField;
             ps.sortType=sortType;
+            sort={ field : sortField,type : sortType} ;
+        } else {
+            if(sort) {
+                ps.sortField=sort.field;
+                ps.sortType=sort.type;
+            }
         }
         if(reset) {
             table.reload('data-table', { where : ps , page:{ curr:1 } });

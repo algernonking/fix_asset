@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:32
+ * @since 2021-10-21 22:12:56
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-knowledgebase/kn-content";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,9 +73,9 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return templet('categoryId',fox.joinLabel(d.category,"hierarchyName"),d);}}
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet: function (d) { return templet('categoryId' ,fox.joinLabel(d.category,"hierarchyName"),d);}}
 					,{ field: 'title', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标题') , templet: function (d) { return templet('title',d.title,d);}  }
 					,{ field: 'contentType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内容类型'), templet:function (d){ return templet('contentType',fox.getEnumText(RADIO_CONTENTTYPE_DATA,d.contentType),d);}}
 					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') , templet: function (d) { return templet('reviewCount',d.reviewCount,d);}  }
@@ -116,12 +117,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value"), fillWith:"category", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
-		value.title={ inputType:"button",value: $("#title").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.profile={ inputType:"button",value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value") ,fillBy:["category"]  ,field:"id", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
+		value.title={ inputType:"button",value: $("#title").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.profile={ inputType:"button",value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.contentType={ inputType:"radio_box", value: xmSelect.get("#contentType",true).getValue("value"), label:xmSelect.get("#contentType",true).getValue("nameStr") };
 		value.display={ inputType:"radio_box", value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr") };
-		value.gradeId={ inputType:"select_box", value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr") };
+		value.gradeId={ inputType:"select_box", value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr") ,field:"code"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -130,6 +131,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

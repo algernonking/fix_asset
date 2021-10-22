@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-eam/eam-asset-data-change";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -76,10 +77,12 @@ function ListPage() {
 
 			];
 			for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
-				var code=ATTRIBUTE_LIST_DATA[i].attribute.code;
-				var e=COL_ALL_DATA[code];
-				LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
-				COL_DATA.push(e);
+				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code){
+					var code=ATTRIBUTE_LIST_DATA[i].attribute.code;
+					var e=COL_ALL_DATA[code];
+					LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
+					COL_DATA.push(e);
+				}
 			}
 			console.log(LAYUI_TABLE_WIDTH_CONFIG);
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
@@ -153,6 +156,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

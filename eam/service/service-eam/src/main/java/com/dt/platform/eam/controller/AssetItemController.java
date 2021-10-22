@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 资产 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:47:54
+ * @since 2021-10-21 22:12:21
 */
 
 @Api(tags = "资产")
@@ -68,6 +68,8 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "498580222866620416"),
 		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = false , dataTypeClass=String.class , example = "498580222489133056"),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_USE_USER_ID , value = "资产使用人" , required = false , dataTypeClass=String.class , example = "490546664730263552"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
 	@ApiOperationSupport(order=1)
@@ -122,6 +124,8 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "498580222866620416"),
 		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = false , dataTypeClass=String.class , example = "498580222489133056"),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_USE_USER_ID , value = "资产使用人" , required = false , dataTypeClass=String.class , example = "490546664730263552"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } )
@@ -142,6 +146,8 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "498580222866620416"),
 		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = false , dataTypeClass=String.class , example = "498580222489133056"),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_USE_USER_ID , value = "资产使用人" , required = false , dataTypeClass=String.class , example = "490546664730263552"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE , AssetItemVOMeta.SEARCH_FIELD , AssetItemVOMeta.FUZZY_FIELD , AssetItemVOMeta.SEARCH_VALUE , AssetItemVOMeta.SORT_FIELD , AssetItemVOMeta.SORT_TYPE , AssetItemVOMeta.IDS } )
@@ -206,6 +212,8 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "498580222866620416"),
 		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = false , dataTypeClass=String.class , example = "498580222489133056"),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_USE_USER_ID , value = "资产使用人" , required = false , dataTypeClass=String.class , example = "490546664730263552"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetItemVOMeta.PAGE_INDEX , AssetItemVOMeta.PAGE_SIZE } )
@@ -227,6 +235,8 @@ public class AssetItemController extends SuperController {
 		@ApiImplicitParam(name = AssetItemVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "498580222866620416"),
 		@ApiImplicitParam(name = AssetItemVOMeta.HANDLE_ID , value = "处理" , required = false , dataTypeClass=String.class , example = "498580222489133056"),
 		@ApiImplicitParam(name = AssetItemVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "498579925209448448"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_USE_USER_ID , value = "资产使用人" , required = false , dataTypeClass=String.class , example = "490546664730263552"),
+		@ApiImplicitParam(name = AssetItemVOMeta.BEFORE_ASSET_STATUS , value = "资产状态" , required = false , dataTypeClass=String.class , example = "using"),
 		@ApiImplicitParam(name = AssetItemVOMeta.CRD , value = "修改标记" , required = false , dataTypeClass=String.class , example = "r"),
 	})
 	@ApiOperationSupport(order=8)

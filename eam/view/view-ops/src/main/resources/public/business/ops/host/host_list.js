@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 07:48:24
+ * @since 2021-10-21 22:12:49
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-ops/ops-host";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,16 +73,16 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return templet('systemId',fox.joinLabel(d.infoSystem,"name"),d);}}
+					,{ field: 'systemId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('信息系统'), templet: function (d) { return templet('systemId' ,fox.joinLabel(d.infoSystem,"name"),d);}}
 					,{ field: 'hostType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机类型'), templet:function (d){ return templet('hostType',fox.getDictText(SELECT_HOSTTYPE_DATA,d.hostType),d);}}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'hostName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('hostName',d.hostName,d);}  }
 					,{ field: 'hostIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理IP') , templet: function (d) { return templet('hostIp',d.hostIp,d);}  }
 					,{ field: 'hostVip', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('虚拟VIP') , templet: function (d) { return templet('hostVip',d.hostVip,d);}  }
 					,{ field: 'environment', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所在环境'), templet:function (d){ return templet('environment',fox.getDictText(SELECT_ENVIRONMENT_DATA,d.environment),d);}}
-					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return templet('positionId',fox.joinLabel(d.position,"name"),d);}}
+					,{ field: 'positionId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('所在位置'), templet: function (d) { return templet('positionId' ,fox.joinLabel(d.position,"name"),d);}}
 					,{ field: 'monitorStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控状态'), templet:function (d){ return templet('monitorStatus',fox.getEnumText(RADIO_MONITORSTATUS_DATA,d.monitorStatus),d);}}
 					,{ field: 'directorUsername', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负责人') , templet: function (d) { return templet('directorUsername',d.directorUsername,d);}  }
 					,{ field: 'hostMemory', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('内存') , templet: function (d) { return templet('hostMemory',d.hostMemory,d);}  }
@@ -94,17 +95,17 @@ function ListPage() {
 					,{ field: 'userOpsOper', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('运维操作用户') , templet: function (d) { return templet('userOpsOper',d.userOpsOper,d);}  }
 					,{ field: 'userOther', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('其他用户') , templet: function (d) { return templet('userOther',d.userOther,d);}  }
 					,{ field: 'passwordStrategyId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('改密策略'), templet:function (d){ return templet('passwordStrategyId',fox.getDictText(SELECT_PASSWORDSTRATEGYID_DATA,d.passwordStrategyId),d);}}
-					,{ field: 'hostBackupMethod', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('备份方式'), templet: function (d) { return templet('hostBackupMethod',fox.joinLabel(d.backupMethod,"label"),d);}}
+					,{ field: 'hostBackupMethod', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('备份方式'), templet: function (d) { return templet('hostBackupMethod' ,fox.joinLabel(d.backupMethod,"label"),d);}}
 					,{ field: 'hostBackupInfo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备份情况') , templet: function (d) { return templet('hostBackupInfo',d.hostBackupInfo,d);}  }
 					,{ field: 'offlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineTime',fox.dateFormat(d.offlineTime,"yyyy-MM-dd"),d); }}
 					,{ field: 'onlineTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineTime',fox.dateFormat(d.onlineTime,"yyyy-MM-dd"),d); }}
 					,{ field: 'labels', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('labels',d.labels,d);}  }
 					,{ field: 'hostNotes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('hostNotes',d.hostNotes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
-					,{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return templet('hostDbIds',fox.joinLabel(d.hostDbList,"name"),d);}}
-					,{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return templet('hostMiddlewareIds',fox.joinLabel(d.hostMiddlewareList,"name"),d);}}
-					,{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return templet('hostOsIds',fox.joinLabel(d.hostOsList,"name"),d);}}
-					,{ field: 'voucherIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('用户凭证'), templet: function (d) { return templet('voucherIds',fox.joinLabel(d.voucherList,"voucher"),d);}}
+					,{ field: 'hostDbIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('数据库'), templet: function (d) { return templet('hostDbIds' ,fox.joinLabel(d.hostDbList,"name"),d);}}
+					,{ field: 'hostMiddlewareIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('中间件'), templet: function (d) { return templet('hostMiddlewareIds' ,fox.joinLabel(d.hostMiddlewareList,"name"),d);}}
+					,{ field: 'hostOsIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('操作系统'), templet: function (d) { return templet('hostOsIds' ,fox.joinLabel(d.hostOsList,"name"),d);}}
+					,{ field: 'voucherIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('用户凭证'), templet: function (d) { return templet('voucherIds' ,fox.joinLabel(d.voucherList,"voucher"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }
 				]],
@@ -139,18 +140,18 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.systemId={ inputType:"select_box", value: xmSelect.get("#systemId",true).getValue("value"), fillWith:"infoSystem", label:xmSelect.get("#systemId",true).getValue("nameStr") };
+		value.systemId={ inputType:"select_box", value: xmSelect.get("#systemId",true).getValue("value") ,fillBy:["infoSystem"]  ,field:"id", label:xmSelect.get("#systemId",true).getValue("nameStr") };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
-		value.hostName={ inputType:"button",value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.hostIp={ inputType:"button",value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.hostVip={ inputType:"button",value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.environment={ inputType:"select_box", value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr") };
-		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value"), fillWith:"position", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+		value.hostName={ inputType:"button",value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.hostIp={ inputType:"button",value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.hostVip={ inputType:"button",value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.environment={ inputType:"select_box", value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr") ,field:"code"};
+		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  ,field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.labels={ inputType:"button",value: $("#labels").val()};
 		value.hostNotes={ inputType:"button",value: $("#hostNotes").val()};
-		value.hostDbIds={ inputType:"select_box", value: xmSelect.get("#hostDbIds",true).getValue("value"), fillWith:"hostDbList", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
-		value.hostMiddlewareIds={ inputType:"select_box", value: xmSelect.get("#hostMiddlewareIds",true).getValue("value"), fillWith:"hostMiddlewareList", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
-		value.hostOsIds={ inputType:"select_box", value: xmSelect.get("#hostOsIds",true).getValue("value"), fillWith:"hostOsList", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
+		value.hostDbIds={ inputType:"select_box", value: xmSelect.get("#hostDbIds",true).getValue("value") ,fillBy:["hostDbList"]  ,field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
+		value.hostMiddlewareIds={ inputType:"select_box", value: xmSelect.get("#hostMiddlewareIds",true).getValue("value") ,fillBy:["hostMiddlewareList"]  ,field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
+		value.hostOsIds={ inputType:"select_box", value: xmSelect.get("#hostOsIds",true).getValue("value") ,fillBy:["hostOsList"]  ,field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -159,6 +160,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

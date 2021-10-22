@@ -1,7 +1,7 @@
 /**
  * 机柜 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-17 10:57:01
+ * @since 2021-10-21 22:11:46
  */
 
 
@@ -11,6 +11,7 @@ function ListPage() {
 	//模块基础路径
 	const moduleURL="/service-datacenter/dc-rack";
 	var dataTable=null;
+	var sort=null;
 	/**
       * 入口函数，初始化
       */
@@ -72,7 +73,7 @@ function ListPage() {
 				where: ps,
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
-					{ fixed: 'left',type:'checkbox' }
+					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'rackCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('编码') , templet: function (d) { return templet('rackCode',d.rackCode,d);}  }
 					,{ field: 'rackName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('rackName',d.rackName,d);}  }
@@ -115,11 +116,11 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.rackCode={ inputType:"button",value: $("#rackCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.rackName={ inputType:"button",value: $("#rackName").val()};
 		value.pduNumber={ inputType:"number_input", value: $("#pduNumber").val() };
-		value.rackLabels={ inputType:"button",value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.rackLabels={ inputType:"button",value: $("#rackLabels").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.rackNotes={ inputType:"button",value: $("#rackNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -128,6 +129,12 @@ function ListPage() {
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
+			sort={ field : sortField,type : sortType} ;
+		} else {
+			if(sort) {
+				ps.sortField=sort.field;
+				ps.sortType=sort.type;
+			}
 		}
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });
