@@ -4,7 +4,7 @@ function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="#(moduleURL)";
-
+	var action=null;
 	var disableCreateNew=#(disableCreateNew);
 	var disableModify=#(disableModify);
 	/**
@@ -14,11 +14,12 @@ function FormPage() {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
+		action=admin.getTempData('#(formDataKey)-form-action');
 		//如果没有修改和保存权限，
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('#(formDataKey)-form-action')=="view") {
+		if(action=="view") {
 			disableModify=true;
 		}
 
@@ -133,8 +134,11 @@ function FormPage() {
 			#if(f.selectField.enumTypeName!=null)
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="#(f.selectField.defaultValues)".split(",");
-				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "#(f.selectField.defaultValues)".split(",");
+					defaultIndexs = "#(f.selectField.defaultIndexs)".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -150,8 +154,11 @@ function FormPage() {
 			#end
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="#(f.selectField.defaultValues)".split(",");
-				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "#(f.selectField.defaultValues)".split(",");
+					defaultIndexs = "#(f.selectField.defaultIndexs)".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -164,8 +171,11 @@ function FormPage() {
 			#if(f.selectField.dictCode!=null)
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="#(f.selectField.defaultValues)".split(",");
-				var defaultIndexs="#(f.selectField.defaultIndexs)".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "#(f.selectField.defaultValues)".split(",");
+					defaultIndexs = "#(f.selectField.defaultIndexs)".split(",");
+				}
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
