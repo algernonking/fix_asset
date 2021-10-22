@@ -237,6 +237,16 @@ public class AssetTranferController extends SuperController {
 		assetTranferService.join(assetTranfer,AssetTranferMeta.MANAGER);
 
 		assetTranferService.join(assetTranfer,AssetTranferMeta.USE_USER);
+
+
+
+		assetTranferService.dao().join(assetTranfer.getOriginator(), Person.class);
+
+		assetTranferService.dao().join(assetTranfer.getUseUser(), Person.class);
+
+		assetTranferService.dao().join(assetTranfer.getManager(), Person.class);
+
+
 		result.success(true).data(assetTranfer);
 		return result;
 	}

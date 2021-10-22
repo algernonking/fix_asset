@@ -6,13 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.system.DictItem;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:16
- * @sign 589E1015C17A455F8501ED446204E5AE
+ * @since 2021-10-22 21:47:45
+ * @sign AA6A744003ED3DEDED6476E5163EF764
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -299,9 +300,19 @@ public class AssetRepairMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.hrm.Employee> REPORT_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPORT_USER, org.github.foxnic.web.domain.hrm.Employee.class, "报修人", "报修人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 维修类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final String REPAIR_TYPE="repairType";
+	
+	/**
+	 * 维修类型 , 类型: org.github.foxnic.web.domain.system.DictItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetRepair,org.github.foxnic.web.domain.system.DictItem> REPAIR_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetRepair.class ,REPAIR_TYPE, org.github.foxnic.web.domain.system.DictItem.class, "维修类型", "维修类型", org.github.foxnic.web.domain.system.DictItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , REPAIR_STATUS , TYPE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , CONTENT , REPORT_USER_ID , PICTURE_ID , ORIGINATOR_ID , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , REPORT_USER , REPAIR_TYPE };
 	
 	/**
 	 * 代理类
@@ -616,6 +627,17 @@ public class AssetRepairMeta {
 		public AssetRepair setReportUser(Employee reportUser) {
 			super.change(REPORT_USER,super.getReportUser(),reportUser);
 			super.setReportUser(reportUser);
+			return this;
+		}
+		
+		/**
+		 * 设置 维修类型
+		 * @param repairType 维修类型
+		 * @return 当前对象
+		*/
+		public AssetRepair setRepairType(DictItem repairType) {
+			super.change(REPAIR_TYPE,super.getRepairType(),repairType);
+			super.setRepairType(repairType);
 			return this;
 		}
 	}

@@ -7,10 +7,14 @@ import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.AssetTranfer;
 import com.dt.platform.domain.eam.AssetTranferVO;
+
+import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import java.io.InputStream;
+import java.util.Map;
+
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -38,6 +42,12 @@ public interface IAssetTranferService extends ISuperService<AssetTranfer> {
 	Result approve(String instanceId, List<AssetTranfer> assets, String approveAction, String opinion);
 
 
+	/**
+	 * 获取单据数据
+	 * @param id ID
+	 * @return 返回结果
+	 * */
+	Map<String, Object> getBill(String id);
 
 
 	/**

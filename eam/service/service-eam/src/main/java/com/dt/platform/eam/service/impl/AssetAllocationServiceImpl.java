@@ -10,11 +10,16 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetAllocationMeta;
+import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.AssetDataChangeMeta;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -24,8 +29,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -42,11 +47,9 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
 
 /**
  * <p>
@@ -106,6 +109,21 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		return null;
 	}
 
+	@Override
+	public Map<String, Object> getBill(String id) {
+
+
+		AssetAllocation data=AssetAllocationServiceProxy.api().getById(id).getData();
+
+		join(data,AssetAllocationMeta.ASSET_LIST);
+		Map<String, Object> map= BeanUtil.toMap(data);
+		if(data.getStatus()!=null){
+			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
+			map.put("statusName", en==null?data.getStatus():en.text());
+		}
+		return map;
+
+	}
 
 
 	private void syncBill(String id, ChangeEvent event) {

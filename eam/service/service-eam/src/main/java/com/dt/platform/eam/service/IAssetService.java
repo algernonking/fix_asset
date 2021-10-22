@@ -1,7 +1,14 @@
 package com.dt.platform.eam.service;
 
 
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.domain.eam.AssetExtData;
+import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
+import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Asset;
@@ -12,6 +19,8 @@ import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import java.io.InputStream;
+import java.util.Map;
+
 import com.github.foxnic.sql.expr.OrderBy;
 import com.github.foxnic.sql.expr.SQL;
 import com.github.foxnic.sql.meta.DBField;
@@ -41,6 +50,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	Result approve(ProcessApproveVO approveVO);
 
 
+	List<Map<String, Object>> getBills(List<String> ids);
 
 
 	/**

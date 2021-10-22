@@ -112,9 +112,6 @@ public class EamRelationManager extends RelationManager {
     }
 
 
-
-
-
     private void setupTplFile() {
         this.property(TplFileMeta.BUSINESS_CODE_PROP)
                 .using(EAMTables.EAM_TPL_FILE.CODE).join(EAMTables.SYS_CODE_REGISTER.CODE);
@@ -244,10 +241,21 @@ public class EamRelationManager extends RelationManager {
 
 
 
+        // 维修类型
+        this.property(AssetRepairMeta.REPAIR_TYPE_PROP)
+                .using(EAMTables.EAM_ASSET_REPAIR.TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_repair_type'");
+
+
+
         // 报修人
         this.property(AssetRepairMeta.REPORT_USER_PROP)
                 .using(EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
 
 
     }

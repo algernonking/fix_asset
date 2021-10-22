@@ -3,7 +3,12 @@ package com.dt.platform.eam.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.deepoove.poi.XWPFTemplate;
+import com.deepoove.poi.config.Configure;
+import com.deepoove.poi.config.ConfigureBuilder;
+import com.deepoove.poi.policy.RenderPolicy;
+import com.deepoove.poi.template.ElementTemplate;
 import com.deepoove.poi.util.PoitlIOUtils;
+import com.deepoove.poi.policy.HackLoopTableRenderPolicy;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
@@ -26,6 +31,8 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * <p>
@@ -61,40 +68,80 @@ public class AssetBillController extends SuperController {
     @Autowired
     private IAssetScrapService assetScrapService;
 
+    @Autowired
+    private IAssetTranferService assetTranferService;
+
+
+    @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS)
+    public void queryAssetRegisterBills(List<String> ids,HttpServletResponse response) throws Exception {
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REGISTER_BILL.code());
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+     //   Configure config = Configure.builder().bind("assetList",policy).build();
+
+        List<Map<String,Object>> list=assetService.getBills(ids);
+        OutputStream outputStream = response.getOutputStream();
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+
+        for(int i=0;i<list.size();i++){
+            Map<String,Object> map=list.get(i);
+
+           // HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+            //Configure config = Configure.builder().bind("assetList",policy).build();
+            XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
+
+            String assetCode=map.get("assetCode").toString();
+            ZipEntry entry = new ZipEntry( assetCode+ ".docx");
+            zipOutputStream.putNextEntry(entry);
+
+            template.write(zipOutputStream);
+            zipOutputStream.flush();
+            template.close();
+
+        }
+
+        zipOutputStream.close();
+        outputStream.flush();
+        outputStream.close();
+
+//        response.setContentType("application/msword");
+//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
+//        OutputStream out = response.getOutputStream();
+//        BufferedOutputStream bos = new BufferedOutputStream(out);
+//        template.write(bos);
+//        bos.flush();
+//        out.flush();
+//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+    }
+
+
+
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILL)
-    public void queryTransferBill(List<String> ids,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_TRANFER_BILL.code());
-        HashMap<String, Object> map=new HashMap<String, Object>();
-        map.put("name","121212");
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-disposition","attachment;filename=\""+"asset.docx"+"\"");
+    public void queryTransferBill(String id,HttpServletResponse response) throws Exception {
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_TRANFER_BILL.code());
+
+        Map<String,Object> map=assetTranferService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
+        response.setContentType("application/msword");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
         bos.flush();
         out.flush();
         PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
     }
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_TRANSFER_BILLS)
-    public void queryTransferBills(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_TRANFER_BILL.code());
-        Map<String, Object> data=new HashMap<String, Object>();
-        AssetBorrow billdata=assetBorrowService.getById(id);
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
-        response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+    public void queryTransferBills(List<String> ids,HttpServletResponse response) throws Exception {
+
     }
 
 
@@ -118,14 +165,14 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_BORROW_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_BORROW_BILL)
     public void queryBorrowBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_BORROW_BILL.code());
-        Map<String, Object> data=new HashMap<String, Object>();
-        AssetBorrow billdata=assetBorrowService.getById(id);
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_BORROW_BILL.code());
+        Map<String,Object> map=assetBorrowService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("借用单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("借用单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
@@ -140,13 +187,12 @@ public class AssetBillController extends SuperController {
     @RequestMapping(AssetBillServiceProxy.QUERY_ALLOCATION_BILL)
     public void queryAllocationBill(String id,HttpServletResponse response) throws Exception {
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_ALLOCATE_BILL.code());
-        Map<String, Object> data=new HashMap<String, Object>();
-        AssetAllocation billdata=assetAllocationService.getById(id);
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+        Map<String,Object> map=assetAllocationService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调拨单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调拨单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
@@ -159,13 +205,12 @@ public class AssetBillController extends SuperController {
     @RequestMapping(AssetBillServiceProxy.QUERY_ALLOCATION_BILLS)
     public void queryAllocationBills(String id,HttpServletResponse response) throws Exception {
         InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_ALLOCATE_BILL.code());
-        Map<String, Object> data=new HashMap<String, Object>();
-        AssetAllocation billdata=assetAllocationService.getById(id);
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+        Map<String,Object> map=assetAllocationService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调拨单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("调拨单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
@@ -179,14 +224,12 @@ public class AssetBillController extends SuperController {
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_BILL)
     public void queryCollectionBill(String id,HttpServletResponse response) throws Exception {
         InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_BILL.code());
-        AssetCollection billdata=assetCollectionService.getById(id);
-        System.out.println(billdata);
-        Map<String,Object> data=new HashMap<String,Object>();
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+        Map<String,Object> map=assetCollectionService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("领用单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("领用单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
@@ -217,20 +260,20 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILL)
     public void queryCollectionReturnBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL.code());
-        AssetCollectionReturn billdata=assetCollectionReturnService.getById(id);
-        Map<String,Object> data=new HashMap<String,Object>();
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_COLLECTION_RETURN_BILL.code());
+        Map<String,Object> map=assetCollectionReturnService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("领用退库单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("领用退库单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
         bos.flush();
         out.flush();
         PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
     }
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_COLLECTION_RETURN_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -255,20 +298,23 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_REAPIR_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_REAPIR_BILL)
     public void queryRepairBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REPAIR_BILL.code());
-        AssetRepair billdata=assetRepairService.getById(id);
-        Map<String,Object> data=new HashMap<String,Object>();
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REPAIR_BILL.code());
+        Map<String,Object> map=assetRepairService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("维修单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("维修单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
         bos.flush();
         out.flush();
         PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+
+
     }
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_REAPIR_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -293,20 +339,22 @@ public class AssetBillController extends SuperController {
     @SentinelResource(value = AssetBillServiceProxy.QUERY_SCRAP_BILL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_SCRAP_BILL)
     public void queryScrapBill(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SCRAP_BILL.code());
-        AssetScrap billdata=assetScrapService.getById(id);
-        Map<String,Object> data=new HashMap<String,Object>();
-        data=BeanUtil.toMap(billdata);
-        System.out.println(data.toString());
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(data);
+
+        InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_SCRAP_BILL.code());
+        Map<String,Object> map=assetScrapService.getBill(id);
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        Configure config = Configure.builder().bind("assetList",policy).build();
+        XWPFTemplate template = XWPFTemplate.compile(inputstream,config).render(map);
         response.setContentType("application/msword");
-        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("报废单据-"+billdata.getBusinessCode()+".docx", "UTF-8"))));
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("报废单据-"+map.get("businessCode")+".docx", "UTF-8"))));
         OutputStream out = response.getOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(out);
         template.write(bos);
         bos.flush();
         out.flush();
         PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+
+
     }
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_SCRAP_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

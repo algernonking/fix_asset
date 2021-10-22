@@ -227,6 +227,10 @@ public class AssetCollectionReturnController extends SuperController {
 		assetCollectionReturnService.join(assetCollectionReturn,AssetCollectionReturnMeta.POSITION);
 		// 关联出 制单人 数据
 		assetCollectionReturnService.join(assetCollectionReturn,AssetCollectionReturnMeta.ORIGINATOR);
+
+		assetCollectionReturnService.dao().join(assetCollectionReturn.getOriginator(), Person.class);
+
+
 		result.success(true).data(assetCollectionReturn);
 		return result;
 	}

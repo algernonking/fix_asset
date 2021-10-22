@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetRepair;
-import com.dt.platform.domain.eam.meta.AssetRepairMeta;
-import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -26,7 +25,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
-import com.dt.platform.domain.eam.meta.AssetScrapVOMeta;
 import com.dt.platform.domain.eam.AssetScrap;
 import com.dt.platform.domain.eam.AssetScrapVO;
 import com.github.foxnic.api.transter.Result;
@@ -41,7 +39,7 @@ import com.github.foxnic.commons.io.StreamUtil;
 import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
-import com.dt.platform.domain.eam.meta.AssetScrapMeta;
+
 import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
@@ -221,6 +219,11 @@ public class AssetScrapController extends SuperController {
 	public Result<AssetScrap> getById(String id) {
 		Result<AssetScrap> result=new Result<>();
 		AssetScrap assetScrap=assetScrapService.getById(id);
+
+		assetScrapService.join(assetScrap, AssetScrapMeta.ORIGINATOR);
+
+		assetScrapService.dao().join(assetScrap.getOriginator(),Person.class);
+
 		result.success(true).data(assetScrap);
 		return result;
 	}

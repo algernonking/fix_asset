@@ -10,9 +10,11 @@ insert into sys_file(id,file_name,location,size,media_type,file_type)values('T00
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_5','eam_asset_allocate.docx','/tpl/T001/eam_asset_allocate.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_6','eam_asset_code.docx','/tpl/T001/eam_asset_code.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_7','eam_asset_card.docx','/tpl/T001/eam_asset_card.docx',10000,'application/octet-stream','docx');
-insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_8','eam_asset_tranfer.docx','/tpl/T001/eam_asset_tranfer',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_8','eam_asset_tranfer.docx','/tpl/T001/eam_asset_tranfer.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_9','eam_download_asset.docx','/tpl/T001/eam_download_asset.xls',10000,'application/octet-stream','xls');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_10','eam_download_scrap.docx','/tpl/T001/eam_asset_scrap.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_11','eam_asset_register.docx','/tpl/T001/eam_asset_register.docx',10000,'application/octet-stream','docx');
+
 
 delete from sys_tpl_file where tenant_id='T001' and type in ('eam_bill_docx','eam_asset_excel');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_1','eam_bill_docx','资产报修','eam_download_asset_repair_bill','T001_eam_1','T001');
@@ -25,9 +27,7 @@ insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_7'
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_8','eam_bill_docx','资产转移','eam_download_asset_tranfer_bill','T001_eam_8','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_9','eam_asset_excel','资产数据下载','eam_download_asset','T001_eam_9','T001');
 insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_10','eam_bill_docx','资产报废','eam_download_asset_scrap_bill','T001_eam_10','T001');
-
-
-
+insert into sys_tpl_file(id,type,name,code,file_id,tenant_id)values('T001_eam_11','eam_bill_docx','资产登记','eam_download_asset_register_bill','T001_eam_11','T001');
 
 
 

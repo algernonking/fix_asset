@@ -378,6 +378,27 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return null;
 	}
 
+	@Override
+	public List<Map<String, Object>> getBills(List<String> ids) {
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",ids);
+		PagedList<Asset> list= super.queryPagedList(null,expr,1,10000);
+		joinData(list);
+		List<Map<String, Object>> data=new ArrayList<>();
+		for(Asset e:list){
+			Map<String, Object> map= BeanUtil.toMap(e);
+			if(e.getStatus()!=null){
+				CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,e.getStatus());
+				map.put("statusName", en==null?e.getStatus():en.text());
+			}
+			if(e.getAssetStatus()!=null){
+				CodeTextEnum en= EnumUtil.parseByCode(AssetStatusEnum.class,e.getAssetStatus());
+				map.put("assetStatusName", en==null?e.getAssetStatus():en.text());
+			}
+		}
+		return data;
+	}
+
 
 	/**
 	 * 操作成功
@@ -765,6 +786,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(StringUtil.isBlank(sample.getOwnerCode())){
 			expr.and("owner_code=?",AssetOwnerCodeEnum.ASSET.code());
 		}
+
 
 		ConditionExpr base=this.buildQueryCondition(sample,"t");
 		expr.and(base);

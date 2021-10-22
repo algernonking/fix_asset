@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:26
+ * @since 2021-10-22 21:47:55
  */
 
 layui.config({

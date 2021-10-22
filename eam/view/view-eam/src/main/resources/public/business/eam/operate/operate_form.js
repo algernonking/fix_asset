@@ -1,14 +1,14 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:11:49
+ * @since 2021-10-22 21:47:13
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-operate";
-
+	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
 	/**
@@ -18,11 +18,12 @@ function FormPage() {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
+		action=admin.getTempData('eam-operate-form-data-form-action');
 		//如果没有修改和保存权限，
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-operate-form-data-form-action')=="view") {
+		if(action=="view") {
 			disableModify=true;
 		}
 
@@ -85,8 +86,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {

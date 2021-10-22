@@ -11,13 +11,19 @@ import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
+import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
 import com.dt.platform.domain.eam.meta.AssetCollectionReturnMeta;
 import com.dt.platform.eam.common.AssetCommonError;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
+import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -27,8 +33,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -45,12 +51,10 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.eam.service.IAssetCollectionReturnService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
 
 /**
  * <p>
@@ -104,6 +108,20 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	@Override
 	public Result approve(String instanceId,List<AssetCollectionReturn> assets, String approveAction, String opinion) {
 		return null;
+	}
+
+	@Override
+	public Map<String, Object> getBill(String id) {
+
+		AssetCollectionReturn data= AssetCollectionReturnServiceProxy.api().getById(id).getData();
+		join(data, AssetCollectionReturnMeta.ASSET_LIST);
+
+		Map<String, Object> map= BeanUtil.toMap(data);
+		if(data.getStatus()!=null){
+			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
+			map.put("statusName", en==null?data.getStatus():en.text());
+		}
+		return map;
 	}
 
 	private void syncBill(String id, ChangeEvent event) {

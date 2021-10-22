@@ -28,6 +28,15 @@ public interface AssetBillServiceProxy {
      */
     public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
 
+    /**
+     * 查询资产单据
+     */
+    public static final String QUERY_ASSET_REGISTER_BILLS = API_PREFIX + "query-asset-register-bills";
+
+
+    public static final String QUERY_ASSET_REGISTER_BILL = API_PREFIX + "query-asset-register-bill";
+
+
 
     /**
      * 查询资产单据

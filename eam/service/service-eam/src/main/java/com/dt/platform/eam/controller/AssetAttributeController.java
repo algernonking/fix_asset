@@ -221,6 +221,7 @@ public class AssetAttributeController extends SuperController {
 	public Result<AssetAttribute> getById(String id) {
 		Result<AssetAttribute> result=new Result<>();
 		AssetAttribute assetAttribute=assetAttributeService.getById(id);
+
 		result.success(true).data(assetAttribute);
 		return result;
 	}
@@ -294,8 +295,6 @@ public class AssetAttributeController extends SuperController {
 		@ApiImplicitParam(name = AssetAttributeVOMeta.REQUIRED_MODIFY , value = "是否修改" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_TYPE , value = "组件类型" , required = false , dataTypeClass=String.class , example = "text_input"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.COMPONENT_CONTENT , value = "组件内容" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetAttributeVOMeta.OWNER , value = "归属" , required = false , dataTypeClass=String.class , example = "asset"),
 })

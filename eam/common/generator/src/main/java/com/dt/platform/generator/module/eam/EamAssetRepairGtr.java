@@ -5,10 +5,7 @@ import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetRepairStatusEnum;
 import com.dt.platform.domain.eam.Asset;
-import com.dt.platform.domain.eam.meta.AssetHandleVOMeta;
-import com.dt.platform.domain.eam.meta.AssetRepairVOMeta;
-import com.dt.platform.domain.eam.meta.CategoryMeta;
-import com.dt.platform.domain.eam.meta.GoodsMeta;
+import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.eam.page.AssetHandlePageController;
 import com.dt.platform.eam.page.AssetRepairPageController;
 import com.dt.platform.eam.page.PositionPageController;
@@ -23,6 +20,9 @@ import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
+import org.github.foxnic.web.domain.system.DictItem;
+import org.github.foxnic.web.domain.system.meta.DictItemMeta;
+import org.github.foxnic.web.proxy.system.DictItemServiceProxy;
 
 public class EamAssetRepairGtr extends BaseCodeGenerator{
     public EamAssetRepairGtr() {
@@ -35,9 +35,11 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
        // cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetRepairVOMeta.ASSET_IDS);
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"reportUser","报修人","报修人");
 
+        cfg.getPoClassFile().addSimpleProperty(DictItem.class,"repairType","维修类型","维修类型");
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ID).basic().hidden(true);
@@ -71,7 +73,15 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
-                .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
+                .basic().label("维修类型")
+                .form().selectBox().queryApi(DictItemServiceProxy.QUERY_LIST+"?dictCode=eam_repair_type")
+                .paging(false).filter(false).toolbar(false)
+                .valueField(DictItemMeta.CODE).
+                textField(DictItemMeta.LABEL).
+                fillWith(AssetRepairMeta.TYPE).muliti(false);
+
+//        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE)
+//                .form().selectBox().dict(DictEnum.EAM_REPAIR_TYPE).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID).table().fillBy("reportUser","nameAndBadge");

@@ -226,6 +226,10 @@ public class AssetAllocationController extends SuperController {
 		assetAllocationService.join(assetAllocation,AssetAllocationMeta.MANAGER);
 		// 关联出 制单人 数据
 		assetAllocationService.join(assetAllocation,AssetAllocationMeta.ORIGINATOR);
+
+		assetAllocationService.dao().join(assetAllocation.getManager(),Person.class);
+		assetAllocationService.dao().join(assetAllocation.getOriginator(),Person.class);
+
 		result.success(true).data(assetAllocation);
 		return result;
 	}

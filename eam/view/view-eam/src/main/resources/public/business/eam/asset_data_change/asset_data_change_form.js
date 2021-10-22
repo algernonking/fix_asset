@@ -11,6 +11,7 @@ function FormPage() {
 
 	var disableCreateNew=false;
 	var disableModify=false;
+	var action=null;
 	var categorySelect;
 	/**
       * 入口函数，初始化
@@ -19,11 +20,12 @@ function FormPage() {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
+		action=admin.getTempData('eam-asset-data-change-form-data-form-action');
 		//如果没有修改和保存权限，
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-asset-data-change-form-data-form-action')=="view") {
+		if(action=="view") {
 			disableModify=true;
 		}
 
@@ -122,8 +124,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -141,8 +146,11 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -161,8 +169,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -183,8 +194,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -204,8 +218,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -271,8 +288,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -292,8 +312,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -317,8 +340,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -337,8 +363,11 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -356,8 +385,11 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -376,8 +408,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -395,8 +430,11 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -421,8 +459,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -441,8 +482,11 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -465,8 +509,11 @@ function FormPage() {
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -513,6 +560,11 @@ function FormPage() {
 			trigger:"click"
 		});
 
+		laydate.render({
+			elem: '#registerDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
 
 	}
 
@@ -579,6 +631,10 @@ function FormPage() {
 			//设置 生产日期 显示复选框勾选
 			if(formData["productionDate"]) {
 				$("#productionDate").val(fox.dateFormat(formData["productionDate"],"yyyy-MM-dd"));
+			}
+			//设置 生产日期 显示复选框勾选
+			if(formData["registerDate"]) {
+				$("#registerDate").val(fox.dateFormat(formData["registerDate"],"yyyy-MM-dd"));
 			}
 
 

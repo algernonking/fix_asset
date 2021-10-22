@@ -226,6 +226,17 @@ public class AssetRepairController extends SuperController {
 	public Result<AssetRepair> getById(String id) {
 		Result<AssetRepair> result=new Result<>();
 		AssetRepair assetRepair=assetRepairService.getById(id);
+
+		assetRepairService.join(assetRepair,AssetRepairMeta.REPAIR_TYPE);
+
+		assetRepairService.join(assetRepair,AssetRepairMeta.ORIGINATOR);
+
+		assetRepairService.join(assetRepair,AssetRepairMeta.REPORT_USER);
+
+		assetRepairService.dao().join(assetRepair.getOriginator(),Person.class);
+
+		assetRepairService.dao().join(assetRepair.getReportUser(),Person.class);
+
 		result.success(true).data(assetRepair);
 		return result;
 	}
@@ -314,6 +325,7 @@ public class AssetRepairController extends SuperController {
 		// 关联出 制单人 数据
 		assetRepairService.join(list, AssetRepairMeta.ORIGINATOR);
 		assetRepairService.join(list, AssetRepairMeta.REPORT_USER);
+		assetRepairService.join(list,AssetRepairMeta.REPAIR_TYPE);
 
 
 		List<Employee> employees= CollectorUtil.collectList(list,AssetRepair::getOriginator);

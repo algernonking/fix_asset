@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:17
+ * @since 2021-10-22 21:47:45
  */
 
 
@@ -79,7 +79,7 @@ function ListPage() {
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态'), templet:function (d){ return templet('repairStatus',fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus),d);}}
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修类型'), templet:function (d){ return templet('type',fox.getDictText(SELECT_TYPE_DATA,d.type),d);}}
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修类型'), templet: function (d) { return templet('type' ,fox.joinLabel(d.type,"label"),d);}}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期'), templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期'), templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') , templet: function (d) { return templet('content',d.content,d);}  }
@@ -124,7 +124,7 @@ function ListPage() {
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
 		value.repairStatus={ inputType:"select_box", value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr") ,field:"code"};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") ,field:"code"};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value") ,fillBy:["type"]  ,field:"code", label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.reportUserId={ inputType:"button",value: $("#reportUserId").val(),fillBy:["reportUser","nameAndBadge"] };
 		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
@@ -219,9 +219,10 @@ function ListPage() {
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({name:data[i].label,value:data[i].code});
 				}
 				return opts;
 			}

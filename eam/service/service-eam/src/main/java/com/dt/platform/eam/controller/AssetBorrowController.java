@@ -226,6 +226,9 @@ public class AssetBorrowController extends SuperController {
 		assetBorrowService.join(assetBorrow,AssetBorrowMeta.BORROWER);
 		// 关联出 制单人 数据
 		assetBorrowService.join(assetBorrow,AssetBorrowMeta.ORIGINATOR);
+
+		assetBorrowService.dao().join(assetBorrow.getOriginator(),Person.class);
+		assetBorrowService.dao().join(assetBorrow.getBorrower(),Person.class);
 		result.success(true).data(assetBorrow);
 		return result;
 	}

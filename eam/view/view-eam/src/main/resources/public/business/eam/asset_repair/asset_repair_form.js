@@ -1,14 +1,14 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:17
+ * @since 2021-10-22 21:47:45
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-asset-repair";
-
+	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
 	/**
@@ -18,11 +18,12 @@ function FormPage() {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
+		action=admin.getTempData('eam-asset-repair-form-data-form-action');
 		//如果没有修改和保存权限，
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
-		if(admin.getTempData('eam-asset-repair-form-data-form-action')=="view") {
+		if(action=="view") {
 			disableModify=true;
 		}
 
@@ -83,8 +84,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -101,8 +105,11 @@ function FormPage() {
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="repairing".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "repairing".split(",");
+					defaultIndexs = "".split(",");
+				}
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
@@ -119,12 +126,16 @@ function FormPage() {
 			//转换数据
 			transform: function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues="repairing".split(",");
-				var defaultIndexs="".split(",");
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
 				var opts=[];
+				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -204,8 +215,8 @@ function FormPage() {
 
 			//设置  维修状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
-			//设置  报修类型 设置下拉框勾选
-			fox.setSelectValue4Dict("#type",formData.type,SELECT_TYPE_DATA);
+			//设置  维修类型 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#type",formData.type);
 
 			//处理fillBy
 
@@ -256,7 +267,7 @@ function FormPage() {
 
 		//获取 维修状态 下拉框的值
 		data["repairStatus"]=fox.getSelectedValue("repairStatus",false);
-		//获取 报修类型 下拉框的值
+		//获取 维修类型 下拉框的值
 		data["type"]=fox.getSelectedValue("type",false);
 
 		return data;

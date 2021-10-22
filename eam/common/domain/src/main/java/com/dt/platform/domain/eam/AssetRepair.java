@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产报修
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:16
- * @sign 589E1015C17A455F8501ED446204E5AE
+ * @since 2021-10-22 21:47:45
+ * @sign AA6A744003ED3DEDED6476E5163EF764
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -199,6 +200,12 @@ public class AssetRepair extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="报修人" , notes = "报修人")
 	private Employee reportUser;
+	
+	/**
+	 * 维修类型：维修类型
+	*/
+	@ApiModelProperty(required = false,value="维修类型" , notes = "维修类型")
+	private DictItem repairType;
 	
 	/**
 	 * 获得 主键<br>
@@ -751,6 +758,25 @@ public class AssetRepair extends Entity {
 	*/
 	public AssetRepair setReportUser(Employee reportUser) {
 		this.reportUser=reportUser;
+		return this;
+	}
+	
+	/**
+	 * 获得 维修类型<br>
+	 * 维修类型
+	 * @return 维修类型
+	*/
+	public DictItem getRepairType() {
+		return repairType;
+	}
+	
+	/**
+	 * 设置 维修类型
+	 * @param repairType 维修类型
+	 * @return 当前对象
+	*/
+	public AssetRepair setRepairType(DictItem repairType) {
+		this.repairType=repairType;
 		return this;
 	}
 

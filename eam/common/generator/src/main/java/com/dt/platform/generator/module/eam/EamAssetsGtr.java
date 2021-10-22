@@ -260,8 +260,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.REMAIN_NUMBER).form().numberInput().allowNegative(false).scale(0);
 
         cfg.view().field(EAMTables.EAM_ASSET.SERVICE_LIFE).form().numberInput().allowNegative(false).scale(2);
-        cfg.view().field(EAMTables.EAM_ASSET.TAXAMOUNT_RATE).form().numberInput().allowNegative(false).scale(2);
-        cfg.view().field(EAMTables.EAM_ASSET.TAXAMOUNT_PRICE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.TAX_AMOUNT_RATE).form().numberInput().allowNegative(false).scale(2);
+        cfg.view().field(EAMTables.EAM_ASSET.TAX_AMOUNT_PRICE).form().numberInput().allowNegative(false).scale(2);
         cfg.view().field(EAMTables.EAM_ASSET.ORIGINAL_UNIT_PRICE).form().numberInput().allowNegative(false).scale(2);
         cfg.view().field(EAMTables.EAM_ASSET.ACCUMULATED_DEPRECIATION).form().numberInput().allowNegative(false).scale(2);
         cfg.view().field(EAMTables.EAM_ASSET.RESIDUALS_RATE).form().numberInput().allowNegative(false).scale(2);

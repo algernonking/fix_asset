@@ -17,7 +17,12 @@ import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
+import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
+import com.github.foxnic.api.constant.CodeTextEnum;
+import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.sql.expr.SQL;
 import org.github.foxnic.web.domain.changes.ChangeEvent;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -27,8 +32,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
 import com.github.foxnic.dao.entity.SuperService;
@@ -45,12 +50,10 @@ import com.github.foxnic.sql.meta.DBField;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.eam.service.IAssetScrapService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
-import java.util.Date;
 
 /**
  * <p>
@@ -111,6 +114,18 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		return null;
 	}
 
+	@Override
+	public Map<String, Object> getBill(String id) {
+		AssetScrap data= AssetScrapServiceProxy.api().getById(id).getData();
+		join(data, AssetScrapMeta.ASSET_LIST);
+
+		Map<String, Object> map= BeanUtil.toMap(data);
+		if(data.getStatus()!=null){
+			CodeTextEnum en= EnumUtil.parseByCode(AssetHandleStatusEnum.class,data.getStatus());
+			map.put("statusName", en==null?data.getStatus():en.text());
+		}
+		return map;
+	}
 
 	private void syncBill(String id, ChangeEvent event) {
 		AssetScrap asset4Update=AssetScrap.create();

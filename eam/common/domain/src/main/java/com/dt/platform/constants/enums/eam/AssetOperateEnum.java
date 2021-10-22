@@ -29,6 +29,10 @@ public enum AssetOperateEnum implements CodeTextEnum {
 
     EAM_DOWNLOAD_ASSET("eam_download_asset", "EAM_资产数据下载"),
 
+    EAM_DOWNLOAD_ASSET_REGISTER_BILL("eam_download_asset_register_bill" , "EAM_资产登记单据"),
+
+    EAM_DOWNLOAD_ASSET_REGISTER_BILLS("eam_download_asset_register_bills" , "EAM_资产登记单据"),
+
     EAM_DOWNLOAD_ASSET_CARD("eam_download_asset_card" , "EAM_资产卡片下载"),
 
     EAM_DOWNLOAD_ASSET_LABEl("eam_download_asset_label" , "EAM_资产标签下载"),

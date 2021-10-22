@@ -230,6 +230,11 @@ public class AssetCollectionController extends SuperController {
 		assetCollectionService.join(assetCollection,AssetCollectionMeta.POSITION);
 		// 关联出 制单人 数据
 		assetCollectionService.join(assetCollection,AssetCollectionMeta.ORIGINATOR);
+		assetCollectionService.join(assetCollection,AssetCollectionMeta.ASSET_LIST);
+
+		assetCollectionService.dao().join(assetCollection.getUseUser(), Person.class);
+		assetCollectionService.dao().join(assetCollection.getOriginator(), Person.class);
+
 		result.success(true).data(assetCollection);
 		return result;
 	}

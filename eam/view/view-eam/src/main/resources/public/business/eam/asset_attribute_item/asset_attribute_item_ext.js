@@ -155,8 +155,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                         //转换数据
                         transform:function(data) {
                             //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-                            var defaultValues="".split(",");
-                            var defaultIndexs="".split(",");
+                            var defaultValues=[],defaultIndexs=[];
+                             defaultValues="".split(",");
+                             defaultIndexs="".split(",");
                             var opts=[];
                             if(!data) return opts;
                             for (var i = 0; i < data.length; i++) {
@@ -178,8 +179,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
                         transform: function(data) {
                             //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-                            var defaultValues="".split(",");
-                            var defaultIndexs="".split(",");
+                            var defaultValues=[],defaultIndexs=[];
+
+                            defaultValues="".split(",");
+                            defaultIndexs="".split(",");
+
                             var opts=[];
                             if(!data) return opts;
                             for (var i = 0; i < data.length; i++) {

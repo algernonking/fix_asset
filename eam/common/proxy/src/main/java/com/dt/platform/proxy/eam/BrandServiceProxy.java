@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 品牌  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-21 22:12:23
+ * @since 2021-10-22 21:47:52
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = BrandServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
