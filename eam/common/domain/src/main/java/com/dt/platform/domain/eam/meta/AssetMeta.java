@@ -25,8 +25,8 @@ import com.dt.platform.domain.datacenter.Rack;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-19 08:56:42
- * @sign A0AD69BFFCAD6509EEB313B2FBE379B1
+ * @since 2021-10-23 13:22:31
+ * @sign 1140917BF5273553DC1503BA1272AC8A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -343,14 +343,14 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.Integer> REMAIN_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,REMAIN_NUMBER, java.lang.Integer.class, "剩余数量", "剩余数量", java.lang.Integer.class, null);
 	
 	/**
-	 * 采购日期 , 类型: java.util.Date
+	 * 购置日期 , 类型: java.util.Date
 	*/
 	public static final String PURCHASE_DATE="purchaseDate";
 	
 	/**
-	 * 采购日期 , 类型: java.util.Date
+	 * 购置日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> PURCHASE_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PURCHASE_DATE, java.util.Date.class, "采购日期", "采购日期", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> PURCHASE_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PURCHASE_DATE, java.util.Date.class, "购置日期", "购置日期", java.util.Date.class, null);
 	
 	/**
 	 * 生产日期 , 类型: java.util.Date
@@ -361,6 +361,16 @@ public class AssetMeta {
 	 * 生产日期 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> PRODUCTION_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,PRODUCTION_DATE, java.util.Date.class, "生产日期", "生产日期", java.util.Date.class, null);
+	
+	/**
+	 * 登记时间 , 类型: java.util.Date
+	*/
+	public static final String REGISTER_DATE="registerDate";
+	
+	/**
+	 * 登记时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.util.Date> REGISTER_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,REGISTER_DATE, java.util.Date.class, "登记时间", "登记时间", java.util.Date.class, null);
 	
 	/**
 	 * 资产RFID , 类型: java.lang.String
@@ -535,22 +545,32 @@ public class AssetMeta {
 	/**
 	 * 税额 , 类型: java.math.BigDecimal
 	*/
-	public static final String TAXAMOUNT_RATE="taxamountRate";
+	public static final String TAX_AMOUNT_RATE="taxAmountRate";
 	
 	/**
 	 * 税额 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAXAMOUNT_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAXAMOUNT_RATE, java.math.BigDecimal.class, "税额", "税额", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAX_AMOUNT_RATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAX_AMOUNT_RATE, java.math.BigDecimal.class, "税额", "税额", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 含税金额 , 类型: java.math.BigDecimal
 	*/
-	public static final String TAXAMOUNT_PRICE="taxamountPrice";
+	public static final String TAX_AMOUNT_PRICE="taxAmountPrice";
 	
 	/**
 	 * 含税金额 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAXAMOUNT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAXAMOUNT_PRICE, java.math.BigDecimal.class, "含税金额", "含税金额", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TAX_AMOUNT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TAX_AMOUNT_PRICE, java.math.BigDecimal.class, "含税金额", "含税金额", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 资产总值 , 类型: java.math.BigDecimal
+	*/
+	public static final String TOTAL_AMOUNT_PRICE="totalAmountPrice";
+	
+	/**
+	 * 资产总值 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.math.BigDecimal> TOTAL_AMOUNT_PRICE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,TOTAL_AMOUNT_PRICE, java.math.BigDecimal.class, "资产总值", "资产总值", java.math.BigDecimal.class, null);
 	
 	/**
 	 * 资产原值(单价) , 类型: java.math.BigDecimal
@@ -1095,7 +1115,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAXAMOUNT_RATE , TAXAMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , REGISTER_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAX_AMOUNT_RATE , TAX_AMOUNT_PRICE , TOTAL_AMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK };
 	
 	/**
 	 * 代理类
@@ -1447,8 +1467,8 @@ public class AssetMeta {
 		}
 		
 		/**
-		 * 设置 采购日期
-		 * @param purchaseDate 采购日期
+		 * 设置 购置日期
+		 * @param purchaseDate 购置日期
 		 * @return 当前对象
 		*/
 		public Asset setPurchaseDate(Date purchaseDate) {
@@ -1465,6 +1485,17 @@ public class AssetMeta {
 		public Asset setProductionDate(Date productionDate) {
 			super.change(PRODUCTION_DATE,super.getProductionDate(),productionDate);
 			super.setProductionDate(productionDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 登记时间
+		 * @param registerDate 登记时间
+		 * @return 当前对象
+		*/
+		public Asset setRegisterDate(Date registerDate) {
+			super.change(REGISTER_DATE,super.getRegisterDate(),registerDate);
+			super.setRegisterDate(registerDate);
 			return this;
 		}
 		
@@ -1657,23 +1688,34 @@ public class AssetMeta {
 		
 		/**
 		 * 设置 税额
-		 * @param taxamountRate 税额
+		 * @param taxAmountRate 税额
 		 * @return 当前对象
 		*/
-		public Asset setTaxamountRate(BigDecimal taxamountRate) {
-			super.change(TAXAMOUNT_RATE,super.getTaxamountRate(),taxamountRate);
-			super.setTaxamountRate(taxamountRate);
+		public Asset setTaxAmountRate(BigDecimal taxAmountRate) {
+			super.change(TAX_AMOUNT_RATE,super.getTaxAmountRate(),taxAmountRate);
+			super.setTaxAmountRate(taxAmountRate);
 			return this;
 		}
 		
 		/**
 		 * 设置 含税金额
-		 * @param taxamountPrice 含税金额
+		 * @param taxAmountPrice 含税金额
 		 * @return 当前对象
 		*/
-		public Asset setTaxamountPrice(BigDecimal taxamountPrice) {
-			super.change(TAXAMOUNT_PRICE,super.getTaxamountPrice(),taxamountPrice);
-			super.setTaxamountPrice(taxamountPrice);
+		public Asset setTaxAmountPrice(BigDecimal taxAmountPrice) {
+			super.change(TAX_AMOUNT_PRICE,super.getTaxAmountPrice(),taxAmountPrice);
+			super.setTaxAmountPrice(taxAmountPrice);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产总值
+		 * @param totalAmountPrice 资产总值
+		 * @return 当前对象
+		*/
+		public Asset setTotalAmountPrice(BigDecimal totalAmountPrice) {
+			super.change(TOTAL_AMOUNT_PRICE,super.getTotalAmountPrice(),totalAmountPrice);
+			super.setTotalAmountPrice(totalAmountPrice);
 			return this;
 		}
 		

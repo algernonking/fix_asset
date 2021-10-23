@@ -3,12 +3,13 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.dt.platform.constants.db.EAMTables;
+import com.deepoove.poi.data.PictureType;
+import com.deepoove.poi.data.Pictures;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
-import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetMeta;
 import com.dt.platform.eam.common.ResetOnCloseInputStream;
@@ -29,13 +30,16 @@ import com.github.foxnic.dao.meta.DBTableMeta;
 import com.github.foxnic.dao.sql.SQLBuilder;
 import com.github.foxnic.sql.expr.*;
 import com.github.foxnic.sql.treaty.DBTreaty;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import org.apache.poi.ss.usermodel.*;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
-import org.github.foxnic.web.domain.changes.meta.ExampleOrderMeta;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
-import org.github.foxnic.web.domain.hrm.meta.EmployeeMeta;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
@@ -45,6 +49,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
 
@@ -67,7 +72,7 @@ import org.github.foxnic.web.framework.dao.DBConfigs;
  * 资产 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-09-20 21:49:26
+ * @since 2021-09-20 21:49:
 */
 
 
@@ -117,6 +122,34 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 		matcher.appendTail(sb);
 		return sb.toString();
+	}
+
+
+	@Override
+	public JSONArray queryAssetStatusList(String owner){
+		JSONArray arr=new JSONArray();
+		for(CodeTextEnum en:AssetStatusEnum.values()){
+			boolean fill=false;
+			if(AssetOwnerCodeEnum.ASSET.code().equals(owner)){
+				if(AssetStatusEnum.ALLOCATING.code().equals(en.code())
+						|| AssetStatusEnum.REPAIR.code().equals(en.code())
+						||AssetStatusEnum.USING.code().equals(en.code())
+						||AssetStatusEnum.SCRAP.code().equals(en.code())
+						||AssetStatusEnum.BORROW.code().equals(en.code())
+						||AssetStatusEnum.IDLE.code().equals(en.code())
+				){
+					fill=true;
+				}
+			}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(owner)){
+			}
+			if(fill){
+				JSONObject e=new JSONObject();
+				e.put("code",en.code());
+				e.put("label",en.text());
+				arr.add(e);
+			}
+		}
+		return arr;
 	}
 
 	/**
@@ -220,7 +253,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 						}
 					}
 				}
-			}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType) ){
+			}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType)
+			  		 ||AssetAttributeValueTypeEnum.DOUBLE.code().equals(valueType)
+					||AssetAttributeValueTypeEnum.DATE.code().equals(valueType)
+					||AssetAttributeValueTypeEnum.INTEGER.code().equals(valueType)
+			){
 				before=assetJsonBefore.getString(rkey);
 				after=assetJsonAfter.getString(rkey);
 			}else{
@@ -325,6 +362,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 		Logger.info("需要更新的字段列表:"+rChangeMap);
 		//获取before数据
+
 		dao.fill(assetBefore).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
 				.with(AssetMeta.GOODS)
@@ -378,11 +416,39 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return null;
 	}
 
+	/**
+	 * @Description:生成资产标签图片
+	 * @param type
+	 * @param data
+	 */
+	private BufferedImage createAssetsPic(String type, String data) {
+		BarcodeFormat format = BarcodeFormat.QR_CODE;
+		int w = 500;
+		int h = 500;
+		if ("rwm".equals(type)) {
+			format = BarcodeFormat.QR_CODE;
+			w = 450;
+			h = 450;
+		} else if ("txm".equals(type)) {
+			format = BarcodeFormat.CODE_128;
+			h = 180;
+			w = 450;
+		}
+		BitMatrix bitMatrix = null;
+		try {
+			bitMatrix = new MultiFormatWriter().encode(data, format, w, h);
+		} catch (WriterException e) {
+			e.printStackTrace();
+		}
+		BufferedImage buffImg = MatrixToImageWriter.toBufferedImage(bitMatrix);
+		return buffImg;
+	}
+
 	@Override
 	public List<Map<String, Object>> getBills(List<String> ids) {
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
-		PagedList<Asset> list= super.queryPagedList(null,expr,1,10000);
+		PagedList<Asset> list= super.queryPagedList(new Asset(),expr,10000,1);
 		joinData(list);
 		List<Map<String, Object>> data=new ArrayList<>();
 		for(Asset e:list){
@@ -395,6 +461,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				CodeTextEnum en= EnumUtil.parseByCode(AssetStatusEnum.class,e.getAssetStatus());
 				map.put("assetStatusName", en==null?e.getAssetStatus():en.text());
 			}
+
+			String assetCode=e.getAssetCode()==null?"null":e.getAssetCode();
+			map.put("assetTxm", Pictures.ofBufferedImage(createAssetsPic("txm", assetCode), PictureType.PNG).size(190,50).create());
+
+			data.add(map);
 		}
 		return data;
 	}
@@ -574,7 +645,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 		}
 
-
+		//填充一些默认数据
 		//制单人
 		if(StringUtil.isBlank(asset.getOriginatorId())){
 			asset.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -585,17 +656,46 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+		//资产数量
+		if(StringUtil.isBlank(asset.getAssetNumber())){
+			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
+				asset.setAssetNumber(1);
+			//}
+		}
+
+		//剩余数量
+		if(StringUtil.isBlank(asset.getRemainNumber())){
+			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
+				asset.setRemainNumber(1);
+			//}
+		}
+
+		//登记日期
+		if(asset.getRegisterDate()==null){
+			asset.setRegisterDate(new Date());
+		}
 
 		//编码
 		if(StringUtil.isBlank(asset.getAssetCode())&&!StringUtil.isBlank(asset.getOwnerCode())){
+			String codeRule="";
 			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
-				Result codeResult= CodeModuleServiceProxy.api().generateCode(CodeModuleEnum.EAM_ASSET_CODE.code());
+				codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
+			}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
+				codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
+			}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(asset.getOwnerCode())){
+				codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();
+			}
+
+
+			if(!StringUtil.isBlank(codeRule)){
+				Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule) ;
 				if(!codeResult.isSuccess()){
 					return codeResult;
 				}else{
 					asset.setAssetCode(codeResult.getData().toString());
 				}
 			}
+
 		}
 
 		//资产状态
@@ -604,7 +704,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				asset.setAssetStatus(AssetStatusEnum.IDLE.code());
 			}
 		}
-
 
 		Result r=super.insert(asset);
 		return r;
@@ -961,7 +1060,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 
-	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String assetOwner,String bussinessType,boolean dataType) {
+	public List<ValidateResult> importData(RcdSet rs,HashMap<String,List<CatalogAttribute>> attributeMap,boolean batch,String assetOwner,boolean dataType) {
 		List<ValidateResult> errors=new ArrayList<>();
 		DBTableMeta tm=dao().getTableMeta(this.table());
 		DBTreaty dbTreaty= dao().getDBTreaty();
@@ -1057,16 +1156,35 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			String sql="";
 			if("insert".equals(actionType)){
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
+
+
+				//资产编号
+				String codeRule="";
+				String approvalRule="";
+				if(AssetOwnerCodeEnum.ASSET.code().equals(assetOwner)){
+					codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
+					approvalRule=AssetOperateEnum.EAM_ASSET_INSERT.code();
+
+				}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetOwner)){
+					codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
+				//	approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_INSERT.code();
+
+				}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(assetOwner)){
+					codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();
+					approvalRule=AssetOperateEnum.EAM_ASSET_SOFTWARE_INSERT.code();
+				}else{
+					errors.add(new ValidateResult(null,(i+1),"资产ownerCode设置错误"));
+				}
+
 				//办理情况
-				if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_INSERT.code()) ){
+				if(operateService.approvalRequired(approvalRule) ){
 					insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
 					//提交审批
 				}else{
 					insert.set("status",AssetHandleStatusEnum.COMPLETE.code());
 				}
 
-				//资产编号
-				Result codeResult= CodeModuleServiceProxy.api().generateCode(bussinessType);
+				Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule);
 				if(!codeResult.isSuccess()){
 					//返回报错
 					errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
@@ -1074,6 +1192,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				}else{
 					insert.set("asset_code",codeResult.getData().toString());
 				}
+
+				//数量
+				if (StringUtil.isBlank(r.getString("asset_number"))){
+					insert.set("asset_number",1);
+				}
+				if (StringUtil.isBlank(r.getString("remain_number"))){
+					insert.set("remain_number",1);
+				}
+
+				//登记时间
+				if (StringUtil.isBlank(r.getString("register_date"))){
+					insert.set("register_date",new Date());
+				}
+
 
 				insert.set(AssetDataExportColumnEnum.ASSET_ID.text(),assetId);
 				insert.set("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
@@ -1155,7 +1287,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 	@Override
-	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,String bussinessType,boolean dataType) {
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,boolean dataType) {
 
 		List<ValidateResult> errors=new ArrayList<>();
 		ExcelReader er=null;
@@ -1178,7 +1310,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			errors.add(new ValidateResult(null,-1,"Excel 读取失败"));
 			return errors;
 		}
-		return importData(rs, attributeMap,batch, assetOwner,bussinessType, dataType);
+		return importData(rs, attributeMap,batch, assetOwner, dataType);
 
 	}
 

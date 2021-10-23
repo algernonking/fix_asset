@@ -41,7 +41,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.SELECTED_CODE).basic().hidden(true);
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID)
+        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).form().validate().required().form()
                 .form().button().chooseOrganization(true);
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
 
@@ -82,10 +82,13 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ATTACH).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).table().hidden();
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
 
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).form().textArea().height(30).search().fuzzySearch();
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.RETURN_DATE).form().validate().required().search().range();
+
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.POSITION_ID)
                 .basic().label("存放位置")
                 .form().validate().required().form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)

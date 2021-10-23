@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产字段配置
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:21
- * @sign FEC0E6317429F0F9030DA1073CE20B5C
+ * @since 2021-10-22 22:22:39
+ * @sign 4B049EACE36F2858D4347F37D9C6A484
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -54,9 +54,9 @@ public class AssetAttribute extends Entity {
 	private String valueType;
 	
 	/**
-	 * 取值类型：取值类型
+	 * 取值路径：取值路径
 	*/
-	@ApiModelProperty(required = false,value="取值类型" , notes = "取值类型")
+	@ApiModelProperty(required = false,value="取值路径" , notes = "取值路径")
 	private String valuePath;
 	
 	/**
@@ -244,17 +244,17 @@ public class AssetAttribute extends Entity {
 	}
 	
 	/**
-	 * 获得 取值类型<br>
-	 * 取值类型
-	 * @return 取值类型
+	 * 获得 取值路径<br>
+	 * 取值路径
+	 * @return 取值路径
 	*/
 	public String getValuePath() {
 		return valuePath;
 	}
 	
 	/**
-	 * 设置 取值类型
-	 * @param valuePath 取值类型
+	 * 设置 取值路径
+	 * @param valuePath 取值路径
 	 * @return 当前对象
 	*/
 	public AssetAttribute setValuePath(String valuePath) {

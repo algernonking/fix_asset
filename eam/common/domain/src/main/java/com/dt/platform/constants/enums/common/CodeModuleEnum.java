@@ -16,8 +16,11 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum CodeModuleEnum implements CodeTextEnum {
 
 	EAM_ASSET_CODE("eam_asset_code" , "EAM_资产编码"),
-
-
+	//未使用
+	EAM_ASSET_STOCK_CODE("eam_asse_stock_code" , "EAM_资产库存编码"),
+	EAM_ASSET_IN_STOCK_INSERT("eam_asset_in_stock_insert" , "EAM_资产库存入库"),
+	EAM_ASSET_OUT_STOCK_INSERT("eam_asset_out_stock_insert" , "EAM_资产库存出库"),
+	EAM_ASSET_SOFTWARE_CODE("eam_asset_software_code" , "EAM_软件资产编码"),
 	EAM_ASSET_COLLECTION("eam_asset_collection" , "EAM_资产单据-领用"),
 	EAM_ASSET_COLLECTION_RETURN("eam_asset_collection_return" , "EAM_资产单据-退库"),
 	EAM_ASSET_BORROW("eam_asset_borrow" , "EAM_资产单据-借用"),

@@ -115,8 +115,6 @@ public class AssetDataController extends SuperController {
             @ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
             @ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class),
-            @ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class),
-            @ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class),
             @ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class),
             @ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class),
             @ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class),

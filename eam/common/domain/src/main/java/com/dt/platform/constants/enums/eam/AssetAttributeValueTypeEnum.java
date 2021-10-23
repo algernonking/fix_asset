@@ -14,6 +14,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetAttributeValueTypeEnum implements CodeTextEnum {
 	ENTITY("entity" , "实体"),
 	DICT("dict" , "字典"),
+	DATE("date" , "日期"),
+	DOUBLE("double" , "浮点"),
+	INTEGER("integer" , "整数"),
 	STRING("string" , "字符串"),
 	ENUM("enum" , "枚举")
 	;

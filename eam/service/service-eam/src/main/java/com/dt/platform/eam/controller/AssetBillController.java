@@ -15,6 +15,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.Api;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
@@ -24,9 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.dt.platform.proxy.eam.AssetBillServiceProxy;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -72,47 +71,48 @@ public class AssetBillController extends SuperController {
     private IAssetTranferService assetTranferService;
 
 
+    private  InputStream cloneInputStream(InputStream input) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = input.read(buffer)) > -1) {
+                baos.write(buffer, 0, len);
+            }
+            baos.flush();
+            return new ByteArrayInputStream(baos.toByteArray());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_REGISTER_BILLS)
     public void queryAssetRegisterBills(List<String> ids,HttpServletResponse response) throws Exception {
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("入库单.zip", "UTF-8"))));
         InputStream inputstream= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REGISTER_BILL.code());
         HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-     //   Configure config = Configure.builder().bind("assetList",policy).build();
-
         List<Map<String,Object>> list=assetService.getBills(ids);
         OutputStream outputStream = response.getOutputStream();
         ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
-
         for(int i=0;i<list.size();i++){
+            InputStream ins= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REGISTER_BILL.code());
             Map<String,Object> map=list.get(i);
-
-           // HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
-            //Configure config = Configure.builder().bind("assetList",policy).build();
-            XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
-
-            String assetCode=map.get("assetCode").toString();
+            System.out.println("mapdata:"+map.toString());
+            XWPFTemplate template = XWPFTemplate.compile( ins ).render(map);
+            String assetCode=map.getOrDefault("assetCode", IDGenerator.getSnowflakeIdString()).toString();
             ZipEntry entry = new ZipEntry( assetCode+ ".docx");
             zipOutputStream.putNextEntry(entry);
-
             template.write(zipOutputStream);
             zipOutputStream.flush();
             template.close();
-
         }
-
         zipOutputStream.close();
         outputStream.flush();
         outputStream.close();
-
-//        response.setContentType("application/msword");
-//        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("转移单据-"+map.get("businessCode")+".docx", "UTF-8"))));
-//        OutputStream out = response.getOutputStream();
-//        BufferedOutputStream bos = new BufferedOutputStream(out);
-//        template.write(bos);
-//        bos.flush();
-//        out.flush();
-//        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
-
     }
 
 

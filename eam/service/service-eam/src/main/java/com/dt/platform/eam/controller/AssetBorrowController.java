@@ -4,6 +4,7 @@ package com.dt.platform.eam.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetAllocationVOMeta;
@@ -11,6 +12,7 @@ import com.dt.platform.eam.service.IAssetHandleService;
 import com.dt.platform.eam.service.IAssetItemService;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.proxy.eam.AssetAllocationServiceProxy;
+import com.dt.platform.proxy.eam.AssetServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.dao.spec.DAO;
@@ -371,6 +373,19 @@ public class AssetBorrowController extends SuperController {
 	public Result revokeOperation(String id)  {
 		return assetBorrowService.revokeOperation(id);
 	}
+
+
+	/**
+	 *归还
+	 * */
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetBorrowServiceProxy.ASSET_RETURN , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetBorrowServiceProxy.ASSET_RETURN)
+	public Result assetReturn(List<String> ids)  {
+
+		return null;
+	}
+
 
 
 	/**

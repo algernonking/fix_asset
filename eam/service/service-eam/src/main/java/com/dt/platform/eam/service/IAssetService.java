@@ -1,6 +1,7 @@
 package com.dt.platform.eam.service;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.domain.eam.AssetExtData;
@@ -50,8 +51,17 @@ public interface IAssetService extends ISuperService<Asset> {
 	Result approve(ProcessApproveVO approveVO);
 
 
+
 	List<Map<String, Object>> getBills(List<String> ids);
 
+
+
+	/**
+	 * 按主键获取 资产
+	 * @param owner 主键
+	 * @return List<JSONArray>
+	 */
+	JSONArray queryAssetStatusList(String owner);
 
 	/**
 	 * 按主键获取 资产
@@ -349,7 +359,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	 * 导入 Excel 数据
 	 * @return  错误信息，成功时返回 null
 	 * */
-	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String owner,String businessType,boolean dataType);
+	List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String owner,boolean dataType);
 
  
 }

@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-19 08:56:42
+ * @since 2021-10-23 13:22:31
  * @sign 01491B7F8B85B7973681B2842B42AB33
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -232,7 +232,6 @@ public class AssetVO extends Asset {
 	@Transient
 	public CompositeParameter getCompositeParameter() {
 		if($compositeParameter!=null) return  $compositeParameter;
-		if(!"$composite".equals(this.getSearchField())) return null;
 		$compositeParameter=new CompositeParameter(this.getSearchValue(),BeanUtil.toMap(this));
 		return  $compositeParameter;
 	}

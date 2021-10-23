@@ -1,5 +1,6 @@
 package com.dt.platform.proxy.eam;
 
+import com.alibaba.fastjson.JSONArray;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.github.foxnic.web.proxy.api.APIProxy;
 import org.github.foxnic.web.proxy.FeignConfiguration;
@@ -122,6 +123,17 @@ public interface AssetServiceProxy {
 	 */
 	public static final String BATCH_CONFIRM_OPERATION= API_PREFIX + "batch-confirm-operation";
 
+	/**
+	 * 确认操作
+	 */
+	public static final String QUERY_ASSET_STATUS_LIST= API_PREFIX + "query-asset-status-list";
+
+
+	/**
+	 * 查询资产状态
+	 */
+	@RequestMapping(AssetServiceProxy.QUERY_ASSET_STATUS_LIST)
+	Result<JSONArray> queryAssetStatusList(String owner);
 
 	/**
 	 * 添加资产

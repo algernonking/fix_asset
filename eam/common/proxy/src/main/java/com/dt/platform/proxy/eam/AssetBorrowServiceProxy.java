@@ -124,6 +124,12 @@ public interface AssetBorrowServiceProxy {
 	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 	/**
+	 * 资产归还
+	 */
+	public static final String ASSET_RETURN= API_PREFIX + "asset-return";
+
+
+	/**
 	 * 添加资产借用
 	*/
 	@RequestMapping(AssetBorrowServiceProxy.INSERT)

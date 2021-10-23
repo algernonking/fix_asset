@@ -1,7 +1,7 @@
 /**
  * 资产字段配置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:21
+ * @since 2021-10-22 22:22:50
  */
 
 
@@ -77,8 +77,8 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段编码') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段名称') , templet: function (d) { return templet('label',d.label,d);}  }
-					,{ field: 'valueType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段值类型') , templet: function (d) { return templet('valueType',d.valueType,d);}  }
-					,{ field: 'valuePath', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('取值类型') , templet: function (d) { return templet('valuePath',d.valuePath,d);}  }
+					,{ field: 'valueType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('字段值类型'), templet:function (d){ return templet('valueType',fox.getEnumText(RADIO_VALUETYPE_DATA,d.valueType),d);}}
+					,{ field: 'valuePath', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('取值路径') , templet: function (d) { return templet('valuePath',d.valuePath,d);}  }
 					,{ field: 'labelNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('标签备注') , templet: function (d) { return templet('labelNotes',d.labelNotes,d);}  }
 					,{ field: 'dimension', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属维度'), templet:function (d){ return templet('dimension',fox.getEnumText(RADIO_DIMENSION_DATA,d.dimension),d);}}
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}

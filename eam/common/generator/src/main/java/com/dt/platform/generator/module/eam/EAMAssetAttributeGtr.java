@@ -3,10 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusValidEnum;
 import com.dt.platform.constants.enums.common.StatusYNEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeComponentTypeEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeDimensionEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
-import com.dt.platform.constants.enums.eam.AssetAttributeOwnerEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.AssetAttribute;
 import com.dt.platform.eam.page.AssetAttributePageController;
 import com.dt.platform.generator.config.Config;
@@ -49,6 +46,11 @@ public class EAMAssetAttributeGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.OWNER).form().validate().required()
                 .form().selectBox().enumType(AssetAttributeOwnerEnum.class);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.VALUE_TYPE).form().validate().required()
+                .form().radioBox().enumType(AssetAttributeValueTypeEnum.class);
+
 
         cfg.view().field(EAMTables.EAM_ASSET_ATTRIBUTE.REQUIRED_MODIFY).form().validate().required()
                 .form().radioBox().enumType(StatusYNEnum.class);

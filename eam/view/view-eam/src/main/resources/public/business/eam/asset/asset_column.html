@@ -271,7 +271,7 @@
 <div  th:fragment="asset_number" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="assetNumber" id="assetNumber" name="assetNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产数量') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
+        <input lay-filter="assetNumber" id="assetNumber" name="assetNumber" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产数量') }" type="text" class="layui-input"      autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"/>
     </div>
 </div>
 
@@ -448,7 +448,7 @@
 <div  th:fragment="tax_amount_rate" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="taxAmountRate" id="taxAmountRate" name="taxAmountRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('税额') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="taxAmountRate" id="taxAmountRate" name="taxAmountRate" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('税额') }" type="text" class="layui-input"      autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -457,7 +457,7 @@
 <div th:fragment="tax_amount_price"  class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="taxAmountPrice" id="taxAmountPrice" name="taxAmountPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('含税金额') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="taxAmountPrice" id="taxAmountPrice" name="taxAmountPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('含税金额') }" type="text" class="layui-input"       autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -465,7 +465,7 @@
 <div th:fragment="total_amount_price"  class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="totalAmountPrice" id="totalAmountPrice" name="totalAmountPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产总值') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="totalAmountPrice" id="totalAmountPrice" name="totalAmountPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产总值') }" type="text" class="layui-input"      autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -474,7 +474,7 @@
 <div  th:fragment="original_unit_price" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="originalUnitPrice" id="originalUnitPrice" name="originalUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产原值(单价)') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="originalUnitPrice" id="originalUnitPrice" name="originalUnitPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产原值(单价)') }" type="text" class="layui-input"       autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -483,7 +483,7 @@
 <div  th:fragment="accumulated_depreciation" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('累计折旧')}">累计折旧</div><div class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="accumulatedDepreciation" id="accumulatedDepreciation" name="accumulatedDepreciation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('累计折旧') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="accumulatedDepreciation" id="accumulatedDepreciation" name="accumulatedDepreciation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('累计折旧') }" type="text" class="layui-input"       autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -501,7 +501,7 @@
 <div  th:fragment="nav_price" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input lay-filter="navPrice" id="navPrice" name="navPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产净值') }" type="text" class="layui-input"    lay-verify="|required"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
+        <input lay-filter="navPrice" id="navPrice" name="navPrice" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资产净值') }" type="text" class="layui-input"    autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="2"/>
     </div>
 </div>
 
@@ -652,7 +652,7 @@
 <div  th:fragment="last_verification_date" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <input input-type="date" lay-filter="lastVerificationDate" id="lastVerificationDate" name="lastVerificationDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('采购日期') }" type="text" class="layui-input"   />
+        <input input-type="date" lay-filter="lastVerificationDate" id="lastVerificationDate" name="lastVerificationDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('核对日期') }" type="text" class="layui-input"   />
     </div>
 </div>
 

@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-19 08:56:46
+ * @since 2021-10-23 13:22:36
  */
  -->
  <!DOCTYPE html>
@@ -57,6 +57,7 @@
                     <!-- 资产数量 , assetNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 剩余数量 , remainNumber ,typeName=number_input, isHideInSearch=true -->
                     <!-- 生产日期 , productionDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 登记时间 , registerDate ,typeName=date_input, isHideInSearch=true -->
                     <!-- 资产RFID , rfid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 附件 , attach ,typeName=upload, isHideInSearch=true -->
                     <!-- 最近核对日期 , lastVerificationDate ,typeName=date_input, isHideInSearch=true -->
@@ -72,8 +73,9 @@
                     <!-- 财务分类 , financialCategoryId ,typeName=select_box, isHideInSearch=true -->
                     <!-- 财务编号 , financialCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 税额 , taxamountRate ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 含税金额 , taxamountPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 税额 , taxAmountRate ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 含税金额 , taxAmountPrice ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 资产总值 , totalAmountPrice ,typeName=number_input, isHideInSearch=true -->
                     <!-- 资产原值(单价) , originalUnitPrice ,typeName=number_input, isHideInSearch=true -->
                     <!-- 累计折旧 , accumulatedDepreciation ,typeName=number_input, isHideInSearch=true -->
                     <!-- 残值率 , residualsRate ,typeName=number_input, isHideInSearch=true -->
@@ -192,9 +194,9 @@
                         <div class="search-label-div" style=""><span th:text="${lang.translate('维保商')}" class="search-label maintainerId-label">维保商</span><span class="search-colon">:</span></div>
                         <div id="maintainerId" th:data="${'/service-eam/eam-maintainer/query-list'}" style="width:140px"></div>
                     </div>
-                    <!-- 采购日期 , purchaseDate ,typeName=date_input, isHideInSearch=false -->
+                    <!-- 购置日期 , purchaseDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('采购日期')}" class="search-label purchaseDate-label">采购日期</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('购置日期')}" class="search-label purchaseDate-label">购置日期</span><span class="search-colon">:</span></div>
                             <input type="text" id="purchaseDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                             <span class="search-dash">-</span>
                             <input type="text" id="purchaseDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>

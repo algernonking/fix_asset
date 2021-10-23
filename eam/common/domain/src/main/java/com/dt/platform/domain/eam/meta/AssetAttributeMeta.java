@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:21
- * @sign FEC0E6317429F0F9030DA1073CE20B5C
+ * @since 2021-10-22 22:22:40
+ * @sign 4B049EACE36F2858D4347F37D9C6A484
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -56,14 +56,14 @@ public class AssetAttributeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> VALUE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VALUE_TYPE, java.lang.String.class, "字段值类型", "字段值类型", java.lang.String.class, null);
 	
 	/**
-	 * 取值类型 , 类型: java.lang.String
+	 * 取值路径 , 类型: java.lang.String
 	*/
 	public static final String VALUE_PATH="valuePath";
 	
 	/**
-	 * 取值类型 , 类型: java.lang.String
+	 * 取值路径 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> VALUE_PATH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VALUE_PATH, java.lang.String.class, "取值类型", "取值类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetAttribute,java.lang.String> VALUE_PATH_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetAttribute.class ,VALUE_PATH, java.lang.String.class, "取值路径", "取值路径", java.lang.String.class, null);
 	
 	/**
 	 * 标签备注 , 类型: java.lang.String
@@ -303,8 +303,8 @@ public class AssetAttributeMeta {
 		}
 		
 		/**
-		 * 设置 取值类型
-		 * @param valuePath 取值类型
+		 * 设置 取值路径
+		 * @param valuePath 取值路径
 		 * @return 当前对象
 		*/
 		public AssetAttribute setValuePath(String valuePath) {

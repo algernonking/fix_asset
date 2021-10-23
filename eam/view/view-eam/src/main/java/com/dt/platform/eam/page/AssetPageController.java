@@ -273,12 +273,13 @@ public class AssetPageController extends ViewController {
 	 * 资产 功能主页面
 	 */
 	@RequestMapping("/asset_info_list.html")
-	public String infoList(Model model,HttpServletRequest request,String pageType,String pageFunc,String categoryCode) {
+	public String infoList(Model model,HttpServletRequest request,String pageType,String pageFunc,String categoryCode,String ownerCode) {
 
 
 		//页面类型，pageType=AssetAttributeItemOwnerEnum.BASE.code();
 		model.addAttribute("pageType",pageType);
 		model.addAttribute("pageFunc",pageFunc);
+		model.addAttribute("ownerCode",ownerCode);
 
 
 		//table宽度
@@ -332,10 +333,11 @@ public class AssetPageController extends ViewController {
 	 * 资产 表单页面
 	 */
 	@RequestMapping("/asset_info_form.html")
-	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode) {
+	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode,String ownerCode) {
 
 		//页面类型
 		model.addAttribute("pageType",pageType);
+		model.addAttribute("ownerCode",ownerCode);
 
 		//设置字段布局
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,null);

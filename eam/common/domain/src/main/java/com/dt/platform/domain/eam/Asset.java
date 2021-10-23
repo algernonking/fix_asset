@@ -26,8 +26,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-19 08:56:42
- * @sign A0AD69BFFCAD6509EEB313B2FBE379B1
+ * @since 2021-10-23 13:22:31
+ * @sign 1140917BF5273553DC1503BA1272AC8A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -226,9 +226,9 @@ public class Asset extends Entity {
 	private Integer remainNumber;
 	
 	/**
-	 * 采购日期：采购日期
+	 * 购置日期：购置日期
 	*/
-	@ApiModelProperty(required = false,value="采购日期" , notes = "采购日期")
+	@ApiModelProperty(required = false,value="购置日期" , notes = "购置日期")
 	private Date purchaseDate;
 	
 	/**
@@ -236,6 +236,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="生产日期" , notes = "生产日期")
 	private Date productionDate;
+	
+	/**
+	 * 登记时间：登记时间
+	*/
+	@ApiModelProperty(required = false,value="登记时间" , notes = "登记时间")
+	private Date registerDate;
 	
 	/**
 	 * 资产RFID：资产RFID
@@ -343,13 +349,19 @@ public class Asset extends Entity {
 	 * 税额：税额
 	*/
 	@ApiModelProperty(required = false,value="税额" , notes = "税额")
-	private BigDecimal taxamountRate;
+	private BigDecimal taxAmountRate;
 	
 	/**
 	 * 含税金额：含税金额
 	*/
 	@ApiModelProperty(required = false,value="含税金额" , notes = "含税金额")
-	private BigDecimal taxamountPrice;
+	private BigDecimal taxAmountPrice;
+	
+	/**
+	 * 资产总值：资产总值
+	*/
+	@ApiModelProperty(required = false,value="资产总值" , notes = "资产总值")
+	private BigDecimal totalAmountPrice;
 	
 	/**
 	 * 资产原值(单价)：资产原值(单价)
@@ -1265,17 +1277,17 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 采购日期<br>
-	 * 采购日期
-	 * @return 采购日期
+	 * 获得 购置日期<br>
+	 * 购置日期
+	 * @return 购置日期
 	*/
 	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
 	
 	/**
-	 * 设置 采购日期
-	 * @param purchaseDate 采购日期
+	 * 设置 购置日期
+	 * @param purchaseDate 购置日期
 	 * @return 当前对象
 	*/
 	public Asset setPurchaseDate(Date purchaseDate) {
@@ -1299,6 +1311,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setProductionDate(Date productionDate) {
 		this.productionDate=productionDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 登记时间<br>
+	 * 登记时间
+	 * @return 登记时间
+	*/
+	public Date getRegisterDate() {
+		return registerDate;
+	}
+	
+	/**
+	 * 设置 登记时间
+	 * @param registerDate 登记时间
+	 * @return 当前对象
+	*/
+	public Asset setRegisterDate(Date registerDate) {
+		this.registerDate=registerDate;
 		return this;
 	}
 	
@@ -1630,17 +1661,17 @@ public class Asset extends Entity {
 	 * 税额
 	 * @return 税额
 	*/
-	public BigDecimal getTaxamountRate() {
-		return taxamountRate;
+	public BigDecimal getTaxAmountRate() {
+		return taxAmountRate;
 	}
 	
 	/**
 	 * 设置 税额
-	 * @param taxamountRate 税额
+	 * @param taxAmountRate 税额
 	 * @return 当前对象
 	*/
-	public Asset setTaxamountRate(BigDecimal taxamountRate) {
-		this.taxamountRate=taxamountRate;
+	public Asset setTaxAmountRate(BigDecimal taxAmountRate) {
+		this.taxAmountRate=taxAmountRate;
 		return this;
 	}
 	
@@ -1649,17 +1680,36 @@ public class Asset extends Entity {
 	 * 含税金额
 	 * @return 含税金额
 	*/
-	public BigDecimal getTaxamountPrice() {
-		return taxamountPrice;
+	public BigDecimal getTaxAmountPrice() {
+		return taxAmountPrice;
 	}
 	
 	/**
 	 * 设置 含税金额
-	 * @param taxamountPrice 含税金额
+	 * @param taxAmountPrice 含税金额
 	 * @return 当前对象
 	*/
-	public Asset setTaxamountPrice(BigDecimal taxamountPrice) {
-		this.taxamountPrice=taxamountPrice;
+	public Asset setTaxAmountPrice(BigDecimal taxAmountPrice) {
+		this.taxAmountPrice=taxAmountPrice;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产总值<br>
+	 * 资产总值
+	 * @return 资产总值
+	*/
+	public BigDecimal getTotalAmountPrice() {
+		return totalAmountPrice;
+	}
+	
+	/**
+	 * 设置 资产总值
+	 * @param totalAmountPrice 资产总值
+	 * @return 当前对象
+	*/
+	public Asset setTotalAmountPrice(BigDecimal totalAmountPrice) {
+		this.totalAmountPrice=totalAmountPrice;
 		return this;
 	}
 	

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-22 21:20:22
+ * @since 2021-10-23 09:03:45
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1693,9 +1693,9 @@ public class EAMTables {
 		public static final DBField VALUE_TYPE = new DBField(DBDataType.STRING , "value_type","valueType","字段值类型","字段值类型",false,false,true);
 		
 		/**
-		 * 取值类型
+		 * 取值路径
 		*/
-		public static final DBField VALUE_PATH = new DBField(DBDataType.STRING , "value_path","valuePath","取值类型","取值类型",false,false,true);
+		public static final DBField VALUE_PATH = new DBField(DBDataType.STRING , "value_path","valuePath","取值路径","取值路径",false,false,true);
 		
 		/**
 		 * 标签备注

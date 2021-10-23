@@ -9,6 +9,7 @@ import java.util.List;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import cn.afterturn.easypoi.excel.entity.TemplateExportParams;
+import com.alibaba.fastjson.JSONArray;
 import com.deepoove.poi.util.PoitlIOUtils;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.constants.enums.ops.OpsOperateEnum;
@@ -146,8 +147,6 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -211,18 +210,19 @@ public class AssetController extends SuperController {
 	@PostMapping(AssetServiceProxy.DELETE)
 	public Result deleteById(String id) {
 
-		Asset data=assetService.getById(id);
-		if(AssetHandleStatusEnum.CANCEL.code().equals(data.getStatus())
-				||AssetHandleStatusEnum.INCOMPLETE.code().equals(data.getStatus()) ){
-			Result result=assetService.deleteByIdLogical(id);
-			return result;
-		}else{
-			return ErrorDesc.failureMessage("当前状态无法进行删除操作");
-		}
+//		Asset data=assetService.getById(id);
+//		if(AssetHandleStatusEnum.CANCEL.code().equals(data.getStatus())
+//				||AssetHandleStatusEnum.INCOMPLETE.code().equals(data.getStatus()) ){
+//
+//			return result;
+//		}else{
+//			return ErrorDesc.failureMessage("当前状态无法进行删除操作");
+//		}
+		return assetService.deleteByIdLogical(id);
 
 	}
-	
-	
+
+
 	/**
 	 * 批量删除资产 <br>
 	 * 联合主键时，请自行调整实现
@@ -290,8 +290,6 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -382,8 +380,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.REGISTER_DATE , value = "登记时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
@@ -401,8 +400,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TOTAL_AMOUNT_PRICE , value = "资产总值" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -539,8 +539,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.REGISTER_DATE , value = "登记时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
@@ -558,8 +559,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TOTAL_AMOUNT_PRICE , value = "资产总值" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -633,8 +635,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.SOURCE_ID , value = "来源" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.ASSET_NUMBER , value = "资产数量" , required = false , dataTypeClass=Integer.class , example = "1"),
 		@ApiImplicitParam(name = AssetVOMeta.REMAIN_NUMBER , value = "剩余数量" , required = false , dataTypeClass=Integer.class , example = "1"),
-		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "采购日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.PURCHASE_DATE , value = "购置日期" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.PRODUCTION_DATE , value = "生产日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = AssetVOMeta.REGISTER_DATE , value = "登记时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetVOMeta.RFID , value = "资产RFID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.LAST_VERIFICATION_DATE , value = "最近核对日期" , required = false , dataTypeClass=Date.class),
@@ -652,8 +655,9 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 		@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-		@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TAX_AMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
+		@ApiImplicitParam(name = AssetVOMeta.TOTAL_AMOUNT_PRICE , value = "资产总值" , required = false , dataTypeClass=BigDecimal.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 		@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -677,7 +681,7 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "E001"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -740,8 +744,6 @@ public class AssetController extends SuperController {
 			@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-			@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-			@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -824,8 +826,6 @@ public class AssetController extends SuperController {
 			@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CATEGORY_ID , value = "财务分类" , required = false , dataTypeClass=String.class , example = "[]"),
 			@ApiImplicitParam(name = AssetVOMeta.FINANCIAL_CODE , value = "财务编号" , required = false , dataTypeClass=String.class),
 			@ApiImplicitParam(name = AssetVOMeta.SUPPLIER_ID , value = "资产供应商" , required = false , dataTypeClass=String.class , example = "[]"),
-			@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_RATE , value = "税额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
-			@ApiImplicitParam(name = AssetVOMeta.TAXAMOUNT_PRICE , value = "含税金额" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.ORIGINAL_UNIT_PRICE , value = "资产原值(单价)" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.ACCUMULATED_DEPRECIATION , value = "累计折旧" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
 			@ApiImplicitParam(name = AssetVOMeta.RESIDUALS_RATE , value = "残值率" , required = false , dataTypeClass=BigDecimal.class , example = "0.00"),
@@ -876,12 +876,29 @@ public class AssetController extends SuperController {
 			@ApiImplicitParam(name = AssetVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 	})
 	@NotNull(name = AssetVOMeta.IDS)
-	@ApiOperationSupport(order=12)
+	@ApiOperationSupport(order=13)
 	@SentinelResource(value = AssetServiceProxy.BATCH_CONFIRM_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.BATCH_CONFIRM_OPERATION)
 	public Result batchConfirmOperation(List<String> ids)  {
 		return assetService.batchConfirmOperation(ids);
 	}
+
+
+	/**
+	 * 查询资产状态
+	 * */
+	@ApiOperationSupport(order=14)
+	@SentinelResource(value = AssetServiceProxy.QUERY_ASSET_STATUS_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.QUERY_ASSET_STATUS_LIST)
+	public Result<JSONArray> queryAssetStatusList(String owner)  {
+		Result<JSONArray> result=new Result<>();
+		JSONArray list=assetService.queryAssetStatusList(owner);
+		result.success(true).data(list);
+		return result;
+	}
+
+
+
 
 	/**
 	 * 导出 Excel
@@ -943,7 +960,7 @@ public class AssetController extends SuperController {
 
 	@SentinelResource(value = AssetServiceProxy.IMPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.IMPORT_EXCEL)
-	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response,String dataType,String categoryId) throws Exception {
+	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response,String dataType,String categoryId,String ownerCode) throws Exception {
 
 			//获得上传的文件
 			Map<String, MultipartFile> map = request.getFileMap();
@@ -963,7 +980,12 @@ public class AssetController extends SuperController {
 					dataFill=true;
 			}
 			dataFill=true;
-			List<ValidateResult> errors=assetService.importExcel(input,0,true,AssetOwnerCodeEnum.ASSET.code(),AssetOperateEnum.EAM_ASSET_INSERT.code(),dataFill);
+
+		    if(StringUtil.isBlank(ownerCode)){
+				return ErrorDesc.failure().message("导入失败,未设置OwnerCode");
+			}
+
+			List<ValidateResult> errors=assetService.importExcel(input,0,true,ownerCode,dataFill);
 			if(errors==null || errors.isEmpty()) {
 				return ErrorDesc.success();
 			} else {
