@@ -111,7 +111,7 @@
                 <div class="layui-form-item" #if(f.isHideInForm)style="display: none"#end>
                     <div class="layui-form-label #if(groups.size()==1)layui-form-label-c1#end"><div th:text="${lang.translate('#(f.labelInForm)')}">#(f.labelInForm)</div>#if(f.validate!=null && f.validate.isRequired)<div class="layui-required">*</div>#end</div>
                     <div class="layui-input-block #if(groups.size()==1)layui-input-block-c1#end">
-                        <input input-type="switch" type="checkbox" #if(f.logicField.defaultValue)checked="yes"#end id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;" #if(f.logicField.defaultValue)value="#(f.logicField.valueOn)"#else value="#(f.logicField.valueOff)" #end>
+                        <input input-type="switch" type="checkbox" #if(f.logicField.defaultValue)checked="yes"#end id="#(f.varName)"  name="#(f.varName)" lay-skin="switch" lay-filter="#(f.varName)" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;">
                     </div>
                 </div>
 
