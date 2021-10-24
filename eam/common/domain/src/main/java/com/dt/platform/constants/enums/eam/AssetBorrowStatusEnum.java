@@ -12,8 +12,9 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 public enum AssetBorrowStatusEnum implements CodeTextEnum {
-	BORROW("borrow" , "借用"),
-	RETURN("return" , "已归还")
+	NOT_BORROWED("not_borrowed" , "未借用"),
+	BORROWED("borrowed" , "已借用"),
+	RETURNED("returned" , "已归还")
 	;
 	private String code;
 	private String text;

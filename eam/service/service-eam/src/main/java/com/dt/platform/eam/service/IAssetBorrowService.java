@@ -40,6 +40,15 @@ public interface IAssetBorrowService extends ISuperService<AssetBorrow> {
 
 	Result approve(String instanceId, List<AssetBorrow> assets, String approveAction, String opinion);
 
+
+
+	/**
+	 * 归还资产
+	 * @param id 单据ID
+	 * @return 返回结果
+	 * */
+	Result assetReturn(List<String> ids);
+
 	/**
 	 * 获取单据数据
 	 * @param id ID

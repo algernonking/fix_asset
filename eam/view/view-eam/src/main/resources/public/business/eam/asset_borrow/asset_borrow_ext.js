@@ -197,27 +197,61 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         billOper:function(url,btnClass,ps,successMessage){
             var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
             var api=moduleURL+"/"+url;
-            admin.post(api,ps,function (r){
-                if(r.success) {
-                    top.layer.msg(successMessage,{time:1000});
-                    window.module.refreshTableData();
-                } else {
-                    var errs=[];
-                    if(r.errors){
-                        for (var i = 0; i < r.errors.length; i++) {
-                            if(errs.indexOf(r.errors[i].message)==-1) {
-                                errs.push(r.errors[i].message);
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
                             }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
                         }
-                        top.layer.msg(errs.join("<br>"),{time:2000});
-                    }else{
-                        top.layer.msg(r.message,{time:2000});
                     }
-                }
-            },{delayLoading:1000,elms:[btn]});
+                }, {delayLoading: 1000, elms: [btn]});
+            });
         },
         confirmData:function (item){
             list.billOper("confirm-operation","confirm-data-button",{id:item.id},"已确认");
+        },
+        assetReturn:function (data){
+            if(data.length==0) {
+                top.layer.msg("请选择要操作的单据!");
+                return;
+            }
+
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                var btn = $('#asset-return');
+                var api = moduleURL + "/asset-return";
+                admin.post(api, {ids: data}, function (r) {
+                    if (r.success) {
+                        top.layer.msg("归还成功", {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
         },
         forApproval:function (item){
             list.billOper("for-approval","for-approval-button",{id:item.id},"已送审");

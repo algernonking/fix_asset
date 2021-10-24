@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:37
+ * @since 2021-10-24 10:31:59
  */
 
 function FormPage() {
@@ -19,7 +19,7 @@ function FormPage() {
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
 		action=admin.getTempData('eam-asset-borrow-form-data-form-action');
-		//如果没有修改和保存权限，
+		//如果没有修改和保存权限
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
@@ -97,6 +97,27 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 borrowStatus 下拉字段
+		fox.renderSelectBox({
+			el: "borrowStatus",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#borrowTime',
 			format:"yyyy-MM-dd",
@@ -104,6 +125,11 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#planReturnDate',
+			format:"yyyy-MM-dd",
+			trigger:"click"
+		});
+		laydate.render({
+			elem: '#returnDate',
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});

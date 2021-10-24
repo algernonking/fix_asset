@@ -2,6 +2,7 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
 
 
 import com.dt.platform.constants.db.EAMTables;
@@ -86,6 +87,8 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Autowired
 	private IAssetSelectedDataService assetSelectedDataService;
 
+	@Autowired
+	private IAssetDataChangeService assetDataChangeService;
 
 	@Autowired
 	private IOperateService operateService;
@@ -113,6 +116,65 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 	@Override
 	public Result approve(String instanceId, List<AssetBorrow> assets, String approveAction, String opinion) {
 		return null;
+	}
+
+
+	/**
+	 * 归还资产
+	 * @param ids 单据IDS
+	 * @return 返回结果
+	 * */
+	public Result assetReturn(List<String> ids){
+		Result result=new Result();
+		for(String id:ids){
+			Result r=assetReturn(id);
+			if(!r.isSuccess()){
+				result.addError(r.getMessage());
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 归还资产
+	 * @param id 单据ID
+	 * @return 返回结果
+	 * */
+	private Result assetReturn(String id){
+		AssetBorrow bill=getById(id);
+		join(bill,AssetBorrowMeta.ASSET_ITEM_LIST);
+		if(!AssetBorrowStatusEnum.BORROWED.code().equals(bill.getBorrowStatus())){
+			return ErrorDesc.failureMessage("当前单据为非借用状态。");
+		}
+		String str="";
+		for(AssetItem item:bill.getAssetItemList()){
+			Asset asset=assetService.getById(item.getAssetId());
+			if(!AssetStatusEnum.BORROW.code().equals(asset.getAssetStatus())){
+				str=str+"资产编码"+asset.getAssetCode()+",当前状态为非借用状态,不在变更  ";
+				continue;
+			}
+			List<Asset> changeList=new ArrayList<>();
+			changeList.add(asset);
+			HashMap<String,Object> map=new HashMap<>();
+			map.put("asset_status",item.getBeforeAssetStatus());
+			map.put("use_user_id",item.getBeforeUseUserId()==null?"":item.getBeforeUseUserId());
+			HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(changeList,map,bill.getBusinessCode(),AssetOperateEnum.EAM_ASSET_BORROW_RETURN.code(),"资产归还");
+			for(String key:resultMap.keySet()){
+				List<SQL> sqls=resultMap.get(key);
+				if(sqls.size()>0){
+					dao.batchExecute(sqls);
+				}
+			}
+
+		}
+		if(StringUtil.isBlank(str)){
+			bill.setBorrowStatus(AssetBorrowStatusEnum.RETURNED.code());
+			bill.setReturnDate(new Date());
+			super.update(bill,SaveMode.NOT_NULL_FIELDS);
+			return  ErrorDesc.success();
+		}else{
+			return ErrorDesc.failureMessage(str);
+		}
 	}
 
 
@@ -207,14 +269,14 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		map.put("use_user_id",billData.getBorrowerId());
 		map.put("asset_status", AssetStatusEnum.BORROW.code());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_BORROW.code(),"");
-		List<SQL> updateSqls=resultMap.get("update");
-		List<SQL> changeSqls=resultMap.get("change");
-		if(updateSqls.size()>0){
-			dao.batchExecute(updateSqls);
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
 		}
-		if(changeSqls.size()>0){
-			dao.batchExecute(changeSqls);
-		}
+		billData.setBorrowStatus(AssetBorrowStatusEnum.BORROWED.code());
+		super.update(billData,SaveMode.NOT_NULL_FIELDS);
 		return ErrorDesc.success();
 	}
 
@@ -303,6 +365,11 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 		//办理状态
 		if(StringUtil.isBlank( assetBorrow.getStatus())){
 			assetBorrow.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//办理状态
+		if(StringUtil.isBlank( assetBorrow.getBorrowStatus())){
+			assetBorrow.setBorrowStatus(AssetBorrowStatusEnum.NOT_BORROWED.code());
 		}
 
 		//生成编码规则

@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产借用
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:37
- * @sign 52FA706BF9B1C64570AA632FDC49AF68
+ * @since 2021-10-24 10:31:52
+ * @sign 74821B5CCABBF8E45FD634241AA5E37F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,6 +57,12 @@ public class AssetBorrow extends Entity {
 	private String status;
 	
 	/**
+	 * 借用状态：借用状态
+	*/
+	@ApiModelProperty(required = false,value="借用状态" , notes = "借用状态")
+	private String borrowStatus;
+	
+	/**
 	 * 业务名称：业务名称
 	*/
 	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
@@ -79,6 +85,12 @@ public class AssetBorrow extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="预计归还时间" , notes = "预计归还时间")
 	private Date planReturnDate;
+	
+	/**
+	 * 归还时间：归还时间
+	*/
+	@ApiModelProperty(required = false,value="归还时间" , notes = "归还时间")
+	private Date returnDate;
 	
 	/**
 	 * 借出说明：借出说明
@@ -177,6 +189,12 @@ public class AssetBorrow extends Entity {
 	private List<String> assetIds;
 	
 	/**
+	 * 资产列表：资产列表
+	*/
+	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
+	private List<AssetItem> assetItemList;
+	
+	/**
 	 * 制单人：制单人
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
@@ -265,6 +283,25 @@ public class AssetBorrow extends Entity {
 	}
 	
 	/**
+	 * 获得 借用状态<br>
+	 * 借用状态
+	 * @return 借用状态
+	*/
+	public String getBorrowStatus() {
+		return borrowStatus;
+	}
+	
+	/**
+	 * 设置 借用状态
+	 * @param borrowStatus 借用状态
+	 * @return 当前对象
+	*/
+	public AssetBorrow setBorrowStatus(String borrowStatus) {
+		this.borrowStatus=borrowStatus;
+		return this;
+	}
+	
+	/**
 	 * 获得 业务名称<br>
 	 * 业务名称
 	 * @return 业务名称
@@ -337,6 +374,25 @@ public class AssetBorrow extends Entity {
 	*/
 	public AssetBorrow setPlanReturnDate(Date planReturnDate) {
 		this.planReturnDate=planReturnDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 归还时间<br>
+	 * 归还时间
+	 * @return 归还时间
+	*/
+	public Date getReturnDate() {
+		return returnDate;
+	}
+	
+	/**
+	 * 设置 归还时间
+	 * @param returnDate 归还时间
+	 * @return 当前对象
+	*/
+	public AssetBorrow setReturnDate(Date returnDate) {
+		this.returnDate=returnDate;
 		return this;
 	}
 	
@@ -663,6 +719,36 @@ public class AssetBorrow extends Entity {
 	public AssetBorrow addAssetId(String assetId) {
 		if(this.assetIds==null) assetIds=new ArrayList<>();
 		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产列表<br>
+	 * 资产列表
+	 * @return 资产列表
+	*/
+	public List<AssetItem> getAssetItemList() {
+		return assetItemList;
+	}
+	
+	/**
+	 * 设置 资产列表
+	 * @param assetItemList 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrow setAssetItemList(List<AssetItem> assetItemList) {
+		this.assetItemList=assetItemList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产列表
+	 * @param assetItem 资产列表
+	 * @return 当前对象
+	*/
+	public AssetBorrow addAssetItem(AssetItem assetItem) {
+		if(this.assetItemList==null) assetItemList=new ArrayList<>();
+		this.assetItemList.add(assetItem);
 		return this;
 	}
 	

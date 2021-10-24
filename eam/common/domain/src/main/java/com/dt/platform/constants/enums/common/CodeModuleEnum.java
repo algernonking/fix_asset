@@ -24,6 +24,7 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_COLLECTION("eam_asset_collection" , "EAM_资产单据-领用"),
 	EAM_ASSET_COLLECTION_RETURN("eam_asset_collection_return" , "EAM_资产单据-退库"),
 	EAM_ASSET_BORROW("eam_asset_borrow" , "EAM_资产单据-借用"),
+	EAM_ASSET_BORROW_RETURN("eam_asset_borrow_return" , "EAM_资产单据-借用归还"),
 	EAM_ASSET_REPAIR("eam_asset_repair" , "EAM_资产单据-报修"),
 	EAM_ASSET_SCRAP("eam_asset_scrap" , "EAM_资产单据-报废"),
 	EAM_ASSET_ALLOCATE("eam_asset_allocate" , "EAM_资产单据-调拨"),

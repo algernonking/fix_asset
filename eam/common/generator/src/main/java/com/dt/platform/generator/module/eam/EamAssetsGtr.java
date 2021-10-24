@@ -83,6 +83,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET.CONTACTS).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET.BUSINESS_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.EQUIPMENT_CODE).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET.MANAGE_IP).search().fuzzySearch();

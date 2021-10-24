@@ -12,7 +12,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 public enum AssetRepairStatusEnum implements CodeTextEnum {
-
+	WAIT_REPAIR("wait_repair" , "等待维修"),
 	REPAIRING("repairing" , "维修中"),
 	FINISH("finish" , "维修结束")
 	;

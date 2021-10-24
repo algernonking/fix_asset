@@ -505,7 +505,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         HashMap<String,String> orgMap=queryUseOrganizationNodes();
         HashMap<String,String> categoryMap=queryAssetCategoryNodes();
         Map<String,Object> map=new HashMap<>();
-        assetService.joinData(list);
+        assetService.joinData(list.getList());
         String tenantId=SessionUser.getCurrent().getActivatedTenantId();
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){

@@ -247,13 +247,11 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		HashMap<String,Object> map=new HashMap<>();
 		map.put("asset_status", AssetStatusEnum.SCRAP.code());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_SCRAP.code(),"完成报废");
-		List<SQL> updateSqls=resultMap.get("update");
-		List<SQL> changeSqls=resultMap.get("change");
-		if(updateSqls.size()>0){
-			dao.batchExecute(updateSqls);
-		}
-		if(changeSqls.size()>0){
-			dao.batchExecute(changeSqls);
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
 		}
 		return ErrorDesc.success();
 	}

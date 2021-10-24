@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:45
+ * @since 2021-10-24 18:13:19
  */
 
 function FormPage() {
@@ -19,7 +19,7 @@ function FormPage() {
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
 		action=admin.getTempData('eam-asset-repair-form-data-form-action');
-		//如果没有修改和保存权限，
+		//如果没有修改和保存权限
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}
@@ -213,8 +213,6 @@ function FormPage() {
 			}
 
 
-			//设置  维修状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#repairStatus",formData.repairStatus,SELECT_REPAIRSTATUS_DATA);
 			//设置  维修类型 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#type",formData.type);
 
@@ -265,8 +263,6 @@ function FormPage() {
 
 
 
-		//获取 维修状态 下拉框的值
-		data["repairStatus"]=fox.getSelectedValue("repairStatus",false);
 		//获取 维修类型 下拉框的值
 		data["type"]=fox.getSelectedValue("type",false);
 

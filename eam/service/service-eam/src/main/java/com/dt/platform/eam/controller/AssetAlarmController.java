@@ -31,9 +31,9 @@ public class AssetAlarmController extends SuperController {
     @ApiOperationSupport(order=1)
     @SentinelResource(value = AssetAlarmServiceProxy.QUERY_BORROW_EXPIRATION_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(AssetAlarmServiceProxy.QUERY_BORROW_EXPIRATION_DATA)
-    public Result queryBorrowExpirationData(AssetVO sample) {
-        Result<PagedList<Asset>> result=new Result<>();
-        PagedList<Asset> list= assetAlarmService.queryBorrowAlarmData(sample,sample.getPageSize(),sample.getPageIndex());
+    public Result<JSONArray> queryBorrowExpirationData(AssetVO sample) {
+        Result<JSONArray> result=new Result<>();
+        JSONArray list= assetAlarmService.queryBorrowAlarmData(sample,sample.getPageSize(),sample.getPageIndex());
         result.success(true).data(list);
         return result;
     }

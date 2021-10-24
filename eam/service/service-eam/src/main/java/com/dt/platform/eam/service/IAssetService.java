@@ -10,11 +10,13 @@ import com.dt.platform.proxy.eam.AssetBorrowServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.dao.entity.Entity;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.dao.entity.ISuperService;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetVO;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
@@ -44,11 +46,12 @@ public interface IAssetService extends ISuperService<Asset> {
 
 	HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes);
 
-	Result joinData(PagedList<Asset> list);
+	Result joinData(List<Asset> list);
 
 	Result startProcess(ProcessStartVO startVO);
 
 	Result approve(ProcessApproveVO approveVO);
+
 
 
 

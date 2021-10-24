@@ -690,7 +690,7 @@ public class AssetController extends SuperController {
 
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-		assetService.joinData(list);
+		assetService.joinData(list.getList());
 		result.success(true).data(list);
 		return result;
 	}
@@ -770,7 +770,7 @@ public class AssetController extends SuperController {
 
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedListBySelect(sample,assetBussinessType,assetOwnerId,assetSelectedCode,assetSearchContent);
-		assetService.joinData(list);
+		assetService.joinData(list.getList());
 
 		result.success(true).data(list);
 		return result;
@@ -850,7 +850,7 @@ public class AssetController extends SuperController {
 	public Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType) {
 		Result<PagedList<Asset>> result=new Result<>();
 		PagedList<Asset> list=assetService.queryPagedListBySelected(sample,assetSelectedCode,assetOwnerId,dataType);
-		assetService.joinData(list);
+		assetService.joinData(list.getList());
 		result.success(true).data(list);
 		return result;
 	}

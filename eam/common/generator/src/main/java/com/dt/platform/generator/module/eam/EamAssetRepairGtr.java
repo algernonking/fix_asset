@@ -139,11 +139,10 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.NAME,
-                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
+                        EAMTables.EAM_ASSET_REPAIR.TYPE,
+//                        EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE,
-                        EAMTables.EAM_ASSET_REPAIR.TYPE,
-
                 }, new Object[] {
                         EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID,
                 }

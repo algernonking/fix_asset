@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:44
+ * @since 2021-10-24 17:47:45
  */
  -->
  <!DOCTYPE html>
@@ -60,7 +60,7 @@
                     <!-- 退库后公司/部门 , useOrganizationId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:150px"><span th:text="${lang.translate('退库后公司/部门')}" class="search-label useOrganizationId-label">退库后公司/部门</span><span class="search-colon">:</span></div>
-                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
+                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
                             <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
 

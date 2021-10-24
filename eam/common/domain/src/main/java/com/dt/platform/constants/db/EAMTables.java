@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-23 09:03:45
+ * @since 2021-10-24 07:32:34
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2023,6 +2023,11 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
 		
 		/**
+		 * 借用状态
+		*/
+		public static final DBField BORROW_STATUS = new DBField(DBDataType.STRING , "borrow_status","borrowStatus","借用状态","借用状态",false,false,true);
+		
+		/**
 		 * 业务名称
 		*/
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","业务名称","业务名称",false,false,true);
@@ -2041,6 +2046,11 @@ public class EAMTables {
 		 * 预计归还时间
 		*/
 		public static final DBField PLAN_RETURN_DATE = new DBField(DBDataType.DATE , "plan_return_date","planReturnDate","预计归还时间","预计归还时间",false,false,true);
+		
+		/**
+		 * 归还时间
+		*/
+		public static final DBField RETURN_DATE = new DBField(DBDataType.DATE , "return_date","returnDate","归还时间","归还时间",false,false,true);
 		
 		/**
 		 * 借出说明
@@ -2112,7 +2122,7 @@ public class EAMTables {
 		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
 		
 		public EAM_ASSET_BORROW() {
-			this.init($NAME,"资产借用" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
+			this.init($NAME,"资产借用" , ID , BUSINESS_CODE , PROC_ID , STATUS , BORROW_STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
 		}
 		public static final EAM_ASSET_BORROW $TABLE=new EAM_ASSET_BORROW();
 	}
@@ -2825,6 +2835,136 @@ public class EAMTables {
 			this.init($NAME,"资产处置" , ID , PROC_ID , BUSINESS_CODE , NAME , STATUS , TYPE , CONTENT , HANDLE_NUMBER , HANDLE_DATE , PLAN_FINISH_DATE , ACTUAL_FINISH_DATE , ORIGINATOR_ID , PICTURE_ID , CRD_ACTION , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_ASSET_HANDLE $TABLE=new EAM_ASSET_HANDLE();
+	}
+	
+	/**
+	 * 资产入库
+	*/
+	public static class EAM_ASSET_IN_STOCK extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_in_stock";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 业务编号
+		*/
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
+		
+		/**
+		 * 流程
+		*/
+		public static final DBField PROC_ID = new DBField(DBDataType.STRING , "proc_id","procId","流程","流程",false,false,true);
+		
+		/**
+		 * 办理状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
+		
+		/**
+		 * 业务名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","业务名称","业务名称",false,false,true);
+		
+		/**
+		 * 来源
+		*/
+		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
+		
+		/**
+		 * 所属公司
+		*/
+		public static final DBField OWN_COMPANY_ID = new DBField(DBDataType.STRING , "own_company_id","ownCompanyId","所属公司","所属公司",false,false,true);
+		
+		/**
+		 * 管理人员
+		*/
+		public static final DBField MANAGER_ID = new DBField(DBDataType.STRING , "manager_id","managerId","管理人员","管理人员",false,false,true);
+		
+		/**
+		 * 仓库
+		*/
+		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
+		
+		/**
+		 * 存放位置
+		*/
+		public static final DBField POSITION_ID = new DBField(DBDataType.STRING , "position_id","positionId","存放位置","存放位置",false,false,true);
+		
+		/**
+		 * 详细位置
+		*/
+		public static final DBField POSITION_DETAIL = new DBField(DBDataType.STRING , "position_detail","positionDetail","详细位置","详细位置",false,false,true);
+		
+		/**
+		 * 附件
+		*/
+		public static final DBField ATTACH = new DBField(DBDataType.STRING , "attach","attach","附件","附件",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		/**
+		 * 选择数据
+		*/
+		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
+		
+		public EAM_ASSET_IN_STOCK() {
+			this.init($NAME,"资产入库" , ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , SOURCE_ID , OWN_COMPANY_ID , MANAGER_ID , WAREHOUSE_ID , POSITION_ID , POSITION_DETAIL , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
+		}
+		public static final EAM_ASSET_IN_STOCK $TABLE=new EAM_ASSET_IN_STOCK();
 	}
 	
 	/**

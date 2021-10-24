@@ -6,6 +6,7 @@ import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetBorrow;
 import com.dt.platform.domain.eam.AssetHandle;
+import com.dt.platform.domain.eam.AssetItem;
 import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
 import com.dt.platform.domain.eam.meta.AssetBorrowVOMeta;
 import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
@@ -38,6 +39,9 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         //此设置用于覆盖字段的独立配置；清单中没有出现的，设置为隐藏；重复出现或不存在的字段将抛出异常；只接受 DBField 或 String 类型的元素
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
+        cfg.getPoClassFile().addListProperty(AssetItem.class,"assetItemList","资产列表","资产列表");
+
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"borrower","借用人","借用人");
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class,AssetBorrowVOMeta.ASSET_IDS);
@@ -53,13 +57,14 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ATTACH).table().disable(true);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
-
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_STATUS).form().selectBox().enumType(AssetBorrowStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROW_TIME).form().validate().required().search().range();
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().validate().required().search().range();
-
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.RETURN_DATE).form().search().range();
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BORROWER_ID).form().validate().required().form().button().chooseEmployee(true);
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
@@ -82,6 +87,8 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PLAN_RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.RETURN_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ORIGINATOR_ID).table().fillBy("originator","nameAndBadge");

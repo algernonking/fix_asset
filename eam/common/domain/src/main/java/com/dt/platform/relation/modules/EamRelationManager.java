@@ -140,6 +140,10 @@ public class EamRelationManager extends RelationManager {
 
     public void setupAssetBorrow() {
 
+        this.property(AssetBorrowMeta.ASSET_ITEM_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_BORROW.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID);
+
 
         // 关联资产
         this.property(AssetBorrowMeta.ASSET_LIST_PROP)

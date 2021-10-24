@@ -25,6 +25,7 @@ import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.commons.reflect.EnumUtil;
 import com.github.foxnic.dao.data.*;
+import com.github.foxnic.dao.entity.Entity;
 import com.github.foxnic.dao.excel.*;
 import com.github.foxnic.dao.meta.DBTableMeta;
 import com.github.foxnic.dao.sql.SQLBuilder;
@@ -449,7 +450,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
 		PagedList<Asset> list= super.queryPagedList(new Asset(),expr,10000,1);
-		joinData(list);
+		joinData(list.getList());
 		List<Map<String, Object>> data=new ArrayList<>();
 		for(Asset e:list){
 			Map<String, Object> map= BeanUtil.toMap(e);
@@ -510,7 +511,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 
 	@Override
-	public Result joinData(PagedList<Asset> list) {
+	public Result joinData(List<Asset> list) {
 		// 关联出 资产分类 数据
 
 		dao.fill(list).with(AssetMeta.CATEGORY)
@@ -532,6 +533,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
 				.execute();
 
+//
 		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
 		dao().join(originators, Person.class);
 

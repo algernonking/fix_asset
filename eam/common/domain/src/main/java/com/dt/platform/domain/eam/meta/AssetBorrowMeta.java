@@ -5,14 +5,15 @@ import com.dt.platform.domain.eam.AssetBorrow;
 import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
+import com.dt.platform.domain.eam.AssetItem;
 import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:37
- * @sign 52FA706BF9B1C64570AA632FDC49AF68
+ * @since 2021-10-24 10:31:52
+ * @sign 74821B5CCABBF8E45FD634241AA5E37F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -59,6 +60,16 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
 	
 	/**
+	 * 借用状态 , 类型: java.lang.String
+	*/
+	public static final String BORROW_STATUS="borrowStatus";
+	
+	/**
+	 * 借用状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> BORROW_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,BORROW_STATUS, java.lang.String.class, "借用状态", "借用状态", java.lang.String.class, null);
+	
+	/**
 	 * 业务名称 , 类型: java.lang.String
 	*/
 	public static final String NAME="name";
@@ -97,6 +108,16 @@ public class AssetBorrowMeta {
 	 * 预计归还时间 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.util.Date> PLAN_RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,PLAN_RETURN_DATE, java.util.Date.class, "预计归还时间", "预计归还时间", java.util.Date.class, null);
+	
+	/**
+	 * 归还时间 , 类型: java.util.Date
+	*/
+	public static final String RETURN_DATE="returnDate";
+	
+	/**
+	 * 归还时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.util.Date> RETURN_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,RETURN_DATE, java.util.Date.class, "归还时间", "归还时间", java.util.Date.class, null);
 	
 	/**
 	 * 借出说明 , 类型: java.lang.String
@@ -259,6 +280,16 @@ public class AssetBorrowMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
+	 * 资产列表 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetItem
+	*/
+	public static final String ASSET_ITEM_LIST="assetItemList";
+	
+	/**
+	 * 资产列表 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.AssetItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetBorrow,com.dt.platform.domain.eam.AssetItem> ASSET_ITEM_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetBorrow.class ,ASSET_ITEM_LIST, java.util.List.class, "资产列表", "资产列表", com.dt.platform.domain.eam.AssetItem.class, null);
+	
+	/**
 	 * 制单人 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String ORIGINATOR="originator";
@@ -281,7 +312,7 @@ public class AssetBorrowMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR , BORROWER };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BORROW_STATUS , NAME , BORROWER_ID , BORROW_TIME , PLAN_RETURN_DATE , RETURN_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ASSET_ITEM_LIST , ORIGINATOR , BORROWER };
 	
 	/**
 	 * 代理类
@@ -336,6 +367,17 @@ public class AssetBorrowMeta {
 		}
 		
 		/**
+		 * 设置 借用状态
+		 * @param borrowStatus 借用状态
+		 * @return 当前对象
+		*/
+		public AssetBorrow setBorrowStatus(String borrowStatus) {
+			super.change(BORROW_STATUS,super.getBorrowStatus(),borrowStatus);
+			super.setBorrowStatus(borrowStatus);
+			return this;
+		}
+		
+		/**
 		 * 设置 业务名称
 		 * @param name 业务名称
 		 * @return 当前对象
@@ -376,6 +418,17 @@ public class AssetBorrowMeta {
 		public AssetBorrow setPlanReturnDate(Date planReturnDate) {
 			super.change(PLAN_RETURN_DATE,super.getPlanReturnDate(),planReturnDate);
 			super.setPlanReturnDate(planReturnDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 归还时间
+		 * @param returnDate 归还时间
+		 * @return 当前对象
+		*/
+		public AssetBorrow setReturnDate(Date returnDate) {
+			super.change(RETURN_DATE,super.getReturnDate(),returnDate);
+			super.setReturnDate(returnDate);
 			return this;
 		}
 		
@@ -552,6 +605,17 @@ public class AssetBorrowMeta {
 		public AssetBorrow setAssetIds(List<String> assetIds) {
 			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
 			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产列表
+		 * @param assetItemList 资产列表
+		 * @return 当前对象
+		*/
+		public AssetBorrow setAssetItemList(List<AssetItem> assetItemList) {
+			super.change(ASSET_ITEM_LIST,super.getAssetItemList(),assetItemList);
+			super.setAssetItemList(assetItemList);
 			return this;
 		}
 		

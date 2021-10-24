@@ -2,7 +2,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:37
+ * @since 2021-10-24 10:31:59
  */
  -->
  <!DOCTYPE html>
@@ -132,7 +132,8 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"button","required":true},"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"borrowTime":{"date":true,"labelInForm":"借出时间","inputType":"date_input","required":true},"planReturnDate":{"date":true,"labelInForm":"预计归还时间","inputType":"date_input","required":true}};
+    var SELECT_BORROWSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}]];
+    var VALIDATE_CONFIG={"borrowerId":{"labelInForm":"借用人","inputType":"button","required":true},"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"returnDate":{"date":true,"labelInForm":"归还时间","inputType":"date_input"},"borrowTime":{"date":true,"labelInForm":"借出时间","inputType":"date_input","required":true},"planReturnDate":{"date":true,"labelInForm":"预计归还时间","inputType":"date_input","required":true}};
     var AUTH_PREFIX="eam_asset_borrow";
 
     // 单据ID

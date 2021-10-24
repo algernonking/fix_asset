@@ -254,14 +254,14 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		HashMap<String,Object> map=new HashMap<>();
 		map.put("asset_status", AssetStatusEnum.REPAIR.code());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"维修中");
-		List<SQL> updateSqls=resultMap.get("update");
-		List<SQL> changeSqls=resultMap.get("change");
-		if(updateSqls.size()>0){
-			dao.batchExecute(updateSqls);
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
 		}
-		if(changeSqls.size()>0){
-			dao.batchExecute(changeSqls);
-		}
+		billData.setRepairStatus(AssetRepairStatusEnum.REPAIRING.code());
+		super.update(billData,SaveMode.NOT_NULL_FIELDS);
 		return ErrorDesc.success();
 	}
 
@@ -283,13 +283,11 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			Rcd rs=dao.queryRecord("select * from eam_asset_item where deleted='0'and crd='r' and handle_id=? and asset_id=?",id,asset.getId());
 			map.put("asset_status",rs.getString("before_asset_status"));
 			HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(list,map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_REPAIR.code(),"维修结束");
-			List<SQL> updateSqls=resultMap.get("update");
-			List<SQL> changeSqls=resultMap.get("change");
-			if(updateSqls.size()>0){
-				dao.batchExecute(updateSqls);
-			}
-			if(changeSqls.size()>0){
-				dao.batchExecute(changeSqls);
+			for(String key:resultMap.keySet()){
+				List<SQL> sqls=resultMap.get(key);
+				if(sqls.size()>0){
+					dao.batchExecute(sqls);
+				}
 			}
 		}
 		billData.setActualFinishDate(new Date());
@@ -328,7 +326,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 		}
 
 
-
 		//制单人
 		if(StringUtil.isBlank(assetRepair.getOriginatorId())){
 			assetRepair.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -345,6 +342,7 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			assetRepair.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
+		assetRepair.setRepairStatus(AssetRepairStatusEnum.WAIT_REPAIR.code());
 
 		//生成编码规则
 		//编码

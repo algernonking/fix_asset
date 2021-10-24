@@ -14,7 +14,7 @@ public interface IAssetAlarmService extends ISuperService<Asset> {
 
     PagedList<Asset> queryAlarmData(Asset sample,int pageSize,int pageIndex);
 
-    PagedList<Asset> queryBorrowAlarmData(Asset sample,int pageSize,int pageIndex);
+    JSONArray queryBorrowAlarmData(Asset sample,int pageSize,int pageIndex);
 
     PagedList<Asset> queryMaintenanceAlarmData(Asset sample,int pageSize,int pageIndex);
 

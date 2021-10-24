@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:44
+ * @since 2021-10-24 17:47:47
  */
  -->
  <!DOCTYPE html>
@@ -40,9 +40,9 @@
             <div class="layui-col-xs4 form-column">
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('退库后公司/部门')}">退库后公司/部门</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('退库后公司/部门')}">退库后公司/部门</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"   />
+                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
                             <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"returnDate":{"date":true,"labelInForm":"退库日期","inputType":"date_input","required":true},"positionId":{"labelInForm":"存放位置","inputType":"select_box","required":true}};
+    var VALIDATE_CONFIG={"businessDate":{"date":true,"labelInForm":"业务日期","inputType":"date_input"},"returnDate":{"date":true,"labelInForm":"退库日期","inputType":"date_input","required":true},"positionId":{"labelInForm":"存放位置","inputType":"select_box","required":true},"useOrganizationId":{"labelInForm":"退库后公司/部门","inputType":"button","required":true}};
     var AUTH_PREFIX="eam_asset_collection_return";
 
     // 单据ID

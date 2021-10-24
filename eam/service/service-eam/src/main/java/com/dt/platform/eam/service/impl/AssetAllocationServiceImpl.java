@@ -206,13 +206,11 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		map.put("own_company_id",billData.getInOwnCompanyId());
 		map.put("manager_id",billData.getManagerId());
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_ALLOCATE.code(),"");
-		List<SQL> updateSqls=resultMap.get("update");
-		List<SQL> changeSqls=resultMap.get("change");
-		if(updateSqls.size()>0){
-			dao.batchExecute(updateSqls);
-		}
-		if(changeSqls.size()>0){
-			dao.batchExecute(changeSqls);
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
 		}
 		return ErrorDesc.success();
 	}

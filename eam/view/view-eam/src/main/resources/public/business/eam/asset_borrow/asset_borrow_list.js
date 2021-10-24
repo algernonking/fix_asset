@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:37
+ * @since 2021-10-24 10:31:57
  */
 
 
@@ -76,9 +76,11 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'borrowStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用状态'), templet:function (d){ return templet('borrowStatus',fox.getEnumText(SELECT_BORROWSTATUS_DATA,d.borrowStatus),d);}}
 					,{ field: 'borrowerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('借用人') , templet: function (d) { return templet('borrowerId',fox.getProperty(d,["borrower","nameAndBadge"]),d);} }
 					,{ field: 'borrowTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('借出时间'), templet: function (d) { return templet('borrowTime',fox.dateFormat(d.borrowTime,"yyyy-MM-dd"),d); }}
 					,{ field: 'planReturnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('预计归还时间'), templet: function (d) { return templet('planReturnDate',fox.dateFormat(d.planReturnDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'returnDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('归还时间'), templet: function (d) { return templet('returnDate',fox.dateFormat(d.returnDate,"yyyy-MM-dd"),d); }}
 					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('借出说明') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期'), templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }}
@@ -261,6 +263,9 @@ function ListPage() {
 					break;
 				case 'batch-del':
 					batchDelete(selected);
+					break;
+				case 'tool-asset-return':
+					window.pageExt.list.assetReturn && window.pageExt.list.assetReturn(selected,obj);
 					break;
 				case 'refresh-data':
 					refreshTableData();

@@ -463,13 +463,11 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		AssetDataChange billData=getById(id);
 		join(billData,AssetDataChangeMeta.ASSET_LIST);
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"");
-		List<SQL> updateSqls=resultMap.get("update");
-		List<SQL> changeSqls=resultMap.get("change");
-		if(updateSqls.size()>0){
-			dao.batchExecute(updateSqls);
-		}
-		if(changeSqls.size()>0){
-			dao.batchExecute(changeSqls);
+		for(String key:resultMap.keySet()){
+			List<SQL> sqls=resultMap.get(key);
+			if(sqls.size()>0){
+				dao.batchExecute(sqls);
+			}
 		}
 		return ErrorDesc.success();
 	}
