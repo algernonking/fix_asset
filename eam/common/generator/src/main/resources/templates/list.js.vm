@@ -177,7 +177,7 @@ function ListPage() {
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
-		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
 		value.#(f.varName)={ inputType:"select_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end  #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") };
 		#end
