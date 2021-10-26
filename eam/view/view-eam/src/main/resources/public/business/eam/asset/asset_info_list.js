@@ -64,9 +64,9 @@ function ListPage() {
 			if(Object.keys(contitions).length>0) {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
-			if(CATEGORY_ID&&CATEGORY_ID.length>0){
-				ps.categoryId=CATEGORY_ID;
-			}
+			// if(CATEGORY_ID&&CATEGORY_ID.length>0){
+			// 	ps.categoryId=CATEGORY_ID;
+			// }
 
 
 			var templet=window.pageExt.list.templet;
@@ -159,7 +159,7 @@ function ListPage() {
 
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
-		value.assetCode={ inputType:"button",value: $("#assetCode").val()};
+		value.assetCode={ inputType:"button",value: $("#assetCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr") ,field:"code"};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  ,field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
@@ -184,9 +184,9 @@ function ListPage() {
 
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 
-		if(CATEGORY_ID&&CATEGORY_ID.length>0){
-			ps.categoryId=CATEGORY_ID;
-		}
+		// if(CATEGORY_ID&&CATEGORY_ID.length>0){
+		// 	ps.categoryId=CATEGORY_ID;
+		// }
 
 		var categoryValue=categorySelect.getValue();
 		if(categoryValue&&categoryValue.length>0){

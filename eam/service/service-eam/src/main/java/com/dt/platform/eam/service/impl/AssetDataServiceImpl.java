@@ -506,10 +506,13 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
         HashMap<String,String> categoryMap=queryAssetCategoryNodes();
         Map<String,Object> map=new HashMap<>();
         assetService.joinData(list.getList());
+
         String tenantId=SessionUser.getCurrent().getActivatedTenantId();
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         for(int i=0;i<list.size();i++){
             Asset assetItem=list.get(i);
+            System.out.println(categoryId+"map"+BeanUtil.toJSONObject(assetItem));
+
             if(!StringUtil.isBlank(categoryId)){
                 if(!categoryId.equals(assetItem.getCategoryId())){
                     continue;
@@ -517,6 +520,7 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
 
             Map<String, Object> assetMap= BeanUtil.toMap(assetItem);
+            System.out.println("assetMap"+BeanUtil.toJSONObject(assetItem));
             //获取自定义属性
             DataQueryVo vo=new DataQueryVo();
             vo.setCatalogId(categoryId);

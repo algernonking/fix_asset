@@ -36,12 +36,8 @@ function ListPage() {
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;
         assetListColumn=layui.assetListColumn;
 
-
-
         //渲染表格
         renderTable();
-
-
         //初始化搜索输入框组件
         initSearchFields();
         //绑定搜索框事件
@@ -118,8 +114,8 @@ function ListPage() {
      */
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
-        value.businessCode={ value: $("#businessCode").val()};
-        value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
+      //  value.businessCode={ value: $("#businessCode").val()};
+   //     value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
         value.status={ value:"complete"};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.maintenanceEndDate={ begin: $("#maintenanceEndDate-begin").val(), end: $("#maintenanceEndDate-end").val() };

@@ -915,7 +915,7 @@ public class AssetController extends SuperController {
 
 		File f=assetDataService.saveTempFile(inputstream,"TMP_download_asset_data.xls");
 		Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetPagedList(null,sample),categoryId);
-
+		System.out.println("mapmap:"+map);
 		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
 		templateExportParams.setScanAllsheet(true);
 		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);

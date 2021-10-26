@@ -937,7 +937,11 @@ function FormPage() {
 
 
 		//关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){
+	    	console.log("close")
+
+	    	admin.closePopupCenter();
+	    });
 
     }
 
