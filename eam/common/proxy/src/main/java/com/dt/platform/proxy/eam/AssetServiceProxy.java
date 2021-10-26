@@ -128,6 +128,18 @@ public interface AssetServiceProxy {
 	 */
 	public static final String QUERY_ASSET_STATUS_LIST= API_PREFIX + "query-asset-status-list";
 
+	/**
+	 * 查询资产新增审批
+	 */
+	public static final String QUERY_ASSET_INSERT_APPROVAL_LIST= API_PREFIX + "query-asset-insert-approval-list";
+
+
+	/**
+	 * 查询资产新增审批
+	 */
+	@RequestMapping(AssetServiceProxy.QUERY_ASSET_INSERT_APPROVAL_LIST)
+	Result<List<Asset>> queryAssetInsertApprovalList(Asset sample);
+
 
 	/**
 	 * 查询资产状态

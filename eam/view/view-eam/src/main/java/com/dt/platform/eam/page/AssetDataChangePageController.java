@@ -12,10 +12,12 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.CatalogVO;
+import org.github.foxnic.web.framework.view.aspect.PageHelper;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.github.foxnic.web.misc.ztree.ZTreeNode;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,10 @@ public class AssetDataChangePageController extends ViewController {
 	 */
 	@RequestMapping("/asset_data_change_list.html")
 	public String list(Model model,HttpServletRequest request,String changeType,String pageType) {
+
+		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
+		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("data-table"+pageType+changeType));
+		model.addAttribute("tableId","data-table"+pageType+changeType);
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(changeType);
 		if(approvalResult.isSuccess()){

@@ -80,7 +80,7 @@ function ListPage() {
 				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code){
 					var code=ATTRIBUTE_LIST_DATA[i].attribute.code;
 					var e=COL_ALL_DATA[code];
-					LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
+					//LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
 					COL_DATA.push(e);
 				}
 			}
@@ -89,7 +89,7 @@ function ListPage() {
 			COL_DATA.push(oper)
 			var responseData=[];
 			var tableConfig={
-				elem: '#data-table',
+				elem: '#'+TABLE_ID,
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
@@ -164,9 +164,9 @@ function ListPage() {
 			}
 		}
 		if(reset) {
-			table.reload('data-table', { where : ps , page:{ curr:1 } });
+			table.reload(TABLE_ID, { where : ps , page:{ curr:1 } });
 		} else {
-			table.reload('data-table', { where : ps });
+			table.reload(TABLE_ID, { where : ps });
 		}
 	}
     
@@ -175,7 +175,7 @@ function ListPage() {
 	  * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	  */
 	function getCheckedList(field) {
-		var checkStatus = table.checkStatus('data-table');
+		var checkStatus = table.checkStatus(TABLE_ID);
 		var data = checkStatus.data;
 		if(!field) return data;
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];

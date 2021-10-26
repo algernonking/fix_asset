@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.afterturn.easypoi.excel.ExcelExportUtil;
@@ -22,9 +23,12 @@ import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.github.foxnic.web.domain.changes.ChangeDefinition;
+import org.github.foxnic.web.domain.changes.ChangeDefinitionVO;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
+import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.util.IdGenerator;
@@ -896,6 +900,48 @@ public class AssetController extends SuperController {
 		result.success(true).data(list);
 		return result;
 	}
+
+	/**
+	 * 查询资产审批清单
+	 * */
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetServiceProxy.QUERY_ASSET_INSERT_APPROVAL_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.QUERY_ASSET_INSERT_APPROVAL_LIST)
+	public Result<PagedList<Asset>> queryAssetInsertApprovalList(AssetVO sample)  {
+		Result<PagedList<Asset>> result=new Result<>();
+		sample.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+
+		PagedList<Asset> list=null;
+		String employId=SessionUser.getCurrent().getActivatedEmployeeId();
+		ChangeDefinitionVO chs=new ChangeDefinitionVO();
+		chs.setValid(1);
+		chs.setCode(AssetOperateEnum.EAM_ASSET_INSERT.code());
+
+	 	Result<List<ChangeDefinition>> chsListResult= ChangeDefinitionServiceProxy.api().queryList(chs);
+	 	if(!chsListResult.isSuccess()){
+	 		return result.success(false).data(list).message("查询流程定义失败");
+		}
+	 	if(chsListResult.getData().size()==0){
+			return result.success(false).data(list).message("未配置流程定义或定义未生效");
+		}
+		ChangeDefinition insertChsDef=chsListResult.getData().get(0);
+		String approvers=insertChsDef.getSimpleApprovers();
+		JSONArray approversArr=JSONArray.parseArray(approvers);
+		if(StringUtil.isBlank(approvers)||approversArr==null||approversArr.size()==0){
+			return result.success(false).data(list).message("流程未指定审批角色或审批人");
+		}
+
+		boolean approval=true;
+		if(approval){
+			list=assetService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+			assetService.joinData(list.getList());
+		}else{
+			//list=new PagedList<>();
+		}
+		result.success(true).data(list);
+		return result;
+	}
+
 
 
 

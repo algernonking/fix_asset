@@ -148,6 +148,8 @@ function ListPage() {
         value.maintainerId={ inputType:"select_box", value: xmSelect.get("#maintainerId",true).getValue("value") ,fillBy:["maintnainer"]  ,field:"id", label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
 
 
+
+
         return value;
     }
     /**
@@ -581,7 +583,6 @@ function ListPage() {
 
                 top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产')+fox.translate('吗？'), function (i) {
                     top.layer.close(i);
-
                     top.layer.load(2);
                     admin.request(moduleURL+"/delete", { id : data.id }, function (data) {
                         top.layer.closeAll('loading');
@@ -599,9 +600,7 @@ function ListPage() {
                 });
 
             }
-            else if (layEvent === 'asset-data-change') { // 变更
-                window.pageExt.list.assetDataChange(data);
-            }
+
 
         });
 

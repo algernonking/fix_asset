@@ -363,6 +363,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Result revokeOperation(String id) {
 		AssetDataChange billData=getById(id);
 		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+			billData.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+			super.update(billData,SaveMode.NOT_NULL_FIELDS);
 
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
@@ -380,8 +382,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Result forApproval(String id){
 		AssetDataChange billData=getById(id);
 		join(billData, AssetDataChangeMeta.ASSET_LIST);
-		assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"1234");
-		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+	//	assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"1234");
+		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus()) ||AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())  ){
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
 				//审批操作
 				//步骤一开始启动流程
@@ -405,6 +407,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 				Result processApproveResult=approve(processApproveVO);
 				if(!processApproveResult.isSuccess()) return processApproveResult;
 
+				billData.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+				super.update(billData,SaveMode.NOT_NULL_FIELDS);
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}

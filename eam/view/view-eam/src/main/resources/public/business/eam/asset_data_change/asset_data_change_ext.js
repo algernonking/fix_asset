@@ -27,15 +27,34 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeInit:function () {
             if(APPROVAL_REQUIRED){
+                //隐藏确认
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }else{
+
                 var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
                 document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
+
+
+            if(PAGE_TYPE&&PAGE_TYPE=="approval"){
+                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+                operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+
+                operHtml=operHtml.replace(/lay-event="edit"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="del"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+            }
+
+
+
             console.log("list:beforeInit");
         },
         /**

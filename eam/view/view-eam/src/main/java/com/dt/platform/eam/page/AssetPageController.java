@@ -236,6 +236,22 @@ public class AssetPageController extends ViewController {
 	}
 
 
+	/**
+	 * 资产登记审批
+	 */
+	@RequestMapping("/approval/asset_register_list.html")
+	public String assetApprove(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/approval/asset_register_list";
+	}
+
+
 
 	/**
 	 * 资产 功能主页面

@@ -118,7 +118,7 @@ function ListPage() {
 				}
 			});
 			//绑定排序事件
-			table.on('sort('+TABLE_ID+')', function(obj){
+			table.on('sort(data-table)', function(obj){
 				refreshTableData(obj.field,obj.type);
 			});
 

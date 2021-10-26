@@ -73,11 +73,12 @@
         </div>
 
         <div style="margin-top: 42px ">
-            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+            <table class="layui-table" th:id="(${tableId})"  lay-filter="data-table"></table>
         </div>
 
     </div>
 </div>
+<!--id="data-table"-->
 
 <script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
@@ -106,9 +107,12 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+  //  var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var AUTH_PREFIX="eam_asset_data_change";
 
+    var TABLE_ID=[[${tableId}]];
+    console.log("TABLE_ID:"+TABLE_ID);
     // 变更类型
     var PAGE_TYPE = [[${pageType}]] ;
     // 变更类型
