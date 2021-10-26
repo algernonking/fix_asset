@@ -1,7 +1,7 @@
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-24 18:13:13
+ * @since 2021-10-26 15:27:41
  */
 
 
@@ -122,9 +122,9 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
-		value.repairStatus={ inputType:"select_box", value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr") ,field:"code"};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value") ,fillBy:["type"]  ,field:"code", label:xmSelect.get("#type",true).getValue("nameStr") };
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
+		value.repairStatus={ inputType:"select_box", value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr") };
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value") ,fillBy:["type"]  , label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.reportUserId={ inputType:"button",value: $("#reportUserId").val(),fillBy:["reportUser","nameAndBadge"] };
 		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };

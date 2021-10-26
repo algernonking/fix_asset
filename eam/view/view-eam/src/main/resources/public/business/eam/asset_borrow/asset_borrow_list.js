@@ -1,7 +1,7 @@
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-24 10:31:57
+ * @since 2021-10-26 15:27:28
  */
 
 
@@ -121,7 +121,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.borrowerId={ inputType:"button",value: $("#borrowerId").val(),fillBy:["borrower","nameAndBadge"] ,label:$("#borrowerId-button").text() };
 		value.borrowTime={ inputType:"date_input", begin: $("#borrowTime-begin").val(), end: $("#borrowTime-end").val() };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };

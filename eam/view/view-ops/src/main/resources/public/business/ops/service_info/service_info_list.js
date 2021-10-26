@@ -1,7 +1,7 @@
 /**
  * 服务 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:27
+ * @since 2021-10-26 15:28:40
  */
 
 
@@ -116,8 +116,8 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.groupId={ inputType:"select_box", value: xmSelect.get("#groupId",true).getValue("value") ,fillBy:["group"]  ,field:"code", label:xmSelect.get("#groupId",true).getValue("nameStr") };
-		value.serviceCategoryId={ inputType:"select_box", value: xmSelect.get("#serviceCategoryId",true).getValue("value") ,fillBy:["serviceCategory"]  ,field:"id", label:xmSelect.get("#serviceCategoryId",true).getValue("nameStr") };
+		value.groupId={ inputType:"select_box", value: xmSelect.get("#groupId",true).getValue("value") ,fillBy:["group"]  , label:xmSelect.get("#groupId",true).getValue("nameStr") };
+		value.serviceCategoryId={ inputType:"select_box", value: xmSelect.get("#serviceCategoryId",true).getValue("value") ,fillBy:["serviceCategory"]  , label:xmSelect.get("#serviceCategoryId",true).getValue("nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};

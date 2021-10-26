@@ -1,7 +1,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:35
+ * @since 2021-10-26 15:27:25
  */
 
 
@@ -123,7 +123,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.outUseOrganizationId={ inputType:"button",value: $("#outUseOrganizationId").val(),fillBy:["outUseOrganization","fullName"] ,label:$("#outUseOrganizationId-button").text() };
 		value.inUseOrganizationId={ inputType:"button",value: $("#inUseOrganizationId").val(),fillBy:["inUseOrganization","fullName"] ,label:$("#inUseOrganizationId-button").text() };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };

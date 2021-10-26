@@ -86,8 +86,8 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.areaName={ value: $("#areaName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.areaNotes={ value: $("#areaNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.areaName={ value: $("#areaName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.areaNotes={ value: $("#areaNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

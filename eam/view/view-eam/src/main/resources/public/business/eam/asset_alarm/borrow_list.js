@@ -120,8 +120,8 @@ function ListPage() {
      */
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
-        value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-        value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+        value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+        value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
         var ps={searchField:"$composite"};
         if(window.pageExt.list.beforeQuery){
             if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

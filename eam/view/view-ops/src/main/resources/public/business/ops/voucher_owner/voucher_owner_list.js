@@ -116,11 +116,11 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.categoryCode={ inputType:"select_box", value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory",field:"code", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
+		value.categoryCode={ inputType:"select_box", value: xmSelect.get("#categoryCode",true).getValue("value"), fillBy:"voucherCategory", label:xmSelect.get("#categoryCode",true).getValue("nameStr") };
 		value.label={ inputType:"select_box", value: xmSelect.get("#label",true).getValue("value"), label:xmSelect.get("#label",true).getValue("nameStr")};
-		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.position={ inputType:"button",value: $("#position").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.position={ inputType:"button",value: $("#position").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

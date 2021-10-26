@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 合同分类
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:34
+ * @since 2021-10-26 15:28:50
  * @sign AC60E7F1D90D4A934275057DAD6E6826
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

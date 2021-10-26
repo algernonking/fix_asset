@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-10-24 07:32:34
+ * @since 2021-10-26 15:49:24
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2578,6 +2578,11 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
 		
 		/**
+		 * 业务名称
+		*/
+		public static final DBField BUSINESS_NAME = new DBField(DBDataType.STRING , "business_name","businessName","业务名称","业务名称",false,false,true);
+		
+		/**
 		 * 变更类型
 		*/
 		public static final DBField CHANGE_TYPE = new DBField(DBDataType.STRING , "change_type","changeType","变更类型","变更类型",false,false,true);
@@ -2697,7 +2702,7 @@ public class EAMTables {
 		public static final DBField NEXT_APPROVER_NAMES = new DBField(DBDataType.STRING , "next_approver_names","nextApproverNames","下一个审批节点审批人姓名","用逗号隔开",false,false,true);
 		
 		public EAM_ASSET_DATA_CHANGE() {
-			this.init($NAME,"数据变更" , ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES);
+			this.init($NAME,"数据变更" , ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES);
 		}
 		public static final EAM_ASSET_DATA_CHANGE $TABLE=new EAM_ASSET_DATA_CHANGE();
 	}

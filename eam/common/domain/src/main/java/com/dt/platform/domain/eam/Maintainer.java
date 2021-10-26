@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 维保厂商
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:57
+ * @since 2021-10-26 15:27:59
  * @sign 504486AD5EDC26C04E7FECBA1BF403A6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

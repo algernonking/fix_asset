@@ -44,6 +44,21 @@ public class AssetDataChangeRecord extends Asset {
 	@ApiModelProperty(required = false,value="变更实体" , notes = "变更实体")
 	private AssetDataChange assetDataChange;
 
+	/**
+	 * 业务名称：业务名称
+	 */
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
+	private String businessName;
+
+
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
 
 
 	public AssetDataChange getAssetDataChange() {

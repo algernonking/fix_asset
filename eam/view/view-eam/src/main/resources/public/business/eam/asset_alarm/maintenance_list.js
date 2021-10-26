@@ -115,7 +115,7 @@ function ListPage() {
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
       //  value.businessCode={ value: $("#businessCode").val()};
-   //     value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
+   //     value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:""};
         value.status={ value:"complete"};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.maintenanceEndDate={ begin: $("#maintenanceEndDate-begin").val(), end: $("#maintenanceEndDate-end").val() };

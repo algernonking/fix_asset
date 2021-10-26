@@ -37,7 +37,7 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
-                    <div class="search-unit">
+                    <div class="search-unit" id="status-search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
                         <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px"></div>
                     </div>
@@ -107,7 +107,7 @@
 
 
 <script th:inline="javascript">
-  //  var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var AUTH_PREFIX="eam_asset_data_change";
 

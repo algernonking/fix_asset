@@ -17,7 +17,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资金明细
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:38
+ * @since 2021-10-26 15:28:55
  * @sign 5F0799953897372D392AAABC3E5D731F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

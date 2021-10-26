@@ -99,10 +99,10 @@ function ListPage() {
      */
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
-        value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
+        value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:""};
         value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
-        value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-        value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+        value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+        value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
         var ps={searchField:"$composite"};
 
         if(window.pageExt.list.beforeQuery){

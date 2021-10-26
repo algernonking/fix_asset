@@ -1,7 +1,7 @@
 /**
  * 主机位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:26
+ * @since 2021-10-26 15:28:37
  */
 
 function FormPage() {
@@ -19,7 +19,7 @@ function FormPage() {
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
 		action=admin.getTempData('ops-host-position-form-data-form-action');
-		//如果没有修改和保存权限，
+		//如果没有修改和保存权限
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}

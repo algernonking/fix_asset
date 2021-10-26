@@ -1,7 +1,7 @@
 /**
  * 资产选择 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:16
+ * @since 2021-10-26 15:27:00
  */
 
 function FormPage() {
@@ -19,7 +19,7 @@ function FormPage() {
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
 		action=admin.getTempData('eam-asset-selected-data-form-data-form-action');
-		//如果没有修改和保存权限，
+		//如果没有修改和保存权限
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
 		}

@@ -548,7 +548,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			assetDataChange.setStatus(assetData.getStatus());
 			//直接使用assetId作为基本数据
 			assetDataChange.setId(assetData.getId());
-
+			assetDataChange.setBusinessName(assetDataChangeRecord.getBusinessName());
 
 			//判断是否唯一
 			if(operateService.queryAssetSerialNumberNeedUnique()){
@@ -627,9 +627,11 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			}
 		}
 
+
 		Result updateAssetResult=assetService.update(assetDataChange.getChangeData(),SaveMode.NOT_NULL_FIELDS);
 		if(!updateAssetResult.isSuccess())return updateAssetResult;
 
+		assetDataChange.setBusinessName(assetDataChangeRecord.getBusinessName());
 		Result r=super.update(assetDataChange,SaveMode.NOT_NULL_FIELDS);
 		if(r.success()){
 			//保存表单数据

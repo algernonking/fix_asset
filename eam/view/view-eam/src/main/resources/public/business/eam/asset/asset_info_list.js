@@ -142,11 +142,11 @@ function ListPage() {
 		// value.businessCode={ value: $("#businessCode").val()};
 		// value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		// value.assetStatus={ value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
-		// value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		// value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		// value.assetCode={ value: $("#assetCode").val(),fuzzy: true,valuePrefix:"",valueSuffix:""};
+		// value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		// value.manufacturerId={ value: xmSelect.get("#manufacturerId",true).getValue("value"), fillBy:"manufacturer",field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
-		// value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		// value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		// value.model={ value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		// value.serialNumber={ value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		// value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text()};
 		// value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text()};
 		// value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text()};
@@ -154,7 +154,7 @@ function ListPage() {
 		// value.positionId={ value: xmSelect.get("#positionId",true).getValue("value"), fillBy:"position",field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		// value.sourceId={ value: xmSelect.get("#sourceId",true).getValue("value"), fillBy:"source",field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		// value.purchaseDate={ begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
-		// value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		// value.assetNotes={ value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 
 
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
@@ -170,7 +170,7 @@ function ListPage() {
 		value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text() };
 		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text() };
 		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  ,field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
-		value.sourceId={ inputType:"select_box", value: xmSelect.get("#sourceId",true).getValue("value") ,fillBy:["source"]  ,field:"code", label:xmSelect.get("#sourceId",true).getValue("nameStr") };
+		value.sourceId={ inputType:"select_box", value: xmSelect.get("#sourceId",true).getValue("value") ,fillBy:["source"]  , label:xmSelect.get("#sourceId",true).getValue("nameStr") };
 		value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
 		value.assetNotes={ inputType:"button",value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.maintainerId={ inputType:"select_box", value: xmSelect.get("#maintainerId",true).getValue("value") ,fillBy:["maintnainer"]  ,field:"id", label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
@@ -192,6 +192,7 @@ function ListPage() {
 		if(categoryValue&&categoryValue.length>0){
 			ps.categoryId=categoryValue[0].id;
 		}
+
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;

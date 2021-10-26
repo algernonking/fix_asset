@@ -89,8 +89,8 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.type={ value: xmSelect.get("#type",true).getValue("value")};
-		value.serviceName={ value: $("#serviceName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.serviceNotes={ value: $("#serviceNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.serviceName={ value: $("#serviceName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.serviceNotes={ value: $("#serviceNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });

@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:42
+ * @since 2021-10-26 15:27:36
  */
 
 
@@ -121,9 +121,9 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") ,field:"code"};
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","nameAndBadge"] ,label:$("#useUserId-button").text() };
-		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  ,field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  , label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.collectionDate={ inputType:"date_input", begin: $("#collectionDate-begin").val(), end: $("#collectionDate-end").val() };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};

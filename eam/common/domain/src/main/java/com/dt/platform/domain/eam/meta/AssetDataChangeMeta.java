@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:31
- * @sign AFA28CC6716891E11E839261495D97B5
+ * @since 2021-10-26 17:00:03
+ * @sign 52039BF77C9C8701116488F8E16D01B7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -57,6 +57,16 @@ public class AssetDataChangeMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final String BUSINESS_NAME="businessName";
+	
+	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> BUSINESS_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,BUSINESS_NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 变更类型 , 类型: java.lang.String
@@ -341,7 +351,7 @@ public class AssetDataChangeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -392,6 +402,17 @@ public class AssetDataChangeMeta {
 		public AssetDataChange setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务名称
+		 * @param businessName 业务名称
+		 * @return 当前对象
+		*/
+		public AssetDataChange setBusinessName(String businessName) {
+			super.change(BUSINESS_NAME,super.getBusinessName(),businessName);
+			super.setBusinessName(businessName);
 			return this;
 		}
 		

@@ -1,7 +1,7 @@
 /**
  * 业务编码 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:46:50
+ * @since 2021-10-26 15:26:25
  */
 
 
@@ -115,7 +115,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.code={ inputType:"button",value: $("#code").val()};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") ,field:"code"};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};

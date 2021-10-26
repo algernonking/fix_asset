@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:12
+ * @since 2021-10-26 15:28:20
  */
 
 
@@ -136,11 +136,11 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value") ,fillBy:["infoSystemStatus"]  ,field:"code", label:xmSelect.get("#status",true).getValue("nameStr") };
+		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value") ,fillBy:["infoSystemStatus"]  , label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.technicalContact={ inputType:"button",value: $("#technicalContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.businessContact={ inputType:"button",value: $("#businessContact").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.belongOrgId={ inputType:"button",value: $("#belongOrgId").val(),fillBy:["belongOrganization","fullName"] ,label:$("#belongOrgId-button").text() };
-		value.grade={ inputType:"select_box", value: xmSelect.get("#grade",true).getValue("value") ,fillBy:["infoSystemGrade"]  ,field:"code", label:xmSelect.get("#grade",true).getValue("nameStr") };
+		value.grade={ inputType:"select_box", value: xmSelect.get("#grade",true).getValue("value") ,fillBy:["infoSystemGrade"]  , label:xmSelect.get("#grade",true).getValue("nameStr") };
 		value.labels={ inputType:"button",value: $("#labels").val()};
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};

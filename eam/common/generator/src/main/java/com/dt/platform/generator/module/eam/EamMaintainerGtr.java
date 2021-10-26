@@ -15,9 +15,6 @@ public class EamMaintainerGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_MAINTAINER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_MAINTAINER.MAINTAINER_NAME).search().fuzzySearch();
-
-
-
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.EAM_MAINTAINER.MAINTAINER_NAME,
@@ -25,9 +22,6 @@ public class EamMaintainerGtr extends BaseCodeGenerator {
 
                 }
         );
-
-
-
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);

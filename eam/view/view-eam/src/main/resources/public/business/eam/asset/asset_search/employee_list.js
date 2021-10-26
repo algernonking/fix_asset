@@ -97,10 +97,10 @@ function ListPage() {
      */
     function refreshTableData(sortField,sortType,reset) {
         var value = {};
-        value.badge={ value: $("#badge").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+        value.badge={ value: $("#badge").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
         value.phone={ value: $("#phone").val()};
         value.status={ value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
-        value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" ",fillBy:["person","name"] };
+        value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"",fillBy:["person","name"] };
         var ps={searchField:"$composite"};
         if(window.pageExt.list.beforeQuery){
             if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

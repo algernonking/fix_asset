@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 数据变更
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:31
- * @sign AFA28CC6716891E11E839261495D97B5
+ * @since 2021-10-26 17:00:03
+ * @sign 52039BF77C9C8701116488F8E16D01B7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -55,6 +55,12 @@ public class AssetDataChange extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
+	
+	/**
+	 * 业务名称：业务名称
+	*/
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
+	private String businessName;
 	
 	/**
 	 * 变更类型：变更类型
@@ -297,6 +303,25 @@ public class AssetDataChange extends Entity {
 	*/
 	public AssetDataChange setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
+	*/
+	public String getBusinessName() {
+		return businessName;
+	}
+	
+	/**
+	 * 设置 业务名称
+	 * @param businessName 业务名称
+	 * @return 当前对象
+	*/
+	public AssetDataChange setBusinessName(String businessName) {
+		this.businessName=businessName;
 		return this;
 	}
 	

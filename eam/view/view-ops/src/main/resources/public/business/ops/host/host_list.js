@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:24
+ * @since 2021-10-26 15:28:35
  */
 
 
@@ -140,18 +140,18 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.systemId={ inputType:"select_box", value: xmSelect.get("#systemId",true).getValue("value") ,fillBy:["infoSystem"]  ,field:"id", label:xmSelect.get("#systemId",true).getValue("nameStr") };
+		value.systemId={ inputType:"select_box", value: xmSelect.get("#systemId",true).getValue("value") ,fillBy:["infoSystem"]  , label:xmSelect.get("#systemId",true).getValue("nameStr") };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.hostName={ inputType:"button",value: $("#hostName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.hostIp={ inputType:"button",value: $("#hostIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.hostVip={ inputType:"button",value: $("#hostVip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.environment={ inputType:"select_box", value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr") ,field:"code"};
-		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  ,field:"id", label:xmSelect.get("#positionId",true).getValue("nameStr") };
+		value.environment={ inputType:"select_box", value: xmSelect.get("#environment",true).getValue("value"), label:xmSelect.get("#environment",true).getValue("nameStr") };
+		value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  , label:xmSelect.get("#positionId",true).getValue("nameStr") };
 		value.labels={ inputType:"button",value: $("#labels").val()};
 		value.hostNotes={ inputType:"button",value: $("#hostNotes").val()};
-		value.hostDbIds={ inputType:"select_box", value: xmSelect.get("#hostDbIds",true).getValue("value") ,fillBy:["hostDbList"]  ,field:"id", label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
-		value.hostMiddlewareIds={ inputType:"select_box", value: xmSelect.get("#hostMiddlewareIds",true).getValue("value") ,fillBy:["hostMiddlewareList"]  ,field:"id", label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
-		value.hostOsIds={ inputType:"select_box", value: xmSelect.get("#hostOsIds",true).getValue("value") ,fillBy:["hostOsList"]  ,field:"id", label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
+		value.hostDbIds={ inputType:"select_box", value: xmSelect.get("#hostDbIds",true).getValue("value") ,fillBy:["hostDbList"]  , label:xmSelect.get("#hostDbIds",true).getValue("nameStr") };
+		value.hostMiddlewareIds={ inputType:"select_box", value: xmSelect.get("#hostMiddlewareIds",true).getValue("value") ,fillBy:["hostMiddlewareList"]  , label:xmSelect.get("#hostMiddlewareIds",true).getValue("nameStr") };
+		value.hostOsIds={ inputType:"select_box", value: xmSelect.get("#hostOsIds",true).getValue("value") ,fillBy:["hostOsList"]  , label:xmSelect.get("#hostOsIds",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

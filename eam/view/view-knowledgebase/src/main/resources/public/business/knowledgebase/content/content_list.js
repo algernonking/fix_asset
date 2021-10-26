@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:33
+ * @since 2021-10-26 15:28:48
  */
 
 
@@ -117,12 +117,12 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value") ,fillBy:["category"]  ,field:"id", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
+		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value") ,fillBy:["category"]  , label:xmSelect.get("#categoryId",true).getValue("nameStr") };
 		value.title={ inputType:"button",value: $("#title").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.profile={ inputType:"button",value: $("#profile").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.contentType={ inputType:"radio_box", value: xmSelect.get("#contentType",true).getValue("value"), label:xmSelect.get("#contentType",true).getValue("nameStr") };
 		value.display={ inputType:"radio_box", value: xmSelect.get("#display",true).getValue("value"), label:xmSelect.get("#display",true).getValue("nameStr") };
-		value.gradeId={ inputType:"select_box", value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr") ,field:"code"};
+		value.gradeId={ inputType:"select_box", value: xmSelect.get("#gradeId",true).getValue("value"), label:xmSelect.get("#gradeId",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

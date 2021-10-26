@@ -91,9 +91,9 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.serviceId={ value: xmSelect.get("#serviceId",true).getValue("value"), fillBy:"opsService",field:"id" };
-		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.patch={ value: $("#patch").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.patch={ value: $("#patch").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value),sortField: sortField,sortType: sortType};
 
 		if(reset) {

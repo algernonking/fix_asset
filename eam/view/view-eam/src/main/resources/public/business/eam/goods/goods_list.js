@@ -1,7 +1,7 @@
 /**
  * 物品档案 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:55
+ * @since 2021-10-26 15:27:56
  */
 
 
@@ -119,10 +119,10 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value") ,fillBy:["category"]  ,field:"id", label:xmSelect.get("#categoryId",true).getValue("nameStr") };
+		value.categoryId={ inputType:"select_box", value: xmSelect.get("#categoryId",true).getValue("value") ,fillBy:["category"]  , label:xmSelect.get("#categoryId",true).getValue("nameStr") };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  ,field:"id", label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
+		value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  , label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

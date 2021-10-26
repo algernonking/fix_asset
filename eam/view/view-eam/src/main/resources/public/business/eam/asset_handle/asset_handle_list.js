@@ -1,7 +1,7 @@
 /**
  * 资产处置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:49
+ * @since 2021-10-26 15:27:45
  */
 
 
@@ -126,7 +126,7 @@ function ListPage() {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") ,field:"code"};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.content={ inputType:"button",value: $("#content").val()};
 		value.handleDate={ inputType:"date_input", begin: $("#handleDate-begin").val(), end: $("#handleDate-end").val() };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };

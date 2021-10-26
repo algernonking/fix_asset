@@ -1,7 +1,7 @@
 /**
  * 折旧策略 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:01
+ * @since 2021-10-26 15:28:04
  */
 
 layui.config({

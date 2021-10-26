@@ -108,7 +108,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value)) return;
 		}

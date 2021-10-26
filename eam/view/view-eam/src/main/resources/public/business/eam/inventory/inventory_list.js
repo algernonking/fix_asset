@@ -109,12 +109,12 @@ function ListPage() {
 	function refreshTableData(sortField,sortType) {
 		var value = {};
 		value.businessCode={ value: $("#businessCode").val()};
-		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		value.status={ value: $("#status").val()};
 		value.categoryId={ value: $("#categoryId").val()};
 		value.startTime={ begin: $("#startTime-begin").val(), end: $("#startTime-end").val() };
 		value.businessDate={ begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
-		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		window.pageExt.list.beforeQuery && window.pageExt.list.beforeQuery(value);
 		var ps={searchField: "$composite", searchValue: JSON.stringify(value)};
 		if(sortField) {

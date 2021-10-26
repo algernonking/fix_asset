@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 物品档案 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:55
+ * @since 2021-10-26 15:27:56
 */
 
 public interface IGoodsService extends ISuperService<Goods> {

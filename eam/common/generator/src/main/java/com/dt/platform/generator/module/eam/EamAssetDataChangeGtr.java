@@ -82,6 +82,7 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_NAME,
                         EAMTables.EAM_ASSET_DATA_CHANGE.BUSINESS_CODE,
                 }
                 , new Object[] {
@@ -92,6 +93,8 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
                         EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_NOTES,
                 }
         );
+
+
 
         cfg.view().form().addPage("资产列表","assetSelectList");
 //        cfg.view().form().addGroup("变更内容",

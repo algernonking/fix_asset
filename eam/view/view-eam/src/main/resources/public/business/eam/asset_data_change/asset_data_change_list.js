@@ -54,6 +54,11 @@ function ListPage() {
 			if(window.pageExt.list.beforeQuery){
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
+
+			if(PAGE_TYPE&&PAGE_TYPE=="approval"){
+				ps.status='approval';
+			}
+
 			ps.searchValue=JSON.stringify(contitions);
 			ps.changeType=CHANGE_TYPE;
 			var templet=window.pageExt.list.templet;
@@ -72,6 +77,7 @@ function ListPage() {
 				{ fixed: 'left',type:'checkbox'},
 				{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  },
 				{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}},
+				{ field: 'businessName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称'), templet:function (d){ return templet('businessName',d.businessName,d);}  },
 				{ field: 'changeDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('变更日期'), templet: function (d) { return templet('changeDate',fox.dateFormat(d.changeDate,"yyyy-MM-dd"),d); }},
 				{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);}}
 
@@ -143,15 +149,21 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 
-		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr")};
 		value.changeDate={ inputType:"date_input", begin: $("#changeDate-begin").val(), end: $("#changeDate-end").val() };
-		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:" "};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
 		ps.changeType=CHANGE_TYPE;
+
+		if(PAGE_TYPE&&PAGE_TYPE=="approval"){
+			delete value.status ;
+			ps.status='approval';
+		}
+
 		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;
@@ -163,6 +175,9 @@ function ListPage() {
 				ps.sortType=sort.type;
 			}
 		}
+
+
+
 		if(reset) {
 			table.reload(TABLE_ID, { where : ps , page:{ curr:1 } });
 		} else {

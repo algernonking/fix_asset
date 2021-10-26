@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 品牌 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:52
+ * @since 2021-10-26 15:27:51
 */
 
 @Api(tags = "品牌")

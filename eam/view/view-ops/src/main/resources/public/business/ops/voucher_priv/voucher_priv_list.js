@@ -1,7 +1,7 @@
 /**
  * 凭证权限 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:48:09
+ * @since 2021-10-26 15:28:15
  */
 
 
@@ -113,7 +113,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") ,field:"code"};
+		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.emplId={ inputType:"button",value: $("#emplId").val(),fillBy:["employee","nameAndBadge"] ,label:$("#emplId-button").text() };
 		value.status={ inputType:"radio_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};

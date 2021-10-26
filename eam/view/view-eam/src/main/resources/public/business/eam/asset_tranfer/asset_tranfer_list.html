@@ -2,7 +2,7 @@
 /**
  * 资产转移 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:35
+ * @since 2021-10-26 15:27:25
  */
  -->
  <!DOCTYPE html>
@@ -56,13 +56,13 @@
                     </div>
                     <!-- 调出使用公司/部门 , outUseOrganizationId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:120px"><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUseOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('调出使用公司/部门')}" class="search-label outUseOrganizationId-label">调出使用公司/部门</span><span class="search-colon">:</span></div>
                             <input lay-filter="outUseOrganizationId" id="outUseOrganizationId" name="outUseOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
                             <button id="outUseOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>
                     <!-- 调入使用公司/部门 , inUseOrganizationId ,typeName=button, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:120px"><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUseOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style="width:130px"><span th:text="${lang.translate('调入使用公司/部门')}" class="search-label inUseOrganizationId-label">调入使用公司/部门</span><span class="search-colon">:</span></div>
                             <input lay-filter="inUseOrganizationId" id="inUseOrganizationId" name="inUseOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
                             <button id="inUseOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn layui-btn-primary   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                     </div>

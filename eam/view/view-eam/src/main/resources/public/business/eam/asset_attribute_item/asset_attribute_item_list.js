@@ -1,7 +1,7 @@
 /**
  * 资产字段配置项 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-22 21:47:23
+ * @since 2021-10-26 15:27:08
  */
 
 
@@ -124,7 +124,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.ownerCode={ inputType:"select_box", value: xmSelect.get("#ownerCode",true).getValue("value"), label:xmSelect.get("#ownerCode",true).getValue("nameStr") ,field:"code"};
+		value.ownerCode={ inputType:"select_box", value: xmSelect.get("#ownerCode",true).getValue("value"), label:xmSelect.get("#ownerCode",true).getValue("nameStr") };
 		value.dimension={ inputType:"radio_box", value: xmSelect.get("#dimension",true).getValue("value"), label:xmSelect.get("#dimension",true).getValue("nameStr") };
 		value.layoutType={ inputType:"radio_box", value: xmSelect.get("#layoutType",true).getValue("value"), label:xmSelect.get("#layoutType",true).getValue("nameStr") };
 		value.listShow={ inputType:"radio_box", value: xmSelect.get("#listShow",true).getValue("value"), label:xmSelect.get("#listShow",true).getValue("nameStr") };
