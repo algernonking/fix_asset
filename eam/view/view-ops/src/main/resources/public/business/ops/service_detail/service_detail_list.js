@@ -90,7 +90,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.serviceId={ value: xmSelect.get("#serviceId",true).getValue("value"), fillBy:"opsService",field:"id" };
+		value.serviceId={ value: xmSelect.get("#serviceId",true).getValue("value"), fillBy:"opsService"};
 		value.name={ value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		value.patch={ value: $("#patch").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
 		value.notes={ value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};

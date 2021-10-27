@@ -49,7 +49,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.SELECTED_CODE).basic().hidden(true);
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).basic().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.BUSINESS_CODE).search().fuzzySearch();
-        cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).table().disable().search().fuzzySearch();
+        cfg.view().field(EAMTables.EAM_ASSET_BORROW.NAME).search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.PROC_ID).table().disable();
@@ -129,6 +129,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_BORROW.NAME,
                         EAMTables.EAM_ASSET_BORROW.BORROWER_ID,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_BORROW.BORROW_TIME

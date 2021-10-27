@@ -151,7 +151,7 @@
         </div>
 
         <div style="margin-top: 84px ">
-            <table class="layui-table" th:id="data-table-+(${pageType})" lay-filter="data-table"></table>
+            <table class="layui-table" th:id="(${tableId})" lay-filter="data-table"></table>
         </div>
 
     </div>
@@ -173,12 +173,8 @@
         <button th:if="${perm.checkAuth('eam_asset:batch-confirm')}"  id="batchConfirm-button" class="layui-btn icon-btn  layui-btn-sm batch-confirm-button"               lay-event="batchConfirm"> <span th:text="${lang.translate('确认')}">确认</span></button>
         <button th:if="${perm.checkAuth('eam_asset:batch-revoke')}" id="batchRevoke-button" class="layui-btn icon-btn  layui-btn-sm batch-revoke-button"                   lay-event="batchRevoke"> <span th:text="${lang.translate('撤销')}">撤销</span></button>
         <button th:if="${perm.checkAuth('eam_asset:bills')}" id="bills-button" class="layui-btn icon-btn layui-btn-sm bills-button"                                        lay-event="bills"> <span th:text="${lang.translate('登记单')}">登记单</span></button>
-
-
-        console.log(111111);
-
-
         <button th:if="${perm.checkAuth('eam_asset:high-export-data')}"  id="highExportData-button" class="layui-btn icon-btn layui-btn-sm high-export-data-button"        lay-event="highExportData"><span th:text="${lang.translate('数据导出')}">数据导出</span></button>
+
     </div>
 </script>
 
@@ -194,9 +190,7 @@
 
 </script>
 
-<!--<script th:inline="javascript" th:src="'/business/eam/asset/asset_a.js?'+${cacheKey}">-->
 
-</script>
 
 <script th:inline="javascript" >
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];

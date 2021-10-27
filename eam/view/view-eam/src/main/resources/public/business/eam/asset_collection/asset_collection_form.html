@@ -2,7 +2,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:36
+ * @since 2021-10-27 09:59:47
  */
  -->
  <!DOCTYPE html>
@@ -40,18 +40,17 @@
             <div class="layui-col-xs4 form-column">
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('领用后公司/部门')}">领用后公司/部门</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
-                            <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                            <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                            <button id="useOrganizationId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
                         </div>
                     </div>
 
@@ -81,7 +80,15 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column">
 
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('使用人员')}">使用人员</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="useUserId" id="useUserId" name="useUserId"  type="hidden" class="layui-input"    lay-verify="|required"   />
+                            <button id="useUserId-button" type="button" action-type="emp-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择人员')}" th:default-label="${lang.translate('请选择人员')}">按钮文本</span></button>
+                        </div>
+                    </div>
 
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('领用日期')}">领用日期</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">

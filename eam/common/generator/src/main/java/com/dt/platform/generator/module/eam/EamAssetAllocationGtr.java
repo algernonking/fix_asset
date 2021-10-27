@@ -49,7 +49,6 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.ATTACH).table().hidden();
 
@@ -110,6 +109,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                  new Object[] {
+                         EAMTables.EAM_ASSET_ALLOCATION.NAME,
                         EAMTables.EAM_ASSET_ALLOCATION.OUT_OWN_COMPANY_ID
                 }, new Object[] {
                         EAMTables.EAM_ASSET_ALLOCATION.IN_OWN_COMPANY_ID

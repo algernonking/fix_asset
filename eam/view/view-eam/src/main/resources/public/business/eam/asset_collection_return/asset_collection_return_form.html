@@ -2,7 +2,7 @@
 /**
  * 资产退库 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:38
+ * @since 2021-10-27 10:03:00
  */
  -->
  <!DOCTYPE html>
@@ -40,6 +40,13 @@
             <div class="layui-col-xs4 form-column">
 
                     <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务名称')}">业务名称</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('业务名称') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('退库后公司/部门')}">退库后公司/部门</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="useOrganizationId" id="useOrganizationId" name="useOrganizationId"  type="hidden" class="layui-input"    lay-verify="|required"   />

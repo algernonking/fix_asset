@@ -61,9 +61,22 @@ public class AssetDataChangePageController extends ViewController {
 	@RequestMapping("/asset_data_change_list.html")
 	public String list(Model model,HttpServletRequest request,String changeType,String pageType) {
 
+
+		model.addAttribute("forApprovalBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":for-approval" ) );
+		model.addAttribute("confirmDataBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":confirm"));
+		model.addAttribute("revokeDataBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":revoke" ));
+		model.addAttribute("agreeBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":agree") );
+		model.addAttribute("denyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":deny"));
+		model.addAttribute("dataChangeCreateBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":create") );
+		model.addAttribute("dataChangeModifyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+"update") );
+		model.addAttribute("dataChangeDeleteBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":delete") );
+		model.addAttribute("dataChangeViewBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":query") );
+		//表格
 		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
 		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("data-table"+pageType+changeType));
 		model.addAttribute("tableId","data-table"+pageType+changeType);
+
+		//审批
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(changeType);
 		if(approvalResult.isSuccess()){
@@ -73,6 +86,8 @@ public class AssetDataChangePageController extends ViewController {
 		model.addAttribute("changeType",changeType);
 		model.addAttribute("pageType",pageType);
 		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getData().toString();
+
+
 
 		//设置字段布局
 		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(pageType, assetAttributeDimension);

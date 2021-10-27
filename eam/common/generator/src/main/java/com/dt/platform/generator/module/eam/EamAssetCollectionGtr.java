@@ -96,7 +96,7 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.ATTACH).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
+       // cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.BUSINESS_DATE).table().hidden();
@@ -128,14 +128,15 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION.NAME,
                         EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID,
-                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
                 }, new Object[] {
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_ID,
                         EAMTables.EAM_ASSET_COLLECTION.POSITION_DETAIL,
 
                 },
                 new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID,
                         EAMTables.EAM_ASSET_COLLECTION.COLLECTION_DATE,
                 }
         );

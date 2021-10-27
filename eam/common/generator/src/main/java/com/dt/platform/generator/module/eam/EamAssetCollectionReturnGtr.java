@@ -78,7 +78,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.PROC_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION.CONTENT).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.NAME).table().disable();
+      //  cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.NAME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.ATTACH).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_COLLECTION_RETURN.CONTENT).table().hidden();
@@ -104,6 +104,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         cfg.view().formWindow().width("98%");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.EAM_ASSET_COLLECTION_RETURN.NAME,
                         EAMTables.EAM_ASSET_COLLECTION_RETURN.USE_ORGANIZATION_ID,
 
                 }

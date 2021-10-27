@@ -117,6 +117,7 @@ function ListPage() {
 							d.status=res.data.list[i].status;
 							d.changeDate=res.data.list[i].changeDate;
 							d.originator=res.data.list[i].originator;
+							d.businessName=res.data.list[i].businessName;
 							data.push(d);
 						}
 					}

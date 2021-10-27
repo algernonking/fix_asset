@@ -43,9 +43,7 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CREATE_TIME).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.ATTACH).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.BUSINESS_DATE).table().hidden();
-        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().hidden();
-
-
+      //  cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).form().validate().required();
@@ -77,7 +75,7 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CLEAN_STATUS).table().disable();
-        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().disable();
+      //  cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().disable();
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.ATTACH).form().upload().acceptSingleFile().displayFileName(false);
 
@@ -104,7 +102,7 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
         cfg.view().form().addGroup(null,
                 new Object[]
                         {
-                                EAMTables.EAM_ASSET_SCRAP.NAME
+                           EAMTables.EAM_ASSET_SCRAP.NAME
                         },
               new Object[]
                       {

@@ -1,7 +1,7 @@
 /**
  * 资产调拨 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:22
+ * @since 2021-10-27 09:55:39
  */
 
 
@@ -76,6 +76,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'outOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调出所属公司') , templet: function (d) { return templet('outOwnCompanyId',fox.getProperty(d,["outOwnerCompany","fullName"]),d);} }
 					,{ field: 'inOwnCompanyId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入所属公司') , templet: function (d) { return templet('inOwnCompanyId',fox.getProperty(d,["inOwnerCompany","fullName"]),d);} }
 					,{ field: 'managerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('调入管理员') , templet: function (d) { return templet('managerId',fox.getProperty(d,["manager","nameAndBadge"]),d);} }
