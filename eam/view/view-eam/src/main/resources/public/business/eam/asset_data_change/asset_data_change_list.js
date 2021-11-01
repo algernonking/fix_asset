@@ -76,6 +76,7 @@ function ListPage() {
 				{ fixed: 'left',type: 'numbers' },
 				{ fixed: 'left',type:'checkbox'},
 				{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  },
+
 				{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}},
 				{ field: 'businessName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称'), templet:function (d){ return templet('businessName',d.businessName,d);}  },
 				{ field: 'changeDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('变更日期'), templet: function (d) { return templet('changeDate',fox.dateFormat(d.changeDate,"yyyy-MM-dd"),d); }},
@@ -86,11 +87,18 @@ function ListPage() {
 				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code){
 					var code=ATTRIBUTE_LIST_DATA[i].attribute.code;
 					var e=COL_ALL_DATA[code];
-					//LAYUI_TABLE_WIDTH_CONFIG["data-table"][e.field]=180;
 					COL_DATA.push(e);
 				}
 			}
-			console.log(LAYUI_TABLE_WIDTH_CONFIG);
+
+			if(APPROVAL_REQUIRED){
+			    var ap={ field: 'chsApprovalOpinion', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('chsApprovalOpinion',d.chsApprovalOpinion,d);}  };
+				COL_DATA.push(ap);
+			}
+
+
+
+
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
 			COL_DATA.push(oper)
 			var responseData=[];
@@ -118,6 +126,11 @@ function ListPage() {
 							d.changeDate=res.data.list[i].changeDate;
 							d.originator=res.data.list[i].originator;
 							d.businessName=res.data.list[i].businessName;
+							if(res.data.list[i].changeInstanceId)
+								d.chsChangeInstanceId=res.data.list[i].changeInstanceId;
+							if(res.data.list[i].approvalOpinion)
+								d.chsApprovalOpinion=res.data.list[i].approvalOpinion;
+
 							data.push(d);
 						}
 					}
@@ -291,6 +304,12 @@ function ListPage() {
 				case 'refresh-data':
 					refreshTableData();
 					break;
+				case 'agree':
+					window.pageExt.list.agreeData(selected,obj);
+					break;
+				case 'deny':
+					window.pageExt.list.denyData(selected,obj);
+					break;
 				case 'other':
 					break;
 			};
@@ -363,15 +382,16 @@ function ListPage() {
 					layer.closeAll('loading');
 					if(data.success) {
 						admin.putTempData('eam-asset-data-change-form-data-form-action', "edit",true);
-
-
 						data.data.changeData.status=data.data.status;
 						data.data.changeData.businessCode=data.data.businessCode;
-						if(data.data.changeDate)
-						data.data.changeData.changeDate=data.data.changeDate;
-						if(data.data.changeNotes)
-						data.data.changeData.changeNotes=data.data.changeNotes;
+						data.data.changeData.businessName=data.data.businessName;
 
+						if(data.data.changeDate)
+							data.data.changeData.changeDate=data.data.changeDate;
+						if(data.data.changeNotes)
+							data.data.changeData.changeNotes=data.data.changeNotes;
+						if(data.data.businessName)
+							data.data.changeData.businessName=data.data.businessName;
 						showEditForm(data.data.changeData);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
@@ -391,6 +411,8 @@ function ListPage() {
 							data.data.changeData.changeDate=data.data.changeDate;
 						if(data.data.changeNotes)
 							data.data.changeData.changeNotes=data.data.changeNotes;
+						if(data.data.businessName)
+							data.data.changeData.businessName=data.data.businessName;
 						showEditForm(data.data.changeData);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
@@ -432,6 +454,12 @@ function ListPage() {
 			}
 			else if (layEvent === 'revoke-data') { // 撤销
 				window.pageExt.list.revokeData(data);
+			}
+			else if (layEvent === 'agree') { // 同意
+				window.pageExt.list.agreeData(data);
+			}
+			else if (layEvent === 'deny') { // 拒绝
+				window.pageExt.list.denyData(data);
 			}
 			
 		});

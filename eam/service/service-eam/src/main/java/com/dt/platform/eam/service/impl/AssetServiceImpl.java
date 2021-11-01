@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.deepoove.poi.data.PictureType;
 import com.deepoove.poi.data.Pictures;
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
@@ -37,13 +38,16 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import org.apache.poi.ss.usermodel.*;
-import org.github.foxnic.web.domain.changes.ProcessApproveVO;
-import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
+import org.github.foxnic.web.constants.enums.changes.ChangeType;
+import org.github.foxnic.web.domain.bpm.Appover;
+import org.github.foxnic.web.domain.changes.*;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
+import org.github.foxnic.web.framework.change.ChangesAssistant;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,7 +78,7 @@ import org.github.foxnic.web.framework.dao.DBConfigs;
  * </p>
  * @author 金杰 , maillank@qq.com
  * @since 2021-09-20 21:49:
-*/
+ */
 
 
 @Service("EamAssetService")
@@ -98,9 +102,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -123,6 +127,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		}
 		matcher.appendTail(sb);
 		return sb.toString();
+	}
+
+	private void syncBill(String id,ChangeEvent event) {
+		Asset asset4Update=Asset.create();
+		asset4Update.setId(id)
+				//设置变更ID
+				.setChangeInstanceId(event.getInstance().getId())
+				//更新状态
+				.setChsStatus(event.getInstance().getStatusEnum().code())
+				//更新最后审批人
+				.setLatestApproverId(event.getApproverId())
+				.setLatestApproverName(event.getApproverName())
+				//设置下一节点审批人
+				.setNextApproverIds(event.getSimpleNextApproverIds())
+				.setNextApproverNames(event.getSimpleNextApproverNames())
+				//更新流程概要
+				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		//执行更新
+		this.update(asset4Update,SaveMode.BESET_FIELDS);
 	}
 
 
@@ -153,8 +176,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		return arr;
 	}
 
+
 	/**
-	 *	changeMap只更新不是null部分
+	 *  changeMap只更新不是null部分
 	 * */
 	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAssetParallel(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
 
@@ -255,7 +279,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					}
 				}
 			}else if(AssetAttributeValueTypeEnum.STRING.code().equals(valueType)
-			  		 ||AssetAttributeValueTypeEnum.DOUBLE.code().equals(valueType)
+					||AssetAttributeValueTypeEnum.DOUBLE.code().equals(valueType)
 					||AssetAttributeValueTypeEnum.DATE.code().equals(valueType)
 					||AssetAttributeValueTypeEnum.INTEGER.code().equals(valueType)
 			){
@@ -266,7 +290,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 			//只更新不是null部分
 			ups.setIf(key,assetJsonAfter.get(rkey));
-		//	ups.setIf(key,assetAfterRcd.getOriginalValue(key));
+			//  ups.setIf(key,assetAfterRcd.getOriginalValue(key));
 			if( !((before+"").equals(after+"") ) ){
 				ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
 			}
@@ -303,8 +327,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		data.put("change",ins);
 		return data;
 	}
-		/**
-	 *	changeMap只更新不是null部分
+	/**
+	 *  changeMap只更新不是null部分
 	 * */
 	@Override
 	public HashMap<String,List<SQL>> parseAssetChangeRecordWithChangeAsset(List<Asset> assetBefore, HashMap<String, Object> changeMap,String businessCode,String operType,String notes){
@@ -409,12 +433,159 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {
-		return null;
+		Result result=new Result();
+		for (String id : startVO.getBillIds()) {
+			Result<ChangeEvent> r=startProcess(id);
+			if(r.failure()) {
+				result.addError(r);
+			} else {
+				// 处理逻辑
+				ChangeEvent event=r.data();
+				syncBill(id,event);
+			}
+		}
+		return ErrorDesc.success();
 	}
+
+
+	/**
+	 * 启动
+	 * */
+	public Result startProcess(String id) {
+
+		//变更后数据
+		Asset assetAfter=this.getById(id);
+		String changeType=AssetOperateEnum.EAM_ASSET_INSERT.code();
+		if(assetAfter==null) {
+			return ErrorDesc.failure().message("单据不存在");
+		}
+
+		//关联订单明细
+		//  this.join(assetAfter, Asset.class);
+		List<String> billIds=Arrays.asList(assetAfter.getId());
+
+		//变更前数据
+		Asset assetBefore=this.getById(assetAfter.getId());
+//      this.join(assetBefore, Asset.class);
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		ChangeRequestBody requestBody=new ChangeRequestBody(changeType, ChangeType.create);
+
+
+		List<Appover> employeeApprovers=assistant.getEmployeeApproversById("E001","488741245229731840");
+		List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById("498946989573017600","498947090244702209");
+		List<Appover> bpmRoleApprovers2=assistant.getBpmRoleApproversByCode("drafter","approver");
+
+		List<Appover> appovers=new ArrayList<>();
+		appovers.addAll(employeeApprovers);
+		appovers.addAll(bpmRoleApprovers1);
+		appovers.addAll(bpmRoleApprovers2);
+
+		requestBody.setNextNodeAppovers(appovers);
+
+
+		//设置当前提交人
+		requestBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		requestBody.setApproverName(SessionUser.getCurrent().getRealName());
+
+		//
+		requestBody.setDataType(Asset.class);
+
+		//设置变更前数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataBefore(assetAfter);
+		//设置变更后数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataAfter(assetBefore);
+
+		//设置审批单据号
+		requestBody.setBillIds(billIds);
+		//设置审批意见
+		requestBody.setOpinion("启动流程");
+		//发起审批
+
+		Result result=assistant.request(requestBody);
+
+		return result;
+	}
+
+
 
 	@Override
 	public Result approve(ProcessApproveVO approveVO) {
-		return null;
+		Result result=new Result();
+		if(approveVO.getInstanceIds()==null || approveVO.getInstanceIds().isEmpty()) {
+			return result.success(false).message("至少指定一个变更ID");
+		}
+		In in=new In(EAMTables.EAM_ASSET.CHANGE_INSTANCE_ID,approveVO.getInstanceIds());
+
+		List<Asset> assets=this.queryList(in.toConditionExpr());
+		Map<String,List<Asset>> assetsMap= CollectorUtil.groupBy(assets,Asset::getChangeInstanceId);
+		for (Map.Entry<String,List<Asset>> e : assetsMap.entrySet()) {
+			Result<ChangeEvent> r=this.approve(e.getKey(),e.getValue(),approveVO.getAction(),approveVO.getOpinion());
+			if(r.failure()){
+				result.addError(r);
+			} else {
+				//同步订状态
+				ChangeEvent event=r.data();
+				for (Asset asset : e.getValue()) {
+					syncBill(asset.getId(),event);
+					//
+				}
+
+			}
+		}
+		return result;
+	}
+	public Result approve(String instanceId, List<Asset> assets, String approveAction, String opinion) {
+
+		ApprovalAction action=ApprovalAction.parseByCode(approveAction);
+
+		//审批数据
+		if(assets==null || assets.isEmpty()) {
+			return ErrorDesc.failure().message("订单不存在");
+		}
+		Asset asset=assets.get(0);
+
+		ChangeApproveBody approveBody=new ChangeApproveBody(AssetOperateEnum.EAM_ASSET_INSERT.code());
+		//设置变更ID
+		approveBody.setChangeInstanceId(asset.getChangeInstanceId());
+
+		//设置当前提交人
+		approveBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		approveBody.setApproverName(SessionUser.getCurrent().getRealName());
+		approveBody.setApprovalAction(action);
+
+		//设置审批意见
+		approveBody.setOpinion(opinion);
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		//发起审批
+		Result result= assistant.approve(approveBody);
+
+		//审批结束
+		if(!result.isSuccess()){
+			return result;
+		}
+
+
+		//审批结束后的动作
+		Asset chs=new Asset();
+		chs.setId(asset.getId());
+		chs.setApprovalOpinion(opinion);
+		if(ApprovalAction.agree.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			//applyChange(asset.getId());
+		}else if(ApprovalAction.reject.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.DENY.code());
+		}else if(ApprovalAction.submit.code().equals(approveAction)){
+			//chs.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+		}
+
+		if(chs.getStatus()!=null){
+			this.update(chs,SaveMode.NOT_NULL_FIELDS);
+		}
+		return result;
 	}
 
 	/**
@@ -465,86 +636,77 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 			String assetCode=e.getAssetCode()==null?"null":e.getAssetCode();
 			map.put("assetTxm", Pictures.ofBufferedImage(createAssetsPic("txm", assetCode), PictureType.PNG).size(190,50).create());
-
 			data.add(map);
 		}
 		return data;
 	}
 
-
 	/**
-	 * 操作成功
-	 * @param id ID
+
+
+	 @Override
+	 public Result joinData(List<Asset> list) {
+	 // 关联出 资产分类 数据
+	 dao.fill(list).with(AssetMeta.CATEGORY)
+	 .with(AssetMeta.GOODS)
+	 .with(AssetMeta.MANUFACTURER)
+	 .with(AssetMeta.POSITION)
+	 .with(AssetMeta.MAINTNAINER)
+	 .with(AssetMeta.SUPPLIER)
+	 .with(AssetMeta.OWNER_COMPANY)
+	 .with(AssetMeta.USE_ORGANIZATION)
+	 .with(AssetMeta.MANAGER)
+	 .with(AssetMeta.USE_USER)
+	 .with(AssetMeta.ORIGINATOR)
+	 .with(AssetMeta.RACK)
+	 .with(AssetMeta.SOURCE)
+	 .with(AssetMeta.SAFETY_LEVEL)
+	 .with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+	 .with(AssetMeta.ASSET_MAINTENANCE_STATUS)
+	 .execute();
+	 //
+	 List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+	 dao().join(originators, Person.class);
+
+	 List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+	 dao().join(managers, Person.class);
+
+	 List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+	 dao().join(useUser, Person.class);
+
+	 return  ErrorDesc.success();
+	 }
+
+
+	 /**
+	  * 批量撤销
+	  * @param ids 主键清单
 	 * @return 是否成功
 	 * */
-	public Result operateSuccess(String id) {
-
-		return ErrorDesc.success();
-	}
-
-	/**
-	 * 操作失败
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result operateFailed(String id) {
-		return ErrorDesc.success();
-	}
-
-
-	/**
-	 * 操作
-	 * @param id  ID
-	 * @param result 结果
-	 * @return
-	 * */
-	public Result operateResult(String id,String result) {
-
-		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
-			return operateSuccess(id);
-		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
-			return operateFailed(id);
-		}else{
-			return ErrorDesc.failureMessage("返回未知结果");
-		}
-	}
-
-
 	@Override
-	public Result joinData(List<Asset> list) {
-		// 关联出 资产分类 数据
+	public Result batchRevokeOperation(List<String> ids){
 
-		dao.fill(list).with(AssetMeta.CATEGORY)
-				.with(AssetMeta.GOODS)
-				.with(AssetMeta.MANUFACTURER)
-				.with(AssetMeta.POSITION)
-				.with(AssetMeta.MAINTNAINER)
-				.with(AssetMeta.SUPPLIER)
-				.with(AssetMeta.OWNER_COMPANY)
-				.with(AssetMeta.USE_ORGANIZATION)
-				.with(AssetMeta.MANAGER)
-				.with(AssetMeta.USE_USER)
-				.with(AssetMeta.ORIGINATOR)
-				.with(AssetMeta.RACK)
+		ConditionExpr expr=new ConditionExpr();
+		expr.andIn("id",ids);
+		expr.andIn("status",AssetHandleStatusEnum.APPROVAL.code(),AssetHandleStatusEnum.DENY.code());
+		List<Asset> list=this.queryList(expr);
+		if(ids.size()!=list.size()){
+			return ErrorDesc.failureMessage("当前选择的资产中部分资产不满足状态要求,无法进行操作");
+		}
 
-				.with(AssetMeta.SOURCE)
-				.with(AssetMeta.SAFETY_LEVEL)
-				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
-				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
-				.execute();
+		List<Asset> upsList=new ArrayList<>();
+		for(String id:ids){
+			Asset as=new Asset();
+			as.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+			as.setChangeInstanceId("");
+			as.setChsStatus("");
+			as.setId(id);
+			upsList.add(as);
+		}
+		return super.updateList(upsList,SaveMode.NOT_NULL_FIELDS);
 
-//
-		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-		dao().join(originators, Person.class);
-
-		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-		dao().join(managers, Person.class);
-
-		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-		dao().join(useUser, Person.class);
-
-		return  ErrorDesc.success();
 	}
+
 
 	/**
 	 * 批量送审batchConfirmOperation
@@ -560,6 +722,35 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(ids.size()!=list.size()){
 			return ErrorDesc.failureMessage("当前选择的资产中部分资产不满足状态要求");
 		}
+
+		//进行送审
+		//步骤一开始启动流程
+		ProcessStartVO startVO=new ProcessStartVO();
+		startVO.setOpinion("启动流程");
+		startVO.setBillIds(ids);
+		Result startReuslt= startProcess(startVO);
+		if(!startReuslt.isSuccess()) return startReuslt;
+
+		//步骤二进入提交阶段
+		ProcessApproveVO processApproveVO=new ProcessApproveVO();
+		ConditionExpr expr2=new ConditionExpr();
+		expr2.andIn("id",ids);
+		List<String> instances =this.queryValues(EAMTables.EAM_ASSET.CHANGE_INSTANCE_ID,String.class,expr);
+		processApproveVO.setOpinion("提交流程");
+		processApproveVO.setInstanceIds(instances);
+		processApproveVO.setAction(ApprovalAction.submit.code());
+
+		Result processApproveResult=approve(processApproveVO);
+		if(!processApproveResult.isSuccess()) return processApproveResult;
+
+		List<Asset> upsList=new ArrayList<>();
+		for(String id:ids){
+			Asset e=new Asset();
+			e.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+			e.setId(id);
+			upsList.add(e);
+		}
+		super.updateList(upsList,SaveMode.NOT_NULL_FIELDS);
 		return ErrorDesc.success();
 	}
 
@@ -569,6 +760,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @param ids 主键清单
 	 * @return 是否成功
 	 * */
+	@Override
 	public Result batchConfirmOperation(List<String> ids ){
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
@@ -591,15 +783,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	}
 
 
-	/**
-	 * 确认操作
-	 * @param id ID
-	 * @return 是否成功
-	 * */
-	public Result confirmOperation(String id) {
 
-		return ErrorDesc.failureMessage("开发中");
-	}
 
 	@Override
 	public AssetExtData getExtDataById(String ownerId, String categoryId){
@@ -661,14 +845,14 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		//资产数量
 		if(StringUtil.isBlank(asset.getAssetNumber())){
 			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
-				asset.setAssetNumber(1);
+			asset.setAssetNumber(1);
 			//}
 		}
 
 		//剩余数量
 		if(StringUtil.isBlank(asset.getRemainNumber())){
 			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
-				asset.setRemainNumber(1);
+			asset.setRemainNumber(1);
 			//}
 		}
 
@@ -722,8 +906,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result insertList(List<Asset> assetList) {
 		return super.insertList(assetList);
 	}
-	
-	
+
+
 	/**
 	 * 按主键删除 资产
 	 *
@@ -744,7 +928,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 资产
 	 *
@@ -768,7 +952,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 更新实体
 	 * @param asset 数据对象
@@ -792,7 +976,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		Result r=super.update(asset , mode);
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param assetList 数据对象列表
@@ -803,8 +987,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public Result updateList(List<Asset> assetList , SaveMode mode) {
 		return super.updateList(assetList , mode);
 	}
-	
-	
+
+
 	/**
 	 * 按主键更新字段 资产
 	 *
@@ -816,9 +1000,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
-	
+	}
+
+
 	/**
 	 * 按主键获取 资产
 	 *
@@ -841,7 +1025,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -849,11 +1033,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public List<Asset> queryList(Asset sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -923,8 +1107,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			//转移
 			queryCondition.andIn("asset_status",AssetStatusEnum.USING.code(),AssetStatusEnum.IDLE.code());
 		}else if(AssetOperateEnum.EAM_ASSET_CHANGE_BASE_INFO.code().equals(businessType)
-			||AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(businessType)
-			||AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(businessType)){
+				||AssetOperateEnum.EAM_ASSET_CHANGE_FINANCIAL.code().equals(businessType)
+				||AssetOperateEnum.EAM_ASSET_CHANGE_MAINTENANCE.code().equals(businessType)){
 			//转移
 		}else{
 			queryCondition.andIn("asset_status","unknow");
@@ -936,7 +1120,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -1025,7 +1209,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		ConditionExpr queryCondition=new ConditionExpr();
 		if(assetOwnerId!=null&&assetOwnerId.length()>0){
-		    //实现临时快照
+			//实现临时快照
 			if("refresh".equals(dataType)){
 				dao.execute("delete from eam_asset_item where crd in ('cd','c') and handle_id=?",assetOwnerId);
 				dao.execute("update eam_asset_item set crd='r' where crd='d' and handle_id=?",assetOwnerId);
@@ -1169,7 +1353,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 				}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
-				//	approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_INSERT.code();
+					//  approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_INSERT.code();
 
 				}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();
@@ -1235,7 +1419,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}else{
 				//办理情况
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.STATUS_NAME.text())){
-//					//r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
+//                  //r.getOwnerSet().removeColumn(AssetDataExportColumnEnum.STATUS_NAME.text());
 				}
 
 				if(r.getOwnerSet().hasColumn(AssetDataExportColumnEnum.ASSET_CODE.text())){
@@ -1288,6 +1472,42 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	}
 
+
+	@Override
+	public Result joinData(List<Asset> list) {
+		// 关联出 资产分类 数据
+		dao.fill(list).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
+				.execute();
+//
+		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+		dao().join(originators, Person.class);
+
+		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
+		dao().join(managers, Person.class);
+
+		List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
+		dao().join(useUser, Person.class);
+
+		return  ErrorDesc.success();
+	}
+
+
+
 	@Override
 	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch,String assetOwner,boolean dataType) {
 
@@ -1334,8 +1554,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				cs.setAlignment(HorizontalAlignment.CENTER);
 				cs.setVerticalAlignment(VerticalAlignment.CENTER);
 				Sheet sheet=workbook.getSheetAt(0);
-//				if("data".equals(sheet.getSheetName())){
-//				}
+//              if("data".equals(sheet.getSheetName())){
+//              }
 				Row firstRow=sheet.getRow(0);
 				Row secondRow=sheet.getRow(1);
 				System.out.println("SheetName:"+sheet.getSheetName());
@@ -1473,7 +1693,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					String rAssetColumn="";
 					//filter
 					if(AssetDataExportColumnEnum.USE_USER_NAME.code().equals(asset_column)
-						||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)
+							||AssetDataExportColumnEnum.MANAGER_NAME.code().equals(asset_column)
 							||AssetDataExportColumnEnum.STATUS_NAME.code().equals(asset_column)){
 						continue;
 					}

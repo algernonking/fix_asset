@@ -18,6 +18,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    const moduleURL="/service-eam/eam-asset";
+
     //列表页的扩展
     var list={
 
@@ -119,6 +121,104 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
+
+        approvalData:function(data,type){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+            //reject
+            var btn=$('#'+type+'-button');
+        },
+        agreeData:function(data,conf){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+
+            var api=moduleURL+"/approve";
+            var successMessage="审批结束"
+            var ps={};
+            ps.instanceIds=data
+           // ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="agree";
+            var btn=$('#agree-button');
+            layer.prompt({
+                formType: 2,
+                value: "同意 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+        },
+        denyData:function(data,conf){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+
+            var api=moduleURL+"/approve";
+            var ps={};
+            var successMessage="审批结束"
+            ps.instanceIds=data
+          //  ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="reject"
+            var btn=$('#deny-button');
+            layer.prompt({
+                formType: 2,
+                value: "拒绝 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+
+        },
+
+
         /**
          * 末尾执行
          */

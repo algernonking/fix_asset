@@ -138,12 +138,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
-            if(!APPROVAL_REQUIRED){
+            if(APPROVAL_REQUIRED){
+                var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
+                toolHtml=toolHtml.replace(/lay-event="batchConfirm"/i, "style=\"display:none\"")
+                document.getElementById("toolbarTemplate").innerHTML=toolHtml;
+            }else{
                 var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
                 toolHtml=toolHtml.replace(/lay-event="batchRevoke"/i, "style=\"display:none\"")
                 toolHtml=toolHtml.replace(/lay-event="forBatchApproval"/i, "style=\"display:none\"")
                 document.getElementById("toolbarTemplate").innerHTML=toolHtml;
             }
+
+
             console.log("list:beforeInit");
         },
         /**
@@ -252,25 +258,61 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
 
         forBatchApproval:function(data,item){
-            console.log("####",data,item)
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
             var api=moduleURL+"/for-batch-approval";
-            admin.post(api,data,function (r){
-                if (r.success) {
-                    layer.msg(r.message, {icon: 1, time: 500});
-                } else {
-                    layer.msg(r.message, {icon: 2, time: 1000});
-                }
-            },{delayLoading:1000,elms:[$("#forBatchApproval-button")]});
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api,data,function (r){
+                    if (r.success) {
+                        top.layer.msg("操作成功", {time: 2000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                },{delayLoading:1000,elms:[$("#forBatchApproval-button")]});
+            });
         },
         batchRevokeOperation:function(data,item){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
             var api=moduleURL+"/batch-revoke-operation";
-            admin.post(api,data,function (r){
-                if (r.success) {
-                    layer.msg(r.message, {icon: 1, time: 500});
-                } else {
-                    layer.msg(r.message, {icon: 2, time: 1000});
-                }
-            },{delayLoading:1000,elms:[$("#batchRevoke-button")]});
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, data, function (r) {
+                    if (r.success) {
+                        top.layer.msg("操作成功", {time: 2000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+
+                }, {delayLoading: 1000, elms: [$("#batchRevoke-button")]});
+            });
         },
         /**
          * 末尾执行

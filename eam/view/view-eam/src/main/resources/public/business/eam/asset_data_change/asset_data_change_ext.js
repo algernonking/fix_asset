@@ -26,43 +26,30 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            console.log("list:beforeInit");
+            var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
+            var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
             if(APPROVAL_REQUIRED){
                 //隐藏确认
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }else{
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
-
-
             if(PAGE_TYPE&&PAGE_TYPE=="approval"){
                 $("#status-search-unit").hide();
-                var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
                 toolbarHtml=toolbarHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
-                document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
-
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="edit"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="del"/i, "style=\"display:none\"")
-                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
-                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }else if( PAGE_TYPE&&PAGE_TYPE=="asset_change"){
-                var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
-                toolbarHtml=toolbarHtml.replace(/lay-event="agree"/i, "style=\"display:none\"")
-                toolbarHtml=toolbarHtml.replace(/lay-event="deny"/i, "style=\"display:none\"")
-                document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
-
+                operHtml=operHtml.replace(/lay-event="agree"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="deny"/i, "style=\"display:none\"")
             }
-
-            console.log("list:beforeInit");
+            document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
+            document.getElementById("tableOperationTemplate").innerHTML=operHtml;
         },
         /**
          * 表格渲染前调用
@@ -126,7 +113,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
-                    fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
+                  //  fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
                 }else if(data[i].status=="approval"){
                     fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
@@ -154,6 +141,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 ||field=="businessCode"
                 ||field=="changeDate"
                 ||field=="businessName"
+                ||field=="chsApprovalOpinion"
                 ||field=="originatorId"){
                 if(value==null) return "";
                 return value;
@@ -233,7 +221,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         billOper:function(url,btnClass,ps,successMessage){
             var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
             var api=moduleURL+"/"+url;
-
             top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
                 top.layer.close(i);
                 admin.post(api, ps, function (r) {
@@ -264,6 +251,92 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         revokeData:function (item){
             list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
+        },
+        approvalData:function(data,type){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+            //reject
+            var btn=$('#'+type+'-button');
+        },
+        agreeData:function(data){
+            var api=moduleURL+"/approve";
+            var successMessage="审批结束"
+            var ps={};
+            ps.instanceIds=[];
+            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="agree"
+            var btn=$('.agree-button').filter("[data-id='" +data.id + "']");
+            layer.prompt({
+                formType: 2,
+                value: "同意 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+        },
+        denyData:function(data){
+
+            var api=moduleURL+"/approve";
+            var ps={};
+            var successMessage="审批结束"
+            ps.instanceIds=[];
+            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="reject"
+            var btn=$('.deny-button').filter("[data-id='" +data.id + "']");
+            layer.prompt({
+                formType: 2,
+                value: "拒绝 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+
         },
         /**
          * 末尾执行
@@ -326,9 +399,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDataFill:function (data) {
 
-
-
-            console.log('afterDataFill',data,",",formAction);
             if(data&&data.id) {
 
                 if (formAction == "view") {

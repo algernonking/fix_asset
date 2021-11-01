@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 14:45:57
+ * @since 2021-10-29 15:19:52
  */
  -->
  <!DOCTYPE html>
@@ -100,6 +100,16 @@
                     <!-- 内部控制标签 , internalControlLabel ,typeName=text_input, isHideInSearch=true -->
                     <!-- 单据 , billId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更类型 , chsType ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更状态 , chsStatus ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更版本号 , chsVersion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 变更ID , changeInstanceId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 流程概要 , summary ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 最后审批人账户ID , latestApproverId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 最后审批人姓名 , latestApproverName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 下一节点审批人 , nextApproverIds ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 下一个审批节点审批人姓名 , nextApproverNames ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
                     <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('资产状态')}" class="search-label assetStatus-label">资产状态</span><span class="search-colon">:</span></div>

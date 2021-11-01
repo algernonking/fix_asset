@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 14:45:57
+ * @since 2021-10-29 15:19:53
  */
 
 
@@ -147,6 +147,16 @@ function ListPage() {
 					,{ field: 'internalControlLabel', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('内部控制标签') , templet: function (d) { return templet('internalControlLabel',d.internalControlLabel,d);}  }
 					,{ field: 'billId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('单据') , templet: function (d) { return templet('billId',d.billId,d);}  }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',d.originatorId,d);}  }
+					,{ field: 'chsType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更类型') , templet: function (d) { return templet('chsType',d.chsType,d);}  }
+					,{ field: 'chsStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更状态') , templet: function (d) { return templet('chsStatus',d.chsStatus,d);}  }
+					,{ field: 'chsVersion', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更版本号') , templet: function (d) { return templet('chsVersion',d.chsVersion,d);}  }
+					,{ field: 'changeInstanceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('变更ID') , templet: function (d) { return templet('changeInstanceId',d.changeInstanceId,d);}  }
+					,{ field: 'summary', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('流程概要') , templet: function (d) { return templet('summary',d.summary,d);}  }
+					,{ field: 'latestApproverId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最后审批人账户ID') , templet: function (d) { return templet('latestApproverId',d.latestApproverId,d);}  }
+					,{ field: 'latestApproverName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最后审批人姓名') , templet: function (d) { return templet('latestApproverName',d.latestApproverName,d);}  }
+					,{ field: 'nextApproverIds', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下一节点审批人') , templet: function (d) { return templet('nextApproverIds',d.nextApproverIds,d);}  }
+					,{ field: 'nextApproverNames', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下一个审批节点审批人姓名') , templet: function (d) { return templet('nextApproverNames',d.nextApproverNames,d);}  }
+					,{ field: 'approvalOpinion', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],

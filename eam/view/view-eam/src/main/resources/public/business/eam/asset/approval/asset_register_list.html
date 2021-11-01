@@ -168,7 +168,7 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button  th:if="${perm.checkAuth('my-business-asset-insert:agree')}"   id="agree-button" class="layui-btn icon-btn layui-btn-sm agree-new-button" lay-event="agree"><i class="layui-icon"></i><span th:text="${lang.translate('同意')}"同意</span></button>
-        <button  th:if="${perm.checkAuth('my-business-asset-insert:deny')}"    id="deny-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm  deny-new-button" lay-event="deny"><i class="layui-icon"></i><span th:text="${lang.translate('拒绝')}">拒绝</span></button>
+        <button  th:if="${perm.checkAuth('my-business-asset-insert:deny')}"    id="deny-button"  class="layui-btn icon-btn layui-btn-danger layui-btn-sm  deny-new-button" lay-event="deny"><i class="layui-icon"></i><span th:text="${lang.translate('拒绝')}">拒绝</span></button>
     </div>
 </script>
 

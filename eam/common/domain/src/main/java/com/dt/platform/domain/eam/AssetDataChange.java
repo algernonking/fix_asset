@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 数据变更
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 17:00:03
- * @sign 52039BF77C9C8701116488F8E16D01B7
+ * @since 2021-10-28 15:36:14
+ * @sign 20D297DA0462B4BF9BF86783498FE436
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -205,6 +205,12 @@ public class AssetDataChange extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="下一个审批节点审批人姓名" , notes = "用逗号隔开")
 	private String nextApproverNames;
+	
+	/**
+	 * 审批意见：审批意见
+	*/
+	@ApiModelProperty(required = false,value="审批意见" , notes = "审批意见")
+	private String approvalOpinion;
 	
 	/**
 	 * 资产：资产
@@ -778,6 +784,25 @@ public class AssetDataChange extends Entity {
 	*/
 	public AssetDataChange setNextApproverNames(String nextApproverNames) {
 		this.nextApproverNames=nextApproverNames;
+		return this;
+	}
+	
+	/**
+	 * 获得 审批意见<br>
+	 * 审批意见
+	 * @return 审批意见
+	*/
+	public String getApprovalOpinion() {
+		return approvalOpinion;
+	}
+	
+	/**
+	 * 设置 审批意见
+	 * @param approvalOpinion 审批意见
+	 * @return 当前对象
+	*/
+	public AssetDataChange setApprovalOpinion(String approvalOpinion) {
+		this.approvalOpinion=approvalOpinion;
 		return this;
 	}
 	

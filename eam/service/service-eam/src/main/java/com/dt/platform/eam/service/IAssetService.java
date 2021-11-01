@@ -53,10 +53,7 @@ public interface IAssetService extends ISuperService<Asset> {
 	Result approve(ProcessApproveVO approveVO);
 
 
-
-
 	List<Map<String, Object>> getBills(List<String> ids);
-
 
 
 	/**
@@ -82,7 +79,13 @@ public interface IAssetService extends ISuperService<Asset> {
 	Result forBatchApproval(List<String> ids);
 
 
-	Result confirmOperation(String id);
+
+	/**
+	 * 批量撤销
+	 * @param ids 主键清单
+	 * @return 是否成功
+	 * */
+	Result batchRevokeOperation(List<String> ids );
 
 
 	/**

@@ -3,6 +3,7 @@ package com.dt.platform.generator.module.eam;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.common.StatusYNEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.eam.page.OperatePageController;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.OperateServiceProxy;
@@ -38,7 +39,7 @@ public class EamAssetOperateGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_OPERATE.NAME).form().validate().required();
 
         cfg.view().field(EAMTables.EAM_OPERATE.OPERATE_CODE).form().validate().required()
-                .form().selectBox().enumType(CodeModuleEnum.class).muliti(false);
+                .form().selectBox().enumType(AssetOperateEnum.class).muliti(false);
 
         cfg.view().field(EAMTables.EAM_OPERATE.APPROVAL).form().validate().required()
                 .form().radioBox().enumType(StatusYNEnum.class);

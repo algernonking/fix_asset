@@ -199,6 +199,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 
 	@Override
 	public Result approve(ProcessApproveVO approveVO) {
+
 		Result result=new Result();
 		if(approveVO.getInstanceIds()==null || approveVO.getInstanceIds().isEmpty()) {
 			return result.success(false).message("至少指定一个变更ID");
@@ -216,6 +217,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 				ChangeEvent event=r.data();
 				for (AssetDataChange asset : e.getValue()) {
 					syncBill(asset.getId(),event);
+					//
 				}
 			}
 		}
@@ -226,12 +228,11 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Result approve(String instanceId, List<AssetDataChange> assets, String approveAction, String opinion) {
 
 		ApprovalAction action=ApprovalAction.parseByCode(approveAction);
+
 		//审批数据
-
 		if(assets==null || assets.isEmpty()) {
-			return ErrorDesc.failure().message("订单不存在");
+			return ErrorDesc.failure().message("单据不存在");
 		}
-
 		AssetDataChange asset=assets.get(0);
 
 		ChangeApproveBody approveBody=new ChangeApproveBody(asset.getChangeType());
@@ -250,7 +251,27 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		ChangesAssistant assistant=new ChangesAssistant(this);
 		//发起审批
 		Result result= assistant.approve(approveBody);
-		//
+
+		//审批结束
+		if(!result.isSuccess()){
+			return result;
+		}
+
+		//审批结束后的动作
+		AssetDataChange chs=new AssetDataChange();
+		chs.setId(asset.getId());
+		chs.setApprovalOpinion(opinion);
+		if(ApprovalAction.agree.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			//applyChange(asset.getId());
+		}else if(ApprovalAction.reject.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.DENY.code());
+		}else if(ApprovalAction.submit.code().equals(approveAction)){
+			//chs.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+		}
+		if(chs.getStatus()!=null){
+			this.update(chs,SaveMode.NOT_NULL_FIELDS);
+		}
 		return result;
 	}
 
@@ -362,8 +383,22 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	@Override
 	public Result revokeOperation(String id) {
 		AssetDataChange billData=getById(id);
-		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
+		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus())||AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())  ){
+
+
+			ProcessApproveVO processApproveVO=new ProcessApproveVO();
+			AssetDataChange bill=getById(id);
+			List<String> instances=new ArrayList<>();
+			instances.add(bill.getChangeInstanceId());
+			processApproveVO.setOpinion("撤销");
+			processApproveVO.setInstanceIds(instances);
+			processApproveVO.setAction(ApprovalAction.revoke.code());
+			Result processApproveResult=approve(processApproveVO);
+			if(!processApproveResult.isSuccess()) return processApproveResult;
+
 			billData.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+			billData.setChsStatus("");
+			billData.setChangeInstanceId("");
 			super.update(billData,SaveMode.NOT_NULL_FIELDS);
 
 		}else{
@@ -382,7 +417,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Result forApproval(String id){
 		AssetDataChange billData=getById(id);
 		join(billData, AssetDataChangeMeta.ASSET_LIST);
-	//	assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),this.queryDataChange(id),billData.getBusinessCode(),billData.getChangeType(),"1234");
 		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus()) ||AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())  ){
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
 				//审批操作
@@ -404,11 +438,12 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 				processApproveVO.setOpinion("提交流程");
 				processApproveVO.setInstanceIds(instances);
 				processApproveVO.setAction(ApprovalAction.submit.code());
+
 				Result processApproveResult=approve(processApproveVO);
 				if(!processApproveResult.isSuccess()) return processApproveResult;
 
-				billData.setStatus(AssetHandleStatusEnum.APPROVAL.code());
-				super.update(billData,SaveMode.NOT_NULL_FIELDS);
+//				//步骤三进入修改status
+				update(EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,AssetHandleStatusEnum.APPROVAL.code(),id);
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}

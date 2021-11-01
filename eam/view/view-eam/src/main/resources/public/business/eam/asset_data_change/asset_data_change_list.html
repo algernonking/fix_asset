@@ -90,8 +90,6 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${dataChangeCreateBtn}"  id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${agreeBtn}" id="agree-button" class="layui-btn icon-btn layui-btn-sm agree-new-button" lay-event="agree"><i class="layui-icon"></i><span th:text="${lang.translate('同意')}"同意</span></button>
-        <button th:if="${denyBtn}"  id="deny-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm  deny-new-button" lay-event="deny"><i class="layui-icon"></i><span th:text="${lang.translate('拒绝')}">拒绝</span></button>
     </div>
 </script>
 
@@ -104,6 +102,10 @@
     <button th:if="${forApprovalBtn}"        class="layui-btn layui-btn-xs for-approval-button" lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
     <button th:if="${confirmDataBtn}"        class="layui-btn layui-btn-xs confirm-data-button" lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
     <button th:if="${revokeDataBtn}"         class="layui-btn layui-btn-xs revoke-data-button" lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
+
+    <button th:if="${agreeBtn}" id="agree-button" class="layui-btn layui-btn-xs                   agree-button" lay-event="agree" data-id="{{d.id}}"><i class="layui-icon"></i><span th:text="${lang.translate('同意')}"同意</span></button>
+    <button th:if="${denyBtn}"  id="deny-button" class="layui-btn layui-btn-xs  layui-btn-danger  deny-button" lay-event="deny" data-id="{{d.id}}"><i class="layui-icon"></i><span th:text="${lang.translate('拒绝')}">拒绝</span></button>
+
 
 </script>
 

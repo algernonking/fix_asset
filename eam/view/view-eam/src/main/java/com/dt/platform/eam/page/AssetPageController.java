@@ -240,9 +240,9 @@ public class AssetPageController extends ViewController {
 	 * 资产登记审批
 	 */
 	@RequestMapping("/approval/asset_register_list.html")
-	public String assetApprove(Model model,HttpServletRequest request) {
+	public String assetApprove(Model model,HttpServletRequest request,String pageType) {
 
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(pageType,null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");

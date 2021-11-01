@@ -25,8 +25,8 @@ import com.dt.platform.domain.datacenter.Rack;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 14:45:52
- * @sign 1140917BF5273553DC1503BA1272AC8A
+ * @since 2021-10-29 15:19:49
+ * @sign 74BA5A2EEF648365550297AA03B271B4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -903,6 +903,106 @@ public class AssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final String CHS_TYPE="chsType";
+	
+	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CHS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CHS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final String CHS_STATUS="chsStatus";
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CHS_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CHS_STATUS, java.lang.String.class, "变更状态", "变更状态", java.lang.String.class, null);
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final String CHS_VERSION="chsVersion";
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CHS_VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CHS_VERSION, java.lang.String.class, "变更版本号", "变更版本号", java.lang.String.class, null);
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final String CHANGE_INSTANCE_ID="changeInstanceId";
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> CHANGE_INSTANCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,CHANGE_INSTANCE_ID, java.lang.String.class, "变更ID", "变更ID", java.lang.String.class, null);
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final String SUMMARY="summary";
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> SUMMARY_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,SUMMARY, java.lang.String.class, "流程概要", "流程概要", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_ID="latestApproverId";
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> LATEST_APPROVER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,LATEST_APPROVER_ID, java.lang.String.class, "最后审批人账户ID", "最后审批人账户ID", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_NAME="latestApproverName";
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> LATEST_APPROVER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,LATEST_APPROVER_NAME, java.lang.String.class, "最后审批人姓名", "最后审批人姓名", java.lang.String.class, null);
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_IDS="nextApproverIds";
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> NEXT_APPROVER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,NEXT_APPROVER_IDS, java.lang.String.class, "下一节点审批人", "下一节点审批人", java.lang.String.class, null);
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_NAMES="nextApproverNames";
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> NEXT_APPROVER_NAMES_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,NEXT_APPROVER_NAMES, java.lang.String.class, "下一个审批节点审批人姓名", "用逗号隔开", java.lang.String.class, null);
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final String APPROVAL_OPINION="approvalOpinion";
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Asset,java.lang.String> APPROVAL_OPINION_PROP = new BeanProperty(com.dt.platform.domain.eam.Asset.class ,APPROVAL_OPINION, java.lang.String.class, "审批意见", "审批意见", java.lang.String.class, null);
+	
+	/**
 	 * 扩展数据 , 类型: com.dt.platform.domain.eam.AssetExtData
 	*/
 	public static final String EXT_DATA="extData";
@@ -1115,7 +1215,7 @@ public class AssetMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , REGISTER_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAX_AMOUNT_RATE , TAX_AMOUNT_PRICE , TOTAL_AMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK };
+	public static final String[] $PROPS={ ID , CATEGORY_ID , CATEGORY_CODE , BUSINESS_CODE , PROC_ID , STATUS , BATCH_CODE , OWNER_CODE , ASSET_CODE , ASSET_STATUS , DISPLAY , CLEAN_OUT , GOODS_ID , NAME , MANUFACTURER_ID , MODEL , PICTURE_ID , UNIT , SERVICE_LIFE , SAFETY_LEVEL_CODE , SERIAL_NUMBER , OWN_COMPANY_ID , MANAGER_ID , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , WAREHOUSE_ID , SOURCE_ID , ASSET_NUMBER , REMAIN_NUMBER , PURCHASE_DATE , PRODUCTION_DATE , REGISTER_DATE , RFID , ATTACH , LAST_VERIFICATION_DATE , PURPOSE , ASSET_NOTES , MAINTAINER_ID , MAINTAINER_NAME , MAINTENANCE_STATUS , CONTACTS , CONTACT_INFORMATION , DIRECTOR , MAINTENANCE_START_DATE , MAINTENANCE_END_DATE , MAINTENANCE_NOTES , FINANCIAL_CATEGORY_ID , FINANCIAL_CODE , SUPPLIER_ID , TAX_AMOUNT_RATE , TAX_AMOUNT_PRICE , TOTAL_AMOUNT_PRICE , ORIGINAL_UNIT_PRICE , ACCUMULATED_DEPRECIATION , RESIDUALS_RATE , NAV_PRICE , PURCHASE_UNIT_PRICE , ENTRY_TIME , FINANCIAL_NOTES , EQUIPMENT_CODE , EQUIPMENT_STATUS , EQUIPMENT_IP , MANAGE_IP , EQUIPMENT_CPU , EQUIPMENT_MEMORY , EQUIPMENT_LABEL , EQUIPMENT_CONF , EQUIPMENT_ENVIRONMENT_CODE , EQUIPMENT_SERIAL_NUMBER , RACK_ID , RACK_UP_NUMBER , RACK_DOWN_NUMBER , LABEL , INTERNAL_CONTROL_LABEL , BILL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , ORIGINATOR_ID , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , EXT_DATA , PCM_DATA , CATALOG_ATTRIBUTE , POSITION , CATEGORY_FINANCE , CATEGORY , GOODS , MANUFACTURER , WAREHOUSE , USE_USER , MANAGER , ORIGINATOR , SUPPLIER , MAINTNAINER , OWNER_COMPANY , USE_ORGANIZATION , SOURCE , EQUIPMENT_ENVIRONMENT , SAFETY_LEVEL , ASSET_MAINTENANCE_STATUS , RACK };
 	
 	/**
 	 * 代理类
@@ -2079,6 +2179,116 @@ public class AssetMeta {
 		public Asset setOriginatorId(String originatorId) {
 			super.change(ORIGINATOR_ID,super.getOriginatorId(),originatorId);
 			super.setOriginatorId(originatorId);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更类型
+		 * @param chsType 变更类型
+		 * @return 当前对象
+		*/
+		public Asset setChsType(String chsType) {
+			super.change(CHS_TYPE,super.getChsType(),chsType);
+			super.setChsType(chsType);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更状态
+		 * @param chsStatus 变更状态
+		 * @return 当前对象
+		*/
+		public Asset setChsStatus(String chsStatus) {
+			super.change(CHS_STATUS,super.getChsStatus(),chsStatus);
+			super.setChsStatus(chsStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更版本号
+		 * @param chsVersion 变更版本号
+		 * @return 当前对象
+		*/
+		public Asset setChsVersion(String chsVersion) {
+			super.change(CHS_VERSION,super.getChsVersion(),chsVersion);
+			super.setChsVersion(chsVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更ID
+		 * @param changeInstanceId 变更ID
+		 * @return 当前对象
+		*/
+		public Asset setChangeInstanceId(String changeInstanceId) {
+			super.change(CHANGE_INSTANCE_ID,super.getChangeInstanceId(),changeInstanceId);
+			super.setChangeInstanceId(changeInstanceId);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程概要
+		 * @param summary 流程概要
+		 * @return 当前对象
+		*/
+		public Asset setSummary(String summary) {
+			super.change(SUMMARY,super.getSummary(),summary);
+			super.setSummary(summary);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人账户ID
+		 * @param latestApproverId 最后审批人账户ID
+		 * @return 当前对象
+		*/
+		public Asset setLatestApproverId(String latestApproverId) {
+			super.change(LATEST_APPROVER_ID,super.getLatestApproverId(),latestApproverId);
+			super.setLatestApproverId(latestApproverId);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人姓名
+		 * @param latestApproverName 最后审批人姓名
+		 * @return 当前对象
+		*/
+		public Asset setLatestApproverName(String latestApproverName) {
+			super.change(LATEST_APPROVER_NAME,super.getLatestApproverName(),latestApproverName);
+			super.setLatestApproverName(latestApproverName);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一节点审批人
+		 * @param nextApproverIds 下一节点审批人
+		 * @return 当前对象
+		*/
+		public Asset setNextApproverIds(String nextApproverIds) {
+			super.change(NEXT_APPROVER_IDS,super.getNextApproverIds(),nextApproverIds);
+			super.setNextApproverIds(nextApproverIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一个审批节点审批人姓名
+		 * @param nextApproverNames 下一个审批节点审批人姓名
+		 * @return 当前对象
+		*/
+		public Asset setNextApproverNames(String nextApproverNames) {
+			super.change(NEXT_APPROVER_NAMES,super.getNextApproverNames(),nextApproverNames);
+			super.setNextApproverNames(nextApproverNames);
+			return this;
+		}
+		
+		/**
+		 * 设置 审批意见
+		 * @param approvalOpinion 审批意见
+		 * @return 当前对象
+		*/
+		public Asset setApprovalOpinion(String approvalOpinion) {
+			super.change(APPROVAL_OPINION,super.getApprovalOpinion(),approvalOpinion);
+			super.setApprovalOpinion(approvalOpinion);
 			return this;
 		}
 		

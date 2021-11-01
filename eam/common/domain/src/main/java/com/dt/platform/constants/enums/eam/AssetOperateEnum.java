@@ -5,7 +5,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum AssetOperateEnum implements CodeTextEnum {
 
-    EAM_ASSET_INSERT("eam_asset_insert" , "EAM_资产插入"),
+    EAM_ASSET_INSERT("eam_asset_insert" , "EAM_资产登记"),
     EAM_ASSET_IN_STOCK_INSERT("eam_asset_in_stock_insert" , "EAM_资产库存入库"),
     EAM_ASSET_OUT_STOCK_INSERT("eam_asset_out_stock_insert" , "EAM_资产库存出库"),
 

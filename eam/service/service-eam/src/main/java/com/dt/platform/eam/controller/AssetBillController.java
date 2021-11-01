@@ -150,7 +150,6 @@ public class AssetBillController extends SuperController {
     public void queryBorrowBills(List<String> ids,HttpServletResponse response) throws Exception {
         InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_BORROW_BILL.code());
         HashMap<String, Object> map=new HashMap<String, Object>();
-        map.put("name","121212");
         XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
         response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition","attachment;filename=\""+"asset.docx"+"\"");

@@ -89,6 +89,9 @@ function ListPage() {
 				if(ATTRIBUTE_LIST_DATA[i].attribute&&ATTRIBUTE_LIST_DATA[i].attribute.code)
 					COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
+			if(APPROVAL_REQUIRED){
+				COL_DATA.push(COL_ALL_DATA["approval_opinion"]);
+			}
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 360 };
 			COL_DATA.push(oper)
 
@@ -497,7 +500,7 @@ function ListPage() {
 				case 'forBatchApproval':
 					window.pageExt.list.forBatchApproval && window.pageExt.list.forBatchApproval(selected,obj);
 					break;
-				case 'batchRevokeOperation':
+				case 'batchRevoke':
 					window.pageExt.list.batchRevokeOperation && window.pageExt.list.batchRevokeOperation(selected,obj);
 					break;
 				case 'bills':

@@ -190,6 +190,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE , AssetDataChangeVOMeta.SEARCH_FIELD , AssetDataChangeVOMeta.FUZZY_FIELD , AssetDataChangeVOMeta.SEARCH_VALUE , AssetDataChangeVOMeta.SORT_FIELD , AssetDataChangeVOMeta.SORT_TYPE , AssetDataChangeVOMeta.IDS } )
@@ -306,6 +307,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetDataChangeVOMeta.PAGE_INDEX , AssetDataChangeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -343,6 +345,7 @@ public class AssetDataChangeController extends SuperController {
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetDataChangeVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetDataChangeVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=8)

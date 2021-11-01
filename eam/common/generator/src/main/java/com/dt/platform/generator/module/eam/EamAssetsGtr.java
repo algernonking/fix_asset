@@ -369,7 +369,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页

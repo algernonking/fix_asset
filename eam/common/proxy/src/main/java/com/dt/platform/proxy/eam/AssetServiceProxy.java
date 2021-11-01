@@ -124,6 +124,11 @@ public interface AssetServiceProxy {
 	public static final String BATCH_CONFIRM_OPERATION= API_PREFIX + "batch-confirm-operation";
 
 	/**
+	 * 批量撤销
+	 */
+	public static final String BATCH_REVOKE_OPERATION= API_PREFIX + "batch-revoke-operation";
+
+	/**
 	 * 确认操作
 	 */
 	public static final String QUERY_ASSET_STATUS_LIST= API_PREFIX + "query-asset-status-list";

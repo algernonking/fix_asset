@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 14:45:58
+ * @since 2021-10-29 15:19:53
  */
  -->
  <!DOCTYPE html>
@@ -668,6 +668,76 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('制单人')}">制单人</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="originatorId" id="originatorId" name="originatorId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('制单人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更类型')}">变更类型</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="chsType" id="chsType" name="chsType" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更类型') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更状态')}">变更状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="chsStatus" id="chsStatus" name="chsStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更状态') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更版本号')}">变更版本号</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="chsVersion" id="chsVersion" name="chsVersion" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更版本号') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('变更ID')}">变更ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="changeInstanceId" id="changeInstanceId" name="changeInstanceId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('变更ID') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('流程概要')}">流程概要</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="summary" id="summary" name="summary" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('流程概要') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('最后审批人账户ID')}">最后审批人账户ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="latestApproverId" id="latestApproverId" name="latestApproverId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('最后审批人账户ID') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('最后审批人姓名')}">最后审批人姓名</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="latestApproverName" id="latestApproverName" name="latestApproverName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('最后审批人姓名') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('下一节点审批人')}">下一节点审批人</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="nextApproverIds" id="nextApproverIds" name="nextApproverIds" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('下一节点审批人') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('下一个审批节点审批人姓名')}">下一个审批节点审批人姓名</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="nextApproverNames" id="nextApproverNames" name="nextApproverNames" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('下一个审批节点审批人姓名') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('审批意见')}">审批意见</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="approvalOpinion" id="approvalOpinion" name="approvalOpinion" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('审批意见') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 

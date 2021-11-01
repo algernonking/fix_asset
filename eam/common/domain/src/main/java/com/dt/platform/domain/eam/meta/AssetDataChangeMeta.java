@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 17:00:03
- * @sign 52039BF77C9C8701116488F8E16D01B7
+ * @since 2021-10-28 15:36:14
+ * @sign 20D297DA0462B4BF9BF86783498FE436
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -309,6 +309,16 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> NEXT_APPROVER_NAMES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,NEXT_APPROVER_NAMES, java.lang.String.class, "下一个审批节点审批人姓名", "用逗号隔开", java.lang.String.class, null);
 	
 	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final String APPROVAL_OPINION="approvalOpinion";
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,java.lang.String> APPROVAL_OPINION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,APPROVAL_OPINION, java.lang.String.class, "审批意见", "审批意见", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -351,7 +361,7 @@ public class AssetDataChangeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -677,6 +687,17 @@ public class AssetDataChangeMeta {
 		public AssetDataChange setNextApproverNames(String nextApproverNames) {
 			super.change(NEXT_APPROVER_NAMES,super.getNextApproverNames(),nextApproverNames);
 			super.setNextApproverNames(nextApproverNames);
+			return this;
+		}
+		
+		/**
+		 * 设置 审批意见
+		 * @param approvalOpinion 审批意见
+		 * @return 当前对象
+		*/
+		public AssetDataChange setApprovalOpinion(String approvalOpinion) {
+			super.change(APPROVAL_OPINION,super.getApprovalOpinion(),approvalOpinion);
+			super.setApprovalOpinion(approvalOpinion);
 			return this;
 		}
 		

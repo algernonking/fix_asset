@@ -70,6 +70,7 @@ layui.define([],
                 ,purpose:{ field: 'purpose', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('资产用途') , templet: function (d) { return templet('purpose',d.purpose,d);}  }
                 ,equipment_serial_number:{ field: 'equipmentSerialNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
                 ,last_verification_date:{ field: 'lastVerificationDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('核对日期') , templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd"),d); }}
+                ,approval_opinion:{ field: 'approvalOpinion', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
 
             }
             return COL_ALL_DATA;

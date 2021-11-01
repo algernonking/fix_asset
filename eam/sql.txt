@@ -1,12 +1,15 @@
-ALTER TABLE eam_asset_data_change ADD chs_type varchar(16)  DEFAULT NULL COMMENT '变更类型';
-ALTER TABLE eam_asset_data_change ADD chs_status varchar(16)  DEFAULT NULL COMMENT '变更状态';
-ALTER TABLE eam_asset_data_change ADD chs_version varchar(16)  DEFAULT NULL COMMENT '变更版本号';
-ALTER TABLE eam_asset_data_change ADD change_instance_id varchar(16)  DEFAULT NULL COMMENT '变更ID';
-ALTER TABLE eam_asset_data_change ADD summary               varchar(500)  DEFAULT NULL COMMENT '流程概要';
-ALTER TABLE eam_asset_data_change ADD latest_approver_id    varchar(16)  DEFAULT NULL COMMENT '最后审批人账户ID';
-ALTER TABLE eam_asset_data_change ADD latest_approver_name  varchar(16)  DEFAULT NULL COMMENT '最后审批人姓名';
-ALTER TABLE eam_asset_data_change ADD next_approver_ids     varchar(512) DEFAULT NULL COMMENT '下一节点审批人';
-ALTER TABLE eam_asset_data_change ADD next_approver_names   varchar(512)  DEFAULT NULL COMMENT '下一个审批节点审批人姓名，用逗号隔开';
+ALTER TABLE eam_asset ADD chs_type varchar(50)  DEFAULT NULL COMMENT '变更类型';
+ALTER TABLE eam_asset ADD chs_status varchar(50)  DEFAULT NULL COMMENT '变更状态';
+ALTER TABLE eam_asset ADD chs_version varchar(50)  DEFAULT NULL COMMENT '变更版本号';
+ALTER TABLE eam_asset ADD change_instance_id varchar(50)  DEFAULT NULL COMMENT '变更ID';
+ALTER TABLE eam_asset ADD summary               varchar(500)  DEFAULT NULL COMMENT '流程概要';
+ALTER TABLE eam_asset ADD latest_approver_id    varchar(50)  DEFAULT NULL COMMENT '最后审批人账户ID';
+ALTER TABLE eam_asset ADD latest_approver_name  varchar(50)  DEFAULT NULL COMMENT '最后审批人姓名';
+ALTER TABLE eam_asset ADD next_approver_ids     varchar(512) DEFAULT NULL COMMENT '下一节点审批人';
+ALTER TABLE eam_asset ADD next_approver_names   varchar(512)  DEFAULT NULL COMMENT '下一个审批节点审批人姓名，用逗号隔开';
+ALTER TABLE eam_asset ADD approval_opinion   varchar(500)  DEFAULT NULL COMMENT '审批意见';
+
+
 
 
 

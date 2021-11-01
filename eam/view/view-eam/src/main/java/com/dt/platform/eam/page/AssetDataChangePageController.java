@@ -71,10 +71,6 @@ public class AssetDataChangePageController extends ViewController {
 		model.addAttribute("dataChangeModifyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+"update") );
 		model.addAttribute("dataChangeDeleteBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":delete") );
 		model.addAttribute("dataChangeViewBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":query") );
-		//表格
-		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
-		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("data-table"+pageType+changeType));
-		model.addAttribute("tableId","data-table"+pageType+changeType);
 
 		//审批
 		boolean approvalRequired=true;
@@ -87,6 +83,10 @@ public class AssetDataChangePageController extends ViewController {
 		model.addAttribute("pageType",pageType);
 		String assetAttributeDimension=AssetDataChangeServiceProxy.api().queryDataChangeDimensionByChangeType(changeType).getData().toString();
 
+		//表格
+		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
+		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("dt"+pageType+changeType+approvalRequired));
+		model.addAttribute("tableId","dt"+pageType+changeType+approvalRequired);
 
 
 		//设置字段布局
@@ -120,6 +120,9 @@ public class AssetDataChangePageController extends ViewController {
 	 */
 	@RequestMapping("/asset_data_change_form.html")
 	public String form(Model model,HttpServletRequest request , String id,String changeType,String pageType) {
+
+
+		model.addAttribute("dataChangeFormBtn",SessionUser.getCurrent().permission().checkAnyAuth(changeType+":create",changeType+":update",changeType+":save") );
 
 
 		String assetAttributeDimension="";

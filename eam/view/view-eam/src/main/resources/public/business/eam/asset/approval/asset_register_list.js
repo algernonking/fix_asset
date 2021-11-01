@@ -55,14 +55,16 @@ function ListPage() {
             var ps={};
 
             var contitions={};
-            contitions.status={ value: "complete", label:"完成"};
+           // contitions.status={ value: "complete", label:"完成"};
             if(window.pageExt.list.beforeQuery){
                 window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
             }
+            contitions.status={ value: "approval", label:"审批中"};
 
             if(Object.keys(contitions).length>0) {
                 ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
             }
+
             var templet=window.pageExt.list.templet;
             if(templet==null) {
                 templet=function(field,value,row) {
@@ -70,7 +72,6 @@ function ListPage() {
                     return value;
                 }
             }
-            console.log("ps",ps);
             var h=$(".search-bar").height();
             var COL_ALL_DATA= assetListColumn.getColumnList(templet);
             var COL_DATA=[{ fixed: 'left',type: 'numbers' },{ fixed: 'left',type:'checkbox'}];
@@ -127,6 +128,7 @@ function ListPage() {
 
 
 
+        value.status={ value: "approval", label:"审批中"};
 
         return value;
     }
@@ -467,7 +469,11 @@ function ListPage() {
                 case 'refresh-data':
                     refreshTableData();
                     break;
-                case 'other':
+                case 'agree':
+                    window.pageExt.list.agreeData(selected)
+                    break;
+                case 'deny':
+                    window.pageExt.list.denyData(selected)
                     break;
             };
         });

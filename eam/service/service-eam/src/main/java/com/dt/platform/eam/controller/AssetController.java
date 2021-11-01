@@ -194,9 +194,6 @@ public class AssetController extends SuperController {
 			}
 		}
 		Result result=assetService.insert(assetVO);
-		if(result.isSuccess()){
-			 assetService.confirmOperation(assetVO.getId());
-		}
 		return result;
 	}
 
@@ -431,6 +428,16 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE , AssetVOMeta.SEARCH_FIELD , AssetVOMeta.FUZZY_FIELD , AssetVOMeta.SEARCH_VALUE , AssetVOMeta.SORT_FIELD , AssetVOMeta.SORT_TYPE , AssetVOMeta.IDS } )
@@ -589,8 +596,17 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-
+		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "E001"),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { AssetVOMeta.PAGE_INDEX , AssetVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = AssetServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -686,6 +702,17 @@ public class AssetController extends SuperController {
 		@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "内部控制标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.BILL_ID , value = "单据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class , example = "E001"),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
+
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -873,6 +900,8 @@ public class AssetController extends SuperController {
 		return assetService.forBatchApproval(ids);
 	}
 
+
+
 	/**
 	 * 批量确认
 	 * */
@@ -940,6 +969,21 @@ public class AssetController extends SuperController {
 		}
 		result.success(true).data(list);
 		return result;
+	}
+
+
+	/**
+	 * 批量撤销
+	 * */
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
+	})
+	@NotNull(name = AssetVOMeta.IDS)
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = AssetServiceProxy.BATCH_REVOKE_OPERATION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.BATCH_REVOKE_OPERATION)
+	public Result batchRevokeOperation(List<String> ids)  {
+		return assetService.batchRevokeOperation(ids);
 	}
 
 
