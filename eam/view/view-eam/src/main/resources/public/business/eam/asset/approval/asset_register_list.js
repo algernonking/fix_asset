@@ -459,6 +459,7 @@ function ListPage() {
         table.on('toolbar(data-table)', function(obj){
             var checkStatus = table.checkStatus(obj.config.id);
             var selected=getCheckedList("id");
+            var selectedInstanceId=getCheckedList("changeInstanceId");
             switch(obj.event){
                 case 'create':
                     openCreateFrom();
@@ -470,10 +471,10 @@ function ListPage() {
                     refreshTableData();
                     break;
                 case 'agree':
-                    window.pageExt.list.agreeData(selected)
+                    window.pageExt.list.agreeData(selectedInstanceId)
                     break;
                 case 'deny':
-                    window.pageExt.list.denyData(selected)
+                    window.pageExt.list.denyData(selectedInstanceId)
                     break;
             };
         });

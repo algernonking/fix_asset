@@ -101,7 +101,6 @@ public class AssetBillController extends SuperController {
         for(int i=0;i<list.size();i++){
             InputStream ins= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_REGISTER_BILL.code());
             Map<String,Object> map=list.get(i);
-            System.out.println("mapdata:"+map.toString());
             XWPFTemplate template = XWPFTemplate.compile( ins ).render(map);
             String assetCode=map.getOrDefault("assetCode", IDGenerator.getSnowflakeIdString()).toString();
             ZipEntry entry = new ZipEntry( assetCode+ ".docx");
@@ -434,19 +433,31 @@ public class AssetBillController extends SuperController {
 
     @SentinelResource(value = AssetBillServiceProxy.QUERY_ASSET_LABELS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @RequestMapping(AssetBillServiceProxy.QUERY_ASSET_LABELS)
-    public void queryAssetLabels(String id,HttpServletResponse response) throws Exception {
-        InputStream inputstream=TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_LABEl.code());
-        HashMap<String, Object> map=new HashMap<String, Object>();
-        map.put("name","121212");
-        XWPFTemplate template = XWPFTemplate.compile(inputstream).render(map);
+    public void queryAssetLabels(List<String> ids,HttpServletResponse response) throws Exception {
+
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-disposition","attachment;filename=\""+"asset.docx"+"\"");
-        OutputStream out = response.getOutputStream();
-        BufferedOutputStream bos = new BufferedOutputStream(out);
-        template.write(bos);
-        bos.flush();
-        out.flush();
-        PoitlIOUtils.closeQuietlyMulti(template, bos, out);
+        response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产标签.zip", "UTF-8"))));
+        HackLoopTableRenderPolicy policy = new HackLoopTableRenderPolicy();
+        List<Map<String,Object>> list=assetService.getBills(ids);
+        OutputStream outputStream = response.getOutputStream();
+        ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
+        for(int i=0;i<list.size();i++){
+            InputStream ins= TplFileServiceProxy.api().getTplFileStreamByCode(AssetOperateEnum.EAM_DOWNLOAD_ASSET_LABEl.code());
+            Map<String,Object> map=list.get(i);
+            System.out.println(map.toString());
+            XWPFTemplate template = XWPFTemplate.compile( ins ).render(map);
+            String assetCode=map.getOrDefault("assetCode", IDGenerator.getSnowflakeIdString()).toString();
+            ZipEntry entry = new ZipEntry( assetCode+ ".docx");
+            zipOutputStream.putNextEntry(entry);
+            template.write(zipOutputStream);
+            zipOutputStream.flush();
+            template.close();
+        }
+        zipOutputStream.close();
+        outputStream.flush();
+        outputStream.close();
+
+
     }
 
 

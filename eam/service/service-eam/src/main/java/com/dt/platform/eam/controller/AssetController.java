@@ -17,6 +17,7 @@ import com.dt.platform.constants.enums.ops.OpsOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
+import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -25,6 +26,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.github.foxnic.web.domain.changes.ChangeDefinition;
 import org.github.foxnic.web.domain.changes.ChangeDefinitionVO;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
@@ -930,6 +932,9 @@ public class AssetController extends SuperController {
 		return result;
 	}
 
+
+
+
 	/**
 	 * 查询资产审批清单
 	 * */
@@ -970,6 +975,19 @@ public class AssetController extends SuperController {
 		result.success(true).data(list);
 		return result;
 	}
+
+
+	/**
+	 * 审批
+	 * */
+	@ApiOperation(value = "审批")
+	@ApiOperationSupport(order=15)
+	@SentinelResource(value = AssetServiceProxy.APPROVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.APPROVE)
+	public Result approve(ProcessApproveVO approveVO)  {
+		return assetService.approve(approveVO);
+	}
+
 
 
 	/**

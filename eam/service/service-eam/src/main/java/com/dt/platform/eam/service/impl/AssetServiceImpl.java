@@ -532,8 +532,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					//
 				}
 
+				//
+
 			}
 		}
+
+
+
 		return result;
 	}
 	public Result approve(String instanceId, List<Asset> assets, String approveAction, String opinion) {
@@ -636,46 +641,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 			String assetCode=e.getAssetCode()==null?"null":e.getAssetCode();
 			map.put("assetTxm", Pictures.ofBufferedImage(createAssetsPic("txm", assetCode), PictureType.PNG).size(190,50).create());
+			map.put("assetEwm", Pictures.ofBufferedImage(createAssetsPic("ewm", assetCode), PictureType.PNG).size(80,100).create());
 			data.add(map);
 		}
 		return data;
 	}
-
-	/**
-
-
-	 @Override
-	 public Result joinData(List<Asset> list) {
-	 // 关联出 资产分类 数据
-	 dao.fill(list).with(AssetMeta.CATEGORY)
-	 .with(AssetMeta.GOODS)
-	 .with(AssetMeta.MANUFACTURER)
-	 .with(AssetMeta.POSITION)
-	 .with(AssetMeta.MAINTNAINER)
-	 .with(AssetMeta.SUPPLIER)
-	 .with(AssetMeta.OWNER_COMPANY)
-	 .with(AssetMeta.USE_ORGANIZATION)
-	 .with(AssetMeta.MANAGER)
-	 .with(AssetMeta.USE_USER)
-	 .with(AssetMeta.ORIGINATOR)
-	 .with(AssetMeta.RACK)
-	 .with(AssetMeta.SOURCE)
-	 .with(AssetMeta.SAFETY_LEVEL)
-	 .with(AssetMeta.EQUIPMENT_ENVIRONMENT)
-	 .with(AssetMeta.ASSET_MAINTENANCE_STATUS)
-	 .execute();
-	 //
-	 List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-	 dao().join(originators, Person.class);
-
-	 List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
-	 dao().join(managers, Person.class);
-
-	 List<Employee> useUser= CollectorUtil.collectList(list,Asset::getUseUser);
-	 dao().join(useUser, Person.class);
-
-	 return  ErrorDesc.success();
-	 }
 
 
 	 /**

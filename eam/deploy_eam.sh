@@ -3,10 +3,13 @@ demo_sql="/tmp/demo.sql"
 echo "use eam_demo;">$demo_sql
 echo "source full.sql;">>$demo_sql
 cd /tmp
-mysql_pwd=`cat /opt/password.txt|tail -1`
-/usr/bin/mysqldump -uroot -p$mysql_pwd -h127.0.0.1 eam  > $demo_sql
-/usr/bin/mysql -uroot -p$mysql_pwd -h127.0.0.1 eam_demo < $demo_sql
 app_dir=/opt/eam
+MYSQLDUMP=/mysql/bin/mysqldump
+MYSQL=/mysql/bin/mysql
+mysql_pwd=`cat /opt/password.txt|tail -1`
+$MYSQLDUMP -uroot -p$mysql_pwd -h127.0.0.1 eam  > $demo_sql
+$MYSQL -uroot -p$mysql_pwd -h127.0.0.1 eam_demo < $demo_sql
+
 if [[ ! -d $app_dir ]];then
   mkdir -p $app_dir
   mkdir $app_dir/log

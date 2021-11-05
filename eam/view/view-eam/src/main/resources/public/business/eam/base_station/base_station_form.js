@@ -1,13 +1,13 @@
 /**
- * 存放位置 列表页 JS 脚本
+ * rfid基站 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:11
+ * @since 2021-11-03 15:24:18
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
-	const moduleURL="/service-eam/eam-position";
+	const moduleURL="/service-eam/rfid-base-station";
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
@@ -18,7 +18,7 @@ function FormPage() {
      	admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,foxup=layui.foxnicUpload;
 		laydate = layui.laydate,table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect;
 
-		action=admin.getTempData('eam-position-form-data-form-action');
+		action=admin.getTempData('rfid-base-station-form-data-form-action');
 		//如果没有修改和保存权限
 		if( !admin.checkAuth(AUTH_PREFIX+":update") && !admin.checkAuth(AUTH_PREFIX+":save")) {
 			disableModify=true;
@@ -58,7 +58,7 @@ function FormPage() {
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			if(area==null) return;
-			admin.putTempData('eam-position-form-area', area);
+			admin.putTempData('rfid-base-station-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
@@ -78,6 +78,30 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 areaId 下拉字段
+		fox.renderSelectBox({
+			el: "areaId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].name,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 deviceType 下拉字段
 		fox.renderSelectBox({
 			el: "deviceType",
@@ -127,7 +151,7 @@ function FormPage() {
       */
 	function fillFormData(formData) {
 		if(!formData) {
-			formData = admin.getTempData('eam-position-form-data');
+			formData = admin.getTempData('rfid-base-station-form-data');
 		}
 
 		window.pageExt.form.beforeDataFill && window.pageExt.form.beforeDataFill(formData);
@@ -148,6 +172,8 @@ function FormPage() {
 
 
 
+			//设置  基站区域 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#areaId",formData.deviceArea);
 			//设置  设备类型 设置下拉框勾选
 			fox.setSelectValue4Enum("#deviceType",formData.deviceType,SELECT_DEVICETYPE_DATA);
 			//设置  工作类型 设置下拉框勾选
@@ -200,6 +226,8 @@ function FormPage() {
 
 
 
+		//获取 基站区域 下拉框的值
+		data["areaId"]=fox.getSelectedValue("areaId",false);
 		//获取 设备类型 下拉框的值
 		data["deviceType"]=fox.getSelectedValue("deviceType",false);
 		//获取 工作类型 下拉框的值
@@ -220,7 +248,7 @@ function FormPage() {
 			layer.closeAll('loading');
 			if (data.success) {
 				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('eam-position-form-data-popup-index');
+				var index=admin.getTempData('rfid-base-station-form-data-popup-index');
 				admin.finishPopupCenter(index);
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1000});

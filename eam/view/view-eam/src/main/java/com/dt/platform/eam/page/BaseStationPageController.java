@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.PositionServiceProxy;
+import com.dt.platform.proxy.eam.BaseStationServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 存放位置 模版页面控制器
+ * rfid基站 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:07
+ * @since 2021-11-03 15:24:08
 */
 
-@Controller("EamPositionPageController")
-@RequestMapping(PositionPageController.prefix)
-public class PositionPageController extends ViewController {
+@Controller("RfidBaseStationPageController")
+@RequestMapping(BaseStationPageController.prefix)
+public class BaseStationPageController extends ViewController {
 	
-	public static final String prefix="business/eam/position";
+	public static final String prefix="business/eam/base_station";
 
-	private PositionServiceProxy proxy;
+	private BaseStationServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class PositionPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public PositionServiceProxy proxy() {
+	public BaseStationServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=PositionServiceProxy.api();
+			proxy=BaseStationServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 存放位置 功能主页面
+	 * rfid基站 功能主页面
 	 */
-	@RequestMapping("/position_list.html")
+	@RequestMapping("/base_station_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/position_list";
+		return prefix+"/base_station_list";
 	}
 
 	/**
-	 * 存放位置 表单页面
+	 * rfid基站 表单页面
 	 */
-	@RequestMapping("/position_form.html")
+	@RequestMapping("/base_station_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/position_form";
+		return prefix+"/base_station_form";
 	}
 }

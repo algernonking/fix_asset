@@ -1,7 +1,7 @@
 /**
- * 存放位置 列表页 JS 脚本
+ * rfid基站 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:07
+ * @since 2021-11-03 15:24:08
  */
 
 layui.config({

@@ -138,6 +138,12 @@ public interface AssetServiceProxy {
 	 */
 	public static final String QUERY_ASSET_INSERT_APPROVAL_LIST= API_PREFIX + "query-asset-insert-approval-list";
 
+	/**
+	 * 查询资产新增审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
+
 
 	/**
 	 * 查询资产新增审批
@@ -216,6 +222,7 @@ public interface AssetServiceProxy {
 	 */
 	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
 	Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetBussinessType,String assetSelectedCode,String assetSearchContent);
+
 
 
 	/**

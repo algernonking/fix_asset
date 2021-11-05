@@ -3,9 +3,10 @@ package com.dt.platform.domain.eam;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.EAM_POSITION;
+import com.dt.platform.constants.db.EAMTables.RFID_BASE_STATION;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -14,19 +15,19 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * 存放位置
+ * rfid基站
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:06
- * @sign 9F0AEF4F504EA0263367B9E1B81436E3
+ * @since 2021-11-03 15:24:02
+ * @sign 2FB38690CF4235B69861282A362ED1DD
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-@Table(name = "eam_position")
-public class Position extends Entity {
+@Table(name = "rfid_base_station")
+public class BaseStation extends Entity {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final DBTable TABLE =EAM_POSITION.$TABLE;
+	public static final DBTable TABLE =RFID_BASE_STATION.$TABLE;
 	
 	/**
 	 * 主键：主键
@@ -36,16 +37,52 @@ public class Position extends Entity {
 	private String id;
 	
 	/**
-	 * 名称：名称
+	 * 区域主键：区域主键
 	*/
-	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	@ApiModelProperty(required = false,value="区域主键" , notes = "区域主键")
+	private String areaId;
+	
+	/**
+	 * 基站名称：基站名称
+	*/
+	@ApiModelProperty(required = false,value="基站名称" , notes = "基站名称")
 	private String name;
 	
 	/**
-	 * 备注：备注
+	 * 经度：经度
 	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	@ApiModelProperty(required = false,value="经度" , notes = "经度")
+	private BigDecimal longitude;
+	
+	/**
+	 * 纬度：纬度
+	*/
+	@ApiModelProperty(required = false,value="纬度" , notes = "纬度")
+	private BigDecimal latitude;
+	
+	/**
+	 * 设备ID：设备ID
+	*/
+	@ApiModelProperty(required = false,value="设备ID" , notes = "设备ID")
+	private String deviceId;
+	
+	/**
+	 * 设备类型：1：无源；2：有源
+	*/
+	@ApiModelProperty(required = false,value="设备类型" , notes = "1：无源；2：有源")
+	private String deviceType;
+	
+	/**
+	 * 是否在线：是否在线
+	*/
+	@ApiModelProperty(required = false,value="是否在线" , notes = "是否在线")
+	private Integer isOnLine;
+	
+	/**
+	 * 工作类型：1：入基站；2：出基站；3：范围基站；4：工位基站
+	*/
+	@ApiModelProperty(required = false,value="工作类型" , notes = "1：入基站；2：出基站；3：范围基站；4：工位基站")
+	private String workType;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -90,16 +127,10 @@ public class Position extends Entity {
 	private Date deleteTime;
 	
 	/**
-	 * version：version
+	 * 数据版本号：数据版本号
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="数据版本号" , notes = "数据版本号")
 	private Integer version;
-	
-	/**
-	 * 租户：租户
-	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
 	
 	/**
 	 * 基站区域：基站区域
@@ -121,46 +152,160 @@ public class Position extends Entity {
 	 * @param id 主键
 	 * @return 当前对象
 	*/
-	public Position setId(String id) {
+	public BaseStation setId(String id) {
 		this.id=id;
 		return this;
 	}
 	
 	/**
-	 * 获得 名称<br>
-	 * 名称
-	 * @return 名称
+	 * 获得 区域主键<br>
+	 * 区域主键
+	 * @return 区域主键
+	*/
+	public String getAreaId() {
+		return areaId;
+	}
+	
+	/**
+	 * 设置 区域主键
+	 * @param areaId 区域主键
+	 * @return 当前对象
+	*/
+	public BaseStation setAreaId(String areaId) {
+		this.areaId=areaId;
+		return this;
+	}
+	
+	/**
+	 * 获得 基站名称<br>
+	 * 基站名称
+	 * @return 基站名称
 	*/
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * 设置 名称
-	 * @param name 名称
+	 * 设置 基站名称
+	 * @param name 基站名称
 	 * @return 当前对象
 	*/
-	public Position setName(String name) {
+	public BaseStation setName(String name) {
 		this.name=name;
 		return this;
 	}
 	
 	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
+	 * 获得 经度<br>
+	 * 经度
+	 * @return 经度
 	*/
-	public String getNotes() {
-		return notes;
+	public BigDecimal getLongitude() {
+		return longitude;
 	}
 	
 	/**
-	 * 设置 备注
-	 * @param notes 备注
+	 * 设置 经度
+	 * @param longitude 经度
 	 * @return 当前对象
 	*/
-	public Position setNotes(String notes) {
-		this.notes=notes;
+	public BaseStation setLongitude(BigDecimal longitude) {
+		this.longitude=longitude;
+		return this;
+	}
+	
+	/**
+	 * 获得 纬度<br>
+	 * 纬度
+	 * @return 纬度
+	*/
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+	
+	/**
+	 * 设置 纬度
+	 * @param latitude 纬度
+	 * @return 当前对象
+	*/
+	public BaseStation setLatitude(BigDecimal latitude) {
+		this.latitude=latitude;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备ID<br>
+	 * 设备ID
+	 * @return 设备ID
+	*/
+	public String getDeviceId() {
+		return deviceId;
+	}
+	
+	/**
+	 * 设置 设备ID
+	 * @param deviceId 设备ID
+	 * @return 当前对象
+	*/
+	public BaseStation setDeviceId(String deviceId) {
+		this.deviceId=deviceId;
+		return this;
+	}
+	
+	/**
+	 * 获得 设备类型<br>
+	 * 1：无源；2：有源
+	 * @return 设备类型
+	*/
+	public String getDeviceType() {
+		return deviceType;
+	}
+	
+	/**
+	 * 设置 设备类型
+	 * @param deviceType 设备类型
+	 * @return 当前对象
+	*/
+	public BaseStation setDeviceType(String deviceType) {
+		this.deviceType=deviceType;
+		return this;
+	}
+	
+	/**
+	 * 获得 是否在线<br>
+	 * 是否在线
+	 * @return 是否在线
+	*/
+	public Integer getIsOnLine() {
+		return isOnLine;
+	}
+	
+	/**
+	 * 设置 是否在线
+	 * @param isOnLine 是否在线
+	 * @return 当前对象
+	*/
+	public BaseStation setIsOnLine(Integer isOnLine) {
+		this.isOnLine=isOnLine;
+		return this;
+	}
+	
+	/**
+	 * 获得 工作类型<br>
+	 * 1：入基站；2：出基站；3：范围基站；4：工位基站
+	 * @return 工作类型
+	*/
+	public String getWorkType() {
+		return workType;
+	}
+	
+	/**
+	 * 设置 工作类型
+	 * @param workType 工作类型
+	 * @return 当前对象
+	*/
+	public BaseStation setWorkType(String workType) {
+		this.workType=workType;
 		return this;
 	}
 	
@@ -178,7 +323,7 @@ public class Position extends Entity {
 	 * @param createBy 创建人ID
 	 * @return 当前对象
 	*/
-	public Position setCreateBy(String createBy) {
+	public BaseStation setCreateBy(String createBy) {
 		this.createBy=createBy;
 		return this;
 	}
@@ -197,7 +342,7 @@ public class Position extends Entity {
 	 * @param createTime 创建时间
 	 * @return 当前对象
 	*/
-	public Position setCreateTime(Date createTime) {
+	public BaseStation setCreateTime(Date createTime) {
 		this.createTime=createTime;
 		return this;
 	}
@@ -216,7 +361,7 @@ public class Position extends Entity {
 	 * @param updateBy 修改人ID
 	 * @return 当前对象
 	*/
-	public Position setUpdateBy(String updateBy) {
+	public BaseStation setUpdateBy(String updateBy) {
 		this.updateBy=updateBy;
 		return this;
 	}
@@ -235,7 +380,7 @@ public class Position extends Entity {
 	 * @param updateTime 修改时间
 	 * @return 当前对象
 	*/
-	public Position setUpdateTime(Date updateTime) {
+	public BaseStation setUpdateTime(Date updateTime) {
 		this.updateTime=updateTime;
 		return this;
 	}
@@ -254,7 +399,7 @@ public class Position extends Entity {
 	 * @param deleted 是否已删除
 	 * @return 当前对象
 	*/
-	public Position setDeleted(Integer deleted) {
+	public BaseStation setDeleted(Integer deleted) {
 		this.deleted=deleted;
 		return this;
 	}
@@ -273,7 +418,7 @@ public class Position extends Entity {
 	 * @param deleteBy 删除人ID
 	 * @return 当前对象
 	*/
-	public Position setDeleteBy(String deleteBy) {
+	public BaseStation setDeleteBy(String deleteBy) {
 		this.deleteBy=deleteBy;
 		return this;
 	}
@@ -292,46 +437,27 @@ public class Position extends Entity {
 	 * @param deleteTime 删除时间
 	 * @return 当前对象
 	*/
-	public Position setDeleteTime(Date deleteTime) {
+	public BaseStation setDeleteTime(Date deleteTime) {
 		this.deleteTime=deleteTime;
 		return this;
 	}
 	
 	/**
-	 * 获得 version<br>
-	 * version
-	 * @return version
+	 * 获得 数据版本号<br>
+	 * 数据版本号
+	 * @return 数据版本号
 	*/
 	public Integer getVersion() {
 		return version;
 	}
 	
 	/**
-	 * 设置 version
-	 * @param version version
+	 * 设置 数据版本号
+	 * @param version 数据版本号
 	 * @return 当前对象
 	*/
-	public Position setVersion(Integer version) {
+	public BaseStation setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
-	*/
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * 设置 租户
-	 * @param tenantId 租户
-	 * @return 当前对象
-	*/
-	public Position setTenantId(String tenantId) {
-		this.tenantId=tenantId;
 		return this;
 	}
 	
@@ -349,7 +475,7 @@ public class Position extends Entity {
 	 * @param deviceArea 基站区域
 	 * @return 当前对象
 	*/
-	public Position setDeviceArea(Position deviceArea) {
+	public BaseStation setDeviceArea(Position deviceArea) {
 		this.deviceArea=deviceArea;
 		return this;
 	}
@@ -357,7 +483,7 @@ public class Position extends Entity {
 	/**
 	 * 将自己转换成指定类型的PO
 	 * @param poType  PO类型
-	 * @return Position , 转换好的 Position 对象
+	 * @return BaseStation , 转换好的 BaseStation 对象
 	*/
 	@Transient
 	public <T extends Entity> T toPO(Class<T> poType) {
@@ -367,7 +493,7 @@ public class Position extends Entity {
 	/**
 	 * 将自己转换成任意指定类型
 	 * @param pojoType  Pojo类型
-	 * @return Position , 转换好的 PoJo 对象
+	 * @return BaseStation , 转换好的 PoJo 对象
 	*/
 	@Transient
 	public <T> T toPojo(Class<T> pojoType) {
@@ -384,35 +510,35 @@ public class Position extends Entity {
 	}
 
 	/**
-	 * 将 Map 转换成 Position
-	 * @param positionMap 包含实体信息的 Map 对象
-	 * @return Position , 转换好的的 Position 对象
+	 * 将 Map 转换成 BaseStation
+	 * @param baseStationMap 包含实体信息的 Map 对象
+	 * @return BaseStation , 转换好的的 BaseStation 对象
 	*/
 	@Transient
-	public static Position createFrom(Map<String,Object> positionMap) {
-		if(positionMap==null) return null;
-		Position po = EntityContext.create(Position.class, positionMap);
+	public static BaseStation createFrom(Map<String,Object> baseStationMap) {
+		if(baseStationMap==null) return null;
+		BaseStation po = EntityContext.create(BaseStation.class, baseStationMap);
 		return po;
 	}
 
 	/**
-	 * 将 Pojo 转换成 Position
+	 * 将 Pojo 转换成 BaseStation
 	 * @param pojo 包含实体信息的 Pojo 对象
-	 * @return Position , 转换好的的 Position 对象
+	 * @return BaseStation , 转换好的的 BaseStation 对象
 	*/
 	@Transient
-	public static Position createFrom(Object pojo) {
+	public static BaseStation createFrom(Object pojo) {
 		if(pojo==null) return null;
-		Position po = EntityContext.create(Position.class,pojo);
+		BaseStation po = EntityContext.create(BaseStation.class,pojo);
 		return po;
 	}
 
 	/**
-	 * 创建一个 Position，等同于 new
-	 * @return Position 对象
+	 * 创建一个 BaseStation，等同于 new
+	 * @return BaseStation 对象
 	*/
 	@Transient
-	public static Position create() {
-		return EntityContext.create(Position.class);
+	public static BaseStation create() {
+		return EntityContext.create(BaseStation.class);
 	}
 }

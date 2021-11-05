@@ -401,6 +401,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			billData.setChangeInstanceId("");
 			super.update(billData,SaveMode.NOT_NULL_FIELDS);
 
+
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
 		}
@@ -468,7 +469,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			AssetDataChange bill=new AssetDataChange();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{

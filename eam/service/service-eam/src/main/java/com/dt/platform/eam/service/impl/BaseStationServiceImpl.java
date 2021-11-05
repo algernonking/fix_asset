@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.PositionVO;
+import com.dt.platform.domain.eam.BaseStation;
+import com.dt.platform.domain.eam.BaseStationVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IPositionService;
+import com.dt.platform.eam.service.IBaseStationService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 存放位置 服务实现
+ * rfid基站 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:07
+ * @since 2021-11-03 15:24:02
 */
 
 
-@Service("EamPositionService")
-public class PositionServiceImpl extends SuperService<Position> implements IPositionService {
+@Service("RfidBaseStationService")
+public class BaseStationServiceImpl extends SuperService<BaseStation> implements IBaseStationService {
 	
 	/**
 	 * 注入DAO对象
@@ -62,38 +62,38 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	
 	/**
 	 * 插入实体
-	 * @param position 实体数据
+	 * @param baseStation 实体数据
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(Position position) {
-		Result r=super.insert(position);
+	public Result insert(BaseStation baseStation) {
+		Result r=super.insert(baseStation);
 		return r;
 	}
 	
 	/**
 	 * 批量插入实体，事务内
-	 * @param positionList 实体数据清单
+	 * @param baseStationList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<Position> positionList) {
-		return super.insertList(positionList);
+	public Result insertList(List<BaseStation> baseStationList) {
+		return super.insertList(baseStationList);
 	}
 	
 	
 	/**
-	 * 按主键删除 存放位置
+	 * 按主键删除 rfid基站
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		Position position = new Position();
+		BaseStation baseStation = new BaseStation();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		position.setId(id);
+		baseStation.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(position);
+			boolean suc = dao.deleteEntity(baseStation);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -104,20 +104,20 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	}
 	
 	/**
-	 * 按主键删除 存放位置
+	 * 按主键删除 rfid基站
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		Position position = new Position();
+		BaseStation baseStation = new BaseStation();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		position.setId(id);
-		position.setDeleted(dao.getDBTreaty().getTrueValue());
-		position.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		position.setDeleteTime(new Date());
+		baseStation.setId(id);
+		baseStation.setDeleted(dao.getDBTreaty().getTrueValue());
+		baseStation.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		baseStation.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(position,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(baseStation,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -129,30 +129,30 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	
 	/**
 	 * 更新实体
-	 * @param position 数据对象
+	 * @param baseStation 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(Position position , SaveMode mode) {
-		Result r=super.update(position , mode);
+	public Result update(BaseStation baseStation , SaveMode mode) {
+		Result r=super.update(baseStation , mode);
 		return r;
 	}
 	
 	/**
 	 * 更新实体集，事务内
-	 * @param positionList 数据对象列表
+	 * @param baseStationList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<Position> positionList , SaveMode mode) {
-		return super.updateList(positionList , mode);
+	public Result updateList(List<BaseStation> baseStationList , SaveMode mode) {
+		return super.updateList(baseStationList , mode);
 	}
 	
 	
 	/**
-	 * 按主键更新字段 存放位置
+	 * 按主键更新字段 rfid基站
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -166,20 +166,20 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	
 	
 	/**
-	 * 按主键获取 存放位置
+	 * 按主键获取 rfid基站
 	 *
 	 * @param id 主键
-	 * @return Position 数据对象
+	 * @return BaseStation 数据对象
 	 */
-	public Position getById(String id) {
-		Position sample = new Position();
+	public BaseStation getById(String id) {
+		BaseStation sample = new BaseStation();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<Position> getByIds(List<String> ids) {
+	public List<BaseStation> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -192,7 +192,7 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<Position> queryList(Position sample) {
+	public List<BaseStation> queryList(BaseStation sample) {
 		return super.queryList(sample);
 	}
 	
@@ -206,7 +206,7 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Position> queryPagedList(Position sample, int pageSize, int pageIndex) {
+	public PagedList<BaseStation> queryPagedList(BaseStation sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 	
@@ -220,25 +220,25 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<Position> queryPagedList(Position sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<BaseStation> queryPagedList(BaseStation sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	
 	/**
 	 * 检查 角色 是否已经存在
 	 *
-	 * @param position 数据对象
+	 * @param baseStation 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Position> checkExists(Position position) {
+	public Result<BaseStation> checkExists(BaseStation baseStation) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(position, SYS_ROLE.NAME);
+		//boolean exists=this.checkExists(baseStation, SYS_ROLE.NAME);
 		//return exists;
 		return ErrorDesc.success();
 	}
 
 	@Override
-	public ExcelWriter exportExcel(Position sample) {
+	public ExcelWriter exportExcel(BaseStation sample) {
 		return super.exportExcel(sample);
 	}
 

@@ -43,6 +43,15 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             fox.submit(downloadUrl,{ids:data});
 
         },
+        assetLabel:function(data){
+            if(data.length==0){
+                top.layer.msg("请选择要操作的资产数据!");
+                return ;
+            }
+
+            var downloadUrl="/service-eam/eam-asset-bill/query-asset-labels";
+            fox.submit(downloadUrl,{ids:data});
+        },
         assetDataChange:function (data){
             var queryString="?assetId="+data.id;
             var index=admin.popupCenter({

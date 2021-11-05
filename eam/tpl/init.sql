@@ -8,7 +8,7 @@ insert into sys_file(id,file_name,location,size,media_type,file_type)values('T00
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_3','eam_asset_collection.docx','/tpl/T001/eam_asset_collection.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_4','eam_asset_collection_return.docx','/tpl/T001/eam_asset_collection_return.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_5','eam_asset_allocate.docx','/tpl/T001/eam_asset_allocate.docx',10000,'application/octet-stream','docx');
-insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_6','eam_asset_code.docx','/tpl/T001/eam_asset_code.docx',10000,'application/octet-stream','docx');
+insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_6','eam_asset_label.docx','/tpl/T001/eam_asset_label.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_7','eam_asset_card.docx','/tpl/T001/eam_asset_card.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_8','eam_asset_tranfer.docx','/tpl/T001/eam_asset_tranfer.docx',10000,'application/octet-stream','docx');
 insert into sys_file(id,file_name,location,size,media_type,file_type)values('T001_eam_9','eam_download_asset.docx','/tpl/T001/eam_download_asset.xls',10000,'application/octet-stream','xls');

@@ -1,7 +1,7 @@
 /**
- * 存放位置 列表页 JS 脚本
+ * rfid基站 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:09
+ * @since 2021-11-03 15:24:15
  */
 
 
@@ -9,7 +9,7 @@ function ListPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect;
 	//模块基础路径
-	const moduleURL="/service-eam/eam-position";
+	const moduleURL="/service-eam/rfid-base-station";
 	var dataTable=null;
 	var sort=null;
 	/**
@@ -75,14 +75,15 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'areaId', align:"left",fixed:false,  hide:false, sort: false, title: fox.translate('基站区域'), templet: function (d) { return templet('areaId' ,fox.joinLabel(d.deviceArea,"name"),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('基站名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'longitude', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('经度') , templet: function (d) { return templet('longitude',d.longitude,d);}  }
+					,{ field: 'latitude', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('纬度') , templet: function (d) { return templet('latitude',d.latitude,d);}  }
+					,{ field: 'deviceId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备ID') , templet: function (d) { return templet('deviceId',d.deviceId,d);}  }
+					,{ field: 'deviceType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备类型'), templet:function (d){ return templet('deviceType',fox.getEnumText(SELECT_DEVICETYPE_DATA,d.deviceType),d);}}
+					,{ field: 'isOnLine', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否在线') , templet: function (d) { return templet('isOnLine',d.isOnLine,d);}  }
+					,{ field: 'workType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('工作类型'), templet:function (d){ return templet('workType',fox.getEnumText(SELECT_WORKTYPE_DATA,d.workType),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
-					,{ field: 'deviceType', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('device_type'), templet:function (d){ return templet('deviceType',fox.getEnumText(SELECT_DEVICETYPE_DATA,d.deviceType),d);}}
-					,{ field: 'workType', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('work_type'), templet:function (d){ return templet('workType',fox.getEnumText(SELECT_WORKTYPE_DATA,d.workType),d);}}
-					,{ field: 'areaId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('area_id') , templet: function (d) { return templet('areaId',d.areaId,d);}  }
-					,{ field: 'deviceId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('device_id') , templet: function (d) { return templet('deviceId',d.deviceId,d);}  }
-					,{ field: 'isOnLine', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('is_on_line') , templet: function (d) { return templet('isOnLine',d.isOnLine,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -119,8 +120,8 @@ function ListPage() {
 		var value = {};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.deviceType={ inputType:"select_box", value: xmSelect.get("#deviceType",true).getValue("value"), label:xmSelect.get("#deviceType",true).getValue("nameStr") };
+		value.isOnLine={ inputType:"number_input", value: $("#isOnLine").val() };
 		value.workType={ inputType:"select_box", value: xmSelect.get("#workType",true).getValue("value"), label:xmSelect.get("#workType",true).getValue("nameStr") };
-		value.isOnLine={ inputType:"button",value: $("#isOnLine").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -267,7 +268,7 @@ function ListPage() {
         function openCreateFrom() {
         	//设置新增是初始化数据
         	var data={};
-			admin.putTempData('eam-position-form-data-form-action', "create",true);
+			admin.putTempData('rfid-base-station-form-data-form-action', "create",true);
             showEditForm(data);
         };
 
@@ -281,11 +282,11 @@ function ListPage() {
 
 			var ids=getCheckedList("id");
             if(ids.length==0) {
-				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('存放位置')+"!");
+				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('rfid基站')+"!");
             	return;
             }
             //调用批量删除接口
-			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('存放位置')+fox.translate('吗？'), function (i) {
+			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('rfid基站')+fox.translate('吗？'), function (i) {
 				top.layer.close(i);
 				top.layer.load(2);
                 admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
@@ -320,7 +321,7 @@ function ListPage() {
 				if(!doNext) return;
 			}
 
-			admin.putTempData('eam-position-form-data-form-action', "",true);
+			admin.putTempData('rfid-base-station-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
@@ -328,7 +329,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-position-form-data-form-action', "edit",true);
+						admin.putTempData('rfid-base-station-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
 						 layer.msg(data.message, {icon: 1, time: 1500});
@@ -341,7 +342,7 @@ function ListPage() {
 					clearTimeout(task);
 					layer.closeAll('loading');
 					if(data.success) {
-						admin.putTempData('eam-position-form-data-form-action', "view",true);
+						admin.putTempData('rfid-base-station-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
 						layer.msg(data.message, {icon: 1, time: 1500});
@@ -355,7 +356,7 @@ function ListPage() {
 					if(!doNext) return;
 				}
 
-				top.layer.confirm(fox.translate('确定删除此')+fox.translate('存放位置')+fox.translate('吗？'), function (i) {
+				top.layer.confirm(fox.translate('确定删除此')+fox.translate('rfid基站')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
 					top.layer.load(2);
@@ -388,14 +389,14 @@ function ListPage() {
 			var doNext=window.pageExt.list.beforeEdit(data);
 			if(!doNext) return;
 		}
-		var action=admin.getTempData('eam-position-form-data-form-action');
+		var action=admin.getTempData('rfid-base-station-form-data-form-action');
 		var queryString="";
 		if(data && data.id) queryString="?" + 'id=' + data.id;
-		admin.putTempData('eam-position-form-data', data);
-		var area=admin.getTempData('eam-position-form-area');
+		admin.putTempData('rfid-base-station-form-data', data);
+		var area=admin.getTempData('rfid-base-station-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
 		var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-		var title = fox.translate('存放位置');
+		var title = fox.translate('rfid基站');
 		if(action=="create") title=fox.translate('添加')+title;
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
@@ -406,13 +407,13 @@ function ListPage() {
 			offset: [top,null],
 			area: ["500px",height+"px"],
 			type: 2,
-			id:"eam-position-form-data-win",
-			content: '/business/eam/position/position_form.html' + queryString,
+			id:"rfid-base-station-form-data-win",
+			content: '/business/eam/base_station/base_station_form.html' + queryString,
 			finish: function () {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-position-form-data-popup-index', index);
+		admin.putTempData('rfid-base-station-form-data-popup-index', index);
 	};
 
 	window.module={

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-11-01 19:09:52
+ * @since 2021-11-03 15:15:23
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -8136,6 +8136,173 @@ public class EAMTables {
 			this.init($NAME,"凭证权限" , ID , TYPE , EMPL_ID , STATUS , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final OPS_VOUCHER_PRIV $TABLE=new OPS_VOUCHER_PRIV();
+	}
+	
+	/**
+	 * rfid基站
+	*/
+	public static class RFID_BASE_STATION extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "rfid_base_station";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 区域主键
+		*/
+		public static final DBField AREA_ID = new DBField(DBDataType.STRING , "area_id","areaId","区域主键","区域主键",false,false,true);
+		
+		/**
+		 * 基站名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","基站名称","基站名称",false,false,true);
+		
+		/**
+		 * 经度
+		*/
+		public static final DBField LONGITUDE = new DBField(DBDataType.DECIMAL , "longitude","longitude","经度","经度",false,false,true);
+		
+		/**
+		 * 纬度
+		*/
+		public static final DBField LATITUDE = new DBField(DBDataType.DECIMAL , "latitude","latitude","纬度","纬度",false,false,true);
+		
+		/**
+		 * 设备ID
+		*/
+		public static final DBField DEVICE_ID = new DBField(DBDataType.STRING , "device_id","deviceId","设备ID","设备ID",false,false,true);
+		
+		/**
+		 * 设备类型，1：无源；2：有源
+		*/
+		public static final DBField DEVICE_TYPE = new DBField(DBDataType.STRING , "device_type","deviceType","设备类型","1：无源；2：有源",false,false,true);
+		
+		/**
+		 * 是否在线
+		*/
+		public static final DBField IS_ON_LINE = new DBField(DBDataType.INTEGER , "is_on_line","isOnLine","是否在线","是否在线",false,false,true);
+		
+		/**
+		 * 工作类型，1：入基站；2：出基站；3：范围基站；4：工位基站
+		*/
+		public static final DBField WORK_TYPE = new DBField(DBDataType.STRING , "work_type","workType","工作类型","1：入基站；2：出基站；3：范围基站；4：工位基站",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public RFID_BASE_STATION() {
+			this.init($NAME,"rfid基站" , ID , AREA_ID , NAME , LONGITUDE , LATITUDE , DEVICE_ID , DEVICE_TYPE , IS_ON_LINE , WORK_TYPE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final RFID_BASE_STATION $TABLE=new RFID_BASE_STATION();
+	}
+	
+	/**
+	 * 区域
+	*/
+	public static class RFID_DEVICE_AREA extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "rfid_device_area";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 区域名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","区域名称","区域名称",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public RFID_DEVICE_AREA() {
+			this.init($NAME,"区域" , ID , NAME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final RFID_DEVICE_AREA $TABLE=new RFID_DEVICE_AREA();
 	}
 	
 	/**

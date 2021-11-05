@@ -208,6 +208,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * @param result 结果
 	 * @return
 	 * */
+	//return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
 	private Result operateResult(String id,String result,String status,String message) {
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			Result verifyResult= verifyBillData(id);
@@ -219,7 +220,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 			AssetCollection bill=new AssetCollection();
 			bill.setId(id);
 			bill.setStatus(status);
-			return update(bill,SaveMode.NOT_NULL_FIELDS);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
