@@ -16,6 +16,7 @@ public class PlatformRelationManager extends RelationManager {
 				new org.github.foxnic.web.relation.modules.HrmRelationManager(),
 				new PcmRelationManager(),
 				new BpmRelationManager(),
+				new DataPermRelationManager(),
 				//
 				new HrmRelationManager(),
 				new KnRelationManager(),

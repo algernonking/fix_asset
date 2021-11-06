@@ -2,6 +2,7 @@ package com.dt.platform.framework.datasource;
 
 import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.log.Logger;
+import com.github.foxnic.dao.dataperm.DataPermManager;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
 import com.github.foxnic.dao.sql.loader.SQLoader;
@@ -58,6 +59,10 @@ public class DAOConfig {
 			FoxnicDataCacheManager cacheManager=new FoxnicDataCacheManager();
 			dao.setDataCacheManager(cacheManager);
 
+			//数据权限管理器
+			DataPermManager dataPermManager=new DataPermManager();
+			dao.setDataPermManager(dataPermManager);
+
 			//设置SQL扫描
 			SQLoader.addTQLScanPackage(dao,SpringUtil.getStartupClass().getPackage().getName());
 			ComponentScan sc=(ComponentScan)SpringUtil.getStartupClass().getAnnotation(ComponentScan.class);
@@ -106,7 +111,13 @@ public class DAOConfig {
 		
 		//设置获取当前用户的逻辑
 		if(SpringUtil.isReady()) {
-			dbTreaty.setUserIdHandler(()->{
+
+			dbTreaty.setSubjectHandler(()->{
+				SessionUser user=SessionUser.getCurrent();
+				return  user;
+			});
+
+			dbTreaty.setLoginUserIdHandler(()->{
 				SessionUser user=SessionUser.getCurrent();
 				if(user==null) return null;
 				return  user.getUserId();
