@@ -828,6 +828,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * */
 	@Override
 	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, ConditionExpr condition, int pageSize, int pageIndex) {
+
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 	

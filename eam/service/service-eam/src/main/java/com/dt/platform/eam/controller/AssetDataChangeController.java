@@ -354,6 +354,7 @@ public class AssetDataChangeController extends SuperController {
 	public Result<PagedList<AssetDataChange>> queryPagedList(AssetDataChangeVO sample) {
 		Result<PagedList<AssetDataChange>> result=new Result<>();
 		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
 		assetDataChangeService.join(list,AssetDataChangeMeta.ORIGINATOR);
 
 		List<Employee> employees= CollectorUtil.collectList(list,AssetDataChange::getOriginator);
