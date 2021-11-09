@@ -500,7 +500,8 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * */
 	@Override
 	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code();
+		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
 	
 	/**
@@ -514,7 +515,8 @@ public class AssetCollectionReturnServiceImpl extends SuperService<AssetCollecti
 	 * */
 	@Override
 	public PagedList<AssetCollectionReturn> queryPagedList(AssetCollectionReturn sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_COLLECTION_RETURN.code();
+		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
 	
 	/**

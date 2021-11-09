@@ -488,7 +488,8 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	 * */
 	@Override
 	public PagedList<AssetScrap> queryPagedList(AssetScrap sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_SCRAP.code();
+		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
 	
 	/**
@@ -502,7 +503,8 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	 * */
 	@Override
 	public PagedList<AssetScrap> queryPagedList(AssetScrap sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_SCRAP.code();
+		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
 	
 	/**

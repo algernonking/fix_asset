@@ -496,7 +496,8 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	 * */
 	@Override
 	public PagedList<AssetTranfer> queryPagedList(AssetTranfer sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_TRANFER.code();
+		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
 	
 	/**
@@ -510,7 +511,8 @@ public class AssetTranferServiceImpl extends SuperService<AssetTranfer> implemen
 	 * */
 	@Override
 	public PagedList<AssetTranfer> queryPagedList(AssetTranfer sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_TRANFER.code();
+		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
 	
 	/**

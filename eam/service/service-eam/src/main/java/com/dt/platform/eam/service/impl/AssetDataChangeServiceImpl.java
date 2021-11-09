@@ -813,8 +813,14 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, int pageSize, int pageIndex,String dp) {
+
+		if(StringUtil.isBlank(dp)){
+			return super.queryPagedList(sample, pageSize, pageIndex);
+		}else{
+			return super.queryPagedList(sample, pageSize, pageIndex,dp);
+		}
+
 	}
 	
 	/**
@@ -828,8 +834,8 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * */
 	@Override
 	public PagedList<AssetDataChange> queryPagedList(AssetDataChange sample, ConditionExpr condition, int pageSize, int pageIndex) {
-
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 数据变更
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-28 15:36:14
- * @sign 20D297DA0462B4BF9BF86783498FE436
+ * @since 2021-11-09 08:27:06
+ * @sign 37D8B38156E6139978989D4CB2A58357
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -235,6 +236,12 @@ public class AssetDataChange extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Employee originator;
+	
+	/**
+	 * 变更实例：变更实例
+	*/
+	@ApiModelProperty(required = false,value="变更实例" , notes = "变更实例")
+	private ChangeInstance changeInstance;
 	
 	/**
 	 * 获得 主键<br>
@@ -901,6 +908,25 @@ public class AssetDataChange extends Entity {
 	*/
 	public AssetDataChange setOriginator(Employee originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更实例<br>
+	 * 变更实例
+	 * @return 变更实例
+	*/
+	public ChangeInstance getChangeInstance() {
+		return changeInstance;
+	}
+	
+	/**
+	 * 设置 变更实例
+	 * @param changeInstance 变更实例
+	 * @return 当前对象
+	*/
+	public AssetDataChange setChangeInstance(ChangeInstance changeInstance) {
+		this.changeInstance=changeInstance;
 		return this;
 	}
 

@@ -489,7 +489,8 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	 * */
 	@Override
 	public PagedList<AssetAllocation> queryPagedList(AssetAllocation sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_ALLOCATE.code();
+		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
 	
 	/**
@@ -503,7 +504,8 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 	 * */
 	@Override
 	public PagedList<AssetAllocation> queryPagedList(AssetAllocation sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_ALLOCATE.code();
+		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
 	
 	/**

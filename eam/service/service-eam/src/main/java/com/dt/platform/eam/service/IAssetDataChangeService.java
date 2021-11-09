@@ -285,7 +285,7 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 	 * @param pageIndex 页码
 	 * @return 查询结果
 	 * */
-	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,int pageSize,int pageIndex);
+	PagedList<AssetDataChange> queryPagedList(AssetDataChange sample,int pageSize,int pageIndex,String dp);
 	
 	/**
 	 * 分页查询实体集

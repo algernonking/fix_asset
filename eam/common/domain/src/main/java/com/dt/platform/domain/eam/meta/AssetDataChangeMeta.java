@@ -6,13 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.eam.Asset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-28 15:36:14
- * @sign 20D297DA0462B4BF9BF86783498FE436
+ * @since 2021-11-09 08:27:06
+ * @sign 37D8B38156E6139978989D4CB2A58357
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -359,9 +360,19 @@ public class AssetDataChangeMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 变更实例 , 类型: org.github.foxnic.web.domain.changes.ChangeInstance
+	*/
+	public static final String CHANGE_INSTANCE="changeInstance";
+	
+	/**
+	 * 变更实例 , 类型: org.github.foxnic.web.domain.changes.ChangeInstance
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetDataChange,org.github.foxnic.web.domain.changes.ChangeInstance> CHANGE_INSTANCE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetDataChange.class ,CHANGE_INSTANCE, org.github.foxnic.web.domain.changes.ChangeInstance.class, "变更实例", "变更实例", org.github.foxnic.web.domain.changes.ChangeInstance.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , ASSET_LIST , ASSET_IDS , CHANGE_DATA , ORIGINATOR , CHANGE_INSTANCE };
 	
 	/**
 	 * 代理类
@@ -742,6 +753,17 @@ public class AssetDataChangeMeta {
 		public AssetDataChange setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更实例
+		 * @param changeInstance 变更实例
+		 * @return 当前对象
+		*/
+		public AssetDataChange setChangeInstance(ChangeInstance changeInstance) {
+			super.change(CHANGE_INSTANCE,super.getChangeInstance(),changeInstance);
+			super.setChangeInstance(changeInstance);
 			return this;
 		}
 	}

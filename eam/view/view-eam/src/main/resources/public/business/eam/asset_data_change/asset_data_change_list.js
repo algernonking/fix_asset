@@ -57,8 +57,9 @@ function ListPage() {
 
 			if(PAGE_TYPE&&PAGE_TYPE=="approval"){
 				ps.status='approval';
-			}
 
+			}
+			ps.pageType=PAGE_TYPE;
 			ps.searchValue=JSON.stringify(contitions);
 			ps.changeType=CHANGE_TYPE;
 			var templet=window.pageExt.list.templet;
@@ -191,6 +192,7 @@ function ListPage() {
 		}
 
 
+		ps.pageType=PAGE_TYPE;
 
 		if(reset) {
 			table.reload(TABLE_ID, { where : ps , page:{ curr:1 } });

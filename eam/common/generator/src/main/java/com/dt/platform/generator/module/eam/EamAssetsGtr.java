@@ -15,6 +15,7 @@ import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.generator.builder.view.config.Tab;
 import com.github.foxnic.generator.config.WriteMode;
 import  com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
@@ -43,6 +44,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 //        cfg.getPoClassFile().addSimpleProperty(AssetExtEquipment.class,"assetEquipment","设备信息","设备信息");
 //        cfg.getPoClassFile().addSimpleProperty(AssetExtSoftware.class,"assetExtSoftware","软件信息","软件信息");
 
+
+
         cfg.getPoClassFile().addSimpleProperty(AssetExtData.class,"extData","扩展数据","扩展数据");
         cfg.getPoClassFile().addMapProperty(String.class,Object.class,"pcmData","PCM数据","PCM数据");
         cfg.getPoClassFile().addListProperty(CatalogAttribute.class,"catalogAttribute","自定义数据属性字段","自定义数据属性字段");
@@ -67,7 +70,12 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"assetMaintenanceStatus","维保状态","维保状态");
 
 
+
         cfg.getPoClassFile().addSimpleProperty(Rack.class,"rack","机柜","机柜");
+
+
+        cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
+
 
 
         cfg.view().field(EAMTables.EAM_ASSET.NAME).search().fuzzySearch();

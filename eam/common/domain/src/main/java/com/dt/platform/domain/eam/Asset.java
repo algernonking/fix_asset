@@ -16,6 +16,7 @@ import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.system.DictItem;
 import com.dt.platform.domain.datacenter.Rack;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import java.util.HashMap;
 import java.util.ArrayList;
 import javax.persistence.Transient;
@@ -26,8 +27,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-29 15:19:49
- * @sign 74BA5A2EEF648365550297AA03B271B4
+ * @since 2021-11-09 08:30:11
+ * @sign ACD5D4279F0FFB81B03FF741C007BB57
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -746,6 +747,12 @@ public class Asset extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="机柜" , notes = "机柜")
 	private Rack rack;
+	
+	/**
+	 * 变更实例：变更实例
+	*/
+	@ApiModelProperty(required = false,value="变更实例" , notes = "变更实例")
+	private ChangeInstance changeInstance;
 	
 	/**
 	 * 获得 主键<br>
@@ -3009,6 +3016,25 @@ public class Asset extends Entity {
 	*/
 	public Asset setRack(Rack rack) {
 		this.rack=rack;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更实例<br>
+	 * 变更实例
+	 * @return 变更实例
+	*/
+	public ChangeInstance getChangeInstance() {
+		return changeInstance;
+	}
+	
+	/**
+	 * 设置 变更实例
+	 * @param changeInstance 变更实例
+	 * @return 当前对象
+	*/
+	public Asset setChangeInstance(ChangeInstance changeInstance) {
+		this.changeInstance=changeInstance;
 		return this;
 	}
 

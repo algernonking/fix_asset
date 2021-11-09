@@ -63,6 +63,10 @@ public class EamRelationManager extends RelationManager {
 
     public void setupAssetDataChange(){
 
+        this.property(AssetDataChangeMeta.CHANGE_INSTANCE_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_CHANGE.CHANGE_INSTANCE_ID )
+                .join(FoxnicWeb.CHS_CHANGE_INSTANCE.ID);
+
         // 关联资产
         this.property(AssetDataChangeMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_CHANGE.ID )
@@ -363,6 +367,10 @@ public class EamRelationManager extends RelationManager {
 //    }
 
     public void setupAsset() {
+
+        this.property(AssetMeta.CHANGE_INSTANCE_PROP)
+                .using(EAMTables.EAM_ASSET.CHANGE_INSTANCE_ID )
+                .join(FoxnicWeb.CHS_CHANGE_INSTANCE.ID);
 
         // 关联维保商
         this.property(AssetMeta.MAINTNAINER_PROP)

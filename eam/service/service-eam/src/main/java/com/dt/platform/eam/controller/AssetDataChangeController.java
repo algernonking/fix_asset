@@ -24,7 +24,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.github.foxnic.web.framework.web.SuperController;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
@@ -352,9 +357,22 @@ public class AssetDataChangeController extends SuperController {
 	@SentinelResource(value = AssetDataChangeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetDataChangeServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<AssetDataChange>> queryPagedList(AssetDataChangeVO sample) {
-		Result<PagedList<AssetDataChange>> result=new Result<>();
-		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		String pageType=request.getParameter("pageType");
+		System.out.println("pageType"+pageType);
+
+		Result<PagedList<AssetDataChange>> result=new Result<>();
+
+		//数据权限
+		String dp="";
+		if(!StringUtil.isBlank(pageType) && "approval".equals(pageType) ){
+			dp=sample.getChangeType()+"_approving";
+		}else{
+			dp=sample.getChangeType();
+		}
+
+		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex(),dp);
 		assetDataChangeService.join(list,AssetDataChangeMeta.ORIGINATOR);
 
 		List<Employee> employees= CollectorUtil.collectList(list,AssetDataChange::getOriginator);
@@ -363,31 +381,8 @@ public class AssetDataChangeController extends SuperController {
 		assetDataChangeService.join(list,AssetDataChangeMeta.CHANGE_DATA);
 		List<Asset> assetData= CollectorUtil.collectList(list,AssetDataChange::getChangeData);
 
-		// 关联出 资产分类 数据
-		assetService.join(assetData, AssetMeta.CATEGORY);
-		// 关联出 物品档案 数据
-		assetService.join(assetData,AssetMeta.GOODS);
-		// 关联出 厂商 数据
-		assetService.join(assetData,AssetMeta.MANUFACTURER);
-		// 关联出 位置 数据
-		assetService.join(assetData,AssetMeta.POSITION);
-		// 关联出 仓库 数据
-		assetService.join(assetData,AssetMeta.WAREHOUSE);
-		// 关联出 来源 数据
-		assetService.join(assetData,AssetMeta.SOURCE);
-		// 关联出 维保商 数据
-		assetService.join(assetData,AssetMeta.MAINTNAINER);
-		// 关联出 财务分类 数据
-		assetService.join(assetData,AssetMeta.CATEGORY_FINANCE);
-		// 关联出 供应商 数据
-		assetService.join(assetData,AssetMeta.SUPPLIER);
-		assetService.join(assetData,AssetMeta.SAFETY_LEVEL);
-		assetService.join(assetData,AssetMeta.EQUIPMENT_ENVIRONMENT);
-		assetService.join(assetData,AssetMeta.OWNER_COMPANY);
-		assetService.join(assetData,AssetMeta.USE_ORGANIZATION);
-		assetService.join(assetData,AssetMeta.MANAGER);
-		assetService.join(assetData,AssetMeta.USE_USER);
-		assetService.join(assetData,AssetMeta.ORIGINATOR);
+		assetService.joinData(assetData);
+
 		result.success(true).data(list);
 		return result;
 

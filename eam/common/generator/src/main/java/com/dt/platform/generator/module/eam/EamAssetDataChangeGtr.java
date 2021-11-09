@@ -10,6 +10,7 @@ import com.dt.platform.eam.page.AssetDataChangePageController;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import org.github.foxnic.web.domain.hrm.Employee;
 
 public class EamAssetDataChangeGtr extends BaseCodeGenerator{
@@ -26,6 +27,8 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(Asset.class,"changeData","变更数据","变更数据");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+
+        cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
 
 
         cfg.view().field(EAMTables.EAM_ASSET_DATA_CHANGE.SELECTED_CODE).basic().hidden(true);

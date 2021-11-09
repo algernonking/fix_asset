@@ -525,7 +525,8 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * */
 	@Override
 	public PagedList<AssetRepair> queryPagedList(AssetRepair sample, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_REPAIR.code();
+		return super.queryPagedList(sample, pageSize, pageIndex,dp);
 	}
 	
 	/**
@@ -539,7 +540,8 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 	 * */
 	@Override
 	public PagedList<AssetRepair> queryPagedList(AssetRepair sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		String dp=AssetOperateEnum.EAM_ASSET_REPAIR.code();
+		return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
 	}
 	
 	/**
