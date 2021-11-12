@@ -1,18 +1,52 @@
 #!/bin/sh
 #####################################################################
 # Script Help:
-#     sh run.sh start|stop|restart
+#     sh eam.sh start|stop|restart
 #
 #####################################################################
+####################### Configure ###################################
+app_name="eam.jar"
+app_dir=/home/eam/eam
+app_log=$app_dir/log
+app_log_file=$app_log/app.log
+
 ####################### Java Environment ############################
 JAVA=java
 
 
-####################### Configure ###################################
-app_name="app.jar"
-app_dir=/tmp/eam
-app_log=$app_dir/log
-app_log_file=$app_log/app.log
+####################### App Environment ############################
+if [[ ! -d $app_dir ]];then
+  echo "App_dir:$app_dir not exist"
+  exit 1;
+fi
+
+if [[ ! -d "$app_dir/data" ]];then
+  mkdir -p "$app_dir/data"
+fi
+
+if [[ ! -d "$app_dir/log" ]];then
+  mkdir -p "$app_dir/log"
+fi
+
+if [[ ! -d "$app_dir/sql" ]];then
+  mkdir -p "$app_dir/sql"
+fi
+
+if [[ ! -d "$app_dir/tmp" ]];then
+  mkdir -p "$app_dir/tmp"
+fi
+
+if [[ ! -d "$app_dir/update" ]];then
+  mkdir -p "$app_dir/update"
+fi
+
+if [[ ! -d "$app_dir/backup" ]];then
+  mkdir -p "$app_dir/backup"
+fi
+
+if [[ ! -d "$app_dir/upload" ]];then
+  mkdir -p "$app_dir/upload/tpl/T001"
+fi
 
 ####################### Parameter ####################################
 app_process_mark="welcome_come_to_use_it"
@@ -45,7 +79,7 @@ start(){
   if [[ $pidcnt -ge 1 ]];then
     echo "Process is already running,please first stop it."
   else
-    nohup $JAVA  -Dloader.path=./lib/ -Xmx512m -jar $app_name -dprocess_Mark=$app_process_mark  >$app_log_file 2>&1 &
+    nohup $JAVA  -Dloader.path=./lib/ -Xmx1024m -jar $app_name -dprocess_Mark=$app_process_mark  >$app_log_file 2>&1 &
     sleep 3
     pidlist2=`ps -ef|grep java|grep $app_process_mark|grep -v grep |awk '{print $2}'`
     pidcnt2=`ps -ef|grep java|grep $app_process_mark|grep -v grep |awk '{print $2}'|wc -l`
