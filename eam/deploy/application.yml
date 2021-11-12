@@ -1,0 +1,119 @@
+server:
+  session:
+    timeout: 1200s
+  servlet:
+    session:
+      # 会话超时时间，如 30s , 20m 等
+      timeout: 1200s
+  port: 26788
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: service-all
+    description: Foxnic Web Service All
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  datasource:
+    # Druid 监控 , 访问 ${url-prefix}/login.html
+    monitor:
+      url-prefix: druid
+      username: root
+      password: root
+      allow: 192.168.33.108,127.0.0.1
+      deny: 192.168.1.73
+      resetEnable: true
+    druid:
+      primary:
+        encrypt:
+          enable: false
+          file:
+            windows: d:/foxnic/passwd.txt
+            mac: /Users/Shared/foxnic/passwd.txt
+            linux: /foxnic/passwd.txt
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/eam_demo?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        username: root
+        password: P@sswOracle12
+        min-idle: 10
+        initial-size: 10
+        max-active: 64
+        max-wait: 60000
+        printSQL: true
+  thymeleaf:
+    prefix: classpath:/public/
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5
+    cache: false
+  #session:
+    #store-type: redis # 使用 redis 存储session
+  #redis:
+      #port: 6379
+      #host: 127.0.0.1
+
+#禁止自动扫描API
+springfox:
+  documentation:
+    auto-startup: false
+
+
+security:
+  # 模式：session / jwt
+  mode: both
+  # 配置无需鉴权可以访问的地址
+  ignored-urls: /assets/** , /pages/** , /favicon.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
+  # mode=session 时配置的登录页面
+  login-page: /login.html
+  jwt:
+    key-location: foxnic-web.jks
+    key-alias: foxnic-web
+    key-pass: fox-123456-nic
+    # 缓存类型  local/remote/both
+    cache-type: local
+    iss: felord.cn
+    sub: all
+    access-expire-seconds: 1800
+    refresh-expire-seconds: 2000
+
+
+logging:
+  config: classpath:logback-config.xml
+
+snowflake:
+  datacenterId: 1
+  workerId: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+knife4j:
+  enable: true
+  title: ${spring.application.name}
+  description: ${spring.application.description}
+  version: 1.0
+
+storage:
+  mode: disk
+  disk:
+    location:
+      #在不同的环境下选择不同的路径
+      windows: c:/uploads
+      mac: /opt/upload
+      linux: /opt/eam/upload
+
+develop:
+  language: defaults
+  start-relation-monitor: true
+  deploy:
+    enable: true
+    # 可以使用以当前项目为基础的相对路径，指定静态资源自动部署的项目目录
+    projects: ../view/view-customer,../view/view-contract,../view/view-knowledgebase, ../view/view-common, ../view/view-console, ../view/view-datacenter, ../view/view-eam, ../view/view-hrm, ../view/view-ops
