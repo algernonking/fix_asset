@@ -372,11 +372,12 @@ public class AssetDataChangeController extends SuperController {
 			dp=sample.getChangeType();
 		}
 
+
 		PagedList<AssetDataChange> list=assetDataChangeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex(),dp);
 		assetDataChangeService.join(list,AssetDataChangeMeta.ORIGINATOR);
-
 		List<Employee> employees= CollectorUtil.collectList(list,AssetDataChange::getOriginator);
 		assetDataChangeService.dao().join(employees, Person.class);
+
 
 		assetDataChangeService.join(list,AssetDataChangeMeta.CHANGE_DATA);
 		List<Asset> assetData= CollectorUtil.collectList(list,AssetDataChange::getChangeData);

@@ -1464,8 +1464,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
 				.execute();
 //
-		List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
-		dao().join(originators, Person.class);
+
+		System.out.println(list);
+	//	List<Employee> originators= CollectorUtil.collectList(list,Asset::getOriginator);
+//		dao().join(originators, Person.class);
 
 		List<Employee> managers= CollectorUtil.collectList(list,Asset::getManager);
 		dao().join(managers, Person.class);
