@@ -37,7 +37,7 @@ MenuGenerator {
 	/**
 	 * 超级管理员角色ID
 	 * */
-	public static final String SUPER_ADMIN_ROLE_ID="110352963290923110";
+	public static String SUPER_ADMIN_ROLE_ID="110352963290923110";
 
 	/**
 	 * 数据中心菜单ID，配置后，从数据库取得
@@ -80,7 +80,7 @@ MenuGenerator {
 	public MenuGenerator(DBTable table, Class proxyType, Class pageType) {
 		this("service-eam",SUPER_ADMIN_ROLE_ID,table,proxyType,pageType);
 	}
-	
+
 	public MenuGenerator(String appId, String roleId, DBTable table, Class proxyType, Class pageType) {
 		this.configs=new PlatformConfigs(appId);
 		this.dao=this.configs.getDAO();
@@ -393,7 +393,7 @@ MenuGenerator {
 
 
 	}
-	
-	
+
+
 
 }
