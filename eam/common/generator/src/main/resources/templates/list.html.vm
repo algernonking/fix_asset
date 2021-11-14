@@ -1,4 +1,4 @@
-<!-- 
+<!--
 #(authorAndTime)
  -->
  <!DOCTYPE html>
@@ -27,7 +27,7 @@
 <body style="overflow-y: hidden">
 
 <div class="#if(!marginDisabled)layui-card#else layui-card-no-shadow #end">
- 
+
     <div class="layui-card-body" style="#if(marginDisabled)padding:0px#end">
 
         <div class="search-bar" style="#if(searchDisabled) display: none; #end">
@@ -47,7 +47,7 @@
                         #if(f.selectField.queryApi!=null && f.search.fuzzySearch)
                          <input id="#(f.varName)" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" />
                         #else
-                        <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end" style="width:#(f.search.inputWidth)px"></div>
+                        <div id="#(f.varName)" th:data="#if(f.selectField.enumTypeName!=null)${enum.toArray('#(f.selectField.enumTypeName)')}#end#if(f.selectField.queryApi!=null)${'#(f.selectField.queryApi)'}#end#if(f.selectField.dictCode!=null)${dict.toArray('#(f.selectField.dictCode)')}#end" style="width:#(f.search.inputWidth)px" extraParam="{}"></div>
                         #end
                         #else if(f.typeName.equals("radio_box"))
 

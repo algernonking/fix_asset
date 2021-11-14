@@ -45,7 +45,7 @@ public class #(simpleName) extends SuperController {
 	#end
 	@PostMapping(#(agentSimpleName).INSERT)
 	public Result insert(#(voSimpleName) #(voVarName)) {
-		Result result=#(serviceVarName).insert(#(voVarName));
+		Result result=#(serviceVarName).insert(#(voVarName),false);
 		return result;
 	}
 
@@ -61,7 +61,7 @@ public class #(simpleName) extends SuperController {
 	@SentinelResource(value = #(agentSimpleName).INSERTS , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end
 	@PostMapping(#(agentSimpleName).INSERTS)
-	public Result insert(List<#(voSimpleName)> #(voVarName)s) {
+	public Result inserts(List<#(voSimpleName)> #(voVarName)s) {
 		Result result=#(serviceVarName).insertList(new ArrayList<>(#(voVarName)s));
 		return result;
 	}
@@ -121,7 +121,7 @@ public class #(simpleName) extends SuperController {
 	#end
 	@PostMapping(#(agentSimpleName).UPDATE)
 	public Result update(#(voSimpleName) #(voVarName)) {
-		Result result=#(serviceVarName).update(#(voVarName),SaveMode.#(saveMode));
+		Result result=#(serviceVarName).update(#(voVarName),SaveMode.#(saveMode),false);
 		return result;
 	}
 
@@ -139,7 +139,7 @@ public class #(simpleName) extends SuperController {
 	#end
 	@PostMapping(#(agentSimpleName).SAVE)
 	public Result save(#(voSimpleName) #(voVarName)) {
-		Result result=#(serviceVarName).save(#(voVarName),SaveMode.#(saveMode));
+		Result result=#(serviceVarName).save(#(voVarName),SaveMode.#(saveMode),false);
 		return result;
 	}
 
@@ -279,10 +279,14 @@ public class #(simpleName) extends SuperController {
 	#end
 	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL)
 	public void exportExcel(#(voSimpleName)  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=#(serviceVarName).exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -294,11 +298,15 @@ public class #(simpleName) extends SuperController {
 	#end
 	@RequestMapping(#(agentSimpleName).EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=#(serviceVarName).exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 
