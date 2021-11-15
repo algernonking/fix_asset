@@ -90,8 +90,8 @@
 			<onMismatch>DENY</onMismatch>
 		</filter>
 	</appender>
- 
- 	<!--  
+
+ 	<!--
 	<appender name="gelf" class="de.siegmar.logbackgelf.GelfUdpAppender">
         <graylogHost>10.88.20.239</graylogHost>
         <graylogPort>12208</graylogPort>
@@ -126,16 +126,18 @@
 		</encoder>
 	</appender>
 	-->
-	
- 
+
+
 	<!-- 系统模块日志级别控制 -->
-	<logger name="com.chinayie.platform" level="info" />
+	<logger name="com.github.foxnic" level="info" />
+	<logger name="org.github.foxnic" level="info" />
+	<logger name="com.dt.platform" level="info" />
 	<!-- Spring日志级别控制 -->
 	<logger name="org.springframework" level="warn" />
- 
+
 	<root level="info">
 		<appender-ref ref="console" />
-		<!--  
+		<!--
 		<appender-ref ref="gelf" />
 		-->
 	</root>
@@ -145,15 +147,15 @@
 	<root level="info">
 		<appender-ref ref="file_info" />
 		<appender-ref ref="file_error" />
-		<!--  
+		<!--
 		<appender-ref ref="gelf" />
 		-->
 	</root>
-	
-	<!-- 
+
+	<!--
 	<root level="debug">
 		 <appender-ref ref="console" />
 	</root>
 	 -->
- 
-</configuration> 
+
+</configuration>

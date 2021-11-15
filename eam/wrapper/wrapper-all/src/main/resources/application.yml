@@ -23,8 +23,8 @@ spring:
       url-prefix: druid
       username: root
       password: root
-      allow: 192.168.33.108,127.0.0.1
-      deny: 192.168.1.73
+      #allow: 192.168.33.108,127.0.0.1
+      #deny: 192.168.1.73
       resetEnable: true
     druid:
       primary:
@@ -38,10 +38,41 @@ spring:
         url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
         username: tD5wkJAfnCt04A+Y+QN5GA==
         password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
-        min-idle: 5
-        initial-size: 5
-        max-active: 64
-        max-wait: 60000
+        # 启动程序时，在连接池中初始化多少个连接
+        initialSize: 16
+        # 连接池中最多支持多少个活动会话
+        maxActive: 128
+        # 程序向连接池中请求连接时,超过maxWait的值后，认为本次请求失败，即连接池没有可用连接，单位毫秒，设置-1时表示无限等待
+        maxWait: 3000
+        # 池中某个连接的空闲时长达到 N 毫秒后, 连接池在下次检查空闲连接时，将回收该连接,要小于防火墙超时设置
+        minEvictableIdleTimeMillis: 30000
+        # 检查空闲连接的频率，单位毫秒, 非正整数时表示不进行检查程序没有close连接且空闲时长超过 minEvictableIdleTimeMillis,则会执行validationQuery指定的SQL,以保证该程序连接不会池kill掉,其范围不超过minIdle指定的连接个数。
+        timeBetweenEvictionRunsMillis: 10000
+        # 回收空闲连接时，将保证至少有minIdle个连接.
+        minIdle: 8
+        # 要求程序从池中get到连接后, N 秒后必须close,否则druid 会强制回收该连接,不管该连接中是活动还是空闲。
+        removeAbandoned: false
+        # 设置druid 强制回收连接的时限，当程序从池中get到连接开始算起，超过此值后，druid将强制回收该连接，单位秒。
+        removeAbandonedTimeout: 86400000
+        # 当druid强制回收连接后，是否将stack trace 记录到日志中
+        logAbandoned: true
+        # 当程序请求连接，池在分配连接时，是否先检查该连接是否有效。(高效)
+        testWhileIdle: true
+        # 用来保持连接有效性的，只有空闲时间大于keepAliveBetweenTimeMillis并且小于minEvictableIdleTimeMillis该参数才会有用
+        keepAlive: true
+        # 检查池中的连接是否仍可用的 SQL 语句,drui会连接到数据库执行该SQL, 如果正常返回，则表示连接可用，否则表示连接不可用
+        validationQuery: select 1
+        # 程序 申请 连接时,进行连接有效性检查（低效，影响性能）
+        testOnBorrow: false
+        # 程序 返还 连接时,进行连接有效性检查（低效，影响性能）
+        testOnReturn: false
+        # 是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+        poolPreparedStatements: false
+        # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+        maxOpenPreparedStatements: -1
+        # 要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+        maxPoolPreparedStatementPerConnectionSize: -1
+        # 是否打印语句，生产环境建议关闭
         printSQL: true
   thymeleaf:
     prefix: classpath:/public/
