@@ -28,14 +28,17 @@ ops_node_file="$tmp_dir/ops.node"
 if [[ -n $1 ]];then
 	type=$1
 fi
+
 if [[ $type == "full" ]];then
 	content=$full_content
 else
 	content=$incr_content
 fi
+
 if [[ ! -d $tmp_dir ]];then
 	mkdir -p $tmp_dir
 fi
+
 if [[ ! -d $jar_dir ]];then
 	echo "can't find $jar_dir"
 	exit 1

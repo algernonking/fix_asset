@@ -137,6 +137,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             ps.ownerCode=OWNER_CODE;
             var task=setTimeout(function(){layer.load(2);},10);
             fox.submit(downloadUrl,ps,"post",function(){
+
                 clearTimeout(task);
                 layer.closeAll('loading');
                 console.log("execute finish");

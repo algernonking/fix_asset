@@ -28,9 +28,9 @@ if [[ ! -d "$app_dir/log" ]];then
   mkdir -p "$app_dir/log"
 fi
 
-if [[ ! -d "$app_dir/sql" ]];then
-  mkdir -p "$app_dir/sql"
-fi
+#if [[ ! -d "$app_dir/sql" ]];then
+#  mkdir -p "$app_dir/sql"
+#fi
 
 if [[ ! -d "$app_dir/tmp" ]];then
   mkdir -p "$app_dir/tmp"

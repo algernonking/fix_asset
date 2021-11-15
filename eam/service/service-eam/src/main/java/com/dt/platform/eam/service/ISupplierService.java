@@ -21,17 +21,26 @@ import com.github.foxnic.dao.data.SaveMode;
  * 供应商 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:07
+ * @since 2021-11-15 08:40:51
 */
 
 public interface ISupplierService extends ISuperService<Supplier> {
 
 	/**
-	 * 插入实体
-	 * @param supplier 实体数据
+	 * 添加，如果语句错误，则抛出异常
+	 * @param supplier 数据对象
 	 * @return 插入是否成功
 	 * */
 	Result insert(Supplier supplier);
+
+	/**
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param supplier  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	Result insert(Supplier supplier,boolean throwsException);
 
 	/**
 	 * 批量插入实体，事务内
@@ -82,12 +91,23 @@ public interface ISupplierService extends ISuperService<Supplier> {
 	boolean update(DBField field,Object value , String id);
 
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param supplier 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	Result update(Supplier supplier , SaveMode mode);
+
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param supplier 数据对象
+	 * @param mode SaveMode,数据更新的模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果
+	 */
+	Result update(Supplier supplier , SaveMode mode,boolean throwsException);
 
 
 	/**
@@ -99,7 +119,16 @@ public interface ISupplierService extends ISuperService<Supplier> {
 	Result updateList(List<Supplier> supplierList, SaveMode mode);
 
 	/**
-	 * 保存实体，如果主键值不为 null，则更新，否则插入
+	 * 保存实体，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param supplier 实体数据
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	Result save(Supplier supplier , SaveMode mode,boolean throwsException);
+
+	/**
+	 * 保存实体，如果语句错误，则抛出异常
 	 * @param supplier 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功

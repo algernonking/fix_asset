@@ -23,8 +23,6 @@ function ListPage() {
 		table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;
 		assetListColumn=layui.assetListColumn;
 
-
-
 		if(window.pageExt.list.beforeInit) {
 			window.pageExt.list.beforeInit();
 		}
@@ -113,8 +111,18 @@ function ListPage() {
 							if(r.success) {
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
-								console.log("#####",r);
-								layer.msg(fox.translate('数据导入失败')+"!");
+								console.log(12345)
+								var errs = [];
+								if (r.errors) {
+									for (var i = 0; i < r.errors.length; i++) {
+										if (errs.indexOf(r.errors[i].message) == -1) {
+											errs.push(r.errors[i].message);
+										}
+									}
+									top.layer.msg(errs.join("<br>"), {time: 2000});
+								} else {
+									top.layer.msg(r.message, {time: 2000});
+								}
 							}
 						}
 					}:false
@@ -311,6 +319,8 @@ function ListPage() {
 				return opts;
 			}
 		});
+
+
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
 			el: "positionId",

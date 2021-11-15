@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 供应商 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:07
+ * @since 2021-11-15 08:40:53
 */
 
 @Api(tags = "供应商")
@@ -73,7 +73,7 @@ public class SupplierController extends SuperController {
 	@SentinelResource(value = SupplierServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SupplierServiceProxy.INSERT)
 	public Result insert(SupplierVO supplierVO) {
-		Result result=supplierService.insert(supplierVO);
+		Result result=supplierService.insert(supplierVO,false);
 		return result;
 	}
 
@@ -127,7 +127,7 @@ public class SupplierController extends SuperController {
 	@SentinelResource(value = SupplierServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SupplierServiceProxy.UPDATE)
 	public Result update(SupplierVO supplierVO) {
-		Result result=supplierService.update(supplierVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=supplierService.update(supplierVO,SaveMode.NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -146,7 +146,7 @@ public class SupplierController extends SuperController {
 	@SentinelResource(value = SupplierServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(SupplierServiceProxy.SAVE)
 	public Result save(SupplierVO supplierVO) {
-		Result result=supplierService.save(supplierVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=supplierService.save(supplierVO,SaveMode.NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -247,10 +247,14 @@ public class SupplierController extends SuperController {
 	@SentinelResource(value = SupplierServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(SupplierServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(SupplierVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=supplierService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -260,11 +264,15 @@ public class SupplierController extends SuperController {
 	@SentinelResource(value = SupplierServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(SupplierServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=supplierService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

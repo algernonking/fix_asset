@@ -2,12 +2,14 @@
 #####################################################################
 # Script Help:
 #     sh updateEAM.sh
+#         include:backup application jar
+#         include(chose):database
 #
 #####################################################################
+
 ####################### Configure ###################################
 update_filename="update.tar"
 app_dir=/opt/eam
-
 ####################### App Environment ############################
 if [[ ! -d $app_dir ]];then
   echo "App_dir:$app_dir not exist"
@@ -22,9 +24,9 @@ if [[ ! -d "$app_dir/log" ]];then
   mkdir -p "$app_dir/log"
 fi
 
-if [[ ! -d "$app_dir/sql" ]];then
-  mkdir -p "$app_dir/sql"
-fi
+#if [[ ! -d "$app_dir/sql" ]];then
+#  mkdir -p "$app_dir/sql"
+#fi
 
 if [[ ! -d "$app_dir/update" ]];then
   mkdir -p "$app_dir/update"
@@ -33,7 +35,6 @@ fi
 if [[ ! -d "$app_dir/upload" ]];then
   mkdir -p "$app_dir/upload/tpl/T001"
 fi
-
 
 if [[ ! -f "update/$update_filename" ]];then
   echo "Start to update application Failed,$update_filename not exist!";
@@ -59,7 +60,6 @@ mkdir update
 mv $update_filename update
 cd update
 tar xvf $update_filename
-
 
 #libs jars
 echo "start to copy lib"
@@ -102,6 +102,5 @@ if [[ -f $updateFileScript ]];then
   chmod +x $app_dir/$updateFileScript
 fi
 echo "eam update success!"
+
 exit 0
-
-

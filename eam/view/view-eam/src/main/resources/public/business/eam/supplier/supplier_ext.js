@@ -1,7 +1,7 @@
 /**
  * 供应商 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:07
+ * @since 2021-11-15 08:40:53
  */
 
 layui.config({
@@ -149,6 +149,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("form:beforeInit")
         },
         /**
+         * 窗口调节前
+         * */
+        beforeAdjustPopup:function () {
+            console.log('beforeAdjustPopup');
+            return true;
+        },
+        /**
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
@@ -178,6 +185,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            return true;
+        },
+        /**
+         * 数据提交后窗口关闭前，如果返回 false，停止后续步骤的执行
+         * */
+        betweenFormSubmitAndClose:function (param,result) {
+            console.log("betweenFormSubmitAndClose",result);
             return true;
         },
         /**

@@ -1015,27 +1015,35 @@ public class AssetController extends SuperController {
 	@RequestMapping(AssetServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(AssetVO  sample,HttpServletResponse response,String categoryId) throws Exception {
 
-		//生成 Excel 数据
-		InputStream inputstream= assetService.buildExcelTemplate(categoryId);
-		if(inputstream==null){
-			return;
-		}
+		try{
+            //生成 Excel 数据
+            InputStream inputstream= assetService.buildExcelTemplate(categoryId);
+            if(inputstream==null){
+                return;
+            }
 
-		File f=assetDataService.saveTempFile(inputstream,"TMP_download_asset_data.xls");
-		Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetPagedList(null,sample),categoryId);
-		System.out.println("mapmap:"+map);
-		TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
-		templateExportParams.setScanAllsheet(true);
-		Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
-		response.setContentType("application/vnd.ms-excel");
-		OutputStream out = response.getOutputStream();
-		BufferedOutputStream bos = new BufferedOutputStream(out);
-		workbook.write(bos);
-		bos.flush();
-		out.flush();
-		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
+            File f=assetDataService.saveTempFile(inputstream,"TMP_download_asset_data.xls");
+            Map<String,Object> map= assetDataService.queryAssetMap(assetDataService.queryAssetPagedList(null,sample),categoryId);
+            TemplateExportParams templateExportParams = new TemplateExportParams(f.getPath());
+            templateExportParams.setScanAllsheet(true);
+            Workbook workbook = ExcelExportUtil.exportExcel(templateExportParams, map);
+            response.setCharacterEncoding("UTF-8");
+            response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产数据.xls", "UTF-8"))));
+            response.setContentType("application/vnd.ms-excel");
+
+
+			//下载
+			DownloadUtil.writeToOutput(response,workbook,"资产数据.xls");
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
+//
+//		OutputStream out = response.getOutputStream();
+//		BufferedOutputStream bos = new BufferedOutputStream(out);
+//		workbook.write(bos);
+//		bos.flush();
+//		out.flush();
+//		PoitlIOUtils.closeQuietlyMulti(workbook, bos, out);
 
 
 	}
@@ -1046,20 +1054,24 @@ public class AssetController extends SuperController {
 	 * */
 	@SentinelResource(value = AssetServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(AssetServiceProxy.EXPORT_EXCEL_TEMPLATE)
-	public Result exportExcelTemplate(HttpServletResponse response,String categoryId) throws Exception {
+	public void exportExcelTemplate(HttpServletResponse response,String categoryId) throws Exception {
 		//生成 Excel 模版
 		//categoryId="497488128370540545";
-		InputStream inputstream=assetService.buildExcelTemplate(categoryId);
-		if(inputstream==null){
-			return ErrorDesc.failure().message("获取模板文件失败");
+		try{
+			InputStream inputstream=assetService.buildExcelTemplate(categoryId);
+			if(inputstream==null){
+
+			}
+			response.setCharacterEncoding("UTF-8");
+			response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产模板.xls", "UTF-8"))));
+			response.setContentType("application/vnd.ms-excel");
+			OutputStream out = response.getOutputStream();
+			IOUtils.copy(inputstream,out);
+			out.flush();
+
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
-		response.setCharacterEncoding("UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode("资产模板.xls", "UTF-8"))));
-		response.setContentType("application/vnd.ms-excel");
-		OutputStream out = response.getOutputStream();
-		IOUtils.copy(inputstream,out);
-		out.flush();
-		return ErrorDesc.success();
 
 		}
 
