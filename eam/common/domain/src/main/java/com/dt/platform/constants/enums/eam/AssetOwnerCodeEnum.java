@@ -15,15 +15,20 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET("asset" , "资产"),
+
+
 	ASSET_SOFTWARE("asset_software" , "软件资产"),
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
 	ASSET_CLEAN("asset_clean" , "资产清理"),
 	ASSET_STOCK("asset_stock" , "资产库存"),
 
+	ASSET_CONSUMABLES("asset_consumables" , "耗材资产"),
+
 	ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code(), "EAM_资产变更-基本"),
 	ASSET_CHANGE_MAINTENANCE(CodeModuleEnum.EAM_ASSET_CHANGE_MAINTENANCE.code() , "EAM_资产变更-维保"),
 	ASSET_CHANGE_FINANCIAL(CodeModuleEnum.EAM_ASSET_CHANGE_FINANCIAL.code() , "EAM_资产变更-财务"),
 	ASSET_CHANGE_EQUIPMENT(CodeModuleEnum.EAM_ASSET_CHANGE_EQUIPMENT.code() , "EAM_资产变更-设备"),
+
 	;
 	private String code;
 	private String text;

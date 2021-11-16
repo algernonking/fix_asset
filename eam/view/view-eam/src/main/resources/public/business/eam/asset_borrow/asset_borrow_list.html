@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 资产借用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 09:58:09
+ * @since 2021-11-16 21:11:53
  */
  -->
  <!DOCTYPE html>
@@ -26,7 +26,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -39,7 +39,7 @@
                     <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px"></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 借用状态 , borrowStatus ,typeName=select_box, isHideInSearch=true -->
                     <!-- 业务名称 , name ,typeName=text_input, isHideInSearch=true -->
@@ -105,8 +105,8 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_asset_borrow:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button id="asset-return" class="layui-btn icon-btn layui-btn-sm  asset_return_buttion " lay-event="tool-asset-return"><span th:text="${lang.translate('归还')}">归还</span></button>
+        <button th:if="${perm.checkAuth('eam_asset_borrow:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button id="asset-return"  th:if="${perm.checkAuth('eam_asset_borrow:return')}"class="layui-btn icon-btn layui-btn-sm  asset_return_buttion " lay-event="tool-asset-return"><span th:text="${lang.translate('归还')}">归还</span></button>
     </div>
 </script>
 

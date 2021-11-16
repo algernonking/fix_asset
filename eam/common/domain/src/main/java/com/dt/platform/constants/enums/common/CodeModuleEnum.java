@@ -31,6 +31,14 @@ public enum CodeModuleEnum implements CodeTextEnum {
 	EAM_ASSET_TRANFER("eam_asset_tranfer" , "EAM_资产单据-转移"),
 	EAM_ASSET_CLEAN("eam_asset_clean" , "EAM_资产单据-清理"),
 
+
+	//员工领用
+	EAM_ASSET_CONSUMABLES_COLLECTION("eam_asset_consumables_collection" , "EAM_资产耗材单据-领用"),
+	EAM_ASSET_CONSUMABLES_IN_STOCK("eam_asset_consumables_in_stock" , "EAM_资产耗材单据-入库"),
+	EAM_ASSET_CONSUMABLES_OUT_STOCK("eam_asset_consumables_out_stock" , "EAM_资产耗材单据-出库"),
+	EAM_ASSET_CONSUMABLES_TRANFER("eam_asset_consumables_tranfer" , "EAM_资产耗材单据-转移"),
+
+
 	EAM_ASSET_CHANGE_BASE_INFO("eam_asset_change_base_info" , "EAM_资产变更-基本"),
 	EAM_ASSET_CHANGE_MAINTENANCE("eam_asset_change_maintenance" , "EAM_资产变更-维保"),
 	EAM_ASSET_CHANGE_FINANCIAL("eam_asset_change_financial" , "EAM_资产变更-财务"),

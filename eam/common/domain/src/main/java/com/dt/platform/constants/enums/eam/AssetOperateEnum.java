@@ -67,6 +67,11 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_SCRAP_BILL("eam_download_asset_scrap_bill" , "EAM_资产报废下载"),
  //   EAM_DOWNLOAD_ASSET_SCRAP_BILLS("eam_download_asset_scrap_bills" , "EAM_资产报废下载"),
 
+
+    EAM_ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "EAM_资产耗材单据-领用"),
+    EAM_ASSET_CONSUMABLES_IN_STOCK(CodeModuleEnum.EAM_ASSET_CONSUMABLES_IN_STOCK.code() , "EAM_资产耗材单据-入库"),
+    EAM_ASSET_CONSUMABLES_OUT_STOCK(CodeModuleEnum.EAM_ASSET_CONSUMABLES_OUT_STOCK.code() , "EAM_资产耗材单据-出库"),
+    EAM_ASSET_CONSUMABLES_TRANFER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_TRANFER.code() , "EAM_资产耗材单据-转移")
     ;
 
 

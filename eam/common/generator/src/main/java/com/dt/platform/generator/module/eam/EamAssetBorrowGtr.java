@@ -68,7 +68,7 @@ public class EamAssetBorrowGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET_BORROW.CONTENT).form().textArea().height(30).search().fuzzySearch();
-        cfg.view().list().addToolButton("归还","assetReturn","asset_return_buttion");
+        cfg.view().list().addToolButton("归还","assetReturn","asset_return_buttion","eam_asset_borrow:return");
 
 //        cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
 //        cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);

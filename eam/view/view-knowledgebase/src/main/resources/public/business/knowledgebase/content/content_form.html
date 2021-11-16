@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:48
+ * @since 2021-11-16 21:14:42
  */
  -->
  <!DOCTYPE html>
@@ -43,7 +43,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('分类')}">分类</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="categoryId" input-type="select" th:data="${'/service-knowledgebase/kn-category/query-list'}"></div>
+                            <div id="categoryId" input-type="select" th:data="${'/service-knowledgebase/kn-category/query-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('等级')}">等级</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="gradeId" input-type="select" th:data="${dict.toArray('kn_grade')}"></div>
+                            <div id="gradeId" input-type="select" th:data="${dict.toArray('kn_grade')}" extraParam="{}"></div>
                         </div>
                     </div>
 

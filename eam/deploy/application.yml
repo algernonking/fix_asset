@@ -81,7 +81,6 @@ security:
     access-expire-seconds: 1800
     refresh-expire-seconds: 2000
 
-
 logging:
   config: classpath:logback-config.xml
 

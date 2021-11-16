@@ -310,6 +310,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             data.assetSelectedCode=timestamp;
             data.assetBusinessType="eam_asset_allocate"
             data.action=formAction;
+            data.ownerCode="asset";
             if(BILL_ID==null)BILL_ID="";
             data.assetOwnerId=BILL_ID;
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);

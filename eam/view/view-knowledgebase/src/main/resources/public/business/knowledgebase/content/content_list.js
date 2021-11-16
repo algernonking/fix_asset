@@ -1,7 +1,7 @@
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:48
+ * @since 2021-11-16 21:14:40
  */
 
 
@@ -81,7 +81,7 @@ function ListPage() {
 					,{ field: 'reviewCount', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('阅读数') , templet: function (d) { return templet('reviewCount',d.reviewCount,d);}  }
 					,{ field: 'display', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('是否显示'), templet:function (d){ return templet('display',fox.getEnumText(RADIO_DISPLAY_DATA,d.display),d);}}
 					,{ field: 'gradeId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('等级'), templet:function (d){ return templet('gradeId',fox.getDictText(SELECT_GRADEID_DATA,d.gradeId),d);}}
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'resEditorId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('编辑人') , templet: function (d) { return templet('resEditorId',fox.getProperty(d,["editor","name"]),d);} }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 250 }

@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 知识库内容 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:48
+ * @since 2021-11-16 21:14:38
  */
  -->
  <!DOCTYPE html>
@@ -26,7 +26,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -38,7 +38,7 @@
                     <!-- 分类 , categoryId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('分类')}" class="search-label categoryId-label">分类</span><span class="search-colon">:</span></div>
-                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:150px"></div>
+                        <div id="categoryId" th:data="${'/service-knowledgebase/kn-category/query-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 关键字 , keyWords ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
@@ -52,7 +52,7 @@
                     <!-- 等级 , gradeId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('等级')}" class="search-label gradeId-label">等级</span><span class="search-colon">:</span></div>
-                        <div id="gradeId" th:data="${dict.toArray('kn_grade')}" style="width:150px"></div>
+                        <div id="gradeId" th:data="${dict.toArray('kn_grade')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 是否显示 , display ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
@@ -113,9 +113,9 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('kn_content:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('kn_content:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-        <button id="kn-function" class="layui-btn icon-btn layui-btn-sm " lay-event="tool-kn-function"><span th:text="${lang.translate('知识库')}">知识库</span></button>
+        <button th:if="${perm.checkAuth('kn_content:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('kn_content:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button id="kn-function"  th:if="${perm.checkAuth('kn_content:kn_search')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-kn-function"><span th:text="${lang.translate('知识库')}">知识库</span></button>
     </div>
 </script>
 

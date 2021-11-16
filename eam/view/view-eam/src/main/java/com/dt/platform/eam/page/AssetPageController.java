@@ -83,14 +83,17 @@ public class AssetPageController extends ViewController {
 	 * 资产
 	 */
 	@RequestMapping("/asset_selected_list.html")
-	public String selectedLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
-		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BILL.code(),null);
+	public String selectedList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+
+		String itemOwner=AssetAttributeItemOwnerEnum.ASSET_BILL.code();
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
 			List<AssetAttributeItem> list=data.get("attributeListData");
 			model.addAttribute("attributeListData",list);
 		}
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode",StringUtil.isBlank(ownerCode)?AssetOwnerCodeEnum.ASSET:ownerCode);
 		return prefix+"/asset_selected_list";
 	}
 
@@ -98,11 +101,12 @@ public class AssetPageController extends ViewController {
 	 * 资产
 	 */
 	@RequestMapping("/asset_select_list.html")
-	public String selectLlist(Model model,HttpServletRequest request,String assetSelectedCode) {
+	public String selectLlist(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
 
 		Result idResult=AssetCategoryServiceProxy.api().queryNodesByCode(AssetCategoryCodeEnum.ASSET.code());
 		model.addAttribute("categoryParentId",idResult.getData());
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode",StringUtil.isBlank(ownerCode)?AssetOwnerCodeEnum.ASSET:ownerCode);
 		return prefix+"/asset_select_list";
 	}
 

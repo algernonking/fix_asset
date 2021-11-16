@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:35
+ * @since 2021-11-16 21:07:06
  */
  -->
  <!DOCTYPE html>
@@ -62,7 +62,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('主机类型')}">主机类型</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostType" input-type="select" th:data="${dict.toArray('ops_host_type')}"></div>
+                            <div id="hostType" input-type="select" th:data="${dict.toArray('ops_host_type')}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('信息系统')}">信息系统</div></div>
                         <div class="layui-input-block ">
-                            <div id="systemId" input-type="select" th:data="${'/service-ops/ops-information-system/query-list'}"></div>
+                            <div id="systemId" input-type="select" th:data="${'/service-ops/ops-information-system/query-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('所在环境')}">所在环境</div></div>
                         <div class="layui-input-block ">
-                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_environment')}"></div>
+                            <div id="environment" input-type="select" th:data="${dict.toArray('ops_environment')}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('所在位置')}">所在位置</div></div>
                         <div class="layui-input-block ">
-                            <div id="positionId" input-type="select" th:data="${'/service-ops/ops-host-position/query-list'}"></div>
+                            <div id="positionId" input-type="select" th:data="${'/service-ops/ops-host-position/query-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -212,7 +212,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('操作系统')}">操作系统</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}"></div>
+                            <div id="hostOsIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -226,7 +226,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数据库')}">数据库</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}"></div>
+                            <div id="hostDbIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -240,7 +240,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('中间件')}">中间件</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}"></div>
+                            <div id="hostMiddlewareIds" input-type="select" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -348,7 +348,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备份方式')}">备份方式</div></div>
                         <div class="layui-input-block ">
-                            <div id="hostBackupMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_host_backup_method'}"></div>
+                            <div id="hostBackupMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_host_backup_method'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -399,7 +399,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('改密策略')}">改密策略</div></div>
                         <div class="layui-input-block ">
-                            <div id="passwordStrategyId" input-type="select" th:data="${dict.toArray('ops_host_password_strategy')}"></div>
+                            <div id="passwordStrategyId" input-type="select" th:data="${dict.toArray('ops_host_password_strategy')}" extraParam="{}"></div>
                         </div>
                     </div>
 

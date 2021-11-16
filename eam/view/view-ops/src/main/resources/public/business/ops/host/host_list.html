@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:35
+ * @since 2021-11-16 21:07:04
  */
  -->
  <!DOCTYPE html>
@@ -26,7 +26,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -65,7 +65,7 @@
                     <!-- 信息系统 , systemId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('信息系统')}" class="search-label systemId-label">信息系统</span><span class="search-colon">:</span></div>
-                        <div id="systemId" th:data="${'/service-ops/ops-information-system/query-list'}" style="width:150px"></div>
+                        <div id="systemId" th:data="${'/service-ops/ops-information-system/query-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 虚拟VIP , hostVip ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -90,17 +90,17 @@
                     <!-- 操作系统 , hostOsIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('操作系统')}" class="search-label hostOsIds-label">操作系统</span><span class="search-colon">:</span></div>
-                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}" style="width:150px"></div>
+                        <div id="hostOsIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=os'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 数据库 , hostDbIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('数据库')}" class="search-label hostDbIds-label">数据库</span><span class="search-colon">:</span></div>
-                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}" style="width:150px"></div>
+                        <div id="hostDbIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=db'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 中间件 , hostMiddlewareIds ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('中间件')}" class="search-label hostMiddlewareIds-label">中间件</span><span class="search-colon">:</span></div>
-                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}" style="width:150px"></div>
+                        <div id="hostMiddlewareIds" th:data="${'/service-ops/ops-service-info/query-list?groupId=mid'}" style="width:150px" extraParam="{}"></div>
                     </div>
 
 
@@ -110,12 +110,12 @@
                     <!-- 所在位置 , positionId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('所在位置')}" class="search-label positionId-label">所在位置</span><span class="search-colon">:</span></div>
-                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:150px"></div>
+                        <div id="positionId" th:data="${'/service-ops/ops-host-position/query-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 所在环境 , environment ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('所在环境')}" class="search-label environment-label">所在环境</span><span class="search-colon">:</span></div>
-                        <div id="environment" th:data="${dict.toArray('ops_environment')}" style="width:150px"></div>
+                        <div id="environment" th:data="${dict.toArray('ops_environment')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 标签 , labels ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -156,9 +156,9 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('ops_host:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('ops_host:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
-        <button id="export-host" class="layui-btn icon-btn layui-btn-sm " lay-event="tool-export-host"><span th:text="${lang.translate('导出')}">导出</span></button>
+        <button th:if="${perm.checkAuth('ops_host:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_host:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button id="export-host"  th:if="${perm.checkAuth('ops_host:export')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-export-host"><span th:text="${lang.translate('数据导出')}">数据导出</span></button>
     </div>
 </script>
 
