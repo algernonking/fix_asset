@@ -86,37 +86,37 @@ function ListPage() {
 					#for(f : fields)
 					#if(!f.disableInList)
 					#if(f.typeName.equals("date_input"))
-					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null) ,templet: function (d) { return templet('#(f.varName)',fox.dateFormat(fox.getProperty(d,#(f.listFillByPropertyNames)),"#(f.dateField.format)"),d); } #else ,templet: function (d) { return templet('#(f.varName)',fox.dateFormat(d.#(f.varName),"#(f.dateField.format)"),d); } #end}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null) ,templet: function (d) { return templet('#(f.varName)',fox.dateFormat(fox.getProperty(d,#(f.listFillByPropertyNames)),"#(f.dateField.format)"),d); } #else ,templet: function (d) { return templet('#(f.varName)',fox.dateFormat(d.#(f.varName),"#(f.dateField.format)"),d); } #end #if(f.listPerm!=null),perm:"#(f.listPerm)" #end  }
 					#elseif(f.typeName.equals("upload") && f.uploadField.isImageOnly && f.uploadField.count==1)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } }
+					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return '<img style="height:100%;" fileType="image/png" onclick="window.previewImage(this)"  src="'+apiurls.storage.image+'?id='+ d.#(f.varName)+'" />'; } #if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#elseif(f.typeName.equals("radio_box"))
 					#if(f.radioField.dictCode!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)", fixed:#(f.fixInList), hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#if(f.radioField.enumTypeName!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(RADIO_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#elseif(f.typeName.equals("check_box"))
 					#if(f.checkField.dictCode!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#if(f.checkField.enumTypeName!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(CHECK_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#elseif(f.typeName.equals("logic_switch"))
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: '#cell-tpl-#(f.varName)'}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: '#cell-tpl-#(f.varName)'#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#elseif(f.typeName.equals("select_box"))
 					#if(f.selectField.enumTypeName!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getEnumText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#if(f.selectField.dictCode!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet:function (d){ return templet('#(f.varName)',fox.getDictText(SELECT_#(f.varName.toUpperCase())_DATA,d.#(f.varName)),d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#if(f.selectField.queryApi!=null)
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)' #if(f.selectField.fillWith!=null),fox.joinLabel(d.#(f.selectField.fillWith),"#(f.selectField.textField)")#end #if(f.listFillByPropertyNames!=null),fox.getProperty(d,#(f.listFillByPropertyNames))#end,d);}}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)'), templet: function (d) { return templet('#(f.varName)' #if(f.selectField.fillWith!=null),fox.joinLabel(d.#(f.selectField.fillWith),"#(f.selectField.textField)")#end #if(f.listFillByPropertyNames!=null),fox.getProperty(d,#(f.listFillByPropertyNames))#end,d);}#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#else
-					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null), templet: function (d) { return templet('#(f.varName)',fox.getProperty(d,#(f.listFillByPropertyNames)),d);} #else , templet: function (d) { return templet('#(f.varName)',d.#(f.varName),d);}  #end}
+					,{ field: '#(f.varName)', align:"#(f.alignInList)",fixed:#(f.fixInList),  hide:#(f.isHideInList), sort: #(f.sortInList), title: fox.translate('#(f.labelInList)') #if(f.listFillByPropertyNames!=null), templet: function (d) { return templet('#(f.varName)',fox.getProperty(d,#(f.listFillByPropertyNames)),d);} #else , templet: function (d) { return templet('#(f.varName)',d.#(f.varName),d);}  #end#if(f.listPerm!=null),perm:"#(f.listPerm)" #end}
 					#end
 					#end
 					#end
@@ -512,11 +512,19 @@ function ListPage() {
 			}
 			switch(obj.event){
 				case 'create':
+					#if(createNewButton.functionName==null)
 					openCreateFrom();
+					#else
+					window.pageExt.list.#(createNewButton.functionName)();
+					#end
 					break;
 				#if(isSimplePK)
 				case 'batch-del':
+					#if(batchDeleteButton.functionName==null)
 					batchDelete(selected);
+					#else
+					window.pageExt.list.#(batchDeleteButton.functionName)();
+					#end
 					break;
 				#end
 				#for(b:toolButtons)
