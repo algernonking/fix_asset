@@ -725,7 +725,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		var index=admin.popupCenter({
+		admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
@@ -737,7 +737,6 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('#(formDataKey)-popup-index', index);
 	};
 
 	window.module={
