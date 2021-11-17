@@ -59,10 +59,10 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         cfg.view().field(EAMTables.EAM_ASSET_ALLOCATION.CONTENT).form().textArea().height(30).search().fuzzySearch();
 
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_allocation:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_allocation:confirm");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_allocation:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_allocation:bill");
 
         cfg.view().list().operationColumn().width(350);
 

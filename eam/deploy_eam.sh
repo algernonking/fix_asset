@@ -1,44 +1,28 @@
 #!/bin.sh
-demo_sql="/tmp/demo.sql"
-echo "use eam_demo;">$demo_sql
-echo "source full.sql;">>$demo_sql
-cd /tmp
+#
+############################################
 app_dir=/opt/eam
-MYSQLDUMP=/mysql/bin/mysqldump
-MYSQL=/mysql/bin/mysql
-mysql_pwd=`cat /opt/password.txt|tail -1`
-$MYSQLDUMP -uroot -p$mysql_pwd -h127.0.0.1 eam  > $demo_sql
-$MYSQL -uroot -p$mysql_pwd -h127.0.0.1 eam_demo < $demo_sql
-if [[ ! -d $app_dir ]];then
-  mkdir -p $app_dir
-  mkdir $app_dir/log
-  mkidr $app_dir/data
-  mkidr $app_dir/tmp
-fi
 if [[ ! -d $app_dir ]];then
   exit 1
 fi
+demo_sql="/tmp/demo.sql"
+app_conf="${app_dir}/bin/app.conf"
+MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
+MYSQL_DUMP=`cat $app_conf|grep MYSQL_DUMP=|awk -F "=" '{print $2}'`
+MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
+DB_NAME=`cat $app_conf|grep DB_NAME=|awk -F "=" '{print $2}'`
+DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
+DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
+DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
+#create demo.sql
+$MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST $DB_NAME  > $demo_sql
+$MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST eam_demo < $demo_sql
+if [[ -f $app_dir/update/update.tar ]];then
+  rm -rf $app_dir/update/update.tar
+fi
+cp /tmp/app.tar $app_dir/update/update.tar
 cd $app_dir
-rm -rf app.tar
-rm -rf lib/*
-cp /tmp/app.tar .
-tar xvf app.tar
+sh bin/updateApp.sh
 sleep 2
-#mkdir package
-#rm -rf package/*
-#mv wrapper-all-0.0.2.RELEASE.jar package/
-#cd package
-#unzip wrapper-all-0.0.2.RELEASE.jar BOOT-INF/classes/application.yml
-#sleep 2
-#u1="a0WwT/76Vgi3kLk6HoY1zPYTublu7Nrfsfaw+3xe/NtQSPN/vG37pE0WeSGDP4mKHVNSz8z8CBtwpihb0Yuv2iOeWjorHS6Aszqc0Mvg1vvYPY9UXm2mFl1nF62HIksKwU7Sr1gASx/TMIpD6WhITqIMjF9il5QJJJrsWaul5CUxJKC43zAo0w5As8X1hKcFc5z408+y4rf5e617vboT2D34kRvuh7+VYQovLwf9Bshu/1ZfPf3Fdp/xzRnncfHr"
-#u2="a0WwT/76Vgi3kLk6HoY1zPYTublu7Nrfsfaw+3xe/NuSIDpBhoC4wBMuQ7DsGJc/ZFxardNYEjXZRNf9VGmxy6VzfkOzLPRJMv4cbXMD8m5RZtAt5flc/PfNB2ScolLZ9htpur58Y4AMzJD3ma0pJA8m9Mild+AG93Lnbn72yoA6SAENEhP27C0vXcDnMBzPLLNhgZSZ0mT8b92Yc3X0xqzKbPcXfg2XdJy84evH+qw04hjuX9RtsLEmjLX6QRHH"
-#sed -i "s@${u1}@${u2}@g"  BOOT-INF/classes/application.yml
-#sleep 2
-#zip -u wrapper-all-0.0.2.RELEASE.jar  BOOT-INF/classes/application.yml
-#cd ..
-cd $app_dir
-rm -rf eam.jar
-mv wrapper-all-0.0.2.RELEASE.jar eam.jar
-cd $app_dir
-nohup sh eam.sh restart &
+sh eamRestart.sh
 exit 0

@@ -28,16 +28,3 @@ $MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST $DB_NAME < $SQL
 
 exit 0
 
-
-
-
-
-
-
-#更新EAM版本
-sh runSql.sh ./sql/eam_updateVersion.sql
-
-
-
-#初始化EAM
-sh runSql.sh ./sql/init.sql
