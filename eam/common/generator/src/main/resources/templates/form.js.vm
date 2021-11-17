@@ -366,25 +366,20 @@ function FormPage() {
 	function saveForm(param) {
 		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
 		var api=moduleURL+"/"+(param.#(idPropertyName)?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, param, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
+		admin.post(api, param, function (data) {
 			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('#(formDataKey)-popup-index');
 				var doNext=true;
 				if(window.pageExt.form.betweenFormSubmitAndClose) {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
 				if(doNext) {
-					admin.finishPopupCenter(index);
+					admin.finishPopupCenterById('#(formDataKey)-win');
 				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				layer.msg(data.message, {icon: 2, time: 1500});
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
-		}, "POST");
+		}, {delayLoading:1000,elms:[$("#submit-button")]});
 	}
 
 	/**
