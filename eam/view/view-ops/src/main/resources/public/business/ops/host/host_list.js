@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-16 21:07:05
+ * @since 2021-11-17 14:46:06
  */
 
 
@@ -477,7 +477,7 @@ function ListPage() {
 						admin.putTempData('ops-host-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			}
@@ -487,7 +487,6 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('主机')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -506,7 +505,6 @@ function ListPage() {
 						}
 					});
 				});
-
 			}
 			else if (layEvent === 'open-host-voucher-window') { // 凭证
 				window.pageExt.list.openHostVoucherWindow(data);

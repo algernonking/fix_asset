@@ -137,10 +137,10 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 //        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
 
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
-        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button");
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_collection_return:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认","confirmData","confirm-data-button","eam_asset_collection_return:confirm");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_collection_return:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_collection_return:bill");
         cfg.view().list().operationColumn().width(350);
 
 //        cfg.view().form().addJsVariable("EMPLOYEE_ID",   "[[${user.getUser().getActivatedEmployeeId()}]]","用户ID");

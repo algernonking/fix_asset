@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:20
+ * @since 2021-11-17 14:45:19
  */
  -->
  <!DOCTYPE html>
@@ -26,7 +26,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -62,12 +62,12 @@
                     <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:90px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_status'}" style="width:150px"></div>
+                        <div id="status" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_status'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 系统分级 , grade ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:90px"><span th:text="${lang.translate('系统分级')}" class="search-label grade-label">系统分级</span><span class="search-colon">:</span></div>
-                        <div id="grade" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_grade'}" style="width:150px"></div>
+                        <div id="grade" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_grade'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -127,22 +127,22 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('ops_information_system:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('ops_information_system:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('ops_information_system:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_information_system:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('ops_information_system:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
-    <button th:if="${perm.checkAnyAuth('ops_information_system:update','ops_information_system:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
+    <button th:if="${perm.checkAuth('ops_information_system:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('ops_information_system:update','ops_information_system:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <button th:if="${perm.checkAuth('ops_information_system:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
+    <button th:if="${perm.checkAuth('ops_information_system:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
-    <button class="layui-btn layui-btn-xs " lay-event="open-system-voucher-window" th:text="${lang.translate('凭证')}" data-id="{{d.id}}">凭证</button>
-    <button class="layui-btn layui-btn-xs " lay-event="open-host-window" th:text="${lang.translate('主机')}" data-id="{{d.id}}">主机</button>
+    <button class="layui-btn layui-btn-xs  ops_information_system:voucher " lay-event="open-system-voucher-window" th:text="${lang.translate('凭证')}" data-id="{{d.id}}">凭证</button>
+    <button class="layui-btn layui-btn-xs  ops_information_system:host " lay-event="open-host-window" th:text="${lang.translate('主机')}" data-id="{{d.id}}">主机</button>
 
 </script>
 

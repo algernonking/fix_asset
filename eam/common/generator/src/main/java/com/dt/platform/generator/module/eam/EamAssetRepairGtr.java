@@ -94,11 +94,11 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 //        cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
 //        cfg.view().list().operationColumn().addActionButton("单据","downloadBill",null);
 
-        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button");
-        cfg.view().list().operationColumn().addActionButton("确认维修","confirmData","confirm-data-button");
-        cfg.view().list().operationColumn().addActionButton("结束维修","finishData","finish-data-button");
-        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button");
-        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button");
+        cfg.view().list().operationColumn().addActionButton("送审","forApproval","for-approval-button","eam_asset_repair:for-approval");
+        cfg.view().list().operationColumn().addActionButton("确认维修","confirmData","confirm-data-button","eam_asset_repair:confirm");
+        cfg.view().list().operationColumn().addActionButton("结束维修","finishData","finish-data-button","eam_asset_repair:finish");
+        cfg.view().list().operationColumn().addActionButton("撤销","revokeData","revoke-data-button","eam_asset_repair:revoke");
+        cfg.view().list().operationColumn().addActionButton("单据","downloadBill","download-bill-button","eam_asset_repair:bill");
 
 
 

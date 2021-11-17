@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产退库
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 10:02:54
- * @sign 6ADDB9B2B846850267A16F3CDDDEEEBF
+ * @since 2021-11-17 13:27:43
+ * @sign 2DC46BB6E64E42CB043AAD604B509AB1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -52,16 +52,16 @@ public class AssetCollectionReturn extends Entity {
 	private String procId;
 	
 	/**
-	 * 业务名称：业务名称
-	*/
-	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
-	private String name;
-	
-	/**
 	 * 办理状态：办理状态
 	*/
 	@ApiModelProperty(required = false,value="办理状态" , notes = "办理状态")
 	private String status;
+	
+	/**
+	 * 业务名称：业务名称
+	*/
+	@ApiModelProperty(required = false,value="业务名称" , notes = "业务名称")
+	private String name;
 	
 	/**
 	 * 退库后公司/部门：退库后公司/部门
@@ -259,25 +259,6 @@ public class AssetCollectionReturn extends Entity {
 	}
 	
 	/**
-	 * 获得 业务名称<br>
-	 * 业务名称
-	 * @return 业务名称
-	*/
-	public String getName() {
-		return name;
-	}
-	
-	/**
-	 * 设置 业务名称
-	 * @param name 业务名称
-	 * @return 当前对象
-	*/
-	public AssetCollectionReturn setName(String name) {
-		this.name=name;
-		return this;
-	}
-	
-	/**
 	 * 获得 办理状态<br>
 	 * 办理状态
 	 * @return 办理状态
@@ -293,6 +274,25 @@ public class AssetCollectionReturn extends Entity {
 	*/
 	public AssetCollectionReturn setStatus(String status) {
 		this.status=status;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务名称<br>
+	 * 业务名称
+	 * @return 业务名称
+	*/
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 设置 业务名称
+	 * @param name 业务名称
+	 * @return 当前对象
+	*/
+	public AssetCollectionReturn setName(String name) {
+		this.name=name;
 		return this;
 	}
 	

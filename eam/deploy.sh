@@ -8,13 +8,23 @@
 ####################### Configure  ##################################
 JAVA=java
 
+
+
 jar_dir="/Users/lank/IdeaProjectsnew/eam/eam/wrapper/wrapper-all/target"
 app_tar="app.tar"
+
+
+cd $jar_dir
+if [[ -f eam.jar ]];then
+  rm -rf eam.jar
+fi
+
+cp wrapper-all-0.0.2.RELEASE.jar eam.jar
 
 ####################### Check #######################################
 #default full
 type=incr
-full_content="./lib/* ./*.jar"
+full_content="./lib/* ./eam.jar"
 incr_content="./lib/service*.jar  ./lib/view*.jar ./lib/*nic*.jar"
 content=$full_content
 

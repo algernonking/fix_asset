@@ -113,7 +113,7 @@ public class KnContentGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.KN_CONTENT.PROFILE).form().textArea().height(25);
 
-        cfg.view().list().operationColumn().addActionButton("预览","reviewKnFunction");
+        cfg.view().list().operationColumn().addActionButton("预览","reviewKnFunction","kn_content:review");
         cfg.view().list().addToolButton("知识库","knFunction",null,"kn_content:kn_search") ;
         cfg.view().list().operationColumn().width(250);
         cfg.view().search().inputLayout(

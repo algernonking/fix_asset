@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 资产报修 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:27:41
+ * @since 2021-11-17 13:33:38
  */
  -->
  <!DOCTYPE html>
@@ -50,7 +50,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('维修类型')}">维修类型</div></div>
                         <div class="layui-input-block ">
-                            <div id="type" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_repair_type'}"></div>
+                            <div id="type" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_repair_type'}" extraParam="{}"></div>
                         </div>
                     </div>
 

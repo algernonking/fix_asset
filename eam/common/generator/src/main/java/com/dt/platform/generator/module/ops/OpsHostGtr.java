@@ -329,10 +329,8 @@ public class OpsHostGtr extends BaseCodeGenerator{
 
 
 
-        cfg.view().list().operationColumn().addActionButton("凭证","openHostVoucherWindow");
-
+        cfg.view().list().operationColumn().addActionButton("凭证","openHostVoucherWindow","ops_host:voucher");
         cfg.view().list().operationColumn().width(250);
-
 
         //文件生成覆盖模式
         cfg.overrides()

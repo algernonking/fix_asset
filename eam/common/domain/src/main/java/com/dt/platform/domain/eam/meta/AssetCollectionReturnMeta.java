@@ -13,8 +13,8 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-27 10:02:54
- * @sign 6ADDB9B2B846850267A16F3CDDDEEEBF
+ * @since 2021-11-17 13:27:43
+ * @sign 2DC46BB6E64E42CB043AAD604B509AB1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,16 +51,6 @@ public class AssetCollectionReturnMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> PROC_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,PROC_ID, java.lang.String.class, "流程", "流程", java.lang.String.class, null);
 	
 	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final String NAME="name";
-	
-	/**
-	 * 业务名称 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
-	
-	/**
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
@@ -69,6 +59,16 @@ public class AssetCollectionReturnMeta {
 	 * 办理状态 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,STATUS, java.lang.String.class, "办理状态", "办理状态", java.lang.String.class, null);
+	
+	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final String NAME="name";
+	
+	/**
+	 * 业务名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetCollectionReturn,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetCollectionReturn.class ,NAME, java.lang.String.class, "业务名称", "业务名称", java.lang.String.class, null);
 	
 	/**
 	 * 退库后公司/部门 , 类型: java.lang.String
@@ -303,7 +303,7 @@ public class AssetCollectionReturnMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , NAME , STATUS , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , RETURN_DATE , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR , USE_ORGANIZATION };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , NAME , USE_ORGANIZATION_ID , POSITION_ID , POSITION_DETAIL , CONTENT , RETURN_DATE , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , POSITION , ASSET_LIST , ASSET_IDS , ORIGINATOR , USE_ORGANIZATION };
 	
 	/**
 	 * 代理类
@@ -347,17 +347,6 @@ public class AssetCollectionReturnMeta {
 		}
 		
 		/**
-		 * 设置 业务名称
-		 * @param name 业务名称
-		 * @return 当前对象
-		*/
-		public AssetCollectionReturn setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
-			return this;
-		}
-		
-		/**
 		 * 设置 办理状态
 		 * @param status 办理状态
 		 * @return 当前对象
@@ -365,6 +354,17 @@ public class AssetCollectionReturnMeta {
 		public AssetCollectionReturn setStatus(String status) {
 			super.change(STATUS,super.getStatus(),status);
 			super.setStatus(status);
+			return this;
+		}
+		
+		/**
+		 * 设置 业务名称
+		 * @param name 业务名称
+		 * @return 当前对象
+		*/
+		public AssetCollectionReturn setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
 			return this;
 		}
 		
