@@ -7,6 +7,7 @@ function FormPage() {
 	var action=null;
 	var disableCreateNew=#(disableCreateNew);
 	var disableModify=#(disableModify);
+	var dataBeforeEdit=null;
 	/**
       * 入口函数，初始化
       */
@@ -321,6 +322,8 @@ function FormPage() {
 			}
 		}
 
+		dataBeforeEdit=getFormData();
+
 	}
 
 	function getFormData() {
@@ -361,6 +364,7 @@ function FormPage() {
 	}
 
 	function saveForm(param) {
+		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
 		var api=moduleURL+"/"+(param.#(idPropertyName)?"update":"insert");
 		var task=setTimeout(function(){layer.load(2);},1000);
 		admin.request(api, param, function (data) {
