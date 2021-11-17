@@ -30678,3 +30678,5 @@ Caused by: java.net.SocketException: Network is unreachable (connect failed)
 
 13:09:01.054 [main] - [] - ERROR o.g.f.w.f.c.r.l.RedisListenerConfig - [getRedisMessageListenerContainer,24] - redis 配置错误，无法进行 notify 操作
 13:11:42.714 [XNIO-1 task-1] - [] - ERROR o.g.f.w.o.e.UserAuthenticationEntryPoint - [handleException,44] - 不允许访问 http://127.0.0.1:8089/
+14:29:22.565 [main] - [] - ERROR o.g.f.w.f.c.r.l.RedisListenerConfig - [getRedisMessageListenerContainer,24] - redis 配置错误，无法进行 notify 操作
+14:30:02.349 [XNIO-1 task-1] - [] - ERROR o.g.f.w.o.e.UserAuthenticationEntryPoint - [handleException,44] - 不允许访问 http://127.0.0.1:8089/index.html

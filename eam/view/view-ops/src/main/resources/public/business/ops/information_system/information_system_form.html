@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:20
+ * @since 2021-11-17 14:45:21
  */
  -->
  <!DOCTYPE html>
@@ -46,7 +46,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div></div>
                         <div class="layui-input-block ">
-                            <div id="status" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_status'}"></div>
+                            <div id="status" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_status'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('系统分级')}">系统分级</div></div>
                         <div class="layui-input-block ">
-                            <div id="grade" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_grade'}"></div>
+                            <div id="grade" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_grade'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -156,7 +156,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('运维模式')}">运维模式</div></div>
                         <div class="layui-input-block ">
-                            <div id="opsMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_ops_method'}"></div>
+                            <div id="opsMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_ops_method'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -165,7 +165,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('开发模式')}">开发模式</div></div>
                         <div class="layui-input-block ">
-                            <div id="devMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_dev_method'}"></div>
+                            <div id="devMethod" input-type="select" th:data="${'/service-system/sys-dict-item/query-list?dictCode=ops_system_dev_method'}" extraParam="{}"></div>
                         </div>
                     </div>
 

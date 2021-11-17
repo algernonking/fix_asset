@@ -195,8 +195,8 @@ public class OpsInformationSystemGtr extends BaseCodeGenerator{
         );
 
 
-        cfg.view().list().operationColumn().addActionButton("凭证","openSystemVoucherWindow");
-        cfg.view().list().operationColumn().addActionButton("主机","openHostWindow");
+        cfg.view().list().operationColumn().addActionButton("凭证","openSystemVoucherWindow","ops_information_system:voucher");
+        cfg.view().list().operationColumn().addActionButton("主机","openHostWindow","ops_information_system:host");
         cfg.view().list().operationColumn().width(290);
 
         //文件生成覆盖模式

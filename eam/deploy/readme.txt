@@ -1,4 +1,5 @@
 
+
 ################ EAM 日常维护,启动停止服务 ################
 #启动EAM服务
 sh eamStart.sh
@@ -14,11 +15,17 @@ sh eamRestart.sh
 sh bin/updateApp.sh
 
 
+
+
 #更新EAM版本
 sh bin/runSql.sh bin/sql/app_updateVersion.sql
 
+
+
 #初始化EAM
 sh bin/runSql.sh ./sql/init.sql
+
+sh bin/runSql.sh eam.sql
 
 
 

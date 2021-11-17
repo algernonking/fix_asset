@@ -1,7 +1,7 @@
 /**
  * 信息系统 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:20
+ * @since 2021-11-17 14:45:20
  */
 
 
@@ -84,9 +84,9 @@ function ListPage() {
 					,{ field: 'technicalContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('技术联系人') , templet: function (d) { return templet('technicalContact',d.technicalContact,d);}  }
 					,{ field: 'businessContact', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务联系人') , templet: function (d) { return templet('businessContact',d.businessContact,d);}  }
 					,{ field: 'belongOrgId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属公司/部门') , templet: function (d) { return templet('belongOrgId',fox.getProperty(d,["belongOrganization","fullName"]),d);} }
-					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间'), templet: function (d) { return templet('lastdrillDate',fox.dateFormat(d.lastdrillDate,"yyyy-MM-dd"),d); }}
-					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间'), templet: function (d) { return templet('onlineDate',fox.dateFormat(d.onlineDate,"yyyy-MM-dd"),d); }}
-					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间'), templet: function (d) { return templet('offlineDate',fox.dateFormat(d.offlineDate,"yyyy-MM-dd"),d); }}
+					,{ field: 'lastdrillDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('演练时间') ,templet: function (d) { return templet('lastdrillDate',fox.dateFormat(d.lastdrillDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'onlineDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上线时间') ,templet: function (d) { return templet('onlineDate',fox.dateFormat(d.onlineDate,"yyyy-MM-dd"),d); }  }
+					,{ field: 'offlineDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('下线时间') ,templet: function (d) { return templet('offlineDate',fox.dateFormat(d.offlineDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'osInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('操作系统') , templet: function (d) { return templet('osInfo',d.osInfo,d);}  }
 					,{ field: 'dbInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('数据库') , templet: function (d) { return templet('dbInfo',d.dbInfo,d);}  }
 					,{ field: 'appInfo', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('应用') , templet: function (d) { return templet('appInfo',d.appInfo,d);}  }
@@ -383,7 +383,7 @@ function ListPage() {
 						admin.putTempData('ops-information-system-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			}
@@ -393,7 +393,6 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('信息系统')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -412,7 +411,6 @@ function ListPage() {
 						}
 					});
 				});
-
 			}
 			else if (layEvent === 'open-system-voucher-window') { // 凭证
 				window.pageExt.list.openSystemVoucherWindow(data);
