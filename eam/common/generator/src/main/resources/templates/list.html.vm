@@ -150,19 +150,19 @@
 	#end
 
     #if(!disableFormView)
-    <button th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button #if(formViewButton.css!=null)#(formViewButton.css)#end" lay-event="view" th:text="${lang.translate(#if(formViewButton.label==null)'查看'#else'#(formViewButton.label)'#end)}" data-id="{{d.id}}">#if(formViewButton.label==null)查看#else#(formViewButton.label)#end</button>
     #end
     #if(!disableModify)
-    <button th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button" lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
+    <button th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button #if(modifyButton.css!=null)#(modifyButton.css)#end" lay-event="edit" th:text="${lang.translate(#if(modifyButton.label==null)'修改'#else'#(modifyButton.label)'#end)}" data-id="{{d.id}}">#if(modifyButton.label==null)修改#else#(modifyButton.label)#end</button>
     #end
 
 
     #if(!disableSingleDelete)
-    <button th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button" lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
+    <button th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button #if(deleteButton.css!=null)#(deleteButton.css)#end" lay-event="del" th:text="${lang.translate(#if(deleteButton.label==null)'删除'#else'#(deleteButton.label)'#end)}" data-id="{{d.id}}">#if(deleteButton.label==null)删除#else#(deleteButton.label)#end</button>
     #end
 
     #for(b:opColumnButtons)
-    <button class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}" data-id="{{d.id}}">#(b.label)</button>
+    <button #if(b.perm!=null)th:if="${perm.checkAuth('#(b.perm)')}"#end class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}" data-id="{{d.id}}">#(b.label)</button>
     #end
 
     #if(opColumnMenus!=null && opColumnMenus.size()>0)

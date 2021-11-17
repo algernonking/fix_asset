@@ -605,6 +605,7 @@ function ListPage() {
 
 			admin.putTempData('#(formDataKey)-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
+				#if(modifyButton.functionName==null)
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
@@ -617,7 +618,11 @@ function ListPage() {
 						 layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
+				#else
+				window.pageExt.list.#(modifyButton.functionName)({ #(paramJson) });
+				#end
 			} else if (layEvent === 'view') { // 查看
+				#if(formViewButton.functionName==null)
 				//延迟显示加载动画，避免界面闪动
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { #(paramJson) }, function (data) {
@@ -627,9 +632,12 @@ function ListPage() {
 						admin.putTempData('#(formDataKey)-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
+				#else
+				window.pageExt.list.#(formViewButton.functionName)({ #(paramJson) });
+				#end
 			}
 			else if (layEvent === 'del') { // 删除
 
@@ -637,7 +645,7 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
+				#if(deleteButton.functionName==null)
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('#(topic)')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -656,7 +664,9 @@ function ListPage() {
 						}
 					});
 				});
-
+				#else
+				window.pageExt.list.#(deleteButton.functionName)({ #(paramJson) });
+				#end
 			}
 			#for(b:opColumnButtons)
 			else if (layEvent === '#(b.id)') { // #(b.label)
@@ -671,6 +681,10 @@ function ListPage() {
 					,show: true //外部事件触发即显示
 					,data: #(opColumnMenuData)
 					,click: function(menu, othis){
+						if(menu.perm && !admin.checkAuth(menu.perm)) {
+							top.layer.msg(fox.translate('缺少操作权限'), {icon: 2, time: 1500});
+							return;
+						}
 						window.pageExt.list.moreAction && window.pageExt.list.moreAction(menu,data, othis);
 					}
 					,align: 'right'
