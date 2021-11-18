@@ -1,7 +1,7 @@
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-28 21:39:12
+ * @since 2021-11-18 12:55:29
  */
 
 
@@ -80,7 +80,7 @@ function ListPage() {
 					,{ field: 'operateCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('操作编码'), templet:function (d){ return templet('operateCode',fox.getEnumText(SELECT_OPERATECODE_DATA,d.operateCode),d);}}
 					,{ field: 'approval', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批'), templet:function (d){ return templet('approval',fox.getEnumText(RADIO_APPROVAL_DATA,d.approval),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -306,7 +306,7 @@ function ListPage() {
 						admin.putTempData('eam-operate-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			}
@@ -316,7 +316,6 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('资产操作')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -335,7 +334,6 @@ function ListPage() {
 						}
 					});
 				});
-
 			}
 			
 		});
@@ -362,7 +360,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		var index=admin.popupCenter({
+		admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
@@ -374,7 +372,6 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-operate-form-data-popup-index', index);
 	};
 
 	window.module={

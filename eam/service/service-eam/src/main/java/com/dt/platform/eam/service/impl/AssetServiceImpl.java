@@ -1323,7 +1323,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 				}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
-					//  approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_INSERT.code();
+					approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_IN.code();
 
 				}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();

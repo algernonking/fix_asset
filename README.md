@@ -1,5 +1,9 @@
 # EAM系统
 
+#### DEMO
+- http://eam-demo.rainbooow.com:26788/index.html
+- 账户:admin 密码:123456
+
 #### 介绍
 
 

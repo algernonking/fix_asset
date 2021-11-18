@@ -16,7 +16,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产操作
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-28 21:39:08
+ * @since 2021-11-18 12:55:21
  * @sign 3E1FEFD0F758226441284163A2686C8F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

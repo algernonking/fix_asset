@@ -57,6 +57,8 @@ echo "delete from eam_asset_borrow_data where 1=1; "                  >>$clear_s
 echo "delete from eam_asset_collection where 1=1 $tenant_sql; "       >>$clear_sql
 echo "delete from eam_asset_collection_return where 1=1 $tenant_sql;" >>$clear_sql
 echo "delete from eam_asset_handle where 1=1 $tenant_sql;"            >>$clear_sql
+echo "delete from eam_asset_data_change where 1=1 $tenant_sql;"       >>$clear_sql
+
 
 
 echo "-- dc"                                                          >>$clear_sql

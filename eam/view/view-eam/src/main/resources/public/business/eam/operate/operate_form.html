@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 资产操作 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-28 21:39:13
+ * @since 2021-11-18 12:55:30
  */
  -->
  <!DOCTYPE html>
@@ -78,7 +78,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('操作编码')}">操作编码</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="operateCode" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetOperateEnum')}"></div>
+                            <div id="operateCode" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetOperateEnum')}" extraParam="{}"></div>
                         </div>
                     </div>
 

@@ -39,7 +39,7 @@ public class EamAssetOperateGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_OPERATE.NAME).form().validate().required();
 
         cfg.view().field(EAMTables.EAM_OPERATE.OPERATE_CODE).form().validate().required()
-                .form().selectBox().enumType(AssetOperateEnum.class).muliti(false);
+                .form().selectBox().filter(true).enumType(AssetOperateEnum.class).muliti(false);
 
         cfg.view().field(EAMTables.EAM_OPERATE.APPROVAL).form().validate().required()
                 .form().radioBox().enumType(StatusYNEnum.class);
