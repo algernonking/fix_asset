@@ -40,6 +40,10 @@ public class CodeBuildRepeat {
                 "EamResidualStrategyGtr",
                 "EamSupplierGtr",
                 "EamSafetylevelGtr",
+                "EamInventoryAssetGtr",
+                "EamInventoryGtr",
+                "EamInventoryUserGtr",
+                "EamAssetStockGtr",
                 "EamWarehouseGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){

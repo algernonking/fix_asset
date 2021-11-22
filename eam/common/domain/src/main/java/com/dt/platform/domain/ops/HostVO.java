@@ -12,8 +12,8 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 主机
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 14:45:58
- * @sign 9094EA3E2AD9273E2F0ABAC69A766EBD
+ * @since 2021-11-20 16:56:42
+ * @sign 629E3998B82DB807A53C16046B1EE004
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -50,6 +50,12 @@ public class HostVO extends Host {
 	*/
 	@ApiModelProperty(required = false,value="搜索的值" , notes = "")
 	private String searchValue;
+	
+	/**
+	 * 已修改字段
+	*/
+	@ApiModelProperty(required = false,value="已修改字段" , notes = "")
+	private List<String> dirtyFields;
 	
 	/**
 	 * 排序字段
@@ -156,6 +162,35 @@ public class HostVO extends Host {
 	*/
 	public HostVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
+		return this;
+	}
+	
+	/**
+	 * 获得 已修改字段<br>
+	 * @return 已修改字段
+	*/
+	public List<String> getDirtyFields() {
+		return dirtyFields;
+	}
+	
+	/**
+	 * 设置 已修改字段
+	 * @param dirtyFields 已修改字段
+	 * @return 当前对象
+	*/
+	public HostVO setDirtyFields(List<String> dirtyFields) {
+		this.dirtyFields=dirtyFields;
+		return this;
+	}
+	
+	/**
+	 * 添加 已修改字段
+	 * @param dirtyField 已修改字段
+	 * @return 当前对象
+	*/
+	public HostVO addDirtyField(String dirtyField) {
+		if(this.dirtyFields==null) dirtyFields=new ArrayList<>();
+		this.dirtyFields.add(dirtyField);
 		return this;
 	}
 	

@@ -12,6 +12,7 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.generator.builder.business.ControllerProxyFile;
 import com.github.foxnic.sql.meta.DBTable;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
+import org.github.foxnic.web.constants.enums.system.AccessType;
 import org.github.foxnic.web.constants.enums.system.MenuType;
 import org.github.foxnic.web.domain.oauth.Menu;
 import org.github.foxnic.web.domain.oauth.MenuResource;
@@ -275,6 +276,7 @@ MenuGenerator {
 			resourze.setId(IDGenerator.getSnowflakeIdString());
 			resourze.setName(name);
 			resourze.setUrl(path);
+			resourze.setAccessType("GRANT");
 			resourze.setType("page");
 			resourze.setMethod("GET");
 			resourze.setTableName(table.name());
@@ -314,6 +316,7 @@ MenuGenerator {
 			resourze.setId(IDGenerator.getSnowflakeIdString());
 			resourze.setName(doc);
 			resourze.setUrl(value);
+			resourze.setAccessType("GRANT");
 			resourze.setType("api");
 			resourze.setMethod("POST");
 			resourze.setTableName(table.name());

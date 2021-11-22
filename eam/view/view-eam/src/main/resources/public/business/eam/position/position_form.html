@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 存放位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:10
+ * @since 2021-11-20 17:07:22
  */
  -->
  <!DOCTYPE html>
@@ -59,45 +59,6 @@
                         </div>
                     </div>
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('设备类型')}">设备类型</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="deviceType" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('工作类型')}">工作类型</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <div id="workType" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}"></div>
-                        </div>
-                    </div>
-
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('area_id')}">area_id</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="areaId" id="areaId" name="areaId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('area_id') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('device_id')}">device_id</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="deviceId" id="deviceId" name="deviceId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('device_id') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" style="display: none">
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('is_on_line')}">is_on_line</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="isOnLine" id="isOnLine" name="isOnLine" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('is_on_line') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
@@ -123,9 +84,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var SELECT_DEVICETYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}]];
-    var SELECT_WORKTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetBorrowStatusEnum')}]];
-    var VALIDATE_CONFIG={"deviceType":{"labelInForm":"设备类型","inputType":"select_box","required":true},"areaId":{"labelInForm":"area_id","inputType":"text_input","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"workType":{"labelInForm":"工作类型","inputType":"select_box","required":true},"deviceId":{"labelInForm":"device_id","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"名称","inputType":"text_input","required":true}};
     var AUTH_PREFIX="eam_position";
 
 

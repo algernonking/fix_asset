@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 存放位置 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:07
+ * @since 2021-11-20 17:07:11
 */
 
 @Api(tags = "存放位置")
@@ -73,7 +73,7 @@ public class PositionController extends SuperController {
 	@SentinelResource(value = PositionServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(PositionServiceProxy.INSERT)
 	public Result insert(PositionVO positionVO) {
-		Result result=positionService.insert(positionVO);
+		Result result=positionService.insert(positionVO,false);
 		return result;
 	}
 
@@ -122,12 +122,12 @@ public class PositionController extends SuperController {
 		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "区域1"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.DIRTY_FIELDS , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } )
 	@NotNull(name = PositionVOMeta.ID)
 	@SentinelResource(value = PositionServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(PositionServiceProxy.UPDATE)
 	public Result update(PositionVO positionVO) {
-		Result result=positionService.update(positionVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=positionService.update(positionVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -141,12 +141,12 @@ public class PositionController extends SuperController {
 		@ApiImplicitParam(name = PositionVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "区域1"),
 		@ApiImplicitParam(name = PositionVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { PositionVOMeta.PAGE_INDEX , PositionVOMeta.PAGE_SIZE , PositionVOMeta.SEARCH_FIELD , PositionVOMeta.FUZZY_FIELD , PositionVOMeta.SEARCH_VALUE , PositionVOMeta.DIRTY_FIELDS , PositionVOMeta.SORT_FIELD , PositionVOMeta.SORT_TYPE , PositionVOMeta.IDS } )
 	@NotNull(name = PositionVOMeta.ID)
 	@SentinelResource(value = PositionServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(PositionServiceProxy.SAVE)
 	public Result save(PositionVO positionVO) {
-		Result result=positionService.save(positionVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=positionService.save(positionVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -165,11 +165,6 @@ public class PositionController extends SuperController {
 	public Result<Position> getById(String id) {
 		Result<Position> result=new Result<>();
 		Position position=positionService.getById(id);
-
-		// join 关联的对象
-		positionService.dao().fill(position)
-			.execute();
-
 		result.success(true).data(position);
 		return result;
 	}
@@ -230,11 +225,6 @@ public class PositionController extends SuperController {
 	public Result<PagedList<Position>> queryPagedList(PositionVO sample) {
 		Result<PagedList<Position>> result=new Result<>();
 		PagedList<Position> list=positionService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		positionService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -247,10 +237,14 @@ public class PositionController extends SuperController {
 	@SentinelResource(value = PositionServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(PositionServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(PositionVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=positionService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -260,11 +254,15 @@ public class PositionController extends SuperController {
 	@SentinelResource(value = PositionServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(PositionServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=positionService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

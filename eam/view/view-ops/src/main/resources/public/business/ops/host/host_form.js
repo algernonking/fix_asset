@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 14:46:11
+ * @since 2021-11-20 16:57:01
  */
 
 function FormPage() {
@@ -11,6 +11,7 @@ function FormPage() {
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
+	var dataBeforeEdit=null;
 	/**
       * 入口函数，初始化
       */
@@ -419,6 +420,8 @@ function FormPage() {
 			}
 		}
 
+		dataBeforeEdit=getFormData();
+
 	}
 
 	function getFormData() {
@@ -453,26 +456,22 @@ function FormPage() {
 	}
 
 	function saveForm(param) {
+		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
 		var api=moduleURL+"/"+(param.id?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, param, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
+		admin.post(api, param, function (data) {
 			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('ops-host-form-data-popup-index');
 				var doNext=true;
 				if(window.pageExt.form.betweenFormSubmitAndClose) {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
 				if(doNext) {
-					admin.finishPopupCenter(index);
+					admin.finishPopupCenterById('ops-host-form-data-win');
 				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				layer.msg(data.message, {icon: 2, time: 1500});
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
-		}, "POST");
+		}, {delayLoading:1000,elms:[$("#submit-button")]});
 	}
 
 	/**

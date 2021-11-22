@@ -1,6 +1,6 @@
 package com.dt.platform.eam.controller;
 
- 
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +33,7 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.InventoryUserMeta;
+import org.github.foxnic.web.domain.hrm.Employee;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 盘点用户 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 19:49:02
+ * @since 2021-11-19 10:34:33
 */
 
 @Api(tags = "盘点用户")
@@ -59,7 +60,7 @@ public class InventoryUserController extends SuperController {
 	@Autowired
 	private IInventoryUserService inventoryUserService;
 
-	
+
 	/**
 	 * 添加盘点用户
 	*/
@@ -68,18 +69,18 @@ public class InventoryUserController extends SuperController {
 		@ApiImplicitParam(name = InventoryUserVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.USER_ID , value = "盘点人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
-	@NotNull(name = InventoryUserVOMeta.ID)
 	@SentinelResource(value = InventoryUserServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(InventoryUserServiceProxy.INSERT)
 	public Result insert(InventoryUserVO inventoryUserVO) {
-		Result result=inventoryUserService.insert(inventoryUserVO);
+		Result result=inventoryUserService.insert(inventoryUserVO,false);
 		return result;
 	}
 
-	
+
+
 	/**
 	 * 删除盘点用户
 	*/
@@ -95,8 +96,8 @@ public class InventoryUserController extends SuperController {
 		Result result=inventoryUserService.deleteByIdLogical(id);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 批量删除盘点用户 <br>
 	 * 联合主键时，请自行调整实现
@@ -113,7 +114,7 @@ public class InventoryUserController extends SuperController {
 		Result result=inventoryUserService.deleteByIdsLogical(ids);
 		return result;
 	}
-	
+
 	/**
 	 * 更新盘点用户
 	*/
@@ -122,18 +123,18 @@ public class InventoryUserController extends SuperController {
 		@ApiImplicitParam(name = InventoryUserVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.USER_ID , value = "盘点人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { InventoryUserVOMeta.PAGE_INDEX , InventoryUserVOMeta.PAGE_SIZE , InventoryUserVOMeta.SEARCH_FIELD , InventoryUserVOMeta.FUZZY_FIELD , InventoryUserVOMeta.SEARCH_VALUE , InventoryUserVOMeta.SORT_FIELD , InventoryUserVOMeta.SORT_TYPE , InventoryUserVOMeta.IDS } ) 
+	@ApiOperationSupport( order=4 , ignoreParameters = { InventoryUserVOMeta.PAGE_INDEX , InventoryUserVOMeta.PAGE_SIZE , InventoryUserVOMeta.SEARCH_FIELD , InventoryUserVOMeta.FUZZY_FIELD , InventoryUserVOMeta.SEARCH_VALUE , InventoryUserVOMeta.DIRTY_FIELDS , InventoryUserVOMeta.SORT_FIELD , InventoryUserVOMeta.SORT_TYPE , InventoryUserVOMeta.IDS } )
 	@NotNull(name = InventoryUserVOMeta.ID)
 	@SentinelResource(value = InventoryUserServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(InventoryUserServiceProxy.UPDATE)
 	public Result update(InventoryUserVO inventoryUserVO) {
-		Result result=inventoryUserService.update(inventoryUserVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=inventoryUserService.update(inventoryUserVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * 保存盘点用户
 	*/
@@ -142,18 +143,18 @@ public class InventoryUserController extends SuperController {
 		@ApiImplicitParam(name = InventoryUserVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.USER_ID , value = "盘点人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { InventoryUserVOMeta.PAGE_INDEX , InventoryUserVOMeta.PAGE_SIZE , InventoryUserVOMeta.SEARCH_FIELD , InventoryUserVOMeta.FUZZY_FIELD , InventoryUserVOMeta.SEARCH_VALUE , InventoryUserVOMeta.SORT_FIELD , InventoryUserVOMeta.SORT_TYPE , InventoryUserVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { InventoryUserVOMeta.PAGE_INDEX , InventoryUserVOMeta.PAGE_SIZE , InventoryUserVOMeta.SEARCH_FIELD , InventoryUserVOMeta.FUZZY_FIELD , InventoryUserVOMeta.SEARCH_VALUE , InventoryUserVOMeta.DIRTY_FIELDS , InventoryUserVOMeta.SORT_FIELD , InventoryUserVOMeta.SORT_TYPE , InventoryUserVOMeta.IDS } )
 	@NotNull(name = InventoryUserVOMeta.ID)
 	@SentinelResource(value = InventoryUserServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(InventoryUserServiceProxy.SAVE)
 	public Result save(InventoryUserVO inventoryUserVO) {
-		Result result=inventoryUserService.save(inventoryUserVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=inventoryUserService.save(inventoryUserVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
-	
+
 	/**
 	 * 获取盘点用户
 	*/
@@ -174,10 +175,10 @@ public class InventoryUserController extends SuperController {
 
 
 	/**
-	 * 批量删除盘点用户 <br>
+	 * 批量获取盘点用户 <br>
 	 * 联合主键时，请自行调整实现
 	*/
-		@ApiOperation(value = "批量删除盘点用户")
+		@ApiOperation(value = "批量获取盘点用户")
 		@ApiImplicitParams({
 				@ApiImplicitParam(name = InventoryUserVOMeta.IDS , value = "主键清单" , required = true , dataTypeClass=List.class , example = "[1,3,4]")
 		})
@@ -192,7 +193,7 @@ public class InventoryUserController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 查询盘点用户
 	*/
@@ -201,7 +202,7 @@ public class InventoryUserController extends SuperController {
 		@ApiImplicitParam(name = InventoryUserVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.USER_ID , value = "盘点人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InventoryUserVOMeta.PAGE_INDEX , InventoryUserVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = InventoryUserServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -213,7 +214,7 @@ public class InventoryUserController extends SuperController {
 		return result;
 	}
 
-	
+
 	/**
 	 * 分页查询盘点用户
 	*/
@@ -222,7 +223,7 @@ public class InventoryUserController extends SuperController {
 		@ApiImplicitParam(name = InventoryUserVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryUserVOMeta.USER_ID , value = "盘点人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "财务备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryUserVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = InventoryUserServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -242,10 +243,14 @@ public class InventoryUserController extends SuperController {
 	@SentinelResource(value = InventoryUserServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(InventoryUserServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(InventoryUserVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=inventoryUserService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -255,12 +260,15 @@ public class InventoryUserController extends SuperController {
 	@SentinelResource(value = InventoryUserServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(InventoryUserServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=inventoryUserService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
-
+	}
 
 
 
@@ -268,25 +276,25 @@ public class InventoryUserController extends SuperController {
 	@RequestMapping(InventoryUserServiceProxy.IMPORT_EXCEL)
 	public Result importExcel(MultipartHttpServletRequest request, HttpServletResponse response) throws Exception {
 
-			//获得上传的文件
-			Map<String, MultipartFile> map = request.getFileMap();
-			InputStream input=null;
-			for (MultipartFile mf : map.values()) {
-				input=StreamUtil.bytes2input(mf.getBytes());
-				break;
-			}
-
-			if(input==null) {
-				return ErrorDesc.failure().message("缺少上传的文件");
-			}
-
-			List<ValidateResult> errors=inventoryUserService.importExcel(input,0,true);
-			if(errors==null || errors.isEmpty()) {
-				return ErrorDesc.success();
-			} else {
-				return ErrorDesc.failure().message("导入失败").data(errors);
-			}
+		//获得上传的文件
+		Map<String, MultipartFile> map = request.getFileMap();
+		InputStream input=null;
+		for (MultipartFile mf : map.values()) {
+			input=StreamUtil.bytes2input(mf.getBytes());
+			break;
 		}
+
+		if(input==null) {
+			return ErrorDesc.failure().message("缺少上传的文件");
+		}
+
+		List<ValidateResult> errors=inventoryUserService.importExcel(input,0,true);
+		if(errors==null || errors.isEmpty()) {
+			return ErrorDesc.success();
+		} else {
+			return ErrorDesc.failure().message("导入失败").data(errors);
+		}
+	}
 
 
 }

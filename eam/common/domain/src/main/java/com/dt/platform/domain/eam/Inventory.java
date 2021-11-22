@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.hrm.Employee;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -16,10 +19,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 资产盘点
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 20:00:02
- * @sign F1DBC8DB38389F930613D14FA1A07717
+ * @since 2021-11-22 10:21:47
+ * @sign 9D43A72A3AB480C0B03727F46167EE68
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -38,10 +41,22 @@ public class Inventory extends Entity {
 	private String id;
 	
 	/**
+	 * 类型：类型
+	*/
+	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	private String type;
+	
+	/**
 	 * 业务编码：业务编码
 	*/
 	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
 	private String businessCode;
+	
+	/**
+	 * 业务状态：业务状态
+	*/
+	@ApiModelProperty(required = false,value="业务状态" , notes = "业务状态")
+	private String status;
 	
 	/**
 	 * 盘点名称：盘点名称
@@ -50,16 +65,28 @@ public class Inventory extends Entity {
 	private String name;
 	
 	/**
-	 * 状态：状态
+	 * 盘点状态：盘点状态
 	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "状态")
-	private String status;
+	@ApiModelProperty(required = false,value="盘点状态" , notes = "盘点状态")
+	private String inventoryStatus;
 	
 	/**
 	 * 数据状态：数据状态
 	*/
 	@ApiModelProperty(required = false,value="数据状态" , notes = "数据状态")
 	private String dataStatus;
+	
+	/**
+	 * 全员盘点：全员盘点
+	*/
+	@ApiModelProperty(required = false,value="全员盘点" , notes = "全员盘点")
+	private String allEmployee;
+	
+	/**
+	 * 资产状态：资产状态
+	*/
+	@ApiModelProperty(required = false,value="资产状态" , notes = "资产状态")
+	private String assetStatus;
 	
 	/**
 	 * 资产分类：资产分类
@@ -80,27 +107,39 @@ public class Inventory extends Entity {
 	private String useOrganizationId;
 	
 	/**
-	 * 资产位置：资产位置
+	 * 存放位置：存放位置
 	*/
-	@ApiModelProperty(required = false,value="资产位置" , notes = "资产位置")
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
 	private String positionId;
 	
 	/**
-	 * 负责人：负责人
+	 * 仓库：仓库
 	*/
-	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
-	private String directoryId;
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private String warehouseId;
 	
 	/**
-	 * 开始时间：开始时间
+	 * 购置开始日期：购置开始日期
 	*/
-	@ApiModelProperty(required = false,value="开始时间" , notes = "开始时间")
+	@ApiModelProperty(required = false,value="购置开始日期" , notes = "购置开始日期")
+	private Date purchaseStartDate;
+	
+	/**
+	 * 购置结束日期：购置结束日期
+	*/
+	@ApiModelProperty(required = false,value="购置结束日期" , notes = "购置结束日期")
+	private Date purchaseEndDate;
+	
+	/**
+	 * 盘点开始时间：盘点开始时间
+	*/
+	@ApiModelProperty(required = false,value="盘点开始时间" , notes = "盘点开始时间")
 	private Date startTime;
 	
 	/**
-	 * 结束时间：结束时间
+	 * 盘点结束时间：盘点结束时间
 	*/
-	@ApiModelProperty(required = false,value="结束时间" , notes = "结束时间")
+	@ApiModelProperty(required = false,value="盘点结束时间" , notes = "盘点结束时间")
 	private Date finishTime;
 	
 	/**
@@ -110,16 +149,16 @@ public class Inventory extends Entity {
 	private String originatorId;
 	
 	/**
-	 * 业务日期：业务日期
-	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
-	
-	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
+	
+	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -170,22 +209,88 @@ public class Inventory extends Entity {
 	private Integer version;
 	
 	/**
+	 * 租户：租户
+	*/
+	@ApiModelProperty(required = false,value="租户" , notes = "租户")
+	private String tenantId;
+	
+	/**
+	 * 盘点资产数据：盘点资产数据
+	*/
+	@ApiModelProperty(required = false,value="盘点资产数据" , notes = "盘点资产数据")
+	private List<InventoryAsset> InventoryAssetInfoList;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private List<Organization> ownerCompany;
+	
+	/**
+	 * 使用公司/部门：使用公司/部门
+	*/
+	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
+	private List<Organization> useOrganization;
+	
+	/**
 	 * 存放位置：存放位置
 	*/
 	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
-	private Position position;
+	private List<Position> position;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private List<Warehouse> warehouse;
+	
+	/**
+	 * 资产分类：资产分类
+	*/
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
+	private List<Catalog> category;
 	
 	/**
 	 * 盘点人员：盘点人员
 	*/
 	@ApiModelProperty(required = false,value="盘点人员" , notes = "盘点人员")
-	private List<InventoryUser> inventoryUserList;
+	private List<Employee> inventoryUser;
 	
 	/**
 	 * 盘点人员列表：盘点人员列表
 	*/
 	@ApiModelProperty(required = false,value="盘点人员列表" , notes = "盘点人员列表")
 	private List<String> inventoryUserIds;
+	
+	/**
+	 * 管理人员：管理人员
+	*/
+	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
+	private List<Employee> manager;
+	
+	/**
+	 * 管理人列表：管理人列表
+	*/
+	@ApiModelProperty(required = false,value="管理人列表" , notes = "管理人列表")
+	private List<String> inventoryManagerIds;
+	
+	/**
+	 * 负责人：负责人
+	*/
+	@ApiModelProperty(required = false,value="负责人" , notes = "负责人")
+	private List<Employee> director;
+	
+	/**
+	 * 负责人列表：负责人列表
+	*/
+	@ApiModelProperty(required = false,value="负责人列表" , notes = "负责人列表")
+	private List<String> inventoryDirectorIds;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
 	
 	/**
 	 * 获得 主键<br>
@@ -203,6 +308,25 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 类型<br>
+	 * 类型
+	 * @return 类型
+	*/
+	public String getType() {
+		return type;
+	}
+	
+	/**
+	 * 设置 类型
+	 * @param type 类型
+	 * @return 当前对象
+	*/
+	public Inventory setType(String type) {
+		this.type=type;
 		return this;
 	}
 	
@@ -226,6 +350,25 @@ public class Inventory extends Entity {
 	}
 	
 	/**
+	 * 获得 业务状态<br>
+	 * 业务状态
+	 * @return 业务状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 业务状态
+	 * @param status 业务状态
+	 * @return 当前对象
+	*/
+	public Inventory setStatus(String status) {
+		this.status=status;
+		return this;
+	}
+	
+	/**
 	 * 获得 盘点名称<br>
 	 * 盘点名称
 	 * @return 盘点名称
@@ -245,21 +388,21 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 状态<br>
-	 * 状态
-	 * @return 状态
+	 * 获得 盘点状态<br>
+	 * 盘点状态
+	 * @return 盘点状态
 	*/
-	public String getStatus() {
-		return status;
+	public String getInventoryStatus() {
+		return inventoryStatus;
 	}
 	
 	/**
-	 * 设置 状态
-	 * @param status 状态
+	 * 设置 盘点状态
+	 * @param inventoryStatus 盘点状态
 	 * @return 当前对象
 	*/
-	public Inventory setStatus(String status) {
-		this.status=status;
+	public Inventory setInventoryStatus(String inventoryStatus) {
+		this.inventoryStatus=inventoryStatus;
 		return this;
 	}
 	
@@ -279,6 +422,44 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setDataStatus(String dataStatus) {
 		this.dataStatus=dataStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 全员盘点<br>
+	 * 全员盘点
+	 * @return 全员盘点
+	*/
+	public String getAllEmployee() {
+		return allEmployee;
+	}
+	
+	/**
+	 * 设置 全员盘点
+	 * @param allEmployee 全员盘点
+	 * @return 当前对象
+	*/
+	public Inventory setAllEmployee(String allEmployee) {
+		this.allEmployee=allEmployee;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产状态<br>
+	 * 资产状态
+	 * @return 资产状态
+	*/
+	public String getAssetStatus() {
+		return assetStatus;
+	}
+	
+	/**
+	 * 设置 资产状态
+	 * @param assetStatus 资产状态
+	 * @return 当前对象
+	*/
+	public Inventory setAssetStatus(String assetStatus) {
+		this.assetStatus=assetStatus;
 		return this;
 	}
 	
@@ -340,17 +521,17 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 资产位置<br>
-	 * 资产位置
-	 * @return 资产位置
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
 	*/
 	public String getPositionId() {
 		return positionId;
 	}
 	
 	/**
-	 * 设置 资产位置
-	 * @param positionId 资产位置
+	 * 设置 存放位置
+	 * @param positionId 存放位置
 	 * @return 当前对象
 	*/
 	public Inventory setPositionId(String positionId) {
@@ -359,36 +540,74 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 负责人<br>
-	 * 负责人
-	 * @return 负责人
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
 	*/
-	public String getDirectoryId() {
-		return directoryId;
+	public String getWarehouseId() {
+		return warehouseId;
 	}
 	
 	/**
-	 * 设置 负责人
-	 * @param directoryId 负责人
+	 * 设置 仓库
+	 * @param warehouseId 仓库
 	 * @return 当前对象
 	*/
-	public Inventory setDirectoryId(String directoryId) {
-		this.directoryId=directoryId;
+	public Inventory setWarehouseId(String warehouseId) {
+		this.warehouseId=warehouseId;
 		return this;
 	}
 	
 	/**
-	 * 获得 开始时间<br>
-	 * 开始时间
-	 * @return 开始时间
+	 * 获得 购置开始日期<br>
+	 * 购置开始日期
+	 * @return 购置开始日期
+	*/
+	public Date getPurchaseStartDate() {
+		return purchaseStartDate;
+	}
+	
+	/**
+	 * 设置 购置开始日期
+	 * @param purchaseStartDate 购置开始日期
+	 * @return 当前对象
+	*/
+	public Inventory setPurchaseStartDate(Date purchaseStartDate) {
+		this.purchaseStartDate=purchaseStartDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 购置结束日期<br>
+	 * 购置结束日期
+	 * @return 购置结束日期
+	*/
+	public Date getPurchaseEndDate() {
+		return purchaseEndDate;
+	}
+	
+	/**
+	 * 设置 购置结束日期
+	 * @param purchaseEndDate 购置结束日期
+	 * @return 当前对象
+	*/
+	public Inventory setPurchaseEndDate(Date purchaseEndDate) {
+		this.purchaseEndDate=purchaseEndDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 盘点开始时间<br>
+	 * 盘点开始时间
+	 * @return 盘点开始时间
 	*/
 	public Date getStartTime() {
 		return startTime;
 	}
 	
 	/**
-	 * 设置 开始时间
-	 * @param startTime 开始时间
+	 * 设置 盘点开始时间
+	 * @param startTime 盘点开始时间
 	 * @return 当前对象
 	*/
 	public Inventory setStartTime(Date startTime) {
@@ -397,17 +616,17 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 结束时间<br>
-	 * 结束时间
-	 * @return 结束时间
+	 * 获得 盘点结束时间<br>
+	 * 盘点结束时间
+	 * @return 盘点结束时间
 	*/
 	public Date getFinishTime() {
 		return finishTime;
 	}
 	
 	/**
-	 * 设置 结束时间
-	 * @param finishTime 结束时间
+	 * 设置 盘点结束时间
+	 * @param finishTime 盘点结束时间
 	 * @return 当前对象
 	*/
 	public Inventory setFinishTime(Date finishTime) {
@@ -435,25 +654,6 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
-	*/
-	public Date getBusinessDate() {
-		return businessDate;
-	}
-	
-	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
-	 * @return 当前对象
-	*/
-	public Inventory setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
-		return this;
-	}
-	
-	/**
 	 * 获得 备注<br>
 	 * 备注
 	 * @return 备注
@@ -469,6 +669,25 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setNotes(String notes) {
 		this.notes=notes;
+		return this;
+	}
+	
+	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public Inventory setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
 		return this;
 	}
 	
@@ -625,11 +844,120 @@ public class Inventory extends Entity {
 	}
 	
 	/**
+	 * 获得 租户<br>
+	 * 租户
+	 * @return 租户
+	*/
+	public String getTenantId() {
+		return tenantId;
+	}
+	
+	/**
+	 * 设置 租户
+	 * @param tenantId 租户
+	 * @return 当前对象
+	*/
+	public Inventory setTenantId(String tenantId) {
+		this.tenantId=tenantId;
+		return this;
+	}
+	
+	/**
+	 * 获得 盘点资产数据<br>
+	 * 盘点资产数据
+	 * @return 盘点资产数据
+	*/
+	public List<InventoryAsset> getInventoryAssetInfoList() {
+		return InventoryAssetInfoList;
+	}
+	
+	/**
+	 * 设置 盘点资产数据
+	 * @param InventoryAssetInfoList 盘点资产数据
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryAssetInfoList(List<InventoryAsset> InventoryAssetInfoList) {
+		this.InventoryAssetInfoList=InventoryAssetInfoList;
+		return this;
+	}
+	
+	/**
+	 * 添加 盘点资产数据
+	 * @param InventoryAssetInfo 盘点资产数据
+	 * @return 当前对象
+	*/
+	public Inventory addInventoryAssetInfo(InventoryAsset InventoryAssetInfo) {
+		if(this.InventoryAssetInfoList==null) InventoryAssetInfoList=new ArrayList<>();
+		this.InventoryAssetInfoList.add(InventoryAssetInfo);
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public List<Organization> getOwnerCompany() {
+		return ownerCompany;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
+	 * @return 当前对象
+	*/
+	public Inventory setOwnerCompany(List<Organization> ownerCompany) {
+		this.ownerCompany=ownerCompany;
+		return this;
+	}
+	
+	/**
+	 * 添加 所属公司
+	 * @param entity 所属公司
+	 * @return 当前对象
+	*/
+	public Inventory addOwnerCompany(Organization entity) {
+		if(this.ownerCompany==null) ownerCompany=new ArrayList<>();
+		this.ownerCompany.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 使用公司/部门<br>
+	 * 使用公司/部门
+	 * @return 使用公司/部门
+	*/
+	public List<Organization> getUseOrganization() {
+		return useOrganization;
+	}
+	
+	/**
+	 * 设置 使用公司/部门
+	 * @param useOrganization 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Inventory setUseOrganization(List<Organization> useOrganization) {
+		this.useOrganization=useOrganization;
+		return this;
+	}
+	
+	/**
+	 * 添加 使用公司/部门
+	 * @param entity 使用公司/部门
+	 * @return 当前对象
+	*/
+	public Inventory addUseOrganization(Organization entity) {
+		if(this.useOrganization==null) useOrganization=new ArrayList<>();
+		this.useOrganization.add(entity);
+		return this;
+	}
+	
+	/**
 	 * 获得 存放位置<br>
 	 * 存放位置
 	 * @return 存放位置
 	*/
-	public Position getPosition() {
+	public List<Position> getPosition() {
 		return position;
 	}
 	
@@ -638,8 +966,79 @@ public class Inventory extends Entity {
 	 * @param position 存放位置
 	 * @return 当前对象
 	*/
-	public Inventory setPosition(Position position) {
+	public Inventory setPosition(List<Position> position) {
 		this.position=position;
+		return this;
+	}
+	
+	/**
+	 * 添加 存放位置
+	 * @param entity 存放位置
+	 * @return 当前对象
+	*/
+	public Inventory addPosition(Position entity) {
+		if(this.position==null) position=new ArrayList<>();
+		this.position.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public List<Warehouse> getWarehouse() {
+		return warehouse;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouse 仓库
+	 * @return 当前对象
+	*/
+	public Inventory setWarehouse(List<Warehouse> warehouse) {
+		this.warehouse=warehouse;
+		return this;
+	}
+	
+	/**
+	 * 添加 仓库
+	 * @param entity 仓库
+	 * @return 当前对象
+	*/
+	public Inventory addWarehouse(Warehouse entity) {
+		if(this.warehouse==null) warehouse=new ArrayList<>();
+		this.warehouse.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产分类<br>
+	 * 资产分类
+	 * @return 资产分类
+	*/
+	public List<Catalog> getCategory() {
+		return category;
+	}
+	
+	/**
+	 * 设置 资产分类
+	 * @param category 资产分类
+	 * @return 当前对象
+	*/
+	public Inventory setCategory(List<Catalog> category) {
+		this.category=category;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产分类
+	 * @param entity 资产分类
+	 * @return 当前对象
+	*/
+	public Inventory addCategory(Catalog entity) {
+		if(this.category==null) category=new ArrayList<>();
+		this.category.add(entity);
 		return this;
 	}
 	
@@ -648,28 +1047,28 @@ public class Inventory extends Entity {
 	 * 盘点人员
 	 * @return 盘点人员
 	*/
-	public List<InventoryUser> getInventoryUserList() {
-		return inventoryUserList;
+	public List<Employee> getInventoryUser() {
+		return inventoryUser;
 	}
 	
 	/**
 	 * 设置 盘点人员
-	 * @param inventoryUserList 盘点人员
+	 * @param inventoryUser 盘点人员
 	 * @return 当前对象
 	*/
-	public Inventory setInventoryUserList(List<InventoryUser> inventoryUserList) {
-		this.inventoryUserList=inventoryUserList;
+	public Inventory setInventoryUser(List<Employee> inventoryUser) {
+		this.inventoryUser=inventoryUser;
 		return this;
 	}
 	
 	/**
 	 * 添加 盘点人员
-	 * @param inventoryUser 盘点人员
+	 * @param entity 盘点人员
 	 * @return 当前对象
 	*/
-	public Inventory addInventoryUser(InventoryUser inventoryUser) {
-		if(this.inventoryUserList==null) inventoryUserList=new ArrayList<>();
-		this.inventoryUserList.add(inventoryUser);
+	public Inventory addInventoryUser(Employee entity) {
+		if(this.inventoryUser==null) inventoryUser=new ArrayList<>();
+		this.inventoryUser.add(entity);
 		return this;
 	}
 	
@@ -700,6 +1099,145 @@ public class Inventory extends Entity {
 	public Inventory addInventoryUserId(String inventoryUserId) {
 		if(this.inventoryUserIds==null) inventoryUserIds=new ArrayList<>();
 		this.inventoryUserIds.add(inventoryUserId);
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人员<br>
+	 * 管理人员
+	 * @return 管理人员
+	*/
+	public List<Employee> getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 管理人员
+	 * @param manager 管理人员
+	 * @return 当前对象
+	*/
+	public Inventory setManager(List<Employee> manager) {
+		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 添加 管理人员
+	 * @param entity 管理人员
+	 * @return 当前对象
+	*/
+	public Inventory addManager(Employee entity) {
+		if(this.manager==null) manager=new ArrayList<>();
+		this.manager.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人列表<br>
+	 * 管理人列表
+	 * @return 管理人列表
+	*/
+	public List<String> getInventoryManagerIds() {
+		return inventoryManagerIds;
+	}
+	
+	/**
+	 * 设置 管理人列表
+	 * @param inventoryManagerIds 管理人列表
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryManagerIds(List<String> inventoryManagerIds) {
+		this.inventoryManagerIds=inventoryManagerIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 管理人列表
+	 * @param inventoryManagerId 管理人列表
+	 * @return 当前对象
+	*/
+	public Inventory addInventoryManagerId(String inventoryManagerId) {
+		if(this.inventoryManagerIds==null) inventoryManagerIds=new ArrayList<>();
+		this.inventoryManagerIds.add(inventoryManagerId);
+		return this;
+	}
+	
+	/**
+	 * 获得 负责人<br>
+	 * 负责人
+	 * @return 负责人
+	*/
+	public List<Employee> getDirector() {
+		return director;
+	}
+	
+	/**
+	 * 设置 负责人
+	 * @param director 负责人
+	 * @return 当前对象
+	*/
+	public Inventory setDirector(List<Employee> director) {
+		this.director=director;
+		return this;
+	}
+	
+	/**
+	 * 添加 负责人
+	 * @param entity 负责人
+	 * @return 当前对象
+	*/
+	public Inventory addDirector(Employee entity) {
+		if(this.director==null) director=new ArrayList<>();
+		this.director.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 负责人列表<br>
+	 * 负责人列表
+	 * @return 负责人列表
+	*/
+	public List<String> getInventoryDirectorIds() {
+		return inventoryDirectorIds;
+	}
+	
+	/**
+	 * 设置 负责人列表
+	 * @param inventoryDirectorIds 负责人列表
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryDirectorIds(List<String> inventoryDirectorIds) {
+		this.inventoryDirectorIds=inventoryDirectorIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 负责人列表
+	 * @param inventoryDirectorId 负责人列表
+	 * @return 当前对象
+	*/
+	public Inventory addInventoryDirectorId(String inventoryDirectorId) {
+		if(this.inventoryDirectorIds==null) inventoryDirectorIds=new ArrayList<>();
+		this.inventoryDirectorIds.add(inventoryDirectorId);
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Inventory setOriginator(Employee originator) {
+		this.originator=originator;
 		return this;
 	}
 

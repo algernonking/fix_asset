@@ -27,7 +27,6 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(Asset.class,"changeData","变更数据","变更数据");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
-
         cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
 
 
@@ -79,6 +78,9 @@ public class EamAssetDataChangeGtr extends BaseCodeGenerator{
         cfg.view().list().operationColumn().addActionButton("送审","forApproval",null);
         cfg.view().list().operationColumn().addActionButton("确认","confirmData",null);
         cfg.view().list().operationColumn().addActionButton("撤销","revokeData",null);
+
+
+
         cfg.view().list().operationColumn().width(350);
 
         cfg.view().formWindow().bottomSpace(20);

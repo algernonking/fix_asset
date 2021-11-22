@@ -3,13 +3,14 @@ package com.dt.platform.domain.eam.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.eam.InventoryUser;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 19:49:01
- * @sign E8C1FFB00A7C4442320AF78E0D21D417
+ * @since 2021-11-19 10:34:30
+ * @sign 788B2592B163094A7F0C2A19E1E40F87
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,14 +47,14 @@ public class InventoryUserMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InventoryUser,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryUser.class ,USER_ID, java.lang.String.class, "盘点人", "盘点人", java.lang.String.class, null);
 	
 	/**
-	 * 财务备注 , 类型: java.lang.String
+	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
 	
 	/**
-	 * 财务备注 , 类型: java.lang.String
+	 * 备注 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InventoryUser,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryUser.class ,NOTES, java.lang.String.class, "财务备注", "财务备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryUser,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryUser.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -136,9 +137,19 @@ public class InventoryUserMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InventoryUser,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryUser.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
 	
 	/**
+	 * 盘点人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final String INVENTORY_USER="inventoryUser";
+	
+	/**
+	 * 盘点人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryUser,org.github.foxnic.web.domain.hrm.Employee> INVENTORY_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryUser.class ,INVENTORY_USER, org.github.foxnic.web.domain.hrm.Employee.class, "盘点人员", "盘点人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , INVENTORY_ID , USER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , INVENTORY_ID , USER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , INVENTORY_USER };
 	
 	/**
 	 * 代理类
@@ -182,8 +193,8 @@ public class InventoryUserMeta {
 		}
 		
 		/**
-		 * 设置 财务备注
-		 * @param notes 财务备注
+		 * 设置 备注
+		 * @param notes 备注
 		 * @return 当前对象
 		*/
 		public InventoryUser setNotes(String notes) {
@@ -277,6 +288,17 @@ public class InventoryUserMeta {
 		public InventoryUser setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 盘点人员
+		 * @param inventoryUser 盘点人员
+		 * @return 当前对象
+		*/
+		public InventoryUser setInventoryUser(Employee inventoryUser) {
+			super.change(INVENTORY_USER,super.getInventoryUser(),inventoryUser);
+			super.setInventoryUser(inventoryUser);
 			return this;
 		}
 	}

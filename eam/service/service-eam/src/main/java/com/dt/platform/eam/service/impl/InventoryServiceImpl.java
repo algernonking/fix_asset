@@ -2,6 +2,13 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.InventoryAsset;
+import com.dt.platform.eam.service.IInventoryAssetService;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,19 +44,19 @@ import java.util.Date;
  * 资产盘点 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 20:00:02
+ * @since 2021-11-20 12:34:49
 */
 
 
 @Service("EamInventoryService")
 public class InventoryServiceImpl extends SuperService<Inventory> implements IInventoryService {
-	
+
 	/**
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
@@ -57,29 +64,199 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 	@Autowired 
 	private InventoryUserServiceImpl inventoryUserServiceImpl;
+	@Autowired 
+	private InventoryDirectorServiceImpl inventoryDirectorServiceImpl;
+	@Autowired 
+	private InventoryManagerServiceImpl inventoryManagerServiceImpl;
 
-	
+	@Autowired
+	private IInventoryAssetService inventoryAssetService;
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
+
+
+	@Override
+	public Result createAssetRecord(String id) {
+		Inventory inventory=this.getById(id);
+		String tenantId=SessionUser.getCurrent().getActivatedTenantId();
+		dao.execute("delete from eam_inventory_asset where id=?",id);
+		String sql="insert into eam_inventory_asset (id,inventory_id,status,asset_id)" +
+				"select uuid(),'"+id+"','"+AssetInventoryDetailStatusEnum.NOT_COUNTED.code()+"',id from eam_asset where deleted=0 and tenant_id='"+tenantId+"' and owner_code='"+inventory.getType()+"' and status='"+AssetHandleStatusEnum.COMPLETE.code()+"' ";
+		//资产状态
+		if(!StringUtil.isBlank(inventory.getAssetStatus())) {
+			String[] statusArr=inventory.getAssetStatus().split(",");
+			String s="";
+			for(int i=0;i<statusArr.length;i++){
+				if(i==0){
+					s="'"+statusArr[i]+"'";}
+				else{
+					s=s+",'"+statusArr[i]+"'";
+				}
+			}
+			sql=sql+" and asset_status in ("+s+")";
+		}
+		//购置时间
+
+
+		//管理人员
+		sql=sql+" and manager_id in (select user_id from eam_inventory_manager where inventory_id='"+id+"' and deleted=0)";
+
+
+		//所属公司
+
+
+		//使用部门
+
+
+		//分类
+
+		System.out.println(sql);
+		dao.execute(sql);
+		return ErrorDesc.success();
+	}
+
+	@Override
+	public Result start(String id) {
+		Inventory inventory=this.getById(id);
+		if(AssetInventoryActionStatusEnum.NOT_START.code().equals(inventory.getInventoryStatus())
+		){
+			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.ACTING.code());
+			inventory.setStartTime(new Date());
+			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+	}
+
+	@Override
+	public Result cancel(String id) {
+		Inventory inventory=this.getById(id);
+		if(AssetInventoryActionStatusEnum.NOT_START.code().equals(inventory.getInventoryStatus())
+		){
+			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.CANCEL.code());
+			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+	}
+
+	@Override
+	public Result finish(String id) {
+		InventoryAsset q=new InventoryAsset();
+		q.setInventoryId(id);
+		q.setStatus(AssetInventoryDetailStatusEnum.NOT_COUNTED.code());
+		if(inventoryAssetService.queryList(q).size()>0){
+			return ErrorDesc.failure().message("资产未盘点完，不能进行结束操作!");
+		}
+		Inventory inventory=this.getById(id);
+		if(AssetInventoryActionStatusEnum.ACTING.code().equals(inventory.getInventoryStatus())
+		){
+			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.FINISH.code());
+			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+	}
+
+	@Override
+	public Result dataSync(String id) {
+		Inventory inventory=this.getById(id);
+		return ErrorDesc.failure().message("该功能未实现!");
+	}
+
+	@Override
+	public Result inventoryAsset(String id,String assetId, String action,String notes) {
+		Inventory inventory=this.getById(id);
+		if(!AssetInventoryActionStatusEnum.ACTING.code().equals(inventory.getInventoryStatus()) ) {
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+
+		InventoryAsset q=new InventoryAsset();
+		q.setInventoryId(id);
+		q.setAssetId(assetId);
+		InventoryAsset inventoryAsset=inventoryAssetService.queryEntity(q);
+		inventoryAsset.setStatus(action);
+		inventoryAsset.setNotes(notes);
+		inventoryAsset.setOperEmplId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		inventoryAsset.setOperDate(new Date());
+		return inventoryAssetService.update(inventoryAsset,SaveMode.NOT_NULL_FIELDS);
+
+	}
+
+
+
 	/**
-	 * 插入实体
-	 * @param inventory 实体数据
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param inventory  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	@Override
+	@Transactional
+	public Result insert(Inventory inventory,boolean throwsException) {
+
+		if(StringUtil.isBlank(inventory.getType())){
+			inventory.setType(AssetOwnerCodeEnum.ASSET.code());
+		}
+
+		if(StringUtil.isBlank(inventory.getBusinessCode())){
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_INVENTORY.code());
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				inventory.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
+		if(StringUtil.isBlank(inventory.getStatus())){
+			inventory.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+		}
+		if(StringUtil.isBlank(inventory.getInventoryStatus())){
+			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.NOT_START.code());
+		}
+
+		if(StringUtil.isBlank(inventory.getDataStatus())){
+			inventory.setDataStatus(AssetInventoryDataStatusEnum.NOT_SYNC.code());
+		}
+
+		if(StringUtil.isBlank(inventory.getOriginatorId())){
+			inventory.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		if(StringUtil.isBlank(inventory.getBusinessDate())){
+			inventory.setBusinessDate(new Date());
+		}
+
+
+
+		Result r=super.insert(inventory,throwsException);
+		//保存关系
+		if(r.success()) {
+			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
+			inventoryDirectorServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryDirectorIds());
+			inventoryManagerServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryManagerIds());
+		}
+
+		this.createAssetRecord(inventory.getId());
+		return r;
+	}
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param inventory 数据对象
 	 * @return 插入是否成功
 	 * */
 	@Override
 	@Transactional
 	public Result insert(Inventory inventory) {
-		Result r=super.insert(inventory);
-		//保存关系
-		if(r.success()) {
-			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
-		}
-		return r;
+		return this.insert(inventory,true);
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param inventoryList 实体数据清单
@@ -89,7 +266,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	public Result insertList(List<Inventory> inventoryList) {
 		return super.insertList(inventoryList);
 	}
-	
+
 	
 	/**
 	 * 按主键删除 资产盘点
@@ -119,6 +296,15 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
+
+		Inventory inventoryData=this.getById(id);
+		if(AssetInventoryActionStatusEnum.FINISH.code().equals(inventoryData.getInventoryStatus())
+		||AssetInventoryActionStatusEnum.ACTING.code().equals(inventoryData.getInventoryStatus())
+		){
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+
+
 		Inventory inventory = new Inventory();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
 		inventory.setId(id);
@@ -135,9 +321,9 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			return r;
 		}
 	}
-	
+
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param inventory 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
@@ -145,14 +331,30 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	@Override
 	@Transactional
 	public Result update(Inventory inventory , SaveMode mode) {
-		Result r=super.update(inventory , mode);
+		return this.update(inventory,mode,true);
+	}
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param inventory 数据对象
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	@Override
+	@Transactional
+	public Result update(Inventory inventory , SaveMode mode,boolean throwsException) {
+		Result r=super.update(inventory , mode , throwsException);
 		//保存关系
 		if(r.success()) {
 			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
+			inventoryDirectorServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryDirectorIds());
+			inventoryManagerServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryManagerIds());
 		}
+		this.createAssetRecord(inventory.getId());
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param inventoryList 数据对象列表
@@ -162,8 +364,9 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	@Override
 	public Result updateList(List<Inventory> inventoryList , SaveMode mode) {
 		return super.updateList(inventoryList , mode);
+
 	}
-	
+
 	
 	/**
 	 * 按主键更新字段 资产盘点
@@ -176,8 +379,8 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
+	}
+
 	
 	/**
 	 * 按主键获取 资产盘点
@@ -201,7 +404,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -209,11 +412,11 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	public List<Inventory> queryList(Inventory sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -223,10 +426,10 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	public PagedList<Inventory> queryPagedList(Inventory sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -237,7 +440,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	public PagedList<Inventory> queryPagedList(Inventory sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *

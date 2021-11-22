@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 资产盘点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 20:00:10
+ * @since 2021-11-22 10:21:58
  */
  -->
  <!DOCTYPE html>
@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
     <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
@@ -25,7 +26,7 @@
 <body style="overflow-y: hidden">
 
 <div class="layui-card">
- 
+
     <div class="layui-card-body" style="">
 
         <div class="search-bar" style="">
@@ -33,30 +34,44 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 资产分类 , categoryId ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 类型 , type ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 业务状态 , status ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 盘点状态 , inventoryStatus ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('资产分类')}" class="search-label categoryId-label">资产分类</span><span class="search-colon">:</span></div>
-                        <input id="categoryId" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('盘点状态')}" class="search-label inventoryStatus-label">盘点状态</span><span class="search-colon">:</span></div>
+                        <div id="inventoryStatus" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetInventoryActionStatusEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 数据状态 , dataStatus ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 全员盘点 , allEmployee ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产状态 , assetStatus ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 资产分类 , categoryId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 所属公司 , ownCompanyId ,typeName=button, isHideInSearch=true -->
+                    <!-- 使用公司/部门 , useOrganizationId ,typeName=button, isHideInSearch=true -->
+                    <!-- 位置 , positionId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 购置开始日期 , purchaseStartDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 购置结束日期 , purchaseEndDate ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 盘点开始时间 , startTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 盘点结束时间 , finishTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 保管人 , inventoryManagerIds ,typeName=button, isHideInSearch=true -->
+                    <!-- 盘点人 , inventoryUserIds ,typeName=button, isHideInSearch=true -->
+                    <!-- 负责人 , inventoryDirectorIds ,typeName=button, isHideInSearch=true -->
+                    <!-- 业务编码 , businessCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编码')}" class="search-label businessCode-label">业务编码</span><span class="search-colon">:</span></div>
+                        <input id="businessCode" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 盘点名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('盘点名称')}" class="search-label name-label">盘点名称</span><span class="search-colon">:</span></div>
-                        <input id="name" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 状态 , status ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 业务编码 , businessCode ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务编码')}" class="search-label businessCode-label">业务编码</span><span class="search-colon">:</span></div>
-                        <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('盘点名称')}" class="search-label name-label">盘点名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 备注 , notes ,typeName=text_area, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
-                        <input id="notes" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:100px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -65,17 +80,10 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 业务日期 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
-                            <input type="text" id="businessDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务日期')}" class="search-label businessDate-label">业务日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="businessDate-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
                             <span class="search-dash">-</span>
-                            <input type="text" id="businessDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
-                    </div>
-                    <!-- 开始时间 , startTime ,typeName=date_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('开始时间')}" class="search-label startTime-label">开始时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="startTime-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
-                            <span class="search-dash">-</span>
-                            <input type="text" id="startTime-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            <input type="text" id="businessDate-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 
@@ -100,30 +108,39 @@
 <script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
 <script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
 
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_inventory:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm" lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
-        <button th:if="${perm.checkAuth('eam_inventory:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm" lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
+        <button th:if="${perm.checkAuth('eam_inventory:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button id="inventory-start"  th:if="${perm.checkAuth('eam_inventory:start')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-inventory-start"><span th:text="${lang.translate('开始')}">开始</span></button>
+        <button id="inventory-finish"  th:if="${perm.checkAuth('eam_inventory:finish')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-inventory-finish"><span th:text="${lang.translate('结束')}">结束</span></button>
+        <button id="inventory-cancel"  th:if="${perm.checkAuth('eam_inventory:cancel')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-inventory-cancel"><span th:text="${lang.translate('取消')}">取消</span></button>
+        <button id="inventory-data-sync"  th:if="${perm.checkAuth('eam_inventory:datasync')}"class="layui-btn icon-btn layui-btn-sm " lay-event="tool-inventory-data-sync"><span th:text="${lang.translate('数据同步')}">数据同步</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <a th:if="${perm.checkAuth('eam_inventory:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view" th:text="${lang.translate('查看')}">查看</a>
-    <a th:if="${perm.checkAnyAuth('eam_inventory:update','eam_inventory:save')}" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit" th:text="${lang.translate('修改')}">修改</a>
+    <button th:if="${perm.checkAuth('eam_inventory:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${perm.checkAnyAuth('eam_inventory:update','eam_inventory:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
 
 
-    <a th:if="${perm.checkAuth('eam_inventory:delete')}" class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" th:text="${lang.translate('删除')}">删除</a>
+    <button th:if="${perm.checkAuth('eam_inventory:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
 
 </script>
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+    var SELECT_INVENTORYSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetInventoryActionStatusEnum')}]];
+    var SELECT_DATASTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetInventoryDataStatusEnum')}]];
+    var SELECT_ALLEMPLOYEE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var AUTH_PREFIX="eam_inventory";
 
 

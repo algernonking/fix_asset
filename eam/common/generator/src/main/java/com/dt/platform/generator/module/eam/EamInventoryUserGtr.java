@@ -6,6 +6,7 @@ import com.dt.platform.eam.page.InventoryUserPageController;
 import com.dt.platform.proxy.eam.InventoryServiceProxy;
 import com.dt.platform.proxy.eam.InventoryUserServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Employee;
 
 public class EamInventoryUserGtr extends BaseCodeGenerator{
 
@@ -15,6 +16,8 @@ public class EamInventoryUserGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
+
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"inventoryUser","盘点人员","盘点人员");
         cfg.view().field(EAMTables.EAM_INVENTORY_USER.ID).basic().hidden(true);
 
         //eam_asset_change_data

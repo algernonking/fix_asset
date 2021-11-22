@@ -7,6 +7,7 @@ import com.dt.platform.constants.db.EAMTables.EAM_INVENTORY_USER;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Employee;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -14,10 +15,10 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 
 /**
- * null
+ * 盘点用户
  * @author 金杰 , maillank@qq.com
- * @since 2021-08-24 19:49:01
- * @sign E8C1FFB00A7C4442320AF78E0D21D417
+ * @since 2021-11-19 10:34:30
+ * @sign 788B2592B163094A7F0C2A19E1E40F87
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,9 +49,9 @@ public class InventoryUser extends Entity {
 	private String userId;
 	
 	/**
-	 * 财务备注：财务备注
+	 * 备注：备注
 	*/
-	@ApiModelProperty(required = false,value="财务备注" , notes = "财务备注")
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
 	
 	/**
@@ -100,6 +101,12 @@ public class InventoryUser extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="数据版本号" , notes = "数据版本号")
 	private Integer version;
+	
+	/**
+	 * 盘点人员：盘点人员
+	*/
+	@ApiModelProperty(required = false,value="盘点人员" , notes = "盘点人员")
+	private Employee inventoryUser;
 	
 	/**
 	 * 获得 主键<br>
@@ -159,17 +166,17 @@ public class InventoryUser extends Entity {
 	}
 	
 	/**
-	 * 获得 财务备注<br>
-	 * 财务备注
-	 * @return 财务备注
+	 * 获得 备注<br>
+	 * 备注
+	 * @return 备注
 	*/
 	public String getNotes() {
 		return notes;
 	}
 	
 	/**
-	 * 设置 财务备注
-	 * @param notes 财务备注
+	 * 设置 备注
+	 * @param notes 备注
 	 * @return 当前对象
 	*/
 	public InventoryUser setNotes(String notes) {
@@ -326,6 +333,25 @@ public class InventoryUser extends Entity {
 	*/
 	public InventoryUser setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 盘点人员<br>
+	 * 盘点人员
+	 * @return 盘点人员
+	*/
+	public Employee getInventoryUser() {
+		return inventoryUser;
+	}
+	
+	/**
+	 * 设置 盘点人员
+	 * @param inventoryUser 盘点人员
+	 * @return 当前对象
+	*/
+	public InventoryUser setInventoryUser(Employee inventoryUser) {
+		this.inventoryUser=inventoryUser;
 		return this;
 	}
 

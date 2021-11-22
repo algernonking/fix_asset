@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-11-03 15:15:23
+ * @since 2021-11-22 09:00:17
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -1843,6 +1843,135 @@ public class EAMTables {
 	}
 	
 	/**
+	*/
+	public static class EAM_ASSET_ATTRIBUTE_2021_11_12 extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_attribute_2021_11_12";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",false,false,false);
+		
+		/**
+		 * 字段编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","字段编码","字段编码",false,false,true);
+		
+		/**
+		 * 字段名称
+		*/
+		public static final DBField LABEL = new DBField(DBDataType.STRING , "label","label","字段名称","字段名称",false,false,true);
+		
+		/**
+		 * 字段值类型
+		*/
+		public static final DBField VALUE_TYPE = new DBField(DBDataType.STRING , "value_type","valueType","字段值类型","字段值类型",false,false,true);
+		
+		/**
+		 * 取值路径
+		*/
+		public static final DBField VALUE_PATH = new DBField(DBDataType.STRING , "value_path","valuePath","取值路径","取值路径",false,false,true);
+		
+		/**
+		 * 标签备注
+		*/
+		public static final DBField LABEL_NOTES = new DBField(DBDataType.STRING , "label_notes","labelNotes","标签备注","标签备注",false,false,true);
+		
+		/**
+		 * 所属维度
+		*/
+		public static final DBField DIMENSION = new DBField(DBDataType.STRING , "dimension","dimension","所属维度","所属维度",false,false,true);
+		
+		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		
+		/**
+		 * 是否必选
+		*/
+		public static final DBField REQUIRED = new DBField(DBDataType.STRING , "required","required","是否必选","是否必选",false,false,true);
+		
+		/**
+		 * 是否修改
+		*/
+		public static final DBField REQUIRED_MODIFY = new DBField(DBDataType.STRING , "required_modify","requiredModify","是否修改","是否修改",false,false,true);
+		
+		/**
+		 * 组件类型
+		*/
+		public static final DBField COMPONENT_TYPE = new DBField(DBDataType.STRING , "component_type","componentType","组件类型","组件类型",false,false,true);
+		
+		/**
+		 * 组件内容
+		*/
+		public static final DBField COMPONENT_CONTENT = new DBField(DBDataType.STRING , "component_content","componentContent","组件内容","组件内容",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		/**
+		 * 归属
+		*/
+		public static final DBField OWNER = new DBField(DBDataType.STRING , "owner","owner","归属","归属",false,false,true);
+		
+		public EAM_ASSET_ATTRIBUTE_2021_11_12() {
+			this.init($NAME,"" , ID , CODE , LABEL , VALUE_TYPE , VALUE_PATH , LABEL_NOTES , DIMENSION , STATUS , REQUIRED , REQUIRED_MODIFY , COMPONENT_TYPE , COMPONENT_CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , OWNER);
+		}
+		public static final EAM_ASSET_ATTRIBUTE_2021_11_12 $TABLE=new EAM_ASSET_ATTRIBUTE_2021_11_12();
+	}
+	
+	/**
 	 * 资产字段配置项
 	*/
 	public static class EAM_ASSET_ATTRIBUTE_ITEM extends DBTable {
@@ -1965,6 +2094,130 @@ public class EAMTables {
 			this.init($NAME,"资产字段配置项" , ID , OWNER_CODE , ATTRIBUTE_ID , DIMENSION , REQUIRED , LAYOUT_TYPE , LIST_SHOW , LIST_CONTENT , LIST_SORT , FORM_SHOW , LAYOUT_ROW , LAYOUT_COLUMN , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_ASSET_ATTRIBUTE_ITEM $TABLE=new EAM_ASSET_ATTRIBUTE_ITEM();
+	}
+	
+	/**
+	*/
+	public static class EAM_ASSET_ATTRIBUTE_ITEM_2021_11_12 extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_attribute_item_2021_11_12";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",false,false,false);
+		
+		/**
+		 * 所属模块
+		*/
+		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","所属模块","所属模块",false,false,true);
+		
+		/**
+		 * 属性
+		*/
+		public static final DBField ATTRIBUTE_ID = new DBField(DBDataType.STRING , "attribute_id","attributeId","属性","属性",false,false,true);
+		
+		/**
+		 * 所属维度
+		*/
+		public static final DBField DIMENSION = new DBField(DBDataType.STRING , "dimension","dimension","所属维度","所属维度",false,false,true);
+		
+		/**
+		 * 必选
+		*/
+		public static final DBField REQUIRED = new DBField(DBDataType.STRING , "required","required","必选","必选",false,false,true);
+		
+		/**
+		 * 布局类型
+		*/
+		public static final DBField LAYOUT_TYPE = new DBField(DBDataType.STRING , "layout_type","layoutType","布局类型","布局类型",false,false,true);
+		
+		/**
+		 * 列表显示
+		*/
+		public static final DBField LIST_SHOW = new DBField(DBDataType.STRING , "list_show","listShow","列表显示","列表显示",false,false,true);
+		
+		/**
+		 * 列表内容
+		*/
+		public static final DBField LIST_CONTENT = new DBField(DBDataType.STRING , "list_content","listContent","列表内容","列表内容",false,false,true);
+		
+		/**
+		 * 列表排序
+		*/
+		public static final DBField LIST_SORT = new DBField(DBDataType.INTEGER , "list_sort","listSort","列表排序","列表排序",false,false,true);
+		
+		/**
+		 * 表单显示
+		*/
+		public static final DBField FORM_SHOW = new DBField(DBDataType.STRING , "form_show","formShow","表单显示","表单显示",false,false,true);
+		
+		/**
+		 * 行布局位置
+		*/
+		public static final DBField LAYOUT_ROW = new DBField(DBDataType.INTEGER , "layout_row","layoutRow","行布局位置","行布局位置",false,false,true);
+		
+		/**
+		 * 列布局位置
+		*/
+		public static final DBField LAYOUT_COLUMN = new DBField(DBDataType.INTEGER , "layout_column","layoutColumn","列布局位置","列布局位置",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_ATTRIBUTE_ITEM_2021_11_12() {
+			this.init($NAME,"" , ID , OWNER_CODE , ATTRIBUTE_ID , DIMENSION , REQUIRED , LAYOUT_TYPE , LIST_SHOW , LIST_CONTENT , LIST_SORT , FORM_SHOW , LAYOUT_ROW , LAYOUT_COLUMN , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_ATTRIBUTE_ITEM_2021_11_12 $TABLE=new EAM_ASSET_ATTRIBUTE_ITEM_2021_11_12();
 	}
 	
 	/**
@@ -4115,6 +4368,87 @@ public class EAMTables {
 	}
 	
 	/**
+	 * C1客户代码生成测试专用表
+	*/
+	public static class EAM_DEMO_C1 extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_demo_c1";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 抬头
+		*/
+		public static final DBField TITLE = new DBField(DBDataType.STRING , "title","title","抬头","抬头",false,false,true);
+		
+		/**
+		 * 价格
+		*/
+		public static final DBField PRICE = new DBField(DBDataType.DECIMAL , "price","price","价格","价格",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 是否有效
+		*/
+		public static final DBField VALID = new DBField(DBDataType.INTEGER , "valid","valid","是否有效","是否有效",false,false,false);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public EAM_DEMO_C1() {
+			this.init($NAME,"C1客户代码生成测试专用表" , ID , TITLE , PRICE , NOTES , VALID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_DEMO_C1 $TABLE=new EAM_DEMO_C1();
+	}
+	
+	/**
 	 * 物品档案
 	*/
 	public static class EAM_GOODS extends DBTable {
@@ -4330,9 +4664,19 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 类型
+		*/
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","类型","类型",false,false,true);
+		
+		/**
 		 * 业务编码
 		*/
 		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编码","业务编码",false,false,true);
+		
+		/**
+		 * 业务状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","业务状态","业务状态",false,false,true);
 		
 		/**
 		 * 盘点名称
@@ -4340,14 +4684,24 @@ public class EAMTables {
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","盘点名称","盘点名称",false,false,true);
 		
 		/**
-		 * 状态
+		 * 盘点状态
 		*/
-		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		public static final DBField INVENTORY_STATUS = new DBField(DBDataType.STRING , "inventory_status","inventoryStatus","盘点状态","盘点状态",false,false,true);
 		
 		/**
 		 * 数据状态
 		*/
 		public static final DBField DATA_STATUS = new DBField(DBDataType.STRING , "data_status","dataStatus","数据状态","数据状态",false,false,true);
+		
+		/**
+		 * 全员盘点
+		*/
+		public static final DBField ALL_EMPLOYEE = new DBField(DBDataType.STRING , "all_employee","allEmployee","全员盘点","全员盘点",false,false,true);
+		
+		/**
+		 * 资产状态
+		*/
+		public static final DBField ASSET_STATUS = new DBField(DBDataType.STRING , "asset_status","assetStatus","资产状态","资产状态",false,false,true);
 		
 		/**
 		 * 资产分类
@@ -4365,24 +4719,34 @@ public class EAMTables {
 		public static final DBField USE_ORGANIZATION_ID = new DBField(DBDataType.STRING , "use_organization_id","useOrganizationId","使用公司/部门","使用公司/部门",false,false,true);
 		
 		/**
-		 * 资产位置
+		 * 存放位置
 		*/
-		public static final DBField POSITION_ID = new DBField(DBDataType.STRING , "position_id","positionId","资产位置","资产位置",false,false,true);
+		public static final DBField POSITION_ID = new DBField(DBDataType.STRING , "position_id","positionId","存放位置","存放位置",false,false,true);
 		
 		/**
-		 * 负责人
+		 * 仓库
 		*/
-		public static final DBField DIRECTORY_ID = new DBField(DBDataType.STRING , "directory_id","directoryId","负责人","负责人",false,false,true);
+		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
 		
 		/**
-		 * 开始时间
+		 * 购置开始日期
 		*/
-		public static final DBField START_TIME = new DBField(DBDataType.DATE , "start_time","startTime","开始时间","开始时间",false,false,true);
+		public static final DBField PURCHASE_START_DATE = new DBField(DBDataType.DATE , "purchase_start_date","purchaseStartDate","购置开始日期","购置开始日期",false,false,true);
 		
 		/**
-		 * 结束时间
+		 * 购置结束日期
 		*/
-		public static final DBField FINISH_TIME = new DBField(DBDataType.DATE , "finish_time","finishTime","结束时间","结束时间",false,false,true);
+		public static final DBField PURCHASE_END_DATE = new DBField(DBDataType.DATE , "purchase_end_date","purchaseEndDate","购置结束日期","购置结束日期",false,false,true);
+		
+		/**
+		 * 盘点开始时间
+		*/
+		public static final DBField START_TIME = new DBField(DBDataType.DATE , "start_time","startTime","盘点开始时间","盘点开始时间",false,false,true);
+		
+		/**
+		 * 盘点结束时间
+		*/
+		public static final DBField FINISH_TIME = new DBField(DBDataType.DATE , "finish_time","finishTime","盘点结束时间","盘点结束时间",false,false,true);
 		
 		/**
 		 * 制单人
@@ -4390,14 +4754,14 @@ public class EAMTables {
 		public static final DBField ORIGINATOR_ID = new DBField(DBDataType.STRING , "originator_id","originatorId","制单人","制单人",false,false,true);
 		
 		/**
-		 * 业务日期
-		*/
-		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
-		
-		/**
 		 * 备注
 		*/
 		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 业务日期
+		*/
+		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务日期","业务日期",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -4445,9 +4809,252 @@ public class EAMTables {
 		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
 		
 		public EAM_INVENTORY() {
-			this.init($NAME,"资产盘点" , ID , BUSINESS_CODE , NAME , STATUS , DATA_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , DIRECTORY_ID , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+			this.init($NAME,"资产盘点" , ID , TYPE , BUSINESS_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , WAREHOUSE_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , NOTES , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_INVENTORY $TABLE=new EAM_INVENTORY();
+	}
+	
+	/**
+	 * 盘点明细
+	*/
+	public static class EAM_INVENTORY_ASSET extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_inventory_asset";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 盘点
+		*/
+		public static final DBField INVENTORY_ID = new DBField(DBDataType.STRING , "inventory_id","inventoryId","盘点","盘点",false,false,true);
+		
+		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		
+		/**
+		 * 资产
+		*/
+		public static final DBField ASSET_ID = new DBField(DBDataType.STRING , "asset_id","assetId","资产","资产",false,false,true);
+		
+		/**
+		 * 员工
+		*/
+		public static final DBField OPER_EMPL_ID = new DBField(DBDataType.STRING , "oper_empl_id","operEmplId","员工","员工",false,false,true);
+		
+		/**
+		 * 操作时间
+		*/
+		public static final DBField OPER_DATE = new DBField(DBDataType.DATE , "oper_date","operDate","操作时间","操作时间",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public EAM_INVENTORY_ASSET() {
+			this.init($NAME,"盘点明细" , ID , INVENTORY_ID , STATUS , ASSET_ID , OPER_EMPL_ID , OPER_DATE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_INVENTORY_ASSET $TABLE=new EAM_INVENTORY_ASSET();
+	}
+	
+	/**
+	 * 盘点负责人
+	*/
+	public static class EAM_INVENTORY_DIRECTOR extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_inventory_director";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 盘点
+		*/
+		public static final DBField INVENTORY_ID = new DBField(DBDataType.STRING , "inventory_id","inventoryId","盘点","盘点",false,false,true);
+		
+		/**
+		 * 盘点人
+		*/
+		public static final DBField USER_ID = new DBField(DBDataType.STRING , "user_id","userId","盘点人","盘点人",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public EAM_INVENTORY_DIRECTOR() {
+			this.init($NAME,"盘点负责人" , ID , INVENTORY_ID , USER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_INVENTORY_DIRECTOR $TABLE=new EAM_INVENTORY_DIRECTOR();
+	}
+	
+	/**
+	 * 资产管理人
+	*/
+	public static class EAM_INVENTORY_MANAGER extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_inventory_manager";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 盘点
+		*/
+		public static final DBField INVENTORY_ID = new DBField(DBDataType.STRING , "inventory_id","inventoryId","盘点","盘点",false,false,true);
+		
+		/**
+		 * 盘点人
+		*/
+		public static final DBField USER_ID = new DBField(DBDataType.STRING , "user_id","userId","盘点人","盘点人",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		public EAM_INVENTORY_MANAGER() {
+			this.init($NAME,"资产管理人" , ID , INVENTORY_ID , USER_ID , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final EAM_INVENTORY_MANAGER $TABLE=new EAM_INVENTORY_MANAGER();
 	}
 	
 	/**
@@ -4476,9 +5083,9 @@ public class EAMTables {
 		public static final DBField USER_ID = new DBField(DBDataType.STRING , "user_id","userId","盘点人","盘点人",false,false,true);
 		
 		/**
-		 * 财务备注
+		 * 备注
 		*/
-		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","财务备注","财务备注",false,false,true);
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -5100,7 +5707,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 资产库存记录单据主表
+	 * 资产库存
 	*/
 	public static class EAM_STOCK extends DBTable {
 		
@@ -5115,79 +5722,49 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 单据编号
+		 * 库存所属
 		*/
-		public static final DBField BUSI_CODE = new DBField(DBDataType.STRING , "busi_code","busiCode","单据编号","单据编号",false,false,true);
+		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","库存所属","库存所属",false,false,true);
+		
+		/**
+		 * 业务编号
+		*/
+		public static final DBField BUSINESS_CODE = new DBField(DBDataType.STRING , "business_code","businessCode","业务编号","业务编号",false,false,true);
 		
 		/**
 		 * 流程
 		*/
-		public static final DBField FLOW_ID = new DBField(DBDataType.STRING , "flow_id","flowId","流程","流程",false,false,true);
+		public static final DBField PROC_ID = new DBField(DBDataType.STRING , "proc_id","procId","流程","流程",false,false,true);
 		
 		/**
-		 * 单据状态
+		 * 办理状态
 		*/
-		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","单据状态","单据状态",false,false,true);
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","办理状态","办理状态",false,false,true);
 		
 		/**
-		 * 库存入库
+		 * 库存名称
 		*/
-		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","库存入库","库存入库",false,false,true);
+		public static final DBField STOCK_NAME = new DBField(DBDataType.STRING , "stock_name","stockName","库存名称","库存名称",false,false,true);
 		
 		/**
 		 * 批次号
 		*/
-		public static final DBField BATCH_NUMBER = new DBField(DBDataType.STRING , "batch_number","batchNumber","批次号","批次号",false,false,true);
-		
-		/**
-		 * 供应商
-		*/
-		public static final DBField SUPPLIER_ID = new DBField(DBDataType.STRING , "supplier_id","supplierId","供应商","供应商",false,false,true);
-		
-		/**
-		 * 接收人
-		*/
-		public static final DBField RECEIVER_ID = new DBField(DBDataType.STRING , "receiver_id","receiverId","接收人","接收人",false,false,true);
-		
-		/**
-		 * 仓库位置
-		*/
-		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库位置","仓库位置",false,false,true);
-		
-		/**
-		 * 管理组织
-		*/
-		public static final DBField MANAGEORG_ID = new DBField(DBDataType.STRING , "manageorg_id","manageorgId","管理组织","管理组织",false,false,true);
-		
-		/**
-		 * 调拨管理人员
-		*/
-		public static final DBField MANAGER_ID = new DBField(DBDataType.STRING , "manager_id","managerId","调拨管理人员","调拨管理人员",false,false,true);
-		
-		/**
-		 * 调拨管理组织
-		*/
-		public static final DBField TOMANAGEORG_ID = new DBField(DBDataType.STRING , "tomanageorg_id","tomanageorgId","调拨管理组织","调拨管理组织",false,false,true);
-		
-		/**
-		 * 调拨管理人员
-		*/
-		public static final DBField TOMANAGER_ID = new DBField(DBDataType.STRING , "tomanager_id","tomanagerId","调拨管理人员","调拨管理人员",false,false,true);
-		
-		/**
-		 * 来源
-		*/
-		public static final DBField SOURCE_ID = new DBField(DBDataType.STRING , "source_id","sourceId","来源","来源",false,false,true);
-		
-		/**
-		 * 来源详情
-		*/
-		public static final DBField SOURCE_DETAIL = new DBField(DBDataType.STRING , "source_detail","sourceDetail","来源详情","来源详情",false,false,true);
+		public static final DBField STOCK_BATCH_CODE = new DBField(DBDataType.STRING , "stock_batch_code","stockBatchCode","批次号","批次号",false,false,true);
 		
 		/**
 		 * 备注
 		*/
-		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		public static final DBField STOCK_NOTES = new DBField(DBDataType.STRING , "stock_notes","stockNotes","备注","备注",false,false,true);
+		
+		/**
+		 * 业务时间
+		*/
+		public static final DBField BUSINESS_DATE = new DBField(DBDataType.DATE , "business_date","businessDate","业务时间","业务时间",false,false,true);
+		
+		/**
+		 * 制单人
+		*/
+		public static final DBField ORIGINATOR_ID = new DBField(DBDataType.STRING , "originator_id","originatorId","制单人","制单人",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -5228,8 +5805,68 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","version","version",false,false,false);
 		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		/**
+		 * 选择数据
+		*/
+		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
+		
+		/**
+		 * 变更类型
+		*/
+		public static final DBField CHS_TYPE = new DBField(DBDataType.STRING , "chs_type","chsType","变更类型","变更类型",false,false,true);
+		
+		/**
+		 * 变更状态
+		*/
+		public static final DBField CHS_STATUS = new DBField(DBDataType.STRING , "chs_status","chsStatus","变更状态","变更状态",false,false,true);
+		
+		/**
+		 * 变更版本号
+		*/
+		public static final DBField CHS_VERSION = new DBField(DBDataType.STRING , "chs_version","chsVersion","变更版本号","变更版本号",false,false,true);
+		
+		/**
+		 * 变更ID
+		*/
+		public static final DBField CHANGE_INSTANCE_ID = new DBField(DBDataType.STRING , "change_instance_id","changeInstanceId","变更ID","变更ID",false,false,true);
+		
+		/**
+		 * 流程概要
+		*/
+		public static final DBField SUMMARY = new DBField(DBDataType.STRING , "summary","summary","流程概要","流程概要",false,false,true);
+		
+		/**
+		 * 最后审批人账户ID
+		*/
+		public static final DBField LATEST_APPROVER_ID = new DBField(DBDataType.STRING , "latest_approver_id","latestApproverId","最后审批人账户ID","最后审批人账户ID",false,false,true);
+		
+		/**
+		 * 最后审批人姓名
+		*/
+		public static final DBField LATEST_APPROVER_NAME = new DBField(DBDataType.STRING , "latest_approver_name","latestApproverName","最后审批人姓名","最后审批人姓名",false,false,true);
+		
+		/**
+		 * 下一节点审批人
+		*/
+		public static final DBField NEXT_APPROVER_IDS = new DBField(DBDataType.STRING , "next_approver_ids","nextApproverIds","下一节点审批人","下一节点审批人",false,false,true);
+		
+		/**
+		 * 下一个审批节点审批人姓名，用逗号隔开
+		*/
+		public static final DBField NEXT_APPROVER_NAMES = new DBField(DBDataType.STRING , "next_approver_names","nextApproverNames","下一个审批节点审批人姓名","用逗号隔开",false,false,true);
+		
+		/**
+		 * 审批意见
+		*/
+		public static final DBField APPROVAL_OPINION = new DBField(DBDataType.STRING , "approval_opinion","approvalOpinion","审批意见","审批意见",false,false,true);
+		
 		public EAM_STOCK() {
-			this.init($NAME,"资产库存记录单据主表" , ID , BUSI_CODE , FLOW_ID , STATUS , TYPE , BATCH_NUMBER , SUPPLIER_ID , RECEIVER_ID , WAREHOUSE_ID , MANAGEORG_ID , MANAGER_ID , TOMANAGEORG_ID , TOMANAGER_ID , SOURCE_ID , SOURCE_DETAIL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"资产库存" , ID , OWNER_CODE , BUSINESS_CODE , PROC_ID , STATUS , STOCK_NAME , STOCK_BATCH_CODE , STOCK_NOTES , BUSINESS_DATE , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION);
 		}
 		public static final EAM_STOCK $TABLE=new EAM_STOCK();
 	}

@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:06
- * @sign 9F0AEF4F504EA0263367B9E1B81436E3
+ * @since 2021-11-20 17:07:08
+ * @sign CC7E3612BC20E8511B58A8BA7FFB45BB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -136,19 +136,9 @@ public class PositionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Position,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Position.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
 	
 	/**
-	 * 基站区域 , 类型: com.dt.platform.domain.eam.Position
-	*/
-	public static final String DEVICE_AREA="deviceArea";
-	
-	/**
-	 * 基站区域 , 类型: com.dt.platform.domain.eam.Position
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Position,com.dt.platform.domain.eam.Position> DEVICE_AREA_PROP = new BeanProperty(com.dt.platform.domain.eam.Position.class ,DEVICE_AREA, com.dt.platform.domain.eam.Position.class, "基站区域", "基站区域", com.dt.platform.domain.eam.Position.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , DEVICE_AREA };
+	public static final String[] $PROPS={ ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
 	
 	/**
 	 * 代理类
@@ -287,17 +277,6 @@ public class PositionMeta {
 		public Position setTenantId(String tenantId) {
 			super.change(TENANT_ID,super.getTenantId(),tenantId);
 			super.setTenantId(tenantId);
-			return this;
-		}
-		
-		/**
-		 * 设置 基站区域
-		 * @param deviceArea 基站区域
-		 * @return 当前对象
-		*/
-		public Position setDeviceArea(Position deviceArea) {
-			super.change(DEVICE_AREA,super.getDeviceArea(),deviceArea);
-			super.setDeviceArea(deviceArea);
 			return this;
 		}
 	}

@@ -1,7 +1,7 @@
 /**
  * 主机 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 14:46:06
+ * @since 2021-11-20 16:56:55
  */
 
 
@@ -534,7 +534,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		var index=admin.popupCenter({
+		admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
@@ -546,7 +546,6 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('ops-host-form-data-popup-index', index);
 	};
 
 	window.module={

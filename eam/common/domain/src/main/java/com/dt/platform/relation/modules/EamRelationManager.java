@@ -7,6 +7,7 @@ import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.domain.ops.Voucher;
+import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
@@ -34,19 +35,29 @@ public class EamRelationManager extends RelationManager {
 
 
         this.setupScrap();
-        this.setupInventory();
+
         this.setupAssetAttributeItem();
+
+        this.setupInventory();
+        this.setupInventoryUser();
+        this.setupInventoryDirecotor();
+        this.setupInventoryAsset();
+        this.setupInventoryManager();
+
 
         this.setupTplFile();
 
-
         this.setupAssetDataChange();
+
+
+        this.setupStockAsset();
 
     }
     public void setupProperties() {
 
 
     }
+
 
     public void setupScrap(){
 
@@ -103,6 +114,8 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET_ALLOCATION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
 
+
+
         this.property(AssetAllocationMeta.MANAGER_PROP)
                 .using(EAMTables.EAM_ASSET_ALLOCATION.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 //                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
@@ -131,16 +144,106 @@ public class EamRelationManager extends RelationManager {
     }
 
 
-    //select * from attrubte_item where id in (select * from attrube)
+
 
     public void setupInventory() {
 
-        // 关联位置
-//        this.property(InventoryMeta.POSITION_PROP)
-//                .using(EAMTables.EAM_INVENTORY.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID)
-//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        this.property(InventoryMeta.INVENTORY_ASSET_INFO_LIST_PROP)
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_ASSET.ASSET_ID);
+
+        //位置
+        this.property(InventoryMeta.POSITION_PROP)
+                .using(EAMTables.EAM_INVENTORY.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
+
+        //仓库
+        this.property(InventoryMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_INVENTORY.WAREHOUSE_ID).join(EAMTables.EAM_WAREHOUSE.ID);
+
+        //关联 使用组织
+        this.property(InventoryMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_INVENTORY.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        //关联 所属公司
+        this.property(InventoryMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_INVENTORY.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+        // 关联资产分类
+        this.property(InventoryMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_INVENTORY.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
+
+        //制单人
+        this.property(InventoryMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_INVENTORY.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //盘点人
+        this.property(InventoryMeta.INVENTORY_USER_PROP)
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_USER.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //负责人
+        this.property(InventoryMeta.DIRECTOR_PROP)
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_DIRECTOR.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_DIRECTOR.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        //管理人
+        this.property(InventoryMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_MANAGER.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_MANAGER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
     }
+
+
+
+    public void setupStockAsset(){
+        this.property(StockMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_STOCK.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        // 关联资产
+        this.property(StockMeta.STOCK_ASSET_LIST_PROP)
+                .using(EAMTables.EAM_STOCK.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join(EAMTables.EAM_ASSET.ID);
+
+
+        this.property(StockMeta.CHANGE_INSTANCE_PROP)
+                .using(EAMTables.EAM_STOCK.CHANGE_INSTANCE_ID )
+                .join(FoxnicWeb.CHS_CHANGE_INSTANCE.ID);
+
+
+    }
+
+    public void setupInventoryAsset() {
+
+        this.property(InventoryAssetMeta.INVENTORY_USER_PROP)
+                .using(EAMTables.EAM_INVENTORY_ASSET.OPER_EMPL_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+        this.property(InventoryAssetMeta.ASSET_PROP)
+                .using(EAMTables.EAM_INVENTORY_ASSET.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
+
+    }
+
+    public void setupInventoryDirecotor(){
+        this.property(InventoryDirectorMeta.INVENTORY_DIRECTOR_PROP)
+                .using(EAMTables.EAM_INVENTORY_DIRECTOR.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+    }
+
+    public void setupInventoryUser() {
+
+        this.property(InventoryUserMeta.INVENTORY_USER_PROP)
+                .using(EAMTables.EAM_INVENTORY_USER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+    }
+
+
+    public void setupInventoryManager() {
+
+        this.property(InventoryManagerMeta.INVENTORY_MANAGER_PROP)
+                .using(EAMTables.EAM_INVENTORY_MANAGER.USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+
+    }
+
 
     public void setupAssetBorrow() {
 
@@ -392,7 +495,7 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_ASSET.EQUIPMENT_ENVIRONMENT_CODE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_equipment_environment'");
 
-        // 关联运行环境
+        // 关联维保
         this.property(AssetMeta.ASSET_MAINTENANCE_STATUS_PROP)
                 .using(EAMTables.EAM_ASSET.MAINTENANCE_STATUS).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
                 .condition("dict_code='eam_maintenance_status'");

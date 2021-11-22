@@ -1,7 +1,7 @@
 /**
  * 存放位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:09
+ * @since 2021-11-20 17:07:19
  */
 
 
@@ -77,12 +77,7 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间'), templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }}
-					,{ field: 'deviceType', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('device_type'), templet:function (d){ return templet('deviceType',fox.getEnumText(SELECT_DEVICETYPE_DATA,d.deviceType),d);}}
-					,{ field: 'workType', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('work_type'), templet:function (d){ return templet('workType',fox.getEnumText(SELECT_WORKTYPE_DATA,d.workType),d);}}
-					,{ field: 'areaId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('area_id') , templet: function (d) { return templet('areaId',d.areaId,d);}  }
-					,{ field: 'deviceId', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('device_id') , templet: function (d) { return templet('deviceId',d.deviceId,d);}  }
-					,{ field: 'isOnLine', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('is_on_line') , templet: function (d) { return templet('isOnLine',d.isOnLine,d);}  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -118,9 +113,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.deviceType={ inputType:"select_box", value: xmSelect.get("#deviceType",true).getValue("value"), label:xmSelect.get("#deviceType",true).getValue("nameStr") };
-		value.workType={ inputType:"select_box", value: xmSelect.get("#workType",true).getValue("value"), label:xmSelect.get("#workType",true).getValue("nameStr") };
-		value.isOnLine={ inputType:"button",value: $("#isOnLine").val()};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -168,40 +161,6 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
-		//渲染 deviceType 下拉字段
-		fox.renderSelectBox({
-			el: "deviceType",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
-		//渲染 workType 下拉字段
-		fox.renderSelectBox({
-			el: "workType",
-			radio: false,
-			size: "small",
-			filterable: false,
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
-				}
-				return opts;
-			}
-		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -344,7 +303,7 @@ function ListPage() {
 						admin.putTempData('eam-position-form-data-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						layer.msg(data.message, {icon: 1, time: 1500});
+						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			}
@@ -354,7 +313,6 @@ function ListPage() {
 					var doNext=window.pageExt.list.beforeSingleDelete(data);
 					if(!doNext) return;
 				}
-
 				top.layer.confirm(fox.translate('确定删除此')+fox.translate('存放位置')+fox.translate('吗？'), function (i) {
 					top.layer.close(i);
 
@@ -373,7 +331,6 @@ function ListPage() {
 						}
 					});
 				});
-
 			}
 			
 		});
@@ -400,7 +357,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		var index=admin.popupCenter({
+		admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
@@ -412,7 +369,6 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
-		admin.putTempData('eam-position-form-data-popup-index', index);
 	};
 
 	window.module={

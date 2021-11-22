@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 存放位置
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:06
- * @sign 9F0AEF4F504EA0263367B9E1B81436E3
+ * @since 2021-11-20 17:07:08
+ * @sign CC7E3612BC20E8511B58A8BA7FFB45BB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -100,12 +100,6 @@ public class Position extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="租户" , notes = "租户")
 	private String tenantId;
-	
-	/**
-	 * 基站区域：基站区域
-	*/
-	@ApiModelProperty(required = false,value="基站区域" , notes = "基站区域")
-	private Position deviceArea;
 	
 	/**
 	 * 获得 主键<br>
@@ -332,25 +326,6 @@ public class Position extends Entity {
 	*/
 	public Position setTenantId(String tenantId) {
 		this.tenantId=tenantId;
-		return this;
-	}
-	
-	/**
-	 * 获得 基站区域<br>
-	 * 基站区域
-	 * @return 基站区域
-	*/
-	public Position getDeviceArea() {
-		return deviceArea;
-	}
-	
-	/**
-	 * 设置 基站区域
-	 * @param deviceArea 基站区域
-	 * @return 当前对象
-	*/
-	public Position setDeviceArea(Position deviceArea) {
-		this.deviceArea=deviceArea;
 		return this;
 	}
 

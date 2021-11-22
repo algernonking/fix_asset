@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-03 15:19:06
- * @sign 9C777B13F7B14E5A431CA88A2029F276
+ * @since 2021-11-20 17:07:08
+ * @sign 388DE2BDFCFC39F239D0F1D264C5EC8A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -66,6 +66,16 @@ public class PositionVOMeta extends PositionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.PositionVO,java.lang.String> SEARCH_VALUE_PROP = new BeanProperty(com.dt.platform.domain.eam.PositionVO.class ,SEARCH_VALUE, java.lang.String.class, "搜索的值", "", java.lang.String.class, null);
 	
 	/**
+	 * 已修改字段 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String DIRTY_FIELDS="dirtyFields";
+	
+	/**
+	 * 已修改字段 , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.PositionVO,java.lang.String> DIRTY_FIELDS_PROP = new BeanProperty(com.dt.platform.domain.eam.PositionVO.class ,DIRTY_FIELDS, java.util.List.class, "已修改字段", "", java.lang.String.class, null);
+	
+	/**
 	 * 排序字段 , 类型: java.lang.String
 	*/
 	public static final String SORT_FIELD="sortField";
@@ -98,7 +108,7 @@ public class PositionVOMeta extends PositionMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , SORT_FIELD , SORT_TYPE , IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS };
 	
 	/**
 	 * 代理类
@@ -160,6 +170,17 @@ public class PositionVOMeta extends PositionMeta {
 		public PositionVO setSearchValue(String searchValue) {
 			super.change(SEARCH_VALUE,super.getSearchValue(),searchValue);
 			super.setSearchValue(searchValue);
+			return this;
+		}
+		
+		/**
+		 * 设置 已修改字段
+		 * @param dirtyFields 已修改字段
+		 * @return 当前对象
+		*/
+		public PositionVO setDirtyFields(List<String> dirtyFields) {
+			super.change(DIRTY_FIELDS,super.getDirtyFields(),dirtyFields);
+			super.setDirtyFields(dirtyFields);
 			return this;
 		}
 		
