@@ -2,7 +2,7 @@
 /**
  * 资产库存 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:17
+ * @since 2021-11-22 13:52:29
  */
  -->
  <!DOCTYPE html>
@@ -37,13 +37,16 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 库存所属 , ownerCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 流程 , procId ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 库存名称 , stockName ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 办理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('库存名称')}" class="search-label stockName-label">库存名称</span><span class="search-colon">:</span></div>
-                        <input id="stockName" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('办理状态')}" class="search-label status-label">办理状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}" style="width:140px" extraParam="{}"></div>
                     </div>
-                    <!-- 批次号 , stockBatchCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 所属公司 , ownCompanyId ,typeName=button, isHideInSearch=true -->
+                    <!-- 仓库 , warehouseId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 总金额 , amount ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 管理人 , managerId ,typeName=button, isHideInSearch=true -->
+                    <!-- 附件 , attachId ,typeName=upload, isHideInSearch=true -->
                     <!-- 制单人 , originatorId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 选择数据 , selectedCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 变更类型 , chsType ,typeName=text_input, isHideInSearch=true -->
@@ -56,15 +59,57 @@
                     <!-- 下一节点审批人 , nextApproverIds ,typeName=text_input, isHideInSearch=true -->
                     <!-- 下一个审批节点审批人姓名 , nextApproverNames ,typeName=text_input, isHideInSearch=true -->
                     <!-- 审批意见 , approvalOpinion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 单据名称 , stockName ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('单据名称')}" class="search-label stockName-label">单据名称</span><span class="search-colon">:</span></div>
+                        <input id="stockName" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
                     <!-- 业务编号 , businessCode ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('业务编号')}" class="search-label businessCode-label">业务编号</span><span class="search-colon">:</span></div>
                         <input id="businessCode" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
+                    <!-- 批次号 , stockBatchCode ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('批次号')}" class="search-label stockBatchCode-label">批次号</span><span class="search-colon">:</span></div>
+                        <input id="stockBatchCode" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 供应商 , supplierId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('供应商')}" class="search-label supplierId-label">供应商</span><span class="search-colon">:</span></div>
+                        <div id="supplierId" th:data="${'/service-eam/eam-supplier/query-list'}" style="width:140px" extraParam="{}"></div>
+                    </div>
+                    <!-- 来源 , sourceId ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('来源')}" class="search-label sourceId-label">来源</span><span class="search-colon">:</span></div>
+                        <div id="sourceId" th:data="${'/service-system/sys-dict-item/query-list?dictCode=eam_source'}" style="width:140px" extraParam="{}"></div>
+                    </div>
                     <!-- 备注 , stockNotes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label stockNotes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="stockNotes" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+                    <!-- 接收人 , receiverUserName ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('接收人')}" class="search-label receiverUserName-label">接收人</span><span class="search-colon">:</span></div>
+                        <input id="receiverUserName" class="layui-input search-input" style="width: 140px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 购置日期 , purchaseDate ,typeName=date_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('购置日期')}" class="search-label purchaseDate-label">购置日期</span><span class="search-colon">:</span></div>
+                            <input type="text" id="purchaseDate-begin" style="width: 140px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="purchaseDate-end"  style="width: 140px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
                     <!-- 业务时间 , businessDate ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -82,11 +127,12 @@
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>
+                <button id="search-button-advance" class="layui-btn layui-btn-primary icon-btn search-button-advance"><i class="layui-icon">&#xe671;</i><span th:text="${lang.translate('更多')}">更多</span></button>
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
-            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+        <div style="margin-top: 84px ">
+            <table class="layui-table" th:id="(${tableId})"  lay-filter="data-table"></table>
         </div>
 
     </div>
@@ -101,35 +147,41 @@
 <!-- 表格工具栏 -->
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
-        <button th:if="${perm.checkAuth('eam_stock:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${stockCreateBtn}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
     </div>
 </script>
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 
-    <button th:if="${perm.checkAuth('eam_stock:view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
-    <button th:if="${perm.checkAnyAuth('eam_stock:update','eam_stock:save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
+    <button th:if="${stockViewFormBtn}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button " lay-event="view" th:text="${lang.translate('查看')}" data-id="{{d.id}}">查看</button>
+    <button th:if="${stockModifyBtn}"   class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
+    <button th:if="${stockDeleteBtn}"   class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
-
-    <button th:if="${perm.checkAuth('eam_stock:delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
-
-    <button class="layui-btn layui-btn-xs " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
-    <button class="layui-btn layui-btn-xs " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
-    <button class="layui-btn layui-btn-xs " lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
+    <button th:if="${forApprovalBtn}"   class="layui-btn layui-btn-xs " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
+    <button th:if="${confirmDataBtn}"   class="layui-btn layui-btn-xs " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
+    <button th:if="${revokeDataBtn}"    class="layui-btn layui-btn-xs " lay-event="revoke-data" th:text="${lang.translate('撤销')}"  data-id="{{d.id}}">撤销</button>
 
 </script>
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
-    var AUTH_PREFIX="eam_stock";
 
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+
+    var AUTH_PREFIX= [[${authPrefix}]];
+
+    var TABLE_ID=[[${tableId}]];
+
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     // 是否需要审批
     var APPROVAL_REQUIRED = [[${approvalRequired}]] ;
     // 页面类型
     var OWNER_CODE = [[${ownerCode}]] ;
+
+    var STOCK_TYPE = [[${stockType}]] ;
+
+    var OPER_TYPE = [[${operType}]] ;
 
 </script>
 

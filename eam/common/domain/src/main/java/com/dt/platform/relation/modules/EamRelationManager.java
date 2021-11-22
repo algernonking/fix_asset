@@ -212,6 +212,34 @@ public class EamRelationManager extends RelationManager {
                 .join(FoxnicWeb.CHS_CHANGE_INSTANCE.ID);
 
 
+        // 关联来源
+        this.property(StockMeta.SOURCE_PROP)
+                .using(EAMTables.EAM_STOCK.SOURCE_ID).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_source'");
+
+        // 关联供应商
+        this.property(StockMeta.SUPPLIER_PROP)
+                .using(EAMTables.EAM_STOCK.SUPPLIER_ID).join(EAMTables.EAM_SUPPLIER.ID);
+
+
+        // 关联仓库
+        this.property(StockMeta.WAREHOUSE_PROP)
+                .using(EAMTables.EAM_STOCK.WAREHOUSE_ID).join(EAMTables.EAM_ASSET.ID);
+
+
+        // 关联管理人员
+        this.property(StockMeta.MANAGER_PROP)
+                .using(EAMTables.EAM_STOCK.MANAGER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+        //    .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+
+        //关联 所属公司
+        this.property(StockMeta.OWNER_COMPANY_PROP)
+                .using(EAMTables.EAM_STOCK.OWN_COMPANY_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+
+
+
+
     }
 
     public void setupInventoryAsset() {

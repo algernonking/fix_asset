@@ -68,7 +68,7 @@ public class AssetDataChangePageController extends ViewController {
 		model.addAttribute("agreeBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":agree") );
 		model.addAttribute("denyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":deny"));
 		model.addAttribute("dataChangeCreateBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":create") );
-		model.addAttribute("dataChangeModifyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+"update") );
+		model.addAttribute("dataChangeModifyBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":update") );
 		model.addAttribute("dataChangeDeleteBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":delete") );
 		model.addAttribute("dataChangeViewBtn",SessionUser.getCurrent().permission().checkAuth(changeType+":query") );
 

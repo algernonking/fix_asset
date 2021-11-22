@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产库存  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:13
+ * @since 2021-11-22 13:52:26
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = StockServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -101,6 +101,28 @@ public interface StockServiceProxy {
 	 * 导入资产库存数据(Excel)
 	 */
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+
+	/**
+	 * 提交审批
+	 */
+	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
+
+
+	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
+	/**
+	 * 确认操作
+	 */
+	public static final String CONFIRM_OPERATION= API_PREFIX + "confirm-operation";
+
+	/**
+	 * 撤销操作
+	 */
+	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 	/**
 	 * 添加资产库存

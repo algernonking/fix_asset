@@ -37,9 +37,6 @@ public interface IAssetDataChangeService extends ISuperService<AssetDataChange> 
 
 	Result approve(String instanceId,List<AssetDataChange> assets,String approveAction,String opinion);
 
-
-
-
 	/**
 	 * 提取获取变更的字段和值
 	 * @param changeType 变更类型

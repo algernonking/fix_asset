@@ -62,6 +62,9 @@ public interface IOperateService extends ISuperService<Operate> {
 	 * */
 	boolean queryAssetStatusColumnDisable();
 
+
+	boolean queryAssetImportDataReplenish();
+
 	/**
 	 * 判断是否需要审批
 	 * @param businessType 业务类型

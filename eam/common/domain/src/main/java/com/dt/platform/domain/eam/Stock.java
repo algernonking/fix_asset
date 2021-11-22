@@ -6,10 +6,13 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.EAMTables.EAM_STOCK;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.changes.ChangeInstance;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.system.DictItem;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -20,8 +23,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产库存
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:12
- * @sign 6DC06D9A90D5D0F73DA15D59DC6F05EC
+ * @since 2021-11-22 16:22:44
+ * @sign F4443130CBD041049C830D051E99EA4F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,6 +49,12 @@ public class Stock extends Entity {
 	private String ownerCode;
 	
 	/**
+	 * 库存类型：库存类型
+	*/
+	@ApiModelProperty(required = false,value="库存类型" , notes = "库存类型")
+	private String stockType;
+	
+	/**
 	 * 业务编号：业务编号
 	*/
 	@ApiModelProperty(required = false,value="业务编号" , notes = "业务编号")
@@ -64,28 +73,82 @@ public class Stock extends Entity {
 	private String status;
 	
 	/**
-	 * 库存名称：库存名称
-	*/
-	@ApiModelProperty(required = false,value="库存名称" , notes = "库存名称")
-	private String stockName;
-	
-	/**
 	 * 批次号：批次号
 	*/
 	@ApiModelProperty(required = false,value="批次号" , notes = "批次号")
 	private String stockBatchCode;
 	
 	/**
-	 * 备注：备注
+	 * 单据名称：单据名称
 	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String stockNotes;
+	@ApiModelProperty(required = false,value="单据名称" , notes = "单据名称")
+	private String stockName;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private String sourceId;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private String ownCompanyId;
+	
+	/**
+	 * 资产供应商：资产供应商
+	*/
+	@ApiModelProperty(required = false,value="资产供应商" , notes = "资产供应商")
+	private String supplierId;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private String warehouseId;
+	
+	/**
+	 * 总金额：总金额
+	*/
+	@ApiModelProperty(required = false,value="总金额" , notes = "总金额")
+	private BigDecimal amount;
+	
+	/**
+	 * 购置日期：购置日期
+	*/
+	@ApiModelProperty(required = false,value="购置日期" , notes = "购置日期")
+	private Date purchaseDate;
+	
+	/**
+	 * 管理人：管理人
+	*/
+	@ApiModelProperty(required = false,value="管理人" , notes = "管理人")
+	private String managerId;
+	
+	/**
+	 * 接收人：接收人
+	*/
+	@ApiModelProperty(required = false,value="接收人" , notes = "接收人")
+	private String receiverUserName;
 	
 	/**
 	 * 业务时间：业务时间
 	*/
 	@ApiModelProperty(required = false,value="业务时间" , notes = "业务时间")
 	private Date businessDate;
+	
+	/**
+	 * 附件：附件
+	*/
+	@ApiModelProperty(required = false,value="附件" , notes = "附件")
+	private String attachId;
+	
+	/**
+	 * 备注：备注
+	*/
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
+	private String stockNotes;
 	
 	/**
 	 * 制单人：制单人
@@ -226,16 +289,46 @@ public class Stock extends Entity {
 	private List<String> stockAssetIds;
 	
 	/**
-	 * 制单人：制单人
+	 * 供应商：供应商
 	*/
-	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
-	private Employee originator;
+	@ApiModelProperty(required = false,value="供应商" , notes = "供应商")
+	private Supplier supplier;
 	
 	/**
 	 * 变更实例：变更实例
 	*/
 	@ApiModelProperty(required = false,value="变更实例" , notes = "变更实例")
 	private ChangeInstance changeInstance;
+	
+	/**
+	 * 制单人：制单人
+	*/
+	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
+	private Employee originator;
+	
+	/**
+	 * 所属公司：所属公司
+	*/
+	@ApiModelProperty(required = false,value="所属公司" , notes = "所属公司")
+	private Organization ownerCompany;
+	
+	/**
+	 * 管理人员：管理人员
+	*/
+	@ApiModelProperty(required = false,value="管理人员" , notes = "管理人员")
+	private Employee manager;
+	
+	/**
+	 * 来源：来源
+	*/
+	@ApiModelProperty(required = false,value="来源" , notes = "来源")
+	private DictItem source;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private Warehouse warehouse;
 	
 	/**
 	 * 获得 主键<br>
@@ -272,6 +365,25 @@ public class Stock extends Entity {
 	*/
 	public Stock setOwnerCode(String ownerCode) {
 		this.ownerCode=ownerCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 库存类型<br>
+	 * 库存类型
+	 * @return 库存类型
+	*/
+	public String getStockType() {
+		return stockType;
+	}
+	
+	/**
+	 * 设置 库存类型
+	 * @param stockType 库存类型
+	 * @return 当前对象
+	*/
+	public Stock setStockType(String stockType) {
+		this.stockType=stockType;
 		return this;
 	}
 	
@@ -333,25 +445,6 @@ public class Stock extends Entity {
 	}
 	
 	/**
-	 * 获得 库存名称<br>
-	 * 库存名称
-	 * @return 库存名称
-	*/
-	public String getStockName() {
-		return stockName;
-	}
-	
-	/**
-	 * 设置 库存名称
-	 * @param stockName 库存名称
-	 * @return 当前对象
-	*/
-	public Stock setStockName(String stockName) {
-		this.stockName=stockName;
-		return this;
-	}
-	
-	/**
 	 * 获得 批次号<br>
 	 * 批次号
 	 * @return 批次号
@@ -371,21 +464,173 @@ public class Stock extends Entity {
 	}
 	
 	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
+	 * 获得 单据名称<br>
+	 * 单据名称
+	 * @return 单据名称
 	*/
-	public String getStockNotes() {
-		return stockNotes;
+	public String getStockName() {
+		return stockName;
 	}
 	
 	/**
-	 * 设置 备注
-	 * @param stockNotes 备注
+	 * 设置 单据名称
+	 * @param stockName 单据名称
 	 * @return 当前对象
 	*/
-	public Stock setStockNotes(String stockNotes) {
-		this.stockNotes=stockNotes;
+	public Stock setStockName(String stockName) {
+		this.stockName=stockName;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public String getSourceId() {
+		return sourceId;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param sourceId 来源
+	 * @return 当前对象
+	*/
+	public Stock setSourceId(String sourceId) {
+		this.sourceId=sourceId;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public String getOwnCompanyId() {
+		return ownCompanyId;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownCompanyId 所属公司
+	 * @return 当前对象
+	*/
+	public Stock setOwnCompanyId(String ownCompanyId) {
+		this.ownCompanyId=ownCompanyId;
+		return this;
+	}
+	
+	/**
+	 * 获得 资产供应商<br>
+	 * 资产供应商
+	 * @return 资产供应商
+	*/
+	public String getSupplierId() {
+		return supplierId;
+	}
+	
+	/**
+	 * 设置 资产供应商
+	 * @param supplierId 资产供应商
+	 * @return 当前对象
+	*/
+	public Stock setSupplierId(String supplierId) {
+		this.supplierId=supplierId;
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public String getWarehouseId() {
+		return warehouseId;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouseId 仓库
+	 * @return 当前对象
+	*/
+	public Stock setWarehouseId(String warehouseId) {
+		this.warehouseId=warehouseId;
+		return this;
+	}
+	
+	/**
+	 * 获得 总金额<br>
+	 * 总金额
+	 * @return 总金额
+	*/
+	public BigDecimal getAmount() {
+		return amount;
+	}
+	
+	/**
+	 * 设置 总金额
+	 * @param amount 总金额
+	 * @return 当前对象
+	*/
+	public Stock setAmount(BigDecimal amount) {
+		this.amount=amount;
+		return this;
+	}
+	
+	/**
+	 * 获得 购置日期<br>
+	 * 购置日期
+	 * @return 购置日期
+	*/
+	public Date getPurchaseDate() {
+		return purchaseDate;
+	}
+	
+	/**
+	 * 设置 购置日期
+	 * @param purchaseDate 购置日期
+	 * @return 当前对象
+	*/
+	public Stock setPurchaseDate(Date purchaseDate) {
+		this.purchaseDate=purchaseDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人<br>
+	 * 管理人
+	 * @return 管理人
+	*/
+	public String getManagerId() {
+		return managerId;
+	}
+	
+	/**
+	 * 设置 管理人
+	 * @param managerId 管理人
+	 * @return 当前对象
+	*/
+	public Stock setManagerId(String managerId) {
+		this.managerId=managerId;
+		return this;
+	}
+	
+	/**
+	 * 获得 接收人<br>
+	 * 接收人
+	 * @return 接收人
+	*/
+	public String getReceiverUserName() {
+		return receiverUserName;
+	}
+	
+	/**
+	 * 设置 接收人
+	 * @param receiverUserName 接收人
+	 * @return 当前对象
+	*/
+	public Stock setReceiverUserName(String receiverUserName) {
+		this.receiverUserName=receiverUserName;
 		return this;
 	}
 	
@@ -405,6 +650,44 @@ public class Stock extends Entity {
 	*/
 	public Stock setBusinessDate(Date businessDate) {
 		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 附件<br>
+	 * 附件
+	 * @return 附件
+	*/
+	public String getAttachId() {
+		return attachId;
+	}
+	
+	/**
+	 * 设置 附件
+	 * @param attachId 附件
+	 * @return 当前对象
+	*/
+	public Stock setAttachId(String attachId) {
+		this.attachId=attachId;
+		return this;
+	}
+	
+	/**
+	 * 获得 备注<br>
+	 * 备注
+	 * @return 备注
+	*/
+	public String getStockNotes() {
+		return stockNotes;
+	}
+	
+	/**
+	 * 设置 备注
+	 * @param stockNotes 备注
+	 * @return 当前对象
+	*/
+	public Stock setStockNotes(String stockNotes) {
+		this.stockNotes=stockNotes;
 		return this;
 	}
 	
@@ -868,21 +1151,21 @@ public class Stock extends Entity {
 	}
 	
 	/**
-	 * 获得 制单人<br>
-	 * 制单人
-	 * @return 制单人
+	 * 获得 供应商<br>
+	 * 供应商
+	 * @return 供应商
 	*/
-	public Employee getOriginator() {
-		return originator;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 	
 	/**
-	 * 设置 制单人
-	 * @param originator 制单人
+	 * 设置 供应商
+	 * @param supplier 供应商
 	 * @return 当前对象
 	*/
-	public Stock setOriginator(Employee originator) {
-		this.originator=originator;
+	public Stock setSupplier(Supplier supplier) {
+		this.supplier=supplier;
 		return this;
 	}
 	
@@ -902,6 +1185,101 @@ public class Stock extends Entity {
 	*/
 	public Stock setChangeInstance(ChangeInstance changeInstance) {
 		this.changeInstance=changeInstance;
+		return this;
+	}
+	
+	/**
+	 * 获得 制单人<br>
+	 * 制单人
+	 * @return 制单人
+	*/
+	public Employee getOriginator() {
+		return originator;
+	}
+	
+	/**
+	 * 设置 制单人
+	 * @param originator 制单人
+	 * @return 当前对象
+	*/
+	public Stock setOriginator(Employee originator) {
+		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属公司<br>
+	 * 所属公司
+	 * @return 所属公司
+	*/
+	public Organization getOwnerCompany() {
+		return ownerCompany;
+	}
+	
+	/**
+	 * 设置 所属公司
+	 * @param ownerCompany 所属公司
+	 * @return 当前对象
+	*/
+	public Stock setOwnerCompany(Organization ownerCompany) {
+		this.ownerCompany=ownerCompany;
+		return this;
+	}
+	
+	/**
+	 * 获得 管理人员<br>
+	 * 管理人员
+	 * @return 管理人员
+	*/
+	public Employee getManager() {
+		return manager;
+	}
+	
+	/**
+	 * 设置 管理人员
+	 * @param manager 管理人员
+	 * @return 当前对象
+	*/
+	public Stock setManager(Employee manager) {
+		this.manager=manager;
+		return this;
+	}
+	
+	/**
+	 * 获得 来源<br>
+	 * 来源
+	 * @return 来源
+	*/
+	public DictItem getSource() {
+		return source;
+	}
+	
+	/**
+	 * 设置 来源
+	 * @param source 来源
+	 * @return 当前对象
+	*/
+	public Stock setSource(DictItem source) {
+		this.source=source;
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouse 仓库
+	 * @return 当前对象
+	*/
+	public Stock setWarehouse(Warehouse warehouse) {
+		this.warehouse=warehouse;
 		return this;
 	}
 

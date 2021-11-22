@@ -18,6 +18,7 @@ import com.dt.platform.domain.eam.*;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.TplFileServiceProxy;
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -1094,12 +1095,12 @@ public class AssetController extends SuperController {
 				return ErrorDesc.failure().message("缺少上传的文件");
 			}
 
+
 			boolean dataFill=false;
-			if( (!StringUtil.isBlank(dataType))
-					&& AssetDataImportProcessTypeEnum.DATA_FILL.code().equals(dataType) ){
-					dataFill=true;
+			Result dataFillResult= OperateServiceProxy.api().queryAssetDirectUpdateMode();
+			if(dataFillResult.isSuccess()){
+				dataFill=(boolean)dataFillResult.getData();
 			}
-			dataFill=true;
 
 		    if(StringUtil.isBlank(ownerCode)){
 				return ErrorDesc.failure().message("导入失败,未设置OwnerCode");

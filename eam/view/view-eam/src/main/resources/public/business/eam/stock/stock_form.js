@@ -1,7 +1,7 @@
 /**
  * 资产库存 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:22
+ * @since 2021-11-22 13:52:33
  */
 
 function FormPage() {
@@ -41,8 +41,6 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
-		//调整窗口的高度与位置
-		adjustPopup();
 	}
 
 	/**
@@ -105,11 +103,107 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 sourceId 下拉字段
+		fox.renderSelectBox({
+			el: "sourceId",
+			radio: true,
+			filterable: false,
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "purchase".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 supplierId 下拉字段
+		fox.renderSelectBox({
+			el: "supplierId",
+			radio: true,
+			filterable: false,
+			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].supplierName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 warehouseId 下拉字段
+		fox.renderSelectBox({
+			el: "warehouseId",
+			radio: true,
+			filterable: true,
+			//转换数据
+			searchField: "warehouseName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].warehouseName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#purchaseDate',
+			format:"yyyy-MM-dd HH:mm:ss",
+			trigger:"click"
+		});
 		laydate.render({
 			elem: '#businessDate',
 			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
+	    //渲染图片字段
+		foxup.render({
+			el:"attachId",
+			maxFileCount: 1,
+			displayFileName: false,
+			accept: "image",
+			acceptMime:'image/*',
+			exts:'png|jpg|bmp|gif|jpeg',
+			afterPreview:function(elId,index,fileId,upload){
+				adjustPopup();
+			},
+			afterUpload:function (result,index,upload) {
+				console.log("文件上传后回调")
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+			}
+	    });
 	}
 
 	/**
@@ -133,15 +227,23 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-
-
-
-			//设置 业务时间 显示复选框勾选
-			if(formData["businessDate"]) {
-				$("#businessDate").val(fox.dateFormat(formData["businessDate"],"yyyy-MM-dd"));
+			//设置 附件 显示附件
+		    if($("#attachId").val()) {
+				foxup.fill("attachId",$("#attachId").val());
+		    } else {
+				adjustPopup();
 			}
 
 
+
+
+
+			//设置  来源 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#sourceId",formData.source);
+			//设置  供应商 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#supplierId",formData.supplier);
+			//设置  仓库 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#warehouseId",formData.warehouse);
 
 			//处理fillBy
 
@@ -192,6 +294,12 @@ function FormPage() {
 
 
 
+		//获取 来源 下拉框的值
+		data["sourceId"]=fox.getSelectedValue("sourceId",false);
+		//获取 供应商 下拉框的值
+		data["supplierId"]=fox.getSelectedValue("supplierId",false);
+		//获取 仓库 下拉框的值
+		data["warehouseId"]=fox.getSelectedValue("warehouseId",false);
 
 		return data;
 	}
@@ -239,6 +347,38 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择公司对话框
+		$("#ownCompanyId-button").click(function(){
+			var ownCompanyIdDialogOptions={
+				field:"ownCompanyId",
+				formData:getFormData(),
+				inputEl:$("#ownCompanyId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"com",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(ownCompanyIdDialogOptions);
+		});
+		// 请选择人员对话框
+		$("#managerId-button").click(function(){
+				var managerIdDialogOptions={
+				field:"managerId",
+				formData:getFormData(),
+				inputEl:$("#managerId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"emp",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseEmployee(managerIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

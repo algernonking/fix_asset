@@ -15,16 +15,45 @@ import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ValidateResult;
 import com.github.foxnic.dao.data.SaveMode;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 /**
  * <p>
  * 资产库存 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:12
+ * @since 2021-11-22 13:52:26
 */
 
 public interface IStockService extends ISuperService<Stock> {
+
+
+	Result startProcess(ProcessStartVO startVO);
+
+	Result approve(ProcessApproveVO approveVO);
+
+	/**
+	 * 撤销流程
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result revokeOperation(String id);
+
+	/**
+	 * 送审
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result forApproval(String id);
+
+	/**
+	 * 确认操作
+	 * @param id ID
+	 * @return 是否成功
+	 * */
+	Result confirmOperation(String id);
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常

@@ -367,7 +367,7 @@ public class AssetBorrowServiceImpl extends SuperService<AssetBorrow> implements
 			assetBorrow.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
-		//办理状态
+		//借用状态
 		if(StringUtil.isBlank( assetBorrow.getBorrowStatus())){
 			assetBorrow.setBorrowStatus(AssetBorrowStatusEnum.NOT_BORROWED.code());
 		}

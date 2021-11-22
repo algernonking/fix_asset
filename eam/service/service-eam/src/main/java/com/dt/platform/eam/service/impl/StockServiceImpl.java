@@ -2,6 +2,14 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +43,7 @@ import java.util.Date;
  * 资产库存 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:47:13
+ * @since 2021-11-22 13:52:26
 */
 
 
@@ -60,6 +68,33 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 		return IDGenerator.getSnowflakeIdString();
 	}
 
+
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result revokeOperation(String id) {
+		return null;
+	}
+
+	@Override
+	public Result forApproval(String id) {
+		return null;
+	}
+
+	@Override
+	public Result confirmOperation(String id) {
+		return null;
+	}
+
+
 	/**
 	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
 	 *
@@ -69,9 +104,67 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 	 */
 	@Override
 	public Result insert(Stock stock,boolean throwsException) {
+
+
+
+		//填充制单人
+		if( StringUtil.isBlank(stock.getOriginatorId())){
+			stock.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+		//业务时间
+		if(StringUtil.isBlank(stock.getBusinessDate())){
+			stock.setBusinessDate(new Date());
+		}
+		//办理状态
+		if(StringUtil.isBlank( stock.getStatus())){
+			stock.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+		//办理状态
+		if(StringUtil.isBlank(stock.getStockType())){
+			stock.setStockType(AssetStockTypeEnum.IN.code());
+		}
+
+		//生成编码规则
+		if(StringUtil.isBlank(stock.getBusinessCode())){
+			String code=AssetOperateEnum.EAM_ASSET_STOCK_IN.code();
+			if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(stock.getOwnerCode())){
+				if(AssetStockTypeEnum.IN.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_STOCK_IN.code();
+				}else if(AssetStockTypeEnum.OUT.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_STOCK_OUT.code();
+				}else if(AssetStockTypeEnum.ALLOCATE.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
+				}
+			}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(stock.getOwnerCode())){
+				if(AssetStockTypeEnum.IN.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_IN.code();
+				}else if(AssetStockTypeEnum.OUT.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_OUT.code();
+				}else if(AssetStockTypeEnum.ALLOCATE.code().equals(stock.getStockType())){
+					code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code();
+				}
+			}
+
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(code);
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				stock.setBusinessCode(codeResult.getData().toString());
+			}
+		}
+
 		Result r=super.insert(stock,throwsException);
+
+
+		if(r.isSuccess()){
+
+		}
+
 		return r;
 	}
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
