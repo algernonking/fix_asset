@@ -183,7 +183,6 @@ public class AssetController extends SuperController {
 	public Result insert(Asset assetVO) {
 		String id= IDGenerator.getSnowflakeIdString();
 		assetVO.setId(id);
-		assetVO.setOwnerCode(AssetOwnerCodeEnum.ASSET.code());
 		//先保存自定义属性
 		if(assetVO.getPcmData()!=null&&assetVO.getPcmData().size()>0){
 			CatalogData pcmData=new CatalogData();
@@ -1003,6 +1002,27 @@ public class AssetController extends SuperController {
 	@RequestMapping(AssetServiceProxy.BATCH_REVOKE_OPERATION)
 	public Result batchRevokeOperation(List<String> ids)  {
 		return assetService.batchRevokeOperation(ids);
+	}
+
+
+	/**
+	 * 查询
+	 * */
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = AssetVOMeta.INTERNAL_CONTROL_LABEL , value = "主键清单" , required = true , dataTypeClass=List.class , example = "12")
+	})
+	@NotNull(name = AssetVOMeta.INTERNAL_CONTROL_LABEL)
+	@ApiOperationSupport(order=17)
+	@SentinelResource(value = AssetServiceProxy.QUERY_INTERNAL_CONTROL_LABEL_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetServiceProxy.QUERY_INTERNAL_CONTROL_LABEL_DATA)
+	public Result<List<Asset>> queryInternalControlLabelData(String internalControlLabel)  {
+		Result<List<Asset>> result=new Result<>();
+		AssetVO vo=new AssetVO();
+		vo.setInternalControlLabel(internalControlLabel);
+		List<Asset> list=assetService.queryList(vo);
+		result.success(true).data(list);
+		return result;
+
 	}
 
 

@@ -10,6 +10,7 @@ JAVA=java
 
 
 
+
 jar_dir="/Users/lank/IdeaProjectsnew/eam/eam/wrapper/wrapper-all/target"
 app_tar="app.tar"
 

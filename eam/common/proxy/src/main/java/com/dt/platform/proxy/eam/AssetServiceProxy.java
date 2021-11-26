@@ -143,7 +143,10 @@ public interface AssetServiceProxy {
 	 */
 	public static final String APPROVE= API_PREFIX + "approve";
 
-
+	/**
+	 * 查询QUERY_INTERNAL_CONTROL_LABEL数据
+	 */
+	public static final String QUERY_INTERNAL_CONTROL_LABEL_DATA= API_PREFIX + "query-internal-control-label-data";
 
 	/**
 	 * 查询资产新增审批

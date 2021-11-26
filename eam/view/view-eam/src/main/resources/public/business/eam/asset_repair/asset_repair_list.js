@@ -79,11 +79,11 @@ function ListPage() {
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'repairStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修状态'), templet:function (d){ return templet('repairStatus',fox.getEnumText(SELECT_REPAIRSTATUS_DATA,d.repairStatus),d);}}
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修类型'), templet: function (d) { return templet('type' ,fox.joinLabel(d.type,"label"),d);}}
+					//,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('维修类型'), templet: function (d) { return templet('type' ,fox.joinLabel(d.type,"label"),d);}}
 					,{ field: 'planFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('计划完成日期') ,templet: function (d) { return templet('planFinishDate',fox.dateFormat(d.planFinishDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'actualFinishDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('实际完成日期') ,templet: function (d) { return templet('actualFinishDate',fox.dateFormat(d.actualFinishDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修内容') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'reportUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') , templet: function (d) { return templet('reportUserId',fox.getProperty(d,["reportUser","nameAndBadge"]),d);} }
+					//,{ field: 'reportUserId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报修人') , templet: function (d) { return templet('reportUserId',fox.getProperty(d,["reportUser","nameAndBadge"]),d);} }
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'selectedCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }

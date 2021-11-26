@@ -1,11 +1,25 @@
 package com.dt.platform.eam.page;
 
+import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.domain.eam.AssetAttributeItemVO;
+import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
 import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanNameUtil;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.hrm.OrganizationVO;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.view.aspect.PageHelper;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.hrm.OrganizationServiceProxy;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.StockServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 资产库存 模版页面控制器
@@ -41,7 +58,37 @@ public class StockPageController extends ViewController {
 		}
 		return proxy;
 	}
-	
+
+	/**
+	 * 资产库存 功能主页面
+	 */
+	@RequestMapping("/stock_asset_list.html")
+	public String stockAssetList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+		String itemOwner= "";
+		String categoryCode="";
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			categoryCode=AssetCategoryCodeEnum.ASSET_CONSUMABLES.code();
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_BILL.code();
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			categoryCode=AssetCategoryCodeEnum.ASSET.code();
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_BILL.code();
+		}
+
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode", ownerCode);
+		model.addAttribute("categoryCode", categoryCode);
+		model.addAttribute("pageType", itemOwner);
+		return prefix+"/stock_asset_list";
+	}
+
+
 	/**
 	 * 资产库存 功能主页面
 	 */
@@ -63,6 +110,8 @@ public class StockPageController extends ViewController {
 
 		model.addAttribute("stockExportBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":export") );
 		model.addAttribute("stockImportBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":import") );
+
+
 
 		//审批
 		boolean approvalRequired=true;
@@ -93,12 +142,28 @@ public class StockPageController extends ViewController {
 	@RequestMapping("/stock_form.html")
 	public String form(Model model,HttpServletRequest request , String id,String ownerCode,String stockType) {
 
+		//默认公司
+		OrganizationVO vo=new OrganizationVO();
+		vo.setSearchField("sort");
+		vo.setValid(1);
+		vo.setType("com");
+		Result<List<Organization>> orgResult= OrganizationServiceProxy.api().queryList(vo);
+		if(orgResult.isSuccess()&&orgResult.getData().size()>0){
+			model.addAttribute("assetDefaultOwnCompany",orgResult.getData().get(0));
+		}
+
 		String authPrefix="eam_"+ownerCode;
 		model.addAttribute("authPrefix",authPrefix);
 		model.addAttribute("ownerCode",ownerCode);
 		model.addAttribute("stockType",stockType);
 
+		model.addAttribute("billId",id);
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			model.addAttribute("billType",AssetOperateEnum.EAM_ASSET_CONSUMABLES_STOCK_IN);
 
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			model.addAttribute("billType",AssetOperateEnum.EAM_ASSET_STOCK_IN);
+		}
 
 		return prefix+"/stock_form";
 	}

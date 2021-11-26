@@ -91,9 +91,6 @@ function ListPage() {
 		console.log("click")
 		if(treeNode==null) return;
 		editingNode=treeNode;
-
-
-
 		$("#assetList")[0].contentWindow.module.searchCategory(treeNode.id);
 	}
 

@@ -3,6 +3,7 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.alibaba.druid.pool.ha.node.NodeEventTypeEnum;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
@@ -20,11 +21,13 @@ import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.sql.expr.*;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
+import org.github.foxnic.web.constants.enums.changes.ApprovalMode;
 import org.github.foxnic.web.constants.enums.changes.ApprovalStatus;
 import org.github.foxnic.web.constants.enums.changes.ChangeType;
 import org.github.foxnic.web.domain.bpm.Appover;
 import org.github.foxnic.web.domain.changes.*;
 import org.github.foxnic.web.framework.change.ChangesAssistant;
+import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -340,6 +343,16 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 					||col.equals("deleted")
 					||col.equals("delete_by")
 					||col.equals("delete_time")
+					||col.equals("chs_type")
+					||col.equals("chs_status")
+					||col.equals("chs_version")
+					||col.equals("change_instance_id")
+					||col.equals("summary")
+					||col.equals("latest_approver_id")
+					||col.equals("latest_approver_name")
+					||col.equals("next_approver_ids")
+					||col.equals("next_approver_names")
+					||col.equals("approval_opinion")
 					||col.equals("internal_control_label")){
 				dataRcd.setValue(col,null);
 				System.out.println("rcd column "+col+" after value:"+dataRcd.getString(col));
@@ -415,10 +428,26 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	 * */
 	@Override
 	public Result forApproval(String id){
+
 		AssetDataChange billData=getById(id);
 		join(billData, AssetDataChangeMeta.ASSET_LIST);
 		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus()) ||AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())  ){
 			if(operateService.approvalRequired(billData.getChangeType()) ) {
+				ChangeDefinitionVO changeDefinitionVO=new ChangeDefinitionVO();
+				changeDefinitionVO.setCode(billData.getChangeType());
+				Result<List<ChangeDefinition>> changeDefinitionResult=ChangeDefinitionServiceProxy.api().queryList(changeDefinitionVO);
+				if(!changeDefinitionResult.isSuccess()){
+					return ErrorDesc.failureMessage("获取流程配置失败");
+				}else{
+					if(changeDefinitionResult.getData().size()==0){
+						return ErrorDesc.failureMessage("未配置流程信息");
+					}
+					ChangeDefinition ChangeDefinition=changeDefinitionResult.getData().get(0);
+					if(!ApprovalMode.simple.code().equals(ChangeDefinition.getMode())){
+						return ErrorDesc.failureMessage("当前只支持简单流程方式");
+					}
+				}
+
 				//审批操作
 				//步骤一开始启动流程
 				ProcessStartVO startVO=new ProcessStartVO();

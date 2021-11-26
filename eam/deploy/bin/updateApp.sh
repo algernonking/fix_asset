@@ -30,6 +30,7 @@ cDir="$app_dir/data
 $app_dir/logs
 $app_dir/tmp
 $app_dir/update
+$app_dir/update/update
 $app_dir/backup/dbdata
 $app_dir/upload
 $app_dir/upload/tpl/T001
@@ -49,6 +50,8 @@ fi
 
 ##start to backup
 cd $app_dir
+sh backupAppDB.sh
+
 echo "Start to backup application!"
 curTime=`date +"%Y%m%d%H%M%S"`
 tar zcvf eam_backup_${curTime}.tar.gz ./lib/* ./*.jar ./application.yml
@@ -108,5 +111,17 @@ if [[ -f $updateFileScript ]];then
   chmod +x $app_dir/bin/$updateFileScript
 fi
 echo "eam update success!"
+
+sh $app_dir/bin/runSql.sh as
+
+if [[ -f $app_dir/update/update/update.sql ]];then
+  echo "update update.sql "
+  sh $app_dir/bin/runSql.sh $app_dir/update/update/update.sql
+fi
+
+if [[ -f $ $app_dir/bin/sql/app_updateVersion.sql ]];then
+  echo "update version"
+  sh $app_dir/bin/runSql.sh $app_dir/bin/sql/app_updateVersion.sql
+fi
 
 exit 0

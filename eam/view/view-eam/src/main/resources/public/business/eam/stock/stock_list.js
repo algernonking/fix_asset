@@ -468,7 +468,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
-		admin.popupCenter({
+		var index=admin.popupCenter({
 			title: title,
 			resize: false,
 			offset: [top,null],
@@ -480,6 +480,11 @@ function ListPage() {
 				refreshTableData();
 			}
 		});
+
+		admin.putTempData('eam-stock-form-data-win-popup-index', index);
+
+
+
 	};
 
 	window.module={

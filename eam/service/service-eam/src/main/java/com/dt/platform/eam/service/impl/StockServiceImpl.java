@@ -3,8 +3,12 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.AssetItem;
+import com.dt.platform.eam.service.IAssetSelectedDataService;
+import com.dt.platform.eam.service.IAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -49,6 +53,15 @@ import java.util.Date;
 
 @Service("EamStockService")
 public class StockServiceImpl extends SuperService<Stock> implements IStockService {
+
+	@Autowired
+	private AssetItemServiceImpl assetItemService;
+
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
+	@Autowired
+	private IAssetService assetService;
 
 	/**
 	 * 注入DAO对象
@@ -105,6 +118,23 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 	@Override
 	public Result insert(Stock stock,boolean throwsException) {
 
+		if(stock.getStockAssetIds()==null||stock.getStockAssetIds().size()==0){
+			String assetSelectedCode=stock.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			stock.setStockAssetIds(list);
+		}
+
+		if(stock.getStockAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+
+		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),stock.getStockAssetIds());
+		if(!ckResult.isSuccess()){
+			return ckResult;
+		}
+
 
 
 		//填充制单人
@@ -158,8 +188,20 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 		Result r=super.insert(stock,throwsException);
 
 
-		if(r.isSuccess()){
-
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<stock.getStockAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
+				asset.setHandleId(stock.getId());
+				asset.setAssetId(stock.getStockAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
 		}
 
 		return r;
@@ -253,6 +295,11 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 	@Override
 	public Result update(Stock stock , SaveMode mode,boolean throwsException) {
 		Result r=super.update(stock , mode , throwsException);
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",stock.getId());
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",stock.getId());
+		}
 		return r;
 	}
 

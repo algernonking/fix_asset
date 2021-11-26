@@ -451,7 +451,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             data.ownerCode=OWNER_CODE;
-            //获取自定义数据
+            data.internalControlLabel=INTERNAL_CONTROL_LABEL;
             return true;
         },
         /**

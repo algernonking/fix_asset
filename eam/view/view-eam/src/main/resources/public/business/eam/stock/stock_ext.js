@@ -17,6 +17,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+
+
+    var timestamp = Date.parse(new Date());
+
+
+    var formAction=admin.getTempData('eam-form-data-form-action');
+
     //列表页的扩展
     var list={
         /**
@@ -212,6 +219,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+
+            if(data&&data.id){
+
+                console.log(1)
+            }else{
+                $('#ownCompanyId-button').find("span").each(function (index, e) {
+                    $(e).html(ASSET_DEFAULT_OWN_COMPANY.fullName);
+                })
+                $('#ownCompanyId').val(ASSET_DEFAULT_OWN_COMPANY.id);
+            }
         },
         /**
          * 表单数据填充后
@@ -256,13 +273,27 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         /**
          *  加载 列表
          */
-        assetSelectList:function (ifr,win,data) {
-            // debugger
-            console.log("assetSelectList",ifr,data);
+        assetSelectList:function (ifr,win,datapar) {
+
+            console.log("assetSelectList",ifr,datapar);
+
             //设置 iframe 高度
-            ifr.height("400px");
+            ifr.height("450px");
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            var data={};
+            data.searchContent={};
+            data.assetSelectedCode=timestamp;
+            data.assetBusinessType=BILL_TYPE
+            data.action=formAction;
+            data.ownerCode="asset_consumables";
+            if(BILL_ID==null)BILL_ID="";
+            data.assetOwnerId=BILL_ID;
+            admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
+            admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
+            win.location="/business/eam/stock/stock_asset_list.html?assetSelectedCode="+timestamp+"&ownerCode="+data.ownerCode;
+
+
+            
         },
         /**
          * 末尾执行

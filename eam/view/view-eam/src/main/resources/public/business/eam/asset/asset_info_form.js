@@ -966,7 +966,6 @@ function FormPage() {
 
 	function saveForm(data) {
 
-		
 		//自定义数据
 		if(pcmColumns.length>0){
 			var pcmData={};
@@ -986,6 +985,7 @@ function FormPage() {
 
 		var api=moduleURL+"/"+(data.id?"update":"insert");
 		admin.post(api,data,function (r){
+			console.log(r);
 			if (r.success) {
 				layer.msg(r.message, {icon: 1, time: 500});
 				var index=admin.getTempData('eam-asset-form-data-popup-index');

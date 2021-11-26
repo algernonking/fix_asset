@@ -100,14 +100,14 @@
             <div class="layui-col-xs4 form-column">
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('所属公司')}">所属公司</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('所属公司')}">所属公司</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="ownCompanyId" id="ownCompanyId" name="ownCompanyId"  type="hidden" class="layui-input"   />
                             <button id="ownCompanyId-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择公司')}" th:default-label="${lang.translate('请选择公司')}">按钮文本</span></button>
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
+                   <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('管理人')}">管理人</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="managerId" id="managerId" name="managerId"  type="hidden" class="layui-input"   />
@@ -168,7 +168,7 @@
          <!--开始：group 循环-->
 
         <fieldset class="layui-elem-field layui-field-title form-group-title">
-        <legend>列表</legend>
+        <legend>资产</legend>
         </fieldset>
         <div class="layui-row form-row" style="text-align: center;">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
@@ -205,6 +205,13 @@
     var BILL_ID = [[${billId}]] ;
     // 单据类型
     var BILL_TYPE = [[${billType}]] ;
+
+    var STOCK_TYPE = [[${stockType}]] ;
+
+    var OWNER_CODE = [[${ownerCode}]] ;
+
+
+    var ASSET_DEFAULT_OWN_COMPANY =  [[${assetDefaultOwnCompany}]];
 
 </script>
 

@@ -331,6 +331,11 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			assetRepair.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 
+		//报修人
+		if(StringUtil.isBlank(assetRepair.getReportUserId())){
+			assetRepair.setReportUserId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
 		//业务时间
 		if(StringUtil.isBlank(assetRepair.getBusinessDate())){
 			assetRepair.setBusinessDate(new Date());

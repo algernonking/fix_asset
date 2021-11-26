@@ -1,3 +1,8 @@
+
+http://121.43.103.102/upload/sql.tar.gz
+http://121.43.103.102/upload/app.tar
+
+
 ###创建数据库
 CREATE DATABASE eam DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 use eam;

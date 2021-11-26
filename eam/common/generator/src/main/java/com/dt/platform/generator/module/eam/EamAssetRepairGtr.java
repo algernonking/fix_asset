@@ -56,8 +56,8 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PICTURE_ID).table().disable();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.BUSINESS_DATE).table().hidden();
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.NAME).table().hidden();
-
-
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.TYPE).table().disable();
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPORT_USER_ID).table().disable();
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.CONTENT).search()
                 .form().validate().required().
@@ -65,7 +65,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
                 .search().fuzzySearch();
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.STATUS).form().form().selectBox().enumType(AssetHandleStatusEnum.class);
-        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form().validate().required()
+        cfg.view().field(EAMTables.EAM_ASSET_REPAIR.REPAIR_STATUS).form()
                 .form().selectBox().enumType(AssetRepairStatusEnum.class).defaultValue(AssetRepairStatusEnum.REPAIRING.code());
 
         cfg.view().field(EAMTables.EAM_ASSET_REPAIR.PLAN_FINISH_DATE).form().dateInput().format("yyyy-MM-dd").search().range();
@@ -128,6 +128,7 @@ public class EamAssetRepairGtr extends BaseCodeGenerator{
 
         cfg.view().list().disableBatchDelete();
 
+        cfg.view().form().addJsVariable("ASSET_DEFAULT_OWN_COMPANY","[[${assetDefaultOwnCompany}]]"," ");
         cfg.view().form().addJsVariable("BILL_ID","[[${billId}]]","单据ID");
         cfg.view().form().addJsVariable("BILL_TYPE","[[${billType}]]","单据类型");
         cfg.view().list().addJsVariable("APPROVAL_REQUIRED","[[${approvalRequired}]]","是否需要审批");

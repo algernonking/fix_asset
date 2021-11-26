@@ -80,7 +80,8 @@ public class AssetSelectedDataServiceImpl extends SuperService<AssetSelectedData
 	public Result insertList(List<AssetSelectedData> assetSelectedDataList) {
 		return super.insertList(assetSelectedDataList);
 	}
-	
+
+
 	
 	/**
 	 * 按主键删除 资产选择

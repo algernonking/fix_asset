@@ -418,7 +418,6 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 		}
 		return r;
 
-
 	}
 	
 	/**

@@ -1,3 +1,17 @@
+
+
+INSERT INTO `eam_asset_attribute_item` (`id`, `owner_code`, `attribute_id`, `dimension`, `required`, `layout_type`, `list_show`, `list_content`, `list_sort`, `form_show`, `layout_row`, `layout_column`, `notes`, `create_by`, `create_time`, `update_by`, `update_time`, `deleted`, `delete_by`, `delete_time`, `version`, `tenant_id`)
+VALUES
+	(uuid(), 'asset_consumables_bill', 'ff016233-0f8a-11ec-ab08-00163e2e6a36', 'attribution', '0', '3', '1', '', 40, '1', 1, 2, '', '110588348101165911', '2021-11-25 18:28:25', '110588348101165911', '2021-11-25 18:34:33', 0, NULL, NULL, 3, 'T001'),
+	(uuid(), 'asset_consumables_bill', '516317539765063680', 'attribution', '1', '3', '1', '', 50, '1', 2, 2, '', '110588348101165911', '2021-11-25 18:25:07', '110588348101165911', '2021-11-25 18:35:24', 0, NULL, NULL, 3, 'T001'),
+	(uuid(), 'asset_consumables_bill', 'fff12037-0f8a-11ec-ab08-00163e2e6a36', 'attribution', '0', '1', '1', '', 100, '1', 4, 1, '', '110588348101165911', '2021-10-25 15:08:23', '110588348101165911', '2021-11-25 18:35:04', 0, NULL, NULL, 5, 'T001'),
+	(uuid(), 'asset_consumables_bill', 'ff0f2f97-0f8a-11ec-ab08-00163e2e6a36', 'attribution', '1', '3', '1', '', 30, '1', 3, 1, '', '110588348101165911', '2021-10-25 15:06:45', '110588348101165911', '2021-11-25 18:34:16', 0, NULL, NULL, 4, 'T001'),
+	(uuid(), 'asset_consumables_bill', 'fef3ab3e-0f8a-11ec-ab08-00163e2e6a36', 'attribution', '1', '3', '1', '', 10, '1', 2, 1, '', '110588348101165911', '2021-10-25 15:03:55', '110588348101165911', '2021-11-25 18:33:38', 0, NULL, NULL, 3, 'T001'),
+	(uuid(), 'asset_consumables_bill', '00f152f2-0f8b-11ec-ab08-00163e2e6a36', 'attribution', '0', '3', '1', '', 110, '1', 3, 2, '', '110588348101165911', '2021-10-25 15:02:17', '110588348101165911', '2021-11-25 18:39:09', 0, NULL, NULL, 6, 'T001'),
+	(uuid(), 'asset_consumables_bill', 'fe6a6910-0f8a-11ec-ab08-00163e2e6a36', 'attribution', '1', '3', '1', '', 20, '1', 1, 1, '', '110588348101165911', '2021-10-25 14:04:05', '110588348101165911', '2021-11-25 18:33:48', 0, NULL, NULL, 4, 'T001');
+
+
+
 ALTER TABLE eam_asset ADD chs_type varchar(50)  DEFAULT NULL COMMENT '变更类型';
 ALTER TABLE eam_asset ADD chs_status varchar(50)  DEFAULT NULL COMMENT '变更状态';
 ALTER TABLE eam_asset ADD chs_version varchar(50)  DEFAULT NULL COMMENT '变更版本号';
@@ -8,6 +22,31 @@ ALTER TABLE eam_asset ADD latest_approver_name  varchar(50)  DEFAULT NULL COMMEN
 ALTER TABLE eam_asset ADD next_approver_ids     varchar(512) DEFAULT NULL COMMENT '下一节点审批人';
 ALTER TABLE eam_asset ADD next_approver_names   varchar(512)  DEFAULT NULL COMMENT '下一个审批节点审批人姓名，用逗号隔开';
 ALTER TABLE eam_asset ADD approval_opinion   varchar(500)  DEFAULT NULL COMMENT '审批意见';
+
+
+select * from sys_resourze where deleted='1'
+
+select * from sys_menu where authority='08-bff8dc9da6-fa0d'
+
+select distinct access_type from sys_resourze
+
+
+select b.* from sys_menu_resource a,sys_resourze b where menu_id='498890640633892865' and a.resource_id=b.id
+
+
+update sys_resourze c set c.access_type='LOGIN' where c.id in (
+select id from aa
+)
+
+
+drop table aa;
+
+select * from aa
+create table aa as
+select b.id from sys_menu_resource a,sys_resourze b where menu_id='498890640633892865' and a.resource_id=b.id
+
+
+
 
 
 

@@ -328,7 +328,7 @@ public class AssetPageController extends ViewController {
 		//设置资产分类
 		CatalogVO catalog=new CatalogVO();
 		if(StringUtil.isBlank(categoryCode)){
-			catalog.setCode("asset");
+			catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
 		}else{
 			catalog.setCode(categoryCode);
 		}
@@ -353,11 +353,13 @@ public class AssetPageController extends ViewController {
 	 * 资产 表单页面
 	 */
 	@RequestMapping("/asset_info_form.html")
-	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode,String ownerCode) {
+	public String infoForm(Model model,HttpServletRequest request , String id,String pageType,String categoryCode,String ownerCode,String internalControlLabel) {
 
 		//页面类型
 		model.addAttribute("pageType",pageType);
 		model.addAttribute("ownerCode",ownerCode);
+		model.addAttribute("internalControlLabel",internalControlLabel);
+
 
 		//设置字段布局
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,null);
@@ -407,7 +409,7 @@ public class AssetPageController extends ViewController {
 		//设置资产分类
 		CatalogVO catalog=new CatalogVO();
 		if(StringUtil.isBlank(categoryCode)||"null".equals(categoryCode.toLowerCase())){
-			catalog.setCode("asset");
+			catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
 		}else{
 			catalog.setCode(categoryCode);
 		}

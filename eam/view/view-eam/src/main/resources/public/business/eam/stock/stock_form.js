@@ -318,7 +318,9 @@ function FormPage() {
 					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
 				}
 				if(doNext) {
-					admin.finishPopupCenterById('eam-stock-form-data-win');
+					var index=admin.getTempData('eam-stock-form-data-win-popup-index');
+					admin.finishPopupCenter(index);
+					// admin.finishPopupCenterById('eam-stock-form-data-win');
 				}
 			} else {
 				layer.msg(data.message, {icon: 2, time: 1500});

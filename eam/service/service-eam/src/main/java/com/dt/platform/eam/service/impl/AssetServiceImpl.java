@@ -39,6 +39,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import org.apache.poi.ss.usermodel.*;
 import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
+import org.github.foxnic.web.constants.enums.changes.ApprovalMode;
 import org.github.foxnic.web.constants.enums.changes.ChangeType;
 import org.github.foxnic.web.domain.bpm.Appover;
 import org.github.foxnic.web.domain.changes.*;
@@ -48,6 +49,7 @@ import org.github.foxnic.web.domain.pcm.CatalogAttribute;
 import org.github.foxnic.web.domain.pcm.CatalogData;
 import org.github.foxnic.web.domain.pcm.DataQueryVo;
 import org.github.foxnic.web.framework.change.ChangesAssistant;
+import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -656,6 +658,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result batchRevokeOperation(List<String> ids){
 
+
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
 		expr.andIn("status",AssetHandleStatusEnum.APPROVAL.code(),AssetHandleStatusEnum.DENY.code());
@@ -684,6 +687,21 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * @return 是否成功
 	 * */
 	public Result forBatchApproval(List<String> ids){
+
+		ChangeDefinitionVO changeDefinitionVO=new ChangeDefinitionVO();
+		changeDefinitionVO.setCode(AssetOperateEnum.EAM_ASSET_INSERT.code());
+		Result<List<ChangeDefinition>> changeDefinitionResult= ChangeDefinitionServiceProxy.api().queryList(changeDefinitionVO);
+		if(!changeDefinitionResult.isSuccess()){
+			return ErrorDesc.failureMessage("获取流程配置失败");
+		}else{
+			if(changeDefinitionResult.getData().size()==0){
+				return ErrorDesc.failureMessage("未配置流程信息");
+			}
+			ChangeDefinition ChangeDefinition=changeDefinitionResult.getData().get(0);
+			if(!ApprovalMode.simple.code().equals(ChangeDefinition.getMode())){
+				return ErrorDesc.failureMessage("当前只支持简单流程方式");
+			}
+		}
 
 		ConditionExpr expr=new ConditionExpr();
 		expr.andIn("id",ids);
@@ -794,14 +812,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result insert(Asset asset) {
 
-		//判断是否序列号要唯一,满足非空唯一即可
-		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())&& !StringUtil.isBlank(asset.getSerialNumber()) && operateService.queryAssetSerialNumberNeedUnique() ){
-			if(!operateService.queryAssetSerialNumberIsUnique(asset.getSerialNumber(),null)){
-				return ErrorDesc.failure().message("当前资产序列号不唯一:"+asset.getSerialNumber());
-			}
+		if(StringUtil.isBlank(asset.getOwnerCode())){
+			asset.setOwnerCode("idle");
 		}
 
-		//填充一些默认数据
 		//制单人
 		if(StringUtil.isBlank(asset.getOriginatorId())){
 			asset.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -812,54 +826,66 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			asset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
-		//资产数量
-		if(StringUtil.isBlank(asset.getAssetNumber())){
-			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
-			asset.setAssetNumber(1);
-			//}
-		}
-
-		//剩余数量
-		if(StringUtil.isBlank(asset.getRemainNumber())){
-			//if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
-			asset.setRemainNumber(1);
-			//}
-		}
-
 		//登记日期
 		if(asset.getRegisterDate()==null){
 			asset.setRegisterDate(new Date());
 		}
 
 		//编码
-		if(StringUtil.isBlank(asset.getAssetCode())&&!StringUtil.isBlank(asset.getOwnerCode())){
-			String codeRule="";
-			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
-				codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
-			}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
-				codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
-			}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(asset.getOwnerCode())){
-				codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();
-			}
+		String codeRule="";
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+			codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
+			asset.setAssetNumber(1);
+			asset.setRemainNumber(1);
+
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
+			codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
+			if(asset.getAssetNumber()<1) asset.setAssetNumber(1);
+			asset.setRemainNumber(asset.getAssetNumber());
+
+		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(asset.getOwnerCode())){
+			codeRule=CodeModuleEnum.EAM_ASSET_CONSUMABLES_CODE.code();
+			if(asset.getAssetNumber()<1) asset.setAssetNumber(1);
+			asset.setRemainNumber(asset.getAssetNumber());
+
+		}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(asset.getOwnerCode())){
+			codeRule=CodeModuleEnum.EAM_ASSET_SOFTWARE_CODE.code();
+			if(asset.getAssetNumber()<1) asset.setAssetNumber(1);
+			asset.setRemainNumber(asset.getAssetNumber());
+		}
 
 
+		if(StringUtil.isBlank(asset.getAssetCode())){
 			if(!StringUtil.isBlank(codeRule)){
-				Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule) ;
-				if(!codeResult.isSuccess()){
-					return codeResult;
-				}else{
-					asset.setAssetCode(codeResult.getData().toString());
+				if(!StringUtil.isBlank(codeRule)){
+					Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule) ;
+					if(!codeResult.isSuccess()){
+						return codeResult;
+					}else{
+						asset.setAssetCode(codeResult.getData().toString());
+					}
 				}
 			}
-
 		}
 
 		//资产状态
 		if(StringUtil.isBlank(asset.getAssetStatus())){
-			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+			if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())
+				|| AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())
+				|| AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(asset.getOwnerCode())
+				|| AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(asset.getOwnerCode())
+			){
 				asset.setAssetStatus(AssetStatusEnum.IDLE.code());
 			}
 		}
+
+		//判断是否序列号要唯一,满足非空唯一即可
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())&& !StringUtil.isBlank(asset.getSerialNumber()) && operateService.queryAssetSerialNumberNeedUnique() ){
+			if(!operateService.queryAssetSerialNumberIsUnique(asset.getSerialNumber(),null)){
+				return ErrorDesc.failure().message("当前资产序列号不唯一:"+asset.getSerialNumber());
+			}
+		}
+
 
 		Result r=super.insert(asset);
 		return r;
