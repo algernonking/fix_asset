@@ -88,6 +88,54 @@ spring:
       #port: 6379
       #host: 127.0.0.1
 
+
+foxnic:
+  # 设置 Join 的二级缓存
+  cache:
+    # 默认配置
+    default:
+      # local,remote,both,none
+      mode: none
+      # 本地缓存配置 : 最大元素个数
+      local-limit: 10240
+      # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
+      local-expire: 1200000
+      # 远程缓存配置 :  超时 20 分钟，单位毫秒; -1 表示用不过期
+      remote-expire: 1200000
+    # 按实体类型配置缓存细节
+    details:
+      "org.github.foxnic.web.domain.oauth.Resourze":
+        mode: remote
+        local-limit: 10240
+        local-expire: 1200000
+        remote-expire: 1200000
+      "org.github.foxnic.web.domain.system.DictItem":
+        mode: remote
+        local-limit: 10240
+        local-expire: 1200000
+        remote-expire: 1200000
+        strategy:
+          query-list:
+            is-accurate: true
+            cache-empty-result: true
+            properties: dictCode
+      "org.github.foxnic.web.domain.system.DbCache":
+        mode: remote
+        local-limit: 10240
+        local-expire: 1200000
+        remote-expire: 1200000
+        strategy:
+          query-list-1:
+            is-accurate: true
+            cache-empty-result: true
+            properties: ownerType,ownerId
+          query-list-2:
+            is-accurate: true
+            cache-empty-result: true
+            properties: area,ownerType,ownerId
+
+
+
 #禁止自动扫描API
 springfox:
   documentation:

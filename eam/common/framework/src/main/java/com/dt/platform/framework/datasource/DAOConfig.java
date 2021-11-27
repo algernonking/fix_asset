@@ -2,6 +2,7 @@ package com.dt.platform.framework.datasource;
 
 import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.log.Logger;
+import com.github.foxnic.dao.cache.CacheProperties;
 import com.github.foxnic.dao.dataperm.DataPermManager;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
@@ -57,7 +58,11 @@ public class DAOConfig {
 
 			//设置缓存
 			FoxnicDataCacheManager cacheManager=new FoxnicDataCacheManager();
+			CacheProperties cacheProperties=new CacheProperties(SpringUtil.getEnvProperties("foxnic.cache"));
+			cacheManager.setCacheProperties(cacheProperties);
+			cacheManager.setRelationManager(relationManager);
 			dao.setDataCacheManager(cacheManager);
+
 
 			//数据权限管理器
 			DataPermManager dataPermManager=new DataPermManager();

@@ -1,35 +1,31 @@
 package com.dt.platform.ops.service.impl;
 
 
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-
+import com.dt.platform.constants.db.EAMTables.OPS_HOST_MID;
 import com.dt.platform.domain.ops.HostMid;
-import com.dt.platform.domain.ops.HostMidVO;
-import java.util.List;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.spec.DAO;
-import java.lang.reflect.Field;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.sql.expr.ConditionExpr;
+import com.dt.platform.domain.ops.ServiceInfo;
+import com.dt.platform.ops.service.IHostMidService;
 import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import java.io.InputStream;
+import com.github.foxnic.dao.spec.DAO;
+import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.meta.DBColumnMeta;
-import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
-import com.dt.platform.ops.service.IHostMidService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
-import com.dt.platform.constants.db.EAMTables.*;
+import java.util.List;
 
 /**
  * <p>
@@ -264,7 +260,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
      * @param serviceInfoIds 服务内容清单
      */
 	public void saveRelation(String hostId,List<String> serviceInfoIds) {
-		super.saveRelation(OPS_HOST_MID.HOST_ID,hostId, OPS_HOST_MID.SERVICE_INFO_ID,serviceInfoIds,true);
+		super.saveRelation(HostMid.class, OPS_HOST_MID.HOST_ID,hostId, ServiceInfo.class,OPS_HOST_MID.SERVICE_INFO_ID,serviceInfoIds,true);
 	}
 
 }
