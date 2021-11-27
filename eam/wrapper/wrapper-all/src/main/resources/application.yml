@@ -105,7 +105,7 @@ foxnic:
     # 按实体类型配置缓存细节
     details:
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: local
+        mode: none
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
