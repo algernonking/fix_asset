@@ -43,7 +43,7 @@ if [[ -n $1 ]];then
   action=$1
 fi
 ###########
-which $JAVA
+#which $JAVA
 javaChk=$?
 if [[ $javaChk -ne 0 ]];then
   echo "Java not found!"
@@ -67,7 +67,7 @@ start(){
   if [[ $pidcnt -ge 1 ]];then
     echo "Process is already running,please first stop it."
   else
-    nohup $JAVA  -Dloader.path=./lib/ $java_Xmx -jar $app_name -dprocess_Mark=$app_process_mark  >$app_log_file 2>&1 &
+    nohup $JAVA  -Dloader.path=./lib/ $java_Xmx -jar $app_name -dprocess_Mark=$app_process_mark --Dspring.config.location=$app_dir/application.yml>$app_log_file 2>&1 &
     sleep 3
     pidlist2=`ps -ef|grep java|grep $app_process_mark|grep -v grep |awk '{print $2}'`
     pidcnt2=`ps -ef|grep java|grep $app_process_mark|grep -v grep |awk '{print $2}'|wc -l`
