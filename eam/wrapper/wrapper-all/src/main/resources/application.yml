@@ -105,12 +105,12 @@ foxnic:
     # 按实体类型配置缓存细节
     details:
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: remote
+        mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
       "org.github.foxnic.web.domain.system.DictItem":
-        mode: remote
+        mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -120,7 +120,7 @@ foxnic:
             cache-empty-result: true
             properties: dictCode
       "org.github.foxnic.web.domain.system.DbCache":
-        mode: remote
+        mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
