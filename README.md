@@ -1,5 +1,6 @@
 # EAM系统
-
+#### QQ交流群
+- QQ群:634770774
 #### DEMO
 - http://eam-demo.rainbooow.com:26788/index.html
 - 账户:admin 密码:123456
