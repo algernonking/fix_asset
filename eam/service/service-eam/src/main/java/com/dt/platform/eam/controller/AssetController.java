@@ -190,6 +190,7 @@ public class AssetController extends SuperController {
 			pcmData.setOwnerId(id);
 			pcmData.setCatalogId(assetVO.getCategoryId());
 			pcmData.setTenantId(SessionUser.getCurrent().getActivatedTenantId());
+			System.out.println(pcmData);
 			Result pcmResult=CatalogServiceProxy.api().saveData(pcmData);
 			if(!pcmResult.isSuccess()){
 				return pcmResult;

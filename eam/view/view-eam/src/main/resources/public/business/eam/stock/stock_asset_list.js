@@ -32,6 +32,10 @@ function ListPage() {
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
         }
+        if(billdata.action=="view"){
+
+        }
+
         //渲染表格
         renderTable();
         //初始化搜索输入框组件

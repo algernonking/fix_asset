@@ -92,6 +92,28 @@ public class StockPageController extends ViewController {
 	/**
 	 * 资产库存 功能主页面
 	 */
+	@RequestMapping("/stock_book_list.html")
+	public String stockBookList(Model model,HttpServletRequest request,String ownerCode) {
+		String itemOwner="";
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
+		}
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		model.addAttribute("ownerCode", ownerCode);
+		return prefix+"/stock_book_list";
+
+	}
+
+	/**
+	 * 资产库存 功能主页面
+	 */
 	@RequestMapping("/stock_list.html")
 	public String list(Model model,HttpServletRequest request,String ownerCode,String stockType,String operType) {
 

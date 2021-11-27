@@ -208,7 +208,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	 * @param result 结果
 	 * @return
 	 * */
-	//return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
 	private Result operateResult(String id,String result,String status,String message) {
 		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
 			Result verifyResult= verifyBillData(id);

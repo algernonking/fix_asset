@@ -295,6 +295,28 @@ public class AssetPageController extends ViewController {
 	@RequestMapping("/asset_info_list.html")
 	public String infoList(Model model,HttpServletRequest request,String pageType,String pageFunc,String categoryCode,String ownerCode) {
 
+		String authPrefix="eam_"+ownerCode;
+
+		model.addAttribute("forBatchApprovalBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":for-batch-approval" ) );
+		model.addAttribute("batchConfirmBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":batch-confirm"));
+		model.addAttribute("batchRevokeBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":batch-revoke" ));
+		model.addAttribute("changeQueryBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":change-query" ));
+		model.addAttribute("billsBtgn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":bills" ));
+		model.addAttribute("cardBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":card" ));
+		model.addAttribute("highExportDataBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":high-export-data" ));
+		model.addAttribute("labelBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":label" ));
+		model.addAttribute("agreeBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":agree") );
+		model.addAttribute("denyBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":deny"));
+		model.addAttribute("createBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":create") );
+		model.addAttribute("updateBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":update") );
+		model.addAttribute("deleteBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":delete") );
+		model.addAttribute("deleteByIdsBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":delete-by-ids") );
+		model.addAttribute("queryBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":query") );
+		model.addAttribute("viewFormBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":view-form") );
+
+
+
+
 
 		//页面类型，pageType=AssetAttributeItemOwnerEnum.BASE.code();
 		model.addAttribute("pageType",pageType);

@@ -187,7 +187,7 @@ function ListPage() {
 		if(categoryValue&&categoryValue.length>0){
 			ps.categoryId=categoryValue[0].id;
 		}
-
+		ps.ownerCode=OWNER_CODE;
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;

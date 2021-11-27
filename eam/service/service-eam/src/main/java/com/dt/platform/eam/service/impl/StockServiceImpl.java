@@ -6,9 +6,11 @@ import javax.annotation.Resource;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
-import com.dt.platform.domain.eam.AssetItem;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.StockMeta;
 import com.dt.platform.eam.service.IAssetSelectedDataService;
 import com.dt.platform.eam.service.IAssetService;
+import com.dt.platform.eam.service.IOperateService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
@@ -18,8 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.Stock;
-import com.dt.platform.domain.eam.StockVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -63,6 +63,8 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 	@Autowired
 	private IAssetService assetService;
 
+	@Autowired
+	private IOperateService operateService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -104,7 +106,73 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 
 	@Override
 	public Result confirmOperation(String id) {
-		return null;
+		Stock billData=getById(id);
+		String code="";
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(billData.getOwnerCode())){
+			code=AssetOperateEnum.EAM_ASSET_CONSUMABLES_STOCK_IN.code();
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(billData.getOwnerCode())){
+			code=AssetOperateEnum.EAM_ASSET_STOCK_IN.code();
+		}
+
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(code) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(id,AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
+
+	}
+
+	/**
+	 * 操作
+	 * @param id  ID
+	 * @param result 结果
+	 * @return
+	 * */
+	private Result operateResult(String id,String result,String status,String message) {
+		Stock stock=this.getById(id);
+		dao().fill(stock)
+				.with(StockMeta.STOCK_ASSET_LIST)
+				.execute();
+
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			stock.setId(id);
+			stock.setStatus(status);
+			super.update(stock,SaveMode.NOT_NULL_FIELDS);
+			List<Asset> assetList=stock.getStockAssetList();
+			if(assetList!=null&&assetList.size()>0){
+				for(int i=0;i<assetList.size();i++){
+					assetList.get(i).setStatus(status);
+					if(StringUtil.isBlank(assetList.get(i).getWarehouseId())){
+						assetList.get(i).setWarehouseId(stock.getWarehouseId());
+					}
+					if(StringUtil.isBlank(assetList.get(i).getOwnCompanyId())){
+						assetList.get(i).setOwnCompanyId(stock.getOwnCompanyId());
+					}
+					if(StringUtil.isBlank(assetList.get(i).getSourceId())){
+						assetList.get(i).setSourceId(stock.getSourceId());
+					}
+					if(StringUtil.isBlank(assetList.get(i).getManagerId())){
+						assetList.get(i).setManagerId(stock.getManagerId());
+					}
+					if(StringUtil.isBlank(assetList.get(i).getSupplierId())){
+						assetList.get(i).setSupplierId(stock.getSupplierId());
+					}
+					if(StringUtil.isBlank(assetList.get(i).getBatchCode())){
+						assetList.get(i).setBatchCode(stock.getStockBatchCode());
+					}
+				}
+				assetService.updateList(assetList,SaveMode.NOT_NULL_FIELDS);
+			}
+			return ErrorDesc.success();
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
 	}
 
 

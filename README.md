@@ -3,6 +3,8 @@
 #### DEMO
 - http://eam-demo.rainbooow.com:26788/index.html
 - 账户:admin 密码:123456
+#### SQL
+- http://121.43.103.102/upload/sql.tar.gz
 
 #### 介绍
 

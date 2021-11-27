@@ -414,7 +414,7 @@ public class StockController extends SuperController {
 	/**
 	 * 确认
 	 * */
-	@ApiOperation(value = "变更确认")
+	@ApiOperation(value = "确认")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = StockVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 	})

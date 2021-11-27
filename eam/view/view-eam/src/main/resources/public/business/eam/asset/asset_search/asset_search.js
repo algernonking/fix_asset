@@ -63,6 +63,7 @@ function ListPage() {
             if(Object.keys(contitions).length>0) {
                 ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
             }
+            ps.ownerCode=OWNER_CODE;
             var templet=window.pageExt.list.templet;
             if(templet==null) {
                 templet=function(field,value,row) {
@@ -176,6 +177,7 @@ function ListPage() {
                 ps.sortType=sort.type;
             }
         }
+        ps.ownerCode=OWNER_CODE;
         if(reset) {
             table.reload('data-table', { where : ps , page:{ curr:1 } });
         } else {

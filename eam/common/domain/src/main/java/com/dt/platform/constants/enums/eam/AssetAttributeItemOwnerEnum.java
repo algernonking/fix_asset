@@ -22,12 +22,12 @@ public enum AssetAttributeItemOwnerEnum implements CodeTextEnum {
 	//单据耗材，
 	ASSET_CONSUMABLES_BILL("asset_consumables_bill","耗材单据"),
 	ASSET_CONSUMABLES_SHOW("asset_consumables_show","耗材公共显示"),
-	ASSET_CONSUMABLES_INSERT("asset_consumables_insert","耗材插入"),
+//	ASSET_CONSUMABLES_INSERT("asset_consumables_insert","耗材插入"),
 
 	//单据耗材，
 	ASSET_STOCK_BILL("asset_stock_bill","库存单据"),
 	ASSET_STOCK_SHOW("asset_stock_show","库存公共显示"),
-	ASSET_STOCK_INSERT("asset_stock_insert","库存插入"),
+//	ASSET_STOCK_INSERT("asset_stock_insert","库存插入"),
 
 	//单据和资产选择，资产公共显示
 	ASSET_BILL("asset_bill" , "资产单据列表"),

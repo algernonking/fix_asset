@@ -158,9 +158,9 @@
     <button th:if="${stockModifyBtn}"   class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button " lay-event="edit" th:text="${lang.translate('修改')}" data-id="{{d.id}}">修改</button>
     <button th:if="${stockDeleteBtn}"   class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button " lay-event="del" th:text="${lang.translate('删除')}" data-id="{{d.id}}">删除</button>
 
-    <button th:if="${forApprovalBtn}"   class="layui-btn layui-btn-xs " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
-    <button th:if="${confirmDataBtn}"   class="layui-btn layui-btn-xs " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
-    <button th:if="${revokeDataBtn}"    class="layui-btn layui-btn-xs " lay-event="revoke-data" th:text="${lang.translate('撤销')}"  data-id="{{d.id}}">撤销</button>
+    <button th:if="${forApprovalBtn}"   class="layui-btn layui-btn-xs for-approval-button " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
+    <button th:if="${confirmDataBtn}"   class="layui-btn layui-btn-xs confirm-data-button " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
+    <button th:if="${revokeDataBtn}"    class="layui-btn layui-btn-xs revoke-data-button " lay-event="revoke-data" th:text="${lang.translate('撤销')}"  data-id="{{d.id}}">撤销</button>
 
 </script>
 

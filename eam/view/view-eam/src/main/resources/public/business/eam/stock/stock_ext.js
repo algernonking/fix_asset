@@ -17,12 +17,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
-
+    const moduleURL="/service-eam/eam-stock";
 
     var timestamp = Date.parse(new Date());
 
 
-    var formAction=admin.getTempData('eam-form-data-form-action');
+    var formAction=admin.getTempData('eam-stock-form-data-form-action');
 
     //列表页的扩展
     var list={
@@ -179,14 +179,49 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
         },
-        forApproval:function (data){
-            console.log('forApproval',data);
+        billOper:function(url,btnClass,ps,successMessage){
+            var btn=$('.'+btnClass).filter("[data-id='" +ps.id + "']");
+            var api=moduleURL+"/"+url;
+
+            top.layer.confirm(fox.translate('确定进行该操作吗？'), function (i) {
+                top.layer.close(i);
+                admin.post(api, ps, function (r) {
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
         },
-        confirmData:function (data){
-            console.log('confirmData',data);
+        // forApproval:function (data){
+        //     console.log('forApproval',data);
+        // },
+        // confirmData:function (data){
+        //     console.log('confirmData',data);
+        // },
+        // revokeData:function (data){
+        //     console.log('revokeData',data);
+        // },
+        confirmData:function (item){
+            list.billOper("confirm-operation","confirm-data-button",{id:item.id},"已确认");
         },
-        revokeData:function (data){
-            console.log('revokeData',data);
+        forApproval:function (item){
+            list.billOper("for-approval","for-approval-button",{id:item.id},"已送审");
+        },
+        revokeData:function (item){
+            list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
         },
         /**
          * 末尾执行
@@ -253,7 +288,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
-            console.log("beforeSubmit",data);
+            var dataListSize=$(".form-iframe")[0].contentWindow.module.getDataListSize();
+            if(dataListSize==0){
+                layer.msg("请选择资产数据", {icon: 2, time: 1000});
+                return false;
+            }
+            data.selectedCode=timestamp;
+            data.ownerCode=OWNER_CODE;
             return true;
         },
         /**
@@ -285,7 +326,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             data.assetSelectedCode=timestamp;
             data.assetBusinessType=BILL_TYPE
             data.action=formAction;
-            data.ownerCode="asset_consumables";
+            data.ownerCode=OWNER_CODE;
             if(BILL_ID==null)BILL_ID="";
             data.assetOwnerId=BILL_ID;
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);

@@ -54,7 +54,7 @@ function ListPage() {
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			ps.searchValue=JSON.stringify(contitions);
-
+			ps.ownerCode=OWNER_CODE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -158,6 +158,7 @@ function ListPage() {
 				ps.sortType=sort.type;
 			}
 		}
+		ps.ownerCode=OWNER_CODE;
 		if(reset) {
 			table.reload(TABLE_ID, { where : ps , page:{ curr:1 } });
 		} else {
