@@ -187,7 +187,7 @@ storage:
       #在不同的环境下选择不同的路径
       windows: c:/uploads
       mac: /opt/upload
-      linux: /opt/upload
+      linux: /opt/eam/upload
 
 develop:
   language: defaults

@@ -265,7 +265,7 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 		chs.setApprovalOpinion(opinion);
 		if(ApprovalAction.agree.code().equals(approveAction)){
 			chs.setStatus(AssetHandleStatusEnum.COMPLETE.code());
-			//applyChange(asset.getId());
+			operateResult(asset.getId(),AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
 		}else if(ApprovalAction.reject.code().equals(approveAction)){
 			chs.setStatus(AssetHandleStatusEnum.DENY.code());
 		}else if(ApprovalAction.submit.code().equals(approveAction)){

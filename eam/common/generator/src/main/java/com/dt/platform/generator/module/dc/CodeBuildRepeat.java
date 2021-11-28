@@ -7,9 +7,9 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.dc";
         String[] clasnamearr={
-                "DcAreaGtr",
-                "DcLayerGtr",
-                "DcRackGtr"
+//                "DcAreaGtr",
+//                "DcLayerGtr",
+//                "DcRackGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

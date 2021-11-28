@@ -226,8 +226,11 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		DBTreaty dbTreaty= dao().getDBTreaty();
 		HashMap<String,SQL> data=new HashMap<>();
 		JSONObject assetJsonBefore=BeanUtil.toJSONObject(assetBefore);
+		System.out.println("assetJsonBefore:\n"+assetJsonBefore);
+		System.out.println("assetJsonAfter:\n"+assetJsonAfter);
 		Update ups=new Update("eam_asset");
 		String ct="";
+		String useUserId="";
 		for(String key:changeMap.keySet()){
 			Rcd rcd=colsMap.get(key);
 			String label=rcd.getString("label");
@@ -236,6 +239,8 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			String rkey=lineToHump(key);
 			String before="-";
 			String after="-";
+
+
 			if(AssetAttributeValueTypeEnum.ENUM.code().equals(valueType)){
 				if("asset_status".equals(key)){
 					if(!StringUtil.isBlank(assetJsonBefore.getString(rkey))){
@@ -290,14 +295,19 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}else{
 				continue;
 			}
+
 			//只更新不是null部分
 			ups.setIf(key,assetJsonAfter.get(rkey));
 			//  ups.setIf(key,assetAfterRcd.getOriginalValue(key));
 			if( !((before+"").equals(after+"") ) ){
+				if("use_user_id".equals(key)){
+					useUserId=assetJsonAfter.getString("useUserId");
+				}
 				ct=ct+"【"+label+"】由"+before+"变更为"+after+" ";
 			}
 
 		}
+		//StringUtil.isBlank(assetJsonAfter.getOrDefault("useUserId",""))?null:assetJsonAfter.getOrDefault("useUserId","");
 		Logger.info("资产编号:"+assetBefore.getAssetCode()+",变更内容:"+ct);
 		//开始填充数据
 		if(tm.getColumn(dbTreaty.getUpdateTimeField())!=null) {
@@ -314,6 +324,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		ins.setIf("process_type",operType);
 		ins.setIf("notes",notes);
 		ins.setIf("content",ct);
+		ins.setIf("use_user_id",StringUtil.isBlank(useUserId)?null:useUserId);
 		ins.set("processd_time",new Date());
 		if(tm.getColumn(dbTreaty.getCreateTimeField())!=null) {
 			ins.set(dbTreaty.getCreateTimeField(),new Date());

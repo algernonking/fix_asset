@@ -8,10 +8,10 @@ public class CodeBuildRepeat {
         String pstr="com.dt.platform.generator.module.common";
         String[] clasnamearr={
 //                "SysTplFileGtr",
-                "SysCodeRegisterGtr",
-                "SysCodeAllocationGtr",
-                "SysCodeAttrGtr",
-                "SysCodeRuleGtr"
+//                "SysCodeRegisterGtr",
+//                "SysCodeAllocationGtr",
+//                "SysCodeAttrGtr",
+//                "SysCodeRuleGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

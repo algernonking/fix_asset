@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产处理记录
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:54
- * @sign 28AF2B1A86D29DFDC2C6CC1BD535D5BB
+ * @since 2021-11-28 11:49:49
+ * @sign 3AE4537DD00259AAD662D5D16E96E38B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -66,10 +66,16 @@ public class AssetProcessRecord extends Entity {
 	private String notes;
 	
 	/**
+	 * 使用人：使用人
+	*/
+	@ApiModelProperty(required = false,value="使用人" , notes = "使用人")
+	private String useUserId;
+	
+	/**
 	 * 变更人：变更人
 	*/
 	@ApiModelProperty(required = false,value="变更人" , notes = "变更人")
-	private Date processUserId;
+	private String processUserId;
 	
 	/**
 	 * 变更时间：变更时间
@@ -240,11 +246,30 @@ public class AssetProcessRecord extends Entity {
 	}
 	
 	/**
+	 * 获得 使用人<br>
+	 * 使用人
+	 * @return 使用人
+	*/
+	public String getUseUserId() {
+		return useUserId;
+	}
+	
+	/**
+	 * 设置 使用人
+	 * @param useUserId 使用人
+	 * @return 当前对象
+	*/
+	public AssetProcessRecord setUseUserId(String useUserId) {
+		this.useUserId=useUserId;
+		return this;
+	}
+	
+	/**
 	 * 获得 变更人<br>
 	 * 变更人
 	 * @return 变更人
 	*/
-	public Date getProcessUserId() {
+	public String getProcessUserId() {
 		return processUserId;
 	}
 	
@@ -253,7 +278,7 @@ public class AssetProcessRecord extends Entity {
 	 * @param processUserId 变更人
 	 * @return 当前对象
 	*/
-	public AssetProcessRecord setProcessUserId(Date processUserId) {
+	public AssetProcessRecord setProcessUserId(String processUserId) {
 		this.processUserId=processUserId;
 		return this;
 	}

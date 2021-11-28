@@ -95,6 +95,7 @@ public class StockPageController extends ViewController {
 	@RequestMapping("/stock_book_list.html")
 	public String stockBookList(Model model,HttpServletRequest request,String ownerCode) {
 		String itemOwner="";
+		String authPrefix="eam_"+ownerCode;
 		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
 			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
 		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
@@ -107,6 +108,14 @@ public class StockPageController extends ViewController {
 			model.addAttribute("attributeListData",list);
 		}
 		model.addAttribute("ownerCode", ownerCode);
+
+
+
+		PageHelper p=new PageHelper(request, SessionUser.getCurrent());
+		model.addAttribute("layuiTableWidthConfig",p.getTableColumnWidthConfig("dt"+ownerCode));
+		model.addAttribute("tableId","dt"+ownerCode);
+
+
 		return prefix+"/stock_book_list";
 
 	}

@@ -48,21 +48,34 @@ echo "delete from ops_voucher_priv where 1=1 $tenant_sql; "           >>$clear_s
 echo "-- eam"                                                         >>$clear_sql
 echo "delete from eam_warehouse where 1=1 $tenant_sql; "              >>$clear_sql
 echo "delete from eam_asset where 1=1 $tenant_sql; "                  >>$clear_sql
-echo "delete from eam_asset_item where 1=1 ; "                        >>$clear_sql
+echo "delete from eam_asset_item where 1=1; "                         >>$clear_sql
+echo "delete from eam_asset_batch where 1=1;"                         >>$clear_sql
+echo "delete from eam_asset_process_record where 1=1;"                >>$clear_sql
+echo "delete from eam_asset_selected_data where 1=1 $tenant_sql;"     >>$clear_sql
+
 echo "delete from eam_asset_repair where 1=1 $tenant_sql; "           >>$clear_sql
 echo "delete from eam_asset_scrap where 1=1 $tenant_sql; "            >>$clear_sql
 echo "delete from eam_asset_allocation where 1=1 $tenant_sql; "       >>$clear_sql
 echo "delete from eam_asset_borrow where 1=1 $tenant_sql; "           >>$clear_sql
-echo "delete from eam_asset_borrow_data where 1=1; "                  >>$clear_sql
+echo "delete from eam_asset_borrow_return where 1=1; "                >>$clear_sql
 echo "delete from eam_asset_collection where 1=1 $tenant_sql; "       >>$clear_sql
 echo "delete from eam_asset_collection_return where 1=1 $tenant_sql;" >>$clear_sql
 echo "delete from eam_asset_handle where 1=1 $tenant_sql;"            >>$clear_sql
+echo "delete from eam_asset_tranfer where 1=1 $tenant_sql;"           >>$clear_sql
+
+
 echo "delete from eam_asset_data_change where 1=1 $tenant_sql;"       >>$clear_sql
 
 
 
-echo "-- dc"                                                          >>$clear_sql
 
+echo "-- stock"                                                       >>$clear_sql
+echo "delete from eam_stock where 1=1 $tenant_sql;"                   >>$clear_sql
+
+echo "-- dc"                                                          >>$clear_sql
+#echo "delete from dc_area where 1=1 $tenant_sql;"                     >>$clear_sql
+#echo "delete from dc_layer where 1=1 $tenant_sql;"                    >>$clear_sql
+#echo "delete from dc_rack where 1=1 $tenant_sql;"                     >>$clear_sql
 
 echo "-- cont"                                                        >>$clear_sql
 echo "delete from cont_company where 1=1 $tenant_sql; "               >>$clear_sql
@@ -77,12 +90,6 @@ echo "-- end"                                                         >>$clear_s
 echo "-- commit"                                                         >>$clear_sql
 
 exit 0
-
-
-
-
-
-
 
 
 

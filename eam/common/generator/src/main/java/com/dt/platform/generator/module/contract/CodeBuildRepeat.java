@@ -7,10 +7,10 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.contract";
         String[] clasnamearr={
-                "ContractCategoryGtr",
-                "ContractCompanyGtr",
-                "ContractFundGtr",
-                "ContractGtr"
+//                "ContractCategoryGtr",
+//                "ContractCompanyGtr",
+//                "ContractFundGtr",
+//                "ContractGtr"
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

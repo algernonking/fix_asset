@@ -7,7 +7,7 @@ public class CodeBuildRepeat {
     public static void main(String[] args) throws Exception {
         String pstr="com.dt.platform.generator.module.kn";
         String[] clasnamearr={
-                "KnContentGtr",
+//                "KnContentGtr",
         };
         for(int i=0;i<clasnamearr.length;i++){
             System.out.println("invoke clsss:"+clasnamearr[i]);

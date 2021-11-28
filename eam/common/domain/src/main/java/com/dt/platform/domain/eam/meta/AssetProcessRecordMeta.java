@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:26:54
- * @sign 28AF2B1A86D29DFDC2C6CC1BD535D5BB
+ * @since 2021-11-28 11:49:49
+ * @sign 3AE4537DD00259AAD662D5D16E96E38B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -76,14 +76,24 @@ public class AssetProcessRecordMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 变更人 , 类型: java.util.Date
+	 * 使用人 , 类型: java.lang.String
+	*/
+	public static final String USE_USER_ID="useUserId";
+	
+	/**
+	 * 使用人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> USE_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,USE_USER_ID, java.lang.String.class, "使用人", "使用人", java.lang.String.class, null);
+	
+	/**
+	 * 变更人 , 类型: java.lang.String
 	*/
 	public static final String PROCESS_USER_ID="processUserId";
 	
 	/**
-	 * 变更人 , 类型: java.util.Date
+	 * 变更人 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.util.Date> PROCESS_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,PROCESS_USER_ID, java.util.Date.class, "变更人", "变更人", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetProcessRecord,java.lang.String> PROCESS_USER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetProcessRecord.class ,PROCESS_USER_ID, java.lang.String.class, "变更人", "变更人", java.lang.String.class, null);
 	
 	/**
 	 * 变更时间 , 类型: java.util.Date
@@ -178,7 +188,7 @@ public class AssetProcessRecordMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , ASSET_ID , BUSINESS_CODE , PROCESS_TYPE , CONTENT , NOTES , PROCESS_USER_ID , PROCESSD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , ASSET_ID , BUSINESS_CODE , PROCESS_TYPE , CONTENT , NOTES , USE_USER_ID , PROCESS_USER_ID , PROCESSD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -255,11 +265,22 @@ public class AssetProcessRecordMeta {
 		}
 		
 		/**
+		 * 设置 使用人
+		 * @param useUserId 使用人
+		 * @return 当前对象
+		*/
+		public AssetProcessRecord setUseUserId(String useUserId) {
+			super.change(USE_USER_ID,super.getUseUserId(),useUserId);
+			super.setUseUserId(useUserId);
+			return this;
+		}
+		
+		/**
 		 * 设置 变更人
 		 * @param processUserId 变更人
 		 * @return 当前对象
 		*/
-		public AssetProcessRecord setProcessUserId(Date processUserId) {
+		public AssetProcessRecord setProcessUserId(String processUserId) {
 			super.change(PROCESS_USER_ID,super.getProcessUserId(),processUserId);
 			super.setProcessUserId(processUserId);
 			return this;

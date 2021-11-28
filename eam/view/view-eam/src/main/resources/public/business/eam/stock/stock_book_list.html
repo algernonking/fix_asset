@@ -130,7 +130,7 @@
         </div>
 
         <div style="margin-top: 84px ">
-            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
+            <table class="layui-table" th:id="(${tableId})" lay-filter="data-table"></table>
         </div>
 
     </div>
@@ -156,13 +156,23 @@
 
 
 <script th:inline="javascript">
-    var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+
+    var AUTH_PREFIX= [[${authPrefix}]];
+
+    var TABLE_ID=[[${tableId}]];
+
+
+
+
+   // var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
 
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
     var SELECT_ASSETSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetStatusEnum')}]];
     var SELECT_EQUIPMENTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetEquipmentStatusEnum')}]];
 
-    var AUTH_PREFIX="eam_stock";
+   // var AUTH_PREFIX="eam_stock";
 
     var ATTRIBUTE_LIST_DATA =  [[${attributeListData}]];
 

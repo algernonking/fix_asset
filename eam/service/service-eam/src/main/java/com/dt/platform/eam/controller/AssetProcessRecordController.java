@@ -71,6 +71,7 @@ public class AssetProcessRecordController extends SuperController {
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_TYPE , value = "操作类型" , required = false , dataTypeClass=String.class , example = "eam_asset_change_maintenance"),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.CONTENT , value = "操作内容" , required = false , dataTypeClass=String.class , example = "【所属公司】由上海分公司变更为- 【资产分类】由服务器变更为- 【使用人员】由李方捷(2021001007)变更为- 【厂商】由-变更为戴尔有限公司 【物品档案】由-变更为121 【资产编号】由AS-5824106925变更为1212 【核对时间】由null变更为2021-10-21 "),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.USE_USER_ID , value = "使用人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_USER_ID , value = "变更人" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESSD_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class , example = "2021-10-19 12:51:00"),
 	})
@@ -89,7 +90,7 @@ public class AssetProcessRecordController extends SuperController {
 	*/
 	@ApiOperation(value = "删除资产处理记录")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = AssetProcessRecordVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "502825997217824768")
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "502825997217824768"),
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = AssetProcessRecordVOMeta.ID)
@@ -129,6 +130,7 @@ public class AssetProcessRecordController extends SuperController {
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_TYPE , value = "操作类型" , required = false , dataTypeClass=String.class , example = "eam_asset_change_maintenance"),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.CONTENT , value = "操作内容" , required = false , dataTypeClass=String.class , example = "【所属公司】由上海分公司变更为- 【资产分类】由服务器变更为- 【使用人员】由李方捷(2021001007)变更为- 【厂商】由-变更为戴尔有限公司 【物品档案】由-变更为121 【资产编号】由AS-5824106925变更为1212 【核对时间】由null变更为2021-10-21 "),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.USE_USER_ID , value = "使用人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_USER_ID , value = "变更人" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESSD_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class , example = "2021-10-19 12:51:00"),
 	})
@@ -153,6 +155,7 @@ public class AssetProcessRecordController extends SuperController {
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_TYPE , value = "操作类型" , required = false , dataTypeClass=String.class , example = "eam_asset_change_maintenance"),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.CONTENT , value = "操作内容" , required = false , dataTypeClass=String.class , example = "【所属公司】由上海分公司变更为- 【资产分类】由服务器变更为- 【使用人员】由李方捷(2021001007)变更为- 【厂商】由-变更为戴尔有限公司 【物品档案】由-变更为121 【资产编号】由AS-5824106925变更为1212 【核对时间】由null变更为2021-10-21 "),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.USE_USER_ID , value = "使用人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_USER_ID , value = "变更人" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESSD_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class , example = "2021-10-19 12:51:00"),
 	})
@@ -221,6 +224,7 @@ public class AssetProcessRecordController extends SuperController {
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_TYPE , value = "操作类型" , required = false , dataTypeClass=String.class , example = "eam_asset_change_maintenance"),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.CONTENT , value = "操作内容" , required = false , dataTypeClass=String.class , example = "【所属公司】由上海分公司变更为- 【资产分类】由服务器变更为- 【使用人员】由李方捷(2021001007)变更为- 【厂商】由-变更为戴尔有限公司 【物品档案】由-变更为121 【资产编号】由AS-5824106925变更为1212 【核对时间】由null变更为2021-10-21 "),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.USE_USER_ID , value = "使用人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_USER_ID , value = "变更人" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESSD_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class , example = "2021-10-19 12:51:00"),
 	})
@@ -246,6 +250,7 @@ public class AssetProcessRecordController extends SuperController {
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_TYPE , value = "操作类型" , required = false , dataTypeClass=String.class , example = "eam_asset_change_maintenance"),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.CONTENT , value = "操作内容" , required = false , dataTypeClass=String.class , example = "【所属公司】由上海分公司变更为- 【资产分类】由服务器变更为- 【使用人员】由李方捷(2021001007)变更为- 【厂商】由-变更为戴尔有限公司 【物品档案】由-变更为121 【资产编号】由AS-5824106925变更为1212 【核对时间】由null变更为2021-10-21 "),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = AssetProcessRecordVOMeta.USE_USER_ID , value = "使用人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESS_USER_ID , value = "变更人" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = AssetProcessRecordVOMeta.PROCESSD_TIME , value = "变更时间" , required = false , dataTypeClass=Date.class , example = "2021-10-19 12:51:00"),
 	})

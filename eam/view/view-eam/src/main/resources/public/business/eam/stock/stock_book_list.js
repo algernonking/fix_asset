@@ -81,7 +81,7 @@ function ListPage() {
 			var oper={ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 };
 			COL_DATA.push(oper)
 			dataTable=fox.renderTable({
-				elem: '#data-table',
+				elem: '#'+TABLE_ID,
 				toolbar: '#toolbarTemplate',
 				defaultToolbar: ['filter', 'print',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
 				url: moduleURL +'/query-paged-list',
@@ -109,7 +109,7 @@ function ListPage() {
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		//value.status={ inputType:"select_box", value:"complete", label:"完成"};
 		//value.assetCode={ inputType:"button",value: $("#assetCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
+		//value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  ,label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
 		value.model={ inputType:"button",value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
@@ -176,9 +176,9 @@ function ListPage() {
 			}
 		}
 		if(reset) {
-			table.reload('data-table', { where : ps , page:{ curr:1 } });
+			table.reload(TABLE_ID, { where : ps , page:{ curr:1 } });
 		} else {
-			table.reload('data-table', { where : ps });
+			table.reload(TABLE_ID, { where : ps });
 		}
 	}
 
@@ -207,7 +207,7 @@ function ListPage() {
 	 * 获得已经选中行的数据,不传入 field 时，返回所有选中的记录，指定 field 时 返回指定的字段集合
 	 */
 	function getCheckedList(field) {
-		var checkStatus = table.checkStatus('data-table');
+		var checkStatus = table.checkStatus(TABLE_ID);
 		var data = checkStatus.data;
 		if(!field) return data;
 		for(var i=0;i<data.length;i++) data[i]=data[i][field];

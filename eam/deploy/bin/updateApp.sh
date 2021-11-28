@@ -112,16 +112,17 @@ if [[ -f $updateFileScript ]];then
 fi
 echo "eam update success!"
 
-sh $app_dir/bin/runSql.sh as
 
-if [[ -f $app_dir/update/update/update.sql ]];then
+if [[ -f "$app_dir/update/update/update.sql" ]];then
   echo "update update.sql "
   sh $app_dir/bin/runSql.sh $app_dir/update/update/update.sql
+  echo "execute $app_dir/update/update/update.sql success!"
 fi
 
-if [[ -f $ $app_dir/bin/sql/app_updateVersion.sql ]];then
+if [[ -f "$app_dir/bin/sql/app_updateVersion.sql" ]];then
   echo "update version"
   sh $app_dir/bin/runSql.sh $app_dir/bin/sql/app_updateVersion.sql
+  echo "execute $app_dir/bin/sql/app_updateVersion.sql success!"
 fi
 
 exit 0
