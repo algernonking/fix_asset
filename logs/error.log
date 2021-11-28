@@ -885,3 +885,4 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'r
 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:617)
 	... 163 more
 
+18:51:37.155 [main] - [] - ERROR o.g.f.w.f.c.r.l.RedisListenerConfig - [getRedisMessageListenerContainer,24] - redis 配置错误，无法进行 notify 操作
