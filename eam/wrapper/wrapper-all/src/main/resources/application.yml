@@ -125,14 +125,10 @@ foxnic:
         local-expire: 1200000
         remote-expire: 1200000
         strategy:
-          query-list-1:
+          query-list:
             is-accurate: true
             cache-empty-result: true
-            properties: ownerType,ownerId
-          query-list-2:
-            is-accurate: true
-            cache-empty-result: true
-            properties: area,ownerType,ownerId
+            properties: area,catalog,ownerType,ownerId
       "org.github.foxnic.web.domain.pcm.Catalog":
         mode: local
         local-limit: 10240
