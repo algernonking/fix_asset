@@ -133,7 +133,11 @@ foxnic:
             is-accurate: true
             cache-empty-result: true
             properties: area,ownerType,ownerId
-
+      "org.github.foxnic.web.domain.pcm.Catalog":
+        mode: local
+        local-limit: 10240
+        local-expire: 1200000
+        remote-expire: 1200000
 
 
 #禁止自动扫描API
