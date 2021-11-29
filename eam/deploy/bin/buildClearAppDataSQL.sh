@@ -29,7 +29,8 @@ if [[ $tenant -eq 1 ]];then
   tenant_sql=" and tenant_id='${tenant_id}' ";
 fi
 
-echo "-- start"                                                        >$clear_sql
+echo "">$clear_sql
+echo "-- start"                                                       >>$clear_sql
 echo "-- clear kn"                                                    >>$clear_sql
 echo "delete from kn_content where 1=1 $tenant_sql; "                 >>$clear_sql
 
@@ -52,6 +53,7 @@ echo "delete from eam_asset_item where 1=1; "                         >>$clear_s
 echo "delete from eam_asset_batch where 1=1;"                         >>$clear_sql
 echo "delete from eam_asset_process_record where 1=1;"                >>$clear_sql
 echo "delete from eam_asset_selected_data where 1=1 $tenant_sql;"     >>$clear_sql
+echo "delete from eam_asset_data_change where 1=1 $tenant_sql;"       >>$clear_sql
 
 echo "delete from eam_asset_repair where 1=1 $tenant_sql; "           >>$clear_sql
 echo "delete from eam_asset_scrap where 1=1 $tenant_sql; "            >>$clear_sql
@@ -63,14 +65,17 @@ echo "delete from eam_asset_collection_return where 1=1 $tenant_sql;" >>$clear_s
 echo "delete from eam_asset_handle where 1=1 $tenant_sql;"            >>$clear_sql
 echo "delete from eam_asset_tranfer where 1=1 $tenant_sql;"           >>$clear_sql
 
-
-echo "delete from eam_asset_data_change where 1=1 $tenant_sql;"       >>$clear_sql
-
-
+echo "-- inventory"                                                   >>$clear_sql
+echo "delete from eam_inventory where 1=1 $tenant_sql;"               >>$clear_sql
+echo "delete from eam_inventory_asset where 1=1 ;"                    >>$clear_sql
+echo "delete from eam_inventory_director where 1=1 ;"                 >>$clear_sql
+echo "delete from eam_inventory_manager where 1=1 ;"                  >>$clear_sql
+echo "delete from eam_inventory_user where 1=1 ;"                     >>$clear_sql
 
 
 echo "-- stock"                                                       >>$clear_sql
 echo "delete from eam_stock where 1=1 $tenant_sql;"                   >>$clear_sql
+echo "delete from eam_asset_stock_collection where 1=1;"              >>$clear_sql
 
 echo "-- dc"                                                          >>$clear_sql
 #echo "delete from dc_area where 1=1 $tenant_sql;"                     >>$clear_sql
@@ -87,7 +92,9 @@ echo "-- end"                                                         >>$clear_s
 
 
 
-echo "-- commit"                                                         >>$clear_sql
+echo "-- commit"                                                      >>$clear_sql
+
+
 
 exit 0
 

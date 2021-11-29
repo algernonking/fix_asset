@@ -1,7 +1,7 @@
 /**
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-28 19:53:43
+ * @since 2021-11-29 13:22:27
  */
 
 function FormPage() {
@@ -116,7 +116,7 @@ function FormPage() {
 				var defaultValues=[],defaultIndexs=[];
 				if(action=="create") {
 					defaultValues = "".split(",");
-					defaultIndexs = "0".split(",");
+					defaultIndexs = "".split(",");
 				}
 				var opts=[];
 				if(!data) return opts;

@@ -13,8 +13,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-28 19:53:37
- * @sign 275DEDEF581483A96D5E2E99FDC35E65
+ * @since 2021-11-29 13:22:20
+ * @sign BE855D19B4F95B60EE1FC59135AA664F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -301,6 +301,16 @@ public class AssetStockCollectionMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockCollection,java.lang.String> ASSET_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockCollection.class ,ASSET_IDS, java.util.List.class, "资产列表", "资产列表", java.lang.String.class, null);
 	
 	/**
+	 * 资产来源 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final String ASSET_SOURCE_LIST="assetSourceList";
+	
+	/**
+	 * 资产来源 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetStockCollection,com.dt.platform.domain.eam.Asset> ASSET_SOURCE_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetStockCollection.class ,ASSET_SOURCE_LIST, java.util.List.class, "资产来源", "资产来源", com.dt.platform.domain.eam.Asset.class, null);
+	
+	/**
 	 * 领用公司/部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
 	*/
 	public static final String USE_ORGANIZATION="useOrganization";
@@ -333,7 +343,7 @@ public class AssetStockCollectionMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , OWNER_CODE , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , COLLECTION_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , POSITION , ASSET_LIST , ASSET_IDS , USE_ORGANIZATION , USE_USER , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , OWNER_CODE , NAME , USE_ORGANIZATION_ID , USE_USER_ID , POSITION_ID , POSITION_DETAIL , COLLECTION_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , POSITION , ASSET_LIST , ASSET_IDS , ASSET_SOURCE_LIST , USE_ORGANIZATION , USE_USER , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -648,6 +658,17 @@ public class AssetStockCollectionMeta {
 		public AssetStockCollection setAssetIds(List<String> assetIds) {
 			super.change(ASSET_IDS,super.getAssetIds(),assetIds);
 			super.setAssetIds(assetIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产来源
+		 * @param assetSourceList 资产来源
+		 * @return 当前对象
+		*/
+		public AssetStockCollection setAssetSourceList(List<Asset> assetSourceList) {
+			super.change(ASSET_SOURCE_LIST,super.getAssetSourceList(),assetSourceList);
+			super.setAssetSourceList(assetSourceList);
 			return this;
 		}
 		

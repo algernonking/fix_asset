@@ -48,8 +48,6 @@ public interface IAssetCollectionService extends ISuperService<AssetCollection> 
 	 * */
 	Map<String, Object> getBill(String id);
 
-
-
 	/**
 	 * 撤销流程
 	 * @param id ID

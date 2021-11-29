@@ -16,7 +16,7 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
     public EamAssetStockCollectionGtr() {
-        super(EAMTables.EAM_ASSET_STOCK_COLLECTION.$TABLE,"513733380219600896");
+        super(EAMTables.EAM_ASSET_STOCK_COLLECTION.$TABLE,BASIC_ASSET_STOCK_ID);
     }
 
     public void generateCode() throws Exception {
@@ -26,6 +26,9 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(Position.class,"position","存放位置","存放位置");
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
+        cfg.getPoClassFile().addListProperty(Asset.class,"assetSourceList","资产来源","资产来源");
+
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","领用公司/部门","领用公司/部门");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
@@ -96,7 +99,7 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_COLLECTION.CONTENT).form().textArea().height(30).search().fuzzySearch();
         cfg.view().field(EAMTables.EAM_ASSET_STOCK_COLLECTION.POSITION_ID)
                 .basic().label("存放位置")
-                .form().selectBox().defaultIndex(0).queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(PositionMeta.ID).textField(PositionMeta.NAME).fillWith(AssetCollectionMeta.POSITION).muliti(false);
 
 
@@ -125,11 +128,7 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.view().form().addGroup(null,
-                new Object[] {
 
-                }
-        );
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.EAM_ASSET_STOCK_COLLECTION.CONTENT,
@@ -143,8 +142,8 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
 //
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
+                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
+                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
@@ -156,11 +155,10 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
         EamAssetStockCollectionGtr g=new EamAssetStockCollectionGtr();
         //生成代码
         g.generateCode();
-
-
         //生成菜单
         //g.removeByBatchId("");
-         g.generateMenu(AssetStockCollectionServiceProxy.class, AssetStockCollectionPageController.class);
+        // g.generateMenu(PositionServiceProxy.class, PositionPageController.class);
+         //g.generateMenu(AssetStockCollectionServiceProxy.class, AssetStockCollectionPageController.class);
     }
 
 

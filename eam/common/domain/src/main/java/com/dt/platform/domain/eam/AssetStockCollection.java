@@ -20,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产领用
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-28 19:53:37
- * @sign 275DEDEF581483A96D5E2E99FDC35E65
+ * @since 2021-11-29 13:22:20
+ * @sign BE855D19B4F95B60EE1FC59135AA664F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -200,6 +200,12 @@ public class AssetStockCollection extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="资产列表" , notes = "资产列表")
 	private List<String> assetIds;
+	
+	/**
+	 * 资产来源：资产来源
+	*/
+	@ApiModelProperty(required = false,value="资产来源" , notes = "资产来源")
+	private List<Asset> assetSourceList;
 	
 	/**
 	 * 领用公司/部门：领用公司/部门
@@ -770,6 +776,36 @@ public class AssetStockCollection extends Entity {
 	public AssetStockCollection addAssetId(String assetId) {
 		if(this.assetIds==null) assetIds=new ArrayList<>();
 		this.assetIds.add(assetId);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产来源<br>
+	 * 资产来源
+	 * @return 资产来源
+	*/
+	public List<Asset> getAssetSourceList() {
+		return assetSourceList;
+	}
+	
+	/**
+	 * 设置 资产来源
+	 * @param assetSourceList 资产来源
+	 * @return 当前对象
+	*/
+	public AssetStockCollection setAssetSourceList(List<Asset> assetSourceList) {
+		this.assetSourceList=assetSourceList;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产来源
+	 * @param assetSource 资产来源
+	 * @return 当前对象
+	*/
+	public AssetStockCollection addAssetSource(Asset assetSource) {
+		if(this.assetSourceList==null) assetSourceList=new ArrayList<>();
+		this.assetSourceList.add(assetSource);
 		return this;
 	}
 	

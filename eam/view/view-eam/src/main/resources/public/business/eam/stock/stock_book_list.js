@@ -64,6 +64,7 @@ function ListPage() {
 				ps = {searchField: "$composite", searchValue: JSON.stringify(contitions)};
 			}
 			ps.ownerCode=OWNER_CODE;
+			ps.status="complete";
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -71,7 +72,6 @@ function ListPage() {
 					return value;
 				}
 			}
-			console.log("ps",ps);
 			var h=$(".search-bar").height();
 			var COL_ALL_DATA= assetListColumn.getColumnList(templet);
 			var COL_DATA=[{ fixed: 'left',type: 'numbers' },{ fixed: 'left',type:'checkbox'}];
@@ -164,6 +164,7 @@ function ListPage() {
 		}
 
 		ps.ownerCode=OWNER_CODE;
+		ps.status="complete";
 		ps.searchValue=JSON.stringify(value);
 		if(sortField) {
 			ps.sortField=sortField;

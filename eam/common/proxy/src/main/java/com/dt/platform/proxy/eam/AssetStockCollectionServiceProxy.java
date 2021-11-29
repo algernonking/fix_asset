@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 资产领用  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-28 19:53:37
+ * @since 2021-11-29 13:22:20
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = AssetStockCollectionServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -103,6 +103,28 @@ public interface AssetStockCollectionServiceProxy {
 	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
 
 	/**
+	 * 审批
+	 */
+	public static final String APPROVE= API_PREFIX + "approve";
+
+	/**
+	 * 提交审批
+	 */
+	public static final String FOR_APPROVAL= API_PREFIX + "for-approval";
+
+	/**
+	 * 确认操作
+	 */
+	public static final String CONFIRM_OPERATION= API_PREFIX + "confirm-operation";
+
+	/**
+	 * 撤销操作
+	 */
+	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
+
+
+
+	/**
 	 * 添加资产领用
 	*/
 	@RequestMapping(AssetStockCollectionServiceProxy.INSERT)
@@ -154,6 +176,7 @@ public interface AssetStockCollectionServiceProxy {
 	*/
 	@RequestMapping(AssetStockCollectionServiceProxy.QUERY_PAGED_LIST)
 	Result<PagedList<AssetStockCollection>> queryPagedList(AssetStockCollectionVO sample);
+
 
 
 	/**

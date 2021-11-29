@@ -2,6 +2,10 @@ package com.dt.platform.eam.service.impl;
 
 
 import javax.annotation.Resource;
+
+import com.dt.platform.domain.eam.AssetCollection;
+import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,13 +33,14 @@ import java.util.ArrayList;
 import com.dt.platform.eam.service.IAssetStockCollectionService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
  * 资产领用 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-28 19:53:37
+ * @since 2021-11-29 13:22:20
 */
 
 
@@ -54,6 +59,41 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	public DAO dao() { return dao; }
 
 
+	@Override
+	public Result startProcess(ProcessStartVO startVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(ProcessApproveVO approveVO) {
+		return null;
+	}
+
+	@Override
+	public Result approve(String instanceId, List<AssetCollection> assets, String approveAction, String opinion) {
+		return null;
+	}
+
+	@Override
+	public Map<String, Object> getBill(String id) {
+		return null;
+	}
+
+	@Override
+	public Result revokeOperation(String id) {
+		return null;
+	}
+
+	@Override
+	public Result forApproval(String id) {
+		return null;
+	}
+
+	@Override
+	public Result confirmOperation(String id) {
+		return null;
+	}
+
 
 	@Override
 	public Object generateId(Field field) {
@@ -70,8 +110,13 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	@Override
 	public Result insert(AssetStockCollection assetStockCollection,boolean throwsException) {
 		Result r=super.insert(assetStockCollection,throwsException);
+		//添加
+
+
 		return r;
 	}
+
+
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
@@ -80,6 +125,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	 * */
 	@Override
 	public Result insert(AssetStockCollection assetStockCollection) {
+
 		return this.insert(assetStockCollection,true);
 	}
 

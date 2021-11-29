@@ -85,6 +85,7 @@ MenuGenerator {
 	public MenuGenerator(String appId, String roleId, DBTable table, Class proxyType, Class pageType) {
 		this.configs=new PlatformConfigs(appId);
 		this.dao=this.configs.getDAO();
+
 		this.table=table;
 		this.proxyType =proxyType;
 		this.pageType =pageType;
@@ -284,12 +285,14 @@ MenuGenerator {
 			resourze.setBatchId(batchId);
 
 			resourzes.add(resourze);
+
 			if(path.endsWith("_list.html")) {
 				resourceMap.put("_list.html",resourze);
 			} else if(path.endsWith("_form.html")) {
 				resourceMap.put("_form.html",resourze);
 			}
-
+			System.out.println("######dao"+dao);
+			System.out.println("#######resourze"+resourze);
 			dao.insertEntity(resourze);
 		}
 

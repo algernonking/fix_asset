@@ -198,30 +198,32 @@ public class EamRelationManager extends RelationManager {
 
     public void setupStockAssetCollection(){
         // 关联资产
-//        this.property(AssetCollectionMeta.ASSET_LIST_PROP)
-//                .using(EAMTables.EAM_ASSET_COLLECTION.ID )
-//                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-//                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
-//                .join( EAMTables.EAM_ASSET.ID);
-//
-//        // 关联位置
-//        this.property(AssetCollectionMeta.POSITION_PROP)
-//                .using(EAMTables.EAM_ASSET_COLLECTION.POSITION_ID)
-//                .join( EAMTables.EAM_POSITION.ID);
-//
-//        // 关联制单人
-//        this.property(AssetCollectionMeta.ORIGINATOR_PROP)
-//                .using(EAMTables.EAM_ASSET_COLLECTION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
-////                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
-//
-//        // 关联使用人
-//        this.property(AssetCollectionMeta.USE_USER_PROP)
-//                .using(EAMTables.EAM_ASSET_COLLECTION.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
-////                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
-//
-//        this.property(AssetCollectionMeta.USE_ORGANIZATION_PROP)
-//                .using(EAMTables.EAM_ASSET_COLLECTION.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
+        this.property(AssetStockCollectionMeta.ASSET_LIST_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.ID )
+                .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
+                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .join( EAMTables.EAM_ASSET.ID);
+
+        // 关联位置
+        this.property(AssetStockCollectionMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.POSITION_ID)
+                .join( EAMTables.EAM_POSITION.ID);
+
+        // 关联制单人
+        this.property(AssetStockCollectionMeta.ORIGINATOR_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        // 关联使用人
+        this.property(AssetStockCollectionMeta.USE_USER_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.USE_USER_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
+//                .using(FoxnicWeb.HRM_EMPLOYEE.PERSON_ID).join(FoxnicWeb.HRM_PERSON.ID);
+
+        this.property(AssetStockCollectionMeta.USE_ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.USE_ORGANIZATION_ID).join(FoxnicWeb.HRM_ORGANIZATION.ID);
     }
+
+
 
     public void setupStockAsset(){
         this.property(StockMeta.ORIGINATOR_PROP)
