@@ -225,7 +225,7 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
      * @param #(relationSlaveVar) #(relationSlaveVarDoc)
      */
 	public void saveRelation(#(relationMasterVarType) #(relationMasterVar),List<#(relationSlaveVarType)> #(relationSlaveVar)) {
-		super.saveRelation(#(relationMasterIdField),#(relationMasterVar), #(relationSlaveIdField),#(relationSlaveVar),#(isRelationClearWhenEmpty));
+		super.saveRelation(#(relationMasterPoType).class,#(relationMasterIdField),#(relationMasterVar),#(relationSlavePoType).class,#(relationSlaveIdField),#(relationSlaveVar),#(isRelationClearWhenEmpty));
 	}
 	#end
 

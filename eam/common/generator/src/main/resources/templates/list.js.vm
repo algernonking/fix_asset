@@ -293,7 +293,12 @@ function ListPage() {
 		fox.renderSelectBox({
 			el: "#(f.varName)",
 			size: "small",
-			radio: false
+			radio: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
+				},1);
+			},
 		});
 		#else if(f.typeName.equals("radio_box"))
 		//渲染 #(f.varName) 搜索框
@@ -301,6 +306,11 @@ function ListPage() {
 			el: "#(f.varName)",
 			size: "small",
 			radio: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			#if(f.radioField.dictCode!=null)
 			transform: function(data) {
@@ -308,7 +318,7 @@ function ListPage() {
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
@@ -319,7 +329,7 @@ function ListPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
@@ -331,6 +341,11 @@ function ListPage() {
 			el: "#(f.varName)",
 			size: "small",
 			radio: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
 			#if(f.checkField.dictCode!=null)
 				transform: function(data) {
@@ -338,7 +353,7 @@ function ListPage() {
 					var opts=[];
 					for (var i = 0; i < data.length; i++) {
 						if(!data[i]) continue;
-						opts.push({name:data[i].text,value:data[i].code});
+						opts.push({data:data[i],name:data[i].text,value:data[i].code});
 					}
 					return opts;
 				}
@@ -349,7 +364,7 @@ function ListPage() {
 					var opts=[];
 					if(!data) return opts;
 					for (var i = 0; i < data.length; i++) {
-						opts.push({name:data[i].text,value:data[i].code});
+						opts.push({data:data[i],name:data[i].text,value:data[i].code});
 					}
 					return opts;
 				}
@@ -392,7 +407,7 @@ function ListPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}
@@ -408,7 +423,7 @@ function ListPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}
@@ -419,7 +434,7 @@ function ListPage() {
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField)});
 				}
 				return opts;
 			}

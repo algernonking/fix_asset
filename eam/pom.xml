@@ -25,8 +25,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<knife4j.version>3.0.2</knife4j.version>
 		<platform.version>0.0.2.RELEASE</platform.version>
-		<foxnic.version>1.4.0.RELEASE</foxnic.version>
-		<foxnic-web.version>0.6.0.RELEASE</foxnic-web.version>
+		<foxnic.version>1.4.1.RELEASE</foxnic.version>
+		<foxnic-web.version>0.6.1.RELEASE</foxnic-web.version>
 	</properties>
 
 

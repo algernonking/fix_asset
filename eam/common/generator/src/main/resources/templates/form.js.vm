@@ -4,6 +4,7 @@ function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="#(moduleURL)";
+	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=#(disableCreateNew);
 	var disableModify=#(disableModify);
@@ -25,7 +26,7 @@ function FormPage() {
 		}
 
 		if(window.pageExt.form.beforeInit) {
-			window.pageExt.form.beforeInit();
+			window.pageExt.form.beforeInit(action,admin.getTempData('#(formDataKey)'));
 		}
 
 		//渲染表单组件
@@ -136,6 +137,11 @@ function FormPage() {
 			#if(f.selectField.toolbar)
 			toolbar: {show:true,showIcon:true,list:[ "ALL", "CLEAR","REVERSE"]},
 			#end
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			#if(f.selectField.enumTypeName!=null)
 			transform:function(data) {
@@ -148,7 +154,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -169,7 +175,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -185,7 +191,7 @@ function FormPage() {
 				var opts=[];
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
-					opts.push({name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].#(f.selectField.textField),value:data[i].#(f.selectField.valueField),selected:(defaultValues.indexOf(data[i].#(f.selectField.valueField))!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -454,7 +460,8 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
-		adjustPopup: adjustPopup
+		adjustPopup: adjustPopup,
+		action: action
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();
