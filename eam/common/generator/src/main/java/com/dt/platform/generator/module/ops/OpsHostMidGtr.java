@@ -1,6 +1,9 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.ops.Host;
+import com.dt.platform.domain.ops.HostMid;
+import com.dt.platform.domain.ops.ServiceInfo;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostMidGtr extends BaseCodeGenerator{
@@ -14,7 +17,10 @@ public class OpsHostMidGtr extends BaseCodeGenerator{
 
         System.out.println(this.getClass().getName());
 
-        cfg.setRelationField(EAMTables.OPS_HOST_MID.HOST_ID, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+
+        //cfg.setRelationField(HostMid.class,HostMid.class,EAMTables.OPS_HOST_MID.HOST_ID, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+
+        cfg.setRelationField(Host.class,EAMTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
 
 
         cfg.view().search().inputLayout(

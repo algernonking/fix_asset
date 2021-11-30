@@ -1,73 +1,91 @@
 package com.dt.platform.ops.service.impl;
 
 
-import com.dt.platform.constants.db.EAMTables.OPS_HOST_MID;
-import com.dt.platform.domain.ops.HostMid;
-import com.dt.platform.domain.ops.ServiceInfo;
-import com.dt.platform.ops.service.IHostMidService;
-import com.github.foxnic.api.error.ErrorDesc;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import com.github.foxnic.dao.excel.ExcelWriter;
-import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.dao.spec.DAO;
-import com.github.foxnic.sql.expr.ConditionExpr;
-import com.github.foxnic.sql.meta.DBField;
-import org.github.foxnic.web.framework.dao.DBConfigs;
+import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
-import java.io.InputStream;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Date;
+
+import com.dt.platform.domain.ops.HostMid;
+import com.dt.platform.domain.ops.HostMidVO;
 import java.util.List;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.spec.DAO;
+import java.lang.reflect.Field;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.sql.expr.ConditionExpr;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.dao.excel.ExcelWriter;
+import com.github.foxnic.dao.excel.ValidateResult;
+import com.github.foxnic.dao.excel.ExcelStructure;
+import java.io.InputStream;
+import com.github.foxnic.sql.meta.DBField;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.meta.DBColumnMeta;
+import com.github.foxnic.sql.expr.Select;
+import java.util.ArrayList;
+import com.dt.platform.ops.service.IHostMidService;
+import org.github.foxnic.web.framework.dao.DBConfigs;
+import java.util.Date;
+import com.dt.platform.constants.db.EAMTables.*;
+import com.dt.platform.domain.ops.Host;
+import com.dt.platform.domain.ops.ServiceInfo;
 
 /**
  * <p>
  * 中间件 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:31
+ * @since 2021-11-30 13:55:56
 */
 
 
 @Service("OpsHostMidService")
 public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMidService {
-	
+
 	/**
 	 * 注入DAO对象
 	 * */
 	@Resource(name=DBConfigs.PRIMARY_DAO) 
 	private DAO dao=null;
-	
+
 	/**
 	 * 获得 DAO 对象
 	 * */
 	public DAO dao() { return dao; }
 
 
-	
+
 	@Override
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
-	
+
 	/**
-	 * 插入实体
-	 * @param hostMid 实体数据
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param hostMid  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	@Override
+	public Result insert(HostMid hostMid,boolean throwsException) {
+		Result r=super.insert(hostMid,throwsException);
+		return r;
+	}
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param hostMid 数据对象
 	 * @return 插入是否成功
 	 * */
 	@Override
 	public Result insert(HostMid hostMid) {
-		Result r=super.insert(hostMid);
-		return r;
+		return this.insert(hostMid,true);
 	}
-	
+
 	/**
 	 * 批量插入实体，事务内
 	 * @param hostMidList 实体数据清单
@@ -77,7 +95,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	public Result insertList(List<HostMid> hostMidList) {
 		return super.insertList(hostMidList);
 	}
-	
+
 	
 	/**
 	 * 按主键删除 中间件
@@ -123,19 +141,31 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 			return r;
 		}
 	}
-	
+
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param hostMid 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
 	public Result update(HostMid hostMid , SaveMode mode) {
-		Result r=super.update(hostMid , mode);
+		return this.update(hostMid,mode,true);
+	}
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param hostMid 数据对象
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	@Override
+	public Result update(HostMid hostMid , SaveMode mode,boolean throwsException) {
+		Result r=super.update(hostMid , mode , throwsException);
 		return r;
 	}
-	
+
 	/**
 	 * 更新实体集，事务内
 	 * @param hostMidList 数据对象列表
@@ -146,7 +176,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	public Result updateList(List<HostMid> hostMidList , SaveMode mode) {
 		return super.updateList(hostMidList , mode);
 	}
-	
+
 	
 	/**
 	 * 按主键更新字段 中间件
@@ -159,8 +189,8 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 		if(!field.table().name().equals(this.table())) throw new IllegalArgumentException("更新的数据表["+field.table().name()+"]与服务对应的数据表["+this.table()+"]不一致");
 		int suc=dao.update(field.table().name()).set(field.name(), value).where().and("id = ? ",id).top().execute();
 		return suc>0;
-	} 
-	
+	}
+
 	
 	/**
 	 * 按主键获取 中间件
@@ -184,7 +214,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 
 	/**
 	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @return 查询结果
 	 * */
@@ -192,11 +222,11 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	public List<HostMid> queryList(HostMid sample) {
 		return super.queryList(sample);
 	}
-	
-	
+
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param pageSize 分页条数
 	 * @param pageIndex 页码
@@ -206,10 +236,10 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	public PagedList<HostMid> queryPagedList(HostMid sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
-	 * 
+	 *
 	 * @param sample  查询条件
 	 * @param condition 其它条件
 	 * @param pageSize 分页条数
@@ -220,7 +250,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
 	public PagedList<HostMid> queryPagedList(HostMid sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
-	
+
 	/**
 	 * 检查 角色 是否已经存在
 	 *
@@ -260,7 +290,7 @@ public class HostMidServiceImpl extends SuperService<HostMid> implements IHostMi
      * @param serviceInfoIds 服务内容清单
      */
 	public void saveRelation(String hostId,List<String> serviceInfoIds) {
-		super.saveRelation(HostMid.class, OPS_HOST_MID.HOST_ID,hostId, ServiceInfo.class,OPS_HOST_MID.SERVICE_INFO_ID,serviceInfoIds,true);
+		super.saveRelation(Host.class,OPS_HOST_MID.HOST_ID,hostId,ServiceInfo.class,OPS_HOST_MID.SERVICE_INFO_ID,serviceInfoIds,true);
 	}
 
 }

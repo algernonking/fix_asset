@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 中间件 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:31
+ * @since 2021-11-30 13:55:56
 */
 
 @Api(tags = "中间件")
@@ -65,15 +65,15 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "添加中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
-		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = HostMidServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostMidServiceProxy.INSERT)
 	public Result insert(HostMidVO hostMidVO) {
-		Result result=hostMidService.insert(hostMidVO);
+		Result result=hostMidService.insert(hostMidVO,false);
 		return result;
 	}
 
@@ -84,7 +84,7 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "删除中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288")
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = HostMidVOMeta.ID)
@@ -118,16 +118,16 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "更新中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
-		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.DIRTY_FIELDS , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
 	@NotNull(name = HostMidVOMeta.ID)
 	@SentinelResource(value = HostMidServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostMidServiceProxy.UPDATE)
 	public Result update(HostMidVO hostMidVO) {
-		Result result=hostMidService.update(hostMidVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=hostMidService.update(hostMidVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -137,16 +137,16 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "保存中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
-		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE , HostMidVOMeta.SEARCH_FIELD , HostMidVOMeta.FUZZY_FIELD , HostMidVOMeta.SEARCH_VALUE , HostMidVOMeta.DIRTY_FIELDS , HostMidVOMeta.SORT_FIELD , HostMidVOMeta.SORT_TYPE , HostMidVOMeta.IDS } )
 	@NotNull(name = HostMidVOMeta.ID)
 	@SentinelResource(value = HostMidServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(HostMidServiceProxy.SAVE)
 	public Result save(HostMidVO hostMidVO) {
-		Result result=hostMidService.save(hostMidVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=hostMidService.save(hostMidVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -165,11 +165,6 @@ public class HostMidController extends SuperController {
 	public Result<HostMid> getById(String id) {
 		Result<HostMid> result=new Result<>();
 		HostMid hostMid=hostMidService.getById(id);
-
-		// join 关联的对象
-		hostMidService.dao().fill(hostMid)
-			.execute();
-
 		result.success(true).data(hostMid);
 		return result;
 	}
@@ -200,9 +195,9 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "查询中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
-		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { HostMidVOMeta.PAGE_INDEX , HostMidVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = HostMidServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -220,9 +215,9 @@ public class HostMidController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询中间件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "495707592262156288"),
-		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class , example = "495707314720866304"),
-		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class , example = "495619232449429504"),
+		@ApiImplicitParam(name = HostMidVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.HOST_ID , value = "主机" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = HostMidVOMeta.SERVICE_INFO_ID , value = "服务内容" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = HostMidServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -230,11 +225,6 @@ public class HostMidController extends SuperController {
 	public Result<PagedList<HostMid>> queryPagedList(HostMidVO sample) {
 		Result<PagedList<HostMid>> result=new Result<>();
 		PagedList<HostMid> list=hostMidService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		hostMidService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -247,10 +237,14 @@ public class HostMidController extends SuperController {
 	@SentinelResource(value = HostMidServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(HostMidServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(HostMidVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=hostMidService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -260,11 +254,15 @@ public class HostMidController extends SuperController {
 	@SentinelResource(value = HostMidServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(HostMidServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=hostMidService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

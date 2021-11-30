@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.eam.Asset;
+import com.dt.platform.domain.eam.AssetItem;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class EamAssetItemGtr extends BaseCodeGenerator {
@@ -21,7 +22,7 @@ public class EamAssetItemGtr extends BaseCodeGenerator {
         );
 
         //指定该表为关系表
-        cfg.setRelationField(EAMTables.EAM_ASSET_ITEM.HANDLE_ID, EAMTables.EAM_ASSET_ITEM.ASSET_ID,true);
+       // cfg.setRelationField(Asset.class,EAMTables.EAM_ASSET_ITEM.HANDLE_ID, AssetItem.class,EAMTables.EAM_ASSET_ITEM.ASSET_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()

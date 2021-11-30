@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.Inventory;
+import com.dt.platform.domain.eam.InventoryManager;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
 
@@ -23,7 +25,7 @@ public class EamInventoryManagerGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.setRelationField(EAMTables.EAM_INVENTORY_MANAGER.INVENTORY_ID, EAMTables.EAM_INVENTORY_MANAGER.USER_ID,true);
+        cfg.setRelationField(Inventory.class,EAMTables.EAM_INVENTORY_MANAGER.INVENTORY_ID, Employee.class, EAMTables.EAM_INVENTORY_MANAGER.USER_ID,true);
 
 
         //文件生成覆盖模式

@@ -88,13 +88,21 @@ echo "delete from cont_contract where 1=1 $tenant_sql; "              >>$clear_s
 echo "delete from cont_contract_fund where 1=1 $tenant_sql; "         >>$clear_sql
 echo "delete from cont_contract_invoice where 1=1 $tenant_sql; "      >>$clear_sql
 
+
+
+
+
+
+
+
+
+echo "delete from hrm_person where deleted='1';" >>$clear_sql
+echo "delete from hrm_employee where deleted='1';" >>$clear_sql
+echo "delete from sys_user where deleted='1';" >>$clear_sql
+
+
 echo "-- end"                                                         >>$clear_sql
-
-
-
 echo "-- commit"                                                      >>$clear_sql
-
-
 
 exit 0
 

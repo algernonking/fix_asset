@@ -1,7 +1,7 @@
 /**
  * 中间件 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:31
+ * @since 2021-11-30 13:55:56
  */
 
 layui.config({
@@ -53,6 +53,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
+        },
+        onSelectBoxChanged:function(id,selected,changes,isAdd) {
+            console.log('onSelectBoxChanged',id,selected,changes,isAdd);
         },
         /**
          * 查询前调用
@@ -140,13 +143,20 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     //表单页的扩展
     var form={
         /**
-         * 表单初始化前调用
+         * 表单初始化前调用 , 并传入表单数据
          * */
-        beforeInit:function () {
+        beforeInit:function (action,data) {
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
+        },
+        /**
+         * 窗口调节前
+         * */
+        beforeAdjustPopup:function () {
+            console.log('beforeAdjustPopup');
+            return true;
         },
         /**
          * 表单数据填充前
@@ -173,11 +183,21 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
         },
+        onSelectBoxChanged:function(id,selected,changes,isAdd) {
+            console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+        },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            return true;
+        },
+        /**
+         * 数据提交后窗口关闭前，如果返回 false，停止后续步骤的执行
+         * */
+        betweenFormSubmitAndClose:function (param,result) {
+            console.log("betweenFormSubmitAndClose",result);
             return true;
         },
         /**

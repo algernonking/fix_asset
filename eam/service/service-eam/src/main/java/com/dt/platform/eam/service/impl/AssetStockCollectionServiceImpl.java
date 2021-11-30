@@ -113,6 +113,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 		//添加
 
 
+
 		return r;
 	}
 

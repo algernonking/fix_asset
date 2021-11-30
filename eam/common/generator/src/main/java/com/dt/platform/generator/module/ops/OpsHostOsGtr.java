@@ -1,6 +1,9 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.ops.Host;
+import com.dt.platform.domain.ops.HostOs;
+import com.dt.platform.domain.ops.ServiceInfo;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class OpsHostOsGtr extends BaseCodeGenerator{
@@ -13,7 +16,7 @@ public class OpsHostOsGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
 
         System.out.println(this.getClass().getName());
-        cfg.setRelationField(EAMTables.OPS_HOST_OS.HOST_ID, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
+        cfg.setRelationField(Host.class,EAMTables.OPS_HOST_OS.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_OS.SERVICE_INFO_ID,true);
 
         cfg.view().search().inputLayout(
                 new Object[]{

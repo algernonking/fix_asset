@@ -22,17 +22,26 @@ import com.dt.platform.constants.db.EAMTables.*;
  * 中间件 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:31
+ * @since 2021-11-30 13:55:55
 */
 
 public interface IHostMidService extends ISuperService<HostMid> {
 
 	/**
-	 * 插入实体
-	 * @param hostMid 实体数据
+	 * 添加，如果语句错误，则抛出异常
+	 * @param hostMid 数据对象
 	 * @return 插入是否成功
 	 * */
 	Result insert(HostMid hostMid);
+
+	/**
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param hostMid  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	Result insert(HostMid hostMid,boolean throwsException);
 
 	/**
 	 * 批量插入实体，事务内
@@ -83,12 +92,23 @@ public interface IHostMidService extends ISuperService<HostMid> {
 	boolean update(DBField field,Object value , String id);
 
 	/**
-	 * 更新实体
+	 * 更新，如果执行错误，则抛出异常
 	 * @param hostMid 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	Result update(HostMid hostMid , SaveMode mode);
+
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param hostMid 数据对象
+	 * @param mode SaveMode,数据更新的模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果
+	 */
+	Result update(HostMid hostMid , SaveMode mode,boolean throwsException);
 
 
 	/**
@@ -100,7 +120,16 @@ public interface IHostMidService extends ISuperService<HostMid> {
 	Result updateList(List<HostMid> hostMidList, SaveMode mode);
 
 	/**
-	 * 保存实体，如果主键值不为 null，则更新，否则插入
+	 * 保存实体，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param hostMid 实体数据
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	Result save(HostMid hostMid , SaveMode mode,boolean throwsException);
+
+	/**
+	 * 保存实体，如果语句错误，则抛出异常
 	 * @param hostMid 实体数据
 	 * @param mode 保存模式
 	 * @return 保存是否成功

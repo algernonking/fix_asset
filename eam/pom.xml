@@ -37,7 +37,6 @@
 		<module>./common/proxy</module>
 
 
-
 		<!-- 接口服务 -->
 		<module>./service/service-eam</module>
 		<module>./service/service-hrm</module>
@@ -58,6 +57,7 @@
 		<module>./view/view-knowledgebase</module>
 		<module>./view/view-contract</module>
 		<module>./view/view-customer</module>
+
 
 
 		<!-- 聚合 -->

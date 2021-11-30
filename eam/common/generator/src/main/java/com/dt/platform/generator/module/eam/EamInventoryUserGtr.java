@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.eam.Inventory;
+import com.dt.platform.domain.eam.InventoryUser;
 import com.dt.platform.eam.page.InventoryPageController;
 import com.dt.platform.eam.page.InventoryUserPageController;
 import com.dt.platform.proxy.eam.InventoryServiceProxy;
@@ -27,8 +29,8 @@ public class EamInventoryUserGtr extends BaseCodeGenerator{
                 }
         );
 
-        cfg.setRelationField(EAMTables.EAM_INVENTORY_USER.INVENTORY_ID, EAMTables.EAM_INVENTORY_USER.USER_ID,true);
-
+     //   cfg.setRelationField(EAMTables.EAM_INVENTORY_USER.INVENTORY_ID, EAMTables.EAM_INVENTORY_USER.USER_ID,true);
+        cfg.setRelationField(Inventory.class,EAMTables.EAM_INVENTORY_USER.INVENTORY_ID, Employee.class,EAMTables.EAM_INVENTORY_USER.USER_ID,true);
 
         //文件生成覆盖模式
         cfg.overrides()
