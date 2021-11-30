@@ -95,7 +95,7 @@ foxnic:
     # 默认配置
     default:
       # local,remote,both,none
-      mode: none
+      mode: local
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
@@ -105,7 +105,7 @@ foxnic:
     # 按实体类型配置缓存细节
     details:
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: none
+        mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
