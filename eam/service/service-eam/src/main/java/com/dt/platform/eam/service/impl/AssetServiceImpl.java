@@ -1350,14 +1350,17 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			if("insert".equals(actionType)){
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 
+
 				//资产编号
 				String codeRule="";
 				String approvalRule="";
+				boolean codeGen=true;
 				if(AssetOwnerCodeEnum.ASSET.code().equals(assetOwner)){
 					//如果初始化模式开始
-					if(!operateService.queryAssetImportAssetCodeKeep()){
-						codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
-						approvalRule=AssetOperateEnum.EAM_ASSET_INSERT.code();
+					codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
+					approvalRule=AssetOperateEnum.EAM_ASSET_INSERT.code();
+					if(operateService.queryAssetImportAssetCodeKeep()){
+						codeGen=false;
 					}
 				}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
@@ -1370,6 +1373,23 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					errors.add(new ValidateResult(null,(i+1),"资产ownerCode设置错误"));
 				}
 
+
+				if(codeGen){
+					Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule);
+					if(!codeResult.isSuccess()){
+						//返回报错
+						errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
+						break;
+					}else{
+						insert.set("asset_code",codeResult.getData().toString());
+					}
+
+				}
+
+
+
+
+
 				//办理情况
 				if(operateService.approvalRequired(approvalRule) ){
 					insert.set("status",AssetHandleStatusEnum.INCOMPLETE.code());
@@ -1378,14 +1398,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 					insert.set("status",AssetHandleStatusEnum.COMPLETE.code());
 				}
 
-				Result codeResult= CodeModuleServiceProxy.api().generateCode(codeRule);
-				if(!codeResult.isSuccess()){
-					//返回报错
-					errors.add(new ValidateResult(null,(i+1),codeResult.getMessage()));
-					break;
-				}else{
-					insert.set("asset_code",codeResult.getData().toString());
-				}
 
 				//数量
 				if (StringUtil.isBlank(r.getString("asset_number"))){

@@ -27,8 +27,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-15 08:35:45
- * @sign ACD5D4279F0FFB81B03FF741C007BB57
+ * @since 2021-11-30 21:52:25
+ * @sign 9C5608F1D022C1992601DBDF9C3B1483
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -485,10 +485,16 @@ public class Asset extends Entity {
 	private Integer rackDownNumber;
 	
 	/**
-	 * 标签：标签
+	 * 标签1：标签1
 	*/
-	@ApiModelProperty(required = false,value="标签" , notes = "标签")
+	@ApiModelProperty(required = false,value="标签1" , notes = "标签1")
 	private String label;
+	
+	/**
+	 * 标签2：标签2
+	*/
+	@ApiModelProperty(required = false,value="标签2" , notes = "标签2")
+	private String label2;
 	
 	/**
 	 * 内部控制标签：内部控制标签
@@ -2161,21 +2167,40 @@ public class Asset extends Entity {
 	}
 	
 	/**
-	 * 获得 标签<br>
-	 * 标签
-	 * @return 标签
+	 * 获得 标签1<br>
+	 * 标签1
+	 * @return 标签1
 	*/
 	public String getLabel() {
 		return label;
 	}
 	
 	/**
-	 * 设置 标签
-	 * @param label 标签
+	 * 设置 标签1
+	 * @param label 标签1
 	 * @return 当前对象
 	*/
 	public Asset setLabel(String label) {
 		this.label=label;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签2<br>
+	 * 标签2
+	 * @return 标签2
+	*/
+	public String getLabel2() {
+		return label2;
+	}
+	
+	/**
+	 * 设置 标签2
+	 * @param label2 标签2
+	 * @return 当前对象
+	*/
+	public Asset setLabel2(String label2) {
+		this.label2=label2;
 		return this;
 	}
 	

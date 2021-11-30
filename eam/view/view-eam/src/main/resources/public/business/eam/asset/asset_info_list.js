@@ -111,12 +111,12 @@ function ListPage() {
 							if(r.success) {
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
-								console.log(12345)
+								console.log(12345,r)
 								var errs = [];
-								if (r.errors) {
-									for (var i = 0; i < r.errors.length; i++) {
-										if (errs.indexOf(r.errors[i].message) == -1) {
-											errs.push(r.errors[i].message);
+								if (r.data&&r.data.length>0) {
+									for (var i = 0; i < r.data.length; i++) {
+										if (errs.indexOf(r.data[i].message) == -1) {
+											errs.push(r.data[i].message);
 										}
 									}
 									top.layer.msg(errs.join("<br>"), {time: 2000});

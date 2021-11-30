@@ -171,7 +171,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 	public Result revokeOperation(String id) {
 		AssetCollection billData=getById(id);
 		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
-
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
 		}

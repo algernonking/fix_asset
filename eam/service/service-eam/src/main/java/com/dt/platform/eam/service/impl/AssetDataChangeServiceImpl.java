@@ -396,8 +396,6 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 	public Result revokeOperation(String id) {
 		AssetDataChange billData=getById(id);
 		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus())||AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())  ){
-
-
 			ProcessApproveVO processApproveVO=new ProcessApproveVO();
 			AssetDataChange bill=getById(id);
 			List<String> instances=new ArrayList<>();
@@ -407,13 +405,10 @@ public class AssetDataChangeServiceImpl extends SuperService<AssetDataChange> im
 			processApproveVO.setAction(ApprovalAction.revoke.code());
 			Result processApproveResult=approve(processApproveVO);
 			if(!processApproveResult.isSuccess()) return processApproveResult;
-
 			billData.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 			billData.setChsStatus("");
 			billData.setChangeInstanceId("");
 			super.update(billData,SaveMode.NOT_NULL_FIELDS);
-
-
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
 		}

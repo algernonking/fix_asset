@@ -106,8 +106,9 @@ public class EamAssetStockGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.EAM_ASSET.SUPPLIER_ID)
                 .basic().label("供应商")
-                .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(false).toolbar(true)
+                .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
                 .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(StockMeta.SUPPLIER).muliti(false);
+
 
 
 
