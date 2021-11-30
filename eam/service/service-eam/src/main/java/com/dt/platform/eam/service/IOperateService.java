@@ -34,6 +34,11 @@ public interface IOperateService extends ISuperService<Operate> {
 	Result approve(ProcessApproveVO approveVO);
 
 
+	/**
+	 * 资产导入保留编码
+	 * @return 返回
+	 */
+	boolean queryAssetImportAssetCodeKeep();
 
 
 	/**

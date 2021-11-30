@@ -1350,14 +1350,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			if("insert".equals(actionType)){
 				Insert insert = SQLBuilder.buildInsert(r,this.table(),this.dao(), true);
 
-
 				//资产编号
 				String codeRule="";
 				String approvalRule="";
 				if(AssetOwnerCodeEnum.ASSET.code().equals(assetOwner)){
-					codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
-					approvalRule=AssetOperateEnum.EAM_ASSET_INSERT.code();
-
+					//如果初始化模式开始
+					if(!operateService.queryAssetImportAssetCodeKeep()){
+						codeRule=CodeModuleEnum.EAM_ASSET_CODE.code();
+						approvalRule=AssetOperateEnum.EAM_ASSET_INSERT.code();
+					}
 				}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetOwner)){
 					codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
 					approvalRule=AssetOperateEnum.EAM_ASSET_STOCK_IN.code();

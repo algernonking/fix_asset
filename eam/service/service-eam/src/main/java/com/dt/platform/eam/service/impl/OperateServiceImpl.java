@@ -111,6 +111,7 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	}
 
 
+
 	/*
 	当前的SN是否是唯一的。判断是否序列号要唯一,满足非空唯一即可
 	 */
@@ -167,6 +168,20 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	}
 
 
+	@Override
+	public boolean queryAssetImportAssetCodeKeep() {
+		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode("eam.assetImportAssetCodeKeep");
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
+		return r;
+	}
 
 	/**
 	 * 判断前端资产是否能更新
