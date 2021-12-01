@@ -343,30 +343,35 @@ function FormPage() {
 				return opts;
 			}
 		});
+
+		// fox.renderSelectBox({
+		// 	el: "manufacturerId",
+		// 	radio: true,
+		// 	filterable: true,
+		// 	paging: true,
+		// 	pageRemote: true,
+		// 	//转换数据
+		// 	searchField: "manufacturerName", //请自行调整用于搜索的字段名称
+		// 	extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+		// 	transform: function(data) {
+		// 		//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+		// 		var defaultValues=[],defaultIndexs=[];
+		// 		if(action=="create") {
+		// 			defaultValues="".split(",");
+		// 			defaultIndexs="".split(",");
+		// 		}
+		// 		var opts=[];
+		// 		if(!data) return opts;
+		// 		for (var i = 0; i < data.length; i++) {
+		// 			if(!data[i]) continue;
+		// 			opts.push({name:data[i].manufacturerName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+		// 		}
+		// 		return opts;
+		// 	}
+		// });
+
 		//渲染 manufacturerId 下拉字段
-		fox.renderSelectBox({
-			el: "manufacturerId",
-			radio: true,
-			filterable: true,
-			//转换数据
-			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					 defaultValues="".split(",");
-					 defaultIndexs="".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({name:data[i].manufacturerName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
+
 
 		//渲染 positionId 下拉字段
 		fox.renderSelectBox({
@@ -394,6 +399,33 @@ function FormPage() {
 				return opts;
 			}
 		});
+
+		fox.renderSelectBox({
+			el: "manufacturerId",
+			radio: true,
+			filterable: true,
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues="".split(",");
+					defaultIndexs="".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({name:data[i].manufacturerName,value:data[i].id,selected:(defaultValues.indexOf(data[i].id)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+
 		//渲染 warehouseId 下拉字段
 		fox.renderSelectBox({
 			el: "warehouseId",

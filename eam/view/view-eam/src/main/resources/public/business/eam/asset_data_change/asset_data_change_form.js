@@ -710,7 +710,6 @@ function FormPage() {
 	     	fm.attr('method', 'POST');
 	     	fox.fillDialogButtons();
 	     	renderFormFields();
-
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
 
 		}
