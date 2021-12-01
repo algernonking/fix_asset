@@ -26,7 +26,7 @@ import org.github.foxnic.web.domain.changes.ChangeInstance;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-30 21:52:25
+ * @since 2021-12-01 18:55:55
  * @sign 9C5608F1D022C1992601DBDF9C3B1483
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

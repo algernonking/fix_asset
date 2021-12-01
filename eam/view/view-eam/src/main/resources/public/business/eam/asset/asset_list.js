@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-30 21:52:30
+ * @since 2021-12-01 18:56:06
  */
 
 
@@ -296,6 +296,8 @@ function ListPage() {
 			radio: false,
 			size: "small",
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
 			searchField: "manufacturerName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数

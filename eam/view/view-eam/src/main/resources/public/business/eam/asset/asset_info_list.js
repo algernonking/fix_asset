@@ -111,7 +111,7 @@ function ListPage() {
 							if(r.success) {
 								layer.msg(fox.translate('数据导入成功')+"!");
 							} else {
-								console.log(12345,r)
+								//console.log(12345,r)
 								var errs = [];
 								if (r.data&&r.data.length>0) {
 									for (var i = 0; i < r.data.length; i++) {

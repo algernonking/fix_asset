@@ -55,7 +55,8 @@ layui.define([],
                 ,purchase_unit_price:{ field: 'purchaseUnitPrice', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('采购单价') , templet: function (d) { return templet('purchaseUnitPrice',d.purchaseUnitPrice,d);}  }
                 ,entryTime:{ field: 'entryTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('入账时间'), templet: function (d) { return templet('entryTime',fox.dateFormat(d.entryTime),d); }}
                 ,financial_notes:{ field: 'financialNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('财务备注') , templet: function (d) { return templet('financialNotes',d.financialNotes,d);}  }
-                ,label:{ field: 'label', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
+                ,label:{ field: 'label', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签1') , templet: function (d) { return templet('label',d.label,d);}  }
+                ,label2:{ field: 'label2', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('标签2') , templet: function (d) { return templet('label2',d.label2,d);}  }
                 ,safety_level_code:{ field: 'safetyLevelCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('安全等级'), templet: function (d) { return templet('safetyLevelCode',fox.joinLabel(d.safetyLevel,"label"),d);}}
                 ,equipment_code:{ field: 'equipmentCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备编号') , templet: function (d) { return templet('equipmentCode',d.equipmentCode,d);}  }
                 ,equipment_status:{ field: 'equipmentStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('设备状态'), templet:function (d){ return templet('equipmentStatus',fox.getEnumText(SELECT_EQUIPMENTSTATUS_DATA,d.equipmentStatus),d);}}
@@ -71,7 +72,6 @@ layui.define([],
                 ,equipment_serial_number:{ field: 'equipmentSerialNumber', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('设备序列') , templet: function (d) { return templet('equipmentSerialNumber',d.equipmentSerialNumber,d);}  }
                 ,last_verification_date:{ field: 'lastVerificationDate', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('核对日期') , templet: function (d) { return templet('lastVerificationDate',fox.dateFormat(d.lastVerificationDate,"yyyy-MM-dd"),d); }}
                 ,approval_opinion:{ field: 'approvalOpinion', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approvalOpinion',d.approvalOpinion,d);}  }
-
             }
             return COL_ALL_DATA;
         }

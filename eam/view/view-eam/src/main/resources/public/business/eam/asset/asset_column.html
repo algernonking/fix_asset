@@ -136,7 +136,7 @@
 <div  th:fragment="manufacturer_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="manufacturerId" input-type="select" th:data="${'/service-eam/eam-manufacturer/query-list'}"></div>
+        <div id="manufacturerId" input-type="select" th:data="${'/service-eam/eam-manufacturer/query-paged-list'}"></div>
     </div>
 </div>
 
@@ -254,7 +254,7 @@
 <div  th:fragment="warehouse_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-list'}"></div>
+        <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-paged-list'}"></div>
     </div>
 </div>
 
@@ -341,7 +341,7 @@
 <div  th:fragment="maintainer_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="maintainerId" input-type="select" th:data="${'/service-eam/eam-maintainer/query-list'}"></div>
+        <div id="maintainerId" input-type="select" th:data="${'/service-eam/eam-maintainer/query-paged-list'}"></div>
     </div>
 </div>
 
@@ -439,7 +439,7 @@
 <div  th:fragment="supplier_id" class="layui-form-item" >
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
-        <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-list'}"></div>
+        <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-paged-list'}"></div>
     </div>
 </div>
 
@@ -537,6 +537,13 @@
     <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
     <div class="layui-input-block layui-input-block-c1">
         <input lay-filter="label" id="label" name="label" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签') }" type="text" class="layui-input"   />
+    </div>
+</div>
+
+<div  th:fragment="label2" class="layui-form-item" >
+    <div class="layui-form-label layui-form-label-c1"><div th:text="${item.attribute.label}"></div><div th:if="${item.required} == 1" class="layui-required">*</div></div>
+    <div class="layui-input-block layui-input-block-c1">
+        <input lay-filter="label2" id="label2" name="label2" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('标签2') }" type="text" class="layui-input"   />
     </div>
 </div>
 

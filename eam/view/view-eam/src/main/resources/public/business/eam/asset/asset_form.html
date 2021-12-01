@@ -2,7 +2,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-30 21:52:31
+ * @since 2021-12-01 18:56:09
  */
  -->
  <!DOCTYPE html>
@@ -256,7 +256,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('仓库')}">仓库</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-list'}" extraParam="{}"></div>
+                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -446,7 +446,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('供应商')}">供应商</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-list'}" extraParam="{}"></div>
+                            <div id="supplierId" input-type="select" th:data="${'/service-eam/eam-supplier/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 

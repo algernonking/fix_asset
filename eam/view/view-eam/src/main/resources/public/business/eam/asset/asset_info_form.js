@@ -400,6 +400,8 @@ function FormPage() {
 			radio: true,
 			filterable: true,
 			//转换数据
+			paging: true,
+			pageRemote: true,
 			searchField: "warehouseName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
 			transform: function(data) {
@@ -468,6 +470,8 @@ function FormPage() {
 			el: "maintainerId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			//转换数据
 			searchField: "maintainerName", //请自行调整用于搜索的字段名称
 			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
@@ -610,6 +614,8 @@ function FormPage() {
 		fox.renderSelectBox({
 			el: "supplierId",
 			radio: true,
+			paging: true,
+			pageRemote: true,
 			filterable: true,
 			on: function(data){
 				setTimeout(function () {

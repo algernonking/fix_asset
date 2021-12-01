@@ -154,11 +154,6 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
 
-        cfg.view().field(EAMTables.EAM_ASSET.SUPPLIER_ID)
-                .basic().label("供应商")
-                .form().selectBox().queryApi(SupplierServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(AssetMeta.SUPPLIER).muliti(false);
-
 
         cfg.view().field(EAMTables.EAM_ASSET.MAINTAINER_ID)
                 .basic().label("维保商")
@@ -238,13 +233,19 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.GOODS_ID)
                 .basic().label("物品档案")
-                .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(GoodsServiceProxy.QUERY_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(GoodsMeta.ID).textField(GoodsMeta.NAME).fillWith(AssetMeta.GOODS).muliti(false);
+
+
+        cfg.view().field(EAMTables.EAM_ASSET.SUPPLIER_ID)
+                .basic().label("供应商")
+                .form().selectBox().queryApi(SupplierServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(SupplierMeta.ID).textField(SupplierMeta.SUPPLIER_NAME).fillWith(AssetMeta.SUPPLIER).muliti(false);
 
 
         cfg.view().field(EAMTables.EAM_ASSET.WAREHOUSE_ID)
                 .basic().label("仓库")
-                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(AssetMeta.WAREHOUSE).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.POSITION_ID)
@@ -255,7 +256,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
         cfg.view().field(EAMTables.EAM_ASSET.MANUFACTURER_ID)
                 .basic().label("厂商")
-                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
+                .form().selectBox().queryApi(ManufacturerServiceProxy.QUERY_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(ManufacturerMeta.ID).textField(ManufacturerMeta.MANUFACTURER_NAME).fillWith(AssetMeta.MANUFACTURER).muliti(false);
 
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_END_DATE).form().dateInput().format("yyyy-MM-dd").search().range();

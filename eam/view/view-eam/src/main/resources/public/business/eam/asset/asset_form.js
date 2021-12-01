@@ -1,7 +1,7 @@
 /**
  * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-30 21:52:33
+ * @since 2021-12-01 18:56:16
  */
 
 function FormPage() {
@@ -196,6 +196,8 @@ function FormPage() {
 			el: "manufacturerId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("manufacturerId",data.arr,data.change,data.isAdd);
@@ -305,6 +307,8 @@ function FormPage() {
 			el: "warehouseId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("warehouseId",data.arr,data.change,data.isAdd);
@@ -500,6 +504,8 @@ function FormPage() {
 			el: "supplierId",
 			radio: true,
 			filterable: true,
+			paging: true,
+			pageRemote: true,
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("supplierId",data.arr,data.change,data.isAdd);
