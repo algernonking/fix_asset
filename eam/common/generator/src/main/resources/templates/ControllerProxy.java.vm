@@ -139,7 +139,7 @@ public interface #(simpleName) {
 
 	#if(isSimplePk)
 	/**
-	 * 批量删除#(topic)
+	 * 获取多个#(topic)
 	*/
 	@RequestMapping(#(agentSimpleName).GET_BY_IDS)
 	Result<List<#(poSimpleName)>> getByIds(List<#(pkType)> #(idPropertyName)s);
