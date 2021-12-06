@@ -6,7 +6,7 @@
         <groupId>com.dt.platform</groupId>
         <artifactId>parent</artifactId>
         <version>0.0.2.RELEASE</version>
-        <relativePath/>
+        <relativePath>../../pom.xml</relativePath>
         <!-- lookup parent from repository -->
     </parent>
 
