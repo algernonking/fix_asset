@@ -4,7 +4,6 @@
  * @since 2021-09-20 20:11:28
  */
 
-
 function ListPage() {
 
     var settings,admin,form,table,layer,util,fox,upload,xmSelect;
@@ -271,7 +270,7 @@ function ListPage() {
             area: ["95%","90%"],
             type: 2,
             id:"eam-asset-select-data-win",
-            content: '/business/eam/asset/asset_select_list.html?assetSelectedCode='+ASSET_SELECTED_CODE,
+            content: '/business/eam/stock/asset_stock_select_list.html?ownerCode='+OWNER_CODE+'assetSelectedCode='+ASSET_SELECTED_CODE,
             finish: function () {
                 console.log("select form finish,");
                 refreshTableData();

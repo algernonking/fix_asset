@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.AssetAttributeItem;
 import com.dt.platform.domain.eam.AssetAttributeItemVO;
-import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
-import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
-import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.dt.platform.proxy.eam.*;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -25,7 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.eam.StockServiceProxy;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -41,16 +39,16 @@ import java.util.List;
 @Controller("EamStockPageController")
 @RequestMapping(StockPageController.prefix)
 public class StockPageController extends ViewController {
-	
+
 	public static final String prefix="business/eam/stock";
 
 	private StockServiceProxy proxy;
-	
+
 	/**
-	 * 获得代理对象<br> 
-	 * 1、单体应用时，在应用内部调用；<br> 
-	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
-	 * 3、微服务时，通过feign调用; <br> 
+	 * 获得代理对象<br>
+	 * 1、单体应用时，在应用内部调用；<br>
+	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br>
+	 * 3、微服务时，通过feign调用; <br>
 	 * */
 	public StockServiceProxy proxy() {
 		if(proxy==null) {
@@ -197,5 +195,68 @@ public class StockPageController extends ViewController {
 		}
 
 		return prefix+"/stock_form";
+	}
+
+
+	/**
+	 * 库存资产
+	 */
+	@RequestMapping("/asset_stock_selected_list.html")
+	public String assetStockSelectedList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+
+		String itemOwner="";
+		String authPrefix="eam_"+ownerCode;
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
+		}
+		System.out.println("######2"+itemOwner);
+		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode", StringUtil.isBlank(ownerCode)? AssetOwnerCodeEnum.ASSET:ownerCode);
+		return prefix+"/asset_stock_selected_list";
+	}
+	/**
+	 * 库存资产
+	 */
+	@RequestMapping("/asset_stock_select_list.html")
+	public String assetStockSelectList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+
+		String itemOwner="";
+		String categoryCode="";
+		String authPrefix="eam_"+ownerCode;
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
+			categoryCode=AssetCategoryCodeEnum.ASSET_CONSUMABLES.code();
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
+			categoryCode=AssetCategoryCodeEnum.ASSET.code();
+		}
+		Result idResult= AssetCategoryServiceProxy.api().queryNodesByCode(categoryCode);
+		model.addAttribute("categoryParentId",idResult.getData());
+
+
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode", ownerCode);
+		return prefix+"/asset_stock_select_list";
+
+	}
+
+	/**
+	 * 库存资产
+	 */
+	@RequestMapping("/asset_stock_basic_list.html")
+	public String assetStockBasicList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+
+		model.addAttribute("assetSelectedCode",assetSelectedCode);
+		model.addAttribute("ownerCode", ownerCode);
+		return prefix+"/asset_stock_basic_list";
+
 	}
 }

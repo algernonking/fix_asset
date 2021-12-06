@@ -32,6 +32,17 @@ import org.github.foxnic.web.domain.changes.ProcessStartVO;
 public interface IAssetStockCollectionService extends ISuperService<AssetStockCollection> {
 
 
+	/**
+	 * 获取单据数据
+	 * @param ownerId
+	 * @param sourceAssetId
+	 * @param cnt
+	 * @return 返回结果
+	 * */
+	Result stockCollect(String ownerId,String sourceAssetId,int cnt);
+
+
+
 	Result startProcess(ProcessStartVO startVO);
 
 	Result approve(ProcessApproveVO approveVO);

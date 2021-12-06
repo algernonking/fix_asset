@@ -431,8 +431,9 @@ function ListPage() {
 			if(!doNext) return;
 		}
 		var action=admin.getTempData('eam-asset-stock-collection-form-data-form-action');
-		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		var queryString="?ownerCode="+OWNER_CODE;
+		if(data && data.id) queryString=queryString+"&" + 'id=' + data.id;
+
 		admin.putTempData('eam-asset-stock-collection-form-data', data);
 		var area=admin.getTempData('eam-asset-stock-collection-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);

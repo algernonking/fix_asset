@@ -56,6 +56,7 @@ import java.util.Map;
 @Service("EamAssetStockCollectionService")
 public class AssetStockCollectionServiceImpl extends SuperService<AssetStockCollection> implements IAssetStockCollectionService {
 
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -67,6 +68,21 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	 * */
 	public DAO dao() { return dao; }
 
+
+	/**
+	 * 获取单据数据
+	 * @param ownerId
+	 * @param sourceAssetId
+	 * @param cnt
+	 * @return 返回结果
+	 * */
+	@Override
+	public Result stockCollect(String ownerId, String sourceAssetId, int cnt) {
+
+
+
+		return null;
+	}
 
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {

@@ -1,8 +1,13 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetAttributeItemOwnerEnum;
 import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
+import com.dt.platform.domain.eam.AssetAttributeItem;
+import com.dt.platform.proxy.eam.AssetAttributeItemServiceProxy;
 import com.dt.platform.proxy.eam.OperateServiceProxy;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -11,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.AssetStockCollectionServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 资产领用 模版页面控制器
@@ -53,6 +61,9 @@ public class AssetStockCollectionPageController extends ViewController {
 		}
 		model.addAttribute("approvalRequired",approvalRequired);
 
+//		model.addAttribute("billType",approvalRequired);
+//		model.addAttribute("billId",approvalRequired);
+
 		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/asset_stock_collection_list";
 	}
@@ -67,4 +78,6 @@ public class AssetStockCollectionPageController extends ViewController {
 		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/asset_stock_collection_form";
 	}
+
+
 }

@@ -8,13 +8,14 @@ layui.config({
     dir: layuiPath,
     base: '/module/'
 }).extend({
+    xmSelect: 'xm-select/xm-select',
     foxnicUpload: 'upload/foxnic-upload'
 })
 //
 layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','xmSelect','laydate','foxnicUpload','dropdown'],function () {
 
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
-    table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,foxup=layui.foxnicUpload;
+    table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
     //列表页的扩展
     var list={
@@ -121,8 +122,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          */
         ending:function() {
 
-        },
-
+        }
     }
 
     //表单页的扩展
@@ -136,10 +136,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
         },
-        /**
-         *  加载 资产列表
-         */
-
         /**
          * 表单数据填充前
          * */
