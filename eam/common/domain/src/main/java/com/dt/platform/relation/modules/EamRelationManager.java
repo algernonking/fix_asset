@@ -2,18 +2,9 @@ package com.dt.platform.relation.modules;
 
 
 import com.dt.platform.constants.db.EAMTables;
-
-import com.dt.platform.domain.common.meta.CodeAllocationMeta;
-import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
-import com.dt.platform.domain.ops.Voucher;
-import com.dt.platform.domain.ops.meta.HostMeta;
-import com.dt.platform.domain.ops.meta.InformationSystemMeta;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
-import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
-
-import java.util.Iterator;
 
 public class EamRelationManager extends RelationManager {
     @Override
@@ -473,7 +464,7 @@ public class EamRelationManager extends RelationManager {
         // 关联资产
         this.property(AssetHandleMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_HANDLE.ID).join( EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using(EAMTables.EAM_ASSET.ID).join(EAMTables.EAM_ASSET_ITEM.ASSET_ID);
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join(EAMTables.EAM_ASSET.ID);
 
 
 

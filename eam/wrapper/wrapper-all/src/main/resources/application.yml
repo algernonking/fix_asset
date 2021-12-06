@@ -90,12 +90,17 @@ spring:
 
 
 foxnic:
+  config:
+    # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
+    profiles: empty,profile@GuoYIE
   # 设置 Join 的二级缓存
   cache:
     # 默认配置
     default:
       # local,remote,both,none
       mode: none
+      # 是否为 join 使用缓存
+      cache-for-join: false
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
@@ -104,6 +109,12 @@ foxnic:
       remote-expire: 1200000
     # 按实体类型配置缓存细节
     details:
+      "org.github.foxnic.web.domain.system.Config":
+        strategy:
+          by-code:
+            is-accurate: true
+            cache-empty-result: true
+            properties: code
       "org.github.foxnic.web.domain.oauth.Resourze":
         mode: local
         local-limit: 10240
@@ -146,7 +157,7 @@ security:
   # 模式：session / jwt
   mode: both
   # 配置无需鉴权可以访问的地址
-  ignored-urls: /assets/** , /pages/** , /favicon.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
+  ignored-urls: /assets/** , /pages/** , /*.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
   # mode=session 时配置的登录页面
   login-page: /login.html
   jwt:

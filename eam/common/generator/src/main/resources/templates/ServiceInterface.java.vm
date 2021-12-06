@@ -115,7 +115,7 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	#if(isSimplePK)
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 按 #(idPropertyName) 获取多个对象
 	 * @param #(idPropertyName)s  主键清单
 	 * @return 实体集
 	 * */
