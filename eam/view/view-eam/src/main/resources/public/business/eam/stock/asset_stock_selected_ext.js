@@ -1,7 +1,7 @@
 /**
- * 资产领用 列表页 JS 脚本
+ * 资产 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-29 13:22:22
+ * @since 2021-09-20 20:11:27
  */
 
 layui.config({
@@ -17,39 +17,44 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
-    var timestamp = Date.parse(new Date());
-    var formAction=admin.getTempData('eam-asset-stock-collection-form-data-form-action');
-
-
     //列表页的扩展
     var list={
         /**
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            var selectedListAction=admin.getTempData('eam-asset-selected-action'+ASSET_SELECTED_CODE);
+            var toolHtml=document.getElementById("toolbarTemplate").innerHTML;
+            if(selectedListAction=="view"){
+                toolHtml=toolHtml.repeat(/lay-event="create"/i,"style=\"display:none\"")
+                toolHtml=toolHtml.repeat(/lay-event="batch-del"/i,"style=\"display:none\"")
+                document.getElementById("toolbarTemplate").innerHTML=toolHtml;
+            }
             console.log("list:beforeInit");
-        },
-        /**
-         * 表格渲染前调用
-         * @param cfg 表格配置参数
-         * */
-        beforeTableRender:function (cfg){
-            console.log("list:beforeTableRender",cfg);
-        },
-        /**
-         * 表格渲染后调用
-         * */
-        afterTableRender :function (){
-
         },
         afterSearchInputReady: function() {
             console.log("list:afterSearchInputReady");
         },
         /**
+         * 对话框之前调用，如果返回 null 则不打开对话框
+         * */
+        beforeDialog:function (param){
+            param.title="组织/人员选择对话框";
+            return param;
+        },
+        /**
+         * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
+         * */
+        afterDialog:function (param,result) {
+            console.log('dialog',param,result);
+            // debugger;
+            window.module.refreshTableData();
+        },
+        /**
          * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
         beforeDialog:function (param){
-            param.title="覆盖对话框标题";
+            param.title="组织/人员选择对话框";
             return param;
         },
         /**
@@ -114,36 +119,10 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
-         * 工具栏按钮事件前调用，如果返回 false 则不执行后续代码
-         * */
-        beforeToolBarButtonEvent:function (selected,obj) {
-            console.log('beforeToolBarButtonEvent',selected,obj);
-            return true;
-        },
-        /**
-         * 列表操作栏按钮事件前调用，如果返回 false 则不执行后续代码
-         * */
-        beforeRowOperationEvent:function (data,obj) {
-            console.log('beforeRowOperationEvent',data,obj);
-            return true;
-        },
-        /**
          * 表格右侧操作列更多按钮事件
          * */
         moreAction:function (menu,data, it){
             console.log('moreAction',menu,data,it);
-        },
-        forApproval:function (data){
-            console.log('forApproval',data);
-        },
-        confirmData:function (data){
-            console.log('confirmData',data);
-        },
-        revokeData:function (data){
-            console.log('revokeData',data);
-        },
-        downloadBill:function (data){
-            console.log('downloadBill',data);
         },
         /**
          * 末尾执行
@@ -165,13 +144,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("form:beforeInit")
         },
         /**
-         * 窗口调节前
-         * */
-        beforeAdjustPopup:function () {
-            console.log('beforeAdjustPopup');
-            return true;
-        },
-        /**
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
@@ -187,7 +159,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
         beforeDialog:function (param){
-            param.title="覆盖对话框标题";
+            param.title="组织/人员选择对话框";
             return param;
         },
         /**
@@ -204,46 +176,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return true;
         },
         /**
-         * 数据提交后窗口关闭前，如果返回 false，停止后续步骤的执行
-         * */
-        betweenFormSubmitAndClose:function (param,result) {
-            console.log("betweenFormSubmitAndClose",result);
-            return true;
-        },
-        /**
          * 数据提交后执行
          * */
         afterSubmit:function (param,result) {
             console.log("afterSubmitt",param,result);
         },
 
-        /**
-         *  加载 资产列表
-         */
-        assetSelectList:function (ifr,win,data) {
-            console.log("assetSelectList",ifr,data);
-            //设置 iframe 高度
-            ifr.height("450px");
-            //设置地址
-            var data={};
-            data.searchContent={};
-            data.assetSelectedCode=timestamp;
-            data.assetBusinessType=BILL_TYPE
-            data.action=formAction;
-            data.ownerCode=OWNER_CODE;
-            if(BILL_ID==null)BILL_ID="";
-            data.assetOwnerId=BILL_ID;
-            admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
-            admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
-            win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
-
-            // debugger
-            // console.log("assetSelectList",ifr,data);
-            // //设置 iframe 高度
-            // ifr.height("400px");
-            // //设置地址
-            // win.location="/business/system/node/node_list.html?id="+data.id;
-        },
         /**
          * 末尾执行
          */

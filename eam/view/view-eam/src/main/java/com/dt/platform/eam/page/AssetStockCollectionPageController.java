@@ -1,5 +1,8 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.proxy.eam.OperateServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
 import org.springframework.stereotype.Controller;
@@ -41,7 +44,16 @@ public class AssetStockCollectionPageController extends ViewController {
 	 * 资产领用 功能主页面
 	 */
 	@RequestMapping("/asset_stock_collection_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String ownerCode) {
+
+		boolean approvalRequired=true;
+		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code());
+		if(approvalResult.isSuccess()){
+			approvalRequired= (boolean) approvalResult.getData();
+		}
+		model.addAttribute("approvalRequired",approvalRequired);
+
+		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/asset_stock_collection_list";
 	}
 
@@ -49,7 +61,10 @@ public class AssetStockCollectionPageController extends ViewController {
 	 * 资产领用 表单页面
 	 */
 	@RequestMapping("/asset_stock_collection_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerCode) {
+		model.addAttribute("billId",id);
+		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code());
+		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/asset_stock_collection_form";
 	}
 }

@@ -3,9 +3,18 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.common.CodeModuleEnum;
+import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
+import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
+import com.dt.platform.constants.enums.eam.AssetStockTypeEnum;
 import com.dt.platform.domain.eam.AssetCollection;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,8 +118,66 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	 */
 	@Override
 	public Result insert(AssetStockCollection assetStockCollection,boolean throwsException) {
+
+
+//		if(AssetStockCollection.getStockAssetIds()==null||AssetStockCollection.getStockAssetIds().size()==0){
+//			String assetSelectedCode=stock.getSelectedCode();
+//			ConditionExpr condition=new ConditionExpr();
+//			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+//			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+//			stock.setStockAssetIds(list);
+//		}
+//
+//		if(stock.getStockAssetIds().size()==0){
+//			return ErrorDesc.failure().message("请选择资产");
+//		}
+
+//		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),stock.getStockAssetIds());
+//		if(!ckResult.isSuccess()){
+//			return
+
+		//业务时间
+		if(StringUtil.isBlank(assetStockCollection.getBusinessDate())){
+			assetStockCollection.setBusinessDate(new Date());
+		}
+
+		//办理状态
+		if(StringUtil.isBlank(assetStockCollection.getStatus())){
+			assetStockCollection.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		}
+
+
+
+		//填充制单人
+		if( StringUtil.isBlank(assetStockCollection.getOriginatorId())){
+			assetStockCollection.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
+		}
+
+
+		//生成编码规则
+		if(StringUtil.isBlank(assetStockCollection.getBusinessCode())){
+			String code="";
+			if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetStockCollection.getOwnerCode())){
+				code=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
+			}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(assetStockCollection.getOwnerCode())){
+
+				code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code();
+			}
+
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(code);
+			if(!codeResult.isSuccess()){
+				return codeResult;
+			}else{
+				assetStockCollection.setBusinessCode(codeResult.getData().toString());
+			}
+
+		}
+
+
+
 		Result r=super.insert(assetStockCollection,throwsException);
 		//添加
+
 
 
 

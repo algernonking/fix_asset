@@ -15,7 +15,7 @@ DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
 DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
 DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
 #create demo.sql
-$MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST $DB_NAME  > $demo_sql
+$MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST eam  > $demo_sql
 $MYSQL -u$DB_USER -p$DB_PWD -h$DB_HOST eam_demo < $demo_sql
 if [[ -f $app_dir/update/update.tar ]];then
   rm -rf $app_dir/update/update.tar

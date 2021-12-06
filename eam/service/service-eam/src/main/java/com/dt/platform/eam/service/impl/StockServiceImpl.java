@@ -203,8 +203,6 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 			return ckResult;
 		}
 
-
-
 		//填充制单人
 		if( StringUtil.isBlank(stock.getOriginatorId())){
 			stock.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
@@ -215,11 +213,11 @@ public class StockServiceImpl extends SuperService<Stock> implements IStockServi
 			stock.setBusinessDate(new Date());
 		}
 		//办理状态
-		if(StringUtil.isBlank( stock.getStatus())){
+		if(StringUtil.isBlank(stock.getStatus())){
 			stock.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		}
 
-		//办理状态
+		//办理类型
 		if(StringUtil.isBlank(stock.getStockType())){
 			stock.setStockType(AssetStockTypeEnum.IN.code());
 		}
