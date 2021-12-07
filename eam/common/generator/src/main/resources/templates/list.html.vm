@@ -178,7 +178,7 @@
 #for(f:fields)
 #if(f.typeName.equals("logic_switch"))
 <script type="text/html" id="cell-tpl-#(f.varName)">
-    <input type="checkbox" class="switch-#(f.varName) list-checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(idPropertyName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}} data-id="{{d.id}}"/>
+    <input type="checkbox" class="switch-#(f.varName) list-checkbox" lay-filter="cell-tpl-#(f.varName)" value="{{d.#(f.varName)}}" lay-skin="switch" lay-text="#(f.logicField.labelOn)|#(f.logicField.labelOff)&nbsp;"  {{d.#(f.varName)==#(f.logicField.valueOn)?'checked':''}} data-id="{{d.id}}"/>
 </script>
 #end
 #end
