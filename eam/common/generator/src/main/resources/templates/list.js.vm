@@ -188,9 +188,9 @@ function ListPage() {
 		value.#(f.varName)={ inputType:"check_box", value: xmSelect.get("##(f.varName)",true).getValue("value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:xmSelect.get("##(f.varName)",true).getValue("nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#else if(f.typeName.equals("date_input"))
 		#if(f.search.searchInRange)
-		value.#(f.varName)={ inputType:"date_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"date_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end ,matchType:"#(f.search.matchType)" };
 		#else
-		value.#(f.varName)={ inputType:"date_input", value: $("##(f.varName)").val() #if(f.searchField!=null) #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end ,field:"#(f.searchField)"#end};
+		value.#(f.varName)={ inputType:"date_input", value: $("##(f.varName)").val() #if(f.searchField!=null) #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end ,field:"#(f.searchField)"#end ,matchType:"#(f.search.matchType)"};
 		#end
 		#else if(f.typeName.equals("number_input"))
 		#if(f.search.searchInRange)
@@ -296,6 +296,9 @@ function ListPage() {
 			radio: false,
 			on: function(data){
 				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
 				},1);
 			},
@@ -308,6 +311,9 @@ function ListPage() {
 			radio: false,
 			on: function(data){
 				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
 				},1);
 			},
@@ -343,6 +349,9 @@ function ListPage() {
 			radio: false,
 			on: function(data){
 				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
 					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
 				},1);
 			},
@@ -374,16 +383,40 @@ function ListPage() {
 		#if(f.search.searchInRange)
 		laydate.render({
 			elem: '##(f.varName)-begin',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("#(f.varName)",value, date, endDate);
+				},1);
+			}
 		});
 		laydate.render({
 			elem: '##(f.varName)-end',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("#(f.varName)",value, date, endDate);
+				},1);
+			}
 		});
 		#else
 		laydate.render({
 			elem: '##(f.varName)',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("#(f.varName)",value, date, endDate);
+				},1);
+			}
 		});
 		#end
 		#else if(f.typeName.equals("select_box"))
@@ -393,6 +426,14 @@ function ListPage() {
 			radio: #(!f.selectField.searchMuliti),
 			size: "small",
 			filterable: #(f.selectField.filter),
+			on: function(data){
+				setTimeout(function () {
+					#if(f.search.triggerOnSelect)
+					refreshTableData();
+					#end
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("#(f.varName)",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			#if(f.selectField.paging)
 			paging: true,
 			pageRemote: true,

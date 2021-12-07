@@ -128,7 +128,7 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	 * @param #(poVar) 数据对象
 	 * @return 判断结果
 	 */
-	Result<#(poSimpleName)> checkExists(#(poSimpleName) #(poVar));
+	Boolean checkExists(#(poSimpleName) #(poVar));
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表

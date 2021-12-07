@@ -50,8 +50,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
         },
+        /**
+         * 当下拉框别选择后触发
+         * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
             console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+        },
+        /**
+         * 当日期选择组件选择后触发
+         * */
+        onDatePickerChanged:function(id,value, date, endDate) {
+            console.log('onDatePickerChanged',id,value, date, endDate);
         },
         /**
          * 查询前调用
@@ -189,8 +198,17 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         afterDialog:function (param,result) {
             console.log('dialog',param,result);
         },
+        /**
+         * 当下拉框别选择后触发
+         * */
         onSelectBoxChanged:function(id,selected,changes,isAdd) {
             console.log('onSelectBoxChanged',id,selected,changes,isAdd);
+        },
+        /**
+         * 当日期选择组件选择后触发
+         * */
+        onDatePickerChanged:function(id,value, date, endDate) {
+            console.log('onDatePickerChanged',id,value, date, endDate);
         },
         /**
          * 数据提交前，如果返回 false，停止后续步骤的执行
