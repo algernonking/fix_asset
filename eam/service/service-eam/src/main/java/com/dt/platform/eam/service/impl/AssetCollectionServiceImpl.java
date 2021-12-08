@@ -212,7 +212,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 			Result verifyResult= verifyBillData(id);
 			if(!verifyResult.isSuccess()) return verifyResult;
 
-
 			Result applayResult=applyChange(id);
 			if(!applayResult.isSuccess()) return applayResult;
 			AssetCollection bill=new AssetCollection();
@@ -292,8 +291,6 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
 			assetCollection.setAssetIds(list);
 		}
-
-
 
 		if(assetCollection.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");

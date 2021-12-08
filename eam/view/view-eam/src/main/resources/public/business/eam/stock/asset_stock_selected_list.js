@@ -210,6 +210,8 @@ function ListPage() {
         //添加按钮点击事件
         function openCreateFrom() {
             // //设置新增是初始化数据
+
+            console.log("openCreateFrom");
             var data={};
             admin.putTempData('eam-asset-select-action', "create",true);
             admin.putTempData('eam-asset-select-data'+ASSET_SELECTED_CODE, billdata,true);
@@ -270,7 +272,7 @@ function ListPage() {
             area: ["95%","90%"],
             type: 2,
             id:"eam-asset-select-data-win",
-            content: '/business/eam/stock/asset_stock_select_list.html?ownerCode='+OWNER_CODE+'assetSelectedCode='+ASSET_SELECTED_CODE,
+            content: '/business/eam/stock/asset_stock_select_list.html?ownerCode='+OWNER_CODE+'&assetSelectedCode='+ASSET_SELECTED_CODE,
             finish: function () {
                 console.log("select form finish,");
                 refreshTableData();

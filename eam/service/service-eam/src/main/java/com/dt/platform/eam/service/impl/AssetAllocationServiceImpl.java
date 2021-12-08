@@ -270,7 +270,6 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 
 
-
 		//校验数据资产
 		if(assetAllocation.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
@@ -284,7 +283,6 @@ public class AssetAllocationServiceImpl extends SuperService<AssetAllocation> im
 
 		//制单人
 		if(StringUtil.isBlank(assetAllocation.getOriginatorId())){
-
 			assetAllocation.setOriginatorId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		}
 

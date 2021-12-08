@@ -3,9 +3,12 @@ package com.dt.platform.eam.controller;
 
 import java.util.List;
 
+import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetDataChangeVOMeta;
 import com.dt.platform.proxy.eam.AssetDataChangeServiceProxy;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +24,6 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 
 import com.dt.platform.proxy.eam.AssetStockCollectionServiceProxy;
 import com.dt.platform.domain.eam.meta.AssetStockCollectionVOMeta;
-import com.dt.platform.domain.eam.AssetStockCollection;
-import com.dt.platform.domain.eam.AssetStockCollectionVO;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.excel.ExcelWriter;
@@ -36,8 +37,6 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.AssetStockCollectionMeta;
-import com.dt.platform.domain.eam.Position;
-import com.dt.platform.domain.eam.Asset;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Employee;
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
@@ -312,7 +311,13 @@ public class AssetStockCollectionController extends SuperController {
 			.with("useUser")
 			.with(AssetCollectionMeta.POSITION)
 			.execute();
+
+		//获取其他
+		List<Employee> employees= CollectorUtil.collectList(list, AssetStockCollection::getUseUser);
+		assetStockCollectionService.dao().join(employees, Person.class);
+
 		result.success(true).data(list);
+
 		return result;
 	}
 
@@ -380,6 +385,31 @@ public class AssetStockCollectionController extends SuperController {
 	}
 
 
+
+
+	/**
+	 * 领用
+	 * */
+	@ApiOperation(value = "领用")
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = AssetStockCollectionServiceProxy.STOCK_COLLECTION , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockCollectionServiceProxy.STOCK_COLLECTION)
+	public Result stockCollection(String assetOwnerId, String assetSelectedCode,String sourceAssetId, String cnt)  {
+		return assetStockCollectionService.stockCollection(assetOwnerId,assetSelectedCode,sourceAssetId,Integer.parseInt(cnt));
+	}
+
+
+
+	/**
+	 * 分类
+	 * */
+	@ApiOperation(value = "分类")
+	@ApiOperationSupport(order=17)
+	@SentinelResource(value = AssetStockCollectionServiceProxy.STOCK_DISTRIBUTE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetStockCollectionServiceProxy.STOCK_DISTRIBUTE)
+	public Result stockDistribute(String assetOwnerId, String assetSelectedCode,String sourceAssetId, String cnt)  {
+		return assetStockCollectionService.stockDistribute(assetOwnerId,assetSelectedCode,sourceAssetId,Integer.parseInt(cnt));
+	}
 
 	/**
 	 * 导出 Excel

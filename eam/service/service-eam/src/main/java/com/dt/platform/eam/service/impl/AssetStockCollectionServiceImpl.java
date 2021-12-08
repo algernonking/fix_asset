@@ -5,13 +5,15 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum;
-import com.dt.platform.constants.enums.eam.AssetStockTypeEnum;
-import com.dt.platform.domain.eam.AssetCollection;
+import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
+import com.github.foxnic.sql.expr.SQL;
+import com.github.foxnic.sql.expr.Update;
 import org.github.foxnic.web.domain.changes.ProcessApproveVO;
 import org.github.foxnic.web.domain.changes.ProcessStartVO;
 import org.github.foxnic.web.session.SessionUser;
@@ -19,8 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.AssetStockCollection;
-import com.dt.platform.domain.eam.AssetStockCollectionVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -39,7 +39,7 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.eam.service.IAssetStockCollectionService;
+
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 import java.util.Map;
@@ -56,7 +56,18 @@ import java.util.Map;
 @Service("EamAssetStockCollectionService")
 public class AssetStockCollectionServiceImpl extends SuperService<AssetStockCollection> implements IAssetStockCollectionService {
 
+	@Autowired
+	private IAssetService assetService;
 
+	@Autowired
+	private IAssetItemService assetItemService;
+
+	@Autowired
+	private IAssetSelectedDataService assetSelectedDataService;
+
+
+	@Autowired
+	private IOperateService operateService;
 	/**
 	 * 注入DAO对象
 	 * */
@@ -77,11 +88,49 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	 * @return 返回结果
 	 * */
 	@Override
-	public Result stockCollect(String ownerId, String sourceAssetId, int cnt) {
+	public Result stockCollection(String ownerId, String assetSelectedCode,String sourceAssetId, int cnt) {
+
+		Asset sourceAsset=assetService.getById(sourceAssetId);
+		if(cnt>sourceAsset.getRemainNumber()){
+			return ErrorDesc.failureMessage("库存不足");
+		}
+		if(cnt<1){
+			return ErrorDesc.failureMessage("数量有误");
+		}
+
+		String id=IDGenerator.getSnowflakeIdString();
+		sourceAsset.setRemainNumber(cnt);
+		sourceAsset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		sourceAsset.setId(id);
+		sourceAsset.setOwnerCode(AssetOwnerCodeEnum.ASSET_CONSUMABLES_COLLECTION.code());
+		sourceAsset.setInternalControlLabel(sourceAssetId);
+		sourceAsset.setAssetCode(sourceAssetId);
+		assetService.insert(sourceAsset);
+		if(ownerId!=null&&ownerId.length()>0){
+			AssetItem obj=new AssetItem();
+			obj.setId(IDGenerator.getSnowflakeIdString());
+			obj.setAssetId(id);
+			obj.setCrd("c");
+			obj.setHandleId(ownerId);
+			return assetItemService.insert(obj);
+		}else{
+			AssetSelectedData obj=new AssetSelectedData();
+			obj.setId(IDGenerator.getSnowflakeIdString());
+			obj.setAssetSelectedCode(assetSelectedCode);
+			obj.setAssetId(id);
+			assetSelectedDataService.insert(obj);
+		}
+		return ErrorDesc.success();
+	}
 
 
 
-		return null;
+	@Override
+	public Result stockDistribute(String ownerId, String assetSelectedCode,String sourceAssetId, int cnt) {
+
+
+
+		return ErrorDesc.success();
 	}
 
 	@Override
@@ -116,7 +165,107 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 
 	@Override
 	public Result confirmOperation(String id) {
-		return null;
+		AssetStockCollection billData=getById(id);
+		String operCode=queryOperateCode(billData.getOwnerCode());
+		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
+			if(operateService.approvalRequired(operCode) ) {
+				return ErrorDesc.failureMessage("当前单据需要审批,请送审");
+			}else{
+				return operateResult(billData, AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+			}
+		}else{
+			return ErrorDesc.failureMessage("当前状态为:"+billData.getStatus()+",不能进行该操作");
+		}
+	}
+
+	private Result checkStock(String id){
+
+
+		String sql="select * from (\t\t\t\n" +
+				"SELECT source_code, SUM(source_remain_number) AS source_remain_number, SUM(remain_number) AS remain_number\n" +
+				"FROM (\n" +
+				"\tSELECT (\n" +
+				"\t\t\tSELECT asset_code\n" +
+				"\t\t\tFROM eam_asset i\n" +
+				"\t\t\tWHERE i.id = t.internal_control_label\n" +
+				"\t\t) AS source_code\n" +
+				"\t\t, (\n" +
+				"\t\t\tSELECT remain_number\n" +
+				"\t\t\tFROM eam_asset i\n" +
+				"\t\t\tWHERE i.id = t.internal_control_label\n" +
+				"\t\t) AS source_remain_number, t.internal_control_label AS source_asset_id, id, remain_number\n" +
+				"\tFROM eam_asset t\n" +
+				"\tWHERE id IN (\n" +
+				"\t\tSELECT asset_id\n" +
+				"\t\tFROM eam_asset_item\n" +
+				"\t\tWHERE handle_id = ?\n" +
+				"\t\t\tAND deleted = '0'\n" +
+				"\t)\n" +
+				") end\n" +
+				"GROUP BY source_code ) out2 where out2.remain_number>out2.source_remain_number";
+		RcdSet rs=dao.query(sql,id);
+		if(rs.size()==0){
+			return ErrorDesc.success();
+		}
+		return ErrorDesc.failureMessage("当前库存不足,编号:"+rs.getRcd(0).getString("source_code"));
+	}
+
+	private Result applyChange(String id){
+
+		String sql="\t\tSELECT (\n" +
+				"\t\t\tSELECT asset_code\n" +
+				"\t\t\tFROM eam_asset i\n" +
+				"\t\t\tWHERE i.id = t.internal_control_label\n" +
+				"\t\t) AS source_code\n" +
+				"\t\t, (\n" +
+				"\t\t\tSELECT remain_number\n" +
+				"\t\t\tFROM eam_asset i\n" +
+				"\t\t\tWHERE i.id = t.internal_control_label\n" +
+				"\t\t) AS source_remain_number, t.internal_control_label AS source_asset_id, id, remain_number\n" +
+				"\tFROM eam_asset t\n" +
+				"\tWHERE id IN (\n" +
+				"\t\tSELECT asset_id\n" +
+				"\t\tFROM eam_asset_item\n" +
+				"\t\tWHERE handle_id = ?\n" +
+				"\t\t\tAND deleted = '0'\n" +
+				"\t)";
+		RcdSet rs=dao.query(sql,id);
+		List<SQL> list=new ArrayList<>();
+		for(Rcd r:rs){
+			Update ups=new Update("eam_asset");
+			ups.setExpr("remain_number","source_remain_number-"+r.getString("remain_number"));
+			ups.where().and("id=?",r.getString("source_remain_number"));
+			list.add(ups);
+		}
+		if(list.size()>0){
+			dao.batchExecute(list);
+		}
+		return ErrorDesc.success();
+
+	}
+
+	/**
+	 * 操作
+	 * @param result  result
+	 * @param result 结果
+	 * @return
+	 * */
+	private Result operateResult(AssetStockCollection asset,String result,String status,String message) {
+		String operCode=queryOperateCode(asset.getOwnerCode());
+		if(AssetHandleConfirmOperationEnum.SUCCESS.code().equals(result)){
+			Result verifyResult= checkStock(asset.getId());
+			if(!verifyResult.isSuccess()) return verifyResult;
+			Result applayResult=applyChange(asset.getId());
+			if(!applayResult.isSuccess()) return applayResult;
+			AssetStockCollection bill=new AssetStockCollection();
+			bill.setId(asset.getId());
+			bill.setStatus(status);
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
+		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
+			return ErrorDesc.failureMessage(message);
+		}else{
+			return ErrorDesc.failureMessage("返回未知结果");
+		}
 	}
 
 
@@ -124,6 +273,29 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	public Object generateId(Field field) {
 		return IDGenerator.getSnowflakeIdString();
 	}
+
+
+	private String queryModuleCode(String ownerCode){
+		String moduleCode="";
+		if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			moduleCode=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
+		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			moduleCode=CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code();
+		}
+		return moduleCode;
+	}
+
+
+	private String queryOperateCode(String ownerCode){
+		String operCode="";
+		if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			operCode=AssetOperateEnum.EAM_ASSET_STOCK_ALLOCATE.code();
+		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			operCode=CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code();
+		}
+		return operCode;
+	}
+
 
 	/**
 	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
@@ -152,6 +324,22 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 //		if(!ckResult.isSuccess()){
 //			return
 
+
+		if(assetStockCollection.getAssetIds()==null||assetStockCollection.getAssetIds().size()==0){
+			String assetSelectedCode=assetStockCollection.getSelectedCode();
+			ConditionExpr condition=new ConditionExpr();
+			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
+			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
+			assetStockCollection.setAssetIds(list);
+		}
+
+
+		//校验数据资产
+		if(assetStockCollection.getAssetIds().size()==0){
+			return ErrorDesc.failure().message("请选择资产");
+		}
+
+
 		//业务时间
 		if(StringUtil.isBlank(assetStockCollection.getBusinessDate())){
 			assetStockCollection.setBusinessDate(new Date());
@@ -172,15 +360,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 
 		//生成编码规则
 		if(StringUtil.isBlank(assetStockCollection.getBusinessCode())){
-			String code="";
-			if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(assetStockCollection.getOwnerCode())){
-				code=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
-			}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(assetStockCollection.getOwnerCode())){
-
-				code=CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code();
-			}
-
-			Result codeResult= CodeModuleServiceProxy.api().generateCode(code);
+			Result codeResult= CodeModuleServiceProxy.api().generateCode(queryModuleCode(assetStockCollection.getOwnerCode()));
 			if(!codeResult.isSuccess()){
 				return codeResult;
 			}else{
@@ -189,15 +369,24 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 
 		}
 
-
-
 		Result r=super.insert(assetStockCollection,throwsException);
-		//添加
-
-
-
-
+		if (r.isSuccess()){
+			//保存资产数据
+			List<AssetItem> saveList=new ArrayList<AssetItem>();
+			for(int i=0;i<assetStockCollection.getAssetIds().size();i++){
+				AssetItem asset=new AssetItem();
+				asset.setId(IDGenerator.getSnowflakeIdString());
+				asset.setHandleId(assetStockCollection.getId());
+				asset.setAssetId(assetStockCollection.getAssetIds().get(i));
+				saveList.add(asset);
+			}
+			Result batchInsertReuslt= assetItemService.insertList(saveList);
+			if(!batchInsertReuslt.isSuccess()){
+				return batchInsertReuslt;
+			}
+		}
 		return r;
+
 	}
 
 
@@ -290,6 +479,12 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	@Override
 	public Result update(AssetStockCollection assetStockCollection , SaveMode mode,boolean throwsException) {
 		Result r=super.update(assetStockCollection , mode , throwsException);
+		if(!r.isSuccess())return r;
+		if(r.success()){
+			//保存表单数据
+			dao.execute("update eam_asset_item set crd='r' where crd='c' and handle_id=?",assetStockCollection.getId());
+			dao.execute("delete from eam_asset_item where crd in ('d','rd') and  handle_id=?",assetStockCollection.getId());
+		}
 		return r;
 	}
 

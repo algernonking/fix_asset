@@ -123,6 +123,15 @@ public interface AssetStockCollectionServiceProxy {
 	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 
+	/**
+	 * 领用
+	 */
+	public static final String STOCK_COLLECTION= API_PREFIX + "stock-collection";
+
+	/**
+	 * 分配
+	 */
+	public static final String STOCK_DISTRIBUTE= API_PREFIX + "stock-distribute";
 
 	/**
 	 * 添加资产领用

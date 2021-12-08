@@ -39,9 +39,9 @@ public interface IAssetStockCollectionService extends ISuperService<AssetStockCo
 	 * @param cnt
 	 * @return 返回结果
 	 * */
-	Result stockCollect(String ownerId,String sourceAssetId,int cnt);
+	Result stockCollection(String ownerId, String assetSelectedCode,String sourceAssetId, int cnt);
 
-
+	Result stockDistribute(String ownerId, String assetSelectedCode,String sourceAssetId, int cnt);
 
 	Result startProcess(ProcessStartVO startVO);
 

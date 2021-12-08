@@ -237,6 +237,8 @@ public class AssetBorrowController extends SuperController {
 
 		assetBorrowService.dao().join(assetBorrow.getOriginator(),Person.class);
 		assetBorrowService.dao().join(assetBorrow.getBorrower(),Person.class);
+
+
 		result.success(true).data(assetBorrow);
 		return result;
 	}

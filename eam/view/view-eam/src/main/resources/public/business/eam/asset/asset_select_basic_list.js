@@ -70,6 +70,7 @@ function ListPage() {
 			ps.assetSelectedCode=ASSET_SELECTED_CODE;
 			ps.assetBussinessType=billdata.assetBusinessType;
 			ps.assetOwnerId=billdata.assetOwnerId;
+			ps.ownerCode=OWNER_CODE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -152,7 +153,7 @@ function ListPage() {
 		ps.assetBussinessType=billdata.assetBusinessType;
 		ps.assetOwnerId=billdata.assetOwnerId;
 		ps.searchValue=JSON.stringify(value);
-
+		ps.ownerCode=OWNER_CODE;
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;

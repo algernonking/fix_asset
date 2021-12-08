@@ -141,7 +141,6 @@ public class StockPageController extends ViewController {
 		model.addAttribute("stockImportBtn",SessionUser.getCurrent().permission().checkAuth(authPrefix+":import") );
 
 
-
 		//审批
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(operType);
@@ -211,7 +210,6 @@ public class StockPageController extends ViewController {
 		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
 			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
 		}
-		System.out.println("######2"+itemOwner);
 		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();
@@ -253,6 +251,27 @@ public class StockPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_stock_basic_list.html")
 	public String assetStockBasicList(Model model,HttpServletRequest request,String assetSelectedCode,String ownerCode) {
+		String itemOwner="";
+		String authPrefix="eam_"+ownerCode;
+
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_CONSUMABLES_SHOW.code();
+			model.addAttribute("stockCollectionBtn", true);
+			model.addAttribute("stockDistributeBtn", false);
+
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
+			itemOwner=AssetAttributeItemOwnerEnum.ASSET_STOCK_SHOW.code();
+			model.addAttribute("stockCollectionBtn", false);
+			model.addAttribute("stockDistributeBtn", true);
+
+		}
+		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(itemOwner,null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
 
 		model.addAttribute("assetSelectedCode",assetSelectedCode);
 		model.addAttribute("ownerCode", ownerCode);

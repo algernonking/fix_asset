@@ -27,7 +27,7 @@ function ListPage() {
         assetListColumn=layui.assetListColumn;
         selectedListAction=admin.getTempData('eam-asset-select-action'+ASSET_SELECTED_CODE);
         billdata=admin.getTempData('eam-asset-select-data'+ASSET_SELECTED_CODE);
-        console.log("asset baseinfo billdata:",billdata);
+        console.log("##asset baseinfo billdata:",billdata);
 
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
@@ -40,6 +40,8 @@ function ListPage() {
         bindSearchEvent();
         //绑定按钮事件
         bindButtonEvent();
+        //绑定行操作按钮事件
+        bindRowOperationEvent();
 
     }
 
@@ -70,6 +72,7 @@ function ListPage() {
             ps.assetSelectedCode=ASSET_SELECTED_CODE;
             ps.assetBussinessType=billdata.assetBusinessType;
             ps.assetOwnerId=billdata.assetOwnerId;
+            ps.ownerCode=OWNER_CODE;
             var templet=window.pageExt.list.templet;
             if(templet==null) {
                 templet=function(field,value,row) {
@@ -85,6 +88,8 @@ function ListPage() {
             for(var i=0;i<ATTRIBUTE_LIST_DATA.length;i++){
                 COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
             }
+            COL_DATA.push({ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 });
+
             dataTable=fox.renderTable({
                 elem: '#data-table',
                 toolbar: '#toolbarTemplate',
@@ -117,22 +122,20 @@ function ListPage() {
         value.businessCode={ inputType:"button",value: $("#businessCode").val()};
         value.status={ inputType:"select_box", value:"complete", label:"完成" };
         value.assetCode={ inputType:"button",value: $("#assetCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-        value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
+      //  value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};
         value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
         value.manufacturerId={ inputType:"select_box", value: xmSelect.get("#manufacturerId",true).getValue("value") ,fillBy:["manufacturer"]  , label:xmSelect.get("#manufacturerId",true).getValue("nameStr") };
         value.model={ inputType:"button",value: $("#model").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-        value.serialNumber={ inputType:"button",value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+     //   value.serialNumber={ inputType:"button",value: $("#serialNumber").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
         value.ownCompanyId={ inputType:"button",value: $("#ownCompanyId").val(),fillBy:["ownerCompany","fullName"] ,label:$("#ownCompanyId-button").text() };
         value.managerId={ inputType:"button",value: $("#managerId").val(),fillBy:["manager","name"] ,label:$("#managerId-button").text() };
         value.useOrganizationId={ inputType:"button",value: $("#useOrganizationId").val(),fillBy:["useOrganization","fullName"] ,label:$("#useOrganizationId-button").text() };
-        value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text() };
+      //  value.useUserId={ inputType:"button",value: $("#useUserId").val(),fillBy:["useUser","name"] ,label:$("#useUserId-button").text() };
         value.positionId={ inputType:"select_box", value: xmSelect.get("#positionId",true).getValue("value") ,fillBy:["position"]  ,  label:xmSelect.get("#positionId",true).getValue("nameStr") };
         value.sourceId={ inputType:"select_box", value: xmSelect.get("#sourceId",true).getValue("value") ,fillBy:["source"] , label:xmSelect.get("#sourceId",true).getValue("nameStr") };
         value.purchaseDate={ inputType:"date_input", begin: $("#purchaseDate-begin").val(), end: $("#purchaseDate-end").val() };
         value.assetNotes={ inputType:"button",value: $("#assetNotes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
         value.maintainerId={ inputType:"select_box", value: xmSelect.get("#maintainerId",true).getValue("value") ,fillBy:["maintnainer"]  , label:xmSelect.get("#maintainerId",true).getValue("nameStr") };
-
-
 
 
         value.status={ value:"complete", label:"完成"};
@@ -152,6 +155,7 @@ function ListPage() {
         ps.assetBussinessType=billdata.assetBusinessType;
         ps.assetOwnerId=billdata.assetOwnerId;
         ps.searchValue=JSON.stringify(value);
+        ps.ownerCode=OWNER_CODE;
 
         if(sortField) {
             ps.sortField=sortField;
@@ -227,23 +231,25 @@ function ListPage() {
                 return opts;
             }
         });
+
         //渲染 assetStatus 下拉字段
-        fox.renderSelectBox({
-            el: "assetStatus",
-            radio: false,
-            size: "small",
-            filterable: false,
-            //转换数据
-            transform:function(data) {
-                //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-                var opts=[];
-                if(!data) return opts;
-                for (var i = 0; i < data.length; i++) {
-                    opts.push({name:data[i].text,value:data[i].code});
-                }
-                return opts;
-            }
-        });
+        // fox.renderSelectBox({
+        //     el: "assetStatus",
+        //     radio: false,
+        //     size: "small",
+        //     filterable: false,
+        //     //转换数据
+        //     transform:function(data) {
+        //         //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+        //         var opts=[];
+        //         if(!data) return opts;
+        //         for (var i = 0; i < data.length; i++) {
+        //             opts.push({name:data[i].text,value:data[i].code});
+        //         }
+        //         return opts;
+        //     }
+        // });
+
         //渲染 manufacturerId 下拉字段
         fox.renderSelectBox({
             el: "manufacturerId",
@@ -393,20 +399,20 @@ function ListPage() {
             fox.chooseOrgNode(useOrganizationIdDialogOptions);
         });
         // 请选择人员对话框
-        $("#useUserId-button").click(function(){
-            var useUserIdDialogOptions={
-                field:"useUserId",
-                inputEl:$("#useUserId"),
-                buttonEl:$(this),
-                single:true,
-                //限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
-                root: "",
-                targetType:"emp",
-                prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
-                callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
-            };
-            fox.chooseEmployee(useUserIdDialogOptions);
-        });
+        // $("#useUserId-button").click(function(){
+        //     var useUserIdDialogOptions={
+        //         field:"useUserId",
+        //         inputEl:$("#useUserId"),
+        //         buttonEl:$(this),
+        //         single:true,
+        //         //限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+        //         root: "",
+        //         targetType:"emp",
+        //         prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+        //         callback:function(param){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param);}
+        //     };
+        //     fox.chooseEmployee(useUserIdDialogOptions);
+        // });
 
         // 请选择人员对话框
         $("#managerId-button").click(function(){
@@ -426,6 +432,69 @@ function ListPage() {
 
     }
 
+
+    function stockCollect(obj){
+
+    }
+    /**
+     * 绑定行操作按钮事件
+     */
+    function bindRowOperationEvent() {
+        // 工具条点击事件
+        table.on('tool(data-table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+
+            if(window.pageExt.list.beforeRowOperationEvent) {
+                var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
+                if(!doNext) return;
+            }
+
+
+            if (layEvent === 'stockCollection') { // 修改
+                layer.open({
+                    id:1,
+                    type:1,
+                    title:"请输入领用数量",
+                    style:"width:50%:height:auto;",
+                    content:"<div style='display:flex;justify-content:center;'><input id='area' type='number' style='width:100%;height:30px;margin-left:5px;margin-right:5px'></input></div>",
+                    btn:['保存','取消'],
+                    yes:function(index,layero){
+                        var closeContent=top.$("#area").val()||$("#area").val();
+                        if(closeContent){
+                            var param={};
+                            param=billdata;
+                            param.assetSelectedCode=ASSET_SELECTED_CODE;
+                            param.sourceAssetId=data.id;
+                            param.cnt=closeContent;
+                            var api="/service-eam/eam-asset-stock-collection/stock-collection";
+                            admin.post(api, param, function (data) {
+                                if (data.success) {
+                                    var index=admin.getTempData('eam-asset-select-data-popup-index');
+                                    admin.finishPopupCenter(index);
+                                } else {
+                                    layer.msg(data.message, {icon: 2, time: 1500});
+                                }
+                            }, {delayLoading:1000,elms:[]});
+
+                        }else{
+                            alert("请输入领用数量");
+                        }
+                    },
+                    no:function(index,layer){
+                        layer.close(index);
+                    }
+
+
+                })
+
+            } else if (layEvent === 'stockDistribute') { // 查看
+
+            }
+
+        });
+
+    };
 
 
 
@@ -517,17 +586,7 @@ function ListPage() {
                 layer.msg(r.message, {icon: 2, time: 1000});
             }
         },{delayLoading:1000,elms:[]});
-        // var task=setTimeout(function(){layer.load(2);},1000);
-        // admin.request(api, postData, function (data) {
-        // 	clearTimeout(task);
-        // 	layer.closeAll('loading');
-        // 	if (data.success) {
-        // 		callback(postData.ids);
-        // 		layer.msg(data.message, {icon: 1, time: 500});
-        // 	} else {
-        // 		layer.msg(data.message, {icon: 2, time: 1000});
-        // 	}
-        // }, "POST");
+
 
     }
     /**
@@ -569,6 +628,7 @@ function ListPage() {
         searchCategory:searchCategory,
         refreshTableData: refreshTableData,
         getCheckedList: getCheckedList,
+        // stockCollect:stockCollect,
         saveSelectData:saveSelectData
     };
 

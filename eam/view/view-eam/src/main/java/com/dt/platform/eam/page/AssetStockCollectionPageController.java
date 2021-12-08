@@ -10,6 +10,7 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.session.SessionUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,8 @@ public class AssetStockCollectionPageController extends ViewController {
 	 * 资产领用 功能主页面
 	 */
 	@RequestMapping("/asset_stock_collection_list.html")
-	public String list(Model model,HttpServletRequest request,String ownerCode) {
+	public String list(Model model,HttpServletRequest request,String ownerCode,String type) {
+
 
 		boolean approvalRequired=true;
 		Result approvalResult= OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code());
@@ -60,6 +62,16 @@ public class AssetStockCollectionPageController extends ViewController {
 			approvalRequired= (boolean) approvalResult.getData();
 		}
 		model.addAttribute("approvalRequired",approvalRequired);
+
+		model.addAttribute("forApprovalBtn", SessionUser.getCurrent().permission().checkAuth(type+":for-approval" ) );
+		model.addAttribute("confirmDataBtn",SessionUser.getCurrent().permission().checkAuth(type+":confirm"));
+		model.addAttribute("revokeDataBtn",SessionUser.getCurrent().permission().checkAuth(type+":revoke" ));
+		model.addAttribute("billBtn",SessionUser.getCurrent().permission().checkAuth(type+":bill") );
+		model.addAttribute("createBtn",SessionUser.getCurrent().permission().checkAuth(type+":create") );
+		model.addAttribute("modifyBtn",SessionUser.getCurrent().permission().checkAuth(type+":update") );
+		model.addAttribute("deleteBtn",SessionUser.getCurrent().permission().checkAuth(type+":delete") );
+		model.addAttribute("viewBtn",SessionUser.getCurrent().permission().checkAuth(type+":query") );
+
 
 //		model.addAttribute("billType",approvalRequired);
 //		model.addAttribute("billId",approvalRequired);

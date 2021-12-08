@@ -22,7 +22,7 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET_STOCK("asset_stock" , "资产库存"),
 	ASSET_CONSUMABLES("asset_consumables" , "耗材资产"),
-
+	ASSET_CONSUMABLES_COLLECTION("asset_consumables_collection" , "耗材资产领用"),
 
 
 	ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code(), "EAM_资产变更-基本"),

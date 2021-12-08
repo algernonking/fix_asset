@@ -1170,15 +1170,20 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			sample.setOwnCompanyId(null);
 		}
 
-
 		if(StringUtil.isBlank(sample.getOwnerCode())){
 			queryCondition.and("owner_code=?",AssetOwnerCodeEnum.ASSET.code());
 		}
 
-		Result r=conditionAssetBusinessType(businessType,queryCondition);
-		if(r.isSuccess()){
-			r.getData();
+		if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(sample.getOwnerCode())){
+			sample.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			sample.setAssetStatus(AssetStatusEnum.IDLE.code());
+		}else if (AssetOwnerCodeEnum.ASSET.code().equals(sample.getOwnerCode())){
+			Result r=conditionAssetBusinessType(businessType,queryCondition);
+			if(r.isSuccess()){
+				r.getData();
+			}
 		}
+
 
 		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
 		return list;

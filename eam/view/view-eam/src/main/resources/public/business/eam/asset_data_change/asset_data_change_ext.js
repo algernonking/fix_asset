@@ -257,7 +257,6 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 top.layer.msg("请选择要操作的资产数据!");
                 return ;
             }
-            //reject
             var btn=$('#'+type+'-button');
         },
         agreeData:function(data){
