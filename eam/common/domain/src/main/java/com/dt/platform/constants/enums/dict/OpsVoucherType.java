@@ -6,7 +6,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-12-08 15:42:15
+ * @since 2021-12-08 16:04:50
  * @author 李方捷 , leefangjie@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -24,21 +24,6 @@ public enum OpsVoucherType implements CodeTextEnum {
 	DB("db" , "数据库"),
 	
 	/**
-	 * 网络
-	*/
-	NETWORK("network" , "网络"),
-	
-	/**
-	 * 安全
-	*/
-	SECURITY("security" , "安全"),
-	
-	/**
-	 * 中间件
-	*/
-	MIDDLEWARE("middleware" , "中间件"),
-	
-	/**
 	 * 应用系统
 	*/
 	APP("app" , "应用系统"),
@@ -52,6 +37,21 @@ public enum OpsVoucherType implements CodeTextEnum {
 	 * 存储系统
 	*/
 	STORAGE("storage" , "存储系统"),
+	
+	/**
+	 * 网络
+	*/
+	NETWORK("network" , "网络"),
+	
+	/**
+	 * 安全
+	*/
+	SECURITY("security" , "安全"),
+	
+	/**
+	 * 中间件
+	*/
+	MIDDLEWARE("middleware" , "中间件"),
 	;
 	
 	private String code;

@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.contract.meta.ContractMeta;
 import java.math.BigDecimal;
+import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同表 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 15:55:20
+ * @since 2021-12-08 17:04:16
 */
 
 @Api(tags = "合同")

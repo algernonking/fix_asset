@@ -6,12 +6,12 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-12-08 15:42:14
+ * @since 2021-12-08 16:04:50
  * @author 李方捷 , leefangjie@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
 
-public enum ContractType implements CodeTextEnum {
+public enum ContractCatalog implements CodeTextEnum {
 	
 	/**
 	 * 采购合同
@@ -26,7 +26,7 @@ public enum ContractType implements CodeTextEnum {
 	
 	private String code;
 	private String text;
-	private ContractType(String code,String text)  {
+	private ContractCatalog(String code,String text)  {
 		this.code=code;
 		this.text=text;
 	}
@@ -42,7 +42,7 @@ public enum ContractType implements CodeTextEnum {
 	/**
 	 * 从字符串转换成当前枚举类型
 	*/
-	public static ContractType parseByCode(String code) {
-		return (ContractType) EnumUtil.parseByCode(ContractType.values(),code);
+	public static ContractCatalog parseByCode(String code) {
+		return (ContractCatalog) EnumUtil.parseByCode(ContractCatalog.values(),code);
 	}
 }

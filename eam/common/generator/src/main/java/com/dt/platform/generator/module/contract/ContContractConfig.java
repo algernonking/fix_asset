@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.contract;
 
 import com.dt.platform.constants.db.ContractTables.CONT_CONTRACT;
+import com.dt.platform.constants.enums.contract.ContractStatus;
+import com.dt.platform.constants.enums.contract.ContractType;
 import com.dt.platform.generator.module.CodeStarter;
 import com.github.foxnic.generator.builder.business.option.ServiceOptions;
 import com.github.foxnic.generator.builder.model.PoClassFile;
@@ -8,6 +10,7 @@ import com.github.foxnic.generator.builder.model.VoClassFile;
 import com.github.foxnic.generator.builder.view.option.ListOptions;
 import com.github.foxnic.generator.builder.view.option.ViewOptions;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT> {
 
@@ -24,8 +27,13 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
 
     @Override
     public void configModel(PoClassFile poType, VoClassFile voType) {
-//        poType.addListProperty(DictItem.class,"items","字典项目","");
-//        poType.addSimpleProperty(Menu.class,"moduleInfo","关联模块","");
+
+        poType.shadow(CONT_CONTRACT.TYPE, ContractType.class);
+        poType.shadow(CONT_CONTRACT.CONTRACT_STATUS, ContractStatus.class);
+        poType.shadow(CONT_CONTRACT.CONTRACT_STATUS, ContractStatus.class);
+
+        poType.addSimpleProperty(Organization.class,"department","归属部门","归属部门");
+
     }
 
     @Override

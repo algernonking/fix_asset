@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.contract.Contract;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 15:55:20
- * @sign 991CFDF994356A595D6A3ECD804B36C6
+ * @since 2021-12-08 17:04:16
+ * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,14 +28,14 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 合同类型 , 主合同，子合同、附加协议 , 类型: java.lang.String
+	 * 合同类型 , 主合同，子合同、附加协议; ContractType , 类型: java.lang.String
 	*/
 	public static final String TYPE="type";
 	
 	/**
-	 * 合同类型 , 主合同，子合同、附加协议 , 类型: java.lang.String
+	 * 合同类型 , 主合同，子合同、附加协议; ContractType , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TYPE, java.lang.String.class, "合同类型", "主合同，子合同、附加协议", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TYPE, java.lang.String.class, "合同类型", "主合同，子合同、附加协议; ContractType", java.lang.String.class, null);
 	
 	/**
 	 * 上级合同ID , 类型: java.lang.String
@@ -97,14 +98,14 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.math.BigDecimal> AMOUNT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,AMOUNT, java.math.BigDecimal.class, "合同金额", "合同金额", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 合同状态 , 类型: java.lang.String
+	 * 合同状态 , 枚举 ContractStatus , 类型: java.lang.String
 	*/
 	public static final String CONTRACT_STATUS="contractStatus";
 	
 	/**
-	 * 合同状态 , 类型: java.lang.String
+	 * 合同状态 , 枚举 ContractStatus , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CONTRACT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CONTRACT_STATUS, java.lang.String.class, "合同状态", "合同状态", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CONTRACT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CONTRACT_STATUS, java.lang.String.class, "合同状态", "枚举 ContractStatus", java.lang.String.class, null);
 	
 	/**
 	 * 摘要信息 , 类型: java.lang.String
@@ -167,14 +168,14 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> DEPARTMENT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DEPARTMENT_ID, java.lang.String.class, "归属部门ID", "归属部门ID", java.lang.String.class, null);
 	
 	/**
-	 * 资金状态 , 类型: java.lang.String
+	 * 资金状态 , 枚举 FundingStatus , 类型: java.lang.String
 	*/
 	public static final String FUNDING_STATUS="fundingStatus";
 	
 	/**
-	 * 资金状态 , 类型: java.lang.String
+	 * 资金状态 , 枚举 FundingStatus , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUNDING_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUNDING_STATUS, java.lang.String.class, "资金状态", "资金状态", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUNDING_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUNDING_STATUS, java.lang.String.class, "资金状态", "枚举 FundingStatus", java.lang.String.class, null);
 	
 	/**
 	 * 资金流向 , 关联字典 , 类型: java.lang.String
@@ -287,9 +288,19 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
 	
 	/**
+	 * 归属部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final String DEPARTMENT="department";
+	
+	/**
+	 * 归属部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
+	*/
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,org.github.foxnic.web.domain.hrm.Organization> DEPARTMENT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DEPARTMENT, org.github.foxnic.web.domain.hrm.Organization.class, "归属部门", "归属部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , PARENT_ID , CONTRACT_NO , TITLE , DELIVERABLES , DELIVERY_LOCATION , AMOUNT , CONTRACT_STATUS , SUMMARY , SIGNING_DATE , EFFECTIVE_DATE , END_DATE , EXPIRATION_DATE , DEPARTMENT_ID , FUNDING_STATUS , FUNDING_DIRECTION , CATALOG_CODE , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , TYPE , PARENT_ID , CONTRACT_NO , TITLE , DELIVERABLES , DELIVERY_LOCATION , AMOUNT , CONTRACT_STATUS , SUMMARY , SIGNING_DATE , EFFECTIVE_DATE , END_DATE , EXPIRATION_DATE , DEPARTMENT_ID , FUNDING_STATUS , FUNDING_DIRECTION , CATALOG_CODE , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , DEPARTMENT };
 	
 	/**
 	 * 代理类
@@ -593,6 +604,17 @@ public class ContractMeta {
 		public Contract setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 归属部门
+		 * @param department 归属部门
+		 * @return 当前对象
+		*/
+		public Contract setDepartment(Organization department) {
+			super.change(DEPARTMENT,super.getDepartment(),department);
+			super.setDepartment(department);
 			return this;
 		}
 	}

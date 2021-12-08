@@ -6,7 +6,7 @@ import com.github.foxnic.commons.reflect.EnumUtil;
 
 
 /**
- * @since 2021-12-08 15:42:14
+ * @since 2021-12-08 16:04:50
  * @author 李方捷 , leefangjie@qq.com
  * 从 select distinct code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops','474157822892834817') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
@@ -152,7 +152,7 @@ public enum DictEnum implements CodeTextEnum {
 	/**
 	 * 合同分类
 	*/
-	CONTRACT_TYPE("contract_type" , "合同分类"),
+	CONTRACT_CATALOG("contract_catalog" , "合同分类"),
 	
 	/**
 	 * 资金流向

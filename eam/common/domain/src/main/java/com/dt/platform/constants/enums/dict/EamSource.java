@@ -6,7 +6,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 /**
- * @since 2021-12-08 15:42:14
+ * @since 2021-12-08 16:04:50
  * @author 李方捷 , leefangjie@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -29,6 +29,11 @@ public enum EamSource implements CodeTextEnum {
 	GIVE("give" , "赠送"),
 	
 	/**
+	 * 其他
+	*/
+	OTHER("other" , "其他"),
+	
+	/**
 	 * 自建
 	*/
 	SELFBUILD("selfbuild" , "自建"),
@@ -37,11 +42,6 @@ public enum EamSource implements CodeTextEnum {
 	 * 捐赠
 	*/
 	DONATION("donation" , "捐赠"),
-	
-	/**
-	 * 其他
-	*/
-	OTHER("other" , "其他"),
 	;
 	
 	private String code;

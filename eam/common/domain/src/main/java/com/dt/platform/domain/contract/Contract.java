@@ -6,9 +6,14 @@ import com.github.foxnic.sql.meta.DBTable;
 import com.dt.platform.constants.db.ContractTables.CONT_CONTRACT;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.util.Date;
+import com.dt.platform.constants.enums.contract.ContractType;
 import javax.persistence.Transient;
+import java.math.BigDecimal;
+import com.dt.platform.constants.enums.contract.ContractStatus;
+import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
+import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.commons.lang.StringUtil;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -17,8 +22,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 合同
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 15:55:20
- * @sign 991CFDF994356A595D6A3ECD804B36C6
+ * @since 2021-12-08 17:04:16
+ * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,10 +42,12 @@ public class Contract extends Entity {
 	private String id;
 	
 	/**
-	 * 合同类型：主合同，子合同、附加协议
+	 * 合同类型：主合同，子合同、附加协议; ContractType
 	*/
-	@ApiModelProperty(required = false,value="合同类型" , notes = "主合同，子合同、附加协议")
+	@ApiModelProperty(required = false,value="合同类型" , notes = "主合同，子合同、附加协议; ContractType")
 	private String type;
+	@Transient
+	private ContractType typeEnum;
 	
 	/**
 	 * 上级合同ID：上级合同ID
@@ -79,10 +86,12 @@ public class Contract extends Entity {
 	private BigDecimal amount;
 	
 	/**
-	 * 合同状态：合同状态
+	 * 合同状态：枚举 ContractStatus
 	*/
-	@ApiModelProperty(required = false,value="合同状态" , notes = "合同状态")
+	@ApiModelProperty(required = false,value="合同状态" , notes = "枚举 ContractStatus")
 	private String contractStatus;
+	@Transient
+	private ContractStatus contractStatusEnum;
 	
 	/**
 	 * 摘要信息：摘要信息
@@ -121,9 +130,9 @@ public class Contract extends Entity {
 	private String departmentId;
 	
 	/**
-	 * 资金状态：资金状态
+	 * 资金状态：枚举 FundingStatus
 	*/
-	@ApiModelProperty(required = false,value="资金状态" , notes = "资金状态")
+	@ApiModelProperty(required = false,value="资金状态" , notes = "枚举 FundingStatus")
 	private String fundingStatus;
 	
 	/**
@@ -193,6 +202,12 @@ public class Contract extends Entity {
 	private Integer version;
 	
 	/**
+	 * 归属部门：归属部门
+	*/
+	@ApiModelProperty(required = false,value="归属部门" , notes = "归属部门")
+	private Organization department;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -213,11 +228,24 @@ public class Contract extends Entity {
 	
 	/**
 	 * 获得 合同类型<br>
-	 * 主合同，子合同、附加协议
+	 * 主合同，子合同、附加协议; ContractType
 	 * @return 合同类型
 	*/
 	public String getType() {
 		return type;
+	}
+	
+	/**
+	 * 获得 合同类型 的投影属性<br>
+	 * 等价于 getType 方法，获得对应的枚举类型
+	 * @return 合同类型
+	*/
+	@Transient
+	public ContractType getTypeEnum() {
+		if(this.typeEnum==null) {
+			this.typeEnum = (ContractType) EnumUtil.parseByCode(ContractType.values(),type);
+		}
+		return this.typeEnum ;
 	}
 	
 	/**
@@ -227,6 +255,26 @@ public class Contract extends Entity {
 	*/
 	public Contract setType(String type) {
 		this.type=type;
+		this.typeEnum= (ContractType) EnumUtil.parseByCode(ContractType.values(),type) ;
+		if(StringUtil.hasContent(type) && this.typeEnum==null) {
+			throw new IllegalArgumentException( type + " is not one of ContractType");
+		}
+		return this;
+	}
+	
+	/**
+	 * 设置 合同类型的投影属性，等同于设置 合同类型
+	 * @param typeEnum 合同类型
+	 * @return 当前对象
+	*/
+	@Transient
+	public Contract setTypeEnum(ContractType typeEnum) {
+		if(typeEnum==null) {
+			this.setType(null);
+		} else {
+			this.setType(typeEnum.code());
+		}
+		this.typeEnum=typeEnum;
 		return this;
 	}
 	
@@ -346,11 +394,24 @@ public class Contract extends Entity {
 	
 	/**
 	 * 获得 合同状态<br>
-	 * 合同状态
+	 * 枚举 ContractStatus
 	 * @return 合同状态
 	*/
 	public String getContractStatus() {
 		return contractStatus;
+	}
+	
+	/**
+	 * 获得 合同状态 的投影属性<br>
+	 * 等价于 getContractStatus 方法，获得对应的枚举类型
+	 * @return 合同状态
+	*/
+	@Transient
+	public ContractStatus getContractStatusEnum() {
+		if(this.contractStatusEnum==null) {
+			this.contractStatusEnum = (ContractStatus) EnumUtil.parseByCode(ContractStatus.values(),contractStatus);
+		}
+		return this.contractStatusEnum ;
 	}
 	
 	/**
@@ -360,6 +421,26 @@ public class Contract extends Entity {
 	*/
 	public Contract setContractStatus(String contractStatus) {
 		this.contractStatus=contractStatus;
+		this.contractStatusEnum= (ContractStatus) EnumUtil.parseByCode(ContractStatus.values(),contractStatus) ;
+		if(StringUtil.hasContent(contractStatus) && this.contractStatusEnum==null) {
+			throw new IllegalArgumentException( contractStatus + " is not one of ContractStatus");
+		}
+		return this;
+	}
+	
+	/**
+	 * 设置 合同状态的投影属性，等同于设置 合同状态
+	 * @param contractStatusEnum 合同状态
+	 * @return 当前对象
+	*/
+	@Transient
+	public Contract setContractStatusEnum(ContractStatus contractStatusEnum) {
+		if(contractStatusEnum==null) {
+			this.setContractStatus(null);
+		} else {
+			this.setContractStatus(contractStatusEnum.code());
+		}
+		this.contractStatusEnum=contractStatusEnum;
 		return this;
 	}
 	
@@ -479,7 +560,7 @@ public class Contract extends Entity {
 	
 	/**
 	 * 获得 资金状态<br>
-	 * 资金状态
+	 * 枚举 FundingStatus
 	 * @return 资金状态
 	*/
 	public String getFundingStatus() {
@@ -702,6 +783,25 @@ public class Contract extends Entity {
 	*/
 	public Contract setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 归属部门<br>
+	 * 归属部门
+	 * @return 归属部门
+	*/
+	public Organization getDepartment() {
+		return department;
+	}
+	
+	/**
+	 * 设置 归属部门
+	 * @param department 归属部门
+	 * @return 当前对象
+	*/
+	public Contract setDepartment(Organization department) {
+		this.department=department;
 		return this;
 	}
 
