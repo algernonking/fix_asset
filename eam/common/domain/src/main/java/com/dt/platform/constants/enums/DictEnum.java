@@ -6,9 +6,9 @@ import com.github.foxnic.commons.reflect.EnumUtil;
 
 
 /**
- * @since 2021-09-29 11:26:57
- * @author 金杰 , maillank@qq.com
- * 从 select code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops') 生成
+ * @since 2021-12-08 15:42:14
+ * @author 李方捷 , leefangjie@qq.com
+ * 从 select distinct code,name from sys_dict WHERE deleted=0 and module in ('kn','eam','hrm','ops','474157822892834817') 生成
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成
 */
 
@@ -17,7 +17,7 @@ public enum DictEnum implements CodeTextEnum {
 	/**
 	 * 资产安全等级
 	*/
-	EAM_SECURITY_LEVEL("eam_security_level" , "资产安全等级"),
+	EAM_SAFETY_LEVEL("eam_safety_level" , "资产安全等级"),
 	
 	/**
 	 * 节点备份
@@ -48,6 +48,16 @@ public enum DictEnum implements CodeTextEnum {
 	 * 知识库分类等级
 	*/
 	KN_GRADE("kn_grade" , "知识库分类等级"),
+	
+	/**
+	 * 维保状态
+	*/
+	EAM_MAINTENANCE_STATUS("eam_maintenance_status" , "维保状态"),
+	
+	/**
+	 * 设备运行环境
+	*/
+	EAM_EQUIPMENT_ENVIRONMENT("eam_equipment_environment" , "设备运行环境"),
 	
 	/**
 	 * 资产报修类型
@@ -130,14 +140,24 @@ public enum DictEnum implements CodeTextEnum {
 	EMPLOYEE_STATUS("employee_status" , "在职状态"),
 	
 	/**
-	 * 测试
-	*/
-	TEST("test" , "测试"),
-	
-	/**
 	 * 凭证标签
 	*/
 	OPS_VOUCHER_LABEL("ops_voucher_label" , "凭证标签"),
+	
+	/**
+	 * 岗位分类
+	*/
+	POSITION_TYPE("position_type" , "岗位分类"),
+	
+	/**
+	 * 合同分类
+	*/
+	CONTRACT_TYPE("contract_type" , "合同分类"),
+	
+	/**
+	 * 资金流向
+	*/
+	FUNDING_DIRECTION("funding_direction" , "资金流向"),
 	
 	/**
 	 * 资产来源

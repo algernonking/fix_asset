@@ -1,27 +1,32 @@
 package com.dt.platform.constants.enums.dict;
 
-import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 
 /**
- * @since 2021-09-29 11:26:59
- * @author 金杰 , maillank@qq.com
+ * @since 2021-12-08 15:42:14
+ * @author 李方捷 , leefangjie@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
 
 public enum OpsHostPasswordStrategy implements CodeTextEnum {
 	
 	/**
-	 * OpsTools
+	 * 需要-opstool工具
 	*/
-	OPS("ops" , "OpsTools"),
+	OPS("ops" , "需要-opstool工具"),
 	
 	/**
-	 * 不改
+	 * 不需要
 	*/
-	UNCHANGE("unchange" , "不改"),
+	UNCHANGE("unchange" , "不需要"),
+	
+	/**
+	 * 需要-手动改密
+	*/
+	MANUAL("manual" , "需要-手动改密"),
 	;
 	
 	private String code;

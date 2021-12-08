@@ -1,13 +1,13 @@
 package com.dt.platform.constants.enums.dict;
 
-import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.api.constant.CodeTextEnum;
 
 
 
 /**
- * @since 2021-09-29 11:26:59
- * @author 金杰 , maillank@qq.com
+ * @since 2021-12-08 15:42:15
+ * @author 李方捷 , leefangjie@qq.com
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
 
@@ -22,6 +22,26 @@ public enum OpsHostType implements CodeTextEnum {
 	 * 办公系统
 	*/
 	OFFICE("office" , "办公系统"),
+	
+	/**
+	 * 外围系统
+	*/
+	OUT("out" , "外围系统"),
+	
+	/**
+	 * 其他业务系统
+	*/
+	OTHER_BUSINESS("other_business" , "其他业务系统"),
+	
+	/**
+	 * 其他-办公系统
+	*/
+	OTHER_OFFICE("other_office" , "其他-办公系统"),
+	
+	/**
+	 * 其他-运维系统
+	*/
+	OTHER_OPS("other_ops" , "其他-运维系统"),
 	
 	/**
 	 * 运维系统
