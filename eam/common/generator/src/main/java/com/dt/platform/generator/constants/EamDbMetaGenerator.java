@@ -6,8 +6,8 @@ import com.github.foxnic.generator.builder.constants.DBMetaClassFile;
 
 
 public class EamDbMetaGenerator  {
- 
- 
+
+
 	/**
 	 * 运行main函数生成代码
 	 * */
@@ -15,28 +15,39 @@ public class EamDbMetaGenerator  {
 		EamDbMetaGenerator g = new EamDbMetaGenerator();
 		g.buildDBMeta();
 	}
-	
+
 	private PlatformConfigs configs;
 	private DAO dao;
-	
+
 	public EamDbMetaGenerator() {
 		this.configs=new PlatformConfigs("service-eam");
 		this.dao=this.configs.getDAO();
 	}
 
- 
+
 	/**
 	 * 生成DBMeta数据
 	 * */
 	private void buildDBMeta() {
-		
+
+		// 主文件
 		DBMetaClassFile dbMetaBuilder=new DBMetaClassFile(dao,configs.getDomianProject(),this.configs.getProjectConfigs().getDomainConstantsPackage(),"EAMTables");
 		dbMetaBuilder.setTableFilter(table->{
 			table=table.toLowerCase();
-			if( table.startsWith("rfid_")|| table.startsWith("cont_")|| table.startsWith("kn_") ||table.startsWith("workorder_")||    table.startsWith("sys_tpl")||  table.startsWith("sys_code") ||table.startsWith("eam_") || table.startsWith("hrm_") || table.startsWith("dc_") || table.startsWith("ops_")) return true;
+			if( table.startsWith("rfid_")|| table.startsWith("kn_") ||table.startsWith("workorder_")||    table.startsWith("sys_tpl")||  table.startsWith("sys_code") ||table.startsWith("eam_") || table.startsWith("hrm_") || table.startsWith("dc_") || table.startsWith("ops_")) return true;
 			return false;
 		});
 		dbMetaBuilder.save(true);
+
+		// 第二个文件
+		dbMetaBuilder=new DBMetaClassFile(dao,configs.getDomianProject(),this.configs.getProjectConfigs().getDomainConstantsPackage(),"ContractTables");
+		dbMetaBuilder.setTableFilter(table->{
+			table=table.toLowerCase();
+			if( table.startsWith("cont_")) return true;
+			return false;
+		});
+		dbMetaBuilder.save(true);
+
 	}
 
 }
