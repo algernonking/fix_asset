@@ -2,7 +2,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-09 17:16:35
  */
  -->
  <!DOCTYPE html>
@@ -48,14 +48,14 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
+                                    <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同类型')}">合同类型</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="type" id="type" name="type" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同类型') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
+                                    <div class="layui-form-item" style="display: none">
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('上级合同ID')}">上级合同ID</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="parentId" id="parentId" name="parentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上级合同ID') }" type="text" class="layui-input"  />
@@ -148,9 +148,9 @@
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('归属部门ID')}">归属部门ID</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('归属部门')}">归属部门</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="departmentId" id="departmentId" name="departmentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('归属部门ID') }" type="text" class="layui-input"  />
+                            <input lay-filter="departmentId" id="departmentId" name="departmentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('归属部门') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -168,12 +168,14 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同分类代码')}">合同分类代码</div></div>
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同分类')}">合同分类</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="catalogCode" id="catalogCode" name="catalogCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同分类代码') }" type="text" class="layui-input"  />
+                            <div id="catalogCode" input-type="select" th:data="${dict.toArray('contract_catalog')}" extraParam="{}"></div>
                         </div>
                     </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -200,6 +202,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_CATALOGCODE_DATA = [[${dict.toArray('contract_catalog')}]];
     var VALIDATE_CONFIG={};
     var AUTH_PREFIX="cont_contract";
 

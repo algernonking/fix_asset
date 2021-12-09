@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.contract;
 
 import com.dt.platform.constants.db.ContractTables.CONT_CONTRACT;
+import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.contract.ContractStatus;
 import com.dt.platform.constants.enums.contract.ContractType;
 import com.dt.platform.generator.module.CodeStarter;
@@ -8,6 +9,7 @@ import com.github.foxnic.generator.builder.business.option.ServiceOptions;
 import com.github.foxnic.generator.builder.model.PoClassFile;
 import com.github.foxnic.generator.builder.model.VoClassFile;
 import com.github.foxnic.generator.builder.view.option.ListOptions;
+import com.github.foxnic.generator.builder.view.option.SearchAreaOptions;
 import com.github.foxnic.generator.builder.view.option.ViewOptions;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Organization;
@@ -39,9 +41,34 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
     @Override
     public void configFields(ViewOptions view) {
 
-//        view.field(SYS_DICT.ID)
-//                .basic().hidden();
-//        view.field(SYS_DICT.IS_TREE).basic().hidden();
+        view.field(CONT_CONTRACT.ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT.TYPE)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT.PARENT_ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT.DELIVERABLES)
+                .search().hidden().table().hidden();
+
+        view.field(CONT_CONTRACT.FUNDING_STATUS)
+                .search().hidden().table().hidden();
+
+        view.field(CONT_CONTRACT.DELIVERY_LOCATION)
+                .search().hidden().table().hidden();
+
+        view.field(CONT_CONTRACT.AMOUNT)
+                .search().hidden().table().hidden();
+
+        view.field(CONT_CONTRACT.SUMMARY)
+                .search().hidden().table().hidden();
+
+        view.field(CONT_CONTRACT.DEPARTMENT_ID)
+                .basic().label("归属部门");
+
+        view.field(CONT_CONTRACT.CATALOG_CODE).basic().label("合同分类").form().selectBox().muliti(false,false).dict(DictEnum.CONTRACT_CATALOG);
 //
 //        view.field(SYS_DICT.MODULE)
 //                .basic().label("模块")
@@ -67,6 +94,15 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
     }
 
     @Override
+    public void configSearch(ViewOptions view, SearchAreaOptions search) {
+        search.inputLayout(
+                new Object[]{CONT_CONTRACT.CATALOG_CODE,CONT_CONTRACT.TITLE},
+                new Object[]{CONT_CONTRACT.CONTRACT_STATUS,CONT_CONTRACT.DEPARTMENT_ID}
+        );
+        search.rowsDisplay(2);
+    }
+
+    @Override
     public void configList(ViewOptions view, ListOptions list) {
 //        list.operationColumn().width(220);
 //        //表格操作列增加一个按钮，并指定JS函数
@@ -82,6 +118,7 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
             .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
             .setListPage(WriteMode.COVER_EXISTS_FILE); //列表HTML页
     }
+
 
 
 

@@ -1,6 +1,9 @@
 package com.dt.platform.generator.menu;
 
+import com.dt.platform.constants.db.ContractTables;
+import com.dt.platform.contract.page.ContractSignerPageController;
 import com.dt.platform.generator.config.PlatformConfigs;
+import com.dt.platform.proxy.contract.ContractSignerServiceProxy;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.io.FileUtil;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -12,7 +15,6 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.generator.builder.business.ControllerProxyFile;
 import com.github.foxnic.sql.meta.DBTable;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
-import org.github.foxnic.web.constants.enums.system.AccessType;
 import org.github.foxnic.web.constants.enums.system.MenuType;
 import org.github.foxnic.web.domain.oauth.Menu;
 import org.github.foxnic.web.domain.oauth.MenuResource;
@@ -61,6 +63,15 @@ MenuGenerator {
 
 //		mg=new MenuGenerator(DC_INFO.$TABLE, InfoServiceProxy.class, InfoPageController.class);
 //		mg.generate(DATACENTER_MENU_ID);
+
+//		mg=new MenuGenerator(ContractTables.CONT_CONTRACT.$TABLE, ContractServiceProxy.class, ContractPageController.class);
+//		mg.generate("474157822892834817");
+
+		mg=new MenuGenerator(ContractTables.CONT_CONTRACT_SIGNER.$TABLE, ContractSignerServiceProxy.class, ContractSignerPageController.class);
+		mg.generate("474157822892834817");
+
+//		mg.removeByBatchId("485743342794047488");
+
 	}
 
 
@@ -352,6 +363,7 @@ MenuGenerator {
 
 		RcdSet menus=dao.query("select id from "+ FoxnicWeb.SYS_MENU.$NAME+" where batch_id=? and authority not like '%:export' and authority not like '%:import'",batchId);
 		for (Rcd r : menus) {
+			if( "导入".equals(r.getString("label")) || "导出".equals(r.getString("label"))) continue;
 			dao.insert(FoxnicWeb.SYS_ROLE_MENU.$NAME)
 			.set(FoxnicWeb.SYS_ROLE_MENU.ID, IDGenerator.getSnowflakeId())
 			.set(FoxnicWeb.SYS_ROLE_MENU.ROLE_ID, roleId)
