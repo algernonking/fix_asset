@@ -73,8 +73,6 @@ public class AssetStockCollectionPageController extends ViewController {
 		model.addAttribute("viewBtn",SessionUser.getCurrent().permission().checkAuth(type+":query") );
 
 
-//		model.addAttribute("billType",approvalRequired);
-//		model.addAttribute("billId",approvalRequired);
 
 		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/asset_stock_collection_list";
@@ -85,6 +83,7 @@ public class AssetStockCollectionPageController extends ViewController {
 	 */
 	@RequestMapping("/asset_stock_collection_form.html")
 	public String form(Model model,HttpServletRequest request , String id,String ownerCode) {
+		System.out.println("billId"+id);
 		model.addAttribute("billId",id);
 		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code());
 		model.addAttribute("ownerCode",ownerCode);

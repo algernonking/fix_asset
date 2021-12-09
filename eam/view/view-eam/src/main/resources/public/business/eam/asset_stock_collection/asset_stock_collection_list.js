@@ -54,7 +54,7 @@ function ListPage() {
 				window.pageExt.list.beforeQuery(contitions,ps,"tableInit");
 			}
 			ps.searchValue=JSON.stringify(contitions);
-
+			ps.ownerCode=OWNER_CODE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
@@ -83,7 +83,7 @@ function ListPage() {
 					,{ field: 'positionDetail', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('详细位置') , templet: function (d) { return templet('positionDetail',d.positionDetail,d);}  }
 					,{ field: 'collectionDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('领用日期') ,templet: function (d) { return templet('collectionDate',fox.dateFormat(d.collectionDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'content', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('领用说明') , templet: function (d) { return templet('content',d.content,d);}  }
-					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
+					// ,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'selectedCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
@@ -142,6 +142,7 @@ function ListPage() {
 				ps.sortType=sort.type;
 			}
 		}
+		ps.ownerCode=OWNER_CODE;
 		if(reset) {
 			table.reload('data-table', { where : ps , page:{ curr:1 } });
 		} else {
@@ -368,6 +369,7 @@ function ListPage() {
 				});
 			} else if (layEvent === 'view') { // 查看
 				//延迟显示加载动画，避免界面闪动
+				admin.putTempData('eam-asset-stock-collection-form-data-form-action', "view",true);
 				var task=setTimeout(function(){layer.load(2);},1000);
 				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					clearTimeout(task);
@@ -431,9 +433,10 @@ function ListPage() {
 			if(!doNext) return;
 		}
 		var action=admin.getTempData('eam-asset-stock-collection-form-data-form-action');
-		var queryString="?ownerCode="+OWNER_CODE;
-		if(data && data.id) queryString=queryString+"&" + 'id=' + data.id;
-
+		var queryString="";
+		if(data && data.id) {
+			queryString=queryString+"&id=" + data.id;
+		}
 		admin.putTempData('eam-asset-stock-collection-form-data', data);
 		var area=admin.getTempData('eam-asset-stock-collection-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -443,6 +446,7 @@ function ListPage() {
 		else if(action=="edit") title=fox.translate('修改')+title;
 		else if(action=="view") title=fox.translate('查看')+title;
 
+		console.log("queryString", '/business/eam/asset_stock_collection/asset_stock_collection_form.html?ownerCode=' + OWNER_CODE+queryString);
 		admin.popupCenter({
 			title: title,
 			resize: false,
@@ -450,7 +454,7 @@ function ListPage() {
 			area: ["98%",height+"px"],
 			type: 2,
 			id:"eam-asset-stock-collection-form-data-win",
-			content: '/business/eam/asset_stock_collection/asset_stock_collection_form.html' + queryString,
+			content: '/business/eam/asset_stock_collection/asset_stock_collection_form.html?ownerCode=' + OWNER_CODE+queryString,
 			finish: function () {
 				refreshTableData();
 			}

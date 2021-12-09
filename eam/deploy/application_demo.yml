@@ -5,7 +5,7 @@ server:
     session:
       # 会话超时时间，如 30s , 20m 等
       timeout: 1200s
-  port: 8089
+  port: 26788
 
 spring:
   main:
@@ -29,16 +29,15 @@ spring:
     druid:
       primary:
         encrypt:
-          enable: true
+          enable: false
           file:
             windows: d:/foxnic/passwd.txt
             mac: /Users/Shared/foxnic/passwd.txt
             linux: /foxnic/passwd.txt
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
-        #url: jdbc:mysql://127.0.0.1:3306/eam_demo?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
-        username: tD5wkJAfnCt04A+Y+QN5GA==
-        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
+        url: jdbc:mysql://127.0.0.1:3306/eam_demo?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        username: root
+        password: root
         # 启动程序时，在连接池中初始化多少个连接
         initialSize: 16
         # 连接池中最多支持多少个活动会话
@@ -83,17 +82,17 @@ spring:
     content-type: text/html
     mode: HTML5
     cache: false
-  #session:
-    #store-type: redis # 使用 redis 存储session
-  #redis:
+      #session:
+      #store-type: redis # 使用 redis 存储session
+      #redis:
       #port: 6379
-      #host: 127.0.0.1
+    #host: 127.0.0.1
 
 
 foxnic:
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
-    profiles: empty,profile@GuoYIE
+    profiles: empty,default
   # 设置 Join 的二级缓存
   cache:
     # 默认配置

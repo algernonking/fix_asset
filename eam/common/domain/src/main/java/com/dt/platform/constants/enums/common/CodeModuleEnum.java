@@ -11,8 +11,6 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 */
 
 
-
-
 public enum CodeModuleEnum implements CodeTextEnum {
 
 

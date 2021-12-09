@@ -27,7 +27,7 @@ function ListPage() {
         assetListColumn=layui.assetListColumn;
         selectedListAction=admin.getTempData('eam-asset-selected-action'+ASSET_SELECTED_CODE);
         billdata=admin.getTempData('eam-asset-selected-data'+ASSET_SELECTED_CODE);
-        // billdata={assetOwnerId:""};
+
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
         }

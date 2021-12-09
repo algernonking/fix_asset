@@ -233,8 +233,8 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 		List<SQL> list=new ArrayList<>();
 		for(Rcd r:rs){
 			Update ups=new Update("eam_asset");
-			ups.setExpr("remain_number","source_remain_number-"+r.getString("remain_number"));
-			ups.where().and("id=?",r.getString("source_remain_number"));
+			ups.setExpr("remain_number","remain_number-"+r.getString("remain_number"));
+			ups.where().and("id=?",r.getString("source_asset_id"));
 			list.add(ups);
 		}
 		if(list.size()>0){
@@ -307,22 +307,6 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	@Override
 	public Result insert(AssetStockCollection assetStockCollection,boolean throwsException) {
 
-
-//		if(AssetStockCollection.getStockAssetIds()==null||AssetStockCollection.getStockAssetIds().size()==0){
-//			String assetSelectedCode=stock.getSelectedCode();
-//			ConditionExpr condition=new ConditionExpr();
-//			condition.andIn("asset_selected_code",assetSelectedCode==null?"":assetSelectedCode);
-//			List<String> list=assetSelectedDataService.queryValues(EAMTables.EAM_ASSET_SELECTED_DATA.ASSET_ID,String.class,condition);
-//			stock.setStockAssetIds(list);
-//		}
-//
-//		if(stock.getStockAssetIds().size()==0){
-//			return ErrorDesc.failure().message("请选择资产");
-//		}
-
-//		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_COLLECTION.code(),stock.getStockAssetIds());
-//		if(!ckResult.isSuccess()){
-//			return
 
 
 		if(assetStockCollection.getAssetIds()==null||assetStockCollection.getAssetIds().size()==0){

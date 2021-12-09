@@ -257,6 +257,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            if(data&&data.id){
+                console.log(1);
+            }else{
+                setTimeout(function(){
+                    var now = new Date();
+                    var day = ("0" + now.getDate()).slice(-2);
+                    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                    $('#collectionDate').val(today);
+                },100)
+            }
+
         },
         /**
          * 表单数据填充后
@@ -315,21 +327,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var data={};
             data.searchContent={};
             data.assetSelectedCode=timestamp;
-            data.assetBusinessType=BILL_TYPE
+            data.assetBusinessType=BILL_TYPE;
             data.action=formAction;
             data.ownerCode=OWNER_CODE;
             if(BILL_ID==null)BILL_ID="";
             data.assetOwnerId=BILL_ID;
             admin.putTempData('eam-asset-selected-data'+timestamp,data,true);
             admin.putTempData('eam-asset-selected-action'+timestamp,formAction,true);
+            //win.location="/business/eam/asset/asset_selected_list.html?assetSelectedCode="+timestamp;
             win.location="/business/eam/stock/asset_stock_selected_list.html?ownerCode="+OWNER_CODE+"&assetSelectedCode="+timestamp;
 
-            // debugger
-            // console.log("assetSelectList",ifr,data);
-            // //设置 iframe 高度
-            // ifr.height("400px");
-            // //设置地址
-            // win.location="/business/system/node/node_list.html?id="+data.id;
+
+
         },
         /**
          * 末尾执行

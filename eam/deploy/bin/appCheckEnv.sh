@@ -90,9 +90,9 @@ echo "db_user:$DB_USER"
 echo "db_pwd:$DB_PWD"
 mysql_ping_cnt=`$MYSQL_ADMIN -u$DB_USER -p$DB_PWD ping 2>&1|grep alive|wc -l`
 if [[ $mysql_ping_cnt -gt 0 ]];then
-  echo -e "   \033[33m check mysql connect,user$DB_USER success! \033[0m"
+  echo -e "   \033[33m check mysql connect,user $DB_USER success! \033[0m"
 else
-  echo -e "   \033[31m check mysql connect,user$DB_USER failed! \033[0m"
+  echo -e "   \033[31m check mysql connect,user $DB_USER failed! \033[0m"
 fi
 
 #echo "###start to check mysql connect from yml file"

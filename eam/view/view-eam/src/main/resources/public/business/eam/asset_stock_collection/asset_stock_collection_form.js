@@ -46,14 +46,44 @@ function FormPage() {
 	/**
 	 * 自动调节窗口高度
 	 * */
+	// var adjustPopupTask=-1;
+	// function adjustPopup() {
+	// 	if(window.pageExt.form.beforeAdjustPopup) {
+	// 		var doNext=window.pageExt.form.beforeAdjustPopup();
+	// 		if(!doNext) return;
+	// 	}
+	//
+	// 	clearTimeout(adjustPopupTask);
+	// 	var scroll=$(".form-container").attr("scroll");
+	// 	if(scroll=='yes') return;
+	// 	adjustPopupTask=setTimeout(function () {
+	// 		var body=$("body");
+	// 		var bodyHeight=body.height();
+	// 		var footerHeight=$(".model-form-footer").height();
+	// 		var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+	// 		if(area==null) return;
+	// 		admin.putTempData('eam-asset-stock-collection-form-area', area);
+	// 		window.adjustPopup=adjustPopup;
+	// 		if(area.tooHeigh) {
+	// 			var windowHeight=area.iframeHeight;
+	// 			var finalHeight=windowHeight-footerHeight-16;
+	// 			//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+	// 			$(".form-container").css("display","");
+	// 			$(".form-container").css("overflow-y","scroll");
+	// 			$(".form-container").css("height",finalHeight+"px");
+	// 			$(".form-container").attr("scroll","yes");
+	// 		}
+	// 	},250);
+	// }
+
 	var adjustPopupTask=-1;
 	function adjustPopup() {
 		if(window.pageExt.form.beforeAdjustPopup) {
 			var doNext=window.pageExt.form.beforeAdjustPopup();
 			if(!doNext) return;
 		}
-
 		clearTimeout(adjustPopupTask);
+
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
 		adjustPopupTask=setTimeout(function () {
@@ -62,12 +92,12 @@ function FormPage() {
 			var footerHeight=$(".model-form-footer").height();
 			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
 			if(area==null) return;
-			admin.putTempData('eam-asset-stock-collection-form-area', area);
+			admin.putTempData('eam-asset-borrow-form-area', area);
 			window.adjustPopup=adjustPopup;
 			if(area.tooHeigh) {
 				var windowHeight=area.iframeHeight;
 				var finalHeight=windowHeight-footerHeight-16;
-				//console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
+				console.log("windowHeight="+windowHeight+',bodyHeight='+bodyHeight+",footerHeight="+footerHeight+",finalHeight="+finalHeight);
 				$(".form-container").css("display","");
 				$(".form-container").css("overflow-y","scroll");
 				$(".form-container").css("height",finalHeight+"px");
@@ -75,6 +105,8 @@ function FormPage() {
 			}
 		},250);
 	}
+
+
 
 	/**
       * 渲染表单组件
@@ -182,7 +214,6 @@ function FormPage() {
 
 
 
-
 			//设置 领用日期 显示复选框勾选
 			if(formData["collectionDate"]) {
 				$("#collectionDate").val(fox.dateFormat(formData["collectionDate"],"yyyy-MM-dd"));
@@ -200,6 +231,7 @@ function FormPage() {
 	     	renderFormFields();
 
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
+			adjustPopup();
 
 		}
 
@@ -238,8 +270,6 @@ function FormPage() {
 
 	function getFormData() {
 		var data=form.val("data-form");
-
-
 
 		//获取 存放位置 下拉框的值
 		data["positionId"]=fox.getSelectedValue("positionId",false);

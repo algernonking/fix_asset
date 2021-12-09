@@ -1,5 +1,5 @@
 <!--
-/**
+/**form-container
  * 资产领用 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
  * @since 2021-11-29 13:22:26
@@ -131,6 +131,7 @@
         <div class="layui-row form-row" style="text-align: center;">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
             <iframe js-fn="assetSelectList" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+
             </div>
         </div>
         <!--结束：group循环-->
@@ -161,6 +162,7 @@
 
     // 单据ID
     var BILL_ID = [[${billId}]] ;
+
     // 单据类型
     var BILL_TYPE = [[${billType}]] ;
 

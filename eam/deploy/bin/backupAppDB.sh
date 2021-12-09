@@ -11,17 +11,20 @@ DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
 DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
 DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
 
-
 BACKUP_DIR=`cat $app_conf|grep BACKUP_DIR=|awk -F "=" '{print $2}'`
 TODAY=`date +%Y%m%d_%H`
-
 if [[ ! -d $BACKUP_DIR ]];then
   echo "backup dir not exist."
   exit 1
 fi
 
+dbname=$DB_NAME
+if [ -n $1 ];then
+  dbname=$1
+fi
+echo "start to backup $dbname"
 cd $BACKUP_DIR
-$MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST $DB_NAME  > eam.sql
+$MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST $dbname  > db.sql
 tar zcvf eam_backup_$TODAY.tar.gz  ./eam.sql
 exit 0
 
