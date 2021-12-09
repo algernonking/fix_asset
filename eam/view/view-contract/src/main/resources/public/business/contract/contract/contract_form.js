@@ -1,16 +1,18 @@
 /**
  * 合同 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-contract/cont-contract";
+	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
+	var dataBeforeEdit=null;
 	/**
       * 入口函数，初始化
       */
@@ -28,7 +30,7 @@ function FormPage() {
 		}
 
 		if(window.pageExt.form.beforeInit) {
-			window.pageExt.form.beforeInit();
+			window.pageExt.form.beforeInit(action,admin.getTempData('cont-contract-form-data'));
 		}
 
 		//渲染表单组件
@@ -49,6 +51,11 @@ function FormPage() {
 	 * */
 	var adjustPopupTask=-1;
 	function adjustPopup() {
+		if(window.pageExt.form.beforeAdjustPopup) {
+			var doNext=window.pageExt.form.beforeAdjustPopup();
+			if(!doNext) return;
+		}
+
 		clearTimeout(adjustPopupTask);
 		var scroll=$(".form-container").attr("scroll");
 		if(scroll=='yes') return;
@@ -79,22 +86,22 @@ function FormPage() {
 		fox.renderFormInputs(form);
 
 		laydate.render({
-			elem: '#effectTime',
+			elem: '#signingDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 		laydate.render({
-			elem: '#lostEffectTime',
+			elem: '#effectiveDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 		laydate.render({
-			elem: '#endTime',
+			elem: '#endDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
 		laydate.render({
-			elem: '#auditTime',
+			elem: '#expirationDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
 		});
@@ -124,21 +131,21 @@ function FormPage() {
 
 
 
-			//设置 生效时间 显示复选框勾选
-			if(formData["effectTime"]) {
-				$("#effectTime").val(fox.dateFormat(formData["effectTime"],"yyyy-MM-dd HH:mm:ss"));
+			//设置 签订日期 显示复选框勾选
+			if(formData["signingDate"]) {
+				$("#signingDate").val(fox.dateFormat(formData["signingDate"],"yyyy-MM-dd HH:mm:ss"));
 			}
-			//设置 失效时间 显示复选框勾选
-			if(formData["lostEffectTime"]) {
-				$("#lostEffectTime").val(fox.dateFormat(formData["lostEffectTime"],"yyyy-MM-dd HH:mm:ss"));
+			//设置 生效日期 显示复选框勾选
+			if(formData["effectiveDate"]) {
+				$("#effectiveDate").val(fox.dateFormat(formData["effectiveDate"],"yyyy-MM-dd HH:mm:ss"));
 			}
-			//设置 结束时间 显示复选框勾选
-			if(formData["endTime"]) {
-				$("#endTime").val(fox.dateFormat(formData["endTime"],"yyyy-MM-dd HH:mm:ss"));
+			//设置 结束日期 显示复选框勾选
+			if(formData["endDate"]) {
+				$("#endDate").val(fox.dateFormat(formData["endDate"],"yyyy-MM-dd HH:mm:ss"));
 			}
-			//设置 签订时间 显示复选框勾选
-			if(formData["auditTime"]) {
-				$("#auditTime").val(fox.dateFormat(formData["auditTime"],"yyyy-MM-dd HH:mm:ss"));
+			//设置 失效日期 显示复选框勾选
+			if(formData["expirationDate"]) {
+				$("#expirationDate").val(fox.dateFormat(formData["expirationDate"],"yyyy-MM-dd HH:mm:ss"));
 			}
 
 
@@ -183,6 +190,8 @@ function FormPage() {
 			}
 		}
 
+		dataBeforeEdit=getFormData();
+
 	}
 
 	function getFormData() {
@@ -199,20 +208,22 @@ function FormPage() {
 	}
 
 	function saveForm(param) {
+		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
 		var api=moduleURL+"/"+(param.id?"update":"insert");
-		var task=setTimeout(function(){layer.load(2);},1000);
-		admin.request(api, param, function (data) {
-			clearTimeout(task);
-			layer.closeAll('loading');
+		admin.post(api, param, function (data) {
 			if (data.success) {
-				layer.msg(data.message, {icon: 1, time: 500});
-				var index=admin.getTempData('cont-contract-form-data-popup-index');
-				admin.finishPopupCenter(index);
+				var doNext=true;
+				if(window.pageExt.form.betweenFormSubmitAndClose) {
+					doNext=window.pageExt.form.betweenFormSubmitAndClose(param,data);
+				}
+				if(doNext) {
+					admin.finishPopupCenterById('cont-contract-form-data-win');
+				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1000});
+				layer.msg(data.message, {icon: 2, time: 1500});
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
-		}, "POST");
+		}, {delayLoading:1000,elms:[$("#submit-button")]});
 	}
 
 	/**
@@ -246,7 +257,8 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
-		adjustPopup: adjustPopup
+		adjustPopup: adjustPopup,
+		action: action
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

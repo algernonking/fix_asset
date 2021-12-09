@@ -186,16 +186,16 @@ public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(in
 	}
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param #(poVar) 数据对象
 	 * @return 判断结果
 	 */
-	public Result<#(poSimpleName)> checkExists(#(poSimpleName) #(poVar)) {
+	public Boolean checkExists(#(poSimpleName) #(poVar)) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(#(poVar), SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(#(poVar), SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

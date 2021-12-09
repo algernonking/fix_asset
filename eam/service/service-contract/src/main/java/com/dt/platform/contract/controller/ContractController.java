@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.contract.meta.ContractMeta;
 import java.math.BigDecimal;
+import org.github.foxnic.web.domain.hrm.Organization;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -46,10 +47,10 @@ import com.github.foxnic.api.validate.annotations.NotNull;
 
 /**
  * <p>
- * 合同 接口控制器
+ * 合同表 接口控制器
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
 */
 
 @Api(tags = "合同")
@@ -67,40 +68,29 @@ public class ContractController extends SuperController {
 	@ApiOperation(value = "添加合同")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContractVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NAME , value = "合同名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CODE , value = "合同编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.STATE , value = "合同状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CATEGORY_ID , value = "合同类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.IDENTITY , value = "我方身份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_DIRECT , value = "资金流向" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.MONEY , value = "金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.ALLMONEY , value = "总金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.USER_ID , value = "承办人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.DEPT_ID , value = "承办人部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.BIDDING_ID , value = "关联招标" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_COMPANY_NAME , value = "我方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACTS , value = "我方联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACT_INFORMATION , value = "我方联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_ID , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_NAME , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACTS , value = "对方单位联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACT_INFORMATION , value = "对方单位联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_UNIT , value = "监理单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACTS , value = "监理人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACT_INFORMATION , value = "监理联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.EFFECT_TIME , value = "生效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.LOST_EFFECT_TIME , value = "失效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.END_TIME , value = "结束时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.AUDIT_TIME , value = "签订时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TYPE , value = "合同类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.PARENT_ID , value = "上级合同ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_NO , value = "合同编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TITLE , value = "合同抬头" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERABLES , value = "交付物" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERY_LOCATION , value = "交付地" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.AMOUNT , value = "合同金额" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_STATUS , value = "合同状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SUMMARY , value = "摘要信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SIGNING_DATE , value = "签订日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EFFECTIVE_DATE , value = "生效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.END_DATE , value = "结束日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EXPIRATION_DATE , value = "失效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.DEPARTMENT_ID , value = "归属部门ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_DIRECTION , value = "资金流向" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CATALOG_CODE , value = "合同分类代码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = ContractServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractServiceProxy.INSERT)
 	public Result insert(ContractVO contractVO) {
-		Result result=contractService.insert(contractVO);
+		Result result=contractService.insert(contractVO,false);
 		return result;
 	}
 
@@ -146,41 +136,30 @@ public class ContractController extends SuperController {
 	@ApiOperation(value = "更新合同")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContractVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NAME , value = "合同名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CODE , value = "合同编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.STATE , value = "合同状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CATEGORY_ID , value = "合同类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.IDENTITY , value = "我方身份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_DIRECT , value = "资金流向" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.MONEY , value = "金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.ALLMONEY , value = "总金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.USER_ID , value = "承办人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.DEPT_ID , value = "承办人部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.BIDDING_ID , value = "关联招标" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_COMPANY_NAME , value = "我方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACTS , value = "我方联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACT_INFORMATION , value = "我方联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_ID , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_NAME , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACTS , value = "对方单位联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACT_INFORMATION , value = "对方单位联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_UNIT , value = "监理单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACTS , value = "监理人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACT_INFORMATION , value = "监理联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.EFFECT_TIME , value = "生效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.LOST_EFFECT_TIME , value = "失效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.END_TIME , value = "结束时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.AUDIT_TIME , value = "签订时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TYPE , value = "合同类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.PARENT_ID , value = "上级合同ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_NO , value = "合同编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TITLE , value = "合同抬头" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERABLES , value = "交付物" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERY_LOCATION , value = "交付地" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.AMOUNT , value = "合同金额" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_STATUS , value = "合同状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SUMMARY , value = "摘要信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SIGNING_DATE , value = "签订日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EFFECTIVE_DATE , value = "生效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.END_DATE , value = "结束日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EXPIRATION_DATE , value = "失效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.DEPARTMENT_ID , value = "归属部门ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_DIRECTION , value = "资金流向" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CATALOG_CODE , value = "合同分类代码" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport( order=4 , ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } )
+	@ApiOperationSupport( order=4 , ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.DIRTY_FIELDS , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } )
 	@NotNull(name = ContractVOMeta.ID)
 	@SentinelResource(value = ContractServiceProxy.UPDATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractServiceProxy.UPDATE)
 	public Result update(ContractVO contractVO) {
-		Result result=contractService.update(contractVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=contractService.update(contractVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -191,41 +170,30 @@ public class ContractController extends SuperController {
 	@ApiOperation(value = "保存合同")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContractVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NAME , value = "合同名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CODE , value = "合同编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.STATE , value = "合同状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CATEGORY_ID , value = "合同类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.IDENTITY , value = "我方身份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_DIRECT , value = "资金流向" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.MONEY , value = "金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.ALLMONEY , value = "总金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.USER_ID , value = "承办人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.DEPT_ID , value = "承办人部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.BIDDING_ID , value = "关联招标" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_COMPANY_NAME , value = "我方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACTS , value = "我方联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACT_INFORMATION , value = "我方联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_ID , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_NAME , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACTS , value = "对方单位联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACT_INFORMATION , value = "对方单位联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_UNIT , value = "监理单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACTS , value = "监理人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACT_INFORMATION , value = "监理联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.EFFECT_TIME , value = "生效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.LOST_EFFECT_TIME , value = "失效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.END_TIME , value = "结束时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.AUDIT_TIME , value = "签订时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TYPE , value = "合同类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.PARENT_ID , value = "上级合同ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_NO , value = "合同编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TITLE , value = "合同抬头" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERABLES , value = "交付物" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERY_LOCATION , value = "交付地" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.AMOUNT , value = "合同金额" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_STATUS , value = "合同状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SUMMARY , value = "摘要信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SIGNING_DATE , value = "签订日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EFFECTIVE_DATE , value = "生效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.END_DATE , value = "结束日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EXPIRATION_DATE , value = "失效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.DEPARTMENT_ID , value = "归属部门ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_DIRECTION , value = "资金流向" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CATALOG_CODE , value = "合同分类代码" , required = false , dataTypeClass=String.class),
 	})
-	@ApiOperationSupport(order=5 ,  ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } )
+	@ApiOperationSupport(order=5 ,  ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE , ContractVOMeta.SEARCH_FIELD , ContractVOMeta.FUZZY_FIELD , ContractVOMeta.SEARCH_VALUE , ContractVOMeta.DIRTY_FIELDS , ContractVOMeta.SORT_FIELD , ContractVOMeta.SORT_TYPE , ContractVOMeta.IDS } )
 	@NotNull(name = ContractVOMeta.ID)
 	@SentinelResource(value = ContractServiceProxy.SAVE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(ContractServiceProxy.SAVE)
 	public Result save(ContractVO contractVO) {
-		Result result=contractService.save(contractVO,SaveMode.NOT_NULL_FIELDS);
+		Result result=contractService.save(contractVO,SaveMode.DIRTY_OR_NOT_NULL_FIELDS,false);
 		return result;
 	}
 
@@ -244,11 +212,6 @@ public class ContractController extends SuperController {
 	public Result<Contract> getById(String id) {
 		Result<Contract> result=new Result<>();
 		Contract contract=contractService.getById(id);
-
-		// join 关联的对象
-		contractService.dao().fill(contract)
-			.execute();
-
 		result.success(true).data(contract);
 		return result;
 	}
@@ -280,34 +243,23 @@ public class ContractController extends SuperController {
 	@ApiOperation(value = "查询合同")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContractVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NAME , value = "合同名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CODE , value = "合同编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.STATE , value = "合同状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CATEGORY_ID , value = "合同类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.IDENTITY , value = "我方身份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_DIRECT , value = "资金流向" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.MONEY , value = "金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.ALLMONEY , value = "总金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.USER_ID , value = "承办人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.DEPT_ID , value = "承办人部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.BIDDING_ID , value = "关联招标" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_COMPANY_NAME , value = "我方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACTS , value = "我方联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACT_INFORMATION , value = "我方联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_ID , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_NAME , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACTS , value = "对方单位联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACT_INFORMATION , value = "对方单位联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_UNIT , value = "监理单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACTS , value = "监理人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACT_INFORMATION , value = "监理联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.EFFECT_TIME , value = "生效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.LOST_EFFECT_TIME , value = "失效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.END_TIME , value = "结束时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.AUDIT_TIME , value = "签订时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TYPE , value = "合同类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.PARENT_ID , value = "上级合同ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_NO , value = "合同编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TITLE , value = "合同抬头" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERABLES , value = "交付物" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERY_LOCATION , value = "交付地" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.AMOUNT , value = "合同金额" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_STATUS , value = "合同状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SUMMARY , value = "摘要信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SIGNING_DATE , value = "签订日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EFFECTIVE_DATE , value = "生效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.END_DATE , value = "结束日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EXPIRATION_DATE , value = "失效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.DEPARTMENT_ID , value = "归属部门ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_DIRECTION , value = "资金流向" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CATALOG_CODE , value = "合同分类代码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ContractVOMeta.PAGE_INDEX , ContractVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = ContractServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -326,34 +278,23 @@ public class ContractController extends SuperController {
 	@ApiOperation(value = "分页查询合同")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = ContractVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NAME , value = "合同名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CODE , value = "合同编号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.STATE , value = "合同状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.CATEGORY_ID , value = "合同类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.IDENTITY , value = "我方身份" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FUND_DIRECT , value = "资金流向" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.MONEY , value = "金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.ALLMONEY , value = "总金额" , required = false , dataTypeClass=BigDecimal.class),
-		@ApiImplicitParam(name = ContractVOMeta.USER_ID , value = "承办人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.DEPT_ID , value = "承办人部门" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.BIDDING_ID , value = "关联招标" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_COMPANY_NAME , value = "我方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACTS , value = "我方联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.FIRST_CONTACT_INFORMATION , value = "我方联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_ID , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_COMPANY_NAME , value = "对方单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACTS , value = "对方单位联系人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.RELATED_CONTACT_INFORMATION , value = "对方单位联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_UNIT , value = "监理单位" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACTS , value = "监理人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.SUPERVISION_CONTACT_INFORMATION , value = "监理联系方式" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.EFFECT_TIME , value = "生效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.LOST_EFFECT_TIME , value = "失效时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.END_TIME , value = "结束时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.AUDIT_TIME , value = "签订时间" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = ContractVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TYPE , value = "合同类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.PARENT_ID , value = "上级合同ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_NO , value = "合同编号" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.TITLE , value = "合同抬头" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERABLES , value = "交付物" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.DELIVERY_LOCATION , value = "交付地" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.AMOUNT , value = "合同金额" , required = false , dataTypeClass=BigDecimal.class),
+		@ApiImplicitParam(name = ContractVOMeta.CONTRACT_STATUS , value = "合同状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SUMMARY , value = "摘要信息" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.SIGNING_DATE , value = "签订日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EFFECTIVE_DATE , value = "生效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.END_DATE , value = "结束日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.EXPIRATION_DATE , value = "失效日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = ContractVOMeta.DEPARTMENT_ID , value = "归属部门ID" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_STATUS , value = "资金状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.FUNDING_DIRECTION , value = "资金流向" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractVOMeta.CATALOG_CODE , value = "合同分类代码" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = ContractServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -361,11 +302,6 @@ public class ContractController extends SuperController {
 	public Result<PagedList<Contract>> queryPagedList(ContractVO sample) {
 		Result<PagedList<Contract>> result=new Result<>();
 		PagedList<Contract> list=contractService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
-
-		// join 关联的对象
-		contractService.dao().fill(list)
-			.execute();
-
 		result.success(true).data(list);
 		return result;
 	}
@@ -378,10 +314,14 @@ public class ContractController extends SuperController {
 	@SentinelResource(value = ContractServiceProxy.EXPORT_EXCEL , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(ContractServiceProxy.EXPORT_EXCEL)
 	public void exportExcel(ContractVO  sample,HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 数据
 			ExcelWriter ew=contractService.exportExcel(sample);
 			//下载
-			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+			DownloadUtil.writeToOutput(response,ew.getWorkBook(),ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
+		}
 	}
 
 
@@ -391,11 +331,15 @@ public class ContractController extends SuperController {
 	@SentinelResource(value = ContractServiceProxy.EXPORT_EXCEL_TEMPLATE , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@RequestMapping(ContractServiceProxy.EXPORT_EXCEL_TEMPLATE)
 	public void exportExcelTemplate(HttpServletResponse response) throws Exception {
+		try{
 			//生成 Excel 模版
 			ExcelWriter ew=contractService.exportExcelTemplate();
 			//下载
 			DownloadUtil.writeToOutput(response, ew.getWorkBook(), ew.getWorkBookName());
+		} catch (Exception e) {
+			DownloadUtil.writeDownloadError(response,e);
 		}
+	}
 
 
 

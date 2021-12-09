@@ -1,8 +1,8 @@
-<!-- 
+<!--
 /**
  * 合同 列表页 JS 脚本
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
  */
  -->
  <!DOCTYPE html>
@@ -12,6 +12,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
 	<title th:text="${lang.translate('合同')}">合同</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
@@ -22,6 +24,7 @@
     <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
     <style>
     </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden;">
@@ -29,189 +32,7 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
-        <input name="id" id="id"  type="hidden"/>
 
-         <!--开始：group 循环-->
-
-
-
-        <div class="layui-row form-row">
-
-             <!--开始：group 循环-->
-            <div class="layui-col-xs3 form-column">
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('合同编号')}">合同编号</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同编号') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('合同类型')}">合同类型</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="categoryId" id="categoryId" name="categoryId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同类型') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('合同名称')}">合同名称</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同名称') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('资金状态')}">资金状态</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="fundStatus" id="fundStatus" name="fundStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资金状态') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('合同状态')}">合同状态</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="state" id="state" name="state" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同状态') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('关联招标')}">关联招标</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="biddingId" id="biddingId" name="biddingId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('关联招标') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('总金额')}">总金额</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="allmoney" id="allmoney" name="allmoney" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('总金额') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
-                        </div>
-                    </div>
-
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs3 form-column">
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('我方单位')}">我方单位</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="firstCompanyName" id="firstCompanyName" name="firstCompanyName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('我方单位') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('我方联系人')}">我方联系人</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="firstContacts" id="firstContacts" name="firstContacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('我方联系人') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('我方联系方式')}">我方联系方式</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="firstContactInformation" id="firstContactInformation" name="firstContactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('我方联系方式') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('监理单位')}">监理单位</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="supervisionUnit" id="supervisionUnit" name="supervisionUnit" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('监理单位') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('监理人')}">监理人</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="supervisionContacts" id="supervisionContacts" name="supervisionContacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('监理人') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('监理联系方式')}">监理联系方式</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="supervisionContactInformation" id="supervisionContactInformation" name="supervisionContactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('监理联系方式') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs3 form-column">
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('对方单位')}">对方单位</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="relatedCompanyId" id="relatedCompanyId" name="relatedCompanyId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('对方单位') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('对方单位')}">对方单位</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="relatedCompanyName" id="relatedCompanyName" name="relatedCompanyName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('对方单位') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('对方单位联系人')}">对方单位联系人</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="relatedContacts" id="relatedContacts" name="relatedContacts" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('对方单位联系人') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('对方单位联系方式')}">对方单位联系方式</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="relatedContactInformation" id="relatedContactInformation" name="relatedContactInformation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('对方单位联系方式') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：group 循环-->
-            <div class="layui-col-xs3 form-column">
-
-
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('生效时间')}">生效时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="effectTime" id="effectTime" name="effectTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('生效时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('签订时间')}">签订时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="auditTime" id="auditTime" name="auditTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('签订时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('结束时间')}">结束时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="endTime" id="endTime" name="endTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('结束时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('失效时间')}">失效时间</div></div>
-                        <div class="layui-input-block ">
-                            <input input-type="date" lay-filter="lostEffectTime" id="lostEffectTime" name="lostEffectTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('失效时间') }" type="text" class="layui-input"   />
-                        </div>
-                    </div>
-
-                <!--结束：栏次内字段循环-->
-            </div>
-            <!--结束：栏次输入框循环-->
-        </div>
          <!--开始：group 循环-->
 
 
@@ -221,21 +42,139 @@
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column">
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('附件')}">附件</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="attach" id="attach" name="attach" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('附件') }" type="text" class="layui-input"  />
+                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主键')}">主键</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主键') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同类型')}">合同类型</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="type" id="type" name="type" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同类型') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('上级合同ID')}">上级合同ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="parentId" id="parentId" name="parentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('上级合同ID') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同编号')}">合同编号</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="contractNo" id="contractNo" name="contractNo" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同编号') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同抬头')}">合同抬头</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同抬头') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('交付物')}">交付物</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="deliverables" id="deliverables" name="deliverables" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('交付物') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('交付地')}">交付地</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="deliveryLocation" id="deliveryLocation" name="deliveryLocation" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('交付地') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                 
                     <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
-                    <div class="layui-input-block ">
-                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 30px" ></textarea>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同金额')}">合同金额</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="amount" id="amount" name="amount" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同金额') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="false" decimal="true" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同状态')}">合同状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="contractStatus" id="contractStatus" name="contractStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同状态') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('摘要信息')}">摘要信息</div></div>
+                    <div class="layui-input-block layui-input-block-c1">
+                        <textarea lay-filter="summary" id="summary" name="summary" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('摘要信息') }" class="layui-textarea" style="height: 120px" ></textarea>
                     </div>
                 </div>
 
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('签订日期')}">签订日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="signingDate" id="signingDate" name="signingDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('签订日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('生效日期')}">生效日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="effectiveDate" id="effectiveDate" name="effectiveDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('生效日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('结束日期')}">结束日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="endDate" id="endDate" name="endDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('结束日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('失效日期')}">失效日期</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="expirationDate" id="expirationDate" name="expirationDate"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('失效日期') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('归属部门ID')}">归属部门ID</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="departmentId" id="departmentId" name="departmentId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('归属部门ID') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资金状态')}">资金状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="fundingStatus" id="fundingStatus" name="fundingStatus" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资金状态') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('资金流向')}">资金流向</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="fundingDirection" id="fundingDirection" name="fundingDirection" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('资金流向') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同分类代码')}">合同分类代码</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="catalogCode" id="catalogCode" name="catalogCode" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同分类代码') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -244,7 +183,6 @@
         <!--结束：group循环-->
 
         <div style="height: 8px"></div>
-        <div style="height: 250px"></div>
 
 
     </form>

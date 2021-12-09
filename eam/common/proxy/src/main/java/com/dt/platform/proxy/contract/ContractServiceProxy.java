@@ -16,10 +16,10 @@ import com.dt.platform.proxy.ServiceNames;
 
 /**
  * <p>
- * 合同  控制器服务代理
+ * 合同表  控制器服务代理
  * </p>
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
 */
 
 @FeignClient(value = ServiceNames.CONTRACT, contextId = ContractServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -139,7 +139,7 @@ public interface ContractServiceProxy {
 	Result<Contract> getById(String id);
 
 	/**
-	 * 批量删除合同
+	 * 获取多个合同
 	*/
 	@RequestMapping(ContractServiceProxy.GET_BY_IDS)
 	Result<List<Contract>> getByIds(List<String> ids);

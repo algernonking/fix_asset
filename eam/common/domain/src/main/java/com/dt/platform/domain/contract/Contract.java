@@ -3,12 +3,17 @@ package com.dt.platform.domain.contract;
 import com.github.foxnic.dao.entity.Entity;
 import javax.persistence.Table;
 import com.github.foxnic.sql.meta.DBTable;
-import com.dt.platform.constants.db.EAMTables.CONT_CONTRACT;
+import com.dt.platform.constants.db.ContractTables.CONT_CONTRACT;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
-import java.math.BigDecimal;
-import java.util.Date;
+import com.dt.platform.constants.enums.contract.ContractType;
 import javax.persistence.Transient;
+import java.math.BigDecimal;
+import com.dt.platform.constants.enums.contract.ContractStatus;
+import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
+import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.commons.lang.StringUtil;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
 
@@ -16,9 +21,9 @@ import com.github.foxnic.dao.entity.EntityContext;
 
 /**
  * 合同
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
- * @sign 631B78EB0F9B3B604C7C271ED12B857C
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
+ * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -37,172 +42,116 @@ public class Contract extends Entity {
 	private String id;
 	
 	/**
-	 * 合同名称：合同名称
+	 * 合同类型：主合同，子合同、附加协议; ContractType
 	*/
-	@ApiModelProperty(required = false,value="合同名称" , notes = "合同名称")
-	private String name;
+	@ApiModelProperty(required = false,value="合同类型" , notes = "主合同，子合同、附加协议; ContractType")
+	private String type;
+	@Transient
+	private ContractType typeEnum;
+	
+	/**
+	 * 上级合同ID：上级合同ID
+	*/
+	@ApiModelProperty(required = false,value="上级合同ID" , notes = "上级合同ID")
+	private String parentId;
 	
 	/**
 	 * 合同编号：合同编号
 	*/
 	@ApiModelProperty(required = false,value="合同编号" , notes = "合同编号")
-	private String code;
+	private String contractNo;
 	
 	/**
-	 * 合同状态：未签订|履约中|中止|完成|作废
+	 * 合同抬头：合同抬头
 	*/
-	@ApiModelProperty(required = false,value="合同状态" , notes = "未签订|履约中|中止|完成|作废")
-	private String state;
+	@ApiModelProperty(required = false,value="合同抬头" , notes = "合同抬头")
+	private String title;
 	
 	/**
-	 * 资金状态：未生效|收付中|已结清
+	 * 交付物：交付物
 	*/
-	@ApiModelProperty(required = false,value="资金状态" , notes = "未生效|收付中|已结清")
-	private String fundStatus;
+	@ApiModelProperty(required = false,value="交付物" , notes = "交付物")
+	private String deliverables;
 	
 	/**
-	 * 合同类型：合同类型
+	 * 交付地：交付地
 	*/
-	@ApiModelProperty(required = false,value="合同类型" , notes = "合同类型")
-	private String categoryId;
+	@ApiModelProperty(required = false,value="交付地" , notes = "交付地")
+	private String deliveryLocation;
 	
 	/**
-	 * 我方身份：我方身份
+	 * 合同金额：合同金额
 	*/
-	@ApiModelProperty(required = false,value="我方身份" , notes = "我方身份")
-	private String identity;
+	@ApiModelProperty(required = false,value="合同金额" , notes = "合同金额")
+	private BigDecimal amount;
 	
 	/**
-	 * 资金流向：资金流向
+	 * 合同状态：枚举 ContractStatus
 	*/
-	@ApiModelProperty(required = false,value="资金流向" , notes = "资金流向")
-	private String fundDirect;
+	@ApiModelProperty(required = false,value="合同状态" , notes = "枚举 ContractStatus")
+	private String contractStatus;
+	@Transient
+	private ContractStatus contractStatusEnum;
 	
 	/**
-	 * 金额：金额
+	 * 摘要信息：摘要信息
 	*/
-	@ApiModelProperty(required = false,value="金额" , notes = "金额")
-	private BigDecimal money;
+	@ApiModelProperty(required = false,value="摘要信息" , notes = "摘要信息")
+	private String summary;
 	
 	/**
-	 * 总金额：总金额
+	 * 签订日期：签订日期
 	*/
-	@ApiModelProperty(required = false,value="总金额" , notes = "总金额")
-	private BigDecimal allmoney;
+	@ApiModelProperty(required = false,value="签订日期" , notes = "签订日期")
+	private Date signingDate;
 	
 	/**
-	 * 承办人：承办人
+	 * 生效日期：生效日期
 	*/
-	@ApiModelProperty(required = false,value="承办人" , notes = "承办人")
-	private String userId;
+	@ApiModelProperty(required = false,value="生效日期" , notes = "生效日期")
+	private Date effectiveDate;
 	
 	/**
-	 * 承办人部门：承办人部门
+	 * 结束日期：结束日期
 	*/
-	@ApiModelProperty(required = false,value="承办人部门" , notes = "承办人部门")
-	private String deptId;
+	@ApiModelProperty(required = false,value="结束日期" , notes = "结束日期")
+	private Date endDate;
 	
 	/**
-	 * 关联招标：关联招标
+	 * 失效日期：失效日期
 	*/
-	@ApiModelProperty(required = false,value="关联招标" , notes = "关联招标")
-	private String biddingId;
+	@ApiModelProperty(required = false,value="失效日期" , notes = "失效日期")
+	private Date expirationDate;
 	
 	/**
-	 * 我方单位：我方单位
+	 * 归属部门ID：归属部门ID
 	*/
-	@ApiModelProperty(required = false,value="我方单位" , notes = "我方单位")
-	private String firstCompanyName;
+	@ApiModelProperty(required = false,value="归属部门ID" , notes = "归属部门ID")
+	private String departmentId;
 	
 	/**
-	 * 我方联系人：我方联系人
+	 * 资金状态：枚举 FundingStatus
 	*/
-	@ApiModelProperty(required = false,value="我方联系人" , notes = "我方联系人")
-	private String firstContacts;
+	@ApiModelProperty(required = false,value="资金状态" , notes = "枚举 FundingStatus")
+	private String fundingStatus;
 	
 	/**
-	 * 我方联系方式：我方联系方式
+	 * 资金流向：关联字典
 	*/
-	@ApiModelProperty(required = false,value="我方联系方式" , notes = "我方联系方式")
-	private String firstContactInformation;
+	@ApiModelProperty(required = false,value="资金流向" , notes = "关联字典")
+	private String fundingDirection;
 	
 	/**
-	 * 对方单位：对方单位
+	 * 合同分类代码：关联字典
 	*/
-	@ApiModelProperty(required = false,value="对方单位" , notes = "对方单位")
-	private String relatedCompanyId;
+	@ApiModelProperty(required = false,value="合同分类代码" , notes = "关联字典")
+	private String catalogCode;
 	
 	/**
-	 * 对方单位：对方单位
+	 * 租户ID：租户ID
 	*/
-	@ApiModelProperty(required = false,value="对方单位" , notes = "对方单位")
-	private String relatedCompanyName;
-	
-	/**
-	 * 对方单位联系人：对方单位联系人
-	*/
-	@ApiModelProperty(required = false,value="对方单位联系人" , notes = "对方单位联系人")
-	private String relatedContacts;
-	
-	/**
-	 * 对方单位联系方式：对方单位联系方式
-	*/
-	@ApiModelProperty(required = false,value="对方单位联系方式" , notes = "对方单位联系方式")
-	private String relatedContactInformation;
-	
-	/**
-	 * 监理单位：监理单位
-	*/
-	@ApiModelProperty(required = false,value="监理单位" , notes = "监理单位")
-	private String supervisionUnit;
-	
-	/**
-	 * 监理人：监理人
-	*/
-	@ApiModelProperty(required = false,value="监理人" , notes = "监理人")
-	private String supervisionContacts;
-	
-	/**
-	 * 监理联系方式：监理联系方式
-	*/
-	@ApiModelProperty(required = false,value="监理联系方式" , notes = "监理联系方式")
-	private String supervisionContactInformation;
-	
-	/**
-	 * 生效时间：生效时间
-	*/
-	@ApiModelProperty(required = false,value="生效时间" , notes = "生效时间")
-	private Date effectTime;
-	
-	/**
-	 * 失效时间：失效时间
-	*/
-	@ApiModelProperty(required = false,value="失效时间" , notes = "失效时间")
-	private Date lostEffectTime;
-	
-	/**
-	 * 结束时间：结束时间
-	*/
-	@ApiModelProperty(required = false,value="结束时间" , notes = "结束时间")
-	private Date endTime;
-	
-	/**
-	 * 签订时间：签订时间
-	*/
-	@ApiModelProperty(required = false,value="签订时间" , notes = "签订时间")
-	private Date auditTime;
-	
-	/**
-	 * 附件：附件
-	*/
-	@ApiModelProperty(required = false,value="附件" , notes = "附件")
-	private String attach;
-	
-	/**
-	 * 备注：备注
-	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	@ApiModelProperty(required = false,value="租户ID" , notes = "租户ID")
+	private String tenantId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -247,16 +196,16 @@ public class Contract extends Entity {
 	private Date deleteTime;
 	
 	/**
-	 * version：version
+	 * 数据版本号：数据版本号
 	*/
-	@ApiModelProperty(required = true,value="version" , notes = "version")
+	@ApiModelProperty(required = true,value="数据版本号" , notes = "数据版本号")
 	private Integer version;
 	
 	/**
-	 * 租户：租户
+	 * 归属部门：归属部门
 	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
+	@ApiModelProperty(required = false,value="归属部门" , notes = "归属部门")
+	private Organization department;
 	
 	/**
 	 * 获得 主键<br>
@@ -278,21 +227,73 @@ public class Contract extends Entity {
 	}
 	
 	/**
-	 * 获得 合同名称<br>
-	 * 合同名称
-	 * @return 合同名称
+	 * 获得 合同类型<br>
+	 * 主合同，子合同、附加协议; ContractType
+	 * @return 合同类型
 	*/
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 	
 	/**
-	 * 设置 合同名称
-	 * @param name 合同名称
+	 * 获得 合同类型 的投影属性<br>
+	 * 等价于 getType 方法，获得对应的枚举类型
+	 * @return 合同类型
+	*/
+	@Transient
+	public ContractType getTypeEnum() {
+		if(this.typeEnum==null) {
+			this.typeEnum = (ContractType) EnumUtil.parseByCode(ContractType.values(),type);
+		}
+		return this.typeEnum ;
+	}
+	
+	/**
+	 * 设置 合同类型
+	 * @param type 合同类型
 	 * @return 当前对象
 	*/
-	public Contract setName(String name) {
-		this.name=name;
+	public Contract setType(String type) {
+		this.type=type;
+		this.typeEnum= (ContractType) EnumUtil.parseByCode(ContractType.values(),type) ;
+		if(StringUtil.hasContent(type) && this.typeEnum==null) {
+			throw new IllegalArgumentException( type + " is not one of ContractType");
+		}
+		return this;
+	}
+	
+	/**
+	 * 设置 合同类型的投影属性，等同于设置 合同类型
+	 * @param typeEnum 合同类型
+	 * @return 当前对象
+	*/
+	@Transient
+	public Contract setTypeEnum(ContractType typeEnum) {
+		if(typeEnum==null) {
+			this.setType(null);
+		} else {
+			this.setType(typeEnum.code());
+		}
+		this.typeEnum=typeEnum;
+		return this;
+	}
+	
+	/**
+	 * 获得 上级合同ID<br>
+	 * 上级合同ID
+	 * @return 上级合同ID
+	*/
+	public String getParentId() {
+		return parentId;
+	}
+	
+	/**
+	 * 设置 上级合同ID
+	 * @param parentId 上级合同ID
+	 * @return 当前对象
+	*/
+	public Contract setParentId(String parentId) {
+		this.parentId=parentId;
 		return this;
 	}
 	
@@ -301,511 +302,335 @@ public class Contract extends Entity {
 	 * 合同编号
 	 * @return 合同编号
 	*/
-	public String getCode() {
-		return code;
+	public String getContractNo() {
+		return contractNo;
 	}
 	
 	/**
 	 * 设置 合同编号
-	 * @param code 合同编号
+	 * @param contractNo 合同编号
 	 * @return 当前对象
 	*/
-	public Contract setCode(String code) {
-		this.code=code;
+	public Contract setContractNo(String contractNo) {
+		this.contractNo=contractNo;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同抬头<br>
+	 * 合同抬头
+	 * @return 合同抬头
+	*/
+	public String getTitle() {
+		return title;
+	}
+	
+	/**
+	 * 设置 合同抬头
+	 * @param title 合同抬头
+	 * @return 当前对象
+	*/
+	public Contract setTitle(String title) {
+		this.title=title;
+		return this;
+	}
+	
+	/**
+	 * 获得 交付物<br>
+	 * 交付物
+	 * @return 交付物
+	*/
+	public String getDeliverables() {
+		return deliverables;
+	}
+	
+	/**
+	 * 设置 交付物
+	 * @param deliverables 交付物
+	 * @return 当前对象
+	*/
+	public Contract setDeliverables(String deliverables) {
+		this.deliverables=deliverables;
+		return this;
+	}
+	
+	/**
+	 * 获得 交付地<br>
+	 * 交付地
+	 * @return 交付地
+	*/
+	public String getDeliveryLocation() {
+		return deliveryLocation;
+	}
+	
+	/**
+	 * 设置 交付地
+	 * @param deliveryLocation 交付地
+	 * @return 当前对象
+	*/
+	public Contract setDeliveryLocation(String deliveryLocation) {
+		this.deliveryLocation=deliveryLocation;
+		return this;
+	}
+	
+	/**
+	 * 获得 合同金额<br>
+	 * 合同金额
+	 * @return 合同金额
+	*/
+	public BigDecimal getAmount() {
+		return amount;
+	}
+	
+	/**
+	 * 设置 合同金额
+	 * @param amount 合同金额
+	 * @return 当前对象
+	*/
+	public Contract setAmount(BigDecimal amount) {
+		this.amount=amount;
 		return this;
 	}
 	
 	/**
 	 * 获得 合同状态<br>
-	 * 未签订|履约中|中止|完成|作废
+	 * 枚举 ContractStatus
 	 * @return 合同状态
 	*/
-	public String getState() {
-		return state;
+	public String getContractStatus() {
+		return contractStatus;
+	}
+	
+	/**
+	 * 获得 合同状态 的投影属性<br>
+	 * 等价于 getContractStatus 方法，获得对应的枚举类型
+	 * @return 合同状态
+	*/
+	@Transient
+	public ContractStatus getContractStatusEnum() {
+		if(this.contractStatusEnum==null) {
+			this.contractStatusEnum = (ContractStatus) EnumUtil.parseByCode(ContractStatus.values(),contractStatus);
+		}
+		return this.contractStatusEnum ;
 	}
 	
 	/**
 	 * 设置 合同状态
-	 * @param state 合同状态
+	 * @param contractStatus 合同状态
 	 * @return 当前对象
 	*/
-	public Contract setState(String state) {
-		this.state=state;
+	public Contract setContractStatus(String contractStatus) {
+		this.contractStatus=contractStatus;
+		this.contractStatusEnum= (ContractStatus) EnumUtil.parseByCode(ContractStatus.values(),contractStatus) ;
+		if(StringUtil.hasContent(contractStatus) && this.contractStatusEnum==null) {
+			throw new IllegalArgumentException( contractStatus + " is not one of ContractStatus");
+		}
+		return this;
+	}
+	
+	/**
+	 * 设置 合同状态的投影属性，等同于设置 合同状态
+	 * @param contractStatusEnum 合同状态
+	 * @return 当前对象
+	*/
+	@Transient
+	public Contract setContractStatusEnum(ContractStatus contractStatusEnum) {
+		if(contractStatusEnum==null) {
+			this.setContractStatus(null);
+		} else {
+			this.setContractStatus(contractStatusEnum.code());
+		}
+		this.contractStatusEnum=contractStatusEnum;
+		return this;
+	}
+	
+	/**
+	 * 获得 摘要信息<br>
+	 * 摘要信息
+	 * @return 摘要信息
+	*/
+	public String getSummary() {
+		return summary;
+	}
+	
+	/**
+	 * 设置 摘要信息
+	 * @param summary 摘要信息
+	 * @return 当前对象
+	*/
+	public Contract setSummary(String summary) {
+		this.summary=summary;
+		return this;
+	}
+	
+	/**
+	 * 获得 签订日期<br>
+	 * 签订日期
+	 * @return 签订日期
+	*/
+	public Date getSigningDate() {
+		return signingDate;
+	}
+	
+	/**
+	 * 设置 签订日期
+	 * @param signingDate 签订日期
+	 * @return 当前对象
+	*/
+	public Contract setSigningDate(Date signingDate) {
+		this.signingDate=signingDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 生效日期<br>
+	 * 生效日期
+	 * @return 生效日期
+	*/
+	public Date getEffectiveDate() {
+		return effectiveDate;
+	}
+	
+	/**
+	 * 设置 生效日期
+	 * @param effectiveDate 生效日期
+	 * @return 当前对象
+	*/
+	public Contract setEffectiveDate(Date effectiveDate) {
+		this.effectiveDate=effectiveDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 结束日期<br>
+	 * 结束日期
+	 * @return 结束日期
+	*/
+	public Date getEndDate() {
+		return endDate;
+	}
+	
+	/**
+	 * 设置 结束日期
+	 * @param endDate 结束日期
+	 * @return 当前对象
+	*/
+	public Contract setEndDate(Date endDate) {
+		this.endDate=endDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 失效日期<br>
+	 * 失效日期
+	 * @return 失效日期
+	*/
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+	
+	/**
+	 * 设置 失效日期
+	 * @param expirationDate 失效日期
+	 * @return 当前对象
+	*/
+	public Contract setExpirationDate(Date expirationDate) {
+		this.expirationDate=expirationDate;
+		return this;
+	}
+	
+	/**
+	 * 获得 归属部门ID<br>
+	 * 归属部门ID
+	 * @return 归属部门ID
+	*/
+	public String getDepartmentId() {
+		return departmentId;
+	}
+	
+	/**
+	 * 设置 归属部门ID
+	 * @param departmentId 归属部门ID
+	 * @return 当前对象
+	*/
+	public Contract setDepartmentId(String departmentId) {
+		this.departmentId=departmentId;
 		return this;
 	}
 	
 	/**
 	 * 获得 资金状态<br>
-	 * 未生效|收付中|已结清
+	 * 枚举 FundingStatus
 	 * @return 资金状态
 	*/
-	public String getFundStatus() {
-		return fundStatus;
+	public String getFundingStatus() {
+		return fundingStatus;
 	}
 	
 	/**
 	 * 设置 资金状态
-	 * @param fundStatus 资金状态
+	 * @param fundingStatus 资金状态
 	 * @return 当前对象
 	*/
-	public Contract setFundStatus(String fundStatus) {
-		this.fundStatus=fundStatus;
-		return this;
-	}
-	
-	/**
-	 * 获得 合同类型<br>
-	 * 合同类型
-	 * @return 合同类型
-	*/
-	public String getCategoryId() {
-		return categoryId;
-	}
-	
-	/**
-	 * 设置 合同类型
-	 * @param categoryId 合同类型
-	 * @return 当前对象
-	*/
-	public Contract setCategoryId(String categoryId) {
-		this.categoryId=categoryId;
-		return this;
-	}
-	
-	/**
-	 * 获得 我方身份<br>
-	 * 我方身份
-	 * @return 我方身份
-	*/
-	public String getIdentity() {
-		return identity;
-	}
-	
-	/**
-	 * 设置 我方身份
-	 * @param identity 我方身份
-	 * @return 当前对象
-	*/
-	public Contract setIdentity(String identity) {
-		this.identity=identity;
+	public Contract setFundingStatus(String fundingStatus) {
+		this.fundingStatus=fundingStatus;
 		return this;
 	}
 	
 	/**
 	 * 获得 资金流向<br>
-	 * 资金流向
+	 * 关联字典
 	 * @return 资金流向
 	*/
-	public String getFundDirect() {
-		return fundDirect;
+	public String getFundingDirection() {
+		return fundingDirection;
 	}
 	
 	/**
 	 * 设置 资金流向
-	 * @param fundDirect 资金流向
+	 * @param fundingDirection 资金流向
 	 * @return 当前对象
 	*/
-	public Contract setFundDirect(String fundDirect) {
-		this.fundDirect=fundDirect;
+	public Contract setFundingDirection(String fundingDirection) {
+		this.fundingDirection=fundingDirection;
 		return this;
 	}
 	
 	/**
-	 * 获得 金额<br>
-	 * 金额
-	 * @return 金额
+	 * 获得 合同分类代码<br>
+	 * 关联字典
+	 * @return 合同分类代码
 	*/
-	public BigDecimal getMoney() {
-		return money;
+	public String getCatalogCode() {
+		return catalogCode;
 	}
 	
 	/**
-	 * 设置 金额
-	 * @param money 金额
+	 * 设置 合同分类代码
+	 * @param catalogCode 合同分类代码
 	 * @return 当前对象
 	*/
-	public Contract setMoney(BigDecimal money) {
-		this.money=money;
+	public Contract setCatalogCode(String catalogCode) {
+		this.catalogCode=catalogCode;
 		return this;
 	}
 	
 	/**
-	 * 获得 总金额<br>
-	 * 总金额
-	 * @return 总金额
+	 * 获得 租户ID<br>
+	 * 租户ID
+	 * @return 租户ID
 	*/
-	public BigDecimal getAllmoney() {
-		return allmoney;
+	public String getTenantId() {
+		return tenantId;
 	}
 	
 	/**
-	 * 设置 总金额
-	 * @param allmoney 总金额
+	 * 设置 租户ID
+	 * @param tenantId 租户ID
 	 * @return 当前对象
 	*/
-	public Contract setAllmoney(BigDecimal allmoney) {
-		this.allmoney=allmoney;
-		return this;
-	}
-	
-	/**
-	 * 获得 承办人<br>
-	 * 承办人
-	 * @return 承办人
-	*/
-	public String getUserId() {
-		return userId;
-	}
-	
-	/**
-	 * 设置 承办人
-	 * @param userId 承办人
-	 * @return 当前对象
-	*/
-	public Contract setUserId(String userId) {
-		this.userId=userId;
-		return this;
-	}
-	
-	/**
-	 * 获得 承办人部门<br>
-	 * 承办人部门
-	 * @return 承办人部门
-	*/
-	public String getDeptId() {
-		return deptId;
-	}
-	
-	/**
-	 * 设置 承办人部门
-	 * @param deptId 承办人部门
-	 * @return 当前对象
-	*/
-	public Contract setDeptId(String deptId) {
-		this.deptId=deptId;
-		return this;
-	}
-	
-	/**
-	 * 获得 关联招标<br>
-	 * 关联招标
-	 * @return 关联招标
-	*/
-	public String getBiddingId() {
-		return biddingId;
-	}
-	
-	/**
-	 * 设置 关联招标
-	 * @param biddingId 关联招标
-	 * @return 当前对象
-	*/
-	public Contract setBiddingId(String biddingId) {
-		this.biddingId=biddingId;
-		return this;
-	}
-	
-	/**
-	 * 获得 我方单位<br>
-	 * 我方单位
-	 * @return 我方单位
-	*/
-	public String getFirstCompanyName() {
-		return firstCompanyName;
-	}
-	
-	/**
-	 * 设置 我方单位
-	 * @param firstCompanyName 我方单位
-	 * @return 当前对象
-	*/
-	public Contract setFirstCompanyName(String firstCompanyName) {
-		this.firstCompanyName=firstCompanyName;
-		return this;
-	}
-	
-	/**
-	 * 获得 我方联系人<br>
-	 * 我方联系人
-	 * @return 我方联系人
-	*/
-	public String getFirstContacts() {
-		return firstContacts;
-	}
-	
-	/**
-	 * 设置 我方联系人
-	 * @param firstContacts 我方联系人
-	 * @return 当前对象
-	*/
-	public Contract setFirstContacts(String firstContacts) {
-		this.firstContacts=firstContacts;
-		return this;
-	}
-	
-	/**
-	 * 获得 我方联系方式<br>
-	 * 我方联系方式
-	 * @return 我方联系方式
-	*/
-	public String getFirstContactInformation() {
-		return firstContactInformation;
-	}
-	
-	/**
-	 * 设置 我方联系方式
-	 * @param firstContactInformation 我方联系方式
-	 * @return 当前对象
-	*/
-	public Contract setFirstContactInformation(String firstContactInformation) {
-		this.firstContactInformation=firstContactInformation;
-		return this;
-	}
-	
-	/**
-	 * 获得 对方单位<br>
-	 * 对方单位
-	 * @return 对方单位
-	*/
-	public String getRelatedCompanyId() {
-		return relatedCompanyId;
-	}
-	
-	/**
-	 * 设置 对方单位
-	 * @param relatedCompanyId 对方单位
-	 * @return 当前对象
-	*/
-	public Contract setRelatedCompanyId(String relatedCompanyId) {
-		this.relatedCompanyId=relatedCompanyId;
-		return this;
-	}
-	
-	/**
-	 * 获得 对方单位<br>
-	 * 对方单位
-	 * @return 对方单位
-	*/
-	public String getRelatedCompanyName() {
-		return relatedCompanyName;
-	}
-	
-	/**
-	 * 设置 对方单位
-	 * @param relatedCompanyName 对方单位
-	 * @return 当前对象
-	*/
-	public Contract setRelatedCompanyName(String relatedCompanyName) {
-		this.relatedCompanyName=relatedCompanyName;
-		return this;
-	}
-	
-	/**
-	 * 获得 对方单位联系人<br>
-	 * 对方单位联系人
-	 * @return 对方单位联系人
-	*/
-	public String getRelatedContacts() {
-		return relatedContacts;
-	}
-	
-	/**
-	 * 设置 对方单位联系人
-	 * @param relatedContacts 对方单位联系人
-	 * @return 当前对象
-	*/
-	public Contract setRelatedContacts(String relatedContacts) {
-		this.relatedContacts=relatedContacts;
-		return this;
-	}
-	
-	/**
-	 * 获得 对方单位联系方式<br>
-	 * 对方单位联系方式
-	 * @return 对方单位联系方式
-	*/
-	public String getRelatedContactInformation() {
-		return relatedContactInformation;
-	}
-	
-	/**
-	 * 设置 对方单位联系方式
-	 * @param relatedContactInformation 对方单位联系方式
-	 * @return 当前对象
-	*/
-	public Contract setRelatedContactInformation(String relatedContactInformation) {
-		this.relatedContactInformation=relatedContactInformation;
-		return this;
-	}
-	
-	/**
-	 * 获得 监理单位<br>
-	 * 监理单位
-	 * @return 监理单位
-	*/
-	public String getSupervisionUnit() {
-		return supervisionUnit;
-	}
-	
-	/**
-	 * 设置 监理单位
-	 * @param supervisionUnit 监理单位
-	 * @return 当前对象
-	*/
-	public Contract setSupervisionUnit(String supervisionUnit) {
-		this.supervisionUnit=supervisionUnit;
-		return this;
-	}
-	
-	/**
-	 * 获得 监理人<br>
-	 * 监理人
-	 * @return 监理人
-	*/
-	public String getSupervisionContacts() {
-		return supervisionContacts;
-	}
-	
-	/**
-	 * 设置 监理人
-	 * @param supervisionContacts 监理人
-	 * @return 当前对象
-	*/
-	public Contract setSupervisionContacts(String supervisionContacts) {
-		this.supervisionContacts=supervisionContacts;
-		return this;
-	}
-	
-	/**
-	 * 获得 监理联系方式<br>
-	 * 监理联系方式
-	 * @return 监理联系方式
-	*/
-	public String getSupervisionContactInformation() {
-		return supervisionContactInformation;
-	}
-	
-	/**
-	 * 设置 监理联系方式
-	 * @param supervisionContactInformation 监理联系方式
-	 * @return 当前对象
-	*/
-	public Contract setSupervisionContactInformation(String supervisionContactInformation) {
-		this.supervisionContactInformation=supervisionContactInformation;
-		return this;
-	}
-	
-	/**
-	 * 获得 生效时间<br>
-	 * 生效时间
-	 * @return 生效时间
-	*/
-	public Date getEffectTime() {
-		return effectTime;
-	}
-	
-	/**
-	 * 设置 生效时间
-	 * @param effectTime 生效时间
-	 * @return 当前对象
-	*/
-	public Contract setEffectTime(Date effectTime) {
-		this.effectTime=effectTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 失效时间<br>
-	 * 失效时间
-	 * @return 失效时间
-	*/
-	public Date getLostEffectTime() {
-		return lostEffectTime;
-	}
-	
-	/**
-	 * 设置 失效时间
-	 * @param lostEffectTime 失效时间
-	 * @return 当前对象
-	*/
-	public Contract setLostEffectTime(Date lostEffectTime) {
-		this.lostEffectTime=lostEffectTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 结束时间<br>
-	 * 结束时间
-	 * @return 结束时间
-	*/
-	public Date getEndTime() {
-		return endTime;
-	}
-	
-	/**
-	 * 设置 结束时间
-	 * @param endTime 结束时间
-	 * @return 当前对象
-	*/
-	public Contract setEndTime(Date endTime) {
-		this.endTime=endTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 签订时间<br>
-	 * 签订时间
-	 * @return 签订时间
-	*/
-	public Date getAuditTime() {
-		return auditTime;
-	}
-	
-	/**
-	 * 设置 签订时间
-	 * @param auditTime 签订时间
-	 * @return 当前对象
-	*/
-	public Contract setAuditTime(Date auditTime) {
-		this.auditTime=auditTime;
-		return this;
-	}
-	
-	/**
-	 * 获得 附件<br>
-	 * 附件
-	 * @return 附件
-	*/
-	public String getAttach() {
-		return attach;
-	}
-	
-	/**
-	 * 设置 附件
-	 * @param attach 附件
-	 * @return 当前对象
-	*/
-	public Contract setAttach(String attach) {
-		this.attach=attach;
-		return this;
-	}
-	
-	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
-	*/
-	public String getNotes() {
-		return notes;
-	}
-	
-	/**
-	 * 设置 备注
-	 * @param notes 备注
-	 * @return 当前对象
-	*/
-	public Contract setNotes(String notes) {
-		this.notes=notes;
+	public Contract setTenantId(String tenantId) {
+		this.tenantId=tenantId;
 		return this;
 	}
 	
@@ -943,17 +768,17 @@ public class Contract extends Entity {
 	}
 	
 	/**
-	 * 获得 version<br>
-	 * version
-	 * @return version
+	 * 获得 数据版本号<br>
+	 * 数据版本号
+	 * @return 数据版本号
 	*/
 	public Integer getVersion() {
 		return version;
 	}
 	
 	/**
-	 * 设置 version
-	 * @param version version
+	 * 设置 数据版本号
+	 * @param version 数据版本号
 	 * @return 当前对象
 	*/
 	public Contract setVersion(Integer version) {
@@ -962,21 +787,21 @@ public class Contract extends Entity {
 	}
 	
 	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
+	 * 获得 归属部门<br>
+	 * 归属部门
+	 * @return 归属部门
 	*/
-	public String getTenantId() {
-		return tenantId;
+	public Organization getDepartment() {
+		return department;
 	}
 	
 	/**
-	 * 设置 租户
-	 * @param tenantId 租户
+	 * 设置 归属部门
+	 * @param department 归属部门
 	 * @return 当前对象
 	*/
-	public Contract setTenantId(String tenantId) {
-		this.tenantId=tenantId;
+	public Contract setDepartment(Organization department) {
+		this.department=department;
 		return this;
 	}
 

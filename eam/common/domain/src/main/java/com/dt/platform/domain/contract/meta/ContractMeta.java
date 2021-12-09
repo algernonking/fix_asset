@@ -4,13 +4,14 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.contract.Contract;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.github.foxnic.web.domain.hrm.Organization;
 
 
 
 /**
- * @author 金杰 , maillank@qq.com
- * @since 2021-10-26 15:28:58
- * @sign 631B78EB0F9B3B604C7C271ED12B857C
+ * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-08 17:04:16
+ * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -27,284 +28,184 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 合同名称 , 类型: java.lang.String
+	 * 合同类型 , 主合同，子合同、附加协议; ContractType , 类型: java.lang.String
 	*/
-	public static final String NAME="name";
+	public static final String TYPE="type";
 	
 	/**
-	 * 合同名称 , 类型: java.lang.String
+	 * 合同类型 , 主合同，子合同、附加协议; ContractType , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,NAME, java.lang.String.class, "合同名称", "合同名称", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TYPE, java.lang.String.class, "合同类型", "主合同，子合同、附加协议; ContractType", java.lang.String.class, null);
+	
+	/**
+	 * 上级合同ID , 类型: java.lang.String
+	*/
+	public static final String PARENT_ID="parentId";
+	
+	/**
+	 * 上级合同ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> PARENT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,PARENT_ID, java.lang.String.class, "上级合同ID", "上级合同ID", java.lang.String.class, null);
 	
 	/**
 	 * 合同编号 , 类型: java.lang.String
 	*/
-	public static final String CODE="code";
+	public static final String CONTRACT_NO="contractNo";
 	
 	/**
 	 * 合同编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CODE, java.lang.String.class, "合同编号", "合同编号", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CONTRACT_NO_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CONTRACT_NO, java.lang.String.class, "合同编号", "合同编号", java.lang.String.class, null);
 	
 	/**
-	 * 合同状态 , 未签订|履约中|中止|完成|作废 , 类型: java.lang.String
+	 * 合同抬头 , 类型: java.lang.String
 	*/
-	public static final String STATE="state";
+	public static final String TITLE="title";
 	
 	/**
-	 * 合同状态 , 未签订|履约中|中止|完成|作废 , 类型: java.lang.String
+	 * 合同抬头 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> STATE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,STATE, java.lang.String.class, "合同状态", "未签订|履约中|中止|完成|作废", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TITLE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TITLE, java.lang.String.class, "合同抬头", "合同抬头", java.lang.String.class, null);
 	
 	/**
-	 * 资金状态 , 未生效|收付中|已结清 , 类型: java.lang.String
+	 * 交付物 , 类型: java.lang.String
 	*/
-	public static final String FUND_STATUS="fundStatus";
+	public static final String DELIVERABLES="deliverables";
 	
 	/**
-	 * 资金状态 , 未生效|收付中|已结清 , 类型: java.lang.String
+	 * 交付物 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUND_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUND_STATUS, java.lang.String.class, "资金状态", "未生效|收付中|已结清", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> DELIVERABLES_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DELIVERABLES, java.lang.String.class, "交付物", "交付物", java.lang.String.class, null);
 	
 	/**
-	 * 合同类型 , 类型: java.lang.String
+	 * 交付地 , 类型: java.lang.String
 	*/
-	public static final String CATEGORY_ID="categoryId";
+	public static final String DELIVERY_LOCATION="deliveryLocation";
 	
 	/**
-	 * 合同类型 , 类型: java.lang.String
+	 * 交付地 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CATEGORY_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CATEGORY_ID, java.lang.String.class, "合同类型", "合同类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> DELIVERY_LOCATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DELIVERY_LOCATION, java.lang.String.class, "交付地", "交付地", java.lang.String.class, null);
 	
 	/**
-	 * 我方身份 , 类型: java.lang.String
+	 * 合同金额 , 类型: java.math.BigDecimal
 	*/
-	public static final String IDENTITY="identity";
+	public static final String AMOUNT="amount";
 	
 	/**
-	 * 我方身份 , 类型: java.lang.String
+	 * 合同金额 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> IDENTITY_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,IDENTITY, java.lang.String.class, "我方身份", "我方身份", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.math.BigDecimal> AMOUNT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,AMOUNT, java.math.BigDecimal.class, "合同金额", "合同金额", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 资金流向 , 类型: java.lang.String
+	 * 合同状态 , 枚举 ContractStatus , 类型: java.lang.String
 	*/
-	public static final String FUND_DIRECT="fundDirect";
+	public static final String CONTRACT_STATUS="contractStatus";
 	
 	/**
-	 * 资金流向 , 类型: java.lang.String
+	 * 合同状态 , 枚举 ContractStatus , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUND_DIRECT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUND_DIRECT, java.lang.String.class, "资金流向", "资金流向", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CONTRACT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CONTRACT_STATUS, java.lang.String.class, "合同状态", "枚举 ContractStatus", java.lang.String.class, null);
 	
 	/**
-	 * 金额 , 类型: java.math.BigDecimal
+	 * 摘要信息 , 类型: java.lang.String
 	*/
-	public static final String MONEY="money";
+	public static final String SUMMARY="summary";
 	
 	/**
-	 * 金额 , 类型: java.math.BigDecimal
+	 * 摘要信息 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.math.BigDecimal> MONEY_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,MONEY, java.math.BigDecimal.class, "金额", "金额", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUMMARY_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUMMARY, java.lang.String.class, "摘要信息", "摘要信息", java.lang.String.class, null);
 	
 	/**
-	 * 总金额 , 类型: java.math.BigDecimal
+	 * 签订日期 , 类型: java.util.Date
 	*/
-	public static final String ALLMONEY="allmoney";
+	public static final String SIGNING_DATE="signingDate";
 	
 	/**
-	 * 总金额 , 类型: java.math.BigDecimal
+	 * 签订日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.math.BigDecimal> ALLMONEY_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,ALLMONEY, java.math.BigDecimal.class, "总金额", "总金额", java.math.BigDecimal.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> SIGNING_DATE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SIGNING_DATE, java.util.Date.class, "签订日期", "签订日期", java.util.Date.class, null);
 	
 	/**
-	 * 承办人 , 类型: java.lang.String
+	 * 生效日期 , 类型: java.util.Date
 	*/
-	public static final String USER_ID="userId";
+	public static final String EFFECTIVE_DATE="effectiveDate";
 	
 	/**
-	 * 承办人 , 类型: java.lang.String
+	 * 生效日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> USER_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,USER_ID, java.lang.String.class, "承办人", "承办人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> EFFECTIVE_DATE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,EFFECTIVE_DATE, java.util.Date.class, "生效日期", "生效日期", java.util.Date.class, null);
 	
 	/**
-	 * 承办人部门 , 类型: java.lang.String
+	 * 结束日期 , 类型: java.util.Date
 	*/
-	public static final String DEPT_ID="deptId";
+	public static final String END_DATE="endDate";
 	
 	/**
-	 * 承办人部门 , 类型: java.lang.String
+	 * 结束日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> DEPT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DEPT_ID, java.lang.String.class, "承办人部门", "承办人部门", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> END_DATE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,END_DATE, java.util.Date.class, "结束日期", "结束日期", java.util.Date.class, null);
 	
 	/**
-	 * 关联招标 , 类型: java.lang.String
+	 * 失效日期 , 类型: java.util.Date
 	*/
-	public static final String BIDDING_ID="biddingId";
+	public static final String EXPIRATION_DATE="expirationDate";
 	
 	/**
-	 * 关联招标 , 类型: java.lang.String
+	 * 失效日期 , 类型: java.util.Date
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> BIDDING_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,BIDDING_ID, java.lang.String.class, "关联招标", "关联招标", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> EXPIRATION_DATE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,EXPIRATION_DATE, java.util.Date.class, "失效日期", "失效日期", java.util.Date.class, null);
 	
 	/**
-	 * 我方单位 , 类型: java.lang.String
+	 * 归属部门ID , 类型: java.lang.String
 	*/
-	public static final String FIRST_COMPANY_NAME="firstCompanyName";
+	public static final String DEPARTMENT_ID="departmentId";
 	
 	/**
-	 * 我方单位 , 类型: java.lang.String
+	 * 归属部门ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_COMPANY_NAME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_COMPANY_NAME, java.lang.String.class, "我方单位", "我方单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> DEPARTMENT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DEPARTMENT_ID, java.lang.String.class, "归属部门ID", "归属部门ID", java.lang.String.class, null);
 	
 	/**
-	 * 我方联系人 , 类型: java.lang.String
+	 * 资金状态 , 枚举 FundingStatus , 类型: java.lang.String
 	*/
-	public static final String FIRST_CONTACTS="firstContacts";
+	public static final String FUNDING_STATUS="fundingStatus";
 	
 	/**
-	 * 我方联系人 , 类型: java.lang.String
+	 * 资金状态 , 枚举 FundingStatus , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_CONTACTS, java.lang.String.class, "我方联系人", "我方联系人", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUNDING_STATUS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUNDING_STATUS, java.lang.String.class, "资金状态", "枚举 FundingStatus", java.lang.String.class, null);
 	
 	/**
-	 * 我方联系方式 , 类型: java.lang.String
+	 * 资金流向 , 关联字典 , 类型: java.lang.String
 	*/
-	public static final String FIRST_CONTACT_INFORMATION="firstContactInformation";
+	public static final String FUNDING_DIRECTION="fundingDirection";
 	
 	/**
-	 * 我方联系方式 , 类型: java.lang.String
+	 * 资金流向 , 关联字典 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FIRST_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FIRST_CONTACT_INFORMATION, java.lang.String.class, "我方联系方式", "我方联系方式", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> FUNDING_DIRECTION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,FUNDING_DIRECTION, java.lang.String.class, "资金流向", "关联字典", java.lang.String.class, null);
 	
 	/**
-	 * 对方单位 , 类型: java.lang.String
+	 * 合同分类代码 , 关联字典 , 类型: java.lang.String
 	*/
-	public static final String RELATED_COMPANY_ID="relatedCompanyId";
+	public static final String CATALOG_CODE="catalogCode";
 	
 	/**
-	 * 对方单位 , 类型: java.lang.String
+	 * 合同分类代码 , 关联字典 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_COMPANY_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_COMPANY_ID, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> CATALOG_CODE_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,CATALOG_CODE, java.lang.String.class, "合同分类代码", "关联字典", java.lang.String.class, null);
 	
 	/**
-	 * 对方单位 , 类型: java.lang.String
+	 * 租户ID , 类型: java.lang.String
 	*/
-	public static final String RELATED_COMPANY_NAME="relatedCompanyName";
+	public static final String TENANT_ID="tenantId";
 	
 	/**
-	 * 对方单位 , 类型: java.lang.String
+	 * 租户ID , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_COMPANY_NAME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_COMPANY_NAME, java.lang.String.class, "对方单位", "对方单位", java.lang.String.class, null);
-	
-	/**
-	 * 对方单位联系人 , 类型: java.lang.String
-	*/
-	public static final String RELATED_CONTACTS="relatedContacts";
-	
-	/**
-	 * 对方单位联系人 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACTS, java.lang.String.class, "对方单位联系人", "对方单位联系人", java.lang.String.class, null);
-	
-	/**
-	 * 对方单位联系方式 , 类型: java.lang.String
-	*/
-	public static final String RELATED_CONTACT_INFORMATION="relatedContactInformation";
-	
-	/**
-	 * 对方单位联系方式 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> RELATED_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,RELATED_CONTACT_INFORMATION, java.lang.String.class, "对方单位联系方式", "对方单位联系方式", java.lang.String.class, null);
-	
-	/**
-	 * 监理单位 , 类型: java.lang.String
-	*/
-	public static final String SUPERVISION_UNIT="supervisionUnit";
-	
-	/**
-	 * 监理单位 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUPERVISION_UNIT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUPERVISION_UNIT, java.lang.String.class, "监理单位", "监理单位", java.lang.String.class, null);
-	
-	/**
-	 * 监理人 , 类型: java.lang.String
-	*/
-	public static final String SUPERVISION_CONTACTS="supervisionContacts";
-	
-	/**
-	 * 监理人 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUPERVISION_CONTACTS_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUPERVISION_CONTACTS, java.lang.String.class, "监理人", "监理人", java.lang.String.class, null);
-	
-	/**
-	 * 监理联系方式 , 类型: java.lang.String
-	*/
-	public static final String SUPERVISION_CONTACT_INFORMATION="supervisionContactInformation";
-	
-	/**
-	 * 监理联系方式 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> SUPERVISION_CONTACT_INFORMATION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,SUPERVISION_CONTACT_INFORMATION, java.lang.String.class, "监理联系方式", "监理联系方式", java.lang.String.class, null);
-	
-	/**
-	 * 生效时间 , 类型: java.util.Date
-	*/
-	public static final String EFFECT_TIME="effectTime";
-	
-	/**
-	 * 生效时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> EFFECT_TIME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,EFFECT_TIME, java.util.Date.class, "生效时间", "生效时间", java.util.Date.class, null);
-	
-	/**
-	 * 失效时间 , 类型: java.util.Date
-	*/
-	public static final String LOST_EFFECT_TIME="lostEffectTime";
-	
-	/**
-	 * 失效时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> LOST_EFFECT_TIME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,LOST_EFFECT_TIME, java.util.Date.class, "失效时间", "失效时间", java.util.Date.class, null);
-	
-	/**
-	 * 结束时间 , 类型: java.util.Date
-	*/
-	public static final String END_TIME="endTime";
-	
-	/**
-	 * 结束时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> END_TIME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,END_TIME, java.util.Date.class, "结束时间", "结束时间", java.util.Date.class, null);
-	
-	/**
-	 * 签订时间 , 类型: java.util.Date
-	*/
-	public static final String AUDIT_TIME="auditTime";
-	
-	/**
-	 * 签订时间 , 类型: java.util.Date
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> AUDIT_TIME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,AUDIT_TIME, java.util.Date.class, "签订时间", "签订时间", java.util.Date.class, null);
-	
-	/**
-	 * 附件 , 类型: java.lang.String
-	*/
-	public static final String ATTACH="attach";
-	
-	/**
-	 * 附件 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> ATTACH_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,ATTACH, java.lang.String.class, "附件", "附件", java.lang.String.class, null);
-	
-	/**
-	 * 备注 , 类型: java.lang.String
-	*/
-	public static final String NOTES="notes";
-	
-	/**
-	 * 备注 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TENANT_ID, java.lang.String.class, "租户ID", "租户ID", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -377,29 +278,29 @@ public class ContractMeta {
 	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
 	
 	/**
-	 * version , 类型: java.lang.Integer
+	 * 数据版本号 , 类型: java.lang.Integer
 	*/
 	public static final String VERSION="version";
 	
 	/**
-	 * version , 类型: java.lang.Integer
+	 * 数据版本号 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,VERSION, java.lang.Integer.class, "version", "version", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,VERSION, java.lang.Integer.class, "数据版本号", "数据版本号", java.lang.Integer.class, null);
 	
 	/**
-	 * 租户 , 类型: java.lang.String
+	 * 归属部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
 	*/
-	public static final String TENANT_ID="tenantId";
+	public static final String DEPARTMENT="department";
 	
 	/**
-	 * 租户 , 类型: java.lang.String
+	 * 归属部门 , 类型: org.github.foxnic.web.domain.hrm.Organization
 	*/
-	public static final BeanProperty<com.dt.platform.domain.contract.Contract,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.contract.Contract,org.github.foxnic.web.domain.hrm.Organization> DEPARTMENT_PROP = new BeanProperty(com.dt.platform.domain.contract.Contract.class ,DEPARTMENT, org.github.foxnic.web.domain.hrm.Organization.class, "归属部门", "归属部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , STATE , FUND_STATUS , CATEGORY_ID , IDENTITY , FUND_DIRECT , MONEY , ALLMONEY , USER_ID , DEPT_ID , BIDDING_ID , FIRST_COMPANY_NAME , FIRST_CONTACTS , FIRST_CONTACT_INFORMATION , RELATED_COMPANY_ID , RELATED_COMPANY_NAME , RELATED_CONTACTS , RELATED_CONTACT_INFORMATION , SUPERVISION_UNIT , SUPERVISION_CONTACTS , SUPERVISION_CONTACT_INFORMATION , EFFECT_TIME , LOST_EFFECT_TIME , END_TIME , AUDIT_TIME , ATTACH , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ ID , TYPE , PARENT_ID , CONTRACT_NO , TITLE , DELIVERABLES , DELIVERY_LOCATION , AMOUNT , CONTRACT_STATUS , SUMMARY , SIGNING_DATE , EFFECTIVE_DATE , END_DATE , EXPIRATION_DATE , DEPARTMENT_ID , FUNDING_STATUS , FUNDING_DIRECTION , CATALOG_CODE , TENANT_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , DEPARTMENT };
 	
 	/**
 	 * 代理类
@@ -421,310 +322,200 @@ public class ContractMeta {
 		}
 		
 		/**
-		 * 设置 合同名称
-		 * @param name 合同名称
+		 * 设置 合同类型
+		 * @param type 合同类型
 		 * @return 当前对象
 		*/
-		public Contract setName(String name) {
-			super.change(NAME,super.getName(),name);
-			super.setName(name);
+		public Contract setType(String type) {
+			super.change(TYPE,super.getType(),type);
+			super.setType(type);
+			return this;
+		}
+		
+		/**
+		 * 设置 上级合同ID
+		 * @param parentId 上级合同ID
+		 * @return 当前对象
+		*/
+		public Contract setParentId(String parentId) {
+			super.change(PARENT_ID,super.getParentId(),parentId);
+			super.setParentId(parentId);
 			return this;
 		}
 		
 		/**
 		 * 设置 合同编号
-		 * @param code 合同编号
+		 * @param contractNo 合同编号
 		 * @return 当前对象
 		*/
-		public Contract setCode(String code) {
-			super.change(CODE,super.getCode(),code);
-			super.setCode(code);
+		public Contract setContractNo(String contractNo) {
+			super.change(CONTRACT_NO,super.getContractNo(),contractNo);
+			super.setContractNo(contractNo);
+			return this;
+		}
+		
+		/**
+		 * 设置 合同抬头
+		 * @param title 合同抬头
+		 * @return 当前对象
+		*/
+		public Contract setTitle(String title) {
+			super.change(TITLE,super.getTitle(),title);
+			super.setTitle(title);
+			return this;
+		}
+		
+		/**
+		 * 设置 交付物
+		 * @param deliverables 交付物
+		 * @return 当前对象
+		*/
+		public Contract setDeliverables(String deliverables) {
+			super.change(DELIVERABLES,super.getDeliverables(),deliverables);
+			super.setDeliverables(deliverables);
+			return this;
+		}
+		
+		/**
+		 * 设置 交付地
+		 * @param deliveryLocation 交付地
+		 * @return 当前对象
+		*/
+		public Contract setDeliveryLocation(String deliveryLocation) {
+			super.change(DELIVERY_LOCATION,super.getDeliveryLocation(),deliveryLocation);
+			super.setDeliveryLocation(deliveryLocation);
+			return this;
+		}
+		
+		/**
+		 * 设置 合同金额
+		 * @param amount 合同金额
+		 * @return 当前对象
+		*/
+		public Contract setAmount(BigDecimal amount) {
+			super.change(AMOUNT,super.getAmount(),amount);
+			super.setAmount(amount);
 			return this;
 		}
 		
 		/**
 		 * 设置 合同状态
-		 * @param state 合同状态
+		 * @param contractStatus 合同状态
 		 * @return 当前对象
 		*/
-		public Contract setState(String state) {
-			super.change(STATE,super.getState(),state);
-			super.setState(state);
+		public Contract setContractStatus(String contractStatus) {
+			super.change(CONTRACT_STATUS,super.getContractStatus(),contractStatus);
+			super.setContractStatus(contractStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 摘要信息
+		 * @param summary 摘要信息
+		 * @return 当前对象
+		*/
+		public Contract setSummary(String summary) {
+			super.change(SUMMARY,super.getSummary(),summary);
+			super.setSummary(summary);
+			return this;
+		}
+		
+		/**
+		 * 设置 签订日期
+		 * @param signingDate 签订日期
+		 * @return 当前对象
+		*/
+		public Contract setSigningDate(Date signingDate) {
+			super.change(SIGNING_DATE,super.getSigningDate(),signingDate);
+			super.setSigningDate(signingDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 生效日期
+		 * @param effectiveDate 生效日期
+		 * @return 当前对象
+		*/
+		public Contract setEffectiveDate(Date effectiveDate) {
+			super.change(EFFECTIVE_DATE,super.getEffectiveDate(),effectiveDate);
+			super.setEffectiveDate(effectiveDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 结束日期
+		 * @param endDate 结束日期
+		 * @return 当前对象
+		*/
+		public Contract setEndDate(Date endDate) {
+			super.change(END_DATE,super.getEndDate(),endDate);
+			super.setEndDate(endDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 失效日期
+		 * @param expirationDate 失效日期
+		 * @return 当前对象
+		*/
+		public Contract setExpirationDate(Date expirationDate) {
+			super.change(EXPIRATION_DATE,super.getExpirationDate(),expirationDate);
+			super.setExpirationDate(expirationDate);
+			return this;
+		}
+		
+		/**
+		 * 设置 归属部门ID
+		 * @param departmentId 归属部门ID
+		 * @return 当前对象
+		*/
+		public Contract setDepartmentId(String departmentId) {
+			super.change(DEPARTMENT_ID,super.getDepartmentId(),departmentId);
+			super.setDepartmentId(departmentId);
 			return this;
 		}
 		
 		/**
 		 * 设置 资金状态
-		 * @param fundStatus 资金状态
+		 * @param fundingStatus 资金状态
 		 * @return 当前对象
 		*/
-		public Contract setFundStatus(String fundStatus) {
-			super.change(FUND_STATUS,super.getFundStatus(),fundStatus);
-			super.setFundStatus(fundStatus);
-			return this;
-		}
-		
-		/**
-		 * 设置 合同类型
-		 * @param categoryId 合同类型
-		 * @return 当前对象
-		*/
-		public Contract setCategoryId(String categoryId) {
-			super.change(CATEGORY_ID,super.getCategoryId(),categoryId);
-			super.setCategoryId(categoryId);
-			return this;
-		}
-		
-		/**
-		 * 设置 我方身份
-		 * @param identity 我方身份
-		 * @return 当前对象
-		*/
-		public Contract setIdentity(String identity) {
-			super.change(IDENTITY,super.getIdentity(),identity);
-			super.setIdentity(identity);
+		public Contract setFundingStatus(String fundingStatus) {
+			super.change(FUNDING_STATUS,super.getFundingStatus(),fundingStatus);
+			super.setFundingStatus(fundingStatus);
 			return this;
 		}
 		
 		/**
 		 * 设置 资金流向
-		 * @param fundDirect 资金流向
+		 * @param fundingDirection 资金流向
 		 * @return 当前对象
 		*/
-		public Contract setFundDirect(String fundDirect) {
-			super.change(FUND_DIRECT,super.getFundDirect(),fundDirect);
-			super.setFundDirect(fundDirect);
+		public Contract setFundingDirection(String fundingDirection) {
+			super.change(FUNDING_DIRECTION,super.getFundingDirection(),fundingDirection);
+			super.setFundingDirection(fundingDirection);
 			return this;
 		}
 		
 		/**
-		 * 设置 金额
-		 * @param money 金额
+		 * 设置 合同分类代码
+		 * @param catalogCode 合同分类代码
 		 * @return 当前对象
 		*/
-		public Contract setMoney(BigDecimal money) {
-			super.change(MONEY,super.getMoney(),money);
-			super.setMoney(money);
+		public Contract setCatalogCode(String catalogCode) {
+			super.change(CATALOG_CODE,super.getCatalogCode(),catalogCode);
+			super.setCatalogCode(catalogCode);
 			return this;
 		}
 		
 		/**
-		 * 设置 总金额
-		 * @param allmoney 总金额
+		 * 设置 租户ID
+		 * @param tenantId 租户ID
 		 * @return 当前对象
 		*/
-		public Contract setAllmoney(BigDecimal allmoney) {
-			super.change(ALLMONEY,super.getAllmoney(),allmoney);
-			super.setAllmoney(allmoney);
-			return this;
-		}
-		
-		/**
-		 * 设置 承办人
-		 * @param userId 承办人
-		 * @return 当前对象
-		*/
-		public Contract setUserId(String userId) {
-			super.change(USER_ID,super.getUserId(),userId);
-			super.setUserId(userId);
-			return this;
-		}
-		
-		/**
-		 * 设置 承办人部门
-		 * @param deptId 承办人部门
-		 * @return 当前对象
-		*/
-		public Contract setDeptId(String deptId) {
-			super.change(DEPT_ID,super.getDeptId(),deptId);
-			super.setDeptId(deptId);
-			return this;
-		}
-		
-		/**
-		 * 设置 关联招标
-		 * @param biddingId 关联招标
-		 * @return 当前对象
-		*/
-		public Contract setBiddingId(String biddingId) {
-			super.change(BIDDING_ID,super.getBiddingId(),biddingId);
-			super.setBiddingId(biddingId);
-			return this;
-		}
-		
-		/**
-		 * 设置 我方单位
-		 * @param firstCompanyName 我方单位
-		 * @return 当前对象
-		*/
-		public Contract setFirstCompanyName(String firstCompanyName) {
-			super.change(FIRST_COMPANY_NAME,super.getFirstCompanyName(),firstCompanyName);
-			super.setFirstCompanyName(firstCompanyName);
-			return this;
-		}
-		
-		/**
-		 * 设置 我方联系人
-		 * @param firstContacts 我方联系人
-		 * @return 当前对象
-		*/
-		public Contract setFirstContacts(String firstContacts) {
-			super.change(FIRST_CONTACTS,super.getFirstContacts(),firstContacts);
-			super.setFirstContacts(firstContacts);
-			return this;
-		}
-		
-		/**
-		 * 设置 我方联系方式
-		 * @param firstContactInformation 我方联系方式
-		 * @return 当前对象
-		*/
-		public Contract setFirstContactInformation(String firstContactInformation) {
-			super.change(FIRST_CONTACT_INFORMATION,super.getFirstContactInformation(),firstContactInformation);
-			super.setFirstContactInformation(firstContactInformation);
-			return this;
-		}
-		
-		/**
-		 * 设置 对方单位
-		 * @param relatedCompanyId 对方单位
-		 * @return 当前对象
-		*/
-		public Contract setRelatedCompanyId(String relatedCompanyId) {
-			super.change(RELATED_COMPANY_ID,super.getRelatedCompanyId(),relatedCompanyId);
-			super.setRelatedCompanyId(relatedCompanyId);
-			return this;
-		}
-		
-		/**
-		 * 设置 对方单位
-		 * @param relatedCompanyName 对方单位
-		 * @return 当前对象
-		*/
-		public Contract setRelatedCompanyName(String relatedCompanyName) {
-			super.change(RELATED_COMPANY_NAME,super.getRelatedCompanyName(),relatedCompanyName);
-			super.setRelatedCompanyName(relatedCompanyName);
-			return this;
-		}
-		
-		/**
-		 * 设置 对方单位联系人
-		 * @param relatedContacts 对方单位联系人
-		 * @return 当前对象
-		*/
-		public Contract setRelatedContacts(String relatedContacts) {
-			super.change(RELATED_CONTACTS,super.getRelatedContacts(),relatedContacts);
-			super.setRelatedContacts(relatedContacts);
-			return this;
-		}
-		
-		/**
-		 * 设置 对方单位联系方式
-		 * @param relatedContactInformation 对方单位联系方式
-		 * @return 当前对象
-		*/
-		public Contract setRelatedContactInformation(String relatedContactInformation) {
-			super.change(RELATED_CONTACT_INFORMATION,super.getRelatedContactInformation(),relatedContactInformation);
-			super.setRelatedContactInformation(relatedContactInformation);
-			return this;
-		}
-		
-		/**
-		 * 设置 监理单位
-		 * @param supervisionUnit 监理单位
-		 * @return 当前对象
-		*/
-		public Contract setSupervisionUnit(String supervisionUnit) {
-			super.change(SUPERVISION_UNIT,super.getSupervisionUnit(),supervisionUnit);
-			super.setSupervisionUnit(supervisionUnit);
-			return this;
-		}
-		
-		/**
-		 * 设置 监理人
-		 * @param supervisionContacts 监理人
-		 * @return 当前对象
-		*/
-		public Contract setSupervisionContacts(String supervisionContacts) {
-			super.change(SUPERVISION_CONTACTS,super.getSupervisionContacts(),supervisionContacts);
-			super.setSupervisionContacts(supervisionContacts);
-			return this;
-		}
-		
-		/**
-		 * 设置 监理联系方式
-		 * @param supervisionContactInformation 监理联系方式
-		 * @return 当前对象
-		*/
-		public Contract setSupervisionContactInformation(String supervisionContactInformation) {
-			super.change(SUPERVISION_CONTACT_INFORMATION,super.getSupervisionContactInformation(),supervisionContactInformation);
-			super.setSupervisionContactInformation(supervisionContactInformation);
-			return this;
-		}
-		
-		/**
-		 * 设置 生效时间
-		 * @param effectTime 生效时间
-		 * @return 当前对象
-		*/
-		public Contract setEffectTime(Date effectTime) {
-			super.change(EFFECT_TIME,super.getEffectTime(),effectTime);
-			super.setEffectTime(effectTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 失效时间
-		 * @param lostEffectTime 失效时间
-		 * @return 当前对象
-		*/
-		public Contract setLostEffectTime(Date lostEffectTime) {
-			super.change(LOST_EFFECT_TIME,super.getLostEffectTime(),lostEffectTime);
-			super.setLostEffectTime(lostEffectTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 结束时间
-		 * @param endTime 结束时间
-		 * @return 当前对象
-		*/
-		public Contract setEndTime(Date endTime) {
-			super.change(END_TIME,super.getEndTime(),endTime);
-			super.setEndTime(endTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 签订时间
-		 * @param auditTime 签订时间
-		 * @return 当前对象
-		*/
-		public Contract setAuditTime(Date auditTime) {
-			super.change(AUDIT_TIME,super.getAuditTime(),auditTime);
-			super.setAuditTime(auditTime);
-			return this;
-		}
-		
-		/**
-		 * 设置 附件
-		 * @param attach 附件
-		 * @return 当前对象
-		*/
-		public Contract setAttach(String attach) {
-			super.change(ATTACH,super.getAttach(),attach);
-			super.setAttach(attach);
-			return this;
-		}
-		
-		/**
-		 * 设置 备注
-		 * @param notes 备注
-		 * @return 当前对象
-		*/
-		public Contract setNotes(String notes) {
-			super.change(NOTES,super.getNotes(),notes);
-			super.setNotes(notes);
+		public Contract setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
 			return this;
 		}
 		
@@ -806,8 +597,8 @@ public class ContractMeta {
 		}
 		
 		/**
-		 * 设置 version
-		 * @param version version
+		 * 设置 数据版本号
+		 * @param version 数据版本号
 		 * @return 当前对象
 		*/
 		public Contract setVersion(Integer version) {
@@ -817,13 +608,13 @@ public class ContractMeta {
 		}
 		
 		/**
-		 * 设置 租户
-		 * @param tenantId 租户
+		 * 设置 归属部门
+		 * @param department 归属部门
 		 * @return 当前对象
 		*/
-		public Contract setTenantId(String tenantId) {
-			super.change(TENANT_ID,super.getTenantId(),tenantId);
-			super.setTenantId(tenantId);
+		public Contract setDepartment(Organization department) {
+			super.change(DEPARTMENT,super.getDepartment(),department);
+			super.setDepartment(department);
 			return this;
 		}
 	}

@@ -104,7 +104,7 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	Result saveList(List<#(poSimpleName)> #(poListVar) , SaveMode mode);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 检查实体中的数据字段是否已经存在 . 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 * @param #(poVar)  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
@@ -123,12 +123,12 @@ public interface #(simpleName) extends ISuperService<#(poSimpleName)> {
 	#end
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param #(poVar) 数据对象
 	 * @return 判断结果
 	 */
-	Result<#(poSimpleName)> checkExists(#(poSimpleName) #(poVar));
+	Boolean checkExists(#(poSimpleName) #(poVar));
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表
