@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-09 17:16:35
+ * @since 2021-12-10 17:05:39
  */
 
 
@@ -75,23 +75,23 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'type', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('合同类型') , templet: function (d) { return templet('type',d.type,d);}  }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同类型') , templet: function (d) { return templet('type',d.type,d);}  }
 					,{ field: 'parentId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('上级合同ID') , templet: function (d) { return templet('parentId',d.parentId,d);}  }
 					,{ field: 'contractNo', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同编号') , templet: function (d) { return templet('contractNo',d.contractNo,d);}  }
 					,{ field: 'title', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同抬头') , templet: function (d) { return templet('title',d.title,d);}  }
 					,{ field: 'deliverables', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('交付物') , templet: function (d) { return templet('deliverables',d.deliverables,d);}  }
 					,{ field: 'deliveryLocation', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('交付地') , templet: function (d) { return templet('deliveryLocation',d.deliveryLocation,d);}  }
 					,{ field: 'amount', align:"right",fixed:false,  hide:true, sort: true, title: fox.translate('合同金额') , templet: function (d) { return templet('amount',d.amount,d);}  }
-					,{ field: 'contractStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同状态') , templet: function (d) { return templet('contractStatus',d.contractStatus,d);}  }
+					,{ field: 'contractStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('contractStatus',fox.getEnumText(SELECT_CONTRACTSTATUS_DATA,d.contractStatus),d);}}
 					,{ field: 'summary', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('摘要信息') , templet: function (d) { return templet('summary',d.summary,d);}  }
 					,{ field: 'signingDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('签订日期') ,templet: function (d) { return templet('signingDate',fox.dateFormat(d.signingDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'effectiveDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('生效日期') ,templet: function (d) { return templet('effectiveDate',fox.dateFormat(d.effectiveDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'endDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('结束日期') ,templet: function (d) { return templet('endDate',fox.dateFormat(d.endDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'expirationDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('失效日期') ,templet: function (d) { return templet('expirationDate',fox.dateFormat(d.expirationDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'departmentId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属部门') , templet: function (d) { return templet('departmentId',d.departmentId,d);}  }
-					,{ field: 'fundingStatus', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('资金状态') , templet: function (d) { return templet('fundingStatus',d.fundingStatus,d);}  }
-					,{ field: 'fundingDirection', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资金流向') , templet: function (d) { return templet('fundingDirection',d.fundingDirection,d);}  }
-					,{ field: 'catalogCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('合同分类'), templet:function (d){ return templet('catalogCode',fox.getDictText(SELECT_CATALOGCODE_DATA,d.catalogCode),d);}}
+					,{ field: 'fundingStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资金状态') , templet: function (d) { return templet('fundingStatus',d.fundingStatus,d);}  }
+					,{ field: 'fundingDirection', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('资金流向') , templet: function (d) { return templet('fundingDirection',d.fundingDirection,d);}  }
+					,{ field: 'catalogCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类'), templet:function (d){ return templet('catalogCode',fox.getDictText(SELECT_CATALOGCODE_DATA,d.catalogCode),d);}}
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -127,9 +127,13 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
+		value.contractNo={ inputType:"button",value: $("#contractNo").val()};
 		value.title={ inputType:"button",value: $("#title").val()};
-		value.contractStatus={ inputType:"button",value: $("#contractStatus").val()};
-		value.departmentId={ inputType:"button",value: $("#departmentId").val()};
+		value.contractStatus={ inputType:"select_box", value: xmSelect.get("#contractStatus",true).getValue("value"), label:xmSelect.get("#contractStatus",true).getValue("nameStr") };
+		value.signingDate={ inputType:"date_input", value: $("#signingDate").val() ,matchType:"auto"};
+		value.effectiveDate={ inputType:"date_input", value: $("#effectiveDate").val() ,matchType:"auto"};
+		value.departmentId={ inputType:"button",value: $("#departmentId").val(),label:$("#departmentId-button").text() };
+		value.fundingStatus={ inputType:"button",value: $("#fundingStatus").val()};
 		value.catalogCode={ inputType:"select_box", value: xmSelect.get("#catalogCode",true).getValue("value"), label:xmSelect.get("#catalogCode",true).getValue("nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -178,6 +182,46 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
+		//渲染 contractStatus 下拉字段
+		fox.renderSelectBox({
+			el: "contractStatus",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("contractStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		laydate.render({
+			elem: '#signingDate',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("signingDate",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#effectiveDate',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("effectiveDate",value, date, endDate);
+				},1);
+			}
+		});
 		//渲染 catalogCode 下拉字段
 		fox.renderSelectBox({
 			el: "catalogCode",
@@ -230,6 +274,21 @@ function ListPage() {
 			});
 		});
 
+		// 请选择部门对话框
+		$("#departmentId-button").click(function(){
+			var departmentIdDialogOptions={
+				field:"departmentId",
+				inputEl:$("#departmentId"),
+				buttonEl:$(this),
+				single:false,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"dept",
+				prepose:function(param){ return window.pageExt.list.beforeDialog && window.pageExt.list.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.list.afterDialog && window.pageExt.list.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(departmentIdDialogOptions);
+		});
 	}
 
 	/**
@@ -400,7 +459,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["800px",height+"px"],
 			type: 2,
 			id:"cont-contract-form-data-win",
 			content: '/business/contract/contract/contract_form.html' + queryString,

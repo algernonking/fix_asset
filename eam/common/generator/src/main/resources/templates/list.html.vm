@@ -90,7 +90,7 @@
                             #end
                         #else if(f.typeName.equals("button"))
                             <input lay-filter="#(f.varName)" id="#(f.varName)" name="#(f.varName)"  type="hidden" class="layui-input"  #if(f.validate!=null)  lay-verify="#if(f.validate.isRequired)|required#end#if(f.validate.isPhone)|phone#end#if(f.validate.isEmail)|email#end#if(f.validate.isUrl)|url#end#if(f.validate.isDate)|date#end#if(f.validate.isIdentity)|identity#end"  #end  />
-                            <button id="#(f.varName)-button" type="button" action-type="#(f.buttonField.action.actionType)" class="layui-btn layui-btn-primary #if(f.buttonField.action.css!=null) #(f.buttonField.action.css) #end" style="width: 100%">#if(f.buttonField.action.iconHtml!=null) #(f.buttonField.action.iconHtml) #end<span th:text="${lang.translate('#(f.buttonField.text)')}" th:default-label="${lang.translate('#(f.buttonField.text)')}">按钮文本</span></button>
+                            <button id="#(f.varName)-button" type="button" action-type="#(f.buttonField.action.actionType)" class="layui-btn layui-btn-primary #if(f.buttonField.action.css!=null) #(f.buttonField.action.css) #end" style="width: #(f.search.inputWidth)px">#if(f.buttonField.action.iconHtml!=null) #(f.buttonField.action.iconHtml) #end<span th:text="${lang.translate('#(f.buttonField.text)')}" th:default-label="${lang.translate('#(f.buttonField.text)')}">按钮文本</span></button>
                         #else
                         <input id="#(f.varName)" class="layui-input search-input" style="width: #(f.search.inputWidth)px" type="text" />
                         #end

@@ -52,18 +52,18 @@
 
         #if(g.type.equals("iframe"))
         #if(g.title!=null)
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="#(g.elId)-fieldset">
         <legend>#(g.title)</legend>
         </fieldset>
         #end
-        <div class="layui-row form-row" style="text-align: center;">
+        <div class="layui-row form-row" style="text-align: center;" id="#(g.elId)-content">
             <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
             <iframe js-fn="#(g.iframeLoadJsFunctionName)" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
             </div>
         </div>
         #else if(g.type.equals("tab"))
 
-        <div class="layui-row form-row" style="text-align: center;background-color: white;">
+        <div class="layui-row form-row" style="text-align: center;background-color: white;" id="#(g.elId)-content">
             <div style="display: inline-block;" class="layui-col-xs12">
                 <div class="layui-tab" style="padding-right: 8px;padding-left: 8px;height: 300px;">
                     <ul class="layui-tab-title">
@@ -86,15 +86,15 @@
         #else if(g.type.equals("normal"))
 
         #if(g.title!=null)
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="#(g.elId)-fieldset">
             <legend>#(g.title)</legend>
         </fieldset>
         #end
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="#(g.elId)-content">
 
             #for(col : g.columns) <!--开始：group 循环-->
-            <div class="layui-col-xs#(g.span) form-column">
+            <div class="layui-col-xs#(g.span) form-column" #if(g.title==null) style="padding-top: 0px" #end>
 
                 #for(f : col)
                 #if(f.typeName.equals("upload"))
