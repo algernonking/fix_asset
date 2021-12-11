@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-10 17:05:43
  */
 
 function FormPage() {
@@ -85,6 +85,32 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 contractStatus 下拉字段
+		fox.renderSelectBox({
+			el: "contractStatus",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("contractStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
 			elem: '#signingDate',
 			format:"yyyy-MM-dd HH:mm:ss",
@@ -104,6 +130,32 @@ function FormPage() {
 			elem: '#expirationDate',
 			format:"yyyy-MM-dd HH:mm:ss",
 			trigger:"click"
+		});
+		//渲染 catalogCode 下拉字段
+		fox.renderSelectBox({
+			el: "catalogCode",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("catalogCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
 		});
 	}
 
@@ -149,6 +201,10 @@ function FormPage() {
 			}
 
 
+			//设置  状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#contractStatus",formData.contractStatus,SELECT_CONTRACTSTATUS_DATA);
+			//设置  分类 设置下拉框勾选
+			fox.setSelectValue4Dict("#catalogCode",formData.catalogCode,SELECT_CATALOGCODE_DATA);
 
 			//处理fillBy
 
@@ -199,6 +255,10 @@ function FormPage() {
 
 
 
+		//获取 状态 下拉框的值
+		data["contractStatus"]=fox.getSelectedValue("contractStatus",false);
+		//获取 分类 下拉框的值
+		data["catalogCode"]=fox.getSelectedValue("catalogCode",false);
 
 		return data;
 	}
@@ -246,6 +306,22 @@ function FormPage() {
 	        return false;
 	    });
 
+		// 请选择部门对话框
+		$("#departmentId-button").click(function(){
+			var departmentIdDialogOptions={
+				field:"departmentId",
+				formData:getFormData(),
+				inputEl:$("#departmentId"),
+				buttonEl:$(this),
+				single:true,
+				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
+				root: "",
+				targetType:"dept",
+				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
+				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
+			};
+			fox.chooseOrgNode(departmentIdDialogOptions);
+		});
 
 	    //关闭窗口
 	    $("#cancel-button").click(function(){admin.closePopupCenter();});

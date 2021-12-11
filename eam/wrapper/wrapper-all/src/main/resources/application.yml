@@ -1,10 +1,10 @@
 server:
   session:
-    timeout: 1200s
+    timeout: 12000s
   servlet:
     session:
       # 会话超时时间，如 30s , 20m 等
-      timeout: 1200s
+      timeout: 12000s
   port: 8089
 
 spring:

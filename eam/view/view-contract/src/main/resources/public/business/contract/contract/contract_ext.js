@@ -1,7 +1,8 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 15:55:20
+ * @since 2021-12-10 15:52:27
+ * @version
  */
 
 layui.config({
@@ -151,6 +152,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     //表单页的扩展
     var form={
+        action:null,
         /**
          * 表单初始化前调用 , 并传入表单数据
          * */
@@ -159,6 +161,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
+            this.action=action;
         },
         /**
          * 窗口调节前
@@ -225,6 +228,54 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        /**
+         *  加载 签订方
+         */
+        loadSignerFrame:function (ifr,win,data) {
+            //如果是新建
+            if(this.action=="create") {
+                ifr.hide();
+                return;
+            }
+            // debugger
+            console.log("loadSignerFrame",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/system/node/node_list.html?id="+data.id;
+        },
+        /**
+         *  加载 合同附件
+         */
+        loadAttachmentFrame:function (ifr,win,data) {
+            //如果是新建
+            if(this.action=="create") {
+                ifr.hide();
+                return;
+            }
+            // debugger
+            console.log("loadAttachmentFrame",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/system/node/node_list.html?id="+data.id;
+        },
+        /**
+         *  加载 执行情况
+         */
+        loadPerformanceFrame:function (ifr,win,data) {
+            //如果是新建
+            if(this.action=="create") {
+                ifr.hide();
+                return;
+            }
+            // debugger
+            console.log("loadPerformanceFrame",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/system/node/node_list.html?id="+data.id;
+        },
         /**
          * 末尾执行
          */

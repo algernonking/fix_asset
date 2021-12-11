@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-12-08 15:26:50
+ * @since 2021-12-08 17:13:39
  * @author 李方捷 , leefangjie@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -31,9 +31,9 @@ public class ContractTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 合同类型，主合同，子合同、附加协议
+		 * 合同类型，主合同，子合同、附加协议; ContractType
 		*/
-		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","合同类型","主合同，子合同、附加协议",false,false,true);
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","合同类型","主合同，子合同、附加协议; ContractType",false,false,true);
 		
 		/**
 		 * 上级合同ID
@@ -66,9 +66,9 @@ public class ContractTables {
 		public static final DBField AMOUNT = new DBField(DBDataType.DECIMAL , "amount","amount","合同金额","合同金额",false,false,true);
 		
 		/**
-		 * 合同状态
+		 * 合同状态;枚举 ContractStatus
 		*/
-		public static final DBField CONTRACT_STATUS = new DBField(DBDataType.STRING , "contract_status","contractStatus","合同状态","合同状态",false,false,true);
+		public static final DBField CONTRACT_STATUS = new DBField(DBDataType.STRING , "contract_status","contractStatus","合同状态","枚举 ContractStatus",false,false,true);
 		
 		/**
 		 * 摘要信息
@@ -101,9 +101,9 @@ public class ContractTables {
 		public static final DBField DEPARTMENT_ID = new DBField(DBDataType.STRING , "department_id","departmentId","归属部门ID","归属部门ID",false,false,true);
 		
 		/**
-		 * 资金状态
+		 * 资金状态；枚举 FundingStatus
 		*/
-		public static final DBField FUNDING_STATUS = new DBField(DBDataType.STRING , "funding_status","fundingStatus","资金状态","资金状态",false,false,true);
+		public static final DBField FUNDING_STATUS = new DBField(DBDataType.STRING , "funding_status","fundingStatus","资金状态","枚举 FundingStatus",false,false,true);
 		
 		/**
 		 * 资金流向，关联字典
@@ -187,14 +187,14 @@ public class ContractTables {
 		public static final DBField OWNER_ID = new DBField(DBDataType.STRING , "owner_id","ownerId","所有者ID","所有者ID",false,false,true);
 		
 		/**
-		 * 所有者类型，合同/履约情况
+		 * 所有者类型，合同/履约情况；枚举： AttachmentOwnerType
 		*/
-		public static final DBField OWNER_TYPE = new DBField(DBDataType.STRING , "owner_type","ownerType","所有者类型","合同/履约情况",false,false,true);
+		public static final DBField OWNER_TYPE = new DBField(DBDataType.STRING , "owner_type","ownerType","所有者类型","合同/履约情况；枚举： AttachmentOwnerType",false,false,true);
 		
 		/**
-		 * 附件类型
+		 * 附件类型；枚举：AttachmentType
 		*/
-		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","附件类型","附件类型",false,false,true);
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","附件类型","枚举：AttachmentType",false,false,true);
 		
 		/**
 		 * 文件ID
@@ -372,14 +372,14 @@ public class ContractTables {
 		public static final DBField SORT = new DBField(DBDataType.INTEGER , "sort","sort","显示顺序","显示顺序",false,false,true);
 		
 		/**
-		 * 别名，甲方/乙方等
+		 * 别名，甲方/乙方等；枚举：SignerAlias
 		*/
-		public static final DBField ALIAS = new DBField(DBDataType.STRING , "alias","alias","别名","甲方/乙方等",false,false,true);
+		public static final DBField ALIAS = new DBField(DBDataType.STRING , "alias","alias","别名","甲方/乙方等；枚举：SignerAlias",false,false,true);
 		
 		/**
-		 * 签订方类型，企业或个人
+		 * 签订方类型，企业或个人；枚举：SignerType
 		*/
-		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","签订方类型","企业或个人",false,false,true);
+		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","签订方类型","企业或个人；枚举：SignerType",false,false,true);
 		
 		/**
 		 * 唯一代码，统一社会信用代码/身份证号码
