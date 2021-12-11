@@ -101,8 +101,20 @@ echo "delete from hrm_employee where deleted='1';" >>$clear_sql
 echo "delete from sys_user where deleted='1';" >>$clear_sql
 
 
+echo "-- logic delete"
+echo "delete from dp_rule where deleted='1';     "                     >>$clear_sql
+echo "delete from dp_rule_condition where deleted='1';  "              >>$clear_sql
+echo "delete from dp_rule_range where deleted='1';   "                 >>$clear_sql
+echo "delete from dp_rule_condition where id in (select id from (select id from dp_rule_condition where range_id not in (select id from dp_rule_range) )t);  " >>$clear_sql
+echo "delete from dp_rule_condition where id in (select id from (select id from dp_rule_condition where rule_id not in (select id from dp_rule) )t);  "        >>$clear_sql
+
+
 echo "-- end"                                                         >>$clear_sql
+
+
+
 echo "-- commit"                                                      >>$clear_sql
+
 
 exit 0
 

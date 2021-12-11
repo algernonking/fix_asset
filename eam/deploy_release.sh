@@ -14,7 +14,7 @@ cp -r $jar_dir/lib/* $release_dir/lib/
 cp $jar_dir/wrapper-all-0.0.2.RELEASE.jar  $release_dir/eam.jar
 tar -zcvf eam_release.tar.gz ./*
 open .
-exit 0
+exit 0ls -rtl
 
 
 

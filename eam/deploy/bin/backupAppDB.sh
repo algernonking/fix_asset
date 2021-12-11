@@ -25,6 +25,6 @@ fi
 echo "start to backup $dbname"
 cd $BACKUP_DIR
 $MYSQL_DUMP -u$DB_USER -p$DB_PWD -h$DB_HOST $dbname  > db.sql
-tar zcvf eam_backup_$TODAY.tar.gz  ./eam.sql
+tar zcvf eam_backup_$TODAY.tar.gz  ./db.sql
 exit 0
 

@@ -5,7 +5,7 @@ server:
     session:
       # 会话超时时间，如 30s , 20m 等
       timeout: 1200s
-  port: 26788
+  port: 8089
 
 spring:
   main:

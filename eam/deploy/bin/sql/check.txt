@@ -1,0 +1,21 @@
+action
+delete from eam.hrm_company where 1=1;
+delete from eam.hrm_employee where 1=1;
+delete from eam.hrm_employee_position where 1=1;
+delete from eam.hrm_favourite_group where 1=1;
+delete from eam.hrm_favourite_group_item where 1=1;
+delete from eam.hrm_organization where 1=1;
+delete from eam.hrm_person where 1=1;
+delete from eam.hrm_position where 1=1;
+delete from eam.sys_user where 1=1;
+delete from eam.sys_user_tenant where 1=1;
+insert into eam.hrm_company select * from  eam_demo.hrm_company;
+insert into eam.hrm_employee select * from  eam_demo.hrm_employee;
+insert into eam.hrm_employee_position select * from  eam_demo.hrm_employee_position;
+insert into eam.hrm_favourite_group select * from  eam_demo.hrm_favourite_group;
+insert into eam.hrm_favourite_group_item select * from  eam_demo.hrm_favourite_group_item;
+insert into eam.hrm_organization select * from  eam_demo.hrm_organization;
+insert into eam.hrm_person select * from  eam_demo.hrm_person;
+insert into eam.hrm_position select * from  eam_demo.hrm_position;
+insert into eam.sys_user select * from  eam_demo.sys_user;
+insert into eam.sys_user_tenant select * from  eam_demo.sys_user_tenant;
