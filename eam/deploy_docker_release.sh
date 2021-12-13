@@ -1,9 +1,4 @@
 #!/bin/sh
-# Build Docker Image
-#docker.io/tomcat          9.0.36-jdk8-openjdk
-#docker.io/mysql           5.7
-#docker exec -it dt-app bash
-#
 #
 curversion=1.0.1
 appdockerfile="eamDockerFile"
