@@ -4,6 +4,7 @@ import com.dt.platform.constants.db.ContractTables.CONT_CONTRACT;
 import com.dt.platform.constants.enums.DictEnum;
 import com.dt.platform.constants.enums.contract.ContractStatus;
 import com.dt.platform.constants.enums.contract.ContractType;
+import com.dt.platform.constants.enums.contract.FundingStatus;
 import com.dt.platform.generator.module.CodeStarter;
 import com.github.foxnic.generator.builder.business.option.ServiceOptions;
 import com.github.foxnic.generator.builder.model.PoClassFile;
@@ -47,22 +48,33 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
         view.field(CONT_CONTRACT.ID)
                 .basic().hidden();
 
+        view.field(CONT_CONTRACT.TITLE)
+                .table().fix(true)
+                .form().validate().required();
+
         view.field(CONT_CONTRACT.TYPE)
-                .basic().search().hidden();
+                .basic().search().hidden()
+                .form().selectBox().enumType(ContractType.class).defaultValue(ContractType.MAIN)
+                .form().validate().required();
 
         view.field(CONT_CONTRACT.PARENT_ID)
                 .basic().hidden();
+
+        view.field(CONT_CONTRACT.CONTRACT_NO)
+                .table().fix(true);
 
         view.field(CONT_CONTRACT.DELIVERABLES)
                 .search().hidden().table().hidden();
 
         view.field(CONT_CONTRACT.FUNDING_DIRECTION)
+                .form().selectBox().dict(DictEnum.FUNDING_DIRECTION).muliti(false,false).defaultIndex(0)
                 .search().hidden().table().hidden();
 
         view.field(CONT_CONTRACT.DELIVERY_LOCATION)
                 .search().hidden().table().hidden();
 
         view.field(CONT_CONTRACT.AMOUNT)
+                .form().numberInput().decimal().scale(2)
                 .search().hidden().table().hidden();
 
         view.field(CONT_CONTRACT.SUMMARY)
@@ -70,10 +82,29 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
 
         view.field(CONT_CONTRACT.DEPARTMENT_ID)
                 .basic().label("归属部门")
-        .form().button().chooseDepartment(true);
+                .form().validate().required()
+                .form().button().chooseOrganization(true);
 
-        view.field(CONT_CONTRACT.CONTRACT_STATUS).basic().label("状态").form().selectBox().muliti(false,false).enumType(ContractStatus.class);
-        view.field(CONT_CONTRACT.CATALOG_CODE).basic().label("分类").form().selectBox().muliti(false,false).dict(DictEnum.CONTRACT_CATALOG);
+        view.field(CONT_CONTRACT.CONTRACT_STATUS).basic().label("合同状态")
+                .form().selectBox().muliti(false,false).enumType(ContractStatus.class);
+        view.field(CONT_CONTRACT.CATALOG_CODE).basic().label("合同分类")
+                .form().validate().required()
+                .form().selectBox().muliti(false,false).dict(DictEnum.CONTRACT_CATALOG);
+
+        view.field(CONT_CONTRACT.FUNDING_STATUS)
+                .form().selectBox().muliti(false,false).enumType(FundingStatus.class);
+
+        view.field(CONT_CONTRACT.EFFECTIVE_DATE)
+                .form().dateInput().format("yyyy-MM-dd");
+
+        view.field(CONT_CONTRACT.SIGNING_DATE)
+                .form().dateInput().format("yyyy-MM-dd");
+
+        view.field(CONT_CONTRACT.END_DATE)
+                .form().dateInput().format("yyyy-MM-dd");
+
+        view.field(CONT_CONTRACT.EXPIRATION_DATE)
+                .form().dateInput().format("yyyy-MM-dd");
 
 
     }
@@ -81,7 +112,7 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
     @Override
     public void configForm(ViewOptions view, FormOptions form) {
 
-        form.labelWidth(70);
+        form.labelWidth(80);
 
         //分成分组布局
         view.formWindow().width("800px");
@@ -146,7 +177,13 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
     public void configList(ViewOptions view, ListOptions list) {
 //        list.operationColumn().width(220);
 //        //表格操作列增加一个按钮，并指定JS函数
-//        list.operationColumn().addActionButton("条目","openDictItemWindow");
+        list.columnLayout(CONT_CONTRACT.CONTRACT_NO,CONT_CONTRACT.TITLE,CONT_CONTRACT.TYPE,CONT_CONTRACT.CATALOG_CODE,
+                CONT_CONTRACT.SIGNING_DATE,CONT_CONTRACT.CONTRACT_STATUS,CONT_CONTRACT.DEPARTMENT_ID,CONT_CONTRACT.FUNDING_STATUS,
+                CONT_CONTRACT.EFFECTIVE_DATE
+        );
+        list.operationColumn().addActionMenu("subs","子合同");
+        list.operationColumn().addActionMenu("addi","附加协议");
+
     }
 
     @Override

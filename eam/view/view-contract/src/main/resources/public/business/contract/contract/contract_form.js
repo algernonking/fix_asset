@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-10 17:05:43
+ * @since 2021-12-13 17:07:19
  */
 
 function FormPage() {
@@ -51,6 +51,7 @@ function FormPage() {
 	 * */
 	var adjustPopupTask=-1;
 	function adjustPopup() {
+		debugger
 		if(window.pageExt.form.beforeAdjustPopup) {
 			var doNext=window.pageExt.form.beforeAdjustPopup();
 			if(!doNext) return;
@@ -85,6 +86,32 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 type 下拉字段
+		fox.renderSelectBox({
+			el: "type",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "main".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 contractStatus 下拉字段
 		fox.renderSelectBox({
 			el: "contractStatus",
@@ -113,23 +140,75 @@ function FormPage() {
 		});
 		laydate.render({
 			elem: '#signingDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#effectiveDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#endDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
 		});
 		laydate.render({
 			elem: '#expirationDate',
-			format:"yyyy-MM-dd HH:mm:ss",
+			format:"yyyy-MM-dd",
 			trigger:"click"
+		});
+		//渲染 fundingStatus 下拉字段
+		fox.renderSelectBox({
+			el: "fundingStatus",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("fundingStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 fundingDirection 下拉字段
+		fox.renderSelectBox({
+			el: "fundingDirection",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("fundingDirection",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "0".split(",");
+				}
+				var opts=[];
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
 		});
 		//渲染 catalogCode 下拉字段
 		fox.renderSelectBox({
@@ -185,25 +264,31 @@ function FormPage() {
 
 			//设置 签订日期 显示复选框勾选
 			if(formData["signingDate"]) {
-				$("#signingDate").val(fox.dateFormat(formData["signingDate"],"yyyy-MM-dd HH:mm:ss"));
+				$("#signingDate").val(fox.dateFormat(formData["signingDate"],"yyyy-MM-dd"));
 			}
 			//设置 生效日期 显示复选框勾选
 			if(formData["effectiveDate"]) {
-				$("#effectiveDate").val(fox.dateFormat(formData["effectiveDate"],"yyyy-MM-dd HH:mm:ss"));
+				$("#effectiveDate").val(fox.dateFormat(formData["effectiveDate"],"yyyy-MM-dd"));
 			}
 			//设置 结束日期 显示复选框勾选
 			if(formData["endDate"]) {
-				$("#endDate").val(fox.dateFormat(formData["endDate"],"yyyy-MM-dd HH:mm:ss"));
+				$("#endDate").val(fox.dateFormat(formData["endDate"],"yyyy-MM-dd"));
 			}
 			//设置 失效日期 显示复选框勾选
 			if(formData["expirationDate"]) {
-				$("#expirationDate").val(fox.dateFormat(formData["expirationDate"],"yyyy-MM-dd HH:mm:ss"));
+				$("#expirationDate").val(fox.dateFormat(formData["expirationDate"],"yyyy-MM-dd"));
 			}
 
 
-			//设置  状态 设置下拉框勾选
+			//设置  合同类型 设置下拉框勾选
+			fox.setSelectValue4Enum("#type",formData.type,SELECT_TYPE_DATA);
+			//设置  合同状态 设置下拉框勾选
 			fox.setSelectValue4Enum("#contractStatus",formData.contractStatus,SELECT_CONTRACTSTATUS_DATA);
-			//设置  分类 设置下拉框勾选
+			//设置  资金状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#fundingStatus",formData.fundingStatus,SELECT_FUNDINGSTATUS_DATA);
+			//设置  资金流向 设置下拉框勾选
+			fox.setSelectValue4Dict("#fundingDirection",formData.fundingDirection,SELECT_FUNDINGDIRECTION_DATA);
+			//设置  合同分类 设置下拉框勾选
 			fox.setSelectValue4Dict("#catalogCode",formData.catalogCode,SELECT_CATALOGCODE_DATA);
 
 			//处理fillBy
@@ -255,9 +340,15 @@ function FormPage() {
 
 
 
-		//获取 状态 下拉框的值
+		//获取 合同类型 下拉框的值
+		data["type"]=fox.getSelectedValue("type",false);
+		//获取 合同状态 下拉框的值
 		data["contractStatus"]=fox.getSelectedValue("contractStatus",false);
-		//获取 分类 下拉框的值
+		//获取 资金状态 下拉框的值
+		data["fundingStatus"]=fox.getSelectedValue("fundingStatus",false);
+		//获取 资金流向 下拉框的值
+		data["fundingDirection"]=fox.getSelectedValue("fundingDirection",false);
+		//获取 合同分类 下拉框的值
 		data["catalogCode"]=fox.getSelectedValue("catalogCode",false);
 
 		return data;
@@ -306,7 +397,7 @@ function FormPage() {
 	        return false;
 	    });
 
-		// 请选择部门对话框
+		// 请选择组织节点对话框
 		$("#departmentId-button").click(function(){
 			var departmentIdDialogOptions={
 				field:"departmentId",
@@ -316,7 +407,7 @@ function FormPage() {
 				single:true,
 				//限制浏览的范围，指定根节点 id 或 code ，优先匹配ID
 				root: "",
-				targetType:"dept",
+				targetType:"org",
 				prepose:function(param){ return window.pageExt.form.beforeDialog && window.pageExt.form.beforeDialog(param);},
 				callback:function(param,result){ window.pageExt.form.afterDialog && window.pageExt.form.afterDialog(param,result);}
 			};

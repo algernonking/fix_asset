@@ -1,41 +1,37 @@
 package com.dt.platform.contract.service.impl;
 
 
-import javax.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-
+import com.dt.platform.contract.service.IContractService;
 import com.dt.platform.domain.contract.Contract;
-import com.dt.platform.domain.contract.ContractVO;
-import java.util.List;
-import com.github.foxnic.api.transter.Result;
-import com.github.foxnic.dao.data.PagedList;
-import com.github.foxnic.dao.entity.SuperService;
-import com.github.foxnic.dao.spec.DAO;
-import java.lang.reflect.Field;
-import com.github.foxnic.commons.busi.id.IDGenerator;
-import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.dao.data.PagedList;
+import com.github.foxnic.dao.data.SaveMode;
+import com.github.foxnic.dao.entity.SuperService;
+import com.github.foxnic.dao.excel.ExcelStructure;
 import com.github.foxnic.dao.excel.ExcelWriter;
 import com.github.foxnic.dao.excel.ValidateResult;
-import com.github.foxnic.dao.excel.ExcelStructure;
-import java.io.InputStream;
+import com.github.foxnic.dao.spec.DAO;
+import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.meta.DBField;
-import com.github.foxnic.dao.data.SaveMode;
-import com.github.foxnic.dao.meta.DBColumnMeta;
-import com.github.foxnic.sql.expr.Select;
-import java.util.ArrayList;
-import com.dt.platform.contract.service.IContractService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.io.InputStream;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
  * 合同表 服务实现
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-10 17:05:35
+ * @since 2021-12-13 17:07:10
+ * @version
 */
 
 
@@ -45,7 +41,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 	/**
 	 * 注入DAO对象
 	 * */
-	@Resource(name=DBConfigs.PRIMARY_DAO) 
+	@Resource(name=DBConfigs.PRIMARY_DAO)
 	private DAO dao=null;
 
 	/**
@@ -70,7 +66,8 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 	@Override
 	public Result insert(Contract contract,boolean throwsException) {
 		Result r=super.insert(contract,throwsException);
-		return r;
+		contract=this.getById(contract.getId());
+		return r.data(contract);
 	}
 
 	/**
@@ -93,7 +90,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 		return super.insertList(contractList);
 	}
 
-	
+
 	/**
 	 * 按主键删除 合同
 	 *
@@ -114,7 +111,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 			return r;
 		}
 	}
-	
+
 	/**
 	 * 按主键删除 合同
 	 *
@@ -174,7 +171,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 		return super.updateList(contractList , mode);
 	}
 
-	
+
 	/**
 	 * 按主键更新字段 合同
 	 *
@@ -188,7 +185,7 @@ public class ContractServiceImpl extends SuperService<Contract> implements ICont
 		return suc>0;
 	}
 
-	
+
 	/**
 	 * 按主键获取 合同
 	 *

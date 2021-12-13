@@ -18,6 +18,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    const moduleURL="/service-contract/cont-contract";
+
     //列表页的扩展
     var list={
         /**
@@ -162,6 +164,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
             console.log("form:beforeInit")
             this.action=action;
+
+            if(this.action=="create") {
+                $("#signer-fieldset").hide();
+                $("#signer-content").hide();
+
+                $("#attachment-fieldset").hide();
+                $("#attachment-content").hide();
+
+                $("#performance-fieldset").hide();
+                $("#performance-content").hide();
+            }
+
         },
         /**
          * 窗口调节前
@@ -219,6 +233,16 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         betweenFormSubmitAndClose:function (param,result) {
             console.log("betweenFormSubmitAndClose",result);
+            if(this.action=="create") {
+
+                admin.putTempData('cont-contract-form-data-form-action', "edit",true);
+                admin.putTempData('cont-contract-form-data', result.data);
+                window.location.reload();
+                setTimeout(function (){
+                    window.module.adjustPopup();
+                },1000);
+                return false;
+            }
             return true;
         },
         /**
