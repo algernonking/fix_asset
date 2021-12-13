@@ -1,7 +1,8 @@
 # EAM固定资产设备管理系
-- 实现资产设备管理系统,对资产的登记、维修、调拨等功能的支持，适合中小企业需求
+- 实现企业对资产的基本管理,包含对资产的登记、维修、调拨、转移等基本功能的支持，并提供对资产的耗材、库存进行管理，有完善的组织架构，非常适合中小企业的需求
 - 后端基于Spring Booter
 - 前端基于LayUi
+
 
 ### 相关资源
 - [demo] http://eam-demo.rainbooow.com:26788/index.html
@@ -10,9 +11,9 @@
 - SQL文件:http://121.43.103.102/upload/sql.tar.gz
 ## 安装部署(Docker)
 - 系统兼容说明
- |   应用镜像   |       移动端支持|
- |----------   | ------------- |  
- |1.0.1         | 暂不支持       |
+ |   应用镜像   |   移动端支持    |
+ | ----------  | -------------  |  
+ |  1.0.1      | 暂不支持        |
 
 - 部署步骤
 ```
@@ -44,7 +45,14 @@
 　4. 调整 MenuGenerator 的代码，生成对应的菜单，并将菜单授权给 admin 角色，建议一次生成一组菜单，菜单生成后，会输出batchId，如果撤销可以调用 removeByBatchId 方法即可。
  以上步骤因为调用main函数生成代码，开发工具并不能立即刷入，如果是Eclipse，请刷新项目。IDEA正常情况下会自动刷入，建议也刷新一下 relaod from disk 。
  :point_right: **注意：代码生成的逻辑，需要按照上面提到的类中给出的示例按需调整。** 
-#### 相关文档
+
+## 项目预览
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/212929_46438369_448530.jpeg "1.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213230_1ba469f5_448530.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213258_8d970535_448530.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213315_83659719_448530.png "屏幕截图.png")
+
+## 相关文档
 [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages)
 
  
