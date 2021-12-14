@@ -4,11 +4,11 @@
 ###############################################################
 cur_dir=$(cd `dirname $0`; pwd)
 app_conf="${cur_dir}/app.conf"
-MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
-DATA_CLEAR=`cat $app_conf|grep DATA_CLEAR=|awk -F "=" '{print $2}'`
-DB_NAME=`cat $app_conf|grep DB_NAME=|awk -F "=" '{print $2}'`
-DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
-DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
+MYSQL=`cat $app_conf|grep -v "#"|grep MYSQL=|awk -F "=" '{print $2}'`
+DATA_CLEAR=`cat $app_conf|grep -v "#"|grep DATA_CLEAR=|awk -F "=" '{print $2}'`
+DB_NAME=`cat $app_conf|grep -v "#"|grep DB_NAME=|awk -F "=" '{print $2}'`
+DB_USER=`cat $app_conf|grep -v "#"|grep DB_USER=|awk -F "=" '{print $2}'`
+DB_HOST=`cat $app_conf|grep -v "#"|grep DB_HOST=|awk -F "=" '{print $2}'`
 DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
 
 clear_sql="$cur_dir/sql/eam_cleardata.sql"
@@ -87,13 +87,6 @@ echo "delete from cont_company where 1=1 $tenant_sql; "               >>$clear_s
 echo "delete from cont_contract where 1=1 $tenant_sql; "              >>$clear_sql
 echo "delete from cont_contract_fund where 1=1 $tenant_sql; "         >>$clear_sql
 echo "delete from cont_contract_invoice where 1=1 $tenant_sql; "      >>$clear_sql
-
-
-
-
-
-
-
 
 
 echo "delete from hrm_person where deleted='1';" >>$clear_sql

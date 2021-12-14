@@ -11,9 +11,9 @@ app_dir=$cur_dir/..
 app_log=$app_dir/logs
 app_log_file=$app_log/app.log
 
-app_name=`cat $app_conf|grep APP_NAME=|awk -F "=" '{print $2}'`
+app_name=`cat $app_conf|grep -v "#"|grep APP_NAME=|awk -F "=" '{print $2}'`
 ####################### Java Environment ############################
-JAVA=`cat $app_conf|grep JAVA=|awk -F "=" '{print $2}'`
+JAVA=`cat $app_conf|grep -v "#"|grep JAVA=|awk -F "=" '{print $2}'`
 #java_Xmx="-Xmx1024m"
 java_Xmx=""
 ####################### App Environment ############################

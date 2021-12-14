@@ -12,13 +12,13 @@
 cur_dir=$(cd `dirname $0`; pwd)
 app_conf="${cur_dir}/app.conf"
 app_dir="${cur_dir}/.."
-update_filename="update.tar"
-MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
-MYSQL_DUMP=`cat $app_conf|grep MYSQL_DUMP=|awk -F "=" '{print $2}'`
-MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
-DB_NAME=`cat $app_conf|grep DB_NAME=|awk -F "=" '{print $2}'`
-DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
-DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
+update_filename="update.tar.gz"
+MYSQL=`cat $app_conf|grep -v "#"|grep MYSQL=|awk -F "=" '{print $2}'`
+MYSQL_DUMP=`cat $app_conf|grep -v "#"|grep MYSQL_DUMP=|awk -F "=" '{print $2}'`
+MYSQL=`cat $app_conf|grep -v "#"|grep MYSQL=|awk -F "=" '{print $2}'`
+DB_NAME=`cat $app_conf|grep -v "#"|grep DB_NAME=|awk -F "=" '{print $2}'`
+DB_USER=`cat $app_conf|grep -v "#"|grep DB_USER=|awk -F "=" '{print $2}'`
+DB_HOST=`cat $app_conf|grep -v "#"|grep DB_HOST=|awk -F "=" '{print $2}'`
 DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
 ####################### App Environment ############################
 if [[ ! -d $app_dir ]];then
@@ -42,7 +42,6 @@ do
   fi
 done
 
-
 if [[ ! -f "update/$update_filename" ]];then
   echo "Start to update application Failed,$update_filename not exist!";
   exit 1;
@@ -50,17 +49,10 @@ fi
 
 ##start to backup
 cd $app_dir
+echo "start to backup app db."
 sh backupAppDB.sh
-
-echo "Start to backup application!"
-curTime=`date +"%Y%m%d%H%M%S"`
-tar zcvf eam_backup_${curTime}.tar.gz ./lib/* ./*.jar ./application.yml
-if [[ ! -f "eam_backup_${curTime}.tar.gz" ]];then
-  echo "Backup Application Failed!";
-  exit 1;
-fi
-mv eam_backup_${curTime}.tar.gz backup/
-
+echo "start to backup app."
+sh backupApp.sh
 
 echo "Start to update application!"
 cd update
