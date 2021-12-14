@@ -64,7 +64,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'#(formDataKey)-win');
 			if(area==null) return;
 			admin.putTempData('#(formAreaKey)', area);
 			window.adjustPopup=adjustPopup;
@@ -204,7 +204,10 @@ function FormPage() {
 			#if(f.dateField.defaultValue=="now")
 			value:$('##(f.varName)').val()?$('##(f.varName)').val():new Date(),
 			#end
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("#(f.varName)",value, date, endDate);
+			}
 		});
 	    #end
 	    #end
