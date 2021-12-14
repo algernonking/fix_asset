@@ -35,7 +35,7 @@ import java.util.Date;
  * 存放位置 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-20 17:07:10
+ * @since 2021-12-14 14:22:42
 */
 
 
@@ -249,16 +249,16 @@ public class PositionServiceImpl extends SuperService<Position> implements IPosi
 	}
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param position 数据对象
 	 * @return 判断结果
 	 */
-	public Result<Position> checkExists(Position position) {
+	public Boolean checkExists(Position position) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(position, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(position, SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 存放位置 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-20 17:07:08
+ * @since 2021-12-14 14:22:41
 */
 
 public interface IPositionService extends ISuperService<Position> {
@@ -144,7 +144,7 @@ public interface IPositionService extends ISuperService<Position> {
 	Result saveList(List<Position> positionList , SaveMode mode);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 检查实体中的数据字段是否已经存在 . 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 * @param position  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
@@ -161,19 +161,19 @@ public interface IPositionService extends ISuperService<Position> {
 	Position getById(String id);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 按 id 获取多个对象
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
 	List<Position> getByIds(List<String> ids);
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param position 数据对象
 	 * @return 判断结果
 	 */
-	Result<Position> checkExists(Position position);
+	Boolean checkExists(Position position);
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表

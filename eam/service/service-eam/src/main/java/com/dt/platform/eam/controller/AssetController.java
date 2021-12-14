@@ -1116,7 +1116,6 @@ public class AssetController extends SuperController {
 				return ErrorDesc.failure().message("缺少上传的文件");
 			}
 
-
 			boolean dataFill=false;
 			Result dataFillResult= OperateServiceProxy.api().queryAssetDirectUpdateMode();
 			if(dataFillResult.isSuccess()){
@@ -1128,14 +1127,18 @@ public class AssetController extends SuperController {
 			}
 
 			List<ValidateResult> errors=assetService.importExcel(input,0,true,ownerCode,dataFill);
+
 			if(errors==null || errors.isEmpty()) {
 				return ErrorDesc.success();
 			} else {
 				System.out.println("import Result:");
+				String msg="导入失败";
 				for(int i=0;i<errors.size();i++){
 					System.out.println(i+":"+errors.get(i).message);
+					msg=errors.get(i).message;
 				}
-				return ErrorDesc.failure().message("导入失败").data(errors);
+//				DownloadUtil.writeDownloadResult(response,ErrorDesc.failure().message("导入失败").data(errors));
+				return ErrorDesc.failure().message(msg).data(errors);
 			}
 		}
 
