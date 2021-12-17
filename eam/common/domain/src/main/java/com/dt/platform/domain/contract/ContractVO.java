@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 合同
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-13 17:06:58
+ * @since 2021-12-14 16:37:07
  * @sign 64C302ACE5E20B9C8B88FE6A2052BE36
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

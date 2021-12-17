@@ -237,10 +237,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
                 admin.putTempData('cont-contract-form-data-form-action', "edit",true);
                 admin.putTempData('cont-contract-form-data', result.data);
-                window.location.reload();
-                setTimeout(function (){
-                    window.module.adjustPopup();
-                },1000);
+                window.module.setAction("edit");
+                window.module.fillFormData(result.data);
+                //window.location.reload();
+                // setTimeout(function (){
+                //     window.module.adjustPopup();
+                //     $(".form-container").attr("scroll","yes");
+                // },1000);
                 return false;
             }
             return true;
@@ -252,15 +255,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+        signerFrame:null,
+        attachmentFrame:null,
+        performanceFrame: null,
+        signerWin:null,
+        attachmentWin:null,
+        performanceWin: null,
         /**
          *  加载 签订方
          */
         loadSignerFrame:function (ifr,win,data) {
-            //如果是新建
-            if(this.action=="create") {
-                ifr.hide();
-                return;
-            }
+            this.signerFrame=ifr;
+            this.signerWin=win;
             // debugger
             console.log("loadSignerFrame",ifr,data);
             //设置 iframe 高度
@@ -272,11 +278,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          *  加载 合同附件
          */
         loadAttachmentFrame:function (ifr,win,data) {
-            //如果是新建
-            if(this.action=="create") {
-                ifr.hide();
-                return;
-            }
+            this.attachmentFrame=ifr;
+            this.attachmentWin=win;
+            this
             // debugger
             console.log("loadAttachmentFrame",ifr,data);
             //设置 iframe 高度
@@ -288,11 +292,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          *  加载 执行情况
          */
         loadPerformanceFrame:function (ifr,win,data) {
-            //如果是新建
-            if(this.action=="create") {
-                ifr.hide();
-                return;
-            }
+
             // debugger
             console.log("loadPerformanceFrame",ifr,data);
             //设置 iframe 高度

@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-13 17:07:19
+ * @since 2021-12-14 16:37:17
  */
 
 function FormPage() {
@@ -51,7 +51,6 @@ function FormPage() {
 	 * */
 	var adjustPopupTask=-1;
 	function adjustPopup() {
-		debugger
 		if(window.pageExt.form.beforeAdjustPopup) {
 			var doNext=window.pageExt.form.beforeAdjustPopup();
 			if(!doNext) return;
@@ -64,7 +63,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'cont-contract-form-data-win');
 			if(area==null) return;
 			admin.putTempData('cont-contract-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -141,22 +140,34 @@ function FormPage() {
 		laydate.render({
 			elem: '#signingDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("signingDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#effectiveDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("effectiveDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#endDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("endDate",value, date, endDate);
+			}
 		});
 		laydate.render({
 			elem: '#expirationDate',
 			format:"yyyy-MM-dd",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("expirationDate",value, date, endDate);
+			}
 		});
 		//渲染 fundingStatus 下拉字段
 		fox.renderSelectBox({
@@ -425,7 +436,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction:function (act) {
+			action=act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();
