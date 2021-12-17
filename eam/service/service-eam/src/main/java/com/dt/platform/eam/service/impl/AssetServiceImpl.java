@@ -113,6 +113,31 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public DAO dao() { return dao; }
 
 
+	public String applyAssetDataPermissions(Asset asset,ConditionExpr expr){
+		String dp="";
+		Logger.info("start to match applyAssetDataPermissions!");
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
+			if(operateService.queryAssetDataPermissions()){
+				dp="eam_asset_global_data_permission";
+			}else{
+				Logger.info("assetDataPermissions parameter disabled!");
+			}
+		}
+		Logger.info("apply asset data permission,dp match result:"+dp);
+		return dp;
+	}
+
+	public boolean applyAssetDataPermissions(Asset asset,ConditionExpr expr,boolean enable ){
+		Logger.info("start to match applyAssetDataPermissions!");
+		if(!enable){
+			return true;
+		}
+		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
+		}
+		return true;
+	}
 
 	@Override
 	public Object generateId(Field field) {
@@ -1083,8 +1108,10 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		ConditionExpr base=this.buildQueryCondition(sample,"t");
 		expr.and(base);
 		select.append(expr.startWithWhere()+" order by create_time desc");
-		PagedList<Asset> pagedList=this.dao().queryPagedEntities(Asset.class,pageSize,pageIndex,select);
-		return pagedList;
+
+		//PagedList<Asset> pagedList=this.dao().queryPagedEntities(Asset.class,pageSize,pageIndex,select);
+		return queryPagedList(sample, expr, pageSize, pageIndex);
+		//return pagedList;
 
 
 	}
@@ -1136,7 +1163,13 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
-		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+
+		String dp=applyAssetDataPermissions(sample,condition);
+		if(StringUtil.isBlank(dp)){
+			return super.queryPagedList(sample, condition, pageSize, pageIndex);
+		}else{
+			return super.queryPagedList(sample, condition, pageSize, pageIndex,dp);
+		}
 	}
 
 

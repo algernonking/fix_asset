@@ -7,8 +7,8 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-12-08 17:13:37
- * @author 李方捷 , leefangjie@qq.com
+ * @since 2021-12-17 09:01:07
+ * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
 */
@@ -2025,6 +2025,396 @@ public class EAMTables {
 			this.init($NAME,"数据变更" , ID , BUSINESS_CODE , PROC_ID , STATUS , BUSINESS_NAME , CHANGE_TYPE , ASSET_CHANGE_ID , CHANGE_DATE , CHANGE_NOTES , ORIGINATOR_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION);
 		}
 		public static final EAM_ASSET_DATA_CHANGE $TABLE=new EAM_ASSET_DATA_CHANGE();
+	}
+	
+	/**
+	 * 资产数据权限
+	*/
+	public static class EAM_ASSET_DATA_PERMISSIONS extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_permissions";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 归属
+		*/
+		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","归属","归属",false,false,true);
+		
+		/**
+		 * 权限编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","权限编码","权限编码",false,false,true);
+		
+		/**
+		 * 业务角色
+		*/
+		public static final DBField ROLE_CODE = new DBField(DBDataType.STRING , "role_code","roleCode","业务角色","业务角色",false,false,true);
+		
+		/**
+		 * 组织权限状态
+		*/
+		public static final DBField ORG_AUTHORITY_ENABLE = new DBField(DBDataType.STRING , "org_authority_enable","orgAuthorityEnable","组织权限状态","组织权限状态",false,false,true);
+		
+		/**
+		 * 本组织激活
+		*/
+		public static final DBField ORG_LOCAL_ENABLE = new DBField(DBDataType.STRING , "org_local_enable","orgLocalEnable","本组织激活","本组织激活",false,false,true);
+		
+		/**
+		 * 组织级联状态
+		*/
+		public static final DBField ORG_CASCADE_ENABLE = new DBField(DBDataType.STRING , "org_cascade_enable","orgCascadeEnable","组织级联状态","组织级联状态",false,false,true);
+		
+		/**
+		 * 分类权限状态
+		*/
+		public static final DBField CATALOG_AUTHORITY_ENABLE = new DBField(DBDataType.STRING , "catalog_authority_enable","catalogAuthorityEnable","分类权限状态","分类权限状态",false,false,true);
+		
+		/**
+		 * 分类级联状态
+		*/
+		public static final DBField CATALOG_CASCADE_ENABLE = new DBField(DBDataType.STRING , "catalog_cascade_enable","catalogCascadeEnable","分类级联状态","分类级联状态",false,false,true);
+		
+		/**
+		 * 位置权限状态
+		*/
+		public static final DBField POSITION_AUTHORITY_ENABLE = new DBField(DBDataType.STRING , "position_authority_enable","positionAuthorityEnable","位置权限状态","位置权限状态",false,false,true);
+		
+		/**
+		 * 优先级
+		*/
+		public static final DBField PRIORITY = new DBField(DBDataType.INTEGER , "priority","priority","优先级","优先级",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 数据版本号
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","数据版本号","数据版本号",false,false,false);
+		
+		/**
+		 * 租户
+		*/
+		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
+		
+		public EAM_ASSET_DATA_PERMISSIONS() {
+			this.init($NAME,"资产数据权限" , ID , NAME , OWNER_CODE , CODE , ROLE_CODE , ORG_AUTHORITY_ENABLE , ORG_LOCAL_ENABLE , ORG_CASCADE_ENABLE , CATALOG_AUTHORITY_ENABLE , CATALOG_CASCADE_ENABLE , POSITION_AUTHORITY_ENABLE , PRIORITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+		}
+		public static final EAM_ASSET_DATA_PERMISSIONS $TABLE=new EAM_ASSET_DATA_PERMISSIONS();
+	}
+	
+	/**
+	 * 分类
+	*/
+	public static class EAM_ASSET_DATA_PERMISSIONS_CATALOG extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_permissions_catalog";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 权限
+		*/
+		public static final DBField PERMISSION_ID = new DBField(DBDataType.STRING , "permission_id","permissionId","权限","权限",false,false,true);
+		
+		/**
+		 * 值
+		*/
+		public static final DBField VALUE = new DBField(DBDataType.STRING , "value","value","值","值",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		public EAM_ASSET_DATA_PERMISSIONS_CATALOG() {
+			this.init($NAME,"分类" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
+		}
+		public static final EAM_ASSET_DATA_PERMISSIONS_CATALOG $TABLE=new EAM_ASSET_DATA_PERMISSIONS_CATALOG();
+	}
+	
+	/**
+	 * 权限属性
+	*/
+	public static class EAM_ASSET_DATA_PERMISSIONS_ITEM extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_permissions_item";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 权限
+		*/
+		public static final DBField PERMISSION_ID = new DBField(DBDataType.STRING , "permission_id","permissionId","权限","权限",false,false,true);
+		
+		/**
+		 * 值
+		*/
+		public static final DBField VALUE = new DBField(DBDataType.STRING , "value","value","值","值",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		public EAM_ASSET_DATA_PERMISSIONS_ITEM() {
+			this.init($NAME,"权限属性" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
+		}
+		public static final EAM_ASSET_DATA_PERMISSIONS_ITEM $TABLE=new EAM_ASSET_DATA_PERMISSIONS_ITEM();
+	}
+	
+	/**
+	 * 组织
+	*/
+	public static class EAM_ASSET_DATA_PERMISSIONS_ORG extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_permissions_org";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 权限
+		*/
+		public static final DBField PERMISSION_ID = new DBField(DBDataType.STRING , "permission_id","permissionId","权限","权限",false,false,true);
+		
+		/**
+		 * 值
+		*/
+		public static final DBField VALUE = new DBField(DBDataType.STRING , "value","value","值","值",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		public EAM_ASSET_DATA_PERMISSIONS_ORG() {
+			this.init($NAME,"组织" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
+		}
+		public static final EAM_ASSET_DATA_PERMISSIONS_ORG $TABLE=new EAM_ASSET_DATA_PERMISSIONS_ORG();
+	}
+	
+	/**
+	 * 位置
+	*/
+	public static class EAM_ASSET_DATA_PERMISSIONS_POSITION extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "eam_asset_data_permissions_position";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 权限
+		*/
+		public static final DBField PERMISSION_ID = new DBField(DBDataType.STRING , "permission_id","permissionId","权限","权限",false,false,true);
+		
+		/**
+		 * 值
+		*/
+		public static final DBField VALUE = new DBField(DBDataType.STRING , "value","value","值","值",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		public EAM_ASSET_DATA_PERMISSIONS_POSITION() {
+			this.init($NAME,"位置" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
+		}
+		public static final EAM_ASSET_DATA_PERMISSIONS_POSITION $TABLE=new EAM_ASSET_DATA_PERMISSIONS_POSITION();
 	}
 	
 	/**

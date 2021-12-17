@@ -35,6 +35,12 @@ public interface IOperateService extends ISuperService<Operate> {
 
 
 	/**
+	 * 资产数据权限启用
+	 * @return 返回
+	 */
+	boolean queryAssetDataPermissions();
+
+	/**
 	 * 资产导入保留编码
 	 * @return 返回
 	 */

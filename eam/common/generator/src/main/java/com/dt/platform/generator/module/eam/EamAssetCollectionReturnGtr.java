@@ -4,6 +4,7 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.domain.eam.AssetCollectionReturn;
+import com.dt.platform.domain.eam.AssetDataPermissions;
 import com.dt.platform.domain.eam.Position;
 
 import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
@@ -11,10 +12,12 @@ import com.dt.platform.domain.eam.meta.AssetCollectionReturnVOMeta;
 import com.dt.platform.domain.eam.meta.AssetCollectionVOMeta;
 import com.dt.platform.domain.eam.meta.PositionMeta;
 import com.dt.platform.eam.page.AssetCollectionReturnPageController;
+import com.dt.platform.eam.page.AssetDataPermissionsPageController;
 import com.dt.platform.eam.service.impl.AssetHandleServiceImpl;
 import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetCollectionReturnServiceProxy;
+import com.dt.platform.proxy.eam.AssetDataPermissionsServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 import org.github.foxnic.web.domain.hrm.Employee;
@@ -24,7 +27,7 @@ import org.github.foxnic.web.domain.hrm.Person;
 public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
     public EamAssetCollectionReturnGtr() {
-        super(EAMTables.EAM_ASSET_COLLECTION_RETURN.$TABLE,BASIC_DATA_MENU_ID);
+        super(EAMTables.EAM_ASSET_COLLECTION_RETURN.$TABLE,BASIC_SETTING_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -34,7 +37,9 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
+
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetCollectionReturnVOMeta.ASSET_IDS);
+
 
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","退库公司","退库公司");
@@ -162,7 +167,7 @@ public class EamAssetCollectionReturnGtr extends BaseCodeGenerator {
         //生成代码
         g.generateCode();
         //生成菜单
-       // g.generateMenu(AssetCollectionReturnServiceProxy.class, AssetCollectionReturnPageController.class);
+       // g.generateMenu(AssetDataPermissionsServiceProxy.class, AssetDataPermissionsPageController.class);
     }
 
 }

@@ -4,17 +4,16 @@ app_conf="${cur_dir}/app.conf"
 app_dir=$cur_dir/..
 yml_file=$cur_dir/../application.yml
 
-APP_NAME=`cat $app_conf|grep APP_NAME=|awk -F "=" '{print $2}'`
-JAVA=`cat $app_conf|grep JAVA=|awk -F "=" '{print $2}'`
-MYSQL=`cat $app_conf|grep MYSQL=|awk -F "=" '{print $2}'`
-MYSQL_DUMP=`cat $app_conf|grep MYSQL_DUMP=|awk -F "=" '{print $2}'`
-MYSQL_ADMIN=`cat $app_conf|grep MYSQL_ADMIN=|awk -F "=" '{print $2}'`
-DB_HOST=`cat $app_conf|grep DB_HOST=|awk -F "=" '{print $2}'`
-DB_PORT=`cat $app_conf|grep DB_PORT=|awk -F "=" '{print $2}'`
-DB_NAME=`cat $app_conf|grep DB_NAME=|awk -F "=" '{print $2}'`
-DB_USER=`cat $app_conf|grep DB_USER=|awk -F "=" '{print $2}'`
-DB_PWD=`cat $app_conf|grep DB_PWD=|awk -F "=" '{print $2}'`
-
+APP_NAME=`cat $app_conf|grep -v "#"|grep APP_NAME=|awk -F "=" '{print $2}'`
+JAVA=`cat $app_conf|grep -v "#"|grep JAVA=|awk -F "=" '{print $2}'`
+MYSQL=`cat $app_conf|grep -v "#"|grep MYSQL=|awk -F "=" '{print $2}'`
+MYSQL_DUMP=`cat $app_conf|grep -v "#"|grep MYSQL_DUMP=|awk -F "=" '{print $2}'`
+MYSQL_ADMIN=`cat $app_conf|grep -v "#"|grep MYSQL_ADMIN=|awk -F "=" '{print $2}'`
+DB_HOST=`cat $app_conf|grep -v "#"|grep DB_HOST=|awk -F "=" '{print $2}'`
+DB_PORT=`cat $app_conf|grep -v "#"|grep DB_PORT=|awk -F "=" '{print $2}'`
+DB_NAME=`cat $app_conf|grep -v "#"|grep DB_NAME=|awk -F "=" '{print $2}'`
+DB_USER=`cat $app_conf|grep -v "#"|grep DB_USER=|awk -F "=" '{print $2}'`
+DB_PWD=`cat $app_conf|grep -v "#"|grep DB_PWD=|awk -F "=" '{print $2}'`
 
 echo "###start to check application.yml exist"
 if [[ -f "$yml_file" ]];then

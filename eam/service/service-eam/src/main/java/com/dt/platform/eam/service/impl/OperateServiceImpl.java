@@ -219,6 +219,27 @@ public class OperateServiceImpl extends SuperService<Operate> implements IOperat
 	}
 
 	@Override
+	public boolean queryAssetDataPermissions(){
+		return queryConfigValue("eam.assetDataPermissions");
+	}
+
+	private boolean queryConfigValue(String code){
+		boolean r=false;
+		ConfigVO vo=new ConfigVO();
+		vo.setCode(code);
+		Result<List<Config>> dataRs=ConfigServiceProxy.api().queryList(vo);
+		if(dataRs.isSuccess()&&dataRs.getData().size()>0){
+			Config conf=dataRs.getData().get(0);
+			if(!StringUtil.isBlank(conf.getValue()) && "1".equals(conf.getValue())){
+				r=true;
+			}
+		}
+		return r;
+	}
+
+
+
+	@Override
 	public boolean queryAssetImportDataReplenish() {
 		boolean r=false;
 		ConfigVO vo=new ConfigVO();

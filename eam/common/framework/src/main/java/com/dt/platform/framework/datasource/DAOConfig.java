@@ -1,8 +1,11 @@
 package com.dt.platform.framework.datasource;
 
+import com.dt.platform.domain.eam.AssetDataPermissions;
+import com.dt.platform.domain.eam.meta.AssetDataPermissionsMeta;
 import com.dt.platform.relation.PlatformRelationManager;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.dao.cache.CacheProperties;
+import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.dataperm.DataPermManager;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.dao.spec.DAOBuilder;
@@ -22,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 public class DAOConfig {
@@ -67,6 +71,28 @@ public class DAOConfig {
 			//数据权限管理器
 			DataPermManager dataPermManager=new DataPermManager();
 			dao.setDataPermManager(dataPermManager);
+			//资产管理全局数据权限
+			dataPermManager.registerGlobalContextGetter(AssetDataPermissions.class,"assetDataPermissions",()->{
+				AssetDataPermissions dp=null;
+				SessionUser user=(SessionUser)dao.getDBTreaty().getSubject();
+				String employId=user.getActivatedEmployeeId();
+				String sql="\n" +
+						"select c.* from eam_asset_data_permissions c where c.owner_code='asset' and c.deleted=0\n" +
+						"and c.role_code in (select distinct a.code from sys_busi_role a,sys_busi_role_member b where b.member_id=? and a.id=b.role_id and a.deleted=0)\n" +
+						"order by c.priority";
+				RcdSet rs= dao.query(sql,employId);
+				List<AssetDataPermissions> list=rs.toEntityList(AssetDataPermissions.class);
+				if(list.size()>0){
+					dp=list.get(0);
+					dao.fill(dp)
+							.with("organization")
+							.with(AssetDataPermissionsMeta.BUSI_ROLE)
+							.with(AssetDataPermissionsMeta.POSITION)
+							.with(AssetDataPermissionsMeta.CATEGORY)
+							.execute();
+				}
+				return dp;
+			});
 
 			//设置SQL扫描
 			SQLoader.addTQLScanPackage(dao,SpringUtil.getStartupClass().getPackage().getName());

@@ -20,6 +20,9 @@ public class EamRelationManager extends RelationManager {
     protected void config() {
         this.setupRelations();
         this.setupProperties();
+
+        this.setupAssetDataPermissions();
+
         this.setupGoods();
 
         this.setupAsset();
@@ -54,17 +57,36 @@ public class EamRelationManager extends RelationManager {
         this.setupStockAssetCollection();
 
     }
+
     public void setupProperties() {
+    }
+
+    public void setupAssetDataPermissions(){
+
+        this.property(AssetDataPermissionsMeta.BUSI_ROLE_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ROLE_CODE)
+                .join(FoxnicWeb.SYS_BUSI_ROLE.CODE);
+
+        this.property(AssetDataPermissionsMeta.POSITION_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.PERMISSION_ID)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.VALUE).join(EAMTables.EAM_POSITION.ID);
+
+        this.property(AssetDataPermissionsMeta.CATEGORY_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.PERMISSION_ID)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.VALUE).join(FoxnicWeb.PCM_CATALOG.ID);
+
+        this.property(AssetDataPermissionsMeta.ORGANIZATION_PROP)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.PERMISSION_ID)
+                .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.VALUE).join(FoxnicWeb.HRM_ORGANIZATION.ID);
 
 
     }
-
 
     public void setupScrap(){
 
         this.property(AssetScrapMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_SCRAP.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
 
 
         this.property(AssetScrapMeta.ORIGINATOR_PROP)
@@ -81,7 +103,7 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataChangeMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_CHANGE.ID )
                 .join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID)
+                .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID)
                 .join( EAMTables.EAM_ASSET.ID);
 
 

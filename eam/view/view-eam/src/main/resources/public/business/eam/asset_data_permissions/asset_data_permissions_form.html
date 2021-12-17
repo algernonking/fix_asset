@@ -1,0 +1,320 @@
+<!--
+/**
+ * 资产数据权限 列表页 JS 脚本
+ * @author 金杰 , maillank@qq.com
+ * @since 2021-12-17 11:24:23
+ */
+ -->
+ <!DOCTYPE html>
+<html style="background-color: #FFFFFF;">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8"/>
+	<title th:text="${lang.translate('资产数据权限')}">资产数据权限</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
+    <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
+    <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
+    <style>
+    </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+</head>
+
+<body style="overflow-y: hidden;">
+<div class="form-container" >
+
+    <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
+
+        <input name="id" id="id"  type="hidden"/>
+
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-6516-content">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('权限编码')}">权限编码</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('权限编码') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('归属')}">归属</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="ownerCode" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('优先级')}">优先级</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="priority" id="priority" name="priority" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('优先级') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"  value="100.0" />
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('业务角色')}">业务角色</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="roleCode" input-type="select" th:data="${'/service-system/sys-busi-role/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7238-fieldset">
+            <legend>分类权限配置</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-7238-content">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('资产分类')}">资产分类</div></div>
+                        <div class="layui-input-block ">
+<!--                            <div id="categoryIds" input-type="select" th:data="${'/service-pcm/pcm-catalog/query-list'}" extraParam="{}"></div>-->
+<!--                           -->
+                            <div id="categoryIds" input-type="select" ></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('分类权限状态')}">分类权限状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="catalogAuthorityEnable" lay-filter="catalogAuthorityEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('分类级联状态')}">分类级联状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="catalogCascadeEnable" lay-filter="catalogCascadeEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-6891-fieldset">
+            <legend>组织权限配置</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-6891-content">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('组织权限状态')}">组织权限状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="orgAuthorityEnable" lay-filter="orgAuthorityEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('组织架构')}">组织架构</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="organizationIds" id="organizationIds" name="organizationIds"  type="hidden" class="layui-input"   />
+                            <button id="organizationIds-button" type="button" action-type="org-dialog" class="layui-btn   " style="width: 100%"> <i class='layui-icon layui-icon-search'></i> <span th:text="${lang.translate('请选择组织节点')}" th:default-label="${lang.translate('请选择组织节点')}">按钮文本</span></button>
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('组织级联状态')}">组织级联状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="orgCascadeEnable" lay-filter="orgCascadeEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs4 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('本组织激活')}">本组织激活</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="orgLocalEnable" lay-filter="orgLocalEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9196-fieldset">
+            <legend>位置权限配置</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-9196-content">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('存放位置')}">存放位置</div></div>
+                        <div class="layui-input-block ">
+                            <div id="positionIds" input-type="select" th:data="${'/service-eam/eam-position/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：group 循环-->
+            <div class="layui-col-xs6 form-column" >
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('位置权限状态')}">位置权限状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="positionAuthorityEnable" lay-filter="positionAuthorityEnable" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+
+        <div class="layui-row form-row" id="random-9187-content">
+
+             <!--开始：group 循环-->
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+
+
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" class="layui-textarea" style="height: 20px" ></textarea>
+                    </div>
+                </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+        <!--结束：group循环-->
+
+        <div style="height: 8px"></div>
+        <div style="height: 20px"></div>
+
+
+    </form>
+
+</div>
+<div class="model-form-footer">
+    <button class="layui-btn layui-btn-primary" id="cancel-button" lay-filter="cancel-button" type="button" th:text="${lang.translate('取消')}" >取消</button>
+    <button th:if="${perm.checkAnyAuth('eam_asset_data_permissions:create','eam_asset_data_permissions:update','eam_asset_data_permissions:save')}" class="layui-btn" style="margin-right: 15px;display: none;"  id="submit-button" lay-filter="submit-button" lay-submit th:text="${lang.translate('保存')}">保存</button>
+</div>
+
+<script type="text/javascript" src="/module/global.js" th:src="'/module/global.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/jquery-3.2.1.min.js" th:src="'/assets/libs/jquery-3.2.1.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/pandyle.min.js" th:src="'/assets/libs/pandyle.min.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/layui/layui.js" th:src="'/assets/libs/layui/layui.js?'+${cacheKey}"></script>
+<script type="text/javascript" src="/assets/libs/toast/js/toast.js" th:src="'/assets/libs/toast/js/toast.js?'+${cacheKey}"></script>
+
+<script th:inline="javascript">
+    var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_OWNERCODE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetOwnerCodeEnum')}]];
+    var RADIO_ORGAUTHORITYENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var RADIO_ORGLOCALENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var RADIO_ORGCASCADEENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var RADIO_CATALOGAUTHORITYENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var RADIO_CATALOGCASCADEENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var RADIO_POSITIONAUTHORITYENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+    var VALIDATE_CONFIG={"orgCascadeEnable":{"labelInForm":"组织级联状态","inputType":"radio_box","required":true},"code":{"labelInForm":"权限编码","inputType":"text_input","required":true},"ownerCode":{"labelInForm":"归属","inputType":"select_box","required":true},"orgAuthorityEnable":{"labelInForm":"组织权限状态","inputType":"radio_box","required":true},"roleCode":{"labelInForm":"业务角色","inputType":"select_box","required":true},"orgLocalEnable":{"labelInForm":"本组织激活","inputType":"radio_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"positionAuthorityEnable":{"labelInForm":"位置权限状态","inputType":"radio_box","required":true},"catalogAuthorityEnable":{"labelInForm":"分类权限状态","inputType":"radio_box","required":true},"catalogCascadeEnable":{"labelInForm":"分类级联状态","inputType":"radio_box","required":true}};
+    var AUTH_PREFIX="eam_asset_data_permissions";
+
+    // 资产分类数据
+    var ASSET_CATEGORY_DATA = [[${assetCategoryData}]] ;
+
+</script>
+
+
+
+<script th:src="'/business/eam/asset_data_permissions/asset_data_permissions_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/eam/asset_data_permissions/asset_data_permissions_form.js?'+${cacheKey}"></script>
+
+</body>
+</html>

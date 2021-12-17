@@ -13,7 +13,7 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:24:05
+ * @since 2021-12-15 15:14:27
  * @sign 2EA45C20964C140B8A4AFCB710A85433
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

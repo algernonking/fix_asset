@@ -216,8 +216,12 @@
 					<groupId>org.apache.logging.log4j</groupId>
 					<artifactId>log4j-to-slf4j</artifactId>
 				</exclusion>
+
+
 			</exclusions>
 		</dependency>
+
+
 		<!-- 添加 Undertow 容器 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
