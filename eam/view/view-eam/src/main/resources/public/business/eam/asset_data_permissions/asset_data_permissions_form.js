@@ -279,7 +279,9 @@ function FormPage() {
 	     	renderFormFields();
 			window.pageExt.form.afterDataFill && window.pageExt.form.afterDataFill(formData);
 
-		}else{
+		}
+
+		if(action=="view") {
 			//处理fillBy
 			setTimeout(function(){
 				if(categorySelect){
@@ -287,7 +289,6 @@ function FormPage() {
 				}
 			},150)
 		}
-
 		//渐显效果
 		fm.css("opacity","0.0");
         fm.css("display","");

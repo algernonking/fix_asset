@@ -65,8 +65,7 @@ function ListPage() {
 			// if(CATEGORY_ID&&CATEGORY_ID.length>0){
 			// 	ps.categoryId=CATEGORY_ID;
 			// }
-
-
+			ps.ownerCode=OWNER_CODE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
 				templet=function(field,value,row) {
