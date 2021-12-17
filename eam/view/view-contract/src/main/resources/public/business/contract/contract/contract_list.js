@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-13 17:07:16
+ * @since 2021-12-14 16:37:13
  */
 
 
@@ -107,6 +107,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
