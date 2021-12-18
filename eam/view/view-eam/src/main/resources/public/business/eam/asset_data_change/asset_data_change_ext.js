@@ -136,6 +136,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 进一步转换 list 数据
          * */
         templet:function (field,value,r) {
+
             if(field=="maintenanceNotes"
                 ||field=="status"
                 ||field=="businessCode"
@@ -143,15 +144,28 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 ||field=="businessName"
                 ||field=="chsApprovalOpinion"
                 ||field=="originatorId"){
-                if(value==null) return "";
+
+                if(value==null)
+                    return "";
                 return value;
             }
-            if(value&&value.length>0){
-                if(value==null) return "";
-                return value;
+            console.log("@@@"+field+"  "+value);
+
+            //处理变更
+            if(value){
+                console.log("###"+field+" "+value+" ,,"+(value+"").length);
+                //处理数字问题
+                var v=(value+"");
+                if(v.length>0){
+                    if(v==null)
+                        return "";
+                    return v;
+                }
             }else{
                 return "未变更";
             }
+
+            return "未知状态"
         },
         /**
          * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
