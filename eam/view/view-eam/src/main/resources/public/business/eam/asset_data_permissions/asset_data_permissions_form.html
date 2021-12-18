@@ -49,15 +49,17 @@
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('权限编码')}">权限编码</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('权限编码') }" type="text" class="layui-input"    lay-verify="|required"  />
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('权限状态')}">权限状态</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
+                </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
+
+
              <!--开始：group 循环-->
             <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
 
@@ -69,14 +71,13 @@
                         </div>
                     </div>
 
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('优先级')}">优先级</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="priority" id="priority" name="priority" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('优先级') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"  value="100.0" />
-                        </div>
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('业务角色')}">业务角色</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <div id="roleCode" input-type="select" th:data="${'/service-system/sys-busi-role/query-paged-list'}" extraParam="{}"></div>
                     </div>
+                </div>
+
 
 
                 <!--结束：栏次内字段循环-->
@@ -85,12 +86,21 @@
             <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('业务角色')}">业务角色</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block ">
-                            <div id="roleCode" input-type="select" th:data="${'/service-system/sys-busi-role/query-paged-list'}" extraParam="{}"></div>
-                        </div>
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('优先级')}">优先级</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="priority" id="priority" name="priority" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('优先级') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0"  value="100.0" />
                     </div>
+                </div>
+
+
+                <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('权限编码')}">权限编码</div><div class="layui-required">*</div></div>
+                    <div class="layui-input-block ">
+                        <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('权限编码') }" type="text" class="layui-input"    lay-verify="|required"  />
+                    </div>
+                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -303,7 +313,11 @@
     var RADIO_CATALOGAUTHORITYENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var RADIO_CATALOGCASCADEENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
     var RADIO_POSITIONAUTHORITYENABLE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
-    var VALIDATE_CONFIG={"orgCascadeEnable":{"labelInForm":"组织级联状态","inputType":"radio_box","required":true},"code":{"labelInForm":"权限编码","inputType":"text_input","required":true},"ownerCode":{"labelInForm":"归属","inputType":"select_box","required":true},"orgAuthorityEnable":{"labelInForm":"组织权限状态","inputType":"radio_box","required":true},"roleCode":{"labelInForm":"业务角色","inputType":"select_box","required":true},"orgLocalEnable":{"labelInForm":"本组织激活","inputType":"radio_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"positionAuthorityEnable":{"labelInForm":"位置权限状态","inputType":"radio_box","required":true},"catalogAuthorityEnable":{"labelInForm":"分类权限状态","inputType":"radio_box","required":true},"catalogCascadeEnable":{"labelInForm":"分类级联状态","inputType":"radio_box","required":true}};
+
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.common.StatusEnableEnum')}]];
+
+
+    var VALIDATE_CONFIG={"status":{"labelInForm":"权限状态","inputType":"radio_box","required":true},"orgCascadeEnable":{"labelInForm":"组织级联状态","inputType":"radio_box","required":true},"code":{"labelInForm":"权限编码","inputType":"text_input","required":true},"ownerCode":{"labelInForm":"归属","inputType":"select_box","required":true},"orgAuthorityEnable":{"labelInForm":"组织权限状态","inputType":"radio_box","required":true},"roleCode":{"labelInForm":"业务角色","inputType":"select_box","required":true},"orgLocalEnable":{"labelInForm":"本组织激活","inputType":"radio_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"positionAuthorityEnable":{"labelInForm":"位置权限状态","inputType":"radio_box","required":true},"catalogAuthorityEnable":{"labelInForm":"分类权限状态","inputType":"radio_box","required":true},"catalogCascadeEnable":{"labelInForm":"分类级联状态","inputType":"radio_box","required":true}};
     var AUTH_PREFIX="eam_asset_data_permissions";
 
     // 资产分类数据

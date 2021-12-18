@@ -12,7 +12,7 @@ import com.github.foxnic.commons.bean.BeanUtil;
 /**
  * 资产数据权限
  * @author 金杰 , maillank@qq.com
- * @since 2021-12-17 11:24:07
+ * @since 2021-12-18 08:47:42
  * @sign F89DDAE2A9D0256A5A03713C37B6C086
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

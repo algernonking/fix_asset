@@ -76,7 +76,7 @@ public class DAOConfig {
 				AssetDataPermissions dp=null;
 				SessionUser user=(SessionUser)dao.getDBTreaty().getSubject();
 				String employId=user.getActivatedEmployeeId();
-				String sql="select c.* from eam_asset_data_permissions c where c.owner_code='asset' and c.deleted=0\n" +
+				String sql="select c.* from eam_asset_data_permissions c where c.status='enable' and  c.owner_code='asset' and c.deleted=0\n" +
 						"and c.role_code in (select distinct a.code from sys_busi_role a,sys_busi_role_member b where b.member_id=? and a.id=b.role_id and a.deleted=0)\n" +
 						"order by c.priority";
 				RcdSet rs= dao.query(sql,employId);

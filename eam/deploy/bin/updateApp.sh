@@ -42,7 +42,7 @@ do
   fi
 done
 
-if [[ ! -f "update/$update_filename" ]];then
+if [[ ! -f "${app_dir}/update/$update_filename" ]];then
   echo "Start to update application Failed,$update_filename not exist!";
   exit 1;
 fi

@@ -5,11 +5,9 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleConfirmOperationEnum;
-import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
-import com.dt.platform.constants.enums.eam.AssetOperateEnum;
-import com.dt.platform.constants.enums.eam.AssetStatusEnum;
+import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.domain.eam.meta.AssetScrapMeta;
 import com.dt.platform.eam.common.AssetCommonError;
@@ -96,6 +94,22 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	private IOperateService operateService;
 
 
+	@Override
+	public Result cleanOut(String id) {
+
+		AssetScrap billData=getById(id);
+		if(AssetHandleStatusEnum.COMPLETE.code().equals(billData.getStatus())){
+			String sql="update eam_asset set owner_code=? where id in (select asset_id from eam_asset_item where handle_id=? and crd in ('r','c') and deleted=0)";
+			dao.execute(sql, AssetOwnerCodeEnum.ASSET_CLEAN_OUT.code(),id);
+			AssetScrap bill=new AssetScrap();
+			bill.setId(id);
+			bill.setCleanStatus(AssetHandleStatusEnum.COMPLETE.code());
+			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
+		}else{
+			return ErrorDesc.failureMessage("当前单据状态，不能对资产进行清理。");
+		}
+
+	}
 
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {
@@ -279,12 +293,13 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		if(assetScrap.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");
 		}
+
+
+		assetScrap.setCleanStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		Result ckResult=assetService.checkAssetDataForBusiessAction(AssetOperateEnum.EAM_ASSET_SCRAP.code(),assetScrap.getAssetIds());
 		if(!ckResult.isSuccess()){
 			return ckResult;
 		}
-
-
 
 		//制单人
 		if(StringUtil.isBlank(assetScrap.getOriginatorId())){

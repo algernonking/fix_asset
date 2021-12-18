@@ -76,6 +76,8 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('权限状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
+					,{ field: 'priority', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('优先级') , templet: function (d) { return templet('priority',d.priority,d);}  }
 					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('归属'), templet:function (d){ return templet('ownerCode',fox.getEnumText(SELECT_OWNERCODE_DATA,d.ownerCode),d);}}
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('权限编码') , templet: function (d) { return templet('code',d.code,d);}  }
 					,{ field: 'roleCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务角色'), templet: function (d) { return templet('roleCode' ,fox.joinLabel(d.busiRole,"name"),d);}}
@@ -85,7 +87,6 @@ function ListPage() {
 					,{ field: 'catalogAuthorityEnable', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类权限状态'), templet:function (d){ return templet('catalogAuthorityEnable',fox.getEnumText(RADIO_CATALOGAUTHORITYENABLE_DATA,d.catalogAuthorityEnable),d);}}
 					,{ field: 'catalogCascadeEnable', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('分类级联状态'), templet:function (d){ return templet('catalogCascadeEnable',fox.getEnumText(RADIO_CATALOGCASCADEENABLE_DATA,d.catalogCascadeEnable),d);}}
 					,{ field: 'positionAuthorityEnable', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('位置权限状态'), templet:function (d){ return templet('positionAuthorityEnable',fox.getEnumText(RADIO_POSITIONAUTHORITYENABLE_DATA,d.positionAuthorityEnable),d);}}
-					,{ field: 'priority', align:"right",fixed:false,  hide:false, sort: true, title: fox.translate('优先级') , templet: function (d) { return templet('priority',d.priority,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'positionIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('存放位置'), templet: function (d) { return templet('positionIds' ,fox.joinLabel(d.position,"name"),d);}}

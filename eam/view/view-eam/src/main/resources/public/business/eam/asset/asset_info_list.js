@@ -65,6 +65,9 @@ function ListPage() {
 			// if(CATEGORY_ID&&CATEGORY_ID.length>0){
 			// 	ps.categoryId=CATEGORY_ID;
 			// }
+			if(!ps.categoryId){
+				ps.categoryId=CATEGORY_ID;
+			}
 			ps.ownerCode=OWNER_CODE;
 			var templet=window.pageExt.list.templet;
 			if(templet==null) {
@@ -187,6 +190,9 @@ function ListPage() {
 			ps.categoryId=categoryValue[0].id;
 		}
 		ps.ownerCode=OWNER_CODE;
+		if(!ps.categoryId){
+			ps.categoryId=CATEGORY_ID;
+		}
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;

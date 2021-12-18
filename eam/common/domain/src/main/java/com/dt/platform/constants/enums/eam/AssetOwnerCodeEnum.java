@@ -16,7 +16,7 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET("asset" , "资产"),
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
-	ASSET_CLEAN("asset_clean" , "资产清理"),
+	ASSET_CLEAN_OUT("asset_clean_out" , "资产清理"),
 	ASSET_SOFTWARE("asset_software" , "软件资产"),
 	ASSET_STOCK("asset_stock" , "资产库存"),
 	ASSET_CONSUMABLES("asset_consumables" , "耗材资产"),

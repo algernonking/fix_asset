@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="/assets/libs/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
     <style>
     </style>
+
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden">

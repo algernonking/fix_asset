@@ -91,7 +91,7 @@ public class EamRelationManager extends RelationManager {
             if(dp.getCategoryIds()==null){
                 dp.setCategoryIds(new ArrayList<>());
             }
-            if(dp.getPositionIds().size()==0&&catalog.size()>0){
+            if(dp.getCategoryIds().size()==0&&catalog.size()>0){
                 for(int i=0;i<catalog.size();i++){
                     dp.getCategoryIds().add(catalog.get(i).getId());
                 }
@@ -106,7 +106,7 @@ public class EamRelationManager extends RelationManager {
             if(dp.getOrganizationIds()==null){
                 dp.setOrganizationIds(new ArrayList<>());
             }
-            if(dp.getPositionIds().size()==0&&org.size()>0){
+            if(dp.getOrganizationIds().size()==0&&org.size()>0){
                 for(int i=0;i<org.size();i++){
                     dp.getOrganizationIds().add(org.get(i).getId());
                 }

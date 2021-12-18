@@ -77,6 +77,7 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编号') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('办理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'cleanStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('清理状态'), templet:function (d){ return templet('cleanStatus',fox.getEnumText(CLEAN_STATUS_DATA,d.cleanStatus),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'scrapDate', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('报废时间') ,templet: function (d) { return templet('scrapDate',fox.dateFormat(d.scrapDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报废说明') , templet: function (d) { return templet('content',d.content,d);}  }
@@ -376,7 +377,10 @@ function ListPage() {
 			}
 			else if (layEvent === 'download-bill') { // 单据
 				window.pageExt.list.downloadBill(data);
+			}else if (layEvent === 'clean-out') { // 清理
+				window.pageExt.list.cleanOut(data);
 			}
+
 			
 		});
 

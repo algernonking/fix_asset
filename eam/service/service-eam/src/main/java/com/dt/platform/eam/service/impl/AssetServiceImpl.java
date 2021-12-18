@@ -118,11 +118,15 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		Logger.info("start to match applyAssetDataPermissions!");
 		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
 			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
-			if(operateService.queryAssetDataPermissions()){
-				dp="eam_asset_global_data_permission";
-			}else{
-				Logger.info("assetDataPermissions parameter disabled!");
-			}
+			//if(asset.getStatus()!=null&&AssetHandleStatusEnum.COMPLETE.code().equals(asset.getStatus())){
+				if(operateService.queryAssetDataPermissions()){
+					dp="eam_asset_global_data_permission";
+				}else{
+					Logger.info("assetDataPermissions parameter disabled!");
+				}
+		//	}else{
+		//		Logger.info("assetDataPermissions disabled!,asset handle status:"+asset.getStatus());
+		//	}
 		}
 		Logger.info("apply asset data permission,dp match result:"+dp);
 		return dp;

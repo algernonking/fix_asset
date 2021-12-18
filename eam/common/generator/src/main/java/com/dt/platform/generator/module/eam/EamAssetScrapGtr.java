@@ -46,6 +46,9 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
       //  cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).table().hidden();
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
+        cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CLEAN_STATUS).form().selectBox().enumType(AssetHandleStatusEnum.class);
+
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.NAME).form().validate().required();
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.CONTENT).form().textArea().height(30);
 
@@ -133,8 +136,8 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)
+                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
+                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS)
                 .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页; //列表HTML页
         cfg.buildAll();
     }

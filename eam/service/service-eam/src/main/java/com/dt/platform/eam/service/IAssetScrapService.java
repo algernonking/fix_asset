@@ -34,6 +34,12 @@ import org.github.foxnic.web.domain.changes.ProcessStartVO;
 
 public interface IAssetScrapService extends ISuperService<AssetScrap> {
 
+	/**
+	 * 清理资产
+	 * @param id 单据ID
+	 * @return 返回结果
+	 * */
+	Result cleanOut(String id);
 
 	Result startProcess(ProcessStartVO startVO);
 

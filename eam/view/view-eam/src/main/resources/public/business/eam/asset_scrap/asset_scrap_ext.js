@@ -82,24 +82,33 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                     // fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
                 }else if(data[i].status=="deny"){
+
+                    fox.disableButton($('.clean-out-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
                 }else if(data[i].status=="approval"){
+                    fox.disableButton($('.clean-out-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     // fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
                 }else if(data[i].status=="cancel"){
+                    fox.disableButton($('.clean-out-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-delete-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.ops-edit-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.for-approval-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.confirm-data-button').filter("[data-id='" + data[i].id + "']"), true);
                     fox.disableButton($('.revoke-data-button').filter("[data-id='" + data[i].id + "']"), true);
                 }
+
+                if(data[i].cleanStatus=="complete"){
+                    fox.disableButton($('.clean-out-button').filter("[data-id='" + data[i].id + "']"), true);
+                }
+
             }
 
         },
@@ -206,6 +215,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         revokeData:function (item){
             list.billOper("revoke-operation","revoke-data-button",{id:item.id},"已撤销");
+        },
+        cleanOut:function (item){
+            list.billOper("clean-out","clean-out-button",{id:item.id},"已清理");
         },
         /**
          *

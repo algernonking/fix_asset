@@ -124,6 +124,11 @@ public interface AssetScrapServiceProxy {
 	public static final String REVOKE_OPERATION= API_PREFIX + "revoke-operation";
 
 	/**
+	 * 数据清理
+	 */
+	public static final String CLEAN_OUT= API_PREFIX + "clean-out";
+
+	/**
 	 * 添加资产报废
 	*/
 	@RequestMapping(AssetScrapServiceProxy.INSERT)

@@ -219,11 +219,8 @@ public class AssetScrapController extends SuperController {
 	public Result<AssetScrap> getById(String id) {
 		Result<AssetScrap> result=new Result<>();
 		AssetScrap assetScrap=assetScrapService.getById(id);
-
 		assetScrapService.join(assetScrap, AssetScrapMeta.ORIGINATOR);
-
 		assetScrapService.dao().join(assetScrap.getOriginator(),Person.class);
-
 		result.success(true).data(assetScrap);
 		return result;
 	}
@@ -372,6 +369,18 @@ public class AssetScrapController extends SuperController {
 	@RequestMapping(AssetScrapServiceProxy.APPROVE)
 	public Result approve(ProcessApproveVO approveVO)  {
 		return assetScrapService.approve(approveVO);
+	}
+
+
+	/**
+	 * 清理
+	 * */
+	@ApiOperation(value = "清理")
+	@ApiOperationSupport(order=16)
+	@SentinelResource(value = AssetScrapServiceProxy.CLEAN_OUT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+	@RequestMapping(AssetScrapServiceProxy.CLEAN_OUT)
+	public Result cleanOut(String id)  {
+		return assetScrapService.cleanOut(id);
 	}
 
 

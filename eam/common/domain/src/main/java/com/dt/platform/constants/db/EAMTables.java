@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2021-12-17 09:01:07
+ * @since 2021-12-18 08:42:43
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2048,6 +2048,11 @@ public class EAMTables {
 		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
 		
 		/**
+		 * 权限状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","权限状态","权限状态",false,false,true);
+		
+		/**
 		 * 归属
 		*/
 		public static final DBField OWNER_CODE = new DBField(DBDataType.STRING , "owner_code","ownerCode","归属","归属",false,false,true);
@@ -2148,7 +2153,7 @@ public class EAMTables {
 		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
 		
 		public EAM_ASSET_DATA_PERMISSIONS() {
-			this.init($NAME,"资产数据权限" , ID , NAME , OWNER_CODE , CODE , ROLE_CODE , ORG_AUTHORITY_ENABLE , ORG_LOCAL_ENABLE , ORG_CASCADE_ENABLE , CATALOG_AUTHORITY_ENABLE , CATALOG_CASCADE_ENABLE , POSITION_AUTHORITY_ENABLE , PRIORITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+			this.init($NAME,"资产数据权限" , ID , NAME , STATUS , OWNER_CODE , CODE , ROLE_CODE , ORG_AUTHORITY_ENABLE , ORG_LOCAL_ENABLE , ORG_CASCADE_ENABLE , CATALOG_AUTHORITY_ENABLE , CATALOG_CASCADE_ENABLE , POSITION_AUTHORITY_ENABLE , PRIORITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_ASSET_DATA_PERMISSIONS $TABLE=new EAM_ASSET_DATA_PERMISSIONS();
 	}
@@ -2217,72 +2222,6 @@ public class EAMTables {
 			this.init($NAME,"分类" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
 		}
 		public static final EAM_ASSET_DATA_PERMISSIONS_CATALOG $TABLE=new EAM_ASSET_DATA_PERMISSIONS_CATALOG();
-	}
-	
-	/**
-	 * 权限属性
-	*/
-	public static class EAM_ASSET_DATA_PERMISSIONS_ITEM extends DBTable {
-		
-		/**
-		 * 表名
-		*/
-		public static final String $NAME = "eam_asset_data_permissions_item";
-		
-		/**
-		 * 主键
-		*/
-		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
-		
-		/**
-		 * 权限
-		*/
-		public static final DBField PERMISSION_ID = new DBField(DBDataType.STRING , "permission_id","permissionId","权限","权限",false,false,true);
-		
-		/**
-		 * 值
-		*/
-		public static final DBField VALUE = new DBField(DBDataType.STRING , "value","value","值","值",false,false,true);
-		
-		/**
-		 * 创建人ID
-		*/
-		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
-		
-		/**
-		 * 创建时间
-		*/
-		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
-		
-		/**
-		 * 修改人ID
-		*/
-		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
-		
-		/**
-		 * 修改时间
-		*/
-		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
-		
-		/**
-		 * 是否已删除
-		*/
-		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
-		
-		/**
-		 * 删除人ID
-		*/
-		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
-		
-		/**
-		 * 删除时间
-		*/
-		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
-		
-		public EAM_ASSET_DATA_PERMISSIONS_ITEM() {
-			this.init($NAME,"权限属性" , ID , PERMISSION_ID , VALUE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME);
-		}
-		public static final EAM_ASSET_DATA_PERMISSIONS_ITEM $TABLE=new EAM_ASSET_DATA_PERMISSIONS_ITEM();
 	}
 	
 	/**

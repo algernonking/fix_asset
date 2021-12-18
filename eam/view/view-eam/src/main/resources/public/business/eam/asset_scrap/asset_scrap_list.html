@@ -118,6 +118,9 @@
     <button th:if="${perm.checkAuth('eam_asset_scrap:for-approval')}"class="layui-btn layui-btn-xs  for-approval-button " lay-event="for-approval" th:text="${lang.translate('送审')}" data-id="{{d.id}}">送审</button>
     <button th:if="${perm.checkAuth('eam_asset_scrap:confirm')}"class="layui-btn layui-btn-xs  confirm-data-button " lay-event="confirm-data" th:text="${lang.translate('确认')}" data-id="{{d.id}}">确认</button>
     <button th:if="${perm.checkAuth('eam_asset_scrap:revoke')}"class="layui-btn layui-btn-xs  revoke-data-button " lay-event="revoke-data" th:text="${lang.translate('撤销')}" data-id="{{d.id}}">撤销</button>
+
+    <button th:if="${perm.checkAuth('eam_asset_scrap:clean-out')}" class="layui-btn layui-btn-xs  clean-out-button " lay-event="clean-out" th:text="${lang.translate('清理')}" data-id="{{d.id}}">清理</button>
+
     <button th:if="${perm.checkAuth('eam_asset_scrap:bill')}"class="layui-btn layui-btn-xs  download-bill-button " lay-event="download-bill" th:text="${lang.translate('单据')}" data-id="{{d.id}}">单据</button>
 
 </script>
@@ -125,7 +128,12 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+
+
     var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+
+    var CLEAN_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.eam.AssetHandleStatusEnum')}]];
+
     var AUTH_PREFIX="eam_asset_scrap";
 
     // 是否需要审批

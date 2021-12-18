@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产数据权限
  * @author 金杰 , maillank@qq.com
- * @since 2021-12-17 11:24:07
- * @sign 38846A0A6CC87BC2243469A8AB12659A
+ * @since 2021-12-18 08:47:42
+ * @sign 5FEFD8D535EF42E03531B3CCD34F6D10
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -45,6 +45,12 @@ public class AssetDataPermissions extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="名称" , notes = "名称")
 	private String name;
+	
+	/**
+	 * 权限状态：权限状态
+	*/
+	@ApiModelProperty(required = false,value="权限状态" , notes = "权限状态")
+	private String status;
 	
 	/**
 	 * 归属：归属
@@ -243,6 +249,25 @@ public class AssetDataPermissions extends Entity {
 	*/
 	public AssetDataPermissions setName(String name) {
 		this.name=name;
+		return this;
+	}
+	
+	/**
+	 * 获得 权限状态<br>
+	 * 权限状态
+	 * @return 权限状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 权限状态
+	 * @param status 权限状态
+	 * @return 当前对象
+	*/
+	public AssetDataPermissions setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
