@@ -118,6 +118,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
+
 					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
@@ -140,6 +141,7 @@ function FormPage() {
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
 					if(!data[i]) continue;
+					console.log("push",data);
 					opts.push({name:data[i].label,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
@@ -218,8 +220,8 @@ function FormPage() {
 			}
 
 
-			//设置  维修类型 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#type",formData.type);
+			console.log("fox setting"+formData.repairType);
+			fox.setSelectValue4QueryApi("#type",formData.repairType);
 
 			//处理fillBy
 
