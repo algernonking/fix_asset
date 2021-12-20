@@ -464,7 +464,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

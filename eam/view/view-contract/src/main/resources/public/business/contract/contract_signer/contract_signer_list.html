@@ -2,7 +2,7 @@
 /**
  * 合同签订方 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-20 16:55:11
  */
  -->
  <!DOCTYPE html>
@@ -19,48 +19,47 @@
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}">
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
+        .layui-card-body .layui-table {
+            margin:0px;
+        }
     </style>
     <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden">
 
-<div class="layui-card">
+<div class="layui-card-no-shadow ">
 
-    <div class="layui-card-body" style="">
+    <div class="layui-card-body" style="padding:0px">
 
-        <div class="search-bar" style="">
+        <div class="search-bar" style=" display: none; ">
 
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- id , id ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('id')}" class="search-label id-label">id</span><span class="search-colon">:</span></div>
-                        <input id="id" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
-                    <!-- 合同ID , contractId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('合同ID')}" class="search-label contractId-label">合同ID</span><span class="search-colon">:</span></div>
-                        <input id="contractId" class="layui-input search-input" style="width: 140px" type="text" />
-                    </div>
+                    <!-- id , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 合同ID , contractId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 显示顺序 , sort ,typeName=number_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style=""><span th:text="${lang.translate('显示顺序')}" class="search-label sort-label">显示顺序</span><span class="search-colon">:</span></div>
                             <input id="sort" class="layui-input search-input" style="width: 140px" type="text" autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0" min-value="" max-value="" scale="0"/>
                     </div>
-                    <!-- 别名 , alias ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 签订方 , alias ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('别名')}" class="search-label alias-label">别名</span><span class="search-colon">:</span></div>
-                        <input id="alias" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('签订方')}" class="search-label alias-label">签订方</span><span class="search-colon">:</span></div>
+                        <div id="alias" th:data="${enum.toArray('com.dt.platform.constants.enums.contract.SignerAlias')}" style="width:140px" extraParam="{}"></div>
                     </div>
-                    <!-- 签订方类型 , type ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 类型 , type ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('签订方类型')}" class="search-label type-label">签订方类型</span><span class="search-colon">:</span></div>
-                        <input id="type" class="layui-input search-input" style="width: 140px" type="text" />
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('类型')}" class="search-label type-label">类型</span><span class="search-colon">:</span></div>
+
+
+                        <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.contract.SignerType')}" style="width:140px"></div>
+
                     </div>
                     <!-- 唯一代码 , identityCdoe ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -114,7 +113,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 0px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -150,6 +149,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_ALIAS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.contract.SignerAlias')}]];
+    var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.contract.SignerType')}]];
     var AUTH_PREFIX="cont_contract_signer";
 
 

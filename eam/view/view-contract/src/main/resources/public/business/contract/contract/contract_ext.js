@@ -106,7 +106,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log('beforeSingleDelete',data);
             return true;
         },
-        afterSingleDelete:function (data){
+        afterSingleDelete:function (data) {
             console.log('beforeSingleDelete',data);
             return true;
         },
@@ -165,6 +165,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("form:beforeInit")
             this.action=action;
 
+            // 如果是新建，则隐藏 iframe
             if(this.action=="create") {
                 $("#signer-fieldset").hide();
                 $("#signer-content").hide();
@@ -189,6 +190,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeDataFill:function (data) {
             console.log('beforeDataFill',data);
+            admin.putVar('contract-data', data);
         },
         /**
          * 表单数据填充后
@@ -200,7 +202,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
         beforeDialog:function (param){
-            param.title="覆盖对话框标题";
+            //param.title="覆盖对话框标题";
             return param;
         },
         /**
@@ -235,18 +237,25 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("betweenFormSubmitAndClose",result);
             if(this.action=="create") {
 
+                this.action="edit";
+
                 admin.putTempData('cont-contract-form-data-form-action', "edit",true);
-                admin.putTempData('cont-contract-form-data', result.data);
+                admin.putVar('contract-data', result.data);
                 window.module.setAction("edit");
                 window.module.fillFormData(result.data);
-                //window.location.reload();
-                // setTimeout(function (){
-                //     window.module.adjustPopup();
-                //     $(".form-container").attr("scroll","yes");
-                // },1000);
+
+                $("#signer-fieldset").show();
+                $("#signer-content").show();
+
+                $("#attachment-fieldset").show();
+                $("#attachment-content").show();
+
+                $("#performance-fieldset").show();
+                $("#performance-content").show();
+
                 return false;
             }
-            return true;
+            return false;
         },
         /**
          * 数据提交后执行
@@ -270,9 +279,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             // debugger
             console.log("loadSignerFrame",ifr,data);
             //设置 iframe 高度
-            ifr.height("400px");
+            ifr.height("300px");
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/contract/contract_signer/contract_signer_list.html";
         },
         /**
          *  加载 合同附件
