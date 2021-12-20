@@ -170,6 +170,10 @@ public class ContContractConfig extends CodeStarter.BaseCodeConfig<CONT_CONTRACT
                 new Object[]{CONT_CONTRACT.CATALOG_CODE,CONT_CONTRACT.CONTRACT_NO,CONT_CONTRACT.TITLE,CONT_CONTRACT.SIGNING_DATE},
                 new Object[]{CONT_CONTRACT.CONTRACT_STATUS,CONT_CONTRACT.DEPARTMENT_ID,CONT_CONTRACT.FUNDING_STATUS,CONT_CONTRACT.EFFECTIVE_DATE}
         );
+
+        view.field(CONT_CONTRACT.CONTRACT_NO).search().inputWidth(160);
+        view.field(CONT_CONTRACT.DEPARTMENT_ID).search().inputWidth(160);
+
         search.rowsDisplay(2);
     }
 

@@ -1,7 +1,8 @@
 /**
  * 合同签订方 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:13
+ * @since 2021-12-20 16:04:24
+ * @version
  */
 
 layui.config({
@@ -17,6 +18,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
 
+    //模块基础路径
+    const moduleURL="/service-contract/cont-contract-signer";
+
     //列表页的扩展
     var list={
         /**
@@ -29,8 +33,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表格渲染前调用
          * @param cfg 表格配置参数
          * */
-        beforeTableRender:function (cfg){
+        beforeTableRender:function (cfg) {
             console.log("list:beforeTableRender",cfg);
+            cfg.page=false;
         },
         /**
          * 表格渲染后调用
@@ -74,6 +79,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            var contractData=admin.getVar('contract-data');
+            //debugger;
+            param.contractId=contractData.id;
+            param.sortField="sort";
+            param.sortType="asc";
             return true;
         },
         /**
@@ -183,7 +193,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
         beforeDialog:function (param){
-            param.title="覆盖对话框标题";
+            //param.title="覆盖对话框标题";
             return param;
         },
         /**
@@ -209,6 +219,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            var contractData=admin.getVar('contract-data');
+            //debugger;
+            data.contractId=contractData.id;
             return true;
         },
         /**

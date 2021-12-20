@@ -454,7 +454,7 @@ function FormPage() {
 		#end
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('#(formDataKey)-win'); });
 
     }
 
@@ -464,7 +464,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

@@ -22,7 +22,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 合同
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-14 16:37:07
+ * @since 2021-12-20 16:12:42
  * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

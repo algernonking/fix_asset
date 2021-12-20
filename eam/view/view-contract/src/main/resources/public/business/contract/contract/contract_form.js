@@ -1,7 +1,7 @@
 /**
  * 合同 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-14 16:37:17
+ * @since 2021-12-20 16:12:42
  */
 
 function FormPage() {
@@ -426,7 +426,7 @@ function FormPage() {
 		});
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('cont-contract-form-data-win'); });
 
     }
 
@@ -437,8 +437,8 @@ function FormPage() {
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
 		action: action,
-		setAction:function (act) {
-			action=act;
+		setAction: function (act) {
+			action = act;
 		}
 	};
 
