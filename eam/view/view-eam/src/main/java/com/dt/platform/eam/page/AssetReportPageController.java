@@ -73,6 +73,16 @@ public class AssetReportPageController extends ViewController {
 	}
 
 
+	/**
+	 * 资产dashboard
+	 */
+	@RequestMapping("/report_dashboard.html")
+	public String reportDashboard(Model model,HttpServletRequest request , String tenantId) {
+
+		model.addAttribute("tenantId",tenantId);
+		return prefix+"/report_dashboard";
+	}
+
 
 
 

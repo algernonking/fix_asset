@@ -324,8 +324,8 @@ function FormPage() {
 			fox.chooseEmployee(useUserIdDialogOptions);
 		});
 
-		//关闭窗口
-		$("#cancel-button").click(function(){admin.closePopupCenter();});
+
+		$("#cancel-button").click(function(){admin.finishPopupCenterById("eam-asset-collection-form-data-win");});
 
 	}
 

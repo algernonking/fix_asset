@@ -1,6 +1,7 @@
 package com.dt.platform.eam.controller;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.service.IAssetRepairService;
 import com.dt.platform.eam.service.IAssetReportService;
@@ -46,6 +47,16 @@ public class AssetReportController extends SuperController {
         Result<JSONArray> result=new Result<>();
         result.success(true).data(assetReportService.queryCategoryData(sample));
         return result;
+    }
+
+
+    @ApiOperation(value = "面板数据")
+    @ApiOperationSupport(order=3)
+    @SentinelResource(value = AssetReportServiceProxy.DASHBOARD , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(AssetReportServiceProxy.DASHBOARD)
+    public  Result<JSONObject> dashBoard() {
+        Result<JSONObject> result=new Result<>();
+        return assetReportService.dashboard();
     }
 
 

@@ -337,7 +337,7 @@ function FormPage() {
 		});
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+		$("#cancel-button").click(function(){admin.finishPopupCenterById("eam-asset-tranfer-form-data-win");});
 
     }
 

@@ -2,11 +2,17 @@ package com.dt.platform.eam.service.impl;
 
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.constants.enums.eam.AssetStatusEnum;
 import com.dt.platform.domain.eam.Asset;
 import com.dt.platform.eam.service.IAssetDataService;
 import com.dt.platform.eam.service.IAssetReportService;
+import com.github.foxnic.api.error.ErrorDesc;
+import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.lang.StringUtil;
+import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
@@ -27,6 +33,8 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
     @Autowired
     IAssetDataService assetDataService;
 
+
+
     /**
      * 注入DAO对象
      * */
@@ -44,6 +52,59 @@ public class AssetReportServiceImpl  extends SuperService<Asset> implements IAss
         return IDGenerator.getSnowflakeIdString();
     }
 
+    @Override
+    public Result<JSONObject>  dashboard() {
+
+        JSONObject result=new JSONObject();
+
+        //获取资产分类数据
+        String sql="select asset_status,count(1) cnt, IFNULL(sum(original_unit_price),0) asset_original_unit_price from eam_asset where owner_code='asset' and deleted=0  and status='complete' group by asset_status order by 2 desc";
+        RcdSet rs=dao.query(sql);
+        JSONArray assetStatusArr=new JSONArray();
+        JSONArray assetStatusPieData=new JSONArray();
+        for(int i=0;i<rs.size();i++){
+            JSONObject r=rs.getRcd(i).toJSONObject();
+            String assetStatus=rs.getRcd(i).getString("asset_status");
+            String value= EnumUtil.parseByCode(AssetStatusEnum.class,assetStatus)==null
+                    ?assetStatus:EnumUtil.parseByCode(AssetStatusEnum.class,assetStatus).text();
+            r.put("name",value);
+            assetStatusArr.add(r);
+
+            JSONObject r2=new JSONObject();
+            r2.put("value",rs.getRcd(i).getInteger("cnt"));
+            r2.put("name",value);
+            assetStatusPieData.add(r2);
+        }
+        result.put("assetStatusData",assetStatusArr);
+        result.put("assetStatusPieData",assetStatusPieData);
+
+        //资产分类
+        String sql2="select b.name,count(1) cnt from eam_asset a, pcm_catalog b where a.owner_code='asset' and a.deleted=0  and a.status='complete'  \n" +
+                "and a.category_id=b.id group by name";
+        RcdSet rs2=dao.query(sql2);
+        JSONArray catalogName=new JSONArray();
+        JSONArray catalogCount=new JSONArray();
+        for(int i=0;i<rs2.size();i++){
+            catalogName.add(rs2.getRcd(i).getString("name"));
+            catalogCount.add(rs2.getRcd(i).getInteger("cnt"));
+        }
+        result.put("catalogNameData",catalogName);
+        result.put("catalogCountData",catalogCount);
+
+        //资产总数
+        String sql3="select \n" +
+                "(select count(1) asset_cnt from eam_asset a where a.owner_code='asset' and a.deleted=0  and a.status='complete') asset_cnt,\n" +
+                "(select IFNULL(sum(original_unit_price),0) asset_original_unit_price from eam_asset a where a.owner_code='asset' and a.deleted=0  and a.status='complete') asset_original_unit_price,\n" +
+                "(select count(1) asset_clean_cnt from eam_asset a where a.owner_code='asset_clean_out' and a.deleted=0  and a.status='complete') asset_clean_cnt,\n" +
+                "(select count(1) asset_repair_cnt from eam_asset a where a.owner_code='asset' and a.deleted=0  and a.status='complete' and a.asset_status='repair') asset_repair_cnt\n";
+
+        Rcd rs3=dao.queryRecord(sql3);
+        result.put("assetData",rs3.toJSONObject());
+
+        Result<JSONObject> resJson=new Result<>();
+        resJson.data(result);
+        return resJson;
+    }
 
     public JSONArray queryOrganizationData(Asset sample){
 

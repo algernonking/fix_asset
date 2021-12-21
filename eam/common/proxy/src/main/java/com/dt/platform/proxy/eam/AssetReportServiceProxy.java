@@ -48,7 +48,10 @@ public interface AssetReportServiceProxy {
 	 */
 	public static final String QUERY_ORGANIZATION_DATA = API_PREFIX + "query-organization-data";
 
-
+	/**
+	 * 资产dashboard
+	 */
+	public static final String DASHBOARD = API_PREFIX + "dashboard";
 
 	/**
 	 * 控制器类名

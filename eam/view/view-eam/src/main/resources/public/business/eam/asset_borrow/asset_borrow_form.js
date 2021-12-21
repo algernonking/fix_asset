@@ -315,8 +315,8 @@ function FormPage() {
 			fox.chooseEmployee(borrowerIdDialogOptions);
 		});
 
-	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+
+		$("#cancel-button").click(function(){admin.finishPopupCenterById("eam-asset-borrow-form-data-win");});
 
     }
 

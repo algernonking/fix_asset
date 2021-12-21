@@ -383,7 +383,8 @@ function FormPage() {
 		});
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+		$("#cancel-button").click(function(){admin.finishPopupCenterById("ops-information-system-form-data-win");});
+
 
     }
 

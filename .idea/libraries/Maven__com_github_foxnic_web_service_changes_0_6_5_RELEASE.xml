@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.foxnic.web:service-changes:0.6.5.RELEASE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/foxnic/web/service-changes/0.6.5.RELEASE/service-changes-0.6.5.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/foxnic/web/service-changes/0.6.5.RELEASE/service-changes-0.6.5.RELEASE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/foxnic/web/service-changes/0.6.5.RELEASE/service-changes-0.6.5.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

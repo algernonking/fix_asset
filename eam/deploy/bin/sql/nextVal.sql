@@ -1,5 +1,5 @@
 DELIMITER ;;
-CREATE DEFINER=``@`%` PROCEDURE `NEXT_VAL`(IN ID varchar(100),IN TID varchar(100),IN NUM int,OUT SVAL varchar(4000))
+CREATE DEFINER=`%`@`%` PROCEDURE `NEXT_VAL`(IN ID varchar(100),IN TID varchar(100),IN NUM int,OUT SVAL varchar(4000))
 BEGIN
 
     DECLARE VAL bigint;
