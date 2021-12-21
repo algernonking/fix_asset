@@ -11,7 +11,7 @@ cd $release_dir
 mkdir lib
 cp -r $jar_dir/lib/*  $release_dir/lib/
 cp $jar_dir/wrapper-all-0.0.2.RELEASE.jar  $release_dir/eam.jar
-tar -zcvf update.tar ./*
+tar -zcvf update.tar.gz ./*
 open .
 exit 0
 

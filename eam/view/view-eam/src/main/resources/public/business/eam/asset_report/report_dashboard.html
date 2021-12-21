@@ -45,6 +45,56 @@
             padding-right: 70px !important;text-overflow:ellipsis!important;overflow:hidden!important;white-space:nowrap!important;}
         .layuimini-notice-title {line-height:28px;font-size:14px;}
         .layuimini-notice-extra {position:absolute;top:50%;margin-top:-8px;right:16px;display:inline-block;height:16px;color:#999;}
+
+
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        td,th {
+            padding: 0;
+        }
+
+        .pure-table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            empty-cells: show;
+            border: 1px solid #cbcbcb;
+        }
+
+        .pure-table caption {
+            color: #000;
+            font: italic 85%/1 arial,sans-serif;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        .pure-table td,.pure-table th {
+            border-left: 1px solid #cbcbcb;
+            border-width: 0 0 0 1px;
+            font-size: inherit;
+            margin: 0;
+            overflow: visible;
+            padding: .5em 1em;
+        }
+
+        .pure-table thead {
+            background-color: #e0e0e0;
+            color: #000;
+            text-align: left;
+            vertical-align: bottom;
+        }
+
+        .pure-table td {
+            background-color: transparent;
+        }
+
+        .pure-table-odd td {
+            background-color: #f2f2f2;
+        }
+
     </style>
 </head>
 
@@ -181,25 +231,17 @@
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-md8">
 
-
                             <div style="height:250px">
-                                <table id="assetStatus" style="width:70%;text-align:left;">
+                                <table class="pure-table" id="assetStatus" style="width:70%;text-align:left;">
 
                                 </table>
                             </div>
 
                         </div>
 
-
-
                         <div class="layui-col-md4">
-
                             <div id="assetStatusPie"  style="height:200px"></div>
-
                         </div>
-
-
-
 
                     </div>
 

@@ -27,9 +27,6 @@ function ListPage() {
 
 
 
-
-
-
         var task=setTimeout(function(){layer.load(2);},1000);
         admin.request(moduleURL+"/dashboard", {}, function (data) {
             clearTimeout(task);
@@ -42,20 +39,17 @@ function ListPage() {
                 $("#assetCleanCnt").html(assetData.assetData.assetCleanCnt);
                 $("#assetRepairCnt").html(assetData.assetData.assetRepairCnt);
 
-
-                var html="    <tr>\n" +
-                    "                <th>资产状态</th>\n" +
-                    "                <th>数量</th>\n" +
-                    "                <th>金额</th>\n" +
-                    "                </tr>";
-
+                var html="<tr>\n" +
+                    "<th>资产状态</th>\n" +
+                    "<th>数量</th>\n" +
+                    "<th>金额</th>\n" +
+                    "</tr>";
                 for(var i=0;i<assetData.assetStatusData.length;i++){
                     html=html+" <tr>\n" +
                         "    <td>"+assetData.assetStatusData[i].name+"</td>\n" +
                         "    <td>"+assetData.assetStatusData[i].cnt+"</td>\n" +
                         "    <td>"+assetData.assetStatusData[i].assetOriginalUnitPrice+"</td>\n" +
                         "  </tr>"
-
                 }
 
                 $("#assetStatus").html(html);
@@ -79,6 +73,12 @@ function ListPage() {
                         name: '数量',
                         type: 'bar', //柱状
                         data:assetData.catalogCountData,
+                        label:{
+                            normal:{
+                                show:true,
+                                position:"top",
+                            }
+                        },
                         itemStyle: {
                             normal: { //柱子颜色
                                 color: 'blue'
@@ -94,6 +94,12 @@ function ListPage() {
                             name: '资产状态占比',
                             type: 'pie',    // 设置图表类型为饼图
                             radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                            label:{
+                              normal:{
+                                  show:true,
+                                  formatter:'{b}:{c}({d}%)'
+                              }
+                            },
                             data:assetData.assetStatusPieData
                         }
                     ]
