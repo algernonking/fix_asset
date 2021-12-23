@@ -1,7 +1,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-23 16:54:52
  */
 
 function FormPage() {
@@ -42,8 +42,6 @@ function FormPage() {
 		//绑定提交事件
 		bindButtonEvent();
 
-		//调整窗口的高度与位置
-		adjustPopup();
 	}
 
 	/**
@@ -63,7 +61,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'cont-contract-attachment-form-data-win');
 			if(area==null) return;
 			admin.putTempData('cont-contract-attachment-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -85,6 +83,32 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+	    //渲染图片字段
+		foxup.render({
+			el:"fileId",
+			maxFileCount: 1,
+			displayFileName: true,
+			accept: "file",
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
+			},
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
+			},
+			beforeRemove:function (elId,fileId,index,upload) {
+				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
+				return true;
+			},
+			afterRemove:function (elId,fileId,index,upload) {
+				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
+			}
+	    });
 	}
 
 	/**
@@ -108,6 +132,12 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
+			//设置 文件ID 显示附件
+		    if($("#fileId").val()) {
+				foxup.fill("fileId",$("#fileId").val());
+		    } else {
+				adjustPopup();
+			}
 
 
 
@@ -212,7 +242,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('cont-contract-attachment-form-data-win'); });
 
     }
 
@@ -222,7 +252,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

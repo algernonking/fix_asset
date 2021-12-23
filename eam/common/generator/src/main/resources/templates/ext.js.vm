@@ -277,6 +277,14 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             win.location="/business/system/code_example_car/code_example_car_list.html";
         },
         #end
+        /**
+         * 文件上传组件回调
+         *  event 类型包括：
+         *  afterPreview ：文件选择后，未上传前触发；
+         *  afterUpload ：文件上传后触发
+         *  beforeRemove ：文件删除前触发
+         *  afterRemove ：文件删除后触发
+         * */
         onUploadEvent: function(e) {
             console.log("onUploadEvent",e);
         },

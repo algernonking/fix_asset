@@ -67,12 +67,14 @@ public class ContContractAttachmentConfig extends CodeStarter.BaseCodeConfig<CON
 
     @Override
     public void configForm(ViewOptions view, FormOptions form) {
+
         form.columnLayout(new Object[]{
                 CONT_CONTRACT_ATTACHMENT.NAME,
                 CONT_CONTRACT_ATTACHMENT.TYPE,
                 CONT_CONTRACT_ATTACHMENT.FILE_ID,
                 CONT_CONTRACT_ATTACHMENT.NOTES
         });
+
     }
 
     @Override
