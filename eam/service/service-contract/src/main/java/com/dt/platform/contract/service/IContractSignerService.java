@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 合同签订方 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-20 16:55:10
 */
 
 public interface IContractSignerService extends ISuperService<ContractSigner> {

@@ -12,18 +12,12 @@ public enum AttachmentType implements CodeTextEnum {
 	/**
 	 * 合同文本
 	 */
-	CONTRACT_TEXT("contract_text" , "合同文本"),
+	CONTRACT_TEXT("contract_text" , "文本"),
 
 	/**
 	 * 交付物
 	*/
-	DELIVERABLE("deliverable" , "交付物"),
-
-	/**
-	 * 履约附件
-	*/
-	PERFORMANCE("performance" , "履约附件")
-	;
+	DELIVERABLE("deliverable" , "交付物");
 
 	private String code;
 	private String text;

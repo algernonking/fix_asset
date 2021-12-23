@@ -7,6 +7,7 @@ import com.dt.platform.generator.module.CodeStarter;
 import com.github.foxnic.generator.builder.business.option.ServiceOptions;
 import com.github.foxnic.generator.builder.model.PoClassFile;
 import com.github.foxnic.generator.builder.model.VoClassFile;
+import com.github.foxnic.generator.builder.view.option.FormOptions;
 import com.github.foxnic.generator.builder.view.option.ListOptions;
 import com.github.foxnic.generator.builder.view.option.ViewOptions;
 import com.github.foxnic.generator.config.WriteMode;
@@ -35,38 +36,43 @@ public class ContContractAttachmentConfig extends CodeStarter.BaseCodeConfig<CON
     @Override
     public void configFields(ViewOptions view) {
 
-//        view.field(SYS_DICT.ID)
-//                .basic().hidden();
-//        view.field(SYS_DICT.IS_TREE).basic().hidden();
-//
-//        view.field(SYS_DICT.MODULE)
-//                .basic().label("模块")
-//                .form().validate().required()
-//                .form().selectBox().queryApi(MenuServiceProxy.QUERY_LIST+"?parentId=0").paging(false).filter(false).toolbar(false)
-//                .valueField(MenuMeta.ID).textField(MenuMeta.LABEL).fillWith(DictMeta.MODULE_INFO).muliti(false,false)
-//                .search().triggerOnSelect(true);
-//
-//        view.field(SYS_DICT.CODE)
-//                .basic().label("代码")
-//                .form().validate().required()
-//                .search().fuzzySearch()
-//        ;
-//
-//        view.field(SYS_DICT.NAME)
-//                .basic().label("名称")
-//                .form().validate().required()
-//                .search().fuzzySearch();
-//
-//        //
-//        view.formWindow().bottomSpace(120);
+        view.field(CONT_CONTRACT_ATTACHMENT.ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.OWNER_TYPE)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.OWNER_ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.NOTES)
+                .form().textArea();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.FILE_ID)
+                .form().upload().acceptAllType().acceptSingleFile();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.TYPE).form().radioBox().enumType(AttachmentType.class);
+
+        view.field(CONT_CONTRACT_ATTACHMENT.CREATE_TIME).basic().label("上传时间");
 
     }
 
     @Override
     public void configList(ViewOptions view, ListOptions list) {
-//        list.operationColumn().width(220);
-//        //表格操作列增加一个按钮，并指定JS函数
-//        list.operationColumn().addActionButton("条目","openDictItemWindow");
+        view.search().disable();
+        view.list().disableMargin();
+        list.columnLayout(CONT_CONTRACT_ATTACHMENT.TYPE,CONT_CONTRACT_ATTACHMENT.NAME,CONT_CONTRACT_ATTACHMENT.CREATE_TIME);
+        list.operationColumn().addActionButton("下载","download");
+    }
+
+    @Override
+    public void configForm(ViewOptions view, FormOptions form) {
+        form.columnLayout(new Object[]{
+                CONT_CONTRACT_ATTACHMENT.NAME,
+                CONT_CONTRACT_ATTACHMENT.TYPE,
+                CONT_CONTRACT_ATTACHMENT.FILE_ID,
+                CONT_CONTRACT_ATTACHMENT.NOTES
+        });
     }
 
     @Override

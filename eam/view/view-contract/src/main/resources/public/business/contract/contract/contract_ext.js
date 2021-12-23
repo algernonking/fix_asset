@@ -295,7 +295,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //设置 iframe 高度
             ifr.height("400px");
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/contract/contract_attachment/contract_attachment_list.html?ownerId="+data.id+"&ownerType=contract";
         },
         /**
          *  加载 执行情况

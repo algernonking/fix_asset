@@ -277,6 +277,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             win.location="/business/system/code_example_car/code_example_car_list.html";
         },
         #end
+        onUploadEvent: function(e) {
+            console.log("onUploadEvent",e);
+        },
         /**
          * 末尾执行
          */

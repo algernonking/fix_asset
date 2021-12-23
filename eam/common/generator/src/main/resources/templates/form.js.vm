@@ -110,18 +110,24 @@ function FormPage() {
 			#if(f.uploadField.getAcceptExts("|")!=null)
 			exts:'#(f.uploadField.getAcceptExts("|"))',
 			#end
-			afterPreview:function(elId,index,fileId,upload){
+			afterPreview:function(elId,index,fileId,upload,fileName,fileType){
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterPreview",elId:elId,index:index,fileId:fileId,upload:upload,fileName:fileName,fileType:fileType});
 			},
-			afterUpload:function (result,index,upload) {
-				console.log("文件上传后回调")
+			afterUpload:function (elId,result,index,upload) {
+				console.log("文件上传后回调");
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterUpload",elId:elId,index:index,upload:upload});
 			},
 			beforeRemove:function (elId,fileId,index,upload) {
 				console.log("文件删除前回调");
+				if(window.pageExt.form.onUploadEvent) {
+					return window.pageExt.form.onUploadEvent({event:"beforeRemove",elId:elId,index:index,fileId:fileId,upload:upload});
+				}
 				return true;
 			},
 			afterRemove:function (elId,fileId,index,upload) {
 				adjustPopup();
+				window.pageExt.form.onUploadEvent &&  window.pageExt.form.onUploadEvent({event:"afterRemove",elId:elId,index:index,upload:upload});
 			}
 	    });
 		#else if(f.typeName.equals("select_box"))

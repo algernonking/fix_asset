@@ -1,7 +1,7 @@
 /**
  * 合同签订方 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-20 16:55:11
  */
 
 function FormPage() {
@@ -63,7 +63,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'cont-contract-signer-form-data-win');
 			if(area==null) return;
 			admin.putTempData('cont-contract-signer-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -85,6 +85,32 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
+		//渲染 alias 下拉字段
+		fox.renderSelectBox({
+			el: "alias",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("alias",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -113,6 +139,8 @@ function FormPage() {
 
 
 
+			//设置  签订方 设置下拉框勾选
+			fox.setSelectValue4Enum("#alias",formData.alias,SELECT_ALIAS_DATA);
 
 			//处理fillBy
 
@@ -163,6 +191,8 @@ function FormPage() {
 
 
 
+		//获取 签订方 下拉框的值
+		data["alias"]=fox.getSelectedValue("alias",false);
 
 		return data;
 	}
@@ -212,7 +242,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('cont-contract-signer-form-data-win'); });
 
     }
 
@@ -222,7 +252,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

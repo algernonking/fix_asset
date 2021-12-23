@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同签订方 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-20 16:55:10
 */
 
 @Api(tags = "合同签订方")
@@ -65,13 +65,13 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "添加合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.CONTRACT_ID , value = "合同ID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.SORT , value = "显示顺序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class , example = "part_a"),
+		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class , example = "enterprise"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.IDENTITY_CDOE , value = "唯一代码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统名称"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.LANDLINE_NUMBER , value = "座机号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.FAX_NUMBER , value = "传真号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
@@ -94,7 +94,7 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "删除合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = ContractSignerVOMeta.ID)
@@ -128,13 +128,13 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "更新合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.CONTRACT_ID , value = "合同ID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.SORT , value = "显示顺序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class , example = "part_a"),
+		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class , example = "enterprise"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.IDENTITY_CDOE , value = "唯一代码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统名称"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.LANDLINE_NUMBER , value = "座机号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.FAX_NUMBER , value = "传真号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
@@ -157,13 +157,13 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "保存合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.CONTRACT_ID , value = "合同ID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.SORT , value = "显示顺序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class , example = "part_a"),
+		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class , example = "enterprise"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.IDENTITY_CDOE , value = "唯一代码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统名称"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.LANDLINE_NUMBER , value = "座机号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.FAX_NUMBER , value = "传真号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
@@ -225,13 +225,13 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "查询合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.CONTRACT_ID , value = "合同ID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.SORT , value = "显示顺序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class , example = "part_a"),
+		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class , example = "enterprise"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.IDENTITY_CDOE , value = "唯一代码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统名称"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.LANDLINE_NUMBER , value = "座机号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.FAX_NUMBER , value = "传真号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
@@ -255,13 +255,13 @@ public class ContractSignerController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询合同签订方")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ID , value = "id" , required = true , dataTypeClass=String.class , example = "525350306561658880"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.CONTRACT_ID , value = "合同ID" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.SORT , value = "显示顺序" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.ALIAS , value = "别名" , required = false , dataTypeClass=String.class , example = "part_a"),
+		@ApiImplicitParam(name = ContractSignerVOMeta.TYPE , value = "签订方类型" , required = false , dataTypeClass=String.class , example = "enterprise"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.IDENTITY_CDOE , value = "唯一代码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractSignerVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "系统名称"),
 		@ApiImplicitParam(name = ContractSignerVOMeta.LANDLINE_NUMBER , value = "座机号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.FAX_NUMBER , value = "传真号码" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = ContractSignerVOMeta.ADDRESS , value = "地址" , required = false , dataTypeClass=String.class),
