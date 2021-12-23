@@ -1,7 +1,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-23 16:54:50
  */
 
 
@@ -62,7 +62,7 @@ function ListPage() {
 					return value;
 				}
 			}
-			var h=$(".search-bar").height();
+			var h=-28; 
 			var tableConfig={
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
@@ -74,14 +74,14 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'ownerId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所有者ID') , templet: function (d) { return templet('ownerId',d.ownerId,d);}  }
-					,{ field: 'ownerType', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所有者类型') , templet: function (d) { return templet('ownerType',d.ownerType,d);}  }
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件类型') , templet: function (d) { return templet('type',d.type,d);}  }
-					,{ field: 'fileId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('文件ID') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件类型'), templet:function (d){ return templet('type',fox.getEnumText(RADIO_TYPE_DATA,d.type),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('附件名称') , templet: function (d) { return templet('name',d.name,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('上传时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
+					,{ field: 'ownerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所有者ID') , templet: function (d) { return templet('ownerId',d.ownerId,d);}  }
+					,{ field: 'ownerType', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所有者类型') , templet: function (d) { return templet('ownerType',d.ownerType,d);}  }
+					,{ field: 'fileId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('文件ID') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -96,6 +96,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
@@ -116,10 +118,7 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.id={ inputType:"button",value: $("#id").val()};
-		value.ownerId={ inputType:"button",value: $("#ownerId").val()};
-		value.ownerType={ inputType:"button",value: $("#ownerType").val()};
-		value.type={ inputType:"button",value: $("#type").val()};
+		value.type={ inputType:"radio_box", value: xmSelect.get("#type",true).getValue("value"), label:xmSelect.get("#type",true).getValue("nameStr") };
 		value.fileId={ inputType:"button",value: $("#fileId").val()};
 		value.name={ inputType:"button",value: $("#name").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
@@ -170,6 +169,27 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		//渲染 type 搜索框
+		fox.renderSelectBox({
+			el: "type",
+			size: "small",
+			radio: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -254,10 +274,7 @@ function ListPage() {
             }
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('合同附件')+fox.translate('吗？'), function (i) {
-				top.layer.close(i);
-				top.layer.load(2);
-                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-					top.layer.closeAll('loading');
+                admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
 						if(window.pageExt.list.afterBatchDelete) {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
@@ -269,7 +286,6 @@ function ListPage() {
 						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
-
 			});
         }
 	}
@@ -290,24 +306,16 @@ function ListPage() {
 
 			admin.putTempData('cont-contract-attachment-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('cont-contract-attachment-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('cont-contract-attachment-form-data-form-action', "view",true);
 						showEditForm(data.data);
@@ -340,6 +348,9 @@ function ListPage() {
 						}
 					});
 				});
+			}
+			else if (layEvent === 'download') { // 下载
+				window.pageExt.list.download(data);
 			}
 			
 		});
