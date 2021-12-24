@@ -15,6 +15,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum AssetOwnerCodeEnum implements CodeTextEnum {
 
 	ASSET("asset" , "资产"),
+	ASSET_UNCONFIRMED("asset_unconfirmed" , "资产新增未确认"),
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
 	ASSET_CLEAN_OUT("asset_clean_out" , "资产清理"),
 	ASSET_SOFTWARE("asset_software" , "软件资产"),

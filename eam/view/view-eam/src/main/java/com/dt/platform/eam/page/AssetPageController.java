@@ -226,6 +226,22 @@ public class AssetPageController extends ViewController {
 	/**
 	 * 资产 台账
 	 */
+	@RequestMapping("/asset_search/asset_clean_search.html")
+	public String searchCleanList(Model model,HttpServletRequest request) {
+
+
+		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.ASSET_BOOK.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+		return prefix+"/asset_search/asset_clean_search";
+	}
+
+	/**
+	 * 资产 台账
+	 */
 	@RequestMapping("/asset_search/asset_search.html")
 	public String searchList(Model model,HttpServletRequest request) {
 
@@ -238,7 +254,6 @@ public class AssetPageController extends ViewController {
 		}
 		return prefix+"/asset_search/asset_search";
 	}
-
 
 
 	/**
