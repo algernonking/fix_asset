@@ -48,5 +48,24 @@ public class DailyManagementPageController extends ViewController {
 		return prefix+"/myAsset_list";
 	}
 
+	/**
+	 * 品牌 功能主页面
+	 */
+	@RequestMapping("/myAssetMgr_list.html")
+	public String listMgr(Model model,HttpServletRequest request) {
+
+		Result<HashMap<String, List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryListColumnByModule(AssetAttributeItemOwnerEnum.PUBLIC_SHOW.code(),null);
+		if(result.isSuccess()){
+			HashMap<String,List<AssetAttributeItem>> data = result.getData();
+			List<AssetAttributeItem> list=data.get("attributeListData");
+			model.addAttribute("attributeListData",list);
+		}
+
+		String employeeId= SessionUser.getCurrent().getActivatedEmployeeId();
+		model.addAttribute("employeeId",employeeId);
+
+		return prefix+"/myAssetMgr_list";
+	}
+
 
 }

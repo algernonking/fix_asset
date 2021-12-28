@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-curversion=1.0.1
+curversion=1.0.2
 appdockerfile="eamDockerFile"
 if [ ! -f "eam.sql" ];then
     echo "eam.sql not exist"
