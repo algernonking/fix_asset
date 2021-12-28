@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 合同附件 接口控制器
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:46
+ * @since 2021-12-28 15:44:51
 */
 
 @Api(tags = "合同附件")
@@ -65,13 +65,13 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "添加合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class , example = "525341591175434240"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class , example = "contract"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.TYPE , value = "附件类型" , required = false , dataTypeClass=String.class , example = "contract_text"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "526426814575280128"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "528210749042982912"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.NAME , value = "附件名称" , required = false , dataTypeClass=String.class , example = "胡云"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "为其未全额"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "wu "),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = ContractAttachmentServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -88,7 +88,7 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "删除合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152")
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = ContractAttachmentVOMeta.ID)
@@ -122,13 +122,13 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "更新合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class , example = "525341591175434240"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class , example = "contract"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.TYPE , value = "附件类型" , required = false , dataTypeClass=String.class , example = "contract_text"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "526426814575280128"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "528210749042982912"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.NAME , value = "附件名称" , required = false , dataTypeClass=String.class , example = "胡云"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "为其未全额"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "wu "),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { ContractAttachmentVOMeta.PAGE_INDEX , ContractAttachmentVOMeta.PAGE_SIZE , ContractAttachmentVOMeta.SEARCH_FIELD , ContractAttachmentVOMeta.FUZZY_FIELD , ContractAttachmentVOMeta.SEARCH_VALUE , ContractAttachmentVOMeta.DIRTY_FIELDS , ContractAttachmentVOMeta.SORT_FIELD , ContractAttachmentVOMeta.SORT_TYPE , ContractAttachmentVOMeta.IDS } )
 	@NotNull(name = ContractAttachmentVOMeta.ID)
@@ -145,13 +145,13 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "保存合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class , example = "525341591175434240"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class , example = "contract"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.TYPE , value = "附件类型" , required = false , dataTypeClass=String.class , example = "contract_text"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "526426814575280128"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "528210749042982912"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.NAME , value = "附件名称" , required = false , dataTypeClass=String.class , example = "胡云"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "为其未全额"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "wu "),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ContractAttachmentVOMeta.PAGE_INDEX , ContractAttachmentVOMeta.PAGE_SIZE , ContractAttachmentVOMeta.SEARCH_FIELD , ContractAttachmentVOMeta.FUZZY_FIELD , ContractAttachmentVOMeta.SEARCH_VALUE , ContractAttachmentVOMeta.DIRTY_FIELDS , ContractAttachmentVOMeta.SORT_FIELD , ContractAttachmentVOMeta.SORT_TYPE , ContractAttachmentVOMeta.IDS } )
 	@NotNull(name = ContractAttachmentVOMeta.ID)
@@ -207,13 +207,13 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "查询合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class , example = "525341591175434240"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class , example = "contract"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.TYPE , value = "附件类型" , required = false , dataTypeClass=String.class , example = "contract_text"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "526426814575280128"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "528210749042982912"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.NAME , value = "附件名称" , required = false , dataTypeClass=String.class , example = "胡云"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "为其未全额"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "wu "),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { ContractAttachmentVOMeta.PAGE_INDEX , ContractAttachmentVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = ContractAttachmentServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -231,13 +231,13 @@ public class ContractAttachmentController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询合同附件")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "526426850986033152"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "528210765681786880"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_ID , value = "所有者ID" , required = false , dataTypeClass=String.class , example = "525341591175434240"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.OWNER_TYPE , value = "所有者类型" , required = false , dataTypeClass=String.class , example = "contract"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.TYPE , value = "附件类型" , required = false , dataTypeClass=String.class , example = "contract_text"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "526426814575280128"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.FILE_ID , value = "文件ID" , required = false , dataTypeClass=String.class , example = "528210749042982912"),
 		@ApiImplicitParam(name = ContractAttachmentVOMeta.NAME , value = "附件名称" , required = false , dataTypeClass=String.class , example = "胡云"),
-		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "为其未全额"),
+		@ApiImplicitParam(name = ContractAttachmentVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "wu "),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = ContractAttachmentServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

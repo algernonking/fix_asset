@@ -1,7 +1,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:50
+ * @since 2021-12-28 15:44:51
  */
 
 
@@ -80,7 +80,7 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'ownerId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所有者ID') , templet: function (d) { return templet('ownerId',d.ownerId,d);}  }
 					,{ field: 'ownerType', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('所有者类型') , templet: function (d) { return templet('ownerType',d.ownerType,d);}  }
-					,{ field: 'fileId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('文件ID') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
+					,{ field: 'fileId', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('附件') , templet: function (d) { return templet('fileId',d.fileId,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -367,7 +367,10 @@ function ListPage() {
 		}
 		var action=admin.getTempData('cont-contract-attachment-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString='id=' + data.id;
+		if(window.pageExt.list.makeFormQueryString) {
+			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+		}
 		admin.putTempData('cont-contract-attachment-form-data', data);
 		var area=admin.getTempData('cont-contract-attachment-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -384,7 +387,7 @@ function ListPage() {
 			area: ["500px",height+"px"],
 			type: 2,
 			id:"cont-contract-attachment-form-data-win",
-			content: '/business/contract/contract_attachment/contract_attachment_form.html' + queryString,
+			content: '/business/contract/contract_attachment/contract_attachment_form.html' + (queryString?("?"+queryString):""),
 			finish: function () {
 				refreshTableData();
 			}

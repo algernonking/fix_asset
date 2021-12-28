@@ -49,9 +49,15 @@ public class ContContractAttachmentConfig extends CodeStarter.BaseCodeConfig<CON
                 .form().textArea();
 
         view.field(CONT_CONTRACT_ATTACHMENT.FILE_ID)
+                .basic().label("附件")
+                .form().validate().required()
                 .form().upload().acceptAllType().acceptSingleFile();
 
-        view.field(CONT_CONTRACT_ATTACHMENT.TYPE).form().radioBox().enumType(AttachmentType.class);
+        view.field(CONT_CONTRACT_ATTACHMENT.TYPE).form().radioBox().enumType(AttachmentType.class)
+        .form().validate().required();
+
+        view.field(CONT_CONTRACT_ATTACHMENT.NAME)
+                .form().validate().required();
 
         view.field(CONT_CONTRACT_ATTACHMENT.CREATE_TIME).basic().label("上传时间");
 
@@ -67,7 +73,7 @@ public class ContContractAttachmentConfig extends CodeStarter.BaseCodeConfig<CON
 
     @Override
     public void configForm(ViewOptions view, FormOptions form) {
-
+        form.labelWidth(80);
         form.columnLayout(new Object[]{
                 CONT_CONTRACT_ATTACHMENT.NAME,
                 CONT_CONTRACT_ATTACHMENT.TYPE,

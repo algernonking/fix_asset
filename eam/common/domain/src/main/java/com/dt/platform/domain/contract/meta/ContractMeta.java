@@ -10,7 +10,7 @@ import org.github.foxnic.web.domain.hrm.Organization;
 
 /**
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-20 16:12:42
+ * @since 2021-12-28 14:16:12
  * @sign FBA14368FFA32BC1456A2C0BD5BFA8FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

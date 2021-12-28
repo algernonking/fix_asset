@@ -2,7 +2,7 @@
 /**
  * 合同履行情况 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-28 14:20:20
  */
  -->
  <!DOCTYPE html>
@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
     </style>
@@ -31,55 +32,54 @@
 
     <form id="data-form" lay-filter="data-form" class="layui-form model-form" style="display:none">
 
+        <input name="id" id="id"  type="hidden"/>
 
          <!--开始：group 循环-->
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-4344-content">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs12 form-column" >
 
-                    <div class="layui-form-item" style="display: none">
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('id')}">id</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="id" id="id" name="id" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('id') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('合同ID')}">合同ID</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="contractId" id="contractId" name="contractId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('合同ID') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('概述')}">概述</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('概述')}">概述</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="title" id="title" name="title" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('概述') }" type="text" class="layui-input"  />
-                        </div>
-                    </div>
-
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('履约细节')}">履约细节</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="detail" id="detail" name="detail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('履约细节') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('履约时间')}">履约时间</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
-                            <input input-type="date" lay-filter="performanceTime" id="performanceTime" name="performanceTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('履约时间') }" type="text" class="layui-input"   />
+                        <div class="layui-form-label "><div th:text="${lang.translate('履约日期')}">履约日期</div></div>
+                        <div class="layui-input-block ">
+                            <input input-type="date" lay-filter="performanceTime" id="performanceTime" name="performanceTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('履约日期') }" type="text" class="layui-input"    lay-verify=""   />
                         </div>
                     </div>
+
+                
+                    <div class="layui-form-item" >
+                    <div class="layui-form-label "><div th:text="${lang.translate('履约细节')}">履约细节</div></div>
+                    <div class="layui-input-block ">
+                        <textarea lay-filter="detail" id="detail" name="detail" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('履约细节') }" class="layui-textarea" style="height: 100px" ></textarea>
+                    </div>
+                </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
             <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="attachment-fieldset">
+        <legend>附件</legend>
+        </fieldset>
+        <div class="layui-row form-row" style="text-align: center;" id="attachment-content">
+            <div style="display: inline-block;padding-right: 8px;padding-left: 8px" class="layui-col-xs12">
+            <iframe js-fn="loadAttachmentFrame" class="form-iframe" frameborder="0" style="width: 100%"></iframe>
+            </div>
         </div>
         <!--结束：group循环-->
 
@@ -102,7 +102,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={};
+    var VALIDATE_CONFIG={"performanceTime":{"date":true,"labelInForm":"履约日期","inputType":"date_input"}};
     var AUTH_PREFIX="cont_contract_performance";
 
 

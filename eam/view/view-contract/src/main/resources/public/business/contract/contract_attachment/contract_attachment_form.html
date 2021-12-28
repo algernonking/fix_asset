@@ -2,7 +2,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:51
+ * @since 2021-12-28 15:44:51
  */
  -->
  <!DOCTYPE html>
@@ -23,6 +23,12 @@
     <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
     <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
+        .layui-form-label-c1 {
+            width: 80px;
+        }
+        .layui-input-block-c1 {
+            margin-left: 115px;
+        }
     </style>
     <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
@@ -38,21 +44,21 @@
 
 
 
-        <div class="layui-row form-row" id="random-8585-content">
+        <div class="layui-row form-row" id="random-6839-content">
 
              <!--开始：group 循环-->
             <div class="layui-col-xs12 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('附件名称')}">附件名称</div></div>
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('附件名称')}">附件名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block layui-input-block-c1">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('附件名称') }" type="text" class="layui-input"  />
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('附件名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('附件类型')}">附件类型</div></div>
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('附件类型')}">附件类型</div><div class="layui-required">*</div></div>
                     <div class="layui-input-block layui-input-block-c1">
                         <input input-type="radio" type="radio" name="type" lay-filter="type" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.contract.AttachmentType')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==-1)?'yes':'no'}">
                     </div>
@@ -61,7 +67,7 @@
 
                 
                 <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('文件ID')}">文件ID</div></div>
+                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('附件')}">附件</div><div class="layui-required">*</div></div>
                     <div class="layui-upload layui-input-block layui-input-block-c1">
                         <input input-type="upload" id="fileId"  name="fileId" lay-filter="fileId" style="display: none">
                         <button type="button" class="layui-btn" id="fileId-button" th:text="${lang.translate('选择附件')}">选择附件</button>
@@ -106,7 +112,7 @@
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
     var RADIO_TYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.contract.AttachmentType')}]];
-    var VALIDATE_CONFIG={};
+    var VALIDATE_CONFIG={"name":{"labelInForm":"附件名称","inputType":"text_input","required":true},"type":{"labelInForm":"附件类型","inputType":"radio_box","required":true},"fileId":{"labelInForm":"附件","inputType":"upload","required":true}};
     var AUTH_PREFIX="cont_contract_attachment";
 
 

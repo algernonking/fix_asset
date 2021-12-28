@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 合同附件 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:46
+ * @since 2021-12-28 15:44:51
 */
 
 public interface IContractAttachmentService extends ISuperService<ContractAttachment> {

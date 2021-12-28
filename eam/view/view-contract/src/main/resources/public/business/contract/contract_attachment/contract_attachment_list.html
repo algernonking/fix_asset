@@ -2,7 +2,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:52
+ * @since 2021-12-28 15:44:51
  */
  -->
  <!DOCTYPE html>
@@ -52,9 +52,9 @@
                         <div id="type" th:data="${enum.toArray('com.dt.platform.constants.enums.contract.AttachmentType')}" style="width:140px"></div>
 
                     </div>
-                    <!-- 文件ID , fileId ,typeName=upload, isHideInSearch=false -->
+                    <!-- 附件 , fileId ,typeName=upload, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('文件ID')}" class="search-label fileId-label">文件ID</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('附件')}" class="search-label fileId-label">附件</span><span class="search-colon">:</span></div>
                         <input id="fileId" class="layui-input search-input" style="width: 140px" type="text" />
                     </div>
                     <!-- 附件名称 , name ,typeName=text_input, isHideInSearch=false -->

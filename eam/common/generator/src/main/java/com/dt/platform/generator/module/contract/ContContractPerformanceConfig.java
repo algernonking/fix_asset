@@ -5,6 +5,7 @@ import com.dt.platform.generator.module.CodeStarter;
 import com.github.foxnic.generator.builder.business.option.ServiceOptions;
 import com.github.foxnic.generator.builder.model.PoClassFile;
 import com.github.foxnic.generator.builder.model.VoClassFile;
+import com.github.foxnic.generator.builder.view.option.FormOptions;
 import com.github.foxnic.generator.builder.view.option.ListOptions;
 import com.github.foxnic.generator.builder.view.option.ViewOptions;
 import com.github.foxnic.generator.config.WriteMode;
@@ -32,8 +33,22 @@ public class ContContractPerformanceConfig extends CodeStarter.BaseCodeConfig<CO
     @Override
     public void configFields(ViewOptions view) {
 
-//        view.field(SYS_DICT.ID)
-//                .basic().hidden();
+        view.field(CONT_CONTRACT_PERFORMANCE.ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT_PERFORMANCE.CONTRACT_ID)
+                .basic().hidden();
+
+        view.field(CONT_CONTRACT_PERFORMANCE.PERFORMANCE_TIME)
+                .basic().label("履约日期")
+        .form().dateInput().format("yyyy-MM-dd");
+
+        view.field(CONT_CONTRACT_PERFORMANCE.DETAIL)
+                .form().textArea().height(100);
+
+        view.field(CONT_CONTRACT_PERFORMANCE.CREATE_TIME)
+                .basic().label("登记时间");
+
 //        view.field(SYS_DICT.IS_TREE).basic().hidden();
 //
 //        view.field(SYS_DICT.MODULE)
@@ -60,10 +75,24 @@ public class ContContractPerformanceConfig extends CodeStarter.BaseCodeConfig<CO
     }
 
     @Override
+    public void configForm(ViewOptions view, FormOptions form) {
+
+        view.formWindow().width("600px");
+
+        form.addGroup(null,new Object[]{
+                CONT_CONTRACT_PERFORMANCE.TITLE,
+                CONT_CONTRACT_PERFORMANCE.PERFORMANCE_TIME,
+                CONT_CONTRACT_PERFORMANCE.DETAIL
+        });
+        //嵌入页面，页面在 loadTest1Iframe 函数中载入
+        form.addPage("attachment","附件","loadAttachmentFrame");
+    }
+
+    @Override
     public void configList(ViewOptions view, ListOptions list) {
-//        list.operationColumn().width(220);
-//        //表格操作列增加一个按钮，并指定JS函数
-//        list.operationColumn().addActionButton("条目","openDictItemWindow");
+        view.search().disable();
+        view.list().disableMargin();
+        list.columnLayout(CONT_CONTRACT_PERFORMANCE.PERFORMANCE_TIME,CONT_CONTRACT_PERFORMANCE.TITLE,CONT_CONTRACT_PERFORMANCE.DETAIL,CONT_CONTRACT_PERFORMANCE.CREATE_TIME);
     }
 
     @Override

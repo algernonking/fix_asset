@@ -152,6 +152,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         }
     }
 
+    var attachmentWin=null;
     //表单页的扩展
     var form={
         action:null,
@@ -244,6 +245,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 window.module.setAction("edit");
                 window.module.fillFormData(result.data);
 
+                //需要重新刷入
+                attachmentWin.location="/business/contract/contract_attachment/contract_attachment_list.html?ownerId="+result.data.id+"&ownerType=contract";
+
                 $("#signer-fieldset").show();
                 $("#signer-content").show();
 
@@ -254,8 +258,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 $("#performance-content").show();
 
                 return false;
+            } else {
+                return true;
             }
-            return false;
         },
         /**
          * 数据提交后执行
@@ -264,18 +269,18 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
-        signerFrame:null,
-        attachmentFrame:null,
-        performanceFrame: null,
-        signerWin:null,
-        attachmentWin:null,
-        performanceWin: null,
+        // signerFrame:null,
+        // attachmentFrame:null,
+        // performanceFrame: null,
+        // signerWin:null,
+        // attachmentWin:null,
+        // performanceWin: null,
         /**
          *  加载 签订方
          */
         loadSignerFrame:function (ifr,win,data) {
-            this.signerFrame=ifr;
-            this.signerWin=win;
+            // this.signerFrame=ifr;
+            // this.signerWin=win;
             // debugger
             console.log("loadSignerFrame",ifr,data);
             //设置 iframe 高度
@@ -287,9 +292,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          *  加载 合同附件
          */
         loadAttachmentFrame:function (ifr,win,data) {
-            this.attachmentFrame=ifr;
-            this.attachmentWin=win;
-            this
+            attachmentWin=win;
+            // this.attachmentFrame=ifr;
+            // this.attachmentWin=win;
             // debugger
             console.log("loadAttachmentFrame",ifr,data);
             //设置 iframe 高度
@@ -307,7 +312,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //设置 iframe 高度
             ifr.height("400px");
             //设置地址
-            win.location="/business/system/node/node_list.html?id="+data.id;
+            win.location="/business/contract/contract_performance/contract_performance_list.html";
         },
         /**
          * 末尾执行

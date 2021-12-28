@@ -21,6 +21,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
     //模块基础路径
     const moduleURL="/service-contract/cont-contract-attachment";
 
+    var ownerType=QueryString.get("ownerType");
+    var ownerId=QueryString.get("ownerId");
+
+    // debugger
+
     //列表页的扩展
     var list={
         /**
@@ -78,6 +83,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            param.ownerId=ownerId;
+            param.ownerType=ownerType;
             return true;
         },
         /**
@@ -92,6 +99,13 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         templet:function (field,value,r) {
             if(value==null) return "";
             return value;
+        },
+        /**
+         * 表单页面打开时，追加更多的参数信息
+         * */
+        makeFormQueryString:function(data,queryString,action) {
+            queryString+="&ownerType="+ownerType+"&ownerId="+ownerId;
+            return queryString;
         },
         /**
          * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
@@ -216,6 +230,8 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            data.ownerId=ownerId;
+            data.ownerType=ownerType;
             return true;
         },
         /**

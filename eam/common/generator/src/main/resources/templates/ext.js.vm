@@ -89,6 +89,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             return value;
         },
         /**
+         * 表单页面打开时，追加更多的参数信息
+         * */
+        makeFormQueryString:function(data,queryString,action) {
+            return queryString;
+        },
+        /**
          * 在新建或编辑窗口打开前调用，若返回 false 则不继续执行后续操作
          * */
         beforeEdit:function (data) {

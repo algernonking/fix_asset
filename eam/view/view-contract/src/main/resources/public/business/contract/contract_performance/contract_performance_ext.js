@@ -1,7 +1,8 @@
 /**
  * 合同履行情况 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:14
+ * @since 2021-12-28 14:20:20
+ * @version
  */
 
 layui.config({
@@ -16,6 +17,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
 
     var admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate,dropdown=layui.dropdown;
     table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,foxup=layui.foxnicUpload;
+
+    //模块基础路径
+    const moduleURL="/service-contract/cont-contract-performance";
 
     //列表页的扩展
     var list={
@@ -74,6 +78,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            var contractData=admin.getVar('contract-data');
+            //debugger;
+            param.contractId=contractData.id;
             return true;
         },
         /**
@@ -149,8 +156,11 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         }
     }
 
+    var  attachmentWin = null;
+
     //表单页的扩展
     var form={
+        action:null,
         /**
          * 表单初始化前调用 , 并传入表单数据
          * */
@@ -158,7 +168,15 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             //获取参数，并调整下拉框查询用的URL
             //var companyId=admin.getTempData("companyId");
             //fox.setSelectBoxUrl("employeeId","/service-hrm/hrm-employee/query-paged-list?companyId="+companyId);
-            console.log("form:beforeInit")
+            console.log("form:beforeInit");
+            //debugger
+            this.action=action;
+
+            if(this.action=="create") {
+
+                $("#attachment-fieldset").hide();
+                $("#attachment-content").hide();
+            }
         },
         /**
          * 窗口调节前
@@ -183,7 +201,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 对话框打开之前调用，如果返回 null 则不打开对话框
          * */
         beforeDialog:function (param){
-            param.title="覆盖对话框标题";
+            //param.title="覆盖对话框标题";
             return param;
         },
         /**
@@ -209,6 +227,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            var contractData=admin.getVar('contract-data');
+            //debugger;
+            data.contractId=contractData.id;
             return true;
         },
         /**
@@ -216,7 +237,29 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         betweenFormSubmitAndClose:function (param,result) {
             console.log("betweenFormSubmitAndClose",result);
-            return true;
+            if(this.action=="create") {
+
+                this.action="edit";
+
+                admin.putTempData('cont-contract-performance-form-data-form-action', "edit",true);
+                window.module.setAction("edit");
+                window.module.fillFormData(result.data);
+
+                //debugger;
+
+
+                $("#attachment-fieldset").show();
+                $("#attachment-content").show();
+
+
+                attachmentWin.location="/business/contract/contract_attachment/contract_attachment_list.html?ownerId="+result.data.id+"&ownerType=performance";
+
+                window.module.adjustPopup();
+
+                return false;
+            } else {
+                return true;
+            }
         },
         /**
          * 数据提交后执行
@@ -225,6 +268,30 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             console.log("afterSubmitt",param,result);
         },
 
+
+        /**
+         *  加载 附件
+         */
+        loadAttachmentFrame:function (ifr,win,data) {
+            attachmentWin=win;
+            // debugger
+            console.log("loadAttachmentFrame",ifr,data);
+            //设置 iframe 高度
+            ifr.height("400px");
+            //设置地址
+            win.location="/business/contract/contract_attachment/contract_attachment_list.html?ownerId="+data.id+"&ownerType=performance";
+        },
+        /**
+         * 文件上传组件回调
+         *  event 类型包括：
+         *  afterPreview ：文件选择后，未上传前触发；
+         *  afterUpload ：文件上传后触发
+         *  beforeRemove ：文件删除前触发
+         *  afterRemove ：文件删除后触发
+         * */
+        onUploadEvent: function(e) {
+            console.log("onUploadEvent",e);
+        },
         /**
          * 末尾执行
          */

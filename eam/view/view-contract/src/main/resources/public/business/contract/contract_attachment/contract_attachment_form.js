@@ -1,7 +1,7 @@
 /**
  * 合同附件 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-23 16:54:52
+ * @since 2021-12-28 15:44:51
  */
 
 function FormPage() {
@@ -132,7 +132,7 @@ function FormPage() {
 			fm[0].reset();
 			form.val('data-form', formData);
 
-			//设置 文件ID 显示附件
+			//设置 附件 显示附件
 		    if($("#fileId").val()) {
 				foxup.fill("fileId",$("#fileId").val());
 		    } else {

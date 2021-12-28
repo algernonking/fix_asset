@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 合同履行情况表 服务接口
  * </p>
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-28 14:20:20
 */
 
 public interface IContractPerformanceService extends ISuperService<ContractPerformance> {

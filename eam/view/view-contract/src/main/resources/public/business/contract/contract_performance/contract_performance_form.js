@@ -1,7 +1,7 @@
 /**
  * 合同履行情况 列表页 JS 脚本
  * @author 李方捷 , leefangjie@qq.com
- * @since 2021-12-08 17:04:16
+ * @since 2021-12-28 14:20:20
  */
 
 function FormPage() {
@@ -63,7 +63,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'cont-contract-performance-form-data-win');
 			if(area==null) return;
 			admin.putTempData('cont-contract-performance-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -87,8 +87,11 @@ function FormPage() {
 
 		laydate.render({
 			elem: '#performanceTime',
-			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			format:"yyyy-MM-dd",
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("performanceTime",value, date, endDate);
+			}
 		});
 	}
 
@@ -116,9 +119,9 @@ function FormPage() {
 
 
 
-			//设置 履约时间 显示复选框勾选
+			//设置 履约日期 显示复选框勾选
 			if(formData["performanceTime"]) {
-				$("#performanceTime").val(fox.dateFormat(formData["performanceTime"],"yyyy-MM-dd HH:mm:ss"));
+				$("#performanceTime").val(fox.dateFormat(formData["performanceTime"],"yyyy-MM-dd"));
 			}
 
 
@@ -221,7 +224,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('cont-contract-performance-form-data-win'); });
 
     }
 
@@ -231,7 +234,10 @@ function FormPage() {
 		saveForm: saveForm,
 		fillFormData: fillFormData,
 		adjustPopup: adjustPopup,
-		action: action
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();
