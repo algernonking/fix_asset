@@ -9,8 +9,8 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Organization;
-import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产盘点
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:21:47
- * @sign 9D43A72A3AB480C0B03727F46167EE68
+ * @since 2022-01-04 12:33:21
+ * @sign F0F77F1296F86ABED8DF9228BB38A75F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,6 +51,12 @@ public class Inventory extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="业务编码" , notes = "业务编码")
 	private String businessCode;
+	
+	/**
+	 * 所属：所属
+	*/
+	@ApiModelProperty(required = false,value="所属" , notes = "所属")
+	private String ownerCode;
 	
 	/**
 	 * 业务状态：业务状态
@@ -149,16 +155,22 @@ public class Inventory extends Entity {
 	private String originatorId;
 	
 	/**
+	 * 业务日期：业务日期
+	*/
+	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
+	private Date businessDate;
+	
+	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
 	
 	/**
-	 * 业务日期：业务日期
+	 * 计划编号：计划编号
 	*/
-	@ApiModelProperty(required = false,value="业务日期" , notes = "业务日期")
-	private Date businessDate;
+	@ApiModelProperty(required = false,value="计划编号" , notes = "计划编号")
+	private String planId;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -233,24 +245,6 @@ public class Inventory extends Entity {
 	private List<Organization> useOrganization;
 	
 	/**
-	 * 存放位置：存放位置
-	*/
-	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
-	private List<Position> position;
-	
-	/**
-	 * 仓库：仓库
-	*/
-	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
-	private List<Warehouse> warehouse;
-	
-	/**
-	 * 资产分类：资产分类
-	*/
-	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
-	private List<Catalog> category;
-	
-	/**
 	 * 盘点人员：盘点人员
 	*/
 	@ApiModelProperty(required = false,value="盘点人员" , notes = "盘点人员")
@@ -291,6 +285,42 @@ public class Inventory extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Employee originator;
+	
+	/**
+	 * 存放位置：存放位置
+	*/
+	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
+	private List<Position> position;
+	
+	/**
+	 * 存放位置Ids：存放位置Ids
+	*/
+	@ApiModelProperty(required = false,value="存放位置Ids" , notes = "存放位置Ids")
+	private List<String> positionIds;
+	
+	/**
+	 * 仓库：仓库
+	*/
+	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
+	private List<Warehouse> warehouse;
+	
+	/**
+	 * 仓库Ids：仓库Ids
+	*/
+	@ApiModelProperty(required = false,value="仓库Ids" , notes = "仓库Ids")
+	private List<String> warehouseIds;
+	
+	/**
+	 * 资产分类：资产分类
+	*/
+	@ApiModelProperty(required = false,value="资产分类" , notes = "资产分类")
+	private List<Catalog> category;
+	
+	/**
+	 * 资产分类Ids：资产分类Ids
+	*/
+	@ApiModelProperty(required = false,value="资产分类Ids" , notes = "资产分类Ids")
+	private List<String> categoryIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -346,6 +376,25 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setBusinessCode(String businessCode) {
 		this.businessCode=businessCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 所属<br>
+	 * 所属
+	 * @return 所属
+	*/
+	public String getOwnerCode() {
+		return ownerCode;
+	}
+	
+	/**
+	 * 设置 所属
+	 * @param ownerCode 所属
+	 * @return 当前对象
+	*/
+	public Inventory setOwnerCode(String ownerCode) {
+		this.ownerCode=ownerCode;
 		return this;
 	}
 	
@@ -654,6 +703,25 @@ public class Inventory extends Entity {
 	}
 	
 	/**
+	 * 获得 业务日期<br>
+	 * 业务日期
+	 * @return 业务日期
+	*/
+	public Date getBusinessDate() {
+		return businessDate;
+	}
+	
+	/**
+	 * 设置 业务日期
+	 * @param businessDate 业务日期
+	 * @return 当前对象
+	*/
+	public Inventory setBusinessDate(Date businessDate) {
+		this.businessDate=businessDate;
+		return this;
+	}
+	
+	/**
 	 * 获得 备注<br>
 	 * 备注
 	 * @return 备注
@@ -673,21 +741,21 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 业务日期<br>
-	 * 业务日期
-	 * @return 业务日期
+	 * 获得 计划编号<br>
+	 * 计划编号
+	 * @return 计划编号
 	*/
-	public Date getBusinessDate() {
-		return businessDate;
+	public String getPlanId() {
+		return planId;
 	}
 	
 	/**
-	 * 设置 业务日期
-	 * @param businessDate 业务日期
+	 * 设置 计划编号
+	 * @param planId 计划编号
 	 * @return 当前对象
 	*/
-	public Inventory setBusinessDate(Date businessDate) {
-		this.businessDate=businessDate;
+	public Inventory setPlanId(String planId) {
+		this.planId=planId;
 		return this;
 	}
 	
@@ -953,96 +1021,6 @@ public class Inventory extends Entity {
 	}
 	
 	/**
-	 * 获得 存放位置<br>
-	 * 存放位置
-	 * @return 存放位置
-	*/
-	public List<Position> getPosition() {
-		return position;
-	}
-	
-	/**
-	 * 设置 存放位置
-	 * @param position 存放位置
-	 * @return 当前对象
-	*/
-	public Inventory setPosition(List<Position> position) {
-		this.position=position;
-		return this;
-	}
-	
-	/**
-	 * 添加 存放位置
-	 * @param entity 存放位置
-	 * @return 当前对象
-	*/
-	public Inventory addPosition(Position entity) {
-		if(this.position==null) position=new ArrayList<>();
-		this.position.add(entity);
-		return this;
-	}
-	
-	/**
-	 * 获得 仓库<br>
-	 * 仓库
-	 * @return 仓库
-	*/
-	public List<Warehouse> getWarehouse() {
-		return warehouse;
-	}
-	
-	/**
-	 * 设置 仓库
-	 * @param warehouse 仓库
-	 * @return 当前对象
-	*/
-	public Inventory setWarehouse(List<Warehouse> warehouse) {
-		this.warehouse=warehouse;
-		return this;
-	}
-	
-	/**
-	 * 添加 仓库
-	 * @param entity 仓库
-	 * @return 当前对象
-	*/
-	public Inventory addWarehouse(Warehouse entity) {
-		if(this.warehouse==null) warehouse=new ArrayList<>();
-		this.warehouse.add(entity);
-		return this;
-	}
-	
-	/**
-	 * 获得 资产分类<br>
-	 * 资产分类
-	 * @return 资产分类
-	*/
-	public List<Catalog> getCategory() {
-		return category;
-	}
-	
-	/**
-	 * 设置 资产分类
-	 * @param category 资产分类
-	 * @return 当前对象
-	*/
-	public Inventory setCategory(List<Catalog> category) {
-		this.category=category;
-		return this;
-	}
-	
-	/**
-	 * 添加 资产分类
-	 * @param entity 资产分类
-	 * @return 当前对象
-	*/
-	public Inventory addCategory(Catalog entity) {
-		if(this.category==null) category=new ArrayList<>();
-		this.category.add(entity);
-		return this;
-	}
-	
-	/**
 	 * 获得 盘点人员<br>
 	 * 盘点人员
 	 * @return 盘点人员
@@ -1238,6 +1216,186 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setOriginator(Employee originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 存放位置<br>
+	 * 存放位置
+	 * @return 存放位置
+	*/
+	public List<Position> getPosition() {
+		return position;
+	}
+	
+	/**
+	 * 设置 存放位置
+	 * @param position 存放位置
+	 * @return 当前对象
+	*/
+	public Inventory setPosition(List<Position> position) {
+		this.position=position;
+		return this;
+	}
+	
+	/**
+	 * 添加 存放位置
+	 * @param entity 存放位置
+	 * @return 当前对象
+	*/
+	public Inventory addPosition(Position entity) {
+		if(this.position==null) position=new ArrayList<>();
+		this.position.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 存放位置Ids<br>
+	 * 存放位置Ids
+	 * @return 存放位置Ids
+	*/
+	public List<String> getPositionIds() {
+		return positionIds;
+	}
+	
+	/**
+	 * 设置 存放位置Ids
+	 * @param positionIds 存放位置Ids
+	 * @return 当前对象
+	*/
+	public Inventory setPositionIds(List<String> positionIds) {
+		this.positionIds=positionIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 存放位置Ids
+	 * @param positionId 存放位置Ids
+	 * @return 当前对象
+	*/
+	public Inventory addPositionId(String positionId) {
+		if(this.positionIds==null) positionIds=new ArrayList<>();
+		this.positionIds.add(positionId);
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库<br>
+	 * 仓库
+	 * @return 仓库
+	*/
+	public List<Warehouse> getWarehouse() {
+		return warehouse;
+	}
+	
+	/**
+	 * 设置 仓库
+	 * @param warehouse 仓库
+	 * @return 当前对象
+	*/
+	public Inventory setWarehouse(List<Warehouse> warehouse) {
+		this.warehouse=warehouse;
+		return this;
+	}
+	
+	/**
+	 * 添加 仓库
+	 * @param entity 仓库
+	 * @return 当前对象
+	*/
+	public Inventory addWarehouse(Warehouse entity) {
+		if(this.warehouse==null) warehouse=new ArrayList<>();
+		this.warehouse.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 仓库Ids<br>
+	 * 仓库Ids
+	 * @return 仓库Ids
+	*/
+	public List<String> getWarehouseIds() {
+		return warehouseIds;
+	}
+	
+	/**
+	 * 设置 仓库Ids
+	 * @param warehouseIds 仓库Ids
+	 * @return 当前对象
+	*/
+	public Inventory setWarehouseIds(List<String> warehouseIds) {
+		this.warehouseIds=warehouseIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 仓库Ids
+	 * @param warehouseId 仓库Ids
+	 * @return 当前对象
+	*/
+	public Inventory addWarehouseId(String warehouseId) {
+		if(this.warehouseIds==null) warehouseIds=new ArrayList<>();
+		this.warehouseIds.add(warehouseId);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产分类<br>
+	 * 资产分类
+	 * @return 资产分类
+	*/
+	public List<Catalog> getCategory() {
+		return category;
+	}
+	
+	/**
+	 * 设置 资产分类
+	 * @param category 资产分类
+	 * @return 当前对象
+	*/
+	public Inventory setCategory(List<Catalog> category) {
+		this.category=category;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产分类
+	 * @param entity 资产分类
+	 * @return 当前对象
+	*/
+	public Inventory addCategory(Catalog entity) {
+		if(this.category==null) category=new ArrayList<>();
+		this.category.add(entity);
+		return this;
+	}
+	
+	/**
+	 * 获得 资产分类Ids<br>
+	 * 资产分类Ids
+	 * @return 资产分类Ids
+	*/
+	public List<String> getCategoryIds() {
+		return categoryIds;
+	}
+	
+	/**
+	 * 设置 资产分类Ids
+	 * @param categoryIds 资产分类Ids
+	 * @return 当前对象
+	*/
+	public Inventory setCategoryIds(List<String> categoryIds) {
+		this.categoryIds=categoryIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 资产分类Ids
+	 * @param categoryId 资产分类Ids
+	 * @return 当前对象
+	*/
+	public Inventory addCategoryId(String categoryId) {
+		if(this.categoryIds==null) categoryIds=new ArrayList<>();
+		this.categoryIds.add(categoryId);
 		return this;
 	}
 

@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 盘点负责人  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 21:45:07
+ * @since 2022-01-04 11:03:13
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = InventoryDirectorServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -139,7 +139,7 @@ public interface InventoryDirectorServiceProxy {
 	Result<InventoryDirector> getById(String id);
 
 	/**
-	 * 批量删除盘点负责人
+	 * 获取多个盘点负责人
 	*/
 	@RequestMapping(InventoryDirectorServiceProxy.GET_BY_IDS)
 	Result<List<InventoryDirector>> getByIds(List<String> ids);

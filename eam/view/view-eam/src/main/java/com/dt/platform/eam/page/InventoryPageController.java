@@ -1,13 +1,22 @@
 package com.dt.platform.eam.page;
 
+import com.dt.platform.constants.enums.eam.AssetCategoryCodeEnum;
+import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.lang.StringUtil;
+import org.github.foxnic.web.domain.pcm.Catalog;
+import org.github.foxnic.web.domain.pcm.CatalogVO;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 
+import org.github.foxnic.web.misc.ztree.ZTreeNode;
+import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import com.dt.platform.proxy.eam.InventoryServiceProxy;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 /**
  * <p>
  * 资产盘点 模版页面控制器
@@ -41,7 +50,8 @@ public class InventoryPageController extends ViewController {
 	 * 资产盘点 功能主页面
 	 */
 	@RequestMapping("/inventory_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String ownerCode) {
+		model.addAttribute("ownerCode",ownerCode);
 		return prefix+"/inventory_list";
 	}
 
@@ -49,7 +59,30 @@ public class InventoryPageController extends ViewController {
 	 * 资产盘点 表单页面
 	 */
 	@RequestMapping("/inventory_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String ownerCode,String planId,String categoryCode) {
+		model.addAttribute("ownerCode",ownerCode);
+		model.addAttribute("planId",planId);
+
+		//设置资产分类
+		CatalogVO catalog=new CatalogVO();
+		if(StringUtil.isBlank(categoryCode)||"null".equals(categoryCode.toLowerCase())){
+			catalog.setCode(AssetCategoryCodeEnum.ASSET.code());
+		}else{
+			catalog.setCode(categoryCode);
+		}
+		Result<List<Catalog>> catalogListResult= CatalogServiceProxy.api().queryList(catalog);
+		String categoryId="";
+		if(catalogListResult.isSuccess()){
+			List<Catalog> catalogList=catalogListResult.getData();
+			if(catalogList.size()>0){
+				categoryId=catalogList.get(0).getId();
+				CatalogVO catalog2=new CatalogVO();
+				catalog2.setParentId(categoryId);
+				catalog2.setIsLoadAllDescendants(1);
+				Result<List<ZTreeNode>> treeResult=CatalogServiceProxy.api().queryNodes(catalog2);
+				model.addAttribute("assetCategoryData",treeResult.getData());
+			}
+		}
 		return prefix+"/inventory_form";
 	}
 }

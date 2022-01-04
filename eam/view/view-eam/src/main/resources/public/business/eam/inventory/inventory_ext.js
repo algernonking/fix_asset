@@ -243,6 +243,39 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 表单数据填充前
          * */
         beforeDataFill:function (data) {
+         //   positionIds inventoryManagerIds inventoryDirectorIds
+            var inventoryUserIds="";
+            if(data&&data.inventoryUser){
+                for(var i=0;i<data.inventoryUser.length;i++){
+                    if(i==0){
+                        inventoryUserIds=data.inventoryUser[i].id;
+                    }else{
+                        inventoryUserIds=inventoryUserIds+","+data.inventoryUser[i].id;
+                    }
+                }
+                data.inventoryUserIds=inventoryUserIds;
+
+            }else{
+                data.inventoryUserIds="";
+            }
+
+            var categoryIds="";
+            // if(data&&data.inventoryUser){
+            //     for(var i=0;i<data.inventoryUser.length;i++){
+            //         if(i==0){
+            //             inventoryUserIds=data.inventoryUser[i].id;
+            //         }else{
+            //             inventoryUserIds=inventoryUserIds+","+data.inventoryUser[i].id;
+            //         }
+            //     }
+            //     data.inventoryUserIds=inventoryUserIds;
+            //
+            // }else{
+            //     data.inventoryUserIds="";
+            // }
+
+
+
             console.log('beforeDataFill',data);
         },
         /**
@@ -269,6 +302,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
+            data.ownerCode=OWNER_CODE;
             return true;
         },
         /**

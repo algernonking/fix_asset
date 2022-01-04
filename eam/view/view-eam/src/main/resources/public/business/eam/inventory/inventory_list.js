@@ -1,7 +1,7 @@
 /**
  * 资产盘点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:21:59
+ * @since 2022-01-04 12:33:28
  */
 
 
@@ -77,20 +77,25 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('类型') , templet: function (d) { return templet('type',d.type,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编码') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
+					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'inventoryStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点状态'), templet:function (d){ return templet('inventoryStatus',fox.getEnumText(SELECT_INVENTORYSTATUS_DATA,d.inventoryStatus),d);}}
 					,{ field: 'dataStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据状态'), templet:function (d){ return templet('dataStatus',fox.getEnumText(SELECT_DATASTATUS_DATA,d.dataStatus),d);}}
 					,{ field: 'allEmployee', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('全员盘点'), templet:function (d){ return templet('allEmployee',fox.getEnumText(SELECT_ALLEMPLOYEE_DATA,d.allEmployee),d);}}
 					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}
-					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return templet('categoryId' ,fox.joinLabel(d.category,"name"),d);}}
-					,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('仓库'), templet: function (d) { return templet('warehouseId' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类') , templet: function (d) { return templet('categoryId',d.categoryId,d);}  }
+					,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('仓库') , templet: function (d) { return templet('warehouseId',d.warehouseId,d);}  }
 					,{ field: 'purchaseStartDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('购置开始日期') ,templet: function (d) { return templet('purchaseStartDate',fox.dateFormat(d.purchaseStartDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'purchaseEndDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('购置结束日期') ,templet: function (d) { return templet('purchaseEndDate',fox.dateFormat(d.purchaseEndDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'startTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('盘点开始时间') ,templet: function (d) { return templet('startTime',fox.dateFormat(d.startTime,"yyyy-MM-dd"),d); }  }
 					,{ field: 'finishTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('盘点结束时间') ,templet: function (d) { return templet('finishTime',fox.dateFormat(d.finishTime,"yyyy-MM-dd"),d); }  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'planId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('计划编号') , templet: function (d) { return templet('planId',d.planId,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'warehouseIds', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('仓库'), templet: function (d) { return templet('warehouseIds' ,fox.joinLabel(d.warehouse,"warehouseName"),d);}}
+					,{ field: 'positionIds', align:"",fixed:false,  hide:false, sort: true, title: fox.translate('位置'), templet: function (d) { return templet('positionIds' ,fox.joinLabel(d.position,"name"),d);}}
+					,{ field: 'categoryIds', align:"",fixed:false,  hide:false, sort: false, title: fox.translate('资产分类'), templet: function (d) { return templet('categoryIds' ,fox.joinLabel(d.category,"name"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -105,6 +110,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
@@ -128,8 +135,8 @@ function ListPage() {
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.inventoryStatus={ inputType:"select_box", value: xmSelect.get("#inventoryStatus",true).getValue("value"), label:xmSelect.get("#inventoryStatus",true).getValue("nameStr") };
+		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() ,matchType:"auto" };
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -183,24 +190,39 @@ function ListPage() {
 			radio: false,
 			size: "small",
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("inventoryStatus",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
 		});
 		laydate.render({
 			elem: '#businessDate-begin',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("businessDate",value, date, endDate);
+				},1);
+			}
 		});
 		laydate.render({
 			elem: '#businessDate-end',
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("businessDate",value, date, endDate);
+				},1);
+			}
 		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
@@ -298,10 +320,7 @@ function ListPage() {
             }
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产盘点')+fox.translate('吗？'), function (i) {
-				top.layer.close(i);
-				top.layer.load(2);
-                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-					top.layer.closeAll('loading');
+                admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
 						if(window.pageExt.list.afterBatchDelete) {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
@@ -313,7 +332,6 @@ function ListPage() {
 						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
-
 			});
         }
 	}
@@ -334,24 +352,16 @@ function ListPage() {
 
 			admin.putTempData('eam-inventory-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-inventory-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-inventory-form-data-form-action', "view",true);
 						showEditForm(data.data);
@@ -400,7 +410,10 @@ function ListPage() {
 		}
 		var action=admin.getTempData('eam-inventory-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString='id=' + data.id;
+		if(window.pageExt.list.makeFormQueryString) {
+			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+		}
 		admin.putTempData('eam-inventory-form-data', data);
 		var area=admin.getTempData('eam-inventory-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -417,7 +430,7 @@ function ListPage() {
 			area: ["85%",height+"px"],
 			type: 2,
 			id:"eam-inventory-form-data-win",
-			content: '/business/eam/inventory/inventory_form.html' + queryString,
+			content: '/business/eam/inventory/inventory_form.html' + (queryString?("?"+queryString):""),
 			finish: function () {
 				refreshTableData();
 			}

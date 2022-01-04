@@ -13,17 +13,19 @@ import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.domain.ops.ServiceInfo;
 import com.dt.platform.domain.ops.meta.HostMeta;
 import com.dt.platform.domain.ops.meta.HostVOMeta;
+import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
 import com.dt.platform.eam.page.InventoryPageController;
-import com.dt.platform.eam.service.impl.InventoryDirectorServiceImpl;
-import com.dt.platform.eam.service.impl.InventoryManagerServiceImpl;
-import com.dt.platform.eam.service.impl.InventoryUserServiceImpl;
+import com.dt.platform.eam.service.impl.*;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.ops.service.impl.HostDbServiceImpl;
 import com.dt.platform.ops.service.impl.HostMidServiceImpl;
 import com.dt.platform.proxy.eam.InventoryServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.dt.platform.proxy.eam.WarehouseServiceProxy;
+import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.generator.config.WriteMode;
+import javafx.geometry.Pos;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
 import org.github.foxnic.web.domain.hrm.Person;
@@ -48,9 +50,8 @@ public class EamInventoryGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addListProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addListProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
-        cfg.getPoClassFile().addListProperty(Position.class,"position","存放位置","存放位置");
-        cfg.getPoClassFile().addListProperty(Warehouse.class,"warehouse","仓库","仓库");
-        cfg.getPoClassFile().addListProperty(Catalog.class,"category","资产分类","资产分类");
+
+
 
 
         cfg.getPoClassFile().addListProperty(Employee.class,"inventoryUser","盘点人员","盘点人员");
@@ -64,11 +65,23 @@ public class EamInventoryGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
 
+
+
+        cfg.getPoClassFile().addListProperty(Position.class,"position","存放位置","存放位置");
+        cfg.getPoClassFile().addListProperty(String.class,"positionIds","存放位置Ids","存放位置Ids");
+
+        cfg.getPoClassFile().addListProperty(Warehouse.class,"warehouse","仓库","仓库");
+        cfg.getPoClassFile().addListProperty(String.class,"warehouseIds","仓库Ids","仓库Ids");
+
+        cfg.getPoClassFile().addListProperty(Catalog.class,"category","资产分类","资产分类");
+        cfg.getPoClassFile().addListProperty(String.class,"categoryIds","资产分类Ids","资产分类Ids");
+
+
         cfg.view().field(EAMTables.EAM_INVENTORY.ID).basic().hidden(true);
+
+        cfg.view().field(EAMTables.EAM_INVENTORY.PLAN_ID).basic().hidden(true);
+
         cfg.view().field(EAMTables.EAM_INVENTORY.TYPE).basic().hidden(true);
-
-
-
 
 
         cfg.view().field(EAMTables.EAM_INVENTORY.BUSINESS_DATE).search().range();
@@ -81,7 +94,7 @@ public class EamInventoryGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_INVENTORY.OWN_COMPANY_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_INVENTORY.USE_ORGANIZATION_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_INVENTORY.POSITION_ID).table().disable(true);
-        //cfg.view().field(EAMTables.EAM_INVENTORY.WAREHOUSE_ID).table().disable(true);
+
         cfg.view().field(InventoryMeta.INVENTORY_MANAGER_IDS).table().disable(true);
         cfg.view().field(InventoryMeta.INVENTORY_USER_IDS).table().disable(true);
         cfg.view().field(InventoryMeta.INVENTORY_DIRECTOR_IDS).table().disable(true);
@@ -133,22 +146,26 @@ public class EamInventoryGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_INVENTORY.FINISH_TIME).form().dateInput().format("yyyy-MM-dd").search().range();
 
 
-        cfg.view().field(EAMTables.EAM_INVENTORY.CATEGORY_ID)
+
+
+        cfg.view().field(InventoryMeta.WAREHOUSE_IDS)
+                .basic().label("仓库")
+                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(InventoryMeta.WAREHOUSE).muliti(true);
+
+        cfg.view().field(InventoryMeta.POSITION_IDS)
+                .basic().label("位置")
+                .form().selectBox().queryApi(PositionServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
+                .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillWith(InventoryMeta.POSITION).muliti(true);
+
+
+        cfg.view().field(InventoryMeta.CATEGORY_IDS)
                 .basic().label("资产分类")
+                .table().sort(false)
                 .form().selectBox().queryApi(CatalogServiceProxy.QUERY_NODES)
                 .paging(false).filter(false).toolbar(false)
                 .valueField(CatalogMeta.ID).textField(CatalogMeta.NAME)
                 .fillWith(InventoryMeta.CATEGORY).muliti(true);
-
-        cfg.view().field(EAMTables.EAM_INVENTORY.WAREHOUSE_ID)
-                .basic().label("仓库")
-                .form().selectBox().queryApi(WarehouseServiceProxy.QUERY_LIST).paging(false).filter(true).toolbar(false)
-                .valueField(WarehouseMeta.ID).textField(WarehouseMeta.WAREHOUSE_NAME).fillWith(InventoryMeta.WAREHOUSE).muliti(false);
-
-        cfg.view().field(EAMTables.EAM_INVENTORY.POSITION_ID)
-                .basic().label("位置")
-                .form().selectBox().queryApi(PositionServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
-                .valueField(PositionMeta.ID).textField( PositionMeta.NAME).fillWith(InventoryMeta.POSITION).muliti(true);
 
 
 
@@ -223,28 +240,41 @@ public class EamInventoryGtr extends BaseCodeGenerator{
                         InventoryMeta.INVENTORY_MANAGER_IDS,
                 },
                 new Object[] {
-                        EAMTables.EAM_INVENTORY.CATEGORY_ID,
-                        EAMTables.EAM_INVENTORY.POSITION_ID,
-                        EAMTables.EAM_INVENTORY.WAREHOUSE_ID,
+                        InventoryMeta.CATEGORY_IDS,
+                        InventoryMeta.POSITION_IDS,
+                        InventoryMeta.WAREHOUSE_IDS
+//                        EAMTables.EAM_INVENTORY.CATEGORY_ID,
+//                        EAMTables.EAM_INVENTORY.POSITION_ID,
+//                        EAMTables.EAM_INVENTORY.WAREHOUSE_ID,
                 }
 
         );
 
+        cfg.view().form().addJsVariable("PLAN_ID","[[${planId}]]","PLAN_ID");
+        cfg.view().form().addJsVariable("OWNER_CODE","[[${ownerCode}]]","OWNER_CODE");
+        cfg.view().list().addJsVariable("OWNER_CODE","[[${ownerCode}]]","OWNER_CODE");
 
         cfg.service().addRelationSaveAction(InventoryUserServiceImpl.class, InventoryVOMeta.INVENTORY_USER_IDS);
         cfg.service().addRelationSaveAction(InventoryDirectorServiceImpl.class, InventoryVOMeta.INVENTORY_DIRECTOR_IDS);
         cfg.service().addRelationSaveAction(InventoryManagerServiceImpl.class, InventoryVOMeta.INVENTORY_MANAGER_IDS);
+
+        cfg.service().addRelationSaveAction(InventoryPositionServiceImpl.class,InventoryVOMeta.POSITION_IDS);
+        cfg.service().addRelationSaveAction(InventoryWarehouseServiceImpl.class,InventoryVOMeta.WAREHOUSE_IDS);
+        cfg.service().addRelationSaveAction(InventoryCatalogServiceImpl.class,InventoryVOMeta.CATEGORY_IDS);
+
 
 
         //文件生成覆盖模式
         cfg.overrides()
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
+                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
                 .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
                 .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
                 .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
+
+
     }
 
     public static void main(String[] args) throws Exception {

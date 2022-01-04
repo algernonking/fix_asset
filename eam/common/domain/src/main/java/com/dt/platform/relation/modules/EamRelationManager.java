@@ -13,6 +13,7 @@ import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
 
+import javax.naming.NoInitialContextException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +44,7 @@ public class EamRelationManager extends RelationManager {
 
         this.setupAssetAttributeItem();
 
+        this.setupInventoryPlan();
         this.setupInventory();
         this.setupInventoryUser();
         this.setupInventoryDirecotor();
@@ -57,6 +59,9 @@ public class EamRelationManager extends RelationManager {
 
         this.setupStockAsset();
         this.setupStockAssetCollection();
+
+
+
 
     }
 
@@ -198,6 +203,23 @@ public class EamRelationManager extends RelationManager {
     }
 
 
+    public void setupInventoryPlan() {
+
+
+        // 关联来源
+        this.property(InventoryPlanMeta.INVENTORY_PLAN_TYPE_PROP)
+                .using(EAMTables.EAM_INVENTORY_PLAN.PLAN_TYPE).join(FoxnicWeb.SYS_DICT_ITEM.CODE)
+                .condition("dict_code='eam_inventory_plan_type'");
+
+        this.property(InventoryPlanMeta.INVENTORY_PROP)
+                .using(EAMTables.EAM_INVENTORY_PLAN.ID).join(EAMTables.EAM_INVENTORY.PLAN_ID);
+
+
+
+
+    }
+
+
 
 
     public void setupInventory() {
@@ -208,11 +230,13 @@ public class EamRelationManager extends RelationManager {
 
         //位置
         this.property(InventoryMeta.POSITION_PROP)
-                .using(EAMTables.EAM_INVENTORY.POSITION_ID).join(EAMTables.EAM_POSITION.ID);
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_POSITION.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_POSITION.VALUE).join(EAMTables.EAM_POSITION.ID);
 
         //仓库
         this.property(InventoryMeta.WAREHOUSE_PROP)
-                .using(EAMTables.EAM_INVENTORY.WAREHOUSE_ID).join(EAMTables.EAM_WAREHOUSE.ID);
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_WAREHOUSE.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_WAREHOUSE.VALUE).join(EAMTables.EAM_WAREHOUSE.ID);
 
         //关联 使用组织
         this.property(InventoryMeta.USE_ORGANIZATION_PROP)
@@ -224,7 +248,8 @@ public class EamRelationManager extends RelationManager {
 
         // 关联资产分类
         this.property(InventoryMeta.CATEGORY_PROP)
-                .using(EAMTables.EAM_INVENTORY.CATEGORY_ID).join(FoxnicWeb.PCM_CATALOG.ID);
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_CATALOG.INVENTORY_ID)
+                .using(EAMTables.EAM_INVENTORY_CATALOG.VALUE).join(FoxnicWeb.PCM_CATALOG.ID);
 
         //制单人
         this.property(InventoryMeta.ORIGINATOR_PROP)

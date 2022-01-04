@@ -6,17 +6,17 @@ import java.util.Date;
 import com.dt.platform.domain.eam.InventoryAsset;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Organization;
+import org.github.foxnic.web.domain.hrm.Employee;
 import com.dt.platform.domain.eam.Position;
 import com.dt.platform.domain.eam.Warehouse;
 import org.github.foxnic.web.domain.pcm.Catalog;
-import org.github.foxnic.web.domain.hrm.Employee;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:21:48
- * @sign 9D43A72A3AB480C0B03727F46167EE68
+ * @since 2022-01-04 12:33:21
+ * @sign F0F77F1296F86ABED8DF9228BB38A75F
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -51,6 +51,16 @@ public class InventoryMeta {
 	 * 业务编码 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> BUSINESS_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,BUSINESS_CODE, java.lang.String.class, "业务编码", "业务编码", java.lang.String.class, null);
+	
+	/**
+	 * 所属 , 类型: java.lang.String
+	*/
+	public static final String OWNER_CODE="ownerCode";
+	
+	/**
+	 * 所属 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> OWNER_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,OWNER_CODE, java.lang.String.class, "所属", "所属", java.lang.String.class, null);
 	
 	/**
 	 * 业务状态 , 类型: java.lang.String
@@ -213,6 +223,16 @@ public class InventoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> ORIGINATOR_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,ORIGINATOR_ID, java.lang.String.class, "制单人", "制单人", java.lang.String.class, null);
 	
 	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final String BUSINESS_DATE="businessDate";
+	
+	/**
+	 * 业务日期 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
+	
+	/**
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final String NOTES="notes";
@@ -223,14 +243,14 @@ public class InventoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
 	
 	/**
-	 * 业务日期 , 类型: java.util.Date
+	 * 计划编号 , 类型: java.lang.String
 	*/
-	public static final String BUSINESS_DATE="businessDate";
+	public static final String PLAN_ID="planId";
 	
 	/**
-	 * 业务日期 , 类型: java.util.Date
+	 * 计划编号 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.util.Date> BUSINESS_DATE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,BUSINESS_DATE, java.util.Date.class, "业务日期", "业务日期", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> PLAN_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,PLAN_ID, java.lang.String.class, "计划编号", "计划编号", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -353,36 +373,6 @@ public class InventoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,org.github.foxnic.web.domain.hrm.Organization> USE_ORGANIZATION_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,USE_ORGANIZATION, java.util.List.class, "使用公司/部门", "使用公司/部门", org.github.foxnic.web.domain.hrm.Organization.class, null);
 	
 	/**
-	 * 存放位置 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Position
-	*/
-	public static final String POSITION="position";
-	
-	/**
-	 * 存放位置 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Position
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,POSITION, java.util.List.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
-	
-	/**
-	 * 仓库 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Warehouse
-	*/
-	public static final String WAREHOUSE="warehouse";
-	
-	/**
-	 * 仓库 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Warehouse
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,WAREHOUSE, java.util.List.class, "仓库", "仓库", com.dt.platform.domain.eam.Warehouse.class, null);
-	
-	/**
-	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
-	*/
-	public static final String CATEGORY="category";
-	
-	/**
-	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,org.github.foxnic.web.domain.pcm.Catalog> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,CATEGORY, java.util.List.class, "资产分类", "资产分类", org.github.foxnic.web.domain.pcm.Catalog.class, null);
-	
-	/**
 	 * 盘点人员 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
 	public static final String INVENTORY_USER="inventoryUser";
@@ -453,9 +443,69 @@ public class InventoryMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,org.github.foxnic.web.domain.hrm.Employee> ORIGINATOR_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,ORIGINATOR, org.github.foxnic.web.domain.hrm.Employee.class, "制单人", "制单人", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
+	 * 存放位置 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final String POSITION="position";
+	
+	/**
+	 * 存放位置 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Position
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,com.dt.platform.domain.eam.Position> POSITION_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,POSITION, java.util.List.class, "存放位置", "存放位置", com.dt.platform.domain.eam.Position.class, null);
+	
+	/**
+	 * 存放位置Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String POSITION_IDS="positionIds";
+	
+	/**
+	 * 存放位置Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> POSITION_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,POSITION_IDS, java.util.List.class, "存放位置Ids", "存放位置Ids", java.lang.String.class, null);
+	
+	/**
+	 * 仓库 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final String WAREHOUSE="warehouse";
+	
+	/**
+	 * 仓库 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Warehouse
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,com.dt.platform.domain.eam.Warehouse> WAREHOUSE_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,WAREHOUSE, java.util.List.class, "仓库", "仓库", com.dt.platform.domain.eam.Warehouse.class, null);
+	
+	/**
+	 * 仓库Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String WAREHOUSE_IDS="warehouseIds";
+	
+	/**
+	 * 仓库Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> WAREHOUSE_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,WAREHOUSE_IDS, java.util.List.class, "仓库Ids", "仓库Ids", java.lang.String.class, null);
+	
+	/**
+	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
+	*/
+	public static final String CATEGORY="category";
+	
+	/**
+	 * 资产分类 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.pcm.Catalog
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,org.github.foxnic.web.domain.pcm.Catalog> CATEGORY_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,CATEGORY, java.util.List.class, "资产分类", "资产分类", org.github.foxnic.web.domain.pcm.Catalog.class, null);
+	
+	/**
+	 * 资产分类Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final String CATEGORY_IDS="categoryIds";
+	
+	/**
+	 * 资产分类Ids , 集合类型: LIST , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> CATEGORY_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,CATEGORY_IDS, java.util.List.class, "资产分类Ids", "资产分类Ids", java.lang.String.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , BUSINESS_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , WAREHOUSE_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , NOTES , BUSINESS_DATE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , OWNER_COMPANY , USE_ORGANIZATION , POSITION , WAREHOUSE , CATEGORY , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , WAREHOUSE_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , OWNER_COMPANY , USE_ORGANIZATION , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR , POSITION , POSITION_IDS , WAREHOUSE , WAREHOUSE_IDS , CATEGORY , CATEGORY_IDS };
 	
 	/**
 	 * 代理类
@@ -495,6 +545,17 @@ public class InventoryMeta {
 		public Inventory setBusinessCode(String businessCode) {
 			super.change(BUSINESS_CODE,super.getBusinessCode(),businessCode);
 			super.setBusinessCode(businessCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 所属
+		 * @param ownerCode 所属
+		 * @return 当前对象
+		*/
+		public Inventory setOwnerCode(String ownerCode) {
+			super.change(OWNER_CODE,super.getOwnerCode(),ownerCode);
+			super.setOwnerCode(ownerCode);
 			return this;
 		}
 		
@@ -675,6 +736,17 @@ public class InventoryMeta {
 		}
 		
 		/**
+		 * 设置 业务日期
+		 * @param businessDate 业务日期
+		 * @return 当前对象
+		*/
+		public Inventory setBusinessDate(Date businessDate) {
+			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
+			super.setBusinessDate(businessDate);
+			return this;
+		}
+		
+		/**
 		 * 设置 备注
 		 * @param notes 备注
 		 * @return 当前对象
@@ -686,13 +758,13 @@ public class InventoryMeta {
 		}
 		
 		/**
-		 * 设置 业务日期
-		 * @param businessDate 业务日期
+		 * 设置 计划编号
+		 * @param planId 计划编号
 		 * @return 当前对象
 		*/
-		public Inventory setBusinessDate(Date businessDate) {
-			super.change(BUSINESS_DATE,super.getBusinessDate(),businessDate);
-			super.setBusinessDate(businessDate);
+		public Inventory setPlanId(String planId) {
+			super.change(PLAN_ID,super.getPlanId(),planId);
+			super.setPlanId(planId);
 			return this;
 		}
 		
@@ -829,39 +901,6 @@ public class InventoryMeta {
 		}
 		
 		/**
-		 * 设置 存放位置
-		 * @param position 存放位置
-		 * @return 当前对象
-		*/
-		public Inventory setPosition(List<Position> position) {
-			super.change(POSITION,super.getPosition(),position);
-			super.setPosition(position);
-			return this;
-		}
-		
-		/**
-		 * 设置 仓库
-		 * @param warehouse 仓库
-		 * @return 当前对象
-		*/
-		public Inventory setWarehouse(List<Warehouse> warehouse) {
-			super.change(WAREHOUSE,super.getWarehouse(),warehouse);
-			super.setWarehouse(warehouse);
-			return this;
-		}
-		
-		/**
-		 * 设置 资产分类
-		 * @param category 资产分类
-		 * @return 当前对象
-		*/
-		public Inventory setCategory(List<Catalog> category) {
-			super.change(CATEGORY,super.getCategory(),category);
-			super.setCategory(category);
-			return this;
-		}
-		
-		/**
 		 * 设置 盘点人员
 		 * @param inventoryUser 盘点人员
 		 * @return 当前对象
@@ -935,6 +974,72 @@ public class InventoryMeta {
 		public Inventory setOriginator(Employee originator) {
 			super.change(ORIGINATOR,super.getOriginator(),originator);
 			super.setOriginator(originator);
+			return this;
+		}
+		
+		/**
+		 * 设置 存放位置
+		 * @param position 存放位置
+		 * @return 当前对象
+		*/
+		public Inventory setPosition(List<Position> position) {
+			super.change(POSITION,super.getPosition(),position);
+			super.setPosition(position);
+			return this;
+		}
+		
+		/**
+		 * 设置 存放位置Ids
+		 * @param positionIds 存放位置Ids
+		 * @return 当前对象
+		*/
+		public Inventory setPositionIds(List<String> positionIds) {
+			super.change(POSITION_IDS,super.getPositionIds(),positionIds);
+			super.setPositionIds(positionIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 仓库
+		 * @param warehouse 仓库
+		 * @return 当前对象
+		*/
+		public Inventory setWarehouse(List<Warehouse> warehouse) {
+			super.change(WAREHOUSE,super.getWarehouse(),warehouse);
+			super.setWarehouse(warehouse);
+			return this;
+		}
+		
+		/**
+		 * 设置 仓库Ids
+		 * @param warehouseIds 仓库Ids
+		 * @return 当前对象
+		*/
+		public Inventory setWarehouseIds(List<String> warehouseIds) {
+			super.change(WAREHOUSE_IDS,super.getWarehouseIds(),warehouseIds);
+			super.setWarehouseIds(warehouseIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产分类
+		 * @param category 资产分类
+		 * @return 当前对象
+		*/
+		public Inventory setCategory(List<Catalog> category) {
+			super.change(CATEGORY,super.getCategory(),category);
+			super.setCategory(category);
+			return this;
+		}
+		
+		/**
+		 * 设置 资产分类Ids
+		 * @param categoryIds 资产分类Ids
+		 * @return 当前对象
+		*/
+		public Inventory setCategoryIds(List<String> categoryIds) {
+			super.change(CATEGORY_IDS,super.getCategoryIds(),categoryIds);
+			super.setCategoryIds(categoryIds);
 			return this;
 		}
 	}

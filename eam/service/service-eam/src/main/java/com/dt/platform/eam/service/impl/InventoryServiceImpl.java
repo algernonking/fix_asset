@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.InventoryAsset;
+import com.dt.platform.domain.eam.meta.InventoryVOMeta;
 import com.dt.platform.eam.service.IInventoryAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
@@ -51,6 +52,7 @@ import java.util.Date;
 @Service("EamInventoryService")
 public class InventoryServiceImpl extends SuperService<Inventory> implements IInventoryService {
 
+
 	/**
 	 * 注入DAO对象
 	 * */
@@ -68,6 +70,17 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	private InventoryDirectorServiceImpl inventoryDirectorServiceImpl;
 	@Autowired 
 	private InventoryManagerServiceImpl inventoryManagerServiceImpl;
+
+	@Autowired
+	private InventoryPositionServiceImpl inventoryPositionServiceImpl;
+
+	@Autowired
+	private InventoryWarehouseServiceImpl inventoryWarehouseServiceImpl;
+
+	@Autowired
+	private InventoryCatalogServiceImpl inventoryCatalogServiceImpl;
+
+
 
 	@Autowired
 	private IInventoryAssetService inventoryAssetService;
@@ -240,6 +253,11 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
 			inventoryDirectorServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryDirectorIds());
 			inventoryManagerServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryManagerIds());
+
+			inventoryPositionServiceImpl.saveRelation(inventory.getId(), inventory.getPositionIds());
+			inventoryWarehouseServiceImpl.saveRelation(inventory.getId(), inventory.getWarehouseIds());
+			inventoryCatalogServiceImpl.saveRelation(inventory.getId(), inventory.getCategoryIds());
+
 		}
 
 		this.createAssetRecord(inventory.getId());
@@ -350,6 +368,10 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
 			inventoryDirectorServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryDirectorIds());
 			inventoryManagerServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryManagerIds());
+			inventoryPositionServiceImpl.saveRelation(inventory.getId(), inventory.getPositionIds());
+			inventoryWarehouseServiceImpl.saveRelation(inventory.getId(), inventory.getWarehouseIds());
+			inventoryCatalogServiceImpl.saveRelation(inventory.getId(), inventory.getCategoryIds());
+
 		}
 		this.createAssetRecord(inventory.getId());
 		return r;

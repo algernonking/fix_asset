@@ -2,7 +2,7 @@
 /**
  * 资产盘点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-22 10:22:00
+ * @since 2022-01-04 12:33:29
  */
  -->
  <!DOCTYPE html>
@@ -12,16 +12,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta charset="utf-8"/>
 	<title th:text="${lang.translate('资产盘点')}">资产盘点</title>
+    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon">
+    <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/assets/libs/layui/css/layui.css" th:href="'/assets/libs/layui/css/layui.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/css/admin.css" th:href="'/assets/css/admin.css?'+${cacheKey}"/>
     <link rel="stylesheet" href="/assets/libs/toast/css/toast.css" type="text/css" th:href="'/assets/libs/toast/css/toast.css?'+${cacheKey}">
     <link rel="stylesheet" href="/assets/css/foxnic-web.css" th:href="'/assets/css/foxnic-web.css?'+${cacheKey}"/>
-    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
-    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>    <link th:if(theme.ico!="null") rel="shortcut icon" th:href="${theme.ico}" type="image/vnd.microsoft.icon"> <link th:if(theme.ico!="null") rel="icon" th:href="theme.ico" type="image/vnd.microsoft.icon">
-    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
+    <link href="/assets/libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="/assets/libs/material-design-webfont/css/material-design-icons-min.css" rel="stylesheet">
+    <script th:inline="javascript">var foxnic_cachekey=[[${cacheKey}]];</script>
     <style>
     </style>
+    <link th:each="css:${theme.css}" rel="stylesheet" th:href="${css}+'?'+${cacheKey}">
 </head>
 
 <body style="overflow-y: hidden;">
@@ -35,10 +38,10 @@
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-6995-content">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('盘点名称')}">盘点名称</div><div class="layui-required">*</div></div>
@@ -58,7 +61,7 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('负责人')}">负责人</div></div>
@@ -71,7 +74,7 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column"  style="padding-top: 0px" >
 
 
                     <div class="layui-form-item" >
@@ -90,10 +93,10 @@
 
 
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-5713-content">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs12 form-column">
+            <div class="layui-col-xs12 form-column" >
 
 
                     <div class="layui-form-item" >
@@ -111,14 +114,14 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9666-fieldset">
             <legend>盘点范围</legend>
         </fieldset>
 
-        <div class="layui-row form-row">
+        <div class="layui-row form-row" id="random-9666-content">
 
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column" >
 
 
                     <div class="layui-form-item" >
@@ -148,7 +151,7 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('所属公司')}">所属公司</div></div>
@@ -177,13 +180,13 @@
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：group 循环-->
-            <div class="layui-col-xs4 form-column">
+            <div class="layui-col-xs4 form-column" >
 
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('资产分类')}">资产分类</div></div>
                         <div class="layui-input-block ">
-                            <div id="categoryId" input-type="select" th:data="${'/service-pcm/pcm-catalog/query-nodes'}" extraParam="{}"></div>
+                            <div id="categoryIds" input-type="select" ></div>
                         </div>
                     </div>
 
@@ -192,7 +195,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('位置')}">位置</div></div>
                         <div class="layui-input-block ">
-                            <div id="positionId" input-type="select" th:data="${'/service-eam/eam-position/query-paged-list'}" extraParam="{}"></div>
+                            <div id="positionIds" input-type="select" th:data="${'/service-eam/eam-position/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -201,7 +204,7 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('仓库')}">仓库</div></div>
                         <div class="layui-input-block ">
-                            <div id="warehouseId" input-type="select" th:data="${'/service-eam/eam-warehouse/query-list'}" extraParam="{}"></div>
+                            <div id="warehouseIds" input-type="select" th:data="${'/service-eam/eam-warehouse/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
@@ -240,6 +243,11 @@
     var VALIDATE_CONFIG={"allEmployee":{"labelInForm":"全员盘点","inputType":"select_box","required":true},"finishTime":{"date":true,"labelInForm":"盘点结束时间","inputType":"date_input"},"purchaseEndDate":{"date":true,"labelInForm":"购置结束日期","inputType":"date_input"},"name":{"labelInForm":"盘点名称","inputType":"text_input","required":true},"purchaseStartDate":{"date":true,"labelInForm":"购置开始日期","inputType":"date_input"},"startTime":{"date":true,"labelInForm":"盘点开始时间","inputType":"date_input"}};
     var AUTH_PREFIX="eam_inventory";
 
+    var ASSET_CATEGORY_DATA =  [[${assetCategoryData}]];
+
+    var PLAN_ID = [[${planId}]] ;
+    // OWNER_CODE
+    var OWNER_CODE = [[${ownerCode}]] ;
 
 </script>
 

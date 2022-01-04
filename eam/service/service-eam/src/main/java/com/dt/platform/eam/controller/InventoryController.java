@@ -73,6 +73,7 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "514089040971042816"),
 		@ApiImplicitParam(name = InventoryVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.OWNER_CODE , value = "所属" , required = false , dataTypeClass=String.class , example = "inventory"),
 		@ApiImplicitParam(name = InventoryVOMeta.STATUS , value = "业务状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.NAME , value = "盘点名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = InventoryVOMeta.INVENTORY_STATUS , value = "盘点状态" , required = false , dataTypeClass=String.class , example = "1212"),
@@ -89,8 +90,9 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.START_TIME , value = "盘点开始时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.FINISH_TIME , value = "盘点结束时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.PLAN_ID , value = "计划编号" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = InventoryServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -144,6 +146,7 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "514089040971042816"),
 		@ApiImplicitParam(name = InventoryVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.OWNER_CODE , value = "所属" , required = false , dataTypeClass=String.class , example = "inventory"),
 		@ApiImplicitParam(name = InventoryVOMeta.STATUS , value = "业务状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.NAME , value = "盘点名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = InventoryVOMeta.INVENTORY_STATUS , value = "盘点状态" , required = false , dataTypeClass=String.class , example = "1212"),
@@ -160,8 +163,9 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.START_TIME , value = "盘点开始时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.FINISH_TIME , value = "盘点结束时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.PLAN_ID , value = "计划编号" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { InventoryVOMeta.PAGE_INDEX , InventoryVOMeta.PAGE_SIZE , InventoryVOMeta.SEARCH_FIELD , InventoryVOMeta.FUZZY_FIELD , InventoryVOMeta.SEARCH_VALUE , InventoryVOMeta.DIRTY_FIELDS , InventoryVOMeta.SORT_FIELD , InventoryVOMeta.SORT_TYPE , InventoryVOMeta.IDS } )
 	@NotNull(name = InventoryVOMeta.ID)
@@ -181,6 +185,7 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "514089040971042816"),
 		@ApiImplicitParam(name = InventoryVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.OWNER_CODE , value = "所属" , required = false , dataTypeClass=String.class , example = "inventory"),
 		@ApiImplicitParam(name = InventoryVOMeta.STATUS , value = "业务状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.NAME , value = "盘点名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = InventoryVOMeta.INVENTORY_STATUS , value = "盘点状态" , required = false , dataTypeClass=String.class , example = "1212"),
@@ -197,8 +202,9 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.START_TIME , value = "盘点开始时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.FINISH_TIME , value = "盘点结束时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.PLAN_ID , value = "计划编号" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InventoryVOMeta.PAGE_INDEX , InventoryVOMeta.PAGE_SIZE , InventoryVOMeta.SEARCH_FIELD , InventoryVOMeta.FUZZY_FIELD , InventoryVOMeta.SEARCH_VALUE , InventoryVOMeta.DIRTY_FIELDS , InventoryVOMeta.SORT_FIELD , InventoryVOMeta.SORT_TYPE , InventoryVOMeta.IDS } )
 	@NotNull(name = InventoryVOMeta.ID)
@@ -233,6 +239,11 @@ public class InventoryController extends SuperController {
 			.with(InventoryMeta.WAREHOUSE)
 			.with(InventoryMeta.POSITION)
 			.execute();
+
+		inventoryService.dao().join(inventory.getDirector(), Person.class);
+		inventoryService.dao().join(inventory.getManager(), Person.class);
+		inventoryService.dao().join(inventory.getInventoryUser(), Person.class);
+
 		result.success(true).data(inventory);
 		return result;
 	}
@@ -266,6 +277,7 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "514089040971042816"),
 		@ApiImplicitParam(name = InventoryVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.OWNER_CODE , value = "所属" , required = false , dataTypeClass=String.class , example = "inventory"),
 		@ApiImplicitParam(name = InventoryVOMeta.STATUS , value = "业务状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.NAME , value = "盘点名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = InventoryVOMeta.INVENTORY_STATUS , value = "盘点状态" , required = false , dataTypeClass=String.class , example = "1212"),
@@ -282,8 +294,9 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.START_TIME , value = "盘点开始时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.FINISH_TIME , value = "盘点结束时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.PLAN_ID , value = "计划编号" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { InventoryVOMeta.PAGE_INDEX , InventoryVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = InventoryServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -304,6 +317,7 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "514089040971042816"),
 		@ApiImplicitParam(name = InventoryVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_CODE , value = "业务编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.OWNER_CODE , value = "所属" , required = false , dataTypeClass=String.class , example = "inventory"),
 		@ApiImplicitParam(name = InventoryVOMeta.STATUS , value = "业务状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.NAME , value = "盘点名称" , required = false , dataTypeClass=String.class , example = "1212"),
 		@ApiImplicitParam(name = InventoryVOMeta.INVENTORY_STATUS , value = "盘点状态" , required = false , dataTypeClass=String.class , example = "1212"),
@@ -320,8 +334,9 @@ public class InventoryController extends SuperController {
 		@ApiImplicitParam(name = InventoryVOMeta.START_TIME , value = "盘点开始时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.FINISH_TIME , value = "盘点结束时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
+		@ApiImplicitParam(name = InventoryVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryVOMeta.PLAN_ID , value = "计划编号" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = InventoryServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
