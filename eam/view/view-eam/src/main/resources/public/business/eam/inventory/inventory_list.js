@@ -77,14 +77,14 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('类型') , templet: function (d) { return templet('type',d.type,d);}  }
 					,{ field: 'businessCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务编码') , templet: function (d) { return templet('businessCode',d.businessCode,d);}  }
-					,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
+					//,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'inventoryStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点状态'), templet:function (d){ return templet('inventoryStatus',fox.getEnumText(SELECT_INVENTORYSTATUS_DATA,d.inventoryStatus),d);}}
 					,{ field: 'dataStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据状态'), templet:function (d){ return templet('dataStatus',fox.getEnumText(SELECT_DATASTATUS_DATA,d.dataStatus),d);}}
 					,{ field: 'allEmployee', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('全员盘点'), templet:function (d){ return templet('allEmployee',fox.getEnumText(SELECT_ALLEMPLOYEE_DATA,d.allEmployee),d);}}
 					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}
-					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类') , templet: function (d) { return templet('categoryId',d.categoryId,d);}  }
-					,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('仓库') , templet: function (d) { return templet('warehouseId',d.warehouseId,d);}  }
+				//	,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类') , templet: function (d) { return templet('categoryId',d.categoryId,d);}  }
+				//	,{ field: 'warehouseId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('仓库') , templet: function (d) { return templet('warehouseId',d.warehouseId,d);}  }
 					,{ field: 'purchaseStartDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('购置开始日期') ,templet: function (d) { return templet('purchaseStartDate',fox.dateFormat(d.purchaseStartDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'purchaseEndDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('购置结束日期') ,templet: function (d) { return templet('purchaseEndDate',fox.dateFormat(d.purchaseEndDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'startTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('盘点开始时间') ,templet: function (d) { return templet('startTime',fox.dateFormat(d.startTime,"yyyy-MM-dd"),d); }  }

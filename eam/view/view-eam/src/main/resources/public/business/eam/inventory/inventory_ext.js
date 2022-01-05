@@ -260,19 +260,19 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             }
 
             var categoryIds="";
-            // if(data&&data.inventoryUser){
-            //     for(var i=0;i<data.inventoryUser.length;i++){
-            //         if(i==0){
-            //             inventoryUserIds=data.inventoryUser[i].id;
-            //         }else{
-            //             inventoryUserIds=inventoryUserIds+","+data.inventoryUser[i].id;
-            //         }
-            //     }
-            //     data.inventoryUserIds=inventoryUserIds;
-            //
-            // }else{
-            //     data.inventoryUserIds="";
-            // }
+            if(data&&data.category){
+                for(var i=0;i<data.category.length;i++){
+                    if(i==0){
+                        categoryIds=data.category[i].id;
+                    }else{
+                        categoryIds=categoryIds+","+data.category[i].id;
+                    }
+                }
+                data.categoryIds=categoryIds;
+
+            }else{
+                data.categoryIds="";
+            }
 
 
 

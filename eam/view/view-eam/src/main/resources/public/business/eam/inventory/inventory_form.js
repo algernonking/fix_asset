@@ -408,7 +408,7 @@ function FormPage() {
 					if(formData.category&&formData.categoryIds){
 						categorySelect.setValue(formData.categoryIds.split(","));
 					}
-					categorySelect.update({disabled:true})
+					//categorySelect.update({disabled:true})
 				}
 			},150)
 
