@@ -489,6 +489,7 @@ function FormPage() {
 
 	function saveForm(param) {
 		param.dirtyFields=fox.compareDirtyFields(dataBeforeEdit,param);
+		param.planId=PLAN_ID;
 		var api=moduleURL+"/"+(param.id?"update":"insert");
 		admin.post(api, param, function (data) {
 			if (data.success) {

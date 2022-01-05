@@ -370,6 +370,24 @@ function ListPage() {
 					}
 				});
 			}
+			else if (layEvent === 'inventoryDetail') {
+				var top=2
+				var index=admin.popupCenter({
+					title: "盘点明细",
+					resize: false,
+					offset: [top,null],
+					area: ["95%","90%"],
+					type: 2,
+					id:"eam-asset-inventory-data",
+					content: '/business/eam/inventory_asset/inventory_asset_list.html?inventoryId='+data.id,
+					finish: function () {
+						console.log('11');
+					}
+				});
+				admin.putTempData('eam-asset-inventory-data-popup-index', index);
+
+
+			}
 			else if (layEvent === 'del') { // 删除
 
 				if(window.pageExt.list.beforeSingleDelete) {

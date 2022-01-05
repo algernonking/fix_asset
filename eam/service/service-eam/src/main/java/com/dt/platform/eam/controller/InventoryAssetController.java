@@ -1,8 +1,16 @@
 package com.dt.platform.eam.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.dt.platform.domain.eam.Inventory;
+import com.dt.platform.domain.eam.meta.AssetMeta;
+import com.dt.platform.domain.eam.meta.InventoryMeta;
+import com.dt.platform.eam.service.IAssetService;
+import com.github.foxnic.commons.collection.CollectorUtil;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,7 +42,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.eam.meta.InventoryAssetMeta;
 import com.dt.platform.domain.eam.Asset;
-import org.github.foxnic.web.domain.hrm.Employee;
+
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +58,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 盘点明细 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:22
+ * @since 2022-01-05 12:58:04
 */
 
 @Api(tags = "盘点明细")
@@ -61,16 +69,18 @@ public class InventoryAssetController extends SuperController {
 	@Autowired
 	private IInventoryAssetService inventoryAssetService;
 
+	@Autowired
+	private IAssetService assetService;
 
 	/**
 	 * 添加盘点明细
 	*/
 	@ApiOperation(value = "添加盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class , example = "531058564924444672"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "loss"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "518094137103220736"),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_EMPL_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_DATE , value = "操作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -90,7 +100,7 @@ public class InventoryAssetController extends SuperController {
 	*/
 	@ApiOperation(value = "删除盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = InventoryAssetVOMeta.ID)
@@ -124,10 +134,10 @@ public class InventoryAssetController extends SuperController {
 	*/
 	@ApiOperation(value = "更新盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class , example = "531058564924444672"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "loss"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "518094137103220736"),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_EMPL_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_DATE , value = "操作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -147,10 +157,10 @@ public class InventoryAssetController extends SuperController {
 	*/
 	@ApiOperation(value = "保存盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class , example = "531058564924444672"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "loss"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "518094137103220736"),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_EMPL_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_DATE , value = "操作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -179,6 +189,32 @@ public class InventoryAssetController extends SuperController {
 	public Result<InventoryAsset> getById(String id) {
 		Result<InventoryAsset> result=new Result<>();
 		InventoryAsset inventoryAsset=inventoryAssetService.getById(id);
+		// join 关联的对象
+		inventoryAssetService.dao().fill(inventoryAsset)
+				.with(InventoryAssetMeta.ASSET)
+				.with(InventoryAssetMeta.OPERATER)
+				.execute();
+
+		assetService.dao().fill(inventoryAsset.getAsset()).with(AssetMeta.CATEGORY)
+				.with(AssetMeta.CATEGORY_FINANCE)
+				.with(AssetMeta.GOODS)
+				.with(AssetMeta.MANUFACTURER)
+				.with(AssetMeta.POSITION)
+				.with(AssetMeta.MAINTNAINER)
+				.with(AssetMeta.SUPPLIER)
+				.with(AssetMeta.OWNER_COMPANY)
+				.with(AssetMeta.USE_ORGANIZATION)
+				.with(AssetMeta.MANAGER)
+				.with(AssetMeta.USE_USER)
+				.with(AssetMeta.ORIGINATOR)
+				.with(AssetMeta.RACK)
+				.with(AssetMeta.SOURCE)
+				.with(AssetMeta.SAFETY_LEVEL)
+				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
+				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
+				.execute();
+
+		inventoryAssetService.dao().join(inventoryAsset.getOperater(), Person.class);
 		result.success(true).data(inventoryAsset);
 		return result;
 	}
@@ -209,10 +245,10 @@ public class InventoryAssetController extends SuperController {
 	*/
 	@ApiOperation(value = "查询盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class , example = "531058564924444672"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "loss"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "518094137103220736"),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_EMPL_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_DATE , value = "操作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -233,10 +269,10 @@ public class InventoryAssetController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询盘点明细")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "66476b1b-6dd0-11ec-bf3e-00163e1b60a7"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.INVENTORY_ID , value = "盘点" , required = false , dataTypeClass=String.class , example = "531058564924444672"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "loss"),
+		@ApiImplicitParam(name = InventoryAssetVOMeta.ASSET_ID , value = "资产" , required = false , dataTypeClass=String.class , example = "518094137103220736"),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_EMPL_ID , value = "员工" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.OPER_DATE , value = "操作时间" , required = false , dataTypeClass=Date.class),
 		@ApiImplicitParam(name = InventoryAssetVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
@@ -247,6 +283,20 @@ public class InventoryAssetController extends SuperController {
 	public Result<PagedList<InventoryAsset>> queryPagedList(InventoryAssetVO sample) {
 		Result<PagedList<InventoryAsset>> result=new Result<>();
 		PagedList<InventoryAsset> list=inventoryAssetService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		// join 关联的对象
+		inventoryAssetService.dao().fill(list)
+				.with(InventoryAssetMeta.OPERATER)
+				.with(InventoryAssetMeta.ASSET)
+				.execute();
+
+
+		List<Employee> operList= CollectorUtil.collectList(list.getList(), InventoryAsset::getOperater);
+		inventoryAssetService.dao().join(operList, Person.class);
+
+		List<Asset> assetList= CollectorUtil.collectList(list.getList(), InventoryAsset::getAsset);
+		assetService.joinData(assetList);
+
 		result.success(true).data(list);
 		return result;
 	}

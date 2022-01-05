@@ -19,7 +19,7 @@ import com.dt.platform.proxy.ServiceNames;
  * 盘点明细  控制器服务代理
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:22
+ * @since 2022-01-05 12:58:04
 */
 
 @FeignClient(value = ServiceNames.EAM, contextId = InventoryAssetServiceProxy.API_CONTEXT_PATH , configuration = FeignConfiguration.class)
@@ -139,7 +139,7 @@ public interface InventoryAssetServiceProxy {
 	Result<InventoryAsset> getById(String id);
 
 	/**
-	 * 批量删除盘点明细
+	 * 获取多个盘点明细
 	*/
 	@RequestMapping(InventoryAssetServiceProxy.GET_BY_IDS)
 	Result<List<InventoryAsset>> getByIds(List<String> ids);

@@ -347,7 +347,7 @@ public class EamRelationManager extends RelationManager {
 
     public void setupInventoryAsset() {
 
-        this.property(InventoryAssetMeta.INVENTORY_USER_PROP)
+        this.property(InventoryAssetMeta.OPERATER_PROP)
                 .using(EAMTables.EAM_INVENTORY_ASSET.OPER_EMPL_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
 
         this.property(InventoryAssetMeta.ASSET_PROP)

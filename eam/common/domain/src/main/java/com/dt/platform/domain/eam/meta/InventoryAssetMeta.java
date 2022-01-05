@@ -10,8 +10,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:20
- * @sign EEC6DF3A53B721A17D6FCE9A88E3CAA0
+ * @since 2022-01-05 12:58:03
+ * @sign BC045218BBAA6361A8F1CBFBC6D44D9A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -178,19 +178,19 @@ public class InventoryAssetMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.InventoryAsset,com.dt.platform.domain.eam.Asset> ASSET_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryAsset.class ,ASSET, com.dt.platform.domain.eam.Asset.class, "资产", "资产", com.dt.platform.domain.eam.Asset.class, null);
 	
 	/**
-	 * 盘点人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	 * 操作人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final String INVENTORY_USER="inventoryUser";
+	public static final String OPERATER="operater";
 	
 	/**
-	 * 盘点人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
+	 * 操作人员 , 类型: org.github.foxnic.web.domain.hrm.Employee
 	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.InventoryAsset,org.github.foxnic.web.domain.hrm.Employee> INVENTORY_USER_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryAsset.class ,INVENTORY_USER, org.github.foxnic.web.domain.hrm.Employee.class, "盘点人员", "盘点人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryAsset,org.github.foxnic.web.domain.hrm.Employee> OPERATER_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryAsset.class ,OPERATER, org.github.foxnic.web.domain.hrm.Employee.class, "操作人员", "操作人员", org.github.foxnic.web.domain.hrm.Employee.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , INVENTORY_ID , STATUS , ASSET_ID , OPER_EMPL_ID , OPER_DATE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET , INVENTORY_USER };
+	public static final String[] $PROPS={ ID , INVENTORY_ID , STATUS , ASSET_ID , OPER_EMPL_ID , OPER_DATE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , ASSET , OPERATER };
 	
 	/**
 	 * 代理类
@@ -377,13 +377,13 @@ public class InventoryAssetMeta {
 		}
 		
 		/**
-		 * 设置 盘点人员
-		 * @param inventoryUser 盘点人员
+		 * 设置 操作人员
+		 * @param operater 操作人员
 		 * @return 当前对象
 		*/
-		public InventoryAsset setInventoryUser(Employee inventoryUser) {
-			super.change(INVENTORY_USER,super.getInventoryUser(),inventoryUser);
-			super.setInventoryUser(inventoryUser);
+		public InventoryAsset setOperater(Employee operater) {
+			super.change(OPERATER,super.getOperater(),operater);
+			super.setOperater(operater);
 			return this;
 		}
 	}

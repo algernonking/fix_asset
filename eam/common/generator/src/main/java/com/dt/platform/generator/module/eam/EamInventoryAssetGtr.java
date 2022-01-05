@@ -22,7 +22,7 @@ public class EamInventoryAssetGtr extends BaseCodeGenerator{
 
         //盘点明细
         cfg.getPoClassFile().addSimpleProperty(Asset.class,"asset","资产","资产");
-        cfg.getPoClassFile().addSimpleProperty(Employee.class,"inventoryUser","盘点人员","盘点人员");
+        cfg.getPoClassFile().addSimpleProperty(Employee.class,"operater","操作人员","操作人员");
 
 
         cfg.view().field(EAMTables.EAM_INVENTORY_ASSET.ID).basic().hidden(true);
@@ -30,7 +30,8 @@ public class EamInventoryAssetGtr extends BaseCodeGenerator{
         //eam_asset_change_data
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.EAM_INVENTORY_ASSET.STATUS
+                        EAMTables.EAM_INVENTORY_ASSET.STATUS,
+                        EAMTables.EAM_INVENTORY_ASSET.NOTES
                 }
         );
 
@@ -38,15 +39,24 @@ public class EamInventoryAssetGtr extends BaseCodeGenerator{
                 .label("盘点状态").selectBox().enumType(AssetInventoryDetailStatusEnum.class);
 
 
+        cfg.view().formWindow().bottomSpace(250);
+        cfg.view().formWindow().width("85%");
+        cfg.view().form().addGroup(null,
+                new Object[] {
+                        EAMTables.EAM_INVENTORY_ASSET.STATUS,
+                        EAMTables.EAM_INVENTORY_ASSET.NOTES,
+                }
+        );
+
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.COVER_EXISTS_FILE) //服务与接口
-                .setControllerAndAgent(WriteMode.COVER_EXISTS_FILE) //Rest
-                .setPageController(WriteMode.COVER_EXISTS_FILE) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
-                .setExtendJsFile(WriteMode.COVER_EXISTS_FILE); //列表HTML页
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
+                .setFormPage(WriteMode.IGNORE) //表单HTML页
+                .setListPage(WriteMode.IGNORE)//列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         cfg.buildAll();
     }
 
@@ -54,6 +64,6 @@ public class EamInventoryAssetGtr extends BaseCodeGenerator{
         EamInventoryAssetGtr g=new EamInventoryAssetGtr();
         g.generateCode();
         //生成菜单
-      //  g.generateMenu(InventoryAssetServiceProxy.class, InventoryAssetPageController.class);
+        g.generateMenu(InventoryAssetServiceProxy.class, InventoryAssetPageController.class);
     }
 }

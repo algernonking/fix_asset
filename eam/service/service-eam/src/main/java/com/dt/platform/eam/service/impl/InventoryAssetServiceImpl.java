@@ -35,7 +35,7 @@ import java.util.Date;
  * 盘点明细 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:22
+ * @since 2022-01-05 12:58:04
 */
 
 
@@ -249,16 +249,16 @@ public class InventoryAssetServiceImpl extends SuperService<InventoryAsset> impl
 	}
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param inventoryAsset 数据对象
 	 * @return 判断结果
 	 */
-	public Result<InventoryAsset> checkExists(InventoryAsset inventoryAsset) {
+	public Boolean checkExists(InventoryAsset inventoryAsset) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=this.checkExists(inventoryAsset, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(inventoryAsset, SYS_ROLE.NAME);
 		//return exists;
-		return ErrorDesc.success();
+		return false;
 	}
 
 	@Override

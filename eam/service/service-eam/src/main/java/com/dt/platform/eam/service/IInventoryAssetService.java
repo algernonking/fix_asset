@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 盘点明细 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:21
+ * @since 2022-01-05 12:58:04
 */
 
 public interface IInventoryAssetService extends ISuperService<InventoryAsset> {
@@ -144,7 +144,7 @@ public interface IInventoryAssetService extends ISuperService<InventoryAsset> {
 	Result saveList(List<InventoryAsset> inventoryAssetList , SaveMode mode);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 检查实体中的数据字段是否已经存在 . 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 * @param inventoryAsset  实体对象
 	 * @param field  字段清单，至少指定一个
 	 * @return 是否已经存在
@@ -161,19 +161,19 @@ public interface IInventoryAssetService extends ISuperService<InventoryAsset> {
 	InventoryAsset getById(String id);
 
 	/**
-	 * 检查实体中的数据字段是否已经存在
+	 * 按 id 获取多个对象
 	 * @param ids  主键清单
 	 * @return 实体集
 	 * */
 	List<InventoryAsset> getByIds(List<String> ids);
 
 	/**
-	 * 检查 角色 是否已经存在
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
 	 * @param inventoryAsset 数据对象
 	 * @return 判断结果
 	 */
-	Result<InventoryAsset> checkExists(InventoryAsset inventoryAsset);
+	Boolean checkExists(InventoryAsset inventoryAsset);
 
 	/**
 	 * 根据实体数构建默认的条件表达式, 不支持 Join 其它表

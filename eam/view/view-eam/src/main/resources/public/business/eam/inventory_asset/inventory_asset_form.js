@@ -1,13 +1,14 @@
 /**
  * 盘点明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:29
+ * @since 2022-01-05 11:04:57
  */
 
 function FormPage() {
 
 	var settings,admin,form,table,layer,util,fox,upload,xmSelect,foxup;
 	const moduleURL="/service-eam/eam-inventory-asset";
+	// 表单执行操作类型：view，create，edit
 	var action=null;
 	var disableCreateNew=false;
 	var disableModify=false;
@@ -29,7 +30,7 @@ function FormPage() {
 		}
 
 		if(window.pageExt.form.beforeInit) {
-			window.pageExt.form.beforeInit();
+			window.pageExt.form.beforeInit(action,admin.getTempData('eam-inventory-asset-form-data'));
 		}
 
 		//渲染表单组件
@@ -62,7 +63,7 @@ function FormPage() {
 			var body=$("body");
 			var bodyHeight=body.height();
 			var footerHeight=$(".model-form-footer").height();
-			var area=admin.changePopupArea(null,bodyHeight+footerHeight);
+			var area=admin.changePopupArea(null,bodyHeight+footerHeight,'eam-inventory-asset-form-data-win');
 			if(area==null) return;
 			admin.putTempData('eam-inventory-asset-form-area', area);
 			window.adjustPopup=adjustPopup;
@@ -89,6 +90,11 @@ function FormPage() {
 			el: "status",
 			radio: true,
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
@@ -100,7 +106,7 @@ function FormPage() {
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
 				}
 				return opts;
 			}
@@ -108,7 +114,10 @@ function FormPage() {
 		laydate.render({
 			elem: '#operDate',
 			format:"yyyy-MM-dd HH:mm:ss",
-			trigger:"click"
+			trigger:"click",
+			done: function(value, date, endDate){
+				window.pageExt.form.onDatePickerChanged && window.pageExt.form.onDatePickerChanged("operDate",value, date, endDate);
+			}
 		});
 	}
 
@@ -136,10 +145,6 @@ function FormPage() {
 
 
 
-			//设置 操作时间 显示复选框勾选
-			if(formData["operDate"]) {
-				$("#operDate").val(fox.dateFormat(formData["operDate"],"yyyy-MM-dd HH:mm:ss"));
-			}
 
 
 			//设置  盘点状态 设置下拉框勾选
@@ -245,7 +250,7 @@ function FormPage() {
 
 
 	    //关闭窗口
-	    $("#cancel-button").click(function(){admin.closePopupCenter();});
+	    $("#cancel-button").click(function(){ admin.finishPopupCenterById('eam-inventory-asset-form-data-win'); });
 
     }
 
@@ -254,7 +259,11 @@ function FormPage() {
 		verifyForm: verifyForm,
 		saveForm: saveForm,
 		fillFormData: fillFormData,
-		adjustPopup: adjustPopup
+		adjustPopup: adjustPopup,
+		action: action,
+		setAction: function (act) {
+			action = act;
+		}
 	};
 
 	window.pageExt.form.ending && window.pageExt.form.ending();

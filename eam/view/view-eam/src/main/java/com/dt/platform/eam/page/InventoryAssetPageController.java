@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  * 盘点明细 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:22
+ * @since 2022-01-05 12:58:05
 */
 
 @Controller("EamInventoryAssetPageController")
@@ -41,7 +41,8 @@ public class InventoryAssetPageController extends ViewController {
 	 * 盘点明细 功能主页面
 	 */
 	@RequestMapping("/inventory_asset_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String inventoryId) {
+		model.addAttribute("inventoryId",inventoryId);
 		return prefix+"/inventory_asset_list";
 	}
 

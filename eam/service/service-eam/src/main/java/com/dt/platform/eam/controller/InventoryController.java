@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.eam.service.IAssetService;
 import com.github.foxnic.commons.collection.CollectorUtil;
 import org.github.foxnic.web.domain.hrm.Person;
 import org.springframework.web.bind.annotation.RestController;
@@ -64,7 +65,8 @@ public class InventoryController extends SuperController {
 	@Autowired
 	private IInventoryService inventoryService;
 
-
+	@Autowired
+	private IAssetService assetService;
 	/**
 	 * 添加资产盘点
 	*/

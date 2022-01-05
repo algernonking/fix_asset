@@ -96,7 +96,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	public Result createAssetRecord(String id) {
 		Inventory inventory=this.getById(id);
 		String tenantId=SessionUser.getCurrent().getActivatedTenantId();
-		dao.execute("delete from eam_inventory_asset where id=?",id);
+		dao.execute("delete from eam_inventory_asset where inventory_id=?",id);
 		String sql="insert into eam_inventory_asset (id,inventory_id,status,asset_id)" +
 				"select uuid(),'"+id+"','"+AssetInventoryDetailStatusEnum.NOT_COUNTED.code()+"',id from eam_asset where deleted=0 and tenant_id='"+tenantId+"' and owner_code='"+inventory.getType()+"' and status='"+AssetHandleStatusEnum.COMPLETE.code()+"' ";
 		//资产状态
@@ -116,16 +116,65 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 
 		//管理人员
-		sql=sql+" and manager_id in (select user_id from eam_inventory_manager where inventory_id='"+id+"' and deleted=0)";
+		String csql1="select count(1) cnt from eam_inventory_manager where inventory_id=? and deleted=0";
+		if(dao.queryRecord(csql1,id).getInteger("cnt")>0){
+			sql=sql+" and manager_id in (select user_id from eam_inventory_manager where inventory_id='"+id+"' and deleted=0)";
+		}
 
+		//位置
+		String csql2="select count(1) cnt from eam_inventory_position where inventory_id=? and deleted=0";
+		if(dao.queryRecord(csql2,id).getInteger("cnt")>0){
+			sql=sql+" and position_id in (select value from eam_inventory_position where inventory_id='"+id+"' and deleted=0)";
+		}
+
+		//仓库
+		String csql3="select count(1) cnt from eam_inventory_warehouse where inventory_id=? and deleted=0";
+		if(dao.queryRecord(csql3,id).getInteger("cnt")>0){
+			sql=sql+" and warehouse_id in (select value from eam_inventory_warehouse where inventory_id='"+id+"' and deleted=0)";
+		}
+
+		//资产分类
+		String csql4="select count(1) cnt from eam_inventory_catalog where inventory_id=? and deleted=0";
+		if(dao.queryRecord(csql4,id).getInteger("cnt")>0){
+			sql=sql+" and category_id in (select value from eam_inventory_catalog where inventory_id='"+id+"' and deleted=0)";
+		}
 
 		//所属公司
+		String companyId=inventory.getOwnCompanyId();
+		if(!StringUtil.isBlank(companyId)){
+			String[] companyIdArr=companyId.split(",");
+			if(companyIdArr.length>0){
+				String subsql="(";
+				for(int i=0;i<companyIdArr.length;i++){
+					if(i==0){
+						subsql=subsql+"'"+companyIdArr[i]+"'";
+					}else{
+						subsql=subsql+",'"+companyIdArr[i]+"'";
+					}
+				}
+				subsql=subsql+")";
+				sql=sql+ " and own_company_id in " +subsql;
+			}
+		}
 
 
 		//使用部门
-
-
-		//分类
+		String orgId=inventory.getUseOrganizationId();
+		if(!StringUtil.isBlank(orgId)){
+			String[] orgIdArr=orgId.split(",");
+			if(orgIdArr.length>0){
+				String subsql="(";
+				for(int i=0;i<orgIdArr.length;i++){
+					if(i==0){
+						subsql=subsql+"'"+orgIdArr[i]+"'";
+					}else{
+						subsql=subsql+",'"+orgIdArr[i]+"'";
+					}
+				}
+				subsql=subsql+")";
+				sql=sql+ " and use_organization_id in " +subsql;
+			}
+		}
 
 		System.out.println(sql);
 		dao.execute(sql);
@@ -137,19 +186,24 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		Inventory inventory=this.getById(id);
 		if(AssetInventoryActionStatusEnum.NOT_START.code().equals(inventory.getInventoryStatus())
 		){
+			Result r=createAssetRecord(id);
+			if(!r.success()){
+				return r;
+			}
 			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.ACTING.code());
 			inventory.setStartTime(new Date());
 			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
 		}else{
 			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
 		}
+
+
 	}
 
 	@Override
 	public Result cancel(String id) {
 		Inventory inventory=this.getById(id);
-		if(AssetInventoryActionStatusEnum.NOT_START.code().equals(inventory.getInventoryStatus())
-		){
+		if(AssetInventoryActionStatusEnum.NOT_START.code().equals(inventory.getInventoryStatus())){
 			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.CANCEL.code());
 			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
 		}else{
@@ -165,9 +219,9 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		if(inventoryAssetService.queryList(q).size()>0){
 			return ErrorDesc.failure().message("资产未盘点完，不能进行结束操作!");
 		}
+
 		Inventory inventory=this.getById(id);
-		if(AssetInventoryActionStatusEnum.ACTING.code().equals(inventory.getInventoryStatus())
-		){
+		if(AssetInventoryActionStatusEnum.ACTING.code().equals(inventory.getInventoryStatus())){
 			inventory.setInventoryStatus(AssetInventoryActionStatusEnum.FINISH.code());
 			return super.update(inventory,SaveMode.NOT_NULL_FIELDS);
 		}else{
@@ -260,7 +314,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 		}
 
-		this.createAssetRecord(inventory.getId());
+		//this.createAssetRecord(inventory.getId());
 		return r;
 	}
 

@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 盘点明细
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:20
- * @sign EEC6DF3A53B721A17D6FCE9A88E3CAA0
+ * @since 2022-01-05 12:58:03
+ * @sign BC045218BBAA6361A8F1CBFBC6D44D9A
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -127,10 +127,10 @@ public class InventoryAsset extends Entity {
 	private Asset asset;
 	
 	/**
-	 * 盘点人员：盘点人员
+	 * 操作人员：操作人员
 	*/
-	@ApiModelProperty(required = false,value="盘点人员" , notes = "盘点人员")
-	private Employee inventoryUser;
+	@ApiModelProperty(required = false,value="操作人员" , notes = "操作人员")
+	private Employee operater;
 	
 	/**
 	 * 获得 主键<br>
@@ -437,21 +437,21 @@ public class InventoryAsset extends Entity {
 	}
 	
 	/**
-	 * 获得 盘点人员<br>
-	 * 盘点人员
-	 * @return 盘点人员
+	 * 获得 操作人员<br>
+	 * 操作人员
+	 * @return 操作人员
 	*/
-	public Employee getInventoryUser() {
-		return inventoryUser;
+	public Employee getOperater() {
+		return operater;
 	}
 	
 	/**
-	 * 设置 盘点人员
-	 * @param inventoryUser 盘点人员
+	 * 设置 操作人员
+	 * @param operater 操作人员
 	 * @return 当前对象
 	*/
-	public InventoryAsset setInventoryUser(Employee inventoryUser) {
-		this.inventoryUser=inventoryUser;
+	public InventoryAsset setOperater(Employee operater) {
+		this.operater=operater;
 		return this;
 	}
 

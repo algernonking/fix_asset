@@ -5,14 +5,15 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.constants.enums.eam.AssetInventoryOwnerEnum;
-import com.dt.platform.domain.eam.Inventory;
+import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.InventoryMeta;
 import com.dt.platform.domain.eam.meta.InventoryPlanMeta;
+import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.pcm.Catalog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.eam.InventoryPlan;
-import com.dt.platform.domain.eam.InventoryPlanVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -215,6 +216,8 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 			return ErrorDesc.failureMessage("当前状态无法应用模板!");
 		}
 
+
+
 		if(plan.getInventory()!=null&&plan.getInventory().getId()!=null){
 
 		}else{
@@ -222,7 +225,73 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 		}
 
 		Inventory inventoryTpl=plan.getInventory();
+		inventoryServiceImpl.dao().fill(inventoryTpl)
+				.with(InventoryMeta.MANAGER)
+				.with(InventoryMeta.DIRECTOR)
+				.with(InventoryMeta.INVENTORY_USER)
+				.with(InventoryMeta.CATEGORY)
+				.with(InventoryMeta.WAREHOUSE)
+				.with(InventoryMeta.POSITION)
+				.execute();
 		inventoryTpl.setId(null);
+		//处理分类
+		List<Catalog> catalogList=inventoryTpl.getCategory();
+		if(catalogList!=null&&catalogList.size()>0){
+			List<String> catalogIdList =new ArrayList<>();
+			for(Catalog c : catalogList){
+				catalogIdList.add(c.getId());
+			}
+			inventoryTpl.setCategoryIds(catalogIdList);
+		}
+		//处理位置
+		List<Position> positionList=inventoryTpl.getPosition();
+		if(positionList!=null&&positionList.size()>0){
+			List<String> positionIdList =new ArrayList<>();
+			for(Position c : positionList){
+				positionIdList.add(c.getId());
+			}
+			inventoryTpl.setPositionIds(positionIdList);
+		}
+
+		//处理仓库
+		List<Warehouse> warehouseList=inventoryTpl.getWarehouse();
+		if(warehouseList!=null&&warehouseList.size()>0){
+			List<String> warehouseIdList =new ArrayList<>();
+			for(Warehouse c : warehouseList){
+				warehouseIdList.add(c.getId());
+			}
+			inventoryTpl.setWarehouseIds(warehouseIdList);
+		}
+
+		//处理盘点人
+		List<Employee> inventoryList=inventoryTpl.getInventoryUser();
+		if(inventoryList!=null&&inventoryList.size()>0){
+			List<String> inventoryIdList =new ArrayList<>();
+			for(Employee c : inventoryList){
+				inventoryIdList.add(c.getId());
+			}
+			inventoryTpl.setInventoryUserIds(inventoryIdList);
+		}
+
+		//处理管理人
+		List<Employee> managerList=inventoryTpl.getManager();
+		if(managerList!=null&&managerList.size()>0){
+			List<String> managerIdList =new ArrayList<>();
+			for(Employee c : managerList){
+				managerIdList.add(c.getId());
+			}
+			inventoryTpl.setInventoryManagerIds(managerIdList);
+		}
+
+		//处理责任人
+		List<Employee> directorList=inventoryTpl.getDirector();
+		if(directorList!=null&&directorList.size()>0){
+			List<String> directorIdList =new ArrayList<>();
+			for(Employee c : directorList){
+				directorIdList.add(c.getId());
+			}
+			inventoryTpl.setInventoryDirectorIds(directorIdList);
+		}
 		inventoryTpl.setOwnerCode(AssetInventoryOwnerEnum.ASSET_INVENTORY.code());
 
 		return inventoryServiceImpl.insert(inventoryTpl,false);

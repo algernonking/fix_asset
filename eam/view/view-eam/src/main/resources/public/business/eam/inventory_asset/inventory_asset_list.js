@@ -1,7 +1,7 @@
 /**
  * 盘点明细 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-19 13:14:28
+ * @since 2022-01-05 11:04:54
  */
 
 
@@ -75,10 +75,17 @@ function ListPage() {
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
-					,{ field: 'inventoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点') , templet: function (d) { return templet('inventoryId',d.inventoryId,d);}  }
+				//	,{ field: 'inventoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点') , templet: function (d) { return templet('inventoryId',d.inventoryId,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-					,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
-					,{ field: 'operEmplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('员工') , templet: function (d) { return templet('operEmplId',d.operEmplId,d);}  }
+				//	,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return templet('categoryId',fox.joinLabel(d.asset.category,"name"),d);}}
+					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.asset.assetStatus),d);}}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('名称') , templet: function (d) { return templet('name',d.asset.name,d);}  }
+					,{ field: 'model', align:"left",fixed:false, hide:false, sort: true, title: fox.translate('规格型号') , templet: function (d) { return templet('model',d.asset.model,d);}  }
+					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.asset.serialNumber,d);}  }
+					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.asset.assetNotes,d);}  }
+
+					,{ field: 'operEmplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点人员') , templet: function (d) { return templet('operEmplId',d.operEmplId,d);}  }
 					,{ field: 'operDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('操作时间') ,templet: function (d) { return templet('operDate',fox.dateFormat(d.operDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -96,6 +103,8 @@ function ListPage() {
 							} else {
 								layer.msg(fox.translate('数据导入失败')+"!");
 							}
+							// 是否执行后续逻辑：错误提示
+							return false;
 						}
 					}:false
 				}
@@ -117,6 +126,7 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
+		value.notes={ inputType:"button",value: $("#notes").val()};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
@@ -170,13 +180,18 @@ function ListPage() {
 			radio: false,
 			size: "small",
 			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
 			//转换数据
 			transform:function(data) {
 				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
 				var opts=[];
 				if(!data) return opts;
 				for (var i = 0; i < data.length; i++) {
-					opts.push({name:data[i].text,value:data[i].code});
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
 				}
 				return opts;
 			}
@@ -265,10 +280,7 @@ function ListPage() {
             }
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('盘点明细')+fox.translate('吗？'), function (i) {
-				top.layer.close(i);
-				top.layer.load(2);
-                admin.request(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
-					top.layer.closeAll('loading');
+                admin.post(moduleURL+"/delete-by-ids", { ids: ids }, function (data) {
                     if (data.success) {
 						if(window.pageExt.list.afterBatchDelete) {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
@@ -280,7 +292,6 @@ function ListPage() {
 						top.layer.msg(data.message, {icon: 2, time: 1500});
                     }
                 });
-
 			});
         }
 	}
@@ -301,24 +312,16 @@ function ListPage() {
 
 			admin.putTempData('eam-inventory-asset-form-data-form-action', "",true);
 			if (layEvent === 'edit') { // 修改
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-inventory-asset-form-data-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 layer.msg(data.message, {icon: 1, time: 1500});
+						 top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
 			} else if (layEvent === 'view') { // 查看
-				//延迟显示加载动画，避免界面闪动
-				var task=setTimeout(function(){layer.load(2);},1000);
-				admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-					clearTimeout(task);
-					layer.closeAll('loading');
+				admin.post(moduleURL+"/get-by-id", { id : data.id }, function (data) {
 					if(data.success) {
 						admin.putTempData('eam-inventory-asset-form-data-form-action', "view",true);
 						showEditForm(data.data);
@@ -326,6 +329,45 @@ function ListPage() {
 						top.layer.msg(data.message, {icon: 1, time: 1500});
 					}
 				});
+			} else if (layEvent === 'detail') { // 查
+
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request("/service-eam/eam-asset/get-by-id", { id : data.assetId }, function (assetResult) {
+					clearTimeout(task);
+					layer.closeAll('loading');
+					if(assetResult.success) {
+						var assetData=assetResult.data;
+						admin.putTempData('eam-asset-form-data-form-action', "view",true);
+						var queryString="?pageType=base";
+						if(assetData && assetData.id) queryString=queryString+"&" + 'id=' + assetData.id;
+						admin.putTempData('eam-asset-form-data', assetData);
+						var area=admin.getTempData('eam-asset-form-area');
+						var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+						var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+						var title = fox.translate('查看资产');
+
+						var index=admin.popupCenter({
+							title: title,
+							resize: false,
+							offset: [2,null],
+							area: ["95%",height+"px"],
+							type: 2,
+							id:"eam-asset-form-data-win",
+							content: '/business/eam/asset/asset_info_form.html' + queryString,
+							finish: function () {
+
+							}
+						});
+						admin.putTempData('eam-asset-form-data-popup-index', index);
+
+					} else {
+						layer.msg(data.message, {icon: 1, time: 1500});
+					}
+				});
+
+
+
+
 			}
 			else if (layEvent === 'del') { // 删除
 
@@ -367,7 +409,10 @@ function ListPage() {
 		}
 		var action=admin.getTempData('eam-inventory-asset-form-data-form-action');
 		var queryString="";
-		if(data && data.id) queryString="?" + 'id=' + data.id;
+		if(data && data.id) queryString='id=' + data.id;
+		if(window.pageExt.list.makeFormQueryString) {
+			queryString=window.pageExt.list.makeFormQueryString(data,queryString,action);
+		}
 		admin.putTempData('eam-inventory-asset-form-data', data);
 		var area=admin.getTempData('eam-inventory-asset-form-area');
 		var height= (area && area.height) ? area.height : ($(window).height()*0.6);
@@ -381,10 +426,10 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["500px",height+"px"],
+			area: ["85%",height+"px"],
 			type: 2,
 			id:"eam-inventory-asset-form-data-win",
-			content: '/business/eam/inventory_asset/inventory_asset_form.html' + queryString,
+			content: '/business/eam/inventory_asset/inventory_asset_form.html' + (queryString?("?"+queryString):""),
 			finish: function () {
 				refreshTableData();
 			}
