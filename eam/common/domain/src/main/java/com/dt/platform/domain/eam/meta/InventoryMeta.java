@@ -15,8 +15,8 @@ import org.github.foxnic.web.domain.pcm.Catalog;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-04 12:33:21
- * @sign F0F77F1296F86ABED8DF9228BB38A75F
+ * @since 2022-01-05 19:34:06
+ * @sign 28D5E4311CAB3B9FDC44C0599870EF36
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -151,26 +151,6 @@ public class InventoryMeta {
 	 * 使用公司/部门 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> USE_ORGANIZATION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,USE_ORGANIZATION_ID, java.lang.String.class, "使用公司/部门", "使用公司/部门", java.lang.String.class, null);
-	
-	/**
-	 * 存放位置 , 类型: java.lang.String
-	*/
-	public static final String POSITION_ID="positionId";
-	
-	/**
-	 * 存放位置 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> POSITION_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,POSITION_ID, java.lang.String.class, "存放位置", "存放位置", java.lang.String.class, null);
-	
-	/**
-	 * 仓库 , 类型: java.lang.String
-	*/
-	public static final String WAREHOUSE_ID="warehouseId";
-	
-	/**
-	 * 仓库 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.eam.Inventory,java.lang.String> WAREHOUSE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.Inventory.class ,WAREHOUSE_ID, java.lang.String.class, "仓库", "仓库", java.lang.String.class, null);
 	
 	/**
 	 * 购置开始日期 , 类型: java.util.Date
@@ -505,7 +485,7 @@ public class InventoryMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , WAREHOUSE_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , OWNER_COMPANY , USE_ORGANIZATION , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR , POSITION , POSITION_IDS , WAREHOUSE , WAREHOUSE_IDS , CATEGORY , CATEGORY_IDS };
+	public static final String[] $PROPS={ ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , OWNER_COMPANY , USE_ORGANIZATION , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR , POSITION , POSITION_IDS , WAREHOUSE , WAREHOUSE_IDS , CATEGORY , CATEGORY_IDS };
 	
 	/**
 	 * 代理类
@@ -655,28 +635,6 @@ public class InventoryMeta {
 		public Inventory setUseOrganizationId(String useOrganizationId) {
 			super.change(USE_ORGANIZATION_ID,super.getUseOrganizationId(),useOrganizationId);
 			super.setUseOrganizationId(useOrganizationId);
-			return this;
-		}
-		
-		/**
-		 * 设置 存放位置
-		 * @param positionId 存放位置
-		 * @return 当前对象
-		*/
-		public Inventory setPositionId(String positionId) {
-			super.change(POSITION_ID,super.getPositionId(),positionId);
-			super.setPositionId(positionId);
-			return this;
-		}
-		
-		/**
-		 * 设置 仓库
-		 * @param warehouseId 仓库
-		 * @return 当前对象
-		*/
-		public Inventory setWarehouseId(String warehouseId) {
-			super.change(WAREHOUSE_ID,super.getWarehouseId(),warehouseId);
-			super.setWarehouseId(warehouseId);
 			return this;
 		}
 		

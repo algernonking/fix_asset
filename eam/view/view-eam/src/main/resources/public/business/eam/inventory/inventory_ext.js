@@ -65,6 +65,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
 
+            param.ownerCode=OWNER_CODE;
             return true;
         },
         /**
@@ -260,6 +261,38 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 data.inventoryUserIds="";
             }
 
+            //保管人inventoryManagerIds
+            var inventoryManagerIds="";
+            if(data&&data.manager){
+                for(var i=0;i<data.manager.length;i++){
+                    if(i==0){
+                        inventoryManagerIds=data.manager[i].id;
+                    }else{
+                        inventoryManagerIds=inventoryManagerIds+","+data.manager[i].id;
+                    }
+                }
+                data.inventoryManagerIds=inventoryManagerIds;
+
+            }else{
+                data.inventoryManagerIds="";
+            }
+
+            var inventoryDirectorIds="";
+            if(data&&data.director){
+                for(var i=0;i<data.director.length;i++){
+                    if(i==0){
+                        inventoryDirectorIds=data.director[i].id;
+                    }else{
+                        inventoryDirectorIds=inventoryDirectorIds+","+data.director[i].id;
+                    }
+                }
+                data.inventoryDirectorIds=inventoryDirectorIds;
+
+            }else{
+                data.inventoryDirectorIds="";
+            }
+
+
             var categoryIds="";
             if(data&&data.category){
                 for(var i=0;i<data.category.length;i++){
@@ -304,6 +337,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         beforeSubmit:function (data) {
             console.log("beforeSubmit",data);
             data.ownerCode=OWNER_CODE;
+            data.planId=PLAN_ID;
             return true;
         },
         /**

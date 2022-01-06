@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产盘点
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-04 12:33:21
- * @sign F0F77F1296F86ABED8DF9228BB38A75F
+ * @since 2022-01-05 19:34:06
+ * @sign 28D5E4311CAB3B9FDC44C0599870EF36
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -111,18 +111,6 @@ public class Inventory extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="使用公司/部门" , notes = "使用公司/部门")
 	private String useOrganizationId;
-	
-	/**
-	 * 存放位置：存放位置
-	*/
-	@ApiModelProperty(required = false,value="存放位置" , notes = "存放位置")
-	private String positionId;
-	
-	/**
-	 * 仓库：仓库
-	*/
-	@ApiModelProperty(required = false,value="仓库" , notes = "仓库")
-	private String warehouseId;
 	
 	/**
 	 * 购置开始日期：购置开始日期
@@ -566,44 +554,6 @@ public class Inventory extends Entity {
 	*/
 	public Inventory setUseOrganizationId(String useOrganizationId) {
 		this.useOrganizationId=useOrganizationId;
-		return this;
-	}
-	
-	/**
-	 * 获得 存放位置<br>
-	 * 存放位置
-	 * @return 存放位置
-	*/
-	public String getPositionId() {
-		return positionId;
-	}
-	
-	/**
-	 * 设置 存放位置
-	 * @param positionId 存放位置
-	 * @return 当前对象
-	*/
-	public Inventory setPositionId(String positionId) {
-		this.positionId=positionId;
-		return this;
-	}
-	
-	/**
-	 * 获得 仓库<br>
-	 * 仓库
-	 * @return 仓库
-	*/
-	public String getWarehouseId() {
-		return warehouseId;
-	}
-	
-	/**
-	 * 设置 仓库
-	 * @param warehouseId 仓库
-	 * @return 当前对象
-	*/
-	public Inventory setWarehouseId(String warehouseId) {
-		this.warehouseId=warehouseId;
 		return this;
 	}
 	

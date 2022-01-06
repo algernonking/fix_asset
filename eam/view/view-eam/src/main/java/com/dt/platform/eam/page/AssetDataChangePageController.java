@@ -136,6 +136,10 @@ public class AssetDataChangePageController extends ViewController {
 			assetAttributeDimension=AssetAttributeDimensionEnum.EQUIPMENT.code();
 		}
 
+
+		if("approval".equals(pageType)){
+			pageType="asset_change";
+		}
 		Result<HashMap<String,List<AssetAttributeItem>>> result = AssetAttributeItemServiceProxy.api().queryFormColumnByModule(pageType,assetAttributeDimension);
 		if(result.isSuccess()){
 			HashMap<String,List<AssetAttributeItem>> data = result.getData();

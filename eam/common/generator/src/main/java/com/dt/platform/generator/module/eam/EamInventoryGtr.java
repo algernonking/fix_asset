@@ -177,15 +177,14 @@ public class EamInventoryGtr extends BaseCodeGenerator{
                 .form().button().chooseOrganization(false);
 //        cfg.view().field(EAMTables.EAM_INVENTORY.USE_ORGANIZATION_ID).table().fillBy("useOrganization","fullName");
 
-        cfg.view().field(InventoryMeta.INVENTORY_MANAGER_IDS).basic().label("保管人").form().fillBy(InventoryMeta.MANAGER,"name")
-                .button().chooseEmployee(false);
+        cfg.view().field(InventoryMeta.INVENTORY_MANAGER_IDS).basic().label("保管人").form().button().chooseEmployee(false);
 
 //       cfg.view().field(EAMTables.EAM_INVENTORY.ORIGINATOR_ID).basic().fillBy("manager","name");
-        cfg.view().field(InventoryMeta.INVENTORY_DIRECTOR_IDS).basic().label("负责人").form().fillBy(InventoryMeta.DIRECTOR,"name")
+        cfg.view().field(InventoryMeta.INVENTORY_DIRECTOR_IDS).basic().label("负责人").form()
                 .button().chooseEmployee(false);
 
 //        cfg.view().field(EAMTables.EAM_INVENTORY.DIRECTOR_ID).table().fillBy("manager","name");
-        cfg.view().field(InventoryMeta.INVENTORY_USER_IDS).basic().label("盘点人").form().fillBy(InventoryMeta.INVENTORY_USER,"name")
+        cfg.view().field(InventoryMeta.INVENTORY_USER_IDS).basic().label("盘点人").form()
                 .button().chooseEmployee(false);
 
 
@@ -269,8 +268,8 @@ public class EamInventoryGtr extends BaseCodeGenerator{
                 .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
                 .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
                 .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
-                .setFormPage(WriteMode.COVER_EXISTS_FILE) //表单HTML页
-                .setListPage(WriteMode.COVER_EXISTS_FILE)//列表HTML页
+                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
+                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS)//列表HTML页
                 .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
         cfg.buildAll();
 

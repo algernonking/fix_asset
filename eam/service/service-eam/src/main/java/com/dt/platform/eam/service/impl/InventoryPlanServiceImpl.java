@@ -5,9 +5,12 @@ import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
 import com.dt.platform.constants.enums.eam.AssetInventoryOwnerEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.InventoryMeta;
 import com.dt.platform.domain.eam.meta.InventoryPlanMeta;
+import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.github.foxnic.commons.lang.StringUtil;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -224,7 +227,13 @@ public class InventoryPlanServiceImpl extends SuperService<InventoryPlan> implem
 			return ErrorDesc.failureMessage("未找到模板，无法应用!");
 		}
 
+		Result codeResult= CodeModuleServiceProxy.api().generateCode(AssetOperateEnum.EAM_ASSET_INVENTORY.code());
+		if(!codeResult.isSuccess()){
+			return codeResult;
+		}
+
 		Inventory inventoryTpl=plan.getInventory();
+		inventoryTpl.setBusinessCode(codeResult.getData().toString());
 		inventoryServiceImpl.dao().fill(inventoryTpl)
 				.with(InventoryMeta.MANAGER)
 				.with(InventoryMeta.DIRECTOR)

@@ -41,7 +41,7 @@ function ListPage() {
 		//绑定按钮事件
 		bindButtonEvent();
 		//绑定行操作按钮事件
-    	//bindRowOperationEvent();
+    	bindRowOperationEvent();
      }
      
      
@@ -84,6 +84,7 @@ function ListPage() {
 				COL_DATA.push(COL_ALL_DATA[ATTRIBUTE_LIST_DATA[i].attribute.code])
 			}
 
+			COL_DATA.push({ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 })
 			dataTable=fox.renderTable({
 				elem: '#data-table',
 				toolbar: '#toolbarTemplate',
@@ -254,6 +255,63 @@ function ListPage() {
 			});
         }
 	}
+
+
+
+	/**
+	 * 绑定行操作按钮事件
+	 */
+	function bindRowOperationEvent() {
+		// 工具条点击事件
+		table.on('tool(data-table)', function (obj) {
+			var data = obj.data;
+			var layEvent = obj.event;
+
+
+
+			if (layEvent === 'detail') { // 修改
+
+
+
+				var task=setTimeout(function(){layer.load(2);},1000);
+				admin.request("/service-eam/eam-asset/get-by-id", { id : data.id }, function (assetResult) {
+					clearTimeout(task);
+					layer.closeAll('loading');
+					if(assetResult.success) {
+						var assetData=assetResult.data;
+						admin.putTempData('eam-asset-form-data-form-action', "view",true);
+						var queryString="?pageType=base";
+						if(assetData && assetData.id) queryString=queryString+"&" + 'id=' + assetData.id;
+						admin.putTempData('eam-asset-form-data', assetData);
+						var area=admin.getTempData('eam-asset-form-area');
+						var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+						var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
+						var title = fox.translate('查看资产');
+
+						var index=admin.popupCenter({
+							title: title,
+							resize: false,
+							offset: [2,null],
+							area: ["95%",height+"px"],
+							type: 2,
+							id:"eam-asset-form-data-win",
+							content: '/business/eam/asset/asset_info_form.html' + queryString,
+							finish: function () {
+
+							}
+						});
+						admin.putTempData('eam-asset-form-data-popup-index', index);
+
+					} else {
+						layer.msg(data.message, {icon: 1, time: 1500});
+					}
+				});
+			}
+
+
+		});
+
+	};
 
     /**
      * 打开编辑窗口

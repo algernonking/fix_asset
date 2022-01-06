@@ -1,4 +1,9 @@
 
+
+
+
+
+
 delete from hrm_person where deleted='1';
 delete from hrm_employee where deleted='1';
 delete from sys_user where deleted='1';

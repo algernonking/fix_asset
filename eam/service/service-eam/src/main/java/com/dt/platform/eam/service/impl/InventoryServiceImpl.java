@@ -4,7 +4,9 @@ package com.dt.platform.eam.service.impl;
 import javax.annotation.Resource;
 
 import com.dt.platform.constants.enums.eam.*;
+import com.dt.platform.domain.eam.AssetProcessRecord;
 import com.dt.platform.domain.eam.InventoryAsset;
+import com.dt.platform.domain.eam.meta.InventoryMeta;
 import com.dt.platform.domain.eam.meta.InventoryVOMeta;
 import com.dt.platform.eam.service.IInventoryAssetService;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 
 import com.dt.platform.domain.eam.Inventory;
 import com.dt.platform.domain.eam.InventoryVO;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -80,10 +84,11 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	@Autowired
 	private InventoryCatalogServiceImpl inventoryCatalogServiceImpl;
 
-
+	@Autowired
+	private InventoryAssetServiceImpl inventoryAssetServiceImpl;
 
 	@Autowired
-	private IInventoryAssetService inventoryAssetService;
+	private AssetProcessRecordServiceImpl assetProcessRecordServiceImpl;
 
 	@Override
 	public Object generateId(Field field) {
@@ -100,6 +105,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		String sql="insert into eam_inventory_asset (id,inventory_id,status,asset_id)" +
 				"select uuid(),'"+id+"','"+AssetInventoryDetailStatusEnum.NOT_COUNTED.code()+"',id from eam_asset where deleted=0 and tenant_id='"+tenantId+"' and owner_code='"+inventory.getType()+"' and status='"+AssetHandleStatusEnum.COMPLETE.code()+"' ";
 		//资产状态
+		sql=sql+" and clean_out='0'";
 		if(!StringUtil.isBlank(inventory.getAssetStatus())) {
 			String[] statusArr=inventory.getAssetStatus().split(",");
 			String s="";
@@ -113,7 +119,18 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			sql=sql+" and asset_status in ("+s+")";
 		}
 		//购置时间
+		//开始时间
+		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+		Date purchaseStartDate= inventory.getPurchaseStartDate();
+		if(purchaseStartDate!=null){
+			sql=sql+" and purchase_date>'"+sdf1.format(purchaseStartDate)+"'";
+		}
 
+		//结束时间
+		Date purchaseEndDate= inventory.getPurchaseEndDate();
+		if(purchaseEndDate!=null){
+			sql=sql+" and purchase_date<'"+sdf1.format(purchaseEndDate)+"'";
+		}
 
 		//管理人员
 		String csql1="select count(1) cnt from eam_inventory_manager where inventory_id=? and deleted=0";
@@ -216,7 +233,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		InventoryAsset q=new InventoryAsset();
 		q.setInventoryId(id);
 		q.setStatus(AssetInventoryDetailStatusEnum.NOT_COUNTED.code());
-		if(inventoryAssetService.queryList(q).size()>0){
+		if(inventoryAssetServiceImpl.queryList(q).size()>0){
 			return ErrorDesc.failure().message("资产未盘点完，不能进行结束操作!");
 		}
 
@@ -232,7 +249,35 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 	@Override
 	public Result dataSync(String id) {
 		Inventory inventory=this.getById(id);
-		return ErrorDesc.failure().message("该功能未实现!");
+		if(AssetInventoryActionStatusEnum.FINISH.code().equals(inventory.getInventoryStatus())
+			&&AssetInventoryDataStatusEnum.NOT_SYNC.code().equals(inventory.getDataStatus())) {
+
+			InventoryAsset q=new InventoryAsset();
+			q.setInventoryId(id);
+			List<InventoryAsset> inventoryAssetList=inventoryAssetServiceImpl.queryList(q);
+
+			if(inventoryAssetList.size()>0){
+				List<AssetProcessRecord> rcdsList=new ArrayList<>();
+				for(int i=0;i<inventoryAssetList.size();i++){
+					AssetProcessRecord r=new AssetProcessRecord();
+					r.setAssetId(inventoryAssetList.get(i).getAssetId());
+					r.setBusinessCode(inventory.getBusinessCode());
+					r.setProcessType(AssetOperateEnum.EAM_ASSET_INVENTORY.code());
+					r.setContent("盘点操作结束 "+inventoryAssetList.get(i).getNotes());
+					rcdsList.add(r);
+
+				}
+				assetProcessRecordServiceImpl.insertList(rcdsList);
+			}
+			//更新核对时间
+			dao.execute("update eam_asset set last_verification_date=now() where id in (select  asset_id from eam_inventory_asset where deleted='0' and inventory_id=?)",id);
+
+		}else{
+			return ErrorDesc.failure().message("当前盘点状态，不允许该操作!");
+		}
+
+
+		return ErrorDesc.success();
 	}
 
 	@Override
@@ -245,12 +290,12 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 		InventoryAsset q=new InventoryAsset();
 		q.setInventoryId(id);
 		q.setAssetId(assetId);
-		InventoryAsset inventoryAsset=inventoryAssetService.queryEntity(q);
+		InventoryAsset inventoryAsset=inventoryAssetServiceImpl.queryEntity(q);
 		inventoryAsset.setStatus(action);
 		inventoryAsset.setNotes(notes);
 		inventoryAsset.setOperEmplId(SessionUser.getCurrent().getUser().getActivatedEmployeeId());
 		inventoryAsset.setOperDate(new Date());
-		return inventoryAssetService.update(inventoryAsset,SaveMode.NOT_NULL_FIELDS);
+		return inventoryAssetServiceImpl.update(inventoryAsset,SaveMode.NOT_NULL_FIELDS);
 
 	}
 
@@ -427,7 +472,7 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			inventoryCatalogServiceImpl.saveRelation(inventory.getId(), inventory.getCategoryIds());
 
 		}
-		this.createAssetRecord(inventory.getId());
+		//this.createAssetRecord(inventory.getId());
 		return r;
 	}
 
