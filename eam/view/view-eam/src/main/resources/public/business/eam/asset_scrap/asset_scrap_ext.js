@@ -25,16 +25,39 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 列表页初始化前调用
          * */
         beforeInit:function () {
+            var toolbarHtml=document.getElementById("toolbarTemplate").innerHTML;
+            var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
             if(APPROVAL_REQUIRED){
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+                // operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                // document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }else{
-                var operHtml=document.getElementById("tableOperationTemplate").innerHTML;
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
-                document.getElementById("tableOperationTemplate").innerHTML=operHtml;
+                // operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                // operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                // document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             }
+
+            if(PAGE_TYPE&&PAGE_TYPE=="approval"){
+                $("#status-search-unit").hide();
+                toolbarHtml=toolbarHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="confirm-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="edit"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="del"/i, "style=\"display:none\"")
+
+                operHtml=operHtml.replace(/lay-event="clean-out"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="download-bill"/i, "style=\"display:none\"")
+
+            }else if( PAGE_TYPE&&PAGE_TYPE=="asset_scrap"){
+                operHtml=operHtml.replace(/lay-event="agree"/i, "style=\"display:none\"")
+                operHtml=operHtml.replace(/lay-event="deny"/i, "style=\"display:none\"")
+            }
+
+            document.getElementById("toolbarTemplate").innerHTML=toolbarHtml;
+            document.getElementById("tableOperationTemplate").innerHTML=operHtml;
             console.log("list:beforeInit");
         },
         afterSearchInputReady: function() {
@@ -51,6 +74,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * 对话框回调，表单域以及按钮 会自动改变为选中的值，此处处理额外的逻辑即可
          * */
         afterDialog:function (param,result) {
+
             console.log('dialog',param,result);
         },
         /**
@@ -61,6 +85,9 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
          * */
         beforeQuery:function (conditions,param,location) {
             console.log('beforeQuery',conditions,param,location);
+            if(PAGE_TYPE=="approval"){
+                param.status="approval";
+            }
             return true;
         },
         /**
@@ -218,6 +245,84 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
         },
         cleanOut:function (item){
             list.billOper("clean-out","clean-out-button",{id:item.id},"已清理");
+        },
+        agreeData:function(data){
+            var api=moduleURL+"/approve";
+            var successMessage="审批结束"
+            var ps={};
+            ps.instanceIds=[];
+            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="agree"
+            var btn=$('.agree-button').filter("[data-id='" +data.id + "']");
+            layer.prompt({
+                formType: 2,
+                value: "同意 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+        },
+        denyData:function(data){
+
+            var api=moduleURL+"/approve";
+            var ps={};
+            var successMessage="审批结束"
+            ps.instanceIds=[];
+            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.opinion="";
+            ps.action="reject"
+            var btn=$('.deny-button').filter("[data-id='" +data.id + "']");
+            layer.prompt({
+                formType: 2,
+                value: "拒绝 ",
+                title: '请输入审批意见',
+                area: ['320px', '150px'] //自定义文本域宽高
+            }, function(value, index, elem){
+                ps.opinion=value;
+                admin.post(api, ps, function (r) {
+                    layer.close(index);
+                    if (r.success) {
+                        top.layer.msg(successMessage, {time: 1000});
+                        window.module.refreshTableData();
+                    } else {
+                        var errs = [];
+                        if (r.errors) {
+                            for (var i = 0; i < r.errors.length; i++) {
+                                if (errs.indexOf(r.errors[i].message) == -1) {
+                                    errs.push(r.errors[i].message);
+                                }
+                            }
+                            top.layer.msg(errs.join("<br>"), {time: 2000});
+                        } else {
+                            top.layer.msg(r.message, {time: 2000});
+                        }
+                    }
+                }, {delayLoading: 1000, elms: [btn]});
+            });
+
+
         },
         /**
          *

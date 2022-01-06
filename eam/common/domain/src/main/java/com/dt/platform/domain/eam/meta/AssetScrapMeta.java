@@ -11,8 +11,8 @@ import org.github.foxnic.web.domain.hrm.Employee;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:32:08
- * @sign 4F4061D4C34EBEE916ED5ED21D969206
+ * @since 2022-01-06 18:05:27
+ * @sign A00FCA4DA08D7F0C9A87B71F3C3BF9E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -229,6 +229,106 @@ public class AssetScrapMeta {
 	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> SELECTED_CODE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,SELECTED_CODE, java.lang.String.class, "选择数据", "选择数据", java.lang.String.class, null);
 	
 	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final String CHS_TYPE="chsType";
+	
+	/**
+	 * 变更类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CHS_TYPE_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CHS_TYPE, java.lang.String.class, "变更类型", "变更类型", java.lang.String.class, null);
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final String CHS_STATUS="chsStatus";
+	
+	/**
+	 * 变更状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CHS_STATUS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CHS_STATUS, java.lang.String.class, "变更状态", "变更状态", java.lang.String.class, null);
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final String CHS_VERSION="chsVersion";
+	
+	/**
+	 * 变更版本号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CHS_VERSION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CHS_VERSION, java.lang.String.class, "变更版本号", "变更版本号", java.lang.String.class, null);
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final String CHANGE_INSTANCE_ID="changeInstanceId";
+	
+	/**
+	 * 变更ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> CHANGE_INSTANCE_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,CHANGE_INSTANCE_ID, java.lang.String.class, "变更ID", "变更ID", java.lang.String.class, null);
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final String SUMMARY="summary";
+	
+	/**
+	 * 流程概要 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> SUMMARY_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,SUMMARY, java.lang.String.class, "流程概要", "流程概要", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_ID="latestApproverId";
+	
+	/**
+	 * 最后审批人账户ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> LATEST_APPROVER_ID_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,LATEST_APPROVER_ID, java.lang.String.class, "最后审批人账户ID", "最后审批人账户ID", java.lang.String.class, null);
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final String LATEST_APPROVER_NAME="latestApproverName";
+	
+	/**
+	 * 最后审批人姓名 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> LATEST_APPROVER_NAME_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,LATEST_APPROVER_NAME, java.lang.String.class, "最后审批人姓名", "最后审批人姓名", java.lang.String.class, null);
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_IDS="nextApproverIds";
+	
+	/**
+	 * 下一节点审批人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> NEXT_APPROVER_IDS_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,NEXT_APPROVER_IDS, java.lang.String.class, "下一节点审批人", "下一节点审批人", java.lang.String.class, null);
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final String NEXT_APPROVER_NAMES="nextApproverNames";
+	
+	/**
+	 * 下一个审批节点审批人姓名 , 用逗号隔开 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> NEXT_APPROVER_NAMES_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,NEXT_APPROVER_NAMES, java.lang.String.class, "下一个审批节点审批人姓名", "用逗号隔开", java.lang.String.class, null);
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final String APPROVAL_OPINION="approvalOpinion";
+	
+	/**
+	 * 审批意见 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.AssetScrap,java.lang.String> APPROVAL_OPINION_PROP = new BeanProperty(com.dt.platform.domain.eam.AssetScrap.class ,APPROVAL_OPINION, java.lang.String.class, "审批意见", "审批意见", java.lang.String.class, null);
+	
+	/**
 	 * 资产 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.Asset
 	*/
 	public static final String ASSET_LIST="assetList";
@@ -261,7 +361,7 @@ public class AssetScrapMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CLEAN_STATUS , NAME , SCRAP_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , ASSET_LIST , ASSET_IDS , ORIGINATOR };
+	public static final String[] $PROPS={ ID , BUSINESS_CODE , PROC_ID , STATUS , CLEAN_STATUS , NAME , SCRAP_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION , ASSET_LIST , ASSET_IDS , ORIGINATOR };
 	
 	/**
 	 * 代理类
@@ -499,6 +599,116 @@ public class AssetScrapMeta {
 		public AssetScrap setSelectedCode(String selectedCode) {
 			super.change(SELECTED_CODE,super.getSelectedCode(),selectedCode);
 			super.setSelectedCode(selectedCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更类型
+		 * @param chsType 变更类型
+		 * @return 当前对象
+		*/
+		public AssetScrap setChsType(String chsType) {
+			super.change(CHS_TYPE,super.getChsType(),chsType);
+			super.setChsType(chsType);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更状态
+		 * @param chsStatus 变更状态
+		 * @return 当前对象
+		*/
+		public AssetScrap setChsStatus(String chsStatus) {
+			super.change(CHS_STATUS,super.getChsStatus(),chsStatus);
+			super.setChsStatus(chsStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更版本号
+		 * @param chsVersion 变更版本号
+		 * @return 当前对象
+		*/
+		public AssetScrap setChsVersion(String chsVersion) {
+			super.change(CHS_VERSION,super.getChsVersion(),chsVersion);
+			super.setChsVersion(chsVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 变更ID
+		 * @param changeInstanceId 变更ID
+		 * @return 当前对象
+		*/
+		public AssetScrap setChangeInstanceId(String changeInstanceId) {
+			super.change(CHANGE_INSTANCE_ID,super.getChangeInstanceId(),changeInstanceId);
+			super.setChangeInstanceId(changeInstanceId);
+			return this;
+		}
+		
+		/**
+		 * 设置 流程概要
+		 * @param summary 流程概要
+		 * @return 当前对象
+		*/
+		public AssetScrap setSummary(String summary) {
+			super.change(SUMMARY,super.getSummary(),summary);
+			super.setSummary(summary);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人账户ID
+		 * @param latestApproverId 最后审批人账户ID
+		 * @return 当前对象
+		*/
+		public AssetScrap setLatestApproverId(String latestApproverId) {
+			super.change(LATEST_APPROVER_ID,super.getLatestApproverId(),latestApproverId);
+			super.setLatestApproverId(latestApproverId);
+			return this;
+		}
+		
+		/**
+		 * 设置 最后审批人姓名
+		 * @param latestApproverName 最后审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetScrap setLatestApproverName(String latestApproverName) {
+			super.change(LATEST_APPROVER_NAME,super.getLatestApproverName(),latestApproverName);
+			super.setLatestApproverName(latestApproverName);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一节点审批人
+		 * @param nextApproverIds 下一节点审批人
+		 * @return 当前对象
+		*/
+		public AssetScrap setNextApproverIds(String nextApproverIds) {
+			super.change(NEXT_APPROVER_IDS,super.getNextApproverIds(),nextApproverIds);
+			super.setNextApproverIds(nextApproverIds);
+			return this;
+		}
+		
+		/**
+		 * 设置 下一个审批节点审批人姓名
+		 * @param nextApproverNames 下一个审批节点审批人姓名
+		 * @return 当前对象
+		*/
+		public AssetScrap setNextApproverNames(String nextApproverNames) {
+			super.change(NEXT_APPROVER_NAMES,super.getNextApproverNames(),nextApproverNames);
+			super.setNextApproverNames(nextApproverNames);
+			return this;
+		}
+		
+		/**
+		 * 设置 审批意见
+		 * @param approvalOpinion 审批意见
+		 * @return 当前对象
+		*/
+		public AssetScrap setApprovalOpinion(String approvalOpinion) {
+			super.change(APPROVAL_OPINION,super.getApprovalOpinion(),approvalOpinion);
+			super.setApprovalOpinion(approvalOpinion);
 			return this;
 		}
 		

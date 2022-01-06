@@ -45,13 +45,14 @@ public class AssetScrapPageController extends ViewController {
 	 * 资产报废 功能主页面
 	 */
 	@RequestMapping("/asset_scrap_list.html")
-	public String list(Model model,HttpServletRequest request) {
+	public String list(Model model,HttpServletRequest request,String pageType) {
 
 		boolean approvalRequired=true;
 		Result approvalResult=OperateServiceProxy.api().approvalRequired(AssetOperateEnum.EAM_ASSET_SCRAP.code());
 		if(approvalResult.isSuccess()){
 			approvalRequired= (boolean) approvalResult.getData();
 		}
+		model.addAttribute("pageType",pageType);
 		model.addAttribute("approvalRequired",approvalRequired);
 		return prefix+"/asset_scrap_list";
 	}
@@ -60,9 +61,10 @@ public class AssetScrapPageController extends ViewController {
 	 * 资产报废 表单页面
 	 */
 	@RequestMapping("/asset_scrap_form.html")
-	public String form(Model model,HttpServletRequest request , String id) {
+	public String form(Model model,HttpServletRequest request , String id,String pageType) {
 
 		model.addAttribute("billId",id);
+		model.addAttribute("pageType",pageType);
 		model.addAttribute("billType", AssetOperateEnum.EAM_ASSET_SCRAP.code());
 		return prefix+"/asset_scrap_form";
 	}

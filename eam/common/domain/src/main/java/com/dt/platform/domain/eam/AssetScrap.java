@@ -19,8 +19,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产报废
  * @author 金杰 , maillank@qq.com
- * @since 2021-11-17 13:32:08
- * @sign 4F4061D4C34EBEE916ED5ED21D969206
+ * @since 2022-01-06 18:05:27
+ * @sign A00FCA4DA08D7F0C9A87B71F3C3BF9E8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -157,6 +157,66 @@ public class AssetScrap extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="选择数据" , notes = "选择数据")
 	private String selectedCode;
+	
+	/**
+	 * 变更类型：变更类型
+	*/
+	@ApiModelProperty(required = false,value="变更类型" , notes = "变更类型")
+	private String chsType;
+	
+	/**
+	 * 变更状态：变更状态
+	*/
+	@ApiModelProperty(required = false,value="变更状态" , notes = "变更状态")
+	private String chsStatus;
+	
+	/**
+	 * 变更版本号：变更版本号
+	*/
+	@ApiModelProperty(required = false,value="变更版本号" , notes = "变更版本号")
+	private String chsVersion;
+	
+	/**
+	 * 变更ID：变更ID
+	*/
+	@ApiModelProperty(required = false,value="变更ID" , notes = "变更ID")
+	private String changeInstanceId;
+	
+	/**
+	 * 流程概要：流程概要
+	*/
+	@ApiModelProperty(required = false,value="流程概要" , notes = "流程概要")
+	private String summary;
+	
+	/**
+	 * 最后审批人账户ID：最后审批人账户ID
+	*/
+	@ApiModelProperty(required = false,value="最后审批人账户ID" , notes = "最后审批人账户ID")
+	private String latestApproverId;
+	
+	/**
+	 * 最后审批人姓名：最后审批人姓名
+	*/
+	@ApiModelProperty(required = false,value="最后审批人姓名" , notes = "最后审批人姓名")
+	private String latestApproverName;
+	
+	/**
+	 * 下一节点审批人：下一节点审批人
+	*/
+	@ApiModelProperty(required = false,value="下一节点审批人" , notes = "下一节点审批人")
+	private String nextApproverIds;
+	
+	/**
+	 * 下一个审批节点审批人姓名：用逗号隔开
+	*/
+	@ApiModelProperty(required = false,value="下一个审批节点审批人姓名" , notes = "用逗号隔开")
+	private String nextApproverNames;
+	
+	/**
+	 * 审批意见：审批意见
+	*/
+	@ApiModelProperty(required = false,value="审批意见" , notes = "审批意见")
+	private String approvalOpinion;
 	
 	/**
 	 * 资产：资产
@@ -572,6 +632,196 @@ public class AssetScrap extends Entity {
 	*/
 	public AssetScrap setSelectedCode(String selectedCode) {
 		this.selectedCode=selectedCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更类型<br>
+	 * 变更类型
+	 * @return 变更类型
+	*/
+	public String getChsType() {
+		return chsType;
+	}
+	
+	/**
+	 * 设置 变更类型
+	 * @param chsType 变更类型
+	 * @return 当前对象
+	*/
+	public AssetScrap setChsType(String chsType) {
+		this.chsType=chsType;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更状态<br>
+	 * 变更状态
+	 * @return 变更状态
+	*/
+	public String getChsStatus() {
+		return chsStatus;
+	}
+	
+	/**
+	 * 设置 变更状态
+	 * @param chsStatus 变更状态
+	 * @return 当前对象
+	*/
+	public AssetScrap setChsStatus(String chsStatus) {
+		this.chsStatus=chsStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更版本号<br>
+	 * 变更版本号
+	 * @return 变更版本号
+	*/
+	public String getChsVersion() {
+		return chsVersion;
+	}
+	
+	/**
+	 * 设置 变更版本号
+	 * @param chsVersion 变更版本号
+	 * @return 当前对象
+	*/
+	public AssetScrap setChsVersion(String chsVersion) {
+		this.chsVersion=chsVersion;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更ID<br>
+	 * 变更ID
+	 * @return 变更ID
+	*/
+	public String getChangeInstanceId() {
+		return changeInstanceId;
+	}
+	
+	/**
+	 * 设置 变更ID
+	 * @param changeInstanceId 变更ID
+	 * @return 当前对象
+	*/
+	public AssetScrap setChangeInstanceId(String changeInstanceId) {
+		this.changeInstanceId=changeInstanceId;
+		return this;
+	}
+	
+	/**
+	 * 获得 流程概要<br>
+	 * 流程概要
+	 * @return 流程概要
+	*/
+	public String getSummary() {
+		return summary;
+	}
+	
+	/**
+	 * 设置 流程概要
+	 * @param summary 流程概要
+	 * @return 当前对象
+	*/
+	public AssetScrap setSummary(String summary) {
+		this.summary=summary;
+		return this;
+	}
+	
+	/**
+	 * 获得 最后审批人账户ID<br>
+	 * 最后审批人账户ID
+	 * @return 最后审批人账户ID
+	*/
+	public String getLatestApproverId() {
+		return latestApproverId;
+	}
+	
+	/**
+	 * 设置 最后审批人账户ID
+	 * @param latestApproverId 最后审批人账户ID
+	 * @return 当前对象
+	*/
+	public AssetScrap setLatestApproverId(String latestApproverId) {
+		this.latestApproverId=latestApproverId;
+		return this;
+	}
+	
+	/**
+	 * 获得 最后审批人姓名<br>
+	 * 最后审批人姓名
+	 * @return 最后审批人姓名
+	*/
+	public String getLatestApproverName() {
+		return latestApproverName;
+	}
+	
+	/**
+	 * 设置 最后审批人姓名
+	 * @param latestApproverName 最后审批人姓名
+	 * @return 当前对象
+	*/
+	public AssetScrap setLatestApproverName(String latestApproverName) {
+		this.latestApproverName=latestApproverName;
+		return this;
+	}
+	
+	/**
+	 * 获得 下一节点审批人<br>
+	 * 下一节点审批人
+	 * @return 下一节点审批人
+	*/
+	public String getNextApproverIds() {
+		return nextApproverIds;
+	}
+	
+	/**
+	 * 设置 下一节点审批人
+	 * @param nextApproverIds 下一节点审批人
+	 * @return 当前对象
+	*/
+	public AssetScrap setNextApproverIds(String nextApproverIds) {
+		this.nextApproverIds=nextApproverIds;
+		return this;
+	}
+	
+	/**
+	 * 获得 下一个审批节点审批人姓名<br>
+	 * 用逗号隔开
+	 * @return 下一个审批节点审批人姓名
+	*/
+	public String getNextApproverNames() {
+		return nextApproverNames;
+	}
+	
+	/**
+	 * 设置 下一个审批节点审批人姓名
+	 * @param nextApproverNames 下一个审批节点审批人姓名
+	 * @return 当前对象
+	*/
+	public AssetScrap setNextApproverNames(String nextApproverNames) {
+		this.nextApproverNames=nextApproverNames;
+		return this;
+	}
+	
+	/**
+	 * 获得 审批意见<br>
+	 * 审批意见
+	 * @return 审批意见
+	*/
+	public String getApprovalOpinion() {
+		return approvalOpinion;
+	}
+	
+	/**
+	 * 设置 审批意见
+	 * @param approvalOpinion 审批意见
+	 * @return 当前对象
+	*/
+	public AssetScrap setApprovalOpinion(String approvalOpinion) {
+		this.approvalOpinion=approvalOpinion;
 		return this;
 	}
 	

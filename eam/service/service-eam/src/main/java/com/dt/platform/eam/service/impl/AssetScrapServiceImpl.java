@@ -8,6 +8,7 @@ import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.AssetBorrowMeta;
+import com.dt.platform.domain.eam.meta.AssetDataChangeMeta;
 import com.dt.platform.domain.eam.meta.AssetRepairMeta;
 import com.dt.platform.domain.eam.meta.AssetScrapMeta;
 import com.dt.platform.eam.common.AssetCommonError;
@@ -19,12 +20,18 @@ import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
 import com.github.foxnic.api.constant.CodeTextEnum;
 import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.commons.reflect.EnumUtil;
+import com.github.foxnic.sql.expr.In;
 import com.github.foxnic.sql.expr.SQL;
-import org.github.foxnic.web.domain.changes.ChangeEvent;
-import org.github.foxnic.web.domain.changes.ProcessApproveVO;
-import org.github.foxnic.web.domain.changes.ProcessStartVO;
+import org.github.foxnic.web.constants.enums.changes.ApprovalAction;
+import org.github.foxnic.web.constants.enums.changes.ApprovalMode;
+import org.github.foxnic.web.constants.enums.changes.ChangeType;
+import org.github.foxnic.web.domain.bpm.Appover;
+import org.github.foxnic.web.domain.changes.*;
+import org.github.foxnic.web.framework.change.ChangesAssistant;
+import org.github.foxnic.web.proxy.changes.ChangeDefinitionServiceProxy;
 import org.github.foxnic.web.session.SessionUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -118,14 +125,81 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 	@Override
 	public Result approve(ProcessApproveVO approveVO) {
-		return null;
+
+		Result result=new Result();
+		if(approveVO.getInstanceIds()==null || approveVO.getInstanceIds().isEmpty()) {
+			return result.success(false).message("至少指定一个变更ID");
+		}
+		In in=new In(EAMTables.EAM_ASSET_SCRAP.CHANGE_INSTANCE_ID,approveVO.getInstanceIds());
+
+		List<AssetScrap> assets=this.queryList(in.toConditionExpr());
+		Map<String,List<AssetScrap>> assetsMap= CollectorUtil.groupBy(assets,AssetScrap::getChangeInstanceId);
+		for (Map.Entry<String,List<AssetScrap>> e : assetsMap.entrySet()) {
+			Result<ChangeEvent> r=this.approve(e.getKey(),e.getValue(),approveVO.getAction(),approveVO.getOpinion());
+			if(r.failure()){
+				result.addError(r);
+			} else {
+				//同步订状态
+				ChangeEvent event=r.data();
+				for (AssetScrap asset : e.getValue()) {
+					syncBill(asset.getId(),event);
+					//
+				}
+			}
+		}
+		return result;
 	}
 
 
 
 	@Override
 	public Result approve(String instanceId, List<AssetScrap> assets, String approveAction, String opinion) {
-		return null;
+		ApprovalAction action=ApprovalAction.parseByCode(approveAction);
+
+		//审批数据
+		if(assets==null || assets.isEmpty()) {
+			return ErrorDesc.failure().message("单据不存在");
+		}
+		AssetScrap asset=assets.get(0);
+
+		ChangeApproveBody approveBody=new ChangeApproveBody("eam_asset_scrap");
+		//设置变更ID
+		approveBody.setChangeInstanceId(asset.getChangeInstanceId());
+
+		//设置当前提交人
+		approveBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		approveBody.setApproverName(SessionUser.getCurrent().getRealName());
+		approveBody.setApprovalAction(action);
+
+		//设置审批意见
+		approveBody.setOpinion(opinion);
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		//发起审批
+		Result result= assistant.approve(approveBody);
+
+		//审批结束
+		if(!result.isSuccess()){
+			return result;
+		}
+
+		//审批结束后的动作
+		AssetScrap chs=new AssetScrap();
+		chs.setId(asset.getId());
+		chs.setApprovalOpinion(opinion);
+		if(ApprovalAction.agree.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.COMPLETE.code());
+			operateResult(asset.getId(),AssetHandleConfirmOperationEnum.SUCCESS.code(),AssetHandleStatusEnum.COMPLETE.code(),"操作成功");
+		}else if(ApprovalAction.reject.code().equals(approveAction)){
+			chs.setStatus(AssetHandleStatusEnum.DENY.code());
+		}else if(ApprovalAction.submit.code().equals(approveAction)){
+			//chs.setStatus(AssetHandleStatusEnum.APPROVAL.code());
+		}
+		if(chs.getStatus()!=null){
+			this.update(chs,SaveMode.NOT_NULL_FIELDS);
+		}
+		return result;
 	}
 
 	@Override
@@ -164,7 +238,66 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	 * 启动流程
 	 * */
 	public Result startProcess(String id) {
-		return null;
+
+		//变更后数据
+		AssetScrap assetAfter=this.getById(id);
+		String changeType="eam_asset_scrap";
+		if(assetAfter==null) {
+			return ErrorDesc.failure().message("单据不存在");
+		}
+		//校验是否勾选的订单都处于待审批状态
+//		if(!ApprovalStatus.drafting.code().equals(assetAfter.getChsStatus())) {
+//			return ErrorDesc.failure().message("单据状态错误,无法提交审批");
+//		}
+
+		//关联订单明细
+		this.join(assetAfter, Asset.class);
+		List<String> billIds=Arrays.asList(assetAfter.getId());
+
+
+		//变更前数据
+		AssetScrap assetBefore=this.getById(assetAfter.getId());
+		this.join(assetBefore, Asset.class);
+
+
+		//创建变更辅助工具
+		ChangesAssistant assistant=new ChangesAssistant(this);
+		ChangeRequestBody requestBody=new ChangeRequestBody(changeType, ChangeType.create);
+
+		//设置当前提交人
+		requestBody.setApproverId(SessionUser.getCurrent().getActivatedEmployeeId());
+		requestBody.setApproverName(SessionUser.getCurrent().getRealName());
+
+		//可按数据情况，设置不同的审批人；若未设置审批人，则按变更配置中的审批人执行；
+		//后续可按审批人对接待办体系
+		List<Appover> employeeApprovers=assistant.getEmployeeApproversById("E001","488741245229731840");
+		List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById("498946989573017600","498947090244702209");
+		List<Appover> bpmRoleApprovers2=assistant.getBpmRoleApproversByCode("drafter","approver");
+
+		List<Appover> appovers=new ArrayList<>();
+		appovers.addAll(employeeApprovers);
+		appovers.addAll(bpmRoleApprovers1);
+		appovers.addAll(bpmRoleApprovers2);
+
+		requestBody.setNextNodeAppovers(appovers);
+
+		//
+		requestBody.setDataType(AssetDataChange.class);
+
+		//设置变更前数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataBefore(assetAfter);
+		//设置变更后数据,simple审批模式仅支持单据的独立审批
+		requestBody.setDataAfter(assetBefore);
+
+		//设置审批单据号
+		requestBody.setBillIds(billIds);
+		//设置审批意见
+		requestBody.setOpinion("启动流程");
+		//发起审批
+
+		Result result=assistant.request(requestBody);
+		System.out.println(1111);
+		return result;
 	}
 
 
@@ -177,8 +310,20 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	@Override
 	public Result revokeOperation(String id) {
 		AssetScrap billData=getById(id);
-		if(AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())){
-
+		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus())||AssetHandleStatusEnum.APPROVAL.code().equals(billData.getStatus())  ){
+			ProcessApproveVO processApproveVO=new ProcessApproveVO();
+			AssetScrap bill=getById(id);
+			List<String> instances=new ArrayList<>();
+			instances.add(bill.getChangeInstanceId());
+			processApproveVO.setOpinion("撤销");
+			processApproveVO.setInstanceIds(instances);
+			processApproveVO.setAction(ApprovalAction.revoke.code());
+			Result processApproveResult=approve(processApproveVO);
+			if(!processApproveResult.isSuccess()) return processApproveResult;
+			billData.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+			billData.setChsStatus("");
+			billData.setChangeInstanceId("");
+			super.update(billData,SaveMode.NOT_NULL_FIELDS);
 		}else{
 			return ErrorDesc.failureMessage("当前状态不能，不能进行撤销操作");
 		}
@@ -195,10 +340,52 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 	public Result forApproval(String id){
 
 		AssetScrap billData=getById(id);
-		if(AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())){
-			if(operateService.approvalRequired(AssetOperateEnum.EAM_ASSET_SCRAP.code()) ) {
-				//审批操作
+		join(billData, AssetScrapMeta.ASSET_LIST);
+		if(AssetHandleStatusEnum.DENY.code().equals(billData.getStatus()) ||AssetHandleStatusEnum.INCOMPLETE.code().equals(billData.getStatus())  ){
+			if(operateService.approvalRequired("eam_asset_scrap") ) {
+				ChangeDefinitionVO changeDefinitionVO=new ChangeDefinitionVO();
+				changeDefinitionVO.setCode("eam_asset_scrap");
 
+
+
+				Result<List<ChangeDefinition>> changeDefinitionResult= ChangeDefinitionServiceProxy.api().queryList(changeDefinitionVO);
+				if(!changeDefinitionResult.isSuccess()){
+					return ErrorDesc.failureMessage("获取流程配置失败");
+				}else{
+					if(changeDefinitionResult.getData().size()==0){
+						return ErrorDesc.failureMessage("未配置流程信息");
+					}
+					ChangeDefinition ChangeDefinition=changeDefinitionResult.getData().get(0);
+					if(!ApprovalMode.simple.code().equals(ChangeDefinition.getMode())){
+						return ErrorDesc.failureMessage("当前只支持简单流程方式");
+					}
+				}
+
+				//审批操作
+				//步骤一开始启动流程
+				ProcessStartVO startVO=new ProcessStartVO();
+				startVO.setOpinion("启动流程");
+				List<String> bills=new ArrayList<>();
+				bills.add(id);
+				startVO.setBillIds(bills);
+				Result startReuslt= startProcess(startVO);
+				if(!startReuslt.isSuccess()) return startReuslt;
+
+
+				//步骤二进入提交阶段
+				ProcessApproveVO processApproveVO=new ProcessApproveVO();
+				AssetScrap bill=getById(id);
+				List<String> instances=new ArrayList<>();
+				instances.add(bill.getChangeInstanceId());
+				processApproveVO.setOpinion("提交流程");
+				processApproveVO.setInstanceIds(instances);
+				processApproveVO.setAction(ApprovalAction.submit.code());
+
+				Result processApproveResult=approve(processApproveVO);
+				if(!processApproveResult.isSuccess()) return processApproveResult;
+
+//				//步骤三进入修改status
+				update(EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,AssetHandleStatusEnum.APPROVAL.code(),id);
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}

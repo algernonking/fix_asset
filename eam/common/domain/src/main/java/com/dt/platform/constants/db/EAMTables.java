@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-01-04 10:39:32
+ * @since 2022-01-06 17:58:05
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -2925,8 +2925,58 @@ public class EAMTables {
 		*/
 		public static final DBField SELECTED_CODE = new DBField(DBDataType.STRING , "selected_code","selectedCode","选择数据","选择数据",false,false,true);
 		
+		/**
+		 * 变更类型
+		*/
+		public static final DBField CHS_TYPE = new DBField(DBDataType.STRING , "chs_type","chsType","变更类型","变更类型",false,false,true);
+		
+		/**
+		 * 变更状态
+		*/
+		public static final DBField CHS_STATUS = new DBField(DBDataType.STRING , "chs_status","chsStatus","变更状态","变更状态",false,false,true);
+		
+		/**
+		 * 变更版本号
+		*/
+		public static final DBField CHS_VERSION = new DBField(DBDataType.STRING , "chs_version","chsVersion","变更版本号","变更版本号",false,false,true);
+		
+		/**
+		 * 变更ID
+		*/
+		public static final DBField CHANGE_INSTANCE_ID = new DBField(DBDataType.STRING , "change_instance_id","changeInstanceId","变更ID","变更ID",false,false,true);
+		
+		/**
+		 * 流程概要
+		*/
+		public static final DBField SUMMARY = new DBField(DBDataType.STRING , "summary","summary","流程概要","流程概要",false,false,true);
+		
+		/**
+		 * 最后审批人账户ID
+		*/
+		public static final DBField LATEST_APPROVER_ID = new DBField(DBDataType.STRING , "latest_approver_id","latestApproverId","最后审批人账户ID","最后审批人账户ID",false,false,true);
+		
+		/**
+		 * 最后审批人姓名
+		*/
+		public static final DBField LATEST_APPROVER_NAME = new DBField(DBDataType.STRING , "latest_approver_name","latestApproverName","最后审批人姓名","最后审批人姓名",false,false,true);
+		
+		/**
+		 * 下一节点审批人
+		*/
+		public static final DBField NEXT_APPROVER_IDS = new DBField(DBDataType.STRING , "next_approver_ids","nextApproverIds","下一节点审批人","下一节点审批人",false,false,true);
+		
+		/**
+		 * 下一个审批节点审批人姓名，用逗号隔开
+		*/
+		public static final DBField NEXT_APPROVER_NAMES = new DBField(DBDataType.STRING , "next_approver_names","nextApproverNames","下一个审批节点审批人姓名","用逗号隔开",false,false,true);
+		
+		/**
+		 * 审批意见
+		*/
+		public static final DBField APPROVAL_OPINION = new DBField(DBDataType.STRING , "approval_opinion","approvalOpinion","审批意见","审批意见",false,false,true);
+		
 		public EAM_ASSET_SCRAP() {
-			this.init($NAME,"资产报废" , ID , BUSINESS_CODE , PROC_ID , STATUS , CLEAN_STATUS , NAME , SCRAP_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE);
+			this.init($NAME,"资产报废" , ID , BUSINESS_CODE , PROC_ID , STATUS , CLEAN_STATUS , NAME , SCRAP_DATE , CONTENT , ORIGINATOR_ID , BUSINESS_DATE , ATTACH , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , SELECTED_CODE , CHS_TYPE , CHS_STATUS , CHS_VERSION , CHANGE_INSTANCE_ID , SUMMARY , LATEST_APPROVER_ID , LATEST_APPROVER_NAME , NEXT_APPROVER_IDS , NEXT_APPROVER_NAMES , APPROVAL_OPINION);
 		}
 		public static final EAM_ASSET_SCRAP $TABLE=new EAM_ASSET_SCRAP();
 	}
@@ -4080,16 +4130,6 @@ public class EAMTables {
 		public static final DBField USE_ORGANIZATION_ID = new DBField(DBDataType.STRING , "use_organization_id","useOrganizationId","使用公司/部门","使用公司/部门",false,false,true);
 		
 		/**
-		 * 存放位置
-		*/
-		public static final DBField POSITION_ID = new DBField(DBDataType.STRING , "position_id","positionId","存放位置","存放位置",false,false,true);
-		
-		/**
-		 * 仓库
-		*/
-		public static final DBField WAREHOUSE_ID = new DBField(DBDataType.STRING , "warehouse_id","warehouseId","仓库","仓库",false,false,true);
-		
-		/**
 		 * 购置开始日期
 		*/
 		public static final DBField PURCHASE_START_DATE = new DBField(DBDataType.DATE , "purchase_start_date","purchaseStartDate","购置开始日期","购置开始日期",false,false,true);
@@ -4175,7 +4215,7 @@ public class EAMTables {
 		public static final DBField TENANT_ID = new DBField(DBDataType.STRING , "tenant_id","tenantId","租户","租户",false,false,true);
 		
 		public EAM_INVENTORY() {
-			this.init($NAME,"资产盘点" , ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , POSITION_ID , WAREHOUSE_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
+			this.init($NAME,"资产盘点" , ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID);
 		}
 		public static final EAM_INVENTORY $TABLE=new EAM_INVENTORY();
 	}

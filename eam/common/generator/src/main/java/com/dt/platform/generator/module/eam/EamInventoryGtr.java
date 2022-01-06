@@ -93,7 +93,7 @@ public class EamInventoryGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.EAM_INVENTORY.STATUS).table().disable(true);
         cfg.view().field(EAMTables.EAM_INVENTORY.OWN_COMPANY_ID).table().disable(true);
         cfg.view().field(EAMTables.EAM_INVENTORY.USE_ORGANIZATION_ID).table().disable(true);
-        cfg.view().field(EAMTables.EAM_INVENTORY.POSITION_ID).table().disable(true);
+
 
         cfg.view().field(InventoryMeta.INVENTORY_MANAGER_IDS).table().disable(true);
         cfg.view().field(InventoryMeta.INVENTORY_USER_IDS).table().disable(true);

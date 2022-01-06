@@ -379,6 +379,10 @@ function ListPage() {
 				window.pageExt.list.downloadBill(data);
 			}else if (layEvent === 'clean-out') { // 清理
 				window.pageExt.list.cleanOut(data);
+			}else if (layEvent === 'agree') { // 清理
+				window.pageExt.list.agreeData(data);
+			}else if (layEvent === 'deny') { // 清理
+				window.pageExt.list.denyData(data);
 			}
 
 			
