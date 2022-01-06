@@ -247,11 +247,12 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             list.billOper("clean-out","clean-out-button",{id:item.id},"已清理");
         },
         agreeData:function(data){
+            console.log("agreeData:",data);
             var api=moduleURL+"/approve";
             var successMessage="审批结束"
             var ps={};
             ps.instanceIds=[];
-            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.instanceIds.push(data.changeInstanceId);
             ps.opinion="";
             ps.action="agree"
             var btn=$('.agree-button').filter("[data-id='" +data.id + "']");
@@ -290,7 +291,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var ps={};
             var successMessage="审批结束"
             ps.instanceIds=[];
-            ps.instanceIds.push(data.chsChangeInstanceId);
+            ps.instanceIds.push(data.changeInstanceId);
             ps.opinion="";
             ps.action="reject"
             var btn=$('.deny-button').filter("[data-id='" +data.id + "']");

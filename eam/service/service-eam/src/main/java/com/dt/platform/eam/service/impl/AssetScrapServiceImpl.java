@@ -120,7 +120,18 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 	@Override
 	public Result startProcess(ProcessStartVO startVO) {
-		return null;
+		Result result=new Result();
+		for (String id : startVO.getBillIds()) {
+			Result<ChangeEvent> r=startProcess(id);
+			if(r.failure()) {
+				result.addError(r);
+			} else {
+				// 处理逻辑
+				ChangeEvent event=r.data();
+				syncBill(id,event);
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -217,19 +228,19 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 	private void syncBill(String id, ChangeEvent event) {
 		AssetScrap asset4Update=AssetScrap.create();
-//		asset4Update.setId(id)
-//				//设置变更ID
-//				.setChangeInstanceId(event.getInstance().getId())
-//				//更新状态
-//				.setChsStatus(event.getInstance().getStatusEnum().code())
-//				//更新最后审批人
-//				.setLatestApproverId(event.getApproverId())
-//				.setLatestApproverName(event.getApproverName())
-//				//设置下一节点审批人
-//				.setNextApproverIds(event.getSimpleNextApproverIds())
-//				.setNextApproverNames(event.getSimpleNextApproverNames())
-//				//更新流程概要
-//				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
+		asset4Update.setId(id)
+				//设置变更ID
+				.setChangeInstanceId(event.getInstance().getId())
+				//更新状态
+				.setChsStatus(event.getInstance().getStatusEnum().code())
+				//更新最后审批人
+				.setLatestApproverId(event.getApproverId())
+				.setLatestApproverName(event.getApproverName())
+				//设置下一节点审批人
+				.setNextApproverIds(event.getSimpleNextApproverIds())
+				.setNextApproverNames(event.getSimpleNextApproverNames())
+				//更新流程概要
+				.setSummary(event.getDefinition().getName()+","+event.getApproveActionEnum().text());
 		//执行更新
 		this.update(asset4Update,SaveMode.BESET_FIELDS);
 	}
@@ -282,7 +293,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 		requestBody.setNextNodeAppovers(appovers);
 
 		//
-		requestBody.setDataType(AssetDataChange.class);
+		requestBody.setDataType(AssetScrap.class);
 
 		//设置变更前数据,simple审批模式仅支持单据的独立审批
 		requestBody.setDataBefore(assetAfter);
@@ -347,7 +358,6 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 				changeDefinitionVO.setCode("eam_asset_scrap");
 
 
-
 				Result<List<ChangeDefinition>> changeDefinitionResult= ChangeDefinitionServiceProxy.api().queryList(changeDefinitionVO);
 				if(!changeDefinitionResult.isSuccess()){
 					return ErrorDesc.failureMessage("获取流程配置失败");
@@ -385,7 +395,7 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 				if(!processApproveResult.isSuccess()) return processApproveResult;
 
 //				//步骤三进入修改status
-				update(EAMTables.EAM_ASSET_DATA_CHANGE.STATUS,AssetHandleStatusEnum.APPROVAL.code(),id);
+				update(EAMTables.EAM_ASSET_SCRAP.STATUS,AssetHandleStatusEnum.APPROVAL.code(),id);
 			}else{
 				return ErrorDesc.failureMessage("当前操作不需要送审,请直接进行确认操作");
 			}

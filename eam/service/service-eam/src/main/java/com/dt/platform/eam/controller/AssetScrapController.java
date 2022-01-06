@@ -1,25 +1,6 @@
 package com.dt.platform.eam.controller;
 
-		@ApiImplicitParam(name = AssetScrapVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "清理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.NAME , value = "业务名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.SCRAP_DATE , value = "报废时间" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CONTENT , value = "报废说明" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CHS_TYPE , value = "变更类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CHS_STATUS , value = "变更状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CHS_VERSION , value = "变更版本号" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CHANGE_INSTANCE_ID , value = "变更ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.SUMMARY , value = "流程概要" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.LATEST_APPROVER_ID , value = "最后审批人账户ID" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.LATEST_APPROVER_NAME , value = "最后审批人姓名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
+
  
 import java.util.List;
 
@@ -395,16 +376,8 @@ public class AssetScrapController extends SuperController {
 		@ApiImplicitParam(name = AssetScrapVOMeta.NEXT_APPROVER_IDS , value = "下一节点审批人" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.NEXT_APPROVER_NAMES , value = "下一个审批节点审批人姓名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = AssetScrapVOMeta.APPROVAL_OPINION , value = "审批意见" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.PROC_ID , value = "流程" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.STATUS , value = "办理状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CLEAN_STATUS , value = "是否清理" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.NAME , value = "业务名称" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.SCRAP_DATE , value = "报废时间" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.CONTENT , value = "报废说明" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.ORIGINATOR_ID , value = "制单人" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.BUSINESS_DATE , value = "业务日期" , required = false , dataTypeClass=Date.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.ATTACH , value = "附件" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = AssetScrapVOMeta.SELECTED_CODE , value = "选择数据" , required = false , dataTypeClass=String.class),
+
+
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = AssetScrapServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
