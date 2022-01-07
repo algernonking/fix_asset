@@ -36,6 +36,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
                 operHtml=operHtml.replace(/lay-event="revoke-data"/i, "style=\"display:none\"")
                 operHtml=operHtml.replace(/lay-event="for-approval"/i, "style=\"display:none\"")
             }
+
             if(PAGE_TYPE&&PAGE_TYPE=="approval"){
                 $("#status-search-unit").hide();
                 toolbarHtml=toolbarHtml.replace(/lay-event="create"/i, "style=\"display:none\"")
@@ -274,6 +275,7 @@ layui.define(['form', 'table', 'util', 'settings', 'admin', 'upload','foxnic','x
             var btn=$('#'+type+'-button');
         },
         agreeData:function(data){
+            console.log("agree",data);
             var api=moduleURL+"/approve";
             var successMessage="审批结束"
             var ps={};

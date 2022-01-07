@@ -262,14 +262,16 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 					AssetProcessRecord r=new AssetProcessRecord();
 					r.setAssetId(inventoryAssetList.get(i).getAssetId());
 					r.setBusinessCode(inventory.getBusinessCode());
+					r.setProcessdTime(new Date());
 					r.setProcessType(AssetOperateEnum.EAM_ASSET_INVENTORY.code());
 					r.setContent("盘点操作结束 "+inventoryAssetList.get(i).getNotes());
 					rcdsList.add(r);
-
 				}
 				assetProcessRecordServiceImpl.insertList(rcdsList);
+
 			}
 			//更新核对时间
+			dao.execute("update eam_inventory set data_status='"+AssetInventoryDataStatusEnum.SYNC.code()+"' where id=?",id);
 			dao.execute("update eam_asset set last_verification_date=now() where id in (select  asset_id from eam_inventory_asset where deleted='0' and inventory_id=?)",id);
 
 		}else{

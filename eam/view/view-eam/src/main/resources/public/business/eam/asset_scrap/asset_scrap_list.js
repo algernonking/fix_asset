@@ -81,6 +81,8 @@ function ListPage() {
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('业务名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'scrapDate', align:"left", fixed:false, hide:false, sort: true, title: fox.translate('报废时间') ,templet: function (d) { return templet('scrapDate',fox.dateFormat(d.scrapDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报废说明') , templet: function (d) { return templet('content',d.content,d);}  }
+					,{ field: 'approval_opinion', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('审批意见') , templet: function (d) { return templet('approval_opinion',d.approval_opinion,d);}  }
+
 					,{ field: 'originatorId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('制单人') , templet: function (d) { return templet('originatorId',fox.getProperty(d,["originator","nameAndBadge"]),d);} }
 					,{ field: 'businessDate', align:"right", fixed:false, hide:true, sort: true, title: fox.translate('业务日期') ,templet: function (d) { return templet('businessDate',fox.dateFormat(d.businessDate,"yyyy-MM-dd"),d); }  }
 					,{ field: 'selectedCode', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('选择数据') , templet: function (d) { return templet('selectedCode',d.selectedCode,d);}  }
@@ -119,7 +121,6 @@ function ListPage() {
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
-		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.scrapDate={ inputType:"date_input", begin: $("#scrapDate-begin").val(), end: $("#scrapDate-end").val() };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
@@ -128,6 +129,11 @@ function ListPage() {
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
 		ps.searchValue=JSON.stringify(value);
+		if(PAGE_TYPE=="approval"){
+			ps.status="approval";
+		}else{
+			value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
+		}
 		if(sortField) {
 			ps.sortField=sortField;
 			ps.sortType=sortType;
@@ -379,6 +385,10 @@ function ListPage() {
 				window.pageExt.list.downloadBill(data);
 			}else if (layEvent === 'clean-out') { // 清理
 				window.pageExt.list.cleanOut(data);
+			}else if (layEvent === 'agree') { // 清理
+				window.pageExt.list.agreeData(data);
+			}else if (layEvent === 'deny') { // 清理
+				window.pageExt.list.denyData(data);
 			}
 
 			
