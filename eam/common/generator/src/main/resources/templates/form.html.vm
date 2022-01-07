@@ -94,8 +94,9 @@
 
         <div class="layui-row form-row" id="#(g.elId)-content">
 
-            #for(col : g.columns) <!--开始：group 循环-->
-            <div class="layui-col-xs#(g.span) form-column" #if(g.title==null && g.columns.size()>1) style="padding-top: 0px" #end>
+            #for(col : g.columns) <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs#(g.span) form-column" #if(g.title==null && g.index>0) style="padding-top: 0px" #end>
 
                 #for(f : col)
                 #if(f.typeName.equals("upload"))

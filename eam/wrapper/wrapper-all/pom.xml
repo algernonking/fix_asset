@@ -60,6 +60,12 @@
 
 		<dependency>
 			<groupId>com.github.foxnic.web</groupId>
+			<artifactId>service-job</artifactId>
+			<version>${foxnic-web.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.foxnic.web</groupId>
 			<artifactId>service-dataperm</artifactId>
 			<version>${foxnic-web.version}</version>
 		</dependency>
@@ -122,6 +128,12 @@
 		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>service-contract</artifactId>
+			<version>${platform.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dt.platform</groupId>
+			<artifactId>service-job</artifactId>
 			<version>${platform.version}</version>
 		</dependency>
 

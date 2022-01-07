@@ -16,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 		FoxnicWebMeta.SERVICE_CHANGES_PACKAGE,
 		FoxnicWebMeta.SERVICE_BPM_PACKAGE,
 		FoxnicWebMeta.SERVICE_DATA_PERM_PACKAGE,
+		FoxnicWebMeta.SERVICE_JOB_PACKAGE,
 		PlatformMeta.FRAMEWORK_PACKAGE,
 		PlatformMeta.SERVICE_EAM_PACKAGE,
 		PlatformMeta.SERVICE_HRM_PACKAGE,
@@ -24,6 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 		PlatformMeta.COMMON_PACKAGE,
 		PlatformMeta.KNOWLEDGEBASE_PACKAGE,
 		PlatformMeta.CONTRACT_PACKAGE,
+		PlatformMeta.JOB_PACKAGE,
 		PlatformMeta.CUSTOMER_PACKAGE
 })
 @SpringBootApplication(exclude = {FeignAutoConfiguration.class})

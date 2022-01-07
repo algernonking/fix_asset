@@ -2,7 +2,7 @@ package com.dt.platform.framework;
 
 public class PlatformMeta {
 
- 
+
 	/**
 	 * 基础包
 	 * */
@@ -12,25 +12,25 @@ public class PlatformMeta {
 	 * 基础框架
 	 * */
 	public static final String FRAMEWORK_PACKAGE=BASE_PACKAGE+".framework";
- 
+
 	/**
 	 * Feign代理包
 	 * */
 	public static final String PROXY_PACKAGE=BASE_PACKAGE+".proxy";
-	
- 
+
+
 	/**
 	 * 实体包
 	 * */
 	public static final String DOMAIN_PACKAGE=BASE_PACKAGE+".doman";
-	
-	
+
+
 	/**
 	 * 资产服务
 	 * */
 	public static final String SERVICE_EAM_PACKAGE=BASE_PACKAGE+".eam";
-	
-	
+
+
 	/**
 	 * 人事服务
 	 * */
@@ -61,6 +61,12 @@ public class PlatformMeta {
 	 * */
 	public static final String CONTRACT_PACKAGE=BASE_PACKAGE+".contract";
 
+
+	/**
+	 * 调度服务
+	 * */
+	public static final String JOB_PACKAGE=BASE_PACKAGE+".job";
+
 	/**
 	 * 客户服务
 	 * */
@@ -71,11 +77,11 @@ public class PlatformMeta {
 
 
 
- 
-	
-	 
-	
-	 
- 
-	
+
+
+
+
+
+
+
 }

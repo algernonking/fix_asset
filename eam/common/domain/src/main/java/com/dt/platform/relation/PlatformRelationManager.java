@@ -17,6 +17,7 @@ public class PlatformRelationManager extends RelationManager {
 				new PcmRelationManager(),
 				new BpmRelationManager(),
 				new DataPermRelationManager(),
+				new JobRelationManager(),
 				//
 				new HrmRelationManager(),
 				new KnRelationManager(),
@@ -43,20 +44,20 @@ public class PlatformRelationManager extends RelationManager {
 //		}
 	}
 
-	
+
 	protected void doReConfigAndValidate() {
 		PlatformRelationManager.this.reconfig();
 //		FoxnicWebRelationManager.this.validate();
 //		Logger.info("FoxnicWebRelationManager Reconfig");
 	}
 
-	
+
 	@Override
 	protected void config() {}
 
-	 
 
- 
-	 
+
+
+
 
 }

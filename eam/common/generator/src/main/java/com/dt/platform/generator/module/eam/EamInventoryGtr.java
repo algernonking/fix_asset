@@ -2,39 +2,27 @@ package com.dt.platform.generator.module.eam;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.StatusEnableEnum;
-import com.dt.platform.constants.enums.common.StatusValidEnum;
-import com.dt.platform.constants.enums.common.StatusYNEnum;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetInventoryActionStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetInventoryDataStatusEnum;
 import com.dt.platform.constants.enums.eam.AssetStatusEnum;
-import com.dt.platform.domain.eam.*;
-import com.dt.platform.domain.eam.meta.*;
-import com.dt.platform.domain.ops.ServiceInfo;
-import com.dt.platform.domain.ops.meta.HostMeta;
-import com.dt.platform.domain.ops.meta.HostVOMeta;
-import com.dt.platform.domain.ops.meta.ServiceInfoMeta;
-import com.dt.platform.eam.page.InventoryPageController;
+import com.dt.platform.domain.eam.InventoryAsset;
+import com.dt.platform.domain.eam.Position;
+import com.dt.platform.domain.eam.Warehouse;
+import com.dt.platform.domain.eam.meta.InventoryMeta;
+import com.dt.platform.domain.eam.meta.InventoryVOMeta;
+import com.dt.platform.domain.eam.meta.PositionMeta;
+import com.dt.platform.domain.eam.meta.WarehouseMeta;
 import com.dt.platform.eam.service.impl.*;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.ops.service.impl.HostDbServiceImpl;
-import com.dt.platform.ops.service.impl.HostMidServiceImpl;
-import com.dt.platform.proxy.eam.InventoryServiceProxy;
 import com.dt.platform.proxy.eam.PositionServiceProxy;
 import com.dt.platform.proxy.eam.WarehouseServiceProxy;
-import com.dt.platform.proxy.ops.ServiceInfoServiceProxy;
-import com.github.foxnic.commons.collection.CollectorUtil;
 import com.github.foxnic.generator.config.WriteMode;
-import javafx.geometry.Pos;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Organization;
-import org.github.foxnic.web.domain.hrm.Person;
 import org.github.foxnic.web.domain.pcm.Catalog;
 import org.github.foxnic.web.domain.pcm.meta.CatalogMeta;
 import org.github.foxnic.web.proxy.pcm.CatalogServiceProxy;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EamInventoryGtr extends BaseCodeGenerator{
 
