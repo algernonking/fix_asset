@@ -5,6 +5,7 @@ package com.dt.platform.eam.controller;
 import java.util.List;
 
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
+import com.dt.platform.constants.enums.eam.AssetOperateEnum;
 import com.dt.platform.domain.eam.AssetRepair;
 import com.dt.platform.domain.eam.meta.*;
 import com.dt.platform.proxy.eam.AssetRepairServiceProxy;
@@ -19,7 +20,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.github.foxnic.web.framework.web.SuperController;
 import org.github.foxnic.web.framework.sentinel.SentinelExceptionUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
@@ -384,7 +390,20 @@ public class AssetScrapController extends SuperController {
 	@PostMapping(AssetScrapServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<AssetScrap>> queryPagedList(AssetScrapVO sample) {
 		Result<PagedList<AssetScrap>> result=new Result<>();
-		PagedList<AssetScrap> list=assetScrapService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
+
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		String pageType=request.getParameter("pageType");
+
+		//数据权限
+		String dp="";
+		if(!StringUtil.isBlank(pageType) && "approval".equals(pageType) ){
+			dp= AssetOperateEnum.EAM_ASSET_SCRAP.code() +"_approving";
+		}else{
+			dp=AssetOperateEnum.EAM_ASSET_SCRAP.code();
+		}
+
+		System.out.println("pageType"+pageType+",dp:"+dp);
+		PagedList<AssetScrap> list=assetScrapService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex(),dp);
 
 		assetScrapService.join(list, AssetScrapMeta.ORIGINATOR);
 

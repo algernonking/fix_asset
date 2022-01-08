@@ -515,16 +515,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 		ChangeRequestBody requestBody=new ChangeRequestBody(changeType, ChangeType.create);
 
 
-		List<Appover> employeeApprovers=assistant.getEmployeeApproversById("E001","488741245229731840");
-		List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById("498946989573017600","498947090244702209");
-		List<Appover> bpmRoleApprovers2=assistant.getBpmRoleApproversByCode("drafter","approver");
-
-		List<Appover> appovers=new ArrayList<>();
-		appovers.addAll(employeeApprovers);
-		appovers.addAll(bpmRoleApprovers1);
-		appovers.addAll(bpmRoleApprovers2);
-
-		requestBody.setNextNodeAppovers(appovers);
+		//后续可按审批人对接待办体系
+		String simpleApprovers=dao.queryRecord("select simple_approvers from chs_change_definition where code=?",changeType).getString("simple_approvers");
+		if(!StringUtil.isBlank(simpleApprovers)){
+			List<Appover> appoverList=new ArrayList<>();
+			JSONArray sarr=JSONArray.parseArray(simpleApprovers);
+			for(int i=0;i<sarr.size();i++){
+				JSONObject e=sarr.getJSONObject(i);
+				String targetId=e.getString("targetId");
+				String targetType=e.getString("targetType");
+				if("busi_role".equals(targetType)){
+					List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
+					appoverList.addAll(bpmRoleApprovers1);
+				}else if("employee".equals(targetType)){
+					List<Appover> approvers1=assistant.getEmployeeApproversById(targetId);
+					appoverList.addAll(approvers1);
+				}
+			}
+			requestBody.setNextNodeAppovers(appoverList);
+		}
 
 
 		//设置当前提交人
@@ -1169,6 +1178,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
 
 		String dp=applyAssetDataPermissions(sample,condition);
+		System.out.println("asset dp:"+dp);
 		if(StringUtil.isBlank(dp)){
 			return super.queryPagedList(sample, condition, pageSize, pageIndex);
 		}else{

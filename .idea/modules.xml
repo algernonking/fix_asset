@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" filepath="$PROJECT_DIR$/eam/service/service-datacenter/service-datacenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" filepath="$PROJECT_DIR$/eam/service/service-eam/service-eam.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" filepath="$PROJECT_DIR$/eam/service/service-hrm/service-hrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eam/service/service-job/service-job.iml" filepath="$PROJECT_DIR$/eam/service/service-job/service-job.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-knowledgebase/service-knowledgebase.iml" filepath="$PROJECT_DIR$/eam/service/service-knowledgebase/service-knowledgebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/service/service-ops/service-ops.iml" filepath="$PROJECT_DIR$/eam/service/service-ops/service-ops.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam/view/view-common/view-common.iml" filepath="$PROJECT_DIR$/eam/view/view-common/view-common.iml" />

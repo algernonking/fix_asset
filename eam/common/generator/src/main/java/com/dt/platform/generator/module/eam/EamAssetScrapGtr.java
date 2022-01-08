@@ -11,6 +11,7 @@ import com.dt.platform.eam.service.impl.AssetItemServiceImpl;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.proxy.eam.AssetScrapServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import org.github.foxnic.web.domain.hrm.Employee;
 import org.github.foxnic.web.domain.hrm.Person;
 
@@ -28,6 +29,8 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
 
         //cfg.service().addRelationSaveAction(AssetItemServiceImpl.class, AssetScrapVOMeta.ASSET_IDS);
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
+
+        cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
 
         cfg.view().field(EAMTables.EAM_ASSET_SCRAP.SELECTED_CODE).basic().hidden(true);
 
@@ -133,12 +136,12 @@ public class EamAssetScrapGtr extends BaseCodeGenerator {
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
-                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
-                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
-                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS)
-                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页; //列表HTML页
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
+                .setFormPage(WriteMode.IGNORE) //表单HTML页
+                .setListPage(WriteMode.IGNORE)
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页; //列表HTML页
         cfg.buildAll();
     }
     public static void main(String[] args) throws Exception {

@@ -3,6 +3,8 @@ package com.dt.platform.eam.service.impl;
 
 import javax.annotation.Resource;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
@@ -281,16 +283,24 @@ public class AssetScrapServiceImpl extends SuperService<AssetScrap> implements I
 
 		//可按数据情况，设置不同的审批人；若未设置审批人，则按变更配置中的审批人执行；
 		//后续可按审批人对接待办体系
-		List<Appover> employeeApprovers=assistant.getEmployeeApproversById("E001","488741245229731840");
-		List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById("498946989573017600","498947090244702209");
-		List<Appover> bpmRoleApprovers2=assistant.getBpmRoleApproversByCode("drafter","approver");
-
-		List<Appover> appovers=new ArrayList<>();
-		appovers.addAll(employeeApprovers);
-		appovers.addAll(bpmRoleApprovers1);
-		appovers.addAll(bpmRoleApprovers2);
-
-		requestBody.setNextNodeAppovers(appovers);
+		String simpleApprovers=dao.queryRecord("select simple_approvers from chs_change_definition where code=?",changeType).getString("simple_approvers");
+		if(!StringUtil.isBlank(simpleApprovers)){
+			List<Appover> appoverList=new ArrayList<>();
+			JSONArray sarr=JSONArray.parseArray(simpleApprovers);
+			for(int i=0;i<sarr.size();i++){
+				JSONObject e=sarr.getJSONObject(i);
+				String targetId=e.getString("targetId");
+				String targetType=e.getString("targetType");
+				if("busi_role".equals(targetType)){
+					List<Appover> bpmRoleApprovers1=assistant.getBpmRoleApproversById(targetId);
+					appoverList.addAll(bpmRoleApprovers1);
+				}else if("employee".equals(targetType)){
+					List<Appover> approvers1=assistant.getEmployeeApproversById(targetId);
+					appoverList.addAll(approvers1);
+				}
+			}
+			requestBody.setNextNodeAppovers(appoverList);
+		}
 
 		//
 		requestBody.setDataType(AssetScrap.class);

@@ -129,6 +129,7 @@ function ListPage() {
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
 		}
 		ps.searchValue=JSON.stringify(value);
+		ps.pageType=PAGE_TYPE;
 		if(PAGE_TYPE=="approval"){
 			ps.status="approval";
 		}else{

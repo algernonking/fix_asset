@@ -124,6 +124,10 @@ public class EamRelationManager extends RelationManager {
 
     public void setupScrap(){
 
+        this.property(AssetScrapMeta.CHANGE_INSTANCE_PROP)
+                .using(EAMTables.EAM_ASSET_SCRAP.CHANGE_INSTANCE_ID )
+                .join(FoxnicWeb.CHS_CHANGE_INSTANCE.ID);
+
         this.property(AssetScrapMeta.ASSET_LIST_PROP)
                 .using(EAMTables.EAM_ASSET_SCRAP.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
                 .using(EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);

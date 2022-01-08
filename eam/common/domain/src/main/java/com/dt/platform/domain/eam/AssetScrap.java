@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 import org.github.foxnic.web.domain.hrm.Employee;
+import org.github.foxnic.web.domain.changes.ChangeInstance;
 import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
@@ -19,8 +20,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产报废
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-06 18:05:27
- * @sign A00FCA4DA08D7F0C9A87B71F3C3BF9E8
+ * @since 2022-01-07 09:06:32
+ * @sign 912C90BF9DA78C3B4DB7DE25B2884599
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -235,6 +236,12 @@ public class AssetScrap extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="制单人" , notes = "制单人")
 	private Employee originator;
+	
+	/**
+	 * 变更实例：变更实例
+	*/
+	@ApiModelProperty(required = false,value="变更实例" , notes = "变更实例")
+	private ChangeInstance changeInstance;
 	
 	/**
 	 * 获得 主键<br>
@@ -901,6 +908,25 @@ public class AssetScrap extends Entity {
 	*/
 	public AssetScrap setOriginator(Employee originator) {
 		this.originator=originator;
+		return this;
+	}
+	
+	/**
+	 * 获得 变更实例<br>
+	 * 变更实例
+	 * @return 变更实例
+	*/
+	public ChangeInstance getChangeInstance() {
+		return changeInstance;
+	}
+	
+	/**
+	 * 设置 变更实例
+	 * @param changeInstance 变更实例
+	 * @return 当前对象
+	*/
+	public AssetScrap setChangeInstance(ChangeInstance changeInstance) {
+		this.changeInstance=changeInstance;
 		return this;
 	}
 

@@ -18,6 +18,8 @@ public class ContractJobExecutor implements JobExecutor {
     @Override
     public Result execute(Object o, Job job, JSONObject jsonObject) {
         Logger.info("ContractJobExecutor 执行 Job ");
+
+
         return ErrorDesc.success();
     }
 }

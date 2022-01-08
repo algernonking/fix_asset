@@ -36,6 +36,14 @@
             <artifactId>proxy</artifactId>
             <version>${platform.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
 
     </dependencies>
     <build>
