@@ -29,7 +29,9 @@ spring:
     druid:
       primary:
         encrypt:
+          # 是否开启加密
           enable: true
+          # 密码文件位置
           file:
             windows: d:/foxnic/passwd.txt
             mac: /Users/Shared/foxnic/passwd.txt
@@ -96,6 +98,10 @@ foxnic:
     profiles: empty,profile@GuoYIE
   # 设置 Join 的二级缓存
   job:
+    # 不运行任何 Job 任务( Job 调度还是会启动 )，仅对本节点有效
+    enable: false
+    # 强制开启的JOB，通常在 enable = false 情况下，调试某些 job，仅对本节点有效
+    force-run-job-ids: 1234,5678
     # 指定 Quartz 使用的DAO数据源
     dao-bean-name: primaryDAO
     # 容许的最大作业延长时间，超出则认为 misfire 发生，单位毫秒
