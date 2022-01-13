@@ -16,6 +16,8 @@
 - 最新SQL文件下载地址:http://121.43.103.102/upload/sql.tar.gz
 - EAM安装手册:在EAM项目的文档目录
 - EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
+- 或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
+
 ## 安装部署(Docker)
 - 系统兼容说明
 
