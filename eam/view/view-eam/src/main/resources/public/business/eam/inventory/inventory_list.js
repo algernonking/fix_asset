@@ -132,7 +132,9 @@ function ListPage() {
 	 */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+
+		//value.businessCode={ inputType:"button",value: $("#businessCode").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.inventoryStatus={ inputType:"select_box", value: xmSelect.get("#inventoryStatus",true).getValue("value"), label:xmSelect.get("#inventoryStatus",true).getValue("nameStr") };
 		value.businessDate={ inputType:"date_input", begin: $("#businessDate-begin").val(), end: $("#businessDate-end").val() ,matchType:"auto" };

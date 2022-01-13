@@ -96,6 +96,8 @@ foxnic:
     profiles: empty,profile@GuoYIE
   # 设置 Join 的二级缓存
   job:
+    enable: false
+    force-run-job-ids:
     # 指定 Quartz 使用的DAO数据源
     dao-bean-name: primaryDAO
     # 容许的最大作业延长时间，超出则认为 misfire 发生，单位毫秒
@@ -165,7 +167,7 @@ security:
   # 模式：session / jwt
   mode: both
   # 配置无需鉴权可以访问的地址
-  ignored-urls: /assets/** , /pages/** , /*.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
+  ignored-urls: /assets/** , /pages/** , /*.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**,/business/eam/user_book/**
   # mode=session 时配置的登录页面
   login-page: /login.html
   jwt:

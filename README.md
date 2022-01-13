@@ -4,11 +4,18 @@
 - 前端基于LayUi
 
 
-### 相关资源
+### 联系方式
+- QQ群:634770774
+
+
+### 系统DEMO
 - [demo] http://eam-demo.rainbooow.com:26788/index.html
 - [demo] admin 密码:123456
-- QQ群:634770774
-- SQL文件:http://121.43.103.102/upload/sql.tar.gz
+
+### 其他资源
+- 最新SQL文件下载地址:http://121.43.103.102/upload/sql.tar.gz
+- EAM安装手册:在EAM项目的文档目录
+- EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
 ## 安装部署(Docker)
 - 系统兼容说明
 

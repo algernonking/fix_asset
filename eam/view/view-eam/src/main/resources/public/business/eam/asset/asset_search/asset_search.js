@@ -108,8 +108,9 @@ function ListPage() {
 
 
 
+        value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 
-        value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+        //value.businessCode={ inputType:"button",value: $("#businessCode").val()};
         value.status={ inputType:"select_box", value:"complete", label:"完成"};
         value.assetCode={ inputType:"button",value: $("#assetCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
         value.assetStatus={ inputType:"select_box", value: xmSelect.get("#assetStatus",true).getValue("value"), label:xmSelect.get("#assetStatus",true).getValue("nameStr")};

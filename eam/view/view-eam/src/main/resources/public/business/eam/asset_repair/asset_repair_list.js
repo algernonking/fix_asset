@@ -121,7 +121,9 @@ function ListPage() {
       */
 	function refreshTableData(sortField,sortType,reset) {
 		var value = {};
-		value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+		//value.businessCode={ inputType:"button",value: $("#businessCode").val()};
+		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
 		value.repairStatus={ inputType:"select_box", value: xmSelect.get("#repairStatus",true).getValue("value"), label:xmSelect.get("#repairStatus",true).getValue("nameStr") };
 		value.type={ inputType:"select_box", value: xmSelect.get("#type",true).getValue("value") ,fillBy:["type"]  , label:xmSelect.get("#type",true).getValue("nameStr") };
