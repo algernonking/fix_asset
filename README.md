@@ -13,10 +13,11 @@
 - [demo] admin 密码:123456
 
 ### 其他资源
-- 最新SQL文件下载地址:http://121.43.103.102/upload/sql.tar.gz
+- SQL文件下载地址(每日更新):http://121.43.103.102/upload/sql.tar.gz
 - EAM安装手册:在EAM项目的文档目录
 - EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
-- 或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
+  或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
+- [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
 
 ## 安装部署(Docker)
 - 系统兼容说明
@@ -62,8 +63,14 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213258_8d970535_448530.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213315_83659719_448530.png "屏幕截图.png")
 
-## 相关文档
-[Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages)
+
+
+## 捐赠
+- 开源不易，坚持更难！如果您觉得本项目不错，可以捐赠请作者喝杯咖啡~，在此表示感谢^_^
+- 同时欢迎商业定制,价格从优~
+- 捐赠(支付宝)
+
+<img width="200" height="200" src="https://images.gitee.com/uploads/images/2020/1105/135552_037eeb5c_448530.png" />
 
  
  
