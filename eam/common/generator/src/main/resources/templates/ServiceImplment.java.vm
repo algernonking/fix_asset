@@ -1,0 +1,232 @@
+package #(package);
+
+
+import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+#(imports)
+
+#(classJavaDoc)
+
+
+@Service("#(beanName)")
+public class #(simpleName) extends SuperService<#(poSimpleName)> implements #(interfaceName) {
+
+	/**
+	 * 注入DAO对象
+	 * */
+	#if(daoName!=null && daoName!="")@Resource(name=#(daoName)) #else @Autowired  #end
+	private DAO dao=null;
+
+	/**
+	 * 获得 DAO 对象
+	 * */
+	public DAO dao() { return dao; }
+
+	#for (jd : injectDescs)
+	@#(jd.annTypeName) #if(jd.resourceName!=null)(name="#(jd.resourceName)")#end
+	private #(jd.typeName) #(jd.varName);
+	#end
+
+
+	@Override
+	public Object generateId(Field field) {
+		return IDGenerator.getSnowflakeIdString();
+	}
+
+	/**
+	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
+	 *
+	 * @param #(poVar)  数据对象
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 结果 , 如果失败返回 false，成功返回 true
+	 */
+	@Override
+	#if(hasRelationSave)
+	@Transactional
+	#end
+	public Result insert(#(poSimpleName) #(poVar),boolean throwsException) {
+		Result r=super.insert(#(poVar),throwsException);
+		#if(hasRelationSave)
+		//保存关系
+		if(r.success()) {
+		#for (rd : relationSaveDescs)
+			#(rd.injectDesc.varName).saveRelation(#(poVar).#(rd.idPropertyGetter)(), #(poVar).#(rd.slavePropertyGetter)());
+		#end
+		}
+		#end
+		return r;
+	}
+
+	/**
+	 * 添加，如果语句错误，则抛出异常
+	 * @param #(poVar) 数据对象
+	 * @return 插入是否成功
+	 * */
+	@Override
+	#if(hasRelationSave)
+	@Transactional
+	#end
+	public Result insert(#(poSimpleName) #(poVar)) {
+		return this.insert(#(poVar),true);
+	}
+
+	/**
+	 * 批量插入实体，事务内
+	 * @param #(poListVar) 实体数据清单
+	 * @return 插入是否成功
+	 * */
+	@Override
+	public Result insertList(List<#(poSimpleName)> #(poListVar)) {
+		return super.insertList(#(poListVar));
+	}
+
+#(deleteByIdMethods)
+
+	/**
+	 * 更新，如果执行错误，则抛出异常
+	 * @param #(poVar) 数据对象
+	 * @param mode 保存模式
+	 * @return 保存是否成功
+	 * */
+	@Override
+	#if(hasRelationSave)
+	@Transactional
+	#end
+	public Result update(#(poSimpleName) #(poVar) , SaveMode mode) {
+		return this.update(#(poVar),mode,true);
+	}
+
+	/**
+	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
+	 * @param #(poVar) 数据对象
+	 * @param mode 保存模式
+	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
+	 * @return 保存是否成功
+	 * */
+	@Override
+	#if(hasRelationSave)
+	@Transactional
+	#end
+	public Result update(#(poSimpleName) #(poVar) , SaveMode mode,boolean throwsException) {
+		Result r=super.update(#(poVar) , mode , throwsException);
+		#if(hasRelationSave)
+		//保存关系
+		if(r.success()) {
+		#for (rd : relationSaveDescs)
+			#(rd.injectDesc.varName).saveRelation(#(poVar).#(rd.idPropertyGetter)(), #(poVar).#(rd.slavePropertyGetter)());
+		#end
+		}
+		#end
+		return r;
+	}
+
+	/**
+	 * 更新实体集，事务内
+	 * @param #(poListVar) 数据对象列表
+	 * @param mode 保存模式
+	 * @return 保存是否成功
+	 * */
+	@Override
+	public Result updateList(List<#(poSimpleName)> #(poListVar) , SaveMode mode) {
+		return super.updateList(#(poListVar) , mode);
+	}
+
+#(updateByIdMethod)
+
+#(getByIdMethod)
+
+#if(isSimplePK)
+	@Override
+	public List<#(poSimpleName)> getByIds(List<#(idPropertyType)> #(idPropertyName)s) {
+		return new ArrayList<>(getByIdsMap(#(idPropertyName)s).values());
+	}
+#end
+
+
+
+	/**
+	 * 查询实体集合，默认情况下，字符串使用模糊匹配，非字符串使用精确匹配
+	 *
+	 * @param sample  查询条件
+	 * @return 查询结果
+	 * */
+	@Override
+	public List<#(poSimpleName)> queryList(#(poSimpleName) sample) {
+		return super.queryList(sample);
+	}
+
+
+	/**
+	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
+	 *
+	 * @param sample  查询条件
+	 * @param pageSize 分页条数
+	 * @param pageIndex 页码
+	 * @return 查询结果
+	 * */
+	@Override
+	public PagedList<#(poSimpleName)> queryPagedList(#(poSimpleName) sample, int pageSize, int pageIndex) {
+		return super.queryPagedList(sample, pageSize, pageIndex);
+	}
+
+	/**
+	 * 分页查询实体集，字符串使用模糊匹配，非字符串使用精确匹配
+	 *
+	 * @param sample  查询条件
+	 * @param condition 其它条件
+	 * @param pageSize 分页条数
+	 * @param pageIndex 页码
+	 * @return 查询结果
+	 * */
+	@Override
+	public PagedList<#(poSimpleName)> queryPagedList(#(poSimpleName) sample, ConditionExpr condition, int pageSize, int pageIndex) {
+		return super.queryPagedList(sample, condition, pageSize, pageIndex);
+	}
+
+	/**
+	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
+	 *
+	 * @param #(poVar) 数据对象
+	 * @return 判断结果
+	 */
+	public Boolean checkExists(#(poSimpleName) #(poVar)) {
+		//TDOD 此处添加判断段的代码
+		//boolean exists=super.checkExists(#(poVar), SYS_ROLE.NAME);
+		//return exists;
+		return false;
+	}
+
+	@Override
+	public ExcelWriter exportExcel(#(poSimpleName) sample) {
+		return super.exportExcel(sample);
+	}
+
+	@Override
+	public ExcelWriter exportExcelTemplate() {
+		return super.exportExcelTemplate();
+	}
+
+	@Override
+	public List<ValidateResult> importExcel(InputStream input,int sheetIndex,boolean batch) {
+		return super.importExcel(input,sheetIndex,batch);
+	}
+
+	@Override
+	public ExcelStructure buildExcelStructure(boolean isForExport) {
+		return super.buildExcelStructure(isForExport);
+	}
+
+	#if(relationMasterIdField!=null)
+	/**
+     * 保存关系
+     * @param #(relationMasterVar) #(relationMasterVarDoc)
+     * @param #(relationSlaveVar) #(relationSlaveVarDoc)
+     */
+	public void saveRelation(#(relationMasterVarType) #(relationMasterVar),List<#(relationSlaveVarType)> #(relationSlaveVar)) {
+		super.saveRelation(#(relationMasterPoType).class,#(relationMasterIdField),#(relationMasterVar),#(relationSlavePoType).class,#(relationSlaveIdField),#(relationSlaveVar),#(isRelationClearWhenEmpty));
+	}
+	#end
+
+}

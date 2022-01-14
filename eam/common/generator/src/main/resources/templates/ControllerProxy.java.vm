@@ -1,0 +1,172 @@
+package #(package);
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.github.foxnic.web.proxy.api.APIProxy;
+import org.github.foxnic.web.proxy.FeignConfiguration;
+
+#if(isEnableMicroService)import org.springframework.cloud.openfeign.FeignClient;#end
+
+#(imports)
+
+#(classJavaDoc)
+
+#if(isEnableMicroService)@FeignClient(value = #(msNameConst), contextId = #(simpleName).API_CONTEXT_PATH , configuration = FeignConfiguration.class)#end
+public interface #(simpleName) {
+
+	/**
+	 * 基础路径 , #(apiBasicPath)
+	*/
+	public static final String API_BASIC_PATH = "#(apiBasicPath)";
+
+	/**
+	 * API 上下文路径 , #(apiContextPath)
+	*/
+	public static final String API_CONTEXT_PATH = "#(apiContextPath)";
+
+	/**
+	 * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成
+	*/
+	public static final String API_PREFIX = "/" + API_BASIC_PATH + "/"+API_CONTEXT_PATH+"/";
+
+	/**
+	 * 添加#(topic)
+	 */
+	public static final String INSERT = API_PREFIX + "insert";
+
+	#if(batchInsert)
+	/**
+	 * 批量添加#(topic)
+	 */
+	public static final String INSERTS = API_PREFIX + "inserts";
+	#end;
+	/**
+	 * 删除#(topic)
+	 */
+	public static final String DELETE = API_PREFIX + "delete";
+
+	#if(isSimplePk)
+	/**
+	 * 批量删除#(topic)
+	 */
+	public static final String DELETE_BY_IDS = API_PREFIX + "delete-by-ids";
+	#end
+
+	/**
+	 * 更新#(topic)
+	 */
+	public static final String UPDATE = API_PREFIX + "update";
+
+
+	/**
+	 * 保存#(topic)
+	 */
+	public static final String SAVE = API_PREFIX + "save";
+
+	/**
+	 * 获取单个#(topic)
+	 */
+	public static final String GET_BY_ID = API_PREFIX + "get-by-id";
+
+	#if(isSimplePk)
+	/**
+	 * 获取多个#(topic)
+	 */
+	public static final String GET_BY_IDS = API_PREFIX + "get-by-ids";
+	#end
+
+	/**
+	 * 查询#(topic)
+	 */
+	public static final String QUERY_LIST = API_PREFIX + "query-list";
+
+	/**
+	 * 分页查询#(topic)
+	 */
+	public static final String QUERY_PAGED_LIST = API_PREFIX + "query-paged-list";
+
+	/**
+	 * 导出#(topic)数据(Excel)
+	 */
+	public static final String EXPORT_EXCEL = API_PREFIX + "export-excel";
+
+	/**
+	 * 下载#(topic)导入模版(Excel)
+	 */
+	public static final String EXPORT_EXCEL_TEMPLATE = API_PREFIX + "export-excel-template";
+
+	/**
+	 * 导入#(topic)数据(Excel)
+	 */
+	public static final String IMPORT_EXCEL = API_PREFIX + "import-excel";
+
+	/**
+	 * 添加#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).INSERT)
+	Result insert(#(voSimpleName) #(voVar));
+
+	/**
+	 * 删除#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).DELETE)
+	Result deleteById(#(controllerMethodParameterDeclare4DeleteById));
+
+	#if(isSimplePk)
+	/**
+	 * 批量删除#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).DELETE_BY_IDS)
+	Result deleteByIds(List<#(pkType)> #(idPropertyName)s);
+	#end
+
+	/**
+	 * 更新#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).UPDATE)
+	Result update(#(voSimpleName) #(voVar));
+
+	/**
+	 * 更新#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).SAVE)
+	Result save(#(voSimpleName) #(voVar));
+
+	/**
+	 * 获取#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).GET_BY_ID)
+	Result<#(poSimpleName)> getById(#(controllerMethodParameterDeclare4GetById));
+
+	#if(isSimplePk)
+	/**
+	 * 获取多个#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).GET_BY_IDS)
+	Result<List<#(poSimpleName)>> getByIds(List<#(pkType)> #(idPropertyName)s);
+	#end
+	/**
+	 * 查询#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).QUERY_LIST)
+	Result<List<#(poSimpleName)>> queryList(#(voSimpleName) sample);
+
+	/**
+	 * 分页查询#(topic)
+	*/
+	@RequestMapping(#(agentSimpleName).QUERY_PAGED_LIST)
+	Result<PagedList<#(poSimpleName)>> queryPagedList(#(voSimpleName) sample);
+
+
+	/**
+	 * 控制器类名
+	 * */
+	public static final String CONTROLLER_CLASS_NAME="#(controllerClassName)";
+
+	/**
+	 * 统一的调用接口，实现在单体应用和微服务应用下的无差异调用
+	 * */
+	public static #(simpleName) api() {
+		return APIProxy.get(#(simpleName).class,CONTROLLER_CLASS_NAME);
+	}
+
+}
