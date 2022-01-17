@@ -39,7 +39,7 @@ public class DAOConfig {
 	@Bean(DBConfigs.PRIMARY_DAO)
 	@Primary
 	public DAO primaryDAO (
-            @Qualifier(DatasourceConfig.PRIMARY_DATA_SOURCE_NAME) DataSource dataSource, DBTreaty dbTreaty) {
+            @Qualifier(DatasourceConfig.PRIMARY_DATA_SOURCE_NAME) DataSource dataSource) {
 		try {
 			if(printSQL==null) printSQL=false;
 
@@ -49,7 +49,7 @@ public class DAOConfig {
 			DAO dao= (new DAOBuilder().datasource(dataSource)).build();
 			dao.setPrintSQL(printSQL);
 			dao.setPrintSQLSimple(printSQL);
-			dao.setDBTreaty(dbTreaty);
+			dao.setDBTreaty(getDBTreaty());
 			PlatformRelationManager relationManager=new PlatformRelationManager();
 			if(startRelationMonitor) {
 				relationManager.startMonitor();
@@ -108,15 +108,14 @@ public class DAOConfig {
 			return null;
 		}
 	}
- 
-	@Bean
+
 	public DBTreaty getDBTreaty() {
-		
+
 		DBTreaty dbTreaty=new DBTreaty();
 		//
 		dbTreaty.setAllowDeleteWithoutWhere(false);
 		dbTreaty.setAllowUpdateWithoutWhere(false);
-		
+
 		//
 		dbTreaty.setUserIdDataType(DBDataType.STRING);
 		//
@@ -138,7 +137,7 @@ public class DAOConfig {
 		//
 		dbTreaty.setFalseValue(0);
 		dbTreaty.setTrueValue(1);
-		
+
 		//设置获取当前用户的逻辑
 		if(SpringUtil.isReady()) {
 
@@ -162,9 +161,9 @@ public class DAOConfig {
 			}
 			return null;
 		});
-		
+
 		//
 		return dbTreaty;
 	}
-	
+
 }
