@@ -91,6 +91,8 @@ spring:
 
 
 foxnic:
+  api:
+    log-enable: true
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
     profiles: empty,profile@GuoYIE
@@ -104,6 +106,14 @@ foxnic:
     misfire-threshold: 1000
     # 日志保留天数
     log-keep-days: 7
+  storage:
+    mode: disk
+    disk:
+      location:
+        #在不同的环境下选择不同的路径
+        windows: c:/uploads
+        mac: /opt/upload
+        linux: /opt/eam/upload
   cache:
     # 默认配置
     default:
@@ -201,14 +211,7 @@ knife4j:
   description: ${spring.application.description}
   version: 1.0
 
-storage:
-  mode: disk
-  disk:
-    location:
-      #在不同的环境下选择不同的路径
-      windows: c:/uploads
-      mac: /opt/upload
-      linux: /opt/eam/upload
+
 
 develop:
   language: defaults
