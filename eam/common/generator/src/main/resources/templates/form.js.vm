@@ -391,7 +391,7 @@ function FormPage() {
 					admin.finishPopupCenterById('#(formDataKey)-win');
 				}
 			} else {
-				layer.msg(data.message, {icon: 2, time: 1500});
+				top.layer.msg(data.message, {icon: 2, time: 1500});
 			}
 			window.pageExt.form.afterSubmit && window.pageExt.form.afterSubmit(param,data);
 		}, {delayLoading:1000,elms:[$("#submit-button")]});

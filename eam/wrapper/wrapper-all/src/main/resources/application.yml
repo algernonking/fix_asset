@@ -106,6 +106,14 @@ foxnic:
     misfire-threshold: 1000
     # 日志保留天数
     log-keep-days: 7
+  storage:
+    mode: disk
+    disk:
+      location:
+        #在不同的环境下选择不同的路径
+        windows: c:/uploads
+        mac: /opt/upload
+        linux: /opt/eam/upload
   cache:
     # 默认配置
     default:
@@ -203,14 +211,7 @@ knife4j:
   description: ${spring.application.description}
   version: 1.0
 
-storage:
-  mode: disk
-  disk:
-    location:
-      #在不同的环境下选择不同的路径
-      windows: c:/uploads
-      mac: /opt/upload
-      linux: /opt/eam/upload
+
 
 develop:
   language: defaults
