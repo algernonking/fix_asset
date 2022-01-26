@@ -7,10 +7,22 @@
 #####################################################################
 ####################### Configure  ##################################
 JAVA=java
+hostname=`hostname`
+cur_dir=$(cd `dirname $0`; pwd)
+conf_file=$cur_dir/app.conf
+echo "cur_dir:$cur_dir";
+echo "conf_file:$conf_file";
 
-jar_dir="/Users/lank/IdeaProjectsnew/eam/eam/wrapper/wrapper-all/target"
 app_tar="app.tar"
+hostname=`hostname`
+cur_dir=$(cd `dirname $0`; pwd)
+conf_file=$cur_dir/app.conf
+jar_dir=`cat $conf_file|grep ${hostname}.jar_dir|awk -F "=" '{print $2}'`
+ops_jar_dir=`cat $conf_file|grep ${hostname}.ops_jar_dir|awk -F "=" '{print $2}'`
 
+echo "jar_dir:$jar_dir"
+echo "cur_dir:$cur_dir";
+echo "conf_file:$conf_file";
 
 cd $jar_dir
 if [[ -f eam.jar ]];then
@@ -27,7 +39,7 @@ incr_content="./lib/service*.jar  ./lib/view*.jar ./lib/*nic*.jar"
 content=$full_content
 
 ###生成远程执行文件
-tmp_dir="/Users/lank/tmp"
+tmp_dir=`cat $conf_file|grep ${hostname}.ops_dir|awk -F "=" '{print $2}'`
 ops_remotefile_recreate=1
 ops_remotefile_recreate_file="$tmp_dir/deploy_app.sh"
 ops_node_file_recreate=0
@@ -76,7 +88,7 @@ if [[ $ops_node_file_recreate -eq 1 ]];then
 	echo "39.105.191.22|22|root|123456|hostname=ops">$ops_node_file
 fi
 ####################### Deploy ######################################
-ops=/Users/lank/IdeaProjectsnew/eam/eam/ops.jar
+ops=$ops_jar_dir/ops.jar
 echo "$JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file">>/tmp/ops.log
 $JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file
 exit 0

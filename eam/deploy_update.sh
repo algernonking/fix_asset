@@ -1,7 +1,13 @@
 #!/bin.sh
-#
-jar_dir="/Users/lank/IdeaProjectsnew/eam/eam/wrapper/wrapper-all/target"
-deploy_dir="/Users/lank/IdeaProjectsnew/eam/eam/deploy"
+hostname=`hostname`
+cur_dir=$(cd `dirname $0`; pwd)
+conf_file=$cur_dir/app.conf
+jar_dir=`cat $conf_file|grep ${hostname}.jar_dir|awk -F "=" '{print $2}'`
+deploy_dir=`cat $conf_file|grep ${hostname}.deploy_dir|awk -F "=" '{print $2}'`
+
+echo "jar_dir:$jar_dir"
+echo "deploy_dir:$deploy_dir"
+
 release_dir="/tmp/eam_deploy"
 if [[ -d $release_dir ]];then
   rm -rf $release_dir

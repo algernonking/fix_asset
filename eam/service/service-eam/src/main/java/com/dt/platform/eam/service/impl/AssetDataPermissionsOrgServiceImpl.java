@@ -45,6 +45,9 @@ import org.github.foxnic.web.domain.hrm.Organization;
 @Service("EamAssetDataPermissionsOrgService")
 public class AssetDataPermissionsOrgServiceImpl extends SuperService<AssetDataPermissionsOrg> implements IAssetDataPermissionsOrgService {
 
+
+
+
 	/**
 	 * 注入DAO对象
 	 * */

@@ -91,6 +91,8 @@ spring:
 
 
 foxnic:
+  api:
+    log-enable: true
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
     profiles: empty,profile@GuoYIE

@@ -148,7 +148,7 @@ public class EamAssetAllocationGtr extends BaseCodeGenerator {
         //生成代码
         g.generateCode();
         //生成菜单
-      //  g.generateMenu(AssetAllocationServiceProxy.class, AssetAllocationPageController.class);
+        g.generateMenu(AssetAllocationServiceProxy.class, AssetAllocationPageController.class);
     }
 
 }

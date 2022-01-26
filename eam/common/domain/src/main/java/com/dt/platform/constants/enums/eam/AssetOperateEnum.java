@@ -35,7 +35,7 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_ASSET_CONSUMABLES_STOCK_OUT(CodeModuleEnum.EAM_ASSET_CONSUMABLES_STOCK_OUT.code() , "EAM_资产耗材单据-出库"),
     EAM_ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "EAM_资产耗材单据-领用"),
     EAM_ASSET_CONSUMABLES_TRANFER(CodeModuleEnum.EAM_ASSET_CONSUMABLES_TRANFER.code() , "EAM_资产耗材单据-转移"),
-//    EAM_ASSET_CONSUMABLES_ALLOCATE(CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code() , "EAM_资产耗材单据-调拨"),
+    //EAM_ASSET_CONSUMABLES_ALLOCATE(CodeModuleEnum.EAM_ASSET_CONSUMABLES_ALLOCATE.code() , "EAM_资产耗材单据-调拨"),
 
     //库存
     EAM_ASSET_STOCK_OUT(CodeModuleEnum.EAM_ASSET_STOCK_OUT.code() , "EAM_资产库存-出库"),
@@ -56,7 +56,8 @@ public enum AssetOperateEnum implements CodeTextEnum {
     EAM_DOWNLOAD_ASSET_BORROW_BILL("eam_download_asset_borrow_bill" , "EAM_资产借用下载"),
     EAM_DOWNLOAD_ASSET_REPAIR_BILL("eam_download_asset_repair_bill" , "EAM_资产报修下载"),
     EAM_DOWNLOAD_ASSET_SCRAP_BILL("eam_download_asset_scrap_bill" , "EAM_资产报废下载"),
-    ;
+
+    EAM_ASSET_DATA_SYNC("eam_asset_data_sync" , "EAM_资产数据同步");
 
 
     private String code;

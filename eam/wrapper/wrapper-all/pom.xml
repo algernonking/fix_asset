@@ -159,6 +159,9 @@
 			<version>${platform.version}</version>
 		</dependency>
 
+
+
+
 		<dependency>
 			<groupId>com.dt.platform</groupId>
 			<artifactId>view-hrm</artifactId>
