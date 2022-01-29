@@ -118,9 +118,7 @@ foxnic:
     # 默认配置
     default:
       # local,remote,both,none
-      mode: none
-      # 是否为 join 使用缓存
-      cache-for-join: false
+      mode: local
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
