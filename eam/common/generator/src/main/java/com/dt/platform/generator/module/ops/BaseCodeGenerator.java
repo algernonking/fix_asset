@@ -12,6 +12,9 @@ public class BaseCodeGenerator {
     public static final String BASIC_HOSTMGR_MENU_ID="472818410917462016";
     public static final String INFOYSTEM_MENU_ID="472819614665932801";
 
+
+    public static final String MONITOR_MENU_ID="474155639195566080";
+
     //
     private String appId="service-ops";
 
