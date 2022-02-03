@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:18:24
+ * @since 2022-02-02 14:55:27
 */
 
 @Api(tags = "节点类型")
@@ -65,9 +65,9 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "添加节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "操作系统"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -85,7 +85,7 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "删除节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorNodeTypeVOMeta.ID)
@@ -119,9 +119,9 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "更新节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "操作系统"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorNodeTypeVOMeta.PAGE_INDEX , MonitorNodeTypeVOMeta.PAGE_SIZE , MonitorNodeTypeVOMeta.SEARCH_FIELD , MonitorNodeTypeVOMeta.FUZZY_FIELD , MonitorNodeTypeVOMeta.SEARCH_VALUE , MonitorNodeTypeVOMeta.DIRTY_FIELDS , MonitorNodeTypeVOMeta.SORT_FIELD , MonitorNodeTypeVOMeta.SORT_TYPE , MonitorNodeTypeVOMeta.IDS } )
@@ -139,9 +139,9 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "保存节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "操作系统"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeTypeVOMeta.PAGE_INDEX , MonitorNodeTypeVOMeta.PAGE_SIZE , MonitorNodeTypeVOMeta.SEARCH_FIELD , MonitorNodeTypeVOMeta.FUZZY_FIELD , MonitorNodeTypeVOMeta.SEARCH_VALUE , MonitorNodeTypeVOMeta.DIRTY_FIELDS , MonitorNodeTypeVOMeta.SORT_FIELD , MonitorNodeTypeVOMeta.SORT_TYPE , MonitorNodeTypeVOMeta.IDS } )
@@ -198,9 +198,9 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "查询节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "操作系统"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeTypeVOMeta.PAGE_INDEX , MonitorNodeTypeVOMeta.PAGE_SIZE } )
@@ -219,9 +219,9 @@ public class MonitorNodeTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询节点类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "操作系统"),
+		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

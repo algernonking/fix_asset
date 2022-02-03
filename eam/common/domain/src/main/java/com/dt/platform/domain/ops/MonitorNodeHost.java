@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点主机
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:33:05
- * @sign 095E79F4CA9BD53BC18D7AC49C26F7BE
+ * @since 2022-02-02 14:55:24
+ * @sign 5EE83777E8AB2DCC42E9B49E474E2BFC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -239,12 +239,6 @@ public class MonitorNodeHost extends Entity {
 	*/
 	@ApiModelProperty(required = true,value="版本" , notes = "版本")
 	private Integer version;
-	
-	/**
-	 * 租户：租户
-	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
 	
 	/**
 	 * 获得 主键<br>
@@ -908,25 +902,6 @@ public class MonitorNodeHost extends Entity {
 	*/
 	public MonitorNodeHost setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
-	*/
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * 设置 租户
-	 * @param tenantId 租户
-	 * @return 当前对象
-	*/
-	public MonitorNodeHost setTenantId(String tenantId) {
-		this.tenantId=tenantId;
 		return this;
 	}
 

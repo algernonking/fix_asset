@@ -36,7 +36,9 @@ import com.dt.platform.domain.ops.meta.MonitorNodeMeta;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.MonitorNodeSubtype;
 import com.dt.platform.domain.ops.MonitorNodeHost;
+import com.dt.platform.domain.ops.MonitorNodeDb;
 import com.dt.platform.domain.ops.MonitorNodeValue;
+import com.dt.platform.domain.ops.MonitorNodeListValue;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -52,7 +54,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:56
+ * @since 2022-02-02 14:55:24
 */
 
 @Api(tags = "节点")
@@ -77,7 +79,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.MONITOR_METHOD , value = "监控方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -138,7 +141,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.MONITOR_METHOD , value = "监控方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -165,7 +169,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.MONITOR_METHOD , value = "监控方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -231,7 +236,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.MONITOR_METHOD , value = "监控方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
@@ -259,7 +265,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.MONITOR_METHOD , value = "监控方式" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})

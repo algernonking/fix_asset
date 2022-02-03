@@ -2,7 +2,7 @@
 /**
  * 节点映射 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 07:10:54
+ * @since 2022-02-02 14:55:29
  */
  -->
  <!DOCTYPE html>
@@ -38,24 +38,16 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- IP , ip ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('IP')}" class="search-label ip-label">IP</span><span class="search-colon">:</span></div>
-                        <input id="ip" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('主键')}" class="search-label id-label">主键</span><span class="search-colon">:</span></div>
+                        <input id="id" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
+                    <!-- 节点 , nodeId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 源值 , sourceId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- IP , ip ,typeName=text_input, isHideInSearch=true -->
                     <!-- 动作 , actionMethod ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 节点 , nodeId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点')}" class="search-label nodeId-label">节点</span><span class="search-colon">:</span></div>
-                        <input id="nodeId" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
-                    <!-- 源值 , sourceId ,typeName=text_input, isHideInSearch=false -->
-                    <div class="search-unit">
-                        <div class="search-label-div" style=""><span th:text="${lang.translate('源值')}" class="search-label sourceId-label">源值</span><span class="search-colon">:</span></div>
-                        <input id="sourceId" class="layui-input search-input" style="width: 150px" type="text" />
-                    </div>
 
 
                 </div>
@@ -85,6 +77,7 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('ops_monitor_node_map:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_monitor_node_map:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

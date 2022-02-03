@@ -13,9 +13,11 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum MonitorMethodEnum implements CodeTextEnum {
 
-    AGENT("agent" , "代理呈现"),
+    AGENT("agent" , "代理方式"),
+    SNMP("snmp" , "SNMP方式"),
     ZABBIX("zabbix" , "Zabbix"),
-    DIRECT("direct" , "直接取数"),
+    VMWARE("vmware" , "Vmware"),
+    DIRECT("direct" , "直接取数")
     ;
 
     private String code;

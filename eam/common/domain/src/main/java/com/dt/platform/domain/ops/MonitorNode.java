@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:56
- * @sign 33590C4E6A6FE1811173DAEC64E3F152
+ * @since 2022-02-02 14:55:24
+ * @sign CBB8A2FF42F09A6A32F5DF8CBB015377
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -80,9 +80,15 @@ public class MonitorNode extends Entity {
 	private String nodeType;
 	
 	/**
-	 * 状态：状态
+	 * 是否启用：是否启用
 	*/
-	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	@ApiModelProperty(required = false,value="是否启用" , notes = "是否启用")
+	private String nodeEnabled;
+	
+	/**
+	 * 监控状态：监控状态
+	*/
+	@ApiModelProperty(required = false,value="监控状态" , notes = "监控状态")
 	private String status;
 	
 	/**
@@ -146,12 +152,6 @@ public class MonitorNode extends Entity {
 	private Integer version;
 	
 	/**
-	 * 租户：租户
-	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
-	
-	/**
 	 * 节点类型：节点类型
 	*/
 	@ApiModelProperty(required = false,value="节点类型" , notes = "节点类型")
@@ -170,10 +170,22 @@ public class MonitorNode extends Entity {
 	private MonitorNodeHost monitorNodeHost;
 	
 	/**
+	 * 数据库信息：数据库信息
+	*/
+	@ApiModelProperty(required = false,value="数据库信息" , notes = "数据库信息")
+	private MonitorNodeDb monitorNodeDb;
+	
+	/**
 	 * 数值信息：数值信息
 	*/
 	@ApiModelProperty(required = false,value="数值信息" , notes = "数值信息")
 	private List<MonitorNodeValue> monitorNodeValueList;
+	
+	/**
+	 * 列表数值信息：列表数值信息
+	*/
+	@ApiModelProperty(required = false,value="列表数值信息" , notes = "列表数值信息")
+	private List<MonitorNodeListValue> monitorNodeListValueList;
 	
 	/**
 	 * 获得 主键<br>
@@ -328,17 +340,36 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 状态<br>
-	 * 状态
-	 * @return 状态
+	 * 获得 是否启用<br>
+	 * 是否启用
+	 * @return 是否启用
+	*/
+	public String getNodeEnabled() {
+		return nodeEnabled;
+	}
+	
+	/**
+	 * 设置 是否启用
+	 * @param nodeEnabled 是否启用
+	 * @return 当前对象
+	*/
+	public MonitorNode setNodeEnabled(String nodeEnabled) {
+		this.nodeEnabled=nodeEnabled;
+		return this;
+	}
+	
+	/**
+	 * 获得 监控状态<br>
+	 * 监控状态
+	 * @return 监控状态
 	*/
 	public String getStatus() {
 		return status;
 	}
 	
 	/**
-	 * 设置 状态
-	 * @param status 状态
+	 * 设置 监控状态
+	 * @param status 监控状态
 	 * @return 当前对象
 	*/
 	public MonitorNode setStatus(String status) {
@@ -537,25 +568,6 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
-	*/
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * 设置 租户
-	 * @param tenantId 租户
-	 * @return 当前对象
-	*/
-	public MonitorNode setTenantId(String tenantId) {
-		this.tenantId=tenantId;
-		return this;
-	}
-	
-	/**
 	 * 获得 节点类型<br>
 	 * 节点类型
 	 * @return 节点类型
@@ -613,6 +625,25 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
+	 * 获得 数据库信息<br>
+	 * 数据库信息
+	 * @return 数据库信息
+	*/
+	public MonitorNodeDb getMonitorNodeDb() {
+		return monitorNodeDb;
+	}
+	
+	/**
+	 * 设置 数据库信息
+	 * @param monitorNodeDb 数据库信息
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorNodeDb(MonitorNodeDb monitorNodeDb) {
+		this.monitorNodeDb=monitorNodeDb;
+		return this;
+	}
+	
+	/**
 	 * 获得 数值信息<br>
 	 * 数值信息
 	 * @return 数值信息
@@ -639,6 +670,36 @@ public class MonitorNode extends Entity {
 	public MonitorNode addMonitorNodeValue(MonitorNodeValue monitorNodeValue) {
 		if(this.monitorNodeValueList==null) monitorNodeValueList=new ArrayList<>();
 		this.monitorNodeValueList.add(monitorNodeValue);
+		return this;
+	}
+	
+	/**
+	 * 获得 列表数值信息<br>
+	 * 列表数值信息
+	 * @return 列表数值信息
+	*/
+	public List<MonitorNodeListValue> getMonitorNodeListValueList() {
+		return monitorNodeListValueList;
+	}
+	
+	/**
+	 * 设置 列表数值信息
+	 * @param monitorNodeListValueList 列表数值信息
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorNodeListValueList(List<MonitorNodeListValue> monitorNodeListValueList) {
+		this.monitorNodeListValueList=monitorNodeListValueList;
+		return this;
+	}
+	
+	/**
+	 * 添加 列表数值信息
+	 * @param monitorNodeListValue 列表数值信息
+	 * @return 当前对象
+	*/
+	public MonitorNode addMonitorNodeListValue(MonitorNodeListValue monitorNodeListValue) {
+		if(this.monitorNodeListValueList==null) monitorNodeListValueList=new ArrayList<>();
+		this.monitorNodeListValueList.add(monitorNodeListValue);
 		return this;
 	}
 

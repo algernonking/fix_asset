@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:57
+ * @since 2022-02-02 14:55:24
  */
 
 
@@ -81,7 +81,8 @@ function ListPage() {
 					,{ field: 'nodeName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主机名') , templet: function (d) { return templet('nodeName',d.nodeName,d);}  }
 					,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('可见主机名') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
 					,{ field: 'nodeType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型') , templet: function (d) { return templet('nodeType',d.nodeType,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态') , templet: function (d) { return templet('status',d.status,d);}  }
+					,{ field: 'nodeEnabled', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否启用') , templet: function (d) { return templet('nodeEnabled',d.nodeEnabled,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控状态') , templet: function (d) { return templet('status',d.status,d);}  }
 					,{ field: 'monitorMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控方式') , templet: function (d) { return templet('monitorMethod',d.monitorMethod,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -129,6 +130,7 @@ function ListPage() {
 		value.nodeName={ inputType:"button",value: $("#nodeName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.nodeNameShow={ inputType:"button",value: $("#nodeNameShow").val()};
 		value.nodeType={ inputType:"button",value: $("#nodeType").val()};
+		value.nodeEnabled={ inputType:"button",value: $("#nodeEnabled").val()};
 		value.status={ inputType:"button",value: $("#status").val()};
 		value.monitorMethod={ inputType:"button",value: $("#monitorMethod").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};

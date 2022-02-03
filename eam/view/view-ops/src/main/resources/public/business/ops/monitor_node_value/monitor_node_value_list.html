@@ -2,7 +2,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:06:05
+ * @since 2022-02-02 14:55:28
  */
  -->
  <!DOCTYPE html>
@@ -40,6 +40,8 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 节点 , nodeId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 监控模版 , monitorTplCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 指标 , indicatorCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 主机名称 , hostname ,typeName=date_input, isHideInSearch=true -->
                     <!-- 启动时间 , boottime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 系统 , osVerion ,typeName=text_input, isHideInSearch=true -->
@@ -67,7 +69,38 @@
                     <!-- 内存 , pMemoryUsed ,typeName=number_input, isHideInSearch=true -->
                     <!-- 虚拟内存 , vMemoryUsed ,typeName=number_input, isHideInSearch=true -->
                     <!-- 信息 , info ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签1 , label1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签2 , label2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签3 , label3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码1 , code1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码2 , code2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码3 , code3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数值1 , valueNumber1 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 数值2 , valueNumber2 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 数值3 , valueNumber3 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 字符串1 , valueStr1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字符串2 , valueStr2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字符串3 , valueStr3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数1 , valueInt1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数2 , valueInt2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数3 , valueInt3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 唯一标识 , uid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 记录时间 , recordTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 标签列1 , listLabel1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签列2 , listLabel2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 标签列3 , listLabel3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码列1 , listCode1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码列2 , listCode2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码列3 , listCode23 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数值列1 , listValueNumber1 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 数值列2 , listValueNumber2 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 数值列3 , listValueNumber3 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 字符串列1 , listValueStr1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字符串列2 , listValueStr2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字符串列3 , listValueStr3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数列1 , listValueInt1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数列2 , listValueInt2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数列3 , listValueInt3 ,typeName=text_input, isHideInSearch=true -->
 
 
                 </div>
@@ -97,6 +130,7 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('ops_monitor_node_value:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_monitor_node_value:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

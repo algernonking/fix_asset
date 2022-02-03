@@ -1,17 +1,14 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.ops.*;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.ops.page.MonitorNodeHostPageController;
-import com.dt.platform.proxy.ops.MonitorNodeHostServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class MonitoryNodeHostGtr extends BaseCodeGenerator{
+public class MonitorNodeDBGtr extends BaseCodeGenerator{
 
 
-    public MonitoryNodeHostGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_HOST.$TABLE,MONITOR_MENU_ID);
+    public MonitorNodeDBGtr() {
+        super(EAMTables.OPS_MONITOR_NODE_DB.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
@@ -21,7 +18,7 @@ public class MonitoryNodeHostGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
-                        EAMTables.OPS_MONITOR_NODE_HOST.NOTES,
+                        EAMTables.OPS_MONITOR_NODE_DB.NOTES,
                 }
 
         );
@@ -30,24 +27,24 @@ public class MonitoryNodeHostGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.NOTES).search().fuzzySearch();
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.NOTES).search().fuzzySearch();
 
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.ID).basic().hidden(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.ID).table().disable(true);
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE_HOST.CREATE_TIME).table().disable(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.ID).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.ID).table().disable(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE_DB.CREATE_TIME).table().disable(true);
 
 
 
 
-        cfg.view().list().disableBatchDelete();
+       // cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
-                        EAMTables.OPS_MONITOR_NODE_HOST.NOTES,
+                        EAMTables.OPS_MONITOR_NODE_DB.NOTES,
 
                 }
         );
@@ -65,11 +62,11 @@ public class MonitoryNodeHostGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        MonitoryNodeHostGtr g=new MonitoryNodeHostGtr();
+        MonitorNodeDBGtr g=new MonitorNodeDBGtr();
         //生成代码
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-        // g.generateMenu(MonitorNodeHostServiceProxy.class, MonitorNodeHostPageController.class);
+        // g.generateMenu(MonitorNodeDbServiceProxy.class, MonitorNodeDbPageController.class);
     }
 }

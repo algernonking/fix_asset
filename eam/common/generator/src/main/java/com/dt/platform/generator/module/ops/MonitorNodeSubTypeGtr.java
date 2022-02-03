@@ -1,24 +1,17 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.eam.Manufacturer;
-import com.dt.platform.domain.eam.meta.AssetMeta;
-import com.dt.platform.domain.eam.meta.MaintainerMeta;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.meta.MonitorNodeSubtypeMeta;
 import com.dt.platform.domain.ops.meta.MonitorNodeTypeMeta;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.ops.page.MonitorNodeSubtypePageController;
-import com.dt.platform.ops.page.MonitorNodeTypePageController;
-import com.dt.platform.proxy.eam.MaintainerServiceProxy;
-import com.dt.platform.proxy.ops.MonitorNodeSubtypeServiceProxy;
 import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class MonitoryNodeSubTypeGtr extends BaseCodeGenerator{
+public class MonitorNodeSubTypeGtr extends BaseCodeGenerator{
 
 
-    public MonitoryNodeSubTypeGtr() {
+    public MonitorNodeSubTypeGtr() {
         super(EAMTables.OPS_MONITOR_NODE_SUBTYPE.$TABLE,MONITOR_MENU_ID);
     }
 
@@ -61,7 +54,7 @@ public class MonitoryNodeSubTypeGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE).form().validate().required();
 
-        cfg.view().list().disableBatchDelete();
+        //cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
@@ -87,7 +80,7 @@ public class MonitoryNodeSubTypeGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        MonitoryNodeSubTypeGtr g=new MonitoryNodeSubTypeGtr();
+        MonitorNodeSubTypeGtr g=new MonitorNodeSubTypeGtr();
         //生成代码
         g.generateCode();
         //移除之前生成的菜单，视情况执行

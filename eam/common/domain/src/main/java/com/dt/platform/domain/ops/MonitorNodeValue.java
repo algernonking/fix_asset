@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点数值
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:06:04
- * @sign C294AD387B4F20009D880480222B1543
+ * @since 2022-02-02 14:55:27
+ * @sign 3B450BEA2C8B1256E670D581A34D5555
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -41,6 +41,18 @@ public class MonitorNodeValue extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="节点" , notes = "节点")
 	private String nodeId;
+	
+	/**
+	 * 监控模版：监控模版
+	*/
+	@ApiModelProperty(required = false,value="监控模版" , notes = "监控模版")
+	private String monitorTplCode;
+	
+	/**
+	 * 指标：指标
+	*/
+	@ApiModelProperty(required = false,value="指标" , notes = "指标")
+	private String indicatorCode;
 	
 	/**
 	 * 主机名称：主机名称
@@ -181,10 +193,196 @@ public class MonitorNodeValue extends Entity {
 	private String info;
 	
 	/**
+	 * 标签1：标签1
+	*/
+	@ApiModelProperty(required = false,value="标签1" , notes = "标签1")
+	private String label1;
+	
+	/**
+	 * 标签2：标签2
+	*/
+	@ApiModelProperty(required = false,value="标签2" , notes = "标签2")
+	private String label2;
+	
+	/**
+	 * 标签3：标签3
+	*/
+	@ApiModelProperty(required = false,value="标签3" , notes = "标签3")
+	private String label3;
+	
+	/**
+	 * 编码1：编码1
+	*/
+	@ApiModelProperty(required = false,value="编码1" , notes = "编码1")
+	private String code1;
+	
+	/**
+	 * 编码2：编码2
+	*/
+	@ApiModelProperty(required = false,value="编码2" , notes = "编码2")
+	private String code2;
+	
+	/**
+	 * 编码3：编码3
+	*/
+	@ApiModelProperty(required = false,value="编码3" , notes = "编码3")
+	private String code3;
+	
+	/**
+	 * 数值1：数值1
+	*/
+	@ApiModelProperty(required = false,value="数值1" , notes = "数值1")
+	private BigDecimal valueNumber1;
+	
+	/**
+	 * 数值2：数值2
+	*/
+	@ApiModelProperty(required = false,value="数值2" , notes = "数值2")
+	private BigDecimal valueNumber2;
+	
+	/**
+	 * 数值3：数值3
+	*/
+	@ApiModelProperty(required = false,value="数值3" , notes = "数值3")
+	private BigDecimal valueNumber3;
+	
+	/**
+	 * 字符串1：字符串1
+	*/
+	@ApiModelProperty(required = false,value="字符串1" , notes = "字符串1")
+	private String valueStr1;
+	
+	/**
+	 * 字符串2：字符串2
+	*/
+	@ApiModelProperty(required = false,value="字符串2" , notes = "字符串2")
+	private String valueStr2;
+	
+	/**
+	 * 字符串3：字符串3
+	*/
+	@ApiModelProperty(required = false,value="字符串3" , notes = "字符串3")
+	private String valueStr3;
+	
+	/**
+	 * 整数1：整数1
+	*/
+	@ApiModelProperty(required = false,value="整数1" , notes = "整数1")
+	private String valueInt1;
+	
+	/**
+	 * 整数2：整数2
+	*/
+	@ApiModelProperty(required = false,value="整数2" , notes = "整数2")
+	private String valueInt2;
+	
+	/**
+	 * 整数3：整数3
+	*/
+	@ApiModelProperty(required = false,value="整数3" , notes = "整数3")
+	private String valueInt3;
+	
+	/**
+	 * 唯一标识：唯一标识
+	*/
+	@ApiModelProperty(required = false,value="唯一标识" , notes = "唯一标识")
+	private String uid;
+	
+	/**
 	 * 记录时间：记录时间
 	*/
 	@ApiModelProperty(required = false,value="记录时间" , notes = "记录时间")
 	private Date recordTime;
+	
+	/**
+	 * 标签列1：标签列1
+	*/
+	@ApiModelProperty(required = false,value="标签列1" , notes = "标签列1")
+	private String listLabel1;
+	
+	/**
+	 * 标签列2：标签列2
+	*/
+	@ApiModelProperty(required = false,value="标签列2" , notes = "标签列2")
+	private String listLabel2;
+	
+	/**
+	 * 标签列3：标签列3
+	*/
+	@ApiModelProperty(required = false,value="标签列3" , notes = "标签列3")
+	private String listLabel3;
+	
+	/**
+	 * 编码列1：编码列1
+	*/
+	@ApiModelProperty(required = false,value="编码列1" , notes = "编码列1")
+	private String listCode1;
+	
+	/**
+	 * 编码列2：编码列2
+	*/
+	@ApiModelProperty(required = false,value="编码列2" , notes = "编码列2")
+	private String listCode2;
+	
+	/**
+	 * 编码列3：编码列3
+	*/
+	@ApiModelProperty(required = false,value="编码列3" , notes = "编码列3")
+	private String listCode23;
+	
+	/**
+	 * 数值列1：数值列1
+	*/
+	@ApiModelProperty(required = false,value="数值列1" , notes = "数值列1")
+	private BigDecimal listValueNumber1;
+	
+	/**
+	 * 数值列2：数值列2
+	*/
+	@ApiModelProperty(required = false,value="数值列2" , notes = "数值列2")
+	private BigDecimal listValueNumber2;
+	
+	/**
+	 * 数值列3：数值列3
+	*/
+	@ApiModelProperty(required = false,value="数值列3" , notes = "数值列3")
+	private BigDecimal listValueNumber3;
+	
+	/**
+	 * 字符串列1：字符串列1
+	*/
+	@ApiModelProperty(required = false,value="字符串列1" , notes = "字符串列1")
+	private String listValueStr1;
+	
+	/**
+	 * 字符串列2：字符串列2
+	*/
+	@ApiModelProperty(required = false,value="字符串列2" , notes = "字符串列2")
+	private String listValueStr2;
+	
+	/**
+	 * 字符串列3：字符串列3
+	*/
+	@ApiModelProperty(required = false,value="字符串列3" , notes = "字符串列3")
+	private String listValueStr3;
+	
+	/**
+	 * 整数列1：整数列1
+	*/
+	@ApiModelProperty(required = false,value="整数列1" , notes = "整数列1")
+	private String listValueInt1;
+	
+	/**
+	 * 整数列2：整数列2
+	*/
+	@ApiModelProperty(required = false,value="整数列2" , notes = "整数列2")
+	private String listValueInt2;
+	
+	/**
+	 * 整数列3：整数列3
+	*/
+	@ApiModelProperty(required = false,value="整数列3" , notes = "整数列3")
+	private String listValueInt3;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -235,12 +433,6 @@ public class MonitorNodeValue extends Entity {
 	private Integer version;
 	
 	/**
-	 * 租户：租户
-	*/
-	@ApiModelProperty(required = false,value="租户" , notes = "租户")
-	private String tenantId;
-	
-	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -275,6 +467,44 @@ public class MonitorNodeValue extends Entity {
 	*/
 	public MonitorNodeValue setNodeId(String nodeId) {
 		this.nodeId=nodeId;
+		return this;
+	}
+	
+	/**
+	 * 获得 监控模版<br>
+	 * 监控模版
+	 * @return 监控模版
+	*/
+	public String getMonitorTplCode() {
+		return monitorTplCode;
+	}
+	
+	/**
+	 * 设置 监控模版
+	 * @param monitorTplCode 监控模版
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setMonitorTplCode(String monitorTplCode) {
+		this.monitorTplCode=monitorTplCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 指标<br>
+	 * 指标
+	 * @return 指标
+	*/
+	public String getIndicatorCode() {
+		return indicatorCode;
+	}
+	
+	/**
+	 * 设置 指标
+	 * @param indicatorCode 指标
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setIndicatorCode(String indicatorCode) {
+		this.indicatorCode=indicatorCode;
 		return this;
 	}
 	
@@ -716,6 +946,310 @@ public class MonitorNodeValue extends Entity {
 	}
 	
 	/**
+	 * 获得 标签1<br>
+	 * 标签1
+	 * @return 标签1
+	*/
+	public String getLabel1() {
+		return label1;
+	}
+	
+	/**
+	 * 设置 标签1
+	 * @param label1 标签1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setLabel1(String label1) {
+		this.label1=label1;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签2<br>
+	 * 标签2
+	 * @return 标签2
+	*/
+	public String getLabel2() {
+		return label2;
+	}
+	
+	/**
+	 * 设置 标签2
+	 * @param label2 标签2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setLabel2(String label2) {
+		this.label2=label2;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签3<br>
+	 * 标签3
+	 * @return 标签3
+	*/
+	public String getLabel3() {
+		return label3;
+	}
+	
+	/**
+	 * 设置 标签3
+	 * @param label3 标签3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setLabel3(String label3) {
+		this.label3=label3;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码1<br>
+	 * 编码1
+	 * @return 编码1
+	*/
+	public String getCode1() {
+		return code1;
+	}
+	
+	/**
+	 * 设置 编码1
+	 * @param code1 编码1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setCode1(String code1) {
+		this.code1=code1;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码2<br>
+	 * 编码2
+	 * @return 编码2
+	*/
+	public String getCode2() {
+		return code2;
+	}
+	
+	/**
+	 * 设置 编码2
+	 * @param code2 编码2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setCode2(String code2) {
+		this.code2=code2;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码3<br>
+	 * 编码3
+	 * @return 编码3
+	*/
+	public String getCode3() {
+		return code3;
+	}
+	
+	/**
+	 * 设置 编码3
+	 * @param code3 编码3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setCode3(String code3) {
+		this.code3=code3;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值1<br>
+	 * 数值1
+	 * @return 数值1
+	*/
+	public BigDecimal getValueNumber1() {
+		return valueNumber1;
+	}
+	
+	/**
+	 * 设置 数值1
+	 * @param valueNumber1 数值1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueNumber1(BigDecimal valueNumber1) {
+		this.valueNumber1=valueNumber1;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值2<br>
+	 * 数值2
+	 * @return 数值2
+	*/
+	public BigDecimal getValueNumber2() {
+		return valueNumber2;
+	}
+	
+	/**
+	 * 设置 数值2
+	 * @param valueNumber2 数值2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueNumber2(BigDecimal valueNumber2) {
+		this.valueNumber2=valueNumber2;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值3<br>
+	 * 数值3
+	 * @return 数值3
+	*/
+	public BigDecimal getValueNumber3() {
+		return valueNumber3;
+	}
+	
+	/**
+	 * 设置 数值3
+	 * @param valueNumber3 数值3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueNumber3(BigDecimal valueNumber3) {
+		this.valueNumber3=valueNumber3;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串1<br>
+	 * 字符串1
+	 * @return 字符串1
+	*/
+	public String getValueStr1() {
+		return valueStr1;
+	}
+	
+	/**
+	 * 设置 字符串1
+	 * @param valueStr1 字符串1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueStr1(String valueStr1) {
+		this.valueStr1=valueStr1;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串2<br>
+	 * 字符串2
+	 * @return 字符串2
+	*/
+	public String getValueStr2() {
+		return valueStr2;
+	}
+	
+	/**
+	 * 设置 字符串2
+	 * @param valueStr2 字符串2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueStr2(String valueStr2) {
+		this.valueStr2=valueStr2;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串3<br>
+	 * 字符串3
+	 * @return 字符串3
+	*/
+	public String getValueStr3() {
+		return valueStr3;
+	}
+	
+	/**
+	 * 设置 字符串3
+	 * @param valueStr3 字符串3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueStr3(String valueStr3) {
+		this.valueStr3=valueStr3;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数1<br>
+	 * 整数1
+	 * @return 整数1
+	*/
+	public String getValueInt1() {
+		return valueInt1;
+	}
+	
+	/**
+	 * 设置 整数1
+	 * @param valueInt1 整数1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueInt1(String valueInt1) {
+		this.valueInt1=valueInt1;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数2<br>
+	 * 整数2
+	 * @return 整数2
+	*/
+	public String getValueInt2() {
+		return valueInt2;
+	}
+	
+	/**
+	 * 设置 整数2
+	 * @param valueInt2 整数2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueInt2(String valueInt2) {
+		this.valueInt2=valueInt2;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数3<br>
+	 * 整数3
+	 * @return 整数3
+	*/
+	public String getValueInt3() {
+		return valueInt3;
+	}
+	
+	/**
+	 * 设置 整数3
+	 * @param valueInt3 整数3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setValueInt3(String valueInt3) {
+		this.valueInt3=valueInt3;
+		return this;
+	}
+	
+	/**
+	 * 获得 唯一标识<br>
+	 * 唯一标识
+	 * @return 唯一标识
+	*/
+	public String getUid() {
+		return uid;
+	}
+	
+	/**
+	 * 设置 唯一标识
+	 * @param uid 唯一标识
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setUid(String uid) {
+		this.uid=uid;
+		return this;
+	}
+	
+	/**
 	 * 获得 记录时间<br>
 	 * 记录时间
 	 * @return 记录时间
@@ -731,6 +1265,291 @@ public class MonitorNodeValue extends Entity {
 	*/
 	public MonitorNodeValue setRecordTime(Date recordTime) {
 		this.recordTime=recordTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签列1<br>
+	 * 标签列1
+	 * @return 标签列1
+	*/
+	public String getListLabel1() {
+		return listLabel1;
+	}
+	
+	/**
+	 * 设置 标签列1
+	 * @param listLabel1 标签列1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListLabel1(String listLabel1) {
+		this.listLabel1=listLabel1;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签列2<br>
+	 * 标签列2
+	 * @return 标签列2
+	*/
+	public String getListLabel2() {
+		return listLabel2;
+	}
+	
+	/**
+	 * 设置 标签列2
+	 * @param listLabel2 标签列2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListLabel2(String listLabel2) {
+		this.listLabel2=listLabel2;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签列3<br>
+	 * 标签列3
+	 * @return 标签列3
+	*/
+	public String getListLabel3() {
+		return listLabel3;
+	}
+	
+	/**
+	 * 设置 标签列3
+	 * @param listLabel3 标签列3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListLabel3(String listLabel3) {
+		this.listLabel3=listLabel3;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码列1<br>
+	 * 编码列1
+	 * @return 编码列1
+	*/
+	public String getListCode1() {
+		return listCode1;
+	}
+	
+	/**
+	 * 设置 编码列1
+	 * @param listCode1 编码列1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListCode1(String listCode1) {
+		this.listCode1=listCode1;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码列2<br>
+	 * 编码列2
+	 * @return 编码列2
+	*/
+	public String getListCode2() {
+		return listCode2;
+	}
+	
+	/**
+	 * 设置 编码列2
+	 * @param listCode2 编码列2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListCode2(String listCode2) {
+		this.listCode2=listCode2;
+		return this;
+	}
+	
+	/**
+	 * 获得 编码列3<br>
+	 * 编码列3
+	 * @return 编码列3
+	*/
+	public String getListCode23() {
+		return listCode23;
+	}
+	
+	/**
+	 * 设置 编码列3
+	 * @param listCode23 编码列3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListCode23(String listCode23) {
+		this.listCode23=listCode23;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值列1<br>
+	 * 数值列1
+	 * @return 数值列1
+	*/
+	public BigDecimal getListValueNumber1() {
+		return listValueNumber1;
+	}
+	
+	/**
+	 * 设置 数值列1
+	 * @param listValueNumber1 数值列1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueNumber1(BigDecimal listValueNumber1) {
+		this.listValueNumber1=listValueNumber1;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值列2<br>
+	 * 数值列2
+	 * @return 数值列2
+	*/
+	public BigDecimal getListValueNumber2() {
+		return listValueNumber2;
+	}
+	
+	/**
+	 * 设置 数值列2
+	 * @param listValueNumber2 数值列2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueNumber2(BigDecimal listValueNumber2) {
+		this.listValueNumber2=listValueNumber2;
+		return this;
+	}
+	
+	/**
+	 * 获得 数值列3<br>
+	 * 数值列3
+	 * @return 数值列3
+	*/
+	public BigDecimal getListValueNumber3() {
+		return listValueNumber3;
+	}
+	
+	/**
+	 * 设置 数值列3
+	 * @param listValueNumber3 数值列3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueNumber3(BigDecimal listValueNumber3) {
+		this.listValueNumber3=listValueNumber3;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串列1<br>
+	 * 字符串列1
+	 * @return 字符串列1
+	*/
+	public String getListValueStr1() {
+		return listValueStr1;
+	}
+	
+	/**
+	 * 设置 字符串列1
+	 * @param listValueStr1 字符串列1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueStr1(String listValueStr1) {
+		this.listValueStr1=listValueStr1;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串列2<br>
+	 * 字符串列2
+	 * @return 字符串列2
+	*/
+	public String getListValueStr2() {
+		return listValueStr2;
+	}
+	
+	/**
+	 * 设置 字符串列2
+	 * @param listValueStr2 字符串列2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueStr2(String listValueStr2) {
+		this.listValueStr2=listValueStr2;
+		return this;
+	}
+	
+	/**
+	 * 获得 字符串列3<br>
+	 * 字符串列3
+	 * @return 字符串列3
+	*/
+	public String getListValueStr3() {
+		return listValueStr3;
+	}
+	
+	/**
+	 * 设置 字符串列3
+	 * @param listValueStr3 字符串列3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueStr3(String listValueStr3) {
+		this.listValueStr3=listValueStr3;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数列1<br>
+	 * 整数列1
+	 * @return 整数列1
+	*/
+	public String getListValueInt1() {
+		return listValueInt1;
+	}
+	
+	/**
+	 * 设置 整数列1
+	 * @param listValueInt1 整数列1
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueInt1(String listValueInt1) {
+		this.listValueInt1=listValueInt1;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数列2<br>
+	 * 整数列2
+	 * @return 整数列2
+	*/
+	public String getListValueInt2() {
+		return listValueInt2;
+	}
+	
+	/**
+	 * 设置 整数列2
+	 * @param listValueInt2 整数列2
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueInt2(String listValueInt2) {
+		this.listValueInt2=listValueInt2;
+		return this;
+	}
+	
+	/**
+	 * 获得 整数列3<br>
+	 * 整数列3
+	 * @return 整数列3
+	*/
+	public String getListValueInt3() {
+		return listValueInt3;
+	}
+	
+	/**
+	 * 设置 整数列3
+	 * @param listValueInt3 整数列3
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setListValueInt3(String listValueInt3) {
+		this.listValueInt3=listValueInt3;
 		return this;
 	}
 	
@@ -883,25 +1702,6 @@ public class MonitorNodeValue extends Entity {
 	*/
 	public MonitorNodeValue setVersion(Integer version) {
 		this.version=version;
-		return this;
-	}
-	
-	/**
-	 * 获得 租户<br>
-	 * 租户
-	 * @return 租户
-	*/
-	public String getTenantId() {
-		return tenantId;
-	}
-	
-	/**
-	 * 设置 租户
-	 * @param tenantId 租户
-	 * @return 当前对象
-	*/
-	public MonitorNodeValue setTenantId(String tenantId) {
-		this.tenantId=tenantId;
 		return this;
 	}
 

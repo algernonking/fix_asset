@@ -3,8 +3,7 @@ package com.dt.platform.relation.modules;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.knowledgebase.meta.ContentMeta;
-import com.dt.platform.domain.ops.meta.MonitorNodeMeta;
-import com.dt.platform.domain.ops.meta.MonitorNodeSubtypeMeta;
+import com.dt.platform.domain.ops.meta.*;
 import com.github.foxnic.dao.relation.RelationManager;
 import org.github.foxnic.web.constants.db.FoxnicWeb;
 
@@ -14,9 +13,12 @@ public class MonitorRelationManager extends RelationManager {
         this.setupRelations();
         this.setupProperties();
         this.setupContent();
-
         this.monitorNodeSubType();
         this.monitorNode();
+
+        this.monitorTpl();
+        this.monitorTplIndicator();
+
     }
 
     public void setupProperties() {
@@ -31,6 +33,8 @@ public class MonitorRelationManager extends RelationManager {
 
     }
 
+
+
     private void monitorNode() {
         this.property(MonitorNodeMeta.MONITOR_NODE_TYPE_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.TYPE).join(EAMTables.OPS_MONITOR_NODE_TYPE.CODE);
@@ -42,9 +46,26 @@ public class MonitorRelationManager extends RelationManager {
         this.property(MonitorNodeMeta.MONITOR_NODE_HOST_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_HOST.NODE_ID);
 
+        this.property(MonitorNodeMeta.MONITOR_NODE_DB_PROP)
+                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_DB.NODE_ID);
 
         this.property(MonitorNodeMeta.MONITOR_NODE_VALUE_LIST_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_VALUE.NODE_ID);
+
+        this.property(MonitorNodeMeta.MONITOR_NODE_LIST_VALUE_LIST_PROP)
+                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_LIST_VALUE.NODE_ID);
+    }
+
+    private void monitorTplIndicator(){
+        this.property(MonitorTplIndicatorMeta.TPL_PROP)
+                .using(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE).join(EAMTables.OPS_MONITOR_TPL.CODE);
+
+    }
+
+
+    private void monitorTpl() {
+        this.property(MonitorTplMeta.TPL_TYPE_PROP)
+                .using(EAMTables.OPS_MONITOR_TPL.TYPE).join(EAMTables.OPS_MONITOR_NODE_TYPE.CODE);
     }
 
     private void monitorNodeSubType() {

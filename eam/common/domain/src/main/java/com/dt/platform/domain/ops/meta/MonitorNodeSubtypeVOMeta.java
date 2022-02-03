@@ -11,7 +11,7 @@ import com.dt.platform.domain.ops.MonitorNodeType;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 05:59:09
+ * @since 2022-02-02 14:55:26
  * @sign 88CB2723B29A3CFE06DB5DAAC8DB33F6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -239,16 +239,6 @@ public class MonitorNodeSubtypeVOMeta extends MonitorNodeSubtypeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeSubtypeVO,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeSubtypeVO.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final String TENANT_ID="tenantId";
-	
-	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeSubtypeVO,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeSubtypeVO.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
-	
-	/**
 	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
 	*/
 	public static final String MONITOR_NODE_TYPE="monitorNodeType";
@@ -261,7 +251,7 @@ public class MonitorNodeSubtypeVOMeta extends MonitorNodeSubtypeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , NAME , CODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , MONITOR_NODE_TYPE };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , NAME , CODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MONITOR_NODE_TYPE };
 	
 	/**
 	 * 代理类
@@ -510,17 +500,6 @@ public class MonitorNodeSubtypeVOMeta extends MonitorNodeSubtypeMeta {
 		public MonitorNodeSubtype setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
-			return this;
-		}
-		
-		/**
-		 * 设置 租户
-		 * @param tenantId 租户
-		 * @return 当前对象
-		*/
-		public MonitorNodeSubtype setTenantId(String tenantId) {
-			super.change(TENANT_ID,super.getTenantId(),tenantId);
-			super.setTenantId(tenantId);
 			return this;
 		}
 		

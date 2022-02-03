@@ -2,22 +2,17 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.ops.page.MonitorNodeValuePageController;
-import com.dt.platform.proxy.ops.MonitorNodeValueServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class MonitoryNodeValueGtr extends BaseCodeGenerator{
+public class MonitorNodeValueGtr extends BaseCodeGenerator{
 
 
-    public MonitoryNodeValueGtr() {
+    public MonitorNodeValueGtr() {
         super(EAMTables.OPS_MONITOR_NODE_VALUE.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
-
-
-
 
 
         cfg.view().search().inputLayout(
@@ -33,16 +28,10 @@ public class MonitoryNodeValueGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.INFO).search().fuzzySearch();
 
-
-
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).table().disable(true);
 
-
-
-
-
-        cfg.view().list().disableBatchDelete();
+       // cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
@@ -65,7 +54,7 @@ public class MonitoryNodeValueGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        MonitoryNodeValueGtr g=new MonitoryNodeValueGtr();
+        MonitorNodeValueGtr g=new MonitorNodeValueGtr();
         //生成代码
         g.generateCode();
         //移除之前生成的菜单，视情况执行

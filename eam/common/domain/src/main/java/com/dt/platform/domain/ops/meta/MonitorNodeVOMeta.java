@@ -8,13 +8,15 @@ import java.util.Date;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.MonitorNodeSubtype;
 import com.dt.platform.domain.ops.MonitorNodeHost;
+import com.dt.platform.domain.ops.MonitorNodeDb;
 import com.dt.platform.domain.ops.MonitorNodeValue;
+import com.dt.platform.domain.ops.MonitorNodeListValue;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:56
+ * @since 2022-02-02 14:55:24
  * @sign 13F4166DF1AF357762C535703A996EE5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -192,14 +194,24 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> NODE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,NODE_TYPE, java.lang.String.class, "类型", "类型", java.lang.String.class, null);
 	
 	/**
-	 * 状态 , 类型: java.lang.String
+	 * 是否启用 , 类型: java.lang.String
+	*/
+	public static final String NODE_ENABLED="nodeEnabled";
+	
+	/**
+	 * 是否启用 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> NODE_ENABLED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,NODE_ENABLED, java.lang.String.class, "是否启用", "是否启用", java.lang.String.class, null);
+	
+	/**
+	 * 监控状态 , 类型: java.lang.String
 	*/
 	public static final String STATUS="status";
 	
 	/**
-	 * 状态 , 类型: java.lang.String
+	 * 监控状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,STATUS, java.lang.String.class, "监控状态", "监控状态", java.lang.String.class, null);
 	
 	/**
 	 * 监控方式 , 类型: java.lang.String
@@ -302,16 +314,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final String TENANT_ID="tenantId";
-	
-	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
-	
-	/**
 	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
 	*/
 	public static final String MONITOR_NODE_TYPE="monitorNodeType";
@@ -342,6 +344,16 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeHost> MONITOR_NODE_HOST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_HOST, com.dt.platform.domain.ops.MonitorNodeHost.class, "主机信息", "主机信息", com.dt.platform.domain.ops.MonitorNodeHost.class, null);
 	
 	/**
+	 * 数据库信息 , 类型: com.dt.platform.domain.ops.MonitorNodeDb
+	*/
+	public static final String MONITOR_NODE_DB="monitorNodeDb";
+	
+	/**
+	 * 数据库信息 , 类型: com.dt.platform.domain.ops.MonitorNodeDb
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeDb> MONITOR_NODE_DB_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_DB, com.dt.platform.domain.ops.MonitorNodeDb.class, "数据库信息", "数据库信息", com.dt.platform.domain.ops.MonitorNodeDb.class, null);
+	
+	/**
 	 * 数值信息 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorNodeValue
 	*/
 	public static final String MONITOR_NODE_VALUE_LIST="monitorNodeValueList";
@@ -352,9 +364,19 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeValue> MONITOR_NODE_VALUE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_VALUE_LIST, java.util.List.class, "数值信息", "数值信息", com.dt.platform.domain.ops.MonitorNodeValue.class, null);
 	
 	/**
+	 * 列表数值信息 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorNodeListValue
+	*/
+	public static final String MONITOR_NODE_LIST_VALUE_LIST="monitorNodeListValueList";
+	
+	/**
+	 * 列表数值信息 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorNodeListValue
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeListValue> MONITOR_NODE_LIST_VALUE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_LIST_VALUE_LIST, java.util.List.class, "列表数值信息", "列表数值信息", com.dt.platform.domain.ops.MonitorNodeListValue.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , STATUS , MONITOR_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_NODE_HOST , MONITOR_NODE_VALUE_LIST };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , MONITOR_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_NODE_HOST , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST , MONITOR_NODE_LIST_VALUE_LIST };
 	
 	/**
 	 * 代理类
@@ -552,8 +574,19 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 状态
-		 * @param status 状态
+		 * 设置 是否启用
+		 * @param nodeEnabled 是否启用
+		 * @return 当前对象
+		*/
+		public MonitorNode setNodeEnabled(String nodeEnabled) {
+			super.change(NODE_ENABLED,super.getNodeEnabled(),nodeEnabled);
+			super.setNodeEnabled(nodeEnabled);
+			return this;
+		}
+		
+		/**
+		 * 设置 监控状态
+		 * @param status 监控状态
 		 * @return 当前对象
 		*/
 		public MonitorNode setStatus(String status) {
@@ -673,17 +706,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 租户
-		 * @param tenantId 租户
-		 * @return 当前对象
-		*/
-		public MonitorNode setTenantId(String tenantId) {
-			super.change(TENANT_ID,super.getTenantId(),tenantId);
-			super.setTenantId(tenantId);
-			return this;
-		}
-		
-		/**
 		 * 设置 节点类型
 		 * @param monitorNodeType 节点类型
 		 * @return 当前对象
@@ -717,6 +739,17 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
+		 * 设置 数据库信息
+		 * @param monitorNodeDb 数据库信息
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorNodeDb(MonitorNodeDb monitorNodeDb) {
+			super.change(MONITOR_NODE_DB,super.getMonitorNodeDb(),monitorNodeDb);
+			super.setMonitorNodeDb(monitorNodeDb);
+			return this;
+		}
+		
+		/**
 		 * 设置 数值信息
 		 * @param monitorNodeValueList 数值信息
 		 * @return 当前对象
@@ -724,6 +757,17 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		public MonitorNode setMonitorNodeValueList(List<MonitorNodeValue> monitorNodeValueList) {
 			super.change(MONITOR_NODE_VALUE_LIST,super.getMonitorNodeValueList(),monitorNodeValueList);
 			super.setMonitorNodeValueList(monitorNodeValueList);
+			return this;
+		}
+		
+		/**
+		 * 设置 列表数值信息
+		 * @param monitorNodeListValueList 列表数值信息
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorNodeListValueList(List<MonitorNodeListValue> monitorNodeListValueList) {
+			super.change(MONITOR_NODE_LIST_VALUE_LIST,super.getMonitorNodeListValueList(),monitorNodeListValueList);
+			super.setMonitorNodeListValueList(monitorNodeListValueList);
 			return this;
 		}
 	}

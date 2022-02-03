@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:56
+ * @since 2022-02-02 14:55:24
  */
  -->
  <!DOCTYPE html>
@@ -49,7 +49,8 @@
                     </div>
                     <!-- 可见主机名 , nodeNameShow ,typeName=text_input, isHideInSearch=true -->
                     <!-- 类型 , nodeType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 是否启用 , nodeEnabled ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 监控状态 , status ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控方式 , monitorMethod ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 主机名 , nodeName ,typeName=text_input, isHideInSearch=false -->
@@ -86,6 +87,7 @@
 <script type="text/html" id="toolbarTemplate">
     <div class="layui-btn-container">
         <button th:if="${perm.checkAuth('ops_monitor_node:create')}" id="add-button" class="layui-btn icon-btn layui-btn-sm create-new-button " lay-event="create"><i class="layui-icon">&#xe654;</i><span th:text="${lang.translate('新建')}">新建</span></button>
+        <button th:if="${perm.checkAuth('ops_monitor_node:delete-by-ids')}" id="delete-button" class="layui-btn icon-btn layui-btn-danger layui-btn-sm batch-delete-button " lay-event="batch-del"><i class="layui-icon">&#xe67e;</i><span th:text="${lang.translate('删除')}">删除</span></button>
     </div>
 </script>
 

@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 节点 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:41:56
+ * @since 2022-02-02 14:55:24
 */
 
 public interface IMonitorNodeService extends ISuperService<MonitorNode> {

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-31 06:06:04
+ * @since 2022-02-02 14:55:28
  * @sign 2D5A5C66E2287DC0F698A37BD22A8975
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -127,6 +127,26 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	 * 节点 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> NODE_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,NODE_ID, java.lang.String.class, "节点", "节点", java.lang.String.class, null);
+	
+	/**
+	 * 监控模版 , 类型: java.lang.String
+	*/
+	public static final String MONITOR_TPL_CODE="monitorTplCode";
+	
+	/**
+	 * 监控模版 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> MONITOR_TPL_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,MONITOR_TPL_CODE, java.lang.String.class, "监控模版", "监控模版", java.lang.String.class, null);
+	
+	/**
+	 * 指标 , 类型: java.lang.String
+	*/
+	public static final String INDICATOR_CODE="indicatorCode";
+	
+	/**
+	 * 指标 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> INDICATOR_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,INDICATOR_CODE, java.lang.String.class, "指标", "指标", java.lang.String.class, null);
 	
 	/**
 	 * 主机名称 , 类型: java.util.Date
@@ -359,6 +379,166 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> INFO_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,INFO, java.lang.String.class, "信息", "信息", java.lang.String.class, null);
 	
 	/**
+	 * 标签1 , 类型: java.lang.String
+	*/
+	public static final String LABEL1="label1";
+	
+	/**
+	 * 标签1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LABEL1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LABEL1, java.lang.String.class, "标签1", "标签1", java.lang.String.class, null);
+	
+	/**
+	 * 标签2 , 类型: java.lang.String
+	*/
+	public static final String LABEL2="label2";
+	
+	/**
+	 * 标签2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LABEL2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LABEL2, java.lang.String.class, "标签2", "标签2", java.lang.String.class, null);
+	
+	/**
+	 * 标签3 , 类型: java.lang.String
+	*/
+	public static final String LABEL3="label3";
+	
+	/**
+	 * 标签3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LABEL3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LABEL3, java.lang.String.class, "标签3", "标签3", java.lang.String.class, null);
+	
+	/**
+	 * 编码1 , 类型: java.lang.String
+	*/
+	public static final String CODE1="code1";
+	
+	/**
+	 * 编码1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> CODE1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CODE1, java.lang.String.class, "编码1", "编码1", java.lang.String.class, null);
+	
+	/**
+	 * 编码2 , 类型: java.lang.String
+	*/
+	public static final String CODE2="code2";
+	
+	/**
+	 * 编码2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> CODE2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CODE2, java.lang.String.class, "编码2", "编码2", java.lang.String.class, null);
+	
+	/**
+	 * 编码3 , 类型: java.lang.String
+	*/
+	public static final String CODE3="code3";
+	
+	/**
+	 * 编码3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> CODE3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CODE3, java.lang.String.class, "编码3", "编码3", java.lang.String.class, null);
+	
+	/**
+	 * 数值1 , 类型: java.math.BigDecimal
+	*/
+	public static final String VALUE_NUMBER1="valueNumber1";
+	
+	/**
+	 * 数值1 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> VALUE_NUMBER1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_NUMBER1, java.math.BigDecimal.class, "数值1", "数值1", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 数值2 , 类型: java.math.BigDecimal
+	*/
+	public static final String VALUE_NUMBER2="valueNumber2";
+	
+	/**
+	 * 数值2 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> VALUE_NUMBER2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_NUMBER2, java.math.BigDecimal.class, "数值2", "数值2", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 数值3 , 类型: java.math.BigDecimal
+	*/
+	public static final String VALUE_NUMBER3="valueNumber3";
+	
+	/**
+	 * 数值3 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> VALUE_NUMBER3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_NUMBER3, java.math.BigDecimal.class, "数值3", "数值3", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 字符串1 , 类型: java.lang.String
+	*/
+	public static final String VALUE_STR1="valueStr1";
+	
+	/**
+	 * 字符串1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_STR1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_STR1, java.lang.String.class, "字符串1", "字符串1", java.lang.String.class, null);
+	
+	/**
+	 * 字符串2 , 类型: java.lang.String
+	*/
+	public static final String VALUE_STR2="valueStr2";
+	
+	/**
+	 * 字符串2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_STR2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_STR2, java.lang.String.class, "字符串2", "字符串2", java.lang.String.class, null);
+	
+	/**
+	 * 字符串3 , 类型: java.lang.String
+	*/
+	public static final String VALUE_STR3="valueStr3";
+	
+	/**
+	 * 字符串3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_STR3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_STR3, java.lang.String.class, "字符串3", "字符串3", java.lang.String.class, null);
+	
+	/**
+	 * 整数1 , 类型: java.lang.String
+	*/
+	public static final String VALUE_INT1="valueInt1";
+	
+	/**
+	 * 整数1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT1, java.lang.String.class, "整数1", "整数1", java.lang.String.class, null);
+	
+	/**
+	 * 整数2 , 类型: java.lang.String
+	*/
+	public static final String VALUE_INT2="valueInt2";
+	
+	/**
+	 * 整数2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT2, java.lang.String.class, "整数2", "整数2", java.lang.String.class, null);
+	
+	/**
+	 * 整数3 , 类型: java.lang.String
+	*/
+	public static final String VALUE_INT3="valueInt3";
+	
+	/**
+	 * 整数3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT3, java.lang.String.class, "整数3", "整数3", java.lang.String.class, null);
+	
+	/**
+	 * 唯一标识 , 类型: java.lang.String
+	*/
+	public static final String UID="uid";
+	
+	/**
+	 * 唯一标识 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> UID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,UID, java.lang.String.class, "唯一标识", "唯一标识", java.lang.String.class, null);
+	
+	/**
 	 * 记录时间 , 类型: java.util.Date
 	*/
 	public static final String RECORD_TIME="recordTime";
@@ -367,6 +547,156 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	 * 记录时间 , 类型: java.util.Date
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.util.Date> RECORD_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,RECORD_TIME, java.util.Date.class, "记录时间", "记录时间", java.util.Date.class, null);
+	
+	/**
+	 * 标签列1 , 类型: java.lang.String
+	*/
+	public static final String LIST_LABEL1="listLabel1";
+	
+	/**
+	 * 标签列1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_LABEL1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_LABEL1, java.lang.String.class, "标签列1", "标签列1", java.lang.String.class, null);
+	
+	/**
+	 * 标签列2 , 类型: java.lang.String
+	*/
+	public static final String LIST_LABEL2="listLabel2";
+	
+	/**
+	 * 标签列2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_LABEL2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_LABEL2, java.lang.String.class, "标签列2", "标签列2", java.lang.String.class, null);
+	
+	/**
+	 * 标签列3 , 类型: java.lang.String
+	*/
+	public static final String LIST_LABEL3="listLabel3";
+	
+	/**
+	 * 标签列3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_LABEL3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_LABEL3, java.lang.String.class, "标签列3", "标签列3", java.lang.String.class, null);
+	
+	/**
+	 * 编码列1 , 类型: java.lang.String
+	*/
+	public static final String LIST_CODE1="listCode1";
+	
+	/**
+	 * 编码列1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_CODE1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_CODE1, java.lang.String.class, "编码列1", "编码列1", java.lang.String.class, null);
+	
+	/**
+	 * 编码列2 , 类型: java.lang.String
+	*/
+	public static final String LIST_CODE2="listCode2";
+	
+	/**
+	 * 编码列2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_CODE2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_CODE2, java.lang.String.class, "编码列2", "编码列2", java.lang.String.class, null);
+	
+	/**
+	 * 编码列3 , 类型: java.lang.String
+	*/
+	public static final String LIST_CODE23="listCode23";
+	
+	/**
+	 * 编码列3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_CODE23_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_CODE23, java.lang.String.class, "编码列3", "编码列3", java.lang.String.class, null);
+	
+	/**
+	 * 数值列1 , 类型: java.math.BigDecimal
+	*/
+	public static final String LIST_VALUE_NUMBER1="listValueNumber1";
+	
+	/**
+	 * 数值列1 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> LIST_VALUE_NUMBER1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_NUMBER1, java.math.BigDecimal.class, "数值列1", "数值列1", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 数值列2 , 类型: java.math.BigDecimal
+	*/
+	public static final String LIST_VALUE_NUMBER2="listValueNumber2";
+	
+	/**
+	 * 数值列2 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> LIST_VALUE_NUMBER2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_NUMBER2, java.math.BigDecimal.class, "数值列2", "数值列2", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 数值列3 , 类型: java.math.BigDecimal
+	*/
+	public static final String LIST_VALUE_NUMBER3="listValueNumber3";
+	
+	/**
+	 * 数值列3 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> LIST_VALUE_NUMBER3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_NUMBER3, java.math.BigDecimal.class, "数值列3", "数值列3", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 字符串列1 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_STR1="listValueStr1";
+	
+	/**
+	 * 字符串列1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_STR1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_STR1, java.lang.String.class, "字符串列1", "字符串列1", java.lang.String.class, null);
+	
+	/**
+	 * 字符串列2 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_STR2="listValueStr2";
+	
+	/**
+	 * 字符串列2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_STR2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_STR2, java.lang.String.class, "字符串列2", "字符串列2", java.lang.String.class, null);
+	
+	/**
+	 * 字符串列3 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_STR3="listValueStr3";
+	
+	/**
+	 * 字符串列3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_STR3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_STR3, java.lang.String.class, "字符串列3", "字符串列3", java.lang.String.class, null);
+	
+	/**
+	 * 整数列1 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_INT1="listValueInt1";
+	
+	/**
+	 * 整数列1 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_INT1, java.lang.String.class, "整数列1", "整数列1", java.lang.String.class, null);
+	
+	/**
+	 * 整数列2 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_INT2="listValueInt2";
+	
+	/**
+	 * 整数列2 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_INT2, java.lang.String.class, "整数列2", "整数列2", java.lang.String.class, null);
+	
+	/**
+	 * 整数列3 , 类型: java.lang.String
+	*/
+	public static final String LIST_VALUE_INT3="listValueInt3";
+	
+	/**
+	 * 整数列3 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_VALUE_INT3, java.lang.String.class, "整数列3", "整数列3", java.lang.String.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -449,19 +779,9 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final String TENANT_ID="tenantId";
-	
-	/**
-	 * 租户 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NODE_ID , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU , CPU_FRE , MEMORY , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , MEMORY_USED , VMEMORY_USED , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_USED , V_MEMORY_USED , INFO , RECORD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NODE_ID , MONITOR_TPL_CODE , INDICATOR_CODE , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU , CPU_FRE , MEMORY , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , MEMORY_USED , VMEMORY_USED , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , UID , RECORD_TIME , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE23 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -589,6 +909,28 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		public MonitorNodeValue setNodeId(String nodeId) {
 			super.change(NODE_ID,super.getNodeId(),nodeId);
 			super.setNodeId(nodeId);
+			return this;
+		}
+		
+		/**
+		 * 设置 监控模版
+		 * @param monitorTplCode 监控模版
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setMonitorTplCode(String monitorTplCode) {
+			super.change(MONITOR_TPL_CODE,super.getMonitorTplCode(),monitorTplCode);
+			super.setMonitorTplCode(monitorTplCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 指标
+		 * @param indicatorCode 指标
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setIndicatorCode(String indicatorCode) {
+			super.change(INDICATOR_CODE,super.getIndicatorCode(),indicatorCode);
+			super.setIndicatorCode(indicatorCode);
 			return this;
 		}
 		
@@ -846,6 +1188,182 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		}
 		
 		/**
+		 * 设置 标签1
+		 * @param label1 标签1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setLabel1(String label1) {
+			super.change(LABEL1,super.getLabel1(),label1);
+			super.setLabel1(label1);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签2
+		 * @param label2 标签2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setLabel2(String label2) {
+			super.change(LABEL2,super.getLabel2(),label2);
+			super.setLabel2(label2);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签3
+		 * @param label3 标签3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setLabel3(String label3) {
+			super.change(LABEL3,super.getLabel3(),label3);
+			super.setLabel3(label3);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码1
+		 * @param code1 编码1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setCode1(String code1) {
+			super.change(CODE1,super.getCode1(),code1);
+			super.setCode1(code1);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码2
+		 * @param code2 编码2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setCode2(String code2) {
+			super.change(CODE2,super.getCode2(),code2);
+			super.setCode2(code2);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码3
+		 * @param code3 编码3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setCode3(String code3) {
+			super.change(CODE3,super.getCode3(),code3);
+			super.setCode3(code3);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值1
+		 * @param valueNumber1 数值1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueNumber1(BigDecimal valueNumber1) {
+			super.change(VALUE_NUMBER1,super.getValueNumber1(),valueNumber1);
+			super.setValueNumber1(valueNumber1);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值2
+		 * @param valueNumber2 数值2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueNumber2(BigDecimal valueNumber2) {
+			super.change(VALUE_NUMBER2,super.getValueNumber2(),valueNumber2);
+			super.setValueNumber2(valueNumber2);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值3
+		 * @param valueNumber3 数值3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueNumber3(BigDecimal valueNumber3) {
+			super.change(VALUE_NUMBER3,super.getValueNumber3(),valueNumber3);
+			super.setValueNumber3(valueNumber3);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串1
+		 * @param valueStr1 字符串1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueStr1(String valueStr1) {
+			super.change(VALUE_STR1,super.getValueStr1(),valueStr1);
+			super.setValueStr1(valueStr1);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串2
+		 * @param valueStr2 字符串2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueStr2(String valueStr2) {
+			super.change(VALUE_STR2,super.getValueStr2(),valueStr2);
+			super.setValueStr2(valueStr2);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串3
+		 * @param valueStr3 字符串3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueStr3(String valueStr3) {
+			super.change(VALUE_STR3,super.getValueStr3(),valueStr3);
+			super.setValueStr3(valueStr3);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数1
+		 * @param valueInt1 整数1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueInt1(String valueInt1) {
+			super.change(VALUE_INT1,super.getValueInt1(),valueInt1);
+			super.setValueInt1(valueInt1);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数2
+		 * @param valueInt2 整数2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueInt2(String valueInt2) {
+			super.change(VALUE_INT2,super.getValueInt2(),valueInt2);
+			super.setValueInt2(valueInt2);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数3
+		 * @param valueInt3 整数3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setValueInt3(String valueInt3) {
+			super.change(VALUE_INT3,super.getValueInt3(),valueInt3);
+			super.setValueInt3(valueInt3);
+			return this;
+		}
+		
+		/**
+		 * 设置 唯一标识
+		 * @param uid 唯一标识
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setUid(String uid) {
+			super.change(UID,super.getUid(),uid);
+			super.setUid(uid);
+			return this;
+		}
+		
+		/**
 		 * 设置 记录时间
 		 * @param recordTime 记录时间
 		 * @return 当前对象
@@ -853,6 +1371,171 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		public MonitorNodeValue setRecordTime(Date recordTime) {
 			super.change(RECORD_TIME,super.getRecordTime(),recordTime);
 			super.setRecordTime(recordTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签列1
+		 * @param listLabel1 标签列1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListLabel1(String listLabel1) {
+			super.change(LIST_LABEL1,super.getListLabel1(),listLabel1);
+			super.setListLabel1(listLabel1);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签列2
+		 * @param listLabel2 标签列2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListLabel2(String listLabel2) {
+			super.change(LIST_LABEL2,super.getListLabel2(),listLabel2);
+			super.setListLabel2(listLabel2);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签列3
+		 * @param listLabel3 标签列3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListLabel3(String listLabel3) {
+			super.change(LIST_LABEL3,super.getListLabel3(),listLabel3);
+			super.setListLabel3(listLabel3);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码列1
+		 * @param listCode1 编码列1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListCode1(String listCode1) {
+			super.change(LIST_CODE1,super.getListCode1(),listCode1);
+			super.setListCode1(listCode1);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码列2
+		 * @param listCode2 编码列2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListCode2(String listCode2) {
+			super.change(LIST_CODE2,super.getListCode2(),listCode2);
+			super.setListCode2(listCode2);
+			return this;
+		}
+		
+		/**
+		 * 设置 编码列3
+		 * @param listCode23 编码列3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListCode23(String listCode23) {
+			super.change(LIST_CODE23,super.getListCode23(),listCode23);
+			super.setListCode23(listCode23);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值列1
+		 * @param listValueNumber1 数值列1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueNumber1(BigDecimal listValueNumber1) {
+			super.change(LIST_VALUE_NUMBER1,super.getListValueNumber1(),listValueNumber1);
+			super.setListValueNumber1(listValueNumber1);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值列2
+		 * @param listValueNumber2 数值列2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueNumber2(BigDecimal listValueNumber2) {
+			super.change(LIST_VALUE_NUMBER2,super.getListValueNumber2(),listValueNumber2);
+			super.setListValueNumber2(listValueNumber2);
+			return this;
+		}
+		
+		/**
+		 * 设置 数值列3
+		 * @param listValueNumber3 数值列3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueNumber3(BigDecimal listValueNumber3) {
+			super.change(LIST_VALUE_NUMBER3,super.getListValueNumber3(),listValueNumber3);
+			super.setListValueNumber3(listValueNumber3);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串列1
+		 * @param listValueStr1 字符串列1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueStr1(String listValueStr1) {
+			super.change(LIST_VALUE_STR1,super.getListValueStr1(),listValueStr1);
+			super.setListValueStr1(listValueStr1);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串列2
+		 * @param listValueStr2 字符串列2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueStr2(String listValueStr2) {
+			super.change(LIST_VALUE_STR2,super.getListValueStr2(),listValueStr2);
+			super.setListValueStr2(listValueStr2);
+			return this;
+		}
+		
+		/**
+		 * 设置 字符串列3
+		 * @param listValueStr3 字符串列3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueStr3(String listValueStr3) {
+			super.change(LIST_VALUE_STR3,super.getListValueStr3(),listValueStr3);
+			super.setListValueStr3(listValueStr3);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数列1
+		 * @param listValueInt1 整数列1
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueInt1(String listValueInt1) {
+			super.change(LIST_VALUE_INT1,super.getListValueInt1(),listValueInt1);
+			super.setListValueInt1(listValueInt1);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数列2
+		 * @param listValueInt2 整数列2
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueInt2(String listValueInt2) {
+			super.change(LIST_VALUE_INT2,super.getListValueInt2(),listValueInt2);
+			super.setListValueInt2(listValueInt2);
+			return this;
+		}
+		
+		/**
+		 * 设置 整数列3
+		 * @param listValueInt3 整数列3
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setListValueInt3(String listValueInt3) {
+			super.change(LIST_VALUE_INT3,super.getListValueInt3(),listValueInt3);
+			super.setListValueInt3(listValueInt3);
 			return this;
 		}
 		
@@ -941,17 +1624,6 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		public MonitorNodeValue setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
-			return this;
-		}
-		
-		/**
-		 * 设置 租户
-		 * @param tenantId 租户
-		 * @return 当前对象
-		*/
-		public MonitorNodeValue setTenantId(String tenantId) {
-			super.change(TENANT_ID,super.getTenantId(),tenantId);
-			super.setTenantId(tenantId);
 			return this;
 		}
 	}

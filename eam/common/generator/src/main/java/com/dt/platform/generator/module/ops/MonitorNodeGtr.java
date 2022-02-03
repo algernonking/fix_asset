@@ -1,19 +1,14 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
-import com.dt.platform.domain.ops.MonitorNodeHost;
-import com.dt.platform.domain.ops.MonitorNodeSubtype;
-import com.dt.platform.domain.ops.MonitorNodeType;
-import com.dt.platform.domain.ops.MonitorNodeValue;
+import com.dt.platform.domain.ops.*;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.ops.page.MonitorNodePageController;
-import com.dt.platform.proxy.ops.MonitorNodeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
-public class MonitoryNodeGtr extends BaseCodeGenerator{
+public class MonitorNodeGtr extends BaseCodeGenerator{
 
 
-    public MonitoryNodeGtr() {
+    public MonitorNodeGtr() {
         super(EAMTables.OPS_MONITOR_NODE.$TABLE,MONITOR_MENU_ID);
     }
 
@@ -25,7 +20,9 @@ public class MonitoryNodeGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeType.class,"monitorNodeType","节点类型","节点类型");
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeSubtype.class,"monitorNodeSubType","节点子类型","节点子类型");
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeHost.class,"monitorNodeHost","主机信息","主机信息");
+        cfg.getPoClassFile().addSimpleProperty(MonitorNodeDb.class,"monitorNodeDb","数据库信息","数据库信息");
         cfg.getPoClassFile().addListProperty(MonitorNodeValue.class,"monitorNodeValueList","数值信息","数值信息");
+        cfg.getPoClassFile().addListProperty(MonitorNodeListValue.class,"monitorNodeListValueList","列表数值信息","列表数值信息");
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -54,7 +51,7 @@ public class MonitoryNodeGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_IP).form().validate().required();
 
-        cfg.view().list().disableBatchDelete();
+       // cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
@@ -79,7 +76,7 @@ public class MonitoryNodeGtr extends BaseCodeGenerator{
     }
 
     public static void main(String[] args) throws Exception {
-        MonitoryNodeGtr g=new MonitoryNodeGtr();
+        MonitorNodeGtr g=new MonitorNodeGtr();
         //生成代码
         g.generateCode();
         //移除之前生成的菜单，视情况执行
