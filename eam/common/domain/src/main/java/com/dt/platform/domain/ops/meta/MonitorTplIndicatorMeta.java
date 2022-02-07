@@ -10,8 +10,8 @@ import com.dt.platform.domain.ops.MonitorTplIndicatorType;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:01
- * @sign C711DCE90AECC966FAA063EC75571215
+ * @since 2022-02-07 13:48:00
+ * @sign BDED3764D9BFA5A9547435047BBBA2E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -198,6 +198,16 @@ public class MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> COMMAND_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,COMMAND, java.lang.String.class, "命令", "命令", java.lang.String.class, null);
 	
 	/**
+	 * command_value , 类型: java.lang.String
+	*/
+	public static final String COMMAND_VALUE="commandValue";
+	
+	/**
+	 * command_value , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> COMMAND_VALUE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,COMMAND_VALUE, java.lang.String.class, "command_value", "command_value", java.lang.String.class, null);
+	
+	/**
 	 * 标签 , 类型: java.lang.String
 	*/
 	public static final String LABEL="label";
@@ -208,34 +218,14 @@ public class MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> LABEL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,LABEL, java.lang.String.class, "标签", "标签", java.lang.String.class, null);
 	
 	/**
-	 * snmp , 类型: java.lang.String
+	 * snmp元数据 , 类型: java.lang.String
 	*/
 	public static final String SNMP_OID="snmpOid";
 	
 	/**
-	 * snmp , 类型: java.lang.String
+	 * snmp元数据 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> SNMP_OID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,SNMP_OID, java.lang.String.class, "snmp", "snmp", java.lang.String.class, null);
-	
-	/**
-	 * snmp版本 , 类型: java.lang.String
-	*/
-	public static final String SNMP_VERSION="snmpVersion";
-	
-	/**
-	 * snmp版本 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> SNMP_VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,SNMP_VERSION, java.lang.String.class, "snmp版本", "snmp版本", java.lang.String.class, null);
-	
-	/**
-	 * snmp团体 , 类型: java.lang.String
-	*/
-	public static final String SNMP_COMMUNITY="snmpCommunity";
-	
-	/**
-	 * snmp团体 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> SNMP_COMMUNITY_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,SNMP_COMMUNITY, java.lang.String.class, "snmp团体", "snmp团体", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> SNMP_OID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,SNMP_OID, java.lang.String.class, "snmp元数据", "snmp元数据", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -246,6 +236,16 @@ public class MonitorTplIndicatorMeta {
 	 * 备注 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	
+	/**
+	 * 排序 , 类型: java.lang.Integer
+	*/
+	public static final String ITEM_SORT="itemSort";
+	
+	/**
+	 * 排序 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.Integer> ITEM_SORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,ITEM_SORT, java.lang.Integer.class, "排序", "排序", java.lang.Integer.class, null);
 	
 	/**
 	 * 创建人ID , 类型: java.lang.String
@@ -350,7 +350,7 @@ public class MonitorTplIndicatorMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , LABEL , SNMP_OID , SNMP_VERSION , SNMP_COMMUNITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , MONITOR_INDICATOR_TYPE };
+	public static final String[] $PROPS={ ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , LABEL , SNMP_OID , NOTES , ITEM_SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , MONITOR_INDICATOR_TYPE };
 	
 	/**
 	 * 代理类
@@ -559,6 +559,17 @@ public class MonitorTplIndicatorMeta {
 		}
 		
 		/**
+		 * 设置 command_value
+		 * @param commandValue command_value
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setCommandValue(String commandValue) {
+			super.change(COMMAND_VALUE,super.getCommandValue(),commandValue);
+			super.setCommandValue(commandValue);
+			return this;
+		}
+		
+		/**
 		 * 设置 标签
 		 * @param label 标签
 		 * @return 当前对象
@@ -570,35 +581,13 @@ public class MonitorTplIndicatorMeta {
 		}
 		
 		/**
-		 * 设置 snmp
-		 * @param snmpOid snmp
+		 * 设置 snmp元数据
+		 * @param snmpOid snmp元数据
 		 * @return 当前对象
 		*/
 		public MonitorTplIndicator setSnmpOid(String snmpOid) {
 			super.change(SNMP_OID,super.getSnmpOid(),snmpOid);
 			super.setSnmpOid(snmpOid);
-			return this;
-		}
-		
-		/**
-		 * 设置 snmp版本
-		 * @param snmpVersion snmp版本
-		 * @return 当前对象
-		*/
-		public MonitorTplIndicator setSnmpVersion(String snmpVersion) {
-			super.change(SNMP_VERSION,super.getSnmpVersion(),snmpVersion);
-			super.setSnmpVersion(snmpVersion);
-			return this;
-		}
-		
-		/**
-		 * 设置 snmp团体
-		 * @param snmpCommunity snmp团体
-		 * @return 当前对象
-		*/
-		public MonitorTplIndicator setSnmpCommunity(String snmpCommunity) {
-			super.change(SNMP_COMMUNITY,super.getSnmpCommunity(),snmpCommunity);
-			super.setSnmpCommunity(snmpCommunity);
 			return this;
 		}
 		
@@ -610,6 +599,17 @@ public class MonitorTplIndicatorMeta {
 		public MonitorTplIndicator setNotes(String notes) {
 			super.change(NOTES,super.getNotes(),notes);
 			super.setNotes(notes);
+			return this;
+		}
+		
+		/**
+		 * 设置 排序
+		 * @param itemSort 排序
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setItemSort(Integer itemSort) {
+			super.change(ITEM_SORT,super.getItemSort(),itemSort);
+			super.setItemSort(itemSort);
 			return this;
 		}
 		

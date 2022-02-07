@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 23:40:24
+ * @since 2022-02-07 12:08:17
  */
  -->
  <!DOCTYPE html>
@@ -40,29 +40,57 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 父节点 , pid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 类型 , type ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 子类型 , subType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- IP , nodeIp ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 节点子分类 , subType ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 节点分组 , groupId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('IP')}" class="search-label nodeIp-label">IP</span><span class="search-colon">:</span></div>
-                        <input id="nodeIp" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点分组')}" class="search-label groupId-label">节点分组</span><span class="search-colon">:</span></div>
+                        <div id="groupId" th:data="${'/service-ops/ops-monitor-node-group/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 可见主机名 , nodeNameShow ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 主机名 , nodeName ,typeName=text_input, isHideInSearch=true -->
                     <!-- 类型 , nodeType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 是否启用 , nodeEnabled ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 监控状态 , status ,typeName=text_input, isHideInSearch=true -->
-                    <!-- SSH端口 , sshPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- 凭证(SSH) , sshVoucherId ,typeName=select_box, isHideInSearch=true -->
+                    <!-- SSH端口 , sshPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- Agent端口 , agentPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- Snmp端口 , snmpPort ,typeName=number_input, isHideInSearch=true -->
+                    <!-- Snmp版本 , snmpVersion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- Snmp团体 , snmpCommunity ,typeName=text_input, isHideInSearch=true -->
                     <!-- Jmx端口 , jmxPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- Jmx端口 , impiPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- Jdbc地址 , jdbcUrl ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 主机名 , nodeName ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 监控状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('主机名')}" class="search-label nodeName-label">主机名</span><span class="search-colon">:</span></div>
-                        <input id="nodeName" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('监控状态')}" class="search-label status-label">监控状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- IP , nodeIp ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('IP')}" class="search-label nodeIp-label">IP</span><span class="search-colon">:</span></div>
+                        <input id="nodeIp" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 可见主机名 , nodeNameShow ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('可见主机名')}" class="search-label nodeNameShow-label">可见主机名</span><span class="search-colon">:</span></div>
+                        <input id="nodeNameShow" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 节点分类 , type ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点分类')}" class="search-label type-label">节点分类</span><span class="search-colon">:</span></div>
+                        <div id="type" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 是否启用 , nodeEnabled ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('是否启用')}" class="search-label nodeEnabled-label">是否启用</span><span class="search-colon">:</span></div>
+                        <div id="nodeEnabled" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 
 
@@ -76,7 +104,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 
@@ -112,6 +140,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
     var AUTH_PREFIX="ops_monitor_node";
 
 

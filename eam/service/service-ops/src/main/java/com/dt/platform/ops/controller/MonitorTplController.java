@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 监控模版 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:22
+ * @since 2022-02-07 13:14:35
 */
 
 @Api(tags = "监控模版")
@@ -70,7 +70,7 @@ public class MonitorTplController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
 	@ApiOperationSupport(order=1)
@@ -125,7 +125,7 @@ public class MonitorTplController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorTplVOMeta.PAGE_INDEX , MonitorTplVOMeta.PAGE_SIZE , MonitorTplVOMeta.SEARCH_FIELD , MonitorTplVOMeta.FUZZY_FIELD , MonitorTplVOMeta.SEARCH_VALUE , MonitorTplVOMeta.DIRTY_FIELDS , MonitorTplVOMeta.SORT_FIELD , MonitorTplVOMeta.SORT_TYPE , MonitorTplVOMeta.IDS } )
@@ -146,7 +146,7 @@ public class MonitorTplController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplVOMeta.PAGE_INDEX , MonitorTplVOMeta.PAGE_SIZE , MonitorTplVOMeta.SEARCH_FIELD , MonitorTplVOMeta.FUZZY_FIELD , MonitorTplVOMeta.SEARCH_VALUE , MonitorTplVOMeta.DIRTY_FIELDS , MonitorTplVOMeta.SORT_FIELD , MonitorTplVOMeta.SORT_TYPE , MonitorTplVOMeta.IDS } )
@@ -210,7 +210,7 @@ public class MonitorTplController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplVOMeta.PAGE_INDEX , MonitorTplVOMeta.PAGE_SIZE } )
@@ -232,7 +232,7 @@ public class MonitorTplController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
 	@ApiOperationSupport(order=8)

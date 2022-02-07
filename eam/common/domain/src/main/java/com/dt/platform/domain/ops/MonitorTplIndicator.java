@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版指标
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:01
- * @sign C711DCE90AECC966FAA063EC75571215
+ * @since 2022-02-07 13:48:00
+ * @sign BDED3764D9BFA5A9547435047BBBA2E1
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -138,34 +138,34 @@ public class MonitorTplIndicator extends Entity {
 	private String command;
 	
 	/**
+	 * command_value：command_value
+	*/
+	@ApiModelProperty(required = false,value="command_value" , notes = "command_value")
+	private String commandValue;
+	
+	/**
 	 * 标签：标签
 	*/
 	@ApiModelProperty(required = false,value="标签" , notes = "标签")
 	private String label;
 	
 	/**
-	 * snmp：snmp
+	 * snmp元数据：snmp元数据
 	*/
-	@ApiModelProperty(required = false,value="snmp" , notes = "snmp")
+	@ApiModelProperty(required = false,value="snmp元数据" , notes = "snmp元数据")
 	private String snmpOid;
-	
-	/**
-	 * snmp版本：snmp版本
-	*/
-	@ApiModelProperty(required = false,value="snmp版本" , notes = "snmp版本")
-	private String snmpVersion;
-	
-	/**
-	 * snmp团体：snmp团体
-	*/
-	@ApiModelProperty(required = false,value="snmp团体" , notes = "snmp团体")
-	private String snmpCommunity;
 	
 	/**
 	 * 备注：备注
 	*/
 	@ApiModelProperty(required = false,value="备注" , notes = "备注")
 	private String notes;
+	
+	/**
+	 * 排序：排序
+	*/
+	@ApiModelProperty(required = false,value="排序" , notes = "排序")
+	private Integer itemSort;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -570,6 +570,25 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
+	 * 获得 command_value<br>
+	 * command_value
+	 * @return command_value
+	*/
+	public String getCommandValue() {
+		return commandValue;
+	}
+	
+	/**
+	 * 设置 command_value
+	 * @param commandValue command_value
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setCommandValue(String commandValue) {
+		this.commandValue=commandValue;
+		return this;
+	}
+	
+	/**
 	 * 获得 标签<br>
 	 * 标签
 	 * @return 标签
@@ -589,59 +608,21 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
-	 * 获得 snmp<br>
-	 * snmp
-	 * @return snmp
+	 * 获得 snmp元数据<br>
+	 * snmp元数据
+	 * @return snmp元数据
 	*/
 	public String getSnmpOid() {
 		return snmpOid;
 	}
 	
 	/**
-	 * 设置 snmp
-	 * @param snmpOid snmp
+	 * 设置 snmp元数据
+	 * @param snmpOid snmp元数据
 	 * @return 当前对象
 	*/
 	public MonitorTplIndicator setSnmpOid(String snmpOid) {
 		this.snmpOid=snmpOid;
-		return this;
-	}
-	
-	/**
-	 * 获得 snmp版本<br>
-	 * snmp版本
-	 * @return snmp版本
-	*/
-	public String getSnmpVersion() {
-		return snmpVersion;
-	}
-	
-	/**
-	 * 设置 snmp版本
-	 * @param snmpVersion snmp版本
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setSnmpVersion(String snmpVersion) {
-		this.snmpVersion=snmpVersion;
-		return this;
-	}
-	
-	/**
-	 * 获得 snmp团体<br>
-	 * snmp团体
-	 * @return snmp团体
-	*/
-	public String getSnmpCommunity() {
-		return snmpCommunity;
-	}
-	
-	/**
-	 * 设置 snmp团体
-	 * @param snmpCommunity snmp团体
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setSnmpCommunity(String snmpCommunity) {
-		this.snmpCommunity=snmpCommunity;
 		return this;
 	}
 	
@@ -661,6 +642,25 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	public MonitorTplIndicator setNotes(String notes) {
 		this.notes=notes;
+		return this;
+	}
+	
+	/**
+	 * 获得 排序<br>
+	 * 排序
+	 * @return 排序
+	*/
+	public Integer getItemSort() {
+		return itemSort;
+	}
+	
+	/**
+	 * 设置 排序
+	 * @param itemSort 排序
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setItemSort(Integer itemSort) {
+		this.itemSort=itemSort;
 		return this;
 	}
 	

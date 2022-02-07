@@ -11,6 +11,7 @@ import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorTplPageController;
 import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
 import com.dt.platform.proxy.ops.MonitorTplServiceProxy;
+import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class MonitorTplGtr extends BaseCodeGenerator{
@@ -25,7 +26,6 @@ public class MonitorTplGtr extends BaseCodeGenerator{
 
         //node type
         cfg.getPoClassFile().addSimpleProperty(MonitorTplType.class,"tplType","节点模版类型","节点模版类型");
-
         cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicatorList","指标","指标");
 
         cfg.view().search().inputLayout(
@@ -51,17 +51,14 @@ public class MonitorTplGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.TYPE)
                 .basic().label("归类")
-                .form().selectBox().queryApi(MonitorNodeTypeServiceProxy.QUERY_PAGED_LIST)
+                .form().selectBox().queryApi(MonitorTplTypeServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
                 .valueField(MonitorTplTypeMeta.CODE).
                 textField(MonitorTplTypeMeta.NAME).
                 fillWith(MonitorTplMeta.TPL_TYPE).muliti(false);
 
 
-
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.CODE).form().validate().required();
-
-
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
@@ -90,8 +87,13 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         MonitorTplGtr g=new MonitorTplGtr();
         //生成代码
         g.generateCode();
+
         //移除之前生成的菜单，视情况执行
-        //g.removeByBatchId("478921035245158400");
-        //g.generateMenu(MonitorTplServiceProxy.class, MonitorTplPageController.class);
+       // g.generateMenu(MonitorTplServiceProxy.class, MonitorTplPageController.class);
+//        delete from sys_menu_resource where resource_id in (select id from sys_resourze where batch_id='541696318553194496');
+//        delete from sys_role_menu where menu_id in (select id from sys_menu where batch_id='541696318553194496');
+//        delete from sys_menu where batch_id='541696318553194496';
+//        delete from sys_resourze where batch_id='541696318553194496'
+
     }
 }

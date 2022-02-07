@@ -1,7 +1,7 @@
 /**
  * 监控凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:33
+ * @since 2022-02-07 12:13:34
  */
 
 
@@ -74,6 +74,7 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
+					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'account', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('账户') , templet: function (d) { return templet('account',d.account,d);}  }
 					,{ field: 'voucher', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('凭证') , templet: function (d) { return templet('voucher',d.voucher,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
@@ -115,6 +116,7 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
+		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.account={ inputType:"button",value: $("#account").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.voucher={ inputType:"button",value: $("#voucher").val()};
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };

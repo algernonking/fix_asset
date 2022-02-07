@@ -1,7 +1,7 @@
 /**
  * 指标类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-03 19:08:17
+ * @since 2022-02-07 12:58:16
  */
 
 function FormPage() {

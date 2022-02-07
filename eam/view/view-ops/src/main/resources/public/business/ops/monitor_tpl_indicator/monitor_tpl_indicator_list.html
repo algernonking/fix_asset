@@ -2,7 +2,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:02
+ * @since 2022-02-07 13:48:00
  */
  -->
  <!DOCTYPE html>
@@ -39,13 +39,11 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 编码 , code ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 模版 , monitorTplCode ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('编码')}" class="search-label code-label">编码</span><span class="search-colon">:</span></div>
-                        <input id="code" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('模版')}" class="search-label monitorTplCode-label">模版</span><span class="search-colon">:</span></div>
+                        <div id="monitorTplCode" th:data="${'/service-ops/ops-monitor-tpl/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 模版 , monitorTplCode ,typeName=select_box, isHideInSearch=true -->
                     <!-- 监控方式 , monitorMethod ,typeName=select_box, isHideInSearch=true -->
                     <!-- 指标类型 , indicatorType ,typeName=select_box, isHideInSearch=true -->
                     <!-- 值行数 , valueColumnRows ,typeName=select_box, isHideInSearch=true -->
@@ -58,15 +56,38 @@
                     <!-- 超时(秒) , timeOut ,typeName=number_input, isHideInSearch=true -->
                     <!-- 间隔时间(秒） , intervalTime ,typeName=number_input, isHideInSearch=true -->
                     <!-- 数据保留天数 , dataKeepDay ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 命令 , command ,typeName=text_area, isHideInSearch=true -->
-                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
-                    <!-- snmp , snmpOid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- snmp版本 , snmpVersion ,typeName=text_input, isHideInSearch=true -->
-                    <!-- snmp团体 , snmpCommunity ,typeName=text_input, isHideInSearch=true -->
+                    <!-- command_value , commandValue ,typeName=text_area, isHideInSearch=true -->
+                    <!-- snmp元数据 , snmpOid ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 排序 , itemSort ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px" extraParam="{}"></div>
+                    </div>
+                    <!-- 编码 , code ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('编码')}" class="search-label code-label">编码</span><span class="search-colon">:</span></div>
+                        <input id="code" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
                         <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+
+
+                </div>
+                <!-- 搜索输入区域 -->
+                <div class="layui-form toolbar search-inputs">
+                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('标签')}" class="search-label label-label">标签</span><span class="search-colon">:</span></div>
+                        <input id="label" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 命令 , command ,typeName=text_area, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('命令')}" class="search-label command-label">命令</span><span class="search-colon">:</span></div>
+                        <input id="command" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -85,7 +106,7 @@
             </div>
         </div>
 
-        <div style="margin-top: 42px ">
+        <div style="margin-top: 84px ">
             <table class="layui-table" id="data-table" lay-filter="data-table"></table>
         </div>
 

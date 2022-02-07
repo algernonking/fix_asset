@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 23:40:23
- * @sign F1130328DD237A12B8989BCBB5FDE1FB
+ * @since 2022-02-07 12:08:17
+ * @sign AD24F72D27383F0346DA08F09DC337FA
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,6 +36,12 @@ public class MonitorNode extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * IP：IP
+	*/
+	@ApiModelProperty(required = false,value="IP" , notes = "IP")
+	private String nodeIp;
 	
 	/**
 	 * 父节点：父节点
@@ -56,10 +62,10 @@ public class MonitorNode extends Entity {
 	private String subType;
 	
 	/**
-	 * IP：IP
+	 * 节点分组：节点分组
 	*/
-	@ApiModelProperty(required = false,value="IP" , notes = "IP")
-	private String nodeIp;
+	@ApiModelProperty(required = false,value="节点分组" , notes = "节点分组")
+	private String groupId;
 	
 	/**
 	 * 主机名：主机名
@@ -92,16 +98,16 @@ public class MonitorNode extends Entity {
 	private String status;
 	
 	/**
-	 * SSH端口：SSH端口
-	*/
-	@ApiModelProperty(required = false,value="SSH端口" , notes = "SSH端口")
-	private Integer sshPort;
-	
-	/**
 	 * 凭证(SSH)：凭证(SSH)
 	*/
 	@ApiModelProperty(required = false,value="凭证(SSH)" , notes = "凭证(SSH)")
 	private String sshVoucherId;
+	
+	/**
+	 * SSH端口：SSH端口
+	*/
+	@ApiModelProperty(required = false,value="SSH端口" , notes = "SSH端口")
+	private Integer sshPort;
 	
 	/**
 	 * Agent端口：Agent端口
@@ -114,6 +120,18 @@ public class MonitorNode extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="Snmp端口" , notes = "Snmp端口")
 	private Integer snmpPort;
+	
+	/**
+	 * Snmp版本：Snmp版本
+	*/
+	@ApiModelProperty(required = false,value="Snmp版本" , notes = "Snmp版本")
+	private String snmpVersion;
+	
+	/**
+	 * Snmp团体：Snmp团体
+	*/
+	@ApiModelProperty(required = false,value="Snmp团体" , notes = "Snmp团体")
+	private String snmpCommunity;
 	
 	/**
 	 * Jmx端口：Jmx端口
@@ -200,18 +218,6 @@ public class MonitorNode extends Entity {
 	private List<MonitorTpl> monitorTplList;
 	
 	/**
-	 * 节点类型：节点类型
-	*/
-	@ApiModelProperty(required = false,value="节点类型" , notes = "节点类型")
-	private MonitorNodeType monitorNodeType;
-	
-	/**
-	 * 节点子类型：节点子类型
-	*/
-	@ApiModelProperty(required = false,value="节点子类型" , notes = "节点子类型")
-	private MonitorNodeSubtype monitorNodeSubType;
-	
-	/**
 	 * 数据库信息：数据库信息
 	*/
 	@ApiModelProperty(required = false,value="数据库信息" , notes = "数据库信息")
@@ -222,6 +228,24 @@ public class MonitorNode extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="数值信息" , notes = "数值信息")
 	private List<MonitorNodeValue> monitorNodeValueList;
+	
+	/**
+	 * 节点分组：节点分组
+	*/
+	@ApiModelProperty(required = false,value="节点分组" , notes = "节点分组")
+	private MonitorNodeGroup monitorNodeGroup;
+	
+	/**
+	 * 节点类型：节点类型
+	*/
+	@ApiModelProperty(required = false,value="节点类型" , notes = "节点类型")
+	private MonitorNodeType monitorNodeType;
+	
+	/**
+	 * 节点子类型：节点子类型
+	*/
+	@ApiModelProperty(required = false,value="节点子类型" , notes = "节点子类型")
+	private MonitorNodeSubtype monitorNodeSubType;
 	
 	/**
 	 * 获得 主键<br>
@@ -239,6 +263,25 @@ public class MonitorNode extends Entity {
 	*/
 	public MonitorNode setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 IP<br>
+	 * IP
+	 * @return IP
+	*/
+	public String getNodeIp() {
+		return nodeIp;
+	}
+	
+	/**
+	 * 设置 IP
+	 * @param nodeIp IP
+	 * @return 当前对象
+	*/
+	public MonitorNode setNodeIp(String nodeIp) {
+		this.nodeIp=nodeIp;
 		return this;
 	}
 	
@@ -300,21 +343,21 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 IP<br>
-	 * IP
-	 * @return IP
+	 * 获得 节点分组<br>
+	 * 节点分组
+	 * @return 节点分组
 	*/
-	public String getNodeIp() {
-		return nodeIp;
+	public String getGroupId() {
+		return groupId;
 	}
 	
 	/**
-	 * 设置 IP
-	 * @param nodeIp IP
+	 * 设置 节点分组
+	 * @param groupId 节点分组
 	 * @return 当前对象
 	*/
-	public MonitorNode setNodeIp(String nodeIp) {
-		this.nodeIp=nodeIp;
+	public MonitorNode setGroupId(String groupId) {
+		this.groupId=groupId;
 		return this;
 	}
 	
@@ -414,25 +457,6 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 SSH端口<br>
-	 * SSH端口
-	 * @return SSH端口
-	*/
-	public Integer getSshPort() {
-		return sshPort;
-	}
-	
-	/**
-	 * 设置 SSH端口
-	 * @param sshPort SSH端口
-	 * @return 当前对象
-	*/
-	public MonitorNode setSshPort(Integer sshPort) {
-		this.sshPort=sshPort;
-		return this;
-	}
-	
-	/**
 	 * 获得 凭证(SSH)<br>
 	 * 凭证(SSH)
 	 * @return 凭证(SSH)
@@ -448,6 +472,25 @@ public class MonitorNode extends Entity {
 	*/
 	public MonitorNode setSshVoucherId(String sshVoucherId) {
 		this.sshVoucherId=sshVoucherId;
+		return this;
+	}
+	
+	/**
+	 * 获得 SSH端口<br>
+	 * SSH端口
+	 * @return SSH端口
+	*/
+	public Integer getSshPort() {
+		return sshPort;
+	}
+	
+	/**
+	 * 设置 SSH端口
+	 * @param sshPort SSH端口
+	 * @return 当前对象
+	*/
+	public MonitorNode setSshPort(Integer sshPort) {
+		this.sshPort=sshPort;
 		return this;
 	}
 	
@@ -486,6 +529,44 @@ public class MonitorNode extends Entity {
 	*/
 	public MonitorNode setSnmpPort(Integer snmpPort) {
 		this.snmpPort=snmpPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 Snmp版本<br>
+	 * Snmp版本
+	 * @return Snmp版本
+	*/
+	public String getSnmpVersion() {
+		return snmpVersion;
+	}
+	
+	/**
+	 * 设置 Snmp版本
+	 * @param snmpVersion Snmp版本
+	 * @return 当前对象
+	*/
+	public MonitorNode setSnmpVersion(String snmpVersion) {
+		this.snmpVersion=snmpVersion;
+		return this;
+	}
+	
+	/**
+	 * 获得 Snmp团体<br>
+	 * Snmp团体
+	 * @return Snmp团体
+	*/
+	public String getSnmpCommunity() {
+		return snmpCommunity;
+	}
+	
+	/**
+	 * 设置 Snmp团体
+	 * @param snmpCommunity Snmp团体
+	 * @return 当前对象
+	*/
+	public MonitorNode setSnmpCommunity(String snmpCommunity) {
+		this.snmpCommunity=snmpCommunity;
 		return this;
 	}
 	
@@ -767,44 +848,6 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 节点类型<br>
-	 * 节点类型
-	 * @return 节点类型
-	*/
-	public MonitorNodeType getMonitorNodeType() {
-		return monitorNodeType;
-	}
-	
-	/**
-	 * 设置 节点类型
-	 * @param monitorNodeType 节点类型
-	 * @return 当前对象
-	*/
-	public MonitorNode setMonitorNodeType(MonitorNodeType monitorNodeType) {
-		this.monitorNodeType=monitorNodeType;
-		return this;
-	}
-	
-	/**
-	 * 获得 节点子类型<br>
-	 * 节点子类型
-	 * @return 节点子类型
-	*/
-	public MonitorNodeSubtype getMonitorNodeSubType() {
-		return monitorNodeSubType;
-	}
-	
-	/**
-	 * 设置 节点子类型
-	 * @param monitorNodeSubType 节点子类型
-	 * @return 当前对象
-	*/
-	public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
-		this.monitorNodeSubType=monitorNodeSubType;
-		return this;
-	}
-	
-	/**
 	 * 获得 数据库信息<br>
 	 * 数据库信息
 	 * @return 数据库信息
@@ -850,6 +893,63 @@ public class MonitorNode extends Entity {
 	public MonitorNode addMonitorNodeValue(MonitorNodeValue monitorNodeValue) {
 		if(this.monitorNodeValueList==null) monitorNodeValueList=new ArrayList<>();
 		this.monitorNodeValueList.add(monitorNodeValue);
+		return this;
+	}
+	
+	/**
+	 * 获得 节点分组<br>
+	 * 节点分组
+	 * @return 节点分组
+	*/
+	public MonitorNodeGroup getMonitorNodeGroup() {
+		return monitorNodeGroup;
+	}
+	
+	/**
+	 * 设置 节点分组
+	 * @param monitorNodeGroup 节点分组
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorNodeGroup(MonitorNodeGroup monitorNodeGroup) {
+		this.monitorNodeGroup=monitorNodeGroup;
+		return this;
+	}
+	
+	/**
+	 * 获得 节点类型<br>
+	 * 节点类型
+	 * @return 节点类型
+	*/
+	public MonitorNodeType getMonitorNodeType() {
+		return monitorNodeType;
+	}
+	
+	/**
+	 * 设置 节点类型
+	 * @param monitorNodeType 节点类型
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorNodeType(MonitorNodeType monitorNodeType) {
+		this.monitorNodeType=monitorNodeType;
+		return this;
+	}
+	
+	/**
+	 * 获得 节点子类型<br>
+	 * 节点子类型
+	 * @return 节点子类型
+	*/
+	public MonitorNodeSubtype getMonitorNodeSubType() {
+		return monitorNodeSubType;
+	}
+	
+	/**
+	 * 设置 节点子类型
+	 * @param monitorNodeSubType 节点子类型
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
+		this.monitorNodeSubType=monitorNodeSubType;
 		return this;
 	}
 

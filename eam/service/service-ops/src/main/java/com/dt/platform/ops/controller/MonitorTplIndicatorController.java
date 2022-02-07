@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模版指标 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:01
+ * @since 2022-02-07 13:48:00
 */
 
 @Api(tags = "模版指标")
@@ -68,7 +68,7 @@ public class MonitorTplIndicatorController extends SuperController {
 	@ApiOperation(value = "添加模版指标")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "host_linux"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os.load"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
@@ -85,11 +85,11 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INTERVAL_TIME , value = "间隔时间(秒）" , required = false , dataTypeClass=Integer.class , example = "180"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "hostname"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_VERSION , value = "snmp版本" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_COMMUNITY , value = "snmp团体" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "系统负载"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MonitorTplIndicatorServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -141,7 +141,7 @@ public class MonitorTplIndicatorController extends SuperController {
 	@ApiOperation(value = "更新模版指标")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "host_linux"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os.load"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
@@ -158,11 +158,11 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INTERVAL_TIME , value = "间隔时间(秒）" , required = false , dataTypeClass=Integer.class , example = "180"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "hostname"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_VERSION , value = "snmp版本" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_COMMUNITY , value = "snmp团体" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "系统负载"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorTplIndicatorVOMeta.PAGE_INDEX , MonitorTplIndicatorVOMeta.PAGE_SIZE , MonitorTplIndicatorVOMeta.SEARCH_FIELD , MonitorTplIndicatorVOMeta.FUZZY_FIELD , MonitorTplIndicatorVOMeta.SEARCH_VALUE , MonitorTplIndicatorVOMeta.DIRTY_FIELDS , MonitorTplIndicatorVOMeta.SORT_FIELD , MonitorTplIndicatorVOMeta.SORT_TYPE , MonitorTplIndicatorVOMeta.IDS } )
 	@NotNull(name = MonitorTplIndicatorVOMeta.ID)
@@ -180,7 +180,7 @@ public class MonitorTplIndicatorController extends SuperController {
 	@ApiOperation(value = "保存模版指标")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "host_linux"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os.load"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
@@ -197,11 +197,11 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INTERVAL_TIME , value = "间隔时间(秒）" , required = false , dataTypeClass=Integer.class , example = "180"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "hostname"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_VERSION , value = "snmp版本" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_COMMUNITY , value = "snmp团体" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "系统负载"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplIndicatorVOMeta.PAGE_INDEX , MonitorTplIndicatorVOMeta.PAGE_SIZE , MonitorTplIndicatorVOMeta.SEARCH_FIELD , MonitorTplIndicatorVOMeta.FUZZY_FIELD , MonitorTplIndicatorVOMeta.SEARCH_VALUE , MonitorTplIndicatorVOMeta.DIRTY_FIELDS , MonitorTplIndicatorVOMeta.SORT_FIELD , MonitorTplIndicatorVOMeta.SORT_TYPE , MonitorTplIndicatorVOMeta.IDS } )
 	@NotNull(name = MonitorTplIndicatorVOMeta.ID)
@@ -263,7 +263,7 @@ public class MonitorTplIndicatorController extends SuperController {
 	@ApiOperation(value = "查询模版指标")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "host_linux"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os.load"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
@@ -280,11 +280,11 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INTERVAL_TIME , value = "间隔时间(秒）" , required = false , dataTypeClass=Integer.class , example = "180"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "hostname"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_VERSION , value = "snmp版本" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_COMMUNITY , value = "snmp团体" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "系统负载"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplIndicatorVOMeta.PAGE_INDEX , MonitorTplIndicatorVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MonitorTplIndicatorServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -303,7 +303,7 @@ public class MonitorTplIndicatorController extends SuperController {
 	@ApiOperation(value = "分页查询模版指标")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "host_linux"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "os.load"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
@@ -320,11 +320,11 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INTERVAL_TIME , value = "间隔时间(秒）" , required = false , dataTypeClass=Integer.class , example = "180"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "hostname"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_VERSION , value = "snmp版本" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_COMMUNITY , value = "snmp团体" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "系统负载"),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MonitorTplIndicatorServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

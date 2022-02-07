@@ -2,6 +2,8 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.ops.page.MonitorTplTypePageController;
+import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class MonitorTplTypeGtr extends BaseCodeGenerator{
@@ -63,6 +65,6 @@ public class MonitorTplTypeGtr extends BaseCodeGenerator{
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-        //g.generateMenu(MonitorTplIndicatorTypeServiceProxy.class, MonitorTplIndicatorTypePageController.class);
+       // g.generateMenu(MonitorTplTypeServiceProxy.class, MonitorTplTypePageController.class);
     }
 }

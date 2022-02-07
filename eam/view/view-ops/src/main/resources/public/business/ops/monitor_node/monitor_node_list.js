@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 23:40:24
+ * @since 2022-02-07 12:08:18
  */
 
 
@@ -74,19 +74,19 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'pid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('父节点') , templet: function (d) { return templet('pid',d.pid,d);}  }
-					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型') , templet: function (d) { return templet('type',d.type,d);}  }
-					,{ field: 'subType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('子类型') , templet: function (d) { return templet('subType',d.subType,d);}  }
 					,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
-					,{ field: 'nodeName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主机名') , templet: function (d) { return templet('nodeName',d.nodeName,d);}  }
+					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点分类'), templet: function (d) { return templet('type' ,fox.joinLabel(d.monitorNodeType,"name"),d);}}
+					,{ field: 'subType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点子分类'), templet: function (d) { return templet('subType' ,fox.joinLabel(d.monitorNodeSubType,"name"),d);}}
+					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点分组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.monitorNodeGroup,"name"),d);}}
 					,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('可见主机名') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
-					,{ field: 'nodeType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型') , templet: function (d) { return templet('nodeType',d.nodeType,d);}  }
-					,{ field: 'nodeEnabled', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否启用') , templet: function (d) { return templet('nodeEnabled',d.nodeEnabled,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控状态') , templet: function (d) { return templet('status',d.status,d);}  }
+					,{ field: 'nodeEnabled', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否启用'), templet:function (d){ return templet('nodeEnabled',fox.getEnumText(SELECT_NODEENABLED_DATA,d.nodeEnabled),d);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
+					,{ field: 'sshVoucherId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('凭证(SSH)'), templet: function (d) { return templet('sshVoucherId' ,fox.joinLabel(d.sshVoucher,"name"),d);}}
 					,{ field: 'sshPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('SSH端口') , templet: function (d) { return templet('sshPort',d.sshPort,d);}  }
-					,{ field: 'sshVoucherId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('凭证(SSH)'), templet: function (d) { return templet('sshVoucherId' ,fox.joinLabel(d.sshVoucher,"notes"),d);}}
 					,{ field: 'agentPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Agent端口') , templet: function (d) { return templet('agentPort',d.agentPort,d);}  }
 					,{ field: 'snmpPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp端口') , templet: function (d) { return templet('snmpPort',d.snmpPort,d);}  }
+					,{ field: 'snmpVersion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp版本') , templet: function (d) { return templet('snmpVersion',d.snmpVersion,d);}  }
+					,{ field: 'snmpCommunity', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp团体') , templet: function (d) { return templet('snmpCommunity',d.snmpCommunity,d);}  }
 					,{ field: 'jmxPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Jmx端口') , templet: function (d) { return templet('jmxPort',d.jmxPort,d);}  }
 					,{ field: 'impiPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Jmx端口') , templet: function (d) { return templet('impiPort',d.impiPort,d);}  }
 					,{ field: 'jdbcUrl', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Jdbc地址') , templet: function (d) { return templet('jdbcUrl',d.jdbcUrl,d);}  }
@@ -129,23 +129,26 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.pid={ inputType:"button",value: $("#pid").val()};
-		value.type={ inputType:"button",value: $("#type").val()};
-		value.subType={ inputType:"button",value: $("#subType").val()};
 		value.nodeIp={ inputType:"button",value: $("#nodeIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.pid={ inputType:"button",value: $("#pid").val()};
+		value.type={ inputType:"select_box", value: getSelectedValue("#type","value") ,fillBy:["monitorNodeType"]  , label:getSelectedValue("#type","nameStr") };
+		value.subType={ inputType:"select_box", value: getSelectedValue("#subType","value") ,fillBy:["monitorNodeSubType"]  , label:getSelectedValue("#subType","nameStr") };
+		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["monitorNodeGroup"]  , label:getSelectedValue("#groupId","nameStr") };
 		value.nodeName={ inputType:"button",value: $("#nodeName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.nodeNameShow={ inputType:"button",value: $("#nodeNameShow").val()};
+		value.nodeNameShow={ inputType:"button",value: $("#nodeNameShow").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.nodeType={ inputType:"button",value: $("#nodeType").val()};
-		value.nodeEnabled={ inputType:"button",value: $("#nodeEnabled").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
-		value.sshPort={ inputType:"number_input", value: $("#sshPort").val() };
+		value.nodeEnabled={ inputType:"select_box", value: getSelectedValue("#nodeEnabled","value"), label:getSelectedValue("#nodeEnabled","nameStr") };
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.sshVoucherId={ inputType:"select_box", value: getSelectedValue("#sshVoucherId","value") ,fillBy:["sshVoucher"]  , label:getSelectedValue("#sshVoucherId","nameStr") };
+		value.sshPort={ inputType:"number_input", value: $("#sshPort").val() };
 		value.agentPort={ inputType:"number_input", value: $("#agentPort").val() };
 		value.snmpPort={ inputType:"number_input", value: $("#snmpPort").val() };
+		value.snmpVersion={ inputType:"button",value: $("#snmpVersion").val()};
+		value.snmpCommunity={ inputType:"button",value: $("#snmpCommunity").val()};
 		value.jmxPort={ inputType:"number_input", value: $("#jmxPort").val() };
 		value.impiPort={ inputType:"number_input", value: $("#impiPort").val() };
 		value.jdbcUrl={ inputType:"button",value: $("#jdbcUrl").val()};
-		value.notes={ inputType:"button",value: $("#notes").val()};
+		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -192,8 +195,106 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
+		//渲染 type 下拉字段
+		fox.renderSelectBox({
+			el: "type",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 groupId 下拉字段
+		fox.renderSelectBox({
+			el: "groupId",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("groupId",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].id});
+				}
+				return opts;
+			}
+		});
+		//渲染 nodeEnabled 下拉字段
+		fox.renderSelectBox({
+			el: "nodeEnabled",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("nodeEnabled",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -215,7 +316,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -385,7 +486,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["800px",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"ops-monitor-node-form-data-win",
 			content: '/business/ops/monitor_node/monitor_node_form.html' + (queryString?("?"+queryString):""),

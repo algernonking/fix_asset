@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点列表数值 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:31
+ * @since 2022-02-07 09:51:46
 */
 
 @Api(tags = "节点列表数值")
@@ -66,8 +66,8 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "添加节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.INDICATOR_CODE , value = "指标" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.VALUE_TYPE , value = "值类型" , required = false , dataTypeClass=String.class),
@@ -101,7 +101,7 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "删除节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorNodeListValueVOMeta.ID)
@@ -135,8 +135,8 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "更新节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.INDICATOR_CODE , value = "指标" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.VALUE_TYPE , value = "值类型" , required = false , dataTypeClass=String.class),
@@ -170,8 +170,8 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "保存节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.INDICATOR_CODE , value = "指标" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.VALUE_TYPE , value = "值类型" , required = false , dataTypeClass=String.class),
@@ -244,8 +244,8 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "查询节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.INDICATOR_CODE , value = "指标" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.VALUE_TYPE , value = "值类型" , required = false , dataTypeClass=String.class),
@@ -280,8 +280,8 @@ public class MonitorNodeListValueController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询节点列表数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.INDICATOR_CODE , value = "指标" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeListValueVOMeta.VALUE_TYPE , value = "值类型" , required = false , dataTypeClass=String.class),

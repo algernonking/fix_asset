@@ -2,7 +2,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:02
+ * @since 2022-02-07 13:48:01
  */
  -->
  <!DOCTYPE html>
@@ -37,19 +37,31 @@
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3997-fieldset">
+            <legend>基本信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="random-4643-content">
+        <div class="layui-row form-row" id="random-3997-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('名称')}">名称</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"  />
+                            <input lay-filter="name" id="name" name="name" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('名称') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('模版')}">模版</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="monitorTplCode" input-type="select" th:data="${'/service-ops/ops-monitor-tpl/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
@@ -65,7 +77,46 @@
                         </div>
                     </div>
 
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('状态')}">状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
                 
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('指标类型')}">指标类型</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="indicatorType" input-type="select" th:data="${'/service-ops/ops-monitor-tpl-indicator-type/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('采集方式')}">采集方式</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="monitorMethod" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorMethodEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('超时(秒)')}">超时(秒)</div></div>
                         <div class="layui-input-block ">
@@ -83,40 +134,33 @@
                     </div>
 
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('排序')}">排序</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="itemSort" id="itemSort" name="itemSort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('排序') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3247-fieldset">
+            <legend>填充信息</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-3247-content">
+
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs4 form-column" >
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('模版')}">模版</div></div>
-                        <div class="layui-input-block ">
-                            <div id="monitorTplCode" input-type="select" th:data="${'/service-ops/ops-monitor-tpl/query-paged-list'}" extraParam="{}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('采集方式')}">采集方式</div></div>
-                        <div class="layui-input-block ">
-                            <div id="monitorMethod" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorMethodEnum')}" extraParam="{}"></div>
-                        </div>
-                    </div>
-
-
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('指标类型')}">指标类型</div></div>
-                        <div class="layui-input-block ">
-                            <div id="indicatorType" input-type="select" th:data="${'/service-ops/ops-monitor-tpl-indicator-type/query-paged-list'}" extraParam="{}"></div>
-                        </div>
-                    </div>
-
-
-                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数值列数')}">数值列数</div></div>
                         <div class="layui-input-block ">
@@ -125,13 +169,7 @@
                     </div>
 
 
-                <!--结束：栏次内字段循环-->
-            </div>
-             <!--开始：column 循环-->
-            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs4 form-column" >
-
-
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数值行数')}">数值行数</div></div>
                         <div class="layui-input-block ">
@@ -149,10 +187,36 @@
                     </div>
 
 
-                                    <div class="layui-form-item" >
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('数值字段')}">数值字段</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="valueColumn" id="valueColumn" name="valueColumn" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数值字段') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('数值字段映射')}">数值字段映射</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="valueColumnMap" id="valueColumnMap" name="valueColumnMap" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('数值字段映射') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('字段名称')}">字段名称</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="valueColumnName" id="valueColumnName" name="valueColumnName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('字段名称') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -170,17 +234,20 @@
          <!--开始：group 循环-->
 
 
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-9390-fieldset">
+            <legend>SNMP信息</legend>
+        </fieldset>
 
-        <div class="layui-row form-row" id="random-5488-content">
+        <div class="layui-row form-row" id="random-9390-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
+            <div class="layui-col-xs12 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('snmp')}">snmp</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('snmp元数据')}">snmp元数据</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="snmpOid" id="snmpOid" name="snmpOid" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('snmp') }" type="text" class="layui-input"  />
+                            <input lay-filter="snmpOid" id="snmpOid" name="snmpOid" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('snmp元数据') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
@@ -192,7 +259,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-6504-content">
+        <div class="layui-row form-row" id="random-5763-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -215,7 +282,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3935-content">
+        <div class="layui-row form-row" id="random-9209-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -259,7 +326,7 @@
     var SELECT_VALUECOLUMNROWS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnRowsEnum')}]];
     var SELECT_VALUECOLUMNCOLS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnColsEnum')}]];
     var SELECT_VALUECOLUMNTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnTypeEnum')}]];
-    var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_input","required":true}};
+    var VALIDATE_CONFIG={"monitorMethod":{"labelInForm":"采集方式","inputType":"select_box","required":true},"code":{"labelInForm":"编码","inputType":"text_input","required":true},"monitorTplCode":{"labelInForm":"模版","inputType":"select_box","required":true},"indicatorType":{"labelInForm":"指标类型","inputType":"select_box","required":true},"name":{"labelInForm":"名称","inputType":"text_input","required":true},"status":{"labelInForm":"状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="ops_monitor_tpl_indicator";
 
 

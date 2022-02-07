@@ -23,6 +23,7 @@ public class CodeMonitorBuildRepeat {
                 "MonitorNodeTplItemGtr",
                 "MonitorWarnGtr",
                 "MonitorVoucherGtr",
+                "MonitorNodeGroupGtr",
 
 //                "OpsInformationSystemGtr",
 //                "OpsDbInstanceGtr",

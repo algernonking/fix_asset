@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模版类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-04 07:28:27
+ * @since 2022-02-07 13:00:44
 */
 
 @Api(tags = "模版类型")
@@ -65,11 +65,10 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "添加模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "主机"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "主机类型"),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MonitorTplTypeServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -86,7 +85,7 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "删除模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorTplTypeVOMeta.ID)
@@ -120,11 +119,10 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "更新模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "主机"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "主机类型"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorTplTypeVOMeta.PAGE_INDEX , MonitorTplTypeVOMeta.PAGE_SIZE , MonitorTplTypeVOMeta.SEARCH_FIELD , MonitorTplTypeVOMeta.FUZZY_FIELD , MonitorTplTypeVOMeta.SEARCH_VALUE , MonitorTplTypeVOMeta.DIRTY_FIELDS , MonitorTplTypeVOMeta.SORT_FIELD , MonitorTplTypeVOMeta.SORT_TYPE , MonitorTplTypeVOMeta.IDS } )
 	@NotNull(name = MonitorTplTypeVOMeta.ID)
@@ -141,11 +139,10 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "保存模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "主机"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "主机类型"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplTypeVOMeta.PAGE_INDEX , MonitorTplTypeVOMeta.PAGE_SIZE , MonitorTplTypeVOMeta.SEARCH_FIELD , MonitorTplTypeVOMeta.FUZZY_FIELD , MonitorTplTypeVOMeta.SEARCH_VALUE , MonitorTplTypeVOMeta.DIRTY_FIELDS , MonitorTplTypeVOMeta.SORT_FIELD , MonitorTplTypeVOMeta.SORT_TYPE , MonitorTplTypeVOMeta.IDS } )
 	@NotNull(name = MonitorTplTypeVOMeta.ID)
@@ -201,11 +198,10 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "查询模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "主机"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "主机类型"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplTypeVOMeta.PAGE_INDEX , MonitorTplTypeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MonitorTplTypeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -223,11 +219,10 @@ public class MonitorTplTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询模版类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "主机"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "host"),
+		@ApiImplicitParam(name = MonitorTplTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "主机类型"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MonitorTplTypeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

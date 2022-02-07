@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:02
+ * @since 2022-02-07 13:48:01
  */
 
 
@@ -92,10 +92,9 @@ function ListPage() {
 					,{ field: 'dataKeepDay', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数据保留天数') , templet: function (d) { return templet('dataKeepDay',d.dataKeepDay,d);}  }
 					,{ field: 'command', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('命令') , templet: function (d) { return templet('command',d.command,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
-					,{ field: 'snmpOid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp') , templet: function (d) { return templet('snmpOid',d.snmpOid,d);}  }
-					,{ field: 'snmpVersion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp版本') , templet: function (d) { return templet('snmpVersion',d.snmpVersion,d);}  }
-					,{ field: 'snmpCommunity', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp团体') , templet: function (d) { return templet('snmpCommunity',d.snmpCommunity,d);}  }
+					,{ field: 'snmpOid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp元数据') , templet: function (d) { return templet('snmpOid',d.snmpOid,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'itemSort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('排序') , templet: function (d) { return templet('itemSort',d.itemSort,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -151,11 +150,11 @@ function ListPage() {
 		value.intervalTime={ inputType:"number_input", value: $("#intervalTime").val() };
 		value.dataKeepDay={ inputType:"number_input", value: $("#dataKeepDay").val() };
 		value.command={ inputType:"button",value: $("#command").val()};
+		value.commandValue={ inputType:"button",value: $("#commandValue").val()};
 		value.label={ inputType:"button",value: $("#label").val()};
 		value.snmpOid={ inputType:"button",value: $("#snmpOid").val()};
-		value.snmpVersion={ inputType:"button",value: $("#snmpVersion").val()};
-		value.snmpCommunity={ inputType:"button",value: $("#snmpCommunity").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
+		value.itemSort={ inputType:"number_input", value: $("#itemSort").val() };
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
@@ -202,8 +201,57 @@ function ListPage() {
 
 	function initSearchFields() {
 
-		fox.switchSearchRow(1);
+		fox.switchSearchRow(2);
 
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 monitorTplCode 下拉字段
+		fox.renderSelectBox({
+			el: "monitorTplCode",
+			radio: true,
+			size: "small",
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("monitorTplCode",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			paging: true,
+			pageRemote: true,
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		fox.renderSearchInputs();
 		window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
 	}
@@ -225,7 +273,7 @@ function ListPage() {
 
 		// 搜索按钮点击事件
 		$('#search-button-advance').click(function () {
-			fox.switchSearchRow(1,function (ex){
+			fox.switchSearchRow(2,function (ex){
 				if(ex=="1") {
 					$('#search-button-advance span').text("关闭");
 				} else {
@@ -395,7 +443,7 @@ function ListPage() {
 			title: title,
 			resize: false,
 			offset: [top,null],
-			area: ["800px",height+"px"],
+			area: ["98%",height+"px"],
 			type: 2,
 			id:"ops-monitor-tpl-indicator-form-data-win",
 			content: '/business/ops/monitor_tpl_indicator/monitor_tpl_indicator_form.html' + (queryString?("?"+queryString):""),

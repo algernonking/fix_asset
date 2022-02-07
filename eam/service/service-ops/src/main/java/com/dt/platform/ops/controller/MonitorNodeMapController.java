@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点映射 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:32
+ * @since 2022-02-07 09:51:47
 */
 
 @Api(tags = "节点映射")
@@ -65,11 +65,11 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "添加节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.IP , value = "IP" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class , example = "tpl"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -87,7 +87,7 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "删除节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorNodeMapVOMeta.ID)
@@ -121,11 +121,11 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "更新节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.IP , value = "IP" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class , example = "tpl"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorNodeMapVOMeta.PAGE_INDEX , MonitorNodeMapVOMeta.PAGE_SIZE , MonitorNodeMapVOMeta.SEARCH_FIELD , MonitorNodeMapVOMeta.FUZZY_FIELD , MonitorNodeMapVOMeta.SEARCH_VALUE , MonitorNodeMapVOMeta.DIRTY_FIELDS , MonitorNodeMapVOMeta.SORT_FIELD , MonitorNodeMapVOMeta.SORT_TYPE , MonitorNodeMapVOMeta.IDS } )
@@ -143,11 +143,11 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "保存节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.IP , value = "IP" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class , example = "tpl"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeMapVOMeta.PAGE_INDEX , MonitorNodeMapVOMeta.PAGE_SIZE , MonitorNodeMapVOMeta.SEARCH_FIELD , MonitorNodeMapVOMeta.FUZZY_FIELD , MonitorNodeMapVOMeta.SEARCH_VALUE , MonitorNodeMapVOMeta.DIRTY_FIELDS , MonitorNodeMapVOMeta.SORT_FIELD , MonitorNodeMapVOMeta.SORT_TYPE , MonitorNodeMapVOMeta.IDS } )
@@ -204,11 +204,11 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "查询节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.IP , value = "IP" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class , example = "tpl"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeMapVOMeta.PAGE_INDEX , MonitorNodeMapVOMeta.PAGE_SIZE } )
@@ -227,11 +227,11 @@ public class MonitorNodeMapController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询节点映射")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.SOURCE_ID , value = "源值" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.IP , value = "IP" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeMapVOMeta.ACTION_METHOD , value = "动作" , required = false , dataTypeClass=String.class , example = "tpl"),
 		@ApiImplicitParam(name = MonitorNodeMapVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

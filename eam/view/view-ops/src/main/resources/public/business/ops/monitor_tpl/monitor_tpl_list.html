@@ -2,7 +2,7 @@
 /**
  * 监控模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:23
+ * @since 2022-02-07 13:14:36
  */
  -->
  <!DOCTYPE html>
@@ -42,7 +42,7 @@
                     <!-- 归类 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('归类')}" class="search-label type-label">归类</span><span class="search-colon">:</span></div>
-                        <div id="type" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                        <div id="type" th:data="${'/service-ops/ops-monitor-tpl-type/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->

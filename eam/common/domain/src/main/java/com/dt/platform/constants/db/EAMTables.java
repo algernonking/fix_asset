@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-07 08:36:03
+ * @since 2022-02-07 13:34:31
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -8405,6 +8405,11 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * IP
+		*/
+		public static final DBField NODE_IP = new DBField(DBDataType.STRING , "node_ip","nodeIp","IP","IP",false,false,true);
+		
+		/**
 		 * 父节点
 		*/
 		public static final DBField PID = new DBField(DBDataType.STRING , "pid","pid","父节点","父节点",false,false,true);
@@ -8420,9 +8425,9 @@ public class EAMTables {
 		public static final DBField SUB_TYPE = new DBField(DBDataType.STRING , "sub_type","subType","子类型","子类型",false,false,true);
 		
 		/**
-		 * IP
+		 * 节点分组
 		*/
-		public static final DBField NODE_IP = new DBField(DBDataType.STRING , "node_ip","nodeIp","IP","IP",false,false,true);
+		public static final DBField GROUP_ID = new DBField(DBDataType.STRING , "group_id","groupId","节点分组","节点分组",false,false,true);
 		
 		/**
 		 * 主机名
@@ -8450,14 +8455,14 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","监控状态","监控状态",false,false,true);
 		
 		/**
-		 * SSH端口
-		*/
-		public static final DBField SSH_PORT = new DBField(DBDataType.INTEGER , "ssh_port","sshPort","SSH端口","SSH端口",false,false,true);
-		
-		/**
 		 * 凭证(SSH)
 		*/
 		public static final DBField SSH_VOUCHER_ID = new DBField(DBDataType.STRING , "ssh_voucher_id","sshVoucherId","凭证(SSH)","凭证(SSH)",false,false,true);
+		
+		/**
+		 * SSH端口
+		*/
+		public static final DBField SSH_PORT = new DBField(DBDataType.INTEGER , "ssh_port","sshPort","SSH端口","SSH端口",false,false,true);
 		
 		/**
 		 * Agent端口
@@ -8468,6 +8473,16 @@ public class EAMTables {
 		 * Snmp端口
 		*/
 		public static final DBField SNMP_PORT = new DBField(DBDataType.INTEGER , "snmp_port","snmpPort","Snmp端口","Snmp端口",false,false,true);
+		
+		/**
+		 * Snmp版本
+		*/
+		public static final DBField SNMP_VERSION = new DBField(DBDataType.STRING , "snmp_version","snmpVersion","Snmp版本","Snmp版本",false,false,true);
+		
+		/**
+		 * Snmp团体
+		*/
+		public static final DBField SNMP_COMMUNITY = new DBField(DBDataType.STRING , "snmp_community","snmpCommunity","Snmp团体","Snmp团体",false,false,true);
 		
 		/**
 		 * Jmx端口
@@ -8530,7 +8545,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE() {
-			this.init($NAME,"节点" , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_PORT , SSH_VOUCHER_ID , AGENT_PORT , SNMP_PORT , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点" , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE $TABLE=new OPS_MONITOR_NODE();
 	}
@@ -8634,6 +8649,77 @@ public class EAMTables {
 			this.init($NAME,"节点数据库" , ID , NODE_ID , DB_NAME , DB_INSTANCE , DB_VERION , CONNECT_COUNT , DB_SIZE , RECORD_TIME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE_DB $TABLE=new OPS_MONITOR_NODE_DB();
+	}
+	
+	/**
+	 * 节点分组
+	*/
+	public static class OPS_MONITOR_NODE_GROUP extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_node_group";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_NODE_GROUP() {
+			this.init($NAME,"节点分组" , ID , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_NODE_GROUP $TABLE=new OPS_MONITOR_NODE_GROUP();
 	}
 	
 	/**
@@ -9839,19 +9925,9 @@ public class EAMTables {
 		public static final DBField LABEL = new DBField(DBDataType.STRING , "label","label","标签","标签",false,false,true);
 		
 		/**
-		 * snmp
+		 * snmp元数据
 		*/
-		public static final DBField SNMP_OID = new DBField(DBDataType.STRING , "snmp_oid","snmpOid","snmp","snmp",false,false,true);
-		
-		/**
-		 * snmp版本
-		*/
-		public static final DBField SNMP_VERSION = new DBField(DBDataType.STRING , "snmp_version","snmpVersion","snmp版本","snmp版本",false,false,true);
-		
-		/**
-		 * snmp团体
-		*/
-		public static final DBField SNMP_COMMUNITY = new DBField(DBDataType.STRING , "snmp_community","snmpCommunity","snmp团体","snmp团体",false,false,true);
+		public static final DBField SNMP_OID = new DBField(DBDataType.STRING , "snmp_oid","snmpOid","snmp元数据","snmp元数据",false,false,true);
 		
 		/**
 		 * 备注
@@ -9904,7 +9980,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_TPL_INDICATOR() {
-			this.init($NAME,"模版指标" , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , LABEL , SNMP_OID , SNMP_VERSION , SNMP_COMMUNITY , NOTES , ITEM_SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"模版指标" , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , LABEL , SNMP_OID , NOTES , ITEM_SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_TPL_INDICATOR $TABLE=new OPS_MONITOR_TPL_INDICATOR();
 	}
@@ -10077,6 +10153,11 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
 		 * 账户
 		*/
 		public static final DBField ACCOUNT = new DBField(DBDataType.STRING , "account","account","账户","账户",false,false,true);
@@ -10132,7 +10213,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_VOUCHER() {
-			this.init($NAME,"监控凭证" , ID , ACCOUNT , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"监控凭证" , ID , NAME , ACCOUNT , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_VOUCHER $TABLE=new OPS_MONITOR_VOUCHER();
 	}

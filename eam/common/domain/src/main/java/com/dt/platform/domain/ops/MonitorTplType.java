@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版类型
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-04 07:28:27
- * @sign BE68D86A3C71DDF551F1B5531063D7DF
+ * @since 2022-02-07 13:00:44
+ * @sign 7B9BE1209DF401A834EE49EA4CF5A366
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -46,12 +46,6 @@ public class MonitorTplType extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="编码" , notes = "编码")
 	private String code;
-	
-	/**
-	 * 分类：分类
-	*/
-	@ApiModelProperty(required = false,value="分类" , notes = "分类")
-	private String type;
 	
 	/**
 	 * 备注：备注
@@ -161,25 +155,6 @@ public class MonitorTplType extends Entity {
 	*/
 	public MonitorTplType setCode(String code) {
 		this.code=code;
-		return this;
-	}
-	
-	/**
-	 * 获得 分类<br>
-	 * 分类
-	 * @return 分类
-	*/
-	public String getType() {
-		return type;
-	}
-	
-	/**
-	 * 设置 分类
-	 * @param type 分类
-	 * @return 当前对象
-	*/
-	public MonitorTplType setType(String type) {
-		this.type=type;
 		return this;
 	}
 	

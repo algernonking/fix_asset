@@ -2,7 +2,7 @@
 /**
  * 监控凭证 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:33
+ * @since 2022-02-07 12:13:34
  */
  -->
  <!DOCTYPE html>
@@ -39,15 +39,20 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
+                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />
+                    </div>
+                    <!-- 凭证 , voucher ,typeName=text_input, isHideInSearch=true -->
                     <!-- 账户 , account ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('账户')}" class="search-label account-label">账户</span><span class="search-colon">:</span></div>
                         <input id="account" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 凭证 , voucher ,typeName=text_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
-                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
+                        <div class="search-label-div" style=""><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>
                         <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
 

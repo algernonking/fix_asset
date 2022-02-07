@@ -11,6 +11,8 @@ import com.dt.platform.domain.ops.meta.MonitorTplIndicatorTypeMeta;
 import com.dt.platform.domain.ops.meta.MonitorTplMeta;
 import com.dt.platform.domain.ops.meta.MonitorVoucherMeta;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.ops.page.MonitorTplIndicatorPageController;
+import com.dt.platform.proxy.ops.MonitorTplIndicatorServiceProxy;
 import com.dt.platform.proxy.ops.MonitorTplIndicatorTypeServiceProxy;
 import com.dt.platform.proxy.ops.MonitorTplServiceProxy;
 import com.dt.platform.proxy.ops.MonitorVoucherServiceProxy;
@@ -31,8 +33,15 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.STATUS,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.CODE,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NAME,
+
+                },
+                new Object[]{
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.LABEL,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NOTES,
 
                 }
@@ -48,13 +57,15 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.ID).table().disable(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND_VALUE).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND_VALUE).table().disable(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.CREATE_TIME).table().disable(true);
 
 
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE)
                 .basic().label("模版")
-                .form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_PAGED_LIST)
+                .form().validate().required().form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
                 .valueField(MonitorTplMeta.CODE).
                 textField(MonitorTplMeta.NAME).
@@ -63,7 +74,7 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.INDICATOR_TYPE)
                 .basic().label("指标类型")
-                .form().selectBox().queryApi(MonitorTplIndicatorTypeServiceProxy.QUERY_PAGED_LIST)
+                .form().validate().required().form().selectBox().queryApi(MonitorTplIndicatorTypeServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
                 .valueField(MonitorTplIndicatorTypeMeta.CODE).
                 textField(MonitorTplIndicatorTypeMeta.NAME).
@@ -72,12 +83,13 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
 
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.CODE).form().validate().required();
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL.NAME).form().validate().required();
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.STATUS).form()
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.STATUS).form().validate().required().form()
                 .label("状态").selectBox().enumType(MonitorEnableEnum.class);
 
 
-        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_METHOD).form()
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_METHOD).form().validate().required().form()
                 .label("采集方式").selectBox().enumType(MonitorMethodEnum.class);
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_TYPE).form()
@@ -90,33 +102,48 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
                 .label("数值列数").selectBox().enumType(MonitorIndicatorValueColumnColsEnum.class);
 
         cfg.view().formWindow().bottomSpace(120);
-        cfg.view().formWindow().width("800px");
-        cfg.view().form().addGroup(null,
+        cfg.view().formWindow().width("98%");
+
+
+        cfg.view().form().addGroup("基本信息",
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NAME,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.CODE,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.LABEL,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.TIME_OUT,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.DATA_KEEP_DAY
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_METHOD,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.STATUS,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.INDICATOR_TYPE,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_COLS,
-
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_METHOD,
                 },
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_ROWS,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_TYPE,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_DESC,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.TIME_OUT,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.DATA_KEEP_DAY,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.ITEM_SORT,
                 }
-
-
         );
 
-        cfg.view().form().addGroup(null,
+
+        cfg.view().form().addGroup("填充信息",
+                new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_COLS,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_ROWS,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_TYPE,
+                },
+                new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_MAP,
+
+                },
+                new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_NAME,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_DESC,
+
+                }
+        );
+
+        cfg.view().form().addGroup("SNMP信息",
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.SNMP_OID
                 }
@@ -126,7 +153,6 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND
                 }
         );
-
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NOTES
@@ -151,6 +177,6 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-      //  g.generateMenu(MonitorNodeTplServiceProxy.class, MonitorNodeTplPageController.class);
+       //  g.generateMenu(MonitorTplIndicatorServiceProxy.class, MonitorTplIndicatorPageController.class);
     }
 }

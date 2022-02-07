@@ -8,8 +8,8 @@ import java.util.Date;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-04 07:28:27
- * @sign BE68D86A3C71DDF551F1B5531063D7DF
+ * @since 2022-02-07 13:00:44
+ * @sign 7B9BE1209DF401A834EE49EA4CF5A366
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -44,16 +44,6 @@ public class MonitorTplTypeMeta {
 	 * 编码 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplType,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplType.class ,CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
-	
-	/**
-	 * 分类 , 类型: java.lang.String
-	*/
-	public static final String TYPE="type";
-	
-	/**
-	 * 分类 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplType,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplType.class ,TYPE, java.lang.String.class, "分类", "分类", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -148,7 +138,7 @@ public class MonitorTplTypeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NAME , CODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -188,17 +178,6 @@ public class MonitorTplTypeMeta {
 		public MonitorTplType setCode(String code) {
 			super.change(CODE,super.getCode(),code);
 			super.setCode(code);
-			return this;
-		}
-		
-		/**
-		 * 设置 分类
-		 * @param type 分类
-		 * @return 当前对象
-		*/
-		public MonitorTplType setType(String type) {
-			super.change(TYPE,super.getType(),type);
-			super.setType(type);
 			return this;
 		}
 		

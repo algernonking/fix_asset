@@ -249,15 +249,14 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 System.out.println("Sql execute error,sql:"+insert.getSQL());
                 Insert errInsert=new Insert("ops_monitor_node_value");
                 errInsert.set("id",insert.getValue("id"));
-                errInsert.set("result_status",insert.getValue("id"));
-                errInsert.set("result_message",insert.getValue("id"));
-                errInsert.set("indicator_code",insert.getValue("id"));
-                errInsert.set("result_message",insert.getValue("id"));
-
+                errInsert.setIf("result_status","failed");
+                errInsert.setIf("result_message","error execute sql");
+                errInsert.setIf("indicator_code",insert.getValue("indicator_code"));
+                errInsert.setIf("node_id",insert.getValue("node_id"));
+                errInsert.setIf("monitor_tpl_code",insert.getValue("monitor_tpl_code"));
+                errInsert.setIf("record_time",new Date());
+                dao.execute(errInsert);
                 e.printStackTrace();
-                System.out.println(e.getMessage());
-
-
             }
 
         }

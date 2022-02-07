@@ -7,16 +7,17 @@ import com.dt.platform.domain.ops.MonitorNode;
 import java.util.Date;
 import com.dt.platform.domain.ops.MonitorVoucher;
 import com.dt.platform.domain.ops.MonitorTpl;
-import com.dt.platform.domain.ops.MonitorNodeType;
-import com.dt.platform.domain.ops.MonitorNodeSubtype;
 import com.dt.platform.domain.ops.MonitorNodeDb;
 import com.dt.platform.domain.ops.MonitorNodeValue;
+import com.dt.platform.domain.ops.MonitorNodeGroup;
+import com.dt.platform.domain.ops.MonitorNodeType;
+import com.dt.platform.domain.ops.MonitorNodeSubtype;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 23:40:23
+ * @since 2022-02-07 12:08:17
  * @sign 13F4166DF1AF357762C535703A996EE5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -124,6 +125,16 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
+	 * IP , 类型: java.lang.String
+	*/
+	public static final String NODE_IP="nodeIp";
+	
+	/**
+	 * IP , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> NODE_IP_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,NODE_IP, java.lang.String.class, "IP", "IP", java.lang.String.class, null);
+	
+	/**
 	 * 父节点 , 类型: java.lang.String
 	*/
 	public static final String PID="pid";
@@ -154,14 +165,14 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> SUB_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SUB_TYPE, java.lang.String.class, "子类型", "子类型", java.lang.String.class, null);
 	
 	/**
-	 * IP , 类型: java.lang.String
+	 * 节点分组 , 类型: java.lang.String
 	*/
-	public static final String NODE_IP="nodeIp";
+	public static final String GROUP_ID="groupId";
 	
 	/**
-	 * IP , 类型: java.lang.String
+	 * 节点分组 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> NODE_IP_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,NODE_IP, java.lang.String.class, "IP", "IP", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> GROUP_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,GROUP_ID, java.lang.String.class, "节点分组", "节点分组", java.lang.String.class, null);
 	
 	/**
 	 * 主机名 , 类型: java.lang.String
@@ -214,16 +225,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,STATUS, java.lang.String.class, "监控状态", "监控状态", java.lang.String.class, null);
 	
 	/**
-	 * SSH端口 , 类型: java.lang.Integer
-	*/
-	public static final String SSH_PORT="sshPort";
-	
-	/**
-	 * SSH端口 , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> SSH_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_PORT, java.lang.Integer.class, "SSH端口", "SSH端口", java.lang.Integer.class, null);
-	
-	/**
 	 * 凭证(SSH) , 类型: java.lang.String
 	*/
 	public static final String SSH_VOUCHER_ID="sshVoucherId";
@@ -232,6 +233,16 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	 * 凭证(SSH) , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> SSH_VOUCHER_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_VOUCHER_ID, java.lang.String.class, "凭证(SSH)", "凭证(SSH)", java.lang.String.class, null);
+	
+	/**
+	 * SSH端口 , 类型: java.lang.Integer
+	*/
+	public static final String SSH_PORT="sshPort";
+	
+	/**
+	 * SSH端口 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> SSH_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_PORT, java.lang.Integer.class, "SSH端口", "SSH端口", java.lang.Integer.class, null);
 	
 	/**
 	 * Agent端口 , 类型: java.lang.Integer
@@ -252,6 +263,26 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	 * Snmp端口 , 类型: java.lang.Integer
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> SNMP_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SNMP_PORT, java.lang.Integer.class, "Snmp端口", "Snmp端口", java.lang.Integer.class, null);
+	
+	/**
+	 * Snmp版本 , 类型: java.lang.String
+	*/
+	public static final String SNMP_VERSION="snmpVersion";
+	
+	/**
+	 * Snmp版本 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> SNMP_VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SNMP_VERSION, java.lang.String.class, "Snmp版本", "Snmp版本", java.lang.String.class, null);
+	
+	/**
+	 * Snmp团体 , 类型: java.lang.String
+	*/
+	public static final String SNMP_COMMUNITY="snmpCommunity";
+	
+	/**
+	 * Snmp团体 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> SNMP_COMMUNITY_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SNMP_COMMUNITY, java.lang.String.class, "Snmp团体", "Snmp团体", java.lang.String.class, null);
 	
 	/**
 	 * Jmx端口 , 类型: java.lang.Integer
@@ -394,26 +425,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorTpl> MONITOR_TPL_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_TPL_LIST, java.util.List.class, "监控模版", "监控模版", com.dt.platform.domain.ops.MonitorTpl.class, null);
 	
 	/**
-	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
-	*/
-	public static final String MONITOR_NODE_TYPE="monitorNodeType";
-	
-	/**
-	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeType> MONITOR_NODE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_TYPE, com.dt.platform.domain.ops.MonitorNodeType.class, "节点类型", "节点类型", com.dt.platform.domain.ops.MonitorNodeType.class, null);
-	
-	/**
-	 * 节点子类型 , 类型: com.dt.platform.domain.ops.MonitorNodeSubtype
-	*/
-	public static final String MONITOR_NODE_SUB_TYPE="monitorNodeSubType";
-	
-	/**
-	 * 节点子类型 , 类型: com.dt.platform.domain.ops.MonitorNodeSubtype
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeSubtype> MONITOR_NODE_SUB_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_SUB_TYPE, com.dt.platform.domain.ops.MonitorNodeSubtype.class, "节点子类型", "节点子类型", com.dt.platform.domain.ops.MonitorNodeSubtype.class, null);
-	
-	/**
 	 * 数据库信息 , 类型: com.dt.platform.domain.ops.MonitorNodeDb
 	*/
 	public static final String MONITOR_NODE_DB="monitorNodeDb";
@@ -434,9 +445,39 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeValue> MONITOR_NODE_VALUE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_VALUE_LIST, java.util.List.class, "数值信息", "数值信息", com.dt.platform.domain.ops.MonitorNodeValue.class, null);
 	
 	/**
+	 * 节点分组 , 类型: com.dt.platform.domain.ops.MonitorNodeGroup
+	*/
+	public static final String MONITOR_NODE_GROUP="monitorNodeGroup";
+	
+	/**
+	 * 节点分组 , 类型: com.dt.platform.domain.ops.MonitorNodeGroup
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeGroup> MONITOR_NODE_GROUP_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_GROUP, com.dt.platform.domain.ops.MonitorNodeGroup.class, "节点分组", "节点分组", com.dt.platform.domain.ops.MonitorNodeGroup.class, null);
+	
+	/**
+	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
+	*/
+	public static final String MONITOR_NODE_TYPE="monitorNodeType";
+	
+	/**
+	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeType> MONITOR_NODE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_TYPE, com.dt.platform.domain.ops.MonitorNodeType.class, "节点类型", "节点类型", com.dt.platform.domain.ops.MonitorNodeType.class, null);
+	
+	/**
+	 * 节点子类型 , 类型: com.dt.platform.domain.ops.MonitorNodeSubtype
+	*/
+	public static final String MONITOR_NODE_SUB_TYPE="monitorNodeSubType";
+	
+	/**
+	 * 节点子类型 , 类型: com.dt.platform.domain.ops.MonitorNodeSubtype
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeSubtype> MONITOR_NODE_SUB_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_SUB_TYPE, com.dt.platform.domain.ops.MonitorNodeSubtype.class, "节点子类型", "节点子类型", com.dt.platform.domain.ops.MonitorNodeSubtype.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_PORT , SSH_VOUCHER_ID , AGENT_PORT , SNMP_PORT , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SSH_VOUCHER , MONITOR_TPL_LIST , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SSH_VOUCHER , MONITOR_TPL_LIST , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST , MONITOR_NODE_GROUP , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE };
 	
 	/**
 	 * 代理类
@@ -557,6 +598,17 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
+		 * 设置 IP
+		 * @param nodeIp IP
+		 * @return 当前对象
+		*/
+		public MonitorNode setNodeIp(String nodeIp) {
+			super.change(NODE_IP,super.getNodeIp(),nodeIp);
+			super.setNodeIp(nodeIp);
+			return this;
+		}
+		
+		/**
 		 * 设置 父节点
 		 * @param pid 父节点
 		 * @return 当前对象
@@ -590,13 +642,13 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 IP
-		 * @param nodeIp IP
+		 * 设置 节点分组
+		 * @param groupId 节点分组
 		 * @return 当前对象
 		*/
-		public MonitorNode setNodeIp(String nodeIp) {
-			super.change(NODE_IP,super.getNodeIp(),nodeIp);
-			super.setNodeIp(nodeIp);
+		public MonitorNode setGroupId(String groupId) {
+			super.change(GROUP_ID,super.getGroupId(),groupId);
+			super.setGroupId(groupId);
 			return this;
 		}
 		
@@ -656,17 +708,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 SSH端口
-		 * @param sshPort SSH端口
-		 * @return 当前对象
-		*/
-		public MonitorNode setSshPort(Integer sshPort) {
-			super.change(SSH_PORT,super.getSshPort(),sshPort);
-			super.setSshPort(sshPort);
-			return this;
-		}
-		
-		/**
 		 * 设置 凭证(SSH)
 		 * @param sshVoucherId 凭证(SSH)
 		 * @return 当前对象
@@ -674,6 +715,17 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		public MonitorNode setSshVoucherId(String sshVoucherId) {
 			super.change(SSH_VOUCHER_ID,super.getSshVoucherId(),sshVoucherId);
 			super.setSshVoucherId(sshVoucherId);
+			return this;
+		}
+		
+		/**
+		 * 设置 SSH端口
+		 * @param sshPort SSH端口
+		 * @return 当前对象
+		*/
+		public MonitorNode setSshPort(Integer sshPort) {
+			super.change(SSH_PORT,super.getSshPort(),sshPort);
+			super.setSshPort(sshPort);
 			return this;
 		}
 		
@@ -696,6 +748,28 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		public MonitorNode setSnmpPort(Integer snmpPort) {
 			super.change(SNMP_PORT,super.getSnmpPort(),snmpPort);
 			super.setSnmpPort(snmpPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 Snmp版本
+		 * @param snmpVersion Snmp版本
+		 * @return 当前对象
+		*/
+		public MonitorNode setSnmpVersion(String snmpVersion) {
+			super.change(SNMP_VERSION,super.getSnmpVersion(),snmpVersion);
+			super.setSnmpVersion(snmpVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 Snmp团体
+		 * @param snmpCommunity Snmp团体
+		 * @return 当前对象
+		*/
+		public MonitorNode setSnmpCommunity(String snmpCommunity) {
+			super.change(SNMP_COMMUNITY,super.getSnmpCommunity(),snmpCommunity);
+			super.setSnmpCommunity(snmpCommunity);
 			return this;
 		}
 		
@@ -854,28 +928,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 节点类型
-		 * @param monitorNodeType 节点类型
-		 * @return 当前对象
-		*/
-		public MonitorNode setMonitorNodeType(MonitorNodeType monitorNodeType) {
-			super.change(MONITOR_NODE_TYPE,super.getMonitorNodeType(),monitorNodeType);
-			super.setMonitorNodeType(monitorNodeType);
-			return this;
-		}
-		
-		/**
-		 * 设置 节点子类型
-		 * @param monitorNodeSubType 节点子类型
-		 * @return 当前对象
-		*/
-		public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
-			super.change(MONITOR_NODE_SUB_TYPE,super.getMonitorNodeSubType(),monitorNodeSubType);
-			super.setMonitorNodeSubType(monitorNodeSubType);
-			return this;
-		}
-		
-		/**
 		 * 设置 数据库信息
 		 * @param monitorNodeDb 数据库信息
 		 * @return 当前对象
@@ -894,6 +946,39 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		public MonitorNode setMonitorNodeValueList(List<MonitorNodeValue> monitorNodeValueList) {
 			super.change(MONITOR_NODE_VALUE_LIST,super.getMonitorNodeValueList(),monitorNodeValueList);
 			super.setMonitorNodeValueList(monitorNodeValueList);
+			return this;
+		}
+		
+		/**
+		 * 设置 节点分组
+		 * @param monitorNodeGroup 节点分组
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorNodeGroup(MonitorNodeGroup monitorNodeGroup) {
+			super.change(MONITOR_NODE_GROUP,super.getMonitorNodeGroup(),monitorNodeGroup);
+			super.setMonitorNodeGroup(monitorNodeGroup);
+			return this;
+		}
+		
+		/**
+		 * 设置 节点类型
+		 * @param monitorNodeType 节点类型
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorNodeType(MonitorNodeType monitorNodeType) {
+			super.change(MONITOR_NODE_TYPE,super.getMonitorNodeType(),monitorNodeType);
+			super.setMonitorNodeType(monitorNodeType);
+			return this;
+		}
+		
+		/**
+		 * 设置 节点子类型
+		 * @param monitorNodeSubType 节点子类型
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
+			super.change(MONITOR_NODE_SUB_TYPE,super.getMonitorNodeSubType(),monitorNodeSubType);
+			super.setMonitorNodeSubType(monitorNodeSubType);
 			return this;
 		}
 	}

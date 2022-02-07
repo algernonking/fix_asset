@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 指标类型 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-03 19:08:16
+ * @since 2022-02-07 12:58:14
 */
 
 @Api(tags = "指标类型")
@@ -65,10 +65,10 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "添加指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "cpu"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "CPU"),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MonitorTplIndicatorTypeServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -85,7 +85,7 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "删除指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorTplIndicatorTypeVOMeta.ID)
@@ -119,10 +119,10 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "更新指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "cpu"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "CPU"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorTplIndicatorTypeVOMeta.PAGE_INDEX , MonitorTplIndicatorTypeVOMeta.PAGE_SIZE , MonitorTplIndicatorTypeVOMeta.SEARCH_FIELD , MonitorTplIndicatorTypeVOMeta.FUZZY_FIELD , MonitorTplIndicatorTypeVOMeta.SEARCH_VALUE , MonitorTplIndicatorTypeVOMeta.DIRTY_FIELDS , MonitorTplIndicatorTypeVOMeta.SORT_FIELD , MonitorTplIndicatorTypeVOMeta.SORT_TYPE , MonitorTplIndicatorTypeVOMeta.IDS } )
 	@NotNull(name = MonitorTplIndicatorTypeVOMeta.ID)
@@ -139,10 +139,10 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "保存指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "cpu"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "CPU"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplIndicatorTypeVOMeta.PAGE_INDEX , MonitorTplIndicatorTypeVOMeta.PAGE_SIZE , MonitorTplIndicatorTypeVOMeta.SEARCH_FIELD , MonitorTplIndicatorTypeVOMeta.FUZZY_FIELD , MonitorTplIndicatorTypeVOMeta.SEARCH_VALUE , MonitorTplIndicatorTypeVOMeta.DIRTY_FIELDS , MonitorTplIndicatorTypeVOMeta.SORT_FIELD , MonitorTplIndicatorTypeVOMeta.SORT_TYPE , MonitorTplIndicatorTypeVOMeta.IDS } )
 	@NotNull(name = MonitorTplIndicatorTypeVOMeta.ID)
@@ -198,10 +198,10 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "查询指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "cpu"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "CPU"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplIndicatorTypeVOMeta.PAGE_INDEX , MonitorTplIndicatorTypeVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MonitorTplIndicatorTypeServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -219,10 +219,10 @@ public class MonitorTplIndicatorTypeController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询指标类型")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "cpu"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplIndicatorTypeVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "CPU"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MonitorTplIndicatorTypeServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

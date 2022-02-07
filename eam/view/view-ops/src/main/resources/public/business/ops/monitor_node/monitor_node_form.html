@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 23:40:24
+ * @since 2022-02-07 12:08:18
  */
  -->
  <!DOCTYPE html>
@@ -38,11 +38,11 @@
 
 
 
-        <div class="layui-row form-row" id="random-7774-content">
+        <div class="layui-row form-row" id="random-9261-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column" >
+            <div class="layui-col-xs4 form-column" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('IP')}">IP</div><div class="layui-required">*</div></div>
@@ -52,18 +52,68 @@
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('主机名')}">主机名</div></div>
+                        <div class="layui-form-label "><div th:text="${lang.translate('可见主机名')}">可见主机名</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="nodeName" id="nodeName" name="nodeName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主机名') }" type="text" class="layui-input"  />
+                            <input lay-filter="nodeNameShow" id="nodeNameShow" name="nodeNameShow" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('可见主机名') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
-                                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('节点分组')}">节点分组</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                            <div id="groupId" input-type="select" th:data="${'/service-ops/ops-monitor-node-group/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('启用状态')}">启用状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="nodeEnabled" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('节点分类')}">节点分类</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="type" input-type="select" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('节点子分类')}">节点子分类</div></div>
+                        <div class="layui-input-block ">
+                            <div id="subType" input-type="select" th:data="${'/service-ops/ops-monitor-node-subtype/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -72,26 +122,17 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7309-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8128-fieldset">
             <legend>数据采集</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-7309-content">
+        <div class="layui-row form-row" id="random-8128-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
+            <div class="layui-col-xs4 form-column" >
 
 
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('SSH端口')}">SSH端口</div></div>
-                        <div class="layui-input-block ">
-                            <input lay-filter="sshPort" id="sshPort" name="sshPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('SSH端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
-                        </div>
-                    </div>
-
-
-                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('凭证(SSH)')}">凭证(SSH)</div></div>
                         <div class="layui-input-block ">
@@ -100,11 +141,49 @@
                     </div>
 
 
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('SSH端口')}">SSH端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="sshPort" id="sshPort" name="sshPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('SSH端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
                 <!--结束：栏次内字段循环-->
             </div>
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs6 form-column" >
+            <div class="layui-col-xs4 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Snmp端口')}">Snmp端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="snmpPort" id="snmpPort" name="snmpPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Snmp端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Snmp版本')}">Snmp版本</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="snmpVersion" id="snmpVersion" name="snmpVersion" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Snmp版本') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Snmp团体')}">Snmp团体</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="snmpCommunity" id="snmpCommunity" name="snmpCommunity" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Snmp团体') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs4 form-column" >
 
 
                     <div class="layui-form-item" >
@@ -124,14 +203,36 @@
                     </div>
 
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('Snmp端口')}">Snmp端口</div></div>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Jdbc地址')}">Jdbc地址</div></div>
                         <div class="layui-input-block ">
-                            <input lay-filter="snmpPort" id="snmpPort" name="snmpPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Snmp端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                            <input lay-filter="jdbcUrl" id="jdbcUrl" name="jdbcUrl" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Jdbc地址') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1263-fieldset">
+            <legend>数据采集</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-1263-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs12 form-column" >
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -159,7 +260,9 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"nodeIp":{"labelInForm":"IP","inputType":"text_input","required":true}};
+    var SELECT_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
+    var VALIDATE_CONFIG={"nodeNameShow":{"labelInForm":"可见主机名","inputType":"text_input","required":true},"nodeEnabled":{"labelInForm":"启用状态","inputType":"select_box","required":true},"nodeIp":{"labelInForm":"IP","inputType":"text_input","required":true},"type":{"labelInForm":"节点分类","inputType":"select_box","required":true},"status":{"labelInForm":"监控状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="ops_monitor_node";
 
 

@@ -60,6 +60,8 @@ public class MonitorRelationManager extends RelationManager {
         this.property(MonitorNodeMeta.MONITOR_NODE_SUB_TYPE_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.SUB_TYPE).join(EAMTables.OPS_MONITOR_NODE_SUBTYPE.CODE);
 
+        this.property(MonitorNodeMeta.MONITOR_NODE_GROUP_PROP)
+                .using(EAMTables.OPS_MONITOR_NODE.GROUP_ID).join(EAMTables.OPS_MONITOR_NODE_GROUP.ID);
 
 //        this.property(MonitorNodeMeta.MONITOR_NODE_HOST_PROP)
 //                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_HOST.NODE_ID);

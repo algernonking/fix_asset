@@ -18,6 +18,7 @@ public class MonitorVoucherGtr extends BaseCodeGenerator{
 
         cfg.view().search().inputLayout(
                 new Object[]{
+                        EAMTables.OPS_MONITOR_VOUCHER.NAME,
                         EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT,
                         EAMTables.OPS_MONITOR_VOUCHER.NOTES,
                 }
@@ -26,11 +27,13 @@ public class MonitorVoucherGtr extends BaseCodeGenerator{
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);
         cfg.view().search().inputWidth(Config.searchInputWidth);
+        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NAME).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NOTES).search().fuzzySearch();
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ID).table().disable(true);
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.CREATE_TIME).table().disable(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.NAME).form().validate().required();
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT).form().validate().required();
         cfg.view().field(EAMTables.OPS_MONITOR_VOUCHER.VOUCHER).form().validate().required();
 
@@ -38,6 +41,7 @@ public class MonitorVoucherGtr extends BaseCodeGenerator{
         cfg.view().formWindow().width("800px");
         cfg.view().form().addGroup(null,
                 new Object[] {
+                        EAMTables.OPS_MONITOR_VOUCHER.NAME,
                         EAMTables.OPS_MONITOR_VOUCHER.ACCOUNT,
                         EAMTables.OPS_MONITOR_VOUCHER.VOUCHER,
                         EAMTables.OPS_MONITOR_VOUCHER.NOTES,

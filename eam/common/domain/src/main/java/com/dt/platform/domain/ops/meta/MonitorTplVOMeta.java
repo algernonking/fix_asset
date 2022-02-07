@@ -12,7 +12,7 @@ import com.dt.platform.domain.ops.MonitorTplIndicator;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:22
+ * @since 2022-02-07 13:14:35
  * @sign 5E82A88D7E6E0AB023724D065E3AED68
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 监控凭证
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:33
- * @sign F9E4E39EAFDE5B91B0664E68FC995779
+ * @since 2022-02-07 12:13:33
+ * @sign 0A89ECC777CA5663F8DE2380F823F667
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +34,12 @@ public class MonitorVoucher extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 名称：名称
+	*/
+	@ApiModelProperty(required = false,value="名称" , notes = "名称")
+	private String name;
 	
 	/**
 	 * 账户：账户
@@ -117,6 +123,25 @@ public class MonitorVoucher extends Entity {
 	*/
 	public MonitorVoucher setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 名称<br>
+	 * 名称
+	 * @return 名称
+	*/
+	public String getName() {
+		return name;
+	}
+	
+	/**
+	 * 设置 名称
+	 * @param name 名称
+	 * @return 当前对象
+	*/
+	public MonitorVoucher setName(String name) {
+		this.name=name;
 		return this;
 	}
 	

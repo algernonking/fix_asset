@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 监控凭证 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:33
+ * @since 2022-02-07 12:13:33
 */
 
 @Api(tags = "监控凭证")
@@ -65,10 +65,11 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "添加监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class , example = "root"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "RootOracle123456789@"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试12"),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MonitorVoucherServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -85,7 +86,7 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "删除监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorVoucherVOMeta.ID)
@@ -119,10 +120,11 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "更新监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class , example = "root"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "RootOracle123456789@"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试12"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorVoucherVOMeta.PAGE_INDEX , MonitorVoucherVOMeta.PAGE_SIZE , MonitorVoucherVOMeta.SEARCH_FIELD , MonitorVoucherVOMeta.FUZZY_FIELD , MonitorVoucherVOMeta.SEARCH_VALUE , MonitorVoucherVOMeta.DIRTY_FIELDS , MonitorVoucherVOMeta.SORT_FIELD , MonitorVoucherVOMeta.SORT_TYPE , MonitorVoucherVOMeta.IDS } )
 	@NotNull(name = MonitorVoucherVOMeta.ID)
@@ -139,10 +141,11 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "保存监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class , example = "root"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "RootOracle123456789@"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorVoucherVOMeta.PAGE_INDEX , MonitorVoucherVOMeta.PAGE_SIZE , MonitorVoucherVOMeta.SEARCH_FIELD , MonitorVoucherVOMeta.FUZZY_FIELD , MonitorVoucherVOMeta.SEARCH_VALUE , MonitorVoucherVOMeta.DIRTY_FIELDS , MonitorVoucherVOMeta.SORT_FIELD , MonitorVoucherVOMeta.SORT_TYPE , MonitorVoucherVOMeta.IDS } )
 	@NotNull(name = MonitorVoucherVOMeta.ID)
@@ -198,10 +201,11 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "查询监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class , example = "root"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "RootOracle123456789@"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试12"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorVoucherVOMeta.PAGE_INDEX , MonitorVoucherVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MonitorVoucherServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -219,10 +223,11 @@ public class MonitorVoucherController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询监控凭证")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.ACCOUNT , value = "账户" , required = false , dataTypeClass=String.class , example = "root"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.VOUCHER , value = "凭证" , required = false , dataTypeClass=String.class , example = "RootOracle123456789@"),
+		@ApiImplicitParam(name = MonitorVoucherVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "测试12"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MonitorVoucherServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

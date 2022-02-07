@@ -2,7 +2,7 @@
 /**
  * 节点类型 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:29
+ * @since 2022-02-07 09:51:43
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-9766-content">
+        <div class="layui-row form-row" id="random-0740-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -51,14 +51,12 @@
                         </div>
                     </div>
 
-                
-                    <div class="layui-form-item" >
-                    <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block layui-input-block-c1">
-                        <textarea lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" class="layui-textarea" style="height: 120px" ></textarea>
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('编码')}">编码</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="code" id="code" name="code" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('编码') }" type="text" class="layui-input"    lay-verify="|required"  />
+                        </div>
                     </div>
-                </div>
-
 
                                     <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
@@ -93,7 +91,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_area","required":true}};
+    var VALIDATE_CONFIG={"code":{"labelInForm":"编码","inputType":"text_input","required":true}};
     var AUTH_PREFIX="ops_monitor_node_type";
 
 

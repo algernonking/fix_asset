@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-06 10:17:03
+ * @since 2022-02-07 13:48:01
  */
 
 function FormPage() {
@@ -305,6 +305,8 @@ function FormPage() {
 
 
 
+			//设置  状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  模版 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#monitorTplCode",formData.tpl);
 			//设置  采集方式 设置下拉框勾选
@@ -367,6 +369,8 @@ function FormPage() {
 
 
 
+		//获取 状态 下拉框的值
+		data["status"]=fox.getSelectedValue("status",false);
 		//获取 模版 下拉框的值
 		data["monitorTplCode"]=fox.getSelectedValue("monitorTplCode",false);
 		//获取 采集方式 下拉框的值

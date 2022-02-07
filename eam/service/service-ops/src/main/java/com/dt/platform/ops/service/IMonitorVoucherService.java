@@ -21,7 +21,7 @@ import com.github.foxnic.dao.data.SaveMode;
  * 监控凭证 服务接口
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-05 16:28:33
+ * @since 2022-02-07 12:13:33
 */
 
 public interface IMonitorVoucherService extends ISuperService<MonitorVoucher> {
