@@ -2,7 +2,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:22
+ * @since 2022-02-06 10:17:02
  */
  -->
  <!DOCTYPE html>
@@ -39,20 +39,30 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 模版 , monitorTplCode ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=true -->
                     <!-- 编码 , code ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('编码')}" class="search-label code-label">编码</span><span class="search-colon">:</span></div>
                         <input id="code" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- 指标类型 , indicatorType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 值行数 , valueDataRows ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 值类型 , valueType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 来源类型 , sourceType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 来源数据 , sourceValue ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 数值类型 , valueColumnType ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 模版 , monitorTplCode ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 监控方式 , monitorMethod ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 指标类型 , indicatorType ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 值行数 , valueColumnRows ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 值列数 , valueColumnCols ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 数值类型 , valueColumnType ,typeName=select_box, isHideInSearch=true -->
                     <!-- 数值字段 , valueColumn ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 描述 , valueColumnDesc ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 数值字段映射 , valueColumnMap ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字段名称 , valueColumnName ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 字段描述 , valueColumnDesc ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 超时(秒) , timeOut ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 间隔时间(秒） , intervalTime ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 数据保留天数 , dataKeepDay ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 命令 , command ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
+                    <!-- snmp , snmpOid ,typeName=text_input, isHideInSearch=true -->
+                    <!-- snmp版本 , snmpVersion ,typeName=text_input, isHideInSearch=true -->
+                    <!-- snmp团体 , snmpCommunity ,typeName=text_input, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
@@ -111,6 +121,11 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var SELECT_MONITORMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorMethodEnum')}]];
+    var SELECT_VALUECOLUMNROWS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnRowsEnum')}]];
+    var SELECT_VALUECOLUMNCOLS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnColsEnum')}]];
+    var SELECT_VALUECOLUMNTYPE_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnTypeEnum')}]];
     var AUTH_PREFIX="ops_monitor_tpl_indicator";
 
 

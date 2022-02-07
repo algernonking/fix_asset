@@ -2,7 +2,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:28
+ * @since 2022-02-06 23:40:32
  */
  -->
  <!DOCTYPE html>
@@ -41,8 +41,10 @@
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 节点 , nodeId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控模版 , monitorTplCode ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 结果状态 , resultStatus ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 结果内容 , resultMessage ,typeName=text_input, isHideInSearch=true -->
                     <!-- 指标 , indicatorCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 主机名称 , hostname ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 主机名称 , hostname ,typeName=text_input, isHideInSearch=true -->
                     <!-- 启动时间 , boottime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 系统 , osVerion ,typeName=text_input, isHideInSearch=true -->
                     <!-- 架构 , arch ,typeName=text_input, isHideInSearch=false -->
@@ -50,9 +52,8 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('架构')}" class="search-label arch-label">架构</span><span class="search-colon">:</span></div>
                         <input id="arch" class="layui-input search-input" style="width: 150px" type="text" />
                     </div>
-                    <!-- CPU数量 , cpu ,typeName=number_input, isHideInSearch=true -->
-                    <!-- CPU主频 , cpuFre ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 内存(M) , memory ,typeName=number_input, isHideInSearch=true -->
+                    <!-- CPU数量 , cpuNumber ,typeName=number_input, isHideInSearch=true -->
+                    <!-- CPU主频 , cpuFree ,typeName=number_input, isHideInSearch=true -->
                     <!-- cpuSys , cpuSys ,typeName=number_input, isHideInSearch=true -->
                     <!-- cpuUser , cpuUser ,typeName=number_input, isHideInSearch=true -->
                     <!-- cpuWait , cpuWait ,typeName=number_input, isHideInSearch=true -->
@@ -61,13 +62,13 @@
                     <!-- 系统负载 , osLoad ,typeName=number_input, isHideInSearch=true -->
                     <!-- 系统负载5 , osLoad5 ,typeName=number_input, isHideInSearch=true -->
                     <!-- 系统负载15 , osLoad15 ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 内存使用率 , memoryUsed ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 虚拟内存使用率 , vmemoryUsed ,typeName=number_input, isHideInSearch=true -->
                     <!-- 上行流量 , networkFlowUp ,typeName=number_input, isHideInSearch=true -->
                     <!-- 下流量 , networkFlowDown ,typeName=number_input, isHideInSearch=true -->
                     <!-- 连接数 , processCnt ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 内存 , pMemoryUsed ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 虚拟内存 , vMemoryUsed ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 物理内存(M) , pMemorySize ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 虚拟内存(M) , vMemorySize ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 物理内存使用率 , pMemoryUsed ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 虚拟内存使用率 , vMemoryUsed ,typeName=number_input, isHideInSearch=true -->
                     <!-- 信息 , info ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签1 , label1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签2 , label2 ,typeName=text_input, isHideInSearch=true -->
@@ -81,9 +82,9 @@
                     <!-- 字符串1 , valueStr1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字符串2 , valueStr2 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字符串3 , valueStr3 ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 整数1 , valueInt1 ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 整数2 , valueInt2 ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 整数3 , valueInt3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数1 , valueInt1 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 整数2 , valueInt2 ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 整数3 , valueInt3 ,typeName=number_input, isHideInSearch=true -->
                     <!-- 唯一标识 , uid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 记录时间 , recordTime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 标签列1 , listLabel1 ,typeName=text_input, isHideInSearch=true -->
@@ -91,7 +92,7 @@
                     <!-- 标签列3 , listLabel3 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 编码列1 , listCode1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 编码列2 , listCode2 ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 编码列3 , listCode23 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 编码列3 , listCode3 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 数值列1 , listValueNumber1 ,typeName=number_input, isHideInSearch=true -->
                     <!-- 数值列2 , listValueNumber2 ,typeName=number_input, isHideInSearch=true -->
                     <!-- 数值列3 , listValueNumber3 ,typeName=number_input, isHideInSearch=true -->
@@ -149,6 +150,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_RESULTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorNodeValueResultStatusEnum')}]];
     var AUTH_PREFIX="ops_monitor_node_value";
 
 

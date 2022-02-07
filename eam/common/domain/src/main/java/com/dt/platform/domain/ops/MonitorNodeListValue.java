@@ -17,7 +17,7 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点列表数值
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:28
+ * @since 2022-02-05 16:28:31
  * @sign D3FDF70A1984A31288B8B95934712149
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

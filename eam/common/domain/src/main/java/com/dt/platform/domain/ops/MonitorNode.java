@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:24
- * @sign CBB8A2FF42F09A6A32F5DF8CBB015377
+ * @since 2022-02-06 23:40:23
+ * @sign F1130328DD237A12B8989BCBB5FDE1FB
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -92,10 +92,46 @@ public class MonitorNode extends Entity {
 	private String status;
 	
 	/**
-	 * 监控方式：监控方式
+	 * SSH端口：SSH端口
 	*/
-	@ApiModelProperty(required = false,value="监控方式" , notes = "监控方式")
-	private String monitorMethod;
+	@ApiModelProperty(required = false,value="SSH端口" , notes = "SSH端口")
+	private Integer sshPort;
+	
+	/**
+	 * 凭证(SSH)：凭证(SSH)
+	*/
+	@ApiModelProperty(required = false,value="凭证(SSH)" , notes = "凭证(SSH)")
+	private String sshVoucherId;
+	
+	/**
+	 * Agent端口：Agent端口
+	*/
+	@ApiModelProperty(required = false,value="Agent端口" , notes = "Agent端口")
+	private Integer agentPort;
+	
+	/**
+	 * Snmp端口：Snmp端口
+	*/
+	@ApiModelProperty(required = false,value="Snmp端口" , notes = "Snmp端口")
+	private Integer snmpPort;
+	
+	/**
+	 * Jmx端口：Jmx端口
+	*/
+	@ApiModelProperty(required = false,value="Jmx端口" , notes = "Jmx端口")
+	private Integer jmxPort;
+	
+	/**
+	 * Jmx端口：Jmx端口
+	*/
+	@ApiModelProperty(required = false,value="Jmx端口" , notes = "Jmx端口")
+	private Integer impiPort;
+	
+	/**
+	 * Jdbc地址：Jdbc地址
+	*/
+	@ApiModelProperty(required = false,value="Jdbc地址" , notes = "Jdbc地址")
+	private String jdbcUrl;
 	
 	/**
 	 * 备注：备注
@@ -152,6 +188,18 @@ public class MonitorNode extends Entity {
 	private Integer version;
 	
 	/**
+	 * ssh凭证：ssh凭证
+	*/
+	@ApiModelProperty(required = false,value="ssh凭证" , notes = "ssh凭证")
+	private MonitorVoucher sshVoucher;
+	
+	/**
+	 * 监控模版：监控模版
+	*/
+	@ApiModelProperty(required = false,value="监控模版" , notes = "监控模版")
+	private List<MonitorTpl> monitorTplList;
+	
+	/**
 	 * 节点类型：节点类型
 	*/
 	@ApiModelProperty(required = false,value="节点类型" , notes = "节点类型")
@@ -164,12 +212,6 @@ public class MonitorNode extends Entity {
 	private MonitorNodeSubtype monitorNodeSubType;
 	
 	/**
-	 * 主机信息：主机信息
-	*/
-	@ApiModelProperty(required = false,value="主机信息" , notes = "主机信息")
-	private MonitorNodeHost monitorNodeHost;
-	
-	/**
 	 * 数据库信息：数据库信息
 	*/
 	@ApiModelProperty(required = false,value="数据库信息" , notes = "数据库信息")
@@ -180,12 +222,6 @@ public class MonitorNode extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="数值信息" , notes = "数值信息")
 	private List<MonitorNodeValue> monitorNodeValueList;
-	
-	/**
-	 * 列表数值信息：列表数值信息
-	*/
-	@ApiModelProperty(required = false,value="列表数值信息" , notes = "列表数值信息")
-	private List<MonitorNodeListValue> monitorNodeListValueList;
 	
 	/**
 	 * 获得 主键<br>
@@ -378,21 +414,135 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 监控方式<br>
-	 * 监控方式
-	 * @return 监控方式
+	 * 获得 SSH端口<br>
+	 * SSH端口
+	 * @return SSH端口
 	*/
-	public String getMonitorMethod() {
-		return monitorMethod;
+	public Integer getSshPort() {
+		return sshPort;
 	}
 	
 	/**
-	 * 设置 监控方式
-	 * @param monitorMethod 监控方式
+	 * 设置 SSH端口
+	 * @param sshPort SSH端口
 	 * @return 当前对象
 	*/
-	public MonitorNode setMonitorMethod(String monitorMethod) {
-		this.monitorMethod=monitorMethod;
+	public MonitorNode setSshPort(Integer sshPort) {
+		this.sshPort=sshPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 凭证(SSH)<br>
+	 * 凭证(SSH)
+	 * @return 凭证(SSH)
+	*/
+	public String getSshVoucherId() {
+		return sshVoucherId;
+	}
+	
+	/**
+	 * 设置 凭证(SSH)
+	 * @param sshVoucherId 凭证(SSH)
+	 * @return 当前对象
+	*/
+	public MonitorNode setSshVoucherId(String sshVoucherId) {
+		this.sshVoucherId=sshVoucherId;
+		return this;
+	}
+	
+	/**
+	 * 获得 Agent端口<br>
+	 * Agent端口
+	 * @return Agent端口
+	*/
+	public Integer getAgentPort() {
+		return agentPort;
+	}
+	
+	/**
+	 * 设置 Agent端口
+	 * @param agentPort Agent端口
+	 * @return 当前对象
+	*/
+	public MonitorNode setAgentPort(Integer agentPort) {
+		this.agentPort=agentPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 Snmp端口<br>
+	 * Snmp端口
+	 * @return Snmp端口
+	*/
+	public Integer getSnmpPort() {
+		return snmpPort;
+	}
+	
+	/**
+	 * 设置 Snmp端口
+	 * @param snmpPort Snmp端口
+	 * @return 当前对象
+	*/
+	public MonitorNode setSnmpPort(Integer snmpPort) {
+		this.snmpPort=snmpPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 Jmx端口<br>
+	 * Jmx端口
+	 * @return Jmx端口
+	*/
+	public Integer getJmxPort() {
+		return jmxPort;
+	}
+	
+	/**
+	 * 设置 Jmx端口
+	 * @param jmxPort Jmx端口
+	 * @return 当前对象
+	*/
+	public MonitorNode setJmxPort(Integer jmxPort) {
+		this.jmxPort=jmxPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 Jmx端口<br>
+	 * Jmx端口
+	 * @return Jmx端口
+	*/
+	public Integer getImpiPort() {
+		return impiPort;
+	}
+	
+	/**
+	 * 设置 Jmx端口
+	 * @param impiPort Jmx端口
+	 * @return 当前对象
+	*/
+	public MonitorNode setImpiPort(Integer impiPort) {
+		this.impiPort=impiPort;
+		return this;
+	}
+	
+	/**
+	 * 获得 Jdbc地址<br>
+	 * Jdbc地址
+	 * @return Jdbc地址
+	*/
+	public String getJdbcUrl() {
+		return jdbcUrl;
+	}
+	
+	/**
+	 * 设置 Jdbc地址
+	 * @param jdbcUrl Jdbc地址
+	 * @return 当前对象
+	*/
+	public MonitorNode setJdbcUrl(String jdbcUrl) {
+		this.jdbcUrl=jdbcUrl;
 		return this;
 	}
 	
@@ -568,6 +718,55 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
+	 * 获得 ssh凭证<br>
+	 * ssh凭证
+	 * @return ssh凭证
+	*/
+	public MonitorVoucher getSshVoucher() {
+		return sshVoucher;
+	}
+	
+	/**
+	 * 设置 ssh凭证
+	 * @param sshVoucher ssh凭证
+	 * @return 当前对象
+	*/
+	public MonitorNode setSshVoucher(MonitorVoucher sshVoucher) {
+		this.sshVoucher=sshVoucher;
+		return this;
+	}
+	
+	/**
+	 * 获得 监控模版<br>
+	 * 监控模版
+	 * @return 监控模版
+	*/
+	public List<MonitorTpl> getMonitorTplList() {
+		return monitorTplList;
+	}
+	
+	/**
+	 * 设置 监控模版
+	 * @param monitorTplList 监控模版
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorTplList(List<MonitorTpl> monitorTplList) {
+		this.monitorTplList=monitorTplList;
+		return this;
+	}
+	
+	/**
+	 * 添加 监控模版
+	 * @param monitorTpl 监控模版
+	 * @return 当前对象
+	*/
+	public MonitorNode addMonitorTpl(MonitorTpl monitorTpl) {
+		if(this.monitorTplList==null) monitorTplList=new ArrayList<>();
+		this.monitorTplList.add(monitorTpl);
+		return this;
+	}
+	
+	/**
 	 * 获得 节点类型<br>
 	 * 节点类型
 	 * @return 节点类型
@@ -602,25 +801,6 @@ public class MonitorNode extends Entity {
 	*/
 	public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
 		this.monitorNodeSubType=monitorNodeSubType;
-		return this;
-	}
-	
-	/**
-	 * 获得 主机信息<br>
-	 * 主机信息
-	 * @return 主机信息
-	*/
-	public MonitorNodeHost getMonitorNodeHost() {
-		return monitorNodeHost;
-	}
-	
-	/**
-	 * 设置 主机信息
-	 * @param monitorNodeHost 主机信息
-	 * @return 当前对象
-	*/
-	public MonitorNode setMonitorNodeHost(MonitorNodeHost monitorNodeHost) {
-		this.monitorNodeHost=monitorNodeHost;
 		return this;
 	}
 	
@@ -670,36 +850,6 @@ public class MonitorNode extends Entity {
 	public MonitorNode addMonitorNodeValue(MonitorNodeValue monitorNodeValue) {
 		if(this.monitorNodeValueList==null) monitorNodeValueList=new ArrayList<>();
 		this.monitorNodeValueList.add(monitorNodeValue);
-		return this;
-	}
-	
-	/**
-	 * 获得 列表数值信息<br>
-	 * 列表数值信息
-	 * @return 列表数值信息
-	*/
-	public List<MonitorNodeListValue> getMonitorNodeListValueList() {
-		return monitorNodeListValueList;
-	}
-	
-	/**
-	 * 设置 列表数值信息
-	 * @param monitorNodeListValueList 列表数值信息
-	 * @return 当前对象
-	*/
-	public MonitorNode setMonitorNodeListValueList(List<MonitorNodeListValue> monitorNodeListValueList) {
-		this.monitorNodeListValueList=monitorNodeListValueList;
-		return this;
-	}
-	
-	/**
-	 * 添加 列表数值信息
-	 * @param monitorNodeListValue 列表数值信息
-	 * @return 当前对象
-	*/
-	public MonitorNode addMonitorNodeListValue(MonitorNodeListValue monitorNodeListValue) {
-		if(this.monitorNodeListValueList==null) monitorNodeListValueList=new ArrayList<>();
-		this.monitorNodeListValueList.add(monitorNodeListValue);
 		return this;
 	}
 

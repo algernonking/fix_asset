@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版指标
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:22
- * @sign A87A02F9B410468FDF85794733B1F07D
+ * @since 2022-02-06 10:17:01
+ * @sign C711DCE90AECC966FAA063EC75571215
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,10 +36,10 @@ public class MonitorTplIndicator extends Entity {
 	private String id;
 	
 	/**
-	 * 监控模版：监控模版
+	 * 状态：状态
 	*/
-	@ApiModelProperty(required = false,value="监控模版" , notes = "监控模版")
-	private String monitorTplCode;
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 名称：名称
@@ -54,6 +54,18 @@ public class MonitorTplIndicator extends Entity {
 	private String code;
 	
 	/**
+	 * 监控模版：监控模版
+	*/
+	@ApiModelProperty(required = false,value="监控模版" , notes = "监控模版")
+	private String monitorTplCode;
+	
+	/**
+	 * 监控方式：监控方式
+	*/
+	@ApiModelProperty(required = false,value="监控方式" , notes = "监控方式")
+	private String monitorMethod;
+	
+	/**
 	 * 指标类型：指标类型
 	*/
 	@ApiModelProperty(required = false,value="指标类型" , notes = "指标类型")
@@ -63,25 +75,13 @@ public class MonitorTplIndicator extends Entity {
 	 * 值行数：值行数
 	*/
 	@ApiModelProperty(required = false,value="值行数" , notes = "值行数")
-	private String valueDataRows;
+	private String valueColumnRows;
 	
 	/**
-	 * 值类型：值类型
+	 * 值列数：值列数
 	*/
-	@ApiModelProperty(required = false,value="值类型" , notes = "值类型")
-	private String valueType;
-	
-	/**
-	 * 来源类型：来源类型
-	*/
-	@ApiModelProperty(required = false,value="来源类型" , notes = "来源类型")
-	private String sourceType;
-	
-	/**
-	 * 来源数据：来源数据
-	*/
-	@ApiModelProperty(required = false,value="来源数据" , notes = "来源数据")
-	private String sourceValue;
+	@ApiModelProperty(required = false,value="值列数" , notes = "值列数")
+	private String valueColumnCols;
 	
 	/**
 	 * 数值类型：数值类型
@@ -96,10 +96,70 @@ public class MonitorTplIndicator extends Entity {
 	private String valueColumn;
 	
 	/**
-	 * 描述：描述
+	 * 数值字段映射：数值字段映射
 	*/
-	@ApiModelProperty(required = false,value="描述" , notes = "描述")
+	@ApiModelProperty(required = false,value="数值字段映射" , notes = "数值字段映射")
+	private String valueColumnMap;
+	
+	/**
+	 * 字段名称：字段名称
+	*/
+	@ApiModelProperty(required = false,value="字段名称" , notes = "字段名称")
+	private String valueColumnName;
+	
+	/**
+	 * 字段描述：字段描述
+	*/
+	@ApiModelProperty(required = false,value="字段描述" , notes = "字段描述")
 	private String valueColumnDesc;
+	
+	/**
+	 * 超时(秒)：超时(秒)
+	*/
+	@ApiModelProperty(required = false,value="超时(秒)" , notes = "超时(秒)")
+	private Integer timeOut;
+	
+	/**
+	 * 间隔时间(秒）：间隔时间(秒）
+	*/
+	@ApiModelProperty(required = false,value="间隔时间(秒）" , notes = "间隔时间(秒）")
+	private Integer intervalTime;
+	
+	/**
+	 * 数据保留天数：数据保留天数
+	*/
+	@ApiModelProperty(required = false,value="数据保留天数" , notes = "数据保留天数")
+	private Integer dataKeepDay;
+	
+	/**
+	 * 命令：命令
+	*/
+	@ApiModelProperty(required = false,value="命令" , notes = "命令")
+	private String command;
+	
+	/**
+	 * 标签：标签
+	*/
+	@ApiModelProperty(required = false,value="标签" , notes = "标签")
+	private String label;
+	
+	/**
+	 * snmp：snmp
+	*/
+	@ApiModelProperty(required = false,value="snmp" , notes = "snmp")
+	private String snmpOid;
+	
+	/**
+	 * snmp版本：snmp版本
+	*/
+	@ApiModelProperty(required = false,value="snmp版本" , notes = "snmp版本")
+	private String snmpVersion;
+	
+	/**
+	 * snmp团体：snmp团体
+	*/
+	@ApiModelProperty(required = false,value="snmp团体" , notes = "snmp团体")
+	private String snmpCommunity;
 	
 	/**
 	 * 备注：备注
@@ -162,6 +222,12 @@ public class MonitorTplIndicator extends Entity {
 	private MonitorTpl tpl;
 	
 	/**
+	 * 指标类型：指标类型
+	*/
+	@ApiModelProperty(required = false,value="指标类型" , notes = "指标类型")
+	private MonitorTplIndicatorType monitorIndicatorType;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -181,21 +247,21 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
-	 * 获得 监控模版<br>
-	 * 监控模版
-	 * @return 监控模版
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
 	*/
-	public String getMonitorTplCode() {
-		return monitorTplCode;
+	public String getStatus() {
+		return status;
 	}
 	
 	/**
-	 * 设置 监控模版
-	 * @param monitorTplCode 监控模版
+	 * 设置 状态
+	 * @param status 状态
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicator setMonitorTplCode(String monitorTplCode) {
-		this.monitorTplCode=monitorTplCode;
+	public MonitorTplIndicator setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -238,6 +304,44 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
+	 * 获得 监控模版<br>
+	 * 监控模版
+	 * @return 监控模版
+	*/
+	public String getMonitorTplCode() {
+		return monitorTplCode;
+	}
+	
+	/**
+	 * 设置 监控模版
+	 * @param monitorTplCode 监控模版
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setMonitorTplCode(String monitorTplCode) {
+		this.monitorTplCode=monitorTplCode;
+		return this;
+	}
+	
+	/**
+	 * 获得 监控方式<br>
+	 * 监控方式
+	 * @return 监控方式
+	*/
+	public String getMonitorMethod() {
+		return monitorMethod;
+	}
+	
+	/**
+	 * 设置 监控方式
+	 * @param monitorMethod 监控方式
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setMonitorMethod(String monitorMethod) {
+		this.monitorMethod=monitorMethod;
+		return this;
+	}
+	
+	/**
 	 * 获得 指标类型<br>
 	 * 指标类型
 	 * @return 指标类型
@@ -261,74 +365,36 @@ public class MonitorTplIndicator extends Entity {
 	 * 值行数
 	 * @return 值行数
 	*/
-	public String getValueDataRows() {
-		return valueDataRows;
+	public String getValueColumnRows() {
+		return valueColumnRows;
 	}
 	
 	/**
 	 * 设置 值行数
-	 * @param valueDataRows 值行数
+	 * @param valueColumnRows 值行数
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicator setValueDataRows(String valueDataRows) {
-		this.valueDataRows=valueDataRows;
+	public MonitorTplIndicator setValueColumnRows(String valueColumnRows) {
+		this.valueColumnRows=valueColumnRows;
 		return this;
 	}
 	
 	/**
-	 * 获得 值类型<br>
-	 * 值类型
-	 * @return 值类型
+	 * 获得 值列数<br>
+	 * 值列数
+	 * @return 值列数
 	*/
-	public String getValueType() {
-		return valueType;
+	public String getValueColumnCols() {
+		return valueColumnCols;
 	}
 	
 	/**
-	 * 设置 值类型
-	 * @param valueType 值类型
+	 * 设置 值列数
+	 * @param valueColumnCols 值列数
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicator setValueType(String valueType) {
-		this.valueType=valueType;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源类型<br>
-	 * 来源类型
-	 * @return 来源类型
-	*/
-	public String getSourceType() {
-		return sourceType;
-	}
-	
-	/**
-	 * 设置 来源类型
-	 * @param sourceType 来源类型
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setSourceType(String sourceType) {
-		this.sourceType=sourceType;
-		return this;
-	}
-	
-	/**
-	 * 获得 来源数据<br>
-	 * 来源数据
-	 * @return 来源数据
-	*/
-	public String getSourceValue() {
-		return sourceValue;
-	}
-	
-	/**
-	 * 设置 来源数据
-	 * @param sourceValue 来源数据
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setSourceValue(String sourceValue) {
-		this.sourceValue=sourceValue;
+	public MonitorTplIndicator setValueColumnCols(String valueColumnCols) {
+		this.valueColumnCols=valueColumnCols;
 		return this;
 	}
 	
@@ -371,21 +437,211 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
-	 * 获得 描述<br>
-	 * 描述
-	 * @return 描述
+	 * 获得 数值字段映射<br>
+	 * 数值字段映射
+	 * @return 数值字段映射
+	*/
+	public String getValueColumnMap() {
+		return valueColumnMap;
+	}
+	
+	/**
+	 * 设置 数值字段映射
+	 * @param valueColumnMap 数值字段映射
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setValueColumnMap(String valueColumnMap) {
+		this.valueColumnMap=valueColumnMap;
+		return this;
+	}
+	
+	/**
+	 * 获得 字段名称<br>
+	 * 字段名称
+	 * @return 字段名称
+	*/
+	public String getValueColumnName() {
+		return valueColumnName;
+	}
+	
+	/**
+	 * 设置 字段名称
+	 * @param valueColumnName 字段名称
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setValueColumnName(String valueColumnName) {
+		this.valueColumnName=valueColumnName;
+		return this;
+	}
+	
+	/**
+	 * 获得 字段描述<br>
+	 * 字段描述
+	 * @return 字段描述
 	*/
 	public String getValueColumnDesc() {
 		return valueColumnDesc;
 	}
 	
 	/**
-	 * 设置 描述
-	 * @param valueColumnDesc 描述
+	 * 设置 字段描述
+	 * @param valueColumnDesc 字段描述
 	 * @return 当前对象
 	*/
 	public MonitorTplIndicator setValueColumnDesc(String valueColumnDesc) {
 		this.valueColumnDesc=valueColumnDesc;
+		return this;
+	}
+	
+	/**
+	 * 获得 超时(秒)<br>
+	 * 超时(秒)
+	 * @return 超时(秒)
+	*/
+	public Integer getTimeOut() {
+		return timeOut;
+	}
+	
+	/**
+	 * 设置 超时(秒)
+	 * @param timeOut 超时(秒)
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setTimeOut(Integer timeOut) {
+		this.timeOut=timeOut;
+		return this;
+	}
+	
+	/**
+	 * 获得 间隔时间(秒）<br>
+	 * 间隔时间(秒）
+	 * @return 间隔时间(秒）
+	*/
+	public Integer getIntervalTime() {
+		return intervalTime;
+	}
+	
+	/**
+	 * 设置 间隔时间(秒）
+	 * @param intervalTime 间隔时间(秒）
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setIntervalTime(Integer intervalTime) {
+		this.intervalTime=intervalTime;
+		return this;
+	}
+	
+	/**
+	 * 获得 数据保留天数<br>
+	 * 数据保留天数
+	 * @return 数据保留天数
+	*/
+	public Integer getDataKeepDay() {
+		return dataKeepDay;
+	}
+	
+	/**
+	 * 设置 数据保留天数
+	 * @param dataKeepDay 数据保留天数
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setDataKeepDay(Integer dataKeepDay) {
+		this.dataKeepDay=dataKeepDay;
+		return this;
+	}
+	
+	/**
+	 * 获得 命令<br>
+	 * 命令
+	 * @return 命令
+	*/
+	public String getCommand() {
+		return command;
+	}
+	
+	/**
+	 * 设置 命令
+	 * @param command 命令
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setCommand(String command) {
+		this.command=command;
+		return this;
+	}
+	
+	/**
+	 * 获得 标签<br>
+	 * 标签
+	 * @return 标签
+	*/
+	public String getLabel() {
+		return label;
+	}
+	
+	/**
+	 * 设置 标签
+	 * @param label 标签
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setLabel(String label) {
+		this.label=label;
+		return this;
+	}
+	
+	/**
+	 * 获得 snmp<br>
+	 * snmp
+	 * @return snmp
+	*/
+	public String getSnmpOid() {
+		return snmpOid;
+	}
+	
+	/**
+	 * 设置 snmp
+	 * @param snmpOid snmp
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setSnmpOid(String snmpOid) {
+		this.snmpOid=snmpOid;
+		return this;
+	}
+	
+	/**
+	 * 获得 snmp版本<br>
+	 * snmp版本
+	 * @return snmp版本
+	*/
+	public String getSnmpVersion() {
+		return snmpVersion;
+	}
+	
+	/**
+	 * 设置 snmp版本
+	 * @param snmpVersion snmp版本
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setSnmpVersion(String snmpVersion) {
+		this.snmpVersion=snmpVersion;
+		return this;
+	}
+	
+	/**
+	 * 获得 snmp团体<br>
+	 * snmp团体
+	 * @return snmp团体
+	*/
+	public String getSnmpCommunity() {
+		return snmpCommunity;
+	}
+	
+	/**
+	 * 设置 snmp团体
+	 * @param snmpCommunity snmp团体
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setSnmpCommunity(String snmpCommunity) {
+		this.snmpCommunity=snmpCommunity;
 		return this;
 	}
 	
@@ -576,6 +832,25 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	public MonitorTplIndicator setTpl(MonitorTpl tpl) {
 		this.tpl=tpl;
+		return this;
+	}
+	
+	/**
+	 * 获得 指标类型<br>
+	 * 指标类型
+	 * @return 指标类型
+	*/
+	public MonitorTplIndicatorType getMonitorIndicatorType() {
+		return monitorIndicatorType;
+	}
+	
+	/**
+	 * 设置 指标类型
+	 * @param monitorIndicatorType 指标类型
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setMonitorIndicatorType(MonitorTplIndicatorType monitorIndicatorType) {
+		this.monitorIndicatorType=monitorIndicatorType;
 		return this;
 	}
 

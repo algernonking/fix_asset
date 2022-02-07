@@ -17,8 +17,10 @@ public enum MonitorMethodEnum implements CodeTextEnum {
     SNMP("snmp" , "SNMP方式"),
     ZABBIX("zabbix" , "Zabbix"),
     VMWARE("vmware" , "Vmware"),
-    DIRECT("direct" , "直接取数")
-    ;
+    DIRECT("direct" , "直接取数"),
+    SHELL("shell" , "shell"),
+    SCRIPT("script" , "脚本"),
+    JDBC("jdbc" , "Jdbc数据库");
 
     private String code;
     private String text;

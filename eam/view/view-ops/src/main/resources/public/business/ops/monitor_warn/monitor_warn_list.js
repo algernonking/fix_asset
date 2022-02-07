@@ -1,7 +1,7 @@
 /**
  * 节点告警 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
+ * @since 2022-02-05 16:28:32
  */
 
 
@@ -74,13 +74,13 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'nodeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型') , templet: function (d) { return templet('nodeId',d.nodeId,d);}  }
+					,{ field: 'nodeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点') , templet: function (d) { return templet('nodeId',d.nodeId,d);}  }
 					,{ field: 'nodeValueId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控数值') , templet: function (d) { return templet('nodeValueId',d.nodeValueId,d);}  }
 					,{ field: 'monitorTplCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控模版') , templet: function (d) { return templet('monitorTplCode',d.monitorTplCode,d);}  }
 					,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控指标') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
 					,{ field: 'indicatorName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('指标名称') , templet: function (d) { return templet('indicatorName',d.indicatorName,d);}  }
-					,{ field: 'warnLevel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('告警等级') , templet: function (d) { return templet('warnLevel',d.warnLevel,d);}  }
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('处理状态') , templet: function (d) { return templet('status',d.status,d);}  }
+					,{ field: 'warnLevel', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('告警等级'), templet:function (d){ return templet('warnLevel',fox.getEnumText(SELECT_WARNLEVEL_DATA,d.warnLevel),d);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('处理状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'handledTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('处理时间') ,templet: function (d) { return templet('handledTime',fox.dateFormat(d.handledTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'warnTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('告警时间') ,templet: function (d) { return templet('warnTime',fox.dateFormat(d.warnTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('内容') , templet: function (d) { return templet('content',d.content,d);}  }
@@ -128,10 +128,10 @@ function ListPage() {
 		value.monitorTplCode={ inputType:"button",value: $("#monitorTplCode").val()};
 		value.indicatorCode={ inputType:"button",value: $("#indicatorCode").val()};
 		value.indicatorName={ inputType:"button",value: $("#indicatorName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.warnLevel={ inputType:"button",value: $("#warnLevel").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
-		value.handledTime={ inputType:"date_input", value: $("#handledTime").val() ,matchType:"auto"};
-		value.warnTime={ inputType:"date_input", value: $("#warnTime").val() ,matchType:"auto"};
+		value.warnLevel={ inputType:"select_box", value: getSelectedValue("#warnLevel","value"), label:getSelectedValue("#warnLevel","nameStr") };
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
+		value.handledTime={ inputType:"date_input", begin: $("#handledTime-begin").val(), end: $("#handledTime-end").val() ,matchType:"auto" };
+		value.warnTime={ inputType:"date_input", begin: $("#warnTime-begin").val(), end: $("#warnTime-end").val() ,matchType:"auto" };
 		value.content={ inputType:"button",value: $("#content").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
@@ -182,8 +182,52 @@ function ListPage() {
 
 		fox.switchSearchRow(2);
 
+		//渲染 warnLevel 下拉字段
+		fox.renderSelectBox({
+			el: "warnLevel",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("warnLevel",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			size: "small",
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		laydate.render({
-			elem: '#handledTime',
+			elem: '#handledTime-begin',
 			trigger:"click",
 			done: function(value, date, endDate) {
 				setTimeout(function () {
@@ -192,7 +236,25 @@ function ListPage() {
 			}
 		});
 		laydate.render({
-			elem: '#warnTime',
+			elem: '#handledTime-end',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("handledTime",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#warnTime-begin',
+			trigger:"click",
+			done: function(value, date, endDate) {
+				setTimeout(function () {
+					window.pageExt.list.onDatePickerChanged && window.pageExt.list.onDatePickerChanged("warnTime",value, date, endDate);
+				},1);
+			}
+		});
+		laydate.render({
+			elem: '#warnTime-end',
 			trigger:"click",
 			done: function(value, date, endDate) {
 				setTimeout(function () {

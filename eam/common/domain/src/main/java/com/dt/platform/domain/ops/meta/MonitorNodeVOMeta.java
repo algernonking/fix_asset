@@ -5,18 +5,18 @@ import com.dt.platform.domain.ops.MonitorNodeVO;
 import java.util.List;
 import com.dt.platform.domain.ops.MonitorNode;
 import java.util.Date;
+import com.dt.platform.domain.ops.MonitorVoucher;
+import com.dt.platform.domain.ops.MonitorTpl;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.MonitorNodeSubtype;
-import com.dt.platform.domain.ops.MonitorNodeHost;
 import com.dt.platform.domain.ops.MonitorNodeDb;
 import com.dt.platform.domain.ops.MonitorNodeValue;
-import com.dt.platform.domain.ops.MonitorNodeListValue;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:24
+ * @since 2022-02-06 23:40:23
  * @sign 13F4166DF1AF357762C535703A996EE5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -214,14 +214,74 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,STATUS, java.lang.String.class, "监控状态", "监控状态", java.lang.String.class, null);
 	
 	/**
-	 * 监控方式 , 类型: java.lang.String
+	 * SSH端口 , 类型: java.lang.Integer
 	*/
-	public static final String MONITOR_METHOD="monitorMethod";
+	public static final String SSH_PORT="sshPort";
 	
 	/**
-	 * 监控方式 , 类型: java.lang.String
+	 * SSH端口 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> MONITOR_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_METHOD, java.lang.String.class, "监控方式", "监控方式", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> SSH_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_PORT, java.lang.Integer.class, "SSH端口", "SSH端口", java.lang.Integer.class, null);
+	
+	/**
+	 * 凭证(SSH) , 类型: java.lang.String
+	*/
+	public static final String SSH_VOUCHER_ID="sshVoucherId";
+	
+	/**
+	 * 凭证(SSH) , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> SSH_VOUCHER_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_VOUCHER_ID, java.lang.String.class, "凭证(SSH)", "凭证(SSH)", java.lang.String.class, null);
+	
+	/**
+	 * Agent端口 , 类型: java.lang.Integer
+	*/
+	public static final String AGENT_PORT="agentPort";
+	
+	/**
+	 * Agent端口 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> AGENT_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,AGENT_PORT, java.lang.Integer.class, "Agent端口", "Agent端口", java.lang.Integer.class, null);
+	
+	/**
+	 * Snmp端口 , 类型: java.lang.Integer
+	*/
+	public static final String SNMP_PORT="snmpPort";
+	
+	/**
+	 * Snmp端口 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> SNMP_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SNMP_PORT, java.lang.Integer.class, "Snmp端口", "Snmp端口", java.lang.Integer.class, null);
+	
+	/**
+	 * Jmx端口 , 类型: java.lang.Integer
+	*/
+	public static final String JMX_PORT="jmxPort";
+	
+	/**
+	 * Jmx端口 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> JMX_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,JMX_PORT, java.lang.Integer.class, "Jmx端口", "Jmx端口", java.lang.Integer.class, null);
+	
+	/**
+	 * Jmx端口 , 类型: java.lang.Integer
+	*/
+	public static final String IMPI_PORT="impiPort";
+	
+	/**
+	 * Jmx端口 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> IMPI_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,IMPI_PORT, java.lang.Integer.class, "Jmx端口", "Jmx端口", java.lang.Integer.class, null);
+	
+	/**
+	 * Jdbc地址 , 类型: java.lang.String
+	*/
+	public static final String JDBC_URL="jdbcUrl";
+	
+	/**
+	 * Jdbc地址 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.String> JDBC_URL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,JDBC_URL, java.lang.String.class, "Jdbc地址", "Jdbc地址", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -314,6 +374,26 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
+	 * ssh凭证 , 类型: com.dt.platform.domain.ops.MonitorVoucher
+	*/
+	public static final String SSH_VOUCHER="sshVoucher";
+	
+	/**
+	 * ssh凭证 , 类型: com.dt.platform.domain.ops.MonitorVoucher
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorVoucher> SSH_VOUCHER_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,SSH_VOUCHER, com.dt.platform.domain.ops.MonitorVoucher.class, "ssh凭证", "ssh凭证", com.dt.platform.domain.ops.MonitorVoucher.class, null);
+	
+	/**
+	 * 监控模版 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTpl
+	*/
+	public static final String MONITOR_TPL_LIST="monitorTplList";
+	
+	/**
+	 * 监控模版 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTpl
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorTpl> MONITOR_TPL_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_TPL_LIST, java.util.List.class, "监控模版", "监控模版", com.dt.platform.domain.ops.MonitorTpl.class, null);
+	
+	/**
 	 * 节点类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
 	*/
 	public static final String MONITOR_NODE_TYPE="monitorNodeType";
@@ -332,16 +412,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	 * 节点子类型 , 类型: com.dt.platform.domain.ops.MonitorNodeSubtype
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeSubtype> MONITOR_NODE_SUB_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_SUB_TYPE, com.dt.platform.domain.ops.MonitorNodeSubtype.class, "节点子类型", "节点子类型", com.dt.platform.domain.ops.MonitorNodeSubtype.class, null);
-	
-	/**
-	 * 主机信息 , 类型: com.dt.platform.domain.ops.MonitorNodeHost
-	*/
-	public static final String MONITOR_NODE_HOST="monitorNodeHost";
-	
-	/**
-	 * 主机信息 , 类型: com.dt.platform.domain.ops.MonitorNodeHost
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeHost> MONITOR_NODE_HOST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_HOST, com.dt.platform.domain.ops.MonitorNodeHost.class, "主机信息", "主机信息", com.dt.platform.domain.ops.MonitorNodeHost.class, null);
 	
 	/**
 	 * 数据库信息 , 类型: com.dt.platform.domain.ops.MonitorNodeDb
@@ -364,19 +434,9 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeValue> MONITOR_NODE_VALUE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_VALUE_LIST, java.util.List.class, "数值信息", "数值信息", com.dt.platform.domain.ops.MonitorNodeValue.class, null);
 	
 	/**
-	 * 列表数值信息 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorNodeListValue
-	*/
-	public static final String MONITOR_NODE_LIST_VALUE_LIST="monitorNodeListValueList";
-	
-	/**
-	 * 列表数值信息 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorNodeListValue
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeVO,com.dt.platform.domain.ops.MonitorNodeListValue> MONITOR_NODE_LIST_VALUE_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeVO.class ,MONITOR_NODE_LIST_VALUE_LIST, java.util.List.class, "列表数值信息", "列表数值信息", com.dt.platform.domain.ops.MonitorNodeListValue.class, null);
-	
-	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , MONITOR_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_NODE_HOST , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST , MONITOR_NODE_LIST_VALUE_LIST };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_PORT , SSH_VOUCHER_ID , AGENT_PORT , SNMP_PORT , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SSH_VOUCHER , MONITOR_TPL_LIST , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST };
 	
 	/**
 	 * 代理类
@@ -596,13 +656,79 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 监控方式
-		 * @param monitorMethod 监控方式
+		 * 设置 SSH端口
+		 * @param sshPort SSH端口
 		 * @return 当前对象
 		*/
-		public MonitorNode setMonitorMethod(String monitorMethod) {
-			super.change(MONITOR_METHOD,super.getMonitorMethod(),monitorMethod);
-			super.setMonitorMethod(monitorMethod);
+		public MonitorNode setSshPort(Integer sshPort) {
+			super.change(SSH_PORT,super.getSshPort(),sshPort);
+			super.setSshPort(sshPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 凭证(SSH)
+		 * @param sshVoucherId 凭证(SSH)
+		 * @return 当前对象
+		*/
+		public MonitorNode setSshVoucherId(String sshVoucherId) {
+			super.change(SSH_VOUCHER_ID,super.getSshVoucherId(),sshVoucherId);
+			super.setSshVoucherId(sshVoucherId);
+			return this;
+		}
+		
+		/**
+		 * 设置 Agent端口
+		 * @param agentPort Agent端口
+		 * @return 当前对象
+		*/
+		public MonitorNode setAgentPort(Integer agentPort) {
+			super.change(AGENT_PORT,super.getAgentPort(),agentPort);
+			super.setAgentPort(agentPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 Snmp端口
+		 * @param snmpPort Snmp端口
+		 * @return 当前对象
+		*/
+		public MonitorNode setSnmpPort(Integer snmpPort) {
+			super.change(SNMP_PORT,super.getSnmpPort(),snmpPort);
+			super.setSnmpPort(snmpPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 Jmx端口
+		 * @param jmxPort Jmx端口
+		 * @return 当前对象
+		*/
+		public MonitorNode setJmxPort(Integer jmxPort) {
+			super.change(JMX_PORT,super.getJmxPort(),jmxPort);
+			super.setJmxPort(jmxPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 Jmx端口
+		 * @param impiPort Jmx端口
+		 * @return 当前对象
+		*/
+		public MonitorNode setImpiPort(Integer impiPort) {
+			super.change(IMPI_PORT,super.getImpiPort(),impiPort);
+			super.setImpiPort(impiPort);
+			return this;
+		}
+		
+		/**
+		 * 设置 Jdbc地址
+		 * @param jdbcUrl Jdbc地址
+		 * @return 当前对象
+		*/
+		public MonitorNode setJdbcUrl(String jdbcUrl) {
+			super.change(JDBC_URL,super.getJdbcUrl(),jdbcUrl);
+			super.setJdbcUrl(jdbcUrl);
 			return this;
 		}
 		
@@ -706,6 +832,28 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
+		 * 设置 ssh凭证
+		 * @param sshVoucher ssh凭证
+		 * @return 当前对象
+		*/
+		public MonitorNode setSshVoucher(MonitorVoucher sshVoucher) {
+			super.change(SSH_VOUCHER,super.getSshVoucher(),sshVoucher);
+			super.setSshVoucher(sshVoucher);
+			return this;
+		}
+		
+		/**
+		 * 设置 监控模版
+		 * @param monitorTplList 监控模版
+		 * @return 当前对象
+		*/
+		public MonitorNode setMonitorTplList(List<MonitorTpl> monitorTplList) {
+			super.change(MONITOR_TPL_LIST,super.getMonitorTplList(),monitorTplList);
+			super.setMonitorTplList(monitorTplList);
+			return this;
+		}
+		
+		/**
 		 * 设置 节点类型
 		 * @param monitorNodeType 节点类型
 		 * @return 当前对象
@@ -728,17 +876,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		}
 		
 		/**
-		 * 设置 主机信息
-		 * @param monitorNodeHost 主机信息
-		 * @return 当前对象
-		*/
-		public MonitorNode setMonitorNodeHost(MonitorNodeHost monitorNodeHost) {
-			super.change(MONITOR_NODE_HOST,super.getMonitorNodeHost(),monitorNodeHost);
-			super.setMonitorNodeHost(monitorNodeHost);
-			return this;
-		}
-		
-		/**
 		 * 设置 数据库信息
 		 * @param monitorNodeDb 数据库信息
 		 * @return 当前对象
@@ -757,17 +894,6 @@ public class MonitorNodeVOMeta extends MonitorNodeMeta {
 		public MonitorNode setMonitorNodeValueList(List<MonitorNodeValue> monitorNodeValueList) {
 			super.change(MONITOR_NODE_VALUE_LIST,super.getMonitorNodeValueList(),monitorNodeValueList);
 			super.setMonitorNodeValueList(monitorNodeValueList);
-			return this;
-		}
-		
-		/**
-		 * 设置 列表数值信息
-		 * @param monitorNodeListValueList 列表数值信息
-		 * @return 当前对象
-		*/
-		public MonitorNode setMonitorNodeListValueList(List<MonitorNodeListValue> monitorNodeListValueList) {
-			super.change(MONITOR_NODE_LIST_VALUE_LIST,super.getMonitorNodeListValueList(),monitorNodeListValueList);
-			super.setMonitorNodeListValueList(monitorNodeListValueList);
 			return this;
 		}
 	}

@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.ops.MonitorMethodEnum;
+import com.dt.platform.constants.enums.ops.MonitorNodeValueResultStatusEnum;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -30,6 +32,10 @@ public class MonitorNodeValueGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.ID).table().disable(true);
+
+
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.RESULT_STATUS).form()
+                .label("结果状态").selectBox().enumType(MonitorNodeValueResultStatusEnum.class);
 
        // cfg.view().list().disableBatchDelete();
 

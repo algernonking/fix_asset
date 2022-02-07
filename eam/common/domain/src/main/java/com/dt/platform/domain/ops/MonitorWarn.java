@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.OPS_MONITOR_WARN;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点告警
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
- * @sign 395AB62670C30229468F8E2AA8A21EC5
+ * @since 2022-02-05 16:28:32
+ * @sign AF2D1B9440B00EA6B31537770BFD2D84
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -36,9 +38,9 @@ public class MonitorWarn extends Entity {
 	private String id;
 	
 	/**
-	 * 类型：类型
+	 * 节点：节点
 	*/
-	@ApiModelProperty(required = false,value="类型" , notes = "类型")
+	@ApiModelProperty(required = false,value="节点" , notes = "节点")
 	private String nodeId;
 	
 	/**
@@ -150,6 +152,18 @@ public class MonitorWarn extends Entity {
 	private Integer version;
 	
 	/**
+	 * 节点模版：节点模版
+	*/
+	@ApiModelProperty(required = false,value="节点模版" , notes = "节点模版")
+	private MonitorTpl tpl;
+	
+	/**
+	 * 节点指标：节点指标
+	*/
+	@ApiModelProperty(required = false,value="节点指标" , notes = "节点指标")
+	private List<MonitorTplIndicator> tplIndicator;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -169,17 +183,17 @@ public class MonitorWarn extends Entity {
 	}
 	
 	/**
-	 * 获得 类型<br>
-	 * 类型
-	 * @return 类型
+	 * 获得 节点<br>
+	 * 节点
+	 * @return 节点
 	*/
 	public String getNodeId() {
 		return nodeId;
 	}
 	
 	/**
-	 * 设置 类型
-	 * @param nodeId 类型
+	 * 设置 节点
+	 * @param nodeId 节点
 	 * @return 当前对象
 	*/
 	public MonitorWarn setNodeId(String nodeId) {
@@ -526,6 +540,55 @@ public class MonitorWarn extends Entity {
 	*/
 	public MonitorWarn setVersion(Integer version) {
 		this.version=version;
+		return this;
+	}
+	
+	/**
+	 * 获得 节点模版<br>
+	 * 节点模版
+	 * @return 节点模版
+	*/
+	public MonitorTpl getTpl() {
+		return tpl;
+	}
+	
+	/**
+	 * 设置 节点模版
+	 * @param tpl 节点模版
+	 * @return 当前对象
+	*/
+	public MonitorWarn setTpl(MonitorTpl tpl) {
+		this.tpl=tpl;
+		return this;
+	}
+	
+	/**
+	 * 获得 节点指标<br>
+	 * 节点指标
+	 * @return 节点指标
+	*/
+	public List<MonitorTplIndicator> getTplIndicator() {
+		return tplIndicator;
+	}
+	
+	/**
+	 * 设置 节点指标
+	 * @param tplIndicator 节点指标
+	 * @return 当前对象
+	*/
+	public MonitorWarn setTplIndicator(List<MonitorTplIndicator> tplIndicator) {
+		this.tplIndicator=tplIndicator;
+		return this;
+	}
+	
+	/**
+	 * 添加 节点指标
+	 * @param entity 节点指标
+	 * @return 当前对象
+	*/
+	public MonitorWarn addTplIndicator(MonitorTplIndicator entity) {
+		if(this.tplIndicator==null) tplIndicator=new ArrayList<>();
+		this.tplIndicator.add(entity);
 		return this;
 	}
 

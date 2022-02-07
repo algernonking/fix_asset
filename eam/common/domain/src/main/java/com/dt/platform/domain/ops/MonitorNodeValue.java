@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点数值
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:27
- * @sign 3B450BEA2C8B1256E670D581A34D5555
+ * @since 2022-02-06 23:40:31
+ * @sign 5097BDB4BF85873402394ED8CB55BE69
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -49,6 +49,18 @@ public class MonitorNodeValue extends Entity {
 	private String monitorTplCode;
 	
 	/**
+	 * 结果状态：结果状态
+	*/
+	@ApiModelProperty(required = false,value="结果状态" , notes = "结果状态")
+	private String resultStatus;
+	
+	/**
+	 * 结果内容：结果内容
+	*/
+	@ApiModelProperty(required = false,value="结果内容" , notes = "结果内容")
+	private String resultMessage;
+	
+	/**
 	 * 指标：指标
 	*/
 	@ApiModelProperty(required = false,value="指标" , notes = "指标")
@@ -58,7 +70,7 @@ public class MonitorNodeValue extends Entity {
 	 * 主机名称：主机名称
 	*/
 	@ApiModelProperty(required = false,value="主机名称" , notes = "主机名称")
-	private Date hostname;
+	private String hostname;
 	
 	/**
 	 * 启动时间：启动时间
@@ -82,19 +94,13 @@ public class MonitorNodeValue extends Entity {
 	 * CPU数量：CPU数量
 	*/
 	@ApiModelProperty(required = false,value="CPU数量" , notes = "CPU数量")
-	private Integer cpu;
+	private Integer cpuNumber;
 	
 	/**
 	 * CPU主频：CPU主频
 	*/
 	@ApiModelProperty(required = false,value="CPU主频" , notes = "CPU主频")
-	private BigDecimal cpuFre;
-	
-	/**
-	 * 内存(M)：内存(M)
-	*/
-	@ApiModelProperty(required = false,value="内存(M)" , notes = "内存(M)")
-	private Integer memory;
+	private BigDecimal cpuFree;
 	
 	/**
 	 * cpuSys：cpuSys
@@ -145,18 +151,6 @@ public class MonitorNodeValue extends Entity {
 	private BigDecimal osLoad15;
 	
 	/**
-	 * 内存使用率：内存使用率
-	*/
-	@ApiModelProperty(required = false,value="内存使用率" , notes = "内存使用率")
-	private BigDecimal memoryUsed;
-	
-	/**
-	 * 虚拟内存使用率：虚拟内存使用率
-	*/
-	@ApiModelProperty(required = false,value="虚拟内存使用率" , notes = "虚拟内存使用率")
-	private BigDecimal vmemoryUsed;
-	
-	/**
 	 * 上行流量：上行流量
 	*/
 	@ApiModelProperty(required = false,value="上行流量" , notes = "上行流量")
@@ -175,15 +169,27 @@ public class MonitorNodeValue extends Entity {
 	private Integer processCnt;
 	
 	/**
-	 * 内存：内存
+	 * 物理内存(M)：物理内存(M)
 	*/
-	@ApiModelProperty(required = false,value="内存" , notes = "内存")
+	@ApiModelProperty(required = false,value="物理内存(M)" , notes = "物理内存(M)")
+	private Integer pMemorySize;
+	
+	/**
+	 * 虚拟内存(M)：虚拟内存(M)
+	*/
+	@ApiModelProperty(required = false,value="虚拟内存(M)" , notes = "虚拟内存(M)")
+	private Integer vMemorySize;
+	
+	/**
+	 * 物理内存使用率：物理内存使用率
+	*/
+	@ApiModelProperty(required = false,value="物理内存使用率" , notes = "物理内存使用率")
 	private Integer pMemoryUsed;
 	
 	/**
-	 * 虚拟内存：虚拟内存
+	 * 虚拟内存使用率：虚拟内存使用率
 	*/
-	@ApiModelProperty(required = false,value="虚拟内存" , notes = "虚拟内存")
+	@ApiModelProperty(required = false,value="虚拟内存使用率" , notes = "虚拟内存使用率")
 	private Integer vMemoryUsed;
 	
 	/**
@@ -268,19 +274,19 @@ public class MonitorNodeValue extends Entity {
 	 * 整数1：整数1
 	*/
 	@ApiModelProperty(required = false,value="整数1" , notes = "整数1")
-	private String valueInt1;
+	private Integer valueInt1;
 	
 	/**
 	 * 整数2：整数2
 	*/
 	@ApiModelProperty(required = false,value="整数2" , notes = "整数2")
-	private String valueInt2;
+	private Integer valueInt2;
 	
 	/**
 	 * 整数3：整数3
 	*/
 	@ApiModelProperty(required = false,value="整数3" , notes = "整数3")
-	private String valueInt3;
+	private Integer valueInt3;
 	
 	/**
 	 * 唯一标识：唯一标识
@@ -328,7 +334,7 @@ public class MonitorNodeValue extends Entity {
 	 * 编码列3：编码列3
 	*/
 	@ApiModelProperty(required = false,value="编码列3" , notes = "编码列3")
-	private String listCode23;
+	private String listCode3;
 	
 	/**
 	 * 数值列1：数值列1
@@ -490,6 +496,44 @@ public class MonitorNodeValue extends Entity {
 	}
 	
 	/**
+	 * 获得 结果状态<br>
+	 * 结果状态
+	 * @return 结果状态
+	*/
+	public String getResultStatus() {
+		return resultStatus;
+	}
+	
+	/**
+	 * 设置 结果状态
+	 * @param resultStatus 结果状态
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setResultStatus(String resultStatus) {
+		this.resultStatus=resultStatus;
+		return this;
+	}
+	
+	/**
+	 * 获得 结果内容<br>
+	 * 结果内容
+	 * @return 结果内容
+	*/
+	public String getResultMessage() {
+		return resultMessage;
+	}
+	
+	/**
+	 * 设置 结果内容
+	 * @param resultMessage 结果内容
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setResultMessage(String resultMessage) {
+		this.resultMessage=resultMessage;
+		return this;
+	}
+	
+	/**
 	 * 获得 指标<br>
 	 * 指标
 	 * @return 指标
@@ -513,7 +557,7 @@ public class MonitorNodeValue extends Entity {
 	 * 主机名称
 	 * @return 主机名称
 	*/
-	public Date getHostname() {
+	public String getHostname() {
 		return hostname;
 	}
 	
@@ -522,7 +566,7 @@ public class MonitorNodeValue extends Entity {
 	 * @param hostname 主机名称
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setHostname(Date hostname) {
+	public MonitorNodeValue setHostname(String hostname) {
 		this.hostname=hostname;
 		return this;
 	}
@@ -589,17 +633,17 @@ public class MonitorNodeValue extends Entity {
 	 * CPU数量
 	 * @return CPU数量
 	*/
-	public Integer getCpu() {
-		return cpu;
+	public Integer getCpuNumber() {
+		return cpuNumber;
 	}
 	
 	/**
 	 * 设置 CPU数量
-	 * @param cpu CPU数量
+	 * @param cpuNumber CPU数量
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setCpu(Integer cpu) {
-		this.cpu=cpu;
+	public MonitorNodeValue setCpuNumber(Integer cpuNumber) {
+		this.cpuNumber=cpuNumber;
 		return this;
 	}
 	
@@ -608,36 +652,17 @@ public class MonitorNodeValue extends Entity {
 	 * CPU主频
 	 * @return CPU主频
 	*/
-	public BigDecimal getCpuFre() {
-		return cpuFre;
+	public BigDecimal getCpuFree() {
+		return cpuFree;
 	}
 	
 	/**
 	 * 设置 CPU主频
-	 * @param cpuFre CPU主频
+	 * @param cpuFree CPU主频
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setCpuFre(BigDecimal cpuFre) {
-		this.cpuFre=cpuFre;
-		return this;
-	}
-	
-	/**
-	 * 获得 内存(M)<br>
-	 * 内存(M)
-	 * @return 内存(M)
-	*/
-	public Integer getMemory() {
-		return memory;
-	}
-	
-	/**
-	 * 设置 内存(M)
-	 * @param memory 内存(M)
-	 * @return 当前对象
-	*/
-	public MonitorNodeValue setMemory(Integer memory) {
-		this.memory=memory;
+	public MonitorNodeValue setCpuFree(BigDecimal cpuFree) {
+		this.cpuFree=cpuFree;
 		return this;
 	}
 	
@@ -794,44 +819,6 @@ public class MonitorNodeValue extends Entity {
 	}
 	
 	/**
-	 * 获得 内存使用率<br>
-	 * 内存使用率
-	 * @return 内存使用率
-	*/
-	public BigDecimal getMemoryUsed() {
-		return memoryUsed;
-	}
-	
-	/**
-	 * 设置 内存使用率
-	 * @param memoryUsed 内存使用率
-	 * @return 当前对象
-	*/
-	public MonitorNodeValue setMemoryUsed(BigDecimal memoryUsed) {
-		this.memoryUsed=memoryUsed;
-		return this;
-	}
-	
-	/**
-	 * 获得 虚拟内存使用率<br>
-	 * 虚拟内存使用率
-	 * @return 虚拟内存使用率
-	*/
-	public BigDecimal getVmemoryUsed() {
-		return vmemoryUsed;
-	}
-	
-	/**
-	 * 设置 虚拟内存使用率
-	 * @param vmemoryUsed 虚拟内存使用率
-	 * @return 当前对象
-	*/
-	public MonitorNodeValue setVmemoryUsed(BigDecimal vmemoryUsed) {
-		this.vmemoryUsed=vmemoryUsed;
-		return this;
-	}
-	
-	/**
 	 * 获得 上行流量<br>
 	 * 上行流量
 	 * @return 上行流量
@@ -889,17 +876,55 @@ public class MonitorNodeValue extends Entity {
 	}
 	
 	/**
-	 * 获得 内存<br>
-	 * 内存
-	 * @return 内存
+	 * 获得 物理内存(M)<br>
+	 * 物理内存(M)
+	 * @return 物理内存(M)
+	*/
+	public Integer getPMemorySize() {
+		return pMemorySize;
+	}
+	
+	/**
+	 * 设置 物理内存(M)
+	 * @param pMemorySize 物理内存(M)
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setPMemorySize(Integer pMemorySize) {
+		this.pMemorySize=pMemorySize;
+		return this;
+	}
+	
+	/**
+	 * 获得 虚拟内存(M)<br>
+	 * 虚拟内存(M)
+	 * @return 虚拟内存(M)
+	*/
+	public Integer getVMemorySize() {
+		return vMemorySize;
+	}
+	
+	/**
+	 * 设置 虚拟内存(M)
+	 * @param vMemorySize 虚拟内存(M)
+	 * @return 当前对象
+	*/
+	public MonitorNodeValue setVMemorySize(Integer vMemorySize) {
+		this.vMemorySize=vMemorySize;
+		return this;
+	}
+	
+	/**
+	 * 获得 物理内存使用率<br>
+	 * 物理内存使用率
+	 * @return 物理内存使用率
 	*/
 	public Integer getPMemoryUsed() {
 		return pMemoryUsed;
 	}
 	
 	/**
-	 * 设置 内存
-	 * @param pMemoryUsed 内存
+	 * 设置 物理内存使用率
+	 * @param pMemoryUsed 物理内存使用率
 	 * @return 当前对象
 	*/
 	public MonitorNodeValue setPMemoryUsed(Integer pMemoryUsed) {
@@ -908,17 +933,17 @@ public class MonitorNodeValue extends Entity {
 	}
 	
 	/**
-	 * 获得 虚拟内存<br>
-	 * 虚拟内存
-	 * @return 虚拟内存
+	 * 获得 虚拟内存使用率<br>
+	 * 虚拟内存使用率
+	 * @return 虚拟内存使用率
 	*/
 	public Integer getVMemoryUsed() {
 		return vMemoryUsed;
 	}
 	
 	/**
-	 * 设置 虚拟内存
-	 * @param vMemoryUsed 虚拟内存
+	 * 设置 虚拟内存使用率
+	 * @param vMemoryUsed 虚拟内存使用率
 	 * @return 当前对象
 	*/
 	public MonitorNodeValue setVMemoryUsed(Integer vMemoryUsed) {
@@ -1178,7 +1203,7 @@ public class MonitorNodeValue extends Entity {
 	 * 整数1
 	 * @return 整数1
 	*/
-	public String getValueInt1() {
+	public Integer getValueInt1() {
 		return valueInt1;
 	}
 	
@@ -1187,7 +1212,7 @@ public class MonitorNodeValue extends Entity {
 	 * @param valueInt1 整数1
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setValueInt1(String valueInt1) {
+	public MonitorNodeValue setValueInt1(Integer valueInt1) {
 		this.valueInt1=valueInt1;
 		return this;
 	}
@@ -1197,7 +1222,7 @@ public class MonitorNodeValue extends Entity {
 	 * 整数2
 	 * @return 整数2
 	*/
-	public String getValueInt2() {
+	public Integer getValueInt2() {
 		return valueInt2;
 	}
 	
@@ -1206,7 +1231,7 @@ public class MonitorNodeValue extends Entity {
 	 * @param valueInt2 整数2
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setValueInt2(String valueInt2) {
+	public MonitorNodeValue setValueInt2(Integer valueInt2) {
 		this.valueInt2=valueInt2;
 		return this;
 	}
@@ -1216,7 +1241,7 @@ public class MonitorNodeValue extends Entity {
 	 * 整数3
 	 * @return 整数3
 	*/
-	public String getValueInt3() {
+	public Integer getValueInt3() {
 		return valueInt3;
 	}
 	
@@ -1225,7 +1250,7 @@ public class MonitorNodeValue extends Entity {
 	 * @param valueInt3 整数3
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setValueInt3(String valueInt3) {
+	public MonitorNodeValue setValueInt3(Integer valueInt3) {
 		this.valueInt3=valueInt3;
 		return this;
 	}
@@ -1368,17 +1393,17 @@ public class MonitorNodeValue extends Entity {
 	 * 编码列3
 	 * @return 编码列3
 	*/
-	public String getListCode23() {
-		return listCode23;
+	public String getListCode3() {
+		return listCode3;
 	}
 	
 	/**
 	 * 设置 编码列3
-	 * @param listCode23 编码列3
+	 * @param listCode3 编码列3
 	 * @return 当前对象
 	*/
-	public MonitorNodeValue setListCode23(String listCode23) {
-		this.listCode23=listCode23;
+	public MonitorNodeValue setListCode3(String listCode3) {
+		this.listCode3=listCode3;
 		return this;
 	}
 	

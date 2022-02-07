@@ -2,7 +2,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:28
+ * @since 2022-02-06 23:40:32
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-1629-content">
+        <div class="layui-row form-row" id="random-3970-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -77,6 +77,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_RESULTSTATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorNodeValueResultStatusEnum')}]];
     var VALIDATE_CONFIG={};
     var AUTH_PREFIX="ops_monitor_node_value";
 

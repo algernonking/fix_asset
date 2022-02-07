@@ -6,12 +6,13 @@ import java.util.List;
 import com.dt.platform.domain.ops.MonitorTplIndicator;
 import java.util.Date;
 import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplIndicatorType;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:22
+ * @since 2022-02-06 10:17:01
  * @sign C0886492D704913F5D2D80E8CED30CF8
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -119,14 +120,14 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 监控模版 , 类型: java.lang.String
+	 * 状态 , 类型: java.lang.String
 	*/
-	public static final String MONITOR_TPL_CODE="monitorTplCode";
+	public static final String STATUS="status";
 	
 	/**
-	 * 监控模版 , 类型: java.lang.String
+	 * 状态 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> MONITOR_TPL_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,MONITOR_TPL_CODE, java.lang.String.class, "监控模版", "监控模版", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -149,6 +150,26 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
 	
 	/**
+	 * 监控模版 , 类型: java.lang.String
+	*/
+	public static final String MONITOR_TPL_CODE="monitorTplCode";
+	
+	/**
+	 * 监控模版 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> MONITOR_TPL_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,MONITOR_TPL_CODE, java.lang.String.class, "监控模版", "监控模版", java.lang.String.class, null);
+	
+	/**
+	 * 监控方式 , 类型: java.lang.String
+	*/
+	public static final String MONITOR_METHOD="monitorMethod";
+	
+	/**
+	 * 监控方式 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> MONITOR_METHOD_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,MONITOR_METHOD, java.lang.String.class, "监控方式", "监控方式", java.lang.String.class, null);
+	
+	/**
 	 * 指标类型 , 类型: java.lang.String
 	*/
 	public static final String INDICATOR_TYPE="indicatorType";
@@ -161,42 +182,22 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 	/**
 	 * 值行数 , 类型: java.lang.String
 	*/
-	public static final String VALUE_DATA_ROWS="valueDataRows";
+	public static final String VALUE_COLUMN_ROWS="valueColumnRows";
 	
 	/**
 	 * 值行数 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_DATA_ROWS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_DATA_ROWS, java.lang.String.class, "值行数", "值行数", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_ROWS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_ROWS, java.lang.String.class, "值行数", "值行数", java.lang.String.class, null);
 	
 	/**
-	 * 值类型 , 类型: java.lang.String
+	 * 值列数 , 类型: java.lang.String
 	*/
-	public static final String VALUE_TYPE="valueType";
+	public static final String VALUE_COLUMN_COLS="valueColumnCols";
 	
 	/**
-	 * 值类型 , 类型: java.lang.String
+	 * 值列数 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_TYPE, java.lang.String.class, "值类型", "值类型", java.lang.String.class, null);
-	
-	/**
-	 * 来源类型 , 类型: java.lang.String
-	*/
-	public static final String SOURCE_TYPE="sourceType";
-	
-	/**
-	 * 来源类型 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> SOURCE_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,SOURCE_TYPE, java.lang.String.class, "来源类型", "来源类型", java.lang.String.class, null);
-	
-	/**
-	 * 来源数据 , 类型: java.lang.String
-	*/
-	public static final String SOURCE_VALUE="sourceValue";
-	
-	/**
-	 * 来源数据 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> SOURCE_VALUE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,SOURCE_VALUE, java.lang.String.class, "来源数据", "来源数据", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_COLS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_COLS, java.lang.String.class, "值列数", "值列数", java.lang.String.class, null);
 	
 	/**
 	 * 数值类型 , 类型: java.lang.String
@@ -219,14 +220,114 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN, java.lang.String.class, "数值字段", "数值字段", java.lang.String.class, null);
 	
 	/**
-	 * 描述 , 类型: java.lang.String
+	 * 数值字段映射 , 类型: java.lang.String
+	*/
+	public static final String VALUE_COLUMN_MAP="valueColumnMap";
+	
+	/**
+	 * 数值字段映射 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_MAP_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_MAP, java.lang.String.class, "数值字段映射", "数值字段映射", java.lang.String.class, null);
+	
+	/**
+	 * 字段名称 , 类型: java.lang.String
+	*/
+	public static final String VALUE_COLUMN_NAME="valueColumnName";
+	
+	/**
+	 * 字段名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_NAME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_NAME, java.lang.String.class, "字段名称", "字段名称", java.lang.String.class, null);
+	
+	/**
+	 * 字段描述 , 类型: java.lang.String
 	*/
 	public static final String VALUE_COLUMN_DESC="valueColumnDesc";
 	
 	/**
-	 * 描述 , 类型: java.lang.String
+	 * 字段描述 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_DESC_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_DESC, java.lang.String.class, "描述", "描述", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> VALUE_COLUMN_DESC_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,VALUE_COLUMN_DESC, java.lang.String.class, "字段描述", "字段描述", java.lang.String.class, null);
+	
+	/**
+	 * 超时(秒) , 类型: java.lang.Integer
+	*/
+	public static final String TIME_OUT="timeOut";
+	
+	/**
+	 * 超时(秒) , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.Integer> TIME_OUT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,TIME_OUT, java.lang.Integer.class, "超时(秒)", "超时(秒)", java.lang.Integer.class, null);
+	
+	/**
+	 * 间隔时间(秒） , 类型: java.lang.Integer
+	*/
+	public static final String INTERVAL_TIME="intervalTime";
+	
+	/**
+	 * 间隔时间(秒） , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.Integer> INTERVAL_TIME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,INTERVAL_TIME, java.lang.Integer.class, "间隔时间(秒）", "间隔时间(秒）", java.lang.Integer.class, null);
+	
+	/**
+	 * 数据保留天数 , 类型: java.lang.Integer
+	*/
+	public static final String DATA_KEEP_DAY="dataKeepDay";
+	
+	/**
+	 * 数据保留天数 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.Integer> DATA_KEEP_DAY_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,DATA_KEEP_DAY, java.lang.Integer.class, "数据保留天数", "数据保留天数", java.lang.Integer.class, null);
+	
+	/**
+	 * 命令 , 类型: java.lang.String
+	*/
+	public static final String COMMAND="command";
+	
+	/**
+	 * 命令 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> COMMAND_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,COMMAND, java.lang.String.class, "命令", "命令", java.lang.String.class, null);
+	
+	/**
+	 * 标签 , 类型: java.lang.String
+	*/
+	public static final String LABEL="label";
+	
+	/**
+	 * 标签 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> LABEL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,LABEL, java.lang.String.class, "标签", "标签", java.lang.String.class, null);
+	
+	/**
+	 * snmp , 类型: java.lang.String
+	*/
+	public static final String SNMP_OID="snmpOid";
+	
+	/**
+	 * snmp , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> SNMP_OID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,SNMP_OID, java.lang.String.class, "snmp", "snmp", java.lang.String.class, null);
+	
+	/**
+	 * snmp版本 , 类型: java.lang.String
+	*/
+	public static final String SNMP_VERSION="snmpVersion";
+	
+	/**
+	 * snmp版本 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> SNMP_VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,SNMP_VERSION, java.lang.String.class, "snmp版本", "snmp版本", java.lang.String.class, null);
+	
+	/**
+	 * snmp团体 , 类型: java.lang.String
+	*/
+	public static final String SNMP_COMMUNITY="snmpCommunity";
+	
+	/**
+	 * snmp团体 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,java.lang.String> SNMP_COMMUNITY_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,SNMP_COMMUNITY, java.lang.String.class, "snmp团体", "snmp团体", java.lang.String.class, null);
 	
 	/**
 	 * 备注 , 类型: java.lang.String
@@ -329,9 +430,19 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,com.dt.platform.domain.ops.MonitorTpl> TPL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,TPL, com.dt.platform.domain.ops.MonitorTpl.class, "节点模版", "节点模版", com.dt.platform.domain.ops.MonitorTpl.class, null);
 	
 	/**
+	 * 指标类型 , 类型: com.dt.platform.domain.ops.MonitorTplIndicatorType
+	*/
+	public static final String MONITOR_INDICATOR_TYPE="monitorIndicatorType";
+	
+	/**
+	 * 指标类型 , 类型: com.dt.platform.domain.ops.MonitorTplIndicatorType
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicatorVO,com.dt.platform.domain.ops.MonitorTplIndicatorType> MONITOR_INDICATOR_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicatorVO.class ,MONITOR_INDICATOR_TYPE, com.dt.platform.domain.ops.MonitorTplIndicatorType.class, "指标类型", "指标类型", com.dt.platform.domain.ops.MonitorTplIndicatorType.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , MONITOR_TPL_CODE , NAME , CODE , INDICATOR_TYPE , VALUE_DATA_ROWS , VALUE_TYPE , SOURCE_TYPE , SOURCE_VALUE , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_DESC , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , LABEL , SNMP_OID , SNMP_VERSION , SNMP_COMMUNITY , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , MONITOR_INDICATOR_TYPE };
 	
 	/**
 	 * 代理类
@@ -452,13 +563,13 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 		}
 		
 		/**
-		 * 设置 监控模版
-		 * @param monitorTplCode 监控模版
+		 * 设置 状态
+		 * @param status 状态
 		 * @return 当前对象
 		*/
-		public MonitorTplIndicator setMonitorTplCode(String monitorTplCode) {
-			super.change(MONITOR_TPL_CODE,super.getMonitorTplCode(),monitorTplCode);
-			super.setMonitorTplCode(monitorTplCode);
+		public MonitorTplIndicator setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		
@@ -485,6 +596,28 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 		}
 		
 		/**
+		 * 设置 监控模版
+		 * @param monitorTplCode 监控模版
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setMonitorTplCode(String monitorTplCode) {
+			super.change(MONITOR_TPL_CODE,super.getMonitorTplCode(),monitorTplCode);
+			super.setMonitorTplCode(monitorTplCode);
+			return this;
+		}
+		
+		/**
+		 * 设置 监控方式
+		 * @param monitorMethod 监控方式
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setMonitorMethod(String monitorMethod) {
+			super.change(MONITOR_METHOD,super.getMonitorMethod(),monitorMethod);
+			super.setMonitorMethod(monitorMethod);
+			return this;
+		}
+		
+		/**
 		 * 设置 指标类型
 		 * @param indicatorType 指标类型
 		 * @return 当前对象
@@ -497,45 +630,23 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 		
 		/**
 		 * 设置 值行数
-		 * @param valueDataRows 值行数
+		 * @param valueColumnRows 值行数
 		 * @return 当前对象
 		*/
-		public MonitorTplIndicator setValueDataRows(String valueDataRows) {
-			super.change(VALUE_DATA_ROWS,super.getValueDataRows(),valueDataRows);
-			super.setValueDataRows(valueDataRows);
+		public MonitorTplIndicator setValueColumnRows(String valueColumnRows) {
+			super.change(VALUE_COLUMN_ROWS,super.getValueColumnRows(),valueColumnRows);
+			super.setValueColumnRows(valueColumnRows);
 			return this;
 		}
 		
 		/**
-		 * 设置 值类型
-		 * @param valueType 值类型
+		 * 设置 值列数
+		 * @param valueColumnCols 值列数
 		 * @return 当前对象
 		*/
-		public MonitorTplIndicator setValueType(String valueType) {
-			super.change(VALUE_TYPE,super.getValueType(),valueType);
-			super.setValueType(valueType);
-			return this;
-		}
-		
-		/**
-		 * 设置 来源类型
-		 * @param sourceType 来源类型
-		 * @return 当前对象
-		*/
-		public MonitorTplIndicator setSourceType(String sourceType) {
-			super.change(SOURCE_TYPE,super.getSourceType(),sourceType);
-			super.setSourceType(sourceType);
-			return this;
-		}
-		
-		/**
-		 * 设置 来源数据
-		 * @param sourceValue 来源数据
-		 * @return 当前对象
-		*/
-		public MonitorTplIndicator setSourceValue(String sourceValue) {
-			super.change(SOURCE_VALUE,super.getSourceValue(),sourceValue);
-			super.setSourceValue(sourceValue);
+		public MonitorTplIndicator setValueColumnCols(String valueColumnCols) {
+			super.change(VALUE_COLUMN_COLS,super.getValueColumnCols(),valueColumnCols);
+			super.setValueColumnCols(valueColumnCols);
 			return this;
 		}
 		
@@ -562,13 +673,123 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 		}
 		
 		/**
-		 * 设置 描述
-		 * @param valueColumnDesc 描述
+		 * 设置 数值字段映射
+		 * @param valueColumnMap 数值字段映射
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setValueColumnMap(String valueColumnMap) {
+			super.change(VALUE_COLUMN_MAP,super.getValueColumnMap(),valueColumnMap);
+			super.setValueColumnMap(valueColumnMap);
+			return this;
+		}
+		
+		/**
+		 * 设置 字段名称
+		 * @param valueColumnName 字段名称
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setValueColumnName(String valueColumnName) {
+			super.change(VALUE_COLUMN_NAME,super.getValueColumnName(),valueColumnName);
+			super.setValueColumnName(valueColumnName);
+			return this;
+		}
+		
+		/**
+		 * 设置 字段描述
+		 * @param valueColumnDesc 字段描述
 		 * @return 当前对象
 		*/
 		public MonitorTplIndicator setValueColumnDesc(String valueColumnDesc) {
 			super.change(VALUE_COLUMN_DESC,super.getValueColumnDesc(),valueColumnDesc);
 			super.setValueColumnDesc(valueColumnDesc);
+			return this;
+		}
+		
+		/**
+		 * 设置 超时(秒)
+		 * @param timeOut 超时(秒)
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setTimeOut(Integer timeOut) {
+			super.change(TIME_OUT,super.getTimeOut(),timeOut);
+			super.setTimeOut(timeOut);
+			return this;
+		}
+		
+		/**
+		 * 设置 间隔时间(秒）
+		 * @param intervalTime 间隔时间(秒）
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setIntervalTime(Integer intervalTime) {
+			super.change(INTERVAL_TIME,super.getIntervalTime(),intervalTime);
+			super.setIntervalTime(intervalTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 数据保留天数
+		 * @param dataKeepDay 数据保留天数
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setDataKeepDay(Integer dataKeepDay) {
+			super.change(DATA_KEEP_DAY,super.getDataKeepDay(),dataKeepDay);
+			super.setDataKeepDay(dataKeepDay);
+			return this;
+		}
+		
+		/**
+		 * 设置 命令
+		 * @param command 命令
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setCommand(String command) {
+			super.change(COMMAND,super.getCommand(),command);
+			super.setCommand(command);
+			return this;
+		}
+		
+		/**
+		 * 设置 标签
+		 * @param label 标签
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setLabel(String label) {
+			super.change(LABEL,super.getLabel(),label);
+			super.setLabel(label);
+			return this;
+		}
+		
+		/**
+		 * 设置 snmp
+		 * @param snmpOid snmp
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setSnmpOid(String snmpOid) {
+			super.change(SNMP_OID,super.getSnmpOid(),snmpOid);
+			super.setSnmpOid(snmpOid);
+			return this;
+		}
+		
+		/**
+		 * 设置 snmp版本
+		 * @param snmpVersion snmp版本
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setSnmpVersion(String snmpVersion) {
+			super.change(SNMP_VERSION,super.getSnmpVersion(),snmpVersion);
+			super.setSnmpVersion(snmpVersion);
+			return this;
+		}
+		
+		/**
+		 * 设置 snmp团体
+		 * @param snmpCommunity snmp团体
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setSnmpCommunity(String snmpCommunity) {
+			super.change(SNMP_COMMUNITY,super.getSnmpCommunity(),snmpCommunity);
+			super.setSnmpCommunity(snmpCommunity);
 			return this;
 		}
 		
@@ -679,6 +900,17 @@ public class MonitorTplIndicatorVOMeta extends MonitorTplIndicatorMeta {
 		public MonitorTplIndicator setTpl(MonitorTpl tpl) {
 			super.change(TPL,super.getTpl(),tpl);
 			super.setTpl(tpl);
+			return this;
+		}
+		
+		/**
+		 * 设置 指标类型
+		 * @param monitorIndicatorType 指标类型
+		 * @return 当前对象
+		*/
+		public MonitorTplIndicator setMonitorIndicatorType(MonitorTplIndicatorType monitorIndicatorType) {
+			super.change(MONITOR_INDICATOR_TYPE,super.getMonitorIndicatorType(),monitorIndicatorType);
+			super.setMonitorIndicatorType(monitorIndicatorType);
 			return this;
 		}
 	}

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-02 15:29:23
+ * @since 2022-02-07 08:36:03
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -8450,9 +8450,39 @@ public class EAMTables {
 		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","监控状态","监控状态",false,false,true);
 		
 		/**
-		 * 监控方式
+		 * SSH端口
 		*/
-		public static final DBField MONITOR_METHOD = new DBField(DBDataType.STRING , "monitor_method","monitorMethod","监控方式","监控方式",false,false,true);
+		public static final DBField SSH_PORT = new DBField(DBDataType.INTEGER , "ssh_port","sshPort","SSH端口","SSH端口",false,false,true);
+		
+		/**
+		 * 凭证(SSH)
+		*/
+		public static final DBField SSH_VOUCHER_ID = new DBField(DBDataType.STRING , "ssh_voucher_id","sshVoucherId","凭证(SSH)","凭证(SSH)",false,false,true);
+		
+		/**
+		 * Agent端口
+		*/
+		public static final DBField AGENT_PORT = new DBField(DBDataType.INTEGER , "agent_port","agentPort","Agent端口","Agent端口",false,false,true);
+		
+		/**
+		 * Snmp端口
+		*/
+		public static final DBField SNMP_PORT = new DBField(DBDataType.INTEGER , "snmp_port","snmpPort","Snmp端口","Snmp端口",false,false,true);
+		
+		/**
+		 * Jmx端口
+		*/
+		public static final DBField JMX_PORT = new DBField(DBDataType.INTEGER , "jmx_port","jmxPort","Jmx端口","Jmx端口",false,false,true);
+		
+		/**
+		 * Jmx端口
+		*/
+		public static final DBField IMPI_PORT = new DBField(DBDataType.INTEGER , "impi_port","impiPort","Jmx端口","Jmx端口",false,false,true);
+		
+		/**
+		 * Jdbc地址
+		*/
+		public static final DBField JDBC_URL = new DBField(DBDataType.STRING , "jdbc_url","jdbcUrl","Jdbc地址","Jdbc地址",false,false,true);
 		
 		/**
 		 * 备注
@@ -8500,7 +8530,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE() {
-			this.init($NAME,"节点" , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , MONITOR_METHOD , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点" , ID , PID , TYPE , SUB_TYPE , NODE_IP , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_PORT , SSH_VOUCHER_ID , AGENT_PORT , SNMP_PORT , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE $TABLE=new OPS_MONITOR_NODE();
 	}
@@ -9138,7 +9168,7 @@ public class EAMTables {
 		/**
 		 * 模版
 		*/
-		public static final DBField TPL_ID = new DBField(DBDataType.STRING , "tpl_id","tplId","模版","模版",false,false,true);
+		public static final DBField TPL_CODE = new DBField(DBDataType.STRING , "tpl_code","tplCode","模版","模版",false,false,true);
 		
 		/**
 		 * 创建人ID
@@ -9181,7 +9211,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE_TPL_ITEM() {
-			this.init($NAME,"节点监控模版" , ID , NODE_ID , TPL_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点监控模版" , ID , NODE_ID , TPL_CODE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE_TPL_ITEM $TABLE=new OPS_MONITOR_NODE_TPL_ITEM();
 	}
@@ -9288,6 +9318,16 @@ public class EAMTables {
 		public static final DBField MONITOR_TPL_CODE = new DBField(DBDataType.STRING , "monitor_tpl_code","monitorTplCode","监控模版","监控模版",false,false,true);
 		
 		/**
+		 * 结果状态
+		*/
+		public static final DBField RESULT_STATUS = new DBField(DBDataType.STRING , "result_status","resultStatus","结果状态","结果状态",false,false,true);
+		
+		/**
+		 * 结果内容
+		*/
+		public static final DBField RESULT_MESSAGE = new DBField(DBDataType.STRING , "result_message","resultMessage","结果内容","结果内容",false,false,true);
+		
+		/**
 		 * 指标
 		*/
 		public static final DBField INDICATOR_CODE = new DBField(DBDataType.STRING , "indicator_code","indicatorCode","指标","指标",false,false,true);
@@ -9295,7 +9335,7 @@ public class EAMTables {
 		/**
 		 * 主机名称
 		*/
-		public static final DBField HOSTNAME = new DBField(DBDataType.DATE , "hostname","hostname","主机名称","主机名称",false,false,true);
+		public static final DBField HOSTNAME = new DBField(DBDataType.STRING , "hostname","hostname","主机名称","主机名称",false,false,true);
 		
 		/**
 		 * 启动时间
@@ -9315,17 +9355,12 @@ public class EAMTables {
 		/**
 		 * CPU数量
 		*/
-		public static final DBField CPU = new DBField(DBDataType.INTEGER , "cpu","cpu","CPU数量","CPU数量",false,false,true);
+		public static final DBField CPU_NUMBER = new DBField(DBDataType.INTEGER , "cpu_number","cpuNumber","CPU数量","CPU数量",false,false,true);
 		
 		/**
 		 * CPU主频
 		*/
-		public static final DBField CPU_FRE = new DBField(DBDataType.DECIMAL , "cpu_fre","cpuFre","CPU主频","CPU主频",false,false,true);
-		
-		/**
-		 * 内存(M)
-		*/
-		public static final DBField MEMORY = new DBField(DBDataType.INTEGER , "memory","memory","内存(M)","内存(M)",false,false,true);
+		public static final DBField CPU_FREE = new DBField(DBDataType.DECIMAL , "cpu_free","cpuFree","CPU主频","CPU主频",false,false,true);
 		
 		/**
 		 * cpuSys
@@ -9368,16 +9403,6 @@ public class EAMTables {
 		public static final DBField OS_LOAD15 = new DBField(DBDataType.DECIMAL , "os_load15","osLoad15","系统负载15","系统负载15",false,false,true);
 		
 		/**
-		 * 内存使用率
-		*/
-		public static final DBField MEMORY_USED = new DBField(DBDataType.DECIMAL , "memory_used","memoryUsed","内存使用率","内存使用率",false,false,true);
-		
-		/**
-		 * 虚拟内存使用率
-		*/
-		public static final DBField VMEMORY_USED = new DBField(DBDataType.DECIMAL , "vmemory_used","vmemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
-		
-		/**
 		 * 上行流量
 		*/
 		public static final DBField NETWORK_FLOW_UP = new DBField(DBDataType.DECIMAL , "network_flow_up","networkFlowUp","上行流量","上行流量",false,false,true);
@@ -9393,14 +9418,24 @@ public class EAMTables {
 		public static final DBField PROCESS_CNT = new DBField(DBDataType.INTEGER , "process_cnt","processCnt","连接数","连接数",false,false,true);
 		
 		/**
-		 * 内存
+		 * 物理内存(M)
 		*/
-		public static final DBField P_MEMORY_USED = new DBField(DBDataType.INTEGER , "p_memory_used","pMemoryUsed","内存","内存",false,false,true);
+		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
 		
 		/**
-		 * 虚拟内存
+		 * 虚拟内存(M)
 		*/
-		public static final DBField V_MEMORY_USED = new DBField(DBDataType.INTEGER , "v_memory_used","vMemoryUsed","虚拟内存","虚拟内存",false,false,true);
+		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
+		
+		/**
+		 * 物理内存使用率
+		*/
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.INTEGER , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		
+		/**
+		 * 虚拟内存使用率
+		*/
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.INTEGER , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
 		
 		/**
 		 * 信息
@@ -9470,17 +9505,17 @@ public class EAMTables {
 		/**
 		 * 整数1
 		*/
-		public static final DBField VALUE_INT1 = new DBField(DBDataType.STRING , "value_int1","valueInt1","整数1","整数1",false,false,true);
+		public static final DBField VALUE_INT1 = new DBField(DBDataType.INTEGER , "value_int1","valueInt1","整数1","整数1",false,false,true);
 		
 		/**
 		 * 整数2
 		*/
-		public static final DBField VALUE_INT2 = new DBField(DBDataType.STRING , "value_int2","valueInt2","整数2","整数2",false,false,true);
+		public static final DBField VALUE_INT2 = new DBField(DBDataType.INTEGER , "value_int2","valueInt2","整数2","整数2",false,false,true);
 		
 		/**
 		 * 整数3
 		*/
-		public static final DBField VALUE_INT3 = new DBField(DBDataType.STRING , "value_int3","valueInt3","整数3","整数3",false,false,true);
+		public static final DBField VALUE_INT3 = new DBField(DBDataType.INTEGER , "value_int3","valueInt3","整数3","整数3",false,false,true);
 		
 		/**
 		 * 唯一标识
@@ -9520,7 +9555,7 @@ public class EAMTables {
 		/**
 		 * 编码列3
 		*/
-		public static final DBField LIST_CODE23 = new DBField(DBDataType.STRING , "list_code23","listCode23","编码列3","编码列3",false,false,true);
+		public static final DBField LIST_CODE3 = new DBField(DBDataType.STRING , "list_code3","listCode3","编码列3","编码列3",false,false,true);
 		
 		/**
 		 * 数值列1
@@ -9608,7 +9643,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE_VALUE() {
-			this.init($NAME,"节点数值" , ID , NODE_ID , MONITOR_TPL_CODE , INDICATOR_CODE , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU , CPU_FRE , MEMORY , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , MEMORY_USED , VMEMORY_USED , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , UID , RECORD_TIME , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE23 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点数值" , ID , NODE_ID , MONITOR_TPL_CODE , RESULT_STATUS , RESULT_MESSAGE , INDICATOR_CODE , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU_NUMBER , CPU_FREE , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_SIZE , V_MEMORY_SIZE , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , UID , RECORD_TIME , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE3 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE_VALUE $TABLE=new OPS_MONITOR_NODE_VALUE();
 	}
@@ -9710,9 +9745,9 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 监控模版
+		 * 状态
 		*/
-		public static final DBField MONITOR_TPL_CODE = new DBField(DBDataType.STRING , "monitor_tpl_code","monitorTplCode","监控模版","监控模版",false,false,true);
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
 		
 		/**
 		 * 名称
@@ -9725,6 +9760,16 @@ public class EAMTables {
 		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,true);
 		
 		/**
+		 * 监控模版
+		*/
+		public static final DBField MONITOR_TPL_CODE = new DBField(DBDataType.STRING , "monitor_tpl_code","monitorTplCode","监控模版","监控模版",false,false,true);
+		
+		/**
+		 * 监控方式
+		*/
+		public static final DBField MONITOR_METHOD = new DBField(DBDataType.STRING , "monitor_method","monitorMethod","监控方式","监控方式",false,false,true);
+		
+		/**
 		 * 指标类型
 		*/
 		public static final DBField INDICATOR_TYPE = new DBField(DBDataType.STRING , "indicator_type","indicatorType","指标类型","指标类型",false,false,true);
@@ -9732,22 +9777,12 @@ public class EAMTables {
 		/**
 		 * 值行数
 		*/
-		public static final DBField VALUE_DATA_ROWS = new DBField(DBDataType.STRING , "value_data_rows","valueDataRows","值行数","值行数",false,false,true);
+		public static final DBField VALUE_COLUMN_ROWS = new DBField(DBDataType.STRING , "value_column_rows","valueColumnRows","值行数","值行数",false,false,true);
 		
 		/**
-		 * 值类型
+		 * 值列数
 		*/
-		public static final DBField VALUE_TYPE = new DBField(DBDataType.STRING , "value_type","valueType","值类型","值类型",false,false,true);
-		
-		/**
-		 * 来源类型
-		*/
-		public static final DBField SOURCE_TYPE = new DBField(DBDataType.STRING , "source_type","sourceType","来源类型","来源类型",false,false,true);
-		
-		/**
-		 * 来源数据
-		*/
-		public static final DBField SOURCE_VALUE = new DBField(DBDataType.STRING , "source_value","sourceValue","来源数据","来源数据",false,false,true);
+		public static final DBField VALUE_COLUMN_COLS = new DBField(DBDataType.STRING , "value_column_cols","valueColumnCols","值列数","值列数",false,false,true);
 		
 		/**
 		 * 数值类型
@@ -9760,9 +9795,144 @@ public class EAMTables {
 		public static final DBField VALUE_COLUMN = new DBField(DBDataType.STRING , "value_column","valueColumn","数值字段","数值字段",false,false,true);
 		
 		/**
-		 * 描述
+		 * 数值字段映射
 		*/
-		public static final DBField VALUE_COLUMN_DESC = new DBField(DBDataType.STRING , "value_column_desc","valueColumnDesc","描述","描述",false,false,true);
+		public static final DBField VALUE_COLUMN_MAP = new DBField(DBDataType.STRING , "value_column_map","valueColumnMap","数值字段映射","数值字段映射",false,false,true);
+		
+		/**
+		 * 字段名称
+		*/
+		public static final DBField VALUE_COLUMN_NAME = new DBField(DBDataType.STRING , "value_column_name","valueColumnName","字段名称","字段名称",false,false,true);
+		
+		/**
+		 * 字段描述
+		*/
+		public static final DBField VALUE_COLUMN_DESC = new DBField(DBDataType.STRING , "value_column_desc","valueColumnDesc","字段描述","字段描述",false,false,true);
+		
+		/**
+		 * 超时(秒)
+		*/
+		public static final DBField TIME_OUT = new DBField(DBDataType.INTEGER , "time_out","timeOut","超时(秒)","超时(秒)",false,false,true);
+		
+		/**
+		 * 间隔时间(秒）
+		*/
+		public static final DBField INTERVAL_TIME = new DBField(DBDataType.INTEGER , "Interval_time","intervalTime","间隔时间(秒）","间隔时间(秒）",false,false,true);
+		
+		/**
+		 * 数据保留天数
+		*/
+		public static final DBField DATA_KEEP_DAY = new DBField(DBDataType.INTEGER , "data_keep_day","dataKeepDay","数据保留天数","数据保留天数",false,false,true);
+		
+		/**
+		 * 命令
+		*/
+		public static final DBField COMMAND = new DBField(DBDataType.STRING , "command","command","命令","命令",false,false,true);
+		
+		/**
+		*/
+		public static final DBField COMMAND_VALUE = new DBField(DBDataType.STRING , "command_value","commandValue","command_value","command_value",false,false,true);
+		
+		/**
+		 * 标签
+		*/
+		public static final DBField LABEL = new DBField(DBDataType.STRING , "label","label","标签","标签",false,false,true);
+		
+		/**
+		 * snmp
+		*/
+		public static final DBField SNMP_OID = new DBField(DBDataType.STRING , "snmp_oid","snmpOid","snmp","snmp",false,false,true);
+		
+		/**
+		 * snmp版本
+		*/
+		public static final DBField SNMP_VERSION = new DBField(DBDataType.STRING , "snmp_version","snmpVersion","snmp版本","snmp版本",false,false,true);
+		
+		/**
+		 * snmp团体
+		*/
+		public static final DBField SNMP_COMMUNITY = new DBField(DBDataType.STRING , "snmp_community","snmpCommunity","snmp团体","snmp团体",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 排序
+		*/
+		public static final DBField ITEM_SORT = new DBField(DBDataType.INTEGER , "item_sort","itemSort","排序","排序",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_TPL_INDICATOR() {
+			this.init($NAME,"模版指标" , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , LABEL , SNMP_OID , SNMP_VERSION , SNMP_COMMUNITY , NOTES , ITEM_SORT , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_TPL_INDICATOR $TABLE=new OPS_MONITOR_TPL_INDICATOR();
+	}
+	
+	/**
+	 * 指标类型
+	*/
+	public static class OPS_MONITOR_TPL_INDICATOR_TYPE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_tpl_indicator_type";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,true);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
 		
 		/**
 		 * 备注
@@ -9809,10 +9979,162 @@ public class EAMTables {
 		*/
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
-		public OPS_MONITOR_TPL_INDICATOR() {
-			this.init($NAME,"模版指标" , ID , MONITOR_TPL_CODE , NAME , CODE , INDICATOR_TYPE , VALUE_DATA_ROWS , VALUE_TYPE , SOURCE_TYPE , SOURCE_VALUE , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_DESC , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		public OPS_MONITOR_TPL_INDICATOR_TYPE() {
+			this.init($NAME,"指标类型" , ID , CODE , NAME , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
-		public static final OPS_MONITOR_TPL_INDICATOR $TABLE=new OPS_MONITOR_TPL_INDICATOR();
+		public static final OPS_MONITOR_TPL_INDICATOR_TYPE $TABLE=new OPS_MONITOR_TPL_INDICATOR_TYPE();
+	}
+	
+	/**
+	 * 模版类型
+	*/
+	public static class OPS_MONITOR_TPL_TYPE extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_tpl_type";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 编码
+		*/
+		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_TPL_TYPE() {
+			this.init($NAME,"模版类型" , ID , NAME , CODE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_TPL_TYPE $TABLE=new OPS_MONITOR_TPL_TYPE();
+	}
+	
+	/**
+	 * 监控凭证
+	*/
+	public static class OPS_MONITOR_VOUCHER extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_voucher";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 账户
+		*/
+		public static final DBField ACCOUNT = new DBField(DBDataType.STRING , "account","account","账户","账户",false,false,true);
+		
+		/**
+		 * 凭证
+		*/
+		public static final DBField VOUCHER = new DBField(DBDataType.STRING , "voucher","voucher","凭证","凭证",false,false,true);
+		
+		/**
+		 * 备注
+		*/
+		public static final DBField NOTES = new DBField(DBDataType.STRING , "notes","notes","备注","备注",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_VOUCHER() {
+			this.init($NAME,"监控凭证" , ID , ACCOUNT , VOUCHER , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_VOUCHER $TABLE=new OPS_MONITOR_VOUCHER();
 	}
 	
 	/**
@@ -9831,9 +10153,9 @@ public class EAMTables {
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
 		
 		/**
-		 * 类型
+		 * 节点
 		*/
-		public static final DBField NODE_ID = new DBField(DBDataType.STRING , "node_id","nodeId","类型","类型",false,false,true);
+		public static final DBField NODE_ID = new DBField(DBDataType.STRING , "node_id","nodeId","节点","节点",false,false,true);
 		
 		/**
 		 * 监控数值

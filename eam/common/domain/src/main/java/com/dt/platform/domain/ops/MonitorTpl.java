@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.OPS_MONITOR_TPL;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 监控模版
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:20
- * @sign F0B4900EB19FC3B514A2657473A6C288
+ * @since 2022-02-05 16:28:22
+ * @sign DA563474C95B9B9D6BA800891A247061
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -111,7 +113,13 @@ public class MonitorTpl extends Entity {
 	 * 节点模版类型：节点模版类型
 	*/
 	@ApiModelProperty(required = false,value="节点模版类型" , notes = "节点模版类型")
-	private MonitorNodeType tplType;
+	private MonitorTplType tplType;
+	
+	/**
+	 * 指标：指标
+	*/
+	@ApiModelProperty(required = false,value="指标" , notes = "指标")
+	private List<MonitorTplIndicator> tplIndicatorList;
 	
 	/**
 	 * 获得 主键<br>
@@ -365,7 +373,7 @@ public class MonitorTpl extends Entity {
 	 * 节点模版类型
 	 * @return 节点模版类型
 	*/
-	public MonitorNodeType getTplType() {
+	public MonitorTplType getTplType() {
 		return tplType;
 	}
 	
@@ -374,8 +382,38 @@ public class MonitorTpl extends Entity {
 	 * @param tplType 节点模版类型
 	 * @return 当前对象
 	*/
-	public MonitorTpl setTplType(MonitorNodeType tplType) {
+	public MonitorTpl setTplType(MonitorTplType tplType) {
 		this.tplType=tplType;
+		return this;
+	}
+	
+	/**
+	 * 获得 指标<br>
+	 * 指标
+	 * @return 指标
+	*/
+	public List<MonitorTplIndicator> getTplIndicatorList() {
+		return tplIndicatorList;
+	}
+	
+	/**
+	 * 设置 指标
+	 * @param tplIndicatorList 指标
+	 * @return 当前对象
+	*/
+	public MonitorTpl setTplIndicatorList(List<MonitorTplIndicator> tplIndicatorList) {
+		this.tplIndicatorList=tplIndicatorList;
+		return this;
+	}
+	
+	/**
+	 * 添加 指标
+	 * @param tplIndicator 指标
+	 * @return 当前对象
+	*/
+	public MonitorTpl addTplIndicator(MonitorTplIndicator tplIndicator) {
+		if(this.tplIndicatorList==null) tplIndicatorList=new ArrayList<>();
+		this.tplIndicatorList.add(tplIndicator);
 		return this;
 	}
 

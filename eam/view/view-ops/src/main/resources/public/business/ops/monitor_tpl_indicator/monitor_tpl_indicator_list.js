@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:22
+ * @since 2022-02-06 10:17:02
  */
 
 
@@ -74,17 +74,27 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'monitorTplCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('模版'), templet: function (d) { return templet('monitorTplCode' ,fox.joinLabel(d.tpl,"name"),d);}}
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码') , templet: function (d) { return templet('code',d.code,d);}  }
-					,{ field: 'indicatorType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('指标类型') , templet: function (d) { return templet('indicatorType',d.indicatorType,d);}  }
-					,{ field: 'valueDataRows', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('值行数') , templet: function (d) { return templet('valueDataRows',d.valueDataRows,d);}  }
-					,{ field: 'valueType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('值类型') , templet: function (d) { return templet('valueType',d.valueType,d);}  }
-					,{ field: 'sourceType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('来源类型') , templet: function (d) { return templet('sourceType',d.sourceType,d);}  }
-					,{ field: 'sourceValue', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('来源数据') , templet: function (d) { return templet('sourceValue',d.sourceValue,d);}  }
-					,{ field: 'valueColumnType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('数值类型') , templet: function (d) { return templet('valueColumnType',d.valueColumnType,d);}  }
+					,{ field: 'monitorTplCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('模版'), templet: function (d) { return templet('monitorTplCode' ,fox.joinLabel(d.tpl,"name"),d);}}
+					,{ field: 'monitorMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控方式'), templet:function (d){ return templet('monitorMethod',fox.getEnumText(SELECT_MONITORMETHOD_DATA,d.monitorMethod),d);}}
+					,{ field: 'indicatorType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('指标类型'), templet: function (d) { return templet('indicatorType' ,fox.joinLabel(d.monitorIndicatorType,"name"),d);}}
+					,{ field: 'valueColumnRows', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('值行数'), templet:function (d){ return templet('valueColumnRows',fox.getEnumText(SELECT_VALUECOLUMNROWS_DATA,d.valueColumnRows),d);}}
+					,{ field: 'valueColumnCols', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('值列数'), templet:function (d){ return templet('valueColumnCols',fox.getEnumText(SELECT_VALUECOLUMNCOLS_DATA,d.valueColumnCols),d);}}
+					,{ field: 'valueColumnType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('数值类型'), templet:function (d){ return templet('valueColumnType',fox.getEnumText(SELECT_VALUECOLUMNTYPE_DATA,d.valueColumnType),d);}}
 					,{ field: 'valueColumn', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('数值字段') , templet: function (d) { return templet('valueColumn',d.valueColumn,d);}  }
-					,{ field: 'valueColumnDesc', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('描述') , templet: function (d) { return templet('valueColumnDesc',d.valueColumnDesc,d);}  }
+					,{ field: 'valueColumnMap', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('数值字段映射') , templet: function (d) { return templet('valueColumnMap',d.valueColumnMap,d);}  }
+					,{ field: 'valueColumnName', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字段名称') , templet: function (d) { return templet('valueColumnName',d.valueColumnName,d);}  }
+					,{ field: 'valueColumnDesc', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字段描述') , templet: function (d) { return templet('valueColumnDesc',d.valueColumnDesc,d);}  }
+					,{ field: 'timeOut', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('超时(秒)') , templet: function (d) { return templet('timeOut',d.timeOut,d);}  }
+					,{ field: 'intervalTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('间隔时间(秒）') , templet: function (d) { return templet('intervalTime',d.intervalTime,d);}  }
+					,{ field: 'dataKeepDay', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数据保留天数') , templet: function (d) { return templet('dataKeepDay',d.dataKeepDay,d);}  }
+					,{ field: 'command', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('命令') , templet: function (d) { return templet('command',d.command,d);}  }
+					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
+					,{ field: 'snmpOid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp') , templet: function (d) { return templet('snmpOid',d.snmpOid,d);}  }
+					,{ field: 'snmpVersion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp版本') , templet: function (d) { return templet('snmpVersion',d.snmpVersion,d);}  }
+					,{ field: 'snmpCommunity', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp团体') , templet: function (d) { return templet('snmpCommunity',d.snmpCommunity,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -124,17 +134,27 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.monitorTplCode={ inputType:"select_box", value: getSelectedValue("#monitorTplCode","value") ,fillBy:["tpl"]  , label:getSelectedValue("#monitorTplCode","nameStr") };
+		value.status={ inputType:"select_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
-		value.indicatorType={ inputType:"button",value: $("#indicatorType").val()};
-		value.valueDataRows={ inputType:"button",value: $("#valueDataRows").val()};
-		value.valueType={ inputType:"button",value: $("#valueType").val()};
-		value.sourceType={ inputType:"button",value: $("#sourceType").val()};
-		value.sourceValue={ inputType:"button",value: $("#sourceValue").val()};
-		value.valueColumnType={ inputType:"button",value: $("#valueColumnType").val()};
+		value.monitorTplCode={ inputType:"select_box", value: getSelectedValue("#monitorTplCode","value") ,fillBy:["tpl"]  , label:getSelectedValue("#monitorTplCode","nameStr") };
+		value.monitorMethod={ inputType:"select_box", value: getSelectedValue("#monitorMethod","value"), label:getSelectedValue("#monitorMethod","nameStr") };
+		value.indicatorType={ inputType:"select_box", value: getSelectedValue("#indicatorType","value") ,fillBy:["monitorIndicatorType"]  , label:getSelectedValue("#indicatorType","nameStr") };
+		value.valueColumnRows={ inputType:"select_box", value: getSelectedValue("#valueColumnRows","value"), label:getSelectedValue("#valueColumnRows","nameStr") };
+		value.valueColumnCols={ inputType:"select_box", value: getSelectedValue("#valueColumnCols","value"), label:getSelectedValue("#valueColumnCols","nameStr") };
+		value.valueColumnType={ inputType:"select_box", value: getSelectedValue("#valueColumnType","value"), label:getSelectedValue("#valueColumnType","nameStr") };
 		value.valueColumn={ inputType:"button",value: $("#valueColumn").val()};
+		value.valueColumnMap={ inputType:"button",value: $("#valueColumnMap").val()};
+		value.valueColumnName={ inputType:"button",value: $("#valueColumnName").val()};
 		value.valueColumnDesc={ inputType:"button",value: $("#valueColumnDesc").val()};
+		value.timeOut={ inputType:"number_input", value: $("#timeOut").val() };
+		value.intervalTime={ inputType:"number_input", value: $("#intervalTime").val() };
+		value.dataKeepDay={ inputType:"number_input", value: $("#dataKeepDay").val() };
+		value.command={ inputType:"button",value: $("#command").val()};
+		value.label={ inputType:"button",value: $("#label").val()};
+		value.snmpOid={ inputType:"button",value: $("#snmpOid").val()};
+		value.snmpVersion={ inputType:"button",value: $("#snmpVersion").val()};
+		value.snmpCommunity={ inputType:"button",value: $("#snmpCommunity").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};

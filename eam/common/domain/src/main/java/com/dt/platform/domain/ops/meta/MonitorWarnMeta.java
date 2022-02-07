@@ -3,13 +3,16 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.MonitorWarn;
 import java.util.Date;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplIndicator;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
- * @sign 395AB62670C30229468F8E2AA8A21EC5
+ * @since 2022-02-05 16:28:32
+ * @sign AF2D1B9440B00EA6B31537770BFD2D84
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -26,14 +29,14 @@ public class MonitorWarnMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
 	
 	/**
-	 * 类型 , 类型: java.lang.String
+	 * 节点 , 类型: java.lang.String
 	*/
 	public static final String NODE_ID="nodeId";
 	
 	/**
-	 * 类型 , 类型: java.lang.String
+	 * 节点 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,java.lang.String> NODE_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,NODE_ID, java.lang.String.class, "类型", "类型", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,java.lang.String> NODE_ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,NODE_ID, java.lang.String.class, "节点", "节点", java.lang.String.class, null);
 	
 	/**
 	 * 监控数值 , 类型: java.lang.String
@@ -216,9 +219,29 @@ public class MonitorWarnMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
+	 * 节点模版 , 类型: com.dt.platform.domain.ops.MonitorTpl
+	*/
+	public static final String TPL="tpl";
+	
+	/**
+	 * 节点模版 , 类型: com.dt.platform.domain.ops.MonitorTpl
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,com.dt.platform.domain.ops.MonitorTpl> TPL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,TPL, com.dt.platform.domain.ops.MonitorTpl.class, "节点模版", "节点模版", com.dt.platform.domain.ops.MonitorTpl.class, null);
+	
+	/**
+	 * 节点指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	*/
+	public static final String TPL_INDICATOR="tplIndicator";
+	
+	/**
+	 * 节点指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorWarn,com.dt.platform.domain.ops.MonitorTplIndicator> TPL_INDICATOR_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorWarn.class ,TPL_INDICATOR, java.util.List.class, "节点指标", "节点指标", com.dt.platform.domain.ops.MonitorTplIndicator.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NODE_ID , NODE_VALUE_ID , MONITOR_TPL_CODE , INDICATOR_CODE , INDICATOR_NAME , WARN_LEVEL , STATUS , HANDLED_TIME , WARN_TIME , CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ ID , NODE_ID , NODE_VALUE_ID , MONITOR_TPL_CODE , INDICATOR_CODE , INDICATOR_NAME , WARN_LEVEL , STATUS , HANDLED_TIME , WARN_TIME , CONTENT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , TPL_INDICATOR };
 	
 	/**
 	 * 代理类
@@ -240,8 +263,8 @@ public class MonitorWarnMeta {
 		}
 		
 		/**
-		 * 设置 类型
-		 * @param nodeId 类型
+		 * 设置 节点
+		 * @param nodeId 节点
 		 * @return 当前对象
 		*/
 		public MonitorWarn setNodeId(String nodeId) {
@@ -445,6 +468,28 @@ public class MonitorWarnMeta {
 		public MonitorWarn setVersion(Integer version) {
 			super.change(VERSION,super.getVersion(),version);
 			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 节点模版
+		 * @param tpl 节点模版
+		 * @return 当前对象
+		*/
+		public MonitorWarn setTpl(MonitorTpl tpl) {
+			super.change(TPL,super.getTpl(),tpl);
+			super.setTpl(tpl);
+			return this;
+		}
+		
+		/**
+		 * 设置 节点指标
+		 * @param tplIndicator 节点指标
+		 * @return 当前对象
+		*/
+		public MonitorWarn setTplIndicator(List<MonitorTplIndicator> tplIndicator) {
+			super.change(TPL_INDICATOR,super.getTplIndicator(),tplIndicator);
+			super.setTplIndicator(tplIndicator);
 			return this;
 		}
 	}

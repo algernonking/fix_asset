@@ -3,14 +3,16 @@ package com.dt.platform.domain.ops.meta;
 import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.MonitorTpl;
 import java.util.Date;
-import com.dt.platform.domain.ops.MonitorNodeType;
+import com.dt.platform.domain.ops.MonitorTplType;
+import com.dt.platform.domain.ops.MonitorTplIndicator;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:20
- * @sign F0B4900EB19FC3B514A2657473A6C288
+ * @since 2022-02-05 16:28:22
+ * @sign DA563474C95B9B9D6BA800891A247061
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -147,19 +149,29 @@ public class MonitorTplMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
 	
 	/**
-	 * 节点模版类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
+	 * 节点模版类型 , 类型: com.dt.platform.domain.ops.MonitorTplType
 	*/
 	public static final String TPL_TYPE="tplType";
 	
 	/**
-	 * 节点模版类型 , 类型: com.dt.platform.domain.ops.MonitorNodeType
+	 * 节点模版类型 , 类型: com.dt.platform.domain.ops.MonitorTplType
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,com.dt.platform.domain.ops.MonitorNodeType> TPL_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,TPL_TYPE, com.dt.platform.domain.ops.MonitorNodeType.class, "节点模版类型", "节点模版类型", com.dt.platform.domain.ops.MonitorNodeType.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,com.dt.platform.domain.ops.MonitorTplType> TPL_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,TPL_TYPE, com.dt.platform.domain.ops.MonitorTplType.class, "节点模版类型", "节点模版类型", com.dt.platform.domain.ops.MonitorTplType.class, null);
+	
+	/**
+	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	*/
+	public static final String TPL_INDICATOR_LIST="tplIndicatorList";
+	
+	/**
+	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,com.dt.platform.domain.ops.MonitorTplIndicator> TPL_INDICATOR_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,TPL_INDICATOR_LIST, java.util.List.class, "指标", "指标", com.dt.platform.domain.ops.MonitorTplIndicator.class, null);
 	
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE };
+	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE , TPL_INDICATOR_LIST };
 	
 	/**
 	 * 代理类
@@ -317,9 +329,20 @@ public class MonitorTplMeta {
 		 * @param tplType 节点模版类型
 		 * @return 当前对象
 		*/
-		public MonitorTpl setTplType(MonitorNodeType tplType) {
+		public MonitorTpl setTplType(MonitorTplType tplType) {
 			super.change(TPL_TYPE,super.getTplType(),tplType);
 			super.setTplType(tplType);
+			return this;
+		}
+		
+		/**
+		 * 设置 指标
+		 * @param tplIndicatorList 指标
+		 * @return 当前对象
+		*/
+		public MonitorTpl setTplIndicatorList(List<MonitorTplIndicator> tplIndicatorList) {
+			super.change(TPL_INDICATOR_LIST,super.getTplIndicatorList(),tplIndicatorList);
+			super.setTplIndicatorList(tplIndicatorList);
 			return this;
 		}
 	}

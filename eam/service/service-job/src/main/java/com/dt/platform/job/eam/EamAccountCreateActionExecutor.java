@@ -18,12 +18,11 @@ import java.time.Instant;
 
 @Component
 public class EamAccountCreateActionExecutor implements JobExecutor {
+
     @Override
     public String getName() {
         return "EamAccountCreateExecutor";
     }
-
-
     /**
      * 注入DAO对象
      * */

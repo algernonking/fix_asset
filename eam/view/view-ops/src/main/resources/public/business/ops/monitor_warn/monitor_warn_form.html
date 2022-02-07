@@ -2,7 +2,7 @@
 /**
  * 节点告警 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
+ * @since 2022-02-05 16:28:32
  */
  -->
  <!DOCTYPE html>
@@ -38,13 +38,31 @@
 
 
 
-        <div class="layui-row form-row" id="random-3760-content">
+        <div class="layui-row form-row" id="random-1309-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column" >
+            <div class="layui-col-xs6 form-column" >
+
 
                     <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('状态')}">状态</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnProcessStatusEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('告警等级')}">告警等级</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <div id="warnLevel" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnLevelEnum')}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('指标名称')}">指标名称</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="indicatorName" id="indicatorName" name="indicatorName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('指标名称') }" type="text" class="layui-input"  />
@@ -55,6 +73,28 @@
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('内容')}">内容</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="content" id="content" name="content" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('内容') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs6 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('告警时间')}">告警时间</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="warnTime" id="warnTime" name="warnTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('告警时间') }" type="text" class="layui-input"   />
+                        </div>
+                    </div>
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('处理时间')}">处理时间</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input input-type="date" lay-filter="handledTime" id="handledTime" name="handledTime"  autocomplete="off"  readonly  th:placeholder="${ lang.translate('请选择') +''+ lang.translate('处理时间') }" type="text" class="layui-input"   />
                         </div>
                     </div>
 
@@ -91,6 +131,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
+    var SELECT_WARNLEVEL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnLevelEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnProcessStatusEnum')}]];
     var VALIDATE_CONFIG={};
     var AUTH_PREFIX="ops_monitor_warn";
 

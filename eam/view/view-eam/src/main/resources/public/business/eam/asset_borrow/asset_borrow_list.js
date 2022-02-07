@@ -120,6 +120,8 @@ function ListPage() {
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType,reset) {
+		admin.request("/service-ops/monitor-process-script/collect-data", { }, function (data) {
+		});
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };
@@ -298,6 +300,11 @@ function ListPage() {
 				top.layer.msg(fox.translate('请选择需要删除的')+fox.translate('资产借用')+"!");
             	return;
             }
+
+
+
+
+
             //调用批量删除接口
 			top.layer.confirm(fox.translate('确定删除已选中的')+fox.translate('资产借用')+fox.translate('吗？'), function (i) {
 				top.layer.close(i);

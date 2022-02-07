@@ -16,7 +16,7 @@ public interface MonitorStatisticalDataServiceProxy {
     /**
      * API 上下文路径 , ops-monitor-node-value
      */
-    public static final String API_CONTEXT_PATH = "ops-monitor-node-value";
+    public static final String API_CONTEXT_PATH = "ops-statistics";
 
     /**
      * API 基础路径 , 由 API_BASIC_PATH 和 API_CONTEXT_PATH 两部分组成

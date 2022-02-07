@@ -2,8 +2,11 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.ops.MonitorNodeType;
+import com.dt.platform.domain.ops.MonitorTplIndicator;
+import com.dt.platform.domain.ops.MonitorTplType;
 import com.dt.platform.domain.ops.meta.MonitorNodeTypeMeta;
 import com.dt.platform.domain.ops.meta.MonitorTplMeta;
+import com.dt.platform.domain.ops.meta.MonitorTplTypeMeta;
 import com.dt.platform.generator.config.Config;
 import com.dt.platform.ops.page.MonitorTplPageController;
 import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
@@ -20,15 +23,17 @@ public class MonitorTplGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addSimpleProperty(MonitorNodeType.class,"tplType","节点模版类型","节点模版类型");
+        //node type
+        cfg.getPoClassFile().addSimpleProperty(MonitorTplType.class,"tplType","节点模版类型","节点模版类型");
+
+        cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicatorList","指标","指标");
+
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.OPS_MONITOR_TPL.TYPE,
                         EAMTables.OPS_MONITOR_TPL.NAME,
                         EAMTables.OPS_MONITOR_TPL.CODE,
-
                 }
-
         );
 
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
@@ -48,15 +53,15 @@ public class MonitorTplGtr extends BaseCodeGenerator{
                 .basic().label("归类")
                 .form().selectBox().queryApi(MonitorNodeTypeServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
-                .valueField(MonitorNodeTypeMeta.CODE).
-                textField(MonitorNodeTypeMeta.NAME).
+                .valueField(MonitorTplTypeMeta.CODE).
+                textField(MonitorTplTypeMeta.NAME).
                 fillWith(MonitorTplMeta.TPL_TYPE).muliti(false);
 
 
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.CODE).form().validate().required();
 
-       // cfg.view().list().disableBatchDelete();
+
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");
@@ -87,6 +92,6 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-       g.generateMenu(MonitorTplServiceProxy.class, MonitorTplPageController.class);
+        //g.generateMenu(MonitorTplServiceProxy.class, MonitorTplPageController.class);
     }
 }

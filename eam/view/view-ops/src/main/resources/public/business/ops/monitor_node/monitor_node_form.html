@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:24
+ * @since 2022-02-06 23:40:24
  */
  -->
  <!DOCTYPE html>
@@ -38,32 +38,100 @@
 
 
 
-        <div class="layui-row form-row" id="random-9948-content">
+        <div class="layui-row form-row" id="random-7774-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs12 form-column" >
 
                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('IP')}">IP</div><div class="layui-required">*</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('IP')}">IP</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="nodeIp" id="nodeIp" name="nodeIp" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"    lay-verify="|required"  />
                         </div>
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('主机名')}">主机名</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('主机名')}">主机名</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="nodeName" id="nodeName" name="nodeName" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('主机名') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 
                                     <div class="layui-form-item" >
-                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('备注')}">备注</div></div>
-                        <div class="layui-input-block layui-input-block-c1">
+                        <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>
+                        <div class="layui-input-block ">
                             <input lay-filter="notes" id="notes" name="notes" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('备注') }" type="text" class="layui-input"  />
                         </div>
                     </div>
+
+                <!--结束：栏次内字段循环-->
+            </div>
+            <!--结束：栏次输入框循环-->
+        </div>
+         <!--开始：group 循环-->
+
+
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-7309-fieldset">
+            <legend>数据采集</legend>
+        </fieldset>
+
+        <div class="layui-row form-row" id="random-7309-content">
+
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs6 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('SSH端口')}">SSH端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="sshPort" id="sshPort" name="sshPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('SSH端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('凭证(SSH)')}">凭证(SSH)</div></div>
+                        <div class="layui-input-block ">
+                            <div id="sshVoucherId" input-type="select" th:data="${'/service-ops/ops-monitor-voucher/query-paged-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                <!--结束：栏次内字段循环-->
+            </div>
+             <!--开始：column 循环-->
+            <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
+            <div class="layui-col-xs6 form-column" >
+
+
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Agent端口')}">Agent端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="agentPort" id="agentPort" name="agentPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Agent端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Jmx端口')}">Jmx端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="impiPort" id="impiPort" name="impiPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Jmx端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Snmp端口')}">Snmp端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="snmpPort" id="snmpPort" name="snmpPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Snmp端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
 
                 <!--结束：栏次内字段循环-->
             </div>

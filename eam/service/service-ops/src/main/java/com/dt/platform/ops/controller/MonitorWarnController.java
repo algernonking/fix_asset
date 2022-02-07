@@ -33,6 +33,8 @@ import java.util.Map;
 import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.MonitorWarnMeta;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplIndicator;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -48,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点告警 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
+ * @since 2022-02-05 16:28:32
 */
 
 @Api(tags = "节点告警")
@@ -66,7 +68,7 @@ public class MonitorWarnController extends SuperController {
 	@ApiOperation(value = "添加节点告警")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorWarnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_VALUE_ID , value = "监控数值" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.INDICATOR_CODE , value = "监控指标" , required = false , dataTypeClass=String.class),
@@ -128,7 +130,7 @@ public class MonitorWarnController extends SuperController {
 	@ApiOperation(value = "更新节点告警")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorWarnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_VALUE_ID , value = "监控数值" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.INDICATOR_CODE , value = "监控指标" , required = false , dataTypeClass=String.class),
@@ -156,7 +158,7 @@ public class MonitorWarnController extends SuperController {
 	@ApiOperation(value = "保存节点告警")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorWarnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_VALUE_ID , value = "监控数值" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.INDICATOR_CODE , value = "监控指标" , required = false , dataTypeClass=String.class),
@@ -223,7 +225,7 @@ public class MonitorWarnController extends SuperController {
 	@ApiOperation(value = "查询节点告警")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorWarnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_VALUE_ID , value = "监控数值" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.INDICATOR_CODE , value = "监控指标" , required = false , dataTypeClass=String.class),
@@ -252,7 +254,7 @@ public class MonitorWarnController extends SuperController {
 	@ApiOperation(value = "分页查询节点告警")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorWarnVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "类型" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.NODE_VALUE_ID , value = "监控数值" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorWarnVOMeta.INDICATOR_CODE , value = "监控指标" , required = false , dataTypeClass=String.class),

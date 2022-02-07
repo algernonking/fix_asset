@@ -1,7 +1,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:28
+ * @since 2022-02-06 23:40:32
  */
 
 
@@ -76,14 +76,15 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'nodeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点') , templet: function (d) { return templet('nodeId',d.nodeId,d);}  }
 					,{ field: 'monitorTplCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控模版') , templet: function (d) { return templet('monitorTplCode',d.monitorTplCode,d);}  }
+					,{ field: 'resultStatus', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('结果状态'), templet:function (d){ return templet('resultStatus',fox.getEnumText(SELECT_RESULTSTATUS_DATA,d.resultStatus),d);}}
+					,{ field: 'resultMessage', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('结果内容') , templet: function (d) { return templet('resultMessage',d.resultMessage,d);}  }
 					,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('指标') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
-					,{ field: 'hostname', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('主机名称') ,templet: function (d) { return templet('hostname',fox.dateFormat(d.hostname,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'hostname', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主机名称') , templet: function (d) { return templet('hostname',d.hostname,d);}  }
 					,{ field: 'boottime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('启动时间') ,templet: function (d) { return templet('boottime',fox.dateFormat(d.boottime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'osVerion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('系统') , templet: function (d) { return templet('osVerion',d.osVerion,d);}  }
 					,{ field: 'arch', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('架构') , templet: function (d) { return templet('arch',d.arch,d);}  }
-					,{ field: 'cpu', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('CPU数量') , templet: function (d) { return templet('cpu',d.cpu,d);}  }
-					,{ field: 'cpuFre', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('CPU主频') , templet: function (d) { return templet('cpuFre',d.cpuFre,d);}  }
-					,{ field: 'memory', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('内存(M)') , templet: function (d) { return templet('memory',d.memory,d);}  }
+					,{ field: 'cpuNumber', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('CPU数量') , templet: function (d) { return templet('cpuNumber',d.cpuNumber,d);}  }
+					,{ field: 'cpuFree', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('CPU主频') , templet: function (d) { return templet('cpuFree',d.cpuFree,d);}  }
 					,{ field: 'cpuSys', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('cpuSys') , templet: function (d) { return templet('cpuSys',d.cpuSys,d);}  }
 					,{ field: 'cpuUser', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('cpuUser') , templet: function (d) { return templet('cpuUser',d.cpuUser,d);}  }
 					,{ field: 'cpuWait', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('cpuWait') , templet: function (d) { return templet('cpuWait',d.cpuWait,d);}  }
@@ -92,13 +93,13 @@ function ListPage() {
 					,{ field: 'osLoad', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('系统负载') , templet: function (d) { return templet('osLoad',d.osLoad,d);}  }
 					,{ field: 'osLoad5', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('系统负载5') , templet: function (d) { return templet('osLoad5',d.osLoad5,d);}  }
 					,{ field: 'osLoad15', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('系统负载15') , templet: function (d) { return templet('osLoad15',d.osLoad15,d);}  }
-					,{ field: 'memoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('内存使用率') , templet: function (d) { return templet('memoryUsed',d.memoryUsed,d);}  }
-					,{ field: 'vmemoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('虚拟内存使用率') , templet: function (d) { return templet('vmemoryUsed',d.vmemoryUsed,d);}  }
 					,{ field: 'networkFlowUp', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('上行流量') , templet: function (d) { return templet('networkFlowUp',d.networkFlowUp,d);}  }
 					,{ field: 'networkFlowDown', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('下流量') , templet: function (d) { return templet('networkFlowDown',d.networkFlowDown,d);}  }
 					,{ field: 'processCnt', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('连接数') , templet: function (d) { return templet('processCnt',d.processCnt,d);}  }
-					,{ field: 'pMemoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('内存') , templet: function (d) { return templet('pMemoryUsed',d.pMemoryUsed,d);}  }
-					,{ field: 'vMemoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('虚拟内存') , templet: function (d) { return templet('vMemoryUsed',d.vMemoryUsed,d);}  }
+					,{ field: 'pMemorySize', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('物理内存(M)') , templet: function (d) { return templet('pMemorySize',d.pMemorySize,d);}  }
+					,{ field: 'vMemorySize', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('虚拟内存(M)') , templet: function (d) { return templet('vMemorySize',d.vMemorySize,d);}  }
+					,{ field: 'pMemoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('物理内存使用率') , templet: function (d) { return templet('pMemoryUsed',d.pMemoryUsed,d);}  }
+					,{ field: 'vMemoryUsed', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('虚拟内存使用率') , templet: function (d) { return templet('vMemoryUsed',d.vMemoryUsed,d);}  }
 					,{ field: 'info', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('信息') , templet: function (d) { return templet('info',d.info,d);}  }
 					,{ field: 'label1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签1') , templet: function (d) { return templet('label1',d.label1,d);}  }
 					,{ field: 'label2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签2') , templet: function (d) { return templet('label2',d.label2,d);}  }
@@ -112,9 +113,9 @@ function ListPage() {
 					,{ field: 'valueStr1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串1') , templet: function (d) { return templet('valueStr1',d.valueStr1,d);}  }
 					,{ field: 'valueStr2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串2') , templet: function (d) { return templet('valueStr2',d.valueStr2,d);}  }
 					,{ field: 'valueStr3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串3') , templet: function (d) { return templet('valueStr3',d.valueStr3,d);}  }
-					,{ field: 'valueInt1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数1') , templet: function (d) { return templet('valueInt1',d.valueInt1,d);}  }
-					,{ field: 'valueInt2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数2') , templet: function (d) { return templet('valueInt2',d.valueInt2,d);}  }
-					,{ field: 'valueInt3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数3') , templet: function (d) { return templet('valueInt3',d.valueInt3,d);}  }
+					,{ field: 'valueInt1', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数1') , templet: function (d) { return templet('valueInt1',d.valueInt1,d);}  }
+					,{ field: 'valueInt2', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数2') , templet: function (d) { return templet('valueInt2',d.valueInt2,d);}  }
+					,{ field: 'valueInt3', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数3') , templet: function (d) { return templet('valueInt3',d.valueInt3,d);}  }
 					,{ field: 'uid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('唯一标识') , templet: function (d) { return templet('uid',d.uid,d);}  }
 					,{ field: 'recordTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('记录时间') ,templet: function (d) { return templet('recordTime',fox.dateFormat(d.recordTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'listLabel1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签列1') , templet: function (d) { return templet('listLabel1',d.listLabel1,d);}  }
@@ -122,7 +123,7 @@ function ListPage() {
 					,{ field: 'listLabel3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签列3') , templet: function (d) { return templet('listLabel3',d.listLabel3,d);}  }
 					,{ field: 'listCode1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码列1') , templet: function (d) { return templet('listCode1',d.listCode1,d);}  }
 					,{ field: 'listCode2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码列2') , templet: function (d) { return templet('listCode2',d.listCode2,d);}  }
-					,{ field: 'listCode23', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码列3') , templet: function (d) { return templet('listCode23',d.listCode23,d);}  }
+					,{ field: 'listCode3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码列3') , templet: function (d) { return templet('listCode3',d.listCode3,d);}  }
 					,{ field: 'listValueNumber1', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数值列1') , templet: function (d) { return templet('listValueNumber1',d.listValueNumber1,d);}  }
 					,{ field: 'listValueNumber2', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数值列2') , templet: function (d) { return templet('listValueNumber2',d.listValueNumber2,d);}  }
 					,{ field: 'listValueNumber3', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数值列3') , templet: function (d) { return templet('listValueNumber3',d.listValueNumber3,d);}  }
@@ -173,14 +174,15 @@ function ListPage() {
 		value.id={ inputType:"button",value: $("#id").val()};
 		value.nodeId={ inputType:"button",value: $("#nodeId").val()};
 		value.monitorTplCode={ inputType:"button",value: $("#monitorTplCode").val()};
+		value.resultStatus={ inputType:"select_box", value: getSelectedValue("#resultStatus","value"), label:getSelectedValue("#resultStatus","nameStr") };
+		value.resultMessage={ inputType:"button",value: $("#resultMessage").val()};
 		value.indicatorCode={ inputType:"button",value: $("#indicatorCode").val()};
-		value.hostname={ inputType:"date_input", value: $("#hostname").val() ,matchType:"auto"};
+		value.hostname={ inputType:"button",value: $("#hostname").val()};
 		value.boottime={ inputType:"date_input", value: $("#boottime").val() ,matchType:"auto"};
 		value.osVerion={ inputType:"button",value: $("#osVerion").val()};
 		value.arch={ inputType:"button",value: $("#arch").val()};
-		value.cpu={ inputType:"number_input", value: $("#cpu").val() };
-		value.cpuFre={ inputType:"number_input", value: $("#cpuFre").val() };
-		value.memory={ inputType:"number_input", value: $("#memory").val() };
+		value.cpuNumber={ inputType:"number_input", value: $("#cpuNumber").val() };
+		value.cpuFree={ inputType:"number_input", value: $("#cpuFree").val() };
 		value.cpuSys={ inputType:"number_input", value: $("#cpuSys").val() };
 		value.cpuUser={ inputType:"number_input", value: $("#cpuUser").val() };
 		value.cpuWait={ inputType:"number_input", value: $("#cpuWait").val() };
@@ -189,11 +191,11 @@ function ListPage() {
 		value.osLoad={ inputType:"number_input", value: $("#osLoad").val() };
 		value.osLoad5={ inputType:"number_input", value: $("#osLoad5").val() };
 		value.osLoad15={ inputType:"number_input", value: $("#osLoad15").val() };
-		value.memoryUsed={ inputType:"number_input", value: $("#memoryUsed").val() };
-		value.vmemoryUsed={ inputType:"number_input", value: $("#vmemoryUsed").val() };
 		value.networkFlowUp={ inputType:"number_input", value: $("#networkFlowUp").val() };
 		value.networkFlowDown={ inputType:"number_input", value: $("#networkFlowDown").val() };
 		value.processCnt={ inputType:"number_input", value: $("#processCnt").val() };
+		value.pMemorySize={ inputType:"number_input", value: $("#pMemorySize").val() };
+		value.vMemorySize={ inputType:"number_input", value: $("#vMemorySize").val() };
 		value.pMemoryUsed={ inputType:"number_input", value: $("#pMemoryUsed").val() };
 		value.vMemoryUsed={ inputType:"number_input", value: $("#vMemoryUsed").val() };
 		value.info={ inputType:"button",value: $("#info").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
@@ -209,9 +211,9 @@ function ListPage() {
 		value.valueStr1={ inputType:"button",value: $("#valueStr1").val()};
 		value.valueStr2={ inputType:"button",value: $("#valueStr2").val()};
 		value.valueStr3={ inputType:"button",value: $("#valueStr3").val()};
-		value.valueInt1={ inputType:"button",value: $("#valueInt1").val()};
-		value.valueInt2={ inputType:"button",value: $("#valueInt2").val()};
-		value.valueInt3={ inputType:"button",value: $("#valueInt3").val()};
+		value.valueInt1={ inputType:"number_input", value: $("#valueInt1").val() };
+		value.valueInt2={ inputType:"number_input", value: $("#valueInt2").val() };
+		value.valueInt3={ inputType:"number_input", value: $("#valueInt3").val() };
 		value.uid={ inputType:"button",value: $("#uid").val()};
 		value.recordTime={ inputType:"date_input", value: $("#recordTime").val() ,matchType:"auto"};
 		value.listLabel1={ inputType:"button",value: $("#listLabel1").val()};
@@ -219,7 +221,7 @@ function ListPage() {
 		value.listLabel3={ inputType:"button",value: $("#listLabel3").val()};
 		value.listCode1={ inputType:"button",value: $("#listCode1").val()};
 		value.listCode2={ inputType:"button",value: $("#listCode2").val()};
-		value.listCode23={ inputType:"button",value: $("#listCode23").val()};
+		value.listCode3={ inputType:"button",value: $("#listCode3").val()};
 		value.listValueNumber1={ inputType:"number_input", value: $("#listValueNumber1").val() };
 		value.listValueNumber2={ inputType:"number_input", value: $("#listValueNumber2").val() };
 		value.listValueNumber3={ inputType:"number_input", value: $("#listValueNumber3").val() };

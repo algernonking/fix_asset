@@ -4,7 +4,11 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.eam.AssetHandleStatusEnum;
 import com.dt.platform.constants.enums.ops.MonitorWarnLevelEnum;
 import com.dt.platform.constants.enums.ops.MonitorWarnProcessStatusEnum;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplIndicator;
 import com.dt.platform.generator.config.Config;
+import com.dt.platform.ops.page.MonitorTplTypePageController;
+import com.dt.platform.proxy.ops.MonitorTplTypeServiceProxy;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class MonitorWarnGtr extends BaseCodeGenerator{
@@ -16,6 +20,9 @@ public class MonitorWarnGtr extends BaseCodeGenerator{
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
+
+        cfg.getPoClassFile().addSimpleProperty(MonitorTpl.class,"tpl","节点模版","节点模版");
+        cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicator","节点指标","节点指标");
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -88,6 +95,6 @@ public class MonitorWarnGtr extends BaseCodeGenerator{
         g.generateCode();
         //移除之前生成的菜单，视情况执行
         //g.removeByBatchId("478921035245158400");
-         //g.generateMenu(MonitorNodeTypeServiceProxy.class, MonitorNodeTypePageController.class);
+        g.generateMenu(MonitorTplTypeServiceProxy.class, MonitorTplTypePageController.class);
     }
 }

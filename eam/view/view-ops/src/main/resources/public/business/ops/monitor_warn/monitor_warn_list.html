@@ -2,7 +2,7 @@
 /**
  * 节点告警 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 15:49:29
+ * @since 2022-02-05 16:28:32
  */
  -->
  <!DOCTYPE html>
@@ -39,20 +39,20 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 类型 , nodeId ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 节点 , nodeId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控数值 , nodeValueId ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控模版 , monitorTplCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控指标 , indicatorCode ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 处理状态 , status ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 处理状态 , status ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('处理状态')}" class="search-label status-label">处理状态</span><span class="search-colon">:</span></div>
-                        <input id="status" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnProcessStatusEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 告警等级 , warnLevel ,typeName=text_input, isHideInSearch=false -->
+                    <!-- 告警等级 , warnLevel ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('告警等级')}" class="search-label warnLevel-label">告警等级</span><span class="search-colon">:</span></div>
-                        <input id="warnLevel" class="layui-input search-input" style="width: 150px" type="text" />
+                        <div id="warnLevel" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnLevelEnum')}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 指标名称 , indicatorName ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -72,12 +72,16 @@
                     <!-- 告警时间 , warnTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('告警时间')}" class="search-label warnTime-label">告警时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="warnTime"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            <input type="text" id="warnTime-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="warnTime-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
                     <!-- 处理时间 , handledTime ,typeName=date_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('处理时间')}" class="search-label handledTime-label">处理时间</span><span class="search-colon">:</span></div>
-                            <input type="text" id="handledTime"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('请选择')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                            <input type="text" id="handledTime-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                            <span class="search-dash">-</span>
+                            <input type="text" id="handledTime-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
                     </div>
 
 
@@ -127,6 +131,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
+    var SELECT_WARNLEVEL_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnLevelEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorWarnProcessStatusEnum')}]];
     var AUTH_PREFIX="ops_monitor_warn";
 
 

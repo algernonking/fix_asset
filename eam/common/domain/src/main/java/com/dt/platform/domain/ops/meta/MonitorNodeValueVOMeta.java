@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:28
+ * @since 2022-02-06 23:40:31
  * @sign 2D5A5C66E2287DC0F698A37BD22A8975
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -139,6 +139,26 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> MONITOR_TPL_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,MONITOR_TPL_CODE, java.lang.String.class, "监控模版", "监控模版", java.lang.String.class, null);
 	
 	/**
+	 * 结果状态 , 类型: java.lang.String
+	*/
+	public static final String RESULT_STATUS="resultStatus";
+	
+	/**
+	 * 结果状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> RESULT_STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,RESULT_STATUS, java.lang.String.class, "结果状态", "结果状态", java.lang.String.class, null);
+	
+	/**
+	 * 结果内容 , 类型: java.lang.String
+	*/
+	public static final String RESULT_MESSAGE="resultMessage";
+	
+	/**
+	 * 结果内容 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> RESULT_MESSAGE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,RESULT_MESSAGE, java.lang.String.class, "结果内容", "结果内容", java.lang.String.class, null);
+	
+	/**
 	 * 指标 , 类型: java.lang.String
 	*/
 	public static final String INDICATOR_CODE="indicatorCode";
@@ -149,14 +169,14 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> INDICATOR_CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,INDICATOR_CODE, java.lang.String.class, "指标", "指标", java.lang.String.class, null);
 	
 	/**
-	 * 主机名称 , 类型: java.util.Date
+	 * 主机名称 , 类型: java.lang.String
 	*/
 	public static final String HOSTNAME="hostname";
 	
 	/**
-	 * 主机名称 , 类型: java.util.Date
+	 * 主机名称 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.util.Date> HOSTNAME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,HOSTNAME, java.util.Date.class, "主机名称", "主机名称", java.util.Date.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> HOSTNAME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,HOSTNAME, java.lang.String.class, "主机名称", "主机名称", java.lang.String.class, null);
 	
 	/**
 	 * 启动时间 , 类型: java.util.Date
@@ -191,32 +211,22 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	/**
 	 * CPU数量 , 类型: java.lang.Integer
 	*/
-	public static final String CPU="cpu";
+	public static final String CPU_NUMBER="cpuNumber";
 	
 	/**
 	 * CPU数量 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> CPU_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CPU, java.lang.Integer.class, "CPU数量", "CPU数量", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> CPU_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CPU_NUMBER, java.lang.Integer.class, "CPU数量", "CPU数量", java.lang.Integer.class, null);
 	
 	/**
 	 * CPU主频 , 类型: java.math.BigDecimal
 	*/
-	public static final String CPU_FRE="cpuFre";
+	public static final String CPU_FREE="cpuFree";
 	
 	/**
 	 * CPU主频 , 类型: java.math.BigDecimal
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> CPU_FRE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CPU_FRE, java.math.BigDecimal.class, "CPU主频", "CPU主频", java.math.BigDecimal.class, null);
-	
-	/**
-	 * 内存(M) , 类型: java.lang.Integer
-	*/
-	public static final String MEMORY="memory";
-	
-	/**
-	 * 内存(M) , 类型: java.lang.Integer
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> MEMORY_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,MEMORY, java.lang.Integer.class, "内存(M)", "内存(M)", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> CPU_FREE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,CPU_FREE, java.math.BigDecimal.class, "CPU主频", "CPU主频", java.math.BigDecimal.class, null);
 	
 	/**
 	 * cpuSys , 类型: java.math.BigDecimal
@@ -299,26 +309,6 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> OS_LOAD15_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,OS_LOAD15, java.math.BigDecimal.class, "系统负载15", "系统负载15", java.math.BigDecimal.class, null);
 	
 	/**
-	 * 内存使用率 , 类型: java.math.BigDecimal
-	*/
-	public static final String MEMORY_USED="memoryUsed";
-	
-	/**
-	 * 内存使用率 , 类型: java.math.BigDecimal
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,MEMORY_USED, java.math.BigDecimal.class, "内存使用率", "内存使用率", java.math.BigDecimal.class, null);
-	
-	/**
-	 * 虚拟内存使用率 , 类型: java.math.BigDecimal
-	*/
-	public static final String VMEMORY_USED="vmemoryUsed";
-	
-	/**
-	 * 虚拟内存使用率 , 类型: java.math.BigDecimal
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.math.BigDecimal> VMEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VMEMORY_USED, java.math.BigDecimal.class, "虚拟内存使用率", "虚拟内存使用率", java.math.BigDecimal.class, null);
-	
-	/**
 	 * 上行流量 , 类型: java.math.BigDecimal
 	*/
 	public static final String NETWORK_FLOW_UP="networkFlowUp";
@@ -349,24 +339,44 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> PROCESS_CNT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,PROCESS_CNT, java.lang.Integer.class, "连接数", "连接数", java.lang.Integer.class, null);
 	
 	/**
-	 * 内存 , 类型: java.lang.Integer
+	 * 物理内存(M) , 类型: java.lang.Integer
+	*/
+	public static final String P_MEMORY_SIZE="pMemorySize";
+	
+	/**
+	 * 物理内存(M) , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> P_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,P_MEMORY_SIZE, java.lang.Integer.class, "物理内存(M)", "物理内存(M)", java.lang.Integer.class, null);
+	
+	/**
+	 * 虚拟内存(M) , 类型: java.lang.Integer
+	*/
+	public static final String V_MEMORY_SIZE="vMemorySize";
+	
+	/**
+	 * 虚拟内存(M) , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> V_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,V_MEMORY_SIZE, java.lang.Integer.class, "虚拟内存(M)", "虚拟内存(M)", java.lang.Integer.class, null);
+	
+	/**
+	 * 物理内存使用率 , 类型: java.lang.Integer
 	*/
 	public static final String P_MEMORY_USED="pMemoryUsed";
 	
 	/**
-	 * 内存 , 类型: java.lang.Integer
+	 * 物理内存使用率 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> P_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,P_MEMORY_USED, java.lang.Integer.class, "内存", "内存", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> P_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,P_MEMORY_USED, java.lang.Integer.class, "物理内存使用率", "物理内存使用率", java.lang.Integer.class, null);
 	
 	/**
-	 * 虚拟内存 , 类型: java.lang.Integer
+	 * 虚拟内存使用率 , 类型: java.lang.Integer
 	*/
 	public static final String V_MEMORY_USED="vMemoryUsed";
 	
 	/**
-	 * 虚拟内存 , 类型: java.lang.Integer
+	 * 虚拟内存使用率 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> V_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,V_MEMORY_USED, java.lang.Integer.class, "虚拟内存", "虚拟内存", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> V_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,V_MEMORY_USED, java.lang.Integer.class, "虚拟内存使用率", "虚拟内存使用率", java.lang.Integer.class, null);
 	
 	/**
 	 * 信息 , 类型: java.lang.String
@@ -499,34 +509,34 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_STR3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_STR3, java.lang.String.class, "字符串3", "字符串3", java.lang.String.class, null);
 	
 	/**
-	 * 整数1 , 类型: java.lang.String
+	 * 整数1 , 类型: java.lang.Integer
 	*/
 	public static final String VALUE_INT1="valueInt1";
 	
 	/**
-	 * 整数1 , 类型: java.lang.String
+	 * 整数1 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT1, java.lang.String.class, "整数1", "整数1", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT1, java.lang.Integer.class, "整数1", "整数1", java.lang.Integer.class, null);
 	
 	/**
-	 * 整数2 , 类型: java.lang.String
+	 * 整数2 , 类型: java.lang.Integer
 	*/
 	public static final String VALUE_INT2="valueInt2";
 	
 	/**
-	 * 整数2 , 类型: java.lang.String
+	 * 整数2 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT2, java.lang.String.class, "整数2", "整数2", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT2, java.lang.Integer.class, "整数2", "整数2", java.lang.Integer.class, null);
 	
 	/**
-	 * 整数3 , 类型: java.lang.String
+	 * 整数3 , 类型: java.lang.Integer
 	*/
 	public static final String VALUE_INT3="valueInt3";
 	
 	/**
-	 * 整数3 , 类型: java.lang.String
+	 * 整数3 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT3, java.lang.String.class, "整数3", "整数3", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.Integer> VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,VALUE_INT3, java.lang.Integer.class, "整数3", "整数3", java.lang.Integer.class, null);
 	
 	/**
 	 * 唯一标识 , 类型: java.lang.String
@@ -601,12 +611,12 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	/**
 	 * 编码列3 , 类型: java.lang.String
 	*/
-	public static final String LIST_CODE23="listCode23";
+	public static final String LIST_CODE3="listCode3";
 	
 	/**
 	 * 编码列3 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_CODE23_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_CODE23, java.lang.String.class, "编码列3", "编码列3", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueVO,java.lang.String> LIST_CODE3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueVO.class ,LIST_CODE3, java.lang.String.class, "编码列3", "编码列3", java.lang.String.class, null);
 	
 	/**
 	 * 数值列1 , 类型: java.math.BigDecimal
@@ -781,7 +791,7 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NODE_ID , MONITOR_TPL_CODE , INDICATOR_CODE , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU , CPU_FRE , MEMORY , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , MEMORY_USED , VMEMORY_USED , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , UID , RECORD_TIME , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE23 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , NODE_ID , MONITOR_TPL_CODE , RESULT_STATUS , RESULT_MESSAGE , INDICATOR_CODE , HOSTNAME , BOOTTIME , OS_VERION , ARCH , CPU_NUMBER , CPU_FREE , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_SIZE , V_MEMORY_SIZE , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , UID , RECORD_TIME , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE3 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION };
 	
 	/**
 	 * 代理类
@@ -924,6 +934,28 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		}
 		
 		/**
+		 * 设置 结果状态
+		 * @param resultStatus 结果状态
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setResultStatus(String resultStatus) {
+			super.change(RESULT_STATUS,super.getResultStatus(),resultStatus);
+			super.setResultStatus(resultStatus);
+			return this;
+		}
+		
+		/**
+		 * 设置 结果内容
+		 * @param resultMessage 结果内容
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setResultMessage(String resultMessage) {
+			super.change(RESULT_MESSAGE,super.getResultMessage(),resultMessage);
+			super.setResultMessage(resultMessage);
+			return this;
+		}
+		
+		/**
 		 * 设置 指标
 		 * @param indicatorCode 指标
 		 * @return 当前对象
@@ -939,7 +971,7 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		 * @param hostname 主机名称
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setHostname(Date hostname) {
+		public MonitorNodeValue setHostname(String hostname) {
 			super.change(HOSTNAME,super.getHostname(),hostname);
 			super.setHostname(hostname);
 			return this;
@@ -980,34 +1012,23 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		
 		/**
 		 * 设置 CPU数量
-		 * @param cpu CPU数量
+		 * @param cpuNumber CPU数量
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setCpu(Integer cpu) {
-			super.change(CPU,super.getCpu(),cpu);
-			super.setCpu(cpu);
+		public MonitorNodeValue setCpuNumber(Integer cpuNumber) {
+			super.change(CPU_NUMBER,super.getCpuNumber(),cpuNumber);
+			super.setCpuNumber(cpuNumber);
 			return this;
 		}
 		
 		/**
 		 * 设置 CPU主频
-		 * @param cpuFre CPU主频
+		 * @param cpuFree CPU主频
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setCpuFre(BigDecimal cpuFre) {
-			super.change(CPU_FRE,super.getCpuFre(),cpuFre);
-			super.setCpuFre(cpuFre);
-			return this;
-		}
-		
-		/**
-		 * 设置 内存(M)
-		 * @param memory 内存(M)
-		 * @return 当前对象
-		*/
-		public MonitorNodeValue setMemory(Integer memory) {
-			super.change(MEMORY,super.getMemory(),memory);
-			super.setMemory(memory);
+		public MonitorNodeValue setCpuFree(BigDecimal cpuFree) {
+			super.change(CPU_FREE,super.getCpuFree(),cpuFree);
+			super.setCpuFree(cpuFree);
 			return this;
 		}
 		
@@ -1100,28 +1121,6 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		}
 		
 		/**
-		 * 设置 内存使用率
-		 * @param memoryUsed 内存使用率
-		 * @return 当前对象
-		*/
-		public MonitorNodeValue setMemoryUsed(BigDecimal memoryUsed) {
-			super.change(MEMORY_USED,super.getMemoryUsed(),memoryUsed);
-			super.setMemoryUsed(memoryUsed);
-			return this;
-		}
-		
-		/**
-		 * 设置 虚拟内存使用率
-		 * @param vmemoryUsed 虚拟内存使用率
-		 * @return 当前对象
-		*/
-		public MonitorNodeValue setVmemoryUsed(BigDecimal vmemoryUsed) {
-			super.change(VMEMORY_USED,super.getVmemoryUsed(),vmemoryUsed);
-			super.setVmemoryUsed(vmemoryUsed);
-			return this;
-		}
-		
-		/**
 		 * 设置 上行流量
 		 * @param networkFlowUp 上行流量
 		 * @return 当前对象
@@ -1155,8 +1154,30 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		}
 		
 		/**
-		 * 设置 内存
-		 * @param pMemoryUsed 内存
+		 * 设置 物理内存(M)
+		 * @param pMemorySize 物理内存(M)
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setPMemorySize(Integer pMemorySize) {
+			super.change(P_MEMORY_SIZE,super.getPMemorySize(),pMemorySize);
+			super.setPMemorySize(pMemorySize);
+			return this;
+		}
+		
+		/**
+		 * 设置 虚拟内存(M)
+		 * @param vMemorySize 虚拟内存(M)
+		 * @return 当前对象
+		*/
+		public MonitorNodeValue setVMemorySize(Integer vMemorySize) {
+			super.change(V_MEMORY_SIZE,super.getVMemorySize(),vMemorySize);
+			super.setVMemorySize(vMemorySize);
+			return this;
+		}
+		
+		/**
+		 * 设置 物理内存使用率
+		 * @param pMemoryUsed 物理内存使用率
 		 * @return 当前对象
 		*/
 		public MonitorNodeValue setPMemoryUsed(Integer pMemoryUsed) {
@@ -1166,8 +1187,8 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		}
 		
 		/**
-		 * 设置 虚拟内存
-		 * @param vMemoryUsed 虚拟内存
+		 * 设置 虚拟内存使用率
+		 * @param vMemoryUsed 虚拟内存使用率
 		 * @return 当前对象
 		*/
 		public MonitorNodeValue setVMemoryUsed(Integer vMemoryUsed) {
@@ -1324,7 +1345,7 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		 * @param valueInt1 整数1
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setValueInt1(String valueInt1) {
+		public MonitorNodeValue setValueInt1(Integer valueInt1) {
 			super.change(VALUE_INT1,super.getValueInt1(),valueInt1);
 			super.setValueInt1(valueInt1);
 			return this;
@@ -1335,7 +1356,7 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		 * @param valueInt2 整数2
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setValueInt2(String valueInt2) {
+		public MonitorNodeValue setValueInt2(Integer valueInt2) {
 			super.change(VALUE_INT2,super.getValueInt2(),valueInt2);
 			super.setValueInt2(valueInt2);
 			return this;
@@ -1346,7 +1367,7 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		 * @param valueInt3 整数3
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setValueInt3(String valueInt3) {
+		public MonitorNodeValue setValueInt3(Integer valueInt3) {
 			super.change(VALUE_INT3,super.getValueInt3(),valueInt3);
 			super.setValueInt3(valueInt3);
 			return this;
@@ -1431,12 +1452,12 @@ public class MonitorNodeValueVOMeta extends MonitorNodeValueMeta {
 		
 		/**
 		 * 设置 编码列3
-		 * @param listCode23 编码列3
+		 * @param listCode3 编码列3
 		 * @return 当前对象
 		*/
-		public MonitorNodeValue setListCode23(String listCode23) {
-			super.change(LIST_CODE23,super.getListCode23(),listCode23);
-			super.setListCode23(listCode23);
+		public MonitorNodeValue setListCode3(String listCode3) {
+			super.change(LIST_CODE3,super.getListCode3(),listCode3);
+			super.setListCode3(listCode3);
 			return this;
 		}
 		

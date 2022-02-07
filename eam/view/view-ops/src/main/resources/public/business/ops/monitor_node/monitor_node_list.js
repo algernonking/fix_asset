@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-02 14:55:24
+ * @since 2022-02-06 23:40:24
  */
 
 
@@ -83,7 +83,13 @@ function ListPage() {
 					,{ field: 'nodeType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('类型') , templet: function (d) { return templet('nodeType',d.nodeType,d);}  }
 					,{ field: 'nodeEnabled', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否启用') , templet: function (d) { return templet('nodeEnabled',d.nodeEnabled,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控状态') , templet: function (d) { return templet('status',d.status,d);}  }
-					,{ field: 'monitorMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('监控方式') , templet: function (d) { return templet('monitorMethod',d.monitorMethod,d);}  }
+					,{ field: 'sshPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('SSH端口') , templet: function (d) { return templet('sshPort',d.sshPort,d);}  }
+					,{ field: 'sshVoucherId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('凭证(SSH)'), templet: function (d) { return templet('sshVoucherId' ,fox.joinLabel(d.sshVoucher,"notes"),d);}}
+					,{ field: 'agentPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Agent端口') , templet: function (d) { return templet('agentPort',d.agentPort,d);}  }
+					,{ field: 'snmpPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp端口') , templet: function (d) { return templet('snmpPort',d.snmpPort,d);}  }
+					,{ field: 'jmxPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Jmx端口') , templet: function (d) { return templet('jmxPort',d.jmxPort,d);}  }
+					,{ field: 'impiPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Jmx端口') , templet: function (d) { return templet('impiPort',d.impiPort,d);}  }
+					,{ field: 'jdbcUrl', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Jdbc地址') , templet: function (d) { return templet('jdbcUrl',d.jdbcUrl,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -132,7 +138,13 @@ function ListPage() {
 		value.nodeType={ inputType:"button",value: $("#nodeType").val()};
 		value.nodeEnabled={ inputType:"button",value: $("#nodeEnabled").val()};
 		value.status={ inputType:"button",value: $("#status").val()};
-		value.monitorMethod={ inputType:"button",value: $("#monitorMethod").val()};
+		value.sshPort={ inputType:"number_input", value: $("#sshPort").val() };
+		value.sshVoucherId={ inputType:"select_box", value: getSelectedValue("#sshVoucherId","value") ,fillBy:["sshVoucher"]  , label:getSelectedValue("#sshVoucherId","nameStr") };
+		value.agentPort={ inputType:"number_input", value: $("#agentPort").val() };
+		value.snmpPort={ inputType:"number_input", value: $("#snmpPort").val() };
+		value.jmxPort={ inputType:"number_input", value: $("#jmxPort").val() };
+		value.impiPort={ inputType:"number_input", value: $("#impiPort").val() };
+		value.jdbcUrl={ inputType:"button",value: $("#jdbcUrl").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
