@@ -18,9 +18,8 @@ public enum MonitorMethodEnum implements CodeTextEnum {
     ZABBIX("zabbix" , "Zabbix"),
     VMWARE("vmware" , "Vmware"),
     DIRECT("direct" , "直接取数"),
-    SHELL("shell" , "shell"),
-    SCRIPT("script" , "脚本"),
-    JDBC("jdbc" , "Jdbc数据库");
+    SCRIPT("script" , "脚本取数"),
+    JDBC("jdbc" , "JDBC取数");
 
     private String code;
     private String text;

@@ -52,6 +52,7 @@ public class MonitorRelationManager extends RelationManager {
                 .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID)
                 .using(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.TPL_CODE).join(EAMTables.OPS_MONITOR_TPL.CODE);
 
+
         this.property(MonitorNodeMeta.SSH_VOUCHER_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID).join(EAMTables.OPS_MONITOR_VOUCHER.ID);
 

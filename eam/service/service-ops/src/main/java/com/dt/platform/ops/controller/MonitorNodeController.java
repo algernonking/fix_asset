@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:43
+ * @since 2022-02-08 18:31:09
 */
 
 @Api(tags = "节点")
@@ -228,7 +228,7 @@ public class MonitorNodeController extends SuperController {
 		MonitorNode monitorNode=monitorNodeService.getById(id);
 		// join 关联的对象
 		monitorNodeService.dao().fill(monitorNode)
-			.with(MonitorNodeMeta.MONITOR_TPL_IDS)
+			.with(MonitorNodeMeta.MONITOR_TPL_LIST)
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)
@@ -332,7 +332,7 @@ public class MonitorNodeController extends SuperController {
 		PagedList<MonitorNode> list=monitorNodeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		monitorNodeService.dao().fill(list)
-			.with(MonitorNodeMeta.MONITOR_TPL_IDS)
+			.with(MonitorNodeMeta.MONITOR_TPL_LIST)
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)

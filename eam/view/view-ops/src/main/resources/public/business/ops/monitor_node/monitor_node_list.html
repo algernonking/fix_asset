@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:43
+ * @since 2022-02-08 18:31:09
  */
  -->
  <!DOCTYPE html>
@@ -58,10 +58,13 @@
                     <!-- Jmx端口 , impiPort ,typeName=number_input, isHideInSearch=true -->
                     <!-- Jdbc地址 , jdbcUrl ,typeName=text_input, isHideInSearch=true -->
                     <!-- 监控模版 , monitorTplIds ,typeName=select_box, isHideInSearch=true -->
-                    <!-- 监控状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 监控状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('监控状态')}" class="search-label status-label">监控状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" style="width:150px" extraParam="{}"></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" style="width:150px"></div>
+
                     </div>
                     <!-- IP , nodeIp ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -83,10 +86,13 @@
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点分类')}" class="search-label type-label">节点分类</span><span class="search-colon">:</span></div>
                         <div id="type" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
-                    <!-- 是否启用 , nodeEnabled ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 是否启用 , nodeEnabled ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('是否启用')}" class="search-label nodeEnabled-label">是否启用</span><span class="search-colon">:</span></div>
-                        <div id="nodeEnabled" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px" extraParam="{}"></div>
+
+
+                        <div id="nodeEnabled" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px"></div>
+
                     </div>
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -141,8 +147,8 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var SELECT_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
+    var RADIO_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
     var AUTH_PREFIX="ops_monitor_node";
 
 

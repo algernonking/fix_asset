@@ -40,6 +40,83 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     }
 
     @Override
+    public Result<JSONObject> queryNodeHostResourceList() {
+
+        String sql="select\n" +
+                "(\n" +
+                "select process_cnt\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.process_cnt' and t.node_id=end.id\n" +
+                ") data_process_cnt,\n" +
+                "(\n" +
+                "select os_load\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.load' and t.node_id=end.id\n" +
+                ") data_os_load,\n" +
+                "(\n" +
+                "select cpu_number\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.cpu_number' and t.node_id=end.id\n" +
+                ") data_os_cpu_number,\n" +
+                "(\n" +
+                "select hostname\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.hostname' and t.node_id=end.id\n" +
+                ") data_hostname,\n" +
+                "\n" +
+                "(\n" +
+                "select p_memory_used\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.memory_used' and t.node_id=end.id\n" +
+                ") data_memory_used,\n" +
+                "(\n" +
+                "select os_datetime\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os_datetime' and t.node_id=end.id\n" +
+                ") data_os_datetime,\n" +
+                "\n" +
+                "(\n" +
+                "select max(list_value_number1) flow_up\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.net_interface_flow' and t.node_id=end.id\n" +
+                ") os_net_interface_flow_up,\n" +
+                "(\n" +
+                "select max(list_value_number2) flow_down\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.net_interface_flow' and t.node_id=end.id\n" +
+                ") os_net_interface_flow_down,\n" +
+                "\n" +
+                "end.*\n" +
+                "from ops_monitor_node end where node_enabled='1' and deleted='0'";
+
+
+        Result<JSONObject> result=new Result<>();
+        JSONObject resultData=new JSONObject();
+        //统计节点个数
+        resultData.put("nodeHostList",dao.query(sql).toJSONArrayWithJSONObject());
+
+        return result.success(true).data(resultData);
+
+
+    }
+
+    @Override
     public Result<JSONObject> queryNodeHostTopData(List<String> topList,int top,int day) {
         Result<JSONObject> result=new Result<>();
         JSONObject resultData=new JSONObject();

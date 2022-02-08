@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(MonitorNodeResourcePageController.prefix)
 public class MonitorNodeResourcePageController extends ViewController {
 	
-	public static final String prefix="business/ops/monitor_resource";
+	public static final String prefix="business/ops/monitor_node_resource";
 
 	private MonitorNodeValueServiceProxy proxy;
 	
@@ -40,9 +40,10 @@ public class MonitorNodeResourcePageController extends ViewController {
 	/**
 	 * 节点数值 功能主页面
 	 */
-	@RequestMapping("/monitor_node_value_list.html")
-	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/monitor_node_value_list";
+	@RequestMapping("/monitor_node_host_list.html")
+	public String nodeHostList(Model model,HttpServletRequest request) {
+
+		return prefix+"/monitor_node_host_list";
 	}
 
 	/**

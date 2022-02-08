@@ -1,5 +1,6 @@
 package com.dt.platform.ops.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.ops.MonitorNode;
 import com.github.foxnic.api.transter.Result;
@@ -16,5 +17,5 @@ public interface IMonitorStatisticalDataService extends ISuperService<MonitorNod
 
     Result<JSONObject> queryNodeHostTopData(List<String> topList,int top,int day);
 
-
+    Result<JSONObject> queryNodeHostResourceList();
 }

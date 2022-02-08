@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:10
+ * @since 2022-02-08 13:14:43
  */
 
 function FormPage() {
@@ -178,6 +178,58 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 nodeEnabled 下拉字段
+		fox.renderSelectBox({
+			el: "nodeEnabled",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("nodeEnabled",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
+		//渲染 status 下拉字段
+		fox.renderSelectBox({
+			el: "status",
+			radio: true,
+			filterable: false,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 		//渲染 sshVoucherId 下拉字段
 		fox.renderSelectBox({
 			el: "sshVoucherId",
@@ -272,10 +324,14 @@ function FormPage() {
 			fox.setSelectValue4QueryApi("#subType",formData.monitorNodeSubType);
 			//设置  节点分组 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#groupId",formData.monitorNodeGroup);
+			//设置  启用状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#nodeEnabled",formData.nodeEnabled,SELECT_NODEENABLED_DATA);
+			//设置  监控状态 设置下拉框勾选
+			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  凭证(SSH) 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#sshVoucherId",formData.sshVoucher);
 			//设置  监控模版 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#monitorTplIds",formData.monitorTplList);
+			fox.setSelectValue4QueryApi("#monitorTplIds",formData.monitorTplIds);
 
 			//处理fillBy
 
@@ -332,6 +388,10 @@ function FormPage() {
 		data["subType"]=fox.getSelectedValue("subType",false);
 		//获取 节点分组 下拉框的值
 		data["groupId"]=fox.getSelectedValue("groupId",false);
+		//获取 启用状态 下拉框的值
+		data["nodeEnabled"]=fox.getSelectedValue("nodeEnabled",false);
+		//获取 监控状态 下拉框的值
+		data["status"]=fox.getSelectedValue("status",false);
 		//获取 凭证(SSH) 下拉框的值
 		data["sshVoucherId"]=fox.getSelectedValue("sshVoucherId",false);
 		//获取 监控模版 下拉框的值

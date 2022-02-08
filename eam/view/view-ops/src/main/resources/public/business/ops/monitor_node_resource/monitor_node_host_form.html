@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:09
+ * @since 2022-02-08 13:14:43
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-5319-content">
+        <div class="layui-row form-row" id="random-2907-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -83,21 +83,21 @@
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('启用状态')}">启用状态</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="nodeEnabled" lay-filter="nodeEnabled" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('启用状态')}">启用状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="nodeEnabled" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" extraParam="{}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 
-                <div class="layui-form-item" >
-                    <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div><div class="layui-required">*</div></div>
-                    <div class="layui-input-block ">
-                        <input input-type="radio" type="radio" name="status" lay-filter="status" th:each="e,stat:${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" th:value="${e.code}" th:title="${e.text}" th:checked="${(e.code=='' || stat.index==0)?'yes':'no'}">
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('监控状态')}">监控状态</div><div class="layui-required">*</div></div>
+                        <div class="layui-input-block ">
+                            <div id="status" input-type="select" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}" extraParam="{}"></div>
+                        </div>
                     </div>
-                </div>
 
 
                 <!--结束：栏次内字段循环-->
@@ -131,11 +131,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8461-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1669-fieldset">
             <legend>数据采集</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-8461-content">
+        <div class="layui-row form-row" id="random-1669-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -227,7 +227,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3773-content">
+        <div class="layui-row form-row" id="random-6003-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -266,9 +266,9 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${layuiTableWidthConfig}]];
-    var RADIO_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
-    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
-    var VALIDATE_CONFIG={"nodeNameShow":{"labelInForm":"可见主机名","inputType":"text_input","required":true},"nodeEnabled":{"labelInForm":"启用状态","inputType":"radio_box","required":true},"nodeIp":{"labelInForm":"IP","inputType":"text_input","required":true},"type":{"labelInForm":"节点分类","inputType":"select_box","required":true},"status":{"labelInForm":"监控状态","inputType":"radio_box","required":true}};
+    var SELECT_NODEENABLED_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorStatusEnum')}]];
+    var VALIDATE_CONFIG={"nodeNameShow":{"labelInForm":"可见主机名","inputType":"text_input","required":true},"nodeEnabled":{"labelInForm":"启用状态","inputType":"select_box","required":true},"nodeIp":{"labelInForm":"IP","inputType":"text_input","required":true},"type":{"labelInForm":"节点分类","inputType":"select_box","required":true},"status":{"labelInForm":"监控状态","inputType":"select_box","required":true}};
     var AUTH_PREFIX="ops_monitor_node";
 
 
@@ -276,8 +276,8 @@
 
 
 
-<script th:src="'/business/ops/monitor_node/monitor_node_ext.js?'+${cacheKey}"></script>
-<script th:src="'/business/ops/monitor_node/monitor_node_form.js?'+${cacheKey}"></script>
+<script th:src="'/business/ops/monitor_node_resource/monitor_node_host_ext.js?'+${cacheKey}"></script>
+<script th:src="'/business/ops/monitor_node_resource/monitor_node_host_form.js?'+${cacheKey}"></script>
 
 </body>
 </html>

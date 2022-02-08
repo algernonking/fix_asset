@@ -34,6 +34,13 @@ public interface MonitorStatisticalDataServiceProxy {
     public static final String QUERY_NODE_HOST_TOP_DATA = API_PREFIX + "query-node-host-top-data";
 
     /**
+     * 查询主机列表
+     */
+    public static final String QUERY_NODE_HOST_RESOURCE_LIST = API_PREFIX + "query-node-host-resource-list";
+
+
+
+    /**
      * 控制器类名
      * */
     public static final String CONTROLLER_CLASS_NAME="com.dt.platform.ops.controller.MonitorStatisticalDataController";

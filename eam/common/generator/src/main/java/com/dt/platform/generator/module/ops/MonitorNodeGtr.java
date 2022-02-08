@@ -80,11 +80,11 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME_SHOW).form().validate().required();
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.STATUS).form().validate().required().form()
-                .label("监控状态").selectBox().enumType(MonitorStatusEnum.class);
+                .label("监控状态").radioBox().defaultIndex(0).enumType(MonitorStatusEnum.class);
 
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_ENABLED).form().validate().required().form()
-                .label("启用状态").selectBox().enumType(MonitorEnableEnum.class);
+                .label("启用状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
 
 
@@ -95,7 +95,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 .table().sort(false).form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_LIST)
                 .valueField(MonitorTplMeta.CODE).textField(MonitorTplMeta.NAME)
                 .toolbar(false).paging(false).defaultIndex(0)
-                .fillWith(MonitorNodeMeta.MONITOR_TPL_IDS).muliti(true);
+                .fillWith(MonitorNodeMeta.MONITOR_TPL_LIST).muliti(true);
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID)
                 .basic().label("凭证(SSH)")

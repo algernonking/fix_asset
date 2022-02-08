@@ -46,6 +46,17 @@ public class MonitorStatisticalDataController {
         return monitorStatisticalData.queryNodeHostTopData(topList,top,day);
     }
 
+    /**
+     * 查询主机节点列表
+     */
+    @ApiOperation(value = "查询主机节点列表")
+    @ApiOperationSupport(order=2)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_RESOURCE_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_RESOURCE_LIST)
+    public Result<JSONObject> queryNodeHostResourceList() {
+        return monitorStatisticalData.queryNodeHostResourceList();
+    }
+
 
 
 }
