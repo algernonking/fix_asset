@@ -103,9 +103,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 ") os_net_interface_flow_down,\n" +
                 "\n" +
                 "end.*\n" +
-                "from ops_monitor_node end where node_enabled='1' and deleted='0'";
-
-
+                "from ops_monitor_node end where node_enabled='enable' and deleted='0'";
+        System.out.println("nodeList Sql:\n"+sql);
         Result<JSONObject> result=new Result<>();
         JSONObject resultData=new JSONObject();
         //统计节点个数
@@ -158,8 +157,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "select b.node_ip,b.node_name_show,a.list_value_str1 fs_namae,a.list_value_number1 up_flow from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
-                "and b.node_enabled='1' \n" +
-                "and b.status='1' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
                 "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number1 desc)end limit "+top;
@@ -170,8 +169,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "select b.node_ip,b.node_name_show,a.list_value_str1 fs_namae,a.list_value_number2 down_flow from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
-                "and b.node_enabled='1' \n" +
-                "and b.status='1' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
                 "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number2 desc)end limit "+top;
@@ -183,8 +182,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "select b.node_ip,b.node_name_show,a.cpu_used from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
-                "and b.node_enabled='1' \n" +
-                "and b.status='1' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.cpu') t group by node_id,indicator_code)\n" +
                 "order by cpu_used desc)end limit "+top;
@@ -196,8 +195,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "select b.node_ip,b.node_name_show,a.os_load from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
-                "and b.node_enabled='1' \n" +
-                "and b.status='1' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.load') t group by node_id,indicator_code)\n" +
                 "order by os_load desc)end limit "+top;
@@ -208,8 +207,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         String sql="select b.node_ip,b.node_name_show,a.p_memory_used from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
-                "and b.node_enabled='1' \n" +
-                "and b.status='1' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.memory_used') t group by node_id,indicator_code)\n" +
                 "order by p_memory_used desc)end limit "+top;

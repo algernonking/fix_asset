@@ -64,10 +64,10 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
             "select a.id,c.monitor_tpl_code,c.code,c.interval_time,c.id indicator_id from\n" +
             "ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
             "where a.deleted='0' \n" +
-            "and a.status='1' \n " +
+            "and a.status='online' \n " +
             "and b.deleted='0' \n" +
             "and c.deleted='0' \n" +
-            "and c.status='1' \n" +
+            "and c.status='enable' \n" +
             "and c.monitor_method='script'\n" +
             "and a.id=b.node_id \n" +
             "and b.tpl_code=c.monitor_tpl_code)t1\n" +
@@ -98,7 +98,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 "where a.deleted='0'\n" +
                 "and b.deleted='0'\n" +
                 "and c.deleted='0'\n" +
-                "and c.status='1'\n" +
+                "and c.status='enable'\n" +
                 "and a.id=b.node_id\n" +
                 "and b.tpl_code=c.monitor_tpl_code \n" +
                 "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
@@ -118,7 +118,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 "and b.deleted='0'\n" +
                 "and c.deleted='0'\n" +
                 "and a.id=b.node_id\n" +
-                "and c.status='1'\n" +
+                "and c.status='enable'\n" +
                 "and b.tpl_code=c.monitor_tpl_code \n" +
                 "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
         ConditionExpr expr=new ConditionExpr();
@@ -134,7 +134,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 "where a.deleted='0'\n" +
                 "and b.deleted='0'\n" +
                 "and c.deleted='0'\n" +
-                "and c.status='1'\n" +
+                "and c.status='enable'\n" +
                 "and a.id=b.node_id\n" +
                 "and b.tpl_code=c.monitor_tpl_code \n" +
                 "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";

@@ -13,8 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum MonitorEnableEnum implements CodeTextEnum {
 
-    ENABLE("1" , "启用"),
-    DISABLED("0" , "禁用");
+    ENABLE("enable" , "启用"),
+    DISABLED("disabled" , "禁用");
 
     private String code;
     private String text;

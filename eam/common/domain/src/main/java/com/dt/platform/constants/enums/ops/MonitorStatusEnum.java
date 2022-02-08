@@ -13,8 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum MonitorStatusEnum implements CodeTextEnum {
 
-    OFFLINE("0" , "下线"),
-    ONLINE("1" , "在线")
+    ONLINE("online" , "在线"),
+    OFFLINE("offline" , "下线")
     ;
 //    RedHt("os" , "操作系统"),
 //    DB("db" , "数据库"),
