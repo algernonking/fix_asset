@@ -14,6 +14,7 @@ import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.InteractiveCallback;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
+import com.github.foxnic.commons.log.Logger;
 
 public class RemoteShellExecutor {
 
@@ -27,7 +28,7 @@ public class RemoteShellExecutor {
     private String charset = Charset.defaultCharset().toString();
 
     private int port = 22;
-    private static final int TIME_OUT = 1000 * 5 * 60;
+    private static final int TIME_OUT = 1000 *8;
 
     private Session session;
 
@@ -95,7 +96,7 @@ public class RemoteShellExecutor {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
-            System.out.println("authenticateWithKeyboardInteractive failed.");
+            Logger.info("authenticateWithKeyboardInteractive failed.");
         }
         return loginSuccess;
 
@@ -129,7 +130,7 @@ public class RemoteShellExecutor {
         StringBuffer result = new StringBuffer();
         int ret = -1;
         try {
-            System.out.println("login status:"+login()+","+cmds);
+            Logger.info("login status:" + login() + "," + cmds);
             if (login()) {
                 // Open a new {@link Session} on this connection
                 session = conn.openSession();
@@ -205,7 +206,7 @@ public class RemoteShellExecutor {
     }
 
     public static void main(String[] args) {
-        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","RootOracle123456789@",22);
+        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","1@",22);
         RemoteShellResult r=rmt.exec("df");
 
         RemoteShellResult r2=rmt.exec("df");

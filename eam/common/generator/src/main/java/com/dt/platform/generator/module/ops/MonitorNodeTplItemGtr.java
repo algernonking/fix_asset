@@ -1,6 +1,10 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.domain.ops.Host;
+import com.dt.platform.domain.ops.MonitorNode;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.ServiceInfo;
 import com.dt.platform.generator.config.Config;
 import com.github.foxnic.generator.config.WriteMode;
 
@@ -8,11 +12,17 @@ public class MonitorNodeTplItemGtr extends BaseCodeGenerator{
 
 
     public MonitorNodeTplItemGtr() {
-        super(EAMTables.OPS_MONITOR_NODE_MAP.$TABLE,MONITOR_MENU_ID);
+        super(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.$TABLE,MONITOR_MENU_ID);
     }
 
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
+
+
+        //A和B，一对多 ，AA。
+        cfg.setRelationField(MonitorNode.class,EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID, MonitorTpl.class, EAMTables.OPS_MONITOR_NODE_TPL_ITEM.TPL_CODE,true);
+        //cfg.setRelationField(Host.class,EAMTables.OPS_HOST_MID.HOST_ID, ServiceInfo.class, EAMTables.OPS_HOST_MID.SERVICE_INFO_ID,true);
+
 
         cfg.view().search().inputLayout(
                 new Object[]{
@@ -20,6 +30,8 @@ public class MonitorNodeTplItemGtr extends BaseCodeGenerator{
                 }
 
         );
+
+
 
         cfg.view().search().labelWidth(1, Config.searchLabelWidth);
         cfg.view().search().labelWidth(2,Config.searchLabelWidth);

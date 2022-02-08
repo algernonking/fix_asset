@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:17
- * @sign AD24F72D27383F0346DA08F09DC337FA
+ * @since 2022-02-08 13:14:43
+ * @sign 85DEB70C2DEEC05E5891ECDA3720B059
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -212,12 +212,6 @@ public class MonitorNode extends Entity {
 	private MonitorVoucher sshVoucher;
 	
 	/**
-	 * 监控模版：监控模版
-	*/
-	@ApiModelProperty(required = false,value="监控模版" , notes = "监控模版")
-	private List<MonitorTpl> monitorTplList;
-	
-	/**
 	 * 数据库信息：数据库信息
 	*/
 	@ApiModelProperty(required = false,value="数据库信息" , notes = "数据库信息")
@@ -246,6 +240,18 @@ public class MonitorNode extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="节点子类型" , notes = "节点子类型")
 	private MonitorNodeSubtype monitorNodeSubType;
+	
+	/**
+	 * 监控模版列表：监控模版列表
+	*/
+	@ApiModelProperty(required = false,value="监控模版列表" , notes = "监控模版列表")
+	private List<MonitorTpl> monitorTplList;
+	
+	/**
+	 * 监控模版Ids：监控模版Ids
+	*/
+	@ApiModelProperty(required = false,value="监控模版Ids" , notes = "监控模版Ids")
+	private List<String> monitorTplIds;
 	
 	/**
 	 * 获得 主键<br>
@@ -818,36 +824,6 @@ public class MonitorNode extends Entity {
 	}
 	
 	/**
-	 * 获得 监控模版<br>
-	 * 监控模版
-	 * @return 监控模版
-	*/
-	public List<MonitorTpl> getMonitorTplList() {
-		return monitorTplList;
-	}
-	
-	/**
-	 * 设置 监控模版
-	 * @param monitorTplList 监控模版
-	 * @return 当前对象
-	*/
-	public MonitorNode setMonitorTplList(List<MonitorTpl> monitorTplList) {
-		this.monitorTplList=monitorTplList;
-		return this;
-	}
-	
-	/**
-	 * 添加 监控模版
-	 * @param monitorTpl 监控模版
-	 * @return 当前对象
-	*/
-	public MonitorNode addMonitorTpl(MonitorTpl monitorTpl) {
-		if(this.monitorTplList==null) monitorTplList=new ArrayList<>();
-		this.monitorTplList.add(monitorTpl);
-		return this;
-	}
-	
-	/**
 	 * 获得 数据库信息<br>
 	 * 数据库信息
 	 * @return 数据库信息
@@ -950,6 +926,66 @@ public class MonitorNode extends Entity {
 	*/
 	public MonitorNode setMonitorNodeSubType(MonitorNodeSubtype monitorNodeSubType) {
 		this.monitorNodeSubType=monitorNodeSubType;
+		return this;
+	}
+	
+	/**
+	 * 获得 监控模版列表<br>
+	 * 监控模版列表
+	 * @return 监控模版列表
+	*/
+	public List<MonitorTpl> getMonitorTplList() {
+		return monitorTplList;
+	}
+	
+	/**
+	 * 设置 监控模版列表
+	 * @param monitorTplList 监控模版列表
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorTplList(List<MonitorTpl> monitorTplList) {
+		this.monitorTplList=monitorTplList;
+		return this;
+	}
+	
+	/**
+	 * 添加 监控模版列表
+	 * @param monitorTpl 监控模版列表
+	 * @return 当前对象
+	*/
+	public MonitorNode addMonitorTpl(MonitorTpl monitorTpl) {
+		if(this.monitorTplList==null) monitorTplList=new ArrayList<>();
+		this.monitorTplList.add(monitorTpl);
+		return this;
+	}
+	
+	/**
+	 * 获得 监控模版Ids<br>
+	 * 监控模版Ids
+	 * @return 监控模版Ids
+	*/
+	public List<String> getMonitorTplIds() {
+		return monitorTplIds;
+	}
+	
+	/**
+	 * 设置 监控模版Ids
+	 * @param monitorTplIds 监控模版Ids
+	 * @return 当前对象
+	*/
+	public MonitorNode setMonitorTplIds(List<String> monitorTplIds) {
+		this.monitorTplIds=monitorTplIds;
+		return this;
+	}
+	
+	/**
+	 * 添加 监控模版Ids
+	 * @param monitorTplId 监控模版Ids
+	 * @return 当前对象
+	*/
+	public MonitorNode addMonitorTplId(String monitorTplId) {
+		if(this.monitorTplIds==null) monitorTplIds=new ArrayList<>();
+		this.monitorTplIds.add(monitorTplId);
 		return this;
 	}
 

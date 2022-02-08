@@ -7,12 +7,12 @@ import com.dt.platform.constants.db.EAMTables.OPS_HOST;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 import org.github.foxnic.web.domain.system.DictItem;
-import java.util.ArrayList;
+
 import javax.persistence.Transient;
-import java.util.Map;
+
 import com.github.foxnic.dao.entity.EntityContext;
 
 
@@ -1382,4 +1382,5 @@ public class Host extends Entity {
 	public static Host create() {
 		return EntityContext.create(Host.class);
 	}
+
 }

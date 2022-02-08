@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 09:51:35
+ * @since 2022-02-08 13:14:41
  * @sign 174C9B47E114D172A6569BA169A6E0D4
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */

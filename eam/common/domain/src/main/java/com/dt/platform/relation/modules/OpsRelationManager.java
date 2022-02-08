@@ -103,7 +103,7 @@ public class OpsRelationManager extends RelationManager {
         //用户凭证
         this.property(InformationSystemMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_INFORMATION_SYSTEM.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher,m)->{
+                .after((tag,voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -146,7 +146,7 @@ public class OpsRelationManager extends RelationManager {
         //用户凭证
         this.property(VoucherOwnerMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_VOUCHER_OWNER.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher,m)->{
+                .after((tag,voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -194,7 +194,7 @@ public class OpsRelationManager extends RelationManager {
         //用户凭证
         this.property(HostMeta.VOUCHER_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_VOUCHER.OWNER_ID)
-                .after((voucherowner,voucher,m)->{
+                .after((tag,voucherowner,voucher,m)->{
                     Iterator var2 = voucher.iterator();
                     while(var2.hasNext()) {
                         Voucher obj = (Voucher)var2.next();
@@ -212,7 +212,7 @@ public class OpsRelationManager extends RelationManager {
         this.property(HostMeta.HOST_DB_LIST_PROP)
                 .using(EAMTables.OPS_HOST.ID).join(EAMTables.OPS_HOST_DB.HOST_ID)
                 .using(EAMTables.OPS_HOST_DB.SERVICE_INFO_ID).join(EAMTables.OPS_SERVICE_INFO.ID)
-        .after((host,dbs,m)->{
+        .after((tag,host,dbs,m)->{
             return dbs;
         });
 

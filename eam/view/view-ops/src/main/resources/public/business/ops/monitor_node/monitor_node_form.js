@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:18
+ * @since 2022-02-08 13:14:43
  */
 
 function FormPage() {
@@ -261,6 +261,35 @@ function FormPage() {
 				return opts;
 			}
 		});
+		//渲染 monitorTplIds 下拉字段
+		fox.renderSelectBox({
+			el: "monitorTplIds",
+			radio: false,
+			filterable: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("monitorTplIds",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//转换数据
+			searchField: "name", //请自行调整用于搜索的字段名称
+			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+			transform: function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var defaultValues=[],defaultIndexs=[];
+				if(action=="create") {
+					defaultValues = "".split(",");
+					defaultIndexs = "0".split(",");
+				}
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					if(!data[i]) continue;
+					opts.push({data:data[i],name:data[i].name,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
+				}
+				return opts;
+			}
+		});
 	}
 
 	/**
@@ -301,6 +330,8 @@ function FormPage() {
 			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  凭证(SSH) 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#sshVoucherId",formData.sshVoucher);
+			//设置  监控模版 设置下拉框勾选
+			fox.setSelectValue4QueryApi("#monitorTplIds",formData.monitorTplIds);
 
 			//处理fillBy
 
@@ -363,6 +394,8 @@ function FormPage() {
 		data["status"]=fox.getSelectedValue("status",false);
 		//获取 凭证(SSH) 下拉框的值
 		data["sshVoucherId"]=fox.getSelectedValue("sshVoucherId",false);
+		//获取 监控模版 下拉框的值
+		data["monitorTplIds"]=fox.getSelectedValue("monitorTplIds",true);
 
 		return data;
 	}

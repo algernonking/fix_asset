@@ -11,6 +11,7 @@ import com.dt.platform.ops.service.*;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.Insert;
@@ -58,6 +59,25 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
     @Autowired
     private IMonitorTplIndicatorService monitorTplIndicatorService;
 
+    String findExecuteDataSql="select * from (\n" +
+            "select t1.*,ifnull(t2.interval_time,100000000) e_interval_time from (\n" +
+            "select a.id,c.monitor_tpl_code,c.code,c.interval_time,c.id indicator_id from\n" +
+            "ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
+            "where a.deleted='0' \n" +
+            "and a.status='1' \n " +
+            "and b.deleted='0' \n" +
+            "and c.deleted='0' \n" +
+            "and c.status='1' \n" +
+            "and c.monitor_method='script'\n" +
+            "and a.id=b.node_id \n" +
+            "and b.tpl_code=c.monitor_tpl_code)t1\n" +
+            "left join \n" +
+            "(select node_id,monitor_tpl_code,indicator_code,UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(max(record_time)) interval_time\n" +
+            "from ops_monitor_node_value \n" +
+            "group by node_id,monitor_tpl_code,indicator_code)t2 \n" +
+            "on t1.id=t2.node_id and t1.monitor_tpl_code=t2.monitor_tpl_code and t1.code=t2.indicator_code \n" +
+            ") end where e_interval_time>interval_time ";
+
 
     private Insert createBaseInsert(MonitorTplIndicator indicator,MonitorNode node){
         Insert nodeV=new Insert("ops_monitor_node_value");
@@ -70,57 +90,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         nodeV.set("node_id",node.getId());
         return nodeV;
     }
-
-    @Override
-    public List<MonitorNode> queryNodeList() {
-        String sql="select distinct a.id from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
-                "where a.deleted='0'\n" +
-                "and b.deleted='0'\n" +
-                "and c.deleted='0'\n" +
-                "and a.id=b.node_id\n" +
-                "and c.status='1'\n" +
-                "and b.tpl_code=c.monitor_tpl_code \n" +
-                "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
-        ConditionExpr expr=new ConditionExpr();
-        expr.and(" id in ("+sql+")" );
-        expr.andIf("node_enabled",MonitorEnableEnum.ENABLE.code());
-        List<MonitorNode> list=monitorNodeService.queryList(expr);
-        return list;
-    }
-//
-//    @Override
-//    public  queryNodeTplKeyValue() {
-//        String sql="select distinct a.id from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
-//                "where a.deleted='0'\n" +
-//                "and b.deleted='0'\n" +
-//                "and c.deleted='0'\n" +
-//                "and a.id=b.node_id\n" +
-//                "and b.tpl_code=c.monitor_tpl_code \n" +
-//                "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
-//        ConditionExpr expr=new ConditionExpr();
-//        expr.and("id in ("+sql+")" );
-//        expr.andIf("node_enabled",MonitorEnableEnum.ENABLE.code());
-//        List<MonitorNode> list=monitorNodeService.queryList(expr);
-//        return list;
-//    }
-
-
-    @Override
-    public List<MonitorTpl> queryTplList() {
-        String sql="select distinct b.tpl_code from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
-                "where a.deleted='0'\n" +
-                "and b.deleted='0'\n" +
-                "and c.deleted='0'\n" +
-                "and c.status='1'\n" +
-                "and a.id=b.node_id\n" +
-                "and b.tpl_code=c.monitor_tpl_code \n" +
-                "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
-        ConditionExpr expr=new ConditionExpr();
-        expr.and("code in ("+sql+")" );
-        List<MonitorTpl> list=monitorTplService.queryList(expr);
-        return list;
-    }
-
 
 
     @Override
@@ -142,9 +111,26 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         return list;
     }
 
+    @Override
+    public List<MonitorNode> queryNodeList() {
+        String sql="select distinct a.id from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
+                "where a.deleted='0'\n" +
+                "and b.deleted='0'\n" +
+                "and c.deleted='0'\n" +
+                "and a.id=b.node_id\n" +
+                "and c.status='1'\n" +
+                "and b.tpl_code=c.monitor_tpl_code \n" +
+                "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
+        ConditionExpr expr=new ConditionExpr();
+        expr.and(" id in ("+sql+")" );
+        expr.andIf("node_enabled",MonitorEnableEnum.ENABLE.code());
+        List<MonitorNode> list=monitorNodeService.queryList(expr);
+        return list;
+    }
 
-    private List<MonitorTplIndicator> queryExecuteIndicatorList(String nodeId) {
-        String sql="select distinct c.id from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
+    @Override
+    public List<MonitorTpl> queryTplList() {
+        String sql="select distinct b.tpl_code from ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
                 "where a.deleted='0'\n" +
                 "and b.deleted='0'\n" +
                 "and c.deleted='0'\n" +
@@ -152,24 +138,41 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 "and a.id=b.node_id\n" +
                 "and b.tpl_code=c.monitor_tpl_code \n" +
                 "and c.monitor_method='"+MonitorMethodEnum.SCRIPT.code()+"'";
-        if(!StringUtil.isBlank(nodeId)){
-            sql=sql+"and a.id='"+nodeId+"'";
-        }
+        ConditionExpr expr=new ConditionExpr();
+        expr.and("code in ("+sql+")" );
+        List<MonitorTpl> list=monitorTplService.queryList(expr);
+        return list;
+    }
 
+    private List<MonitorNode> queryExecuteNodeList() {
+        String sql="select distinct ret.id from ("+findExecuteDataSql+") ret ";
+        ConditionExpr expr=new ConditionExpr();
+        expr.and(" id in ("+sql+")" );
+        expr.andIf("node_enabled",MonitorEnableEnum.ENABLE.code());
+        List<MonitorNode> list=monitorNodeService.queryList(expr);
+        return list;
+    }
+
+    private List<MonitorTplIndicator> queryExecuteIndicatorList(String nodeId) {
+        String sql="select distinct ret.indicator_id from ("+findExecuteDataSql+") ret where 1=1 ";
+        if(!StringUtil.isBlank(nodeId)){
+            sql=sql+" and ret.id='"+nodeId+"'";
+        }
         ConditionExpr expr=new ConditionExpr();
         expr.and("id in ("+sql+")" );
         List<MonitorTplIndicator> list=monitorTplIndicatorService.queryList(expr);
         return list;
     }
 
+
     @Override
     public Result collectData() {
-        List<MonitorNode> nodeList=queryNodeList();
-        System.out.println("collectData,find nodes number:"+nodeList.size());
+        List<MonitorNode> nodeList=queryExecuteNodeList();
+        Logger.info("collectData,find nodes number:"+nodeList.size());
         for(MonitorNode node:nodeList){
             Result result=collectNodeData(node);
             if(!result.isSuccess()){
-                System.out.println("node ip:"+node.getNodeIp()+",message"+result.getMessage());
+                Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
             }
         }
         return ErrorDesc.success();
@@ -201,7 +204,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
 
         //获取指标
         List<MonitorTplIndicator> monitorTplIndicatorList=queryExecuteIndicatorList(node.getId());
-        System.out.println("collectData,process node:"+node.getId()+",ip:"+node.getNodeIp()+",find indicator number:"+monitorTplIndicatorList.size());
+        Logger.info("collectData,process node:"+node.getId()+",ip:"+node.getNodeIp()+",find indicator number:"+monitorTplIndicatorList.size());
         List<Insert> list=executeScriptSingle(monitorTplIndicatorList,node,account,voucher,sshPort);
         //开始执行insert
         executeCollectDataInsert(list);
@@ -215,7 +218,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         for(MonitorTplIndicator tplIndicator:monitorTplIndicatorList){
             //获取一个指标的执行结果
             RemoteShellResult executeResult = rmt.exec(tplIndicator.getCommand());
-            System.out.println("executeResult"+executeResult.result+executeResult.code);
+            Logger.info("executeResult"+executeResult.result+executeResult.code);
           if(executeResult.code==0){
                 //执行结果
                 String content=executeResult.result;
@@ -246,7 +249,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
             try{
                 dao.execute(insert);
             }catch(UncategorizedSQLException e){
-                System.out.println("Sql execute error,sql:"+insert.getSQL());
+                Logger.info("Sql execute error,sql:"+insert.getSQL());
                 Insert errInsert=new Insert("ops_monitor_node_value");
                 errInsert.set("id",insert.getValue("id"));
                 errInsert.setIf("result_status","failed");
@@ -291,7 +294,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 while (colContent != null)
                 {
                     contentList.add(colContent);
-                    System.out.println("ss"+colContent);
                     colContent=br.readLine();
 
                 }
@@ -320,11 +322,11 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         }else if(MonitorIndicatorValueColumnColsEnum.MULTIPLE.code().equals(tplIndicator.getValueColumnCols())){
             //当多列时
             for(String itemValue:contentList){
-                System.out.println("itemValue:"+itemValue);
+                Logger.info("itemValue:"+itemValue);
                 String[] valueColumnItemArr=itemValue.split(NODE_VALUE_COLUMN_COLS_SPLIT);
                 Insert ins=createBaseInsert(tplIndicator,node);
-                //System.out.println("valueColumnItemArr"+valueColumnItemArr);
-                //System.out.println("valueColumnArr"+valueColumnArr);
+                //Logger.info("valueColumnItemArr"+valueColumnItemArr);
+                //Logger.info("valueColumnArr"+valueColumnArr);
                 if(valueColumnItemArr.length==valueColumnArr.length){
                     for(int i=0;i<valueColumnArr.length;i++){
                         ins.set(valueColumnArr[i],valueColumnItemArr[i]);

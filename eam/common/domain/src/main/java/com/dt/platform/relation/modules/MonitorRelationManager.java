@@ -48,11 +48,15 @@ public class MonitorRelationManager extends RelationManager {
 
     private void monitorNode() {
 
+        this.property(MonitorNodeMeta.MONITOR_TPL_LIST_PROP)
+                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID)
+                .using(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.TPL_CODE).join(EAMTables.OPS_MONITOR_TPL.CODE);
+
         this.property(MonitorNodeMeta.SSH_VOUCHER_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID).join(EAMTables.OPS_MONITOR_VOUCHER.ID);
 
-        this.property(MonitorNodeMeta.MONITOR_TPL_LIST_PROP)
-                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID);
+//        this.property(MonitorNodeMeta.MONITOR_TPL_LIST_PROP)
+//                .using(EAMTables.OPS_MONITOR_NODE.ID).join(EAMTables.OPS_MONITOR_NODE_TPL_ITEM.NODE_ID);
 
         this.property(MonitorNodeMeta.MONITOR_NODE_TYPE_PROP)
                 .using(EAMTables.OPS_MONITOR_NODE.TYPE).join(EAMTables.OPS_MONITOR_NODE_TYPE.CODE);

@@ -2,7 +2,7 @@
 /**
  * 节点映射 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 09:51:47
+ * @since 2022-02-08 13:14:47
  */
  -->
  <!DOCTYPE html>
@@ -38,16 +38,30 @@
 
 
 
-        <div class="layui-row form-row" id="random-5446-content">
+        <div class="layui-row form-row" id="random-0897-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
             <div class="layui-col-xs12 form-column" >
 
                     <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('IP')}">IP</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="ip" id="ip" name="ip" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('IP') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
                         <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('节点')}">节点</div></div>
                         <div class="layui-input-block layui-input-block-c1">
                             <input lay-filter="nodeId" id="nodeId" name="nodeId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('节点') }" type="text" class="layui-input"  />
+                        </div>
+                    </div>
+
+                                    <div class="layui-form-item" >
+                        <div class="layui-form-label layui-form-label-c1"><div th:text="${lang.translate('源值')}">源值</div></div>
+                        <div class="layui-input-block layui-input-block-c1">
+                            <input lay-filter="sourceId" id="sourceId" name="sourceId" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('源值') }" type="text" class="layui-input"  />
                         </div>
                     </div>
 

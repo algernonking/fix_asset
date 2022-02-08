@@ -37,7 +37,6 @@ public class MonitorNodeValueGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_NODE_VALUE.RESULT_STATUS).form()
                 .label("结果状态").selectBox().enumType(MonitorNodeValueResultStatusEnum.class);
 
-       // cfg.view().list().disableBatchDelete();
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("800px");

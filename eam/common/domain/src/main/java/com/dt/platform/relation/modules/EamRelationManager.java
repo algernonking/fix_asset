@@ -77,7 +77,7 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataPermissionsMeta.POSITION_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.PERMISSION_ID)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_POSITION.VALUE).join(EAMTables.EAM_POSITION.ID)
-                .after((dp,pos,m)->{
+                .after((tag,dp,pos,m)->{
                      if(dp.getPositionIds()==null){
                          dp.setPositionIds(new ArrayList<>());
                      }
@@ -92,7 +92,7 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataPermissionsMeta.CATEGORY_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.PERMISSION_ID)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_CATALOG.VALUE).join(FoxnicWeb.PCM_CATALOG.ID)
-                .after((dp,catalog,m)->{
+                .after((tag,dp,catalog,m)->{
             if(dp.getCategoryIds()==null){
                 dp.setCategoryIds(new ArrayList<>());
             }
@@ -107,7 +107,7 @@ public class EamRelationManager extends RelationManager {
         this.property(AssetDataPermissionsMeta.ORGANIZATION_PROP)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS.ID).join(EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.PERMISSION_ID)
                 .using(EAMTables.EAM_ASSET_DATA_PERMISSIONS_ORG.VALUE).join(FoxnicWeb.HRM_ORGANIZATION.ID)
-                .after((dp,org,m)->{
+                .after((tag,dp,org,m)->{
             if(dp.getOrganizationIds()==null){
                 dp.setOrganizationIds(new ArrayList<>());
             }

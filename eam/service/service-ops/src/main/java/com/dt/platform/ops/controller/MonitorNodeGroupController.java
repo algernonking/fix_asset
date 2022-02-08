@@ -48,7 +48,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点分组 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 10:57:33
+ * @since 2022-02-08 13:15:00
 */
 
 @Api(tags = "节点分组")
@@ -65,9 +65,9 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "添加节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux分组"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux分组"),
 	})
 	@ApiOperationSupport(order=1)
 	@SentinelResource(value = MonitorNodeGroupServiceProxy.INSERT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -84,7 +84,7 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "删除节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorNodeGroupVOMeta.ID)
@@ -118,9 +118,9 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "更新节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux分组"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux分组"),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorNodeGroupVOMeta.PAGE_INDEX , MonitorNodeGroupVOMeta.PAGE_SIZE , MonitorNodeGroupVOMeta.SEARCH_FIELD , MonitorNodeGroupVOMeta.FUZZY_FIELD , MonitorNodeGroupVOMeta.SEARCH_VALUE , MonitorNodeGroupVOMeta.DIRTY_FIELDS , MonitorNodeGroupVOMeta.SORT_FIELD , MonitorNodeGroupVOMeta.SORT_TYPE , MonitorNodeGroupVOMeta.IDS } )
 	@NotNull(name = MonitorNodeGroupVOMeta.ID)
@@ -137,9 +137,9 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "保存节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux分组"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux分组"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeGroupVOMeta.PAGE_INDEX , MonitorNodeGroupVOMeta.PAGE_SIZE , MonitorNodeGroupVOMeta.SEARCH_FIELD , MonitorNodeGroupVOMeta.FUZZY_FIELD , MonitorNodeGroupVOMeta.SEARCH_VALUE , MonitorNodeGroupVOMeta.DIRTY_FIELDS , MonitorNodeGroupVOMeta.SORT_FIELD , MonitorNodeGroupVOMeta.SORT_TYPE , MonitorNodeGroupVOMeta.IDS } )
 	@NotNull(name = MonitorNodeGroupVOMeta.ID)
@@ -195,9 +195,9 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "查询节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux分组"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux分组"),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorNodeGroupVOMeta.PAGE_INDEX , MonitorNodeGroupVOMeta.PAGE_SIZE } )
 	@SentinelResource(value = MonitorNodeGroupServiceProxy.QUERY_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
@@ -215,9 +215,9 @@ public class MonitorNodeGroupController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询节点分组")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "543027008297238528"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux分组"),
+		@ApiImplicitParam(name = MonitorNodeGroupVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux分组"),
 	})
 	@ApiOperationSupport(order=8)
 	@SentinelResource(value = MonitorNodeGroupServiceProxy.QUERY_PAGED_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )

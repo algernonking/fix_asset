@@ -148,13 +148,10 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.SNMP_OID
                 }
         );
-        cfg.view().form().addGroup(null,
+
+        cfg.view().form().addGroup("其他信息",
                 new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND
-                }
-        );
-        cfg.view().form().addGroup(null,
-                new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NOTES
                 }
         );

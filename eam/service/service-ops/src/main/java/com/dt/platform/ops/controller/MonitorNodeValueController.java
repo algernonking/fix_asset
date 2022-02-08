@@ -49,7 +49,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点数值 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 09:51:45
+ * @since 2022-02-08 13:14:52
 */
 
 @Api(tags = "节点数值")
@@ -66,8 +66,8 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "添加节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192"),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_STATUS , value = "结果状态" , required = false , dataTypeClass=String.class , example = "sucess"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_MESSAGE , value = "结果内容" , required = false , dataTypeClass=String.class , example = "执行成功"),
@@ -110,7 +110,7 @@ public class MonitorNodeValueController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT2 , value = "整数2" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT3 , value = "整数3" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.UID , value = "唯一标识" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 09:13:00"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 10:08:47"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL1 , value = "标签列1" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL2 , value = "标签列2" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL3 , value = "标签列3" , required = false , dataTypeClass=String.class),
@@ -142,7 +142,7 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "删除节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192")
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorNodeValueVOMeta.ID)
@@ -176,8 +176,8 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "更新节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192"),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_STATUS , value = "结果状态" , required = false , dataTypeClass=String.class , example = "sucess"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_MESSAGE , value = "结果内容" , required = false , dataTypeClass=String.class , example = "执行成功"),
@@ -220,7 +220,7 @@ public class MonitorNodeValueController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT2 , value = "整数2" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT3 , value = "整数3" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.UID , value = "唯一标识" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 09:13:00"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 10:08:47"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL1 , value = "标签列1" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL2 , value = "标签列2" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL3 , value = "标签列3" , required = false , dataTypeClass=String.class),
@@ -252,8 +252,8 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "保存节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192"),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_STATUS , value = "结果状态" , required = false , dataTypeClass=String.class , example = "sucess"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_MESSAGE , value = "结果内容" , required = false , dataTypeClass=String.class , example = "执行成功"),
@@ -296,7 +296,7 @@ public class MonitorNodeValueController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT2 , value = "整数2" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT3 , value = "整数3" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.UID , value = "唯一标识" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 09:13:00"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 10:08:47"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL1 , value = "标签列1" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL2 , value = "标签列2" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL3 , value = "标签列3" , required = false , dataTypeClass=String.class),
@@ -367,8 +367,8 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "查询节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192"),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_STATUS , value = "结果状态" , required = false , dataTypeClass=String.class , example = "sucess"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_MESSAGE , value = "结果内容" , required = false , dataTypeClass=String.class , example = "执行成功"),
@@ -411,7 +411,7 @@ public class MonitorNodeValueController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT2 , value = "整数2" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT3 , value = "整数3" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.UID , value = "唯一标识" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 09:13:00"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 10:08:47"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL1 , value = "标签列1" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL2 , value = "标签列2" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL3 , value = "标签列3" , required = false , dataTypeClass=String.class),
@@ -444,8 +444,8 @@ public class MonitorNodeValueController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询节点数值")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "542996191554568192"),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "54319142128949657"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.NODE_ID , value = "节点" , required = false , dataTypeClass=String.class , example = "2"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.MONITOR_TPL_CODE , value = "监控模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_STATUS , value = "结果状态" , required = false , dataTypeClass=String.class , example = "sucess"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RESULT_MESSAGE , value = "结果内容" , required = false , dataTypeClass=String.class , example = "执行成功"),
@@ -488,7 +488,7 @@ public class MonitorNodeValueController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT2 , value = "整数2" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.VALUE_INT3 , value = "整数3" , required = false , dataTypeClass=Integer.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.UID , value = "唯一标识" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 09:13:00"),
+		@ApiImplicitParam(name = MonitorNodeValueVOMeta.RECORD_TIME , value = "记录时间" , required = false , dataTypeClass=Date.class , example = "2022-02-07 10:08:47"),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL1 , value = "标签列1" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL2 , value = "标签列2" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeValueVOMeta.LIST_LABEL3 , value = "标签列3" , required = false , dataTypeClass=String.class),

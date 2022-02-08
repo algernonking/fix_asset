@@ -7,10 +7,8 @@ import com.dt.platform.constants.enums.ops.MonitorStatusEnum;
 import com.dt.platform.domain.ops.*;
 import com.dt.platform.domain.ops.meta.*;
 import com.dt.platform.generator.config.Config;
-import com.dt.platform.proxy.ops.MonitorNodeGroupServiceProxy;
-import com.dt.platform.proxy.ops.MonitorNodeSubtypeServiceProxy;
-import com.dt.platform.proxy.ops.MonitorNodeTypeServiceProxy;
-import com.dt.platform.proxy.ops.MonitorVoucherServiceProxy;
+import com.dt.platform.ops.service.impl.MonitorNodeTplItemServiceImpl;
+import com.dt.platform.proxy.ops.*;
 import com.github.foxnic.generator.config.WriteMode;
 
 public class MonitorNodeGtr extends BaseCodeGenerator{
@@ -24,7 +22,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         System.out.println(this.getClass().getName());
 
         cfg.getPoClassFile().addSimpleProperty(MonitorVoucher.class,"sshVoucher","ssh凭证","ssh凭证");
-        cfg.getPoClassFile().addListProperty(MonitorTpl.class,"monitorTplList","监控模版","监控模版");
+
      //  cfg.getPoClassFile().addSimpleProperty(MonitorNodeHost.class,"monitorNodeHost","主机信息","主机信息");
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeDb.class,"monitorNodeDb","数据库信息","数据库信息");
         cfg.getPoClassFile().addListProperty(MonitorNodeValue.class,"monitorNodeValueList","数值信息","数值信息");
@@ -34,6 +32,8 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeType.class,"monitorNodeType","节点类型","节点类型");
         cfg.getPoClassFile().addSimpleProperty(MonitorNodeSubtype.class,"monitorNodeSubType","节点子类型","节点子类型");
 
+        cfg.getPoClassFile().addListProperty(MonitorTpl.class,"monitorTplList","监控模版列表","监控模版列表");
+        cfg.getPoClassFile().addListProperty(String.class,"monitorTplIds","监控模版Ids","监控模版Ids");
 
 
         cfg.view().search().inputLayout(
@@ -86,8 +86,16 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_ENABLED).form().validate().required().form()
                 .label("启用状态").selectBox().enumType(MonitorEnableEnum.class);
 
-//        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SSH_PORT).form().numberInput().
 
+
+        cfg.service().addRelationSaveAction(MonitorNodeTplItemServiceImpl.class,MonitorNodeVOMeta.MONITOR_TPL_IDS);
+
+        cfg.view().field(MonitorNodeMeta.MONITOR_TPL_IDS)
+                .basic().label("监控模版")
+                .table().sort(false).form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_LIST)
+                .valueField(MonitorTplMeta.CODE).textField(MonitorTplMeta.NAME)
+                .toolbar(false).paging(false).defaultIndex(0)
+                .fillWith(MonitorNodeMeta.MONITOR_TPL_IDS).muliti(true);
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID)
                 .basic().label("凭证(SSH)")
@@ -96,8 +104,6 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 .valueField(MonitorVoucherMeta.ID).
                 textField(MonitorVoucherMeta.NAME).
                 fillWith(MonitorNodeMeta.SSH_VOUCHER).muliti(false);
-
-
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.GROUP_ID)
                 .basic().label("节点分组")
@@ -133,6 +139,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                         EAMTables.OPS_MONITOR_NODE.GROUP_ID,
                 },
                 new Object[] {
+                        MonitorNodeMeta.MONITOR_TPL_IDS,
                         EAMTables.OPS_MONITOR_NODE.NODE_ENABLED,
                         EAMTables.OPS_MONITOR_NODE.STATUS,
                 },

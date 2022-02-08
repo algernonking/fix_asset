@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:18
+ * @since 2022-02-08 13:14:43
  */
 
 
@@ -91,6 +91,7 @@ function ListPage() {
 					,{ field: 'impiPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Jmx端口') , templet: function (d) { return templet('impiPort',d.impiPort,d);}  }
 					,{ field: 'jdbcUrl', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Jdbc地址') , templet: function (d) { return templet('jdbcUrl',d.jdbcUrl,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'monitorTplIds', align:"",fixed:false,  hide:false, sort: false  , title: fox.translate('监控模版'), templet: function (d) { return templet('monitorTplIds' ,fox.joinLabel(d.monitorTplIds,"name"),d);}}
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -150,6 +151,7 @@ function ListPage() {
 		value.jdbcUrl={ inputType:"button",value: $("#jdbcUrl").val()};
 		value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
+		value.monitorTplIds={ inputType:"select_box", value: getSelectedValue("#monitorTplIds","value") ,fillBy:["monitorTplIds"]  , label:getSelectedValue("#monitorTplIds","nameStr") };
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){
 			if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;

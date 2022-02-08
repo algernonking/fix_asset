@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 13:48:01
+ * @since 2022-02-08 13:14:39
  */
 
 
@@ -91,10 +91,10 @@ function ListPage() {
 					,{ field: 'intervalTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('间隔时间(秒）') , templet: function (d) { return templet('intervalTime',d.intervalTime,d);}  }
 					,{ field: 'dataKeepDay', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数据保留天数') , templet: function (d) { return templet('dataKeepDay',d.dataKeepDay,d);}  }
 					,{ field: 'command', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('命令') , templet: function (d) { return templet('command',d.command,d);}  }
-					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
 					,{ field: 'snmpOid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp元数据') , templet: function (d) { return templet('snmpOid',d.snmpOid,d);}  }
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
+					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
 					,{ field: 'itemSort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('排序') , templet: function (d) { return templet('itemSort',d.itemSort,d);}  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -151,10 +151,10 @@ function ListPage() {
 		value.dataKeepDay={ inputType:"number_input", value: $("#dataKeepDay").val() };
 		value.command={ inputType:"button",value: $("#command").val()};
 		value.commandValue={ inputType:"button",value: $("#commandValue").val()};
-		value.label={ inputType:"button",value: $("#label").val()};
 		value.snmpOid={ inputType:"button",value: $("#snmpOid").val()};
-		value.notes={ inputType:"button",value: $("#notes").val()};
+		value.label={ inputType:"button",value: $("#label").val()};
 		value.itemSort={ inputType:"number_input", value: $("#itemSort").val() };
+		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){

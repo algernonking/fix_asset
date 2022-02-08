@@ -26,6 +26,8 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import com.dt.platform.ops.service.IMonitorNodeService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
@@ -35,7 +37,7 @@ import java.util.Date;
  * 节点 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:17
+ * @since 2022-02-08 13:14:43
 */
 
 
@@ -53,6 +55,8 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 	 * */
 	public DAO dao() { return dao; }
 
+	@Autowired 
+	private MonitorNodeTplItemServiceImpl monitorNodeTplItemServiceImpl;
 
 
 	@Override
@@ -68,8 +72,13 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 	 * @return 结果 , 如果失败返回 false，成功返回 true
 	 */
 	@Override
+	@Transactional
 	public Result insert(MonitorNode monitorNode,boolean throwsException) {
 		Result r=super.insert(monitorNode,throwsException);
+		//保存关系
+		if(r.success()) {
+			monitorNodeTplItemServiceImpl.saveRelation(monitorNode.getId(), monitorNode.getMonitorTplIds());
+		}
 		return r;
 	}
 
@@ -79,6 +88,7 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 	 * @return 插入是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result insert(MonitorNode monitorNode) {
 		return this.insert(monitorNode,true);
 	}
@@ -146,6 +156,7 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(MonitorNode monitorNode , SaveMode mode) {
 		return this.update(monitorNode,mode,true);
 	}
@@ -158,8 +169,13 @@ public class MonitorNodeServiceImpl extends SuperService<MonitorNode> implements
 	 * @return 保存是否成功
 	 * */
 	@Override
+	@Transactional
 	public Result update(MonitorNode monitorNode , SaveMode mode,boolean throwsException) {
 		Result r=super.update(monitorNode , mode , throwsException);
+		//保存关系
+		if(r.success()) {
+			monitorNodeTplItemServiceImpl.saveRelation(monitorNode.getId(), monitorNode.getMonitorTplIds());
+		}
 		return r;
 	}
 

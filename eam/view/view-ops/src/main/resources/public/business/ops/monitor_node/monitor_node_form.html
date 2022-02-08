@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:18
+ * @since 2022-02-08 13:14:43
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-9261-content">
+        <div class="layui-row form-row" id="random-2907-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -74,6 +74,15 @@
             <div class="layui-col-xs4 form-column" >
 
 
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('监控模版')}">监控模版</div></div>
+                        <div class="layui-input-block ">
+                            <div id="monitorTplIds" input-type="select" th:data="${'/service-ops/ops-monitor-tpl/query-list'}" extraParam="{}"></div>
+                        </div>
+                    </div>
+
+
+                
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('启用状态')}">启用状态</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
@@ -122,11 +131,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8128-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1669-fieldset">
             <legend>数据采集</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-8128-content">
+        <div class="layui-row form-row" id="random-1669-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -217,15 +226,12 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1263-fieldset">
-            <legend>数据采集</legend>
-        </fieldset>
 
-        <div class="layui-row form-row" id="random-1263-content">
+        <div class="layui-row form-row" id="random-6003-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
-            <div class="layui-col-xs12 form-column" >
+            <div class="layui-col-xs12 form-column"  style="padding-top: 0px" >
 
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('备注')}">备注</div></div>

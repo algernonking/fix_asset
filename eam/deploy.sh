@@ -89,6 +89,7 @@ if [[ $ops_node_file_recreate -eq 1 ]];then
 fi
 ####################### Deploy ######################################
 ops=$ops_jar_dir/ops.jar
+echo "##########"
 echo "$JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file">>/tmp/ops.log
 $JAVA  -jar $ops -e action -n $ops_node_file -c $ops_remotefile_recreate_file
 exit 0

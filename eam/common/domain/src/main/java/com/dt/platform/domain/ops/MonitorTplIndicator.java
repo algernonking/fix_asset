@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版指标
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 13:48:00
- * @sign BDED3764D9BFA5A9547435047BBBA2E1
+ * @since 2022-02-08 13:14:39
+ * @sign ABB399BD447164E3EA610CA909778DEE
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -144,28 +144,28 @@ public class MonitorTplIndicator extends Entity {
 	private String commandValue;
 	
 	/**
-	 * 标签：标签
-	*/
-	@ApiModelProperty(required = false,value="标签" , notes = "标签")
-	private String label;
-	
-	/**
 	 * snmp元数据：snmp元数据
 	*/
 	@ApiModelProperty(required = false,value="snmp元数据" , notes = "snmp元数据")
 	private String snmpOid;
 	
 	/**
-	 * 备注：备注
+	 * 标签：标签
 	*/
-	@ApiModelProperty(required = false,value="备注" , notes = "备注")
-	private String notes;
+	@ApiModelProperty(required = false,value="标签" , notes = "标签")
+	private String label;
 	
 	/**
 	 * 排序：排序
 	*/
 	@ApiModelProperty(required = false,value="排序" , notes = "排序")
 	private Integer itemSort;
+	
+	/**
+	 * 备注：备注
+	*/
+	@ApiModelProperty(required = false,value="备注" , notes = "备注")
+	private String notes;
 	
 	/**
 	 * 创建人ID：创建人ID
@@ -589,25 +589,6 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
-	 * 获得 标签<br>
-	 * 标签
-	 * @return 标签
-	*/
-	public String getLabel() {
-		return label;
-	}
-	
-	/**
-	 * 设置 标签
-	 * @param label 标签
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setLabel(String label) {
-		this.label=label;
-		return this;
-	}
-	
-	/**
 	 * 获得 snmp元数据<br>
 	 * snmp元数据
 	 * @return snmp元数据
@@ -627,21 +608,21 @@ public class MonitorTplIndicator extends Entity {
 	}
 	
 	/**
-	 * 获得 备注<br>
-	 * 备注
-	 * @return 备注
+	 * 获得 标签<br>
+	 * 标签
+	 * @return 标签
 	*/
-	public String getNotes() {
-		return notes;
+	public String getLabel() {
+		return label;
 	}
 	
 	/**
-	 * 设置 备注
-	 * @param notes 备注
+	 * 设置 标签
+	 * @param label 标签
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicator setNotes(String notes) {
-		this.notes=notes;
+	public MonitorTplIndicator setLabel(String label) {
+		this.label=label;
 		return this;
 	}
 	
@@ -661,6 +642,25 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	public MonitorTplIndicator setItemSort(Integer itemSort) {
 		this.itemSort=itemSort;
+		return this;
+	}
+	
+	/**
+	 * 获得 备注<br>
+	 * 备注
+	 * @return 备注
+	*/
+	public String getNotes() {
+		return notes;
+	}
+	
+	/**
+	 * 设置 备注
+	 * @param notes 备注
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setNotes(String notes) {
+		this.notes=notes;
 		return this;
 	}
 	

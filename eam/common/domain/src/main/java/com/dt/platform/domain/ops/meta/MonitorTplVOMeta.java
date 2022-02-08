@@ -12,7 +12,7 @@ import com.dt.platform.domain.ops.MonitorTplIndicator;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 13:14:35
+ * @since 2022-02-08 13:14:36
  * @sign 5E82A88D7E6E0AB023724D065E3AED68
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -250,14 +250,14 @@ public class MonitorTplVOMeta extends MonitorTplMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplVO,com.dt.platform.domain.ops.MonitorTplType> TPL_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplVO.class ,TPL_TYPE, com.dt.platform.domain.ops.MonitorTplType.class, "节点模版类型", "节点模版类型", com.dt.platform.domain.ops.MonitorTplType.class, null);
 	
 	/**
-	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	 * 指标列表 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
 	*/
 	public static final String TPL_INDICATOR_LIST="tplIndicatorList";
 	
 	/**
-	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
+	 * 指标列表 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplIndicator
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplVO,com.dt.platform.domain.ops.MonitorTplIndicator> TPL_INDICATOR_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplVO.class ,TPL_INDICATOR_LIST, java.util.List.class, "指标", "指标", com.dt.platform.domain.ops.MonitorTplIndicator.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplVO,com.dt.platform.domain.ops.MonitorTplIndicator> TPL_INDICATOR_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplVO.class ,TPL_INDICATOR_LIST, java.util.List.class, "指标列表", "指标列表", com.dt.platform.domain.ops.MonitorTplIndicator.class, null);
 	
 	/**
 	 * 全部属性清单
@@ -526,8 +526,8 @@ public class MonitorTplVOMeta extends MonitorTplMeta {
 		}
 		
 		/**
-		 * 设置 指标
-		 * @param tplIndicatorList 指标
+		 * 设置 指标列表
+		 * @param tplIndicatorList 指标列表
 		 * @return 当前对象
 		*/
 		public MonitorTpl setTplIndicatorList(List<MonitorTplIndicator> tplIndicatorList) {

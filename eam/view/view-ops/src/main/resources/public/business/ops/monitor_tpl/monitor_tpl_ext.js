@@ -1,7 +1,7 @@
 /**
  * 监控模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 13:14:35
+ * @since 2022-02-08 13:14:37
  */
 
 layui.config({

@@ -1,7 +1,7 @@
 /**
  * 节点映射 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 09:51:47
+ * @since 2022-02-08 13:14:47
  */
 
 
@@ -74,13 +74,11 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'id', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 					,{ field: 'nodeId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点') , templet: function (d) { return templet('nodeId',d.nodeId,d);}  }
 					,{ field: 'sourceId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('源值') , templet: function (d) { return templet('sourceId',d.sourceId,d);}  }
 					,{ field: 'ip', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('IP') , templet: function (d) { return templet('ip',d.ip,d);}  }
 					,{ field: 'actionMethod', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('动作') , templet: function (d) { return templet('actionMethod',d.actionMethod,d);}  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
-					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
 				]],
@@ -119,9 +117,9 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.nodeId={ inputType:"button",value: $("#nodeId").val()};
-		value.sourceId={ inputType:"button",value: $("#sourceId").val()};
-		value.ip={ inputType:"button",value: $("#ip").val()};
+		value.nodeId={ inputType:"button",value: $("#nodeId").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.sourceId={ inputType:"button",value: $("#sourceId").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.ip={ inputType:"button",value: $("#ip").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.actionMethod={ inputType:"button",value: $("#actionMethod").val()};
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};

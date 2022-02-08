@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 监控模版
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 13:14:35
- * @sign DA563474C95B9B9D6BA800891A247061
+ * @since 2022-02-08 13:14:36
+ * @sign 356A610EDC12EBD936F8C1F52F800027
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -116,9 +116,9 @@ public class MonitorTpl extends Entity {
 	private MonitorTplType tplType;
 	
 	/**
-	 * 指标：指标
+	 * 指标列表：指标列表
 	*/
-	@ApiModelProperty(required = false,value="指标" , notes = "指标")
+	@ApiModelProperty(required = false,value="指标列表" , notes = "指标列表")
 	private List<MonitorTplIndicator> tplIndicatorList;
 	
 	/**
@@ -388,17 +388,17 @@ public class MonitorTpl extends Entity {
 	}
 	
 	/**
-	 * 获得 指标<br>
-	 * 指标
-	 * @return 指标
+	 * 获得 指标列表<br>
+	 * 指标列表
+	 * @return 指标列表
 	*/
 	public List<MonitorTplIndicator> getTplIndicatorList() {
 		return tplIndicatorList;
 	}
 	
 	/**
-	 * 设置 指标
-	 * @param tplIndicatorList 指标
+	 * 设置 指标列表
+	 * @param tplIndicatorList 指标列表
 	 * @return 当前对象
 	*/
 	public MonitorTpl setTplIndicatorList(List<MonitorTplIndicator> tplIndicatorList) {
@@ -407,8 +407,8 @@ public class MonitorTpl extends Entity {
 	}
 	
 	/**
-	 * 添加 指标
-	 * @param tplIndicator 指标
+	 * 添加 指标列表
+	 * @param tplIndicator 指标列表
 	 * @return 当前对象
 	*/
 	public MonitorTpl addTplIndicator(MonitorTplIndicator tplIndicator) {

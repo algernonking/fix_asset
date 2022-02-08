@@ -34,12 +34,12 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.MonitorNodeMeta;
 import com.dt.platform.domain.ops.MonitorVoucher;
-import com.dt.platform.domain.ops.MonitorTpl;
 import com.dt.platform.domain.ops.MonitorNodeDb;
 import com.dt.platform.domain.ops.MonitorNodeValue;
 import com.dt.platform.domain.ops.MonitorNodeGroup;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.MonitorNodeSubtype;
+import com.dt.platform.domain.ops.MonitorTpl;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-07 12:08:17
+ * @since 2022-02-08 13:14:43
 */
 
 @Api(tags = "节点")
@@ -77,7 +77,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SUB_TYPE , value = "子类型" , required = false , dataTypeClass=String.class , example = "Redhat"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class , example = "543027032871665664"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
@@ -148,7 +148,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SUB_TYPE , value = "子类型" , required = false , dataTypeClass=String.class , example = "Redhat"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class , example = "543027032871665664"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
@@ -185,7 +185,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SUB_TYPE , value = "子类型" , required = false , dataTypeClass=String.class , example = "Redhat"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class , example = "543027032871665664"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
@@ -228,6 +228,7 @@ public class MonitorNodeController extends SuperController {
 		MonitorNode monitorNode=monitorNodeService.getById(id);
 		// join 关联的对象
 		monitorNodeService.dao().fill(monitorNode)
+			.with(MonitorNodeMeta.MONITOR_TPL_IDS)
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)
@@ -268,7 +269,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SUB_TYPE , value = "子类型" , required = false , dataTypeClass=String.class , example = "Redhat"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class , example = "543027032871665664"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
@@ -306,7 +307,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.PID , value = "父节点" , required = false , dataTypeClass=String.class , example = "0"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.TYPE , value = "类型" , required = false , dataTypeClass=String.class , example = "os"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SUB_TYPE , value = "子类型" , required = false , dataTypeClass=String.class , example = "Redhat"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.GROUP_ID , value = "节点分组" , required = false , dataTypeClass=String.class , example = "543027032871665664"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
@@ -331,6 +332,7 @@ public class MonitorNodeController extends SuperController {
 		PagedList<MonitorNode> list=monitorNodeService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		monitorNodeService.dao().fill(list)
+			.with(MonitorNodeMeta.MONITOR_TPL_IDS)
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)

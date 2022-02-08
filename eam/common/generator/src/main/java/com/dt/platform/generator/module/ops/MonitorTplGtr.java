@@ -26,7 +26,8 @@ public class MonitorTplGtr extends BaseCodeGenerator{
 
         //node type
         cfg.getPoClassFile().addSimpleProperty(MonitorTplType.class,"tplType","节点模版类型","节点模版类型");
-        cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicatorList","指标","指标");
+        cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicatorList","指标列表","指标列表");
+
 
         cfg.view().search().inputLayout(
                 new Object[]{
