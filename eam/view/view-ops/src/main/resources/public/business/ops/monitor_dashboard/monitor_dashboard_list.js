@@ -55,7 +55,7 @@ function ListPage() {
         list.push("os_net_flow_up");
         list.push("os_net_flow_down");
         topPs.topList=list;
-        topPs.top=10;
+        topPs.top=5;
         topPs.day=5;
         admin.request("/service-ops/ops-statistics/query-node-host-top-data", topPs, function (data) {
             if(data.success){
@@ -90,6 +90,33 @@ function ListPage() {
                         "  </tr>"
                 }
                 $("#dataLoad").html(loadhtml);
+
+                var memhtml="<tr>\n" +
+                    "<th>主机名称</th>\n" +
+                    "<th>内存使用率</th>\n" +
+                    "</tr>";
+                for(var i=0;i<dataMemoryUsed.length;i++){
+                    memhtml=memhtml+"<tr>\n" +
+                        "    <td>"+dataMemoryUsed[i].nodeNameShow+"_"+dataMemoryUsed[i].nodeIp+"</td>\n" +
+                        "    <td>"+dataMemoryUsed[i].pMemoryUsed+"</td>\n" +
+                        "  </tr>"
+                }
+                $("#dataMem").html(memhtml);
+
+
+                var fshtml="<tr>\n" +
+                    "<th>主机名称</th>\n" +
+                    "<th>挂载点</th>\n" +
+                    "<th>使用率</th>\n" +
+                    "</tr>";
+                for(var i=0;i<dataMemoryUsed.length;i++){
+                    fshtml=fshtml+"<tr>\n" +
+                        "    <td>"+dataFs[i].nodeNameShow+"_"+dataFs[i].nodeIp+"</td>\n" +
+                        "    <td>"+dataFs[i].fsName+"</td>\n" +
+                        "    <td>"+dataFs[i].pct+"</td>\n" +
+                        "  </tr>"
+                }
+                $("#dataFs").html(fshtml);
 
 
             }else{

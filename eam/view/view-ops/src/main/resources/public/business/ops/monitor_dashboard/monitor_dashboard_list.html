@@ -47,7 +47,9 @@
         .layuimini-notice-extra {position:absolute;top:50%;margin-top:-8px;right:16px;display:inline-block;height:16px;color:#999;}
 
 
-
+        body {
+            margin: 10px;
+        }
         table {
             border-collapse: collapse;
             border-spacing: 0;
@@ -91,10 +93,13 @@
             background-color: transparent;
         }
 
-        .pure-table-odd td {
-            background-color: #f2f2f2;
+        .pure-table-bordered td {
+            border-bottom: 1px solid #cbcbcb;
         }
 
+        .pure-table-bordered tbody>tr:last-child>td {
+            border-bottom-width: 0;
+        }
     </style>
 </head>
 
@@ -186,44 +191,42 @@
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-md6">
                             <div style="height:250px">
-                                <table class="pure-table" id="dataCpu" style="width:70%;text-align:left;">
+                                <table class="pure-table pure-table-bordered" id="dataCpu" style="width:100%;text-align:left;">
                                 </table>
                             </div>
                         </div>
                         <div class="layui-col-md6">
                             <div style="height:250px">
-                                <table class="pure-table" id="dataLoad" style="width:70%;text-align:left;">
+                                <table class="pure-table" id="dataLoad" style="width:100%;text-align:left;">
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">
-                    监控Top数据
-                </div>
+
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-md6">
                             <div style="height:250px">
-                                <table class="pure-table" id="dataCpu" style="width:70%;text-align:left;">
+                                <table class="pure-table" id="dataMem" style="width:100%;text-align:left;">
                                 </table>
                             </div>
                         </div>
                         <div class="layui-col-md6">
                             <div style="height:250px">
-                                <table class="pure-table" id="dataLoad" style="width:70%;text-align:left;">
+                                <table class="pure-table" id="dataFs" style="width:100%;text-align:left;">
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
+
 
 
 

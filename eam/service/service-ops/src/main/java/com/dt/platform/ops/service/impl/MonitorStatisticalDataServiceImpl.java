@@ -194,14 +194,16 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
 
     private JSONArray queryNodeHostTopDataOsFsUsed(int top,int day){
         String sql="select * from (       \n" +
-                "select b.node_ip,b.node_name_show,a.list_value_str1 fs_namae,a.list_value_number1 up_flow from ops_monitor_node_value a,ops_monitor_node b\n" +
+                "select b.node_ip,b.node_name_show,a.list_value_str1 fs_name,list_value_number1 pct from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
-                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
-                "order by a.list_value_number1 desc)end limit "+top;
+                "in (\n" +
+                "select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.fs' and result_status='sucess') t group by node_id,indicator_code,list_value_str1\n" +
+                ")\n" +
+                "order by a.list_value_number2 desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
     private JSONArray queryNodeHostTopDataOsFsInodeUsed(int top,int day){
@@ -268,7 +270,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
-                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.p_memory_used') t group by node_id,indicator_code)\n" +
+                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.memory_used') t group by node_id,indicator_code)\n" +
                 "order by p_memory_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
