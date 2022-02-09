@@ -171,10 +171,17 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         List<MonitorNode> nodeList=queryExecuteNodeList();
         Logger.info("collectData,find nodes number:"+nodeList.size());
         for(MonitorNode node:nodeList){
-            Result result=collectNodeData(node);
-            if(!result.isSuccess()){
-                Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
-            }
+            ThreadTaskHelper.run(new Runnable() {
+                @Override
+                public void run() {
+                    Result result=collectNodeData(node);
+                    if(!result.isSuccess()){
+                        Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
+                    }
+                }
+            });
+
+
         }
         return ErrorDesc.success();
     }

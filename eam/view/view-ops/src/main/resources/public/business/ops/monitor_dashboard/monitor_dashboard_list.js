@@ -74,7 +74,7 @@ function ListPage() {
                 for(var i=0;i<dataCpu.length;i++){
                         cpuhtml=cpuhtml+"<tr>\n" +
                         "    <td>"+dataCpu[i].nodeNameShow+"_"+dataCpu[i].nodeIp+"</td>\n" +
-                        "    <td>"+dataCpu[i].cpuUsed+"</td>\n" +
+                        "    <td>"+dataCpu[i].cpuUsed+"%</td>\n" +
                         "  </tr>"
                 }
                 $("#dataCpu").html(cpuhtml);
@@ -98,7 +98,7 @@ function ListPage() {
                 for(var i=0;i<dataMemoryUsed.length;i++){
                     memhtml=memhtml+"<tr>\n" +
                         "    <td>"+dataMemoryUsed[i].nodeNameShow+"_"+dataMemoryUsed[i].nodeIp+"</td>\n" +
-                        "    <td>"+dataMemoryUsed[i].pMemoryUsed+"</td>\n" +
+                        "    <td>"+dataMemoryUsed[i].pMemoryUsed+"%</td>\n" +
                         "  </tr>"
                 }
                 $("#dataMem").html(memhtml);
@@ -113,7 +113,7 @@ function ListPage() {
                     fshtml=fshtml+"<tr>\n" +
                         "    <td>"+dataFs[i].nodeNameShow+"_"+dataFs[i].nodeIp+"</td>\n" +
                         "    <td>"+dataFs[i].fsName+"</td>\n" +
-                        "    <td>"+dataFs[i].pct+"</td>\n" +
+                        "    <td>"+dataFs[i].pct+"%</td>\n" +
                         "  </tr>"
                 }
                 $("#dataFs").html(fshtml);
