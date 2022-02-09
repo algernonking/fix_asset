@@ -47,6 +47,14 @@ public class MonitorNodeResourcePageController extends ViewController {
 	}
 
 	/**
+	 * 节点报错
+	 */
+	@RequestMapping("/monitor_node_collect_error.html")
+	public String nodeCollectDataErrorList(Model model,HttpServletRequest request) {
+		return prefix+"/monitor_node_collect_error";
+	}
+
+	/**
 	 * 节点数值 表单页面
 	 */
 	@RequestMapping("/monitor_node_value_form.html")

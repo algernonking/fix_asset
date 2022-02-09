@@ -44,6 +44,27 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
 
         String sql="select\n" +
                 "(\n" +
+                "select is_connected\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.connected' and t.node_id=end.id\n" +
+                ") data_os_connected, \n"+
+
+                "(select max_record_time from \n" +
+                "(select node_id, max(record_time) max_record_time from ops_monitor_node_value where result_status='sucess' group by node_id) t\n" +
+                "where t.node_id=end.id\n" +
+                ") data_max_record_time,\n"+
+
+                "(\n" +
+                "select p_memory_size\n" +
+                "from ops_monitor_node_value t where \n" +
+                "(node_id,indicator_code,record_time) in \n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
+                "and result_status='sucess' and t.indicator_code='os.memory_size' and t.node_id=end.id\n" +
+                ") data_p_memory_size,\n"+
+
+                "(\n" +
                 "select process_cnt\n" +
                 "from ops_monitor_node_value t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
@@ -78,13 +99,13 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
                 "and result_status='sucess' and t.indicator_code='os.memory_used' and t.node_id=end.id\n" +
-                ") data_memory_used,\n" +
+                ") data_p_memory_used,\n" +
                 "(\n" +
                 "select os_datetime\n" +
                 "from ops_monitor_node_value t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
-                "and result_status='sucess' and t.indicator_code='os_datetime' and t.node_id=end.id\n" +
+                "and result_status='sucess' and t.indicator_code='os.datetime' and t.node_id=end.id\n" +
                 ") data_os_datetime,\n" +
                 "\n" +
                 "(\n" +
@@ -93,27 +114,55 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
                 "and result_status='sucess' and t.indicator_code='os.net_interface_flow' and t.node_id=end.id\n" +
-                ") os_net_interface_flow_up,\n" +
+                ") data_os_net_interface_flow_up,\n" +
                 "(\n" +
                 "select max(list_value_number2) flow_down\n" +
                 "from ops_monitor_node_value t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value group by node_id,indicator_code)\n" +
                 "and result_status='sucess' and t.indicator_code='os.net_interface_flow' and t.node_id=end.id\n" +
-                ") os_net_interface_flow_down,\n" +
+                ") data_os_net_interface_flow_down,\n" +
                 "\n" +
                 "end.*\n" +
                 "from ops_monitor_node end where node_enabled='enable' and deleted='0'";
-        System.out.println("nodeList Sql:\n"+sql);
+       // System.out.println("nodeList Sql:\n"+sql);
         Result<JSONObject> result=new Result<>();
         JSONObject resultData=new JSONObject();
         //统计节点个数
         resultData.put("nodeHostList",dao.query(sql).toJSONArrayWithJSONObject());
-
         return result.success(true).data(resultData);
-
-
     }
+
+    @Override
+    public Result<JSONObject> queryNodeCollectDataFailed() {
+
+        String sql="select t1.*,t2.node_ip,t2.node_name_show,t3.name tpl_name from \n" +
+                "(\n" +
+                "select node_id,monitor_tpl_code,indicator_code,record_time,result_message  \n" +
+                "from ops_monitor_node_value t \n" +
+                "where (node_id,monitor_tpl_code,indicator_code,record_time) in (\n" +
+                "\n" +
+                "select node_id,monitor_tpl_code,indicator_code,max_record_time from (\n" +
+                "select a1.*, a2.max_record_time a2_max_record_time from (\n" +
+                "select node_id,monitor_tpl_code,indicator_code, max(record_time) max_record_time from ops_monitor_node_value where result_status='failed' group by node_id,monitor_tpl_code,indicator_code\n" +
+                ")a1 left join \n" +
+                "(\n" +
+                "select node_id,monitor_tpl_code,indicator_code, max(record_time) max_record_time from ops_monitor_node_value where result_status='sucess' group by node_id,monitor_tpl_code,indicator_code\n" +
+                ")a2\n" +
+                "on  a1.node_id=a2.node_id\n" +
+                "and a1.monitor_tpl_code=a2.monitor_tpl_code\n" +
+                "and a1.indicator_code=a2.indicator_code\n" +
+                ") end where a2_max_record_time is null or max_record_time>a2_max_record_time\n" +
+                ")\n" +
+                ")t1,ops_monitor_node t2,ops_monitor_tpl t3\n" +
+                "where t1.node_id=t2.id and t3.code=t1.monitor_tpl_code";
+        Result<JSONObject> result=new Result<>();
+        JSONObject resultData=new JSONObject();
+        //统计节点个数
+        resultData.put("nodeList",dao.query(sql).toJSONArrayWithJSONObject());
+        return result.success(true).data(resultData);
+    }
+
 
     @Override
     public Result<JSONObject> queryNodeHostTopData(List<String> topList,int top,int day) {
@@ -129,10 +178,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     resultData.put("osFsInodeUsed",this.queryNodeHostTopDataOsFsInodeUsed(top,day));
                 }else if(MonitorTopDataEnum.OS_LOAD.code().equals(topValue)){
                     resultData.put("osLoad",this.queryNodeHostTopDataOsLoad(top,day));
-                }else if(MonitorTopDataEnum.OS_MEMORY_USED.code().equals(topValue)){
-                    resultData.put("osMemoryUsed",this.queryNodeHostTopDataOsMemoryUsed(top,day));
-                }else if(MonitorTopDataEnum.OS_VMEMORY_USED.code().equals(topValue)){
-                    resultData.put("osVmemoryUsed",this.queryNodeHostTopDataOsVmemoryUsed(top,day));
+                }else if(MonitorTopDataEnum.OS_P_MEMORY_USED.code().equals(topValue)){
+                    resultData.put("osPMemoryUsed",this.queryNodeHostTopDataOsMemoryUsed(top,day));
+                }else if(MonitorTopDataEnum.OS_V_MEMORY_USED.code().equals(topValue)){
+                    resultData.put("osVMemoryUsed",this.queryNodeHostTopDataOsVmemoryUsed(top,day));
                 }else if(MonitorTopDataEnum.OS_NET_FLOW_UP.code().equals(topValue)){
                     resultData.put("osNetFlowUp",this.queryNodeHostTopDataOsNetFlowUp(top,day));
                 }else if(MonitorTopDataEnum.OS_NET_FLOW_DOWN.code().equals(topValue)){
@@ -144,7 +193,15 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     }
 
     private JSONArray queryNodeHostTopDataOsFsUsed(int top,int day){
-        String sql="";
+        String sql="select * from (       \n" +
+                "select b.node_ip,b.node_name_show,a.list_value_str1 fs_namae,a.list_value_number1 up_flow from ops_monitor_node_value a,ops_monitor_node b\n" +
+                "where a.node_id=b.id \n" +
+                "and b.type='os' \n" +
+                "and b.node_enabled='enable' \n" +
+                "and b.status='online' \n" +
+                "and (node_id,indicator_code,list_value_str1,record_time) \n" +
+                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
+                "order by a.list_value_number1 desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
     private JSONArray queryNodeHostTopDataOsFsInodeUsed(int top,int day){
@@ -204,13 +261,14 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     }
 
     private JSONArray queryNodeHostTopDataOsMemoryUsed(int top,int day){
-        String sql="select b.node_ip,b.node_name_show,a.p_memory_used from ops_monitor_node_value a,ops_monitor_node b\n" +
+        String sql="select * from (       \n" +
+                "select b.node_ip,b.node_name_show,a.p_memory_used from ops_monitor_node_value a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
-                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.memory_used') t group by node_id,indicator_code)\n" +
+                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where indicator_code='os.p_memory_used') t group by node_id,indicator_code)\n" +
                 "order by p_memory_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }

@@ -96,6 +96,7 @@ public class RemoteShellExecutor {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
+            e.printStackTrace();
             Logger.info("authenticateWithKeyboardInteractive failed.");
         }
         return loginSuccess;
@@ -158,7 +159,6 @@ public class RemoteShellExecutor {
             if (conn != null) {
                 conn.close();
             }
-            ret = 0;
             result.append("");
             if (stdOut != null) {
                 try {
@@ -206,11 +206,9 @@ public class RemoteShellExecutor {
     }
 
     public static void main(String[] args) {
-        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","1@",22);
+        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","oracle",3316);
         RemoteShellResult r=rmt.exec("df");
 
-        RemoteShellResult r2=rmt.exec("df");
-        RemoteShellResult r3=rmt.exec("df");
         System.out.println(r.result);
     }
 

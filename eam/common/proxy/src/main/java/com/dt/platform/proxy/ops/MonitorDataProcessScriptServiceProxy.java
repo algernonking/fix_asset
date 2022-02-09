@@ -40,11 +40,13 @@ public interface MonitorDataProcessScriptServiceProxy {
 	 */
 	public static final String COLLECT_DATA = API_PREFIX + "collect-data";
 
+
+
 	/**
 	 * 添加节点数据库
 	 */
 	@RequestMapping(MonitorDataProcessScriptServiceProxy.COLLECT_DATA)
-	Result collectData();
+	public Result collectData();
 
 	/**
 	 * 控制器类名

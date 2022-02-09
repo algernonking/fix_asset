@@ -38,6 +38,12 @@ public interface MonitorStatisticalDataServiceProxy {
      */
     public static final String QUERY_NODE_HOST_RESOURCE_LIST = API_PREFIX + "query-node-host-resource-list";
 
+    /**
+     * 查询主机列表
+     */
+    public static final String QUERY_NODE_COLLECT_DATA_FAILED = API_PREFIX + "query-node-collect-data-failed";
+
+
 
 
     /**
