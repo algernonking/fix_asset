@@ -45,6 +45,11 @@ public interface MonitorStatisticalDataServiceProxy {
 
 
 
+    /**
+     * 查询主机列表
+     */
+    public static final String QUERY_NODE_COLLECT_DATA = API_PREFIX + "query-node-collect-data";
+
 
     /**
      * 控制器类名

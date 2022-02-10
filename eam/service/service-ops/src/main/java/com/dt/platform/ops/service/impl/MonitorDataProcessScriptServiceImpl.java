@@ -11,6 +11,7 @@ import com.dt.platform.ops.service.*;
 import com.github.foxnic.api.error.ErrorDesc;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
+import com.github.foxnic.commons.concurrent.SimpleJoinForkTask;
 import com.github.foxnic.commons.log.Logger;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.expr.ConditionExpr;
@@ -170,19 +171,42 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
     public Result collectData() {
         List<MonitorNode> nodeList=queryExecuteNodeList();
         Logger.info("collectData,find nodes number:"+nodeList.size());
-        for(MonitorNode node:nodeList){
-            ThreadTaskHelper.run(new Runnable() {
-                @Override
-                public void run() {
-                    Result result=collectNodeData(node);
-                    if(!result.isSuccess()){
-                        Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
-                    }
+//        for(MonitorNode node:nodeList){
+//            ThreadTaskHelper.run(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Result result=collectNodeData(node);
+//                    if(!result.isSuccess()){
+//                        Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
+//                    }
+//                }
+//            });
+//        }
+
+        // 创建 ForkJoin 工具，其中 输入一个 Integer 元素的 List ，输出 Long 元素的 List ，每个线程处理 若干元素 ，此处为 5 个
+        SimpleJoinForkTask<MonitorNode,Result> task=new SimpleJoinForkTask<>(nodeList,3);
+        // 并行执行
+        List<Result> rvs=task.execute(els->{
+            // 打印当前线程信息
+            System.out.println(Thread.currentThread().getName());
+            // 处理当前分到的 若干元素，此处为 5 个
+            List<Result> rs=new ArrayList<>();
+            for (MonitorNode node : els) {
+                Result result=collectNodeData(node);
+                if(!result.isSuccess()){
+                    Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
                 }
-            });
+                rs.add(result);
+            }
+            // 处理完毕，返回本批次的处理结果，由 SimpleJoinForkTask 负责合并全部结果，并由 rvs 变量接收
+            return rs;
+        });
+//
+//        // 处理返回的结果
+//        for (Long i : rvs) {
+//            System.out.println(i);
+//        }
 
-
-        }
         return ErrorDesc.success();
     }
 
@@ -252,7 +276,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
               nodeInsList.add(errInsert);
               insList.addAll(nodeInsList);
           }
-
         }
        return insList;
     }

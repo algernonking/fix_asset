@@ -65,6 +65,10 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.ID).table().disable(true);
 
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE).basic().hidden(true);
+        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE).table().disable(true);
+
+
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.NODE_NAME).table().disable(true);
 
@@ -116,19 +120,19 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
 
         cfg.view().field(EAMTables.OPS_MONITOR_NODE.TYPE)
                 .basic().label("节点分类")
-                .form().validate().required().form().selectBox().queryApi(MonitorNodeTypeServiceProxy.QUERY_PAGED_LIST)
+                .form().validate().required().form().selectBox().queryApi(ServiceGroupServiceProxy.QUERY_PAGED_LIST)
                 .paging(true).filter(true).toolbar(false)
-                .valueField(MonitorNodeTypeMeta.CODE).
-                textField(MonitorNodeTypeMeta.NAME).
+                .valueField(ServiceGroupMeta.CODE).
+                textField(ServiceGroupMeta.NAME).
                 fillWith(MonitorNodeMeta.MONITOR_NODE_TYPE).muliti(false);
 
-        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE)
-                .basic().label("节点子分类")
-                .form().selectBox().queryApi(MonitorNodeSubtypeServiceProxy.QUERY_PAGED_LIST)
-                .paging(true).filter(true).toolbar(false)
-                .valueField(MonitorNodeSubtypeMeta.CODE).
-                textField(MonitorNodeSubtypeMeta.NAME).
-                fillWith(MonitorNodeMeta.MONITOR_NODE_SUB_TYPE).muliti(false);
+//        cfg.view().field(EAMTables.OPS_MONITOR_NODE.SUB_TYPE)
+//                .basic().label("节点子分类")
+//                .form().selectBox().queryApi(ServiceInfoServiceProxy.QUERY_PAGED_LIST)
+//                .paging(true).filter(true).toolbar(false)
+//                .valueField(ServiceInfoMeta.NAME).
+//                textField(ServiceInfoMeta.NAME).
+//                fillWith(MonitorNodeMeta.MONITOR_NODE_SUB_TYPE).muliti(false);
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("98%");

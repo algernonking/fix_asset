@@ -491,9 +491,6 @@ public class AssetDataServiceImpl  extends SuperService<Asset> implements IAsset
             }
             rcd.setValue(rackId,matchRackId);
         }
-
-
-
         return ErrorDesc.success();
     }
 

@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:10
+ * @since 2022-02-10 11:13:05
  */
 
 function FormPage() {
@@ -95,37 +95,6 @@ function FormPage() {
 			on: function(data){
 				setTimeout(function () {
 					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("type",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			//转换数据
-			searchField: "name", //请自行调整用于搜索的字段名称
-			extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
-			transform: function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					if(!data[i]) continue;
-					opts.push({data:data[i],name:data[i].name,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
-		//渲染 subType 下拉字段
-		fox.renderSelectBox({
-			el: "subType",
-			radio: true,
-			filterable: true,
-			paging: true,
-			pageRemote: true,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("subType",data.arr,data.change,data.isAdd);
 				},1);
 			},
 			//转换数据
@@ -268,8 +237,6 @@ function FormPage() {
 
 			//设置  节点分类 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#type",formData.monitorNodeType);
-			//设置  节点子分类 设置下拉框勾选
-			fox.setSelectValue4QueryApi("#subType",formData.monitorNodeSubType);
 			//设置  节点分组 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#groupId",formData.monitorNodeGroup);
 			//设置  凭证(SSH) 设置下拉框勾选
@@ -328,8 +295,6 @@ function FormPage() {
 
 		//获取 节点分类 下拉框的值
 		data["type"]=fox.getSelectedValue("type",false);
-		//获取 节点子分类 下拉框的值
-		data["subType"]=fox.getSelectedValue("subType",false);
 		//获取 节点分组 下拉框的值
 		data["groupId"]=fox.getSelectedValue("groupId",false);
 		//获取 凭证(SSH) 下拉框的值

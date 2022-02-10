@@ -68,8 +68,15 @@ public class MonitorStatisticalDataController {
         return monitorStatisticalData.queryNodeCollectDataFailed();
     }
 
-
-
-
+    /**
+     * 查询主机
+     */
+    @ApiOperation(value = "查询节点")
+    @ApiOperationSupport(order=5)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA)
+    public Result<JSONObject> queryNodeCollectData(String nodeId) {
+        return monitorStatisticalData.queryNodeCollectData(nodeId);
+    }
 
 }

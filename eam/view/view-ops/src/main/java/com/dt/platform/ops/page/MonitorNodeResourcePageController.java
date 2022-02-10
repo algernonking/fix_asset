@@ -55,6 +55,15 @@ public class MonitorNodeResourcePageController extends ViewController {
 	}
 
 	/**
+	 * 节点数据
+	 */
+	@RequestMapping("/monitor_node_collect_data.html")
+	public String nodeCollectData(Model model,HttpServletRequest request) {
+		return prefix+"/monitor_node_collect_data";
+	}
+
+
+	/**
 	 * 节点数值 表单页面
 	 */
 	@RequestMapping("/monitor_node_value_form.html")

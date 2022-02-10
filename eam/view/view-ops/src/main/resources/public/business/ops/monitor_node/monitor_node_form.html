@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:09
+ * @since 2022-02-10 11:13:05
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-5319-content">
+        <div class="layui-row form-row" id="random-0751-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -110,19 +110,17 @@
                     <div class="layui-form-item" >
                         <div class="layui-form-label "><div th:text="${lang.translate('节点分类')}">节点分类</div><div class="layui-required">*</div></div>
                         <div class="layui-input-block ">
-                            <div id="type" input-type="select" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" extraParam="{}"></div>
+                            <div id="type" input-type="select" th:data="${'/service-ops/ops-service-group/query-paged-list'}" extraParam="{}"></div>
                         </div>
                     </div>
 
 
-                
-                    <div class="layui-form-item" >
-                        <div class="layui-form-label "><div th:text="${lang.translate('节点子分类')}">节点子分类</div></div>
+                                    <div class="layui-form-item" style="display: none">
+                        <div class="layui-form-label "><div th:text="${lang.translate('子类型')}">子类型</div></div>
                         <div class="layui-input-block ">
-                            <div id="subType" input-type="select" th:data="${'/service-ops/ops-monitor-node-subtype/query-paged-list'}" extraParam="{}"></div>
+                            <input lay-filter="subType" id="subType" name="subType" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('子类型') }" type="text" class="layui-input"  />
                         </div>
                     </div>
-
 
                 <!--结束：栏次内字段循环-->
             </div>
@@ -131,11 +129,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-8461-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1423-fieldset">
             <legend>数据采集</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-8461-content">
+        <div class="layui-row form-row" id="random-1423-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -227,7 +225,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-3773-content">
+        <div class="layui-row form-row" id="random-8551-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->

@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:09
+ * @since 2022-02-10 11:13:04
 */
 
 @Api(tags = "节点")
@@ -81,8 +81,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "disabled"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "online"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
@@ -152,8 +152,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "disabled"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "online"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
@@ -189,8 +189,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "disabled"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "online"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
@@ -226,14 +226,15 @@ public class MonitorNodeController extends SuperController {
 	public Result<MonitorNode> getById(String id) {
 		Result<MonitorNode> result=new Result<>();
 		MonitorNode monitorNode=monitorNodeService.getById(id);
+
 		// join 关联的对象
 		monitorNodeService.dao().fill(monitorNode)
 			.with(MonitorNodeMeta.MONITOR_TPL_LIST)
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)
-			.with(MonitorNodeMeta.MONITOR_NODE_SUB_TYPE)
 			.execute();
+
 		result.success(true).data(monitorNode);
 		return result;
 	}
@@ -273,8 +274,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "disabled"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "online"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
@@ -311,8 +312,8 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME , value = "主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_NAME_SHOW , value = "可见主机名" , required = false , dataTypeClass=String.class , example = "192.168.1.1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_TYPE , value = "类型" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.NODE_ENABLED , value = "是否启用" , required = false , dataTypeClass=String.class , example = "disabled"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.STATUS , value = "监控状态" , required = false , dataTypeClass=String.class , example = "online"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
@@ -336,7 +337,6 @@ public class MonitorNodeController extends SuperController {
 			.with(MonitorNodeMeta.SSH_VOUCHER)
 			.with(MonitorNodeMeta.MONITOR_NODE_GROUP)
 			.with(MonitorNodeMeta.MONITOR_NODE_TYPE)
-			.with(MonitorNodeMeta.MONITOR_NODE_SUB_TYPE)
 			.execute();
 		result.success(true).data(list);
 		return result;

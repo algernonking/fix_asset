@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:09
+ * @since 2022-02-10 11:13:05
  */
 
 
@@ -76,7 +76,6 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点分类'), templet: function (d) { return templet('type' ,fox.joinLabel(d.monitorNodeType,"name"),d);}}
-					,{ field: 'subType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点子分类'), templet: function (d) { return templet('subType' ,fox.joinLabel(d.monitorNodeSubType,"name"),d);}}
 					,{ field: 'groupId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('节点分组'), templet: function (d) { return templet('groupId' ,fox.joinLabel(d.monitorNodeGroup,"name"),d);}}
 					,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('可见主机名') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
 					,{ field: 'nodeEnabled', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('是否启用'), templet:function (d){ return templet('nodeEnabled',fox.getEnumText(RADIO_NODEENABLED_DATA,d.nodeEnabled),d);}}
@@ -133,7 +132,7 @@ function ListPage() {
 		value.nodeIp={ inputType:"button",value: $("#nodeIp").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.pid={ inputType:"button",value: $("#pid").val()};
 		value.type={ inputType:"select_box", value: getSelectedValue("#type","value") ,fillBy:["monitorNodeType"]  , label:getSelectedValue("#type","nameStr") };
-		value.subType={ inputType:"select_box", value: getSelectedValue("#subType","value") ,fillBy:["monitorNodeSubType"]  , label:getSelectedValue("#subType","nameStr") };
+		value.subType={ inputType:"button",value: $("#subType").val()};
 		value.groupId={ inputType:"select_box", value: getSelectedValue("#groupId","value") ,fillBy:["monitorNodeGroup"]  , label:getSelectedValue("#groupId","nameStr") };
 		value.nodeName={ inputType:"button",value: $("#nodeName").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.nodeNameShow={ inputType:"button",value: $("#nodeNameShow").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };

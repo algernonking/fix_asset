@@ -21,4 +21,8 @@ public interface IMonitorStatisticalDataService extends ISuperService<MonitorNod
 
     Result<JSONObject> queryNodeCollectDataFailed();
 
+    Result<JSONObject> queryNodeCollectData(String nodeId);
+
+
+
 }

@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 18:31:09
+ * @since 2022-02-10 11:13:04
  */
  -->
  <!DOCTYPE html>
@@ -40,7 +40,7 @@
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
                     <!-- 父节点 , pid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 节点子分类 , subType ,typeName=select_box, isHideInSearch=true -->
+                    <!-- 子类型 , subType ,typeName=text_input, isHideInSearch=true -->
                     <!-- 节点分组 , groupId ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点分组')}" class="search-label groupId-label">节点分组</span><span class="search-colon">:</span></div>
@@ -84,7 +84,7 @@
                     <!-- 节点分类 , type ,typeName=select_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('节点分类')}" class="search-label type-label">节点分类</span><span class="search-colon">:</span></div>
-                        <div id="type" th:data="${'/service-ops/ops-monitor-node-type/query-paged-list'}" style="width:150px" extraParam="{}"></div>
+                        <div id="type" th:data="${'/service-ops/ops-service-group/query-paged-list'}" style="width:150px" extraParam="{}"></div>
                     </div>
                     <!-- 是否启用 , nodeEnabled ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">

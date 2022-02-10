@@ -4,11 +4,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.ops.MonitorTopDataEnum;
 import com.dt.platform.domain.ops.MonitorNode;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.meta.MonitorNodeMeta;
+import com.dt.platform.ops.service.IMonitorNodeService;
 import com.dt.platform.ops.service.IMonitorStatisticalDataService;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanUtil;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.entity.SuperService;
 import com.github.foxnic.dao.spec.DAO;
 import org.github.foxnic.web.framework.dao.DBConfigs;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +29,11 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
      * */
     @Resource(name= DBConfigs.PRIMARY_DAO)
     private DAO dao=null;
+
+    @Autowired
+    private IMonitorNodeService monitorNodeService;
+
+
 
     /**
      * 获得 DAO 对象
@@ -161,6 +173,57 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         //统计节点个数
         resultData.put("nodeList",dao.query(sql).toJSONArrayWithJSONObject());
         return result.success(true).data(resultData);
+    }
+
+    /*
+    * nodeIp,
+    *
+    * */
+    private JSONObject parseCollectData(JSONObject data){
+
+        JSONObject result=new JSONObject();
+        return result;
+    }
+
+    @Override
+    public Result<JSONObject> queryNodeCollectData(String nodeId) {
+
+        Result<JSONObject> result=new Result<>();
+        JSONObject resultData=new JSONObject();
+        MonitorNode monitorNode=monitorNodeService.getById(nodeId);
+
+        // join 关联的对象
+        monitorNodeService.dao().fill(monitorNode)
+                .with(MonitorNodeMeta.MONITOR_TPL_LIST)
+                .with(MonitorNodeMeta.SSH_VOUCHER)
+                .with(MonitorNodeMeta.MONITOR_NODE_GROUP)
+                .with(MonitorNodeMeta.MONITOR_NODE_TYPE)
+                .execute();
+        String sql="";
+
+
+        JSONArray nodeCollectData=new JSONArray();
+        List<MonitorTpl> nodeTplList=monitorNode.getMonitorTplList();
+        if(nodeTplList!=null&&nodeTplList.size()>0)
+        for(MonitorTpl tpl:nodeTplList){
+           String dataSql="select * from (\n" +
+                   "select * from ops_monitor_tpl_indicator where monitor_tpl_code='tpl_host_linux_script' and status='enable'\n" +
+                   ") a1 left join \n" +
+                   "(\n" +
+                   "select * from ops_monitor_node_value where (node_id,indicator_code,record_time) \n" +
+                   "in(\n" +
+                   "select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where node_id=2 and result_status='sucess' and monitor_tpl_code='tpl_host_linux_script') t group by node_id,indicator_code\n" +
+                   "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.item_sort\n";
+           RcdSet rs=dao.query(dataSql);
+           for(Rcd r:rs){
+               JSONObject data=parseCollectData(r.toJSONObject());
+               nodeCollectData.add(data);
+           }
+        }
+        resultData.put("nodeCollectDataList",nodeCollectData);
+        resultData.put("nodeInfo",BeanUtil.toJSONObject(monitorNode));
+        return result.success(true).data(resultData);
+
     }
 
 
