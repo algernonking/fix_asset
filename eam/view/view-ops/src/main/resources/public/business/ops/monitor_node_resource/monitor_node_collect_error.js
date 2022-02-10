@@ -61,7 +61,7 @@ function ListPage() {
                 elem: '#data-table',
                 toolbar: '#toolbarTemplate',
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
-                url: moduleURL +'/query-node-host-resource-list',
+                url: moduleURL +'/query-node-collect-data-failed',
                 height: 'full-'+(h+28),
                 limit: 50,
                 page:false,
@@ -70,28 +70,22 @@ function ListPage() {
                     { fixed: 'left',type: 'numbers' },
                     { fixed: 'left',type:'checkbox' },
                     { field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('ID') , templet: function (d) { return templet('id',d.id,d);}  }
-                    ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
-                    ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
-                    ,{ field: 'dataOsConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机连接') , templet: function (d) { return templet('dataOsConnected',d.dataOsConnected,d);}  }
-                    ,{ field: 'dataOsCpuNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU数量') , templet: function (d) { return templet('dataOsCpuNumber',d.dataOsCpuNumber,d);}  }
-                    ,{ field: 'dataOsLoad', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负载') , templet: function (d) { return templet('dataOsLoad',d.dataOsLoad,d);}  }
-                    ,{ field: 'dataPMemorySize', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存大小(M)') , templet: function (d) { return templet('dataPMemorySize',d.dataPMemorySize,d);}  }
-                    ,{ field: 'dataPMemoryUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存使用率(%)') , templet: function (d) { return templet('dataPMemoryUsed',d.dataPMemoryUsed,d);}  }
-                    ,{ field: 'dataOsNetInterfaceFlowUp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('上行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowUp',d.dataOsNetInterfaceFlowUp,d);}  }
-                    ,{ field: 'dataOsNetInterfaceFlowDown', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowDown',d.dataOsNetInterfaceFlowDown,d);}  }
-                    ,{ field: 'dataProcessCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('连接数') , templet: function (d) { return templet('dataProcessCnt',d.dataProcessCnt,d);}  }
-                    ,{ field: 'dataHostname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名') , templet: function (d) { return templet('dataHostname',d.dataHostname,d);}  }
-                    ,{ field: 'dataMaxRecordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('dataMaxRecordTime',d.dataMaxRecordTime,d);}  }
+                    ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('节点IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
+                    ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('节点名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
+                    ,{ field: 'tplName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('模版名称') , templet: function (d) { return templet('tplName',d.tplName,d);}  }
+                    ,{ field: 'resultMessage', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报错信息') , templet: function (d) { return templet('resultMessage',d.resultMessage,d);}  }
+                    ,{ field: 'recordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('recordTime',d.recordTime,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-                   // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+                    // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+                    //
                 ]],
                 parseData:function(res){
                     console.log("parese res:",res);
                     return {
                         "code": res.code == "00" ? 0 : -1, //解析接口状态
                         "msg": res.message, //解析提示文本
-                        "count": res.data.nodeHostList.length, //解析数据长度
-                        "data": res.data.nodeHostList //解析数据列表
+                        "count": res.data.nodeList.length, //解析数据长度
+                        "data": res.data.nodeList //解析数据列表
                     };
                 },
                 done: function (data) {

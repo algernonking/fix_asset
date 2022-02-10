@@ -17,8 +17,8 @@ public enum MonitorTopDataEnum implements CodeTextEnum {
     OS_LOAD("os_load" , "TOP主机负载"),
     OS_FS_USED("fs_used" , "TOP主机文件系统"),
     OS_FS_INODE_USED("fs_inode_used" , "TOP主机文件系统INODE"),
-    OS_MEMORY_USED("os_memory_used" , "TOP主机内存使用率"),
-    OS_VMEMORY_USED("os_vmemory_used" , "TOP主机虚拟内存使用率"),
+    OS_P_MEMORY_USED("os_p_memory_used" , "TOP主机内存使用率"),
+    OS_V_MEMORY_USED("os_v_memory_used" , "TOP主机虚拟内存使用率"),
     OS_NET_FLOW_UP("os_net_flow_up" , "TOP主机上传流量"),
     OS_NET_FLOW_DOWN("os_net_flow_down" , "TOP主机下传流量")
     ;

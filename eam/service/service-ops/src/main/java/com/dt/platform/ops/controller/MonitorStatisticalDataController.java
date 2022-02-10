@@ -42,20 +42,33 @@ public class MonitorStatisticalDataController {
     @ApiOperationSupport(order=2)
     @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_TOP_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_TOP_DATA)
-    public Result<JSONObject> queryNodeHostTopData(List<String> topList,int top,int day) {
-        return monitorStatisticalData.queryNodeHostTopData(topList,top,day);
+    public Result<JSONObject> queryNodeHostTopData(List<String> topList,String top,String day) {
+        return monitorStatisticalData.queryNodeHostTopData(topList,Integer.parseInt(top),Integer.parseInt(day));
     }
 
     /**
      * 查询主机节点列表
      */
     @ApiOperation(value = "查询主机节点列表")
-    @ApiOperationSupport(order=2)
+    @ApiOperationSupport(order=3)
     @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_RESOURCE_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_HOST_RESOURCE_LIST)
     public Result<JSONObject> queryNodeHostResourceList() {
         return monitorStatisticalData.queryNodeHostResourceList();
     }
+
+    /**
+     * 查询主机报错节点信息
+     */
+    @ApiOperation(value = "查询节点")
+    @ApiOperationSupport(order=4)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_FAILED , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_FAILED)
+    public Result<JSONObject> queryNodeCollectDataFailed() {
+        return monitorStatisticalData.queryNodeCollectDataFailed();
+    }
+
+
 
 
 

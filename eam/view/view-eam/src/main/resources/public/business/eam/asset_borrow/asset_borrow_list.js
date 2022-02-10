@@ -120,8 +120,8 @@ function ListPage() {
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType,reset) {
-		admin.request("/service-ops/monitor-process-script/collect-data", { }, function (data) {
-		});
+		// admin.request("/service-ops/monitor-process-script/collect-data", { }, function (data) {
+		// });
 		var value = {};
 		value.businessCode={ inputType:"button",value: $("#businessCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.status={ inputType:"select_box", value: xmSelect.get("#status",true).getValue("value"), label:xmSelect.get("#status",true).getValue("nameStr") };

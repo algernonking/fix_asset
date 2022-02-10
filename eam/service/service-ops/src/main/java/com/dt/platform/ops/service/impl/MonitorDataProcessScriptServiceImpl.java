@@ -65,6 +65,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
             "ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
             "where a.deleted='0' \n" +
             "and a.status='online' \n " +
+            "and a.node_enabled='enable' \n"+
             "and b.deleted='0' \n" +
             "and c.deleted='0' \n" +
             "and c.status='enable' \n" +
@@ -170,10 +171,17 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         List<MonitorNode> nodeList=queryExecuteNodeList();
         Logger.info("collectData,find nodes number:"+nodeList.size());
         for(MonitorNode node:nodeList){
-            Result result=collectNodeData(node);
-            if(!result.isSuccess()){
-                Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
-            }
+            ThreadTaskHelper.run(new Runnable() {
+                @Override
+                public void run() {
+                    Result result=collectNodeData(node);
+                    if(!result.isSuccess()){
+                        Logger.info("node ip:"+node.getNodeIp()+",message"+result.getMessage());
+                    }
+                }
+            });
+
+
         }
         return ErrorDesc.success();
     }
@@ -218,7 +226,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         for(MonitorTplIndicator tplIndicator:monitorTplIndicatorList){
             //获取一个指标的执行结果
             RemoteShellResult executeResult = rmt.exec(tplIndicator.getCommand());
-            Logger.info("executeResult"+executeResult.result+executeResult.code);
+            Logger.info("execute command:"+tplIndicator.getCommand()+",executeCode:"+executeResult.code+",executeResult:"+executeResult.result);
           if(executeResult.code==0){
                 //执行结果
                 String content=executeResult.result;
@@ -230,7 +238,21 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                         insList.addAll(nodeInsList);
                     }
                 }
-            }
+            }else{
+              List<Insert> nodeInsList=new ArrayList<>();
+              Insert errInsert=new Insert("ops_monitor_node_value");
+              errInsert.set("id",IDGenerator.getSnowflakeId());
+              errInsert.setIf("result_status","failed");
+              errInsert.setIf("result_message",executeResult.result);
+              errInsert.setIf("indicator_code",tplIndicator.getCode());
+              errInsert.setIf("node_id",node.getId());
+              errInsert.setIf("is_connected",0);
+              errInsert.setIf("monitor_tpl_code",tplIndicator.getMonitorTplCode());
+              errInsert.setIf("record_time",new Date());
+              nodeInsList.add(errInsert);
+              insList.addAll(nodeInsList);
+          }
+
         }
        return insList;
     }
@@ -247,6 +269,7 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
 
         for(Insert insert:insList){
             try{
+                System.out.println("insert collect data:\n"+insert.getSQL());
                 dao.execute(insert);
             }catch(UncategorizedSQLException e){
                 Logger.info("Sql execute error,sql:"+insert.getSQL());
