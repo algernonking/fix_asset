@@ -220,6 +220,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                nodeCollectData.add(data);
            }
         }
+
+
         resultData.put("nodeCollectDataList",nodeCollectData);
         resultData.put("nodeInfo",BeanUtil.toJSONObject(monitorNode));
         return result.success(true).data(resultData);
