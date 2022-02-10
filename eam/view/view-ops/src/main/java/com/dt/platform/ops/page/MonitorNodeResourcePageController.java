@@ -58,8 +58,20 @@ public class MonitorNodeResourcePageController extends ViewController {
 	 * 节点数据
 	 */
 	@RequestMapping("/monitor_node_collect_data.html")
-	public String nodeCollectData(Model model,HttpServletRequest request) {
+	public String nodeCollectData(Model model,HttpServletRequest request,String nodeId) {
+
+		model.addAttribute("nodeId",nodeId);
 		return prefix+"/monitor_node_collect_data";
+	}
+
+	/**
+	 * 节点数据
+	 */
+	@RequestMapping("/monitor_node_collect_data_graph.html")
+	public String nodeCollectDataGraph(Model model,HttpServletRequest request,String nodeId) {
+
+		model.addAttribute("nodeId",nodeId);
+		return prefix+"/monitor_node_collect_data_graph";
 	}
 
 

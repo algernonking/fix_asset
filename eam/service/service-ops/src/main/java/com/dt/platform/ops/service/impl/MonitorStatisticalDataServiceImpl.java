@@ -9,6 +9,7 @@ import com.dt.platform.domain.ops.meta.MonitorNodeMeta;
 import com.dt.platform.ops.service.IMonitorNodeService;
 import com.dt.platform.ops.service.IMonitorStatisticalDataService;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service("MonitorStatisticalDataService")
 public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode> implements IMonitorStatisticalDataService {
@@ -175,13 +178,59 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         return result.success(true).data(resultData);
     }
 
+
+    public String lineToHump(String str) {
+        Pattern linePattern = Pattern.compile("_(\\w)");
+        str = str.toLowerCase();
+        Matcher matcher = linePattern.matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
     /*
     * nodeIp,
-    *
+    * nodeShowName
+    * tplName
+    * indicatorCode
+    * value
     * */
-    private JSONObject parseCollectData(JSONObject data){
+    private JSONObject parseCollectData(JSONObject meta){
 
         JSONObject result=new JSONObject();
+        result.put("nodeIp",meta.getString("nodeIp"));
+        result.put("nodeNameShow",meta.getString("nodeNameShow"));
+        result.put("monitorTplCode",meta.getString("monitorTplCode"));
+        result.put("indicatorCode",meta.getString("code"));
+        result.put("recordTime",meta.getString("recordTime"));
+        result.put("valueColumnDesc",meta.getString("valueColumnDesc"));
+
+
+        String colType=meta.getString("valueColumnCols");
+        if("single".equals(colType)){
+            String col=meta.getString("valueColumn");
+            result.put("value",meta.getString(lineToHump(col)));
+        }else if("multiple".equals(colType)){
+            String[] colArr=meta.getString("valueColumn").split(",");
+            if(colArr.length>0){
+                String v="";
+                for(int i=0;i<colArr.length;i++){
+                    if(i==0){
+                        v=meta.getString(lineToHump(colArr[i]));
+                    }else{
+                        v=v+","+meta.getString(lineToHump(colArr[i]));
+                    }
+                }
+                result.put("value",v);
+            }else{
+                result.put("value","未知错误");
+            }
+        }else{
+            result.put("value","未知错误");
+        }
         return result;
     }
 
@@ -199,20 +248,22 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 .with(MonitorNodeMeta.MONITOR_NODE_GROUP)
                 .with(MonitorNodeMeta.MONITOR_NODE_TYPE)
                 .execute();
-        String sql="";
-
 
         JSONArray nodeCollectData=new JSONArray();
         List<MonitorTpl> nodeTplList=monitorNode.getMonitorTplList();
         if(nodeTplList!=null&&nodeTplList.size()>0)
         for(MonitorTpl tpl:nodeTplList){
-           String dataSql="select * from (\n" +
-                   "select * from ops_monitor_tpl_indicator where monitor_tpl_code='tpl_host_linux_script' and status='enable'\n" +
+            String tplCode=tpl.getCode();
+            String dataSql="select \n" +
+                    "(select node_ip from ops_monitor_node where id=a2.node_id)node_ip,\n" +
+                    "(select node_name_show from ops_monitor_node where id=a2.node_id)node_name_show,\n" +
+                    "a1.* ,a2.* from " +
+                   "(select * from ops_monitor_tpl_indicator where monitor_tpl_code='"+tplCode+"' and status='enable'\n" +
                    ") a1 left join \n" +
                    "(\n" +
                    "select * from ops_monitor_node_value where (node_id,indicator_code,record_time) \n" +
                    "in(\n" +
-                   "select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where node_id=2 and result_status='sucess' and monitor_tpl_code='tpl_host_linux_script') t group by node_id,indicator_code\n" +
+                   "select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value where node_id='"+nodeId+"' and result_status='sucess' and monitor_tpl_code='"+tplCode+"') t group by node_id,indicator_code\n" +
                    "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.item_sort\n";
            RcdSet rs=dao.query(dataSql);
            for(Rcd r:rs){
@@ -220,7 +271,6 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                nodeCollectData.add(data);
            }
         }
-
 
         resultData.put("nodeCollectDataList",nodeCollectData);
         resultData.put("nodeInfo",BeanUtil.toJSONObject(monitorNode));

@@ -72,7 +72,7 @@ function ListPage() {
                     { field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('ID') , templet: function (d) { return templet('id',d.id,d);}  }
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
-                    ,{ field: 'dataOsConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机连接') , templet: function (d) { return templet('dataOsConnected',d.dataOsConnected,d);}  }
+                    ,{ field: 'dataOsConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态') , templet: function (d) { return templet('dataOsConnected',d.dataOsConnected,d);}  }
                     ,{ field: 'dataOsCpuNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU数量') , templet: function (d) { return templet('dataOsCpuNumber',d.dataOsCpuNumber,d);}  }
                     ,{ field: 'dataOsLoad', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负载') , templet: function (d) { return templet('dataOsLoad',d.dataOsLoad,d);}  }
                     ,{ field: 'dataPMemorySize', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存大小(M)') , templet: function (d) { return templet('dataPMemorySize',d.dataPMemorySize,d);}  }
@@ -83,7 +83,7 @@ function ListPage() {
                     ,{ field: 'dataHostname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名') , templet: function (d) { return templet('dataHostname',d.dataHostname,d);}  }
                     ,{ field: 'dataMaxRecordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('dataMaxRecordTime',d.dataMaxRecordTime,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
-                   // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
+                    ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
                 parseData:function(res){
                     console.log("parese res:",res);
@@ -220,26 +220,17 @@ function ListPage() {
         table.on('tool(data-table)', function (obj) {
             var data = obj.data;
             var layEvent = obj.event;
-
+            console.log("nodeData:",data);
             if(window.pageExt.list.beforeRowOperationEvent) {
                 var doNext=window.pageExt.list.beforeRowOperationEvent(data,obj);
                 if(!doNext) return;
             }
-
-            admin.putTempData('eam-position-form-data-form-action', "",true);
             if (layEvent === 'view') { // 查看
                 //延迟显示加载动画，避免界面闪动
-                var task=setTimeout(function(){layer.load(2);},1000);
-                admin.request(moduleURL+"/get-by-id", { id : data.id }, function (data) {
-                    clearTimeout(task);
-                    layer.closeAll('loading');
-                    if(data.success) {
-                        admin.putTempData('eam-report-form-data-form-action', "view",true);
-                        showEditForm(data.data);
-                    } else {
-                        layer.msg(data.message, {icon: 1, time: 1500});
-                    }
-                });
+                var d={}
+                d.nodeId=data.id;
+                console.log(d);
+                showEditForm(d);
             }
 
 
@@ -255,26 +246,22 @@ function ListPage() {
             var doNext=window.pageExt.list.beforeEdit(data);
             if(!doNext) return;
         }
-        var action=admin.getTempData('eam-report-form-data-form-action');
-        var queryString="";
-        if(data && data.id) queryString="?" + 'id=' + data.id;
+
         admin.putTempData('eam-report-form-data', data);
         var area=admin.getTempData('eam-report-form-area');
         var height= (area && area.height) ? area.height : ($(window).height()*0.6);
         var top= (area && area.top) ? area.top : (($(window).height()-height)/2);
-        var title = fox.translate('存放位置');
-        if(action=="create") title=fox.translate('添加')+title;
-        else if(action=="edit") title=fox.translate('修改')+title;
-        else if(action=="view") title=fox.translate('查看')+title;
+        var title = fox.translate('最新数据');
 
+        top=8;
         var index=admin.popupCenter({
             title: title,
             resize: false,
             offset: [top,null],
-            area: ["500px",height+"px"],
+            area: ["95%","95%"],
             type: 2,
             id:"eam-report-form-data-win",
-            content: '/business/eam/position/position_form.html' + queryString,
+            content: '/business/ops/monitor_node_resource/monitor_node_collect_data.html?nodeId=' + data.nodeId,
             finish: function () {
                 refreshTableData();
             }
