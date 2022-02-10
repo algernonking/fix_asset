@@ -96,7 +96,7 @@ foxnic:
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
     profiles: empty,profile@GuoYIE
-  # 设置 Join 的二级缓存
+  # 设置 API 接口
   job:
     enable: false
     force-run-job-ids:
@@ -118,7 +118,7 @@ foxnic:
     # 默认配置
     default:
       # local,remote,both,none
-      mode: local
+      mode: both
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
@@ -134,12 +134,12 @@ foxnic:
             cache-empty-result: true
             properties: code
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
       "org.github.foxnic.web.domain.system.DictItem":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -149,7 +149,7 @@ foxnic:
             cache-empty-result: true
             properties: dictCode
       "org.github.foxnic.web.domain.system.DbCache":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -159,7 +159,7 @@ foxnic:
             cache-empty-result: true
             properties: area,catalog,ownerType,ownerId
       "org.github.foxnic.web.domain.pcm.Catalog":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
