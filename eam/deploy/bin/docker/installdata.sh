@@ -14,6 +14,7 @@ if [ $appdbcnt -eq "0" ] ; then
         use eam;
         source /tmp/eam.sql
         source /tmp/next.sql
+        source /tmp/eam.sql
 EOF
    fi
 else
@@ -25,7 +26,7 @@ cd /usr/local/bin/
 sh startapp.sh
 exit 0
 
-docker run --name eam_base -t \
+docker run --name eam_base1 -t \
 -e MYSQL_USER="eam" \
 -e MYSQL_PASSWORD="eam_pwd" \
 -e MYSQL_ROOT_PASSWORD=root_pwd \
@@ -34,11 +35,14 @@ docker run --name eam_base -t \
 -d docker.io/algernonking/dtmysql:base \
 --character-set-server=utf8
 
-dd=e
+dd=af7adc2e672b
+
 docker cp docker-entrypoint.sh $dd:/usr/local/bin/
 docker cp startapp.sh $dd:/usr/local/bin/
 docker cp installdata.sh $dd:/tmp/
 docker cp jdk8.tar.gz $dd:/tmp/
+
+
 
 docker exec -it $dd /bin/bash
 mkdir -p /opt/eam
@@ -48,3 +52,10 @@ cd /docker-entrypoint-initdb.d;rm -rf installdata.sh ; mv /tmp/installdata.sh .;
 
 docker commit $dd docker.io/algernonking/eamapp:base
 docker stop $dd;docker rm $dd
+
+
+dd=24322ccd466e
+docker cp  $dd:/tmp/jdk8.tar.gz .
+docker cp  $dd:/usr/local/bin/docker-entrypoint.sh .
+
+docker cp a $dd:/tmp/

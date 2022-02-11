@@ -14,7 +14,10 @@ if [[ -d $release_dir ]];then
 fi
 mkdir -p $release_dir
 
-
+if [[ -d $$release_dir/lib ]];then
+  rm -rf $release_dir/lib
+fi
+mkdir -p $release_dir/lib
 
 cd $release_dir
 cp -r $deploy_dir/* .

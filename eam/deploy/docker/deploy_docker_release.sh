@@ -48,6 +48,16 @@ docker run --name eamapp -t \
 --character-set-server=utf8
 
 
+docker run --name eamapp -t \
+-e MYSQL_USER="eam" \
+-e MYSQL_PASSWORD="eam_pwd" \
+-e MYSQL_ROOT_PASSWORD="root_pwd" \
+-v /d/mysql:/var/lib/mysql  \
+-p 3307:3306 \
+-p 3327:8089 \
+-d docker.io/algernonking/eamapp:1.0.5 \
+--character-set-server=utf8
+
 
 
 
