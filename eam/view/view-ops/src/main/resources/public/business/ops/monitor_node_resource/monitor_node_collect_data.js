@@ -73,11 +73,13 @@ function ListPage() {
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
                     ,{ field: 'monitorTplCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('监控模板') , templet: function (d) { return templet('monitorTplCode',d.monitorTplCode,d);}  }
-                    ,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('指标') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
-                    ,{ field: 'valueColumnDesc', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('结果描述') , templet: function (d) { return templet('valueColumnDesc',d.valueColumnDesc,d);}  }
+                    ,{ field: 'indicatorNme', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('指标名称') , templet: function (d) { return templet('indicatorName',d.indicatorName,d);}  }
+                    ,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('指标编码') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
+                    ,{ field: 'valueColumnName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('结果描述') , templet: function (d) { return templet('valueColumnName',d.valueColumnName,d);}  }
                     ,{ field: 'value', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('结果数据') , templet: function (d) { return templet('value',d.value,d);}  }
                     ,{ field: 'recordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最新记录') , templet: function (d) { return templet('recordTime',d.recordTime,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+
                     // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
                 parseData:function(res){

@@ -2,7 +2,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:39
+ * @since 2022-02-12 17:26:29
  */
  -->
  <!DOCTYPE html>
@@ -52,17 +52,19 @@
                     <!-- 数值字段 , valueColumn ,typeName=text_input, isHideInSearch=true -->
                     <!-- 数值字段映射 , valueColumnMap ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字段名称 , valueColumnName ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 字段描述 , valueColumnDesc ,typeName=text_input, isHideInSearch=true -->
                     <!-- 超时(秒) , timeOut ,typeName=number_input, isHideInSearch=true -->
                     <!-- 间隔时间(秒） , intervalTime ,typeName=number_input, isHideInSearch=true -->
                     <!-- 数据保留天数 , dataKeepDay ,typeName=number_input, isHideInSearch=true -->
                     <!-- command_value , commandValue ,typeName=text_area, isHideInSearch=true -->
                     <!-- snmp元数据 , snmpOid ,typeName=text_input, isHideInSearch=true -->
                     <!-- 排序 , itemSort ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 状态 , status ,typeName=select_box, isHideInSearch=false -->
+                    <!-- 状态 , status ,typeName=radio_box, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('状态')}" class="search-label status-label">状态</span><span class="search-colon">:</span></div>
-                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px" extraParam="{}"></div>
+
+
+                        <div id="status" th:data="${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}" style="width:150px"></div>
+
                     </div>
                     <!-- 编码 , code ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
@@ -142,7 +144,7 @@
 
 <script th:inline="javascript">
     var LAYUI_TABLE_WIDTH_CONFIG = [[${pageHelper.getTableColumnWidthConfig('data-table')}]];
-    var SELECT_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
+    var RADIO_STATUS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorEnableEnum')}]];
     var SELECT_MONITORMETHOD_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorMethodEnum')}]];
     var SELECT_VALUECOLUMNROWS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnRowsEnum')}]];
     var SELECT_VALUECOLUMNCOLS_DATA = [[${enum.toArray('com.dt.platform.constants.enums.ops.MonitorIndicatorValueColumnColsEnum')}]];

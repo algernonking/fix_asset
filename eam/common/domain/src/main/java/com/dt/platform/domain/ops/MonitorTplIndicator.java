@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版指标
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:39
- * @sign ABB399BD447164E3EA610CA909778DEE
+ * @since 2022-02-12 17:26:28
+ * @sign C096BF83A8A595B5B5E139AD6B9C22DC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -106,12 +106,6 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="字段名称" , notes = "字段名称")
 	private String valueColumnName;
-	
-	/**
-	 * 字段描述：字段描述
-	*/
-	@ApiModelProperty(required = false,value="字段描述" , notes = "字段描述")
-	private String valueColumnDesc;
 	
 	/**
 	 * 超时(秒)：超时(秒)
@@ -471,25 +465,6 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	public MonitorTplIndicator setValueColumnName(String valueColumnName) {
 		this.valueColumnName=valueColumnName;
-		return this;
-	}
-	
-	/**
-	 * 获得 字段描述<br>
-	 * 字段描述
-	 * @return 字段描述
-	*/
-	public String getValueColumnDesc() {
-		return valueColumnDesc;
-	}
-	
-	/**
-	 * 设置 字段描述
-	 * @param valueColumnDesc 字段描述
-	 * @return 当前对象
-	*/
-	public MonitorTplIndicator setValueColumnDesc(String valueColumnDesc) {
-		this.valueColumnDesc=valueColumnDesc;
 		return this;
 	}
 	

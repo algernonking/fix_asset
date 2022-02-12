@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.dt.platform.domain.ops.MonitorTplIndicator;
-import com.dt.platform.domain.ops.MonitorTplIndicatorVO;
+import com.dt.platform.domain.ops.MonitorTplGraph;
+import com.dt.platform.domain.ops.MonitorTplGraphVO;
 import java.util.List;
 import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.dao.data.PagedList;
@@ -26,21 +26,21 @@ import com.github.foxnic.dao.data.SaveMode;
 import com.github.foxnic.dao.meta.DBColumnMeta;
 import com.github.foxnic.sql.expr.Select;
 import java.util.ArrayList;
-import com.dt.platform.ops.service.IMonitorTplIndicatorService;
+import com.dt.platform.ops.service.IMonitorTplGraphService;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import java.util.Date;
 
 /**
  * <p>
- * 模版指标 服务实现
+ * 模版图形 服务实现
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:28
+ * @since 2022-02-12 17:30:34
 */
 
 
-@Service("OpsMonitorTplIndicatorService")
-public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndicator> implements IMonitorTplIndicatorService {
+@Service("OpsMonitorTplGraphService")
+public class MonitorTplGraphServiceImpl extends SuperService<MonitorTplGraph> implements IMonitorTplGraphService {
 
 	/**
 	 * 注入DAO对象
@@ -63,49 +63,49 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 	/**
 	 * 添加，根据 throwsException 参数抛出异常或返回 Result 对象
 	 *
-	 * @param monitorTplIndicator  数据对象
+	 * @param monitorTplGraph  数据对象
 	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
 	 * @return 结果 , 如果失败返回 false，成功返回 true
 	 */
 	@Override
-	public Result insert(MonitorTplIndicator monitorTplIndicator,boolean throwsException) {
-		Result r=super.insert(monitorTplIndicator,throwsException);
+	public Result insert(MonitorTplGraph monitorTplGraph,boolean throwsException) {
+		Result r=super.insert(monitorTplGraph,throwsException);
 		return r;
 	}
 
 	/**
 	 * 添加，如果语句错误，则抛出异常
-	 * @param monitorTplIndicator 数据对象
+	 * @param monitorTplGraph 数据对象
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insert(MonitorTplIndicator monitorTplIndicator) {
-		return this.insert(monitorTplIndicator,true);
+	public Result insert(MonitorTplGraph monitorTplGraph) {
+		return this.insert(monitorTplGraph,true);
 	}
 
 	/**
 	 * 批量插入实体，事务内
-	 * @param monitorTplIndicatorList 实体数据清单
+	 * @param monitorTplGraphList 实体数据清单
 	 * @return 插入是否成功
 	 * */
 	@Override
-	public Result insertList(List<MonitorTplIndicator> monitorTplIndicatorList) {
-		return super.insertList(monitorTplIndicatorList);
+	public Result insertList(List<MonitorTplGraph> monitorTplGraphList) {
+		return super.insertList(monitorTplGraphList);
 	}
 
 	
 	/**
-	 * 按主键删除 模版指标
+	 * 按主键删除 模版图形
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdPhysical(String id) {
-		MonitorTplIndicator monitorTplIndicator = new MonitorTplIndicator();
+		MonitorTplGraph monitorTplGraph = new MonitorTplGraph();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		monitorTplIndicator.setId(id);
+		monitorTplGraph.setId(id);
 		try {
-			boolean suc = dao.deleteEntity(monitorTplIndicator);
+			boolean suc = dao.deleteEntity(monitorTplGraph);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -116,20 +116,20 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 	}
 	
 	/**
-	 * 按主键删除 模版指标
+	 * 按主键删除 模版图形
 	 *
 	 * @param id 主键
 	 * @return 删除是否成功
 	 */
 	public Result deleteByIdLogical(String id) {
-		MonitorTplIndicator monitorTplIndicator = new MonitorTplIndicator();
+		MonitorTplGraph monitorTplGraph = new MonitorTplGraph();
 		if(id==null) return ErrorDesc.failure().message("id 不允许为 null 。");
-		monitorTplIndicator.setId(id);
-		monitorTplIndicator.setDeleted(dao.getDBTreaty().getTrueValue());
-		monitorTplIndicator.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
-		monitorTplIndicator.setDeleteTime(new Date());
+		monitorTplGraph.setId(id);
+		monitorTplGraph.setDeleted(dao.getDBTreaty().getTrueValue());
+		monitorTplGraph.setDeleteBy((String)dao.getDBTreaty().getLoginUserId());
+		monitorTplGraph.setDeleteTime(new Date());
 		try {
-			boolean suc = dao.updateEntity(monitorTplIndicator,SaveMode.NOT_NULL_FIELDS);
+			boolean suc = dao.updateEntity(monitorTplGraph,SaveMode.NOT_NULL_FIELDS);
 			return suc?ErrorDesc.success():ErrorDesc.failure();
 		}
 		catch(Exception e) {
@@ -141,42 +141,42 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 
 	/**
 	 * 更新，如果执行错误，则抛出异常
-	 * @param monitorTplIndicator 数据对象
+	 * @param monitorTplGraph 数据对象
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(MonitorTplIndicator monitorTplIndicator , SaveMode mode) {
-		return this.update(monitorTplIndicator,mode,true);
+	public Result update(MonitorTplGraph monitorTplGraph , SaveMode mode) {
+		return this.update(monitorTplGraph,mode,true);
 	}
 
 	/**
 	 * 更新，根据 throwsException 参数抛出异常或返回 Result 对象
-	 * @param monitorTplIndicator 数据对象
+	 * @param monitorTplGraph 数据对象
 	 * @param mode 保存模式
 	 * @param throwsException 是否抛出异常，如果不抛出异常，则返回一个失败的 Result 对象
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result update(MonitorTplIndicator monitorTplIndicator , SaveMode mode,boolean throwsException) {
-		Result r=super.update(monitorTplIndicator , mode , throwsException);
+	public Result update(MonitorTplGraph monitorTplGraph , SaveMode mode,boolean throwsException) {
+		Result r=super.update(monitorTplGraph , mode , throwsException);
 		return r;
 	}
 
 	/**
 	 * 更新实体集，事务内
-	 * @param monitorTplIndicatorList 数据对象列表
+	 * @param monitorTplGraphList 数据对象列表
 	 * @param mode 保存模式
 	 * @return 保存是否成功
 	 * */
 	@Override
-	public Result updateList(List<MonitorTplIndicator> monitorTplIndicatorList , SaveMode mode) {
-		return super.updateList(monitorTplIndicatorList , mode);
+	public Result updateList(List<MonitorTplGraph> monitorTplGraphList , SaveMode mode) {
+		return super.updateList(monitorTplGraphList , mode);
 	}
 
 	
 	/**
-	 * 按主键更新字段 模版指标
+	 * 按主键更新字段 模版图形
 	 *
 	 * @param id 主键
 	 * @return 是否更新成功
@@ -190,20 +190,20 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 
 	
 	/**
-	 * 按主键获取 模版指标
+	 * 按主键获取 模版图形
 	 *
 	 * @param id 主键
-	 * @return MonitorTplIndicator 数据对象
+	 * @return MonitorTplGraph 数据对象
 	 */
-	public MonitorTplIndicator getById(String id) {
-		MonitorTplIndicator sample = new MonitorTplIndicator();
+	public MonitorTplGraph getById(String id) {
+		MonitorTplGraph sample = new MonitorTplGraph();
 		if(id==null) throw new IllegalArgumentException("id 不允许为 null ");
 		sample.setId(id);
 		return dao.queryEntity(sample);
 	}
 
 	@Override
-	public List<MonitorTplIndicator> getByIds(List<String> ids) {
+	public List<MonitorTplGraph> getByIds(List<String> ids) {
 		return new ArrayList<>(getByIdsMap(ids).values());
 	}
 
@@ -216,7 +216,7 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 	 * @return 查询结果
 	 * */
 	@Override
-	public List<MonitorTplIndicator> queryList(MonitorTplIndicator sample) {
+	public List<MonitorTplGraph> queryList(MonitorTplGraph sample) {
 		return super.queryList(sample);
 	}
 
@@ -230,7 +230,7 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<MonitorTplIndicator> queryPagedList(MonitorTplIndicator sample, int pageSize, int pageIndex) {
+	public PagedList<MonitorTplGraph> queryPagedList(MonitorTplGraph sample, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, pageSize, pageIndex);
 	}
 
@@ -244,25 +244,25 @@ public class MonitorTplIndicatorServiceImpl extends SuperService<MonitorTplIndic
 	 * @return 查询结果
 	 * */
 	@Override
-	public PagedList<MonitorTplIndicator> queryPagedList(MonitorTplIndicator sample, ConditionExpr condition, int pageSize, int pageIndex) {
+	public PagedList<MonitorTplGraph> queryPagedList(MonitorTplGraph sample, ConditionExpr condition, int pageSize, int pageIndex) {
 		return super.queryPagedList(sample, condition, pageSize, pageIndex);
 	}
 
 	/**
 	 * 检查 实体 是否已经存在 , 判断 主键值不同，但指定字段的值相同的记录是否存在
 	 *
-	 * @param monitorTplIndicator 数据对象
+	 * @param monitorTplGraph 数据对象
 	 * @return 判断结果
 	 */
-	public Boolean checkExists(MonitorTplIndicator monitorTplIndicator) {
+	public Boolean checkExists(MonitorTplGraph monitorTplGraph) {
 		//TDOD 此处添加判断段的代码
-		//boolean exists=super.checkExists(monitorTplIndicator, SYS_ROLE.NAME);
+		//boolean exists=super.checkExists(monitorTplGraph, SYS_ROLE.NAME);
 		//return exists;
 		return false;
 	}
 
 	@Override
-	public ExcelWriter exportExcel(MonitorTplIndicator sample) {
+	public ExcelWriter exportExcel(MonitorTplGraph sample) {
 		return super.exportExcel(sample);
 	}
 

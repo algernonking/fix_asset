@@ -1,5 +1,8 @@
 package com.dt.platform.ops.service.impl;
 
+import ch.ethz.ssh2.*;
+import com.github.foxnic.commons.log.Logger;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,14 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 
-import ch.ethz.ssh2.ChannelCondition;
-import ch.ethz.ssh2.Connection;
-import ch.ethz.ssh2.InteractiveCallback;
-import ch.ethz.ssh2.Session;
-import ch.ethz.ssh2.StreamGobbler;
-import com.github.foxnic.commons.log.Logger;
-
-public class RemoteShellExecutor {
+public class RemoteShellExecutor2 {
 
     private Connection conn;
     /** 远程机器IP */
@@ -39,13 +35,13 @@ public class RemoteShellExecutor {
      * @param usr
      * @param pasword
      */
-    public RemoteShellExecutor(String ip, String usr, String pasword) {
+    public RemoteShellExecutor2(String ip, String usr, String pasword) {
         this.ip = ip;
         this.osUsername = usr;
         this.password = pasword;
     }
 
-    public RemoteShellExecutor(String ip, String usr, String pasword, int port) {
+    public RemoteShellExecutor2(String ip, String usr, String pasword, int port) {
         this.ip = ip;
         this.osUsername = usr;
         this.password = pasword;
@@ -73,6 +69,7 @@ public class RemoteShellExecutor {
 
     public boolean login() {
 
+
         conn = new Connection(ip, port);
         boolean result = false;
         try {
@@ -80,12 +77,13 @@ public class RemoteShellExecutor {
             result = conn.authenticateWithPassword(osUsername, password);
         } catch (IOException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            // e.printStackTrace();
             System.out.println("authenticateWithPassword failed,try to authenticateWithKeyboardInteractive");
         }
         if (result) {
             return result;
         }
+
         // login for the first time
         UsernamePasswordInteractiveCallback il = new UsernamePasswordInteractiveCallback();
         boolean loginSuccess = false;
@@ -95,10 +93,12 @@ public class RemoteShellExecutor {
             loginSuccess = conn.authenticateWithKeyboardInteractive(osUsername, il);
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            // e.printStackTrace();
             e.printStackTrace();
             Logger.info("authenticateWithKeyboardInteractive failed.");
         }
         return loginSuccess;
+
     }
 
     /**
@@ -154,9 +154,7 @@ public class RemoteShellExecutor {
             ret = -102;
             result.append("执行异常IO" + e.getMessage());
         } finally {
-            if (conn != null) {
-                conn.close();
-            }
+//
             if (session != null) {
                 session.close();
             }
@@ -207,9 +205,9 @@ public class RemoteShellExecutor {
     }
 
     public static void main(String[] args) {
-        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","oracle",3316);
-        RemoteShellResult r=rmt.exec("df");
-
+        RemoteShellExecutor2 rmt=new RemoteShellExecutor2("121.43.103.102","root","RootOracle123456789@",22);
+        RemoteShellResult r=rmt.exec("date");
+        //RemoteShellResult r2=rmt.exec("df");
         System.out.println(r.result);
     }
 

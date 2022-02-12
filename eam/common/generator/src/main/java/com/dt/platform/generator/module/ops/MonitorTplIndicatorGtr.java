@@ -127,18 +127,17 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
 
         cfg.view().form().addGroup("填充信息",
                 new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_TYPE,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_NAME,
+                },
+                new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_COLS,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_ROWS,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_TYPE,
+
                 },
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_MAP,
-
-                },
-                new Object[] {
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_NAME,
-                        EAMTables.OPS_MONITOR_TPL_INDICATOR.VALUE_COLUMN_DESC,
 
                 }
         );

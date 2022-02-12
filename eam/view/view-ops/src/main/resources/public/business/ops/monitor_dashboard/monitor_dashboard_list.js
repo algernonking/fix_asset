@@ -18,12 +18,8 @@ function ListPage() {
 
         echarts=layui.echarts;
 
-
-
         // var assetCata = echarts.init(document.getElementById('assetCata'));
         // var assetStatusPie = echarts.init(document.getElementById('assetStatusPie'));
-
-
         admin.request("/service-ops/ops-statistics/query-node-statistics", {}, function (data) {
             if(data.success){
                 var nodeStatistics=data.data.nodeStatistics;
@@ -52,21 +48,20 @@ function ListPage() {
         list.push("os_cpu_used");
         list.push("fs_used");
         list.push("os_p_memory_used");
-        list.push("os_net_flow_up");
-        list.push("os_net_flow_down");
+        // list.push("os_net_flow_up");
+        // list.push("os_net_flow_down");
+
         topPs.topList=list;
         topPs.top=5;
         topPs.day=5;
         admin.request("/service-ops/ops-statistics/query-node-host-top-data", topPs, function (data) {
             if(data.success){
-
                 var dataLoad=data.data.osLoad;
                 var dataCpu=data.data.osCpuUsed;
                 var dataFs=data.data.osFs;
                 var dataMemoryUsed=data.data.osPMemoryUsed;
                 var dataFlowUp=data.data.osNetFlowUp;
                 var dataFlowDown=data.data.osNetFlowDown;
-
                 var cpuhtml="<tr>\n" +
                     "<th>主机名称</th>\n" +
                     "<th>CPU使用率</th>\n" +

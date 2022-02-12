@@ -10,14 +10,14 @@ import com.github.foxnic.commons.bean.BeanUtil;
 
 
 /**
- * 模版指标
+ * 模版图形
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:28
- * @sign C0886492D704913F5D2D80E8CED30CF8
+ * @since 2022-02-12 17:30:34
+ * @sign 01D6D829C65447B90A44F8E5C9ADA5A5
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
-public class MonitorTplIndicatorVO extends MonitorTplIndicator {
+public class MonitorTplGraphVO extends MonitorTplGraph {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -88,7 +88,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param pageIndex 页码
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setPageIndex(Integer pageIndex) {
+	public MonitorTplGraphVO setPageIndex(Integer pageIndex) {
 		this.pageIndex=pageIndex;
 		return this;
 	}
@@ -106,7 +106,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param pageSize 分页大小
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setPageSize(Integer pageSize) {
+	public MonitorTplGraphVO setPageSize(Integer pageSize) {
 		this.pageSize=pageSize;
 		return this;
 	}
@@ -124,7 +124,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param searchField 搜索字段
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setSearchField(String searchField) {
+	public MonitorTplGraphVO setSearchField(String searchField) {
 		this.searchField=searchField;
 		return this;
 	}
@@ -142,7 +142,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param fuzzyField 模糊搜索字段
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setFuzzyField(String fuzzyField) {
+	public MonitorTplGraphVO setFuzzyField(String fuzzyField) {
 		this.fuzzyField=fuzzyField;
 		return this;
 	}
@@ -160,7 +160,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param searchValue 搜索的值
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setSearchValue(String searchValue) {
+	public MonitorTplGraphVO setSearchValue(String searchValue) {
 		this.searchValue=searchValue;
 		return this;
 	}
@@ -178,7 +178,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param dirtyFields 已修改字段
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setDirtyFields(List<String> dirtyFields) {
+	public MonitorTplGraphVO setDirtyFields(List<String> dirtyFields) {
 		this.dirtyFields=dirtyFields;
 		return this;
 	}
@@ -188,7 +188,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param dirtyField 已修改字段
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO addDirtyField(String dirtyField) {
+	public MonitorTplGraphVO addDirtyField(String dirtyField) {
 		if(this.dirtyFields==null) dirtyFields=new ArrayList<>();
 		this.dirtyFields.add(dirtyField);
 		return this;
@@ -207,7 +207,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param sortField 排序字段
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setSortField(String sortField) {
+	public MonitorTplGraphVO setSortField(String sortField) {
 		this.sortField=sortField;
 		return this;
 	}
@@ -225,7 +225,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param sortType 排序方式
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setSortType(String sortType) {
+	public MonitorTplGraphVO setSortType(String sortType) {
 		this.sortType=sortType;
 		return this;
 	}
@@ -244,7 +244,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param ids 主键清单
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO setIds(List<String> ids) {
+	public MonitorTplGraphVO setIds(List<String> ids) {
 		this.ids=ids;
 		return this;
 	}
@@ -254,7 +254,7 @@ public class MonitorTplIndicatorVO extends MonitorTplIndicator {
 	 * @param id 主键清单
 	 * @return 当前对象
 	*/
-	public MonitorTplIndicatorVO addId(String id) {
+	public MonitorTplGraphVO addId(String id) {
 		if(this.ids==null) ids=new ArrayList<>();
 		this.ids.add(id);
 		return this;

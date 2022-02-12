@@ -10,8 +10,8 @@ import com.dt.platform.domain.ops.MonitorTplIndicatorType;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:39
- * @sign ABB399BD447164E3EA610CA909778DEE
+ * @since 2022-02-12 17:26:28
+ * @sign C096BF83A8A595B5B5E139AD6B9C22DC
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -146,16 +146,6 @@ public class MonitorTplIndicatorMeta {
 	 * 字段名称 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> VALUE_COLUMN_NAME_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,VALUE_COLUMN_NAME, java.lang.String.class, "字段名称", "字段名称", java.lang.String.class, null);
-	
-	/**
-	 * 字段描述 , 类型: java.lang.String
-	*/
-	public static final String VALUE_COLUMN_DESC="valueColumnDesc";
-	
-	/**
-	 * 字段描述 , 类型: java.lang.String
-	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplIndicator,java.lang.String> VALUE_COLUMN_DESC_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplIndicator.class ,VALUE_COLUMN_DESC, java.lang.String.class, "字段描述", "字段描述", java.lang.String.class, null);
 	
 	/**
 	 * 超时(秒) , 类型: java.lang.Integer
@@ -350,7 +340,7 @@ public class MonitorTplIndicatorMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , VALUE_COLUMN_DESC , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , SNMP_OID , LABEL , ITEM_SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , MONITOR_INDICATOR_TYPE };
+	public static final String[] $PROPS={ ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , SNMP_OID , LABEL , ITEM_SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , MONITOR_INDICATOR_TYPE };
 	
 	/**
 	 * 代理类
@@ -500,17 +490,6 @@ public class MonitorTplIndicatorMeta {
 		public MonitorTplIndicator setValueColumnName(String valueColumnName) {
 			super.change(VALUE_COLUMN_NAME,super.getValueColumnName(),valueColumnName);
 			super.setValueColumnName(valueColumnName);
-			return this;
-		}
-		
-		/**
-		 * 设置 字段描述
-		 * @param valueColumnDesc 字段描述
-		 * @return 当前对象
-		*/
-		public MonitorTplIndicator setValueColumnDesc(String valueColumnDesc) {
-			super.change(VALUE_COLUMN_DESC,super.getValueColumnDesc(),valueColumnDesc);
-			super.setValueColumnDesc(valueColumnDesc);
 			return this;
 		}
 		

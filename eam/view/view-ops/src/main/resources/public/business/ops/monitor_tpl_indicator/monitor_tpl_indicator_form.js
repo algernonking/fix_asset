@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:39
+ * @since 2022-02-12 17:26:30
  */
 
 function FormPage() {
@@ -85,32 +85,6 @@ function FormPage() {
 	function renderFormFields() {
 		fox.renderFormInputs(form);
 
-		//渲染 status 下拉字段
-		fox.renderSelectBox({
-			el: "status",
-			radio: true,
-			filterable: false,
-			on: function(data){
-				setTimeout(function () {
-					window.pageExt.form.onSelectBoxChanged && window.pageExt.form.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
-				},1);
-			},
-			//转换数据
-			transform:function(data) {
-				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
-				var defaultValues=[],defaultIndexs=[];
-				if(action=="create") {
-					defaultValues = "".split(",");
-					defaultIndexs = "".split(",");
-				}
-				var opts=[];
-				if(!data) return opts;
-				for (var i = 0; i < data.length; i++) {
-					opts.push({data:data[i],name:data[i].text,value:data[i].code,selected:(defaultValues.indexOf(data[i].code)!=-1 || defaultIndexs.indexOf(""+i)!=-1)});
-				}
-				return opts;
-			}
-		});
 		//渲染 monitorTplCode 下拉字段
 		fox.renderSelectBox({
 			el: "monitorTplCode",
@@ -305,8 +279,6 @@ function FormPage() {
 
 
 
-			//设置  状态 设置下拉框勾选
-			fox.setSelectValue4Enum("#status",formData.status,SELECT_STATUS_DATA);
 			//设置  模版 设置下拉框勾选
 			fox.setSelectValue4QueryApi("#monitorTplCode",formData.tpl);
 			//设置  采集方式 设置下拉框勾选
@@ -369,8 +341,6 @@ function FormPage() {
 
 
 
-		//获取 状态 下拉框的值
-		data["status"]=fox.getSelectedValue("status",false);
 		//获取 模版 下拉框的值
 		data["monitorTplCode"]=fox.getSelectedValue("monitorTplCode",false);
 		//获取 采集方式 下拉框的值

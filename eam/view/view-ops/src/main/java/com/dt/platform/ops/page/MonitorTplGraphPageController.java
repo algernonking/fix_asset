@@ -6,23 +6,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import com.dt.platform.proxy.ops.MonitorTplIndicatorServiceProxy;
+import com.dt.platform.proxy.ops.MonitorTplGraphServiceProxy;
 import javax.servlet.http.HttpServletRequest;
 /**
  * <p>
- * 模版指标 模版页面控制器
+ * 模版图形 模版页面控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:29
+ * @since 2022-02-12 17:30:35
 */
 
-@Controller("OpsMonitorTplIndicatorPageController")
-@RequestMapping(MonitorTplIndicatorPageController.prefix)
-public class MonitorTplIndicatorPageController extends ViewController {
+@Controller("OpsMonitorTplGraphPageController")
+@RequestMapping(MonitorTplGraphPageController.prefix)
+public class MonitorTplGraphPageController extends ViewController {
 	
-	public static final String prefix="business/ops/monitor_tpl_indicator";
+	public static final String prefix="business/ops/monitor_tpl_graph";
 
-	private MonitorTplIndicatorServiceProxy proxy;
+	private MonitorTplGraphServiceProxy proxy;
 	
 	/**
 	 * 获得代理对象<br> 
@@ -30,26 +30,26 @@ public class MonitorTplIndicatorPageController extends ViewController {
 	 * 2、前后端分离时，通过配置，以Rest方式调用后端；<br> 
 	 * 3、微服务时，通过feign调用; <br> 
 	 * */
-	public MonitorTplIndicatorServiceProxy proxy() {
+	public MonitorTplGraphServiceProxy proxy() {
 		if(proxy==null) {
-			proxy=MonitorTplIndicatorServiceProxy.api();
+			proxy=MonitorTplGraphServiceProxy.api();
 		}
 		return proxy;
 	}
 	
 	/**
-	 * 模版指标 功能主页面
+	 * 模版图形 功能主页面
 	 */
-	@RequestMapping("/monitor_tpl_indicator_list.html")
+	@RequestMapping("/monitor_tpl_graph_list.html")
 	public String list(Model model,HttpServletRequest request) {
-		return prefix+"/monitor_tpl_indicator_list";
+		return prefix+"/monitor_tpl_graph_list";
 	}
 
 	/**
-	 * 模版指标 表单页面
+	 * 模版图形 表单页面
 	 */
-	@RequestMapping("/monitor_tpl_indicator_form.html")
+	@RequestMapping("/monitor_tpl_graph_form.html")
 	public String form(Model model,HttpServletRequest request , String id) {
-		return prefix+"/monitor_tpl_indicator_form";
+		return prefix+"/monitor_tpl_graph_form";
 	}
 }

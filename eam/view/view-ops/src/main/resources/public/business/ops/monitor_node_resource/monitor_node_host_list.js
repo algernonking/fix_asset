@@ -79,7 +79,7 @@ function ListPage() {
                     ,{ field: 'dataPMemoryUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存使用率(%)') , templet: function (d) { return templet('dataPMemoryUsed',d.dataPMemoryUsed,d);}  }
                     ,{ field: 'dataOsNetInterfaceFlowUp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('上行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowUp',d.dataOsNetInterfaceFlowUp,d);}  }
                     ,{ field: 'dataOsNetInterfaceFlowDown', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowDown',d.dataOsNetInterfaceFlowDown,d);}  }
-                    ,{ field: 'dataProcessCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('连接数') , templet: function (d) { return templet('dataProcessCnt',d.dataProcessCnt,d);}  }
+                    ,{ field: 'dataProcessCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('进程连接数') , templet: function (d) { return templet('dataProcessCnt',d.dataProcessCnt,d);}  }
                     ,{ field: 'dataHostname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名') , templet: function (d) { return templet('dataHostname',d.dataHostname,d);}  }
                     ,{ field: 'dataMaxRecordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('dataMaxRecordTime',d.dataMaxRecordTime,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
