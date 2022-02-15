@@ -213,7 +213,17 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
     @Override
     public Result clearNodeValueLastHistoryData() {
 
-        String sql="";
+        String sql="delete from ops_monitor_node_value_last where id in (\n" +
+                "select id from (\n" +
+                "select \n" +
+                "(\n" +
+                "select max_record_time from (\n" +
+                "select node_id,monitor_tpl_code,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last b  group by node_id,monitor_tpl_code,indicator_code\n" +
+                ") e1 where e1.node_id=a.node_id and e1.monitor_tpl_code=a.monitor_tpl_code and e1.indicator_code=a.indicator_code\n" +
+                ") max_record_time,\n" +
+                "a.*\n" +
+                "from ops_monitor_node_value_last a )end where  end.record_time<end.max_record_time)";
+
         dao.execute(sql);
         return ErrorDesc.success();
     }

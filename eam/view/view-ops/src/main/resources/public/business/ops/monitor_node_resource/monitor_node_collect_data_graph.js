@@ -54,7 +54,32 @@ function ListPage() {
                 },
             }]
         };
-        assetStatusPie.setOption(optionchart, true);
+
+
+        option = {
+            tooltip : { trigger: "axis",},
+            toolbox : { show :true,
+
+                feature : { dataZoom : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ["line", "bar"]},
+                    restore : {show: true},
+                    saveAsImage : {show: true}}},
+            calculable : true,
+            xAxis: [ { type:"time",
+                axisLabel :{formatter:function (value){return value.toLocaleDateString()+" "+value.getHours(); }}}],
+            yAxis: [ { type: "value", } ],
+            series: [ { name: "2P1电表", type: "line",
+                data: [
+                    [new Date("2014/11/13 22:00:00"),29273],
+                    [new Date("2014/11/13 23:00:00"),29430],
+                    [new Date("2014/11/14 04:00:00"),30154],
+                    [new Date("2014/11/15 07:00:00"),34127]
+                ]
+            }
+            ]
+        };
+        assetStatusPie.setOption(option, true);
 
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
