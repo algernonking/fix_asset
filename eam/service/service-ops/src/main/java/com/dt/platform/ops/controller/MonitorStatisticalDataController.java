@@ -2,7 +2,9 @@ package com.dt.platform.ops.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.domain.ops.MonitorTplGraph;
 import com.dt.platform.ops.service.IMonitorStatisticalDataService;
+import com.dt.platform.ops.service.IMonitorTplGraphService;
 import com.dt.platform.proxy.ops.MonitorStatisticalDataServiceProxy;
 import com.github.foxnic.api.transter.Result;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -23,6 +25,9 @@ public class MonitorStatisticalDataController {
 
     @Autowired
     private IMonitorStatisticalDataService monitorStatisticalData;
+
+    @Autowired
+    private IMonitorTplGraphService monitorTplGraphService;
 
     /**
      * 查询节点统计数据
@@ -77,6 +82,29 @@ public class MonitorStatisticalDataController {
     @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA)
     public Result<JSONObject> queryNodeCollectData(String nodeId) {
         return monitorStatisticalData.queryNodeCollectData(nodeId);
+    }
+
+    /**
+     * 查询节点图形数据
+     */
+    @ApiOperation(value = "查询节点图形数据")
+    @ApiOperationSupport(order=6)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH)
+    public Result<JSONObject> queryNodeCollectData(String nodeId,String sdate,String edate,String day) {
+        return monitorStatisticalData.queryNodeCollectDataGraph(nodeId,sdate,edate,day);
+    }
+
+    /**
+     * 查询节点图形数据
+     */
+    @ApiOperation(value = "查询节点图形数据")
+    @ApiOperationSupport(order=7)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH_BY_GRAPH , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH_BY_GRAPH)
+    public Result<JSONObject> queryNodeCollectData(String graphId,String nodeId,String sdate,String edate,String day) {
+        MonitorTplGraph graph =monitorTplGraphService.getById(graphId);
+        return monitorStatisticalData.queryNodeCollectDataGraphByGraph(graph,nodeId,sdate,edate,day);
     }
 
 }

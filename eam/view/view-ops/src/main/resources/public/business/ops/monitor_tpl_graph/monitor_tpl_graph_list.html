@@ -2,7 +2,7 @@
 /**
  * 模版图形 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:30:35
+ * @since 2022-02-13 20:48:54
  */
  -->
  <!DOCTYPE html>
@@ -39,6 +39,7 @@
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
                     <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 状态 , status ,typeName=text_input, isHideInSearch=true -->
                     <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>
@@ -48,7 +49,8 @@
                     <!-- 宽度 , graphWidth ,typeName=number_input, isHideInSearch=true -->
                     <!-- 高度 , graphHeight ,typeName=number_input, isHideInSearch=true -->
                     <!-- 图形类别 , graphType ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 图形内容 , content ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 图形设置 , content ,typeName=text_area, isHideInSearch=true -->
+                    <!-- 数据来源 , ds ,typeName=text_area, isHideInSearch=true -->
                     <!-- 标签 , label ,typeName=text_input, isHideInSearch=true -->
                     <!-- 排序 , sort ,typeName=number_input, isHideInSearch=true -->
                     <!-- 备注 , notes ,typeName=text_input, isHideInSearch=false -->

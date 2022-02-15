@@ -4,13 +4,15 @@ import com.github.foxnic.api.bean.BeanProperty;
 import com.dt.platform.domain.ops.MonitorTplGraph;
 import java.util.Date;
 import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplGraphItem;
+import java.util.List;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:30:34
- * @sign B56A06E8B1CD35B0A5261158AC2DFE03
+ * @since 2022-02-13 20:48:53
+ * @sign D5993649EDC9F5215357BE6DE2929D76
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -25,6 +27,16 @@ public class MonitorTplGraphMeta {
 	 * 主键 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
 	 * 名称 , 类型: java.lang.String
@@ -77,14 +89,24 @@ public class MonitorTplGraphMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> GRAPH_TYPE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,GRAPH_TYPE, java.lang.String.class, "图形类别", "图形类别", java.lang.String.class, null);
 	
 	/**
-	 * 图形内容 , 类型: java.lang.String
+	 * 图形设置 , 类型: java.lang.String
 	*/
 	public static final String CONTENT="content";
 	
 	/**
-	 * 图形内容 , 类型: java.lang.String
+	 * 图形设置 , 类型: java.lang.String
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,CONTENT, java.lang.String.class, "图形内容", "图形内容", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> CONTENT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,CONTENT, java.lang.String.class, "图形设置", "图形设置", java.lang.String.class, null);
+	
+	/**
+	 * 数据来源 , 类型: java.lang.String
+	*/
+	public static final String DS="ds";
+	
+	/**
+	 * 数据来源 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,java.lang.String> DS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,DS, java.lang.String.class, "数据来源", "数据来源", java.lang.String.class, null);
 	
 	/**
 	 * 标签 , 类型: java.lang.String
@@ -207,9 +229,19 @@ public class MonitorTplGraphMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,com.dt.platform.domain.ops.MonitorTpl> TPL_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,TPL, com.dt.platform.domain.ops.MonitorTpl.class, "节点模版", "节点模版", com.dt.platform.domain.ops.MonitorTpl.class, null);
 	
 	/**
+	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplGraphItem
+	*/
+	public static final String GRAPH_ITEM="graphItem";
+	
+	/**
+	 * 指标 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplGraphItem
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTplGraph,com.dt.platform.domain.ops.MonitorTplGraphItem> GRAPH_ITEM_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTplGraph.class ,GRAPH_ITEM, java.util.List.class, "指标", "指标", com.dt.platform.domain.ops.MonitorTplGraphItem.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , TPL_CODE , GRAPH_WIDTH , GRAPH_HEIGHT , GRAPH_TYPE , CONTENT , LABEL , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL };
+	public static final String[] $PROPS={ ID , STATUS , NAME , TPL_CODE , GRAPH_WIDTH , GRAPH_HEIGHT , GRAPH_TYPE , CONTENT , DS , LABEL , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL , GRAPH_ITEM };
 	
 	/**
 	 * 代理类
@@ -227,6 +259,17 @@ public class MonitorTplGraphMeta {
 		public MonitorTplGraph setId(String id) {
 			super.change(ID,super.getId(),id);
 			super.setId(id);
+			return this;
+		}
+		
+		/**
+		 * 设置 状态
+		 * @param status 状态
+		 * @return 当前对象
+		*/
+		public MonitorTplGraph setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		
@@ -286,13 +329,24 @@ public class MonitorTplGraphMeta {
 		}
 		
 		/**
-		 * 设置 图形内容
-		 * @param content 图形内容
+		 * 设置 图形设置
+		 * @param content 图形设置
 		 * @return 当前对象
 		*/
 		public MonitorTplGraph setContent(String content) {
 			super.change(CONTENT,super.getContent(),content);
 			super.setContent(content);
+			return this;
+		}
+		
+		/**
+		 * 设置 数据来源
+		 * @param ds 数据来源
+		 * @return 当前对象
+		*/
+		public MonitorTplGraph setDs(String ds) {
+			super.change(DS,super.getDs(),ds);
+			super.setDs(ds);
 			return this;
 		}
 		
@@ -425,6 +479,17 @@ public class MonitorTplGraphMeta {
 		public MonitorTplGraph setTpl(MonitorTpl tpl) {
 			super.change(TPL,super.getTpl(),tpl);
 			super.setTpl(tpl);
+			return this;
+		}
+		
+		/**
+		 * 设置 指标
+		 * @param graphItem 指标
+		 * @return 当前对象
+		*/
+		public MonitorTplGraph setGraphItem(List<MonitorTplGraphItem> graphItem) {
+			super.change(GRAPH_ITEM,super.getGraphItem(),graphItem);
+			super.setGraphItem(graphItem);
 			return this;
 		}
 	}

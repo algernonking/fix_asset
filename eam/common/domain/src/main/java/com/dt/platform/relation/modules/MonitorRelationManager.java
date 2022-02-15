@@ -15,7 +15,7 @@ public class MonitorRelationManager extends RelationManager {
         this.setupContent();
         this.monitorNodeSubType();
         this.monitorNode();
-
+        this.monitorTplGraph();
         this.monitorTpl();
         this.monitorTplIndicator();
         this.monitorWarn();
@@ -90,11 +90,21 @@ public class MonitorRelationManager extends RelationManager {
 
     }
 
+    private void monitorTplGraph() {
+        this.property(MonitorTplGraphMeta.TPL_PROP)
+                .using(EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE).join(EAMTables.OPS_MONITOR_TPL.CODE);
+
+        this.property(MonitorTplGraphMeta.GRAPH_ITEM_PROP)
+                .using(EAMTables.OPS_MONITOR_TPL_GRAPH.ID).join(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.GRAPH_ID);
+
+    }
 
     private void monitorTpl() {
+        this.property(MonitorTplMeta.GRAPH_LIST_PROP)
+                .using(EAMTables.OPS_MONITOR_TPL.CODE).join(EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE);
+
         this.property(MonitorTplMeta.TPL_TYPE_PROP)
                 .using(EAMTables.OPS_MONITOR_TPL.TYPE).join(EAMTables.OPS_MONITOR_TPL_TYPE.CODE);
-
 
         this.property(MonitorTplMeta.TPL_INDICATOR_LIST_PROP)
                 .using(EAMTables.OPS_MONITOR_TPL.CODE).join(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE);

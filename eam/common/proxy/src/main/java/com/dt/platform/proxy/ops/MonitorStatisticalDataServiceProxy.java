@@ -44,6 +44,17 @@ public interface MonitorStatisticalDataServiceProxy {
     public static final String QUERY_NODE_COLLECT_DATA_FAILED = API_PREFIX + "query-node-collect-data-failed";
 
 
+    /**
+     * 查询节点图形数据
+     */
+    public static final String QUERY_NODE_COLLECT_DATA_GRAPH = API_PREFIX + "query-node-collect-data-graph";
+
+
+    /**
+     * 查询节点图形数据
+     */
+    public static final String QUERY_NODE_COLLECT_DATA_GRAPH_BY_GRAPH = API_PREFIX + "query-node-collect-dat-graph-by-graph";
+
 
     /**
      * 查询主机列表

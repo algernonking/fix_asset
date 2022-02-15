@@ -18,4 +18,5 @@ public interface IMonitorDataProcessService {
 
     Result collectData();
 
+    Result clearNodeValueLastHistoryData();
 }

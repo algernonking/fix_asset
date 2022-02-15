@@ -84,6 +84,7 @@
 
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
+    <button class="layui-btn layui-btn-primary layui-btn-xs ops-graph-button" lay-event="graph" th:text="${lang.translate('图形')}" data-id="{{d.id}}">图形</button>
     <button class="layui-btn layui-btn-primary layui-btn-xs ops-view-button" lay-event="view" th:text="${lang.translate('最新数据')}" data-id="{{d.id}}">最新数据</button>
 </script>
 

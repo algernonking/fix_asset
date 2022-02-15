@@ -6,13 +6,14 @@ import java.util.Date;
 import com.dt.platform.domain.ops.MonitorTplType;
 import com.dt.platform.domain.ops.MonitorTplIndicator;
 import java.util.List;
+import com.dt.platform.domain.ops.MonitorTplGraph;
 
 
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:36
- * @sign 356A610EDC12EBD936F8C1F52F800027
+ * @since 2022-02-13 08:04:05
+ * @sign 99F025E78C542A0CC8BF0932CAF85BB7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -169,9 +170,19 @@ public class MonitorTplMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,com.dt.platform.domain.ops.MonitorTplIndicator> TPL_INDICATOR_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,TPL_INDICATOR_LIST, java.util.List.class, "指标列表", "指标列表", com.dt.platform.domain.ops.MonitorTplIndicator.class, null);
 	
 	/**
+	 * 图形 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplGraph
+	*/
+	public static final String GRAPH_LIST="graphList";
+	
+	/**
+	 * 图形 , 集合类型: LIST , 类型: com.dt.platform.domain.ops.MonitorTplGraph
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,com.dt.platform.domain.ops.MonitorTplGraph> GRAPH_LIST_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,GRAPH_LIST, java.util.List.class, "图形", "图形", com.dt.platform.domain.ops.MonitorTplGraph.class, null);
+	
+	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE , TPL_INDICATOR_LIST };
+	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE , TPL_INDICATOR_LIST , GRAPH_LIST };
 	
 	/**
 	 * 代理类
@@ -343,6 +354,17 @@ public class MonitorTplMeta {
 		public MonitorTpl setTplIndicatorList(List<MonitorTplIndicator> tplIndicatorList) {
 			super.change(TPL_INDICATOR_LIST,super.getTplIndicatorList(),tplIndicatorList);
 			super.setTplIndicatorList(tplIndicatorList);
+			return this;
+		}
+		
+		/**
+		 * 设置 图形
+		 * @param graphList 图形
+		 * @return 当前对象
+		*/
+		public MonitorTpl setGraphList(List<MonitorTplGraph> graphList) {
+			super.change(GRAPH_LIST,super.getGraphList(),graphList);
+			super.setGraphList(graphList);
 			return this;
 		}
 	}

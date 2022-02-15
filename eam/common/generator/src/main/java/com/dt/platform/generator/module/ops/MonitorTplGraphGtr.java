@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplGraphItem;
 import com.dt.platform.domain.ops.MonitorTplIndicator;
 import com.dt.platform.domain.ops.MonitorTplType;
 import com.dt.platform.domain.ops.meta.MonitorTplGraphMeta;
@@ -24,8 +25,9 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        //node type
+
         cfg.getPoClassFile().addSimpleProperty(MonitorTpl.class,"tpl","节点模版","节点模版");
+        cfg.getPoClassFile().addListProperty(MonitorTplGraphItem.class,"graphItem","指标","指标");
 
 
         cfg.view().search().inputLayout(
@@ -45,8 +47,6 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.ID).table().disable(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.CREATE_TIME).table().disable(true);
 
-
-
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE)
                 .basic().label("图形模版")
                 .form().selectBox().queryApi(MonitorTplServiceProxy.QUERY_PAGED_LIST)
@@ -62,16 +62,19 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_GRAPH.NAME,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_WIDTH,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_HEIGHT,
+                        EAMTables.OPS_MONITOR_TPL_GRAPH.STATUS,
+
                 },
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_GRAPH.TPL_CODE,
                         EAMTables.OPS_MONITOR_TPL_GRAPH.CONTENT,
+                        EAMTables.OPS_MONITOR_TPL_GRAPH.NOTES,
                 },
                 new Object[] {
+                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_WIDTH,
+                        EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_HEIGHT,
                         EAMTables.OPS_MONITOR_TPL_GRAPH.SORT,
-                        EAMTables.OPS_MONITOR_TPL_GRAPH.NOTES,
+
                 }
         );
 

@@ -18,6 +18,8 @@ function ListPage() {
     this.init=function(layui) {
         admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
+
+
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
         }
@@ -68,7 +70,7 @@ function ListPage() {
                 where: ps,
                 cols: [[
                     { fixed: 'left',type: 'numbers' },
-                    { fixed: 'left',type:'checkbox' },
+                    // { fixed: 'left',type:'checkbox' },
                     { field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('ID') , templet: function (d) { return templet('id',d.id,d);}  }
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }

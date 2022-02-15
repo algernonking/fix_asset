@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-12 15:19:02
+ * @since 2022-02-15 12:27:12
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -9745,6 +9745,372 @@ public class EAMTables {
 	}
 	
 	/**
+	 * 节点数值最新
+	*/
+	public static class OPS_MONITOR_NODE_VALUE_LAST extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_node_value_last";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 节点
+		*/
+		public static final DBField NODE_ID = new DBField(DBDataType.STRING , "node_id","nodeId","节点","节点",false,false,true);
+		
+		/**
+		 * 监控模版
+		*/
+		public static final DBField MONITOR_TPL_CODE = new DBField(DBDataType.STRING , "monitor_tpl_code","monitorTplCode","监控模版","监控模版",false,false,true);
+		
+		/**
+		 * 结果状态
+		*/
+		public static final DBField RESULT_STATUS = new DBField(DBDataType.STRING , "result_status","resultStatus","结果状态","结果状态",false,false,true);
+		
+		/**
+		 * 结果内容
+		*/
+		public static final DBField RESULT_MESSAGE = new DBField(DBDataType.STRING , "result_message","resultMessage","结果内容","结果内容",false,false,true);
+		
+		/**
+		 * 指标
+		*/
+		public static final DBField INDICATOR_CODE = new DBField(DBDataType.STRING , "indicator_code","indicatorCode","指标","指标",false,false,true);
+		
+		/**
+		 * 主机名称
+		*/
+		public static final DBField HOSTNAME = new DBField(DBDataType.STRING , "hostname","hostname","主机名称","主机名称",false,false,true);
+		
+		/**
+		 * 系统时间
+		*/
+		public static final DBField OS_DATETIME = new DBField(DBDataType.STRING , "os_datetime","osDatetime","系统时间","系统时间",false,false,true);
+		
+		/**
+		 * 启动时间
+		*/
+		public static final DBField BOOTTIME = new DBField(DBDataType.DATE , "boottime","boottime","启动时间","启动时间",false,false,true);
+		
+		/**
+		 * 系统
+		*/
+		public static final DBField OS_VERION = new DBField(DBDataType.STRING , "os_verion","osVerion","系统","系统",false,false,true);
+		
+		/**
+		 * 架构
+		*/
+		public static final DBField ARCH = new DBField(DBDataType.STRING , "arch","arch","架构","架构",false,false,true);
+		
+		/**
+		 * CPU数量
+		*/
+		public static final DBField CPU_NUMBER = new DBField(DBDataType.INTEGER , "cpu_number","cpuNumber","CPU数量","CPU数量",false,false,true);
+		
+		/**
+		 * CPU主频
+		*/
+		public static final DBField CPU_FREE = new DBField(DBDataType.DECIMAL , "cpu_free","cpuFree","CPU主频","CPU主频",false,false,true);
+		
+		/**
+		 * cpuSys
+		*/
+		public static final DBField CPU_SYS = new DBField(DBDataType.DECIMAL , "cpu_sys","cpuSys","cpuSys","cpuSys",false,false,true);
+		
+		/**
+		 * cpuUser
+		*/
+		public static final DBField CPU_USER = new DBField(DBDataType.DECIMAL , "cpu_user","cpuUser","cpuUser","cpuUser",false,false,true);
+		
+		/**
+		 * cpuWait
+		*/
+		public static final DBField CPU_WAIT = new DBField(DBDataType.DECIMAL , "cpu_wait","cpuWait","cpuWait","cpuWait",false,false,true);
+		
+		/**
+		 * CPU空闲旅
+		*/
+		public static final DBField CPU_IDLE = new DBField(DBDataType.DECIMAL , "cpu_idle","cpuIdle","CPU空闲旅","CPU空闲旅",false,false,true);
+		
+		/**
+		 * CPU使用率
+		*/
+		public static final DBField CPU_USED = new DBField(DBDataType.DECIMAL , "cpu_used","cpuUsed","CPU使用率","CPU使用率",false,false,true);
+		
+		/**
+		 * 系统负载
+		*/
+		public static final DBField OS_LOAD = new DBField(DBDataType.DECIMAL , "os_load","osLoad","系统负载","系统负载",false,false,true);
+		
+		/**
+		 * 系统负载5
+		*/
+		public static final DBField OS_LOAD5 = new DBField(DBDataType.DECIMAL , "os_load5","osLoad5","系统负载5","系统负载5",false,false,true);
+		
+		/**
+		 * 系统负载15
+		*/
+		public static final DBField OS_LOAD15 = new DBField(DBDataType.DECIMAL , "os_load15","osLoad15","系统负载15","系统负载15",false,false,true);
+		
+		/**
+		 * 上行流量
+		*/
+		public static final DBField NETWORK_FLOW_UP = new DBField(DBDataType.DECIMAL , "network_flow_up","networkFlowUp","上行流量","上行流量",false,false,true);
+		
+		/**
+		 * 下流量
+		*/
+		public static final DBField NETWORK_FLOW_DOWN = new DBField(DBDataType.DECIMAL , "network_flow_down","networkFlowDown","下流量","下流量",false,false,true);
+		
+		/**
+		 * 连接数
+		*/
+		public static final DBField PROCESS_CNT = new DBField(DBDataType.INTEGER , "process_cnt","processCnt","连接数","连接数",false,false,true);
+		
+		/**
+		 * 物理内存(M)
+		*/
+		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
+		
+		/**
+		 * 虚拟内存(M)
+		*/
+		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
+		
+		/**
+		 * 物理内存使用率
+		*/
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.INTEGER , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		
+		/**
+		 * 虚拟内存使用率
+		*/
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.INTEGER , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
+		
+		/**
+		 * 信息
+		*/
+		public static final DBField INFO = new DBField(DBDataType.STRING , "info","info","信息","信息",false,false,true);
+		
+		/**
+		 * 标签1
+		*/
+		public static final DBField LABEL1 = new DBField(DBDataType.STRING , "label1","label1","标签1","标签1",false,false,true);
+		
+		/**
+		 * 标签2
+		*/
+		public static final DBField LABEL2 = new DBField(DBDataType.STRING , "label2","label2","标签2","标签2",false,false,true);
+		
+		/**
+		 * 标签3
+		*/
+		public static final DBField LABEL3 = new DBField(DBDataType.STRING , "label3","label3","标签3","标签3",false,false,true);
+		
+		/**
+		 * 编码1
+		*/
+		public static final DBField CODE1 = new DBField(DBDataType.STRING , "code1","code1","编码1","编码1",false,false,true);
+		
+		/**
+		 * 编码2
+		*/
+		public static final DBField CODE2 = new DBField(DBDataType.STRING , "code2","code2","编码2","编码2",false,false,true);
+		
+		/**
+		 * 编码3
+		*/
+		public static final DBField CODE3 = new DBField(DBDataType.STRING , "code3","code3","编码3","编码3",false,false,true);
+		
+		/**
+		 * 数值1
+		*/
+		public static final DBField VALUE_NUMBER1 = new DBField(DBDataType.DECIMAL , "value_number1","valueNumber1","数值1","数值1",false,false,true);
+		
+		/**
+		 * 数值2
+		*/
+		public static final DBField VALUE_NUMBER2 = new DBField(DBDataType.DECIMAL , "value_number2","valueNumber2","数值2","数值2",false,false,true);
+		
+		/**
+		 * 数值3
+		*/
+		public static final DBField VALUE_NUMBER3 = new DBField(DBDataType.DECIMAL , "value_number3","valueNumber3","数值3","数值3",false,false,true);
+		
+		/**
+		 * 字符串1
+		*/
+		public static final DBField VALUE_STR1 = new DBField(DBDataType.STRING , "value_str1","valueStr1","字符串1","字符串1",false,false,true);
+		
+		/**
+		 * 字符串2
+		*/
+		public static final DBField VALUE_STR2 = new DBField(DBDataType.STRING , "value_str2","valueStr2","字符串2","字符串2",false,false,true);
+		
+		/**
+		 * 字符串3
+		*/
+		public static final DBField VALUE_STR3 = new DBField(DBDataType.STRING , "value_str3","valueStr3","字符串3","字符串3",false,false,true);
+		
+		/**
+		 * 整数1
+		*/
+		public static final DBField VALUE_INT1 = new DBField(DBDataType.INTEGER , "value_int1","valueInt1","整数1","整数1",false,false,true);
+		
+		/**
+		 * 整数2
+		*/
+		public static final DBField VALUE_INT2 = new DBField(DBDataType.INTEGER , "value_int2","valueInt2","整数2","整数2",false,false,true);
+		
+		/**
+		 * 整数3
+		*/
+		public static final DBField VALUE_INT3 = new DBField(DBDataType.INTEGER , "value_int3","valueInt3","整数3","整数3",false,false,true);
+		
+		/**
+		 * 标签列1
+		*/
+		public static final DBField LIST_LABEL1 = new DBField(DBDataType.STRING , "list_label1","listLabel1","标签列1","标签列1",false,false,true);
+		
+		/**
+		 * 标签列2
+		*/
+		public static final DBField LIST_LABEL2 = new DBField(DBDataType.STRING , "list_label2","listLabel2","标签列2","标签列2",false,false,true);
+		
+		/**
+		 * 标签列3
+		*/
+		public static final DBField LIST_LABEL3 = new DBField(DBDataType.STRING , "list_label3","listLabel3","标签列3","标签列3",false,false,true);
+		
+		/**
+		 * 编码列1
+		*/
+		public static final DBField LIST_CODE1 = new DBField(DBDataType.STRING , "list_code1","listCode1","编码列1","编码列1",false,false,true);
+		
+		/**
+		 * 编码列2
+		*/
+		public static final DBField LIST_CODE2 = new DBField(DBDataType.STRING , "list_code2","listCode2","编码列2","编码列2",false,false,true);
+		
+		/**
+		 * 编码列3
+		*/
+		public static final DBField LIST_CODE3 = new DBField(DBDataType.STRING , "list_code3","listCode3","编码列3","编码列3",false,false,true);
+		
+		/**
+		 * 数值列1
+		*/
+		public static final DBField LIST_VALUE_NUMBER1 = new DBField(DBDataType.DECIMAL , "list_value_number1","listValueNumber1","数值列1","数值列1",false,false,true);
+		
+		/**
+		 * 数值列2
+		*/
+		public static final DBField LIST_VALUE_NUMBER2 = new DBField(DBDataType.DECIMAL , "list_value_number2","listValueNumber2","数值列2","数值列2",false,false,true);
+		
+		/**
+		 * 数值列3
+		*/
+		public static final DBField LIST_VALUE_NUMBER3 = new DBField(DBDataType.DECIMAL , "list_value_number3","listValueNumber3","数值列3","数值列3",false,false,true);
+		
+		/**
+		 * 字符串列1
+		*/
+		public static final DBField LIST_VALUE_STR1 = new DBField(DBDataType.STRING , "list_value_str1","listValueStr1","字符串列1","字符串列1",false,false,true);
+		
+		/**
+		 * 字符串列2
+		*/
+		public static final DBField LIST_VALUE_STR2 = new DBField(DBDataType.STRING , "list_value_str2","listValueStr2","字符串列2","字符串列2",false,false,true);
+		
+		/**
+		 * 字符串列3
+		*/
+		public static final DBField LIST_VALUE_STR3 = new DBField(DBDataType.STRING , "list_value_str3","listValueStr3","字符串列3","字符串列3",false,false,true);
+		
+		/**
+		 * 整数列1
+		*/
+		public static final DBField LIST_VALUE_INT1 = new DBField(DBDataType.STRING , "list_value_int1","listValueInt1","整数列1","整数列1",false,false,true);
+		
+		/**
+		 * 整数列2
+		*/
+		public static final DBField LIST_VALUE_INT2 = new DBField(DBDataType.STRING , "list_value_int2","listValueInt2","整数列2","整数列2",false,false,true);
+		
+		/**
+		 * 整数列3
+		*/
+		public static final DBField LIST_VALUE_INT3 = new DBField(DBDataType.STRING , "list_value_int3","listValueInt3","整数列3","整数列3",false,false,true);
+		
+		/**
+		 * 唯一标识
+		*/
+		public static final DBField UID = new DBField(DBDataType.STRING , "uid","uid","唯一标识","唯一标识",false,false,true);
+		
+		/**
+		 * 是否连接
+		*/
+		public static final DBField IS_CONNECTED = new DBField(DBDataType.INTEGER , "is_connected","isConnected","是否连接","是否连接",false,false,true);
+		
+		/**
+		 * 记录时间
+		*/
+		public static final DBField RECORD_TIME = new DBField(DBDataType.DATE , "record_time","recordTime","记录时间","记录时间",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_NODE_VALUE_LAST() {
+			this.init($NAME,"节点数值最新" , ID , NODE_ID , MONITOR_TPL_CODE , RESULT_STATUS , RESULT_MESSAGE , INDICATOR_CODE , HOSTNAME , OS_DATETIME , BOOTTIME , OS_VERION , ARCH , CPU_NUMBER , CPU_FREE , CPU_SYS , CPU_USER , CPU_WAIT , CPU_IDLE , CPU_USED , OS_LOAD , OS_LOAD5 , OS_LOAD15 , NETWORK_FLOW_UP , NETWORK_FLOW_DOWN , PROCESS_CNT , P_MEMORY_SIZE , V_MEMORY_SIZE , P_MEMORY_USED , V_MEMORY_USED , INFO , LABEL1 , LABEL2 , LABEL3 , CODE1 , CODE2 , CODE3 , VALUE_NUMBER1 , VALUE_NUMBER2 , VALUE_NUMBER3 , VALUE_STR1 , VALUE_STR2 , VALUE_STR3 , VALUE_INT1 , VALUE_INT2 , VALUE_INT3 , LIST_LABEL1 , LIST_LABEL2 , LIST_LABEL3 , LIST_CODE1 , LIST_CODE2 , LIST_CODE3 , LIST_VALUE_NUMBER1 , LIST_VALUE_NUMBER2 , LIST_VALUE_NUMBER3 , LIST_VALUE_STR1 , LIST_VALUE_STR2 , LIST_VALUE_STR3 , LIST_VALUE_INT1 , LIST_VALUE_INT2 , LIST_VALUE_INT3 , UID , IS_CONNECTED , RECORD_TIME , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_NODE_VALUE_LAST $TABLE=new OPS_MONITOR_NODE_VALUE_LAST();
+	}
+	
+	/**
 	 * 监控模版
 	*/
 	public static class OPS_MONITOR_TPL extends DBTable {
@@ -9826,7 +10192,7 @@ public class EAMTables {
 	}
 	
 	/**
-	 * 模版图标
+	 * 模版图形
 	*/
 	public static class OPS_MONITOR_TPL_GRAPH extends DBTable {
 		
@@ -9839,6 +10205,11 @@ public class EAMTables {
 		 * 主键
 		*/
 		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
 		
 		/**
 		 * 名称
@@ -9866,9 +10237,14 @@ public class EAMTables {
 		public static final DBField GRAPH_TYPE = new DBField(DBDataType.STRING , "graph_type","graphType","图形类别","图形类别",false,false,true);
 		
 		/**
-		 * 图形内容
+		 * 图形设置
 		*/
-		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","图形内容","图形内容",false,false,true);
+		public static final DBField CONTENT = new DBField(DBDataType.STRING , "content","content","图形设置","图形设置",false,false,true);
+		
+		/**
+		 * 数据来源
+		*/
+		public static final DBField DS = new DBField(DBDataType.STRING , "ds","ds","数据来源","数据来源",false,false,true);
 		
 		/**
 		 * 标签
@@ -9926,9 +10302,95 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_TPL_GRAPH() {
-			this.init($NAME,"模版图标" , ID , NAME , TPL_CODE , GRAPH_WIDTH , GRAPH_HEIGHT , GRAPH_TYPE , CONTENT , LABEL , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"模版图形" , ID , STATUS , NAME , TPL_CODE , GRAPH_WIDTH , GRAPH_HEIGHT , GRAPH_TYPE , CONTENT , DS , LABEL , SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_TPL_GRAPH $TABLE=new OPS_MONITOR_TPL_GRAPH();
+	}
+	
+	/**
+	 * 图形指标
+	*/
+	public static class OPS_MONITOR_TPL_GRAPH_ITEM extends DBTable {
+		
+		/**
+		 * 表名
+		*/
+		public static final String $NAME = "ops_monitor_tpl_graph_item";
+		
+		/**
+		 * 主键
+		*/
+		public static final DBField ID = new DBField(DBDataType.STRING , "id","id","主键","主键",true,false,false);
+		
+		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		
+		/**
+		 * 图形
+		*/
+		public static final DBField GRAPH_ID = new DBField(DBDataType.STRING , "graph_id","graphId","图形","图形",false,false,true);
+		
+		/**
+		 * 指标
+		*/
+		public static final DBField INDICATOR_CODE = new DBField(DBDataType.STRING , "indicator_code","indicatorCode","指标","指标",false,false,true);
+		
+		/**
+		 * 名称
+		*/
+		public static final DBField NAME = new DBField(DBDataType.STRING , "name","name","名称","名称",false,false,true);
+		
+		/**
+		 * 数据
+		*/
+		public static final DBField ROUTE = new DBField(DBDataType.STRING , "route","route","数据","数据",false,false,true);
+		
+		/**
+		 * 创建人ID
+		*/
+		public static final DBField CREATE_BY = new DBField(DBDataType.STRING , "create_by","createBy","创建人ID","创建人ID",false,false,true);
+		
+		/**
+		 * 创建时间
+		*/
+		public static final DBField CREATE_TIME = new DBField(DBDataType.DATE , "create_time","createTime","创建时间","创建时间",false,false,true);
+		
+		/**
+		 * 修改人ID
+		*/
+		public static final DBField UPDATE_BY = new DBField(DBDataType.STRING , "update_by","updateBy","修改人ID","修改人ID",false,false,true);
+		
+		/**
+		 * 修改时间
+		*/
+		public static final DBField UPDATE_TIME = new DBField(DBDataType.DATE , "update_time","updateTime","修改时间","修改时间",false,false,true);
+		
+		/**
+		 * 是否已删除
+		*/
+		public static final DBField DELETED = new DBField(DBDataType.INTEGER , "deleted","deleted","是否已删除","是否已删除",false,false,false);
+		
+		/**
+		 * 删除人ID
+		*/
+		public static final DBField DELETE_BY = new DBField(DBDataType.STRING , "delete_by","deleteBy","删除人ID","删除人ID",false,false,true);
+		
+		/**
+		 * 删除时间
+		*/
+		public static final DBField DELETE_TIME = new DBField(DBDataType.DATE , "delete_time","deleteTime","删除时间","删除时间",false,false,true);
+		
+		/**
+		 * 版本
+		*/
+		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
+		
+		public OPS_MONITOR_TPL_GRAPH_ITEM() {
+			this.init($NAME,"图形指标" , ID , STATUS , GRAPH_ID , INDICATOR_CODE , NAME , ROUTE , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+		}
+		public static final OPS_MONITOR_TPL_GRAPH_ITEM $TABLE=new OPS_MONITOR_TPL_GRAPH_ITEM();
 	}
 	
 	/**

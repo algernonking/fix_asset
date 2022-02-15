@@ -210,6 +210,14 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
         return ErrorDesc.success();
     }
 
+    @Override
+    public Result clearNodeValueLastHistoryData() {
+
+        String sql="";
+        dao.execute(sql);
+        return ErrorDesc.success();
+    }
+
     public Result collectNodeData(MonitorNode node) {
 
         String ip=node.getNodeIp();
@@ -294,6 +302,9 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
             try{
                 System.out.println("insert collect data:\n"+insert.getSQL());
                 dao.execute(insert);
+                insert.into("ops_monitor_node_value_last");
+                dao.execute(insert);
+
             }catch(UncategorizedSQLException e){
                 Logger.info("Sql execute error,sql:"+insert.getSQL());
                 Insert errInsert=new Insert("ops_monitor_node_value");
@@ -304,6 +315,8 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 errInsert.setIf("node_id",insert.getValue("node_id"));
                 errInsert.setIf("monitor_tpl_code",insert.getValue("monitor_tpl_code"));
                 errInsert.setIf("record_time",new Date());
+                dao.execute(errInsert);
+                errInsert.into("ops_monitor_node_value_last");
                 dao.execute(errInsert);
                 e.printStackTrace();
             }

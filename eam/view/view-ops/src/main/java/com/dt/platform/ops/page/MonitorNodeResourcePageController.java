@@ -46,6 +46,8 @@ public class MonitorNodeResourcePageController extends ViewController {
 		return prefix+"/monitor_node_host_list";
 	}
 
+
+
 	/**
 	 * 节点报错
 	 */

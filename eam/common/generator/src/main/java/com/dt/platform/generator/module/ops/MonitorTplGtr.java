@@ -2,6 +2,7 @@ package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.domain.ops.MonitorNodeType;
+import com.dt.platform.domain.ops.MonitorTplGraph;
 import com.dt.platform.domain.ops.MonitorTplIndicator;
 import com.dt.platform.domain.ops.MonitorTplType;
 import com.dt.platform.domain.ops.meta.MonitorNodeTypeMeta;
@@ -27,6 +28,7 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         //node type
         cfg.getPoClassFile().addSimpleProperty(MonitorTplType.class,"tplType","节点模版类型","节点模版类型");
         cfg.getPoClassFile().addListProperty(MonitorTplIndicator.class,"tplIndicatorList","指标列表","指标列表");
+        cfg.getPoClassFile().addListProperty(MonitorTplGraph.class,"graphList","图形","图形");
 
 
         cfg.view().search().inputLayout(

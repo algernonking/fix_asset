@@ -1,7 +1,7 @@
 /**
  * 存放位置 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2021-10-12 12:47:14
+ * @since 2021-10-12 12:47:18
  */
 
 
@@ -231,6 +231,26 @@ function ListPage() {
                 d.nodeId=data.id;
                 console.log(d);
                 showEditForm(d);
+            }else if  (layEvent === 'graph') { // 查看
+                //延迟显示加载动画，避免界面闪动
+                admin.putTempData('eam-report-form-data', data);
+                var area=admin.getTempData('eam-report-form-area');
+                var height= (area && area.height) ? area.height : ($(window).height()*0.6);
+                var title = '节点图形'
+                top=8;
+                var index=admin.popupCenter({
+                    title: title,
+                    resize: false,
+                    offset: [top,null],
+                    area: ["95%","95%"],
+                    type: 2,
+                    id:"eam-report-form-data-win",
+                    content: '/business/ops/monitor_node_resource/monitor_node_collect_data_graph.html?nodeId=' + data.id,
+                    finish: function () {
+                        //refreshTableData();
+                    }
+                });
+                admin.putTempData('eam-report-form-data-popup-index', index);
             }
 
 
@@ -263,7 +283,7 @@ function ListPage() {
             id:"eam-report-form-data-win",
             content: '/business/ops/monitor_node_resource/monitor_node_collect_data.html?nodeId=' + data.nodeId,
             finish: function () {
-                refreshTableData();
+               // refreshTableData();
             }
         });
         admin.putTempData('eam-report-form-data-popup-index', index);

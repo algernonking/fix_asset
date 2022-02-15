@@ -41,4 +41,17 @@ public class MonitorDataProcessScriptController extends SuperController {
     }
 
 
+    /**
+     * 批量删除节点 <br>
+     * 联合主键时，请自行调整实现
+     */
+    @ApiOperation(value = "收集数据")
+    @ApiOperationSupport(order=1)
+    @SentinelResource(value = MonitorDataProcessScriptServiceProxy.CLEAR_NODE_VALUE_LAST_HISTORY_DATA , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorDataProcessScriptServiceProxy.CLEAR_NODE_VALUE_LAST_HISTORY_DATA)
+    public Result clearNodeValueLastHistoryData() {
+        return monitorDataProcessScriptService.clearNodeValueLastHistoryData();
+    }
+
+
 }

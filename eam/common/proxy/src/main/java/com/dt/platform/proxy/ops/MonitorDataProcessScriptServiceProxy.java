@@ -41,12 +41,23 @@ public interface MonitorDataProcessScriptServiceProxy {
 	public static final String COLLECT_DATA = API_PREFIX + "collect-data";
 
 
+	/**
+	 * 收集数据
+	 */
+	public static final String CLEAR_NODE_VALUE_LAST_HISTORY_DATA = API_PREFIX + "clear-node-value-last-history-data";
+
 
 	/**
 	 * 添加节点数据库
 	 */
 	@RequestMapping(MonitorDataProcessScriptServiceProxy.COLLECT_DATA)
 	public Result collectData();
+
+	/**
+	 * 添加节点数据库
+	 */
+	@RequestMapping(MonitorDataProcessScriptServiceProxy.CLEAR_NODE_VALUE_LAST_HISTORY_DATA)
+	public Result clearNodeValueLastHistoryData();
 
 	/**
 	 * 控制器类名

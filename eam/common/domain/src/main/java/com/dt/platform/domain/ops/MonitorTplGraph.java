@@ -7,6 +7,8 @@ import com.dt.platform.constants.db.EAMTables.OPS_MONITOR_TPL_GRAPH;
 import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Transient;
 import java.util.Map;
 import com.github.foxnic.dao.entity.EntityContext;
@@ -16,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版图形
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:30:34
- * @sign B56A06E8B1CD35B0A5261158AC2DFE03
+ * @since 2022-02-13 20:48:53
+ * @sign D5993649EDC9F5215357BE6DE2929D76
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -34,6 +36,12 @@ public class MonitorTplGraph extends Entity {
 	@Id
 	@ApiModelProperty(required = true,value="主键" , notes = "主键")
 	private String id;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 名称：名称
@@ -66,10 +74,16 @@ public class MonitorTplGraph extends Entity {
 	private String graphType;
 	
 	/**
-	 * 图形内容：图形内容
+	 * 图形设置：图形设置
 	*/
-	@ApiModelProperty(required = false,value="图形内容" , notes = "图形内容")
+	@ApiModelProperty(required = false,value="图形设置" , notes = "图形设置")
 	private String content;
+	
+	/**
+	 * 数据来源：数据来源
+	*/
+	@ApiModelProperty(required = false,value="数据来源" , notes = "数据来源")
+	private String ds;
 	
 	/**
 	 * 标签：标签
@@ -144,6 +158,12 @@ public class MonitorTplGraph extends Entity {
 	private MonitorTpl tpl;
 	
 	/**
+	 * 指标：指标
+	*/
+	@ApiModelProperty(required = false,value="指标" , notes = "指标")
+	private List<MonitorTplGraphItem> graphItem;
+	
+	/**
 	 * 获得 主键<br>
 	 * 主键
 	 * @return 主键
@@ -159,6 +179,25 @@ public class MonitorTplGraph extends Entity {
 	*/
 	public MonitorTplGraph setId(String id) {
 		this.id=id;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public MonitorTplGraph setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	
@@ -258,21 +297,40 @@ public class MonitorTplGraph extends Entity {
 	}
 	
 	/**
-	 * 获得 图形内容<br>
-	 * 图形内容
-	 * @return 图形内容
+	 * 获得 图形设置<br>
+	 * 图形设置
+	 * @return 图形设置
 	*/
 	public String getContent() {
 		return content;
 	}
 	
 	/**
-	 * 设置 图形内容
-	 * @param content 图形内容
+	 * 设置 图形设置
+	 * @param content 图形设置
 	 * @return 当前对象
 	*/
 	public MonitorTplGraph setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	/**
+	 * 获得 数据来源<br>
+	 * 数据来源
+	 * @return 数据来源
+	*/
+	public String getDs() {
+		return ds;
+	}
+	
+	/**
+	 * 设置 数据来源
+	 * @param ds 数据来源
+	 * @return 当前对象
+	*/
+	public MonitorTplGraph setDs(String ds) {
+		this.ds=ds;
 		return this;
 	}
 	
@@ -501,6 +559,36 @@ public class MonitorTplGraph extends Entity {
 	*/
 	public MonitorTplGraph setTpl(MonitorTpl tpl) {
 		this.tpl=tpl;
+		return this;
+	}
+	
+	/**
+	 * 获得 指标<br>
+	 * 指标
+	 * @return 指标
+	*/
+	public List<MonitorTplGraphItem> getGraphItem() {
+		return graphItem;
+	}
+	
+	/**
+	 * 设置 指标
+	 * @param graphItem 指标
+	 * @return 当前对象
+	*/
+	public MonitorTplGraph setGraphItem(List<MonitorTplGraphItem> graphItem) {
+		this.graphItem=graphItem;
+		return this;
+	}
+	
+	/**
+	 * 添加 指标
+	 * @param entity 指标
+	 * @return 当前对象
+	*/
+	public MonitorTplGraph addGraphItem(MonitorTplGraphItem entity) {
+		if(this.graphItem==null) graphItem=new ArrayList<>();
+		this.graphItem.add(entity);
 		return this;
 	}
 

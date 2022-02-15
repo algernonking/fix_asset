@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 监控模版
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:36
- * @sign 356A610EDC12EBD936F8C1F52F800027
+ * @since 2022-02-13 08:04:05
+ * @sign 99F025E78C542A0CC8BF0932CAF85BB7
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -120,6 +120,12 @@ public class MonitorTpl extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="指标列表" , notes = "指标列表")
 	private List<MonitorTplIndicator> tplIndicatorList;
+	
+	/**
+	 * 图形：图形
+	*/
+	@ApiModelProperty(required = false,value="图形" , notes = "图形")
+	private List<MonitorTplGraph> graphList;
 	
 	/**
 	 * 获得 主键<br>
@@ -414,6 +420,36 @@ public class MonitorTpl extends Entity {
 	public MonitorTpl addTplIndicator(MonitorTplIndicator tplIndicator) {
 		if(this.tplIndicatorList==null) tplIndicatorList=new ArrayList<>();
 		this.tplIndicatorList.add(tplIndicator);
+		return this;
+	}
+	
+	/**
+	 * 获得 图形<br>
+	 * 图形
+	 * @return 图形
+	*/
+	public List<MonitorTplGraph> getGraphList() {
+		return graphList;
+	}
+	
+	/**
+	 * 设置 图形
+	 * @param graphList 图形
+	 * @return 当前对象
+	*/
+	public MonitorTpl setGraphList(List<MonitorTplGraph> graphList) {
+		this.graphList=graphList;
+		return this;
+	}
+	
+	/**
+	 * 添加 图形
+	 * @param graph 图形
+	 * @return 当前对象
+	*/
+	public MonitorTpl addGraph(MonitorTplGraph graph) {
+		if(this.graphList==null) graphList=new ArrayList<>();
+		this.graphList.add(graph);
 		return this;
 	}
 

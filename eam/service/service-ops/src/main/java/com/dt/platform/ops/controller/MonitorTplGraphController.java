@@ -34,6 +34,7 @@ import com.github.foxnic.dao.excel.ValidateResult;
 import java.io.InputStream;
 import com.dt.platform.domain.ops.meta.MonitorTplGraphMeta;
 import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.domain.ops.MonitorTplGraphItem;
 import io.swagger.annotations.Api;
 import com.github.xiaoymin.knife4j.annotations.ApiSort;
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模版图形 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:30:34
+ * @since 2022-02-13 20:48:53
 */
 
 @Api(tags = "模版图形")
@@ -66,15 +67,17 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "添加模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class , example = "line"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形设置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.DS , value = "数据来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=1)
@@ -92,7 +95,7 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "删除模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class)
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1")
 	})
 	@ApiOperationSupport(order=2)
 	@NotNull(name = MonitorTplGraphVOMeta.ID)
@@ -126,15 +129,17 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "更新模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class , example = "line"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形设置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.DS , value = "数据来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport( order=4 , ignoreParameters = { MonitorTplGraphVOMeta.PAGE_INDEX , MonitorTplGraphVOMeta.PAGE_SIZE , MonitorTplGraphVOMeta.SEARCH_FIELD , MonitorTplGraphVOMeta.FUZZY_FIELD , MonitorTplGraphVOMeta.SEARCH_VALUE , MonitorTplGraphVOMeta.DIRTY_FIELDS , MonitorTplGraphVOMeta.SORT_FIELD , MonitorTplGraphVOMeta.SORT_TYPE , MonitorTplGraphVOMeta.IDS } )
@@ -152,15 +157,17 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "保存模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class , example = "line"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形设置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.DS , value = "数据来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplGraphVOMeta.PAGE_INDEX , MonitorTplGraphVOMeta.PAGE_SIZE , MonitorTplGraphVOMeta.SEARCH_FIELD , MonitorTplGraphVOMeta.FUZZY_FIELD , MonitorTplGraphVOMeta.SEARCH_VALUE , MonitorTplGraphVOMeta.DIRTY_FIELDS , MonitorTplGraphVOMeta.SORT_FIELD , MonitorTplGraphVOMeta.SORT_TYPE , MonitorTplGraphVOMeta.IDS } )
@@ -221,15 +228,17 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "查询模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class , example = "line"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形设置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.DS , value = "数据来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=5 ,  ignoreParameters = { MonitorTplGraphVOMeta.PAGE_INDEX , MonitorTplGraphVOMeta.PAGE_SIZE } )
@@ -248,15 +257,17 @@ public class MonitorTplGraphController extends SuperController {
 	*/
 	@ApiOperation(value = "分页查询模版图形")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形内容" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_TYPE , value = "图形类别" , required = false , dataTypeClass=String.class , example = "line"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.CONTENT , value = "图形设置" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.DS , value = "数据来源" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class),
 	})
 	@ApiOperationSupport(order=8)

@@ -25,9 +25,6 @@ layui.define(['echarts', 'util', 'settings', 'admin'],function () {
         beforeInit:function () {
             console.log("list:beforeInit");
 
-
-
-
         },
         /**
          * 表格渲染前调用

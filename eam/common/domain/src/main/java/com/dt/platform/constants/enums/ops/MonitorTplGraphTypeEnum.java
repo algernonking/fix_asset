@@ -13,9 +13,8 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 
 public enum MonitorTplGraphTypeEnum implements CodeTextEnum {
 
-//    PIE("pie" , "PIE"),
+    PIE("pie" , "饼图"),
     LINE("line" , "线条");
-
 
     private String code;
     private String text;
