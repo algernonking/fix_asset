@@ -108,6 +108,8 @@ public class MonitorRelationManager extends RelationManager {
 
         this.property(MonitorTplMeta.TPL_INDICATOR_LIST_PROP)
                 .using(EAMTables.OPS_MONITOR_TPL.CODE).join(EAMTables.OPS_MONITOR_TPL_INDICATOR.MONITOR_TPL_CODE);
+
+
     }
 
     private void monitorNodeSubType() {

@@ -53,7 +53,7 @@ public interface MonitorStatisticalDataServiceProxy {
     /**
      * 查询节点图形数据
      */
-    public static final String QUERY_NODE_COLLECT_DATA_GRAPH_BY_GRAPH = API_PREFIX + "query-node-collect-dat-graph-by-graph";
+    public static final String QUERY_NODE_COLLECT_DATA_GRAPH_BY_GRAPH = API_PREFIX + "query-node-collect-data-graph-by-graph";
 
 
     /**

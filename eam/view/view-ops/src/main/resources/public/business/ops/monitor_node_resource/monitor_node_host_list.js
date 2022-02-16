@@ -75,6 +75,7 @@ function ListPage() {
                     ,{ field: 'dataOsConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态') , templet: function (d) { return templet('dataOsConnected',d.dataOsConnected,d);}  }
                     ,{ field: 'dataOsCpuNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU数量') , templet: function (d) { return templet('dataOsCpuNumber',d.dataOsCpuNumber,d);}  }
                     ,{ field: 'dataOsLoad', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负载') , templet: function (d) { return templet('dataOsLoad',d.dataOsLoad,d);}  }
+                    ,{ field: 'dataOsCpuUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU使用率') , templet: function (d) { return templet('dataOsCpuUsed',d.dataOsCpuUsed,d);}  }
                     ,{ field: 'dataPMemorySize', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存大小(M)') , templet: function (d) { return templet('dataPMemorySize',d.dataPMemorySize,d);}  }
                     ,{ field: 'dataPMemoryUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('物理内存使用率(%)') , templet: function (d) { return templet('dataPMemoryUsed',d.dataPMemoryUsed,d);}  }
                     ,{ field: 'dataOsNetInterfaceFlowUp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('上行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowUp',d.dataOsNetInterfaceFlowUp,d);}  }

@@ -38,24 +38,14 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
-
-                    <div style="height: 50px"></div>
-                    <!-- 主键 , id ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 名称 , name ,typeName=text_input, isHideInSearch=false -->
-                    <!--                    <div class="search-unit">-->
-                    <!--                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('名称')}" class="search-label name-label">名称</span><span class="search-colon">:</span></div>-->
-                    <!--                        <input id="name" class="layui-input search-input" style="width: 150px" type="text" />-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash; 备注 , notes ,typeName=text_input, isHideInSearch=false &ndash;&gt;-->
-                    <!--                    <div class="search-unit">-->
-                    <!--                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('备注')}" class="search-label notes-label">备注</span><span class="search-colon">:</span></div>-->
-                    <!--                        <input id="notes" class="layui-input search-input" style="width: 150px" type="text" />-->
-                    <!--                    </div>-->
-
-
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('搜索时间')}" class="search-label sTime-label">搜索时间</span><span class="search-colon">:</span></div>
+                        <input type="text" id="sTime-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
+                        <span class="search-dash">-</span>
+                        <input type="text" id="sTime-end"  style="width: 150px"  lay-verify="date" th:placeholder="${lang.translate('结束日期')}" autocomplete="off" class="layui-input search-input search-date-input" readonly>
+                    </div>
                 </div>
             </div>
-
 
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
@@ -64,9 +54,9 @@
         </div>
 
         <div style="margin-top: 42px ">
-            <div id="assetStatusPie"  style="height:400px"></div>
-            <table class="layui-table" id="data-table" lay-filter="data-table"></table>
-
+            <div id="chartList"></div>
+<!--            <div id="assetStatusPie"  style="width:100%;height:500px;margin-top:20px;padding-top:20px"></div>-->
+<!--            <table class="layui-table" id="data-table" lay-filter="data-table"></table>-->
         </div>
 
     </div>

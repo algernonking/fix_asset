@@ -201,12 +201,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
             // 处理完毕，返回本批次的处理结果，由 SimpleJoinForkTask 负责合并全部结果，并由 rvs 变量接收
             return rs;
         });
-//
-//        // 处理返回的结果
-//        for (Long i : rvs) {
-//            System.out.println(i);
-//        }
-
         return ErrorDesc.success();
     }
 
@@ -364,7 +358,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 {
                     contentList.add(colContent);
                     colContent=br.readLine();
-
                 }
             }
              catch (IOException e) {

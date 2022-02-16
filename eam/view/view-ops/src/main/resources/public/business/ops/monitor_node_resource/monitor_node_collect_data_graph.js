@@ -12,74 +12,73 @@ function ListPage() {
     const moduleURL="/service-ops/ops-statistics";
     var dataTable=null;
     var sort=null;
+
+    var formatDateTime = function (date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h=h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        var second=date.getSeconds();
+        second=second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute;
+    };
+    var lineOption= {
+        legend: {
+            orient: 'horizontal',
+            show:true,
+            type:'plain',
+            bottom:0,
+            data:[],
+        },
+        grid: {
+            x:80,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderWidth: 1,
+            borderColor: '#ccc'
+        },
+
+        title:{
+            x: 'center',
+            show:true,
+            text:"",
+            textStyle:{
+                fontSize: 15,
+            }
+        },
+        tooltip: {
+            trigger: 'axis',
+            position:pt=>{
+                return [pt[0],'10%']
+            }
+        },
+        xAxis: {
+            type: 'time',
+            // splitNumber: 13,
+            axisLabel: {
+                formatter: function(value, index) {
+                    return formatDateTime(new Date(value));
+                }
+            },
+            boundaryGap: false
+        },
+        yAxis: {
+            type: 'value',
+            splitLine:{ show:true}
+        },
+        series: []
+    };
     /**
      * 入口函数，初始化
      */
     this.init=function(layui) {
         admin = layui.admin,settings = layui.settings,form = layui.form,upload = layui.upload,laydate= layui.laydate;
         table = layui.table,layer = layui.layer,util = layui.util,fox = layui.foxnic,xmSelect = layui.xmSelect,dropdown=layui.dropdown;;
-
         echarts=layui.echarts;
-
-        var assetStatusPie = echarts.init(document.getElementById('assetStatusPie'));
-
-        var optionchart = {
-            title: {
-                text: '资产分类'
-            },
-            tooltip: {},
-            legend: {
-                data: ['数量']
-            },
-            xAxis: {
-                data: ["IT基础设施", "办公用品", "服务器"]
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                name: '数量',
-                type: 'line', //柱状
-                data:[3, 1, 2],
-                label:{
-                    normal:{
-                        show:true,
-                        position:"top",
-                    }
-                },
-                itemStyle: {
-                    normal: { //柱子颜色
-                        color: 'blue'
-                    }
-                },
-            }]
-        };
-
-
-        option = {
-            tooltip : { trigger: "axis",},
-            toolbox : { show :true,
-
-                feature : { dataZoom : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    magicType : {show: true, type: ["line", "bar"]},
-                    restore : {show: true},
-                    saveAsImage : {show: true}}},
-            calculable : true,
-            xAxis: [ { type:"time",
-                axisLabel :{formatter:function (value){return value.toLocaleDateString()+" "+value.getHours(); }}}],
-            yAxis: [ { type: "value", } ],
-            series: [ { name: "2P1电表", type: "line",
-                data: [
-                    [new Date("2014/11/13 22:00:00"),29273],
-                    [new Date("2014/11/13 23:00:00"),29430],
-                    [new Date("2014/11/14 04:00:00"),30154],
-                    [new Date("2014/11/15 07:00:00"),34127]
-                ]
-            }
-            ]
-        };
-        assetStatusPie.setOption(option, true);
 
         if(window.pageExt.list.beforeInit) {
             window.pageExt.list.beforeInit();
@@ -94,6 +93,57 @@ function ListPage() {
         bindButtonEvent();
         //绑定行操作按钮事件
         bindRowOperationEvent();
+
+        searchData();
+    }
+
+    function searchData(){
+        var ps={};
+        ps.nodeId=NODE_ID;
+        ps.sdate="";
+        ps.edate="";
+        ps.day=5;
+        var stime=$("#sTime-begin").val();
+        var etime=$("#sTime-end").val();
+        if(stime!=""&&stime.length==10){
+            ps.sdate=stime+" 00:00";
+        }
+        if(etime!=""&&etime.length==10){
+            ps.edate=etime+" 00:00";
+        }
+        var task=setTimeout(function(){layer.load(2);},1000);
+        admin.post("/service-ops/ops-statistics/query-node-collect-data-graph", ps, function (data) {
+           clearTimeout(task);
+           layer.closeAll('loading');
+            if (data.success) {
+
+                var tplData=data.data.tplData;
+                for(var i=0;i<tplData.length;i++){
+                    var graphData=tplData[i];
+                    for(var j=0;j<graphData.length;j++){
+                        if(j==0){
+                            var html="";
+                            $("#chartList").html(html);
+                        }
+                        var gData=graphData[j];
+                        var graphType=gData.graphInfo.graphType;
+                        if(graphType=="line"){
+                            var gid="graph"+gData.graphInfo.id;
+                            var html="<div id=\""+gid+"\" style=\"width:100%;height:400px;margin-top:20px;padding-top:20px\"></div>";
+                            $("#chartList").append(html);
+                            lineOption.legend.data=gData.legendData;
+                            lineOption.title.text=gData.graphInfo.name;
+                            lineOption.series=gData.seriesData;
+                            var gChart = echarts.init(document.getElementById(gid));
+                            gChart.setOption(lineOption, true);
+                        }
+
+                    }
+                }
+            } else {
+            }
+        });
+
     }
     /**
      * 渲染表格
@@ -176,29 +226,7 @@ function ListPage() {
      * 刷新表格数据
      */
     function refreshTableData(sortField,sortType,reset) {
-        var value = {};
-        value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
-        value.notes={ inputType:"button",value: $("#notes").val() ,fuzzy: true,valuePrefix:"",valueSuffix:""};
-        var ps={searchField:"$composite"};
-        if(window.pageExt.list.beforeQuery){
-            if(!window.pageExt.list.beforeQuery(value,ps,"refresh")) return;
-        }
-        ps.searchValue=JSON.stringify(value);
-        if(sortField) {
-            ps.sortField=sortField;
-            ps.sortType=sortType;
-            sort={ field : sortField,type : sortType} ;
-        } else {
-            if(sort) {
-                ps.sortField=sort.field;
-                ps.sortType=sort.type;
-            }
-        }
-        if(reset) {
-            table.reload('data-table', { where : ps , page:{ curr:1 } });
-        } else {
-            table.reload('data-table', { where : ps });
-        }
+        searchData();
     }
 
 
@@ -213,8 +241,59 @@ function ListPage() {
         return data;
     }
 
+    function getRecentDay(day){
+        var today = new Date();
+        var targetday_milliseconds=today.getTime() + 1000*60*60*24*day;
+        today.setTime(targetday_milliseconds);
+        var tYear = today.getFullYear();
+        var tMonth = today.getMonth();
+        var tDate = today.getDate();
+        tMonth = doHandleMonth(tMonth + 1);
+        tDate = doHandleMonth(tDate);
+        return tYear+"-"+tMonth+"-"+tDate;
+    }
+    function doHandleMonth(month){
+        var m = month;
+        if(month.toString().length == 1){
+            m = "0" + month;
+        }
+        return m;
+    }
+
     function initSearchFields() {
         fox.switchSearchRow(1);
+
+
+        var start=laydate.render({
+            elem: '#sTime-begin',
+            max:0,
+            value:getRecentDay(-1),
+            trigger:"click",
+            done:function(value,date) {
+                if (value && (value > $("#sTime-end").val())) {
+                     $("#end_date").val("");
+                }
+                end.config.min = {
+                    year: date.year,
+                    month: date.month - 1,
+                    date: date.date,
+                };
+            }
+
+        });
+        var end=laydate.render({
+            elem: '#sTime-end',
+            // max:1,
+            value: getRecentDay(1),
+            trigger:"click",
+            done:function(value,date) {
+                start.config.max = {
+                    year: date.year,
+                    month: date.month - 1,
+                    date: date.date,
+                }
+            }
+        });
         fox.renderSearchInputs();
         window.pageExt.list.afterSearchInputReady && window.pageExt.list.afterSearchInputReady();
     }
@@ -229,10 +308,13 @@ function ListPage() {
             refreshTableData(null,null,true);
         });
 
+
         // 搜索按钮点击事件
         $('#search-button').click(function () {
             refreshTableData(null,null,true);
         });
+
+        fox.renderSearchInputs();
 
         // 搜索按钮点击事件
         $('#search-button-advance').click(function () {
