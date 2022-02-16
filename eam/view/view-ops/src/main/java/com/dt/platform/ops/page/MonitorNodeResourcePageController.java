@@ -46,6 +46,14 @@ public class MonitorNodeResourcePageController extends ViewController {
 		return prefix+"/monitor_node_host_list";
 	}
 
+	/**
+	 * 节点数值 功能主页面
+	 */
+	@RequestMapping("/monitor_node_host_tree.html")
+	public String nodeHostTree(Model model,HttpServletRequest request) {
+
+		return prefix+"/monitor_node_host_tree";
+	}
 
 
 	/**
@@ -65,6 +73,8 @@ public class MonitorNodeResourcePageController extends ViewController {
 		model.addAttribute("nodeId",nodeId);
 		return prefix+"/monitor_node_collect_data";
 	}
+
+
 
 	/**
 	 * 节点数据

@@ -26,10 +26,12 @@ import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.expr.Insert;
 import org.github.foxnic.web.framework.dao.DBConfigs;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.SQLSyntaxErrorException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -167,6 +169,35 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         //统计节点个数
         resultData.put("nodeHostList",dao.query(sql).toJSONArrayWithJSONObject());
         return result.success(true).data(resultData);
+    }
+
+    @Override
+    public Result<JSONArray> queryNodeTreeResourceList() {
+
+//        {
+//            "notes": "",
+//                "categoryName": "1编程开发",
+//                "updateBy": "110588348101165911",
+//                "id": "483565479521165313",
+//                "hierarchy": "483565479521165313",
+//                "hierarchyName": "1编程开发",
+//                "updateTime": "2021-09-10 21:39:16",
+//                "categoryCode": "",
+//                "sort": 9999,
+//                "version": 4,
+//                "parentId": "0",
+//                "createBy": "110588348101165911",
+//                "deleted": 0,
+//                "createTime": "2021-08-27 09:16:35"
+//        }, {
+
+            Result<JSONArray> result=new Result<>();
+        JSONArray data=new JSONArray();
+
+
+
+        return result.success(true).data(data);
+
     }
 
     @Override
@@ -341,7 +372,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     if("enable".equals(item.getStatus())){
                         String dsql="";
                         try{
-                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where node_id='"+nodeId+"' and result_status='sucess' and "+route+" is not null";
+                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+route+" is not null";
                             if(sdate.length()==16){
                                 dsql=dsql+" and record_time>str_to_date('"+sdate+"','%Y-%m-%d %H:%i')\n";
                             }
@@ -358,7 +389,9 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                             graphSeries.add(graphSeriesJson);
                             legendData.add(name);
                         }catch(UncategorizedSQLException e){
-                            Logger.info("Sql query error,sql:"+dsql);
+                            Logger.info("Sql query uncategorizedSQLException error,sql:"+dsql);
+                        }catch(DataAccessException e2){
+                            Logger.info("Sql query SQLSyntaxErrorException error,sql:"+dsql);
                         }
                     }
                 }

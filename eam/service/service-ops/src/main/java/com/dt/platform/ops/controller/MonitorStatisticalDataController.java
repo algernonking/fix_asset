@@ -1,6 +1,7 @@
 package com.dt.platform.ops.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.domain.ops.MonitorTplGraph;
 import com.dt.platform.ops.service.IMonitorStatisticalDataService;
@@ -105,6 +106,17 @@ public class MonitorStatisticalDataController {
     public Result<JSONObject> queryNodeCollectData(String graphId,String nodeId,String sdate,String edate,String day) {
         MonitorTplGraph graph =monitorTplGraphService.getById(graphId);
         return monitorStatisticalData.queryNodeCollectDataGraphByGraph(graph,nodeId,sdate,edate,day);
+    }
+
+    /**
+     * 查询节点树形数据
+     */
+    @ApiOperation(value = "查询节点树形数据")
+    @ApiOperationSupport(order=8)
+    @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_TREE_RESOURCE_LIST , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
+    @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_TREE_RESOURCE_LIST)
+    public Result<JSONArray> queryNodeTreeResourceList(String type) {
+        return monitorStatisticalData.queryNodeTreeResourceList();
     }
 
 }

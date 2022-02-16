@@ -116,7 +116,6 @@ function ListPage() {
            clearTimeout(task);
            layer.closeAll('loading');
             if (data.success) {
-
                 var tplData=data.data.tplData;
                 for(var i=0;i<tplData.length;i++){
                     var graphData=tplData[i];
@@ -129,7 +128,7 @@ function ListPage() {
                         var graphType=gData.graphInfo.graphType;
                         if(graphType=="line"){
                             var gid="graph"+gData.graphInfo.id;
-                            var html="<div id=\""+gid+"\" style=\"width:100%;height:400px;margin-top:20px;padding-top:20px\"></div>";
+                            var html="<div id=\""+gid+"\" style=\"width:100%;height:300px;margin-top:20px;padding-top:20px\"></div>";
                             $("#chartList").append(html);
                             lineOption.legend.data=gData.legendData;
                             lineOption.title.text=gData.graphInfo.name;

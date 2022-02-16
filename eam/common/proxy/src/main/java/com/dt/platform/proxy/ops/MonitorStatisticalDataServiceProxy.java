@@ -63,6 +63,13 @@ public interface MonitorStatisticalDataServiceProxy {
 
 
     /**
+     * 查询主机列表
+     */
+    public static final String QUERY_NODE_TREE_RESOURCE_LIST = API_PREFIX + "query-node-tree-resource-list";
+
+
+
+    /**
      * 控制器类名
      * */
     public static final String CONTROLLER_CLASS_NAME="com.dt.platform.ops.controller.MonitorStatisticalDataController";
