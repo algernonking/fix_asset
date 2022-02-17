@@ -14,7 +14,7 @@ import com.github.foxnic.api.constant.CodeTextEnum;
 public enum MonitorIndicatorValueTypeEnum implements CodeTextEnum {
 
     SINGLE("single" , "单行"),
-    MULTIPLE("Multiple" , "多行");
+    MULTIPLE("multiple" , "多行");
 
 
     private String code;

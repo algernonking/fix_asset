@@ -73,6 +73,7 @@ function ListPage() {
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('节点IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('节点名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
                     ,{ field: 'tplName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('模版名称') , templet: function (d) { return templet('tplName',d.tplName,d);}  }
+                    ,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('指标编号') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
                     ,{ field: 'resultMessage', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('报错信息') , templet: function (d) { return templet('resultMessage',d.resultMessage,d);}  }
                     ,{ field: 'recordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('recordTime',d.recordTime,d);}  }
                     ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}

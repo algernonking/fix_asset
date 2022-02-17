@@ -206,7 +206,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
 
     @Override
     public Result clearNodeValueLastHistoryData() {
-
         String sql="delete from ops_monitor_node_value_last where id in (\n" +
                 "select id from (\n" +
                 "select \n" +
@@ -217,7 +216,6 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 ") max_record_time,\n" +
                 "a.*\n" +
                 "from ops_monitor_node_value_last a )end where  end.record_time<end.max_record_time)";
-
         dao.execute(sql);
         return ErrorDesc.success();
     }
@@ -373,12 +371,15 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
 
         //结果数据转换，开始转换列
         String[] valueColumnArr=tplIndicator.getValueColumn().split(NODE_VALUE_COLUMN_COLS_SPLIT);
-
+        Date uidDate=new Date();
         //当单列时
         if(MonitorIndicatorValueColumnColsEnum.SINGLE.code().equals(tplIndicator.getValueColumnCols())){
             for(String itemValue:contentList){
                 Insert ins=createBaseInsert(tplIndicator,node);
                 ins.set(tplIndicator.getValueColumn(),itemValue);
+                if(MonitorIndicatorValueColumnRowsEnum.MULTIPLE.code().equals(tplIndicator.getValueColumnRows())){
+                    ins.set("record_time",uidDate);
+                }
                 insList.add(ins);
             }
         }else if(MonitorIndicatorValueColumnColsEnum.MULTIPLE.code().equals(tplIndicator.getValueColumnCols())){
@@ -387,6 +388,9 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
                 Logger.info("itemValue:"+itemValue);
                 String[] valueColumnItemArr=itemValue.split(NODE_VALUE_COLUMN_COLS_SPLIT);
                 Insert ins=createBaseInsert(tplIndicator,node);
+                if(MonitorIndicatorValueColumnRowsEnum.MULTIPLE.code().equals(tplIndicator.getValueColumnRows())){
+                    ins.set("record_time",uidDate);
+                }
                 //Logger.info("valueColumnItemArr"+valueColumnItemArr);
                 //Logger.info("valueColumnArr"+valueColumnArr);
                 if(valueColumnItemArr.length==valueColumnArr.length){

@@ -1,4 +1,7 @@
 
+delete from ops_monitor_node_value;
+insert into ops_monitor_node_value select * from eam_demo.ops_monitor_node_value;
+
 
 
 

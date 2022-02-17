@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模版图形 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 20:48:53
+ * @since 2022-02-17 15:12:42
 */
 
 @Api(tags = "模版图形")
@@ -68,8 +68,8 @@ public class MonitorTplGraphController extends SuperController {
 	@ApiOperation(value = "添加模版图形")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU使用率"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
@@ -130,8 +130,8 @@ public class MonitorTplGraphController extends SuperController {
 	@ApiOperation(value = "更新模版图形")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU使用率"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
@@ -158,8 +158,8 @@ public class MonitorTplGraphController extends SuperController {
 	@ApiOperation(value = "保存模版图形")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU使用率"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
@@ -229,8 +229,8 @@ public class MonitorTplGraphController extends SuperController {
 	@ApiOperation(value = "查询模版图形")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU使用率"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),
@@ -258,8 +258,8 @@ public class MonitorTplGraphController extends SuperController {
 	@ApiOperation(value = "分页查询模版图形")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class),
-		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
+		@ApiImplicitParam(name = MonitorTplGraphVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "CPU使用率"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.TPL_CODE , value = "模版" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_script"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_WIDTH , value = "宽度" , required = false , dataTypeClass=Integer.class , example = "900"),
 		@ApiImplicitParam(name = MonitorTplGraphVOMeta.GRAPH_HEIGHT , value = "高度" , required = false , dataTypeClass=Integer.class , example = "200"),

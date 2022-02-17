@@ -1,6 +1,8 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.ops.MonitorEnableEnum;
+import com.dt.platform.constants.enums.ops.MonitorStatusEnum;
 import com.dt.platform.domain.ops.MonitorTpl;
 import com.dt.platform.domain.ops.meta.MonitorTplGraphMeta;
 import com.dt.platform.domain.ops.meta.MonitorTplMeta;
@@ -35,6 +37,8 @@ public class MonitorTplGraphItemGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).basic().hidden(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.ID).table().disable(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH_ITEM.CREATE_TIME).table().disable(true);
+
+
 
         cfg.view().formWindow().bottomSpace(120);
         cfg.view().formWindow().width("98%");

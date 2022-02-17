@@ -13,6 +13,8 @@ function ListPage() {
     var dataTable=null;
     var sort=null;
 
+    var nodeId=NODE_ID;
+
     var formatDateTime = function (date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -99,7 +101,7 @@ function ListPage() {
 
     function searchData(){
         var ps={};
-        ps.nodeId=NODE_ID;
+        ps.nodeId=nodeId;
         ps.sdate="";
         ps.edate="";
         ps.day=5;
@@ -124,17 +126,47 @@ function ListPage() {
                             var html="";
                             $("#chartList").html(html);
                         }
+                        var gap="<div class=\"gap\"></div>";
+                        $("#chartList").append(gap);
                         var gData=graphData[j];
                         var graphType=gData.graphInfo.graphType;
-                        if(graphType=="line"){
+                        if(graphType=="line" || graphType=="line_calculation"){
+                            // if(graphType=="line_calculation") {
+                            //     console.log("line_calculation",gData)
+                            // }
                             var gid="graph"+gData.graphInfo.id;
-                            var html="<div id=\""+gid+"\" style=\"width:100%;height:300px;margin-top:20px;padding-top:20px\"></div>";
+                            var html="<div class=\"card\" id=\""+gid+"\" style=\"width:100%;height:300px;margin-top:20px;padding-top:20px\"></div>";
                             $("#chartList").append(html);
                             lineOption.legend.data=gData.legendData;
                             lineOption.title.text=gData.graphInfo.name;
                             lineOption.series=gData.seriesData;
                             var gChart = echarts.init(document.getElementById(gid));
                             gChart.setOption(lineOption, true);
+                        }else if(graphType=="table"){
+                            // console.log("table data:",gData);
+                            var header=gData.tableData.header;
+                            var route=gData.tableData.route;
+                            var tableData=gData.tableData.data;
+                            var title=gData.graphInfo.name;
+                            var html="<div class=\"card_table\">" +
+                                "<div class=\"card_table_title\"> "+title+"</div>" +
+                                "<table class=\"pure-table pure-table-bordered\" id=\"dataCpu\" style=\"width:100%;text-align:left;\">"
+                            html=html+"<tr>";
+                            for(var i=0;i<header.length;i++){
+                                html=html+"<th>"+header[i]+"</th>";
+                            }
+                            html=html+"</tr>";
+                            for(var i=0;i<tableData.length;i++){
+                                var obj=tableData[i];
+                                html=html+"<tr>";
+                                for(var k=0;k<route.length;k++){
+                                     html=html+"<td>"+obj[route[k]]+"</td>";
+                                }
+                                html=html+"</tr>";
+                            }
+                            html=html+"</table></div>";
+                            console.log(html);
+                            $("#chartList").append(html);
                         }
 
                     }
@@ -173,7 +205,7 @@ function ListPage() {
                 elem: '#data-table',
                 toolbar: '#toolbarTemplate',
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
-                url: moduleURL +'/query-node-collect-data?nodeId='+NODE_ID,
+                url: moduleURL +'/query-node-collect-data?nodeId='+nodeId,
                 height: 'full-'+(h+28),
                 limit: 50,
                 page:false,
@@ -423,7 +455,14 @@ function ListPage() {
         admin.putTempData('eam-report-form-data-popup-index', index);
     };
 
+    function showNodeData(node){
+        nodeId=node;
+        searchData();
+    }
+
+    window.showNodeData=showNodeData;
     window.module={
+        showNodeData:showNodeData,
         refreshTableData: refreshTableData,
         getCheckedList: getCheckedList
     };

@@ -15,7 +15,7 @@ public enum MonitorListValueTypeEnum implements CodeTextEnum {
 
     OS_FS("os_fs" , "文件系统"),
     NET_INTERFACE("net_interface" , "网络接口"),
-    DB_TABLESPACES("db_tablespaces" , "数据库表空间")
+    DB_TABLESPACE("db_tablespace" , "数据库表空间")
     ;
 
     private String code;

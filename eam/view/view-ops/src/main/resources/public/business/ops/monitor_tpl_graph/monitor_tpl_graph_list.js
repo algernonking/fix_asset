@@ -1,7 +1,7 @@
 /**
  * 模版图形 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 20:48:54
+ * @since 2022-02-17 15:12:43
  */
 
 
@@ -74,12 +74,12 @@ function ListPage() {
 				cols: [[
 					{ fixed: 'left',type: 'numbers' },
 					{ fixed: 'left',type:'checkbox'}
-					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态') , templet: function (d) { return templet('status',d.status,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'tplCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图形模版'), templet: function (d) { return templet('tplCode' ,fox.joinLabel(d.tpl,"name"),d);}}
 					,{ field: 'graphWidth', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('宽度') , templet: function (d) { return templet('graphWidth',d.graphWidth,d);}  }
 					,{ field: 'graphHeight', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('高度') , templet: function (d) { return templet('graphHeight',d.graphHeight,d);}  }
-					,{ field: 'graphType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图形类别') , templet: function (d) { return templet('graphType',d.graphType,d);}  }
+					,{ field: 'graphType', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图形类别'), templet:function (d){ return templet('graphType',fox.getEnumText(RADIO_GRAPHTYPE_DATA,d.graphType),d);}}
 					,{ field: 'content', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('图形设置') , templet: function (d) { return templet('content',d.content,d);}  }
 					,{ field: 'ds', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('数据来源') , templet: function (d) { return templet('ds',d.ds,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
@@ -123,12 +123,12 @@ function ListPage() {
 		function getSelectedValue(id,prop) { var xm=xmSelect.get(id,true); return xm==null ? null : xm.getValue(prop);}
 		var value = {};
 		value.id={ inputType:"button",value: $("#id").val()};
-		value.status={ inputType:"button",value: $("#status").val()};
+		value.status={ inputType:"radio_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.tplCode={ inputType:"select_box", value: $("#tplCode").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" ,fillBy:["tpl"] };
 		value.graphWidth={ inputType:"number_input", value: $("#graphWidth").val() };
 		value.graphHeight={ inputType:"number_input", value: $("#graphHeight").val() };
-		value.graphType={ inputType:"button",value: $("#graphType").val()};
+		value.graphType={ inputType:"radio_box", value: getSelectedValue("#graphType","value"), label:getSelectedValue("#graphType","nameStr") };
 		value.content={ inputType:"button",value: $("#content").val()};
 		value.ds={ inputType:"button",value: $("#ds").val()};
 		value.label={ inputType:"button",value: $("#label").val()};

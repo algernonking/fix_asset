@@ -1,5 +1,6 @@
 package com.dt.platform.ops.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dt.platform.constants.enums.ops.MonitorTopDataEnum;
@@ -16,6 +17,7 @@ import com.dt.platform.ops.service.IMonitorStatisticalDataService;
 import com.dt.platform.ops.service.IMonitorTplGraphService;
 import com.dt.platform.ops.service.IMonitorTplService;
 import com.github.foxnic.api.transter.Result;
+import com.github.foxnic.commons.bean.BeanNameUtil;
 import com.github.foxnic.commons.bean.BeanUtil;
 import com.github.foxnic.commons.concurrent.SimpleJoinForkTask;
 import com.github.foxnic.commons.log.Logger;
@@ -174,30 +176,31 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     @Override
     public Result<JSONArray> queryNodeTreeResourceList() {
 
-//        {
-//            "notes": "",
-//                "categoryName": "1编程开发",
-//                "updateBy": "110588348101165911",
-//                "id": "483565479521165313",
-//                "hierarchy": "483565479521165313",
-//                "hierarchyName": "1编程开发",
-//                "updateTime": "2021-09-10 21:39:16",
-//                "categoryCode": "",
-//                "sort": 9999,
-//                "version": 4,
-//                "parentId": "0",
-//                "createBy": "110588348101165911",
-//                "deleted": 0,
-//                "createTime": "2021-08-27 09:16:35"
-//        }, {
-
-            Result<JSONArray> result=new Result<>();
-        JSONArray data=new JSONArray();
-
-
-
+         String sql="select * from ops_monitor_node_group where deleted=0 and id in (select distinct group_id from ops_monitor_node a where a.node_enabled='enable' and a.deleted=0)";
+         Result<JSONArray> result=new Result<>();
+         JSONArray data=new JSONArray();
+         RcdSet rs=dao.query(sql);
+         for(Rcd r:rs){
+             JSONObject obj=new JSONObject();
+             obj.put("parentId","0");
+             obj.put("id",r.getString("id"));
+             obj.put("ip","");
+             obj.put("name",r.getString("name"));
+             obj.put("type","group");
+             data.add(obj);
+             String nodeSql="select id,node_ip,node_name_show name from ops_monitor_node a where a.node_enabled='enable' and a.deleted=0 and group_id=?";
+             RcdSet nodeRs=dao.query(nodeSql,r.getString("id"));
+             for(Rcd noder:nodeRs){
+                 JSONObject nodeObj=new JSONObject();
+                 nodeObj.put("parentId",r.getString("id"));
+                 nodeObj.put("id",noder.getString("id"));
+                 nodeObj.put("ip",noder.getString("ip"));
+                 nodeObj.put("name",noder.getString("name"));
+                 nodeObj.put("type","node");
+                 data.add(nodeObj);
+             }
+         }
         return result.success(true).data(data);
-
     }
 
     @Override
@@ -356,6 +359,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         JSONArray graphSeries=new JSONArray();
         JSONArray graphPidData=new JSONArray();
         JSONArray legendData=new JSONArray();
+        JSONObject tableData=new JSONObject();
         resultData.put("graphInfo",BeanUtil.toJSONObject(graph));
         if(MonitorTplGraphTypeEnum.PIE.code().equals(graph.getGraphType())){
             //饼图
@@ -363,6 +367,110 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
             if(ds!=null&&ds.length()>0){
                 graphPidData=dao.query(ds).toJSONArrayWithJSONObject();
             }
+        }else if(MonitorTplGraphTypeEnum.LINE_CALCULATION.code().equals(graph.getGraphType())){
+            if(graph.getGraphItem()!=null&&graph.getGraphItem().size()>0) {
+                for (MonitorTplGraphItem item : graph.getGraphItem()) {
+                    String name=item.getName();
+                    tableData.put("name",name);
+                    String route=item.getRoute();
+                    if(!"enable".equals(item.getStatus())){
+                        continue;
+                    }
+                    String[] routeArr=route.split(",");
+                    if(routeArr.length<2){
+                        continue;
+                    }
+                    String colDef=routeArr[0];
+                    String colValue=routeArr[1];
+                    String colSql="select distinct "+colDef+" colname from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"'\n" +
+                            "and result_status='sucess' and node_id=?\n" +
+                            "and record_time=(select max(record_time) from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
+                    RcdSet colRs=null;
+                    try {
+                        colRs = dao.query(colSql, nodeId, nodeId);
+                    }catch(UncategorizedSQLException e){
+                        Logger.info("Sql query uncategorizedSQLException error,sql:"+colSql);
+                    }catch(DataAccessException e2){
+                        Logger.info("Sql query SQLSyntaxErrorException error,sql:"+colSql);
+                    }
+
+                    if(colRs==null||colRs.size()==0){
+                        continue;
+                    }
+                    for(Rcd r:colRs){
+                        String colName=r.getString("colname");
+                        legendData.add(colName);
+                        String dsql="";
+                        try{
+                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+colValue+" from ops_monitor_node_value where "+colDef+"='"+colName+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+colValue+" is not null";
+                            if(sdate.length()==16){
+                                dsql=dsql+" and record_time>str_to_date('"+sdate+"','%Y-%m-%d %H:%i')\n";
+                            }
+                            if(edate.length()==16){
+                                dsql=dsql+" and record_time<str_to_date('"+edate+"','%Y-%m-%d %H:%i')\n";
+                            }
+                            dsql=dsql+" order by record_time";
+                            JSONArray dArr=dao.query(dsql).toJSONArrayWithJSONArray();
+                            JSONObject graphSeriesJson=new JSONObject();
+                            graphSeriesJson.put("name",colName);
+                            graphSeriesJson.put("symbol","none");
+                            graphSeriesJson.put("type",MonitorTplGraphTypeEnum.LINE.code());
+                            graphSeriesJson.put("data",dArr);
+                            graphSeries.add(graphSeriesJson);
+                        }catch(UncategorizedSQLException e){
+                            Logger.info("Sql query uncategorizedSQLException error,sql:"+dsql);
+                        }catch(DataAccessException e2){
+                            Logger.info("Sql query SQLSyntaxErrorException error,sql:"+dsql);
+                        }
+                    }
+                }
+            }
+
+        }else if(MonitorTplGraphTypeEnum.TABLE.code().equals(graph.getGraphType())){
+            if(graph.getGraphItem()!=null&&graph.getGraphItem().size()>0){
+                for(MonitorTplGraphItem item:graph.getGraphItem()){
+                    String name=item.getName();
+                    String route=item.getRoute();
+                    tableData.put("name",name);
+                    if(!"enable".equals(item.getStatus())){
+                        continue;
+                    }
+                    String tabMetaSql="select value_column_name from ops_monitor_tpl_indicator where deleted=0 and code=? and monitor_tpl_code=? limit 1";
+                    Rcd tabMetaRs=dao.queryRecord(tabMetaSql,item.getIndicatorCode(),graph.getTplCode());
+                    if(tabMetaRs==null){
+                        continue;
+                    }
+                    String header=tabMetaRs.getString("value_column_name");
+                    String[] headerArr=header.split(",");
+                    String[] routeArr=route.split(",");
+                    if( !(headerArr.length==routeArr.length&&headerArr.length>0) ){
+                        continue;
+                    }
+                    JSONArray headerArray=new JSONArray();
+                    JSONArray routeArray=new JSONArray();
+                    for(int i=0;i<headerArr.length;i++){
+                        headerArray.add(headerArr[i]);
+                        routeArray.add(this.lineToHump(routeArr[i]));
+                    }
+                    headerArray.add("记录时间");
+                    routeArray.add("recordTime");
+                    tableData.put("header",headerArray);
+                    tableData.put("route",routeArray);
+                    String tabSql="";
+                    try{
+                        tabSql="select "+route+",record_time from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' \n" +
+                                "and result_status='sucess' and node_id=?\n" +
+                                "and record_time=(select max(record_time) from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
+                        RcdSet tabRs=dao.query(tabSql,nodeId,nodeId);
+                        tableData.put("data",tabRs.toJSONArrayWithJSONObject());
+                    }catch(UncategorizedSQLException e){
+                        Logger.info("Sql query uncategorizedSQLException error,sql:"+tabSql);
+                    }catch(DataAccessException e2){
+                        Logger.info("Sql query SQLSyntaxErrorException error,sql:"+tabSql);
+                    }
+                }
+            }
+
         }else if(MonitorTplGraphTypeEnum.LINE.code().equals(graph.getGraphType())){
             //线形图
             if(graph.getGraphItem()!=null&&graph.getGraphItem().size()>0){
@@ -402,6 +510,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         resultData.put("seriesData",graphSeries);
         resultData.put("legendData",legendData);
         resultData.put("graphPidData",graphPidData);
+        resultData.put("tableData",tableData);
         return result.success(true).data(resultData);
     }
 
