@@ -7,8 +7,6 @@ public enum OpsISDataExportColumnEnum implements CodeTextEnum {
 
     IS_ID("id","id" ),
     BELONG_ORG_NAME("belongOrgName","belong_org_id" ),
-
-
     STATUS_NAME("statusName","status" ),
     GRADE_NAME("gradeName","grade" ),
     OPS_METHOD_NAME("opsMethodName","ops_method" ),

@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-15 12:27:12
+ * @since 2022-02-20 14:45:57
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -8470,6 +8470,11 @@ public class EAMTables {
 		public static final DBField AGENT_PORT = new DBField(DBDataType.INTEGER , "agent_port","agentPort","Agent端口","Agent端口",false,false,true);
 		
 		/**
+		 * Zabbix代理端口
+		*/
+		public static final DBField ZABBIX_AGENG_PORT = new DBField(DBDataType.INTEGER , "zabbix_ageng_port","zabbixAgengPort","Zabbix代理端口","Zabbix代理端口",false,false,true);
+		
+		/**
 		 * Snmp端口
 		*/
 		public static final DBField SNMP_PORT = new DBField(DBDataType.INTEGER , "snmp_port","snmpPort","Snmp端口","Snmp端口",false,false,true);
@@ -8545,7 +8550,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE() {
-			this.init($NAME,"节点" , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点" , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , ZABBIX_AGENG_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE $TABLE=new OPS_MONITOR_NODE();
 	}
@@ -9511,22 +9516,22 @@ public class EAMTables {
 		/**
 		 * 物理内存(M)
 		*/
-		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
+		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.LONG , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
 		
 		/**
 		 * 虚拟内存(M)
 		*/
-		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
+		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.LONG , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
 		
 		/**
 		 * 物理内存使用率
 		*/
-		public static final DBField P_MEMORY_USED = new DBField(DBDataType.INTEGER , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.LONG , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
 		
 		/**
 		 * 虚拟内存使用率
 		*/
-		public static final DBField V_MEMORY_USED = new DBField(DBDataType.INTEGER , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.LONG , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
 		
 		/**
 		 * 信息
@@ -9596,17 +9601,17 @@ public class EAMTables {
 		/**
 		 * 整数1
 		*/
-		public static final DBField VALUE_INT1 = new DBField(DBDataType.INTEGER , "value_int1","valueInt1","整数1","整数1",false,false,true);
+		public static final DBField VALUE_INT1 = new DBField(DBDataType.LONG , "value_int1","valueInt1","整数1","整数1",false,false,true);
 		
 		/**
 		 * 整数2
 		*/
-		public static final DBField VALUE_INT2 = new DBField(DBDataType.INTEGER , "value_int2","valueInt2","整数2","整数2",false,false,true);
+		public static final DBField VALUE_INT2 = new DBField(DBDataType.LONG , "value_int2","valueInt2","整数2","整数2",false,false,true);
 		
 		/**
 		 * 整数3
 		*/
-		public static final DBField VALUE_INT3 = new DBField(DBDataType.INTEGER , "value_int3","valueInt3","整数3","整数3",false,false,true);
+		public static final DBField VALUE_INT3 = new DBField(DBDataType.LONG , "value_int3","valueInt3","整数3","整数3",false,false,true);
 		
 		/**
 		 * 标签列1
@@ -9671,17 +9676,17 @@ public class EAMTables {
 		/**
 		 * 整数列1
 		*/
-		public static final DBField LIST_VALUE_INT1 = new DBField(DBDataType.STRING , "list_value_int1","listValueInt1","整数列1","整数列1",false,false,true);
+		public static final DBField LIST_VALUE_INT1 = new DBField(DBDataType.LONG , "list_value_int1","listValueInt1","整数列1","整数列1",false,false,true);
 		
 		/**
 		 * 整数列2
 		*/
-		public static final DBField LIST_VALUE_INT2 = new DBField(DBDataType.STRING , "list_value_int2","listValueInt2","整数列2","整数列2",false,false,true);
+		public static final DBField LIST_VALUE_INT2 = new DBField(DBDataType.LONG , "list_value_int2","listValueInt2","整数列2","整数列2",false,false,true);
 		
 		/**
 		 * 整数列3
 		*/
-		public static final DBField LIST_VALUE_INT3 = new DBField(DBDataType.STRING , "list_value_int3","listValueInt3","整数列3","整数列3",false,false,true);
+		public static final DBField LIST_VALUE_INT3 = new DBField(DBDataType.LONG , "list_value_int3","listValueInt3","整数列3","整数列3",false,false,true);
 		
 		/**
 		 * 唯一标识
@@ -9877,22 +9882,22 @@ public class EAMTables {
 		/**
 		 * 物理内存(M)
 		*/
-		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
+		public static final DBField P_MEMORY_SIZE = new DBField(DBDataType.LONG , "p_memory_size","pMemorySize","物理内存(M)","物理内存(M)",false,false,true);
 		
 		/**
 		 * 虚拟内存(M)
 		*/
-		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.INTEGER , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
+		public static final DBField V_MEMORY_SIZE = new DBField(DBDataType.LONG , "v_memory_size","vMemorySize","虚拟内存(M)","虚拟内存(M)",false,false,true);
 		
 		/**
 		 * 物理内存使用率
 		*/
-		public static final DBField P_MEMORY_USED = new DBField(DBDataType.INTEGER , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.LONG , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
 		
 		/**
 		 * 虚拟内存使用率
 		*/
-		public static final DBField V_MEMORY_USED = new DBField(DBDataType.INTEGER , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.LONG , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
 		
 		/**
 		 * 信息
@@ -9962,17 +9967,17 @@ public class EAMTables {
 		/**
 		 * 整数1
 		*/
-		public static final DBField VALUE_INT1 = new DBField(DBDataType.INTEGER , "value_int1","valueInt1","整数1","整数1",false,false,true);
+		public static final DBField VALUE_INT1 = new DBField(DBDataType.LONG , "value_int1","valueInt1","整数1","整数1",false,false,true);
 		
 		/**
 		 * 整数2
 		*/
-		public static final DBField VALUE_INT2 = new DBField(DBDataType.INTEGER , "value_int2","valueInt2","整数2","整数2",false,false,true);
+		public static final DBField VALUE_INT2 = new DBField(DBDataType.LONG , "value_int2","valueInt2","整数2","整数2",false,false,true);
 		
 		/**
 		 * 整数3
 		*/
-		public static final DBField VALUE_INT3 = new DBField(DBDataType.INTEGER , "value_int3","valueInt3","整数3","整数3",false,false,true);
+		public static final DBField VALUE_INT3 = new DBField(DBDataType.LONG , "value_int3","valueInt3","整数3","整数3",false,false,true);
 		
 		/**
 		 * 标签列1
@@ -10037,17 +10042,17 @@ public class EAMTables {
 		/**
 		 * 整数列1
 		*/
-		public static final DBField LIST_VALUE_INT1 = new DBField(DBDataType.STRING , "list_value_int1","listValueInt1","整数列1","整数列1",false,false,true);
+		public static final DBField LIST_VALUE_INT1 = new DBField(DBDataType.LONG , "list_value_int1","listValueInt1","整数列1","整数列1",false,false,true);
 		
 		/**
 		 * 整数列2
 		*/
-		public static final DBField LIST_VALUE_INT2 = new DBField(DBDataType.STRING , "list_value_int2","listValueInt2","整数列2","整数列2",false,false,true);
+		public static final DBField LIST_VALUE_INT2 = new DBField(DBDataType.LONG , "list_value_int2","listValueInt2","整数列2","整数列2",false,false,true);
 		
 		/**
 		 * 整数列3
 		*/
-		public static final DBField LIST_VALUE_INT3 = new DBField(DBDataType.STRING , "list_value_int3","listValueInt3","整数列3","整数列3",false,false,true);
+		public static final DBField LIST_VALUE_INT3 = new DBField(DBDataType.LONG , "list_value_int3","listValueInt3","整数列3","整数列3",false,false,true);
 		
 		/**
 		 * 唯一标识
@@ -10489,8 +10494,14 @@ public class EAMTables {
 		public static final DBField COMMAND = new DBField(DBDataType.STRING , "command","command","命令","命令",false,false,true);
 		
 		/**
+		 * 命令值
 		*/
-		public static final DBField COMMAND_VALUE = new DBField(DBDataType.STRING , "command_value","commandValue","command_value","command_value",false,false,true);
+		public static final DBField COMMAND_VALUE = new DBField(DBDataType.STRING , "command_value","commandValue","命令值","命令值",false,false,true);
+		
+		/**
+		 * 变量
+		*/
+		public static final DBField INDICATOR_VARIABLE = new DBField(DBDataType.STRING , "indicator_variable","indicatorVariable","变量","变量",false,false,true);
 		
 		/**
 		 * snmp元数据
@@ -10553,7 +10564,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_TPL_INDICATOR() {
-			this.init($NAME,"模版指标" , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , SNMP_OID , LABEL , ITEM_SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"模版指标" , ID , STATUS , NAME , CODE , MONITOR_TPL_CODE , MONITOR_METHOD , INDICATOR_TYPE , VALUE_COLUMN_ROWS , VALUE_COLUMN_COLS , VALUE_COLUMN_TYPE , VALUE_COLUMN , VALUE_COLUMN_MAP , VALUE_COLUMN_NAME , TIME_OUT , INTERVAL_TIME , DATA_KEEP_DAY , COMMAND , COMMAND_VALUE , INDICATOR_VARIABLE , SNMP_OID , LABEL , ITEM_SORT , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_TPL_INDICATOR $TABLE=new OPS_MONITOR_TPL_INDICATOR();
 	}

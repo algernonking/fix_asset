@@ -16,8 +16,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 模版指标
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:28
- * @sign C096BF83A8A595B5B5E139AD6B9C22DC
+ * @since 2022-02-20 12:42:51
+ * @sign B77DCC56FC19491081164BDC55DF7BB9
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -136,6 +136,12 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="command_value" , notes = "command_value")
 	private String commandValue;
+	
+	/**
+	 * 变量：变量
+	*/
+	@ApiModelProperty(required = false,value="变量" , notes = "变量")
+	private String indicatorVariable;
 	
 	/**
 	 * snmp元数据：snmp元数据
@@ -560,6 +566,25 @@ public class MonitorTplIndicator extends Entity {
 	*/
 	public MonitorTplIndicator setCommandValue(String commandValue) {
 		this.commandValue=commandValue;
+		return this;
+	}
+	
+	/**
+	 * 获得 变量<br>
+	 * 变量
+	 * @return 变量
+	*/
+	public String getIndicatorVariable() {
+		return indicatorVariable;
+	}
+	
+	/**
+	 * 设置 变量
+	 * @param indicatorVariable 变量
+	 * @return 当前对象
+	*/
+	public MonitorTplIndicator setIndicatorVariable(String indicatorVariable) {
+		this.indicatorVariable=indicatorVariable;
 		return this;
 	}
 	

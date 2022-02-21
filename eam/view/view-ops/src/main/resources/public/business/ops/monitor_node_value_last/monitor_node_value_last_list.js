@@ -1,7 +1,7 @@
 /**
  * 节点数值最新 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-15 12:29:39
+ * @since 2022-02-20 14:46:46
  */
 
 
@@ -129,9 +129,9 @@ function ListPage() {
 					,{ field: 'listValueStr1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列1') , templet: function (d) { return templet('listValueStr1',d.listValueStr1,d);}  }
 					,{ field: 'listValueStr2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列2') , templet: function (d) { return templet('listValueStr2',d.listValueStr2,d);}  }
 					,{ field: 'listValueStr3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列3') , templet: function (d) { return templet('listValueStr3',d.listValueStr3,d);}  }
-					,{ field: 'listValueInt1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列1') , templet: function (d) { return templet('listValueInt1',d.listValueInt1,d);}  }
-					,{ field: 'listValueInt2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列2') , templet: function (d) { return templet('listValueInt2',d.listValueInt2,d);}  }
-					,{ field: 'listValueInt3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列3') , templet: function (d) { return templet('listValueInt3',d.listValueInt3,d);}  }
+					,{ field: 'listValueInt1', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列1') , templet: function (d) { return templet('listValueInt1',d.listValueInt1,d);}  }
+					,{ field: 'listValueInt2', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列2') , templet: function (d) { return templet('listValueInt2',d.listValueInt2,d);}  }
+					,{ field: 'listValueInt3', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列3') , templet: function (d) { return templet('listValueInt3',d.listValueInt3,d);}  }
 					,{ field: 'uid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('唯一标识') , templet: function (d) { return templet('uid',d.uid,d);}  }
 					,{ field: 'isConnected', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('是否连接') , templet: function (d) { return templet('isConnected',d.isConnected,d);}  }
 					,{ field: 'recordTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('记录时间') ,templet: function (d) { return templet('recordTime',fox.dateFormat(d.recordTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
@@ -197,10 +197,10 @@ function ListPage() {
 		value.networkFlowUp={ inputType:"number_input", value: $("#networkFlowUp").val() };
 		value.networkFlowDown={ inputType:"number_input", value: $("#networkFlowDown").val() };
 		value.processCnt={ inputType:"number_input", value: $("#processCnt").val() };
-		value.pMemorySize={ inputType:"number_input", value: $("#pMemorySize").val() };
-		value.vMemorySize={ inputType:"number_input", value: $("#vMemorySize").val() };
-		value.pMemoryUsed={ inputType:"number_input", value: $("#pMemoryUsed").val() };
-		value.vMemoryUsed={ inputType:"number_input", value: $("#vMemoryUsed").val() };
+		value.pMemorySize={ inputType:"button",value: $("#pMemorySize").val()};
+		value.vMemorySize={ inputType:"button",value: $("#vMemorySize").val()};
+		value.pMemoryUsed={ inputType:"button",value: $("#pMemoryUsed").val()};
+		value.vMemoryUsed={ inputType:"button",value: $("#vMemoryUsed").val()};
 		value.info={ inputType:"button",value: $("#info").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.label1={ inputType:"button",value: $("#label1").val()};
 		value.label2={ inputType:"button",value: $("#label2").val()};
@@ -214,9 +214,9 @@ function ListPage() {
 		value.valueStr1={ inputType:"button",value: $("#valueStr1").val()};
 		value.valueStr2={ inputType:"button",value: $("#valueStr2").val()};
 		value.valueStr3={ inputType:"button",value: $("#valueStr3").val()};
-		value.valueInt1={ inputType:"number_input", value: $("#valueInt1").val() };
-		value.valueInt2={ inputType:"number_input", value: $("#valueInt2").val() };
-		value.valueInt3={ inputType:"number_input", value: $("#valueInt3").val() };
+		value.valueInt1={ inputType:"button",value: $("#valueInt1").val()};
+		value.valueInt2={ inputType:"button",value: $("#valueInt2").val()};
+		value.valueInt3={ inputType:"button",value: $("#valueInt3").val()};
 		value.listLabel1={ inputType:"button",value: $("#listLabel1").val()};
 		value.listLabel2={ inputType:"button",value: $("#listLabel2").val()};
 		value.listLabel3={ inputType:"button",value: $("#listLabel3").val()};

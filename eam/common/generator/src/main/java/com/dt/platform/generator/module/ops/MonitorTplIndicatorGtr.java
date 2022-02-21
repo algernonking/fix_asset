@@ -151,6 +151,7 @@ public class MonitorTplIndicatorGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup("其他信息",
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.COMMAND,
+                        EAMTables.OPS_MONITOR_TPL_INDICATOR.INDICATOR_VARIABLE,
                         EAMTables.OPS_MONITOR_TPL_INDICATOR.NOTES
                 }
         );

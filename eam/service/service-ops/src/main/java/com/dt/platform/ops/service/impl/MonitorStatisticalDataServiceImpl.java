@@ -1,5 +1,6 @@
 package com.dt.platform.ops.service.impl;
 
+import com.alibaba.csp.sentinel.util.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -81,10 +82,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "from ops_monitor_node_value_last t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value_last group by node_id,indicator_code)\n" +
-                "and result_status='sucess' and t.indicator_code='os.connected' and t.node_id=end.id limit 1\n" +
-                ") data_os_connected, \n"+
+                "and result_status='sucess' and t.indicator_code='system.connected' and t.node_id=end.id limit 1\n" +
+                ") data_system_connected, \n"+
 
-                "(select cpu_used\n" +
+                "(select 100-cpu_idle\n" +
                 "from ops_monitor_node_value_last t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value_last group by node_id,indicator_code)\n" +
@@ -173,6 +174,9 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         return result.success(true).data(resultData);
     }
 
+
+
+
     @Override
     public Result<JSONArray> queryNodeTreeResourceList() {
 
@@ -188,15 +192,16 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
              obj.put("name",r.getString("name"));
              obj.put("type","group");
              data.add(obj);
-             String nodeSql="select id,node_ip,node_name_show name from ops_monitor_node a where a.node_enabled='enable' and a.deleted=0 and group_id=?";
+             String nodeSql="select id,node_ip,node_name_show name,a.type show_type from ops_monitor_node a where a.node_enabled='enable' and a.deleted=0 and group_id=?";
              RcdSet nodeRs=dao.query(nodeSql,r.getString("id"));
              for(Rcd noder:nodeRs){
                  JSONObject nodeObj=new JSONObject();
                  nodeObj.put("parentId",r.getString("id"));
                  nodeObj.put("id",noder.getString("id"));
-                 nodeObj.put("ip",noder.getString("ip"));
-                 nodeObj.put("name",noder.getString("name"));
+                 nodeObj.put("ip",noder.getString("node_ip"));
+                 nodeObj.put("name",noder.getString("name")+"["+noder.getString("node_ip")+"]");
                  nodeObj.put("type","node");
+                 nodeObj.put("showType",noder.getString("show_type"));
                  data.add(nodeObj);
              }
          }
@@ -291,7 +296,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     }
 
     @Override
-    public Result<JSONObject> queryNodeCollectDataGraph(String nodeId,String sdate,String edate,String day) {
+    public Result<JSONObject> queryNodeCollectDataGraph(String nodeId,String tplCode,String sdate,String edate,String day) {
         Result<JSONObject> result=new Result<>();
         JSONObject resultData=new JSONObject();
         MonitorNode monitorNode=monitorNodeService.getById(nodeId);
@@ -303,9 +308,20 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         JSONArray tplData=new JSONArray();
         if(monitorNode.getMonitorTplList()!=null&&monitorNode.getMonitorTplList().size()>0){
             for(MonitorTpl tpl:monitorNode.getMonitorTplList()){
-                Result<JSONArray> r=queryNodeCollectDataTpl(tpl,nodeId,sdate,edate,day);
-                if(r.isSuccess()){
-                    tplData.add(r.getData());
+                Boolean match=false;
+                //tplCode 存在值,并且匹配
+                if(StringUtil.isBlank(tplCode)) {
+                    match=true;
+                }else{
+                    if(tpl.getCode().equals(tplCode)){
+                        match=true;
+                    }
+                }
+                if(match){
+                    Result<JSONArray> r=queryNodeCollectDataTpl(tpl,nodeId,sdate,edate,day);
+                    if(r.isSuccess()){
+                        tplData.add(r.getData());
+                    }
                 }
             }
             resultData.put("tplData",tplData);
@@ -322,7 +338,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 .with(MonitorTplMeta.GRAPH_LIST)
                 .execute();
         if(tpl.getGraphList()!=null&&tpl.getGraphList().size()>0){
-            SimpleJoinForkTask<MonitorTplGraph,JSONObject> task=new SimpleJoinForkTask<>(tpl.getGraphList(),1);
+            SimpleJoinForkTask<MonitorTplGraph,JSONObject> task=new SimpleJoinForkTask<>(tpl.getGraphList(),2);
             List<JSONObject> rvs=task.execute(els->{
                 // 打印当前线程信息
                 System.out.println("Thread name:"+Thread.currentThread().getName());
@@ -346,6 +362,9 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         return result.success(true).data(resultData);
     }
 
+
+
+
     @Override
     public Result<JSONObject> queryNodeCollectDataGraphByGraph(MonitorTplGraph graph,String nodeId,String sdate,String edate,String day) {
         Logger.info("graphName:"+graph.getName()+",nodeId:"+nodeId);
@@ -354,6 +373,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         monitorTplGraphService.dao().fill(graph)
                 .with(MonitorTplGraphMeta.GRAPH_ITEM)
                 .execute();
+        String tplCode=graph.getTplCode();
         JSONArray graphCols=new JSONArray();
         JSONArray graphData=new JSONArray();
         JSONArray graphSeries=new JSONArray();
@@ -368,6 +388,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 graphPidData=dao.query(ds).toJSONArrayWithJSONObject();
             }
         }else if(MonitorTplGraphTypeEnum.LINE_CALCULATION.code().equals(graph.getGraphType())){
+
             if(graph.getGraphItem()!=null&&graph.getGraphItem().size()>0) {
                 for (MonitorTplGraphItem item : graph.getGraphItem()) {
                     String name=item.getName();
@@ -382,15 +403,17 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     }
                     String colDef=routeArr[0];
                     String colValue=routeArr[1];
-                    String colSql="select distinct "+colDef+" colname from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"'\n" +
+                    String colSql="select distinct "+colDef+" colname from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"'\n" +
                             "and result_status='sucess' and node_id=?\n" +
-                            "and record_time=(select max(record_time) from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
+                            "and record_time=(select max(record_time) from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
                     RcdSet colRs=null;
                     try {
                         colRs = dao.query(colSql, nodeId, nodeId);
                     }catch(UncategorizedSQLException e){
+                        e.printStackTrace();
                         Logger.info("Sql query uncategorizedSQLException error,sql:"+colSql);
                     }catch(DataAccessException e2){
+                        e2.printStackTrace();
                         Logger.info("Sql query SQLSyntaxErrorException error,sql:"+colSql);
                     }
 
@@ -402,7 +425,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                         legendData.add(colName);
                         String dsql="";
                         try{
-                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+colValue+" from ops_monitor_node_value where "+colDef+"='"+colName+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+colValue+" is not null";
+                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+colValue+" from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and  "+colDef+"='"+colName+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+colValue+" is not null";
                             if(sdate.length()==16){
                                 dsql=dsql+" and record_time>str_to_date('"+sdate+"','%Y-%m-%d %H:%i')\n";
                             }
@@ -418,8 +441,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                             graphSeriesJson.put("data",dArr);
                             graphSeries.add(graphSeriesJson);
                         }catch(UncategorizedSQLException e){
+                            e.printStackTrace();
                             Logger.info("Sql query uncategorizedSQLException error,sql:"+dsql);
                         }catch(DataAccessException e2){
+                            e2.printStackTrace();
                             Logger.info("Sql query SQLSyntaxErrorException error,sql:"+dsql);
                         }
                     }
@@ -444,6 +469,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     String[] headerArr=header.split(",");
                     String[] routeArr=route.split(",");
                     if( !(headerArr.length==routeArr.length&&headerArr.length>0) ){
+                        tableData.put("header",new JSONArray());
+                        tableData.put("route",new JSONArray());
                         continue;
                     }
                     JSONArray headerArray=new JSONArray();
@@ -458,14 +485,19 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     tableData.put("route",routeArray);
                     String tabSql="";
                     try{
-                        tabSql="select "+route+",record_time from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' \n" +
+                        tabSql="select "+route+",record_time from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' \n" +
                                 "and result_status='sucess' and node_id=?\n" +
-                                "and record_time=(select max(record_time) from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
+                                "and record_time=(select max(record_time) from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
+
+                        System.out.println(nodeId+"@@@\n"+tabSql);
                         RcdSet tabRs=dao.query(tabSql,nodeId,nodeId);
+
                         tableData.put("data",tabRs.toJSONArrayWithJSONObject());
                     }catch(UncategorizedSQLException e){
+                        e.printStackTrace();
                         Logger.info("Sql query uncategorizedSQLException error,sql:"+tabSql);
                     }catch(DataAccessException e2){
+                        e2.printStackTrace();
                         Logger.info("Sql query SQLSyntaxErrorException error,sql:"+tabSql);
                     }
                 }
@@ -480,7 +512,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     if("enable".equals(item.getStatus())){
                         String dsql="";
                         try{
-                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+route+" is not null";
+                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where  monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+route+" is not null";
                             if(sdate.length()==16){
                                 dsql=dsql+" and record_time>str_to_date('"+sdate+"','%Y-%m-%d %H:%i')\n";
                             }
@@ -497,8 +529,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                             graphSeries.add(graphSeriesJson);
                             legendData.add(name);
                         }catch(UncategorizedSQLException e){
+                            e.printStackTrace();
                             Logger.info("Sql query uncategorizedSQLException error,sql:"+dsql);
                         }catch(DataAccessException e2){
+                            e2.printStackTrace();
                             Logger.info("Sql query SQLSyntaxErrorException error,sql:"+dsql);
                         }
                     }
@@ -666,7 +700,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.cpu') t group by node_id,indicator_code)\n" +
-                "order by cpu_used desc)end limit "+top;
+                "and cpu_used is not null order by cpu_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
 

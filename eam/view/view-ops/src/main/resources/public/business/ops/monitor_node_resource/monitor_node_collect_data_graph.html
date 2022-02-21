@@ -116,6 +116,13 @@
             <div class="search-input-rows" style="opacity: 0">
                 <!-- 搜索输入区域 -->
                 <div class="layui-form toolbar search-inputs">
+
+                    <div class="search-unit">
+                        <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('图形模版')}" class="search-label systemId-label">图形模版</span><span class="search-colon">:</span></div>
+                        <div id="nodeTpl" th:data="${nodeTplData}" style="width:250px"></div>
+                    </div>
+
+
                     <div class="search-unit">
                         <div class="search-label-div" style="width:70px"><span th:text="${lang.translate('搜索时间')}" class="search-label sTime-label">搜索时间</span><span class="search-colon">:</span></div>
                         <input type="text" id="sTime-begin" style="width: 150px" lay-verify="date" th:placeholder="${lang.translate('开始日期')}" autocomplete="off" class="layui-input search-input search-date-input"  readonly >
@@ -162,6 +169,9 @@
 <script th:inline="javascript">
 
     var AUTH_PREFIX="eam_report_org";
+
+    var SELECT_NODE_TPL_DATA = [[${nodeTplData}]];
+
     var NODE_ID = [[${nodeId}]] ;
 
 </script>

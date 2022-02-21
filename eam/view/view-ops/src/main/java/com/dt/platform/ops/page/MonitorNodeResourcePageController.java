@@ -1,12 +1,19 @@
 package com.dt.platform.ops.page;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.dt.platform.domain.ops.MonitorNode;
+import com.dt.platform.domain.ops.MonitorTpl;
+import com.dt.platform.proxy.ops.MonitorDataProcessBaseServiceProxy;
 import com.dt.platform.proxy.ops.MonitorNodeValueServiceProxy;
+import com.github.foxnic.api.transter.Result;
 import org.github.foxnic.web.framework.view.controller.ViewController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -83,6 +90,19 @@ public class MonitorNodeResourcePageController extends ViewController {
 	public String nodeCollectDataGraph(Model model,HttpServletRequest request,String nodeId) {
 
 		model.addAttribute("nodeId",nodeId);
+		Result<List<MonitorTpl>> res= MonitorDataProcessBaseServiceProxy.api().queryTplListByNodeId(nodeId);
+		JSONArray tplArr=new JSONArray();
+		if(res.isSuccess()){
+			for(MonitorTpl tpl:res.getData()){
+				JSONObject obj=new JSONObject();
+				obj.put("code",tpl.getCode());
+				obj.put("name",tpl.getName());
+				tplArr.add(obj);
+			}
+		}
+		model.addAttribute("nodeTplData",tplArr);
+
+
 		return prefix+"/monitor_node_collect_data_graph";
 	}
 

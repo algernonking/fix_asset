@@ -5,8 +5,6 @@ insert into ops_monitor_node_value select * from eam_demo.ops_monitor_node_value
 
 
 
-
-
 delete from hrm_person where deleted='1';
 delete from hrm_employee where deleted='1';
 delete from sys_user where deleted='1';

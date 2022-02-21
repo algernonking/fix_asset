@@ -9,13 +9,6 @@ import java.util.List;
 
 public interface IMonitorDataProcessService {
 
-
-    List<MonitorNode> queryNodeList();
-
-    List<MonitorTpl> queryTplList();
-
-    List<MonitorTplIndicator> queryIndicatorList(String node);
-
     Result collectData();
 
     Result clearNodeValueLastHistoryData();

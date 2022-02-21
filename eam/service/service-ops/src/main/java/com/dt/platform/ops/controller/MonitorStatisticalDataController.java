@@ -92,8 +92,8 @@ public class MonitorStatisticalDataController {
     @ApiOperationSupport(order=6)
     @SentinelResource(value = MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
     @PostMapping(MonitorStatisticalDataServiceProxy.QUERY_NODE_COLLECT_DATA_GRAPH)
-    public Result<JSONObject> queryNodeCollectData(String nodeId,String sdate,String edate,String day) {
-        return monitorStatisticalData.queryNodeCollectDataGraph(nodeId,sdate,edate,day);
+    public Result<JSONObject> queryNodeCollectDataGraph(String nodeId,String tplCode,String sdate,String edate,String day) {
+        return monitorStatisticalData.queryNodeCollectDataGraph(nodeId,tplCode,sdate,edate,day);
     }
 
     /**

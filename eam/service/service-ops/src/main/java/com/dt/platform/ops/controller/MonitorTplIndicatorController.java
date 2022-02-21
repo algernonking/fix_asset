@@ -50,7 +50,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 模版指标 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:28
+ * @since 2022-02-20 12:42:51
 */
 
 @Api(tags = "模版指标")
@@ -85,6 +85,7 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class , example = "365"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "uptime|awk -F \":\" '{print $NF}'|awk -F \",\" '{print $1}'"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INDICATOR_VARIABLE , value = "变量" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
@@ -157,6 +158,7 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class , example = "365"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "uptime|awk -F \":\" '{print $NF}'|awk -F \",\" '{print $1}'"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INDICATOR_VARIABLE , value = "变量" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
@@ -195,6 +197,7 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class , example = "365"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "uptime|awk -F \":\" '{print $NF}'|awk -F \",\" '{print $1}'"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INDICATOR_VARIABLE , value = "变量" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
@@ -277,6 +280,7 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class , example = "365"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "uptime|awk -F \":\" '{print $NF}'|awk -F \",\" '{print $1}'"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INDICATOR_VARIABLE , value = "变量" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),
@@ -316,6 +320,7 @@ public class MonitorTplIndicatorController extends SuperController {
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.DATA_KEEP_DAY , value = "数据保留天数" , required = false , dataTypeClass=Integer.class , example = "365"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND , value = "命令" , required = false , dataTypeClass=String.class , example = "uptime|awk -F \":\" '{print $NF}'|awk -F \",\" '{print $1}'"),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.COMMAND_VALUE , value = "command_value" , required = false , dataTypeClass=String.class),
+		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.INDICATOR_VARIABLE , value = "变量" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.SNMP_OID , value = "snmp元数据" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.LABEL , value = "标签" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorTplIndicatorVOMeta.ITEM_SORT , value = "排序" , required = false , dataTypeClass=Integer.class , example = "800"),

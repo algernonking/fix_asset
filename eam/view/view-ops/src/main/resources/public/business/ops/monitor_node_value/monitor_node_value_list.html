@@ -2,7 +2,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:52
+ * @since 2022-02-20 14:46:24
  */
  -->
  <!DOCTYPE html>
@@ -45,6 +45,7 @@
                     <!-- 结果内容 , resultMessage ,typeName=text_input, isHideInSearch=true -->
                     <!-- 指标 , indicatorCode ,typeName=text_input, isHideInSearch=true -->
                     <!-- 主机名称 , hostname ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 系统时间 , osDatetime ,typeName=text_input, isHideInSearch=true -->
                     <!-- 启动时间 , boottime ,typeName=date_input, isHideInSearch=true -->
                     <!-- 系统 , osVerion ,typeName=text_input, isHideInSearch=true -->
                     <!-- 架构 , arch ,typeName=text_input, isHideInSearch=false -->
@@ -65,10 +66,10 @@
                     <!-- 上行流量 , networkFlowUp ,typeName=number_input, isHideInSearch=true -->
                     <!-- 下流量 , networkFlowDown ,typeName=number_input, isHideInSearch=true -->
                     <!-- 连接数 , processCnt ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 物理内存(M) , pMemorySize ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 虚拟内存(M) , vMemorySize ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 物理内存使用率 , pMemoryUsed ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 虚拟内存使用率 , vMemoryUsed ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 物理内存(M) , pMemorySize ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 虚拟内存(M) , vMemorySize ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 物理内存使用率 , pMemoryUsed ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 虚拟内存使用率 , vMemoryUsed ,typeName=text_input, isHideInSearch=true -->
                     <!-- 信息 , info ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签1 , label1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签2 , label2 ,typeName=text_input, isHideInSearch=true -->
@@ -82,11 +83,9 @@
                     <!-- 字符串1 , valueStr1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字符串2 , valueStr2 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 字符串3 , valueStr3 ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 整数1 , valueInt1 ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 整数2 , valueInt2 ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 整数3 , valueInt3 ,typeName=number_input, isHideInSearch=true -->
-                    <!-- 唯一标识 , uid ,typeName=text_input, isHideInSearch=true -->
-                    <!-- 记录时间 , recordTime ,typeName=date_input, isHideInSearch=true -->
+                    <!-- 整数1 , valueInt1 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数2 , valueInt2 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 整数3 , valueInt3 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签列1 , listLabel1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签列2 , listLabel2 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 标签列3 , listLabel3 ,typeName=text_input, isHideInSearch=true -->
@@ -102,8 +101,15 @@
                     <!-- 整数列1 , listValueInt1 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 整数列2 , listValueInt2 ,typeName=text_input, isHideInSearch=true -->
                     <!-- 整数列3 , listValueInt3 ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 唯一标识 , uid ,typeName=text_input, isHideInSearch=true -->
+                    <!-- 是否连接 , isConnected ,typeName=number_input, isHideInSearch=true -->
+                    <!-- 记录时间 , recordTime ,typeName=date_input, isHideInSearch=true -->
+
+
                 </div>
             </div>
+
+
             <!-- 按钮区域 -->
             <div class="layui-form toolbar search-buttons" style="opacity: 0">
                 <button id="search-button" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>&nbsp;&nbsp;<span th:text="${lang.translate('搜索')}">搜索</span></button>

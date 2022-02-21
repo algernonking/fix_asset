@@ -142,7 +142,15 @@ public class RemoteShellExecutor {
                 session.waitForCondition(ChannelCondition.EXIT_STATUS, TIME_OUT);
                 result.append(outStr.trim());
                 result.append(outErr.trim());
-                ret = session.getExitStatus();
+//                Logger.info("outStr\n"+outStr.trim());
+//                Logger.info("outErr\n"+outErr.trim());
+                if(outErr.trim().length()>0){
+                    ret=100;
+                }else if(outStr.trim().contains("command not found")){
+                    ret=100;
+                }else{
+                    ret = session.getExitStatus();
+                }
                 session.close();
             } else {
                 ret = -101;
@@ -207,10 +215,9 @@ public class RemoteShellExecutor {
     }
 
     public static void main(String[] args) {
-        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","oracle",3316);
-        RemoteShellResult r=rmt.exec("df");
-
-        System.out.println(r.result);
+        RemoteShellExecutor rmt=new RemoteShellExecutor("121.43.103.102","root","oracle",3319);
+        RemoteShellResult r=rmt.exec("netstat1 -ant |wc -l");
+        r.print();
     }
 
 }

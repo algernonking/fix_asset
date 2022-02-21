@@ -1,7 +1,7 @@
 /**
  * 节点数值 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-08 13:14:52
+ * @since 2022-02-20 14:46:24
  */
 
 
@@ -80,6 +80,7 @@ function ListPage() {
 					,{ field: 'resultMessage', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('结果内容') , templet: function (d) { return templet('resultMessage',d.resultMessage,d);}  }
 					,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('指标') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
 					,{ field: 'hostname', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('主机名称') , templet: function (d) { return templet('hostname',d.hostname,d);}  }
+					,{ field: 'osDatetime', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('系统时间') , templet: function (d) { return templet('osDatetime',d.osDatetime,d);}  }
 					,{ field: 'boottime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('启动时间') ,templet: function (d) { return templet('boottime',fox.dateFormat(d.boottime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'osVerion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('系统') , templet: function (d) { return templet('osVerion',d.osVerion,d);}  }
 					,{ field: 'arch', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('架构') , templet: function (d) { return templet('arch',d.arch,d);}  }
@@ -116,8 +117,6 @@ function ListPage() {
 					,{ field: 'valueInt1', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数1') , templet: function (d) { return templet('valueInt1',d.valueInt1,d);}  }
 					,{ field: 'valueInt2', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数2') , templet: function (d) { return templet('valueInt2',d.valueInt2,d);}  }
 					,{ field: 'valueInt3', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数3') , templet: function (d) { return templet('valueInt3',d.valueInt3,d);}  }
-					,{ field: 'uid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('唯一标识') , templet: function (d) { return templet('uid',d.uid,d);}  }
-					,{ field: 'recordTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('记录时间') ,templet: function (d) { return templet('recordTime',fox.dateFormat(d.recordTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'listLabel1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签列1') , templet: function (d) { return templet('listLabel1',d.listLabel1,d);}  }
 					,{ field: 'listLabel2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签列2') , templet: function (d) { return templet('listLabel2',d.listLabel2,d);}  }
 					,{ field: 'listLabel3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签列3') , templet: function (d) { return templet('listLabel3',d.listLabel3,d);}  }
@@ -130,9 +129,12 @@ function ListPage() {
 					,{ field: 'listValueStr1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列1') , templet: function (d) { return templet('listValueStr1',d.listValueStr1,d);}  }
 					,{ field: 'listValueStr2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列2') , templet: function (d) { return templet('listValueStr2',d.listValueStr2,d);}  }
 					,{ field: 'listValueStr3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('字符串列3') , templet: function (d) { return templet('listValueStr3',d.listValueStr3,d);}  }
-					,{ field: 'listValueInt1', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列1') , templet: function (d) { return templet('listValueInt1',d.listValueInt1,d);}  }
-					,{ field: 'listValueInt2', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列2') , templet: function (d) { return templet('listValueInt2',d.listValueInt2,d);}  }
-					,{ field: 'listValueInt3', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列3') , templet: function (d) { return templet('listValueInt3',d.listValueInt3,d);}  }
+					,{ field: 'listValueInt1', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列1') , templet: function (d) { return templet('listValueInt1',d.listValueInt1,d);}  }
+					,{ field: 'listValueInt2', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列2') , templet: function (d) { return templet('listValueInt2',d.listValueInt2,d);}  }
+					,{ field: 'listValueInt3', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('整数列3') , templet: function (d) { return templet('listValueInt3',d.listValueInt3,d);}  }
+					,{ field: 'uid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('唯一标识') , templet: function (d) { return templet('uid',d.uid,d);}  }
+					,{ field: 'isConnected', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('是否连接') , templet: function (d) { return templet('isConnected',d.isConnected,d);}  }
+					,{ field: 'recordTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('记录时间') ,templet: function (d) { return templet('recordTime',fox.dateFormat(d.recordTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true   ,title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
@@ -178,6 +180,7 @@ function ListPage() {
 		value.resultMessage={ inputType:"button",value: $("#resultMessage").val()};
 		value.indicatorCode={ inputType:"button",value: $("#indicatorCode").val()};
 		value.hostname={ inputType:"button",value: $("#hostname").val()};
+		value.osDatetime={ inputType:"button",value: $("#osDatetime").val()};
 		value.boottime={ inputType:"date_input", value: $("#boottime").val() ,matchType:"auto"};
 		value.osVerion={ inputType:"button",value: $("#osVerion").val()};
 		value.arch={ inputType:"button",value: $("#arch").val()};
@@ -194,10 +197,10 @@ function ListPage() {
 		value.networkFlowUp={ inputType:"number_input", value: $("#networkFlowUp").val() };
 		value.networkFlowDown={ inputType:"number_input", value: $("#networkFlowDown").val() };
 		value.processCnt={ inputType:"number_input", value: $("#processCnt").val() };
-		value.pMemorySize={ inputType:"number_input", value: $("#pMemorySize").val() };
-		value.vMemorySize={ inputType:"number_input", value: $("#vMemorySize").val() };
-		value.pMemoryUsed={ inputType:"number_input", value: $("#pMemoryUsed").val() };
-		value.vMemoryUsed={ inputType:"number_input", value: $("#vMemoryUsed").val() };
+		value.pMemorySize={ inputType:"button",value: $("#pMemorySize").val()};
+		value.vMemorySize={ inputType:"button",value: $("#vMemorySize").val()};
+		value.pMemoryUsed={ inputType:"button",value: $("#pMemoryUsed").val()};
+		value.vMemoryUsed={ inputType:"button",value: $("#vMemoryUsed").val()};
 		value.info={ inputType:"button",value: $("#info").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.label1={ inputType:"button",value: $("#label1").val()};
 		value.label2={ inputType:"button",value: $("#label2").val()};
@@ -211,11 +214,9 @@ function ListPage() {
 		value.valueStr1={ inputType:"button",value: $("#valueStr1").val()};
 		value.valueStr2={ inputType:"button",value: $("#valueStr2").val()};
 		value.valueStr3={ inputType:"button",value: $("#valueStr3").val()};
-		value.valueInt1={ inputType:"number_input", value: $("#valueInt1").val() };
-		value.valueInt2={ inputType:"number_input", value: $("#valueInt2").val() };
-		value.valueInt3={ inputType:"number_input", value: $("#valueInt3").val() };
-		value.uid={ inputType:"button",value: $("#uid").val()};
-		value.recordTime={ inputType:"date_input", value: $("#recordTime").val() ,matchType:"auto"};
+		value.valueInt1={ inputType:"button",value: $("#valueInt1").val()};
+		value.valueInt2={ inputType:"button",value: $("#valueInt2").val()};
+		value.valueInt3={ inputType:"button",value: $("#valueInt3").val()};
 		value.listLabel1={ inputType:"button",value: $("#listLabel1").val()};
 		value.listLabel2={ inputType:"button",value: $("#listLabel2").val()};
 		value.listLabel3={ inputType:"button",value: $("#listLabel3").val()};
@@ -231,6 +232,9 @@ function ListPage() {
 		value.listValueInt1={ inputType:"button",value: $("#listValueInt1").val()};
 		value.listValueInt2={ inputType:"button",value: $("#listValueInt2").val()};
 		value.listValueInt3={ inputType:"button",value: $("#listValueInt3").val()};
+		value.uid={ inputType:"button",value: $("#uid").val()};
+		value.isConnected={ inputType:"number_input", value: $("#isConnected").val() };
+		value.recordTime={ inputType:"date_input", value: $("#recordTime").val() ,matchType:"auto"};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
 		var ps={searchField:"$composite"};
 		if(window.pageExt.list.beforeQuery){

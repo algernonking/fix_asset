@@ -93,6 +93,9 @@ function ListPage() {
         if(treeNode==null) return;
         editingNode=treeNode;
 
+        if(treeNode.type=="group"){
+            return 0;
+        }
         console.log("treeNode:",treeNode);
         $("#chartList")[0].contentWindow.showNodeData(treeNode.id);
     }

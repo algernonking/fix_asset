@@ -9,8 +9,8 @@ import java.math.BigDecimal;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-15 12:29:38
- * @sign 5D0F87B931FD9C4E10BE171936635C07
+ * @since 2022-02-20 14:46:45
+ * @sign C1EFBF496424B39321E11194893D81C6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -257,44 +257,44 @@ public class MonitorNodeValueLastMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> PROCESS_CNT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,PROCESS_CNT, java.lang.Integer.class, "连接数", "连接数", java.lang.Integer.class, null);
 	
 	/**
-	 * 物理内存(M) , 类型: java.lang.Integer
+	 * 物理内存(M) , 类型: java.lang.Long
 	*/
 	public static final String P_MEMORY_SIZE="pMemorySize";
 	
 	/**
-	 * 物理内存(M) , 类型: java.lang.Integer
+	 * 物理内存(M) , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> P_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,P_MEMORY_SIZE, java.lang.Integer.class, "物理内存(M)", "物理内存(M)", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> P_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,P_MEMORY_SIZE, java.lang.Long.class, "物理内存(M)", "物理内存(M)", java.lang.Long.class, null);
 	
 	/**
-	 * 虚拟内存(M) , 类型: java.lang.Integer
+	 * 虚拟内存(M) , 类型: java.lang.Long
 	*/
 	public static final String V_MEMORY_SIZE="vMemorySize";
 	
 	/**
-	 * 虚拟内存(M) , 类型: java.lang.Integer
+	 * 虚拟内存(M) , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> V_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,V_MEMORY_SIZE, java.lang.Integer.class, "虚拟内存(M)", "虚拟内存(M)", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> V_MEMORY_SIZE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,V_MEMORY_SIZE, java.lang.Long.class, "虚拟内存(M)", "虚拟内存(M)", java.lang.Long.class, null);
 	
 	/**
-	 * 物理内存使用率 , 类型: java.lang.Integer
+	 * 物理内存使用率 , 类型: java.lang.Long
 	*/
 	public static final String P_MEMORY_USED="pMemoryUsed";
 	
 	/**
-	 * 物理内存使用率 , 类型: java.lang.Integer
+	 * 物理内存使用率 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> P_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,P_MEMORY_USED, java.lang.Integer.class, "物理内存使用率", "物理内存使用率", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> P_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,P_MEMORY_USED, java.lang.Long.class, "物理内存使用率", "物理内存使用率", java.lang.Long.class, null);
 	
 	/**
-	 * 虚拟内存使用率 , 类型: java.lang.Integer
+	 * 虚拟内存使用率 , 类型: java.lang.Long
 	*/
 	public static final String V_MEMORY_USED="vMemoryUsed";
 	
 	/**
-	 * 虚拟内存使用率 , 类型: java.lang.Integer
+	 * 虚拟内存使用率 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> V_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,V_MEMORY_USED, java.lang.Integer.class, "虚拟内存使用率", "虚拟内存使用率", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> V_MEMORY_USED_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,V_MEMORY_USED, java.lang.Long.class, "虚拟内存使用率", "虚拟内存使用率", java.lang.Long.class, null);
 	
 	/**
 	 * 信息 , 类型: java.lang.String
@@ -427,34 +427,34 @@ public class MonitorNodeValueLastMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.String> VALUE_STR3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_STR3, java.lang.String.class, "字符串3", "字符串3", java.lang.String.class, null);
 	
 	/**
-	 * 整数1 , 类型: java.lang.Integer
+	 * 整数1 , 类型: java.lang.Long
 	*/
 	public static final String VALUE_INT1="valueInt1";
 	
 	/**
-	 * 整数1 , 类型: java.lang.Integer
+	 * 整数1 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT1, java.lang.Integer.class, "整数1", "整数1", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT1, java.lang.Long.class, "整数1", "整数1", java.lang.Long.class, null);
 	
 	/**
-	 * 整数2 , 类型: java.lang.Integer
+	 * 整数2 , 类型: java.lang.Long
 	*/
 	public static final String VALUE_INT2="valueInt2";
 	
 	/**
-	 * 整数2 , 类型: java.lang.Integer
+	 * 整数2 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT2, java.lang.Integer.class, "整数2", "整数2", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT2, java.lang.Long.class, "整数2", "整数2", java.lang.Long.class, null);
 	
 	/**
-	 * 整数3 , 类型: java.lang.Integer
+	 * 整数3 , 类型: java.lang.Long
 	*/
 	public static final String VALUE_INT3="valueInt3";
 	
 	/**
-	 * 整数3 , 类型: java.lang.Integer
+	 * 整数3 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Integer> VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT3, java.lang.Integer.class, "整数3", "整数3", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,VALUE_INT3, java.lang.Long.class, "整数3", "整数3", java.lang.Long.class, null);
 	
 	/**
 	 * 标签列1 , 类型: java.lang.String
@@ -577,34 +577,34 @@ public class MonitorNodeValueLastMeta {
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.String> LIST_VALUE_STR3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_STR3, java.lang.String.class, "字符串列3", "字符串列3", java.lang.String.class, null);
 	
 	/**
-	 * 整数列1 , 类型: java.lang.String
+	 * 整数列1 , 类型: java.lang.Long
 	*/
 	public static final String LIST_VALUE_INT1="listValueInt1";
 	
 	/**
-	 * 整数列1 , 类型: java.lang.String
+	 * 整数列1 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.String> LIST_VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT1, java.lang.String.class, "整数列1", "整数列1", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> LIST_VALUE_INT1_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT1, java.lang.Long.class, "整数列1", "整数列1", java.lang.Long.class, null);
 	
 	/**
-	 * 整数列2 , 类型: java.lang.String
+	 * 整数列2 , 类型: java.lang.Long
 	*/
 	public static final String LIST_VALUE_INT2="listValueInt2";
 	
 	/**
-	 * 整数列2 , 类型: java.lang.String
+	 * 整数列2 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.String> LIST_VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT2, java.lang.String.class, "整数列2", "整数列2", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> LIST_VALUE_INT2_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT2, java.lang.Long.class, "整数列2", "整数列2", java.lang.Long.class, null);
 	
 	/**
-	 * 整数列3 , 类型: java.lang.String
+	 * 整数列3 , 类型: java.lang.Long
 	*/
 	public static final String LIST_VALUE_INT3="listValueInt3";
 	
 	/**
-	 * 整数列3 , 类型: java.lang.String
+	 * 整数列3 , 类型: java.lang.Long
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.String> LIST_VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT3, java.lang.String.class, "整数列3", "整数列3", java.lang.String.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNodeValueLast,java.lang.Long> LIST_VALUE_INT3_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNodeValueLast.class ,LIST_VALUE_INT3, java.lang.Long.class, "整数列3", "整数列3", java.lang.Long.class, null);
 	
 	/**
 	 * 唯一标识 , 类型: java.lang.String
@@ -998,7 +998,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param pMemorySize 物理内存(M)
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setPMemorySize(Integer pMemorySize) {
+		public MonitorNodeValueLast setPMemorySize(Long pMemorySize) {
 			super.change(P_MEMORY_SIZE,super.getPMemorySize(),pMemorySize);
 			super.setPMemorySize(pMemorySize);
 			return this;
@@ -1009,7 +1009,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param vMemorySize 虚拟内存(M)
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setVMemorySize(Integer vMemorySize) {
+		public MonitorNodeValueLast setVMemorySize(Long vMemorySize) {
 			super.change(V_MEMORY_SIZE,super.getVMemorySize(),vMemorySize);
 			super.setVMemorySize(vMemorySize);
 			return this;
@@ -1020,7 +1020,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param pMemoryUsed 物理内存使用率
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setPMemoryUsed(Integer pMemoryUsed) {
+		public MonitorNodeValueLast setPMemoryUsed(Long pMemoryUsed) {
 			super.change(P_MEMORY_USED,super.getPMemoryUsed(),pMemoryUsed);
 			super.setPMemoryUsed(pMemoryUsed);
 			return this;
@@ -1031,7 +1031,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param vMemoryUsed 虚拟内存使用率
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setVMemoryUsed(Integer vMemoryUsed) {
+		public MonitorNodeValueLast setVMemoryUsed(Long vMemoryUsed) {
 			super.change(V_MEMORY_USED,super.getVMemoryUsed(),vMemoryUsed);
 			super.setVMemoryUsed(vMemoryUsed);
 			return this;
@@ -1185,7 +1185,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param valueInt1 整数1
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setValueInt1(Integer valueInt1) {
+		public MonitorNodeValueLast setValueInt1(Long valueInt1) {
 			super.change(VALUE_INT1,super.getValueInt1(),valueInt1);
 			super.setValueInt1(valueInt1);
 			return this;
@@ -1196,7 +1196,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param valueInt2 整数2
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setValueInt2(Integer valueInt2) {
+		public MonitorNodeValueLast setValueInt2(Long valueInt2) {
 			super.change(VALUE_INT2,super.getValueInt2(),valueInt2);
 			super.setValueInt2(valueInt2);
 			return this;
@@ -1207,7 +1207,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param valueInt3 整数3
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setValueInt3(Integer valueInt3) {
+		public MonitorNodeValueLast setValueInt3(Long valueInt3) {
 			super.change(VALUE_INT3,super.getValueInt3(),valueInt3);
 			super.setValueInt3(valueInt3);
 			return this;
@@ -1350,7 +1350,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param listValueInt1 整数列1
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setListValueInt1(String listValueInt1) {
+		public MonitorNodeValueLast setListValueInt1(Long listValueInt1) {
 			super.change(LIST_VALUE_INT1,super.getListValueInt1(),listValueInt1);
 			super.setListValueInt1(listValueInt1);
 			return this;
@@ -1361,7 +1361,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param listValueInt2 整数列2
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setListValueInt2(String listValueInt2) {
+		public MonitorNodeValueLast setListValueInt2(Long listValueInt2) {
 			super.change(LIST_VALUE_INT2,super.getListValueInt2(),listValueInt2);
 			super.setListValueInt2(listValueInt2);
 			return this;
@@ -1372,7 +1372,7 @@ public class MonitorNodeValueLastMeta {
 		 * @param listValueInt3 整数列3
 		 * @return 当前对象
 		*/
-		public MonitorNodeValueLast setListValueInt3(String listValueInt3) {
+		public MonitorNodeValueLast setListValueInt3(Long listValueInt3) {
 			super.change(LIST_VALUE_INT3,super.getListValueInt3(),listValueInt3);
 			super.setListValueInt3(listValueInt3);
 			return this;

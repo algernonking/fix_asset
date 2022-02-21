@@ -2,7 +2,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-10 11:13:05
+ * @since 2022-02-19 19:33:26
  */
  -->
  <!DOCTYPE html>
@@ -38,7 +38,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-0751-content">
+        <div class="layui-row form-row" id="random-1876-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -129,11 +129,11 @@
          <!--开始：group 循环-->
 
 
-        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-1423-fieldset">
+        <fieldset class="layui-elem-field layui-field-title form-group-title" id="random-3041-fieldset">
             <legend>数据采集</legend>
         </fieldset>
 
-        <div class="layui-row form-row" id="random-1423-content">
+        <div class="layui-row form-row" id="random-3041-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->
@@ -153,6 +153,15 @@
                         <div class="layui-form-label "><div th:text="${lang.translate('SSH端口')}">SSH端口</div></div>
                         <div class="layui-input-block ">
                             <input lay-filter="sshPort" id="sshPort" name="sshPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('SSH端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
+                        </div>
+                    </div>
+
+
+                
+                    <div class="layui-form-item" >
+                        <div class="layui-form-label "><div th:text="${lang.translate('Zabbix代理端口')}">Zabbix代理端口</div></div>
+                        <div class="layui-input-block ">
+                            <input lay-filter="zabbixAgengPort" id="zabbixAgengPort" name="zabbixAgengPort" th:placeholder="${ lang.translate('请输入') +''+ lang.translate('Zabbix代理端口') }" type="text" class="layui-input"   autocomplete="off" input-type="number_input" integer="true" decimal="false" allow-negative="true" step="1.0"   scale="0" />
                         </div>
                     </div>
 
@@ -225,7 +234,7 @@
 
 
 
-        <div class="layui-row form-row" id="random-8551-content">
+        <div class="layui-row form-row" id="random-2403-content">
 
              <!--开始：column 循环-->
             <!-- 只有当非第一个分组没有title时才使 padding-top 为 0 -->

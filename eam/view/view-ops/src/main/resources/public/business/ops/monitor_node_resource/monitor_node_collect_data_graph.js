@@ -95,12 +95,21 @@ function ListPage() {
         bindButtonEvent();
         //绑定行操作按钮事件
         bindRowOperationEvent();
-
-        searchData();
+        //searchData();
     }
+
+
 
     function searchData(){
         var ps={};
+        var tpl=xmSelect.get("#nodeTpl",true).getValue("value");
+        console.log("tpl",tpl);
+        if(tpl&&tpl.length>0){
+            ps.tplCode=tpl[0];
+        }else{
+            alert("请选择模版")
+            return 1;
+        }
         ps.nodeId=nodeId;
         ps.sdate="";
         ps.edate="";
@@ -119,12 +128,13 @@ function ListPage() {
            layer.closeAll('loading');
             if (data.success) {
                 var tplData=data.data.tplData;
+                var html="";
+                $("#chartList").html(html);
                 for(var i=0;i<tplData.length;i++){
                     var graphData=tplData[i];
                     for(var j=0;j<graphData.length;j++){
                         if(j==0){
-                            var html="";
-                            $("#chartList").html(html);
+
                         }
                         var gap="<div class=\"gap\"></div>";
                         $("#chartList").append(gap);
@@ -143,11 +153,15 @@ function ListPage() {
                             var gChart = echarts.init(document.getElementById(gid));
                             gChart.setOption(lineOption, true);
                         }else if(graphType=="table"){
-                            // console.log("table data:",gData);
+                           // console.log("table data:",gData);
+                            if(!(gData.tableData.header&&gData.tableData.route&&gData.tableData.data&&gData.tableData.name)){
+                                continue;
+                            }
                             var header=gData.tableData.header;
                             var route=gData.tableData.route;
                             var tableData=gData.tableData.data;
                             var title=gData.graphInfo.name;
+
                             var html="<div class=\"card_table\">" +
                                 "<div class=\"card_table_title\"> "+title+"</div>" +
                                 "<table class=\"pure-table pure-table-bordered\" id=\"dataCpu\" style=\"width:100%;text-align:left;\">"
@@ -293,6 +307,32 @@ function ListPage() {
 
     function initSearchFields() {
         fox.switchSearchRow(1);
+
+        //渲染 systemId 下拉字段
+        fox.renderSelectBox({
+            el: "nodeTpl",
+            radio: true,
+            size: "small",
+            filterable: true,
+            //转换数据
+            searchField: "name", //请自行调整用于搜索的字段名称
+            extraParam: {}, //额外的查询参数，Object 或是 返回 Object 的函数
+            transform: function(data) {
+                //要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+                var opts=[];
+                if(!data) return opts;
+                for (var i = 0; i < data.length; i++) {
+                    if(!data[i]) continue;
+                    if(i==0){
+                        opts.push({name:data[i].name,value:data[i].code,selected:true});
+                    }else{
+                        opts.push({name:data[i].name,value:data[i].code});
+                    }
+
+                }
+                return opts;
+            }
+        });
 
 
         var start=laydate.render({
@@ -457,7 +497,29 @@ function ListPage() {
 
     function showNodeData(node){
         nodeId=node;
-        searchData();
+        //设置刷新下拉框
+        admin.request("/service-ops/monitor-data-process-base/query-tpl-list-by-node-id", { nodeId : nodeId }, function (data) {
+            if(data.success){
+                var d=data.data;
+                var dArr=[];
+                for(var i=0;i<d.length;i++){
+                    var e={};
+                    if(i==0){
+                        e.selected=true;
+                    }
+                    e.value=d[i].code;
+                    e.name=d[i].name;
+                    dArr.push(e);
+                }
+                var selectTpl = xmSelect.get('#nodeTpl', true);
+                if (selectTpl) {
+                    selectTpl.update({data: dArr})
+
+                }
+                searchData();
+            }
+        });
+
     }
 
     window.showNodeData=showNodeData;

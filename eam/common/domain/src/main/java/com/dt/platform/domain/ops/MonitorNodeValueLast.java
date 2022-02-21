@@ -17,8 +17,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点数值最新
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-15 12:29:38
- * @sign 5D0F87B931FD9C4E10BE171936635C07
+ * @since 2022-02-20 14:46:45
+ * @sign C1EFBF496424B39321E11194893D81C6
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -178,25 +178,25 @@ public class MonitorNodeValueLast extends Entity {
 	 * 物理内存(M)：物理内存(M)
 	*/
 	@ApiModelProperty(required = false,value="物理内存(M)" , notes = "物理内存(M)")
-	private Integer pMemorySize;
+	private Long pMemorySize;
 	
 	/**
 	 * 虚拟内存(M)：虚拟内存(M)
 	*/
 	@ApiModelProperty(required = false,value="虚拟内存(M)" , notes = "虚拟内存(M)")
-	private Integer vMemorySize;
+	private Long vMemorySize;
 	
 	/**
 	 * 物理内存使用率：物理内存使用率
 	*/
 	@ApiModelProperty(required = false,value="物理内存使用率" , notes = "物理内存使用率")
-	private Integer pMemoryUsed;
+	private Long pMemoryUsed;
 	
 	/**
 	 * 虚拟内存使用率：虚拟内存使用率
 	*/
 	@ApiModelProperty(required = false,value="虚拟内存使用率" , notes = "虚拟内存使用率")
-	private Integer vMemoryUsed;
+	private Long vMemoryUsed;
 	
 	/**
 	 * 信息：信息
@@ -280,19 +280,19 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数1：整数1
 	*/
 	@ApiModelProperty(required = false,value="整数1" , notes = "整数1")
-	private Integer valueInt1;
+	private Long valueInt1;
 	
 	/**
 	 * 整数2：整数2
 	*/
 	@ApiModelProperty(required = false,value="整数2" , notes = "整数2")
-	private Integer valueInt2;
+	private Long valueInt2;
 	
 	/**
 	 * 整数3：整数3
 	*/
 	@ApiModelProperty(required = false,value="整数3" , notes = "整数3")
-	private Integer valueInt3;
+	private Long valueInt3;
 	
 	/**
 	 * 标签列1：标签列1
@@ -370,19 +370,19 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数列1：整数列1
 	*/
 	@ApiModelProperty(required = false,value="整数列1" , notes = "整数列1")
-	private String listValueInt1;
+	private Long listValueInt1;
 	
 	/**
 	 * 整数列2：整数列2
 	*/
 	@ApiModelProperty(required = false,value="整数列2" , notes = "整数列2")
-	private String listValueInt2;
+	private Long listValueInt2;
 	
 	/**
 	 * 整数列3：整数列3
 	*/
 	@ApiModelProperty(required = false,value="整数列3" , notes = "整数列3")
-	private String listValueInt3;
+	private Long listValueInt3;
 	
 	/**
 	 * 唯一标识：唯一标识
@@ -911,7 +911,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 物理内存(M)
 	 * @return 物理内存(M)
 	*/
-	public Integer getPMemorySize() {
+	public Long getPMemorySize() {
 		return pMemorySize;
 	}
 	
@@ -920,7 +920,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param pMemorySize 物理内存(M)
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setPMemorySize(Integer pMemorySize) {
+	public MonitorNodeValueLast setPMemorySize(Long pMemorySize) {
 		this.pMemorySize=pMemorySize;
 		return this;
 	}
@@ -930,7 +930,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 虚拟内存(M)
 	 * @return 虚拟内存(M)
 	*/
-	public Integer getVMemorySize() {
+	public Long getVMemorySize() {
 		return vMemorySize;
 	}
 	
@@ -939,7 +939,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param vMemorySize 虚拟内存(M)
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setVMemorySize(Integer vMemorySize) {
+	public MonitorNodeValueLast setVMemorySize(Long vMemorySize) {
 		this.vMemorySize=vMemorySize;
 		return this;
 	}
@@ -949,7 +949,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 物理内存使用率
 	 * @return 物理内存使用率
 	*/
-	public Integer getPMemoryUsed() {
+	public Long getPMemoryUsed() {
 		return pMemoryUsed;
 	}
 	
@@ -958,7 +958,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param pMemoryUsed 物理内存使用率
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setPMemoryUsed(Integer pMemoryUsed) {
+	public MonitorNodeValueLast setPMemoryUsed(Long pMemoryUsed) {
 		this.pMemoryUsed=pMemoryUsed;
 		return this;
 	}
@@ -968,7 +968,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 虚拟内存使用率
 	 * @return 虚拟内存使用率
 	*/
-	public Integer getVMemoryUsed() {
+	public Long getVMemoryUsed() {
 		return vMemoryUsed;
 	}
 	
@@ -977,7 +977,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param vMemoryUsed 虚拟内存使用率
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setVMemoryUsed(Integer vMemoryUsed) {
+	public MonitorNodeValueLast setVMemoryUsed(Long vMemoryUsed) {
 		this.vMemoryUsed=vMemoryUsed;
 		return this;
 	}
@@ -1234,7 +1234,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数1
 	 * @return 整数1
 	*/
-	public Integer getValueInt1() {
+	public Long getValueInt1() {
 		return valueInt1;
 	}
 	
@@ -1243,7 +1243,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param valueInt1 整数1
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setValueInt1(Integer valueInt1) {
+	public MonitorNodeValueLast setValueInt1(Long valueInt1) {
 		this.valueInt1=valueInt1;
 		return this;
 	}
@@ -1253,7 +1253,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数2
 	 * @return 整数2
 	*/
-	public Integer getValueInt2() {
+	public Long getValueInt2() {
 		return valueInt2;
 	}
 	
@@ -1262,7 +1262,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param valueInt2 整数2
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setValueInt2(Integer valueInt2) {
+	public MonitorNodeValueLast setValueInt2(Long valueInt2) {
 		this.valueInt2=valueInt2;
 		return this;
 	}
@@ -1272,7 +1272,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数3
 	 * @return 整数3
 	*/
-	public Integer getValueInt3() {
+	public Long getValueInt3() {
 		return valueInt3;
 	}
 	
@@ -1281,7 +1281,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param valueInt3 整数3
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setValueInt3(Integer valueInt3) {
+	public MonitorNodeValueLast setValueInt3(Long valueInt3) {
 		this.valueInt3=valueInt3;
 		return this;
 	}
@@ -1519,7 +1519,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数列1
 	 * @return 整数列1
 	*/
-	public String getListValueInt1() {
+	public Long getListValueInt1() {
 		return listValueInt1;
 	}
 	
@@ -1528,7 +1528,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param listValueInt1 整数列1
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setListValueInt1(String listValueInt1) {
+	public MonitorNodeValueLast setListValueInt1(Long listValueInt1) {
 		this.listValueInt1=listValueInt1;
 		return this;
 	}
@@ -1538,7 +1538,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数列2
 	 * @return 整数列2
 	*/
-	public String getListValueInt2() {
+	public Long getListValueInt2() {
 		return listValueInt2;
 	}
 	
@@ -1547,7 +1547,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param listValueInt2 整数列2
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setListValueInt2(String listValueInt2) {
+	public MonitorNodeValueLast setListValueInt2(Long listValueInt2) {
 		this.listValueInt2=listValueInt2;
 		return this;
 	}
@@ -1557,7 +1557,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * 整数列3
 	 * @return 整数列3
 	*/
-	public String getListValueInt3() {
+	public Long getListValueInt3() {
 		return listValueInt3;
 	}
 	
@@ -1566,7 +1566,7 @@ public class MonitorNodeValueLast extends Entity {
 	 * @param listValueInt3 整数列3
 	 * @return 当前对象
 	*/
-	public MonitorNodeValueLast setListValueInt3(String listValueInt3) {
+	public MonitorNodeValueLast setListValueInt3(Long listValueInt3) {
 		this.listValueInt3=listValueInt3;
 		return this;
 	}

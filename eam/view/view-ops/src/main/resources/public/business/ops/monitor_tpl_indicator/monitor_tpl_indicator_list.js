@@ -1,7 +1,7 @@
 /**
  * 模版指标 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-12 17:26:29
+ * @since 2022-02-20 12:42:52
  */
 
 
@@ -90,6 +90,7 @@ function ListPage() {
 					,{ field: 'intervalTime', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('间隔时间(秒）') , templet: function (d) { return templet('intervalTime',d.intervalTime,d);}  }
 					,{ field: 'dataKeepDay', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('数据保留天数') , templet: function (d) { return templet('dataKeepDay',d.dataKeepDay,d);}  }
 					,{ field: 'command', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('命令') , templet: function (d) { return templet('command',d.command,d);}  }
+					,{ field: 'indicatorVariable', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('变量') , templet: function (d) { return templet('indicatorVariable',d.indicatorVariable,d);}  }
 					,{ field: 'snmpOid', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('snmp元数据') , templet: function (d) { return templet('snmpOid',d.snmpOid,d);}  }
 					,{ field: 'label', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('标签') , templet: function (d) { return templet('label',d.label,d);}  }
 					,{ field: 'itemSort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('排序') , templet: function (d) { return templet('itemSort',d.itemSort,d);}  }
@@ -149,6 +150,7 @@ function ListPage() {
 		value.dataKeepDay={ inputType:"number_input", value: $("#dataKeepDay").val() };
 		value.command={ inputType:"button",value: $("#command").val()};
 		value.commandValue={ inputType:"button",value: $("#commandValue").val()};
+		value.indicatorVariable={ inputType:"button",value: $("#indicatorVariable").val()};
 		value.snmpOid={ inputType:"button",value: $("#snmpOid").val()};
 		value.label={ inputType:"button",value: $("#label").val()};
 		value.itemSort={ inputType:"number_input", value: $("#itemSort").val() };
