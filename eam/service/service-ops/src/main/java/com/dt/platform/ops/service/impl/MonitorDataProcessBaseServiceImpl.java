@@ -64,7 +64,7 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
             "select a.id,c.monitor_tpl_code,c.code,c.interval_time,c.id indicator_id from\n" +
             "ops_monitor_node a,ops_monitor_node_tpl_item b,ops_monitor_tpl_indicator c\n" +
             "where a.deleted='0' \n" +
-            "and a.status='online' \n" +
+           // "and a.status='online' \n" +
             "and a.node_enabled='enable' \n"+
             "and b.deleted='0' \n" +
             "and c.deleted='0' \n" +
@@ -83,8 +83,17 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
     @Override
     public Result<JSONArray> queryNodeZabbixAgentData() {
         Result<JSONArray> result=new Result<>();
-        JSONObject resultData=new JSONObject();
-        String sql="";
+        String sql="select \n" +
+                "a.node_ip,\n" +
+                "a.node_name_show,\n" +
+                "b.indicator_code indicator_code,\n" +
+                "b.value_str1 zabbix_agent_version,\n" +
+                "b.record_time record_time\n" +
+                "from ops_monitor_node a,( \n" +
+                "select * from ops_monitor_node_value_last where (node_id,indicator_code,record_time)in (\n" +
+                "select node_id,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last where indicator_code='zabbixAgent.version' and  result_status='sucess' group by \n" +
+                " node_id,indicator_code)\n" +
+                " )b where a.id=b.node_id and a.deleted=0";
         return result.success(true).data(dao.query(sql).toJSONArrayWithJSONObject());
     }
 

@@ -16,8 +16,8 @@ import com.dt.platform.domain.ops.MonitorTpl;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-19 19:33:24
- * @sign AD05D1BF87A9419EA366092F81827D76
+ * @since 2022-02-22 17:47:09
+ * @sign 1E4445C7D63FE940F72B0945961CA866
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -166,12 +166,12 @@ public class MonitorNodeMeta {
 	/**
 	 * Zabbix代理端口 , 类型: java.lang.Integer
 	*/
-	public static final String ZABBIX_AGENG_PORT="zabbixAgengPort";
+	public static final String ZABBIX_AGENT_PORT="zabbixAgentPort";
 	
 	/**
 	 * Zabbix代理端口 , 类型: java.lang.Integer
 	*/
-	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNode,java.lang.Integer> ZABBIX_AGENG_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNode.class ,ZABBIX_AGENG_PORT, java.lang.Integer.class, "Zabbix代理端口", "Zabbix代理端口", java.lang.Integer.class, null);
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorNode,java.lang.Integer> ZABBIX_AGENT_PORT_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorNode.class ,ZABBIX_AGENT_PORT, java.lang.Integer.class, "Zabbix代理端口", "Zabbix代理端口", java.lang.Integer.class, null);
 	
 	/**
 	 * Snmp端口 , 类型: java.lang.Integer
@@ -406,7 +406,7 @@ public class MonitorNodeMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , ZABBIX_AGENG_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SSH_VOUCHER , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST , MONITOR_NODE_GROUP , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_TPL_LIST , MONITOR_TPL_IDS };
+	public static final String[] $PROPS={ ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , ZABBIX_AGENT_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , SSH_VOUCHER , MONITOR_NODE_DB , MONITOR_NODE_VALUE_LIST , MONITOR_NODE_GROUP , MONITOR_NODE_TYPE , MONITOR_NODE_SUB_TYPE , MONITOR_TPL_LIST , MONITOR_TPL_IDS };
 	
 	/**
 	 * 代理类
@@ -572,12 +572,12 @@ public class MonitorNodeMeta {
 		
 		/**
 		 * 设置 Zabbix代理端口
-		 * @param zabbixAgengPort Zabbix代理端口
+		 * @param zabbixAgentPort Zabbix代理端口
 		 * @return 当前对象
 		*/
-		public MonitorNode setZabbixAgengPort(Integer zabbixAgengPort) {
-			super.change(ZABBIX_AGENG_PORT,super.getZabbixAgengPort(),zabbixAgengPort);
-			super.setZabbixAgengPort(zabbixAgengPort);
+		public MonitorNode setZabbixAgentPort(Integer zabbixAgentPort) {
+			super.change(ZABBIX_AGENT_PORT,super.getZabbixAgentPort(),zabbixAgentPort);
+			super.setZabbixAgentPort(zabbixAgentPort);
 			return this;
 		}
 		

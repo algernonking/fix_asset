@@ -11,15 +11,15 @@ import com.github.foxnic.api.constant.CodeTextEnum;
  */
 
 
-public enum MonitorZabbixAgentIndicatorEnum implements CodeTextEnum {
+public enum MonitorZabbixAgentIndicatorTranslateEnum implements CodeTextEnum {
 
-
+    OS_NET_INTERFACE_FLOW("os.net_interface_flow" , "主机网络流量"),
     SYSTEM_CONNECTED("system.connected" , "节点连接状态")
     ;
 
     private String code;
     private String text;
-    private MonitorZabbixAgentIndicatorEnum(String code, String text)  {
+    private MonitorZabbixAgentIndicatorTranslateEnum(String code, String text)  {
         this.code=code;
         this.text=text;
     }

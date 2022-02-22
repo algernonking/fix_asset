@@ -55,7 +55,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 节点 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-19 19:33:25
+ * @since 2022-02-22 17:47:11
 */
 
 @Api(tags = "节点")
@@ -86,7 +86,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENG_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENT_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_PORT , value = "Snmp端口" , required = false , dataTypeClass=Integer.class , example = "12345"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_VERSION , value = "Snmp版本" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_COMMUNITY , value = "Snmp团体" , required = false , dataTypeClass=String.class),
@@ -158,7 +158,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENG_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENT_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_PORT , value = "Snmp端口" , required = false , dataTypeClass=Integer.class , example = "12345"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_VERSION , value = "Snmp版本" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_COMMUNITY , value = "Snmp团体" , required = false , dataTypeClass=String.class),
@@ -196,7 +196,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENG_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENT_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_PORT , value = "Snmp端口" , required = false , dataTypeClass=Integer.class , example = "12345"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_VERSION , value = "Snmp版本" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_COMMUNITY , value = "Snmp团体" , required = false , dataTypeClass=String.class),
@@ -280,7 +280,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENG_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENT_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_PORT , value = "Snmp端口" , required = false , dataTypeClass=Integer.class , example = "12345"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_VERSION , value = "Snmp版本" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_COMMUNITY , value = "Snmp团体" , required = false , dataTypeClass=String.class),
@@ -319,7 +319,7 @@ public class MonitorNodeController extends SuperController {
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_VOUCHER_ID , value = "凭证(SSH)" , required = false , dataTypeClass=String.class , example = "1"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SSH_PORT , value = "SSH端口" , required = false , dataTypeClass=Integer.class , example = "22"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.AGENT_PORT , value = "Agent端口" , required = false , dataTypeClass=Integer.class , example = "10052"),
-		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENG_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
+		@ApiImplicitParam(name = MonitorNodeVOMeta.ZABBIX_AGENT_PORT , value = "Zabbix代理端口" , required = false , dataTypeClass=Integer.class , example = "10050"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_PORT , value = "Snmp端口" , required = false , dataTypeClass=Integer.class , example = "12345"),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_VERSION , value = "Snmp版本" , required = false , dataTypeClass=String.class),
 		@ApiImplicitParam(name = MonitorNodeVOMeta.SNMP_COMMUNITY , value = "Snmp团体" , required = false , dataTypeClass=String.class),

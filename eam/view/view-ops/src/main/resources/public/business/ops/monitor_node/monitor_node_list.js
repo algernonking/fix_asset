@@ -1,7 +1,7 @@
 /**
  * 节点 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-19 19:33:26
+ * @since 2022-02-22 17:47:12
  */
 
 
@@ -83,7 +83,7 @@ function ListPage() {
 					,{ field: 'sshVoucherId', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('凭证(SSH)'), templet: function (d) { return templet('sshVoucherId' ,fox.joinLabel(d.sshVoucher,"name"),d);}}
 					,{ field: 'sshPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('SSH端口') , templet: function (d) { return templet('sshPort',d.sshPort,d);}  }
 					,{ field: 'agentPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Agent端口') , templet: function (d) { return templet('agentPort',d.agentPort,d);}  }
-					,{ field: 'zabbixAgengPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Zabbix代理端口') , templet: function (d) { return templet('zabbixAgengPort',d.zabbixAgengPort,d);}  }
+					,{ field: 'zabbixAgentPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Zabbix代理端口') , templet: function (d) { return templet('zabbixAgentPort',d.zabbixAgentPort,d);}  }
 					,{ field: 'snmpPort', align:"right",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp端口') , templet: function (d) { return templet('snmpPort',d.snmpPort,d);}  }
 					,{ field: 'snmpVersion', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp版本') , templet: function (d) { return templet('snmpVersion',d.snmpVersion,d);}  }
 					,{ field: 'snmpCommunity', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('Snmp团体') , templet: function (d) { return templet('snmpCommunity',d.snmpCommunity,d);}  }
@@ -143,7 +143,7 @@ function ListPage() {
 		value.sshVoucherId={ inputType:"select_box", value: getSelectedValue("#sshVoucherId","value") ,fillBy:["sshVoucher"]  , label:getSelectedValue("#sshVoucherId","nameStr") };
 		value.sshPort={ inputType:"number_input", value: $("#sshPort").val() };
 		value.agentPort={ inputType:"number_input", value: $("#agentPort").val() };
-		value.zabbixAgengPort={ inputType:"number_input", value: $("#zabbixAgengPort").val() };
+		value.zabbixAgentPort={ inputType:"number_input", value: $("#zabbixAgentPort").val() };
 		value.snmpPort={ inputType:"number_input", value: $("#snmpPort").val() };
 		value.snmpVersion={ inputType:"button",value: $("#snmpVersion").val()};
 		value.snmpCommunity={ inputType:"button",value: $("#snmpCommunity").val()};

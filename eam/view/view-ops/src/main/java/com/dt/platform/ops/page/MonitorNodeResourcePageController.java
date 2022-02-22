@@ -53,6 +53,14 @@ public class MonitorNodeResourcePageController extends ViewController {
 		return prefix+"/monitor_node_host_list";
 	}
 
+
+
+	@RequestMapping("monitor_zabbix_agent_list.html")
+	public String zabbixAgentList(Model model,HttpServletRequest request) {
+		return prefix+"/monitor_zabbix_agent_list";
+	}
+
+
 	/**
 	 * 节点数值 功能主页面
 	 */

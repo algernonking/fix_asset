@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-20 14:45:57
+ * @since 2022-02-22 17:42:39
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -8472,7 +8472,7 @@ public class EAMTables {
 		/**
 		 * Zabbix代理端口
 		*/
-		public static final DBField ZABBIX_AGENG_PORT = new DBField(DBDataType.INTEGER , "zabbix_ageng_port","zabbixAgengPort","Zabbix代理端口","Zabbix代理端口",false,false,true);
+		public static final DBField ZABBIX_AGENT_PORT = new DBField(DBDataType.INTEGER , "zabbix_agent_port","zabbixAgentPort","Zabbix代理端口","Zabbix代理端口",false,false,true);
 		
 		/**
 		 * Snmp端口
@@ -8550,7 +8550,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_NODE() {
-			this.init($NAME,"节点" , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , ZABBIX_AGENG_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"节点" , ID , NODE_IP , PID , TYPE , SUB_TYPE , GROUP_ID , NODE_NAME , NODE_NAME_SHOW , NODE_TYPE , NODE_ENABLED , STATUS , SSH_VOUCHER_ID , SSH_PORT , AGENT_PORT , ZABBIX_AGENT_PORT , SNMP_PORT , SNMP_VERSION , SNMP_COMMUNITY , JMX_PORT , IMPI_PORT , JDBC_URL , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_NODE $TABLE=new OPS_MONITOR_NODE();
 	}
@@ -9526,12 +9526,12 @@ public class EAMTables {
 		/**
 		 * 物理内存使用率
 		*/
-		public static final DBField P_MEMORY_USED = new DBField(DBDataType.LONG , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.DECIMAL , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
 		
 		/**
 		 * 虚拟内存使用率
 		*/
-		public static final DBField V_MEMORY_USED = new DBField(DBDataType.LONG , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.DECIMAL , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
 		
 		/**
 		 * 信息
@@ -9892,12 +9892,12 @@ public class EAMTables {
 		/**
 		 * 物理内存使用率
 		*/
-		public static final DBField P_MEMORY_USED = new DBField(DBDataType.LONG , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
+		public static final DBField P_MEMORY_USED = new DBField(DBDataType.DECIMAL , "p_memory_used","pMemoryUsed","物理内存使用率","物理内存使用率",false,false,true);
 		
 		/**
 		 * 虚拟内存使用率
 		*/
-		public static final DBField V_MEMORY_USED = new DBField(DBDataType.LONG , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
+		public static final DBField V_MEMORY_USED = new DBField(DBDataType.DECIMAL , "v_memory_used","vMemoryUsed","虚拟内存使用率","虚拟内存使用率",false,false,true);
 		
 		/**
 		 * 信息

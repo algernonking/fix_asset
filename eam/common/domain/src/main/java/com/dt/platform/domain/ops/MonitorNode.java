@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 节点
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-19 19:33:24
- * @sign AD05D1BF87A9419EA366092F81827D76
+ * @since 2022-02-22 17:47:09
+ * @sign 1E4445C7D63FE940F72B0945961CA866
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -119,7 +119,7 @@ public class MonitorNode extends Entity {
 	 * Zabbix代理端口：Zabbix代理端口
 	*/
 	@ApiModelProperty(required = false,value="Zabbix代理端口" , notes = "Zabbix代理端口")
-	private Integer zabbixAgengPort;
+	private Integer zabbixAgentPort;
 	
 	/**
 	 * Snmp端口：Snmp端口
@@ -530,17 +530,17 @@ public class MonitorNode extends Entity {
 	 * Zabbix代理端口
 	 * @return Zabbix代理端口
 	*/
-	public Integer getZabbixAgengPort() {
-		return zabbixAgengPort;
+	public Integer getZabbixAgentPort() {
+		return zabbixAgentPort;
 	}
 	
 	/**
 	 * 设置 Zabbix代理端口
-	 * @param zabbixAgengPort Zabbix代理端口
+	 * @param zabbixAgentPort Zabbix代理端口
 	 * @return 当前对象
 	*/
-	public MonitorNode setZabbixAgengPort(Integer zabbixAgengPort) {
-		this.zabbixAgengPort=zabbixAgengPort;
+	public MonitorNode setZabbixAgentPort(Integer zabbixAgentPort) {
+		this.zabbixAgentPort=zabbixAgentPort;
 		return this;
 	}
 	

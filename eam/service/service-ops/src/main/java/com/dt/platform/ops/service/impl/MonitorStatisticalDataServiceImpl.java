@@ -580,10 +580,12 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                    "select * from ops_monitor_node_value_last where (node_id,indicator_code,record_time) \n" +
                    "in(\n" +
                    "select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where node_id='"+nodeId+"' and result_status='sucess' and monitor_tpl_code='"+tplCode+"') t group by node_id,indicator_code\n" +
-                   "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.item_sort\n";
+                   "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.monitor_tpl_code, a1.code\n";
            RcdSet rs=dao.query(dataSql);
            for(Rcd r:rs){
+               //System.out.println(r.toJSONObject().toString());
                JSONObject data=parseCollectData(r.toJSONObject());
+              // System.out.println("T"+data.toString());
                nodeCollectData.add(data);
            }
         }
@@ -693,14 +695,14 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
 
     private JSONArray queryNodeHostTopDataOsCpuUsed(int top,int day){
         String sql="select * from (       \n" +
-                "select b.node_ip,b.node_name_show,a.cpu_used from ops_monitor_node_value_last a,ops_monitor_node b\n" +
+                "select b.node_ip,b.node_name_show,100-a.cpu_idle cpu_used from ops_monitor_node_value_last a,ops_monitor_node b\n" +
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.cpu') t group by node_id,indicator_code)\n" +
-                "and cpu_used is not null order by cpu_used desc)end limit "+top;
+                "and cpu_idle is not null order by cpu_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
 

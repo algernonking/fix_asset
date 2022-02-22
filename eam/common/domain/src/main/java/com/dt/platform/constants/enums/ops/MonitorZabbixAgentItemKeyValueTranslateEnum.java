@@ -11,15 +11,16 @@ import com.github.foxnic.api.constant.CodeTextEnum;
  */
 
 
-public enum MonitorZabbixAgentItemKeyValueEnum implements CodeTextEnum {
+public enum MonitorZabbixAgentItemKeyValueTranslateEnum implements CodeTextEnum {
 
     VFS_FS_GET("vfs.fs.get" , "文件系统"),
     SYSTEM_LOCALTIME_UTC("system.localtime[utc]" , "系统时间"),
+    NET_INTERFACE_FLOW("net.interface.flow" , "主机网络流量"),
     ;
 
     private String code;
     private String text;
-    private MonitorZabbixAgentItemKeyValueEnum(String code, String text)  {
+    private MonitorZabbixAgentItemKeyValueTranslateEnum(String code, String text)  {
         this.code=code;
         this.text=text;
     }

@@ -158,7 +158,7 @@ public class MonitorNodeGtr extends BaseCodeGenerator{
                 new Object[] {
                         EAMTables.OPS_MONITOR_NODE.SSH_VOUCHER_ID,
                         EAMTables.OPS_MONITOR_NODE.SSH_PORT,
-                        EAMTables.OPS_MONITOR_NODE.ZABBIX_AGENG_PORT,
+                        EAMTables.OPS_MONITOR_NODE.ZABBIX_AGENT_PORT,
                 },
 
                 new Object[] {

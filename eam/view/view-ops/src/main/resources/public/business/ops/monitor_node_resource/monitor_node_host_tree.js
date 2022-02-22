@@ -75,10 +75,10 @@ function ListPage() {
         });
 
         setTimeout(function(){
-            var toolbarHeight=$("#toolbar")[0].clientHeight;
+          //  var toolbarHeight=$("#toolbar")[0].clientHeight;
             var fullHeight=$(window).height();
             var fullWidth=$(window).width();
-            var treeHeight=fullHeight-toolbarHeight-1;
+            var treeHeight=fullHeight-20-1;
             $("#tree-container").height(treeHeight);
             $("#form-view").height(fullHeight-6);
         },10);
