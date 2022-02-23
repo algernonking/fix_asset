@@ -63,7 +63,7 @@ function ListPage() {
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
                 url: moduleURL +'/query-node-host-resource-list',
                 height: 'full-'+(h+28),
-                limit: 50,
+                limit: 1000,
                 page:false,
                 where: ps,
                 cols: [[
@@ -72,6 +72,7 @@ function ListPage() {
                     { field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('ID') , templet: function (d) { return templet('id',d.id,d);}  }
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
+
                     ,{ field: 'dataSystemConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态') , templet: function (d) {
 
                         if(d.dataSystemConnected=="1"){
@@ -81,6 +82,8 @@ function ListPage() {
                         }
 
                     }  }
+                    ,{ field: 'dataHostname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名') , templet: function (d) { return templet('dataHostname',d.dataHostname,d);}  }
+
                     ,{ field: 'dataOsCpuNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU数量') , templet: function (d) { return templet('dataOsCpuNumber',d.dataOsCpuNumber,d);}  }
                     ,{ field: 'dataOsLoad', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('负载') , templet: function (d) { return templet('dataOsLoad',d.dataOsLoad,d);}  }
                     ,{ field: 'dataOsCpuUsed', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('CPU使用率') , templet: function (d) { return templet('dataOsCpuUsed',d.dataOsCpuUsed,d);}  }
@@ -89,9 +92,8 @@ function ListPage() {
                     ,{ field: 'dataOsNetInterfaceFlowUp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('上行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowUp',d.dataOsNetInterfaceFlowUp,d);}  }
                     ,{ field: 'dataOsNetInterfaceFlowDown', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('下行流量(KB/s)') , templet: function (d) { return templet('dataOsNetInterfaceFlowDown',d.dataOsNetInterfaceFlowDown,d);}  }
                     ,{ field: 'dataProcessCnt', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('进程连接数') , templet: function (d) { return templet('dataProcessCnt',d.dataProcessCnt,d);}  }
-                    ,{ field: 'dataHostname', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名') , templet: function (d) { return templet('dataHostname',d.dataHostname,d);}  }
-                    ,{ field: 'dataMaxRecordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('dataMaxRecordTime',d.dataMaxRecordTime,d);}  }
-                    ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+                  //  ,{ field: 'dataMaxRecordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('更新时间') , templet: function (d) { return templet('dataMaxRecordTime',d.dataMaxRecordTime,d);}  }
+                 //   ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
                     ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],
                 parseData:function(res){

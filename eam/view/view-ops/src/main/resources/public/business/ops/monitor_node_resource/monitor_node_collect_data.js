@@ -65,7 +65,7 @@ function ListPage() {
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
                 url: moduleURL +'/query-node-collect-data?nodeId='+NODE_ID,
                 height: 'full-'+(h+28),
-                limit: 50,
+                limit: 10000,
                 page:false,
                 where: ps,
                 cols: [[
@@ -79,8 +79,8 @@ function ListPage() {
                     ,{ field: 'indicatorCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('指标编码') , templet: function (d) { return templet('indicatorCode',d.indicatorCode,d);}  }
                     ,{ field: 'valueColumnName', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('结果描述') , templet: function (d) { return templet('valueColumnName',d.valueColumnName,d);}  }
                     ,{ field: 'value', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('结果数据') , templet: function (d) { return templet('value',d.value,d);}  }
-                    ,{ field: 'recordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最新记录') , templet: function (d) { return templet('recordTime',d.recordTime,d);}  }
-                    ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
+                   // ,{ field: 'recordTime', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('最新记录') , templet: function (d) { return templet('recordTime',d.recordTime,d);}  }
+                   // ,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 
                     // ,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }
                 ]],

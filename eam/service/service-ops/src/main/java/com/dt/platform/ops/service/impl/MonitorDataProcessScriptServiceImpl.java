@@ -13,6 +13,8 @@ import com.github.foxnic.api.transter.Result;
 import com.github.foxnic.commons.busi.id.IDGenerator;
 import com.github.foxnic.commons.concurrent.SimpleJoinForkTask;
 import com.github.foxnic.commons.log.Logger;
+import com.github.foxnic.dao.data.Rcd;
+import com.github.foxnic.dao.data.RcdSet;
 import com.github.foxnic.dao.spec.DAO;
 import com.github.foxnic.sql.expr.ConditionExpr;
 import com.github.foxnic.sql.expr.Insert;
@@ -85,18 +87,27 @@ public class MonitorDataProcessScriptServiceImpl implements IMonitorDataProcessS
     @Override
     public Result clearNodeValueLastHistoryData() {
         String sql1="delete from ops_monitor_node_value_last where record_time<date_sub(now(), interval 1 day) ";
-        String sql2="delete from ops_monitor_node_value_last where id in (\n" +
-                "select id from (\n" +
-                "select \n" +
-                "(\n" +
-                "select max_record_time from (\n" +
-                "select node_id,monitor_tpl_code,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last b  group by node_id,monitor_tpl_code,indicator_code\n" +
-                ") e1 where e1.node_id=a.node_id and e1.monitor_tpl_code=a.monitor_tpl_code and e1.indicator_code=a.indicator_code\n" +
-                ") max_record_time,\n" +
-                "a.*\n" +
-                "from ops_monitor_node_value_last a )end where  end.record_time<end.max_record_time)";
+        String sql2="      delete from ops_monitor_node_value_last where record_time<  ( select min(max_record_time) from (\n" +
+                "            select node_id,monitor_tpl_code,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last b  group by node_id,monitor_tpl_code,indicator_code\n" +
+                "            ) a)\n";
+
         dao.execute(sql1);
         dao.execute(sql2);
+
+        String sql=" select  id from (\n" +
+                "                           select   (                                \n" +
+                "                select max_record_time from (\n" +
+                "                                select node_id,monitor_tpl_code,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last b  group by node_id,monitor_tpl_code,indicator_code\n" +
+                "                ) e1   where e1.node_id=a.node_id and e1.monitor_tpl_code=a.monitor_tpl_code and e1.indicator_code=a.indicator_code   ) max_record_time, \n" +
+                "                a.*\n" +
+                "                from ops_monitor_node_value_last a\n" +
+                "                \t\t\t )\n" +
+                "              \t\t  end where  end.record_time<end.max_record_time                 ";
+        RcdSet rs=dao.query(sql);
+        for(Rcd r:rs){
+            dao.execute("delete from ops_monitor_node_value_last where id=?",r.getString("id"));
+        }
+
         return ErrorDesc.success();
     }
 

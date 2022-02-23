@@ -92,10 +92,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value_last where result_status='sucess'  and  indicator_code='os.cpu' group by node_id,indicator_code)\n" +
                 " and t.node_id=end.id limit 1\n" +
                 ") data_os_cpu_used, \n" +
-                "(select max_record_time from \n" +
-                "(select node_id, max(record_time) max_record_time from ops_monitor_node_value_last where result_status='sucess' group by node_id) t\n" +
-                "where t.node_id=end.id limit 1\n" +
-                ") data_max_record_time,\n" +
+//                "(select max_record_time from \n" +
+//                "(select node_id, max(record_time) max_record_time from ops_monitor_node_value_last where result_status='sucess' group by node_id) t\n" +
+//                "where t.node_id=end.id limit 1\n" +
+//                ") data_max_record_time,\n" +
                 "(\n" +
                 "select p_memory_size\n" +
                 "from ops_monitor_node_value_last t where \n" +
@@ -143,7 +143,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "select os_datetime\n" +
                 "from ops_monitor_node_value_last t where \n" +
                 "(node_id,indicator_code,record_time) in \n" +
-                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value where result_status='sucess'   and indicator_code='os.datetime'  group by node_id,indicator_code)\n" +
+                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value_last where result_status='sucess'   and indicator_code='os.datetime'  group by node_id,indicator_code)\n" +
                 "and t.node_id=end.id limit 1\n" +
                 ") data_os_datetime,\n" +
                 "\n" +
