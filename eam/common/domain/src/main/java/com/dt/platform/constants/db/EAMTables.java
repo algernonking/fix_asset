@@ -7,7 +7,7 @@ import com.github.foxnic.sql.meta.DBDataType;
 
 
 /**
- * @since 2022-02-22 17:42:39
+ * @since 2022-02-23 11:03:36
  * @author 金杰 , maillank@qq.com
  * 数据库描述文件
  * 此文件由工具自动生成，请勿修改。若表结构变动，请使用工具重新生成。
@@ -10141,6 +10141,11 @@ public class EAMTables {
 		public static final DBField CODE = new DBField(DBDataType.STRING , "code","code","编码","编码",false,false,true);
 		
 		/**
+		 * 状态
+		*/
+		public static final DBField STATUS = new DBField(DBDataType.STRING , "status","status","状态","状态",false,false,true);
+		
+		/**
 		 * 分类
 		*/
 		public static final DBField TYPE = new DBField(DBDataType.STRING , "type","type","分类","分类",false,false,true);
@@ -10191,7 +10196,7 @@ public class EAMTables {
 		public static final DBField VERSION = new DBField(DBDataType.INTEGER , "version","version","版本","版本",false,false,false);
 		
 		public OPS_MONITOR_TPL() {
-			this.init($NAME,"监控模版" , ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
+			this.init($NAME,"监控模版" , ID , NAME , CODE , STATUS , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION);
 		}
 		public static final OPS_MONITOR_TPL $TABLE=new OPS_MONITOR_TPL();
 	}

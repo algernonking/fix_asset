@@ -1,6 +1,7 @@
 package com.dt.platform.generator.module.ops;
 
 import com.dt.platform.constants.db.EAMTables;
+import com.dt.platform.constants.enums.ops.MonitorEnableEnum;
 import com.dt.platform.domain.ops.MonitorNodeType;
 import com.dt.platform.domain.ops.MonitorTplGraph;
 import com.dt.platform.domain.ops.MonitorTplIndicator;
@@ -34,6 +35,7 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         cfg.view().search().inputLayout(
                 new Object[]{
                         EAMTables.OPS_MONITOR_TPL.TYPE,
+                        EAMTables.OPS_MONITOR_TPL.STATUS,
                         EAMTables.OPS_MONITOR_TPL.NAME,
                         EAMTables.OPS_MONITOR_TPL.CODE,
                 }
@@ -50,6 +52,8 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.ID).table().disable(true);
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.CREATE_TIME).table().disable(true);
 
+        cfg.view().field(EAMTables.OPS_MONITOR_TPL.STATUS).form().validate().required().form()
+                .label("状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
 
         cfg.view().field(EAMTables.OPS_MONITOR_TPL.TYPE)
@@ -68,6 +72,7 @@ public class MonitorTplGtr extends BaseCodeGenerator{
         cfg.view().form().addGroup(null,
                 new Object[] {
                         EAMTables.OPS_MONITOR_TPL.TYPE,
+                        EAMTables.OPS_MONITOR_TPL.STATUS,
                         EAMTables.OPS_MONITOR_TPL.NAME,
                         EAMTables.OPS_MONITOR_TPL.CODE,
                         EAMTables.OPS_MONITOR_TPL.NOTES,

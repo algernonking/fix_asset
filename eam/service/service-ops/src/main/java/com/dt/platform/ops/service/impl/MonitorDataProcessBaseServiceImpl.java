@@ -89,11 +89,16 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
                 "b.indicator_code indicator_code,\n" +
                 "b.value_str1 zabbix_agent_version,\n" +
                 "b.record_time record_time\n" +
-                "from ops_monitor_node a,( \n" +
+                "from (\n" +
+                "select * from ops_monitor_node where id in (select node_id from ops_monitor_node_tpl_item where tpl_code='tpl_zabbix_agent')\n" +
+                ")a\n" +
+                "left join \n" +
+                "( \n" +
                 "select * from ops_monitor_node_value_last where (node_id,indicator_code,record_time)in (\n" +
                 "select node_id,indicator_code,max(record_time) max_record_time from ops_monitor_node_value_last where indicator_code='zabbixAgent.version' and  result_status='sucess' group by \n" +
                 " node_id,indicator_code)\n" +
-                " )b where a.id=b.node_id and a.deleted=0";
+                " )b on  a.id=b.node_id and a.deleted=0\n" +
+                " \n";
         return result.success(true).data(dao.query(sql).toJSONArrayWithJSONObject());
     }
 

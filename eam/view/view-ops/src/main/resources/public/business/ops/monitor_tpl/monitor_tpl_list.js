@@ -1,7 +1,7 @@
 /**
  * 监控模版 列表页 JS 脚本
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 08:04:06
+ * @since 2022-02-23 11:07:05
  */
 
 
@@ -76,6 +76,7 @@ function ListPage() {
 					{ fixed: 'left',type:'checkbox'}
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'code', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('编码') , templet: function (d) { return templet('code',d.code,d);}  }
+					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(RADIO_STATUS_DATA,d.status),d);}}
 					,{ field: 'type', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('归类'), templet: function (d) { return templet('type' ,fox.joinLabel(d.tplType,"name"),d);}}
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true  , title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
@@ -118,6 +119,7 @@ function ListPage() {
 		value.id={ inputType:"button",value: $("#id").val()};
 		value.name={ inputType:"button",value: $("#name").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
 		value.code={ inputType:"button",value: $("#code").val() ,fuzzy: true,valuePrefix:"",valueSuffix:"" };
+		value.status={ inputType:"radio_box", value: getSelectedValue("#status","value"), label:getSelectedValue("#status","nameStr") };
 		value.type={ inputType:"select_box", value: getSelectedValue("#type","value") ,fillBy:["tplType"]  , label:getSelectedValue("#type","nameStr") };
 		value.notes={ inputType:"button",value: $("#notes").val()};
 		value.createTime={ inputType:"date_input", value: $("#createTime").val() ,matchType:"auto"};
@@ -168,6 +170,27 @@ function ListPage() {
 
 		fox.switchSearchRow(1);
 
+		//渲染 status 搜索框
+		fox.renderSelectBox({
+			el: "status",
+			size: "small",
+			radio: true,
+			on: function(data){
+				setTimeout(function () {
+					window.pageExt.list.onSelectBoxChanged && window.pageExt.list.onSelectBoxChanged("status",data.arr,data.change,data.isAdd);
+				},1);
+			},
+			//toolbar: {show:true,showIcon:true,list:["CLEAR","REVERSE"]},
+			transform:function(data) {
+				//要求格式 :[{name: '水果', value: 1},{name: '蔬菜', value: 2}]
+				var opts=[];
+				if(!data) return opts;
+				for (var i = 0; i < data.length; i++) {
+					opts.push({data:data[i],name:data[i].text,value:data[i].code});
+				}
+				return opts;
+			}
+		});
 		//渲染 type 下拉字段
 		fox.renderSelectBox({
 			el: "type",

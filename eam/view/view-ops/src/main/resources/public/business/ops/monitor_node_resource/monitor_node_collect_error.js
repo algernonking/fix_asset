@@ -63,7 +63,7 @@ function ListPage() {
                 defaultToolbar: ['filter', 'print','exports',{title: '刷新数据',layEvent: 'refresh-data',icon: 'layui-icon-refresh-3'}],
                 url: moduleURL +'/query-node-collect-data-failed',
                 height: 'full-'+(h+28),
-                limit: 50,
+                limit: 10000,
                 page:false,
                 where: ps,
                 cols: [[

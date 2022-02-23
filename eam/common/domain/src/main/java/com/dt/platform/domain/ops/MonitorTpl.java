@@ -18,8 +18,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 监控模版
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 08:04:05
- * @sign 99F025E78C542A0CC8BF0932CAF85BB7
+ * @since 2022-02-23 11:07:04
+ * @sign E756DEC5600774DEED8170081B4E6B1E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,12 @@ public class MonitorTpl extends Entity {
 	*/
 	@ApiModelProperty(required = false,value="编码" , notes = "编码")
 	private String code;
+	
+	/**
+	 * 状态：状态
+	*/
+	@ApiModelProperty(required = false,value="状态" , notes = "状态")
+	private String status;
 	
 	/**
 	 * 分类：分类
@@ -181,6 +187,25 @@ public class MonitorTpl extends Entity {
 	*/
 	public MonitorTpl setCode(String code) {
 		this.code=code;
+		return this;
+	}
+	
+	/**
+	 * 获得 状态<br>
+	 * 状态
+	 * @return 状态
+	*/
+	public String getStatus() {
+		return status;
+	}
+	
+	/**
+	 * 设置 状态
+	 * @param status 状态
+	 * @return 当前对象
+	*/
+	public MonitorTpl setStatus(String status) {
+		this.status=status;
 		return this;
 	}
 	

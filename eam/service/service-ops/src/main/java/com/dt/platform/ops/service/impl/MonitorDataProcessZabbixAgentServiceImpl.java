@@ -137,6 +137,8 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
         String ip=node.getNodeIp();
         String port=node.getZabbixAgentPort()+"";
         String cmdExe=getZabbixGetExe();
+        String result="";
+        int code=0;
         if(StringUtil.isBlank(cmdExe)){
             Logger.info("ip:"+ip+",没有找到zabbix_get");
             return RemoteZabbixAgentResult.setData(99, "没有找到zabbix_get");
@@ -145,7 +147,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
             Logger.info("ip:"+ip+",Command 为空");
             return RemoteZabbixAgentResult.setData(99, "没有找到Command");
         }
-        String result="";
+
         RemoteZabbixAgentResult res=null;
         if(MonitorIndicatorValueColumnColsEnum.MULTIPLE.code().equals(tplIndicator.getValueColumnCols())
                 &&MonitorIndicatorValueColumnRowsEnum.SINGLE.code().equals(tplIndicator.getValueColumnRows())){
@@ -163,9 +165,11 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
             }
         }else{
            res=executeZabbixAgentCommandSingle(node,tplIndicator.getCommand(),tplIndicator.getIndicatorVariable());
+           code=res.code;
+           result=res.result;
         }
-        int code=0;
-        result=res.result;
+
+
         if(MonitorZabbixAgentIndicatorTranslateEnum.SYSTEM_CONNECTED.code().equals(tplIndicator.getCode())){
 
         }else if(MonitorZabbixAgentIndicatorTranslateEnum.OS_NET_INTERFACE_FLOW.code().equals(tplIndicator.getCode())){
@@ -175,6 +179,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
             result=getNetFlowData(node,netInt);
             System.out.println("getNetFlowData Result:"+result);
         }
+        Logger.info("zabbix agent result,code:"+res.code+",content:"+res.result);
         return RemoteZabbixAgentResult.setData(code, result);
     }
 
@@ -262,10 +267,9 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
             Logger.info("ip:"+ip+",Command 为空");
             return RemoteZabbixAgentResult.setData(99, "没有找到Command");
         }
-
         String exeCommand=cmdExe.trim()+" -s "+ip+" -p "+port+" -k "+cmd.trim();
-        Logger.info("execute zabbix agent,command:"+exeCommand);
         SystemCommandtResult r=SystemCommandExecutor.exeCmd(exeCommand,30);
+        Logger.info("execute zabbix agent,command:\n"+exeCommand+",result:"+r.result);
         if(r.code==0){
             if(MonitorZabbixAgentItemKeyValueTranslateEnum.SYSTEM_LOCALTIME_UTC.code().equals(cmd.trim())){
                 String unixTime=r.result.replaceAll("\n","".trim());

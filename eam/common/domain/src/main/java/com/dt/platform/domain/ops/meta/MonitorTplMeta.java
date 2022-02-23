@@ -12,8 +12,8 @@ import com.dt.platform.domain.ops.MonitorTplGraph;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 08:04:05
- * @sign 99F025E78C542A0CC8BF0932CAF85BB7
+ * @since 2022-02-23 11:07:04
+ * @sign E756DEC5600774DEED8170081B4E6B1E
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -48,6 +48,16 @@ public class MonitorTplMeta {
 	 * 编码 , 类型: java.lang.String
 	*/
 	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,CODE, java.lang.String.class, "编码", "编码", java.lang.String.class, null);
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final String STATUS="status";
+	
+	/**
+	 * 状态 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.ops.MonitorTpl,java.lang.String> STATUS_PROP = new BeanProperty(com.dt.platform.domain.ops.MonitorTpl.class ,STATUS, java.lang.String.class, "状态", "状态", java.lang.String.class, null);
 	
 	/**
 	 * 分类 , 类型: java.lang.String
@@ -182,7 +192,7 @@ public class MonitorTplMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ ID , NAME , CODE , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE , TPL_INDICATOR_LIST , GRAPH_LIST };
+	public static final String[] $PROPS={ ID , NAME , CODE , STATUS , TYPE , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TPL_TYPE , TPL_INDICATOR_LIST , GRAPH_LIST };
 	
 	/**
 	 * 代理类
@@ -222,6 +232,17 @@ public class MonitorTplMeta {
 		public MonitorTpl setCode(String code) {
 			super.change(CODE,super.getCode(),code);
 			super.setCode(code);
+			return this;
+		}
+		
+		/**
+		 * 设置 状态
+		 * @param status 状态
+		 * @return 当前对象
+		*/
+		public MonitorTpl setStatus(String status) {
+			super.change(STATUS,super.getStatus(),status);
+			super.setStatus(status);
 			return this;
 		}
 		

@@ -51,7 +51,7 @@ import com.github.foxnic.api.validate.annotations.NotNull;
  * 监控模版 接口控制器
  * </p>
  * @author 金杰 , maillank@qq.com
- * @since 2022-02-13 08:04:06
+ * @since 2022-02-23 11:07:04
 */
 
 @Api(tags = "监控模版")
@@ -69,8 +69,9 @@ public class MonitorTplController extends SuperController {
 	@ApiOperation(value = "添加监控模版")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控zabbix模版"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_zabbix"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
@@ -124,8 +125,9 @@ public class MonitorTplController extends SuperController {
 	@ApiOperation(value = "更新监控模版")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控zabbix模版"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_zabbix"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
@@ -145,8 +147,9 @@ public class MonitorTplController extends SuperController {
 	@ApiOperation(value = "保存监控模版")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控zabbix模版"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_zabbix"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
@@ -209,8 +212,9 @@ public class MonitorTplController extends SuperController {
 	@ApiOperation(value = "查询监控模版")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控zabbix模版"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_zabbix"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
@@ -231,8 +235,9 @@ public class MonitorTplController extends SuperController {
 	@ApiOperation(value = "分页查询监控模版")
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = MonitorTplVOMeta.ID , value = "主键" , required = true , dataTypeClass=String.class , example = "1"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控模版"),
-		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.NAME , value = "名称" , required = false , dataTypeClass=String.class , example = "Linux监控zabbix模版"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.CODE , value = "编码" , required = false , dataTypeClass=String.class , example = "tpl_host_linux_zabbix"),
+		@ApiImplicitParam(name = MonitorTplVOMeta.STATUS , value = "状态" , required = false , dataTypeClass=String.class , example = "enable"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.TYPE , value = "分类" , required = false , dataTypeClass=String.class , example = "host"),
 		@ApiImplicitParam(name = MonitorTplVOMeta.NOTES , value = "备注" , required = false , dataTypeClass=String.class , example = "Linux主机监控模版"),
 	})
