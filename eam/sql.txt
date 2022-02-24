@@ -1,3 +1,14 @@
+create index ind1 on ops_monitor_node(node_enabled,type,status);
+create index ind2 on ops_monitor_node(node_enabled,type);
+create index ind6 on ops_monitor_node_value_last(node_id,result_status,monitor_tpl_code)
+create index ind1 on ops_monitor_tpl_indicator(status,monitor_tpl_code)
+tpl 表新政status 字段
+alter table ops_monitor_node_value drop index ind1;
+create index ind1 on ops_monitor_node_value (`node_id`,result_status,`monitor_tpl_code`,`indicator_code`,`record_time`)
+
+
+
+
 
 delete from ops_monitor_node_value;
 insert into ops_monitor_node_value select * from eam_demo.ops_monitor_node_value;

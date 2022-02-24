@@ -168,6 +168,7 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
                 "and c.monitor_method='"+monitorMethod+"'";
         ConditionExpr expr=new ConditionExpr();
         expr.and(" id in ("+sql+")" );
+       // expr.and("status","enable");
         expr.andIf("node_enabled",MonitorEnableEnum.ENABLE.code());
         List<MonitorNode> list=monitorNodeService.queryList(expr);
         return list;
@@ -202,6 +203,7 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
                 "and b.tpl_code=c.monitor_tpl_code \n";
         ConditionExpr expr=new ConditionExpr();
         expr.and("code in ("+sql+")" );
+        expr.and("status=?","enable");
         List<MonitorTpl> list=monitorTplService.queryList(expr);
         Result<List<MonitorTpl>> res=new Result<>();
         res.data(list);
@@ -213,11 +215,9 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
 
         for(Insert insert:insList){
             try{
-                System.out.println("insert collect data:\n"+insert.getSQL());
                 dao.execute(insert);
                 insert.into("ops_monitor_node_value_last");
                 dao.execute(insert);
-
             }catch(UncategorizedSQLException e){
                 Logger.info("Sql execute error,sql:"+insert.getSQL());
                 Insert errInsert=new Insert("ops_monitor_node_value");

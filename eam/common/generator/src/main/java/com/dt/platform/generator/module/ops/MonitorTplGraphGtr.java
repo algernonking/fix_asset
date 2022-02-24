@@ -52,6 +52,9 @@ public class MonitorTplGraphGtr extends BaseCodeGenerator{
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.STATUS).form().validate().required().form()
                 .label("状态").radioBox().defaultIndex(0).enumType(MonitorEnableEnum.class);
 
+
+
+
         cfg.view().field(EAMTables.OPS_MONITOR_TPL_GRAPH.GRAPH_TYPE).form().validate().required().form()
                 .label("类型").radioBox().defaultIndex(0).enumType(MonitorTplGraphTypeEnum.class);
 

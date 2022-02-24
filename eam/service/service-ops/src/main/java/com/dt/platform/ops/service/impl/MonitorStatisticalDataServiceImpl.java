@@ -164,9 +164,6 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "\n" +
                 "end.*\n" +
                 "from ops_monitor_node end where node_enabled='enable' and deleted='0'\n" ;
-
-
-       // System.out.println("nodeList Sql:\n"+sql);
         Result<JSONObject> result=new Result<>();
         JSONObject resultData=new JSONObject();
         //统计节点个数
@@ -261,7 +258,6 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
     private JSONObject parseCollectData(JSONObject meta){
 
         JSONObject result=new JSONObject();
-
         result.put("nodeIp",meta.getString("nodeIp"));
         result.put("nodeNameShow",meta.getString("nodeNameShow"));
         result.put("monitorTplCode",meta.getString("monitorTplCode"));
@@ -269,7 +265,6 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         result.put("indicatorName",meta.getString("name"));
         result.put("recordTime",meta.getString("recordTime"));
         result.put("valueColumnName",meta.getString("valueColumnName"));
-
         String colType=meta.getString("valueColumnCols");
         if("single".equals(colType)){
             String col=meta.getString("valueColumn");
@@ -282,11 +277,8 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 for(int i=0;i<colArr.length;i++){
                     if(i==0){
                         v=meta.getString(lineToHump(colArr[i]));
-                        System.out.println(colArr[i]+v);
                     }else{
                         v=v+","+meta.getString(lineToHump(colArr[i]));
-                        System.out.println(colArr[i]+v);
-                        System.out.println(v);
                     }
                 }
                 result.put("value",v);
@@ -312,6 +304,9 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
         JSONArray tplData=new JSONArray();
         if(monitorNode.getMonitorTplList()!=null&&monitorNode.getMonitorTplList().size()>0){
             for(MonitorTpl tpl:monitorNode.getMonitorTplList()){
+                if(!"enable".equals(tpl.getStatus())){
+                    continue;
+                }
                 Boolean match=false;
                 //tplCode 存在值,并且匹配
                 if(StringUtil.isBlank(tplCode)) {
@@ -345,7 +340,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
             SimpleJoinForkTask<MonitorTplGraph,JSONObject> task=new SimpleJoinForkTask<>(tpl.getGraphList(),2);
             List<JSONObject> rvs=task.execute(els->{
                 // 打印当前线程信息
-                System.out.println("Thread name:"+Thread.currentThread().getName());
+                Logger.info("Thread name:"+Thread.currentThread().getName());
                 // 处理当前分到的 若干元素，此处为 5 个
                 List<JSONObject> rs=new ArrayList<>();
                 for (MonitorTplGraph graph : els) {
@@ -492,10 +487,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                         tabSql="select "+route+",record_time from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' \n" +
                                 "and result_status='sucess' and node_id=?\n" +
                                 "and record_time=(select max(record_time) from ops_monitor_node_value where monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and result_status='sucess' and node_id=?)";
-
-                        System.out.println(nodeId+"@@@\n"+tabSql);
                         RcdSet tabRs=dao.query(tabSql,nodeId,nodeId);
-
                         tableData.put("data",tabRs.toJSONArrayWithJSONObject());
                     }catch(UncategorizedSQLException e){
                         e.printStackTrace();
@@ -581,17 +573,17 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                    "(select * from ops_monitor_tpl_indicator where monitor_tpl_code='"+tplCode+"' and status='enable'\n" +
                    ") a1 left join \n" +
                    "(\n" +
-                   "select * from ops_monitor_node_value_last where (node_id,indicator_code,record_time) \n" +
+                   "select * from ops_monitor_node_value_last where node_id='"+nodeId+"' and (indicator_code,record_time) \n" +
                    "in(\n" +
-                   "select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where node_id='"+nodeId+"' and result_status='sucess' and monitor_tpl_code='"+tplCode+"') t group by node_id,indicator_code\n" +
+                   "select indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where node_id='"+nodeId+"' and result_status='sucess' and monitor_tpl_code='"+tplCode+"') t group by node_id,indicator_code\n" +
                    "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.monitor_tpl_code, a1.code\n";
            RcdSet rs=dao.query(dataSql);
+           System.out.println("TTTT"+System.currentTimeMillis());
            for(Rcd r:rs){
-               //System.out.println(r.toJSONObject().toString());
                JSONObject data=parseCollectData(r.toJSONObject());
-              // System.out.println("T"+data.toString());
                nodeCollectData.add(data);
            }
+            System.out.println("TTTT"+System.currentTimeMillis());
         }
 
         resultData.put("nodeCollectDataList",nodeCollectData);
@@ -613,7 +605,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
             // 并行执行
             List<HashMap<String,JSONArray>> rvs=task.execute(els->{
                 // 打印当前线程信息
-                System.out.println("Thread name:"+Thread.currentThread().getName());
+                Logger.info("Thread name:"+Thread.currentThread().getName());
                 // 处理当前分到的 若干元素，此处为 5 个
                 List<HashMap<String,JSONArray>> rs=new ArrayList<>();
                 for (String topValue : els) {
@@ -645,7 +637,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 while (it.hasNext()) {
                     Map.Entry<String, JSONArray> entry = it.next();
                     resultData.put(entry.getKey(),entry.getValue());
-                    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+
                 }
             }
         }
@@ -680,7 +672,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
-                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
+                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow' and result_status='sucess') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number1 desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
@@ -692,7 +684,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
-                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow') t group by node_id,indicator_code,list_value_str1)\n" +
+                "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow' and result_status='sucess') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number2 desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
@@ -705,7 +697,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
-                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.cpu') t group by node_id,indicator_code)\n" +
+                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.cpu' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "and cpu_idle is not null order by cpu_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
@@ -718,7 +710,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
-                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.load') t group by node_id,indicator_code)\n" +
+                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.load' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "order by os_load desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }
@@ -731,7 +723,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "and b.node_enabled='enable' \n" +
                 "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
-                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.memory_used') t group by node_id,indicator_code)\n" +
+                "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.memory_used' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "order by p_memory_used desc)end limit "+top;
         return dao.query(sql).toJSONArrayWithJSONObject();
     }

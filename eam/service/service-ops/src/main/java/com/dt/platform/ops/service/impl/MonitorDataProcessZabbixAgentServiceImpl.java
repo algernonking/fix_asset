@@ -75,7 +75,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
         // 并行执行
         List<Result> rvs=task.execute(els->{
             // 打印当前线程信息
-            System.out.println(Thread.currentThread().getName());
+            Logger.info(Thread.currentThread().getName());
             // 处理当前分到的 若干元素，此处为 5 个
             List<Result> rs=new ArrayList<>();
             for (MonitorNode node : els) {
@@ -174,10 +174,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
 
         }else if(MonitorZabbixAgentIndicatorTranslateEnum.OS_NET_INTERFACE_FLOW.code().equals(tplIndicator.getCode())){
             JSONArray netInt= JSONArray.parseArray(result);
-            System.out.println(netInt.toJSONString());
-            System.out.println("getNetFlowData"+netInt.toJSONString());
             result=getNetFlowData(node,netInt);
-            System.out.println("getNetFlowData Result:"+result);
         }
         Logger.info("zabbix agent result,code:"+res.code+",content:"+res.result);
         return RemoteZabbixAgentResult.setData(code, result);
@@ -196,7 +193,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
         // 并行执行
         List<String> rvs=task.execute(els->{
             // 打印当前线程信息
-            System.out.println(Thread.currentThread().getName());
+            Logger.info(Thread.currentThread().getName());
             // 处理当前分到的 若干元素，此处为 5 个
             List<String> rs=new ArrayList<>();
             for (String intName : els) {

@@ -50,11 +50,13 @@ function ListPage() {
         list.push("os_p_memory_used");
         // list.push("os_net_flow_up");
         // list.push("os_net_flow_down");
-
         topPs.topList=list;
         topPs.top=5;
         topPs.day=5;
+        var task=setTimeout(function(){layer.load(2);},1000);
         admin.request("/service-ops/ops-statistics/query-node-host-top-data", topPs, function (data) {
+            clearTimeout(task);
+            layer.closeAll('loading');
             if(data.success){
                 var dataLoad=data.data.osLoad;
                 var dataCpu=data.data.osCpuUsed;
