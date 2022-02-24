@@ -508,7 +508,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                     if("enable".equals(item.getStatus())){
                         String dsql="";
                         try{
-                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where  monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' and "+route+" is not null";
+                            dsql="select unix_timestamp(record_time)*1000 unix_record_time,"+route+" from ops_monitor_node_value where  monitor_tpl_code='"+tplCode+"' and indicator_code='"+item.getIndicatorCode()+"' and node_id='"+nodeId+"' and result_status='sucess' ";
                             if(sdate.length()==16){
                                 dsql=dsql+" and record_time>str_to_date('"+sdate+"','%Y-%m-%d %H:%i')\n";
                             }
