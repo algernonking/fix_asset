@@ -71,7 +71,7 @@ public class MonitorDataProcessZabbixAgentServiceImpl implements IMonitorDataPro
         Logger.info("collectData,find nodes number:"+nodeList.size());
 
         // 创建 ForkJoin 工具，其中 输入一个 Integer 元素的 List ，输出 Long 元素的 List ，每个线程处理 若干元素 ，此处为 5 个
-        SimpleJoinForkTask<MonitorNode,Result> task=new SimpleJoinForkTask<>(nodeList,3);
+        SimpleJoinForkTask<MonitorNode,Result> task=new SimpleJoinForkTask<>(nodeList,5);
         // 并行执行
         List<Result> rvs=task.execute(els->{
             // 打印当前线程信息

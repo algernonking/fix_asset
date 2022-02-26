@@ -7,8 +7,11 @@ import com.dt.platform.constants.db.EAMTables;
 import com.dt.platform.constants.enums.common.CodeModuleEnum;
 import com.dt.platform.constants.enums.eam.*;
 import com.dt.platform.domain.eam.*;
+import com.dt.platform.domain.eam.meta.AssetCollectionMeta;
+import com.dt.platform.domain.eam.meta.AssetStockCollectionMeta;
 import com.dt.platform.eam.service.*;
 import com.dt.platform.proxy.common.CodeModuleServiceProxy;
+import com.dt.platform.proxy.eam.AssetCollectionServiceProxy;
 import com.github.foxnic.commons.lang.StringUtil;
 import com.github.foxnic.dao.data.Rcd;
 import com.github.foxnic.dao.data.RcdSet;
@@ -100,11 +103,14 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 
 		String id=IDGenerator.getSnowflakeIdString();
 		sourceAsset.setRemainNumber(cnt);
+		sourceAsset.setAssetNumber(cnt);
 		sourceAsset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
 		sourceAsset.setId(id);
 		sourceAsset.setOwnerCode(AssetOwnerCodeEnum.ASSET_CONSUMABLES_COLLECTION.code());
 		sourceAsset.setInternalControlLabel(sourceAssetId);
+		//sourceAsset.setInternalControlLabel(AssetOwnerCodeEnum.ASSET_CONSUMABLES_COLLECTION.code());
 		sourceAsset.setAssetCode(sourceAssetId);
+
 		assetService.insert(sourceAsset);
 		if(ownerId!=null&&ownerId.length()>0){
 			AssetItem obj=new AssetItem();
@@ -128,8 +134,37 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	@Override
 	public Result stockDistribute(String ownerId, String assetSelectedCode,String sourceAssetId, int cnt) {
 
+		Asset sourceAsset=assetService.getById(sourceAssetId);
+		if(cnt>sourceAsset.getRemainNumber()){
+			return ErrorDesc.failureMessage("库存不足");
+		}
+		if(cnt<1){
+			return ErrorDesc.failureMessage("数量有误");
+		}
 
-
+		String id=IDGenerator.getSnowflakeIdString();
+		sourceAsset.setAssetNumber(cnt);
+		sourceAsset.setRemainNumber(cnt);
+		sourceAsset.setStatus(AssetHandleStatusEnum.INCOMPLETE.code());
+		sourceAsset.setId(id);
+		sourceAsset.setOwnerCode(AssetOwnerCodeEnum.ASSET_STOCK_DISTRIBUTE.code());
+		sourceAsset.setInternalControlLabel(sourceAssetId);
+		sourceAsset.setAssetCode(sourceAssetId);
+		assetService.insert(sourceAsset);
+		if(ownerId!=null&&ownerId.length()>0){
+			AssetItem obj=new AssetItem();
+			obj.setId(IDGenerator.getSnowflakeIdString());
+			obj.setAssetId(id);
+			obj.setCrd("c");
+			obj.setHandleId(ownerId);
+			return assetItemService.insert(obj);
+		}else{
+			AssetSelectedData obj=new AssetSelectedData();
+			obj.setId(IDGenerator.getSnowflakeIdString());
+			obj.setAssetSelectedCode(assetSelectedCode);
+			obj.setAssetId(id);
+			assetSelectedDataService.insert(obj);
+		}
 		return ErrorDesc.success();
 	}
 
@@ -179,7 +214,6 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	}
 
 	private Result checkStock(String id){
-
 
 		String sql="select * from (\t\t\t\n" +
 				"SELECT source_code, SUM(source_remain_number) AS source_remain_number, SUM(remain_number) AS remain_number\n" +
@@ -260,7 +294,22 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 			AssetStockCollection bill=new AssetStockCollection();
 			bill.setId(asset.getId());
 			bill.setStatus(status);
-			return super.update(bill,SaveMode.NOT_NULL_FIELDS);
+
+
+			Result r=super.update(bill,SaveMode.NOT_NULL_FIELDS);
+			if(r.isSuccess()){
+				//减去库存
+				join(asset, AssetStockCollectionMeta.ASSET_LIST);
+				List<Asset> assetList=asset.getAssetList();
+				if(assetList.size()>0){
+					for(int i=0;i<assetList.size();i++){
+						String sql="update asset set asset_number=asset_number-"+assetList.get(i).getAssetNumber()+",remain_number=remain_number-"+assetList.get(i).getAssetNumber()+" where id=?";
+						dao.execute(sql,assetList.get(i).getInternalControlLabel());
+					}
+				}
+
+			}
+			return r;
 		}else if(AssetHandleConfirmOperationEnum.FAILED.code().equals(result)){
 			return ErrorDesc.failureMessage(message);
 		}else{
@@ -278,7 +327,7 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	private String queryModuleCode(String ownerCode){
 		String moduleCode="";
 		if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(ownerCode)){
-			moduleCode=CodeModuleEnum.EAM_ASSET_STOCK_ALLOCATE.code();
+			moduleCode=CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code();
 		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(ownerCode)){
 			moduleCode=CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code();
 		}
@@ -306,8 +355,6 @@ public class AssetStockCollectionServiceImpl extends SuperService<AssetStockColl
 	 */
 	@Override
 	public Result insert(AssetStockCollection assetStockCollection,boolean throwsException) {
-
-
 
 		if(assetStockCollection.getAssetIds()==null||assetStockCollection.getAssetIds().size()==0){
 			String assetSelectedCode=assetStockCollection.getSelectedCode();

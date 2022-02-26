@@ -490,6 +490,39 @@ function ListPage() {
                 })
 
             } else if (layEvent === 'stockDistribute') { // 查看
+                layer.open({
+                    id:1,
+                    type:1,
+                    title:"请输入分配数量",
+                    style:"width:50%:height:auto;",
+                    content:"<div style='display:flex;justify-content:center;'><input id='area' type='number' style='width:100%;height:30px;margin-left:5px;margin-right:5px'></input></div>",
+                    btn:['保存','取消'],
+                    yes:function(index,layero){
+                        var closeContent=top.$("#area").val()||$("#area").val();
+                        if(closeContent){
+                            var param={};
+                            param=billdata;
+                            param.assetSelectedCode=ASSET_SELECTED_CODE;
+                            param.sourceAssetId=data.id;
+                            param.cnt=closeContent;
+                            var api="/service-eam/eam-asset-stock-collection/stock-distribute";
+                            admin.post(api, param, function (data) {
+                                if (data.success) {
+                                    var index=admin.getTempData('eam-asset-select-data-popup-index');
+                                    admin.finishPopupCenter(index);
+                                } else {
+                                    layer.msg(data.message, {icon: 2, time: 1500});
+                                }
+                            }, {delayLoading:1000,elms:[]});
+
+                        }else{
+                            alert("请输入分配数量");
+                        }
+                    },
+                    no:function(index,layer){
+                        layer.close(index);
+                    }
+                })
 
             }
 

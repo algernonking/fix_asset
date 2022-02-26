@@ -78,13 +78,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
 
         String sql=" \n" +
                 "select\n" +
-                "(\n" +
-                "select is_connected\n" +
-                "from ops_monitor_node_value_last t where \n" +
-                "(node_id,indicator_code,record_time) in \n" +
-                "(select node_id,indicator_code, max(record_time) max_record_time from ops_monitor_node_value_last where result_status='sucess' and indicator_code='system.connected'  group by node_id,indicator_code)\n" +
-                " and t.node_id=end.id limit 1\n" +
-                ") data_system_connected, \n" +
+
                 "\n" +
                 "(select 100-cpu_idle\n" +
                 "from ops_monitor_node_value_last t where \n" +
@@ -578,12 +572,10 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                    "select indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where node_id='"+nodeId+"' and result_status='sucess' and monitor_tpl_code='"+tplCode+"') t group by node_id,indicator_code\n" +
                    "))a2 on a1.monitor_tpl_code=a2.monitor_tpl_code and a1.code=a2.indicator_code order by a1.monitor_tpl_code, a1.code\n";
            RcdSet rs=dao.query(dataSql);
-           System.out.println("TTTT"+System.currentTimeMillis());
            for(Rcd r:rs){
                JSONObject data=parseCollectData(r.toJSONObject());
                nodeCollectData.add(data);
            }
-            System.out.println("TTTT"+System.currentTimeMillis());
         }
 
         resultData.put("nodeCollectDataList",nodeCollectData);
@@ -651,7 +643,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+               // "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
                 "in (\n" +
                 "select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.fs' and result_status='sucess') t group by node_id,indicator_code,list_value_str1\n" +
@@ -670,7 +662,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+             //  "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
                 "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow' and result_status='sucess') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number1 desc)end limit "+top;
@@ -682,7 +674,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+             //   "and b.status='online' \n" +
                 "and (node_id,indicator_code,list_value_str1,record_time) \n" +
                 "in (select node_id,indicator_code,list_value_str1,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.net_interface_flow' and result_status='sucess') t group by node_id,indicator_code,list_value_str1)\n" +
                 "order by a.list_value_number2 desc)end limit "+top;
@@ -695,7 +687,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+              //  "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.cpu' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "and cpu_idle is not null order by cpu_used desc)end limit "+top;
@@ -708,7 +700,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+             //   "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.load' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "order by os_load desc)end limit "+top;
@@ -721,7 +713,7 @@ public class MonitorStatisticalDataServiceImpl extends SuperService<MonitorNode>
                 "where a.node_id=b.id \n" +
                 "and b.type='os' \n" +
                 "and b.node_enabled='enable' \n" +
-                "and b.status='online' \n" +
+           //     "and b.status='online' \n" +
                 "and (node_id,indicator_code,record_time) \n" +
                 "in (select node_id,indicator_code,max(record_time) max_record_time from (select * from ops_monitor_node_value_last where indicator_code='os.memory_used' and result_status='sucess') t group by node_id,indicator_code)\n" +
                 "order by p_memory_used desc)end limit "+top;

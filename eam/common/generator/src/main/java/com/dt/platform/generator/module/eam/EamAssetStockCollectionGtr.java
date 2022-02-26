@@ -27,6 +27,7 @@ public class EamAssetStockCollectionGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addListProperty(Asset.class,"assetList","资产","资产");
         cfg.getPoClassFile().addListProperty(String.class,"assetIds","资产列表","资产列表");
 
+
         cfg.getPoClassFile().addListProperty(Asset.class,"assetSourceList","资产来源","资产来源");
 
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","领用公司/部门","领用公司/部门");

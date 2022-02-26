@@ -281,8 +281,8 @@ public class EamRelationManager extends RelationManager {
     public void setupStockAssetCollection(){
         // 关联资产
         this.property(AssetStockCollectionMeta.ASSET_LIST_PROP)
-                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.ID ).join(EAMTables.EAM_ASSET_ITEM.HANDLE_ID)
-                .using( EAMTables.EAM_ASSET_ITEM.ASSET_ID).join( EAMTables.EAM_ASSET.ID);
+                .using(EAMTables.EAM_ASSET_STOCK_COLLECTION.ID ).join(EAMTables.EAM_ASSET.INTERNAL_CONTROL_LABEL);
+
 
         // 关联位置
         this.property(AssetStockCollectionMeta.POSITION_PROP)

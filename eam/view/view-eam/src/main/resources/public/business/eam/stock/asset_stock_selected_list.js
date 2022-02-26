@@ -210,7 +210,6 @@ function ListPage() {
         //添加按钮点击事件
         function openCreateFrom() {
             // //设置新增是初始化数据
-
             console.log("openCreateFrom");
             var data={};
             admin.putTempData('eam-asset-select-action', "create",true);

@@ -889,12 +889,25 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 		}else if(AssetOwnerCodeEnum.ASSET_STOCK.code().equals(asset.getOwnerCode())){
 			codeRule=CodeModuleEnum.EAM_ASSET_STOCK_CODE.code();
-			if(asset.getAssetNumber()<1) asset.setAssetNumber(1);
+			if(asset.getAssetNumber()<1){
+				asset.setAssetNumber(1);
+			}
+			asset.setRemainNumber(asset.getAssetNumber());
+
+		}else if(AssetOwnerCodeEnum.ASSET_STOCK_DISTRIBUTE.code().equals(asset.getOwnerCode())){
+			codeRule=AssetOwnerCodeEnum.ASSET_STOCK_DISTRIBUTE.code();
+			asset.setRemainNumber(asset.getAssetNumber());
+
+
+		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES_COLLECTION.code().equals(asset.getOwnerCode())){
+			codeRule=AssetOwnerCodeEnum.ASSET_CONSUMABLES_COLLECTION.code();
 			asset.setRemainNumber(asset.getAssetNumber());
 
 		}else if(AssetOwnerCodeEnum.ASSET_CONSUMABLES.code().equals(asset.getOwnerCode())){
 			codeRule=CodeModuleEnum.EAM_ASSET_CONSUMABLES_CODE.code();
-			if(asset.getAssetNumber()<1) asset.setAssetNumber(1);
+			if(asset.getAssetNumber()<1) {
+				asset.setAssetNumber(1);
+			}
 			asset.setRemainNumber(asset.getAssetNumber());
 
 		}else if(AssetOwnerCodeEnum.ASSET_SOFTWARE.code().equals(asset.getOwnerCode())){

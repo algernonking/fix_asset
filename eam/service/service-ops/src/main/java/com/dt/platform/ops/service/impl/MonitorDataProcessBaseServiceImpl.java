@@ -74,7 +74,7 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
             "and b.tpl_code=c.monitor_tpl_code)t1\n" +
             "left join \n" +
             "(select node_id,monitor_tpl_code,indicator_code,UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(max(record_time)) interval_time\n" +
-            "from ops_monitor_node_value \n" +
+            "from ops_monitor_node_value_last \n" +
             "group by node_id,monitor_tpl_code,indicator_code)t2 \n" +
             "on t1.id=t2.node_id and t1.monitor_tpl_code=t2.monitor_tpl_code and t1.code=t2.indicator_code \n" +
             ") end where e_interval_time>interval_time ";
@@ -253,7 +253,7 @@ public class MonitorDataProcessBaseServiceImpl implements IMonitorDataProcessBas
             return ErrorDesc.success().data(insList);
         }
         if("system.connected".equals(tplIndicator.getCode())){
-            if("1".equals(content)){
+            if("1".equals(content.replaceAll("\n","").trim())){
                 dao.execute("update ops_monitor_node set status='online' where id=? ",node.getId());
             }else{
                 dao.execute("update ops_monitor_node set status='offline' where id=? ",node.getId());

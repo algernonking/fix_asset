@@ -19,9 +19,12 @@ public enum AssetOwnerCodeEnum implements CodeTextEnum {
 	ASSET_CHANGE_RECORD("asset_change_record" , "资产变更记录"),
 	ASSET_CLEAN_OUT("asset_clean_out" , "资产清理"),
 	ASSET_SOFTWARE("asset_software" , "软件资产"),
-	ASSET_STOCK("asset_stock" , "资产库存"),
+
 	ASSET_CONSUMABLES("asset_consumables" , "耗材资产"),
-	ASSET_CONSUMABLES_COLLECTION("asset_consumables_collection" , "耗材资产领用"),
+	ASSET_CONSUMABLES_COLLECTION(CodeModuleEnum.EAM_ASSET_CONSUMABLES_COLLECTION.code() , "耗材资产领用"),
+
+	ASSET_STOCK("asset_stock" , "资产库存"),
+	ASSET_STOCK_DISTRIBUTE(CodeModuleEnum.EAM_ASSET_STOCK_DISTRIBUTE.code() , "资产库存分配"),
 
 
 	ASSET_CHANGE_BASE_INFO(CodeModuleEnum.EAM_ASSET_CHANGE_BASE_INFO.code(), "EAM_资产变更-基本"),

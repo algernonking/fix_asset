@@ -73,9 +73,9 @@ function ListPage() {
                     ,{ field: 'nodeIp', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机IP') , templet: function (d) { return templet('nodeIp',d.nodeIp,d);}  }
                     ,{ field: 'nodeNameShow', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机名称') , templet: function (d) { return templet('nodeNameShow',d.nodeNameShow,d);}  }
 
-                    ,{ field: 'dataSystemConnected', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态') , templet: function (d) {
+                    ,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('主机状态') , templet: function (d) {
 
-                        if(d.dataSystemConnected=="1"){
+                        if(d.status=="online"){
                             return "在线"
                         }else{
                             return "下线"
