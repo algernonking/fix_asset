@@ -12,7 +12,7 @@ if [[ -d "$maven_dir/com/github/foxnic" ]];then
   cd $maven_dir/com/github/foxnic
   echo "start to clear foxnic maven lib";
   rm -rf *
-fi
+fiAL
 
 if [[ -d "/Users/lank/IdeaProjectsnew/eam/logs" ]];then
   cd /Users/lank/IdeaProjectsnew/eam/logs

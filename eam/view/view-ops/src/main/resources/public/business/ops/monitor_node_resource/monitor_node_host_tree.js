@@ -67,7 +67,7 @@ function ListPage() {
                 menuTree=$.fn.zTree.init($("#menu-tree"), cfgs,r.data);
                 var  tmp_nodes = menuTree.getNodes();
                 for  ( var  i = 0; i < tmp_nodes.length; i++) {  //设置节点展开
-                    menuTree.expandNode(tmp_nodes[i],  true ,  false ,  true );
+                   // menuTree.expandNode(tmp_nodes[i],  true ,  false ,  true );
                 }
             } else {
                 admin.toast().error("获取数据失败",{time:1000,position:"right-bottom"});

@@ -35,10 +35,12 @@ spring:
             mac: /Users/Shared/foxnic/passwd.txt
             linux: /foxnic/passwd.txt
         driver-class-name: com.mysql.cj.jdbc.Driver
-        #url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
-        url: jdbc:mysql://127.0.0.1:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
-        username: tD5wkJAfnCt04A+Y+QN5GA==
-        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
+        #        url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
+        #        username: tD5wkJAfnCt04A+Y+QN5GA==
+        #        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
+        url: jdbc:mysql://121.43.103.102:3306/eam_dh?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+        username: root
+        password: 123456
         # 启动程序时，在连接池中初始化多少个连接
         initialSize: 16
         # 连接池中最多支持多少个活动会话
@@ -86,15 +88,17 @@ spring:
       #session:
       #store-type: redis # 使用 redis 存储session
       #redis:
-      #port: 6379
+    #port: 6379
     #host: 127.0.0.1
 
 
 foxnic:
+  api:
+    log-enable: true
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
-    profiles: empty,profile@GuoYIE
-  # 设置 Join 的二级缓存
+    profiles: empty
+  # 设置 API 接口
   job:
     enable: false
     force-run-job-ids:
@@ -104,13 +108,19 @@ foxnic:
     misfire-threshold: 1000
     # 日志保留天数
     log-keep-days: 7
+  storage:
+    mode: disk
+    disk:
+      location:
+        #在不同的环境下选择不同的路径
+        windows: c:/uploads
+        mac: /opt/upload
+        linux: /opt/eam/upload
   cache:
     # 默认配置
     default:
       # local,remote,both,none
-      mode: none
-      # 是否为 join 使用缓存
-      cache-for-join: false
+      mode: both
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
@@ -126,12 +136,12 @@ foxnic:
             cache-empty-result: true
             properties: code
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
       "org.github.foxnic.web.domain.system.DictItem":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -141,7 +151,7 @@ foxnic:
             cache-empty-result: true
             properties: dictCode
       "org.github.foxnic.web.domain.system.DbCache":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -151,7 +161,7 @@ foxnic:
             cache-empty-result: true
             properties: area,catalog,ownerType,ownerId
       "org.github.foxnic.web.domain.pcm.Catalog":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -201,14 +211,7 @@ knife4j:
   description: ${spring.application.description}
   version: 1.0
 
-storage:
-  mode: disk
-  disk:
-    location:
-      #在不同的环境下选择不同的路径
-      windows: c:/uploads
-      mac: /opt/upload
-      linux: /opt/eam/upload
+
 
 develop:
   language: defaults
