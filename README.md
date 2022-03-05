@@ -33,7 +33,7 @@
 
 - 部署步骤
 ```
-  其中镜像中1.0.5为版本号,替换相对于版本即可。
+  其中镜像中1.0.6为版本号,替换相对于版本即可。
   $docker run --name eamapp -t \
     -e MYSQL_USER="eam" \
     -e MYSQL_PASSWORD="eam_pwd" \
