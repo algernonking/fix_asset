@@ -29,22 +29,24 @@
 
  | 应用镜像     |   移动端     |
  | ---------- | -----------  |
+ | 1.0.7      | 暂不支持      |
  | 1.0.6      | 暂不支持      |
  | 1.0.5      | 暂不支持      |
  | 1.0.2      | 暂不支持      |
 
 - 部署步骤
 ```
-  其中镜像中1.0.6为版本号,替换相对于版本即可。
+  其中镜像中1.0.7为版本号,替换相对于版本即可。
   $docker run --name eamapp -t \
     -e MYSQL_USER="eam" \
     -e MYSQL_PASSWORD="eam_pwd" \
     -e MYSQL_ROOT_PASSWORD="root_pwd" \
-    -v /d/mysql:/var/lib/mysql  \
+    -v /eam/mysql:/var/lib/mysql  \
     -p 3307:3306 \
     -p 8089:8089 \
     -d docker.io/algernonking/eamapp:1.0.6 \
     --character-set-server=utf8
+
 ```
 
 ## 项目结构说明

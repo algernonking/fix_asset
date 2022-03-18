@@ -1,11 +1,11 @@
 server:
   session:
-    timeout: 1200s
+    timeout: 12000s
   servlet:
     session:
       # 会话超时时间，如 30s , 20m 等
-      timeout: 1200s
-  port: 26788
+      timeout: 12000s
+  port: 8089
 
 spring:
   main:
@@ -35,7 +35,10 @@ spring:
             mac: /Users/Shared/foxnic/passwd.txt
             linux: /foxnic/passwd.txt
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/eam?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
+#        url: ai+mCm8asbK9SNrQDk7ac29neidjdgHp2jFU7HYbZZOmvbR4OKNXb877AJzdYToBGLgN+etaRMM4wzovFLMULMH6brIo3zgsyub026w4Il4Oqg9jzyYsLaa6LNyznmYm5kKoS17K9XHBX8e0lDuik9pcc/DfdjaUkhm0MmOALUM86dHiyURHUP5hfQ4otf/kE9gVP+GO1G7fUdc4JBLDYylfBzmp9SNKQcTLQ/5AkWcnbm89+5pAz4JNnCJILF0B
+#        username: tD5wkJAfnCt04A+Y+QN5GA==
+#        password: ODGx5F84xpWJgfRFnzAaYhViHJqrTO3uxxDZ2lRlZNk=
+        url: jdbc:mysql://127.0.0.1:3306/eam_dh?useSSL=false&serverTimezone=Hongkong&useUnicode=true&characterEncoding=utf-8&autoReconnect=true&allowPublicKeyRetrieval=true&tinyInt1isBit=false
         username: root
         password: root_pwd
         # 启动程序时，在连接池中初始化多少个连接
@@ -90,17 +93,34 @@ spring:
 
 
 foxnic:
+  api:
+    log-enable: true
   config:
     # 按顺序读取 profile 下的配置值，默认使用 default Profile 的配置值，如果位于靠前的 profile 已经有配置，则不再往后读取，即前面 profile 的覆盖后面的 profile ;
-    profiles: empty,default
-  # 设置 Join 的二级缓存
+    profiles: empty
+  # 设置 API 接口
+  job:
+    enable: false
+    force-run-job-ids:
+    # 指定 Quartz 使用的DAO数据源
+    dao-bean-name: primaryDAO
+    # 容许的最大作业延长时间，超出则认为 misfire 发生，单位毫秒
+    misfire-threshold: 1000
+    # 日志保留天数
+    log-keep-days: 7
+  storage:
+    mode: disk
+    disk:
+      location:
+        #在不同的环境下选择不同的路径
+        windows: c:/uploads
+        mac: /opt/upload
+        linux: /opt/eam/upload
   cache:
     # 默认配置
     default:
       # local,remote,both,none
-      mode: none
-      # 是否为 join 使用缓存
-      cache-for-join: false
+      mode: both
       # 本地缓存配置 : 最大元素个数
       local-limit: 10240
       # 本地缓存配置 : 本地缓存超时时长；-1 表示用不过期
@@ -116,12 +136,12 @@ foxnic:
             cache-empty-result: true
             properties: code
       "org.github.foxnic.web.domain.oauth.Resourze":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
       "org.github.foxnic.web.domain.system.DictItem":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -131,7 +151,7 @@ foxnic:
             cache-empty-result: true
             properties: dictCode
       "org.github.foxnic.web.domain.system.DbCache":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -141,7 +161,7 @@ foxnic:
             cache-empty-result: true
             properties: area,catalog,ownerType,ownerId
       "org.github.foxnic.web.domain.pcm.Catalog":
-        mode: local
+        #mode: local
         local-limit: 10240
         local-expire: 1200000
         remote-expire: 1200000
@@ -157,7 +177,7 @@ security:
   # 模式：session / jwt
   mode: both
   # 配置无需鉴权可以访问的地址
-  ignored-urls: /assets/** , /pages/** , /*.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**
+  ignored-urls: /assets/** , /pages/** , /*.ico , /module/** ,  /**/*.css , /**/*.js , /error , /druid/**,/business/eam/user_book/**
   # mode=session 时配置的登录页面
   login-page: /login.html
   jwt:
@@ -191,14 +211,7 @@ knife4j:
   description: ${spring.application.description}
   version: 1.0
 
-storage:
-  mode: disk
-  disk:
-    location:
-      #在不同的环境下选择不同的路径
-      windows: c:/uploads
-      mac: /opt/upload
-      linux: /opt/eam/upload
+
 
 develop:
   language: defaults

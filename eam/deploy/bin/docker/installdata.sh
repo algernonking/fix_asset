@@ -21,7 +21,7 @@ else
     echo "db eam is exits"
 fi
 
-echo "hello2">>/tmp/action.log
+echo "hello">>/tmp/action.log
 cd /usr/local/bin/
 sh startapp.sh
 exit 0
@@ -36,6 +36,8 @@ docker run --name eam_base1 -t \
 --character-set-server=utf8
 
 dd=af7adc2e672b
+
+docker cp  $dd:/usr/local/bin/docker-entrypoint.sh
 
 docker cp docker-entrypoint.sh $dd:/usr/local/bin/
 docker cp startapp.sh $dd:/usr/local/bin/
