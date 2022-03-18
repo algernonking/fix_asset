@@ -36,7 +36,6 @@ public class EamAssetCollectionGtr extends BaseCodeGenerator {
 
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"useUser","使用人员","使用人员");
-
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","领用公司/部门","领用公司/部门");
 
 

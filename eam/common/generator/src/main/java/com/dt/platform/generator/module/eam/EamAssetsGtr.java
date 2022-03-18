@@ -60,20 +60,13 @@ public class EamAssetsGtr extends BaseCodeGenerator {
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"originator","制单人","制单人");
         cfg.getPoClassFile().addSimpleProperty(Supplier.class,"supplier","供应商","供应商");
         cfg.getPoClassFile().addSimpleProperty(Maintainer.class,"maintnainer","维保商","维保商");
-
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"ownerCompany","所属公司","所属公司");
         cfg.getPoClassFile().addSimpleProperty(Organization.class,"useOrganization","使用公司/部门","使用公司/部门");
-
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"source","来源","来源");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"equipmentEnvironment","设备运行环境","设备运行环境");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"safetyLevel","安全等级","安全等级");
         cfg.getPoClassFile().addSimpleProperty(DictItem.class,"assetMaintenanceStatus","维保状态","维保状态");
-
-
-
         cfg.getPoClassFile().addSimpleProperty(Rack.class,"rack","机柜","机柜");
-
-
         cfg.getPoClassFile().addSimpleProperty(ChangeInstance.class,"changeInstance","变更实例","变更实例");
 
 
@@ -279,6 +272,7 @@ public class EamAssetsGtr extends BaseCodeGenerator {
 
 
         cfg.view().field(EAMTables.EAM_ASSET.ASSET_NOTES).form().textArea().height(30);
+
         cfg.view().field(EAMTables.EAM_ASSET.FINANCIAL_NOTES).form().textArea().height(30);
         cfg.view().field(EAMTables.EAM_ASSET.MAINTENANCE_NOTES).form().textArea().height(30);
 

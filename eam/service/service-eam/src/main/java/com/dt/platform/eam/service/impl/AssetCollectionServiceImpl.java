@@ -260,6 +260,7 @@ public class AssetCollectionServiceImpl extends SuperService<AssetCollection> im
 		map.put("position_id",billData.getPositionId());
 		map.put("position_detail",billData.getPositionDetail());
 		map.put("use_organization_id",billData.getUseOrganizationId());
+
 		HashMap<String,List<SQL>> resultMap=assetService.parseAssetChangeRecordWithChangeAsset(billData.getAssetList(),map,billData.getBusinessCode(),AssetOperateEnum.EAM_ASSET_COLLECTION.code(),"");
 		for(String key:resultMap.keySet()){
 			List<SQL> sqls=resultMap.get(key);

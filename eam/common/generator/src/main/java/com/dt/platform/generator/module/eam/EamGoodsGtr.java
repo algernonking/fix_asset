@@ -54,7 +54,6 @@ public class EamGoodsGtr extends BaseCodeGenerator {
                 .form().selectBox().queryApi(CategoryServiceProxy.QUERY_PAGED_LIST).paging(true).filter(true).toolbar(false)
                 .valueField(CategoryMeta.ID).textField(CategoryMeta.HIERARCHY_NAME).fillWith(GoodsMeta.CATEGORY).muliti(false);
 
-//
 //        cfg.view().field(EAMTables.EAM_GOODS.BRAND_ID)
 //                .basic().label("品牌")
 //                .form().validate().required()

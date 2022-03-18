@@ -25,8 +25,6 @@ function ListPage() {
 
 
 
-
-
         var task=setTimeout(function(){layer.load(2);},1000);
         admin.request(moduleURL+"/dashboard", {}, function (data) {
             clearTimeout(task);
@@ -104,6 +102,8 @@ function ListPage() {
                         }
                     ]
                 })
+
+
 
             }else{
                 alert("获取数据失败!");

@@ -115,33 +115,36 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 
 	public String applyAssetDataPermissions(Asset asset,ConditionExpr expr){
 		String dp="";
-		Logger.info("start to match applyAssetDataPermissions!");
+		Logger.info("dataPermissions|applyAssetDataPermissions,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
 		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
-			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
-			//if(asset.getStatus()!=null&&AssetHandleStatusEnum.COMPLETE.code().equals(asset.getStatus())){
+				Logger.info("dataPermissions|queryAssetDataPermissions ");
 				if(operateService.queryAssetDataPermissions()){
+					Logger.info("dataPermissions|assetDataPermissions parameter enable");
 					dp="eam_asset_global_data_permission";
 				}else{
-					Logger.info("assetDataPermissions parameter disabled!");
+					Logger.info("dataPermissions|assetDataPermissions parameter disabled");
 				}
 		//	}else{
 		//		Logger.info("assetDataPermissions disabled!,asset handle status:"+asset.getStatus());
 		//	}
+		}else{
+			Logger.info("dataPermissions|assetCode not matched.");
 		}
-		Logger.info("apply asset data permission,dp match result:"+dp);
+
+		Logger.info("dataPermissions|apply asset data permission finish,dp match result:"+dp);
 		return dp;
 	}
 
-	public boolean applyAssetDataPermissions(Asset asset,ConditionExpr expr,boolean enable ){
-		Logger.info("start to match applyAssetDataPermissions!");
-		if(!enable){
-			return true;
-		}
-		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
-			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
-		}
-		return true;
-	}
+//	public boolean applyAssetDataPermissions(Asset asset,ConditionExpr expr,boolean enable ){
+//		Logger.info("start to match applyAssetDataPermissions!");
+//		if(!enable){
+//			return true;
+//		}
+//		if(AssetOwnerCodeEnum.ASSET.code().equals(asset.getOwnerCode())){
+//			Logger.info("apply asset data permission,ownerCode:"+AssetOwnerCodeEnum.ASSET.code());
+//		}
+//		return true;
+//	}
 
 	@Override
 	public Object generateId(Field field) {
@@ -580,18 +583,12 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 				ChangeEvent event=r.data();
 				for (Asset asset : e.getValue()) {
 					syncBill(asset.getId(),event);
-					//
 				}
-
-				//
-
 			}
 		}
-
-
-
 		return result;
 	}
+
 	public Result approve(String instanceId, List<Asset> assets, String approveAction, String opinion) {
 
 		ApprovalAction action=ApprovalAction.parseByCode(approveAction);
@@ -861,9 +858,9 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	@Override
 	public Result insert(Asset asset) {
 
-		if(StringUtil.isBlank(asset.getOwnerCode())){
-			asset.setOwnerCode("idle");
-		}
+//		if(StringUtil.isBlank(asset.getOwnerCode())){
+//			asset.setOwnerCode("idle");
+//		}
 
 		//制单人
 		if(StringUtil.isBlank(asset.getOriginatorId())){
@@ -1189,9 +1186,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 	 * */
 	@Override
 	public PagedList<Asset> queryPagedList(Asset sample, ConditionExpr condition, int pageSize, int pageIndex) {
-
 		String dp=applyAssetDataPermissions(sample,condition);
-		System.out.println("asset dp:"+dp);
 		if(StringUtil.isBlank(dp)){
 			return super.queryPagedList(sample, condition, pageSize, pageIndex);
 		}else{
