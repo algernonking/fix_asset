@@ -389,7 +389,7 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			changeId=IDGenerator.getSnowflakeIdString();
 			Insert ins=new Insert("eam_asset");
 			ins.set("owner_code",AssetOwnerCodeEnum.ASSET_CHANGE_RECORD.code());
-			ins.setIf("tenant_id",SessionUser.getCurrent().getActivatedCompanyId());
+			ins.setIf("tenant_id",SessionUser.getCurrent().getActivatedTenantId());
 			for(String key:changeMap.keySet()){
 				ins.set(key,changeMap.get(key));
 			}
