@@ -166,6 +166,26 @@ function ListPage() {
     };
 
 	/**
+	 * 刷新单号数据
+	 * */
+	function refreshRowData(data,remote) {
+		var context=dataTable.getDataRowContext( { #(paramJson) } );
+		if(context==null) return;
+		if(remote) {
+			admin.post(moduleURL+"/get-by-id", { #(paramJson) }, function (r) {
+				if (r.success) {
+					data = r.data;
+					context.update(data);
+				} else {
+					top.layer.msg(data.message, {icon: 1, time: 1500});
+				}
+			});
+		} else {
+			context.update(data);
+		}
+	}
+
+	/**
       * 刷新表格数据
       */
 	function refreshTableData(sortField,sortType,reset) {
@@ -782,13 +802,19 @@ function ListPage() {
 			id:"#(formDataKey)-win",
 			content: '#(formURI)' + (queryString?("?"+queryString):""),
 			finish: function () {
-				refreshTableData();
+				if(action=="create") {
+					refreshTableData();
+				}
+				if(action=="edit") {
+					#(refreshAfterEdit)?refreshTableData():refreshRowData(data,true);
+				}
 			}
 		});
 	};
 
 	window.module={
 		refreshTableData: refreshTableData,
+		refreshRowData: refreshRowData,
 		getCheckedList: getCheckedList
 	};
 

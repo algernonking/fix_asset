@@ -150,11 +150,15 @@ public class #(simpleName) extends SuperController {
 	#if(isEnableSwagger)
 	@ApiOperation(value = "获取#(topic)")
 	@ApiImplicitParams({
-		@ApiImplicitParam(name = #(voMetaSimpleName).#(idPropertyConst) , value = "主键" , required = true , dataTypeClass=#(idPropertyType).class , example = "1"),
+		#for(pk : pks)
+		@ApiImplicitParam(name = #(voMetaSimpleName).#(pk.idPropertyConst) , value = "主键" , required = true , dataTypeClass=#(pk.idPropertyType).class , example = "1"),
+		#end
 	})
 	@ApiOperationSupport(order=6)
 	#end
-	@NotNull(name = #(voMetaSimpleName).#(idPropertyConst))
+	#for(pk : pks)
+	@NotNull(name = #(voMetaSimpleName).#(pk.idPropertyConst))
+	#end
 	#if(isEnableMicroService)
 	@SentinelResource(value = #(agentSimpleName).GET_BY_ID , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	#end

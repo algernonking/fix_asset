@@ -150,23 +150,23 @@
 <!-- 表格操作列 -->
 <script type="text/html" id="tableOperationTemplate">
 	#if(isTree)
-    <button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" th:text="${lang.translate('下级')}" data-id="{{d.id}}">下级</button>
+    <button class="layui-btn layui-btn-primary layui-btn-xs" lay-event="drill" data-id="{{d.id}}"><span th:text="${lang.translate('下级')}">下级</span></button>
 	#end
 
     #if(!disableFormView)
-    <button th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button #if(formViewButton.css!=null)#(formViewButton.css)#end" lay-event="view" th:text="${lang.translate(#if(formViewButton.label==null)'查看'#else'#(formViewButton.label)'#end)}" data-id="{{d.id}}">#if(formViewButton.label==null)查看#else#(formViewButton.label)#end</button>
+    <button th:if="${perm.checkAuth('#(authPrefix):view-form')}" class="layui-btn layui-btn-primary layui-btn-xs ops-view-button #if(formViewButton.css!=null)#(formViewButton.css)#end" lay-event="view"  data-id="{{d.id}}"> <span th:text="${lang.translate(#if(formViewButton.label==null)'查看'#else'#(formViewButton.label)'#end)}">#if(formViewButton.label==null)查看#else#(formViewButton.label)#end</span></button>
     #end
     #if(!disableModify)
-    <button th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button #if(modifyButton.css!=null)#(modifyButton.css)#end" lay-event="edit" th:text="${lang.translate(#if(modifyButton.label==null)'修改'#else'#(modifyButton.label)'#end)}" data-id="{{d.id}}">#if(modifyButton.label==null)修改#else#(modifyButton.label)#end</button>
+    <button th:if="${perm.checkAnyAuth('#(authPrefix):update','#(authPrefix):save')}" class="layui-btn layui-btn-primary layui-btn-xs ops-edit-button #if(modifyButton.css!=null)#(modifyButton.css)#end" lay-event="edit"data-id="{{d.id}}"><span th:text="${lang.translate(#if(modifyButton.label==null)'修改'#else'#(modifyButton.label)'#end)}">#if(modifyButton.label==null)修改#else#(modifyButton.label)#end</span></button>
     #end
 
 
     #if(!disableSingleDelete)
-    <button th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button #if(deleteButton.css!=null)#(deleteButton.css)#end" lay-event="del" th:text="${lang.translate(#if(deleteButton.label==null)'删除'#else'#(deleteButton.label)'#end)}" data-id="{{d.id}}">#if(deleteButton.label==null)删除#else#(deleteButton.label)#end</button>
+    <button th:if="${perm.checkAuth('#(authPrefix):delete')}" class="layui-btn layui-btn-xs layui-btn-danger ops-delete-button #if(deleteButton.css!=null)#(deleteButton.css)#end" lay-event="del" data-id="{{d.id}}"><span th:text="${lang.translate(#if(deleteButton.label==null)'删除'#else'#(deleteButton.label)'#end)}">#if(deleteButton.label==null)删除#else#(deleteButton.label)#end</span></button>
     #end
 
     #for(b:opColumnButtons)
-    <button #if(b.perm!=null)th:if="${perm.checkAuth('#(b.perm)')}"#end class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" th:text="${lang.translate('#(b.label)')}" data-id="{{d.id}}">#(b.label)</button>
+    <button #if(b.perm!=null)th:if="${perm.checkAuth('#(b.perm)')}"#end class="layui-btn layui-btn-xs #if(b.css!=null) #(b.css) #end" lay-event="#(b.id)" data-id="{{d.id}}">#if(b.iconHtml!=null) #(b.iconHtml) #end<span th:text="${lang.translate('#(b.label)')}">#(b.label)</span></button>
     #end
 
     #if(opColumnMenus!=null && opColumnMenus.size()>0)
