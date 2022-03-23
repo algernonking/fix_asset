@@ -1,0 +1,148 @@
+
+
+
+delete from eam_c1.eam_brand;
+insert into eam_c1.eam_brand select * from eam_brand;
+
+delete from eam_c1.eam_category;
+insert into eam_c1.eam_category select * from eam_category;
+
+delete from eam_c1.eam_category_finance;
+insert into eam_c1.eam_category_finance select * from eam_category_finance;
+
+
+delete from eam_c1.eam_maintainer;
+insert into eam_c1.eam_maintainer select * from eam_maintainer;
+
+delete from eam_c1.eam_manufacturer;
+insert into eam_c1.eam_manufacturer select * from eam_manufacturer;
+
+delete from eam_c1.eam_position;
+insert into eam_c1.eam_position select * from eam_position;
+
+delete from eam_c1.eam_supplier;
+insert into eam_c1.eam_supplier select * from eam_supplier;
+
+
+delete from eam_c1.eam_warehouse;
+insert into eam_c1.eam_warehouse select * from eam_warehouse;
+
+
+
+
+delete from eam_c1.hrm_company;
+insert into eam_c1.hrm_company select * from hrm_company;
+
+delete from eam_c1.hrm_employee;
+insert into eam_c1.hrm_employee select * from hrm_employee;
+
+delete from eam_c1.hrm_employee_position;
+insert into eam_c1.hrm_employee_position select * from hrm_employee_position;
+
+
+delete from eam_c1.hrm_organization;
+insert into eam_c1.hrm_organization select * from hrm_organization;
+
+
+delete from eam_c1.hrm_person;
+insert into eam_c1.hrm_person select * from hrm_person;
+
+
+delete from eam_c1.hrm_position;
+insert into eam_c1.hrm_position select * from hrm_position;
+
+
+
+
+
+
+delete from eam_c1.sys_user;
+insert into eam_c1.sys_user select * from sys_user;
+
+
+delete from eam_c1.sys_user_tenant;
+insert into eam_c1.sys_user_tenant select * from sys_user_tenant;
+
+
+
+delete from eam_c1.sys_role;
+insert into eam_c1.sys_role select * from sys_role;
+
+
+
+delete from eam_c1.pcm_catalog;
+insert into eam_c1.pcm_catalog select * from pcm_catalog;
+
+
+delete from eam_c1.pcm_catalog_allocation;
+insert into eam_c1.pcm_catalog_allocation select * from pcm_catalog_allocation;
+
+delete from eam_c1.pcm_catalog_attribute;
+insert into eam_c1.pcm_catalog_attribute select * from pcm_catalog_attribute;
+
+delete from eam_c1.pcm_data_01;
+insert into eam_c1.pcm_data_01 select * from pcm_data_01;
+
+delete from eam_c1.pcm_data_02;
+insert into eam_c1.pcm_data_02 select * from pcm_data_02;
+
+delete from eam_c1.pcm_data_asset_01;
+insert into eam_c1.pcm_data_asset_01 select * from pcm_data_asset_01;
+
+
+delete from eam_c1.eam_approve_configure;
+insert into eam_c1.eam_approve_configure select * from eam_approve_configure;
+
+
+delete from eam_c1.eam_approve_role;
+insert into eam_c1.eam_approve_role select * from eam_approve_role;
+
+delete from eam_c1.eam_asset_attribute;
+insert into eam_c1.eam_asset_attribute select * from eam_asset_attribute;
+
+delete from eam_c1.eam_asset_attribute_item;
+insert into eam_c1.eam_asset_attribute_item select * from eam_asset_attribute_item;
+
+delete from eam_c1.eam_asset_data_change;
+insert into eam_c1.eam_asset_data_change select * from eam_asset_data_change;
+
+
+delete from eam_c1.eam_asset_data_permissions;
+insert into eam_c1.eam_asset_data_permissions select * from eam_asset_data_permissions;
+
+delete from eam_c1.eam_asset_data_permissions_catalog;
+insert into eam_c1.eam_asset_data_permissions_catalog select * from eam_asset_data_permissions_catalog;
+
+delete from eam_c1.eam_asset_data_permissions_org;
+insert into eam_c1.eam_asset_data_permissions_org select * from eam_asset_data_permissions_org;
+
+delete from eam_c1.eam_asset_data_permissions_position;
+insert into eam_c1.eam_asset_data_permissions_position select * from eam_asset_data_permissions_position;
+
+
+
+delete from eam_c1.dp_rule;
+insert into eam_c1.dp_rule select * from dp_rule;
+
+
+delete from eam_c1.dp_rule_condition;
+insert into eam_c1.dp_rule_condition select * from dp_rule_condition;
+
+delete from eam_c1.dp_rule_range;
+insert into eam_c1.dp_rule_range select * from dp_rule_range;
+
+delete from eam_c1.sys_busi_role;
+insert into eam_c1.sys_busi_role select * from sys_busi_role;
+
+
+delete from eam_c1.sys_busi_role_member;
+insert into eam_c1.sys_busi_role_member select * from sys_busi_role_member;
+
+
+delete from eam_c1.eam_operate;
+insert into eam_c1.eam_operate select * from eam_operate;
+
+
+
+
+

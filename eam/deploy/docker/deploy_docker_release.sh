@@ -19,7 +19,7 @@ fi
 
 ########################生成数据库dockerfile####################
 echo "">appdockerfile
-#echo "FROM docker.io/algernonking/eamapp:base     ">>appdockerfile
+echo "FROM docker.io/algernonking/eamapp:base     ">>appdockerfile
 echo "MAINTAINER lank                             ">>appdockerfile
 echo "RUN chmod 777 /opt                          ">>appdockerfile
 echo "RUN rm -rf /tmp/app.log                     ">>appdockerfile
@@ -66,7 +66,7 @@ docker run --user 0 --name eamapp -t \
     -d docker.io/algernonking/eamapp:1.0.6 \
     --character-set-server=utf8
 
-docker exec -it d2d33ca1fd1b /bin/bash
+docker exec -it a82d30157be2 /bin/bash
 
 
 
