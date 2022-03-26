@@ -340,10 +340,14 @@ public class InventoryController extends SuperController {
 	@PostMapping(InventoryServiceProxy.QUERY_PAGED_LIST)
 	public Result<PagedList<Inventory>> queryPagedList(InventoryVO sample) {
 		Result<PagedList<Inventory>> result=new Result<>();
+
+
+
 		PagedList<Inventory> list=inventoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		inventoryService.dao().fill(list)
 			.with(InventoryMeta.MANAGER)
+			.with(InventoryMeta.ORIGINATOR)
 			.with(InventoryMeta.DIRECTOR)
 			.with(InventoryMeta.INVENTORY_USER)
 			.with(InventoryMeta.CATEGORY)
@@ -356,6 +360,9 @@ public class InventoryController extends SuperController {
 		List<List<Employee>> managerList= CollectorUtil.collectList(list.getList(), Inventory::getManager);
 		List<Employee> managers=managerList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
 		inventoryService.dao().join(managers, Person.class);
+
+		List<Employee> originator= CollectorUtil.collectList(list.getList(),Inventory::getOriginator);
+		inventoryService.dao().join(originator, Person.class);
 
 		List<List<Employee>> usersList= CollectorUtil.collectList(list.getList(), Inventory::getInventoryUser);
 		List<Employee> users=usersList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);

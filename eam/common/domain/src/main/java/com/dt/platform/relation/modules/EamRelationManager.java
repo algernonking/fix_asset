@@ -255,6 +255,7 @@ public class EamRelationManager extends RelationManager {
                 .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_CATALOG.INVENTORY_ID)
                 .using(EAMTables.EAM_INVENTORY_CATALOG.VALUE).join(FoxnicWeb.PCM_CATALOG.ID);
 
+
         //制单人
         this.property(InventoryMeta.ORIGINATOR_PROP)
                 .using(EAMTables.EAM_INVENTORY.ORIGINATOR_ID).join(FoxnicWeb.HRM_EMPLOYEE.ID);
