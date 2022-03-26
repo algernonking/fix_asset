@@ -190,6 +190,8 @@ public class EamAssetsGtr extends BaseCodeGenerator {
                 textField(DictItemMeta.LABEL).
                 fillWith(AssetMeta.ASSET_MAINTENANCE_STATUS).muliti(false);
 
+
+
         cfg.view().field(EAMTables.EAM_ASSET.RACK_ID)
                 .basic().label("机柜")
                 .form().selectBox().queryApi(RackServiceProxy.QUERY_PAGED_LIST)

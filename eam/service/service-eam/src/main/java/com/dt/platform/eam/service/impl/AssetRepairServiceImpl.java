@@ -314,8 +314,6 @@ public class AssetRepairServiceImpl extends SuperService<AssetRepair> implements
 			assetRepair.setAssetIds(list);
 		}
 
-
-
 		//校验数据资产
 		if(assetRepair.getAssetIds().size()==0){
 			return ErrorDesc.failure().message("请选择资产");

@@ -218,13 +218,13 @@ public interface AssetServiceProxy {
 	 * 分页查询资产
 	 */
 	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECT)
-	Result<PagedList<Asset>> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetSelectedCode,String assetSearchContent);
+	Result<PagedList<Asset>> queryPagedListBySelect(AssetVO sample,String assetBusinessType,String assetSelectedCode,String assetSearchContent);
 
 	/**
 	 * 分页查询资产
 	 */
 	@RequestMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECTED)
-	Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetBussinessType,String assetSelectedCode,String assetSearchContent);
+	Result<PagedList<Asset>> queryPagedListBySelected(AssetVO sample,String assetBusinessType,String assetSelectedCode,String assetSearchContent);
 
 
 

@@ -799,11 +799,11 @@ public class AssetController extends SuperController {
 	@ApiOperationSupport(order=9)
 	@SentinelResource(value = AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECT , blockHandlerClass = { SentinelExceptionUtil.class } , blockHandler = SentinelExceptionUtil.HANDLER )
 	@PostMapping(AssetServiceProxy.QUERY_PAGED_LIST_BY_SELECT)
-	public Result<PagedList<Asset>> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
+	public Result<PagedList<Asset>> queryPagedListBySelect(AssetVO sample,String assetBusinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent) {
 
 
 		Result<PagedList<Asset>> result=new Result<>();
-		PagedList<Asset> list=assetService.queryPagedListBySelect(sample,assetBussinessType,assetOwnerId,assetSelectedCode,assetSearchContent);
+		PagedList<Asset> list=assetService.queryPagedListBySelect(sample,assetBusinessType,assetOwnerId,assetSelectedCode,assetSearchContent);
 		assetService.joinData(list.getList());
 
 		result.success(true).data(list);

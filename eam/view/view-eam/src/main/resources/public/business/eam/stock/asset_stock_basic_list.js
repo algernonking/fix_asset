@@ -70,7 +70,7 @@ function ListPage() {
 
             }
             ps.assetSelectedCode=ASSET_SELECTED_CODE;
-            ps.assetBussinessType=billdata.assetBusinessType;
+            ps.assetBusinessType=billdata.assetBusinessType;
             ps.assetOwnerId=billdata.assetOwnerId;
             ps.ownerCode=OWNER_CODE;
             var templet=window.pageExt.list.templet;
@@ -153,7 +153,7 @@ function ListPage() {
             ps.categoryId=searchContent_categoryId;
         }
         ps.assetSelectedCode=ASSET_SELECTED_CODE;
-        ps.assetBussinessType=billdata.assetBusinessType;
+        ps.assetBusinessType=billdata.assetBusinessType;
         ps.assetOwnerId=billdata.assetOwnerId;
         ps.searchValue=JSON.stringify(value);
         ps.ownerCode=OWNER_CODE;

@@ -320,7 +320,7 @@ public interface IAssetService extends ISuperService<Asset> {
 
 	PagedList<Asset> queryPagedListBySelected(AssetVO sample,String assetSelectedCode,String assetOwnerId,String dataType);
 
-	PagedList<Asset> queryPagedListBySelect(AssetVO sample,String assetBussinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent);
+	PagedList<Asset> queryPagedListBySelect(AssetVO sample,String assetBusinessType,String assetOwnerId,String assetSelectedCode,String assetSearchContent);
 
 	/**
 	 * 查询指定字段的数据清单

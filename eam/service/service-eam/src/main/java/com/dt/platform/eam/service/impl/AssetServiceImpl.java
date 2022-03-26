@@ -1239,7 +1239,6 @@ public class AssetServiceImpl extends SuperService<Asset> implements IAssetServi
 			}
 		}
 
-
 		PagedList<Asset> list= queryPagedList(sample,queryCondition,sample.getPageSize(),sample.getPageIndex());
 		return list;
 	}
