@@ -354,11 +354,9 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 			inventoryUserServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryUserIds());
 			inventoryDirectorServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryDirectorIds());
 			inventoryManagerServiceImpl.saveRelation(inventory.getId(), inventory.getInventoryManagerIds());
-
 			inventoryPositionServiceImpl.saveRelation(inventory.getId(), inventory.getPositionIds());
 			inventoryWarehouseServiceImpl.saveRelation(inventory.getId(), inventory.getWarehouseIds());
 			inventoryCatalogServiceImpl.saveRelation(inventory.getId(), inventory.getCategoryIds());
-
 		}
 
 		//this.createAssetRecord(inventory.getId());

@@ -21,8 +21,8 @@ import com.github.foxnic.dao.entity.EntityContext;
 /**
  * 资产盘点
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-05 19:34:06
- * @sign 28D5E4311CAB3B9FDC44C0599870EF36
+ * @since 2022-03-26 19:25:56
+ * @sign 99C40F56A1550EB223B5DDEC3129C19B
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
 
@@ -218,7 +218,31 @@ public class Inventory extends Entity {
 	 * 盘点资产数据：盘点资产数据
 	*/
 	@ApiModelProperty(required = false,value="盘点资产数据" , notes = "盘点资产数据")
-	private List<InventoryAsset> InventoryAssetInfoList;
+	private List<InventoryAsset> inventoryAssetInfoList;
+	
+	/**
+	 * 待盘点：待盘点
+	*/
+	@ApiModelProperty(required = false,value="待盘点" , notes = "待盘点")
+	private Integer inventoryAssetCountByNotCounted;
+	
+	/**
+	 * 已盘点：已盘点
+	*/
+	@ApiModelProperty(required = false,value="已盘点" , notes = "已盘点")
+	private Integer inventoryAssetCountByCounted;
+	
+	/**
+	 * 盘亏：盘亏
+	*/
+	@ApiModelProperty(required = false,value="盘亏" , notes = "盘亏")
+	private Integer inventoryAssetCountByLoss;
+	
+	/**
+	 * 盘盈：盘盈
+	*/
+	@ApiModelProperty(required = false,value="盘盈" , notes = "盘盈")
+	private Integer inventoryAssetCountBySurplus;
 	
 	/**
 	 * 所属公司：所属公司
@@ -886,27 +910,103 @@ public class Inventory extends Entity {
 	 * @return 盘点资产数据
 	*/
 	public List<InventoryAsset> getInventoryAssetInfoList() {
-		return InventoryAssetInfoList;
+		return inventoryAssetInfoList;
 	}
 	
 	/**
 	 * 设置 盘点资产数据
-	 * @param InventoryAssetInfoList 盘点资产数据
+	 * @param inventoryAssetInfoList 盘点资产数据
 	 * @return 当前对象
 	*/
-	public Inventory setInventoryAssetInfoList(List<InventoryAsset> InventoryAssetInfoList) {
-		this.InventoryAssetInfoList=InventoryAssetInfoList;
+	public Inventory setInventoryAssetInfoList(List<InventoryAsset> inventoryAssetInfoList) {
+		this.inventoryAssetInfoList=inventoryAssetInfoList;
 		return this;
 	}
 	
 	/**
 	 * 添加 盘点资产数据
-	 * @param InventoryAssetInfo 盘点资产数据
+	 * @param inventoryAssetInfo 盘点资产数据
 	 * @return 当前对象
 	*/
-	public Inventory addInventoryAssetInfo(InventoryAsset InventoryAssetInfo) {
-		if(this.InventoryAssetInfoList==null) InventoryAssetInfoList=new ArrayList<>();
-		this.InventoryAssetInfoList.add(InventoryAssetInfo);
+	public Inventory addInventoryAssetInfo(InventoryAsset inventoryAssetInfo) {
+		if(this.inventoryAssetInfoList==null) inventoryAssetInfoList=new ArrayList<>();
+		this.inventoryAssetInfoList.add(inventoryAssetInfo);
+		return this;
+	}
+	
+	/**
+	 * 获得 待盘点<br>
+	 * 待盘点
+	 * @return 待盘点
+	*/
+	public Integer getInventoryAssetCountByNotCounted() {
+		return inventoryAssetCountByNotCounted;
+	}
+	
+	/**
+	 * 设置 待盘点
+	 * @param inventoryAssetCountByNotCounted 待盘点
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryAssetCountByNotCounted(Integer inventoryAssetCountByNotCounted) {
+		this.inventoryAssetCountByNotCounted=inventoryAssetCountByNotCounted;
+		return this;
+	}
+	
+	/**
+	 * 获得 已盘点<br>
+	 * 已盘点
+	 * @return 已盘点
+	*/
+	public Integer getInventoryAssetCountByCounted() {
+		return inventoryAssetCountByCounted;
+	}
+	
+	/**
+	 * 设置 已盘点
+	 * @param inventoryAssetCountByCounted 已盘点
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryAssetCountByCounted(Integer inventoryAssetCountByCounted) {
+		this.inventoryAssetCountByCounted=inventoryAssetCountByCounted;
+		return this;
+	}
+	
+	/**
+	 * 获得 盘亏<br>
+	 * 盘亏
+	 * @return 盘亏
+	*/
+	public Integer getInventoryAssetCountByLoss() {
+		return inventoryAssetCountByLoss;
+	}
+	
+	/**
+	 * 设置 盘亏
+	 * @param inventoryAssetCountByLoss 盘亏
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryAssetCountByLoss(Integer inventoryAssetCountByLoss) {
+		this.inventoryAssetCountByLoss=inventoryAssetCountByLoss;
+		return this;
+	}
+	
+	/**
+	 * 获得 盘盈<br>
+	 * 盘盈
+	 * @return 盘盈
+	*/
+	public Integer getInventoryAssetCountBySurplus() {
+		return inventoryAssetCountBySurplus;
+	}
+	
+	/**
+	 * 设置 盘盈
+	 * @param inventoryAssetCountBySurplus 盘盈
+	 * @return 当前对象
+	*/
+	public Inventory setInventoryAssetCountBySurplus(Integer inventoryAssetCountBySurplus) {
+		this.inventoryAssetCountBySurplus=inventoryAssetCountBySurplus;
 		return this;
 	}
 	

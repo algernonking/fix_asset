@@ -16,7 +16,7 @@ import org.github.foxnic.web.domain.pcm.Catalog;
 
 /**
  * @author 金杰 , maillank@qq.com
- * @since 2022-01-05 19:34:06
+ * @since 2022-03-26 19:25:56
  * @sign 98BD3C085215D4F9F4525FF653E71299
  * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
 */
@@ -416,12 +416,52 @@ public class InventoryVOMeta extends InventoryMeta {
 	/**
 	 * 盘点资产数据 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InventoryAsset
 	*/
-	public static final String INVENTORY_ASSET_INFO_LIST="InventoryAssetInfoList";
+	public static final String INVENTORY_ASSET_INFO_LIST="inventoryAssetInfoList";
 	
 	/**
 	 * 盘点资产数据 , 集合类型: LIST , 类型: com.dt.platform.domain.eam.InventoryAsset
 	*/
 	public static final BeanProperty<com.dt.platform.domain.eam.InventoryVO,com.dt.platform.domain.eam.InventoryAsset> INVENTORY_ASSET_INFO_LIST_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryVO.class ,INVENTORY_ASSET_INFO_LIST, java.util.List.class, "盘点资产数据", "盘点资产数据", com.dt.platform.domain.eam.InventoryAsset.class, null);
+	
+	/**
+	 * 待盘点 , 类型: java.lang.Integer
+	*/
+	public static final String INVENTORY_ASSET_COUNT_BY_NOT_COUNTED="inventoryAssetCountByNotCounted";
+	
+	/**
+	 * 待盘点 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryVO,java.lang.Integer> INVENTORY_ASSET_COUNT_BY_NOT_COUNTED_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryVO.class ,INVENTORY_ASSET_COUNT_BY_NOT_COUNTED, java.lang.Integer.class, "待盘点", "待盘点", java.lang.Integer.class, null);
+	
+	/**
+	 * 已盘点 , 类型: java.lang.Integer
+	*/
+	public static final String INVENTORY_ASSET_COUNT_BY_COUNTED="inventoryAssetCountByCounted";
+	
+	/**
+	 * 已盘点 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryVO,java.lang.Integer> INVENTORY_ASSET_COUNT_BY_COUNTED_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryVO.class ,INVENTORY_ASSET_COUNT_BY_COUNTED, java.lang.Integer.class, "已盘点", "已盘点", java.lang.Integer.class, null);
+	
+	/**
+	 * 盘亏 , 类型: java.lang.Integer
+	*/
+	public static final String INVENTORY_ASSET_COUNT_BY_LOSS="inventoryAssetCountByLoss";
+	
+	/**
+	 * 盘亏 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryVO,java.lang.Integer> INVENTORY_ASSET_COUNT_BY_LOSS_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryVO.class ,INVENTORY_ASSET_COUNT_BY_LOSS, java.lang.Integer.class, "盘亏", "盘亏", java.lang.Integer.class, null);
+	
+	/**
+	 * 盘盈 , 类型: java.lang.Integer
+	*/
+	public static final String INVENTORY_ASSET_COUNT_BY_SURPLUS="inventoryAssetCountBySurplus";
+	
+	/**
+	 * 盘盈 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.eam.InventoryVO,java.lang.Integer> INVENTORY_ASSET_COUNT_BY_SURPLUS_PROP = new BeanProperty(com.dt.platform.domain.eam.InventoryVO.class ,INVENTORY_ASSET_COUNT_BY_SURPLUS, java.lang.Integer.class, "盘盈", "盘盈", java.lang.Integer.class, null);
 	
 	/**
 	 * 所属公司 , 集合类型: LIST , 类型: org.github.foxnic.web.domain.hrm.Organization
@@ -576,7 +616,7 @@ public class InventoryVOMeta extends InventoryMeta {
 	/**
 	 * 全部属性清单
 	*/
-	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , OWNER_COMPANY , USE_ORGANIZATION , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR , POSITION , POSITION_IDS , WAREHOUSE , WAREHOUSE_IDS , CATEGORY , CATEGORY_IDS };
+	public static final String[] $PROPS={ PAGE_INDEX , PAGE_SIZE , SEARCH_FIELD , FUZZY_FIELD , SEARCH_VALUE , DIRTY_FIELDS , SORT_FIELD , SORT_TYPE , IDS , ID , TYPE , BUSINESS_CODE , OWNER_CODE , STATUS , NAME , INVENTORY_STATUS , DATA_STATUS , ALL_EMPLOYEE , ASSET_STATUS , CATEGORY_ID , OWN_COMPANY_ID , USE_ORGANIZATION_ID , PURCHASE_START_DATE , PURCHASE_END_DATE , START_TIME , FINISH_TIME , ORIGINATOR_ID , BUSINESS_DATE , NOTES , PLAN_ID , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID , INVENTORY_ASSET_INFO_LIST , INVENTORY_ASSET_COUNT_BY_NOT_COUNTED , INVENTORY_ASSET_COUNT_BY_COUNTED , INVENTORY_ASSET_COUNT_BY_LOSS , INVENTORY_ASSET_COUNT_BY_SURPLUS , OWNER_COMPANY , USE_ORGANIZATION , INVENTORY_USER , INVENTORY_USER_IDS , MANAGER , INVENTORY_MANAGER_IDS , DIRECTOR , INVENTORY_DIRECTOR_IDS , ORIGINATOR , POSITION , POSITION_IDS , WAREHOUSE , WAREHOUSE_IDS , CATEGORY , CATEGORY_IDS };
 	
 	/**
 	 * 代理类
@@ -1017,12 +1057,56 @@ public class InventoryVOMeta extends InventoryMeta {
 		
 		/**
 		 * 设置 盘点资产数据
-		 * @param InventoryAssetInfoList 盘点资产数据
+		 * @param inventoryAssetInfoList 盘点资产数据
 		 * @return 当前对象
 		*/
-		public Inventory setInventoryAssetInfoList(List<InventoryAsset> InventoryAssetInfoList) {
-			super.change(INVENTORY_ASSET_INFO_LIST,super.getInventoryAssetInfoList(),InventoryAssetInfoList);
-			super.setInventoryAssetInfoList(InventoryAssetInfoList);
+		public Inventory setInventoryAssetInfoList(List<InventoryAsset> inventoryAssetInfoList) {
+			super.change(INVENTORY_ASSET_INFO_LIST,super.getInventoryAssetInfoList(),inventoryAssetInfoList);
+			super.setInventoryAssetInfoList(inventoryAssetInfoList);
+			return this;
+		}
+		
+		/**
+		 * 设置 待盘点
+		 * @param inventoryAssetCountByNotCounted 待盘点
+		 * @return 当前对象
+		*/
+		public Inventory setInventoryAssetCountByNotCounted(Integer inventoryAssetCountByNotCounted) {
+			super.change(INVENTORY_ASSET_COUNT_BY_NOT_COUNTED,super.getInventoryAssetCountByNotCounted(),inventoryAssetCountByNotCounted);
+			super.setInventoryAssetCountByNotCounted(inventoryAssetCountByNotCounted);
+			return this;
+		}
+		
+		/**
+		 * 设置 已盘点
+		 * @param inventoryAssetCountByCounted 已盘点
+		 * @return 当前对象
+		*/
+		public Inventory setInventoryAssetCountByCounted(Integer inventoryAssetCountByCounted) {
+			super.change(INVENTORY_ASSET_COUNT_BY_COUNTED,super.getInventoryAssetCountByCounted(),inventoryAssetCountByCounted);
+			super.setInventoryAssetCountByCounted(inventoryAssetCountByCounted);
+			return this;
+		}
+		
+		/**
+		 * 设置 盘亏
+		 * @param inventoryAssetCountByLoss 盘亏
+		 * @return 当前对象
+		*/
+		public Inventory setInventoryAssetCountByLoss(Integer inventoryAssetCountByLoss) {
+			super.change(INVENTORY_ASSET_COUNT_BY_LOSS,super.getInventoryAssetCountByLoss(),inventoryAssetCountByLoss);
+			super.setInventoryAssetCountByLoss(inventoryAssetCountByLoss);
+			return this;
+		}
+		
+		/**
+		 * 设置 盘盈
+		 * @param inventoryAssetCountBySurplus 盘盈
+		 * @return 当前对象
+		*/
+		public Inventory setInventoryAssetCountBySurplus(Integer inventoryAssetCountBySurplus) {
+			super.change(INVENTORY_ASSET_COUNT_BY_SURPLUS,super.getInventoryAssetCountBySurplus(),inventoryAssetCountBySurplus);
+			super.setInventoryAssetCountBySurplus(inventoryAssetCountBySurplus);
 			return this;
 		}
 		

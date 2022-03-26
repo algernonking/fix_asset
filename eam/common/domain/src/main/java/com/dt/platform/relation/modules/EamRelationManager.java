@@ -3,6 +3,7 @@ package com.dt.platform.relation.modules;
 
 import com.dt.platform.constants.db.EAMTables;
 
+import com.dt.platform.constants.enums.eam.AssetInventoryDetailStatusEnum;
 import com.dt.platform.domain.common.meta.CodeAllocationMeta;
 import com.dt.platform.domain.eam.*;
 import com.dt.platform.domain.eam.meta.*;
@@ -15,6 +16,7 @@ import org.github.foxnic.web.domain.hrm.meta.PersonMeta;
 
 import javax.naming.NoInitialContextException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -226,11 +228,45 @@ public class EamRelationManager extends RelationManager {
 
 
 
+    private HashMap<String,Integer> calculateInventoryAssetQuantityStatistics(List<InventoryAsset> assets){
+        HashMap<String,Integer> map=new HashMap<>();
+        int notCount=0;
+        int count=0;
+        int loss=0;
+        int surplus=0;
+        if(assets!=null&&assets.size()>0){
+            for(int i=0;i<assets.size();i++){
+                if(AssetInventoryDetailStatusEnum.NOT_COUNTED.code().equals( assets.get(i).getStatus())){
+                    notCount++;
+                }else if(AssetInventoryDetailStatusEnum.COUNTED.code().equals( assets.get(i).getStatus())){
+                    count++;
+                }else if(AssetInventoryDetailStatusEnum.LOSS.code().equals( assets.get(i).getStatus())){
+                    loss++;
+                }else if(AssetInventoryDetailStatusEnum.SURPLUS.code().equals( assets.get(i).getStatus())){
+                    surplus++;
+                }
+            }
+            map.put(AssetInventoryDetailStatusEnum.NOT_COUNTED.code(),notCount);
+            map.put(AssetInventoryDetailStatusEnum.COUNTED.code(),count);
+            map.put(AssetInventoryDetailStatusEnum.LOSS.code(),loss);
+            map.put(AssetInventoryDetailStatusEnum.SURPLUS.code(),surplus);
+        }
+        return map;
+    }
+
     public void setupInventory() {
-
-
         this.property(InventoryMeta.INVENTORY_ASSET_INFO_LIST_PROP)
-                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_ASSET.ASSET_ID);
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_ASSET.INVENTORY_ID).after((tag,inventory,assets,map)->{
+            HashMap<String,Integer> data= calculateInventoryAssetQuantityStatistics(assets);
+            inventory.setInventoryAssetCountByNotCounted(data.getOrDefault(AssetInventoryDetailStatusEnum.NOT_COUNTED.code(),0));
+            inventory.setInventoryAssetCountByCounted(data.getOrDefault(AssetInventoryDetailStatusEnum.COUNTED.code(),0));
+            inventory.setInventoryAssetCountByLoss(data.getOrDefault(AssetInventoryDetailStatusEnum.LOSS.code(),0));
+            inventory.setInventoryAssetCountBySurplus(data.getOrDefault(AssetInventoryDetailStatusEnum.SURPLUS.code(),0));
+            return assets;
+        });
+
+        this.property(Inventory.class,InventoryMeta.INVENTORY_ASSET_COUNT_BY_LOSS,InventoryAsset.class)
+                .using(EAMTables.EAM_INVENTORY.ID).join(EAMTables.EAM_INVENTORY_ASSET.ASSET_ID).groupForCount();
 
         //位置
         this.property(InventoryMeta.POSITION_PROP)

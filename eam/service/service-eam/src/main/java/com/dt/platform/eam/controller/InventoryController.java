@@ -231,16 +231,20 @@ public class InventoryController extends SuperController {
 		Inventory inventory=inventoryService.getById(id);
 		// join 关联的对象
 		inventoryService.dao().fill(inventory)
+			.with(InventoryMeta.INVENTORY_ASSET_INFO_LIST)
 			.with(InventoryMeta.MANAGER)
+			.with(InventoryMeta.ORIGINATOR)
 			.with(InventoryMeta.DIRECTOR)
 			.with(InventoryMeta.INVENTORY_USER)
 			.with(InventoryMeta.CATEGORY)
 			.with(InventoryMeta.WAREHOUSE)
+		//	.with(InventoryMeta.INVENTORY_ASSET_COUNT_BY_LOSS)
 			.with(InventoryMeta.POSITION)
 			.execute();
 
 		inventoryService.dao().join(inventory.getDirector(), Person.class);
 		inventoryService.dao().join(inventory.getManager(), Person.class);
+		inventoryService.dao().join(inventory.getOriginator(), Person.class);
 		inventoryService.dao().join(inventory.getInventoryUser(), Person.class);
 
 		result.success(true).data(inventory);
@@ -341,15 +345,15 @@ public class InventoryController extends SuperController {
 	public Result<PagedList<Inventory>> queryPagedList(InventoryVO sample) {
 		Result<PagedList<Inventory>> result=new Result<>();
 
-
-
 		PagedList<Inventory> list=inventoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		inventoryService.dao().fill(list)
+			.with(InventoryMeta.INVENTORY_ASSET_INFO_LIST)
 			.with(InventoryMeta.MANAGER)
 			.with(InventoryMeta.ORIGINATOR)
 			.with(InventoryMeta.DIRECTOR)
 			.with(InventoryMeta.INVENTORY_USER)
+		//	.with(InventoryMeta.INVENTORY_ASSET_COUNT_BY_LOSS)
 			.with(InventoryMeta.CATEGORY)
 			.with(InventoryMeta.WAREHOUSE)
 			.with(InventoryMeta.POSITION)

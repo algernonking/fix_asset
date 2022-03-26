@@ -33,7 +33,13 @@ public class EamInventoryGtr extends BaseCodeGenerator{
     public void generateCode() throws Exception {
         System.out.println(this.getClass().getName());
 
-        cfg.getPoClassFile().addListProperty(InventoryAsset.class,"InventoryAssetInfoList","盘点资产数据","盘点资产数据");
+        cfg.getPoClassFile().addListProperty(InventoryAsset.class,"inventoryAssetInfoList","盘点资产数据","盘点资产数据");
+
+
+        cfg.getPoClassFile().addSimpleProperty(Integer.class,"inventoryAssetCountByNotCounted","待盘点","待盘点");
+        cfg.getPoClassFile().addSimpleProperty(Integer.class,"inventoryAssetCountByCounted","已盘点","已盘点");
+        cfg.getPoClassFile().addSimpleProperty(Integer.class,"inventoryAssetCountByLoss","盘亏","盘亏");
+        cfg.getPoClassFile().addSimpleProperty(Integer.class,"inventoryAssetCountBySurplus","盘盈","盘盈");
 
 
         cfg.getPoClassFile().addListProperty(Organization.class,"ownerCompany","所属公司","所属公司");
@@ -63,6 +69,8 @@ public class EamInventoryGtr extends BaseCodeGenerator{
 
         cfg.getPoClassFile().addListProperty(Catalog.class,"category","资产分类","资产分类");
         cfg.getPoClassFile().addListProperty(String.class,"categoryIds","资产分类Ids","资产分类Ids");
+
+
 
 
         cfg.view().field(EAMTables.EAM_INVENTORY.ID).basic().hidden(true);
@@ -253,12 +261,12 @@ public class EamInventoryGtr extends BaseCodeGenerator{
 
         //文件生成覆盖模式
         cfg.overrides()
-                .setServiceIntfAnfImpl(WriteMode.CREATE_IF_NOT_EXISTS) //服务与接口
-                .setControllerAndAgent(WriteMode.CREATE_IF_NOT_EXISTS) //Rest
-                .setPageController(WriteMode.CREATE_IF_NOT_EXISTS) //页面控制器
-                .setFormPage(WriteMode.CREATE_IF_NOT_EXISTS) //表单HTML页
-                .setListPage(WriteMode.CREATE_IF_NOT_EXISTS)//列表HTML页
-                .setExtendJsFile(WriteMode.CREATE_IF_NOT_EXISTS); //列表HTML页
+                .setServiceIntfAnfImpl(WriteMode.IGNORE) //服务与接口
+                .setControllerAndAgent(WriteMode.IGNORE) //Rest
+                .setPageController(WriteMode.IGNORE) //页面控制器
+                .setFormPage(WriteMode.IGNORE) //表单HTML页
+                .setListPage(WriteMode.IGNORE)//列表HTML页
+                .setExtendJsFile(WriteMode.IGNORE); //列表HTML页
         cfg.buildAll();
 
 

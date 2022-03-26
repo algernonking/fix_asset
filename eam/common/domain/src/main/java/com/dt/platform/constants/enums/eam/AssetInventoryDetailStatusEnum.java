@@ -17,7 +17,7 @@ public enum AssetInventoryDetailStatusEnum implements CodeTextEnum {
 	SURPLUS("surplus" , "盘盈"),
 	LOSS("loss" , "盘亏"),
 	COUNTED("counted" , "已盘点"),
-	NOT_COUNTED("not_counted" , "未盘点");
+	NOT_COUNTED("not_counted" , "待盘点");
 
 	private String code;
 	private String text;
