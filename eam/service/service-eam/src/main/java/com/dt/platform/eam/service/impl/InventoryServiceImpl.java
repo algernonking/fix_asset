@@ -97,6 +97,8 @@ public class InventoryServiceImpl extends SuperService<Inventory> implements IIn
 
 
 
+
+
 	@Override
 	public Result createAssetRecord(String id) {
 		Inventory inventory=this.getById(id);

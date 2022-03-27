@@ -238,7 +238,6 @@ public class InventoryController extends SuperController {
 			.with(InventoryMeta.INVENTORY_USER)
 			.with(InventoryMeta.CATEGORY)
 			.with(InventoryMeta.WAREHOUSE)
-		//	.with(InventoryMeta.INVENTORY_ASSET_COUNT_BY_LOSS)
 			.with(InventoryMeta.POSITION)
 			.execute();
 
@@ -345,15 +344,16 @@ public class InventoryController extends SuperController {
 	public Result<PagedList<Inventory>> queryPagedList(InventoryVO sample) {
 		Result<PagedList<Inventory>> result=new Result<>();
 
+
+
 		PagedList<Inventory> list=inventoryService.queryPagedList(sample,sample.getPageSize(),sample.getPageIndex());
 		// join 关联的对象
 		inventoryService.dao().fill(list)
 			.with(InventoryMeta.INVENTORY_ASSET_INFO_LIST)
 			.with(InventoryMeta.MANAGER)
 			.with(InventoryMeta.ORIGINATOR)
-			.with(InventoryMeta.DIRECTOR)
 			.with(InventoryMeta.INVENTORY_USER)
-		//	.with(InventoryMeta.INVENTORY_ASSET_COUNT_BY_LOSS)
+			.with(InventoryMeta.DIRECTOR)
 			.with(InventoryMeta.CATEGORY)
 			.with(InventoryMeta.WAREHOUSE)
 			.with(InventoryMeta.POSITION)
@@ -369,6 +369,7 @@ public class InventoryController extends SuperController {
 		inventoryService.dao().join(originator, Person.class);
 
 		List<List<Employee>> usersList= CollectorUtil.collectList(list.getList(), Inventory::getInventoryUser);
+
 		List<Employee> users=usersList.stream().collect(ArrayList::new,ArrayList::addAll,ArrayList::addAll);
 		inventoryService.dao().join(users, Person.class);
 

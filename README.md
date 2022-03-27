@@ -2,19 +2,22 @@
 - 实现企业对资产的基本管理,包含对资产的登记、维修、调拨、转移等基本功能的支持，并提供对资产的耗材、库存进行管理，有完善的组织架构，非常适合中小企业的需求
 - EAM系统整体覆盖了基本的资产管理、合同管理、运维服务、运维服务、数据中心设备管理等多个模块。
 
-# 技术栈
-- 后端基于SpringBoot
-- 前端基于LayUi
-
-### 使用前需知：
-- 1、业务软件开放源码(发行协议:GPLv3)，用户可免费使用，但禁止任何单位或个人修改软件后再次发行或出售的行为。
-- 2、软件集成资产管理、合同管理、运管管理、运维监控等模块
-- 3、技术支持及定制开发需求：QQ群:634770774，微信号:myxyjm
-- 4、如您的组织或公司正在使用本系统，请在 issue 中告知，具体包含公司名称,谢谢
-
+### 联系方式
+- 1、技术支持及定制开发需求：QQ群:634770774，微信号:myxyjm
 ### 系统DEMO
 - [demo] http://eam-demo.rainbooow.com:26788/index.html
 - [demo] admin 密码:123456
+
+# 技术栈
+- 后端基于:SpringBoot
+- 安全框架:Spring Security
+- 模版引擎:Thymeleaf  
+- 前端基于:LayUi
+
+### 使用需知
+- 1、本软件开放源码(发行协议:GPLv3)，用户可免费使用，但禁止任何单位或个人修改软件后再次发行或出售的行为
+- 2、EAM开源方式以社区版形式供免费使用,在未授权情况下，禁止修改涉及页面版权信息的相关代码和名称
+- 3、如您的组织或公司正在使用本系统，请在 issue 中告知，具体包含公司名称
 
 ### 其他资源
 - SQL文件下载地址(每日更新):http://121.43.103.102/upload/sql.tar.gz
@@ -29,7 +32,6 @@
 ## 安装部署(Docker)
 - 系统兼容说明
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
-
  | 应用镜像     |   移动端     |
  | ---------- | -----------  |
  | 1.0.7      | 暂不支持      |
@@ -47,7 +49,7 @@
     -v /eam/mysql:/var/lib/mysql  \
     -p 3307:3306 \
     -p 8089:8089 \
-    -d docker.io/algernonking/eamapp:1.0.6 \
+    -d docker.io/algernonking/eamapp:1.0.7 \
     --character-set-server=utf8
 
 ```
@@ -83,7 +85,6 @@
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0316/122824_f21ca8de_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212016_f9fa171e_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212025_135c19b0_448530.jpeg" />
- 
  
 
 ## 捐赠

@@ -183,6 +183,7 @@ public interface InventoryServiceProxy {
 	Result<PagedList<Inventory>> queryPagedList(InventoryVO sample);
 
 
+
 	/**
 	 * 控制器类名
 	 * */

@@ -25,6 +25,7 @@ public class EamInventoryAssetGtr extends BaseCodeGenerator{
         cfg.getPoClassFile().addSimpleProperty(Employee.class,"operater","操作人员","操作人员");
 
 
+
         cfg.view().field(EAMTables.EAM_INVENTORY_ASSET.ID).basic().hidden(true);
 
         //eam_asset_change_data

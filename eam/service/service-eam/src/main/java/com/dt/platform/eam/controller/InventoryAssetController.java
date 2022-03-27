@@ -195,6 +195,7 @@ public class InventoryAssetController extends SuperController {
 				.with(InventoryAssetMeta.OPERATER)
 				.execute();
 
+		inventoryAssetService.dao().join(inventoryAsset.getOperater(), Person.class);
 		assetService.dao().fill(inventoryAsset.getAsset()).with(AssetMeta.CATEGORY)
 				.with(AssetMeta.CATEGORY_FINANCE)
 				.with(AssetMeta.GOODS)
@@ -213,6 +214,7 @@ public class InventoryAssetController extends SuperController {
 				.with(AssetMeta.EQUIPMENT_ENVIRONMENT)
 				.with(AssetMeta.ASSET_MAINTENANCE_STATUS)
 				.execute();
+
 
 		inventoryAssetService.dao().join(inventoryAsset.getOperater(), Person.class);
 		result.success(true).data(inventoryAsset);

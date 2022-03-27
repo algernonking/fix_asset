@@ -77,7 +77,10 @@ function ListPage() {
 					,{ field: 'id', align:"left",fixed:false,  hide:true, sort: true, title: fox.translate('主键') , templet: function (d) { return templet('id',d.id,d);}  }
 				//	,{ field: 'inventoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点') , templet: function (d) { return templet('inventoryId',d.inventoryId,d);}  }
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
-				//	,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
+					,{ field: 'operEmplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点人员') , templet: function (d) { return templet('operEmplId',fox.getProperty(d,["operater","name"]),d);} }
+					,{ field: 'operDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('操作时间') ,templet: function (d) { return templet('operDate',fox.dateFormat(d.operDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+
+					//	,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
 					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') , templet: function (d) { return templet('assetCode',d.asset.assetCode,d);}  }
 					,{ field: 'categoryId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产分类'), templet: function (d) { return templet('categoryId',fox.joinLabel(d.asset.category,"name"),d);}}
 					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.asset.assetStatus),d);}}
@@ -86,8 +89,6 @@ function ListPage() {
 					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.asset.serialNumber,d);}  }
 					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.asset.assetNotes,d);}  }
 
-					,{ field: 'operEmplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点人员') , templet: function (d) { return templet('operEmplId',d.operEmplId,d);}  }
-					,{ field: 'operDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('操作时间') ,templet: function (d) { return templet('operDate',fox.dateFormat(d.operDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
