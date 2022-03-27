@@ -8,7 +8,7 @@
 - [demo] http://eam-demo.rainbooow.com:26788/index.html
 - [demo] admin 密码:123456
 
-# 技术栈
+### 技术栈
 - 后端基于:SpringBoot
 - 安全框架:Spring Security
 - 模版引擎:Thymeleaf  
@@ -32,6 +32,7 @@
 ## 安装部署(Docker)
 - 系统兼容说明
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
+
  | 应用镜像     |   移动端     |
  | ---------- | -----------  |
  | 1.0.7      | 暂不支持      |
