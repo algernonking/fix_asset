@@ -93,6 +93,7 @@ spring:
 
 
 foxnic:
+  licence: D:/leefj/workspace/git-base/foxnic-grant/licence/community/licence
   api:
     log-enable: true
   config:

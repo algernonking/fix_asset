@@ -177,7 +177,7 @@ function ListPage() {
 					data = r.data;
 					context.update(data);
 				} else {
-					top.layer.msg(data.message, {icon: 1, time: 1500});
+					fox.showMessage(data);
 				}
 			});
 		} else {
@@ -199,15 +199,15 @@ function ListPage() {
 		#else if(f.typeName.equals("select_box"))
 		#if(f.selectField.queryApi!=null)
 		#if(f.search.fuzzySearch)
-		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"select_box", value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end  #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end, label:getSelectedValue("##(f.varName)","nameStr") };
+		value.#(f.varName)={ inputType:"select_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end #if(f.selectField.fillWith) ,fillBy:["#(f.selectField.fillWith)"] #end  #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end, label:getSelectedValue("##(f.varName)","nameStr") };
 		#end
 		#else
-		value.#(f.varName)={ inputType:"select_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:getSelectedValue("##(f.varName)","nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end};
+		value.#(f.varName)={ inputType:"select_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:getSelectedValue("##(f.varName)","nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end};
 		#end
 		#else if(f.typeName.equals("check_box"))
-		value.#(f.varName)={ inputType:"check_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:getSelectedValue("##(f.varName)","nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end};
+		value.#(f.varName)={ inputType:"check_box", value: getSelectedValue("##(f.varName)","value")#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)"#end, label:getSelectedValue("##(f.varName)","nameStr") #if(f.searchField!=null),field:"#(f.searchField)"#end #if(f.listFillByPropertyNames) ,fillBy:#(f.listFillByPropertyNames) #end};
 		#else if(f.typeName.equals("date_input"))
 		#if(f.search.searchInRange)
 		value.#(f.varName)={ inputType:"date_input", begin: $("##(f.varName)-begin").val(), end: $("##(f.varName)-end").val() #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end ,matchType:"#(f.search.matchType)" };
@@ -221,9 +221,9 @@ function ListPage() {
 		value.#(f.varName)={ inputType:"number_input", value: $("##(f.varName)").val() #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#else if(f.typeName.equals("button"))
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end,label:$("##(f.varName)-button").text() #if(f.searchField!=null),field:"#(f.searchField)"#end };
 		#else
-		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
+		value.#(f.varName)={ inputType:"button",value: $("##(f.varName)").val()#if(f.search!=null && f.search.fuzzySearch) ,fuzzy: true,splitValue:#(f.search.splitValue),valuePrefix:"#(f.search.valuePrefix)",valueSuffix:"#(f.search.valueSuffix)" #end #if(f.listFillByPropertyNames),fillBy:#(f.listFillByPropertyNames) #end #if(f.searchField!=null),field:"#(f.searchField)"#end};
 		#end
 		#end
 		var ps={searchField:"$composite"};
@@ -651,10 +651,10 @@ function ListPage() {
 							var doNext=window.pageExt.list.afterBatchDelete(data);
 							if(!doNext) return;
 						}
-                    	top.layer.msg(data.message, {icon: 1, time: 500});
+						fox.showMessage(data);
                         refreshTableData();
                     } else {
-						top.layer.msg(data.message, {icon: 2, time: 1500});
+						fox.showMessage(data);
                     }
                 });
 			});
@@ -684,7 +684,7 @@ function ListPage() {
 						admin.putTempData('#(formDataKey)-form-action', "edit",true);
 						showEditForm(data.data);
 					} else {
-						 top.layer.msg(data.message, {icon: 1, time: 1500});
+						 fox.showMessage(data);
 					}
 				});
 				#else
@@ -697,7 +697,7 @@ function ListPage() {
 						admin.putTempData('#(formDataKey)-form-action', "view",true);
 						showEditForm(data.data);
 					} else {
-						top.layer.msg(data.message, {icon: 1, time: 1500});
+						fox.showMessage(data);
 					}
 				});
 				#else
@@ -722,10 +722,10 @@ function ListPage() {
 								var doNext=window.pageExt.list.afterSingleDelete(data);
 								if(!doNext) return;
 							}
-							top.layer.msg(data.message, {icon: 1, time: 500});
+							fox.showMessage(data);
 							refreshTableData();
 						} else {
-							top.layer.msg(data.message, {icon: 2, time: 1500});
+							fox.showMessage(data);
 						}
 					});
 				});
