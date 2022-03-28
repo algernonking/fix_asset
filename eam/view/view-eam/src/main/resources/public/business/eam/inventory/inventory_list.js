@@ -63,6 +63,13 @@ function ListPage() {
 					return value;
 				}
 			}
+			function pdCount(d,type){
+				if(d[type]){
+					return d[type];
+				}else{
+					return 0;
+				}
+			}
 			var h=$(".search-bar").height();
 			var tableConfig={
 				elem: '#data-table',
@@ -81,6 +88,12 @@ function ListPage() {
 					//,{ field: 'ownerCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('所属') , templet: function (d) { return templet('ownerCode',d.ownerCode,d);}  }
 					,{ field: 'name', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点名称') , templet: function (d) { return templet('name',d.name,d);}  }
 					,{ field: 'inventoryStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点状态'), templet:function (d){ return templet('inventoryStatus',fox.getEnumText(SELECT_INVENTORYSTATUS_DATA,d.inventoryStatus),d);}}
+
+					,{ field: 'inventoryAssetCountByNotCounted', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('待盘点'), templet:function (d){ return pdCount(d,"inventoryAssetCountByNotCounted");}}
+					,{ field: 'inventoryAssetCountByCounted', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('已盘点'), templet:function (d){ return pdCount(d,"inventoryAssetCountByCounted");}}
+					,{ field: 'inventoryAssetCountByLoss', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘亏'), templet:function (d){ return pdCount(d,"inventoryAssetCountByLoss");}}
+					,{ field: 'inventoryAssetCountBySurplus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘赢'), templet:function (d){ return pdCount(d,"inventoryAssetCountBySurplus");}}
+
 					,{ field: 'dataStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('数据状态'), templet:function (d){ return templet('dataStatus',fox.getEnumText(SELECT_DATASTATUS_DATA,d.dataStatus),d);}}
 					,{ field: 'allEmployee', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('全员盘点'), templet:function (d){ return templet('allEmployee',fox.getEnumText(SELECT_ALLEMPLOYEE_DATA,d.allEmployee),d);}}
 					,{ field: 'assetStatus', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产状态'), templet:function (d){ return templet('assetStatus',fox.getEnumText(SELECT_ASSETSTATUS_DATA,d.assetStatus),d);}}

@@ -79,6 +79,7 @@ function ListPage() {
 					,{ field: 'status', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('状态'), templet:function (d){ return templet('status',fox.getEnumText(SELECT_STATUS_DATA,d.status),d);}}
 					,{ field: 'operEmplId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点人员') , templet: function (d) { return templet('operEmplId',fox.getProperty(d,["operater","name"]),d);} }
 					,{ field: 'operDate', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('操作时间') ,templet: function (d) { return templet('operDate',fox.dateFormat(d.operDate,"yyyy-MM-dd HH:mm:ss"),d); }  }
+					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('盘点备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 
 					//	,{ field: 'assetId', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产') , templet: function (d) { return templet('assetId',d.assetId,d);}  }
 					,{ field: 'assetCode', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产编号') , templet: function (d) { return templet('assetCode',d.asset.assetCode,d);}  }
@@ -89,7 +90,6 @@ function ListPage() {
 					,{ field: 'serialNumber', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('序列号') , templet: function (d) { return templet('serialNumber',d.asset.serialNumber,d);}  }
 					,{ field: 'assetNotes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('资产备注') , templet: function (d) { return templet('assetNotes',d.asset.assetNotes,d);}  }
 
-					,{ field: 'notes', align:"left",fixed:false,  hide:false, sort: true, title: fox.translate('备注') , templet: function (d) { return templet('notes',d.notes,d);}  }
 					,{ field: 'createTime', align:"right", fixed:false, hide:false, sort: true, title: fox.translate('创建时间') ,templet: function (d) { return templet('createTime',fox.dateFormat(d.createTime,"yyyy-MM-dd HH:mm:ss"),d); }  }
 					,{ field: fox.translate('空白列'), align:"center", hide:false, sort: false, title: "",minWidth:8,width:8,unresize:true}
 					,{ field: 'row-ops', fixed: 'right', align: 'center', toolbar: '#tableOperationTemplate', title: fox.translate('操作'), width: 160 }

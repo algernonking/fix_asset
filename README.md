@@ -4,17 +4,24 @@
 
 ### 联系方式
 - 1、技术支持及定制开发需求：QQ群:634770774，微信号:myxyjm
+
+
 ### 系统DEMO
-- [demo] http://eam-demo.rainbooow.com:26788/index.html
-- [demo] admin 密码:123456
+- [Demo] http://eam-demo.rainbooow.com:26788/index.html
+- [Demo] 账户:admin 密码:123456
 
 ### 技术栈
-- 后端基于:SpringBoot
+- 后端技术:SpringBoot
+- 前端技术:LayUI
 - 安全框架:Spring Security
 - 模版引擎:Thymeleaf  
-- 前端基于:LayUi
 
-### 使用需知
+### 实施方案
+- 1、传统方式:传统单体架构方式打包部署
+- 2、微服务:拆分成独立微服务方式部署
+- 3、集群模式:拆分成独立服务各自独立启动部署
+
+### 使用前需知
 - 1、本软件开放源码(发行协议:GPLv3)，用户可免费使用，但禁止任何单位或个人修改软件后再次发行或出售的行为
 - 2、EAM开源方式以社区版形式供免费使用,在未授权情况下，禁止修改涉及页面版权信息的相关代码和名称
 - 3、如您的组织或公司正在使用本系统，请在 issue 中告知，具体包含公司名称
@@ -26,10 +33,12 @@
   或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
 - [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
 
-### 开发说明
+
+### 二次开发说明
 - 如果私库无法下载，请检查maven 版本是否是3.6,正常情况代码拉取后，能正常启动
 
-## 安装部署(Docker)
+
+## 安装部署(Docker方式)
 - 系统兼容说明
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
 
@@ -37,8 +46,6 @@
  | ---------- | -----------  |
  | 1.0.7      | 暂不支持      |
  | 1.0.6      | 暂不支持      |
- | 1.0.5      | 暂不支持      |
- | 1.0.2      | 暂不支持      |
 
 - 部署步骤
 ```
