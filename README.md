@@ -44,16 +44,14 @@
   或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
 - [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
 
-
 ### 实施方案
 - 1、传统方式:传统单体架构方式打包部署
 - 2、微服务:拆分成独立微服务方式部署
 - 3、集群模式:拆分成独立服务各自独立启动部署
 
-
 ## 安装部署(Docker方式)
-- 系统兼容说明
 - 注意点:建议第一次docker部署完后，在重启一次，可能第一次启动数据库初始化还没完成，会导致报错
+- 应用和移动端兼容列表
 
  | 应用镜像     |   移动端     |
  | ---------- | -----------  |
