@@ -1,4 +1,4 @@
-package com.dt.platform.generator.module.workorder;
+package com.dt.platform.generator.module.vehicle;
 
 import com.dt.platform.generator.config.PlatformConfigs;
 import com.dt.platform.generator.menu.MenuGenerator;
@@ -8,21 +8,15 @@ import com.github.foxnic.sql.meta.DBTable;
 
 public class BaseCodeGenerator {
 
-    public static final String BASIC_SETTING_MENU_ID="472818971712684033";
+    public static final String BASIC_MGR_MENU_ID="562319719252623360";
+    public static final String BASIC_SETTING_MENU_ID="562319582266654720";
 
-    public static final String SERVICE_STAGE="472358699843715073";
+
+
     //
     private String appId="service-vehicle";
 
     private String appConfigPrefix= "service-vehicle";
-
-    public String getTablePrefix() {
-        return tablePrefix;
-    }
-
-    public void setTablePrefix(String tablePrefix) {
-        this.tablePrefix = tablePrefix;
-    }
 
     private String tablePrefix="vehicle_";
 
@@ -35,16 +29,6 @@ public class BaseCodeGenerator {
     protected ModuleContext cfg;
 
     public BaseCodeGenerator(DBTable table, String parentMenuId) {
-
-        this.table=table;
-        this.parentMenuId=parentMenuId;
-        configs=new PlatformConfigs(appConfigPrefix);
-        cfg=createModuleConfig();
-    }
-    public BaseCodeGenerator(DBTable table, String parentMenuId, String tabPrefix) {
-        if(tablePrefix!=null){
-            this.tablePrefix=tabPrefix;
-        }
         this.table=table;
         this.parentMenuId=parentMenuId;
         configs=new PlatformConfigs(appConfigPrefix);
@@ -85,7 +69,6 @@ public class BaseCodeGenerator {
     }
 
     public ModuleContext createModuleConfig() {
-
         return createModuleConfig(this.table, tablePrefix, 1);
     }
 
