@@ -93,7 +93,6 @@ spring:
 
 
 foxnic:
-  licence: /Users/Shared/foxnic/licence
   api:
     log-enable: true
   config:
