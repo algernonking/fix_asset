@@ -1,32 +1,35 @@
-# EAM固定资产设备管理系统
+# EAM管理系统介绍
 - 实现企业对资产的基本管理,包含对资产的登记、维修、调拨、转移等基本功能的支持，并提供对资产的耗材、库存进行管理，有完善的组织架构，非常适合中小企业的需求
 - EAM系统整体覆盖了基本的资产管理、合同管理、运维服务、运维服务、数据中心设备管理等多个模块。
-
-### 联系方式
-- 1、技术支持及定制开发需求：QQ群:634770774，微信号:myxyjm
 
 ### 系统DEMO
 - [Demo] http://eam-demo.rainbooow.com:26788/index.html
 - [Demo] 账户:admin 密码:123456
 
-### 技术栈
-- 后端技术:SpringBoot
-- 前端技术:LayUI
+### 联系方式
+- 1、QQ群:634770774 
+- 2、微信号:myxyjm
+
+### 主要技术栈
+#### 后端技术栈
 - 安全框架:Spring Security
-- 模版引擎:Thymeleaf  
+- 开发框架:SpringBoot 2.3
+- 数据库链接池:Druid 1.2.8
+- 模版引擎:Thymeleaf 3
+- 运行容器:Undertow
+- 持久层框架:Foxnic
+- 日志管理:Logback
+- 流程引擎:Camunda
+- 任务调度:Quartz
+- 缓存:Redis 5
+
+#### 前端技术栈
+- 前端框架:LayUI
 
 ### 使用前需知
 - 1、本软件开放源码(发行协议:GPLv3)，用户可免费使用，但禁止任何单位或个人修改软件后再次发行或出售的行为
 - 2、EAM源代码已开源，软件介质以社区版形式供免费使用,在未授权情况下，禁止修改涉及页面版权信息的相关代码和名称
 - 3、如您的组织或公司正在使用本系统，请在 issue 中告知，具体包含公司名称
-
-### 其他资源
-- SQL文件下载地址(每日更新):http://121.43.103.102/upload/sql.tar.gz
-- EAM安装手册:在EAM项目的文档目录
-- EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
-  或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
-- [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
-
 
 ### 二次开发说明
 - 1、私服无法下载,确保Maven版本是3.6，可以在private_lib.tar.gz压缩包内找到所有私有库,进行手动安装即可
@@ -34,13 +37,19 @@
 - 3、运行环境要求:mysql版:5.7.X,Java版本:1.8
 - 4、部署请参考Git目录文档目录下的《EAM安装部署维护手册.docx》
 
-### 问题排查
-- 1
+
+### 帮助文档
+- EAM安装手册:在EAM项目的文档目录
+- EAM使用手册:登录系统后,选择公共服务下的公共资源菜单->EAM使用手册
+  或者访问如下地址: http://eam-demo.rainbooow.com:26788/business/eam/user_book/user_book.html?v=20211125010911443c1
+- [Foxnc-Web 文档 ](https://gitee.com/LeeFJ/foxnic-web/wikis/pages) https://gitee.com/LeeFJ/foxnic-web/wikis/pages
+
 
 ### 实施方案
 - 1、传统方式:传统单体架构方式打包部署
 - 2、微服务:拆分成独立微服务方式部署
 - 3、集群模式:拆分成独立服务各自独立启动部署
+
 
 ## 安装部署(Docker方式)
 - 系统兼容说明
@@ -88,7 +97,6 @@
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213230_1ba469f5_448530.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213258_8d970535_448530.png "屏幕截图.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1213/213315_83659719_448530.png "屏幕截图.png")
-
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0316/122751_e20f543f_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0316/122759_2c4b10f6_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0316/122807_a1c6116b_448530.jpeg" />
@@ -96,7 +104,6 @@
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0316/122824_f21ca8de_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212016_f9fa171e_448530.jpeg" />
 <img width="200"  src="https://images.gitee.com/uploads/images/2022/0326/212025_135c19b0_448530.jpeg" />
- 
 
 ## 捐赠
 - 开源不易，坚持更难，如果您觉得本项目不错，可以捐赠请作者喝杯咖啡~，在此表示感谢^_^
