@@ -90,6 +90,14 @@
             <version>${platform.version}</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.dt.platform</groupId>
+            <artifactId>service-vehicle</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>com.dt.platform</groupId>
             <artifactId>view-console</artifactId>
@@ -139,6 +147,12 @@
             <version>${platform.version}</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.dt.platform</groupId>
+            <artifactId>view-vehicle</artifactId>
+            <version>${platform.version}</version>
+        </dependency>
 
     </dependencies>
 

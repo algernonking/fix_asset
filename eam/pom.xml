@@ -48,6 +48,8 @@
 		<module>./service/service-knowledgebase</module>
 		<module>./service/service-contract</module>
 		<module>./service/service-customer</module>
+		<module>./service/service-vehicle</module>
+
 
 		<!-- 界面视图 -->
 		<module>./view/view-console</module>
@@ -59,7 +61,7 @@
 		<module>./view/view-knowledgebase</module>
 		<module>./view/view-contract</module>
 		<module>./view/view-customer</module>
-
+		<module>./view/view-vehicle</module>
 
 
 		<!-- 聚合 -->

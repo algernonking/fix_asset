@@ -116,4 +116,15 @@ applications:
     viewProjectPath: /view/view-customer
     viewPrefixPath: public/business/customer
     wrapperProjectPath: /wrapper/wrapper-all
+  #车辆模块
+  service-vehicle:
+    nacosGroup: service
+    nacosDataId: service-vehicle.yml
+    serviceProjectPath: /service/service-vehicle
+    packageName: com.dt.platform.vehicle
+    primaryDatasourceConfigKey: spring.datasource.druid.primary
+    microServiceNameConst: VEHICLE
+    viewProjectPath: /view/view-vehicle
+    viewPrefixPath: public/business/vehicle
+    wrapperProjectPath: /wrapper/wrapper-all
     

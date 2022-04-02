@@ -73,6 +73,11 @@ public class PlatformMeta {
 	public static final String CUSTOMER_PACKAGE=BASE_PACKAGE+".customer";
 
 
+	/**
+	 * 车辆管理
+	 * */
+	public static final String VEHICLE_PACKAGE=BASE_PACKAGE+".vehicle";
+
 
 
 

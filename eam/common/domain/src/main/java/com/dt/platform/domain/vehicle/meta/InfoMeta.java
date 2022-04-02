@@ -1,0 +1,620 @@
+package com.dt.platform.domain.vehicle.meta;
+
+import com.github.foxnic.api.bean.BeanProperty;
+import com.dt.platform.domain.vehicle.Info;
+import java.math.BigDecimal;
+import java.util.Date;
+
+
+
+/**
+ * @author 金杰 , maillank@qq.com
+ * @since 2022-04-01 21:16:00
+ * @sign 901DAB5D06A563BDA9424D014DC1CD75
+ * 此文件由工具自动生成，请勿修改。若表结构或配置发生变动，请使用工具重新生成。
+*/
+
+public class InfoMeta {
+	
+	/**
+	 * 主键 , 类型: java.lang.String
+	*/
+	public static final String ID="id";
+	
+	/**
+	 * 主键 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,ID, java.lang.String.class, "主键", "主键", java.lang.String.class, null);
+	
+	/**
+	 * 车牌号 , 类型: java.lang.String
+	*/
+	public static final String REGISTRANT="registrant";
+	
+	/**
+	 * 车牌号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> REGISTRANT_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,REGISTRANT, java.lang.String.class, "车牌号", "车牌号", java.lang.String.class, null);
+	
+	/**
+	 * 车辆类型 , 类型: java.lang.String
+	*/
+	public static final String TYPE="type";
+	
+	/**
+	 * 车辆类型 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> TYPE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,TYPE, java.lang.String.class, "车辆类型", "车辆类型", java.lang.String.class, null);
+	
+	/**
+	 * 登记人 , 类型: java.lang.String
+	*/
+	public static final String CODE="code";
+	
+	/**
+	 * 登记人 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> CODE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,CODE, java.lang.String.class, "登记人", "登记人", java.lang.String.class, null);
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final String NAME="name";
+	
+	/**
+	 * 名称 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> NAME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,NAME, java.lang.String.class, "名称", "名称", java.lang.String.class, null);
+	
+	/**
+	 * 品牌型号 , 类型: java.lang.String
+	*/
+	public static final String MODEL="model";
+	
+	/**
+	 * 品牌型号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> MODEL_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,MODEL, java.lang.String.class, "品牌型号", "品牌型号", java.lang.String.class, null);
+	
+	/**
+	 * 颜色 , 类型: java.lang.String
+	*/
+	public static final String COLOR="color";
+	
+	/**
+	 * 颜色 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> COLOR_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,COLOR, java.lang.String.class, "颜色", "颜色", java.lang.String.class, null);
+	
+	/**
+	 * 发动机号 , 类型: java.lang.String
+	*/
+	public static final String ENGINE_NUMBER="engineNumber";
+	
+	/**
+	 * 发动机号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> ENGINE_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,ENGINE_NUMBER, java.lang.String.class, "发动机号", "发动机号", java.lang.String.class, null);
+	
+	/**
+	 * 车架号 , 类型: java.lang.String
+	*/
+	public static final String FRAME_NUMBER="frameNumber";
+	
+	/**
+	 * 车架号 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> FRAME_NUMBER_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,FRAME_NUMBER, java.lang.String.class, "车架号", "车架号", java.lang.String.class, null);
+	
+	/**
+	 * 行驶证 , 类型: java.lang.String
+	*/
+	public static final String DRIVING_LICENSE="drivingLicense";
+	
+	/**
+	 * 行驶证 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> DRIVING_LICENSE_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,DRIVING_LICENSE, java.lang.String.class, "行驶证", "行驶证", java.lang.String.class, null);
+	
+	/**
+	 * 公里数 , 类型: java.math.BigDecimal
+	*/
+	public static final String KILOMETERS="kilometers";
+	
+	/**
+	 * 公里数 , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.math.BigDecimal> KILOMETERS_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,KILOMETERS, java.math.BigDecimal.class, "公里数", "公里数", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 抢险(元) , 类型: java.math.BigDecimal
+	*/
+	public static final String RESCUE_MONEY="rescueMoney";
+	
+	/**
+	 * 抢险(元) , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.math.BigDecimal> RESCUE_MONEY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,RESCUE_MONEY, java.math.BigDecimal.class, "抢险(元)", "抢险(元)", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 商业险(元) , 类型: java.math.BigDecimal
+	*/
+	public static final String COMMERCIAL_INSURANCE_MONEY="commercialInsuranceMoney";
+	
+	/**
+	 * 商业险(元) , 类型: java.math.BigDecimal
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.math.BigDecimal> COMMERCIAL_INSURANCE_MONEY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,COMMERCIAL_INSURANCE_MONEY, java.math.BigDecimal.class, "商业险(元)", "商业险(元)", java.math.BigDecimal.class, null);
+	
+	/**
+	 * 保险公司 , 类型: java.lang.String
+	*/
+	public static final String INSURANCE_COMPANY="insuranceCompany";
+	
+	/**
+	 * 保险公司 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> INSURANCE_COMPANY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,INSURANCE_COMPANY, java.lang.String.class, "保险公司", "保险公司", java.lang.String.class, null);
+	
+	/**
+	 * 上牌时间 , 类型: java.util.Date
+	*/
+	public static final String LICENSING_TIME="licensingTime";
+	
+	/**
+	 * 上牌时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> LICENSING_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,LICENSING_TIME, java.util.Date.class, "上牌时间", "上牌时间", java.util.Date.class, null);
+	
+	/**
+	 * 报废时间 , 类型: java.util.Date
+	*/
+	public static final String SCRAP_TIME="scrapTime";
+	
+	/**
+	 * 报废时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> SCRAP_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,SCRAP_TIME, java.util.Date.class, "报废时间", "报废时间", java.util.Date.class, null);
+	
+	/**
+	 * 位置 , 类型: java.lang.String
+	*/
+	public static final String POSITION_DETAIL="positionDetail";
+	
+	/**
+	 * 位置 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> POSITION_DETAIL_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,POSITION_DETAIL, java.lang.String.class, "位置", "位置", java.lang.String.class, null);
+	
+	/**
+	 * 图片 , 类型: java.lang.String
+	*/
+	public static final String PICTURES="pictures";
+	
+	/**
+	 * 图片 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> PICTURES_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,PICTURES, java.lang.String.class, "图片", "图片", java.lang.String.class, null);
+	
+	/**
+	 * 备注 , 类型: java.lang.String
+	*/
+	public static final String NOTES="notes";
+	
+	/**
+	 * 备注 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> NOTES_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,NOTES, java.lang.String.class, "备注", "备注", java.lang.String.class, null);
+	
+	/**
+	 * 创建人ID , 类型: java.lang.String
+	*/
+	public static final String CREATE_BY="createBy";
+	
+	/**
+	 * 创建人ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> CREATE_BY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,CREATE_BY, java.lang.String.class, "创建人ID", "创建人ID", java.lang.String.class, null);
+	
+	/**
+	 * 创建时间 , 类型: java.util.Date
+	*/
+	public static final String CREATE_TIME="createTime";
+	
+	/**
+	 * 创建时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> CREATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,CREATE_TIME, java.util.Date.class, "创建时间", "创建时间", java.util.Date.class, null);
+	
+	/**
+	 * 修改人ID , 类型: java.lang.String
+	*/
+	public static final String UPDATE_BY="updateBy";
+	
+	/**
+	 * 修改人ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> UPDATE_BY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,UPDATE_BY, java.lang.String.class, "修改人ID", "修改人ID", java.lang.String.class, null);
+	
+	/**
+	 * 修改时间 , 类型: java.util.Date
+	*/
+	public static final String UPDATE_TIME="updateTime";
+	
+	/**
+	 * 修改时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> UPDATE_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,UPDATE_TIME, java.util.Date.class, "修改时间", "修改时间", java.util.Date.class, null);
+	
+	/**
+	 * 是否已删除 , 类型: java.lang.Integer
+	*/
+	public static final String DELETED="deleted";
+	
+	/**
+	 * 是否已删除 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.Integer> DELETED_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,DELETED, java.lang.Integer.class, "是否已删除", "是否已删除", java.lang.Integer.class, null);
+	
+	/**
+	 * 删除人ID , 类型: java.lang.String
+	*/
+	public static final String DELETE_BY="deleteBy";
+	
+	/**
+	 * 删除人ID , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> DELETE_BY_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,DELETE_BY, java.lang.String.class, "删除人ID", "删除人ID", java.lang.String.class, null);
+	
+	/**
+	 * 删除时间 , 类型: java.util.Date
+	*/
+	public static final String DELETE_TIME="deleteTime";
+	
+	/**
+	 * 删除时间 , 类型: java.util.Date
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.util.Date> DELETE_TIME_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,DELETE_TIME, java.util.Date.class, "删除时间", "删除时间", java.util.Date.class, null);
+	
+	/**
+	 * 版本 , 类型: java.lang.Integer
+	*/
+	public static final String VERSION="version";
+	
+	/**
+	 * 版本 , 类型: java.lang.Integer
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.Integer> VERSION_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,VERSION, java.lang.Integer.class, "版本", "版本", java.lang.Integer.class, null);
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final String TENANT_ID="tenantId";
+	
+	/**
+	 * 租户 , 类型: java.lang.String
+	*/
+	public static final BeanProperty<com.dt.platform.domain.vehicle.Info,java.lang.String> TENANT_ID_PROP = new BeanProperty(com.dt.platform.domain.vehicle.Info.class ,TENANT_ID, java.lang.String.class, "租户", "租户", java.lang.String.class, null);
+	
+	/**
+	 * 全部属性清单
+	*/
+	public static final String[] $PROPS={ ID , REGISTRANT , TYPE , CODE , NAME , MODEL , COLOR , ENGINE_NUMBER , FRAME_NUMBER , DRIVING_LICENSE , KILOMETERS , RESCUE_MONEY , COMMERCIAL_INSURANCE_MONEY , INSURANCE_COMPANY , LICENSING_TIME , SCRAP_TIME , POSITION_DETAIL , PICTURES , NOTES , CREATE_BY , CREATE_TIME , UPDATE_BY , UPDATE_TIME , DELETED , DELETE_BY , DELETE_TIME , VERSION , TENANT_ID };
+	
+	/**
+	 * 代理类
+	*/
+	public static class $$proxy$$ extends com.dt.platform.domain.vehicle.Info {
+
+		private static final long serialVersionUID = 1L;
+
+		
+		/**
+		 * 设置 主键
+		 * @param id 主键
+		 * @return 当前对象
+		*/
+		public Info setId(String id) {
+			super.change(ID,super.getId(),id);
+			super.setId(id);
+			return this;
+		}
+		
+		/**
+		 * 设置 车牌号
+		 * @param registrant 车牌号
+		 * @return 当前对象
+		*/
+		public Info setRegistrant(String registrant) {
+			super.change(REGISTRANT,super.getRegistrant(),registrant);
+			super.setRegistrant(registrant);
+			return this;
+		}
+		
+		/**
+		 * 设置 车辆类型
+		 * @param type 车辆类型
+		 * @return 当前对象
+		*/
+		public Info setType(String type) {
+			super.change(TYPE,super.getType(),type);
+			super.setType(type);
+			return this;
+		}
+		
+		/**
+		 * 设置 登记人
+		 * @param code 登记人
+		 * @return 当前对象
+		*/
+		public Info setCode(String code) {
+			super.change(CODE,super.getCode(),code);
+			super.setCode(code);
+			return this;
+		}
+		
+		/**
+		 * 设置 名称
+		 * @param name 名称
+		 * @return 当前对象
+		*/
+		public Info setName(String name) {
+			super.change(NAME,super.getName(),name);
+			super.setName(name);
+			return this;
+		}
+		
+		/**
+		 * 设置 品牌型号
+		 * @param model 品牌型号
+		 * @return 当前对象
+		*/
+		public Info setModel(String model) {
+			super.change(MODEL,super.getModel(),model);
+			super.setModel(model);
+			return this;
+		}
+		
+		/**
+		 * 设置 颜色
+		 * @param color 颜色
+		 * @return 当前对象
+		*/
+		public Info setColor(String color) {
+			super.change(COLOR,super.getColor(),color);
+			super.setColor(color);
+			return this;
+		}
+		
+		/**
+		 * 设置 发动机号
+		 * @param engineNumber 发动机号
+		 * @return 当前对象
+		*/
+		public Info setEngineNumber(String engineNumber) {
+			super.change(ENGINE_NUMBER,super.getEngineNumber(),engineNumber);
+			super.setEngineNumber(engineNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 车架号
+		 * @param frameNumber 车架号
+		 * @return 当前对象
+		*/
+		public Info setFrameNumber(String frameNumber) {
+			super.change(FRAME_NUMBER,super.getFrameNumber(),frameNumber);
+			super.setFrameNumber(frameNumber);
+			return this;
+		}
+		
+		/**
+		 * 设置 行驶证
+		 * @param drivingLicense 行驶证
+		 * @return 当前对象
+		*/
+		public Info setDrivingLicense(String drivingLicense) {
+			super.change(DRIVING_LICENSE,super.getDrivingLicense(),drivingLicense);
+			super.setDrivingLicense(drivingLicense);
+			return this;
+		}
+		
+		/**
+		 * 设置 公里数
+		 * @param kilometers 公里数
+		 * @return 当前对象
+		*/
+		public Info setKilometers(BigDecimal kilometers) {
+			super.change(KILOMETERS,super.getKilometers(),kilometers);
+			super.setKilometers(kilometers);
+			return this;
+		}
+		
+		/**
+		 * 设置 抢险(元)
+		 * @param rescueMoney 抢险(元)
+		 * @return 当前对象
+		*/
+		public Info setRescueMoney(BigDecimal rescueMoney) {
+			super.change(RESCUE_MONEY,super.getRescueMoney(),rescueMoney);
+			super.setRescueMoney(rescueMoney);
+			return this;
+		}
+		
+		/**
+		 * 设置 商业险(元)
+		 * @param commercialInsuranceMoney 商业险(元)
+		 * @return 当前对象
+		*/
+		public Info setCommercialInsuranceMoney(BigDecimal commercialInsuranceMoney) {
+			super.change(COMMERCIAL_INSURANCE_MONEY,super.getCommercialInsuranceMoney(),commercialInsuranceMoney);
+			super.setCommercialInsuranceMoney(commercialInsuranceMoney);
+			return this;
+		}
+		
+		/**
+		 * 设置 保险公司
+		 * @param insuranceCompany 保险公司
+		 * @return 当前对象
+		*/
+		public Info setInsuranceCompany(String insuranceCompany) {
+			super.change(INSURANCE_COMPANY,super.getInsuranceCompany(),insuranceCompany);
+			super.setInsuranceCompany(insuranceCompany);
+			return this;
+		}
+		
+		/**
+		 * 设置 上牌时间
+		 * @param licensingTime 上牌时间
+		 * @return 当前对象
+		*/
+		public Info setLicensingTime(Date licensingTime) {
+			super.change(LICENSING_TIME,super.getLicensingTime(),licensingTime);
+			super.setLicensingTime(licensingTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 报废时间
+		 * @param scrapTime 报废时间
+		 * @return 当前对象
+		*/
+		public Info setScrapTime(Date scrapTime) {
+			super.change(SCRAP_TIME,super.getScrapTime(),scrapTime);
+			super.setScrapTime(scrapTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 位置
+		 * @param positionDetail 位置
+		 * @return 当前对象
+		*/
+		public Info setPositionDetail(String positionDetail) {
+			super.change(POSITION_DETAIL,super.getPositionDetail(),positionDetail);
+			super.setPositionDetail(positionDetail);
+			return this;
+		}
+		
+		/**
+		 * 设置 图片
+		 * @param pictures 图片
+		 * @return 当前对象
+		*/
+		public Info setPictures(String pictures) {
+			super.change(PICTURES,super.getPictures(),pictures);
+			super.setPictures(pictures);
+			return this;
+		}
+		
+		/**
+		 * 设置 备注
+		 * @param notes 备注
+		 * @return 当前对象
+		*/
+		public Info setNotes(String notes) {
+			super.change(NOTES,super.getNotes(),notes);
+			super.setNotes(notes);
+			return this;
+		}
+		
+		/**
+		 * 设置 创建人ID
+		 * @param createBy 创建人ID
+		 * @return 当前对象
+		*/
+		public Info setCreateBy(String createBy) {
+			super.change(CREATE_BY,super.getCreateBy(),createBy);
+			super.setCreateBy(createBy);
+			return this;
+		}
+		
+		/**
+		 * 设置 创建时间
+		 * @param createTime 创建时间
+		 * @return 当前对象
+		*/
+		public Info setCreateTime(Date createTime) {
+			super.change(CREATE_TIME,super.getCreateTime(),createTime);
+			super.setCreateTime(createTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 修改人ID
+		 * @param updateBy 修改人ID
+		 * @return 当前对象
+		*/
+		public Info setUpdateBy(String updateBy) {
+			super.change(UPDATE_BY,super.getUpdateBy(),updateBy);
+			super.setUpdateBy(updateBy);
+			return this;
+		}
+		
+		/**
+		 * 设置 修改时间
+		 * @param updateTime 修改时间
+		 * @return 当前对象
+		*/
+		public Info setUpdateTime(Date updateTime) {
+			super.change(UPDATE_TIME,super.getUpdateTime(),updateTime);
+			super.setUpdateTime(updateTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 是否已删除
+		 * @param deleted 是否已删除
+		 * @return 当前对象
+		*/
+		public Info setDeleted(Integer deleted) {
+			super.change(DELETED,super.getDeleted(),deleted);
+			super.setDeleted(deleted);
+			return this;
+		}
+		
+		/**
+		 * 设置 删除人ID
+		 * @param deleteBy 删除人ID
+		 * @return 当前对象
+		*/
+		public Info setDeleteBy(String deleteBy) {
+			super.change(DELETE_BY,super.getDeleteBy(),deleteBy);
+			super.setDeleteBy(deleteBy);
+			return this;
+		}
+		
+		/**
+		 * 设置 删除时间
+		 * @param deleteTime 删除时间
+		 * @return 当前对象
+		*/
+		public Info setDeleteTime(Date deleteTime) {
+			super.change(DELETE_TIME,super.getDeleteTime(),deleteTime);
+			super.setDeleteTime(deleteTime);
+			return this;
+		}
+		
+		/**
+		 * 设置 版本
+		 * @param version 版本
+		 * @return 当前对象
+		*/
+		public Info setVersion(Integer version) {
+			super.change(VERSION,super.getVersion(),version);
+			super.setVersion(version);
+			return this;
+		}
+		
+		/**
+		 * 设置 租户
+		 * @param tenantId 租户
+		 * @return 当前对象
+		*/
+		public Info setTenantId(String tenantId) {
+			super.change(TENANT_ID,super.getTenantId(),tenantId);
+			super.setTenantId(tenantId);
+			return this;
+		}
+	}
+}

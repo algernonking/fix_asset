@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>知识库</title>
+    <script src="./jquery.min.js"></script>
+    <script>
+
+        window.paceOptions = {
+            ajax: {
+                trackMethods: ['GET', 'POST'],
+            },
+            document:false,
+            elements: false,
+            eventLag:false,
+            restartOnPushState: false,
+            restartOnRequestAfter: false,
+            startOnPageLoad:false,
+        };
+    </script>
+    <script src="./pace/pace.js"></script>
+    <link href="./pace/themes/blue/pace-theme-loading-bar.css" rel="stylesheet" />
+    <link href="./bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100%;
+            cursor: default;
+            font-family: "PingFang SC",Arial,"Microsoft YaHei",sans-serif;
+        }
+        .item{
+            margin-left:20px;
+            width:548px;
+            padding-bottom: 22px;
+            min-height: 20px;
+            width: 550px;
+        }
+        .header{
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 26px;
+            zoom: 1;
+            white-space: nowrap;
+            word-wrap: normal;
+            color:#741274;
+            /*font-weight: 400;*/
+            padding-bottom: 2px;
+        }
+        .profile{
+            font-size:13px;
+            zoom: 1;
+            line-height: 20px;
+            padding: 1px 0;
+            overflow: hidden;
+        }
+        .footer{
+            height: 22px;
+            font-style: normal;
+            line-height: 22px;
+            font-size:10px;
+        }
+        .container{
+            min-height: 425px;
+            word-break: break-all;
+            word-wrap: break-word;
+            position: relative;
+            margin-top:150px;
+        }
+    </style>
+</head>
+<body>
+<nav style="text-align: center;box-shadow:0px 0px  15px 5px #aaa;" class="navbar navbar-expand-lg bg-white navbar-light fixed-top">
+    <div class="form-inline" style="text-align: center;width:450px; margin:0 auto;">
+        <a class="navbar-brand" href="#">知识库</a>
+        <input id="searchtext" style="width:280px" class="form-control mr-sm-2"  placeholder="请输入搜索内容" aria-label="Search">
+        <a id="search" style="width:80px" class="btn btn btn-primary my-2 my-sm-0">搜索</a>
+    </div>
+</nav>
+<div class="container" id="searchct">
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center" id="pagebtn">
+    </ul>
+</nav>
+</body>
+<script>
+    $(document).ajaxStart(function() { window.Pace.restart();});
+
+    var project = "/";
+    var selectPage=1;
+    var PageSize=10;
+    function searchpage(type,v){
+        if(type=='num'){
+            selectPage=v;
+        }else if(type=='after'){
+            selectPage=selectPage+1 ;
+        }else if(type=='before'){
+            selectPage=selectPage-1 ;
+        }else if(type=='idle'){
+            return ;
+        }
+        search();
+    }
+    function search(){
+        var ct=$("#searchtext").val();
+        console.log(ct);
+        $.ajax({
+            type : "POST",
+            url : project + "service-knowledgebase/kn-content/query-paged-list",
+            ContentType : "application/json",
+            data : {
+                pageIndex:selectPage,
+                pageSize:PageSize,
+                content:ct
+            },
+            dataType : 'json',
+            success : function(res) {
+                //填充搜索内容
+                var searchhtml="";
+                if(res.code==0&&res.data.list.length){
+                    for(var j=0;j<res.data.list.length;j++){
+                        searchhtml=searchhtml+"<div class=\"item\"> "
+                        var object=res.data.list[j];
+                        var type=object.contentType;
+                        var href="";
+                        // console.log(type);
+                        if(type=="linkAdress"){
+                            href=object.linkAddress;
+                        }else{
+                            href="knbaselook.html?id="+object.id;
+                        }
+                        searchhtml=searchhtml+"    <div class=\"header\"><a target=\"_blank\" href=\""+href+"\" >"+object.title+"</a></div>"
+                        searchhtml=searchhtml+"    <div class=\"profile\">"+object.profile+"</div>"
+                        if(object.category&&object.category.hierarchyName){
+                            searchhtml=searchhtml+"    <div class=\"footer text-secondary\"><span class=\"text-info\">"+object.category.hierarchyName+"</span>     阅读数: "+object.reviewCount+"</div>"
+                        }
+                        searchhtml=searchhtml+"</div>"
+                    }
+                }else{
+                    searchhtml="<div style=\"margin-top:80px\">没有找到匹配的内容</div>";
+                }
+                $("#searchct").html(searchhtml);
+                //计算分页数据
+                var pagehtml=""
+                var Count=res.data.totalRowCount;
+                var PageCount=parseInt(Count/PageSize);
+                if(Count%PageSize!=0){
+                    PageCount++;
+                }
+                // console.log("PageCount:"+PageCount);
+                if(PageCount>1){
+                    if(PageCount<=10){
+                        for(var i=0;i<PageCount;i++){
+                            var pageactive="";
+                            if ((i+1)==selectPage){
+                                pageactive="active";
+                            }
+                            pagehtml=pagehtml+"<li onclick=\"searchpage('num',"+(i+1)+")\" class=\"page-item "+pageactive+"\"><a class=\"page-link\" href=\"JavaScript:;\">"+(i+1)+"</a></li> ";
+                        }
+                    }else if(PageCount>10){
+                        if(selectPage<5){
+                            for(var i=0;i<10;i++){
+                                var pageactive="";
+                                if ((i+1)==selectPage){
+                                    pageactive="active";
+                                }
+                                pagehtml=pagehtml+"<li onclick=\"searchpage('num',"+(i+1)+")\" class=\"page-item "+pageactive+"\"><a class=\"page-link\" href=\"JavaScript:;\">"+(i+1)+"</a></li> ";
+                            }
+                        }else{
+
+                            pagehtml=pagehtml+"<li onclick=\"searchpage('before')\" class=\"page-item\"><a class=\"page-link\" href=\"JavaScript:;\" >上一页</a></li> "
+                            pagehtml=pagehtml+"<li onclick=\"searchpage('num',1)\" class=\"page-item\"><a class=\"page-link\" href=\"JavaScript:;\">"+1+"</a></li> ";
+                            pagehtml=pagehtml+"<li onclick=\"searchpage('idle')\" class=\"page-item\"><a class=\"page-link\" href=\"JavaScript:;\">...</a></li> ";
+                            for(var i=selectPage-1;i<selectPage-1+8;i++){
+                                var pageactive="";
+                                if ((i+1)==selectPage){
+                                    pageactive="active";
+                                }
+                                pagehtml=pagehtml+"<li onclick=\"searchpage('num',"+(i+1)+")\" class=\"page-item "+pageactive+"\"><a class=\"page-link\" href=\"JavaScript:;\">"+(i+1)+"</a></li> ";
+                            }
+                        }
+                        pagehtml=pagehtml+"<li onclick=\"searchpage('after')\" class=\"page-item\"><a class=\"page-link\" href=\"JavaScript:;\" >下一页</a></li> ";
+                    }
+                }
+                $("#pagebtn").html(pagehtml);
+            }
+        });
+    }
+    $("#search").click(function(){
+        selectPage=1;
+        search();
+    });
+    $("#searchtext").on('keypress', function(event){
+        if(event.keyCode==13){
+            selectPage=1;
+            search();
+        }else{
+        }
+    });
+</script>
+</html>
